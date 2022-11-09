@@ -4,7 +4,7 @@ import "./Navbar.scss";
 
 const Navbar = () => {
 	return (
-		<div id="Navbar">
+		<div className="Navbar">
 			<DropedMenu />
 		</div>
 	);
