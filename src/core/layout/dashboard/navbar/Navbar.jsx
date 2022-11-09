@@ -1,10 +1,11 @@
-import React from "react";
+import { DropedMenu } from "core/components";
+import React          from "react";
 import "./Navbar.scss";
 
 const Navbar = () => {
 	return (
 		<div id="Navbar">
-			Nav Bar
+			<DropedMenu />
 		</div>
 	);
 };

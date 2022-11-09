@@ -1,0 +1,44 @@
+@import "../../../Resources/scss/variables/colorThemes";
+// @import "../../../Resources/scss/style.scss";
+
+#DropedMenu {
+    width: 100%;
+    border-bottom: 1px solid #E9E4D9;
+    padding: 10px;
+
+    .menu {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        .menu-item {
+            label {
+                color : $flat-color;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 16px;
+            } 
+        }
+    }
+
+    .selector-container {
+        margin-top: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .action {
+            display: flex;
+            gap: 10px;
+            color : $dark-color;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            p {
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 18px;
+            }
+        }
+    }
+}

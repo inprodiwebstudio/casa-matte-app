@@ -1,6 +1,9 @@
 import React from "react";
 import "./Header.scss";
 
+//Own components
+import { CarIcon } from "Resources/icons";
+
 const Header = () => {
 	return (
 		<div id="Header">
@@ -8,8 +11,9 @@ const Header = () => {
 				<h1 className="casa-matte-tittle">CASA MATTE</h1>
 				<div>Tittle</div>
 				<div className="icons-container">
-					<div>Save</div>
-					<div>Car</div>
+					<div className="icon-container">
+						<CarIcon size="20px" />
+					</div>
 				</div>
 			</div>
 		</div>
