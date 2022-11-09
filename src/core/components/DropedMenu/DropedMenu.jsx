@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 //Own components
-import { ArrowTop } from "Resources/icons";
-import { MenuItem } from "core/components";
+import { ArrowTop }                   from "Resources/icons";
+import { MenuItem, SelectorMenuItem } from "core/components";
 import "./DropedMenu.scss";
 
 const DropedMenu = () => {
@@ -16,7 +16,7 @@ const DropedMenu = () => {
 				</div>
 				<div className="menu-item">
 					<label>PASTA</label>
-					<MenuItem />
+					<SelectorMenuItem />
 				</div>
 				<div className="menu-item">
 					<label>PASTA</label>
@@ -24,7 +24,7 @@ const DropedMenu = () => {
 				</div>
 				<div className="menu-item">
 					<label>PASTA</label>
-					<MenuItem />
+					<SelectorMenuItem />
 				</div>
 			</div>
 			<div className="selector-container">
