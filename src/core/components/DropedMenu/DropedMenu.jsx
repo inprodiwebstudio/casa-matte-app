@@ -11,19 +11,19 @@ const DropedMenu = () => {
 		<div id="DropedMenu">
 			<div className={`menu ${!activeMenu && "hidden"}`}>
 				<div className="menu-item">
-					<label>Pasta</label>
+					<label>PASTA</label>
 					<MenuItem />
 				</div>
 				<div className="menu-item">
-					<label>Pasta</label>
+					<label>PASTA</label>
 					<MenuItem />
 				</div>
 				<div className="menu-item">
-					<label>Pasta</label>
+					<label>PASTA</label>
 					<MenuItem />
 				</div>
 				<div className="menu-item">
-					<label>Pasta</label>
+					<label>PASTA</label>
 					<MenuItem />
 				</div>
 			</div>
