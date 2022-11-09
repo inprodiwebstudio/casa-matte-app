@@ -1,16 +1,60 @@
+@import "../../../Resources/scss/variables/colorThemes";
+@import "../../../Resources/scss/style.scss";
+
 #AppShell {
-    .header-container {
-        background: blue;
+    .shell-container {
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        height: 30px;
+        height: 100vh;
+
+        .header-container {
+            background: orange;
+            height: 80px;
+            min-height: 60px;
+        }
+
+        .footer-and-nav-grouped {
+            display: flex;
+            align-items: flex-end;
+            position: relative;
+            .nav-menu {
+                background: green;
+                width: 180px;
+                height: calc(100vh - 80px);
+            }
+
+            .footer-nav {
+                background: yellow;
+                height: 165px;
+                width: 1386px;
+            }
+
+            .side-bar {
+                background: pink;
+                position: absolute;
+                top: 0;
+                left: 100;
+                right: 0;
+                bottom: 0;
+                width: 354px;
+                @include big-tablet {
+                    width: 280px;
+                }
+                @include laptop {
+                    width: 280px;
+                }
+                @include tablet {
+                    width: 240px;
+                }
+            }
+        }
     }
 
     .bodyContainer {
-        background: grey;
+        background: $body-color;
         height: 100vh;
     }
 }

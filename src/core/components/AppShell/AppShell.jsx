@@ -9,7 +9,14 @@ const AppShell = ({Body, header}) => {
 			<div className="bodyContainer">
 				<Body />
 			</div>
-			<div className="header-container">Header</div>
+			<div className="shell-container">
+				<div className="header-container">Header</div>
+				<div className="footer-and-nav-grouped">
+					<div className="nav-menu">Nav Menu</div>
+					<div className="footer-nav">Footer</div>
+					<div className="side-bar">Side Bar</div>
+				</div>
+			</div>
 		</div>
 	);
 };
