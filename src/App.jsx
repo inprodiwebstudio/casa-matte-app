@@ -4,6 +4,7 @@ import { PersistGate }   from "redux-persist/integration/react";
 
 import store, { persistor } from "store";
 import Router               from "routes";
+import "./index.scss";
 
 export default function App() {
 	return (

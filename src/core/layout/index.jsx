@@ -1,7 +1,12 @@
 import { Outlet } from "react-router-dom";
 
-export default function AppShell() {
+//Own components
+import { AppShell } from "core/components";
+
+export default function Layout() {
 	return (
-		<Outlet />
+		<AppShell
+			Body={Outlet}
+		/>
 	);
 }
