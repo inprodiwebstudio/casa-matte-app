@@ -9,12 +9,14 @@ import "./Resources/scss/style.scss";
 
 export default function App() {
 	return (
-		<Provider store={store}>
-			<BrowserRouter>
-				<PersistGate persistor={persistor}>
-					<Router />
-				</PersistGate>
-			</BrowserRouter>
-		</Provider>
+		<div id="body-app">
+			<Provider store={store}>
+				<BrowserRouter>
+					<PersistGate persistor={persistor}>
+						<Router />
+					</PersistGate>
+				</BrowserRouter>
+			</Provider>
+		</div>
 	);
 }

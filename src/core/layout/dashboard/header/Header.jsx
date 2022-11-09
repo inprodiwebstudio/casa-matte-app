@@ -6,7 +6,7 @@ import { CarIcon } from "Resources/icons";
 
 const Header = () => {
 	return (
-		<div id="Header">
+		<div className="Header">
 			<div className="body-container">
 				<h1 className="casa-matte-tittle">CASA MATTE</h1>
 				<div>Tittle</div>

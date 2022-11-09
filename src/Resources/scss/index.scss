@@ -1,7 +1,14 @@
 @import "./variables/colorThemes";
+@font-face {
+    font-family: "helvetica";
+    src: url("../Fonts/helvetica.ttf");
+}
+@font-face {
+    font-family: "Aitana-Regular";
+    src: url("../Fonts/Aitana-Regular.ttf");
+}
 
 * {
-    font-family: "Montserrat", sans-serif;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -17,4 +24,8 @@ a {
     &:hover, &:focus, &:active {
         text-decoration: none !important;
     }
+}
+
+#body-app {
+    font-family: "helvetica", sans-serif;
 }

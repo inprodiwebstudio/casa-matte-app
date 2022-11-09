@@ -1,16 +1,21 @@
-@import "../../../Resources/scss/variables/colorThemes";
-// @import "../../../Resources/scss/style.scss";
+@import "/src/Resources/scss/variables/colorThemes";
 
 #DropedMenu {
     width: 100%;
-    border-bottom: 1px solid #E9E4D9;
+    border-bottom: 2px solid #e9e4d9;
     padding: 10px;
 
-    .menu {
+    & .menu {
         display: flex;
         flex-direction: column;
         gap: 10px;
-        .menu-item {
+        height: 283px;
+        transition: all ease 300ms;
+        overflow: hidden;
+        &.hidden {
+            height: 0px;
+        }
+        & .menu-item {
             label {
                 color : $flat-color;
                 font-size: 14px;
@@ -33,6 +38,14 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+
+            & .icon-arrow-container {
+                transform: rotate(0deg);
+                transition: all ease 300ms;
+                &.hidden {
+                    transform: rotate(180deg);
+                }
+            }
 
             p {
                 font-weight: 400;

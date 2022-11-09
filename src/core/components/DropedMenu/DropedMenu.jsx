@@ -1,14 +1,15 @@
-import React from "react";
-import "./DropedMenu.scss";
+import { useState } from "react";
 
 //Own components
 import { ArrowTop } from "Resources/icons";
 import { MenuItem } from "core/components";
+import "./DropedMenu.scss";
 
 const DropedMenu = () => {
+	const [ activeMenu, setActiveMenu ] = useState(false);
 	return (
 		<div id="DropedMenu">
-			<div className="menu">
+			<div className={`menu ${!activeMenu && "hidden"}`}>
 				<div className="menu-item">
 					<label>Pasta</label>
 					<MenuItem />
@@ -27,9 +28,11 @@ const DropedMenu = () => {
 				</div>
 			</div>
 			<div className="selector-container">
-				<div className="action">
+				<div className="action" onClick={() => setActiveMenu(!activeMenu)}>
 					<p>PROYECTO</p>
-					<ArrowTop size="15px" />
+					<div className={`icon-arrow-container ${!activeMenu && "hidden"}`}>
+						<ArrowTop size="15px" />
+					</div>
 				</div>
 			</div>
 		</div>
