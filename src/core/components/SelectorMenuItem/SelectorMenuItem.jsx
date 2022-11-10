@@ -1,8 +1,9 @@
-import { useState } from "react";
-import Select       from "react-select";
+import { useState }           from "react";
+import Select, { components } from "react-select";
 
 //Own components
 import SelectStyles from "./SelectStyles";
+import { ArrowTop } from "Resources/icons";
 import "./SelectorMenuItem.scss";
 
 const SelectorMenuItem = () => {
@@ -12,6 +13,14 @@ const SelectorMenuItem = () => {
 		{ value : "strawberry", label : "Strawberry" },
 		{ value : "vanilla", label : "Vanilla" },
 	];
+
+	const DropdownIndicator = (props) => {
+		return (
+			<components.DropdownIndicator {...props}>
+				<ArrowTop size="10px" style={{transform : "rotate(180deg)"}} />
+			</components.DropdownIndicator>
+		);
+	};
 	return (
 		<div
 			className="SelectorMenuItem"
@@ -23,6 +32,7 @@ const SelectorMenuItem = () => {
 				placeholder="Default..."
 				styles={SelectStyles()}
 				menuPortalTarget={document.body}
+				components={{ DropdownIndicator }}
 			/>
 			<div className={`lineStyle ${hoverDisplay && "fulWidth"}`}>&nbsp;</div>
 		</div>

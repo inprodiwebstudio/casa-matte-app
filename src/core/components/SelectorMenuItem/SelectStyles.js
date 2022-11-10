@@ -85,15 +85,17 @@ const SelectStyles = () => ({
 			transition      : "all ease 200ms",
 		},
 	}),
-	indicatorSeparator  : () => ({ display : "none"}),
-	indicatorsContainer : (styles) => ({
+	indicatorSeparator : () => ({ display : "none"}),
+	// indicatorsContainer : (styles) => ({
+	// 	...styles,
+	// 	display : "none !important",
+	// }),
+	dropdownIndicator  : (styles) => ({
 		...styles,
-		display : "none !important",
-	}),
-	dropdownIndicator : (styles) => ({
-		...styles,
-		color : "#adb5bd",
-		width : "0px !important",
+		fontWeight : 100,
+		"&:hover"  : {
+			color : "#000000",
+		},
 	}),
 	placeholder : (styles) => ({
 		...styles,
