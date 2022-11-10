@@ -17,8 +17,8 @@ const AppShell = ({Body, header, navbar}) => {
 					<div className="nav-menu">
 						{navbar}
 					</div>
-					<div className="footer-nav">Footer</div>
-					<div className="side-bar">Side Bar</div>
+					<div className="footer-nav">&nbsp;</div>
+					<div className="side-bar">&nbsp;</div>
 				</div>
 			</div>
 		</div>
