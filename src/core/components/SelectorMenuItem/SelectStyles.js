@@ -86,15 +86,12 @@ const SelectStyles = () => ({
 		},
 	}),
 	indicatorSeparator : () => ({ display : "none"}),
-	// indicatorsContainer : (styles) => ({
-	// 	...styles,
-	// 	display : "none !important",
-	// }),
 	dropdownIndicator  : (styles) => ({
 		...styles,
 		fontWeight : 100,
+		color      : "#B2AFA6",
 		"&:hover"  : {
-			color : "#000000",
+			color : "#000",
 		},
 	}),
 	placeholder : (styles) => ({
