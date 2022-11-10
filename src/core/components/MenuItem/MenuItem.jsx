@@ -1,10 +1,10 @@
 import React from "react";
 import "./MenuItem.scss";
 
-const MenuItem = () => {
+const MenuItem = ({body}) => {
 	return (
 		<div id="MenuItem">
-			MenuItem
+			{body}
 		</div>
 	);
 };

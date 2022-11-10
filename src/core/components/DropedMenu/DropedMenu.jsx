@@ -12,18 +12,18 @@ const DropedMenu = () => {
 			<div className={`menu ${!activeMenu && "hidden"}`}>
 				<div className="menu-item">
 					<label>PASTA</label>
-					<MenuItem />
+					<MenuItem body="DURA" />
 				</div>
 				<div className="menu-item">
-					<label>PASTA</label>
+					<label>TAMAÑO</label>
 					<SelectorMenuItem />
 				</div>
 				<div className="menu-item">
-					<label>PASTA</label>
-					<MenuItem />
+					<label>NÚMERO DE PÁGINAS</label>
+					<MenuItem body="SEMIFLAT" />
 				</div>
 				<div className="menu-item">
-					<label>PASTA</label>
+					<label>ENCUADERNADO</label>
 					<SelectorMenuItem />
 				</div>
 			</div>

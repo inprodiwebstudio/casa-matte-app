@@ -29,7 +29,7 @@ const SelectorMenuItem = () => {
 		>
 			<Select
 				options={fakeOptions}
-				placeholder="Default..."
+				placeholder="Default"
 				styles={SelectStyles()}
 				menuPortalTarget={document.body}
 				components={{ DropdownIndicator }}
