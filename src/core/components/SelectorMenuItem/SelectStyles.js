@@ -1,14 +1,14 @@
 const SelectStyles = () => ({
 	control : (provided) => ({
 		...provided,
-		// minHeight  : inputSize && inputSize,
-		border       : "none",
-		width        : "100%",
-		background   : "none",
-		// background   : "red",
-		borderRadius : "0px",
-		// padding      : "0px",
-		"&:focus"    : {
+		border        : "none",
+		width         : "100%",
+		minHeight     : "26px",
+		paddingBottom : "10px",
+		paddingTop    : "10px",
+		background    : "none",
+		borderRadius  : "0px",
+		"&:focus"     : {
 			border    : "none",
 			boxShadow : "none",
 		},
@@ -27,6 +27,7 @@ const SelectStyles = () => ({
 		paddingBottom : "0px !important",
 		paddingRight  : "0px !important",
 		paddingLeft   : "15px !important",
+		marginBottom  : "0px !important",
 	}),
 	multiValue : (styles) => ({
 		...styles,

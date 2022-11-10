@@ -11,7 +11,11 @@ const SelectorMenuItem = () => {
 		{ value : "vanilla", label : "Vanilla" },
 	];
 	return (
-		<div>
+		<div
+			style={{
+				borderBottom : "solid 1px #E3E3E3",
+			}}
+		>
 			<Select
 				options={fakeOptions}
 				placeholder="Default..."
