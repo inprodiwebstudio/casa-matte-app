@@ -20,11 +20,11 @@ const DropedMenu = () => {
 				</div>
 				<div className="menu-item">
 					<label>NÚMERO DE PÁGINAS</label>
-					<MenuItem body="SEMIFLAT" />
+					<SelectorMenuItem />
 				</div>
 				<div className="menu-item">
 					<label>ENCUADERNADO</label>
-					<SelectorMenuItem />
+					<MenuItem body="SEMIFLAT" />
 				</div>
 			</div>
 			<div className={`selector-container ${!activeMenu && "hidden"}`}>
