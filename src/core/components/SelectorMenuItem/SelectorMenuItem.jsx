@@ -1,10 +1,12 @@
-import React  from "react";
-import Select from "react-select";
+import { useState } from "react";
+import Select       from "react-select";
 
 //Own components
 import SelectStyles from "./SelectStyles";
+import "./SelectorMenuItem.scss";
 
 const SelectorMenuItem = () => {
+	const [ hoverDisplay, setHoverDisplay ] = useState(false);
 	const fakeOptions = [
 		{ value : "chocolate", label : "Chocolate" },
 		{ value : "strawberry", label : "Strawberry" },
@@ -12,9 +14,9 @@ const SelectorMenuItem = () => {
 	];
 	return (
 		<div
-			style={{
-				borderBottom : "solid 1px #E3E3E3",
-			}}
+			className="SelectorMenuItem"
+			onMouseOver={() => setHoverDisplay(true)}
+			onMouseLeave={() => setHoverDisplay(false)}
 		>
 			<Select
 				options={fakeOptions}
@@ -22,6 +24,7 @@ const SelectorMenuItem = () => {
 				styles={SelectStyles()}
 				menuPortalTarget={document.body}
 			/>
+			<div className={`lineStyle ${hoverDisplay && "fulWidth"}`}>&nbsp;</div>
 		</div>
 	);
 };

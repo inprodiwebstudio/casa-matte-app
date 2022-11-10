@@ -8,6 +8,7 @@ const SelectStyles = () => ({
 		paddingTop    : "10px",
 		background    : "none",
 		borderRadius  : "0px",
+		cursor        : "pointer",
 		"&:focus"     : {
 			border    : "none",
 			boxShadow : "none",
@@ -20,6 +21,13 @@ const SelectStyles = () => ({
 			border    : "none",
 			boxShadow : "none",
 		},
+	}),
+	menu : (styles) => ({
+		...styles,
+		borderRadius : "0px",
+		boxShadow    : "none !important",
+		top          : "-50px",
+		padding      : "0px !important",
 	}),
 	valueContainer : (styles) => ({
 		...styles,
@@ -52,16 +60,17 @@ const SelectStyles = () => ({
 		...styles,
 		backgroundColor : "#fff",
 		color           : "#000",
-		fontSize        : "13px",
+		fontSize        : "16px",
 		fontWeight      : 300,
 		padding         : "5px",
-		width           : "95%",
-		margin         	: "0 auto",
-		borderRadius    : "5px",
+		width           : "100%",
 		cursor          : "pointer",
+		transition      : "all ease 200ms",
+		margin          : "0px",
 		"&:hover"       : {
 			backgroundColor : "#f1f3f5",
 			color           : "#000",
+			transition      : "all ease 200ms",
 		},
 	}),
 	indicatorSeparator  : () => ({ display : "none"}),
@@ -83,7 +92,7 @@ const SelectStyles = () => ({
 		textTransform : "uppercase",
 		fontSize      : "14px",
 	}),
-	menuPortal : styles => ({ ...styles, zIndex : 9999 }),
+	menuPortal : styles => ({ ...styles, zIndex : 9999}),
 });
 
 export default SelectStyles;

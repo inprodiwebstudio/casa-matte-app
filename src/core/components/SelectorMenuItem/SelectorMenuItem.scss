@@ -1,0 +1,22 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.SelectorMenuItem {
+    position : relative;
+    border-bottom: solid 1px #E3E3E3;
+
+    & .lineStyle {
+        width : 2px;
+        height: 1px;
+        background: #000000;
+        position: absolute;
+        top : 101%;
+        left : 0;
+        right: 0;
+        bottom: 0;
+        transition: all ease 200ms;
+
+        &.fulWidth {
+            width : 100% !important;
+        }
+    }
+}
