@@ -1,0 +1,88 @@
+const SelectStyles = () => ({
+	control : (provided) => ({
+		...provided,
+		// minHeight  : inputSize && inputSize,
+		border       : "none",
+		width        : "100%",
+		background   : "none",
+		// background   : "red",
+		borderRadius : "0px",
+		// padding      : "0px",
+		"&:focus"    : {
+			border    : "none",
+			boxShadow : "none",
+		},
+		"&:active" : {
+			border    : "none",
+			boxShadow : "none",
+		},
+		"&:focus-within" : {
+			border    : "none",
+			boxShadow : "none",
+		},
+	}),
+	valueContainer : (styles) => ({
+		...styles,
+		paddingTop    : "0px !important",
+		paddingBottom : "0px !important",
+		paddingRight  : "0px !important",
+		paddingLeft   : "15px !important",
+	}),
+	multiValue : (styles) => ({
+		...styles,
+		backgroundColor : "#f1f3f5",
+		color           : "#595f66",
+		marginBottom    : "5px",
+		borderRadius   	: "8px",
+		fontWeight      : 500,
+		justifyContent  : "space-between",
+		width           : "100% !important",
+	}),
+	singleValue : (styles) => ({
+		...styles,
+		fontWeight    : 400,
+		lineHeight    : "16px",
+		fontFamily    : "Helvetica",
+		color         : "#000000",
+		textTransform : "uppercase",
+		fontSize      : "14px",
+	}),
+	option : (styles) => ({
+		...styles,
+		backgroundColor : "#fff",
+		color           : "#000",
+		fontSize        : "13px",
+		fontWeight      : 300,
+		padding         : "5px",
+		width           : "95%",
+		margin         	: "0 auto",
+		borderRadius    : "5px",
+		cursor          : "pointer",
+		"&:hover"       : {
+			backgroundColor : "#f1f3f5",
+			color           : "#000",
+		},
+	}),
+	indicatorSeparator  : () => ({ display : "none"}),
+	indicatorsContainer : (styles) => ({
+		...styles,
+		display : "none !important",
+	}),
+	dropdownIndicator : (styles) => ({
+		...styles,
+		color : "#adb5bd",
+		width : "0px !important",
+	}),
+	placeholder : (styles) => ({
+		...styles,
+		fontWeight    : 400,
+		lineHeight    : "16px",
+		fontFamily    : "Helvetica",
+		color         : "#000000",
+		textTransform : "uppercase",
+		fontSize      : "14px",
+	}),
+	menuPortal : styles => ({ ...styles, zIndex : 9999 }),
+});
+
+export default SelectStyles;

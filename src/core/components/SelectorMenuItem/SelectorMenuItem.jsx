@@ -1,6 +1,9 @@
 import React  from "react";
 import Select from "react-select";
 
+//Own components
+import SelectStyles from "./SelectStyles";
+
 const SelectorMenuItem = () => {
 	const fakeOptions = [
 		{ value : "chocolate", label : "Chocolate" },
@@ -9,7 +12,12 @@ const SelectorMenuItem = () => {
 	];
 	return (
 		<div>
-			<Select options={fakeOptions} />
+			<Select
+				options={fakeOptions}
+				placeholder="Default..."
+				styles={SelectStyles()}
+				menuPortalTarget={document.body}
+			/>
 		</div>
 	);
 };
