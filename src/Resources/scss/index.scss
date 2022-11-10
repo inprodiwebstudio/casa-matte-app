@@ -1,7 +1,7 @@
-@font-face {
-    font-family: "helvetica";
-    src: url("../Fonts/helvetica.ttf");
-}
+// @font-face {
+//     font-family: "helvetica";
+//     src: url("../Fonts/Helvetica.ttc");
+// }
 @font-face {
     font-family: "Aitana-Regular";
     src: url("../Fonts/Aitana-Regular.ttf");
@@ -26,5 +26,5 @@ a {
 }
 
 #body-app {
-    font-family: "helvetica", sans-serif;
+    font-family: Helvetica, sans-serif;
 }

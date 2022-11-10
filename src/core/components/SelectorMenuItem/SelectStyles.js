@@ -58,7 +58,7 @@ const SelectStyles = () => ({
 		...styles,
 		fontWeight    : 400,
 		lineHeight    : "16px",
-		fontFamily    : "Helvetica",
+		fontFamily    : "Aitana-Regular",
 		color         : "#000000",
 		textTransform : "uppercase",
 		fontSize      : "14px",
