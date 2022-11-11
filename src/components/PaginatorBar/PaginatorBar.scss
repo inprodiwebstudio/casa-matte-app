@@ -1,0 +1,23 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+#PaginatorBar {
+    background: red;
+    height: 100%;
+    padding-top: 10px;
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    align-items: center;
+
+    .header-ittle {
+        font-size: 16px;
+        font-weight: 400;
+        font-family: "Aitana-Regutlar";
+    }
+
+    .navbar-paginator-container {
+        background: blue;
+        width: 100%;
+        flex-grow: 1;
+    }
+}
