@@ -1,15 +1,16 @@
 @import "/src/Resources/scss/variables/colorThemes";
 
 .Button {
-    background: none;
+	background: none;
+	display: flex;
 	color: inherit;
 	border: none;
-	padding: 0;
 	font: inherit;
 	outline: inherit;
 	width: 100%;
 	cursor: pointer;
-	height: 45px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	transition: all ease 200ms;
 	font-family: "Aitana-Regular";
 	color : $flat-color;
@@ -17,6 +18,7 @@
 	font-weight: 400;
 	line-height: 25px;
 	text-transform: uppercase;
+	justify-content: center;
 
 	.button-body {
 		display: flex;
@@ -24,6 +26,7 @@
 		align-items: center;
 		justify-content: center;
 		cursor: pointer;
+		width: fit-content;
 	}
 
 	&:hover {
