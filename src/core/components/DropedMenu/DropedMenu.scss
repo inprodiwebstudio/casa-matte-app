@@ -38,7 +38,7 @@
         }
 
 
-        .action {
+        .action-droped {
             display: flex;
             gap: 10px;
             color : $dark-color;
@@ -54,11 +54,12 @@
                 }
             }
 
-            p {
+            .tittle-action-droped {
                 font-weight: 400;
                 font-size: 16px;
-                // line-height: 18px;
+                color : $dark-color;
                 font-family: "Aitana-Regular";
+                // font-family: "Aitana-Regular";
             }
         }
     }
