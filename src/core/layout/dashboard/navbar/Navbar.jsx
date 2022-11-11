@@ -17,11 +17,13 @@ const Navbar = () => {
 			>
 				Container
 			</div>
-			<Button
-				icon={<PlusIcon size="20px" />}
-			>
-				Nueva
-			</Button>
+			<div className="body-action-container">
+				<Button
+					icon={<PlusIcon size="20px" />}
+				>
+					Nueva
+				</Button>
+			</div>
 		</div>
 	);
 };
