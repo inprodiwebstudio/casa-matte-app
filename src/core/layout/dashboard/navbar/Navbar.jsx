@@ -21,6 +21,7 @@ const Navbar = () => {
 			<div className="body-action-container">
 				<Button
 					icon={<PlusIcon size="20px" />}
+					fontSize="20px"
 				>
 					Nueva
 				</Button>

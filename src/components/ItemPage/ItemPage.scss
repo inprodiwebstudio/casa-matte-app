@@ -1,0 +1,39 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+#ItemPage {
+    width: 100%;
+    height: 102px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all ease 200ms;
+    cursor: pointer;
+
+    &:hover {
+        background: $primary-color;
+    }
+
+    .withe-page-container {
+        width: 129px;
+        height: 82px;
+        background: #FFFFFF;
+        border: 1px solid #B2AFA6;
+    }
+
+    .pages-book-conatier {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        padding-left: 11.5px;
+        padding-right: 11.5px;
+
+        p {
+            color : $flat-color;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 14px;
+            font-family: "helvetica";
+        }
+    }
+}

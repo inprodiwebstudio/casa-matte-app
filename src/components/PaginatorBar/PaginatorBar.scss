@@ -19,19 +19,5 @@
         width: 100%;
         flex-grow: 1;
         overflow: hidden;
-
-        .item-page-container {
-            width: 100%;
-            height: 102px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all ease 200ms;
-            cursor: pointer;
-
-            &:hover {
-                background: $primary-color;
-            }
-        }
     }
 }
