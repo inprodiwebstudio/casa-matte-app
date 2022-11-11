@@ -1,5 +1,8 @@
-import { DropedMenu } from "core/components";
-import React          from "react";
+
+
+//Own components
+import { DropedMenu, Button } from "core/components";
+import { PlusIcon }           from "Resources/icons";
 import "./Navbar.scss";
 
 const Navbar = () => {
@@ -8,14 +11,17 @@ const Navbar = () => {
 			<DropedMenu />
 			<div
 				style={{
-					background : "red",
-					overflow   : "hidden",
-					flexGrow   : 3,
+					overflow : "hidden",
+					flexGrow : 3,
 				}}
 			>
 				Container
 			</div>
-			<div>Button Add</div>
+			<Button
+				icon={<PlusIcon size="20px" />}
+			>
+				Nueva
+			</Button>
 		</div>
 	);
 };
