@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import { AppShell } from "core/components";
 import Header       from "core/layout/dashboard/header";
 import Navbar       from "./dashboard/navbar";
+import Footer       from "./dashboard/footer";
 
 export default function Layout() {
 	return (
@@ -11,6 +12,7 @@ export default function Layout() {
 			Body={Outlet}
 			header={<Header />}
 			navbar={<Navbar />}
+			footer={<Footer />}
 		/>
 	);
 }
