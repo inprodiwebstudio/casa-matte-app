@@ -1,7 +1,7 @@
 //Own components
 import "./AppShell.scss";
 
-const AppShell = ({Body, header, navbar, footer}) => {
+const AppShell = ({Body, header, navbar, footer, sidebar}) => {
 	return (
 		<div
 			id="AppShell"
@@ -20,7 +20,9 @@ const AppShell = ({Body, header, navbar, footer}) => {
 					<div className="footer-nav">
 						{footer}
 					</div>
-					<div className="side-bar">&nbsp;</div>
+					<div className="side-bar">
+						{sidebar}
+					</div>
 				</div>
 			</div>
 		</div>

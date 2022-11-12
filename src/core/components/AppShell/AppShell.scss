@@ -30,21 +30,21 @@
             }
 
             .side-bar {
-                background: $secondary-color;
+                // background: $secondary-color;
                 position: absolute;
                 top: 0;
                 left: 100;
                 right: 0;
                 bottom: 0;
-                width: 354px;
+                width: 379px;
                 @include big-tablet {
-                    width: 280px;
+                    width: 305px;
                 }
                 @include laptop {
-                    width: 280px;
+                    width: 305px;
                 }
                 @include tablet {
-                    width: 240px;
+                    width: 265px;
                 }
             }
         }

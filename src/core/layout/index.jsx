@@ -5,6 +5,7 @@ import { AppShell } from "core/components";
 import Header       from "core/layout/dashboard/header";
 import Navbar       from "./dashboard/navbar";
 import Footer       from "./dashboard/footer";
+import SideBar      from "./dashboard/sideBar";
 
 export default function Layout() {
 	return (
@@ -13,6 +14,7 @@ export default function Layout() {
 			header={<Header />}
 			navbar={<Navbar />}
 			footer={<Footer />}
+			sidebar={<SideBar />}
 		/>
 	);
 }
