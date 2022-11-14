@@ -1,7 +1,18 @@
 @import "/src/Resources/scss/variables/colorThemes";
+@import "/src/Resources/scss/breakpoints.scss";
 
 #SideBar {
     height: 100%;
-    width: 379px;
+    width: 200px;
     background: $secondary-color;
+    width: 379px;
+    @include big-tablet {
+        width: 305px;
+    }
+    @include laptop {
+        width: 305px;
+    }
+    @include tablet {
+        width: 265px;
+    }
 }
