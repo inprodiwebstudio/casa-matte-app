@@ -4,17 +4,23 @@ import "./ItemPage.scss";
 
 const ItemPage = ({
 	innerRef,
+	snapShot,
 	draggableProps,
 	dragHandleProps,
 }) => {
 	return (
 		<div
 			className="ItemPage"
+			ref={innerRef}
 			{...dragHandleProps}
 			{...draggableProps}
-			ref={innerRef}
 		>
-			<div className="my-page-container">
+			<div
+				className="my-page-container"
+				style={{
+					background : snapShot?.isDragging && "#E9E4D9",
+				}}
+			>
 				<div className="drag-icon-conatainer">
 					<DragIcon size="15px" />
 				</div>
