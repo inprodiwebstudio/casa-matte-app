@@ -1,9 +1,58 @@
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import PerfectScrollbar                          from "react-perfect-scrollbar";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import PerfectScrollbar               from "react-perfect-scrollbar";
 
 //Own components
 import ItemPage from "components/ItemPage";
 import "./PaginatorBar.scss";
+
+//data Fake
+const pageslist = [
+	{
+		id       : "drager-1",
+		leftPage : {
+			page : 1,
+		},
+		rightPage : {
+			page : 2,
+		},
+	},
+	{
+		id       : "drager-2",
+		leftPage : {
+			page : 3,
+		},
+		rightPage : {
+			page : 4,
+		},
+	},
+	{
+		id       : "drager-3",
+		leftPage : {
+			page : 5,
+		},
+		rightPage : {
+			page : 6,
+		},
+	},
+	{
+		id       : "drager-4",
+		leftPage : {
+			page : 7,
+		},
+		rightPage : {
+			page : 8,
+		},
+	},
+	{
+		id       : "drager-5",
+		leftPage : {
+			page : 9,
+		},
+		rightPage : {
+			page : 10,
+		},
+	},
+];
 
 const PaginatorBar = () => {
 	return (
@@ -18,46 +67,16 @@ const PaginatorBar = () => {
 								ref={provided.innerRef}
 								{...provided.droppableProps}
 							>
-								<Draggable draggableId="darg-1" index={0}>
-									{(otherProvided, snapShot) => (
+								{
+									pageslist.map((pageData, index) => (
 										<ItemPage
-											draggableProps={otherProvided.draggableProps}
-											dragHandleProps={otherProvided.dragHandleProps}
-											innerRef={otherProvided.innerRef}
-											snapShot={snapShot}
+											index={index}
+											key={pageData?.id}
+											pageData={pageData}
+											draggableId={pageData?.id}
 										/>
-									)}
-								</Draggable>
-								<Draggable draggableId="darg-2" index={1}>
-									{(otherProvided, snapShot) => (
-										<ItemPage
-											draggableProps={otherProvided.draggableProps}
-											dragHandleProps={otherProvided.dragHandleProps}
-											innerRef={otherProvided.innerRef}
-											snapShot={snapShot}
-										/>
-									)}
-								</Draggable>
-								<Draggable draggableId="darg-3" index={2}>
-									{(otherProvided, snapShot) => (
-										<ItemPage
-											draggableProps={otherProvided.draggableProps}
-											dragHandleProps={otherProvided.dragHandleProps}
-											innerRef={otherProvided.innerRef}
-											snapShot={snapShot}
-										/>
-									)}
-								</Draggable>
-								<Draggable draggableId="darg-4" index={3}>
-									{(otherProvided, snapShot) => (
-										<ItemPage
-											draggableProps={otherProvided.draggableProps}
-											dragHandleProps={otherProvided.dragHandleProps}
-											innerRef={otherProvided.innerRef}
-											snapShot={snapShot}
-										/>
-									)}
-								</Draggable>
+									))
+								}
 								{provided.placeholder}
 							</div>
 						</PerfectScrollbar>
