@@ -28,25 +28,6 @@
                 height: auto;
                 width: 1386px;
             }
-
-            .side-bar {
-                // background: $secondary-color;
-                position: absolute;
-                top: 0;
-                left: 100;
-                right: 0;
-                bottom: 0;
-                width: 379px;
-                @include big-tablet {
-                    width: 305px;
-                }
-                @include laptop {
-                    width: 305px;
-                }
-                @include tablet {
-                    width: 265px;
-                }
-            }
         }
     }
 
