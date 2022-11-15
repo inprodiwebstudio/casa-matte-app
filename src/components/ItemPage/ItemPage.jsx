@@ -2,9 +2,18 @@
 import { DragIcon, Cross } from "Resources/icons";
 import "./ItemPage.scss";
 
-const ItemPage = () => {
+const ItemPage = ({
+	innerRef,
+	draggableProps,
+	dragHandleProps,
+}) => {
 	return (
-		<div id="ItemPage">
+		<div
+			className="ItemPage"
+			{...dragHandleProps}
+			{...draggableProps}
+			ref={innerRef}
+		>
 			<div className="my-page-container">
 				<div className="drag-icon-conatainer">
 					<DragIcon size="15px" />
