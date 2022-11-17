@@ -26,7 +26,7 @@ const SelectStyles = () => ({
 		...styles,
 		borderRadius  : "0px",
 		boxShadow     : "0px 4px 10px rgba(193, 189, 180, 0.2), 0px 0px 1px rgba(193, 189, 180, 0.5)",
-		top           : "-55px",
+		top           : "-6px",
 		padding       : "0px !important",
 		paddingTop    : "0px !important",
 		paddingBottom : "0px !important",
