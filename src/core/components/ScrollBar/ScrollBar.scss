@@ -1,0 +1,32 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+#ScrollBar {
+    width: auto;
+    height: auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+      
+    /* background of the scrollbar except button or resizer */
+    &::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+    
+    /* scrollbar itself */
+    &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+        border-radius: 0px !important;
+        &:hover {
+            background-color: darken(#babac0, 15%);
+        }
+    }
+
+    &:hover {
+        &::-webkit-scrollbar-thumb {
+            background-color: #babac076;
+            border-radius: 16px;
+        }
+    }
+}

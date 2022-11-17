@@ -33,8 +33,8 @@ const ItemPage = ({
 						<div>
 							<div className="withe-page-container">&nbsp;</div>
 							<div className="pages-book-conatier">
-								<p>{pageData?.leftPage?.page}</p>
-								<p>{pageData?.rightPage?.page}</p>
+								<p>{pageData?.leftPage}</p>
+								<p>{pageData?.rightPage}</p>
 							</div>
 						</div>
 						<div className="cross-icon-conatiner">
