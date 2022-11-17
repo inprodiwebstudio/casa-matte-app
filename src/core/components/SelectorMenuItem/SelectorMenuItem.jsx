@@ -21,6 +21,10 @@ const SelectorMenuItem = () => {
 			</components.DropdownIndicator>
 		);
 	};
+
+	const handleChange = () => {
+		setHoverDisplay(false);
+	};
 	return (
 		<div
 			className="SelectorMenuItem"
@@ -30,6 +34,7 @@ const SelectorMenuItem = () => {
 			<Select
 				options={fakeOptions}
 				placeholder="Default"
+				onChange={handleChange}
 				styles={SelectStyles()}
 				menuPortalTarget={document.body}
 				components={{ DropdownIndicator }}
