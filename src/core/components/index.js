@@ -6,3 +6,5 @@ export { default as MenuItem }         from "./MenuItem";
 export { default as SelectorMenuItem } from "./SelectorMenuItem";
 export { default as ScrollBar }        from "./ScrollBar";
 export { default as Button }           from "./Button";
+export { default as TextInput }        from "./Inputs/TextInput";
+

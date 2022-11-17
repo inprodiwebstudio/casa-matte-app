@@ -3,6 +3,7 @@ import { useDropzone } from "react-dropzone";
 
 //Own components
 import { DropFile, Folder, PhotoList } from "Resources/icons";
+import { TextInput }                   from "core/components";
 import { isValidArray }                from "helpers";
 import "./DropDoc.scss";
 
@@ -37,10 +38,12 @@ const DropDoc = () => {
 		},
 	});
 
+	const testing = true;
+
 	return (
 		<div className="DropDoc">
 			{
-				!isValidArray(fileImage) ? (
+				(!isValidArray(fileImage) && !testing) && (
 					<div  {...getRootProps({className : "indicator-drop-container"})}>
 						<DropFile size="40px" />
 						<p>
@@ -49,7 +52,10 @@ const DropDoc = () => {
 						</p>
 						<input {...getInputProps()} />
 					</div>
-				) : (
+				)
+			}
+			{
+				(isValidArray(fileImage) && !testing) && (
 					<div className="options-cards-container">
 						<div className="options-card">
 							<div className="cardOption">
@@ -65,6 +71,25 @@ const DropDoc = () => {
 									CARPETA
 								</p>
 							</div>
+						</div>
+					</div>
+				)
+			}
+			{
+				testing && (
+					<div className="options-cards-container">
+						<div className="options-card">
+							<div className="form-container">
+								<div className="cardOption regularCard">
+									<Folder size="50px" />
+									<p>
+										CARGAR EN UNA NUEVA
+										CARPETA
+									</p>
+								</div>
+								<TextInput />
+							</div>
+							<p>Boton</p>
 						</div>
 					</div>
 				)
