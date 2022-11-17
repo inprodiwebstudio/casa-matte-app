@@ -8,6 +8,7 @@ const ItemPage = ({
 	index,
 	pageData,
 	draggableId,
+	handleDelete,
 }) => {
 	return (
 		<Draggable
@@ -37,7 +38,7 @@ const ItemPage = ({
 								<p>{pageData?.rightPage}</p>
 							</div>
 						</div>
-						<div className="cross-icon-conatiner">
+						<div className="cross-icon-conatiner" onClick={() => handleDelete(pageData?.id, index)}>
 							<Cross size="9px" />
 						</div>
 					</div>

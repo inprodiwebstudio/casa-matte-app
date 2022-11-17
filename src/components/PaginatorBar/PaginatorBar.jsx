@@ -65,6 +65,15 @@ const PaginatorBar = () => {
 		setPageList(newPagesList);
 	};
 
+	const handleDelete = (pageId, index) => {
+		setPageList(prev => {
+			const newData = {...prev};
+			delete newData.pages[pageId];
+			newData.pagesIds.splice(index, 1);
+			return newData;
+		});
+	};
+
 	return (
 		<div id="PaginatorBar">
 			<h3 className="header-ittle-paginator">PAGINADO</h3>
@@ -84,6 +93,7 @@ const PaginatorBar = () => {
 										<ItemPage
 											index={index}
 											key={pageId}
+											handleDelete={handleDelete}
 											pageData={pageList.pages[pageId]}
 											draggableId={pageId}
 										/>
