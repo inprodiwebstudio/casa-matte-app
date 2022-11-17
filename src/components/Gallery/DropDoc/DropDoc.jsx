@@ -10,6 +10,7 @@ import "./DropDoc.scss";
 const DropDoc = () => {
 
 	const [ fileImage, setFileImage ] = useState([]);
+	const [ isSelectedFolder, setIsSelectedFolder ] = useState(false);
 
 	const handleDrop = files => {
 		const isValidFiles = isValidArray(files);
@@ -38,12 +39,10 @@ const DropDoc = () => {
 		},
 	});
 
-	const testing = true;
-
 	return (
 		<div className="DropDoc">
 			{
-				(!isValidArray(fileImage) && !testing) && (
+				(!isValidArray(fileImage) && !isSelectedFolder) && (
 					<div  {...getRootProps({className : "indicator-drop-container"})}>
 						<DropFile size="40px" />
 						<p>
@@ -55,7 +54,7 @@ const DropDoc = () => {
 				)
 			}
 			{
-				(isValidArray(fileImage) && !testing) && (
+				(isValidArray(fileImage) && !isSelectedFolder) && (
 					<div className="options-cards-container">
 						<div className="options-card">
 							<div className="cardOption">
@@ -64,7 +63,7 @@ const DropDoc = () => {
 									CARGAR A GALERÍA
 								</p>
 							</div>
-							<div className="cardOption">
+							<div className="cardOption" onClick={() => setIsSelectedFolder(true)}>
 								<Folder size="50px" />
 								<p>
 									CARGAR EN UNA NUEVA
@@ -76,7 +75,7 @@ const DropDoc = () => {
 				)
 			}
 			{
-				testing && (
+				isSelectedFolder && (
 					<div className="options-cards-container">
 						<div className="options-card">
 							<div className="form-container">
