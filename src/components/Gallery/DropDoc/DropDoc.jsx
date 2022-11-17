@@ -3,7 +3,7 @@ import { useDropzone } from "react-dropzone";
 
 //Own components
 import { DropFile, Folder, PhotoList } from "Resources/icons";
-import { TextInput }                   from "core/components";
+import { TextInput, Button }           from "core/components";
 import { isValidArray }                from "helpers";
 import "./DropDoc.scss";
 
@@ -88,7 +88,11 @@ const DropDoc = () => {
 								</div>
 								<TextInput />
 							</div>
-							<p>Boton</p>
+							<Button
+								fontSize="16px"
+							>
+								CREAR
+							</Button>
 						</div>
 					</div>
 				)
