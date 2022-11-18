@@ -17,12 +17,13 @@
         }
         & .menu-item {
             label {
+                font-size: 12px;
+                font-weight: 300;
+                line-height: 14px;
                 color : $flat-color;
-                font-size: 14px;
-                font-family: "Aitana-Regular";
+                letter-spacing: 0.05em;
+                letter-spacing: 0.05em;
                 text-transform: uppercase;
-                font-weight: 400;
-                line-height: 16px;
             } 
         }
     }
@@ -56,8 +57,10 @@
 
             .tittle-action-droped {
                 font-weight: 400;
-                font-size: 16px;
+                font-size: 18px;
+                line-height: 22px;
                 color : $dark-color;
+                letter-spacing: 0.05em;
                 font-family: "Aitana-Regular";
             }
         }

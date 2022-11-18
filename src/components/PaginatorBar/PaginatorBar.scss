@@ -9,10 +9,11 @@
     align-items: center;
 
     .header-ittle-paginator {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 400;
-        font-family: "Aitana-Regular";
+        line-height: 16px;
         color: $dark-color;
+        letter-spacing: 0.05em;
     }
 
     .navbar-paginator-container {
