@@ -9,7 +9,7 @@ const Header = () => {
 		<div className="Header">
 			<div className="body-container">
 				<h1 className="casa-matte-tittle">CASA MATTE</h1>
-				<div>Tittle</div>
+				<div>WHITE / SIN TÍTULO</div>
 				<div className="icons-container">
 					<div className="icon-container">
 						<CarIcon size="20px" />
