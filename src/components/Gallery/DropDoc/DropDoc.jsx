@@ -3,7 +3,7 @@ import { useDropzone } from "react-dropzone";
 
 //Own components
 import { DropFile, Folder, PhotoList } from "Resources/icons";
-import { TextInput, Button }           from "core/components";
+import { TextInput, Button, Card }     from "core/components";
 import { isValidArray }                from "helpers";
 import "./DropDoc.scss";
 
@@ -57,19 +57,17 @@ const DropDoc = () => {
 				(isValidArray(fileImage) && !isSelectedFolder) && (
 					<div className="options-cards-container">
 						<div className="options-card">
-							<div className="cardOption">
-								<PhotoList size="50px" />
-								<p>
-									CARGAR A GALERÍA
-								</p>
-							</div>
-							<div className="cardOption" onClick={() => setIsSelectedFolder(true)}>
-								<Folder size="50px" />
-								<p>
-									CARGAR EN UNA NUEVA
-									CARPETA
-								</p>
-							</div>
+							<Card
+								isButton
+								image={<PhotoList size="50px" />}
+								body="CARGAR A GALERÍA"
+							/>
+							<Card
+								isButton
+								image={<Folder size="50px" />}
+								body="CARGAR EN UNA NUEVA CARPETA"
+								onSelect={() => setIsSelectedFolder(true)}
+							/>
 						</div>
 					</div>
 				)
@@ -79,13 +77,10 @@ const DropDoc = () => {
 					<div className="options-cards-container">
 						<div className="options-card">
 							<div className="form-container">
-								<div className="cardOption regularCard">
-									<Folder size="50px" />
-									<p>
-										CARGAR EN UNA NUEVA
-										CARPETA
-									</p>
-								</div>
+								<Card
+									image={<Folder size="50px" />}
+									body="CARGAR EN UNA NUEVA CARPETA"
+								/>
 								<TextInput />
 							</div>
 							<Button
