@@ -23,15 +23,20 @@
 		transition: all ease 200ms;
 		font-family: "Aitana-Regular";
 		line-height: 19px;
+
+		.button-body {
+			display: flex;
+			gap: 10px;
+			cursor: pointer;
+			align-items: start;
+			padding-top: 2px;
+			justify-content: center;
+		}
+
 		&:hover {
 			cursor: pointer;
 			color : $dark-color;
 			background-color: $primary-color;
-		}
-		.button-body {
-			p {
-				margin-top: 3px !important;
-			}
 		}
 	}
 
