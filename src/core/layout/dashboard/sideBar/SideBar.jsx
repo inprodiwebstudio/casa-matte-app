@@ -8,7 +8,7 @@ import "./SideBar.scss";
 const SideBar = () => {
 	const [ isfullSize, setIsFullSize ] = useState(false);
 
-	const isAvailableDocs = true;
+	const isAvailableDocs = false;
 
 	return (
 		<div id="SideBar" className={isAvailableDocs ? (isfullSize && "isFullSize") : "isNoData"}>
