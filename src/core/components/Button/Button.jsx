@@ -11,6 +11,7 @@ const Button = ({
 	fullSize,
 	fontSize,
 	children,
+	...rest
 }) => {
 	return (
 		<button
@@ -25,6 +26,7 @@ const Button = ({
 				height,
 				fontSize,
 			}}
+			{...rest}
 		>
 			<div className="button-body">
 				{

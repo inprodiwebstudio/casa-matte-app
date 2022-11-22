@@ -92,6 +92,7 @@ const DropDoc = () => {
 						</div>
 						<div className="back-container">
 							<Button
+								onClick={() => setIsSelectedFolder(false)}
 								icon={<ArrowLeft size="20px" />}
 								fontSize="12px"
 								type="transparent"
