@@ -17,15 +17,15 @@
         cursor: pointer;
         background: $primary-color;
         color : $flat-color;
-        padding-bottom: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: all ease 200ms;
+        padding-top: 1px;
 
         .downArrow {
             transform: rotate(180deg);
-            margin-top: 15px;
+            padding-top: 0px !important;
         }
     }
 
