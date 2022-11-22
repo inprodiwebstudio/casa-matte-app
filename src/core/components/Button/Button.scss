@@ -1,36 +1,60 @@
 @import "/src/Resources/scss/variables/colorThemes";
 
 .Button {
-	background: none;
 	display: flex;
-	color: inherit;
-	border: none;
 	font: inherit;
-	outline: inherit;
-	width: 100%;
+	color: inherit;
 	cursor: pointer;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	transition: all ease 200ms;
-	font-family: "Aitana-Regular";
-	color : $flat-color;
 	font-size: 22px;
+	outline: inherit;
+	background: none;
 	font-weight: 400;
-	line-height: 25px;
-	text-transform: uppercase;
+	padding-top: 10px;
+	color : $flat-color;
+	align-items: center;
+	padding-bottom: 10px;
 	justify-content: center;
+	text-transform: uppercase;
+	transition: all ease 200ms;
+
+	&.subtle {
+		background: none;
+		border: none !important;
+		transition: all ease 200ms;
+		font-family: "Aitana-Regular";
+		line-height: 19px;
+		&:hover {
+			cursor: pointer;
+			color : $dark-color;
+			background-color: $primary-color;
+		}
+		.button-body {
+			p {
+				margin-top: 3px !important;
+			}
+		}
+	}
+
+	&.transparent {
+		border: none !important;
+		background: none;
+		&:hover {
+			cursor: pointer;
+			background: none;
+			color : $dark-color;
+		}
+	}
+
+	&.fullSize { 
+		width: 100%;
+		border: none;
+	}
 
 	.button-body {
 		display: flex;
 		gap: 10px;
+		cursor: pointer;
 		align-items: center;
 		justify-content: center;
-		cursor: pointer;
-		width: fit-content;
-	}
-
-	&:hover {
-		cursor: pointer;
-		background-color: $primary-color;
 	}
 }

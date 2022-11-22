@@ -5,14 +5,21 @@ import "./Button.scss";
 
 const Button = ({
 	icon,
+	type,
 	width,
 	height,
+	fullSize,
 	fontSize,
 	children,
 }) => {
 	return (
 		<button
-			className="Button"
+			className={
+				`Button
+				${type && type}
+				${fullSize && "fullSize"}
+				`
+			}
 			style={{
 				width,
 				height,
@@ -25,9 +32,9 @@ const Button = ({
 						icon
 					)
 				}
-				<div>
+				<p>
 					{children}
-				</div>
+				</p>
 			</div>
 		</button>
 	);

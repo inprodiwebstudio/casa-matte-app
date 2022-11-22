@@ -2,9 +2,9 @@ import { useState }    from "react";
 import { useDropzone } from "react-dropzone";
 
 //Own components
-import { DropFile, Folder, PhotoList } from "Resources/icons";
-import { TextInput, Button, Card }     from "core/components";
-import { isValidArray }                from "helpers";
+import { DropFile, Folder, PhotoList, ArrowLeft } from "Resources/icons";
+import { TextInput, Button, Card }                from "core/components";
+import { isValidArray }                           from "helpers";
 import "./DropDoc.scss";
 
 const DropDoc = () => {
@@ -85,8 +85,18 @@ const DropDoc = () => {
 							</div>
 							<Button
 								fontSize="16px"
+								fullSize
 							>
 								CREAR
+							</Button>
+						</div>
+						<div className="back-container">
+							<Button
+								icon={<ArrowLeft size="20px" />}
+								fontSize="12px"
+								type="transparent"
+							>
+								ATRÁS
 							</Button>
 						</div>
 					</div>

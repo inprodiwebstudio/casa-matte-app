@@ -7,6 +7,7 @@ import DragIcon  from "./DragIcon";
 import DropFile  from "./DropFile";
 import PhotoList from "./PhotoList";
 import Folder    from "./Folder";
+import ArrowLeft from "./ArrowLeft";
 
 export {
 	Cross,
@@ -17,5 +18,6 @@ export {
 	SaveIcom,
 	ArrowTop,
 	PlusIcon,
+	ArrowLeft,
 	PhotoList,
 };

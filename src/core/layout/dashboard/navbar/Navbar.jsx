@@ -20,8 +20,11 @@ const Navbar = () => {
 			</div>
 			<div className="body-action-container">
 				<Button
-					icon={<PlusIcon size="20px" />}
-					fontSize="20px"
+					icon={<PlusIcon size="15px" />}
+					fontSize="16px"
+					type="subtle"
+					width={117}
+					height={39}
 				>
 					Nueva
 				</Button>
