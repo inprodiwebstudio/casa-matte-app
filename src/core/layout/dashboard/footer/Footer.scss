@@ -15,17 +15,23 @@
         width: 80px;
         height: 20px;
         cursor: pointer;
-        background: $primary-color;
-        color : $flat-color;
         display: flex;
+        padding-top: 2px;
+        color : $flat-color;
         align-items: center;
         justify-content: center;
-        transition: all ease 200ms;
-        padding-top: 2px;
+        background: $primary-color;
 
-        .downArrow {
-            transform: rotate(180deg);
-            padding-top: 4px !important;
+        svg {
+            transition: all ease 200ms;
+        }
+
+        &.downArrow {
+            padding-top: 0px;
+            padding-bottom: 3px;
+            svg {
+                transform: rotate(180deg);
+            }
         }
     }
 

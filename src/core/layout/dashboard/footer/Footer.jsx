@@ -8,8 +8,8 @@ const Footer = () => {
 	const [ dropedToggle, setDropedToggle ] = useState(false);
 	return (
 		<div id="Footer" className={`${dropedToggle && "full-size"}`}>
-			<div className="droped-container-action" onClick={() => setDropedToggle(!dropedToggle)}>
-				<ArrowTop size="20px" className={`${dropedToggle && "downArrow"}`} />
+			<div className={`droped-container-action ${dropedToggle && "downArrow"}`} onClick={() => setDropedToggle(!dropedToggle)}>
+				<ArrowTop size="20px" />
 			</div>
 			<div className="header-in-footer-container">&nbsp;</div>
 			<div className="body-layouts-container">&nbsp;</div>
