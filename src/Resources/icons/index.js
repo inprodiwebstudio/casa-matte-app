@@ -1,13 +1,15 @@
-import SaveIcom  from "./SaveIcon";
-import CarIcon   from "./CarIcon";
-import ArrowTop  from "./ArrowTop";
-import PlusIcon  from "./PlusIcon";
-import Cross     from "./Cross";
-import DragIcon  from "./DragIcon";
-import DropFile  from "./DropFile";
-import PhotoList from "./PhotoList";
-import Folder    from "./Folder";
-import ArrowLeft from "./ArrowLeft";
+import SaveIcom   from "./SaveIcon";
+import CarIcon    from "./CarIcon";
+import ArrowTop   from "./ArrowTop";
+import PlusIcon   from "./PlusIcon";
+import Cross      from "./Cross";
+import DragIcon   from "./DragIcon";
+import DropFile   from "./DropFile";
+import PhotoList  from "./PhotoList";
+import Folder     from "./Folder";
+import ArrowLeft  from "./ArrowLeft";
+import FolderPlus from "./FolderPlus";
+
 
 export {
 	Cross,
@@ -20,4 +22,5 @@ export {
 	PlusIcon,
 	ArrowLeft,
 	PhotoList,
+	FolderPlus,
 };
