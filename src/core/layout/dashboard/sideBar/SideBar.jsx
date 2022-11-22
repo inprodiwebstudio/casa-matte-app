@@ -12,8 +12,8 @@ const SideBar = () => {
 
 	return (
 		<div id="SideBar" className={isfullSize && "isFullSize"}>
-			<div className={`action-sidebar-conatiner ${isfullSize && "isFullSize"}`} onClick={() => setIsFullSize(!isfullSize)}>
-				<ArrowTop size="18px" className="icon-arrow-action isFullSize" />
+			<div className={`action-sidebar-conatiner ${isfullSize && "isFullSize"}`}>
+				<ArrowTop size="18px" className="icon-arrow-action isFullSize" onClick={() => setIsFullSize(!isfullSize)} />
 				<DropFile size="18px" />
 				<FolderPlus size="20px" />
 			</div>

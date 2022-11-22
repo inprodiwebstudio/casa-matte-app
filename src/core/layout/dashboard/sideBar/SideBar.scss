@@ -41,11 +41,18 @@
         flex-wrap: wrap;
         align-items: center;
         justify-content: center;
-        cursor: pointer;
         padding-left: 6px;
         padding-right: 6px;
         padding-bottom: 16.6px;
         padding-top: 35px;
+
+        svg {
+            transition: all ease 200ms;
+            &:hover {
+                color : $dark-color;
+                cursor: pointer;
+            }
+        }
 
         .icon-arrow-action {
             transform: rotate(270deg);
