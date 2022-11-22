@@ -11,24 +11,30 @@
     width: 386px;
     transition: all ease 200ms;
     &.isFullSize {
-        width: 1200px;
+        width: 1200px !important;
+    }
+    &.isNoData {
+        width: 354px;
     }
     @include big-tablet {
-        width: 305px;
+        width: 305px !important;
         &.isFullSize {
-            width: 900px;
+            width: 900px !important;
         }
     }
     @include laptop {
-        width: 305px;
+        width: 330px !important;
+        &.isNoData {
+            width: 298px !important;
+        }
         &.isFullSize {
-            width: 900px;
+            width: 900px !important;
         }
     }
     @include tablet {
-        width: 265px;
+        width: 265px !important;
         &.isFullSize {
-            width: 900px;
+            width: 900px !important;
         }
     }
     .action-sidebar-conatiner {
