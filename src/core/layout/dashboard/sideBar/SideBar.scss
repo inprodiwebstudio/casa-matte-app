@@ -32,7 +32,10 @@
         }
     }
     @include tablet {
-        width: 265px !important;
+        width: 260px !important;
+        &.isNoData {
+            width: 228px !important;
+        }
         &.isFullSize {
             width: 900px !important;
         }
