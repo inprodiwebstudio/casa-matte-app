@@ -90,15 +90,6 @@ const BodyGallery = () => {
 				>
 					&nbsp;
 				</div>
-				<div
-					style={{
-						background : "grey",
-						width      : "157px",
-						height     : "157px",
-					}}
-				>
-					&nbsp;
-				</div>
 			</div>
 		</div>
 	);
