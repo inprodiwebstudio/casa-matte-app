@@ -1,11 +1,40 @@
 import React from "react";
 
 //Own components
-import DropDoc from "../DropDoc";
+import DropDoc   from "../DropDoc";
+import PhotoCard from "../PhotoCard";
 import "./BodyGallery.scss";
 
 const BodyGallery = () => {
 	const isAvailableDocs = true;
+
+	const testPhotosData = [
+		{
+			image : "",
+		},
+		{
+			image : "",
+		},
+		{
+			image : "",
+		},
+		{
+			image : "",
+		},
+		{
+			image : "",
+		},
+		{
+			image : "",
+		},
+		{
+			image : "",
+		},
+		{
+			image : "",
+		},
+	];
+
 	return (
 		<div className="BodyGallery">
 			<div className="header-gallery-container">
@@ -18,78 +47,11 @@ const BodyGallery = () => {
 				)
 			}
 			<div className="photo-grid">
-				<div
-					style={{
-						background : "grey",
-						width      : "157px",
-						height     : "157px",
-					}}
-				>
-					&nbsp;
-				</div>
-				<div
-					style={{
-						background : "grey",
-						width      : "157px",
-						height     : "157px",
-					}}
-				>
-					&nbsp;
-				</div>
-				<div
-					style={{
-						background : "grey",
-						width      : "157px",
-						height     : "157px",
-					}}
-				>
-					&nbsp;
-				</div>
-				<div
-					style={{
-						background : "grey",
-						width      : "157px",
-						height     : "157px",
-					}}
-				>
-					&nbsp;
-				</div>
-				<div
-					style={{
-						background : "grey",
-						width      : "157px",
-						height     : "157px",
-					}}
-				>
-					&nbsp;
-				</div>
-				<div
-					style={{
-						background : "grey",
-						width      : "157px",
-						height     : "157px",
-					}}
-				>
-					&nbsp;
-				</div>
-				<div
-					style={{
-						background : "grey",
-						width      : "157px",
-						height     : "157px",
-					}}
-				>
-					&nbsp;
-				</div>
-				<div
-					style={{
-						background : "grey",
-						width      : "157px",
-						height     : "157px",
-					}}
-				>
-					&nbsp;
-				</div>
+				{
+					testPhotosData.map((photo, index) => (
+						<PhotoCard key={index} />
+					))
+				}
 			</div>
 		</div>
 	);
