@@ -3,6 +3,7 @@ import React from "react";
 //Own components
 import DropDoc   from "../DropDoc";
 import PhotoCard from "../PhotoCard";
+import imageTest from "Resources/images/testingImage01.jpg";
 import "./BodyGallery.scss";
 
 const BodyGallery = () => {
@@ -10,28 +11,28 @@ const BodyGallery = () => {
 
 	const testPhotosData = [
 		{
-			image : "",
+			image : imageTest,
 		},
 		{
-			image : "",
+			image : imageTest,
 		},
 		{
-			image : "",
+			image : imageTest,
 		},
 		{
-			image : "",
+			image : imageTest,
 		},
 		{
-			image : "",
+			image : imageTest,
 		},
 		{
-			image : "",
+			image : imageTest,
 		},
 		{
-			image : "",
+			image : imageTest,
 		},
 		{
-			image : "",
+			image : imageTest,
 		},
 	];
 
@@ -49,7 +50,7 @@ const BodyGallery = () => {
 			<div className="photo-grid">
 				{
 					testPhotosData.map((photo, index) => (
-						<PhotoCard key={index} />
+						<PhotoCard key={index} image={photo?.image} />
 					))
 				}
 			</div>

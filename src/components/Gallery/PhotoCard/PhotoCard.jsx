@@ -1,10 +1,15 @@
 //Own components
 import "./PhotoCard.scss";
 
-const PhotoCard = () => {
+const PhotoCard = ({image}) => {
 	return (
-		<div className="PhotoCard">
-            &nbsp;
+		<div
+			className="PhotoCard"
+			style={{
+				backgroundImage : image ? `url(${image})` : null,
+			}}
+		>
+			&nbsp;
 		</div>
 	);
 };
