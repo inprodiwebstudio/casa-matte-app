@@ -11,15 +11,17 @@
     width: 386px;
     transition: all ease 200ms;
     &.isFullSize {
-        width: 1450px !important;
+        // width : 1388px !important;
+        width: calc(73vw - 13px) !important;
     }
     &.isNoData {
         width: 354px;
     }
     @include big-tablet {
-        width: 305px !important;
+        width: 216px !important;
         &.isFullSize {
-            width: 900px !important;
+            // width: 900px !important;
+            width: calc(62vw - 11px) !important;
         }
     }
     @include laptop {
@@ -28,16 +30,18 @@
             width: 298px !important;
         }
         &.isFullSize {
-            width: 900px !important;
+            // width: 1054px !important;
+            width: calc(74vw - 11px) !important;
         }
     }
     @include tablet {
-        width: 260px !important;
+        width: 216px !important;
         &.isNoData {
             width: 228px !important;
         }
         &.isFullSize {
-            width: 900px !important;
+            // width: 900px !important;
+            width: calc(55vw - 10px) !important;
         }
     }
     .actions-sidebar-conatiner {
