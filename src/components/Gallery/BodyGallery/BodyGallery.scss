@@ -5,17 +5,22 @@
     height: 100%;
     padding: 10px;
     padding-left: 15px;
-    padding-right: 15px;
+    padding-right: calc(15px - 5px);
     display: flex;
     flex-direction: column;
 
-    .photo-grid { 
-        display: flex;
-        gap : 10px;
-        flex-wrap: wrap;
-        width: 100%;
-        overflow-y: hidden;
+    .docs-list {
+        flex-grow: 1;
+        overflow: hidden;
+        .photo-grid { 
+            display: flex;
+            gap : 10px;
+            flex-wrap: wrap;
+            width: 100%;
+            overflow-y: hidden;
+        }
     }
+
 
     .header-gallery-container {
         height: 75px;
