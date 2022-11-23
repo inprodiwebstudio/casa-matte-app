@@ -14,10 +14,16 @@ const SideBar = () => {
 		<div id="SideBar" className={isAvailableDocs ? (isfullSize && "isFullSize") : "isNoData"}>
 			{
 				isAvailableDocs && (
-					<div className={`action-sidebar-conatiner ${isfullSize && "isFullSize"}`}>
-						<ArrowTop size="18px" className="icon-arrow-action isFullSize" onClick={() => setIsFullSize(!isfullSize)} />
-						<DropFile size="18px" />
-						<FolderPlus size="20px" />
+					<div className={`actions-sidebar-conatiner ${isfullSize && "isFullSize"}`}>
+						<div className="icon-sidebar-action" onClick={() => setIsFullSize(!isfullSize)}>
+							<ArrowTop size="18px" className="icon-arrow-action" />
+						</div>
+						<div className="icon-sidebar-action">
+							<DropFile size="18px" />
+						</div>
+						<div className="icon-sidebar-action">
+							<FolderPlus size="20px" />
+						</div>
 					</div>
 				)
 			}

@@ -40,7 +40,7 @@
             width: 900px !important;
         }
     }
-    .action-sidebar-conatiner {
+    .actions-sidebar-conatiner {
         background: $secondary-color;
         color : $flat-color;
         flex-direction: column;
@@ -50,13 +50,15 @@
         flex-wrap: wrap;
         align-items: center;
         justify-content: center;
-        padding-left: 6px;
-        padding-right: 6px;
         padding-bottom: 16.6px;
         padding-top: 35px;
 
-        svg {
+        .icon-sidebar-action {
             transition: all ease 200ms;
+            display: flex;
+            align-items: center;
+            padding-left: 6px;
+            padding-right: 6px;
             &:hover {
                 color : $dark-color;
                 cursor: pointer;
