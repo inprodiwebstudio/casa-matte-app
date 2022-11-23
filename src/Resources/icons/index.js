@@ -9,11 +9,13 @@ import PhotoList  from "./PhotoList";
 import Folder     from "./Folder";
 import ArrowLeft  from "./ArrowLeft";
 import FolderPlus from "./FolderPlus";
+import Reload     from "./Reload";
 
 
 export {
 	Cross,
 	Folder,
+	Reload,
 	CarIcon,
 	DropFile,
 	DragIcon,
