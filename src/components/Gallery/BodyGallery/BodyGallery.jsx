@@ -58,7 +58,6 @@ const BodyGallery = () => {
 				isAvailableDocs && (
 					<ScrollBar>
 						<div className="docs-list">
-							<div>Folder</div>
 							<div className="photo-grid">
 								{
 									testPhotosData.map((photo, index) => (
