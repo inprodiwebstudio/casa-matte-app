@@ -7,6 +7,14 @@
     display: flex;
     flex-direction: column;
 
+    .photo-grid { 
+        display: flex;
+        gap : 10px;
+        flex-wrap: wrap;
+        width: 100%;
+        overflow-y: hidden;
+    }
+
     .header-gallery-container {
         height: 75px;
         padding-top: 10px;

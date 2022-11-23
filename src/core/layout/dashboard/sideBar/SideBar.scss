@@ -8,10 +8,10 @@
     left: 100;
     right: 0;
     bottom: 0;
-    width: 386px;
+    width: 376px;
     transition: all ease 200ms;
     &.isFullSize {
-        width: 1200px !important;
+        width: 1450px !important;
     }
     &.isNoData {
         width: 354px;
@@ -23,7 +23,7 @@
         }
     }
     @include laptop {
-        width: 330px !important;
+        width: 376px !important;
         &.isNoData {
             width: 298px !important;
         }
