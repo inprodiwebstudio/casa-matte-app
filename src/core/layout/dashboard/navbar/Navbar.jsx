@@ -12,8 +12,9 @@ const Navbar = () => {
 			<DropedMenu />
 			<div
 				style={{
-					overflow : "hidden",
-					flexGrow : 3,
+					overflowY : "hidden",
+					flexGrow  : 3,
+					width     : "185px",
 				}}
 			>
 				<PaginatorBar />

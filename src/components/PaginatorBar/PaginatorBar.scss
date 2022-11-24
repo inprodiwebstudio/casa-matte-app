@@ -14,11 +14,14 @@
         color: $dark-color;
         letter-spacing: 0.05em;
         text-align: center;
-        width: 100%;
+        width: 180px;
     }
 
     .navbar-paginator-container {
-        width: 100%;
+        width: 185px;
+        // background: red;
         flex-grow: 1;
+        z-index: 2000;
+        // width: 300px;
     }
 }

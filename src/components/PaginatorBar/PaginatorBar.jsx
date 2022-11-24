@@ -3,8 +3,8 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 //Own components
 import ItemPage      from "components/ItemPage";
-import FrontPage     from "components/FrontPage";
 import { ScrollBar } from "core/components";
+import FrontPage     from "components/FrontPage";
 import "./PaginatorBar.scss";
 
 // const datapaginator = {
