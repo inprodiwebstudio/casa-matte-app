@@ -6,6 +6,7 @@ import "./PhotoCard.scss";
 
 const PhotoCard = ({image}) => {
 	const [ isChecked, setIsChecked ] = useState(false);
+	const [ isSelected, setIsSelected ] = useState(false);
 	return (
 		<div
 			className="PhotoCard"
@@ -13,7 +14,7 @@ const PhotoCard = ({image}) => {
 				backgroundImage : image ? `url(${image})` : null,
 			}}
 		>
-			<div className="photo-overlay">
+			<div className={`photo-overlay ${isSelected && "photo-selected"}`}>
 				<div className={`check-box ${isChecked && "isChecked"}`} onClick={() => setIsChecked(!isChecked)}>
 					{
 						isChecked && (
@@ -21,7 +22,7 @@ const PhotoCard = ({image}) => {
 						)
 					}
 				</div>
-				<div className="plus-icon-container">
+				<div className="plus-icon-container" onClick={() => setIsSelected(!isSelected)}>
 					<BigPlus size="80px" />
 				</div>
 				<div className="move-arrows-icon-container">
