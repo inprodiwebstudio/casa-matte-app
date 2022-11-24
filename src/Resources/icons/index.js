@@ -12,8 +12,10 @@ import FolderPlus from "./FolderPlus";
 import Reload     from "./Reload";
 import BigPlus    from "./BigPlus";
 import MoveArrows from "./MoveArrows";
+import Check      from "./Check";
 
 export {
+	Check,
 	Cross,
 	Folder,
 	Reload,

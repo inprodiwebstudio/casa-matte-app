@@ -26,8 +26,24 @@
             width: 20px;
             height: 20px;
             transition: all ease 250ms;
-            border : solid 1px transparent;
+            border : solid 2px transparent;
             margin-left: calc(100% - 20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: transparent;
+
+            .square-check {
+                width: 12px;
+                height: 12px;
+                background: white;
+            }
+
+            &.isChecked { 
+                color : white;
+                border : solid 2px white;
+                background: rgba(0, 0, 0, 0.5);
+            }
         }
 
         .plus-icon-container {
@@ -52,7 +68,9 @@
             background: rgba(0, 0, 0, 0.5);
 
             .check-box {
-                border : solid 1px white;
+                border : solid 2px white;
+                background: none;
+                color : white;
             }
 
             .plus-icon-container {

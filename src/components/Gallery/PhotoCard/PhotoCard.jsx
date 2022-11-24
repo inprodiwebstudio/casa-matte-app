@@ -3,6 +3,7 @@ import { BigPlus, MoveArrows } from "Resources/icons";
 import "./PhotoCard.scss";
 
 const PhotoCard = ({image}) => {
+	const isChecked = false;
 	return (
 		<div
 			className="PhotoCard"
@@ -11,8 +12,14 @@ const PhotoCard = ({image}) => {
 			}}
 		>
 			<div className="photo-overlay">
-				<div className="check-box">
-					&nbsp;
+				<div className={`check-box ${isChecked && "isChecked"}`}>
+					{
+						isChecked && (
+							<div className="square-check">
+								&nbsp;
+							</div>
+						)
+					}
 				</div>
 				<div className="plus-icon-container">
 					<BigPlus size="80px" />
