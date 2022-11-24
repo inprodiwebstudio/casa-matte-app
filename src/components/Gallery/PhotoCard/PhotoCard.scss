@@ -12,6 +12,10 @@
     &:hover {
         .photo-overlay {
             width: 100% !important;
+
+            .check-icon-container {
+                color : transparent !important;
+            }
         }
     }
 
@@ -28,10 +32,26 @@
         background: transparent;
         transition: all ease 250ms;
 
+        .check-icon-container {
+            right: 0;
+            top : 46%;
+            bottom : 0;
+            width: fit-content;
+            position: absolute;
+            color: transparent;
+            height: fit-content;
+            left : calc(100% - 25px);
+            transition: all ease 250ms;
+        }
+
         &.photo-selected {
             width: 30px;
             padding: 5px;
             background: rgba(0, 0, 0, 0.5);
+
+            .check-icon-container {
+                color: white;
+            }
         }
 
         .check-box {
