@@ -10,13 +10,15 @@ import Folder     from "./Folder";
 import ArrowLeft  from "./ArrowLeft";
 import FolderPlus from "./FolderPlus";
 import Reload     from "./Reload";
-
+import BigPlus    from "./BigPlus";
+import MoveArrows from "./MoveArrows";
 
 export {
 	Cross,
 	Folder,
 	Reload,
 	CarIcon,
+	BigPlus,
 	DropFile,
 	DragIcon,
 	SaveIcom,
@@ -25,4 +27,5 @@ export {
 	ArrowLeft,
 	PhotoList,
 	FolderPlus,
+	MoveArrows,
 };

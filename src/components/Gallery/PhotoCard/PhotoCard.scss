@@ -3,8 +3,68 @@
 .PhotoCard {
     width      : 157px;
     height     : 157px;
+    position : relative;
 
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+
+    .photo-overlay {
+        position: absolute;
+        top : 0;
+        left : 0;
+        right : 0;
+        bottom : 0;
+        width : 157px;
+        padding: 10px;
+        height : 157px;
+        cursor: pointer;
+        background: transparent;
+        transition: all ease 250ms;
+
+        .check-box {
+            width: 20px;
+            height: 20px;
+            transition: all ease 250ms;
+            border : solid 1px transparent;
+            margin-left: calc(100% - 20px);
+        }
+
+        .plus-icon-container {
+            width: 100%;
+            display: flex;
+            color: transparent;
+            margin-top: 10.5px;
+            stroke: transparent;
+            margin-bottom: 5px;
+            justify-content: center;
+            transition: all ease 250ms;
+        }
+
+        .move-arrows-icon-container {
+            width: 100%;
+            color : transparent;
+            transition: all ease 250ms;
+        }
+
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.5);
+
+            .check-box {
+                border : solid 1px white;
+            }
+
+            .plus-icon-container {
+                color: white;
+                stroke: white;
+            }
+
+            .move-arrows-icon-container {
+                color : white;
+                transition: all ease 250ms;
+            }
+        }
+    }
+
 }
