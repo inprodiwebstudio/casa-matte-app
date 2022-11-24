@@ -1,9 +1,11 @@
+import { useState } from "react";
+
 //Own components
 import { BigPlus, MoveArrows } from "Resources/icons";
 import "./PhotoCard.scss";
 
 const PhotoCard = ({image}) => {
-	const isChecked = false;
+	const [ isChecked, setIsChecked ] = useState(false);
 	return (
 		<div
 			className="PhotoCard"
@@ -12,12 +14,10 @@ const PhotoCard = ({image}) => {
 			}}
 		>
 			<div className="photo-overlay">
-				<div className={`check-box ${isChecked && "isChecked"}`}>
+				<div className={`check-box ${isChecked && "isChecked"}`} onClick={() => setIsChecked(!isChecked)}>
 					{
 						isChecked && (
-							<div className="square-check">
-								&nbsp;
-							</div>
+							<div className="square-check" />
 						)
 					}
 				</div>
