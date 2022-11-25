@@ -13,6 +13,7 @@ import Reload     from "./Reload";
 import BigPlus    from "./BigPlus";
 import MoveArrows from "./MoveArrows";
 import Check      from "./Check";
+import MoreOption from "./MoreOption";
 
 export {
 	Check,
@@ -30,4 +31,5 @@ export {
 	PhotoList,
 	FolderPlus,
 	MoveArrows,
+	MoreOption,
 };

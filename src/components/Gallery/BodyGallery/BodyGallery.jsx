@@ -1,6 +1,7 @@
 import React from "react";
 
 //Own components
+import Folder        from "../Folder";
 import DropDoc       from "../DropDoc";
 import PhotoCard     from "../PhotoCard";
 import { ScrollBar } from "core/components";
@@ -59,6 +60,9 @@ const BodyGallery = () => {
 					<ScrollBar>
 						<div className="docs-list">
 							<div className="photo-grid">
+								<Folder />
+								<Folder />
+								<Folder />
 								{
 									testPhotosData.map((photo, index) => (
 										<PhotoCard key={index} image={photo?.image} />

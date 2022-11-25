@@ -1,0 +1,50 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.Folder {
+    gap: 31.5px;
+    width: 324px;
+    padding: 5px;
+    height: 157px;
+    display: flex;
+    flex-direction: column;
+    transition: all ease 300ms;
+
+    &:hover {
+        background: $primary-color;
+    }
+
+    h4 {
+        font-size: 14px;
+        font-weight: 300;
+        color : $dark-color;
+    }
+
+    .header-folder {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .drager-body-container {
+        flex-grow: 1;
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        border: 1px dashed $flat-color;
+
+        .body-container {
+            gap: 8px;
+            display: flex;
+            color : $flat-color;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+
+            .text-container {
+                font-size: 12px;
+                font-weight: 300;
+            }
+        }
+    }
+}
