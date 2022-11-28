@@ -25,25 +25,48 @@
         justify-content: space-between;
     }
 
-    .drager-body-container {
-        flex-grow: 1;
+    .body-indicator-conatiner {
+        height: 100%;
         display: flex;
         cursor: pointer;
-        align-items: center;
-        justify-content: center;
-        border: 1px dashed $flat-color;
 
-        .body-container {
-            gap: 8px;
+        .photo-thumb-nail-container {
+            gap: 0px;
+            width: auto;
             display: flex;
-            color : $flat-color;
-            align-items: center;
-            flex-direction: column;
-            justify-content: center;
+            .photo-indicator {
+                width: 0px;
+                margin-right: 0px;
+                background-size: cover;
+                transition: all ease 250ms;
+                background-position: center;
+                background-repeat: no-repeat;
+    
+                &.full-size {
+                    width : 57.8px;
+                    margin-right: 4px;
+                }
+            }
+        }
 
-            .text-container {
-                font-size: 12px;
-                font-weight: 300;
+        .drager-place {
+            flex-grow: 1;
+            display: flex;
+            font-size: 12px;
+            font-weight: 300;
+            color:$flat-color;
+            align-items: center;
+            letter-spacing: 0.05em;
+            justify-content: center;
+            border: solid 1px $flat-color;
+
+
+            .label-indicator-drager {
+                gap:5px;
+                display: flex;
+                text-align: center;
+                align-items: center;
+                flex-direction: column;
             }
         }
     }
