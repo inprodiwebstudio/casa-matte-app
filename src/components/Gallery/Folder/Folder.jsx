@@ -1,19 +1,16 @@
-import { useState }     from "react";
 import { isValidArray } from "helpers";
 
 //Own omponents
 import { MoreOption, PlusIcon } from "Resources/icons";
-import imageTest                from "Resources/images/testingImage01.jpg";
 
 import "./Folder.scss";
 
-const Folder = () => {
-	const [ myImagesList, setMyImagesList ] = useState([]);
+const Folder = ({images, name, handleMovePhotos}) => {
 
 	return (
 		<div className="Folder">
 			<div className="header-folder">
-				<h4>NUEVA CARPETA</h4>
+				<h4>{name}</h4>
 				<div className="more-icon-container">
 					<MoreOption size="20px" />
 				</div>
@@ -21,38 +18,38 @@ const Folder = () => {
 			<div className="body-indicator-conatiner">
 				<div className="photo-thumb-nail-container">
 					<div
-						className={`photo-indicator ${myImagesList[0] && "full-size"}`}
+						className={`photo-indicator ${images[0] && "full-size"}`}
 						style={{
-							backgroundImage : myImagesList[0] ? `url(${myImagesList[0]?.image})` : null,
+							backgroundImage : images[0] ? `url(${images[0]?.image})` : null,
 						}}
 					/>
 					<div
-						className={`photo-indicator ${myImagesList[1] && "full-size"}`}
+						className={`photo-indicator ${images[1] && "full-size"}`}
 						style={{
-							backgroundImage : myImagesList[1] ? `url(${myImagesList[1]?.image})` : null,
+							backgroundImage : images[1] ? `url(${images[1]?.image})` : null,
 						}}
 					/>
 					<div
-						className={`photo-indicator ${myImagesList[2] && "full-size"}`}
+						className={`photo-indicator ${images[2] && "full-size"}`}
 						style={{
-							backgroundImage : myImagesList[2] ? `url(${myImagesList[2]?.image})` : null,
+							backgroundImage : images[2] ? `url(${images[2]?.image})` : null,
 						}}
 					/>
 					<div
-						className={`photo-indicator ${myImagesList[3] && "full-size"}`}
+						className={`photo-indicator ${images[3] && "full-size"}`}
 						style={{
-							backgroundImage : myImagesList[3] ? `url(${myImagesList[3]?.image})` : null,
+							backgroundImage : images[3] ? `url(${images[3]?.image})` : null,
 						}}
 					/>
 				</div>
 				<div
 					className="drager-place"
-					onClick={() => setMyImagesList([...myImagesList, {image : imageTest}])}
+					onClick={() => handleMovePhotos()}
 				>
 					<div className="label-indicator-drager">
 						<PlusIcon size="20px" />
 						{
-							!isValidArray(myImagesList) && (
+							!isValidArray(images) && (
 								<p>
 									AGREGAR FOTOS
 								</p>
