@@ -1,14 +1,16 @@
 import { useState } from "react";
+import { connect }  from "react-redux";
 import BodyGallery  from "components/Gallery/BodyGallery";
 
 //Own components
+import { convertToArray, isValidArray }          from "helpers";
 import { ArrowTop, FolderPlus, DropFile, Thrash} from "Resources/icons";
 import "./SideBar.scss";
 
-const SideBar = () => {
+const SideBar = ({galleryData}) => {
 	const [ isfullSize, setIsFullSize ] = useState(false);
 
-	const isAvailableDocs = false;
+	const isAvailableDocs = isValidArray(convertToArray(galleryData));
 
 	return (
 		<div id="SideBar" className={isAvailableDocs ? (isfullSize && "isFullSize") : "isNoData"}>
@@ -37,4 +39,9 @@ const SideBar = () => {
 	);
 };
 
-export default SideBar;
+const mapStateToProps = ({ gallerySlice }) => ({
+	galleryData  : gallerySlice?.data ?? {},
+	selectedData : gallerySlice?.selectedData ?? {},
+});
+
+export default connect(mapStateToProps)(SideBar);

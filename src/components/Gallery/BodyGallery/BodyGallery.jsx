@@ -1,15 +1,18 @@
 import { useState } from "react";
+import { connect }  from "react-redux";
+
 
 //Own components
-import Folder        from "../Folder";
-import DropDoc       from "../DropDoc";
-import PhotoCard     from "../PhotoCard";
-import { ScrollBar } from "core/components";
-import imageTest     from "Resources/images/testingImage01.jpg";
+import Folder                           from "../Folder";
+import DropDoc                          from "../DropDoc";
+import PhotoCard                        from "../PhotoCard";
+import { ScrollBar }                    from "core/components";
+import { convertToArray, isValidArray } from "helpers";
+import imageTest                        from "Resources/images/testingImage01.jpg";
 import "./BodyGallery.scss";
 
-const BodyGallery = () => {
-	const isAvailableDocs = false;
+const BodyGallery = ({galleryData}) => {
+	const isAvailableDocs = isValidArray(convertToArray(galleryData));
 	const [ testPhotosData, setTestPhotosData ] = useState({
 		"image0" : {
 			id    : "image0",
@@ -122,4 +125,8 @@ const BodyGallery = () => {
 	);
 };
 
-export default BodyGallery;
+const mapStateToProps = ({ gallerySlice }) => ({
+	galleryData : gallerySlice?.data ?? {},
+});
+
+export default connect(mapStateToProps) (BodyGallery);

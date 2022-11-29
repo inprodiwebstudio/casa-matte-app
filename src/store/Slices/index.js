@@ -1,4 +1,4 @@
 //slices
 export { authSlice }    from "./authSlice";
-export { gallerySlice } from "./gallerySlice";
+export { gallerySlice, setGalleryData, clearSelectedData, deleteData } from "./gallerySlice";
 

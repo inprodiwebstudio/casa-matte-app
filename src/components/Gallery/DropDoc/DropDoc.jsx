@@ -1,13 +1,15 @@
 import { useState }    from "react";
 import { useDropzone } from "react-dropzone";
+import { connect }     from "react-redux";
 
 //Own components
+import { setGalleryData }                         from "store/Slices";
 import { DropFile, Folder, PhotoList, ArrowLeft } from "Resources/icons";
 import { TextInput, Button, Card }                from "core/components";
-import { isValidArray }                           from "helpers";
+import { isValidArray, convertToObject, bindAll } from "helpers";
 import "./DropDoc.scss";
 
-const DropDoc = () => {
+const DropDoc = ({setGalleryData}) => {
 
 	const [ fileImage, setFileImage ] = useState([]);
 	const [ isSelectedFolder, setIsSelectedFolder ] = useState(false);
@@ -39,6 +41,18 @@ const DropDoc = () => {
 		},
 	});
 
+	const handleAddPhotos = () => {
+		const newData = fileImage.map(file => ({
+			id    : file?.name,
+			name  : file?.name,
+			image : file?.preview,
+		}));
+
+		const dataToSend = convertToObject(newData);
+
+		setGalleryData(dataToSend);
+	};
+
 	return (
 		<div className="DropDoc">
 			{
@@ -61,6 +75,7 @@ const DropDoc = () => {
 								isButton
 								image={<PhotoList size="50px" />}
 								body="CARGAR A GALERÍA"
+								onSelect={() => handleAddPhotos()}
 							/>
 							<Card
 								isButton
@@ -107,4 +122,6 @@ const DropDoc = () => {
 	);
 };
 
-export default DropDoc;
+const mapDispatchToProps = bindAll({ setGalleryData : setGalleryData});
+
+export default connect(null, mapDispatchToProps) (DropDoc);
