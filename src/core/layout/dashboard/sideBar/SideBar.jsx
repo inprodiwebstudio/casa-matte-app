@@ -2,13 +2,13 @@ import { useState } from "react";
 import BodyGallery  from "components/Gallery/BodyGallery";
 
 //Own components
-import { ArrowTop, FolderPlus, DropFile} from "Resources/icons";
+import { ArrowTop, FolderPlus, DropFile, Thrash} from "Resources/icons";
 import "./SideBar.scss";
 
 const SideBar = () => {
 	const [ isfullSize, setIsFullSize ] = useState(false);
 
-	const isAvailableDocs = true;
+	const isAvailableDocs = false;
 
 	return (
 		<div id="SideBar" className={isAvailableDocs ? (isfullSize && "isFullSize") : "isNoData"}>
@@ -23,6 +23,9 @@ const SideBar = () => {
 						</div>
 						<div className="icon-sidebar-action">
 							<FolderPlus size="20px" />
+						</div>
+						<div className="icon-sidebar-action">
+							<Thrash size="20px" />
 						</div>
 					</div>
 				)

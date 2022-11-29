@@ -14,11 +14,13 @@ import BigPlus    from "./BigPlus";
 import MoveArrows from "./MoveArrows";
 import Check      from "./Check";
 import MoreOption from "./MoreOption";
+import Thrash     from "./Thrash";
 
 export {
 	Check,
 	Cross,
 	Folder,
+	Thrash,
 	Reload,
 	CarIcon,
 	BigPlus,

@@ -9,7 +9,7 @@ import imageTest     from "Resources/images/testingImage01.jpg";
 import "./BodyGallery.scss";
 
 const BodyGallery = () => {
-	const isAvailableDocs = true;
+	const isAvailableDocs = false;
 	const [ testPhotosData, setTestPhotosData ] = useState({
 		"image0" : {
 			id    : "image0",

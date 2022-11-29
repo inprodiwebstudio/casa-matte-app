@@ -26,6 +26,7 @@ const persistConfig = {
 	storage   : localForage,
 	whitelist : [
 		"authSlice",
+		"gallerySlice",
 	],
 };
 
