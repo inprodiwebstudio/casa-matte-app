@@ -3,34 +3,16 @@ import { connect }  from "react-redux";
 
 
 //Own components
-import Folder                           from "../Folder";
-import DropDoc                          from "../DropDoc";
-import PhotoCard                        from "../PhotoCard";
-import { ScrollBar }                    from "core/components";
-import { convertToArray, isValidArray } from "helpers";
-import imageTest                        from "Resources/images/testingImage01.jpg";
+import Folder                                    from "../Folder";
+import DropDoc                                   from "../DropDoc";
+import PhotoCard                                 from "../PhotoCard";
+import { ScrollBar }                             from "core/components";
+import { deleteData }                            from "store/Slices";
+import { convertToArray, isValidArray, bindAll } from "helpers";
 import "./BodyGallery.scss";
 
-const BodyGallery = ({galleryData}) => {
+const BodyGallery = ({galleryData, deleteData}) => {
 	const isAvailableDocs = isValidArray(convertToArray(galleryData));
-	const [ testPhotosData, setTestPhotosData ] = useState({
-		"image0" : {
-			id    : "image0",
-			image : imageTest,
-		},
-		"image1" : {
-			id    : "image1",
-			image : "https://rare-gallery.com/thumbs/560927-bora-bora-beach.jpg",
-		},
-		"image2" : {
-			id    : "image2",
-			image : "https://thumbs.dreamstime.com/b/good-morning-image-hd-wallpapers-sun-deepak-photo-graph-flowers-176211421.jpg",
-		},
-		"image3" : {
-			id    : "image3",
-			image : "https://thumbs.dreamstime.com/b/leeni-pond-plants-sri-lanka-beautiful-fish-hd-wallpapers-260261989.jpg",
-		},
-	});
 
 	const [ selectedPhotos, setSelectedPhotos ] = useState({});
 
@@ -70,13 +52,7 @@ const BodyGallery = ({galleryData}) => {
 			newData[folderIndex].images = [...newData[folderIndex].images, ...Object.values(selectedPhotos)];
 			return newData;
 		});
-		setTestPhotosData(prev => {
-			const newData = {...prev};
-			Object.values(selectedPhotos).forEach(image => {
-				delete newData[image.id];
-			});
-			return newData;
-		});
+		deleteData(selectedPhotos);
 		setSelectedPhotos({});
 	};
 
@@ -107,7 +83,7 @@ const BodyGallery = ({galleryData}) => {
 									))
 								}
 								{
-									Object.values(testPhotosData).map((photo, index) => (
+									Object.values(galleryData).map((photo, index) => (
 										<PhotoCard
 											key={index}
 											image={photo?.image}
@@ -129,4 +105,6 @@ const mapStateToProps = ({ gallerySlice }) => ({
 	galleryData : gallerySlice?.data ?? {},
 });
 
-export default connect(mapStateToProps) (BodyGallery);
+const mapDispatchToProps = bindAll({ deleteData : deleteData});
+
+export default connect(mapStateToProps, mapDispatchToProps) (BodyGallery);
