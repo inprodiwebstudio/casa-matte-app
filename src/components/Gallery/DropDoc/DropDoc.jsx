@@ -106,6 +106,7 @@ const DropDoc = ({gallerySlice}) => {
 		const dataToSend = convertToObject(newData);
 
 		gallerySlice.setGalleryData({[folderData["id"]] : {...folderData}, ...dataToSend});
+		gallerySlice.setTypeDropedView(null);
 	};
 
 	return (

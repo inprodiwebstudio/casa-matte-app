@@ -11,7 +11,7 @@ import { gallerySlice }                          from "store/Slices";
 import { convertToArray, isValidArray, bindAll } from "helpers";
 import "./BodyGallery.scss";
 
-const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice}) => {
+const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDropedView}) => {
 	const isAvailableDocs = isValidArray(convertToArray(galleryData));
 
 	const [ myGalleryData, setMyGalleryData ] = useState([]);
@@ -82,10 +82,25 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice}) => {
 					<DropDoc />
 				)
 			}
-			{/* <DropDoc /> */}
 			{
 				isAvailableDocs && (
 					<ScrollBar>
+						{
+							galleryTypeDropedView && (
+								<div
+									style={{
+										zIndex     : "2",
+										position   : "absolute",
+										height     : "calc(100% - 100px)",
+										width      : "calc(100% - 60px)",
+										display    : "flex",
+										background : "rgba(247, 245, 241, 0.95)",
+									}}
+								>
+									<DropDoc />
+								</div>
+							)
+						}
 						<div className="docs-list">
 							<div className="photo-grid">
 								{/* {
@@ -131,8 +146,9 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice}) => {
 };
 
 const mapStateToProps = ({ gallerySlice }) => ({
-	galleryData      : gallerySlice?.data ?? {},
-	galleryPathRoute : gallerySlice?.galleryPathName ?? "main",
+	galleryData           : gallerySlice?.data ?? {},
+	galleryPathRoute      : gallerySlice?.galleryPathName ?? "main",
+	galleryTypeDropedView : gallerySlice?.typeDropedView ?? null,
 });
 
 const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});

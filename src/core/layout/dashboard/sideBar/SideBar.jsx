@@ -3,11 +3,12 @@ import { connect }  from "react-redux";
 import BodyGallery  from "components/Gallery/BodyGallery";
 
 //Own components
-import { convertToArray, isValidArray }          from "helpers";
+import { gallerySlice }                          from "store/Slices";
+import { convertToArray, isValidArray, bindAll } from "helpers";
 import { ArrowTop, FolderPlus, DropFile, Thrash} from "Resources/icons";
 import "./SideBar.scss";
 
-const SideBar = ({galleryData}) => {
+const SideBar = ({galleryData, gallerySlice}) => {
 	const [ isfullSize, setIsFullSize ] = useState(false);
 
 	const isAvailableDocs = isValidArray(convertToArray(galleryData));
@@ -24,7 +25,7 @@ const SideBar = ({galleryData}) => {
 							<DropFile size="18px" />
 						</div>
 						<div className="icon-sidebar-action">
-							<FolderPlus size="20px" />
+							<FolderPlus size="20px"  onClick={() => gallerySlice.setTypeDropedView("addFolder")} />
 						</div>
 						<div className="icon-sidebar-action">
 							<Thrash size="20px" />
@@ -44,4 +45,6 @@ const mapStateToProps = ({ gallerySlice }) => ({
 	selectedData : gallerySlice?.selectedData ?? {},
 });
 
-export default connect(mapStateToProps)(SideBar);
+const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideBar);

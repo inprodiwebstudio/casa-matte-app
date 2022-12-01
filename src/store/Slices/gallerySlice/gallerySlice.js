@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
 	galleryPathName : "main",
+	typeDropedView  : null,
 	data            : {},
 	selectedData    : {},
 };
@@ -11,7 +12,7 @@ export const gallerySlice = createSlice({
 	initialState,
 	reducers : {
 		setGalleryData : (state, {payload}) => {
-			state.data = payload;
+			state.data = {...payload, ...state.data};
 		},
 		clearSelectedData : (state) => {
 			state.selectedData = initialState;
@@ -26,6 +27,13 @@ export const gallerySlice = createSlice({
 				delete newData[key];
 			});
 			state.data = newData;
+		},
+		setTypeDropedView : (state, {payload}) => {
+			if (payload === state.typeDropedView) {
+				state.typeDropedView = null;
+			} else {
+				state.typeDropedView = payload;
+			}
 		},
 		setGalleryPath : (state, {payload}) => {
 			state.galleryPathName = payload;
