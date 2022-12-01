@@ -1,6 +1,6 @@
-import { useState }    from "react";
-import { connect }     from "react-redux";
-import { useDropzone } from "react-dropzone";
+import { useState, useEffect } from "react";
+import { connect }             from "react-redux";
+import { useDropzone }         from "react-dropzone";
 // import Resizer         from "react-image-file-resizer";
 
 //Own components
@@ -108,6 +108,13 @@ const DropDoc = ({gallerySlice, galleryTypeDropedView}) => {
 		gallerySlice.setGalleryData({[folderData["id"]] : {...folderData}, ...dataToSend});
 		gallerySlice.setTypeDropedView(null);
 	};
+
+	useEffect(() => {
+		if (galleryTypeDropedView === "addFolder") {
+			setFileImage([]);
+		}
+	}, [galleryTypeDropedView]);
+
 
 	return (
 		<div className="DropDoc">
