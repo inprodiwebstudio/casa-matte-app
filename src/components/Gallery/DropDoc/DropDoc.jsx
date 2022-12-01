@@ -16,50 +16,55 @@ const DropDoc = ({gallerySlice}) => {
 	const [ isSelectedFolder, setIsSelectedFolder ] = useState(false);
 	const [ folderName, setFolderName ] = useState("");
 
-	const comprimirImagen = (imagenComoArchivo, porcentajeCalidad) => {
-		return new Promise((resolve, reject) => {
-			const $canvas = document.createElement("canvas");
-			const imagen = new Image();
-			imagen.onload = () => {
-				$canvas.width = imagen.width;
-				$canvas.height = imagen.height;
-				$canvas.getContext("2d").drawImage(imagen, 0, 0);
-				$canvas.toBlob(
-					(blob) => {
-						if (blob === null) {
-							return reject(blob);
-						} else {
-							resolve(blob);
-						}
-					},
-					"image/jpeg",
-					porcentajeCalidad / 100
-				);
-			};
-			imagen.src = URL.createObjectURL(imagenComoArchivo);
-		});
-	};
+	// const comprimirImagen = (imagenComoArchivo, porcentajeCalidad) => {
+	// 	return new Promise((resolve, reject) => {
+	// 		const $canvas = document.createElement("canvas");
+	// 		const imagen = new Image();
+	// 		imagen.onload = () => {
+	// 			$canvas.width = imagen.width;
+	// 			$canvas.height = imagen.height;
+	// 			$canvas.getContext("2d").drawImage(imagen, 0, 0);
+	// 			$canvas.toBlob(
+	// 				(blob) => {
+	// 					if (blob === null) {
+	// 						return reject(blob);
+	// 					} else {
+	// 						resolve(blob);
+	// 					}
+	// 				},
+	// 				"image/jpeg",
+	// 				porcentajeCalidad / 100
+	// 			);
+	// 		};
+	// 		imagen.src = URL.createObjectURL(imagenComoArchivo);
+	// 	});
+	// };
 
 	const handleDrop = (files) => {
 		const isValidFiles = isValidArray(files);
 
 		if (isValidFiles) {
-			const newListFiles = files.map(async (file) => {
+			const newListFiles = files.map((file) => {
 				const myFile = file;
-				const blob = await comprimirImagen(myFile, 10);
-				const createObjectURL = Object.assign(myFile, { preview : URL.createObjectURL(blob) });
+				// const blob = await comprimirImagen(myFile, 10);
+				const createObjectURL = Object.assign(myFile, { preview : URL.createObjectURL(file) });
 				return (
 					createObjectURL
 				);
 			});
 
-			Promise.all(newListFiles).then(values => {
-				setFileImage(prev => {
-					const newData = [...prev, ...values];
-					return newData;
-				});
-			}, reason => {
-				console.error(reason);
+			// Promise.all(newListFiles).then(values => {
+			// 	setFileImage(prev => {
+			// 		const newData = [...prev, ...values];
+			// 		return newData;
+			// 	});
+			// }, reason => {
+			// 	console.error(reason);
+			// });
+
+			setFileImage(prev => {
+				const newData = [...prev, ...newListFiles];
+				return newData;
 			});
 		}
 	};
@@ -102,6 +107,8 @@ const DropDoc = ({gallerySlice}) => {
 
 		gallerySlice.setGalleryData({[folderData["id"]] : {...folderData}, ...dataToSend});
 	};
+
+	console.log(fileImage);
 
 	return (
 		<div className="DropDoc">
