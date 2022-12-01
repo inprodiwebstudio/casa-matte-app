@@ -36,6 +36,6 @@ const baseQueryWithRetry = retry(baseQueryWithReauth, { maxRetries : 6 });
 export const api = createApi({
 	reducerPath : "api",
 	baseQuery   : baseQueryWithRetry,
-	tagTypes    : [],
+	tagTypes    : ["gallerySlice"],
 	endpoints   : () => ({}),
 });

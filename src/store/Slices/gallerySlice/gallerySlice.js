@@ -27,4 +27,4 @@ export const gallerySlice = createSlice({
 });
 
 
-export const { setGalleryData, clearSelectedData, deleteData } = gallerySlice.actions;
+export default gallerySlice;

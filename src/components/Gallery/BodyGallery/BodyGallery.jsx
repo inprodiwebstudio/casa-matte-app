@@ -7,11 +7,11 @@ import Folder                                    from "../Folder";
 import DropDoc                                   from "../DropDoc";
 import PhotoCard                                 from "../PhotoCard";
 import { ScrollBar }                             from "core/components";
-import { deleteData }                            from "store/Slices";
+import { gallerySlice }                          from "store/Slices";
 import { convertToArray, isValidArray, bindAll } from "helpers";
 import "./BodyGallery.scss";
 
-const BodyGallery = ({galleryData, deleteData}) => {
+const BodyGallery = ({galleryData, gallerySlice}) => {
 	const isAvailableDocs = isValidArray(convertToArray(galleryData));
 
 	const [ selectedPhotos, setSelectedPhotos ] = useState({});
@@ -117,6 +117,6 @@ const mapStateToProps = ({ gallerySlice }) => ({
 	galleryData : gallerySlice?.data ?? {},
 });
 
-const mapDispatchToProps = bindAll({ deleteData : deleteData});
+const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});
 
 export default connect(mapStateToProps, mapDispatchToProps) (BodyGallery);

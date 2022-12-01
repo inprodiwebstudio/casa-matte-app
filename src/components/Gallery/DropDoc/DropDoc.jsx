@@ -4,13 +4,13 @@ import { useDropzone } from "react-dropzone";
 // import Resizer         from "react-image-file-resizer";
 
 //Own components
-import { setGalleryData }                         from "store/Slices";
+import { gallerySlice }                           from "store/Slices";
 import { DropFile, Folder, PhotoList, ArrowLeft } from "Resources/icons";
 import { TextInput, Button, Card }                from "core/components";
 import { isValidArray, convertToObject, bindAll } from "helpers";
 import "./DropDoc.scss";
 
-const DropDoc = ({setGalleryData}) => {
+const DropDoc = ({gallerySlice}) => {
 
 	const [ fileImage, setFileImage ] = useState([]);
 	const [ isSelectedFolder, setIsSelectedFolder ] = useState(false);
@@ -81,7 +81,7 @@ const DropDoc = ({setGalleryData}) => {
 
 		const dataToSend = convertToObject(newData);
 
-		setGalleryData(dataToSend);
+		gallerySlice.setGalleryData(dataToSend);
 	};
 
 	const handleAddFolder = () => {
@@ -100,18 +100,8 @@ const DropDoc = ({setGalleryData}) => {
 
 		const dataToSend = convertToObject(newData);
 
-		setGalleryData({[folderData["id"]] : {...folderData}, ...dataToSend});
+		gallerySlice.setGalleryData({[folderData["id"]] : {...folderData}, ...dataToSend});
 	};
-
-	// console.log(
-	// 	fileImage[0]?.toBlob(null, "image/jpeg", 20)
-	// );
-
-	// console.log(URL.createObjectURL(myUri));
-
-	// console.log(myUri);
-
-	console.log(fileImage);
 
 	return (
 		<div className="DropDoc">
@@ -183,6 +173,6 @@ const DropDoc = ({setGalleryData}) => {
 	);
 };
 
-const mapDispatchToProps = bindAll({ setGalleryData : setGalleryData});
+const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});
 
 export default connect(null, mapDispatchToProps) (DropDoc);
