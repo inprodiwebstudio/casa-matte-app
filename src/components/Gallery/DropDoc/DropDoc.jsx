@@ -87,6 +87,7 @@ const DropDoc = ({gallerySlice, galleryTypeDropedView}) => {
 		const dataToSend = convertToObject(newData);
 
 		gallerySlice.setGalleryData(dataToSend);
+		gallerySlice.setTypeDropedView(null);
 	};
 
 	const handleAddFolder = () => {
