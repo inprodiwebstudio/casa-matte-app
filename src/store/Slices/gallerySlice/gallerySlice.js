@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	data         : {},
-	selectedData : {},
+	galleryPathName : "main",
+	data            : {},
+	selectedData    : {},
 };
 
 export const gallerySlice = createSlice({
@@ -22,6 +23,9 @@ export const gallerySlice = createSlice({
 				delete newData[key];
 			});
 			state.data = newData;
+		},
+		setGalleryPath : (state, {payload}) => {
+			state.galleryPathName = payload;
 		},
 	},
 });

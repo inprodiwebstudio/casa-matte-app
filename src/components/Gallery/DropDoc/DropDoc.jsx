@@ -108,8 +108,6 @@ const DropDoc = ({gallerySlice}) => {
 		gallerySlice.setGalleryData({[folderData["id"]] : {...folderData}, ...dataToSend});
 	};
 
-	console.log(fileImage);
-
 	return (
 		<div className="DropDoc">
 			{

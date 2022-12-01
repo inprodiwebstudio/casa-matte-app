@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { connect }  from "react-redux";
+import { useState, useEffect } from "react";
+import { connect }             from "react-redux";
 
 
 //Own components
@@ -11,8 +11,10 @@ import { gallerySlice }                          from "store/Slices";
 import { convertToArray, isValidArray, bindAll } from "helpers";
 import "./BodyGallery.scss";
 
-const BodyGallery = ({galleryData, gallerySlice}) => {
+const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice}) => {
 	const isAvailableDocs = isValidArray(convertToArray(galleryData));
+
+	const [ myGalleryData, setMyGalleryData ] = useState([]);
 
 	const [ selectedPhotos, setSelectedPhotos ] = useState({});
 
@@ -33,6 +35,18 @@ const BodyGallery = ({galleryData, gallerySlice}) => {
 	// 		images     : [],
 	// 	},
 	// ]);
+
+	useEffect(() => {
+		const toArrData = Object.values(galleryData).map(data => data);
+		if (galleryPathRoute === "main") {
+			const dataFilteredMain = toArrData.filter(dirent => (!dirent?.parentId));
+			setMyGalleryData(dataFilteredMain);
+			return;
+		}
+		const dataFilteredPath = toArrData.filter(dirent => dirent?.id === galleryPathRoute);
+		setMyGalleryData(dataFilteredPath);
+	}, [galleryData, galleryPathRoute]);
+
 
 	const handleSelected = (dataImage) => {
 		setSelectedPhotos(prev => {
@@ -55,6 +69,7 @@ const BodyGallery = ({galleryData, gallerySlice}) => {
 	// 	deleteData(selectedPhotos);
 	// 	setSelectedPhotos({});
 	// };
+
 
 	return (
 		<div className="BodyGallery">
@@ -83,7 +98,7 @@ const BodyGallery = ({galleryData, gallerySlice}) => {
 									))
 								} */}
 								{
-									Object.values(galleryData).map((data, index) => {
+									myGalleryData?.map((data, index) => {
 										if (data?.folderName) {
 											return (
 												<Folder
@@ -114,7 +129,8 @@ const BodyGallery = ({galleryData, gallerySlice}) => {
 };
 
 const mapStateToProps = ({ gallerySlice }) => ({
-	galleryData : gallerySlice?.data ?? {},
+	galleryData      : gallerySlice?.data ?? {},
+	galleryPathRoute : gallerySlice?.galleryPathName ?? "main",
 });
 
 const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});
