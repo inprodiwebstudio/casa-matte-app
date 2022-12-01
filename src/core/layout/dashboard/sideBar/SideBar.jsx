@@ -21,11 +21,11 @@ const SideBar = ({galleryData, gallerySlice}) => {
 						<div className="icon-sidebar-action" onClick={() => setIsFullSize(!isfullSize)}>
 							<ArrowTop size="18px" className="icon-arrow-action" />
 						</div>
-						<div className="icon-sidebar-action">
+						<div className="icon-sidebar-action" onClick={() => gallerySlice.setTypeDropedView("addFiles")}>
 							<DropFile size="18px" />
 						</div>
-						<div className="icon-sidebar-action">
-							<FolderPlus size="20px"  onClick={() => gallerySlice.setTypeDropedView("addFolder")} />
+						<div className="icon-sidebar-action" onClick={() => gallerySlice.setTypeDropedView("addFolder")}>
+							<FolderPlus size="20px" />
 						</div>
 						<div className="icon-sidebar-action">
 							<Thrash size="20px" />

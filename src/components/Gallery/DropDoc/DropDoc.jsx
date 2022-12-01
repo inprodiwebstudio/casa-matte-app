@@ -10,7 +10,7 @@ import { TextInput, Button, Card }                from "core/components";
 import { isValidArray, convertToObject, bindAll } from "helpers";
 import "./DropDoc.scss";
 
-const DropDoc = ({gallerySlice}) => {
+const DropDoc = ({gallerySlice, galleryTypeDropedView}) => {
 
 	const [ fileImage, setFileImage ] = useState([]);
 	const [ isSelectedFolder, setIsSelectedFolder ] = useState(false);
@@ -112,7 +112,7 @@ const DropDoc = ({gallerySlice}) => {
 	return (
 		<div className="DropDoc">
 			{
-				(!isValidArray(fileImage) && !isSelectedFolder) && (
+				((!isValidArray(fileImage) && !isSelectedFolder) && (galleryTypeDropedView !== "addFolder")) && (
 					<div  {...getRootProps({className : "indicator-drop-container"})}>
 						<DropFile size="40px" />
 						<p>
@@ -144,7 +144,7 @@ const DropDoc = ({gallerySlice}) => {
 				)
 			}
 			{
-				isSelectedFolder && (
+				(isSelectedFolder || (galleryTypeDropedView === "addFolder")) && (
 					<div className="options-cards-container">
 						<div className="options-card">
 							<div className="form-container">
@@ -163,14 +163,18 @@ const DropDoc = ({gallerySlice}) => {
 							</Button>
 						</div>
 						<div className="back-container">
-							<Button
-								onClick={() => setIsSelectedFolder(false)}
-								icon={<ArrowLeft size="20px" />}
-								fontSize="12px"
-								type="transparent"
-							>
-								ATRÁS
-							</Button>
+							{
+								galleryTypeDropedView !== "addFolder" && (
+									<Button
+										onClick={() => setIsSelectedFolder(false)}
+										icon={<ArrowLeft size="20px" />}
+										fontSize="12px"
+										type="transparent"
+									>
+										ATRÁS
+									</Button>
+								)
+							}
 						</div>
 					</div>
 				)
@@ -181,4 +185,8 @@ const DropDoc = ({gallerySlice}) => {
 
 const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});
 
-export default connect(null, mapDispatchToProps) (DropDoc);
+const mapStateToProps = ({ gallerySlice }) => ({
+	galleryTypeDropedView : gallerySlice?.typeDropedView ?? null,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps) (DropDoc);
