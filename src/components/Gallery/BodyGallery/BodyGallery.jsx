@@ -74,7 +74,7 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 	return (
 		<div className="BodyGallery">
 			<div className="header-gallery-container">
-				<div style={{ height : "26px", width : "100%" }}>&nbsp;</div>
+				<div style={{ height : "26px", width : "100%" }} />
 				<h3>GALERÍA</h3>
 			</div>
 			{
