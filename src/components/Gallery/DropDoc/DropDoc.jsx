@@ -10,7 +10,7 @@ import { TextInput, Button, Card }                from "core/components";
 import { isValidArray, convertToObject, bindAll } from "helpers";
 import "./DropDoc.scss";
 
-const DropDoc = ({gallerySlice, galleryTypeDropedView}) => {
+const DropDoc = ({gallerySlice, galleryTypeDropedView, galleryPathRoute}) => {
 
 	const [ fileImage, setFileImage ] = useState([]);
 	const [ isSelectedFolder, setIsSelectedFolder ] = useState(false);
@@ -82,6 +82,7 @@ const DropDoc = ({gallerySlice, galleryTypeDropedView}) => {
 			id    : file?.name,
 			name  : file?.name,
 			image : file?.preview,
+			...(galleryPathRoute !== "main" && { parentId : galleryPathRoute }),
 		}));
 
 		const dataToSend = convertToObject(newData);
@@ -141,12 +142,16 @@ const DropDoc = ({gallerySlice, galleryTypeDropedView}) => {
 								body="CARGAR A GALERÍA"
 								onSelect={() => handleAddPhotos()}
 							/>
-							<Card
-								isButton
-								image={<Folder size="50px" />}
-								body="CARGAR EN UNA NUEVA CARPETA"
-								onSelect={() => setIsSelectedFolder(true)}
-							/>
+							{
+								galleryPathRoute === "main" && (
+									<Card
+										isButton
+										image={<Folder size="50px" />}
+										body="CARGAR EN UNA NUEVA CARPETA"
+										onSelect={() => setIsSelectedFolder(true)}
+									/>
+								)
+							}
 						</div>
 					</div>
 				)
@@ -195,6 +200,7 @@ const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});
 
 const mapStateToProps = ({ gallerySlice }) => ({
 	galleryTypeDropedView : gallerySlice?.typeDropedView ?? null,
+	galleryPathRoute      : gallerySlice?.galleryPathName ?? "main",
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (DropDoc);

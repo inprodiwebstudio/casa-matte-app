@@ -18,7 +18,13 @@ export const gallerySlice = createSlice({
 			state.selectedData = initialState;
 		},
 		setSelectedData : (state, {payload}) => {
-			state.selectedData = payload;
+			const newData = {...state.selectedData};
+			if (newData[payload?.id]) {
+				delete newData[payload?.id];
+			} else {
+				newData[payload?.id] = payload;
+			}
+			state.selectedData = newData;
 		},
 		deleteData : (state, {payload}) => {
 			const newData = {...state.data};

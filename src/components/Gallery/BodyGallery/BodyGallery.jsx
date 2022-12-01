@@ -11,12 +11,10 @@ import { gallerySlice }                          from "store/Slices";
 import { convertToArray, isValidArray, bindAll } from "helpers";
 import "./BodyGallery.scss";
 
-const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDropedView}) => {
+const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDropedView, gallerySelectedData}) => {
 	const isAvailableDocs = isValidArray(convertToArray(galleryData));
 
 	const [ myGalleryData, setMyGalleryData ] = useState([]);
-
-	const [ selectedPhotos, setSelectedPhotos ] = useState({});
 
 	// const [ dataFolder, setFolderData ] = useState([
 	// 	{
@@ -44,30 +42,11 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 			return;
 		}
 		const dataFilteredPath = toArrData.filter(dirent => dirent?.parentId === galleryPathRoute);
+		console.log(dataFilteredPath);
 		setMyGalleryData(dataFilteredPath);
 	}, [galleryData, galleryPathRoute]);
 
-
-	const handleSelected = (dataImage) => {
-		setSelectedPhotos(prev => {
-			const newData = {...prev};
-			if (newData[dataImage?.id]) {
-				delete newData[dataImage?.id];
-				return newData;
-			}
-			newData[dataImage?.id] = dataImage;
-			return newData;
-		});
-	};
-
 	// const handleMovePhotos = (folderIndex) => {
-	// 	setFolderData(prev => {
-	// 		const newData = [...prev];
-	// 		newData[folderIndex].images = [...newData[folderIndex].images, ...Object.values(selectedPhotos)];
-	// 		return newData;
-	// 	});
-	// 	deleteData(selectedPhotos);
-	// 	setSelectedPhotos({});
 	// };
 
 
@@ -103,16 +82,6 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 						}
 						<div className="docs-list">
 							<div className="photo-grid">
-								{/* {
-									dataFolder?.map((folder, index) => (
-										<Folder
-											key={folder?.id}
-											images={folder?.images}
-											name={folder?.folderName}
-											handleMovePhotos={() => handleMovePhotos(index)}
-										/>
-									))
-								} */}
 								{
 									myGalleryData?.map((data, index) => {
 										if (data?.folderName) {
@@ -130,8 +99,8 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 											<PhotoCard
 												key={index}
 												image={data?.image}
-												onSelected={() => handleSelected(data)}
-												isChecked={selectedPhotos[data?.id] ? true : false}
+												onSelected={() => gallerySlice.setSelectedData(data)}
+												isChecked={gallerySelectedData[data?.id] ? true : false}
 											/>
 										);
 									})
@@ -148,6 +117,7 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 const mapStateToProps = ({ gallerySlice }) => ({
 	galleryData           : gallerySlice?.data ?? {},
 	galleryPathRoute      : gallerySlice?.galleryPathName ?? "main",
+	gallerySelectedData   : gallerySlice?.selectedData ?? {},
 	galleryTypeDropedView : gallerySlice?.typeDropedView ?? null,
 });
 
