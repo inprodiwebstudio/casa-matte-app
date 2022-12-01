@@ -5,10 +5,10 @@ import { MoreOption, PlusIcon } from "Resources/icons";
 
 import "./Folder.scss";
 
-const Folder = ({images, name, handleMovePhotos}) => {
+const Folder = ({images, name, handleMovePhotos, onSelectedFolder}) => {
 
 	return (
-		<div className="Folder">
+		<div className="Folder" onDoubleClick={() => onSelectedFolder()}>
 			<div className="header-folder">
 				<h4>{name}</h4>
 				<div className="more-icon-container">

@@ -43,7 +43,7 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice}) => {
 			setMyGalleryData(dataFilteredMain);
 			return;
 		}
-		const dataFilteredPath = toArrData.filter(dirent => dirent?.id === galleryPathRoute);
+		const dataFilteredPath = toArrData.filter(dirent => dirent?.parentId === galleryPathRoute);
 		setMyGalleryData(dataFilteredPath);
 	}, [galleryData, galleryPathRoute]);
 
@@ -82,6 +82,7 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice}) => {
 					<DropDoc />
 				)
 			}
+			{/* <DropDoc /> */}
 			{
 				isAvailableDocs && (
 					<ScrollBar>
@@ -105,6 +106,7 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice}) => {
 													key={data?.id}
 													images={data?.thumbImages}
 													name={data?.folderName}
+													onSelectedFolder={() => gallerySlice.setGalleryPath(data?.id)}
 													// handleMovePhotos={() => handleMovePhotos(index)}
 												/>
 											);
