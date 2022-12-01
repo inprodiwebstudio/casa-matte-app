@@ -16,23 +16,23 @@ const BodyGallery = ({galleryData, deleteData}) => {
 
 	const [ selectedPhotos, setSelectedPhotos ] = useState({});
 
-	const [ dataFolder, setFolderData ] = useState([
-		{
-			id         : 1,
-			folderName : "CARPETA 1",
-			images     : [],
-		},
-		{
-			id         : 2,
-			folderName : "CARPETA 2",
-			images     : [],
-		},
-		{
-			id         : 3,
-			folderName : "CARPETA 3",
-			images     : [],
-		},
-	]);
+	// const [ dataFolder, setFolderData ] = useState([
+	// 	{
+	// 		id         : 1,
+	// 		folderName : "CARPETA 1",
+	// 		images     : [],
+	// 	},
+	// 	{
+	// 		id         : 2,
+	// 		folderName : "CARPETA 2",
+	// 		images     : [],
+	// 	},
+	// 	{s
+	// 		id         : 3,
+	// 		folderName : "CARPETA 3",
+	// 		images     : [],
+	// 	},
+	// ]);
 
 	const handleSelected = (dataImage) => {
 		setSelectedPhotos(prev => {
@@ -46,15 +46,15 @@ const BodyGallery = ({galleryData, deleteData}) => {
 		});
 	};
 
-	const handleMovePhotos = (folderIndex) => {
-		setFolderData(prev => {
-			const newData = [...prev];
-			newData[folderIndex].images = [...newData[folderIndex].images, ...Object.values(selectedPhotos)];
-			return newData;
-		});
-		deleteData(selectedPhotos);
-		setSelectedPhotos({});
-	};
+	// const handleMovePhotos = (folderIndex) => {
+	// 	setFolderData(prev => {
+	// 		const newData = [...prev];
+	// 		newData[folderIndex].images = [...newData[folderIndex].images, ...Object.values(selectedPhotos)];
+	// 		return newData;
+	// 	});
+	// 	deleteData(selectedPhotos);
+	// 	setSelectedPhotos({});
+	// };
 
 	return (
 		<div className="BodyGallery">
@@ -72,7 +72,7 @@ const BodyGallery = ({galleryData, deleteData}) => {
 					<ScrollBar>
 						<div className="docs-list">
 							<div className="photo-grid">
-								{
+								{/* {
 									dataFolder?.map((folder, index) => (
 										<Folder
 											key={folder?.id}
@@ -81,16 +81,28 @@ const BodyGallery = ({galleryData, deleteData}) => {
 											handleMovePhotos={() => handleMovePhotos(index)}
 										/>
 									))
-								}
+								} */}
 								{
-									Object.values(galleryData).map((photo, index) => (
-										<PhotoCard
-											key={index}
-											image={photo?.image}
-											onSelected={() => handleSelected(photo)}
-											isChecked={selectedPhotos[photo?.id] ? true : false}
-										/>
-									))
+									Object.values(galleryData).map((data, index) => {
+										if (data?.folderName) {
+											return (
+												<Folder
+													key={data?.id}
+													images={data?.thumbImages}
+													name={data?.folderName}
+													// handleMovePhotos={() => handleMovePhotos(index)}
+												/>
+											);
+										}
+										return (
+											<PhotoCard
+												key={index}
+												image={data?.image}
+												onSelected={() => handleSelected(data)}
+												isChecked={selectedPhotos[data?.id] ? true : false}
+											/>
+										);
+									})
 								}
 							</div>
 						</div>

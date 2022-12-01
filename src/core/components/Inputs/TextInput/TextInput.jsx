@@ -1,9 +1,9 @@
 //Own components
 import "./TextInput.scss";
 
-const TextInput = () => {
+const TextInput = ({...props}) => {
 	return (
-		<input className="TextInput" type="text" placeholder="NOMBRE DE LA CARPETA" />
+		<input className="TextInput" type="text" {...props} />
 	);
 };
 

@@ -1,6 +1,7 @@
 import { useState }    from "react";
-import { useDropzone } from "react-dropzone";
 import { connect }     from "react-redux";
+import { useDropzone } from "react-dropzone";
+// import Resizer         from "react-image-file-resizer";
 
 //Own components
 import { setGalleryData }                         from "store/Slices";
@@ -13,22 +14,52 @@ const DropDoc = ({setGalleryData}) => {
 
 	const [ fileImage, setFileImage ] = useState([]);
 	const [ isSelectedFolder, setIsSelectedFolder ] = useState(false);
+	const [ folderName, setFolderName ] = useState("");
 
-	const handleDrop = files => {
+	const comprimirImagen = (imagenComoArchivo, porcentajeCalidad) => {
+		return new Promise((resolve, reject) => {
+			const $canvas = document.createElement("canvas");
+			const imagen = new Image();
+			imagen.onload = () => {
+				$canvas.width = imagen.width;
+				$canvas.height = imagen.height;
+				$canvas.getContext("2d").drawImage(imagen, 0, 0);
+				$canvas.toBlob(
+					(blob) => {
+						if (blob === null) {
+							return reject(blob);
+						} else {
+							resolve(blob);
+						}
+					},
+					"image/jpeg",
+					porcentajeCalidad / 100
+				);
+			};
+			imagen.src = URL.createObjectURL(imagenComoArchivo);
+		});
+	};
+
+	const handleDrop = (files) => {
 		const isValidFiles = isValidArray(files);
 
 		if (isValidFiles) {
-			const newListFiles = files.map(file => {
+			const newListFiles = files.map(async (file) => {
 				const myFile = file;
-				const createObjectURL = Object.assign(myFile, { preview : URL.createObjectURL(myFile) });
+				const blob = await comprimirImagen(myFile, 10);
+				const createObjectURL = Object.assign(myFile, { preview : URL.createObjectURL(blob) });
 				return (
 					createObjectURL
 				);
 			});
 
-			setFileImage(prev => {
-				const newData = [...prev, ...newListFiles];
-				return newData;
+			Promise.all(newListFiles).then(values => {
+				setFileImage(prev => {
+					const newData = [...prev, ...values];
+					return newData;
+				});
+			}, reason => {
+				console.error(reason);
 			});
 		}
 	};
@@ -52,6 +83,35 @@ const DropDoc = ({setGalleryData}) => {
 
 		setGalleryData(dataToSend);
 	};
+
+	const handleAddFolder = () => {
+		const newData = fileImage.map(file => ({
+			id       : file?.name,
+			name     : file?.name,
+			image    : file?.preview,
+			parentId : folderName,
+		}));
+		const thumbImages = (newData?.length > 5) ? [newData[0], newData[1], newData[2], newData[3], newData[4]] : newData;
+		const folderData = {
+			id          : folderName,
+			folderName  : folderName,
+			thumbImages : thumbImages,
+		};
+
+		const dataToSend = convertToObject(newData);
+
+		setGalleryData({[folderData["id"]] : {...folderData}, ...dataToSend});
+	};
+
+	// console.log(
+	// 	fileImage[0]?.toBlob(null, "image/jpeg", 20)
+	// );
+
+	// console.log(URL.createObjectURL(myUri));
+
+	// console.log(myUri);
+
+	console.log(fileImage);
 
 	return (
 		<div className="DropDoc">
@@ -96,11 +156,12 @@ const DropDoc = ({setGalleryData}) => {
 									image={<Folder size="50px" />}
 									body="CARGAR EN UNA NUEVA CARPETA"
 								/>
-								<TextInput />
+								<TextInput placeholder="NOMBRE DE LA CARPETA" onChange={(e) => setFolderName(e.target.value)} />
 							</div>
 							<Button
 								fontSize="16px"
 								fullSize
+								onClick={() => handleAddFolder()}
 							>
 								CREAR
 							</Button>
