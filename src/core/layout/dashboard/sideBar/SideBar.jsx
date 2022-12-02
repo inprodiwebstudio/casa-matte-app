@@ -15,8 +15,6 @@ const SideBar = ({galleryData, gallerySlice, galleryPath, selectedData}) => {
 
 	const isSelectedData = isValidArray(convertToArray(selectedData));
 
-	console.log(galleryPath);
-
 	return (
 		<div id="SideBar" className={isAvailableDocs ? (isfullSize && "isFullSize") : "isNoData"}>
 			{
@@ -37,7 +35,7 @@ const SideBar = ({galleryData, gallerySlice, galleryPath, selectedData}) => {
 						}
 						{
 							isSelectedData && (
-								<div className="icon-sidebar-action">
+								<div className="icon-sidebar-action" onClick={() => gallerySlice.deleteData(selectedData)}>
 									<Thrash size="20px" />
 								</div>
 							)
