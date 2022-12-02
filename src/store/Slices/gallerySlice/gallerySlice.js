@@ -1,4 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice }     from "@reduxjs/toolkit";
+import { convertToObject } from "helpers";
+
 
 const initialState = {
 	galleryPathName : "main",
@@ -43,6 +45,19 @@ export const gallerySlice = createSlice({
 		},
 		setGalleryPath : (state, {payload}) => {
 			state.galleryPathName = payload;
+		},
+		moveToFolder : (state, {payload}) => {
+			const cloneData = { ...state.data };
+			const toArrSelectedData = Object.values(state.selectedData).map(data => ({...data, parentId : payload}));
+			const lenghtOfThumbImages = cloneData[payload].thumbImages;
+			const quantityToSetImages = 5 - lenghtOfThumbImages.length;
+			const newImagesThumb = toArrSelectedData.slice(0, quantityToSetImages + 1);
+
+			const newData = {...cloneData, ...convertToObject(toArrSelectedData)};
+			newData[payload].thumbImages = [...newData[payload].thumbImages, ...newImagesThumb];
+
+			state.data = newData;
+			state.selectedData = {};
 		},
 	},
 });

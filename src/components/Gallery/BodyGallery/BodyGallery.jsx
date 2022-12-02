@@ -9,30 +9,13 @@ import PhotoCard                                 from "../PhotoCard";
 import { ScrollBar }                             from "core/components";
 import { gallerySlice }                          from "store/Slices";
 import { convertToArray, isValidArray, bindAll } from "helpers";
+import { CircleArrow }                           from "Resources/icons";
 import "./BodyGallery.scss";
 
 const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDropedView, gallerySelectedData}) => {
 	const isAvailableDocs = isValidArray(convertToArray(galleryData));
 
 	const [ myGalleryData, setMyGalleryData ] = useState([]);
-
-	// const [ dataFolder, setFolderData ] = useState([
-	// 	{
-	// 		id         : 1,
-	// 		folderName : "CARPETA 1",
-	// 		images     : [],
-	// 	},
-	// 	{
-	// 		id         : 2,
-	// 		folderName : "CARPETA 2",
-	// 		images     : [],
-	// 	},
-	// 	{s
-	// 		id         : 3,
-	// 		folderName : "CARPETA 3",
-	// 		images     : [],
-	// 	},
-	// ]);
 
 	useEffect(() => {
 		const toArrData = Object.values(galleryData).map(data => data);
@@ -42,19 +25,24 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 			return;
 		}
 		const dataFilteredPath = toArrData.filter(dirent => dirent?.parentId === galleryPathRoute);
-		console.log(dataFilteredPath);
 		setMyGalleryData(dataFilteredPath);
 	}, [galleryData, galleryPathRoute]);
-
-	// const handleMovePhotos = (folderIndex) => {
-	// };
 
 
 	return (
 		<div className="BodyGallery">
 			<div className="header-gallery-container">
-				<div style={{ height : "26px", width : "100%" }} />
-				<h3>GALERÍA</h3>
+				<div style={{ height : "34px", width : "100%" }} />
+				<h3>{galleryPathRoute === "main" ? "GALERÍA" : galleryPathRoute}</h3>
+				<div className="actions-header-container">
+					{
+						galleryPathRoute !== "main" && (
+							<div className="circle-arrow-icon" onClick={() => gallerySlice.setGalleryPath("main")}>
+								<CircleArrow size="30px" />
+							</div>
+						)
+					}
+				</div>
 			</div>
 			{
 				!isAvailableDocs && (
@@ -83,27 +71,25 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 						<div className="docs-list">
 							<div className="photo-grid">
 								{
-									myGalleryData?.map((data, index) => {
-										if (data?.folderName) {
-											return (
-												<Folder
-													key={data?.id}
-													images={data?.thumbImages}
-													name={data?.folderName}
-													onSelectedFolder={() => gallerySlice.setGalleryPath(data?.id)}
-													// handleMovePhotos={() => handleMovePhotos(index)}
-												/>
-											);
-										}
-										return (
-											<PhotoCard
-												key={index}
-												image={data?.image}
-												onSelected={() => gallerySlice.setSelectedData(data)}
-												isChecked={gallerySelectedData[data?.id] ? true : false}
-											/>
-										);
-									})
+									myGalleryData?.filter(data => data?.folderName).map(data => (
+										<Folder
+											key={data?.id}
+											images={data?.thumbImages}
+											name={data?.folderName}
+											onSelectedFolder={() => gallerySlice.setGalleryPath(data?.id)}
+											handleMovePhotos={() =>gallerySlice.moveToFolder(data?.id)}
+										/>
+									))
+								}
+								{
+									myGalleryData?.filter(data => !data?.folderName).map((data, index) => (
+										<PhotoCard
+											key={index}
+											image={data?.image}
+											onSelected={() => gallerySlice.setSelectedData(data)}
+											isChecked={gallerySelectedData[data?.id] ? true : false}
+										/>
+									))
 								}
 							</div>
 						</div>

@@ -8,10 +8,14 @@ import { convertToArray, isValidArray, bindAll } from "helpers";
 import { ArrowTop, FolderPlus, DropFile, Thrash} from "Resources/icons";
 import "./SideBar.scss";
 
-const SideBar = ({galleryData, gallerySlice}) => {
+const SideBar = ({galleryData, gallerySlice, galleryPath, selectedData}) => {
 	const [ isfullSize, setIsFullSize ] = useState(false);
 
 	const isAvailableDocs = isValidArray(convertToArray(galleryData));
+
+	const isSelectedData = isValidArray(convertToArray(selectedData));
+
+	console.log(galleryPath);
 
 	return (
 		<div id="SideBar" className={isAvailableDocs ? (isfullSize && "isFullSize") : "isNoData"}>
@@ -24,12 +28,20 @@ const SideBar = ({galleryData, gallerySlice}) => {
 						<div className="icon-sidebar-action" onClick={() => gallerySlice.setTypeDropedView("addFiles")}>
 							<DropFile size="18px" />
 						</div>
-						<div className="icon-sidebar-action" onClick={() => gallerySlice.setTypeDropedView("addFolder")}>
-							<FolderPlus size="20px" />
-						</div>
-						<div className="icon-sidebar-action">
-							<Thrash size="20px" />
-						</div>
+						{
+							galleryPath === "main" && (
+								<div className="icon-sidebar-action" onClick={() => gallerySlice.setTypeDropedView("addFolder")}>
+									<FolderPlus size="20px" />
+								</div>
+							)
+						}
+						{
+							isSelectedData && (
+								<div className="icon-sidebar-action">
+									<Thrash size="20px" />
+								</div>
+							)
+						}
 					</div>
 				)
 			}
@@ -43,6 +55,7 @@ const SideBar = ({galleryData, gallerySlice}) => {
 const mapStateToProps = ({ gallerySlice }) => ({
 	galleryData  : gallerySlice?.data ?? {},
 	selectedData : gallerySlice?.selectedData ?? {},
+	galleryPath  : gallerySlice?.galleryPathName ?? "main",
 });
 
 const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});

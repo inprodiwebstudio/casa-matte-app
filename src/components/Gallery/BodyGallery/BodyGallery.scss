@@ -24,10 +24,19 @@
 
 
     .header-gallery-container {
-        height: 75px;
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 22px;
+        // padding-bottom: 10px;
         margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .actions-header-container {
+            .circle-arrow-icon {
+                color : $flat-color;
+                cursor: pointer;
+            }
+        }
 
         h3 {
             font-size: 20px;
@@ -36,6 +45,7 @@
             text-align: center;
             letter-spacing: 0.05em;
             font-family: "Aitana-Regular";
+            text-transform: uppercase;
         }
     }
 }
