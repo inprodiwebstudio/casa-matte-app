@@ -17,7 +17,7 @@ export const gallerySlice = createSlice({
 			state.data = {...payload, ...state.data};
 		},
 		clearSelectedData : (state) => {
-			state.selectedData = initialState;
+			state.selectedData = {};
 		},
 		setSelectedData : (state, {payload}) => {
 			const newData = {...state.selectedData};
@@ -35,6 +35,7 @@ export const gallerySlice = createSlice({
 				delete newData[key];
 			});
 			state.data = newData;
+			state.selectedData = {};
 		},
 		setTypeDropedView : (state, {payload}) => {
 			if (payload === state.typeDropedView) {
@@ -45,6 +46,7 @@ export const gallerySlice = createSlice({
 		},
 		setGalleryPath : (state, {payload}) => {
 			state.galleryPathName = payload;
+			state.selectedData = {};
 		},
 		moveToFolder : (state, {payload}) => {
 			const cloneData = { ...state.data };
