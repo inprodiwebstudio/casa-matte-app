@@ -13,7 +13,7 @@ const Folder = ({images, name, handleMovePhotos, onSelectedFolder, gallerySelect
 
 	return (
 		<div
-			className={`Folder ${!isValidArray(images) && "cursor-regular"}`}
+			className={`Folder ${(!isValidArray(images) && !isSelectedData) && "cursor-regular"}`}
 			{
 				...(isValidArray(images) && {onDoubleClick : onSelectedFolder})
 			}
