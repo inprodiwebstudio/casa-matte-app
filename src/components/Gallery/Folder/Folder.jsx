@@ -1,14 +1,23 @@
-import { isValidArray } from "helpers";
+import { isValidArray, convertToArray } from "helpers";
+import { connect }                      from "react-redux";
+
 
 //Own omponents
 import { MoreOption, PlusIcon } from "Resources/icons";
 
 import "./Folder.scss";
 
-const Folder = ({images, name, handleMovePhotos, onSelectedFolder}) => {
+const Folder = ({images, name, handleMovePhotos, onSelectedFolder, gallerySelectedData}) => {
+
+	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
 
 	return (
-		<div className="Folder" onDoubleClick={() => onSelectedFolder()}>
+		<div
+			className={`Folder ${!isValidArray(images) && "cursor-regular"}`}
+			{
+				...(isValidArray(images) && {onDoubleClick : onSelectedFolder})
+			}
+		>
 			<div className="header-folder">
 				<h4>{name}</h4>
 				<div className="more-icon-container">
@@ -42,24 +51,39 @@ const Folder = ({images, name, handleMovePhotos, onSelectedFolder}) => {
 						}}
 					/>
 				</div>
-				<div
-					className="drager-place"
-					onClick={() => handleMovePhotos()}
-				>
-					<div className="label-indicator-drager">
-						<PlusIcon size="20px" />
-						{
-							!isValidArray(images) && (
-								<p>
-									AGREGAR FOTOS
-								</p>
-							)
-						}
-					</div>
-				</div>
+				{
+					isValidArray(images) && (
+						<div
+							className="drager-place"
+						>
+							<div>
+								<PlusIcon size="20px" />
+							</div>
+						</div>
+					)
+				}
+				{
+					((isSelectedData || (!isValidArray(images))) && (
+						<div className={`overlay-add-photos ${!isValidArray(images) && "none-background"}`} onClick={() => handleMovePhotos()}>
+							<PlusIcon size="20px" />
+							<p>
+								{
+									!isValidArray(images) && "Primero selecciona las fotos para agregar a ésta carpeta"
+								}
+								{
+									isValidArray(images) && "Haz click aquí para agregar las fotos seleccionadas"
+								}
+							</p>
+						</div>
+					))
+				}
 			</div>
 		</div>
 	);
 };
 
-export default Folder;
+const mapStateToProps = ({ gallerySlice }) => ({
+	gallerySelectedData : gallerySlice?.selectedData ?? {},
+});
+
+export default connect(mapStateToProps) (Folder);

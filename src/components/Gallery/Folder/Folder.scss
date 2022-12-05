@@ -6,11 +6,21 @@
     padding: 5px;
     height: 157px;
     display: flex;
+    cursor: pointer;
     flex-direction: column;
     transition: all ease 300ms;
+    background: $light-color;
+
+    &.cursor-regular {
+        cursor: default;
+    }
 
     &:hover {
         background: $primary-color;
+
+        .overlay-add-photos {
+            background: rgba(233, 228, 217, 0.95) !important;
+        }
     }
 
     h4 {
@@ -29,7 +39,7 @@
     .body-indicator-conatiner {
         height: 100%;
         display: flex;
-        cursor: pointer;
+        position: relative;
 
         .photo-thumb-nail-container {
             gap: 0px;
@@ -55,19 +65,34 @@
             display: flex;
             font-size: 12px;
             font-weight: 300;
-            color:$flat-color;
+            text-align: center;
             align-items: center;
             letter-spacing: 0.05em;
             justify-content: center;
             border: solid 1px $flat-color;
+        }
 
+        .overlay-add-photos {
+            gap:5px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            font-size: 12px;
+            font-weight: 300;
+            color:$flat-color;
+            padding-left: 30px;
+            padding-right: 30px;
+            position: absolute;
+            text-align: center;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            transition: all ease 250ms;
+            border: solid 1px $flat-color;
+            background: rgba(247, 245, 241, 0.95);
 
-            .label-indicator-drager {
-                gap:5px;
-                display: flex;
-                text-align: center;
-                align-items: center;
-                flex-direction: column;
+            &.none-background {
+                background: none;
             }
         }
     }
