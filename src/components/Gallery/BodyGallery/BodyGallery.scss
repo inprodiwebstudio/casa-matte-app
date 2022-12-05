@@ -31,11 +31,16 @@
         gap: 20px;
 
         .actions-header-container {
-            display: flex; 
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
             .icon-style {
                 color : $flat-color;
                 cursor: pointer;
                 transition: all ease 200ms;
+                height: 30px;
+                width: 30px;
 
                 &:hover {
                     color : $dark-color;
@@ -43,7 +48,12 @@
             }
 
             .filter-selector-container {
-                flex-grow: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .selector-input {
+                    width: 180px;
+                }
             }
         }
 

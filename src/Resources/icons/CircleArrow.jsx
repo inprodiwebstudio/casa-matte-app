@@ -10,7 +10,7 @@ const CircleArrow = ({ size = "30px", className = "", style = {}, ...rest }) => 
 		}}
 		className={className}
 		xmlns="http://www.w3.org/2000/svg"
-		viewBox="0 0 31 31"
+		viewBox="0 0 31 30"
 		width="30px"
 		height="30px"
 		{...rest}

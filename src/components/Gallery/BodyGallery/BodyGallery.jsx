@@ -6,7 +6,7 @@ import { connect }             from "react-redux";
 import Folder                                    from "../Folder";
 import DropDoc                                   from "../DropDoc";
 import PhotoCard                                 from "../PhotoCard";
-import { ScrollBar }                             from "core/components";
+import { ScrollBar, SelectorMenuItem }           from "core/components";
 import { gallerySlice }                          from "store/Slices";
 import { convertToArray, isValidArray, bindAll } from "helpers";
 import { CircleArrow, CrossSelector }            from "Resources/icons";
@@ -37,22 +37,25 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 				<div style={{ height : "34px", width : "100%" }} />
 				<h3>{galleryPathRoute === "main" ? "GALERÍA" : galleryPathRoute}</h3>
 				<div className="actions-header-container">
-					{
-						galleryPathRoute !== "main" && (
-							<div className="icon-style" onClick={() => gallerySlice.setGalleryPath("main")}>
-								<CircleArrow size="30px" />
-							</div>
-						)
-					}
-					<div className="filter-selector-container" />
-					{
-						isSelectedData && (
-							<div className="icon-style" onClick={() => gallerySlice.clearSelectedData()}>
-								<CrossSelector size="30px" />
-							</div>
-						)
-					}
-
+					<div className="icon-style">
+						{
+							galleryPathRoute !== "main" && (
+								<CircleArrow size="30px" onClick={() => gallerySlice.setGalleryPath("main")} />
+							)
+						}
+					</div>
+					<div className="filter-selector-container">
+						<div className="selector-input">
+							<SelectorMenuItem />
+						</div>
+					</div>
+					<div className="icon-style" {...(isSelectedData && {onClick : () => gallerySlice.clearSelectedData()})}>
+						{
+							isSelectedData && (
+								<CrossSelector size="30px" onClick={() => gallerySlice.clearSelectedData()} />
+							)
+						}
+					</div>
 				</div>
 			</div>
 			{
