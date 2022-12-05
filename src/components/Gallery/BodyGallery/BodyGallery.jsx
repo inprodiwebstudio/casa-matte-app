@@ -44,11 +44,15 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 							)
 						}
 					</div>
-					<div className="filter-selector-container">
-						<div className="selector-input">
-							<SelectorMenuItem />
-						</div>
-					</div>
+					{
+						isValidArray(myGalleryData) && (
+							<div className="filter-selector-container">
+								<div className="selector-input">
+									<SelectorMenuItem />
+								</div>
+							</div>
+						)
+					}
 					<div className="icon-style" {...(isSelectedData && {onClick : () => gallerySlice.clearSelectedData()})}>
 						{
 							isSelectedData && (
