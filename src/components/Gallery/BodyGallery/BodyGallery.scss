@@ -25,16 +25,25 @@
 
     .header-gallery-container {
         padding-top: 22px;
-        // padding-bottom: 10px;
         margin-bottom: 10px;
         display: flex;
         flex-direction: column;
         gap: 20px;
 
         .actions-header-container {
-            .circle-arrow-icon {
+            display: flex; 
+            .icon-style {
                 color : $flat-color;
                 cursor: pointer;
+                transition: all ease 200ms;
+
+                &:hover {
+                    color : $dark-color;
+                }
+            }
+
+            .filter-selector-container {
+                flex-grow: 1;
             }
         }
 

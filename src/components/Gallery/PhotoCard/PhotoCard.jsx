@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 //Own components
-import { BigPlus, MoveArrows, Check } from "Resources/icons";
+import { BigPlus, Check } from "Resources/icons";
 import "./PhotoCard.scss";
 
 const PhotoCard = ({image, onSelected, isChecked}) => {
@@ -27,9 +27,6 @@ const PhotoCard = ({image, onSelected, isChecked}) => {
 				</div>
 				<div className="plus-icon-container" onClick={() => setIsSelected(!isSelected)}>
 					<BigPlus size="80px" />
-				</div>
-				<div className="move-arrows-icon-container">
-					<MoveArrows size="20px" />
 				</div>
 			</div>
 		</div>

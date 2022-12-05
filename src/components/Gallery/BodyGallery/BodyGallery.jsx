@@ -9,13 +9,15 @@ import PhotoCard                                 from "../PhotoCard";
 import { ScrollBar }                             from "core/components";
 import { gallerySlice }                          from "store/Slices";
 import { convertToArray, isValidArray, bindAll } from "helpers";
-import { CircleArrow }                           from "Resources/icons";
+import { CircleArrow, CrossSelector }            from "Resources/icons";
 import "./BodyGallery.scss";
 
 const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDropedView, gallerySelectedData}) => {
 	const isAvailableDocs = isValidArray(convertToArray(galleryData));
 
 	const [ myGalleryData, setMyGalleryData ] = useState([]);
+
+	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
 
 	useEffect(() => {
 		const toArrData = Object.values(galleryData).map(data => data);
@@ -37,11 +39,20 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 				<div className="actions-header-container">
 					{
 						galleryPathRoute !== "main" && (
-							<div className="circle-arrow-icon" onClick={() => gallerySlice.setGalleryPath("main")}>
+							<div className="icon-style" onClick={() => gallerySlice.setGalleryPath("main")}>
 								<CircleArrow size="30px" />
 							</div>
 						)
 					}
+					<div className="filter-selector-container" />
+					{
+						isSelectedData && (
+							<div className="icon-style" onClick={() => gallerySlice.clearSelectedData()}>
+								<CrossSelector size="30px" />
+							</div>
+						)
+					}
+
 				</div>
 			</div>
 			{
@@ -58,7 +69,7 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 									style={{
 										zIndex     : "2",
 										position   : "absolute",
-										height     : "calc(100% - 100px)",
+										height     : "calc(100% - 150px)",
 										width      : "calc(100% - 60px)",
 										display    : "flex",
 										background : "rgba(247, 245, 241, 0.95)",
