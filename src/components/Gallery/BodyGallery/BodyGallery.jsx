@@ -64,7 +64,7 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 						isValidArray(myGalleryData) && (
 							<div className="filter-selector-container">
 								<div className="selector-input">
-									<SelectorMenuItem type="light" />
+									<SelectorMenuItem type="light" placeholder="Ordenar por" />
 								</div>
 							</div>
 						)
