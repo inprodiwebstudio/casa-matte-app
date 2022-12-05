@@ -1,12 +1,12 @@
-const SelectStyles = () => ({
+const SelectStyles = ({type}) => ({
 	control : (provided) => ({
 		...provided,
 		border        : "none",
 		width         : "100%",
 		minHeight     : "26px",
-		paddingBottom : "10px",
-		paddingTop    : "10px",
-		background    : "none",
+		paddingBottom : type === "light" ? "1px" : "1px",
+		paddingTop    : type === "light" ? "1px" : "1px",
+		background    : type === "light" ? "whithe" : "none",
 		borderRadius  : "0px",
 		cursor        : "pointer",
 		"&:focus"     : {
@@ -60,12 +60,12 @@ const SelectStyles = () => ({
 		lineHeight    : "17px",
 		color         : "#000000",
 		letterSpacing : "0.05em",
-		textTransform : "uppercase",
+		textTransform : type !== "light" && "uppercase",
 		fontSize      : "14px",
 	}),
 	option : (styles) => ({
 		...styles,
-		textTransform   : "uppercase",
+		textTransform   : type !== "light" && "uppercase",
 		fontFamily      : "Helvetica",
 		backgroundColor : "#fff",
 		color           : "#000",
@@ -100,10 +100,10 @@ const SelectStyles = () => ({
 		...styles,
 		fontWeight    : 300,
 		lineHeight    : "17px",
-		color         : "#000000",
-		textTransform : "uppercase",
 		fontSize      : "14px",
 		letterSpacing : "0.05em",
+		textTransform : type !== "light" && "uppercase",
+		color         : type === "light" ? "#B2AFA6" : "#000000",
 	}),
 	menuPortal : styles => ({ ...styles, zIndex : 9999}),
 });

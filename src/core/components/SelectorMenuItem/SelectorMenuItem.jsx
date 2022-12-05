@@ -6,7 +6,7 @@ import SelectStyles from "./SelectStyles";
 import { ArrowTop } from "Resources/icons";
 import "./SelectorMenuItem.scss";
 
-const SelectorMenuItem = () => {
+const SelectorMenuItem = ({type}) => {
 	const [ hoverDisplay, setHoverDisplay ] = useState(false);
 	const fakeOptions = [
 		{ value : "chocolate", label : "Chocolate" },
@@ -35,7 +35,7 @@ const SelectorMenuItem = () => {
 				options={fakeOptions}
 				placeholder="Default"
 				onChange={handleChange}
-				styles={SelectStyles()}
+				styles={SelectStyles({type})}
 				menuPortalTarget={document.body}
 				components={{ DropdownIndicator }}
 			/>
