@@ -3,6 +3,11 @@
 .SelectorMenuItem {
     position : relative;
     border-bottom: solid 1px #E3E3E3;
+    transition: all ease 200ms;
+
+    &.isHover { 
+        border-bottom-color: #000000;
+    }
 
     & .lineStyle {
         width : 2px;

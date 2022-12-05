@@ -27,7 +27,7 @@ const SelectorMenuItem = ({type}) => {
 	};
 	return (
 		<div
-			className="SelectorMenuItem"
+			className={`SelectorMenuItem ${((type === "light") && hoverDisplay) && "isHover"}`}
 			onMouseOver={() => setHoverDisplay(true)}
 			onMouseLeave={() => setHoverDisplay(false)}
 		>
@@ -39,7 +39,11 @@ const SelectorMenuItem = ({type}) => {
 				menuPortalTarget={document.body}
 				components={{ DropdownIndicator }}
 			/>
-			<div className={`lineStyle ${hoverDisplay && "fulWidth"}`}>&nbsp;</div>
+			{
+				type !== "light" && (
+					<div className={`lineStyle ${hoverDisplay && "fulWidth"}`}>&nbsp;</div>
+				)
+			}
 		</div>
 	);
 };
