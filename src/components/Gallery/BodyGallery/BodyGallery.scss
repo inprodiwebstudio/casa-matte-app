@@ -30,6 +30,11 @@
         flex-direction: column;
         gap: 20px;
 
+        .header-actions-gallery {
+            width : 100%;
+            height: 34px;
+        }
+
         .actions-header-container {
             display: flex;
             align-items: center;

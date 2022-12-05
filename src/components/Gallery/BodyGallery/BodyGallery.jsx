@@ -3,10 +3,14 @@ import { connect }             from "react-redux";
 
 
 //Own components
-import Folder                                    from "../Folder";
-import DropDoc                                   from "../DropDoc";
-import PhotoCard                                 from "../PhotoCard";
-import { ScrollBar, SelectorMenuItem }           from "core/components";
+import Folder        from "../Folder";
+import DropDoc       from "../DropDoc";
+import PhotoCard     from "../PhotoCard";
+import {
+	CheckBox,
+	ScrollBar,
+	SelectorMenuItem,
+} from "core/components";
 import { gallerySlice }                          from "store/Slices";
 import { convertToArray, isValidArray, bindAll } from "helpers";
 import { CircleArrow, CrossSelector }            from "Resources/icons";
@@ -34,7 +38,9 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 	return (
 		<div className="BodyGallery">
 			<div className="header-gallery-container">
-				<div style={{ height : "34px", width : "100%" }} />
+				<div className="header-actions-gallery">
+					<CheckBox />
+				</div>
 				<h3>{galleryPathRoute === "main" ? "GALERÍA" : galleryPathRoute}</h3>
 				<div className="actions-header-container">
 					<div className="icon-style">

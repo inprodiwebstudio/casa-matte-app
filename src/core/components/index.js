@@ -8,4 +8,4 @@ export { default as ScrollBar }        from "./ScrollBar";
 export { default as Button }           from "./Button";
 export { default as TextInput }        from "./Inputs/TextInput";
 export { default as Card }             from "./Card";
-
+export { default as CheckBox }         from "./CheckBox";
