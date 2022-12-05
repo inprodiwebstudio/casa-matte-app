@@ -7,6 +7,7 @@ import Folder        from "../Folder";
 import DropDoc       from "../DropDoc";
 import PhotoCard     from "../PhotoCard";
 import {
+	Button,
 	CheckBox,
 	ScrollBar,
 	SelectorMenuItem,
@@ -39,7 +40,8 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 		<div className="BodyGallery">
 			<div className="header-gallery-container">
 				<div className="header-actions-gallery">
-					<CheckBox />
+					<CheckBox label="OCULTAR FOTOS USADAS" isActive={true} />
+					<Button width={84} fontSize={12} type="outline">AUTOFILL</Button>
 				</div>
 				<h3>{galleryPathRoute === "main" ? "GALERÍA" : galleryPathRoute}</h3>
 				<div className="actions-header-container">

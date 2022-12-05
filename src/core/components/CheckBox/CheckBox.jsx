@@ -1,9 +1,16 @@
 //Own components
-import "./Checkbox.scss";
+import "./CheckBox.scss";
 
-const CheckBox = () => {
+const CheckBox = ({label, isActive}) => {
 	return (
-		<div>CheckBox</div>
+		<div className="CheckBox">
+			<div className="check-box" id="checkBox">
+				{
+					isActive && <div className="filling" />
+				}
+			</div>
+			<label htmlFor="checkBox" className="label-checkbox">{label}</label>
+		</div>
 	);
 };
 

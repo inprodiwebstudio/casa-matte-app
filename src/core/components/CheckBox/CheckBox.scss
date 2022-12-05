@@ -1,4 +1,30 @@
 @import "/src/Resources/scss/variables/colorThemes";
 
 .CheckBox {
+    gap: 5px;
+    display: flex;
+    cursor: pointer;
+    width: fit-content;
+
+    .check-box {
+        width : 20px;
+        height: 20px;
+        padding : 2px;
+        border: solid 2px $dark-color;
+
+        .filling {
+            width: 100%;
+            height: 100%;
+            background: $dark-color;
+        }
+    }
+
+    .label-checkbox {
+        display: flex;
+        font-size: 12px;
+        cursor: pointer;
+        margin-top: 1px;
+        font-weight: 300;
+        align-items: center;
+    }
 }
