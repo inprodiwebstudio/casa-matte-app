@@ -1,9 +1,9 @@
 //Own components
 import "./CheckBox.scss";
 
-const CheckBox = ({label, isActive}) => {
+const CheckBox = ({label, isActive, onChange}) => {
 	return (
-		<div className="CheckBox">
+		<div className="CheckBox" onClick={() => onChange()}>
 			<div className="check-box" id="checkBox">
 				{
 					isActive && <div className="filling" />

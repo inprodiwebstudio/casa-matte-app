@@ -22,6 +22,8 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 
 	const [ myGalleryData, setMyGalleryData ] = useState([]);
 
+	const [ isHideSelected, setIsHideSelected ] = useState(false);
+
 	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
 
 	useEffect(() => {
@@ -40,8 +42,14 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 		<div className="BodyGallery">
 			<div className="header-gallery-container">
 				<div className="header-actions-gallery">
-					<CheckBox label="OCULTAR FOTOS USADAS" isActive={true} />
-					<Button width={84} fontSize={12} type="outline">AUTOFILL</Button>
+					{
+						isAvailableDocs && (
+							<>
+								<CheckBox label="OCULTAR FOTOS USADAS" isActive={isHideSelected} onChange={() => setIsHideSelected(!isHideSelected)} />
+								<Button width={84} fontSize={12} type="outline">AUTOFILL</Button>
+							</>
+						)
+					}
 				</div>
 				<h3>{galleryPathRoute === "main" ? "GALERÍA" : galleryPathRoute}</h3>
 				<div className="actions-header-container">
