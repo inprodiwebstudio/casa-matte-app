@@ -6,7 +6,7 @@ import SelectStyles from "./SelectStyles";
 import { ArrowTop } from "Resources/icons";
 import "./SelectorMenuItem.scss";
 
-const SelectorMenuItem = ({type, placeholder}) => {
+const SelectorMenuItem = ({type, placeholder, leftIcon}) => {
 	const [ hoverDisplay, setHoverDisplay ] = useState(false);
 	const fakeOptions = [
 		{ value : "chocolate", label : "Chocolate" },
@@ -31,11 +31,18 @@ const SelectorMenuItem = ({type, placeholder}) => {
 			onMouseOver={() => setHoverDisplay(true)}
 			onMouseLeave={() => setHoverDisplay(false)}
 		>
+			{
+				leftIcon && (
+					<div className="icon-selector-container">
+						{leftIcon}
+					</div>
+				)
+			}
 			<Select
 				options={fakeOptions}
 				placeholder={placeholder ? placeholder : "Defaul"}
 				onChange={handleChange}
-				styles={SelectStyles({type})}
+				styles={SelectStyles({type, leftIcon})}
 				menuPortalTarget={document.body}
 				components={{ DropdownIndicator }}
 				noOptionsMessage={() => "No hay resultados"}

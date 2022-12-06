@@ -2,8 +2,20 @@
 
 .SelectorMenuItem {
     position : relative;
-    border-bottom: solid 1px #E3E3E3;
     transition: all ease 200ms;
+    border-bottom: solid 1px #E3E3E3;
+
+    .icon-selector-container {
+        top: 21%;
+        left: 4%;
+        right: 0;
+        bottom: 0;
+        z-index: 4;
+        width: 15px;
+        height: 15px;
+        position: absolute;
+        color : $flat-color;
+    }
 
     &.isHover { 
         border-bottom-color: #000000;

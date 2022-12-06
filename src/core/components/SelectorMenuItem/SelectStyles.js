@@ -1,4 +1,4 @@
-const SelectStyles = ({type}) => ({
+const SelectStyles = ({type, leftIcon}) => ({
 	control : (provided) => ({
 		...provided,
 		border        : "none",
@@ -44,7 +44,7 @@ const SelectStyles = ({type}) => ({
 		paddingTop    : "0px !important",
 		paddingBottom : "0px !important",
 		paddingRight  : "0px !important",
-		paddingLeft   : "15px !important",
+		paddingLeft   : ((type !== "light") || !leftIcon) ? "13px !important" : "27px",
 		marginBottom  : "0px !important",
 	}),
 	multiValue : (styles) => ({
@@ -108,7 +108,7 @@ const SelectStyles = ({type}) => ({
 		textTransform : type !== "light" && "uppercase",
 		color         : type === "light" ? "#B2AFA6" : "#000000",
 	}),
-	menuPortal : styles => ({ ...styles, zIndex : 9999}),
+	menuPortal : styles => ({ ...styles, zIndex : 3}),
 });
 
 export default SelectStyles;

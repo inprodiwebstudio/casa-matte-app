@@ -12,9 +12,9 @@ import {
 	ScrollBar,
 	SelectorMenuItem,
 } from "core/components";
-import { gallerySlice }                          from "store/Slices";
-import { convertToArray, isValidArray, bindAll } from "helpers";
-import { CircleArrow, CrossSelector }            from "Resources/icons";
+import { gallerySlice }                           from "store/Slices";
+import { convertToArray, isValidArray, bindAll }  from "helpers";
+import { CircleArrow, CrossSelector, FilterIcon } from "Resources/icons";
 import "./BodyGallery.scss";
 
 const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDropedView, gallerySelectedData}) => {
@@ -64,7 +64,7 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 						isValidArray(myGalleryData) && (
 							<div className="filter-selector-container">
 								<div className="selector-input">
-									<SelectorMenuItem type="light" placeholder="Ordenar por" />
+									<SelectorMenuItem type="light" placeholder="Ordenar por" leftIcon={<FilterIcon size="15px" />} />
 								</div>
 							</div>
 						)

@@ -17,6 +17,7 @@ import MoreOption    from "./MoreOption";
 import Thrash        from "./Thrash";
 import CircleArrow   from "./CircleArrow";
 import CrossSelector from "./CrossSelector";
+import FilterIcon    from "./FilterIcon";
 
 
 export {
@@ -34,6 +35,7 @@ export {
 	PlusIcon,
 	ArrowLeft,
 	PhotoList,
+	FilterIcon,
 	FolderPlus,
 	MoveArrows,
 	MoreOption,
