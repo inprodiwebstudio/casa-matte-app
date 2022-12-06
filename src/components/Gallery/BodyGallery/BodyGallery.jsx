@@ -92,7 +92,7 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 									style={{
 										zIndex     : "2",
 										position   : "absolute",
-										height     : "calc(100% - 150px)",
+										height     : "calc(100% - 180px)",
 										width      : "calc(100% - 60px)",
 										display    : "flex",
 										background : "rgba(247, 245, 241, 0.95)",

@@ -6,7 +6,7 @@ import { MenuItem, SelectorMenuItem } from "core/components";
 import "./DropedMenu.scss";
 
 const DropedMenu = () => {
-	const [ activeMenu, setActiveMenu ] = useState(true);
+	const [ activeMenu, setActiveMenu ] = useState(false);
 	return (
 		<div id="DropedMenu">
 			<div className={`menu ${!activeMenu && "hidden"}`}>
