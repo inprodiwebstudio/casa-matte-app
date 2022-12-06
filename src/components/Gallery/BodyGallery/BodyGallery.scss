@@ -11,9 +11,39 @@
     
 
     .docs-list {
+        gap: 17px;
         flex-grow: 1;
+        display: flex;
         overflow: hidden;
-        .photo-grid { 
+        flex-direction: column;
+
+        .folder-grid {
+            gap: 10px;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            overflow-y: hidden;
+        }
+
+        .separator-container {
+            gap: 3px;
+            display: flex;
+            font-size: 20px;
+            font-weight: 400;
+            color: $flat-color;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            font-family: "Aitana-Regular";
+
+            .spacer-line {
+                width: 100%;
+                height: 1px;
+                background: $flat-color;
+            }
+        }
+
+        .photo-grid {
             display: flex;
             gap : 10px;
             flex-wrap: wrap;

@@ -103,7 +103,7 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 							)
 						}
 						<div className="docs-list">
-							<div className="photo-grid">
+							<div className="folder-grid">
 								{
 									myGalleryData?.filter(data => data?.folderName).map(data => (
 										<Folder
@@ -115,6 +115,12 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 										/>
 									))
 								}
+							</div>
+							<div className="separator-container">
+								<p>FOTOS</p>
+								<div className="spacer-line" />
+							</div>
+							<div className="photo-grid">
 								{
 									myGalleryData?.filter(data => !data?.folderName).map((data, index) => (
 										<PhotoCard
