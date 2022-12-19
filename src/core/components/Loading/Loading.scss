@@ -1,0 +1,17 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.Loading {
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   justify-content: center;
+
+   gap: 5px;
+
+   h5 {
+       font-size: 14px;
+       font-weight: 300;
+       color : $flat-color;
+       text-transform: uppercase;
+   }
+}

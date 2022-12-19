@@ -23,8 +23,11 @@ export default defineConfig({
 		},
 	},
 	server : {
-		open : true,
-		host : "0.0.0.0",
+		open  : true,
+		host  : "0.0.0.0",
+		proxy : {
+			"/api" : "https://temporal.casamatte.com",
+		},
 	},
 	//https://github.com/vitejs/vite/issues/8644
 	// esbuild : {

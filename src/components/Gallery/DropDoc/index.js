@@ -1,1 +1,1 @@
-export { default } from "./DropDoc";
+export { default } from "./DropDocContainer";

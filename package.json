@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "proxy": "https://temporal.casamatte.com",
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
@@ -16,7 +17,9 @@
   "dependencies": {
     "@hookform/resolvers": "^2.9.8",
     "@reduxjs/toolkit": "^1.8.5",
+    "axios": "^1.2.1",
     "fs": "^0.0.1-security",
+    "imagekitio-react": "^2.0.0",
     "localforage": "^1.10.0",
     "path": "^0.12.7",
     "qs": "^6.11.0",
@@ -31,6 +34,7 @@
     "react-router": "^6.4.3",
     "react-router-dom": "^6.4.0",
     "react-select": "^5.6.0",
+    "react-spinners": "^0.13.7",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "sass": "^1.54.0",

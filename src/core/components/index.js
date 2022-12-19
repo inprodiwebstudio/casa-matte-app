@@ -9,3 +9,5 @@ export { default as Button }           from "./Button";
 export { default as TextInput }        from "./Inputs/TextInput";
 export { default as Card }             from "./Card";
 export { default as CheckBox }         from "./CheckBox";
+export { default as Loading }          from "./Loading";
+

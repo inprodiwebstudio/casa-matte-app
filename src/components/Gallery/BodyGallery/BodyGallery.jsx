@@ -3,9 +3,11 @@ import { connect }             from "react-redux";
 
 
 //Own components
-import Folder        from "../Folder";
-import DropDoc       from "../DropDoc";
-import PhotoCard     from "../PhotoCard";
+import Folder         from "../Folder";
+import DropDoc        from "../DropDoc";
+import PhotoCard      from "../PhotoCard";
+import { genericApi } from "store/api/genericApi";
+
 import {
 	Button,
 	CheckBox,
@@ -18,7 +20,23 @@ import { CircleArrow, CrossSelector, FilterIcon } from "Resources/icons";
 import "./BodyGallery.scss";
 
 const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDropedView, gallerySelectedData}) => {
-	const isAvailableDocs = isValidArray(convertToArray(galleryData));
+	const { data : galleryFolderData } = genericApi.useGetDataQuery({
+		module : "gallery",
+		params : {
+			meta_key   : "isfolder",
+			meta_value : "true",
+		},
+	});
+
+	const { data : galleryPhotosData } = genericApi.useGetDataQuery({
+		module : "gallery",
+		params : {
+			meta_key   : "isfolder",
+			meta_value : "false",
+		},
+	});
+
+	const isAvailableDocs = isValidArray(galleryFolderData) || isValidArray(galleryPhotosData);
 
 	const [ myGalleryData, setMyGalleryData ] = useState([]);
 
@@ -36,7 +54,6 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 		const dataFilteredPath = toArrData.filter(dirent => dirent?.parentId === galleryPathRoute);
 		setMyGalleryData(dataFilteredPath);
 	}, [galleryData, galleryPathRoute]);
-
 
 	return (
 		<div className="BodyGallery">
