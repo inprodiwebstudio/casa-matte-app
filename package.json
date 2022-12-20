@@ -19,6 +19,7 @@
     "@reduxjs/toolkit": "^1.8.5",
     "axios": "^1.2.1",
     "fs": "^0.0.1-security",
+    "imagekit-javascript": "^1.5.4",
     "imagekitio-react": "^2.0.0",
     "localforage": "^1.10.0",
     "path": "^0.12.7",

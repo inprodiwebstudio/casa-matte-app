@@ -5,9 +5,9 @@
     height: 100%;
     padding: 10px;
     padding-left: 15px;
+    flex-direction: column;
     padding-right: calc(15px - 5px);
     display: flex;
-    flex-direction: column;
     
 
     .docs-list {

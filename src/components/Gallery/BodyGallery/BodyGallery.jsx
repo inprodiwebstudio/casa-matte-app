@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
+import { SquareLoader }        from "react-spinners";
 import { connect }             from "react-redux";
 
 
 //Own components
-import Folder         from "../Folder";
-import DropDoc        from "../DropDoc";
-import PhotoCard      from "../PhotoCard";
-import { genericApi } from "store/api/genericApi";
+import Folder    from "../Folder";
+import DropDoc   from "../DropDoc";
+import PhotoCard from "../PhotoCard";
+// import { genericApi } from "store/api/genericApi";
 
 import {
 	Button,
@@ -19,22 +20,32 @@ import { convertToArray, isValidArray, bindAll }  from "helpers";
 import { CircleArrow, CrossSelector, FilterIcon } from "Resources/icons";
 import "./BodyGallery.scss";
 
-const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDropedView, gallerySelectedData}) => {
-	const { data : galleryFolderData } = genericApi.useGetDataQuery({
-		module : "gallery",
-		params : {
-			meta_key   : "isfolder",
-			meta_value : "true",
-		},
-	});
+const BodyGallery = ({
+	galleryData,
+	gallerySlice,
+	fetchingPhotos,
+	fetchingFolders,
+	galleryPathRoute,
+	galleryFolderData,
+	galleryPhotosData,
+	gallerySelectedData,
+	galleryTypeDropedView,
+}) => {
+	// const { data : galleryFolderData, isFetching : fetchingFolders } = genericApi.useGetDataQuery({
+	// 	module : "gallery",
+	// 	params : {
+	// 		meta_key   : "isfolder",
+	// 		meta_value : "true",
+	// 	},
+	// });
 
-	const { data : galleryPhotosData } = genericApi.useGetDataQuery({
-		module : "gallery",
-		params : {
-			meta_key   : "isfolder",
-			meta_value : "false",
-		},
-	});
+	// const { data : galleryPhotosData, isFetching : fetchingPhotos } = genericApi.useGetDataQuery({
+	// 	module : "gallery",
+	// 	params : {
+	// 		meta_key   : "parentid",
+	// 		meta_value : "route",
+	// 	},
+	// });
 
 	const isAvailableDocs = isValidArray(galleryFolderData) || isValidArray(galleryPhotosData);
 
@@ -60,7 +71,7 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 			<div className="header-gallery-container">
 				<div className="header-actions-gallery">
 					{
-						isAvailableDocs && (
+						(isAvailableDocs && (!fetchingFolders && !fetchingPhotos)) && (
 							<>
 								<CheckBox label="OCULTAR FOTOS USADAS" isActive={isHideSelected} onChange={() => setIsHideSelected(!isHideSelected)} />
 								<Button width={84} fontSize={12} type="outline">AUTOFILL</Button>
@@ -96,12 +107,25 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 				</div>
 			</div>
 			{
-				!isAvailableDocs && (
+				(fetchingFolders || fetchingPhotos) && (
+					<div style={{width : "100%", height : "100%", display : "flex", justifyContent : "center", paddingTop : "70%"}}>
+						<SquareLoader
+							color={"#B2AFA6"}
+							loading={true}
+							size={40}
+							aria-label="Loading Spinner"
+							data-testid="loader"
+						/>
+					</div>
+				)
+			}
+			{
+				((!fetchingFolders && !fetchingPhotos) && !isAvailableDocs) && (
 					<DropDoc />
 				)
 			}
 			{
-				isAvailableDocs && (
+				((!fetchingFolders && !fetchingPhotos) && isAvailableDocs) && (
 					<ScrollBar>
 						{
 							galleryTypeDropedView && (
@@ -122,11 +146,11 @@ const BodyGallery = ({galleryData, galleryPathRoute, gallerySlice, galleryTypeDr
 						<div className="docs-list">
 							<div className="folder-grid">
 								{
-									myGalleryData?.filter(data => data?.folderName).map(data => (
+									galleryFolderData?.map(data => (
 										<Folder
 											key={data?.id}
-											images={data?.thumbImages}
-											name={data?.folderName}
+											name={data?.meta?.name}
+											images={data?.meta?.thumbimages}
 											onSelectedFolder={() => gallerySlice.setGalleryPath(data?.id)}
 											handleMovePhotos={() =>gallerySlice.moveToFolder(data?.id)}
 										/>

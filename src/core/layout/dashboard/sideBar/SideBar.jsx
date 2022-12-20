@@ -4,6 +4,7 @@ import BodyGallery  from "components/Gallery/BodyGallery";
 
 //Own components
 import { gallerySlice }                          from "store/Slices";
+import { genericApi }                            from "store/api/genericApi";
 import { convertToArray, isValidArray, bindAll } from "helpers";
 import { ArrowTop, FolderPlus, DropFile, Thrash} from "Resources/icons";
 import "./SideBar.scss";
@@ -11,14 +12,30 @@ import "./SideBar.scss";
 const SideBar = ({galleryData, gallerySlice, galleryPath, selectedData}) => {
 	const [ isfullSize, setIsFullSize ] = useState(false);
 
-	const isAvailableDocs = isValidArray(convertToArray(galleryData));
+	const { data : galleryFolderData, isFetching : fetchingFolders } = genericApi.useGetDataQuery({
+		module : "gallery",
+		params : {
+			meta_key   : "isfolder",
+			meta_value : "true",
+		},
+	});
+
+	const { data : galleryPhotosData, isFetching : fetchingPhotos } = genericApi.useGetDataQuery({
+		module : "gallery",
+		params : {
+			meta_key   : "parentid",
+			meta_value : "route",
+		},
+	});
+
+	const isAvailableDocs = (isValidArray(galleryPhotosData) || isValidArray(galleryFolderData));
 
 	const isSelectedData = isValidArray(convertToArray(selectedData));
 
 	return (
 		<div id="SideBar" className={isAvailableDocs ? (isfullSize && "isFullSize") : "isNoData"}>
 			{
-				isAvailableDocs && (
+				((!fetchingFolders && !fetchingPhotos) && isAvailableDocs) && (
 					<div className={`actions-sidebar-conatiner ${isfullSize && "isFullSize"}`}>
 						<div className="icon-sidebar-action" onClick={() => setIsFullSize(!isfullSize)}>
 							<ArrowTop size="18px" className="icon-arrow-action" />
@@ -44,7 +61,12 @@ const SideBar = ({galleryData, gallerySlice, galleryPath, selectedData}) => {
 				)
 			}
 			<div className="body-sidebar">
-				<BodyGallery />
+				<BodyGallery
+					fetchingPhotos={fetchingPhotos}
+					fetchingFolders={fetchingFolders}
+					galleryFolderData={galleryFolderData}
+					galleryPhotosData={galleryPhotosData}
+				/>
 			</div>
 		</div>
 	);

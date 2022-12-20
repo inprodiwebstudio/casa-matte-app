@@ -41,37 +41,23 @@ const DropDoc = ({
 
 	const [galleryMutation] = genericApi.useSubmitDataMutation();
 
-	// const addNewFolder = async () => {
-	// 	await galleryMutation({
-	// 		module : "gallery",
-	// 		tags   : ["gallery"],
-	// 		data   : {
-	// 			status : "publish",
-	// 			meta   : {
-	// 				name     : folderName,
-	// 				isfolder : true,
-	// 			},
-	// 		},
-	// 		method : "POST",
-	// 	}).unwrap();
-	// };
-
 	const sendImages = (prentId) => {
 		const filesData = fileImage.map(async (image, index) => {
 			const imageData = await uploadImageKitIo(image);
 			await galleryMutation({
 				module : "gallery",
-				tags   : (index === (fileImage.lenght - 1)) ? ["gallery"] : ["null"],
+				tags   : ["null"],
 				data   : {
 					status : "publish",
 					meta   : {
 						isfolder : false,
 						imageurl : imageData?.data?.url,
-						parentid : prentId ? prentId : "",
+						parentid : prentId ? prentId : "route",
 					},
 				},
 				method : "POST",
 			}).unwrap();
+			return imageData?.data?.url;
 		});
 		return filesData;
 	};
@@ -80,24 +66,6 @@ const DropDoc = ({
 		const isValidFiles = isValidArray(files);
 
 		if (isValidFiles) {
-			// const newListFiles = files.map((file) => {
-			// 	const myFile = file;
-			// 	// const blob = await comprimirImagen(myFile, 10);
-			// 	const createObjectURL = Object.assign(myFile, { preview : URL.createObjectURL(file) });
-			// 	return (
-			// 		createObjectURL
-			// 	);
-			// });
-
-			// Promise.all(newListFiles).then(values => {
-			// 	setFileImage(prev => {
-			// 		const newData = [...prev, ...values];
-			// 		return newData;
-			// 	});
-			// }, reason => {
-			// 	console.error(reason);
-			// });
-
 			setFileImage(prev => {
 				const newData = [...prev, ...files];
 				return newData;
@@ -140,7 +108,19 @@ const DropDoc = ({
 			method : "POST",
 		});
 		if (resFolder?.data) {
-			Promise.allSettled(sendImages(resFolder?.data?.id)).then(values => {
+			Promise.allSettled(sendImages(resFolder?.data?.id)).then(async values => {
+				const listOfImages = values.map(image => image?.value);
+				await galleryMutation({
+					module : `gallery/${resFolder?.data?.id}`,
+					tags   : ["gallery"],
+					data   : {
+						status : "publish",
+						meta   : {
+							thumbimages : [...listOfImages],
+						},
+					},
+					method : "POST",
+				});
 				setLoading(false);
 				gallerySlice.setTypeDropedView(null);
 			}, reason => {
