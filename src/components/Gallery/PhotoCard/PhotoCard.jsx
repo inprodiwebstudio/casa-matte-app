@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 //Own components
-import resizerImage       from "../helpers/resizerImage";
 import { BigPlus, Check } from "Resources/icons";
+import { resizerImage }   from "helpers";
 import "./PhotoCard.scss";
 
 const PhotoCard = ({image, onSelected, isChecked}) => {

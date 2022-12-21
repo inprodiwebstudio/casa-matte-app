@@ -7,4 +7,5 @@ export { default as bindAll }                from "./Functions/bindAll";
 export { default as postRequestResponse }    from "./postRequestResponse";
 export { default as getMainLettersFromName } from "./getMainLettersFromName";
 export { default as uploadImageKitIo }       from "./uploadImageKitIo";
+export { default as resizerImage }           from "./resizerImage";
 

@@ -1,10 +1,10 @@
-import { isValidArray, convertToArray } from "helpers";
-import { connect }                      from "react-redux";
+import { connect } from "react-redux";
 
 
 //Own omponents
-import resizerImage             from "../helpers/resizerImage";
-import { MoreOption, PlusIcon } from "Resources/icons";
+import { MoreOption, PlusIcon }                       from "Resources/icons";
+import { isValidArray, convertToArray, resizerImage } from "helpers";
+
 
 import "./Folder.scss";
 
