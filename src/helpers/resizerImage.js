@@ -1,7 +1,6 @@
 //external
 import ImageKit from "imagekit-javascript";
 
-
 const resizerImage = (imgUrl, width, height) => {
 	const imagekit = new ImageKit({
 		urlEndpoint : "https://ik.imagekit.io/joabMedel",
