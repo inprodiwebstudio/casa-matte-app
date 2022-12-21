@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { connect }             from "react-redux";
 import { useDropzone }         from "react-dropzone";
 
+
 //Own components
 import { gallerySlice } from "store/Slices";
 import { genericApi }   from "store/api/genericApi";
@@ -27,7 +28,6 @@ import {
 import "./DropDoc.scss";
 
 const DropDoc = ({
-	token,
 	gallerySlice,
 	galleryPathRoute,
 	galleryTypeDropedView,
@@ -41,23 +41,29 @@ const DropDoc = ({
 
 	const [galleryMutation] = genericApi.useSubmitDataMutation();
 
-	const sendImages = (prentId) => {
-		const filesData = fileImage.map(async (image, index) => {
-			const imageData = await uploadImageKitIo(image);
-			await galleryMutation({
-				module : "gallery",
-				tags   : ["null"],
-				data   : {
-					status : "publish",
-					meta   : {
-						isfolder : false,
-						imageurl : imageData?.data?.url,
-						parentid : prentId ? prentId : "route",
-					},
+	const postImage = async (image, prentId, isRefetching) => {
+		const imageData = await uploadImageKitIo(image);
+		await galleryMutation({
+			module : "gallery",
+			tags   : isRefetching ? ["gallery"] : ["null"],
+			data   : {
+				status : "publish",
+				meta   : {
+					isfolder : false,
+					imageurl : imageData?.data?.url,
+					parentid : prentId ? prentId : "route",
 				},
-				method : "POST",
-			}).unwrap();
-			return imageData?.data?.url;
+			},
+			method : "POST",
+		}).unwrap();
+		return imageData?.data?.url;
+	};
+
+	const sendImages = (prentId) => {
+		const cloneFileList = prentId ? fileImage : (fileImage?.slice(0, fileImage?.length - 1));
+		const filesData = cloneFileList.map((image) => {
+			const availableParentId = prentId ? prentId : false;
+			return postImage(image, availableParentId, false);
 		});
 		return filesData;
 	};
@@ -83,21 +89,22 @@ const DropDoc = ({
 
 	const handleAddPhotos = () => {
 		setLoading(true);
-		Promise.allSettled(sendImages()).then(values => {
+		Promise.allSettled([...sendImages()]).then(async (values) => {
+			await postImage(fileImage[fileImage?.length - 1], false, true);
 			setLoading(false);
+			gallerySlice.setTypeDropedView(null);
 		}, reason => {
 			setLoading(false);
+			gallerySlice.setTypeDropedView(null);
 			console.error(reason);
 		});
-
-		gallerySlice.setTypeDropedView(null);
 	};
 
 	const handleAddFolder = async () => {
 		setLoading(true);
 		const resFolder = await galleryMutation({
 			module : "gallery",
-			tags   : ["null"],
+			tags   : !isValidArray(fileImage) ? ["gallery"] : ["null"],
 			data   : {
 				status : "publish",
 				meta   : {
@@ -107,16 +114,22 @@ const DropDoc = ({
 			},
 			method : "POST",
 		});
-		if (resFolder?.data) {
+		if (resFolder?.data && (isValidArray(fileImage))) {
 			Promise.allSettled(sendImages(resFolder?.data?.id)).then(async values => {
 				const listOfImages = values.map(image => image?.value);
+
+				const thumbimages =
+				(listOfImages?.length > 5) ?
+					[listOfImages[0], listOfImages[1], listOfImages[2], listOfImages[3], listOfImages[4]] :
+					listOfImages;
+
 				await galleryMutation({
 					module : `gallery/${resFolder?.data?.id}`,
 					tags   : ["gallery"],
 					data   : {
 						status : "publish",
 						meta   : {
-							thumbimages : [...listOfImages],
+							thumbimages : [...thumbimages],
 						},
 					},
 					method : "POST",
@@ -127,7 +140,10 @@ const DropDoc = ({
 				setLoading(false);
 				console.error(reason);
 			});
+			return;
 		}
+		setLoading(false);
+		gallerySlice.setTypeDropedView(null);
 	};
 
 	useEffect(() => {
@@ -233,10 +249,9 @@ const DropDoc = ({
 
 const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});
 
-const mapStateToProps = ({ gallerySlice, authSlice }) => ({
+const mapStateToProps = ({ gallerySlice }) => ({
 	galleryTypeDropedView : gallerySlice?.typeDropedView ?? null,
 	galleryPathRoute      : gallerySlice?.galleryPathName ?? "main",
-	token                 : authSlice?.token ?? "",
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (DropDoc);
