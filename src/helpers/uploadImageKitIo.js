@@ -19,7 +19,7 @@ const uploadImageKitIo = async (image) => {
 				signature : res?.data?.signature,
 				expire    : res?.data?.expire,
 				token     : res?.data?.token,
-				fileName  : "newTetsingFile.jpg",
+				fileName  : "cmtImage.jpg",
 			}
 		);
 		return uploadFile;

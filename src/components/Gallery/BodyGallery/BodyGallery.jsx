@@ -163,10 +163,10 @@ const BodyGallery = ({
 							</div>
 							<div className="photo-grid">
 								{
-									myGalleryData?.filter(data => !data?.folderName).map((data, index) => (
+									galleryPhotosData?.map((data, index) => (
 										<PhotoCard
 											key={index}
-											image={data?.image}
+											image={data?.meta?.imageurl}
 											onSelected={() => gallerySlice.setSelectedData(data)}
 											isChecked={gallerySelectedData[data?.id] ? true : false}
 										/>

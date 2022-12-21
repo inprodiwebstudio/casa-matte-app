@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 //Own components
+import resizerImage       from "../helpers/resizerImage";
 import { BigPlus, Check } from "Resources/icons";
 import "./PhotoCard.scss";
 
@@ -11,7 +12,7 @@ const PhotoCard = ({image, onSelected, isChecked}) => {
 		<div
 			className="PhotoCard"
 			style={{
-				backgroundImage : image ? `url(${image})` : null,
+				backgroundImage : image ? `url(${resizerImage(image)})` : null,
 			}}
 		>
 			<div className={`photo-overlay ${isSelected && "photo-selected"}`}>

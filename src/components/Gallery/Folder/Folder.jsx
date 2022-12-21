@@ -1,9 +1,9 @@
 import { isValidArray, convertToArray } from "helpers";
 import { connect }                      from "react-redux";
-import ImageKit                         from "imagekit-javascript";
 
 
 //Own omponents
+import resizerImage             from "../helpers/resizerImage";
 import { MoreOption, PlusIcon } from "Resources/icons";
 
 import "./Folder.scss";
@@ -11,18 +11,6 @@ import "./Folder.scss";
 const Folder = ({images, name, handleMovePhotos, onSelectedFolder, gallerySelectedData}) => {
 
 	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
-
-	const imagekit = new ImageKit({
-		urlEndpoint : "https://ik.imagekit.io/joabMedel",
-	});
-
-	const imageURL = (imageUrl) => imagekit.url({
-		src            : imageUrl,
-		transformation : [{
-			"height" : "150",
-			"width"  : "150",
-		}],
-	});
 
 	return (
 		<div
@@ -42,25 +30,25 @@ const Folder = ({images, name, handleMovePhotos, onSelectedFolder, gallerySelect
 					<div
 						className={`photo-indicator ${images[0] && "full-size"}`}
 						style={{
-							backgroundImage : images[0] ? `url(${imageURL(images[0])})` : null,
+							backgroundImage : images[0] ? `url(${resizerImage(images[0])})` : null,
 						}}
 					/>
 					<div
 						className={`photo-indicator ${images[1] && "full-size"}`}
 						style={{
-							backgroundImage : images[1] ? `url(${imageURL(images[1])})` : null,
+							backgroundImage : images[1] ? `url(${resizerImage(images[1])})` : null,
 						}}
 					/>
 					<div
 						className={`photo-indicator ${images[2] && "full-size"}`}
 						style={{
-							backgroundImage : images[2] ? `url(${imageURL(images[2])})` : null,
+							backgroundImage : images[2] ? `url(${resizerImage(images[2])})` : null,
 						}}
 					/>
 					<div
 						className={`photo-indicator ${images[3] && "full-size"}`}
 						style={{
-							backgroundImage : images[3] ? `url(${imageURL(images[3])})` : null,
+							backgroundImage : images[3] ? `url(${resizerImage(images[3])})` : null,
 						}}
 					/>
 				</div>
