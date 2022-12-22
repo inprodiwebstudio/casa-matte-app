@@ -3,10 +3,13 @@ import { convertToObject } from "helpers";
 
 
 const initialState = {
-	galleryPathName : "route",
-	typeDropedView  : null,
-	data            : {},
-	selectedData    : {},
+	galleryPathName : {
+		id   : "route",
+		name : "route",
+	},
+	typeDropedView : null,
+	data           : {},
+	selectedData   : {},
 };
 
 export const gallerySlice = createSlice({

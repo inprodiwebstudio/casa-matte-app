@@ -14,7 +14,7 @@ const ChargeSpinner = () => {
 				data-testid="loader"
 			/>
 			<h5>
-				Cargando galería de fotos
+				Tu galería esta cargando.
 				Espera un momento ...
 			</h5>
 		</div>

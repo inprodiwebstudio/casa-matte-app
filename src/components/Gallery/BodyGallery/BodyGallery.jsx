@@ -60,12 +60,12 @@ const BodyGallery = ({
 						)
 					}
 				</div>
-				<h3>{galleryPathRoute === "route" ? "GALERÍA" : galleryPathRoute}</h3>
+				<h3>{galleryPathRoute?.id === "route" ? "GALERÍA" : galleryPathRoute?.name}</h3>
 				<div className="actions-header-container">
 					<div className="icon-style">
 						{
-							galleryPathRoute !== "route" && (
-								<CircleArrow size="30px" onClick={() => gallerySlice.setGalleryPath("route")} />
+							((galleryPathRoute?.id !== "route") && !isFetching) && (
+								<CircleArrow size="30px" onClick={() => gallerySlice.setGalleryPath({id : "route", name : "route"})} />
 							)
 						}
 					</div>
@@ -126,7 +126,7 @@ const BodyGallery = ({
 											key={data?.id}
 											name={data?.meta?.name}
 											images={data?.meta?.thumbimages}
-											onSelectedFolder={() => gallerySlice.setGalleryPath(data?.id)}
+											onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.id, name : data?.meta?.name})}
 											handleMovePhotos={() =>gallerySlice.moveToFolder(data?.id)}
 										/>
 									))

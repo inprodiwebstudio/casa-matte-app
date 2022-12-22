@@ -17,7 +17,7 @@ const SideBar = ({galleryData, gallerySlice, galleryPath, selectedData}) => {
 		params : {
 			per_page   : 50,
 			meta_key   : "parentid",
-			meta_value : galleryPath,
+			meta_value : galleryPath?.id,
 		},
 	});
 
