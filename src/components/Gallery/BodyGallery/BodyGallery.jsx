@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { SquareLoader }        from "react-spinners";
 import { connect }             from "react-redux";
 
 //Own components
@@ -13,6 +12,7 @@ import {
 	Button,
 	CheckBox,
 	ScrollBar,
+	ChargeSpinner,
 	SelectorMenuItem,
 } from "core/components";
 import { gallerySlice }                           from "store/Slices";
@@ -90,13 +90,7 @@ const BodyGallery = ({
 			{
 				(isFetching || isFetching) && (
 					<div style={{width : "100%", height : "100%", display : "flex", justifyContent : "center", alignItems : "center"}}>
-						<SquareLoader
-							color={"#B2AFA6"}
-							loading={true}
-							size={40}
-							aria-label="Loading Spinner"
-							data-testid="loader"
-						/>
+						<ChargeSpinner />
 					</div>
 				)
 			}
