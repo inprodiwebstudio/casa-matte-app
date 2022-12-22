@@ -113,7 +113,9 @@ const DropDoc = ({
 
 	const handleAddFolder = async () => {
 		setLoading(true);
-		setIsGenerateNewFolder(true);
+		if (!isValidArray(fileImage)) {
+			setIsGenerateNewFolder(true);
+		}
 		const resFolder = await galleryMutation({
 			module : "gallery",
 			tags   : ["null"],
@@ -128,6 +130,7 @@ const DropDoc = ({
 			method : "POST",
 		});
 		if (resFolder?.data && (isValidArray(fileImage))) {
+			setIsGenerateNewFolder(false);
 			Promise.allSettled(sendImages(resFolder?.data?.id)).then(async values => {
 				const listOfImages = values.map(image => image?.value);
 
@@ -135,6 +138,8 @@ const DropDoc = ({
 				(listOfImages?.length > 5) ?
 					[listOfImages[0], listOfImages[1], listOfImages[2], listOfImages[3], listOfImages[4]] :
 					listOfImages;
+
+				setIsGenerateNewFolder(true);
 
 				const newFolderData = await galleryMutation({
 					module : `gallery/${resFolder?.data?.id}`,
@@ -181,8 +186,13 @@ const DropDoc = ({
 						<div className="upluadIndicatorContainer">
 							<Loading />
 							{
-								isGenerateNewFolder && (
+								!isGenerateNewFolder && (
 									<div className="currentUpluaded">{completedPhotos.length} de {fileImage.length}</div>
+								)
+							}
+							{
+								isGenerateNewFolder && (
+									<div className="currentUpluaded">Generando Nueva Carpeta...</div>
 								)
 							}
 						</div>
