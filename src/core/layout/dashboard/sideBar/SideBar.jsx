@@ -52,7 +52,7 @@ const SideBar = ({galleryData, gallerySlice, galleryPath, selectedData}) => {
 							<DropFile size="18px" />
 						</div>
 						{
-							galleryPath === "route" && (
+							galleryPath?.id === "route" && (
 								<div className="icon-sidebar-action" onClick={() => gallerySlice.setTypeDropedView("addFolder")}>
 									<FolderPlus size="20px" />
 								</div>

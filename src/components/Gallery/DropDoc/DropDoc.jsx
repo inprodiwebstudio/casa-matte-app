@@ -39,6 +39,7 @@ const DropDoc = ({
 	const [ fileImage, setFileImage ] = useState([]);
 	const [ isSelectedFolder, setIsSelectedFolder ] = useState(false);
 	const [ folderName, setFolderName ] = useState("");
+	const [ completedPhotos, setPhotosCompleted ] = useState([]);
 
 	const [galleryMutation] = genericApi.useSubmitDataMutation();
 
@@ -56,6 +57,10 @@ const DropDoc = ({
 				},
 			},
 			method : "POST",
+		});
+		setPhotosCompleted(prev => {
+			const newData = [newGallery?.data, ...prev];
+			return newData;
 		});
 		if (prentId) {
 			return imageData?.data?.url;
@@ -165,14 +170,12 @@ const DropDoc = ({
 			{
 				loading ? (
 					<div
-						style={{
-							width          : "100%",
-							display        : "flex",
-							justifyContent : "center",
-							height         : "calc(100% - 350px)",
-						}}
+						className="UploadingContainer"
 					>
-						<Loading />
+						<div className="upluadIndicatorContainer">
+							<Loading />
+							<div className="currentUpluaded">{completedPhotos.length}/{fileImage.length}</div>
+						</div>
 					</div>
 				) : (
 					<div className="DropDoc">
@@ -199,7 +202,7 @@ const DropDoc = ({
 											onSelect={() => handleAddPhotos()}
 										/>
 										{
-											galleryPathRoute === "route" && (
+											galleryPathRoute?.id === "route" && (
 												<Card
 													isButton
 													image={<Folder size="50px" />}
