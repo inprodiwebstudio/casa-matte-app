@@ -40,6 +40,7 @@ const DropDoc = ({
 	const [ isSelectedFolder, setIsSelectedFolder ] = useState(false);
 	const [ folderName, setFolderName ] = useState("");
 	const [ completedPhotos, setPhotosCompleted ] = useState([]);
+	const [ isGenerateNewFolder, setIsGenerateNewFolder ] = useState(false);
 
 	const [galleryMutation] = genericApi.useSubmitDataMutation();
 
@@ -112,6 +113,7 @@ const DropDoc = ({
 
 	const handleAddFolder = async () => {
 		setLoading(true);
+		setIsGenerateNewFolder(true);
 		const resFolder = await galleryMutation({
 			module : "gallery",
 			tags   : ["null"],
@@ -147,15 +149,19 @@ const DropDoc = ({
 				});
 				setLoading(false);
 				gallerySlice.setGalleryData(convertToObject([newFolderData?.data]));
+				setIsGenerateNewFolder(false);
 				gallerySlice.setTypeDropedView(null);
 			}, reason => {
 				setLoading(false);
+				setIsGenerateNewFolder(false);
+				gallerySlice.setTypeDropedView(null);
 				console.error(reason);
 			});
 			return;
 		}
 		gallerySlice.setGalleryData(convertToObject([resFolder?.data]));
 		setLoading(false);
+		setIsGenerateNewFolder(false);
 		gallerySlice.setTypeDropedView(null);
 	};
 
@@ -174,7 +180,11 @@ const DropDoc = ({
 					>
 						<div className="upluadIndicatorContainer">
 							<Loading />
-							<div className="currentUpluaded">{completedPhotos.length}/{fileImage.length}</div>
+							{
+								isGenerateNewFolder && (
+									<div className="currentUpluaded">{completedPhotos.length} de {fileImage.length}</div>
+								)
+							}
 						</div>
 					</div>
 				) : (

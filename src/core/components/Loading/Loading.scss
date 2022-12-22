@@ -8,6 +8,14 @@
 
    gap: 5px;
 
+   span {
+       width: 144px !important;
+
+       span {
+           width : 10px !important;
+       }
+   }
+
    h5 {
        font-size: 14px;
        font-weight: 300;

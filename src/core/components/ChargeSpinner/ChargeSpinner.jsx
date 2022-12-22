@@ -1,12 +1,12 @@
 
 //Own components
-import { SquareLoader } from "react-spinners";
+import { ClockLoader } from "react-spinners";
 import "./ChargeSpinner.scss";
 
 const ChargeSpinner = () => {
 	return (
 		<div className="ChargeSpinner">
-			<SquareLoader
+			<ClockLoader
 				color={"#B2AFA6"}
 				loading={true}
 				size={50}
@@ -14,8 +14,7 @@ const ChargeSpinner = () => {
 				data-testid="loader"
 			/>
 			<h5>
-				Tu galería esta cargando.
-				Espera un momento ...
+				Cargando galería...
 			</h5>
 		</div>
 	);

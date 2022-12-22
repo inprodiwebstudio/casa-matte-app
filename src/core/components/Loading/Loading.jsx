@@ -9,7 +9,7 @@ const Loading = () => {
 			<BarLoader
 				color={"#B2AFA6"}
 				loading={true}
-				size={150}
+				size={0}
 				aria-label="Loading Spinner"
 				data-testid="loader"
 			/>
