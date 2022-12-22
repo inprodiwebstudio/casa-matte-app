@@ -3,7 +3,7 @@ import { convertToObject } from "helpers";
 
 
 const initialState = {
-	galleryPathName : "main",
+	galleryPathName : "route",
 	typeDropedView  : null,
 	data            : {},
 	selectedData    : {},

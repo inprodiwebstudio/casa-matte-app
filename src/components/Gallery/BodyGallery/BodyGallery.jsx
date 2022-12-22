@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { SquareLoader }        from "react-spinners";
 import { connect }             from "react-redux";
 
-
 //Own components
 import Folder    from "../Folder";
 import DropDoc   from "../DropDoc";
 import PhotoCard from "../PhotoCard";
-// import { genericApi } from "store/api/genericApi";
+
+import { gallerySeparation } from "./BodyGallery.helpers";
 
 import {
 	Button,
@@ -21,33 +21,14 @@ import { CircleArrow, CrossSelector, FilterIcon } from "Resources/icons";
 import "./BodyGallery.scss";
 
 const BodyGallery = ({
+	isFetching,
 	galleryData,
 	gallerySlice,
-	fetchingPhotos,
-	fetchingFolders,
 	galleryPathRoute,
-	galleryFolderData,
-	galleryPhotosData,
 	gallerySelectedData,
 	galleryTypeDropedView,
 }) => {
-	// const { data : galleryFolderData, isFetching : fetchingFolders } = genericApi.useGetDataQuery({
-	// 	module : "gallery",
-	// 	params : {
-	// 		meta_key   : "isfolder",
-	// 		meta_value : "true",
-	// 	},
-	// });
-
-	// const { data : galleryPhotosData, isFetching : fetchingPhotos } = genericApi.useGetDataQuery({
-	// 	module : "gallery",
-	// 	params : {
-	// 		meta_key   : "parentid",
-	// 		meta_value : "route",
-	// 	},
-	// });
-
-	const isAvailableDocs = isValidArray(galleryFolderData) || isValidArray(galleryPhotosData);
+	const isAvailableDocs = isValidArray(convertToArray(galleryData));
 
 	const [ myGalleryData, setMyGalleryData ] = useState([]);
 
@@ -71,7 +52,7 @@ const BodyGallery = ({
 			<div className="header-gallery-container">
 				<div className="header-actions-gallery">
 					{
-						(isAvailableDocs && (!fetchingFolders && !fetchingPhotos)) && (
+						(isAvailableDocs && (!isFetching && !isFetching)) && (
 							<>
 								<CheckBox label="OCULTAR FOTOS USADAS" isActive={isHideSelected} onChange={() => setIsHideSelected(!isHideSelected)} />
 								<Button width={84} fontSize={12} type="outline">AUTOFILL</Button>
@@ -107,7 +88,7 @@ const BodyGallery = ({
 				</div>
 			</div>
 			{
-				(fetchingFolders || fetchingPhotos) && (
+				(isFetching || isFetching) && (
 					<div style={{width : "100%", height : "100%", display : "flex", justifyContent : "center", paddingTop : "70%"}}>
 						<SquareLoader
 							color={"#B2AFA6"}
@@ -120,12 +101,12 @@ const BodyGallery = ({
 				)
 			}
 			{
-				((!fetchingFolders && !fetchingPhotos) && !isAvailableDocs) && (
+				((!isFetching && !isFetching) && !isAvailableDocs) && (
 					<DropDoc />
 				)
 			}
 			{
-				((!fetchingFolders && !fetchingPhotos) && isAvailableDocs) && (
+				((!isFetching && !isFetching) && isAvailableDocs) && (
 					<ScrollBar>
 						{
 							galleryTypeDropedView && (
@@ -146,7 +127,7 @@ const BodyGallery = ({
 						<div className="docs-list">
 							<div className="folder-grid">
 								{
-									galleryFolderData?.map(data => (
+									gallerySeparation(galleryData, true).map( data => (
 										<Folder
 											key={data?.id}
 											name={data?.meta?.name}
@@ -163,7 +144,7 @@ const BodyGallery = ({
 							</div>
 							<div className="photo-grid">
 								{
-									galleryPhotosData?.map((data, index) => (
+									gallerySeparation(galleryData, false).map( (data, index) => (
 										<PhotoCard
 											key={index}
 											image={data?.meta?.imageurl}

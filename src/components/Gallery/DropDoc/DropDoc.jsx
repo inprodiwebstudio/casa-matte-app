@@ -10,6 +10,7 @@ import { genericApi }   from "store/api/genericApi";
 import {
 	bindAll,
 	isValidArray,
+	convertToObject,
 	uploadImageKitIo,
 } from "helpers";
 import {
@@ -41,11 +42,11 @@ const DropDoc = ({
 
 	const [galleryMutation] = genericApi.useSubmitDataMutation();
 
-	const postImage = async (image, prentId, isRefetching) => {
+	const postImage = async (image, prentId) => {
 		const imageData = await uploadImageKitIo(image);
-		await galleryMutation({
+		const newGallery = await galleryMutation({
 			module : "gallery",
-			tags   : isRefetching ? ["gallery"] : ["null"],
+			tags   : ["null"],
 			data   : {
 				status : "publish",
 				meta   : {
@@ -55,15 +56,17 @@ const DropDoc = ({
 				},
 			},
 			method : "POST",
-		}).unwrap();
-		return imageData?.data?.url;
+		});
+		if (prentId) {
+			return imageData?.data?.url;
+		}
+		return newGallery?.data;
 	};
 
 	const sendImages = (prentId) => {
-		const cloneFileList = prentId ? fileImage : (fileImage?.slice(0, fileImage?.length - 1));
-		const filesData = cloneFileList.map((image) => {
+		const filesData = fileImage.map((image) => {
 			const availableParentId = prentId ? prentId : false;
-			return postImage(image, availableParentId, false);
+			return postImage(image, availableParentId);
 		});
 		return filesData;
 	};
@@ -90,9 +93,11 @@ const DropDoc = ({
 	const handleAddPhotos = () => {
 		setLoading(true);
 		Promise.allSettled([...sendImages()]).then(async (values) => {
-			await postImage(fileImage[fileImage?.length - 1], false, true);
-			setLoading(false);
+			const newListData = values.map(data => data?.value);
+			const parseDataGallery = convertToObject(newListData);
+			gallerySlice.setGalleryData(parseDataGallery);
 			gallerySlice.setTypeDropedView(null);
+			setLoading(false);
 		}, reason => {
 			setLoading(false);
 			gallerySlice.setTypeDropedView(null);
@@ -104,7 +109,7 @@ const DropDoc = ({
 		setLoading(true);
 		const resFolder = await galleryMutation({
 			module : "gallery",
-			tags   : !isValidArray(fileImage) ? ["gallery"] : ["null"],
+			tags   : ["null"],
 			data   : {
 				status : "publish",
 				meta   : {
