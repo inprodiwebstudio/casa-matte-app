@@ -42,7 +42,7 @@ const SideBar = ({galleryData, gallerySlice, galleryPath, selectedData}) => {
 							<DropFile size="18px" />
 						</div>
 						{
-							galleryPath === "main" && (
+							galleryPath === "route" && (
 								<div className="icon-sidebar-action" onClick={() => gallerySlice.setTypeDropedView("addFolder")}>
 									<FolderPlus size="20px" />
 								</div>
@@ -68,7 +68,7 @@ const SideBar = ({galleryData, gallerySlice, galleryPath, selectedData}) => {
 const mapStateToProps = ({ gallerySlice }) => ({
 	galleryData  : gallerySlice?.data ?? {},
 	selectedData : gallerySlice?.selectedData ?? {},
-	galleryPath  : gallerySlice?.galleryPathName ?? "main",
+	galleryPath  : gallerySlice?.galleryPathName ?? "route",
 });
 
 const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});

@@ -128,9 +128,9 @@ const DropDoc = ({
 					[listOfImages[0], listOfImages[1], listOfImages[2], listOfImages[3], listOfImages[4]] :
 					listOfImages;
 
-				await galleryMutation({
+				const newFolderData = await galleryMutation({
 					module : `gallery/${resFolder?.data?.id}`,
-					tags   : ["gallery"],
+					tags   : ["null"],
 					data   : {
 						status : "publish",
 						meta   : {
@@ -139,6 +139,7 @@ const DropDoc = ({
 					},
 					method : "POST",
 				});
+				gallerySlice.setGalleryData(newFolderData);
 				setLoading(false);
 				gallerySlice.setTypeDropedView(null);
 			}, reason => {
@@ -147,6 +148,7 @@ const DropDoc = ({
 			});
 			return;
 		}
+		gallerySlice.setGalleryData(resFolder);
 		setLoading(false);
 		gallerySlice.setTypeDropedView(null);
 	};

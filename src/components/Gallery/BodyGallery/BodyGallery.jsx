@@ -38,7 +38,7 @@ const BodyGallery = ({
 
 	useEffect(() => {
 		const toArrData = Object.values(galleryData).map(data => data);
-		if (galleryPathRoute === "main") {
+		if (galleryPathRoute === "route") {
 			const dataFilteredMain = toArrData.filter(dirent => (!dirent?.parentId));
 			setMyGalleryData(dataFilteredMain);
 			return;
@@ -60,12 +60,12 @@ const BodyGallery = ({
 						)
 					}
 				</div>
-				<h3>{galleryPathRoute === "main" ? "GALERÍA" : galleryPathRoute}</h3>
+				<h3>{galleryPathRoute === "route" ? "GALERÍA" : galleryPathRoute}</h3>
 				<div className="actions-header-container">
 					<div className="icon-style">
 						{
-							galleryPathRoute !== "main" && (
-								<CircleArrow size="30px" onClick={() => gallerySlice.setGalleryPath("main")} />
+							galleryPathRoute !== "route" && (
+								<CircleArrow size="30px" onClick={() => gallerySlice.setGalleryPath("route")} />
 							)
 						}
 					</div>
@@ -164,7 +164,7 @@ const BodyGallery = ({
 
 const mapStateToProps = ({ gallerySlice }) => ({
 	galleryData           : gallerySlice?.data ?? {},
-	galleryPathRoute      : gallerySlice?.galleryPathName ?? "main",
+	galleryPathRoute      : gallerySlice?.galleryPathName ?? "route",
 	gallerySelectedData   : gallerySlice?.selectedData ?? {},
 	galleryTypeDropedView : gallerySlice?.typeDropedView ?? null,
 });
