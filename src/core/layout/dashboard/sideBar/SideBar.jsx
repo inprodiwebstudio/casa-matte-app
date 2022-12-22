@@ -21,7 +21,6 @@ const SideBar = ({galleryData, gallerySlice, galleryPath, selectedData}) => {
 		},
 	});
 
-	//newGalleryData
 
 	const isAvailableDocs = isValidArray(convertToArray(galleryData));
 
