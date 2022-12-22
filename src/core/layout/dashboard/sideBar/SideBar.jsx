@@ -15,7 +15,9 @@ const SideBar = ({galleryData, gallerySlice, galleryPath, selectedData}) => {
 	const { data : myGalleryData, isFetching } = genericApi.useGetDataQuery({
 		module : "gallery",
 		params : {
-			per_page : 50,
+			per_page   : 50,
+			meta_key   : "parentid",
+			meta_value : galleryPath,
 		},
 	});
 

@@ -114,6 +114,7 @@ const DropDoc = ({
 				status : "publish",
 				meta   : {
 					isfolder : true,
+					parentid : "route",
 					name     : folderName,
 				},
 			},
