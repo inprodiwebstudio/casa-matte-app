@@ -139,8 +139,8 @@ const DropDoc = ({
 					},
 					method : "POST",
 				});
-				gallerySlice.setGalleryData(newFolderData);
 				setLoading(false);
+				gallerySlice.setGalleryData(convertToObject([newFolderData?.data]));
 				gallerySlice.setTypeDropedView(null);
 			}, reason => {
 				setLoading(false);
@@ -148,7 +148,7 @@ const DropDoc = ({
 			});
 			return;
 		}
-		gallerySlice.setGalleryData(resFolder);
+		gallerySlice.setGalleryData(convertToObject([resFolder?.data]));
 		setLoading(false);
 		gallerySlice.setTypeDropedView(null);
 	};
@@ -198,7 +198,7 @@ const DropDoc = ({
 											onSelect={() => handleAddPhotos()}
 										/>
 										{
-											galleryPathRoute === "main" && (
+											galleryPathRoute === "route" && (
 												<Card
 													isButton
 													image={<Folder size="50px" />}
@@ -258,7 +258,7 @@ const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});
 
 const mapStateToProps = ({ gallerySlice }) => ({
 	galleryTypeDropedView : gallerySlice?.typeDropedView ?? null,
-	galleryPathRoute      : gallerySlice?.galleryPathName ?? "main",
+	galleryPathRoute      : gallerySlice?.galleryPathName ?? "route",
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (DropDoc);
