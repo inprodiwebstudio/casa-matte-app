@@ -16,6 +16,9 @@ export const gallerySlice = createSlice({
 		setGalleryData : (state, {payload}) => {
 			state.data = {...payload, ...state.data};
 		},
+		newGalleryData : (state, {payload}) => {
+			state.data = payload;
+		},
 		clearSelectedData : (state) => {
 			state.selectedData = {};
 		},

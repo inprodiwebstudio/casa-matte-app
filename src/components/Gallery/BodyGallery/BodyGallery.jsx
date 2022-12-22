@@ -89,7 +89,7 @@ const BodyGallery = ({
 			</div>
 			{
 				(isFetching || isFetching) && (
-					<div style={{width : "100%", height : "100%", display : "flex", justifyContent : "center", paddingTop : "70%"}}>
+					<div style={{width : "100%", height : "100%", display : "flex", justifyContent : "center", alignItems : "center"}}>
 						<SquareLoader
 							color={"#B2AFA6"}
 							loading={true}

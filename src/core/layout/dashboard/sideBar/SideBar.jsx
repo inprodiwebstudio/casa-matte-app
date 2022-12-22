@@ -21,6 +21,8 @@ const SideBar = ({galleryData, gallerySlice, galleryPath, selectedData}) => {
 		},
 	});
 
+	//newGalleryData
+
 	const isAvailableDocs = isValidArray(convertToArray(galleryData));
 
 	const isSelectedData = isValidArray(convertToArray(selectedData));
@@ -31,6 +33,13 @@ const SideBar = ({galleryData, gallerySlice, galleryPath, selectedData}) => {
 			gallerySlice.setGalleryData(parseDataGallery);
 		}
 	}, [myGalleryData]);
+
+	useEffect(() => {
+		if (isValidArray(myGalleryData)) {
+			const parseDataGallery = convertToObject(myGalleryData);
+			gallerySlice.newGalleryData(parseDataGallery);
+		}
+	}, [galleryPath, myGalleryData]);
 
 	return (
 		<div id="SideBar" className={isAvailableDocs ? (isfullSize && "isFullSize") : "isNoData"}>
