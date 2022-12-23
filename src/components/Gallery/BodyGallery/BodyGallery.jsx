@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { connect }             from "react-redux";
+import { useState } from "react";
+import { connect }  from "react-redux";
 
 //Own components
 import Folder    from "../Folder";
@@ -28,31 +28,18 @@ const BodyGallery = ({
 	gallerySelectedData,
 	galleryTypeDropedView,
 }) => {
-	const isAvailableDocs = isValidArray(convertToArray(galleryData));
-
-	const [ myGalleryData, setMyGalleryData ] = useState([]);
+	const isAvailableDocs = isValidArray(galleryData);
 
 	const [ isHideSelected, setIsHideSelected ] = useState(false);
 
 	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
-
-	useEffect(() => {
-		const toArrData = Object.values(galleryData).map(data => data);
-		if (galleryPathRoute === "route") {
-			const dataFilteredMain = toArrData.filter(dirent => (!dirent?.parentId));
-			setMyGalleryData(dataFilteredMain);
-			return;
-		}
-		const dataFilteredPath = toArrData.filter(dirent => dirent?.parentId === galleryPathRoute);
-		setMyGalleryData(dataFilteredPath);
-	}, [galleryData, galleryPathRoute]);
 
 	return (
 		<div className="BodyGallery">
 			<div className="header-gallery-container">
 				<div className="header-actions-gallery">
 					{
-						(isAvailableDocs && (!isFetching && !isFetching)) && (
+						(isAvailableDocs && (!isFetching)) && (
 							<>
 								<CheckBox label="OCULTAR FOTOS USADAS" isActive={isHideSelected} onChange={() => setIsHideSelected(!isHideSelected)} />
 								<Button width={84} fontSize={12} type="outline">AUTOFILL</Button>
@@ -70,7 +57,7 @@ const BodyGallery = ({
 						}
 					</div>
 					{
-						isValidArray(myGalleryData) && (
+						isAvailableDocs && (
 							<div className="filter-selector-container">
 								<div className="selector-input">
 									<SelectorMenuItem type="light" placeholder="Ordenar por" leftIcon={<FilterIcon size="15px" />} />
@@ -88,19 +75,19 @@ const BodyGallery = ({
 				</div>
 			</div>
 			{
-				(isFetching || isFetching) && (
+				(isFetching) && (
 					<div style={{width : "100%", height : "100%", display : "flex", justifyContent : "center", alignItems : "center"}}>
 						<ChargeSpinner />
 					</div>
 				)
 			}
 			{
-				((!isFetching && !isFetching) && !isAvailableDocs) && (
+				((!isFetching) && !isAvailableDocs) && (
 					<DropDoc />
 				)
 			}
 			{
-				((!isFetching && !isFetching) && isAvailableDocs) && (
+				((!isFetching) && isAvailableDocs) && (
 					<ScrollBar>
 						{
 							galleryTypeDropedView && (
@@ -157,7 +144,6 @@ const BodyGallery = ({
 };
 
 const mapStateToProps = ({ gallerySlice }) => ({
-	galleryData           : gallerySlice?.data ?? {},
 	galleryPathRoute      : gallerySlice?.galleryPathName ?? "route",
 	gallerySelectedData   : gallerySlice?.selectedData ?? {},
 	galleryTypeDropedView : gallerySlice?.typeDropedView ?? null,

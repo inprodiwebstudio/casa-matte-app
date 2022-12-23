@@ -10,7 +10,6 @@ import { genericApi }   from "store/api/genericApi";
 import {
 	bindAll,
 	isValidArray,
-	convertToObject,
 	uploadImageKitIo,
 } from "helpers";
 import {
@@ -44,11 +43,11 @@ const DropDoc = ({
 
 	const [galleryMutation] = genericApi.useSubmitDataMutation();
 
-	const postImage = async (image, prentId) => {
+	const postImage = async (image, prentId, isRefetching) => {
 		const imageData = await uploadImageKitIo(image);
 		const newGallery = await galleryMutation({
 			module : "gallery",
-			tags   : ["null"],
+			tags   : isRefetching ? ["gallery"] : ["null"],
 			data   : {
 				status : "publish",
 				meta   : {
@@ -70,7 +69,8 @@ const DropDoc = ({
 	};
 
 	const sendImages = (prentId) => {
-		const filesData = fileImage.map((image) => {
+		const cloneFileList = prentId ? fileImage : (fileImage?.slice(0, fileImage?.length - 1));
+		const filesData = cloneFileList.map((image) => {
 			const availableParentId = prentId ? prentId : false;
 			return postImage(image, availableParentId);
 		});
@@ -99,11 +99,9 @@ const DropDoc = ({
 	const handleAddPhotos = () => {
 		setLoading(true);
 		Promise.allSettled([...sendImages()]).then(async (values) => {
-			const newListData = values.map(data => data?.value);
-			const parseDataGallery = convertToObject(newListData);
-			gallerySlice.setGalleryData(parseDataGallery);
-			gallerySlice.setTypeDropedView(null);
+			await postImage(fileImage[fileImage?.length - 1], false, true);
 			setLoading(false);
+			gallerySlice.setTypeDropedView(null);
 		}, reason => {
 			setLoading(false);
 			gallerySlice.setTypeDropedView(null);
@@ -118,7 +116,7 @@ const DropDoc = ({
 		}
 		const resFolder = await galleryMutation({
 			module : "gallery",
-			tags   : ["null"],
+			tags   : !isValidArray(fileImage) ? ["gallery"] : ["null"],
 			data   : {
 				status : "publish",
 				meta   : {
@@ -141,9 +139,9 @@ const DropDoc = ({
 
 				setIsGenerateNewFolder(true);
 
-				const newFolderData = await galleryMutation({
+				await galleryMutation({
 					module : `gallery/${resFolder?.data?.id}`,
-					tags   : ["null"],
+					tags   : ["gallery"],
 					data   : {
 						status : "publish",
 						meta   : {
@@ -153,7 +151,6 @@ const DropDoc = ({
 					method : "POST",
 				});
 				setLoading(false);
-				gallerySlice.setGalleryData(convertToObject([newFolderData?.data]));
 				setIsGenerateNewFolder(false);
 				gallerySlice.setTypeDropedView(null);
 			}, reason => {
@@ -164,7 +161,6 @@ const DropDoc = ({
 			});
 			return;
 		}
-		gallerySlice.setGalleryData(convertToObject([resFolder?.data]));
 		setLoading(false);
 		setIsGenerateNewFolder(false);
 		gallerySlice.setTypeDropedView(null);
