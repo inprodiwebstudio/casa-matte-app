@@ -57,7 +57,7 @@ const BodyGallery = ({
 						}
 					</div>
 					{
-						isAvailableDocs && (
+						(isAvailableDocs && !isFetching) && (
 							<div className="filter-selector-container">
 								<div className="selector-input">
 									<SelectorMenuItem type="light" placeholder="Ordenar por" leftIcon={<FilterIcon size="15px" />} />
