@@ -45,6 +45,7 @@ const DropDoc = ({
 
 	const postImage = async (image, prentId, isRefetching) => {
 		const imageData = await uploadImageKitIo(image);
+
 		const newGallery = await galleryMutation({
 			module : "gallery",
 			tags   : isRefetching ? ["gallery"] : ["null"],
@@ -111,9 +112,10 @@ const DropDoc = ({
 
 	const handleAddFolder = async () => {
 		setLoading(true);
-		if (!isValidArray(fileImage)) {
+		if (fileImage?.length <= 0) {
 			setIsGenerateNewFolder(true);
 		}
+
 		const resFolder = await galleryMutation({
 			module : "gallery",
 			tags   : !isValidArray(fileImage) ? ["gallery"] : ["null"],
@@ -128,7 +130,6 @@ const DropDoc = ({
 			method : "POST",
 		});
 		if (resFolder?.data && (isValidArray(fileImage))) {
-			setIsGenerateNewFolder(false);
 			Promise.allSettled(sendImages(resFolder?.data?.id)).then(async values => {
 				const listOfImages = values.map(image => image?.value);
 

@@ -36,8 +36,9 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 const baseQueryWithRetry = retry(baseQueryWithReauth, { maxRetries : 6 });
 
 export const api = createApi({
-	reducerPath : "api",
-	baseQuery   : baseQueryWithRetry,
-	tagTypes    : ["gallerySlice", "media"],
-	endpoints   : () => ({}),
+	reducerPath       : "api",
+	baseQuery         : baseQueryWithRetry,
+	keepUnusedDataFor : 3600,
+	tagTypes          : ["gallerySlice", "media"],
+	endpoints         : () => ({}),
 });

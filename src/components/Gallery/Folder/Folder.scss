@@ -15,25 +15,31 @@
         cursor: default;
     }
 
-    &:hover {
-        background: $primary-color;
-
-        .overlay-add-photos {
-            background: rgba(233, 228, 217, 0.95) !important;
+    &.isAvailable {
+        &:hover {
+            background: $primary-color;
+    
+            .overlay-add-photos {
+                background: rgba(233, 228, 217, 0.95) !important;
+            }
         }
-    }
-
-    h4 {
-        font-size: 14px;
-        font-weight: 300;
-        color : $dark-color;
-        text-transform: uppercase;
     }
 
     .header-folder {
         width: 100%;
         display: flex;
+        color : $dark-color;
         justify-content: space-between;
+
+        &.loading {
+            color : $flat-color;
+        }
+
+        h4 {
+            font-size: 14px;
+            font-weight: 300;
+            text-transform: uppercase;
+        }
     }
 
     .body-indicator-conatiner {

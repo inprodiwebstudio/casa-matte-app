@@ -15,6 +15,7 @@ import {
 	ChargeSpinner,
 	SelectorMenuItem,
 } from "core/components";
+import { genericApi }                             from "store/api/genericApi";
 import { gallerySlice }                           from "store/Slices";
 import { convertToArray, isValidArray, bindAll }  from "helpers";
 import { CircleArrow, CrossSelector, FilterIcon } from "Resources/icons";
@@ -31,6 +32,10 @@ const BodyGallery = ({
 	const isAvailableDocs = isValidArray(galleryData);
 
 	const [ isHideSelected, setIsHideSelected ] = useState(false);
+
+	const [galleryMutation, galleryMutationResult] = genericApi.useSubmitDataMutation();
+
+	const loadingMutationGallery = galleryMutationResult.isLoading;
 
 	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
 
@@ -111,10 +116,12 @@ const BodyGallery = ({
 									gallerySeparation(galleryData, true).map( data => (
 										<Folder
 											key={data?.id}
+											folderId={data?.id}
 											name={data?.meta?.name}
 											images={data?.meta?.thumbimages}
+											galleryMutation={galleryMutation}
+											loadingMutationGallery={loadingMutationGallery}
 											onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.id, name : data?.meta?.name})}
-											handleMovePhotos={() =>gallerySlice.moveToFolder(data?.id)}
 										/>
 									))
 								}

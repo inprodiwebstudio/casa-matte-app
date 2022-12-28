@@ -12,7 +12,7 @@ import "./SideBar.scss";
 const SideBar = ({gallerySlice, galleryPath, selectedData}) => {
 	const [ isfullSize, setIsFullSize ] = useState(false);
 
-	const { data : myGalleryData, isFetching } = genericApi.useGetDataQuery({
+	const { data : galleryData, isFetching } = genericApi.useGetDataQuery({
 		module : "gallery",
 		params : {
 			per_page   : 50,
@@ -22,7 +22,7 @@ const SideBar = ({gallerySlice, galleryPath, selectedData}) => {
 	});
 
 
-	const isAvailableDocs = isValidArray(myGalleryData);
+	const isAvailableDocs = isValidArray(galleryData);
 
 	const isSelectedData = isValidArray(convertToArray(selectedData));
 
@@ -55,7 +55,7 @@ const SideBar = ({gallerySlice, galleryPath, selectedData}) => {
 				)
 			}
 			<div className="body-sidebar">
-				<BodyGallery isFetching={isFetching} galleryData={myGalleryData} />
+				<BodyGallery isFetching={isFetching} galleryData={galleryData} />
 			</div>
 		</div>
 	);

@@ -2,24 +2,72 @@ import { connect } from "react-redux";
 
 
 //Own omponents
+import { MutationSpinner }                            from "core/components";
 import { MoreOption, PlusIcon }                       from "Resources/icons";
 import { isValidArray, convertToArray, resizerImage } from "helpers";
+
+import { UpdateThumbNails } from "./Folder.helpers";
 
 
 import "./Folder.scss";
 
-const Folder = ({images, name, handleMovePhotos, onSelectedFolder, gallerySelectedData}) => {
-
+const Folder = ({
+	name,
+	images,
+	folderId,
+	galleryMutation,
+	onSelectedFolder,
+	gallerySelectedData,
+	loadingMutationGallery,
+}) => {
 	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
+
+	const moveIntoFolder = async (currenTPhotos, photosSelected) => {
+		const isUpdatedableFolder = (images.length < 4) ? true : false;
+		const parseObjToArr = convertToArray(photosSelected);
+
+		const promisesPhotos = parseObjToArr.map(async (photo, index) => {
+			return await galleryMutation({
+				module : `gallery/${photo?.id}`,
+				tags   : (!isUpdatedableFolder && (index === parseObjToArr?.length - 1)) ? ["gallery"] : ["null"],
+				data   : {
+					status : "publish",
+					meta   : {
+						parentid : folderId,
+					},
+				},
+				method : "POST",
+			});
+		});
+
+		Promise.allSettled([...promisesPhotos]).then(async (values) => {}, reason => {
+			console.error(reason);
+		});
+
+		if (isUpdatedableFolder) {
+			const newThumbNails = UpdateThumbNails(currenTPhotos, photosSelected);
+			await galleryMutation({
+				module : `gallery/${folderId}`,
+				tags   : ["gallery"],
+				data   : {
+					status : "publish",
+					meta   : {
+						thumbimages : [...newThumbNails],
+					},
+				},
+				method : "POST",
+			});
+		}
+	};
 
 	return (
 		<div
-			className={`Folder ${(!isValidArray(images) && !isSelectedData) && "cursor-regular"}`}
+			className={`Folder ${((!isValidArray(images) && !isSelectedData) || loadingMutationGallery) && "cursor-regular"} ${!loadingMutationGallery && "isAvailable"}`}
 			{
-				...(isValidArray(images) && {onDoubleClick : onSelectedFolder})
+				...((isValidArray(images) && !loadingMutationGallery) && {onDoubleClick : onSelectedFolder})
 			}
 		>
-			<div className="header-folder">
+			<div className={`header-folder ${loadingMutationGallery && "loading"}`}>
 				<h4>{name}</h4>
 				<div className="more-icon-container">
 					<MoreOption size="20px" />
@@ -64,15 +112,26 @@ const Folder = ({images, name, handleMovePhotos, onSelectedFolder, gallerySelect
 					)
 				}
 				{
-					((isSelectedData || (!isValidArray(images))) && (
-						<div className={`overlay-add-photos ${!isValidArray(images) && "none-background"}`} onClick={() => handleMovePhotos()}>
-							<PlusIcon size="20px" />
+					((isSelectedData || (!isValidArray(images)) || loadingMutationGallery) && (
+						<div
+							className={`overlay-add-photos ${!isValidArray(images) && "none-background"}`}
+							{
+								...(!loadingMutationGallery && {onClick : () => moveIntoFolder(images, gallerySelectedData)})
+							}
+						>
+							{
+								loadingMutationGallery ? (
+									<MutationSpinner />
+								) : (
+									<PlusIcon size="20px" />
+								)
+							}
 							<p>
 								{
 									!isValidArray(images) && "Primero selecciona las fotos para agregar a ésta carpeta"
 								}
 								{
-									isValidArray(images) && "Haz click aquí para agregar las fotos seleccionadas"
+									(isValidArray(images) && !loadingMutationGallery) && "Haz click aquí para agregar las fotos seleccionadas"
 								}
 							</p>
 						</div>
