@@ -2,9 +2,10 @@ import { connect } from "react-redux";
 
 
 //Own omponents
-import { MutationSpinner }                            from "core/components";
-import { MoreOption, PlusIcon }                       from "Resources/icons";
-import { isValidArray, convertToArray, resizerImage } from "helpers";
+import { MutationSpinner }                                     from "core/components";
+import { gallerySlice }                                        from "store/Slices";
+import { MoreOption, PlusIcon }                                from "Resources/icons";
+import { isValidArray, convertToArray, resizerImage, bindAll } from "helpers";
 
 import { UpdateThumbNails } from "./Folder.helpers";
 
@@ -15,6 +16,7 @@ const Folder = ({
 	name,
 	images,
 	folderId,
+	gallerySlice,
 	galleryMutation,
 	onSelectedFolder,
 	gallerySelectedData,
@@ -58,6 +60,8 @@ const Folder = ({
 				method : "POST",
 			});
 		}
+
+		gallerySlice.clearSelectedData();
 	};
 
 	return (
@@ -146,4 +150,6 @@ const mapStateToProps = ({ gallerySlice }) => ({
 	gallerySelectedData : gallerySlice?.selectedData ?? {},
 });
 
-export default connect(mapStateToProps) (Folder);
+const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});
+
+export default connect(mapStateToProps, mapDispatchToProps) (Folder);

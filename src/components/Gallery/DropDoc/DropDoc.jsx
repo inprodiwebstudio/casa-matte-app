@@ -54,7 +54,7 @@ const DropDoc = ({
 				meta   : {
 					isfolder : false,
 					imageurl : imageData?.data?.url,
-					parentid : prentId ? prentId : "route",
+					parentid : prentId ? prentId : galleryPathRoute?.id,
 				},
 			},
 			method : "POST",
@@ -279,7 +279,7 @@ const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});
 
 const mapStateToProps = ({ gallerySlice }) => ({
 	galleryTypeDropedView : gallerySlice?.typeDropedView ?? null,
-	galleryPathRoute      : gallerySlice?.galleryPathName ?? "route",
+	galleryPathRoute      : gallerySlice?.galleryPathName ?? {},
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (DropDoc);
