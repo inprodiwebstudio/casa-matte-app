@@ -6,11 +6,14 @@ import BodyGallery  from "components/Gallery/BodyGallery";
 import { gallerySlice }                          from "store/Slices";
 import { genericApi }                            from "store/api/genericApi";
 import { convertToArray, isValidArray, bindAll } from "helpers";
+import { deleteImageKitIo }                      from "./SideBar.helpers";
 import { ArrowTop, FolderPlus, DropFile, Thrash} from "Resources/icons";
 import "./SideBar.scss";
 
 const SideBar = ({gallerySlice, galleryPath, selectedData}) => {
 	const [ isfullSize, setIsFullSize ] = useState(false);
+
+	const [galleryMutation] = genericApi.useDeleteMutation();
 
 	const { data : galleryData, isFetching } = genericApi.useGetDataQuery({
 		module : "gallery",
@@ -21,10 +24,26 @@ const SideBar = ({gallerySlice, galleryPath, selectedData}) => {
 		},
 	});
 
-
 	const isAvailableDocs = isValidArray(galleryData);
 
 	const isSelectedData = isValidArray(convertToArray(selectedData));
+
+	const deleteImages = () => {
+		const parseToArr = convertToArray(selectedData);
+		const listOfSelectedImages = parseToArr.map( image => (image?.meta?.fileid));
+		const promisesImages = parseToArr.map( async (image, index) => {
+			const resRequest = await galleryMutation({
+				module : `gallery/${image.id}`,
+				tags   : (index === parseToArr.length - 1) ? ["gallery"] : ["null"],
+			});
+			return resRequest;
+		});
+		Promise.allSettled([...promisesImages]).then((values) => {
+			deleteImageKitIo(listOfSelectedImages);
+		}, reason => {
+			console.error(reason);
+		});
+	};
 
 	return (
 		<div id="SideBar" className={isAvailableDocs ? (isfullSize && "isFullSize") : "isNoData"}>
@@ -46,7 +65,7 @@ const SideBar = ({gallerySlice, galleryPath, selectedData}) => {
 						}
 						{
 							isSelectedData && (
-								<div className="icon-sidebar-action" onClick={() => gallerySlice.deleteData(selectedData)}>
+								<div className="icon-sidebar-action" onClick={() => deleteImages()}>
 									<Thrash size="20px" />
 								</div>
 							)

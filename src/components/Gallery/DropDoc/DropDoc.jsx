@@ -53,6 +53,7 @@ const DropDoc = ({
 				status : "publish",
 				meta   : {
 					isfolder : false,
+					fileid   : imageData?.data?.fileId,
 					imageurl : imageData?.data?.url,
 					parentid : prentId ? prentId : galleryPathRoute?.id,
 				},

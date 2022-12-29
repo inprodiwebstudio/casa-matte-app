@@ -7,7 +7,6 @@ import axios from "axios";
 // 	baseURL : "https://upload.imagekit.io/api/v1/files/upload",
 // 	headers : {"Content-Type" : "multipart/form-data"},
 // });
-
 const uploadImageKitIo = async (image) => {
 	try {
 		const res = await axios.get("http://localhost:3001/auth");
