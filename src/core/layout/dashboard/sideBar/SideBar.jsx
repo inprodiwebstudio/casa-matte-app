@@ -40,8 +40,10 @@ const SideBar = ({gallerySlice, galleryPath, selectedData}) => {
 		});
 		Promise.allSettled([...promisesImages]).then((values) => {
 			deleteImageKitIo(listOfSelectedImages);
+			gallerySlice.clearSelectedData();
 		}, reason => {
 			console.error(reason);
+			gallerySlice.clearSelectedData();
 		});
 	};
 
