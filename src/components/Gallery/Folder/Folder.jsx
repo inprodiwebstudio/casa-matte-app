@@ -45,7 +45,6 @@ const Folder = ({
 		Promise.allSettled([...promisesPhotos]).then(async (values) => {}, reason => {
 			console.error(reason);
 		});
-
 		if (isUpdatedableFolder) {
 			const newThumbNails = UpdateThumbNails(currenTPhotos, photosSelected);
 			await galleryMutation({
@@ -60,7 +59,6 @@ const Folder = ({
 				method : "POST",
 			});
 		}
-
 		gallerySlice.clearSelectedData();
 	};
 

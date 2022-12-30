@@ -3,17 +3,19 @@ import { connect }  from "react-redux";
 import BodyGallery  from "components/Gallery/BodyGallery";
 
 //Own components
-import { gallerySlice }                          from "store/Slices";
-import { genericApi }                            from "store/api/genericApi";
-import { convertToArray, isValidArray, bindAll } from "helpers";
-import { deleteImageKitIo }                      from "./SideBar.helpers";
-import { ArrowTop, FolderPlus, DropFile, Thrash} from "Resources/icons";
+import { gallerySlice }                                           from "store/Slices";
+import { genericApi }                                             from "store/api/genericApi";
+import { convertToArray, isValidArray, bindAll, filterTwoArrays } from "helpers";
+import { deleteImageKitIo }                                       from "./SideBar.helpers";
+import { ArrowTop, FolderPlus, DropFile, Thrash}                  from "Resources/icons";
 import "./SideBar.scss";
 
 const SideBar = ({gallerySlice, galleryPath, selectedData}) => {
 	const [ isfullSize, setIsFullSize ] = useState(false);
 
-	const [galleryMutation] = genericApi.useDeleteMutation();
+	const [galleryMutationDelete] = genericApi.useDeleteMutation();
+	const [galleryMutationSubmit] = genericApi.useSubmitDataMutation();
+
 
 	const { data : galleryData, isFetching } = genericApi.useGetDataQuery({
 		module : "gallery",
@@ -32,13 +34,37 @@ const SideBar = ({gallerySlice, galleryPath, selectedData}) => {
 		const parseToArr = convertToArray(selectedData);
 		const listOfSelectedImages = parseToArr.map( image => (image?.meta?.fileid));
 		const promisesImages = parseToArr.map( async (image, index) => {
-			const resRequest = await galleryMutation({
+			const resRequest = await galleryMutationDelete({
 				module : `gallery/${image.id}`,
-				tags   : (index === parseToArr.length - 1) ? ["gallery"] : ["null"],
+				tags   : ((index === parseToArr.length - 1) && (galleryPath?.id === "route")) ? ["gallery"] : ["null"],
 			});
 			return resRequest;
 		});
-		Promise.allSettled([...promisesImages]).then((values) => {
+		Promise.allSettled([...promisesImages]).then(async (values) => {
+			if (galleryPath?.id !== "route") {
+				const imagesList = galleryData?.map(data => data?.meta?.imageurl);
+				const listImagesSelected = parseToArr.map(image => (image?.meta?.imageurl));
+				const newListImages = filterTwoArrays(imagesList, listImagesSelected);
+				const newThumbsImages = newListImages.slice(0, 5);
+				await galleryMutationSubmit({
+					module : `gallery/${galleryPath?.id}`,
+					tags   : ["gallery"],
+					data   : {
+						status : "publish",
+						meta   : {
+							thumbimages : isValidArray(newThumbsImages) ? newThumbsImages : null,
+						},
+					},
+					method : "POST",
+				});
+				if (galleryData?.length <= 1) {
+					gallerySlice.setGalleryPath({
+						id           : "route",
+						name         : "route",
+						folderThumbs : [],
+					});
+				}
+			}
 			deleteImageKitIo(listOfSelectedImages);
 			gallerySlice.clearSelectedData();
 		}, reason => {

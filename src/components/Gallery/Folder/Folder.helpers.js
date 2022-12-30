@@ -1,5 +1,5 @@
 //Own functions
-import { convertToArray } from "helpers";
+import { convertToArray, isValidArray } from "helpers";
 
 export const UpdateThumbNails = (currentPhotos, photosSelected) => {
 	const newPhotos = convertToArray(photosSelected).map(photo => photo?.meta?.imageurl);
@@ -7,8 +7,11 @@ export const UpdateThumbNails = (currentPhotos, photosSelected) => {
 	if (updatedable) {
 		const missingPhotos = 5 - currentPhotos.length;
 		const sliceNewPhotos = newPhotos.slice(0, missingPhotos);
-		const newPhotosUpload = [...currentPhotos, ...sliceNewPhotos ];
+		const newPhotosUpload = [...currentPhotos, ...sliceNewPhotos];
 		return newPhotosUpload;
+	}
+	if (!isValidArray(currentPhotos)) {
+		return newPhotos.slice(0, 5);
 	}
 	return currentPhotos;
 };

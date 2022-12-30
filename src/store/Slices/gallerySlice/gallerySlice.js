@@ -4,8 +4,9 @@ import { convertToObject } from "helpers";
 
 const initialState = {
 	galleryPathName : {
-		id   : "route",
-		name : "route",
+		id           : "route",
+		name         : "route",
+		folderThumbs : [],
 	},
 	typeDropedView : null,
 	data           : {},

@@ -121,7 +121,7 @@ const BodyGallery = ({
 											images={data?.meta?.thumbimages}
 											galleryMutation={galleryMutation}
 											loadingMutationGallery={loadingMutationGallery}
-											onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.id, name : data?.meta?.name})}
+											onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.id, name : data?.meta?.name, folderThumbs : data?.meta?.thumbimages})}
 										/>
 									))
 								}
