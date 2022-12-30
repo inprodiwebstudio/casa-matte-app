@@ -118,7 +118,7 @@ const Folder = ({
 						<div
 							className={`overlay-add-photos ${!isValidArray(images) && "none-background"}`}
 							{
-								...(!loadingMutationGallery && {onClick : () => moveIntoFolder(images, gallerySelectedData)})
+								...((!loadingMutationGallery && isSelectedData) && {onClick : () => moveIntoFolder(images, gallerySelectedData)})
 							}
 						>
 							{
