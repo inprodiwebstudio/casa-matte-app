@@ -6,6 +6,22 @@
     cursor: pointer;
     width: fit-content;
 
+    &.is-loading {
+        cursor: progress;
+        .check-box {
+            border: solid 2px $primary-color;
+
+            .filling {
+                background: $primary-color;
+            }
+        }
+
+        .label-checkbox {
+            color : $primary-color;
+            cursor: progress;
+        }
+    }
+
     .check-box {
         width : 20px;
         height: 20px;

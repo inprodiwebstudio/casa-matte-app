@@ -11,6 +11,7 @@ const Button = ({
 	fullSize,
 	fontSize,
 	children,
+	isLoading,
 	...rest
 }) => {
 	return (
@@ -19,6 +20,7 @@ const Button = ({
 				`Button
 				${type && type}
 				${fullSize && "fullSize"}
+				${isLoading && "is-loading"}
 				`
 			}
 			style={{

@@ -18,6 +18,21 @@
 	transition: all ease 200ms;
 	border: 1px solid $dark-color !important;
 
+	&.is-loading {
+		cursor: progress !important;
+		border: 1px solid $primary-color !important;
+		&.outline {
+			color : $primary-color !important;
+			&:hover {
+				background: none !important;
+				border: 1px solid $primary-color !important;
+			}
+		}
+		.button-body {
+			cursor: progress !important;
+		}
+	}
+
 	&.subtle {
 		background: none;
 		border: none !important;

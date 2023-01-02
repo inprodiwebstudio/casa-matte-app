@@ -43,8 +43,20 @@ const BodyGallery = ({
 					{
 						(isAvailableDocs && (!isFetching)) && (
 							<>
-								<CheckBox label="OCULTAR FOTOS USADAS" isActive={isHideSelected} onChange={() => setIsHideSelected(!isHideSelected)} />
-								<Button width={84} fontSize={12} type="outline">AUTOFILL</Button>
+								<CheckBox
+									isActive={isHideSelected}
+									label="OCULTAR FOTOS USADAS"
+									isLoading={loadingMutationGallery}
+									onChange={() => setIsHideSelected(!isHideSelected)}
+								/>
+								<Button
+									width={84}
+									fontSize={12}
+									type="outline"
+									isLoading={loadingMutationGallery}
+								>
+									AUTOFILL
+								</Button>
 							</>
 						)
 					}
@@ -69,7 +81,7 @@ const BodyGallery = ({
 					}
 					<div className="icon-style" {...(isSelectedData && {onClick : () => gallerySlice.clearSelectedData()})}>
 						{
-							isSelectedData && (
+							(isSelectedData && !loadingMutationGallery) && (
 								<CrossSelector size="30px" onClick={() => gallerySlice.clearSelectedData()} />
 							)
 						}
