@@ -5,7 +5,6 @@ import { useDropzone }         from "react-dropzone";
 
 //Own components
 import { gallerySlice } from "store/Slices";
-import { genericApi }   from "store/api/genericApi";
 
 import {
 	bindAll,
@@ -29,6 +28,7 @@ import "./DropDoc.scss";
 
 const DropDoc = ({
 	gallerySlice,
+	galleryMutation,
 	galleryPathRoute,
 	galleryTypeDropedView,
 }) => {
@@ -40,8 +40,6 @@ const DropDoc = ({
 	const [ folderName, setFolderName ] = useState("");
 	const [ completedPhotos, setPhotosCompleted ] = useState([]);
 	const [ isGenerateNewFolder, setIsGenerateNewFolder ] = useState(false);
-
-	const [galleryMutation] = genericApi.useSubmitDataMutation();
 
 	const postImage = async (image, prentId, isRefetching) => {
 		const imageData = await uploadImageKitIo(image);

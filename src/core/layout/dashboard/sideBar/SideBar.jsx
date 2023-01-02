@@ -79,23 +79,51 @@ const SideBar = ({gallerySlice, galleryPath, selectedData}) => {
 		<div id="SideBar" className={isAvailableDocs ? (isfullSize && "isFullSize") : "isNoData"}>
 			{
 				((!isFetching) && isAvailableDocs) && (
-					<div className={`actions-sidebar-conatiner ${isfullSize && "isFullSize"}`}>
-						<div className="icon-sidebar-action" onClick={() => setIsFullSize(!isfullSize)}>
+					<div className={`actions-sidebar-conatiner ${isfullSize && "isFullSize"} ${loadingMutationGallery && "is-loading"}`}>
+						<div
+							className="icon-sidebar-action"
+							{
+								...(!loadingMutationGallery && {
+									onClick : () => setIsFullSize(!isfullSize),
+								})
+							}
+						>
 							<ArrowTop size="18px" className="icon-arrow-action" />
 						</div>
-						<div className="icon-sidebar-action" onClick={() => gallerySlice.setTypeDropedView("addFiles")}>
+						<div
+							className="icon-sidebar-action"
+							{
+								...(!loadingMutationGallery && {
+									onClick : () => gallerySlice.setTypeDropedView("addFiles"),
+								})
+							}
+						>
 							<DropFile size="18px" />
 						</div>
 						{
 							galleryPath?.id === "route" && (
-								<div className="icon-sidebar-action" onClick={() => gallerySlice.setTypeDropedView("addFolder")}>
+								<div
+									className="icon-sidebar-action"
+									{
+										...(!loadingMutationGallery && {
+											onClick : () => gallerySlice.setTypeDropedView("addFolder"),
+										})
+									}
+								>
 									<FolderPlus size="20px" />
 								</div>
 							)
 						}
 						{
 							isSelectedData && (
-								<div className="icon-sidebar-action" onClick={() => deleteImages()}>
+								<div
+									className="icon-sidebar-action"
+									{
+										...(!loadingMutationGallery && {
+											onClick : () =>  deleteImages(),
+										})
+									}
+								>
 									<Thrash size="20px" />
 								</div>
 							)

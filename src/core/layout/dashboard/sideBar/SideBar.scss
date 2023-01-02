@@ -56,6 +56,16 @@
         justify-content: center;
         padding-bottom: 16.6px;
         padding-top: 35px;
+        
+        &.is-loading {
+            color : $primary-color !important;
+            .icon-sidebar-action {
+                &:hover {
+                    color : $primary-color;
+                    cursor: wait;
+                }
+            }
+        }
 
         .icon-sidebar-action {
             transition: all ease 200ms;

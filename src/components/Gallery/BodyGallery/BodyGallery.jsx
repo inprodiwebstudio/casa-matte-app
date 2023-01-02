@@ -85,7 +85,7 @@ const BodyGallery = ({
 			}
 			{
 				((!isFetching) && !isAvailableDocs) && (
-					<DropDoc />
+					<DropDoc galleryMutation={galleryMutation} />
 				)
 			}
 			{
@@ -103,7 +103,7 @@ const BodyGallery = ({
 										background : "rgba(247, 245, 241, 0.95)",
 									}}
 								>
-									<DropDoc />
+									<DropDoc galleryMutation={galleryMutation} />
 								</div>
 							)
 						}

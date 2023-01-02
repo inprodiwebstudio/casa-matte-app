@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 
-
 //Own omponents
 import { MutationSpinner }      from "core/components";
 import { gallerySlice }         from "store/Slices";
@@ -12,9 +11,7 @@ import {
 	convertToArray,
 } from "helpers";
 
-
 import { UpdateThumbNails } from "./Folder.helpers";
-
 
 import "./Folder.scss";
 
