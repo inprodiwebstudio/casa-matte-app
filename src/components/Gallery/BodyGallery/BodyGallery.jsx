@@ -65,7 +65,7 @@ const BodyGallery = ({
 				<div className="actions-header-container">
 					<div className="icon-style">
 						{
-							((galleryPathRoute?.id !== "route") && !isFetching) && (
+							((galleryPathRoute?.id !== "route") && !isFetching && !loadingMutationGallery) && (
 								<CircleArrow size="30px" onClick={() => gallerySlice.setGalleryPath({id : "route", name : "route"})} />
 							)
 						}
@@ -74,7 +74,12 @@ const BodyGallery = ({
 						(isAvailableDocs && !isFetching) && (
 							<div className="filter-selector-container">
 								<div className="selector-input">
-									<SelectorMenuItem type="light" placeholder="Ordenar por" leftIcon={<FilterIcon size="15px" />} />
+									<SelectorMenuItem
+										type="light"
+										placeholder="Ordenar por"
+										isLoading={loadingMutationGallery}
+										leftIcon={<FilterIcon size="15px" />}
+									/>
 								</div>
 							</div>
 						)
