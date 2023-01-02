@@ -2,10 +2,17 @@
 
 .LargeFormat {
     z-index: 1;
-    width: 100%;
-    height: 100%;
+    width: 75%;
+    height: 70%;
+    display: flex;
     display: flex;
     align-items: center;
     background: white;
     justify-content: center;
+
+    .page-body {
+        flex-grow: 1;
+        height: 100%;
+        border : solid 1.5px rgb(206, 206, 206)
+    }
 }
