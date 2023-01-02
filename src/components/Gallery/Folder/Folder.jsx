@@ -2,10 +2,16 @@ import { connect } from "react-redux";
 
 
 //Own omponents
-import { MutationSpinner }                                     from "core/components";
-import { gallerySlice }                                        from "store/Slices";
-import { MoreOption, PlusIcon }                                from "Resources/icons";
-import { isValidArray, convertToArray, resizerImage, bindAll } from "helpers";
+import { MutationSpinner }      from "core/components";
+import { gallerySlice }         from "store/Slices";
+import { MoreOption, PlusIcon } from "Resources/icons";
+import {
+	bindAll,
+	isValidArray,
+	resizerImage,
+	convertToArray,
+} from "helpers";
+
 
 import { UpdateThumbNails } from "./Folder.helpers";
 

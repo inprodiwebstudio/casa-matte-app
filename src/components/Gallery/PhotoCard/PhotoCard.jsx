@@ -13,7 +13,7 @@ const PhotoCard = ({image, onSelected, isChecked, loadingMutationGallery}) => {
 		<div
 			className="PhotoCard"
 			style={{
-				backgroundImage : image ? `url(${resizerImage(image)})` : null,
+				background : image ? `url(${resizerImage(image)}) center center / cover no-repeat` : "grey",
 			}}
 		>
 			{
