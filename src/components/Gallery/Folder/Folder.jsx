@@ -133,7 +133,7 @@ const Folder = ({
 							}
 							<p>
 								{
-									!isValidArray(images) && "Primero selecciona las fotos para agregar a ésta carpeta"
+									(!isValidArray(images) && !loadingMutationGallery) && "Primero selecciona las fotos para agregar a ésta carpeta"
 								}
 								{
 									(isValidArray(images) && !loadingMutationGallery) && "Haz click aquí para agregar las fotos seleccionadas"
