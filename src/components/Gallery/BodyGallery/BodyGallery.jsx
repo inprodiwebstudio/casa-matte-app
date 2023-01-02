@@ -15,7 +15,6 @@ import {
 	ChargeSpinner,
 	SelectorMenuItem,
 } from "core/components";
-import { genericApi }                             from "store/api/genericApi";
 import { gallerySlice }                           from "store/Slices";
 import { convertToArray, isValidArray, bindAll }  from "helpers";
 import { CircleArrow, CrossSelector, FilterIcon } from "Resources/icons";
@@ -25,17 +24,15 @@ const BodyGallery = ({
 	isFetching,
 	galleryData,
 	gallerySlice,
+	galleryMutation,
 	galleryPathRoute,
 	gallerySelectedData,
 	galleryTypeDropedView,
+	loadingMutationGallery,
 }) => {
 	const isAvailableDocs = isValidArray(galleryData);
 
 	const [ isHideSelected, setIsHideSelected ] = useState(false);
-
-	const [galleryMutation, galleryMutationResult] = genericApi.useSubmitDataMutation();
-
-	const loadingMutationGallery = galleryMutationResult.isLoading;
 
 	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
 
@@ -136,6 +133,7 @@ const BodyGallery = ({
 										<PhotoCard
 											key={index}
 											image={data?.meta?.imageurl}
+											loadingMutationGallery={loadingMutationGallery}
 											onSelected={() => gallerySlice.setSelectedData(data)}
 											isChecked={gallerySelectedData[data?.id] ? true : false}
 										/>

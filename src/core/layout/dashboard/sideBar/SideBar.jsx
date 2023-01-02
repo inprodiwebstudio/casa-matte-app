@@ -13,9 +13,11 @@ import "./SideBar.scss";
 const SideBar = ({gallerySlice, galleryPath, selectedData}) => {
 	const [ isfullSize, setIsFullSize ] = useState(false);
 
-	const [galleryMutationDelete] = genericApi.useDeleteMutation();
-	const [galleryMutationSubmit] = genericApi.useSubmitDataMutation();
+	const [galleryMutationDelete, galleryDeleteResult] = genericApi.useDeleteMutation();
 
+	const [galleryMutation, galleryMutationResult] = genericApi.useSubmitDataMutation();
+
+	const loadingMutationGallery = galleryMutationResult.isLoading || galleryDeleteResult.isLoading;
 
 	const { data : galleryData, isFetching } = genericApi.useGetDataQuery({
 		module : "gallery",
@@ -46,7 +48,7 @@ const SideBar = ({gallerySlice, galleryPath, selectedData}) => {
 				const listImagesSelected = parseToArr.map(image => (image?.meta?.imageurl));
 				const newListImages = filterTwoArrays(imagesList, listImagesSelected);
 				const newThumbsImages = newListImages.slice(0, 5);
-				await galleryMutationSubmit({
+				await galleryMutation({
 					module : `gallery/${galleryPath?.id}`,
 					tags   : ["gallery"],
 					data   : {
@@ -102,7 +104,12 @@ const SideBar = ({gallerySlice, galleryPath, selectedData}) => {
 				)
 			}
 			<div className="body-sidebar">
-				<BodyGallery isFetching={isFetching} galleryData={galleryData} />
+				<BodyGallery
+					isFetching={isFetching}
+					galleryData={galleryData}
+					galleryMutation={galleryMutation}
+					loadingMutationGallery={loadingMutationGallery}
+				/>
 			</div>
 		</div>
 	);
