@@ -12,6 +12,7 @@
     }
 
     .droped-container-action {
+        z-index: 2;
         width: 80px;
         height: 20px;
         cursor: pointer;
@@ -36,12 +37,14 @@
     }
 
     .header-in-footer-container {
+        z-index: 2;
         height: 30px;
         background: $primary-color;
     }
 
     .body-layouts-container {
-        background: white;
+        z-index: 2;
         flex-grow: 1;
+        background: white;
     }
 }

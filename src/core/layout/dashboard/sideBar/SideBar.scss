@@ -10,6 +10,7 @@
     bottom: 0;
     width: 386px;
     transition: all ease 200ms;
+    z-index: 2;
     &.isFullSize {
         // width : 1388px !important;
         width: calc(73vw - 13px) !important;

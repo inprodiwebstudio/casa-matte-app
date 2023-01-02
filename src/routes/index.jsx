@@ -9,7 +9,7 @@ import { GuestRoute } from "components/global";
 // //Auth
 const Login = Loadable(lazy(() => import("pages/auth/Login")));
 // // Dashboard
-const Home = Loadable(lazy(() => import("pages/dashboard/Home")));
+const WorkSpace = Loadable(lazy(() => import("pages/dashboard/WorkSpace")));
 // //Erros
 const NotFound  = Loadable(lazy(() => import("pages/Page404")));
 const Forbidden = Loadable(lazy(() => import("pages/Page403")));
@@ -39,7 +39,7 @@ const Router = () => {
 			element  : <DashboardLayout />,
 			children : [
 				{ element : <Navigate to="/dashboard/home" replace />, index : true },
-				{ path : "home", element : <Home /> },
+				{ path : "home", element : <WorkSpace /> },
 			],
 		},
 		// Redirect

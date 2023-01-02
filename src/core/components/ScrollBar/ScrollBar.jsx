@@ -3,7 +3,7 @@ import "./ScrollBar.scss";
 
 const ScrollBar = ({children}) => {
 	return (
-		<div id="ScrollBar" style={{zIndex : "1"}}>
+		<div id="ScrollBar" style={{zIndex : "3"}}>
 			{children}
 		</div>
 	);
