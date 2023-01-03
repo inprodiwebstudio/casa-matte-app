@@ -13,6 +13,7 @@
     .page-body {
         flex-grow: 1;
         height: 100%;
-        border : solid 1.5px rgb(206, 206, 206)
+        border : solid 2px rgb(206, 206, 206);
+        padding: 0px !important;
     }
 }
