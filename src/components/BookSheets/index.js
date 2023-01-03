@@ -1,8 +1,8 @@
 import LargeFormat from "./LargeFormat";
 
-const BookPages = {
+const BookSheets = {
 	LargeFormat : LargeFormat,
 };
 
 
-export default BookPages;
+export default BookSheets;

@@ -5,13 +5,13 @@ const LargeFormat = () => {
 	return (
 		<div className="LargeFormat">
 			<div className="page-body">
-				<div
+				{/* <div
 					style={{
 						width      : "calc(200% + 2px)",
 						height     : "100%",
 						background : "red",
 					}}
-				/>
+				/> */}
 			</div>
 			<div className="spacer" />
 			<div className="page-body" />

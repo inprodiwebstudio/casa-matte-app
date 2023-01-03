@@ -1,6 +1,6 @@
 
 //Own Components
-import { Reload} from "Resources/icons";
+import {Reload} from "Resources/icons";
 import "./FrontPage.scss";
 
 const FrontPage = () => {

@@ -9,4 +9,22 @@
 	display        : flex;
     justify-content : center;
 	align-items     : center;
+
+	.canva-space {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		padding: 50px;
+		padding-top: 110px;
+		align-items: center;
+		justify-content: center;
+
+		.ghost-canva {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
 }
