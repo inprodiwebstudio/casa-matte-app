@@ -1,20 +1,42 @@
 //Own components
 import "./LargeFormat.scss";
+import layouts from "components/global/LayoutsPage/LargeFormat";
 
-const LargeFormat = () => {
+const LargeFormat = ({page1, page2}) => {
+	const isSinglePage = ["Mod1", "Mod2", "Mod3"].includes(page1);
+
+	const LayoutPage1 = layouts[page1];
+	const LayoutPage2 = layouts[page2];
+
 	return (
 		<div className="LargeFormat">
 			<div className="page-body">
-				{/* <div
-					style={{
-						width      : "calc(200% + 2px)",
-						height     : "100%",
-						background : "red",
-					}}
-				/> */}
+				{
+					!LayoutPage1 ? (
+						<div />
+					) : (
+						<LayoutPage1 />
+					)
+				}
 			</div>
-			<div className="spacer" />
-			<div className="page-body" />
+			{
+				!isSinglePage && (
+					<div className="spacer" />
+				)
+			}
+			{
+				!isSinglePage && (
+					<div className="page-body">
+						{
+							!LayoutPage2 ? (
+								<div />
+							) : (
+								<LayoutPage2 />
+							)
+						}
+					</div>
+				)
+			}
 		</div>
 	);
 };
