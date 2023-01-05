@@ -7,7 +7,7 @@ const WorkSpace = () => {
 		<div className="WorkSpace">
 			<div className="canva-space">
 				<div className="ghost-canva">
-					<FormatPage typeFormat="LargeFormat" page1="Mod15" page2="Mod13" />
+					<FormatPage typeFormat="LargeFormat" page1="Mod15" page2="Mod16" />
 				</div>
 			</div>
 		</div>

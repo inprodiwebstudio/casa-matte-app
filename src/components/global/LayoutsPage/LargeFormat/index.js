@@ -13,6 +13,7 @@ import Mod12 from "./Mod12";
 import Mod13 from "./Mod13";
 import Mod14 from "./Mod14";
 import Mod15 from "./Mod15";
+import Mod16 from "./Mod16";
 
 const LargeFormat = {
 	Mod1,
@@ -30,6 +31,7 @@ const LargeFormat = {
 	Mod13,
 	Mod14,
 	Mod15,
+	Mod16,
 };
 
 
