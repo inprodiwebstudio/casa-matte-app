@@ -2,19 +2,19 @@
 
 .LargeFormat {
     z-index: 1;
-    aspect-ratio: 16 / 9;
     height: 100%;
     display: flex;
     display: flex;
-    align-items: center;
     background: white;
+    align-items: center;
+    aspect-ratio: 16 / 9;
     justify-content: center;
-    border : solid 1px rgb(206, 206, 206);
+    box-shadow: 0px 0px 15px rgba(178, 175, 166, 0.2);
 
     .spacer {
-        width: 2px;
+        width: 5px;
         height: 100%;
-        background: rgb(206, 206, 206);
+        background: linear-gradient(90deg, rgb(255, 255, 255), $body-color, rgb(255, 255, 255));
     }
 
     .page-body {

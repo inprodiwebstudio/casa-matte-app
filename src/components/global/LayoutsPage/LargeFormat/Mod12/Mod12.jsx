@@ -1,0 +1,14 @@
+import "./Mod12.scss";
+
+const Mod12 = () => {
+	return (
+		<div className="body-mod12-layout">
+			<div className="content-body">
+				<div className="content-children-body" />
+				<div className="content-children-body" />
+			</div>
+		</div>
+	);
+};
+
+export default Mod12;
