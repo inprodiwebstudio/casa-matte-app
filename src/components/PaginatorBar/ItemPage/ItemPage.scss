@@ -33,10 +33,22 @@
         }
 
         .withe-page-container {
-            width: 129px;
+            width: fit-content;
             height: 82px;
-            background: #FFFFFF;
+            background: red;
             border: 1px solid $flat-color;
+            position: relative;
+
+            .spacer-paginator {
+                top: 0;
+                left : 50%;
+                right: 0;
+                bottom : 0;
+                width: 1px;
+                height: 100%;
+                position: absolute;
+                background: $flat-color;
+            }
         }
     
         .pages-book-conatier {

@@ -40,10 +40,11 @@
         }
 
         .withe-page-container {
-            width: 129px;
+            aspect-ratio: 16 / 9;
             height: 82px;
             background: #FFFFFF;
             border: 1px solid $flat-color;
+            font-size: 1vw;
         }
     
         .pages-book-conatier {

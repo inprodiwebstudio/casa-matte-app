@@ -1,6 +1,7 @@
 
 //Own Components
-import {Reload} from "Resources/icons";
+import FormatPage from "components/FormatPage";
+import {Reload}   from "Resources/icons";
 import "./FrontPage.scss";
 
 const FrontPage = () => {
@@ -15,7 +16,9 @@ const FrontPage = () => {
 					<div style={{width : "15px"}}>&nbsp;</div>
 				</div>
 				<div>
-					<div className="withe-page-container">&nbsp;</div>
+					<div className="withe-page-container">
+						<FormatPage typeFormat="LargeFormat" page1="FrontLayout" />
+					</div>
 					<div className="pages-book-conatier">
 						<p>ATRÁS</p>
 						<p>FRENTE</p>

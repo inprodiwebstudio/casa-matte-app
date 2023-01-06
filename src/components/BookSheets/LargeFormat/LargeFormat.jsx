@@ -1,9 +1,10 @@
 //Own components
 import "./LargeFormat.scss";
-import layouts from "components/global/LayoutsPage/LargeFormat";
+import layouts from     "components/global/LayoutsPage/LargeFormat";
+import FrontLayout from "components/global/LayoutsPage/FrontLayout";
 
 const LargeFormat = ({page1, page2}) => {
-	const isSinglePage = ["Mod1", "Mod2", "Mod3"].includes(page1);
+	const isSinglePage = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(page1);
 
 	const LayoutPage1 = layouts[page1];
 	const LayoutPage2 = layouts[page2];
@@ -13,7 +14,7 @@ const LargeFormat = ({page1, page2}) => {
 			<div className="page-body">
 				{
 					!LayoutPage1 ? (
-						<div />
+						<FrontLayout />
 					) : (
 						<LayoutPage1 />
 					)

@@ -1,6 +1,7 @@
 import { Draggable } from "react-beautiful-dnd";
 
 //Own Components
+import FormatPage          from "components/FormatPage";
 import { DragIcon, Cross } from "Resources/icons";
 import "./ItemPage.scss";
 
@@ -32,7 +33,10 @@ const ItemPage = ({
 							<DragIcon size="15px" />
 						</div>
 						<div>
-							<div className="withe-page-container">&nbsp;</div>
+							<div className="withe-page-container">
+								<div className="spacer-paginator" />
+								<FormatPage typeFormat="LargeFormat" page1="Mod15" page2="Mod16" />
+							</div>
 							<div className="pages-book-conatier">
 								<p>{pageData?.leftPage}</p>
 								<p>{pageData?.rightPage}</p>
