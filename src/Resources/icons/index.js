@@ -18,6 +18,7 @@ import Thrash        from "./Thrash";
 import CircleArrow   from "./CircleArrow";
 import CrossSelector from "./CrossSelector";
 import FilterIcon    from "./FilterIcon";
+import PhotoGallery  from "./PhotoGallery";
 
 
 export {
@@ -40,5 +41,6 @@ export {
 	MoveArrows,
 	MoreOption,
 	CircleArrow,
+	PhotoGallery,
 	CrossSelector,
 };

@@ -53,11 +53,16 @@
                 aspect-ratio: 1 / 1;
                 border: 0.5px dashed $flat-color;
                 padding: 4%;
+                cursor: pointer;
 
                 .photo-content {
                     width: 100%;
                     height: 100%;
                     background: $body-color;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color : #848484;
                 }
             }
 
