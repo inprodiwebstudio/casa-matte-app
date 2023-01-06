@@ -7,7 +7,6 @@
     align-items: center;
     justify-content: center;
     transition: all ease 200ms;
-    // background: red;
     cursor: grab;
 
     &:hover {
@@ -33,9 +32,7 @@
         }
 
         .withe-page-container {
-            width: fit-content;
             height: 82px;
-            background: red;
             border: 1px solid $flat-color;
             position: relative;
 

@@ -14,7 +14,7 @@ const Navbar = () => {
 				style={{
 					overflowY : "hidden",
 					flexGrow  : 3,
-					width     : "185px",
+					width     : "190px",
 				}}
 			>
 				<PaginatorBar />
