@@ -33,9 +33,9 @@
 
         .withe-page-container {
             height: 82px;
-            border: 1px solid $flat-color;
-            position: relative;
             font-size: 15px;
+            position: relative;
+            box-shadow: 0px 0px 15px rgba(178, 175, 166, 0.2);
 
             .spacer-paginator {
                 top: 0;
