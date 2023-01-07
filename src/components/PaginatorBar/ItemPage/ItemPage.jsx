@@ -35,7 +35,15 @@ const ItemPage = ({
 						<div>
 							<div className="withe-page-container">
 								<div className="spacer-paginator" />
-								<FormatPage typeFormat="LargeFormat" page1="Mod15" page2="Mod16" />
+								<FormatPage
+									typeFormat="LargeFormat"
+									page1="Mod12"
+									page2="Mod16"
+									images={[
+										"https://ik.imagekit.io/joabMedel/cmtImage_PjxZ4-FHNE.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1672942995835",
+										"https://ik.imagekit.io/joabMedel/cmtImage_PjxZ4-FHNE.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1672942995835",
+									]}
+								/>
 							</div>
 							<div className="pages-book-conatier">
 								<p>{pageData?.leftPage}</p>

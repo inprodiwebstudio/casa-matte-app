@@ -3,7 +3,7 @@ import "./LargeFormat.scss";
 import layouts from     "components/global/LayoutsPage/LargeFormat";
 import FrontLayout from "components/global/LayoutsPage/FrontLayout";
 
-const LargeFormat = ({page1, page2}) => {
+const LargeFormat = ({page1, page2, images}) => {
 	const isSinglePage = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(page1);
 
 	const LayoutPage1 = layouts[page1];
@@ -16,7 +16,7 @@ const LargeFormat = ({page1, page2}) => {
 					!LayoutPage1 ? (
 						<FrontLayout />
 					) : (
-						<LayoutPage1 />
+						<LayoutPage1 images={images} />
 					)
 				}
 			</div>
@@ -32,7 +32,7 @@ const LargeFormat = ({page1, page2}) => {
 							!LayoutPage2 ? (
 								<div />
 							) : (
-								<LayoutPage2 />
+								<LayoutPage2 images={images} />
 							)
 						}
 					</div>
