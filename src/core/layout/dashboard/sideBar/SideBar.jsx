@@ -7,7 +7,6 @@ import { gallerySlice }                          from "store/Slices";
 import { genericApi }                            from "store/api/genericApi";
 import { apiImageKit }                           from "store/api/imageKitApi";
 import { convertToArray, isValidArray, bindAll } from "helpers";
-import { deleteImageKitIo }                      from "./SideBar.helpers";
 import { ArrowTop, FolderPlus, DropFile, Thrash} from "Resources/icons";
 import "./SideBar.scss";
 
@@ -22,15 +21,21 @@ const SideBar = ({gallerySlice, galleryPath, selectedData}) => {
 		},
 	});
 
-	const loadingMutationGallery = galleryMutationResult.isLoading;
+	const [galleryImagesMutation, galleryImagesMutationResult] = apiImageKit.useDeleteImagesMutation();
+
+	const loadingMutationGallery = galleryMutationResult.isLoading || galleryImagesMutationResult.isLoading;
 
 	const isAvailableDocs = isValidArray(imageKitData);
 
 	const isSelectedData = isValidArray(convertToArray(selectedData));
 
-	const deleteImages = () => {
+	const deleteImages = async () => {
 		const listOfSelectedImages = convertToArray(selectedData).map( image => (image?.fileId));
-		deleteImageKitIo(listOfSelectedImages);
+		await galleryImagesMutation({
+			data : {
+				imageIds : listOfSelectedImages,
+			},
+		});
 	};
 
 	return (

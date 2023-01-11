@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery, retry } from "@reduxjs/toolkit/query/react";
-import { galleryApiUrl }                    from "helpers";
 import qs                                   from "qs";
 
 
 // Import Own Components
-import { authSlice } from "store/Slices/authSlice";
+import { galleryApiUrl } from "helpers";
+import { authSlice }     from "store/Slices/authSlice";
 
 // Injects token in every request
 const baseQuery = fetchBaseQuery({
@@ -36,7 +36,19 @@ export const apiImageKit = createApi({
 	tagTypes          : [],
 	endpoints         : (builder) => ({
 		getDirentsList : builder.query({
-			query : ({params}) => `files/?${qs.stringify(params)}`,
+			query        : ({params}) => `files/?${qs.stringify(params)}`,
+			providesTags : ["gallery"],
+		}),
+		deleteImages : builder.mutation({
+			query({data}) {
+				const body = data;
+				return {
+					url    : "delete",
+					method : "POST",
+					body,
+				};
+			},
+			invalidatesTags : ["gallery"],
 		}),
 	}),
 });
