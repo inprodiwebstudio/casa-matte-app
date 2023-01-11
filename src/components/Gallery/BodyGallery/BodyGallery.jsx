@@ -129,13 +129,13 @@ const BodyGallery = ({
 								{
 									gallerySeparation(galleryData, true).map( data => (
 										<Folder
-											key={data?.id}
-											folderId={data?.id}
+											key={data?.fileId}
+											folderId={data?.fileId}
 											name={data?.meta?.name}
-											images={data?.meta?.thumbimages}
+											images={[]}
 											galleryMutation={galleryMutation}
 											loadingMutationGallery={loadingMutationGallery}
-											onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.id, name : data?.meta?.name, folderThumbs : data?.meta?.thumbimages})}
+											onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.fileId, name : data?.name, folderThumbs : []})}
 										/>
 									))
 								}
@@ -149,10 +149,10 @@ const BodyGallery = ({
 									gallerySeparation(galleryData, false).map( (data, index) => (
 										<PhotoCard
 											key={index}
-											image={data?.meta?.imageurl}
+											image={data?.url}
 											loadingMutationGallery={loadingMutationGallery}
 											onSelected={() => gallerySlice.setSelectedData(data)}
-											isChecked={gallerySelectedData[data?.id] ? true : false}
+											isChecked={gallerySelectedData[data?.fileId] ? true : false}
 										/>
 									))
 								}

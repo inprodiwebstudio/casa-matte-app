@@ -3,82 +3,40 @@ import { connect }  from "react-redux";
 import BodyGallery  from "components/Gallery/BodyGallery";
 
 //Own components
-import { gallerySlice }                                           from "store/Slices";
-import { genericApi }                                             from "store/api/genericApi";
-import { convertToArray, isValidArray, bindAll, filterTwoArrays } from "helpers";
-import { deleteImageKitIo }                                       from "./SideBar.helpers";
-import { ArrowTop, FolderPlus, DropFile, Thrash}                  from "Resources/icons";
+import { gallerySlice }                          from "store/Slices";
+import { genericApi }                            from "store/api/genericApi";
+import { apiImageKit }                           from "store/api/imageKitApi";
+import { convertToArray, isValidArray, bindAll } from "helpers";
+import { deleteImageKitIo }                      from "./SideBar.helpers";
+import { ArrowTop, FolderPlus, DropFile, Thrash} from "Resources/icons";
 import "./SideBar.scss";
 
 const SideBar = ({gallerySlice, galleryPath, selectedData}) => {
 	const [ isfullSize, setIsFullSize ] = useState(false);
 
-	const [galleryMutationDelete, galleryDeleteResult] = genericApi.useDeleteMutation();
-
 	const [galleryMutation, galleryMutationResult] = genericApi.useSubmitDataMutation();
 
-	const loadingMutationGallery = galleryMutationResult.isLoading || galleryDeleteResult.isLoading;
-
-	const { data : galleryData, isFetching } = genericApi.useGetDataQuery({
-		module : "gallery",
+	const {data : imageKitData, isFetching : imageKitFetching} = apiImageKit.useGetDirentsListQuery({
 		params : {
-			per_page   : 50,
-			meta_key   : "parentid",
-			meta_value : galleryPath?.id,
+			limit : 100,
 		},
 	});
 
-	const isAvailableDocs = isValidArray(galleryData);
+	const loadingMutationGallery = galleryMutationResult.isLoading;
+
+	const isAvailableDocs = isValidArray(imageKitData);
 
 	const isSelectedData = isValidArray(convertToArray(selectedData));
 
 	const deleteImages = () => {
-		const parseToArr = convertToArray(selectedData);
-		const listOfSelectedImages = parseToArr.map( image => (image?.meta?.fileid));
-		const promisesImages = parseToArr.map( async (image, index) => {
-			const resRequest = await galleryMutationDelete({
-				module : `gallery/${image.id}`,
-				tags   : ((index === parseToArr.length - 1) && (galleryPath?.id === "route")) ? ["gallery"] : ["null"],
-			});
-			return resRequest;
-		});
-		Promise.allSettled([...promisesImages]).then(async (values) => {
-			if (galleryPath?.id !== "route") {
-				const imagesList = galleryData?.map(data => data?.meta?.imageurl);
-				const listImagesSelected = parseToArr.map(image => (image?.meta?.imageurl));
-				const newListImages = filterTwoArrays(imagesList, listImagesSelected);
-				const newThumbsImages = newListImages.slice(0, 5);
-				await galleryMutation({
-					module : `gallery/${galleryPath?.id}`,
-					tags   : ["gallery"],
-					data   : {
-						status : "publish",
-						meta   : {
-							thumbimages : isValidArray(newThumbsImages) ? newThumbsImages : null,
-						},
-					},
-					method : "POST",
-				});
-				if (galleryData?.length <= 1) {
-					gallerySlice.setGalleryPath({
-						id           : "route",
-						name         : "route",
-						folderThumbs : [],
-					});
-				}
-			}
-			deleteImageKitIo(listOfSelectedImages);
-			gallerySlice.clearSelectedData();
-		}, reason => {
-			console.error(reason);
-			gallerySlice.clearSelectedData();
-		});
+		const listOfSelectedImages = convertToArray(selectedData).map( image => (image?.fileId));
+		deleteImageKitIo(listOfSelectedImages);
 	};
 
 	return (
 		<div id="SideBar" className={isAvailableDocs ? (isfullSize && "isFullSize") : "isNoData"}>
 			{
-				((!isFetching) && isAvailableDocs) && (
+				((!imageKitFetching) && isAvailableDocs) && (
 					<div className={`actions-sidebar-conatiner ${isfullSize && "isFullSize"} ${loadingMutationGallery && "is-loading"}`}>
 						<div
 							className="icon-sidebar-action"
@@ -133,8 +91,8 @@ const SideBar = ({gallerySlice, galleryPath, selectedData}) => {
 			}
 			<div className="body-sidebar">
 				<BodyGallery
-					isFetching={isFetching}
-					galleryData={galleryData}
+					isFetching={imageKitFetching}
+					galleryData={imageKitData}
 					galleryMutation={galleryMutation}
 					loadingMutationGallery={loadingMutationGallery}
 				/>

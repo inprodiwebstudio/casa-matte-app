@@ -1,15 +1,9 @@
-import axios from "axios";
+import axios         from "axios";
+import galleryApiUrl from "./galleryApiUrl";
 
-//Own functions
-// const publicKey = import.meta.env.IMAGEKIT_PUBLIC_KEY;
-
-// const instance = axios.create({
-// 	baseURL : "https://upload.imagekit.io/api/v1/files/upload",
-// 	headers : {"Content-Type" : "multipart/form-data"},
-// });
 const uploadImageKitIo = async (image) => {
 	try {
-		const res = await axios.get("http://localhost:3001/auth");
+		const res = await axios.get(`${galleryApiUrl}auth`);
 		const uploadFile = await axios.postForm(
 			"https://upload.imagekit.io/api/v1/files/upload",
 			{
@@ -25,12 +19,6 @@ const uploadImageKitIo = async (image) => {
 	} catch (error) {
 		return error;
 	}
-
-	// const requestAndResponse = instance.postForm(pathUrl, data)
-	// 	.then(resp => resp)
-	// 	.catch(err => err);
-
-	// return requestAndResponse;
 };
 
 export default (uploadImageKitIo);

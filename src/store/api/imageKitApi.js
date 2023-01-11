@@ -1,26 +1,20 @@
 import { createApi, fetchBaseQuery, retry } from "@reduxjs/toolkit/query/react";
+import { galleryApiUrl }                    from "helpers";
+import qs                                   from "qs";
+
 
 // Import Own Components
-import { apiUrl }    from "helpers";
 import { authSlice } from "store/Slices/authSlice";
 
 // Injects token in every request
 const baseQuery = fetchBaseQuery({
-	baseUrl        : apiUrl,
-	prepareHeaders : (headers, { getState }) => {
-		const { token } = getState().authSlice;
-
-		if (token) {
-			headers.set("authorization", `Bearer ${token}`);
-		}
-
-		headers.set("Accept", "/");
+	baseUrl        : galleryApiUrl,
+	prepareHeaders : (headers) => {
 		headers.set("Access-Control-Allow-Origin", "*");
 		headers.set("Access-Control-Allow-Methods", "*");
 		return headers;
 	},
 });
-
 // Logs the user out if token isn't valid
 const baseQueryWithReauth = async (args, api, extraOptions) => {
 	const result = await baseQuery(args, api, extraOptions);
@@ -35,10 +29,14 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 // Retry at most 6 times.
 const baseQueryWithRetry = retry(baseQueryWithReauth, { maxRetries : 2 });
 
-export const api = createApi({
-	reducerPath       : "api",
+export const apiImageKit = createApi({
+	reducerPath       : "apiImageKit",
 	baseQuery         : baseQueryWithRetry,
 	keepUnusedDataFor : 3600,
-	tagTypes          : ["gallerySlice", "media"],
-	endpoints         : () => ({}),
+	tagTypes          : [],
+	endpoints         : (builder) => ({
+		getDirentsList : builder.query({
+			query : ({params}) => `files/?${qs.stringify(params)}`,
+		}),
+	}),
 });

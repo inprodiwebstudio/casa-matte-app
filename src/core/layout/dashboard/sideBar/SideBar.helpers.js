@@ -1,14 +1,15 @@
-import axios from "axios";
+import axios             from "axios";
+import { galleryApiUrl } from "helpers";
 
 export const deleteImageKitIo = async (files) => {
 	try {
 		await axios.post(
-			"http://localhost:3001/delete",
+			`${galleryApiUrl}delete`,
 			{
 				imageIds : files,
 			}
 		);
 	} catch (error) {
-		console.log("error");
+		console.error("error");
 	}
 };

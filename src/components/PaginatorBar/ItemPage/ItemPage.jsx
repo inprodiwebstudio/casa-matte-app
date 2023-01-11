@@ -39,6 +39,9 @@ const ItemPage = ({
 									typeFormat="LargeFormat"
 									page1="Mod12"
 									page2="Mod16"
+									images={[
+										"https://ik.imagekit.io/joabMedel/cmtImage_nisOScPtw.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1673278551650",
+									]}
 								/>
 							</div>
 							<div className="pages-book-conatier">
