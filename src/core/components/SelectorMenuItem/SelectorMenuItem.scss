@@ -5,6 +5,10 @@
     transition: all ease 200ms;
     border-bottom: solid 1px #E3E3E3;
 
+    &.isFilled { 
+        border-bottom: none !important;
+    }
+
     .icon-selector-container {
         top: 21%;
         left: 4%;

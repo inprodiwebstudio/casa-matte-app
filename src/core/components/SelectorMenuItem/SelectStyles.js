@@ -1,15 +1,19 @@
 const SelectStyles = ({type, leftIcon}) => ({
 	control : (provided) => ({
 		...provided,
-		border        : "none",
+		border        : (type === "filled") ? "1px solid #B2AFA6 !important" : "none",
 		width         : "100%",
-		minHeight     : "26px",
-		paddingBottom : type === "light" ? "1px" : "10px",
-		paddingTop    : type === "light" ? "1px" : "10px",
-		background    : type === "light" ? "whithe" : "none",
+		minHeight     : "34px",
+		paddingBottom : ((type === "light") || (type === "filled")) ? "1px" : "10px",
+		paddingTop    : ((type === "light") || (type === "filled")) ? "1px" : "10px",
+		background    : ((type === "light") || (type === "filled")) ? "whithe" : "none",
 		borderRadius  : "0px",
 		cursor        : "pointer",
 		"&:focus"     : {
+			border    : "none",
+			boxShadow : "none",
+		},
+		"&:hover" : {
 			border    : "none",
 			boxShadow : "none",
 		},
@@ -18,8 +22,8 @@ const SelectStyles = ({type, leftIcon}) => ({
 			boxShadow : "none",
 		},
 		"&:focus-within" : {
-			border    : "none",
 			boxShadow : "none",
+			border    : "none",
 		},
 	}),
 	menu : (styles) => ({
@@ -61,7 +65,7 @@ const SelectStyles = ({type, leftIcon}) => ({
 		...styles,
 		fontWeight    : 300,
 		lineHeight    : "17px",
-		color         : "#000000",
+		color         : type === "filled" ? "#B2AFA6" : "#000000",
 		letterSpacing : "0.05em",
 		textTransform : type !== "light" && "uppercase",
 		fontSize      : "14px",
@@ -71,7 +75,7 @@ const SelectStyles = ({type, leftIcon}) => ({
 		textTransform   : type !== "light" && "uppercase",
 		fontFamily      : "Helvetica",
 		backgroundColor : "#fff",
-		color           : "#000",
+		color           : type === "filled" ? "#B2AFA6" : "#000",
 		fontSize        : "14px",
 		fontWeight      : 300,
 		letterSpacing   : "0.05em",
@@ -106,7 +110,7 @@ const SelectStyles = ({type, leftIcon}) => ({
 		fontSize      : "14px",
 		letterSpacing : "0.05em",
 		textTransform : type !== "light" && "uppercase",
-		color         : type === "light" ? "#B2AFA6" : "#000000",
+		color         : ((type === "light") || (type === "filled")) ? "#B2AFA6" : "#000000",
 	}),
 	menuPortal : styles => ({ ...styles, zIndex : 3}),
 });

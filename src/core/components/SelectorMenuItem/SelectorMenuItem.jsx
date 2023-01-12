@@ -27,7 +27,7 @@ const SelectorMenuItem = ({type, placeholder, leftIcon, isLoading}) => {
 	};
 	return (
 		<div
-			className={`SelectorMenuItem ${((type === "light") && hoverDisplay) && "isHover"}`}
+			className={`SelectorMenuItem ${(type === "filled") && "isFilled"} ${((type === "light") && hoverDisplay) && "isHover"}`}
 			onMouseOver={() => setHoverDisplay(true)}
 			onMouseLeave={() => setHoverDisplay(false)}
 		>
@@ -49,7 +49,7 @@ const SelectorMenuItem = ({type, placeholder, leftIcon, isLoading}) => {
 				noOptionsMessage={() => "No hay resultados"}
 			/>
 			{
-				type !== "light" && (
+				((type !== "light") && (type !== "filled")) && (
 					<div className={`lineStyle ${hoverDisplay && "fulWidth"}`}>&nbsp;</div>
 				)
 			}

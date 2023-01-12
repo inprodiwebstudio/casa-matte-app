@@ -2,13 +2,13 @@
 
 #Footer {
     width: 100%;
-    height: 165px;
+    height: 170px;
     display: flex;
     flex-direction: column;
     transition: all ease 200ms;
 
     &.full-size {
-        height: 600px;
+        height: 65vh;
     }
 
     .droped-container-action {
