@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 //Owwn components
+import { Tabs }     from "core/components";
 import { ArrowTop } from "Resources/icons";
 import "./Footer.scss";
 
@@ -11,7 +12,9 @@ const Footer = () => {
 			<div className={`droped-container-action ${dropedToggle && "downArrow"}`} onClick={() => setDropedToggle(!dropedToggle)}>
 				<ArrowTop size="20px" />
 			</div>
-			<div className="header-in-footer-container">&nbsp;</div>
+			<div className="header-in-footer-container">
+				<Tabs tabList={["TODOS", "SOLO FOTOS", "SOLO TEXTO", "FOTOS Y TEXTO", "PÁGINA SENCILLA", "PÁGINA DOBLE"]} />
+			</div>
 			<div className="body-layouts-container">&nbsp;</div>
 		</div>
 	);
