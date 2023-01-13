@@ -45,8 +45,8 @@ const ItemPage = ({
 								/>
 							</div>
 							<div className="pages-book-conatier">
-								<p>{pageData?.leftPage}</p>
-								<p>{pageData?.rightPage}</p>
+								<p>{(index+1)*2 - 1}</p>
+								<p>{(index+1)*2}</p>
 							</div>
 						</div>
 						<div className="cross-icon-conatiner" onClick={() => handleDelete(pageData?.id, index)}>

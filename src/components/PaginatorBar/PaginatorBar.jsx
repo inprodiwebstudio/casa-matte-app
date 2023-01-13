@@ -1,10 +1,12 @@
-import { useState }                   from "react";
+import { useState, useEffect }        from "react";
+import { connect }                    from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 //Own components
-import ItemPage      from "./ItemPage";
-import { ScrollBar } from "core/components";
-import FrontPage     from "./FrontPage";
+import ItemPage                         from "./ItemPage";
+import { convertToArray, isValidArray } from "helpers";
+import { ScrollBar }                    from "core/components";
+import FrontPage                        from "./FrontPage";
 import "./PaginatorBar.scss";
 
 // const datapaginator = {
@@ -22,7 +24,7 @@ import "./PaginatorBar.scss";
 // };
 
 
-const PaginatorBar = () => {
+const PaginatorBar = ({ pagesData }) => {
 	const [ pageList, setPageList ] = useState({
 		pages : {
 			"drager-1" : { id : "drager-1", leftPage : 1, rightPage : 2},
@@ -65,6 +67,20 @@ const PaginatorBar = () => {
 
 		setPageList(newPagesList);
 	};
+
+	useEffect(() => {
+		const dataList = convertToArray(pagesData);
+		if (isValidArray(dataList)) {
+			const newData = {
+				pages : {
+					...pagesData,
+				},
+				pagesIds : dataList.map(page => page?.id),
+			};
+			setPageList(newData);
+			return;
+		}
+	}, [pagesData]);
 
 	const handleDelete = (pageId, index) => {
 		setPageList(prev => {
@@ -111,4 +127,8 @@ const PaginatorBar = () => {
 	);
 };
 
-export default PaginatorBar;
+const mapStateToProps = ({ workSpaceSlice }) => ({
+	pagesData : workSpaceSlice?.data?.pages ?? {},
+});
+
+export default connect(mapStateToProps) (PaginatorBar);
