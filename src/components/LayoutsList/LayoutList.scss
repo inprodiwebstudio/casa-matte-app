@@ -1,0 +1,10 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.LayoutList {
+    gap : 20px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 15px;
+}

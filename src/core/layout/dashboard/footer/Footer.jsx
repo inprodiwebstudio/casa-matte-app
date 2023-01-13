@@ -1,4 +1,5 @@
 import { useState } from "react";
+import LayoutsList  from "components/LayoutsList";
 
 //Owwn components
 import { Tabs, SelectorMenuItem } from "core/components";
@@ -18,13 +19,17 @@ const Footer = () => {
 			<div className="body-layouts-container">
 				<div
 					style={{
-						width : "120px",
+						marginTop : "15px",
+						width     : "110px",
 					}}
 				>
 					<SelectorMenuItem
 						type="filled"
-						placeholder="PAGINAS"
+						placeholder="FOTOS"
 					/>
+				</div>
+				<div className="LayoutsContainer">
+					<LayoutsList />
 				</div>
 			</div>
 		</div>

@@ -9,9 +9,9 @@ import "./SelectorMenuItem.scss";
 const SelectorMenuItem = ({type, placeholder, leftIcon, isLoading}) => {
 	const [ hoverDisplay, setHoverDisplay ] = useState(false);
 	const fakeOptions = [
-		{ value : "chocolate", label : "Chocolate" },
-		{ value : "strawberry", label : "Strawberry" },
-		{ value : "vanilla", label : "Vanilla" },
+		{ value : "1 FOTO", label : "1 FOTO" },
+		{ value : "2 FOTOS", label : "2 FOTOS" },
+		{ value : "3 FOTOS", label : "3 FOTOS" },
 	];
 
 	const DropdownIndicator = (props) => {
