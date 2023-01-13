@@ -11,6 +11,7 @@ const ItemPage = ({
 	draggableId,
 	handleDelete,
 }) => {
+	const isDoublePage = pageData?.sheet2;
 	return (
 		<Draggable
 			draggableId={draggableId}
@@ -34,14 +35,14 @@ const ItemPage = ({
 						</div>
 						<div>
 							<div className="withe-page-container">
-								<div className="spacer-paginator" />
+								{
+									isDoublePage && (
+										<div className="spacer-paginator" />
+									)
+								}
 								<FormatPage
 									typeFormat="LargeFormat"
-									page1="Mod12"
-									page2="Mod16"
-									images={[
-										"https://ik.imagekit.io/joabMedel/cmtImage_nisOScPtw.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1673278551650",
-									]}
+									pageData={pageData}
 								/>
 							</div>
 							<div className="pages-book-conatier">

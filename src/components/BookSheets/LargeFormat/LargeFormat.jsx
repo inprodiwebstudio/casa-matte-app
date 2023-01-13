@@ -1,13 +1,20 @@
 //Own components
+import layouts            from "components/global/LayoutsPage/LargeFormat";
+import { convertToArray } from "helpers";
+import FrontLayout        from "components/global/LayoutsPage/FrontLayout";
 import "./LargeFormat.scss";
-import layouts from     "components/global/LayoutsPage/LargeFormat";
-import FrontLayout from "components/global/LayoutsPage/FrontLayout";
 
-const LargeFormat = ({page1, page2, images}) => {
-	const isSinglePage = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(page1);
+const LargeFormat = ({pageData}) => {
+	const isSinglePage = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(pageData?.sheet1?.layoutType);
 
-	const LayoutPage1 = layouts[page1];
-	const LayoutPage2 = layouts[page2];
+	const LayoutPage1 = layouts[pageData?.sheet1?.layoutType];
+	const LayoutPage2 = layouts[pageData?.sheet2?.layoutType];
+
+	const photoList = (sheetId) => {
+		const sheetData = pageData[sheetId];
+		const listOfImages = convertToArray(sheetData.photos);
+		return listOfImages;
+	};
 
 	return (
 		<div className="LargeFormat">
@@ -16,7 +23,7 @@ const LargeFormat = ({page1, page2, images}) => {
 					!LayoutPage1 ? (
 						<FrontLayout />
 					) : (
-						<LayoutPage1 images={images} />
+						<LayoutPage1 images={photoList("sheet1")} />
 					)
 				}
 			</div>
@@ -32,7 +39,7 @@ const LargeFormat = ({page1, page2, images}) => {
 							!LayoutPage2 ? (
 								<div />
 							) : (
-								<LayoutPage2 images={images} />
+								<LayoutPage2 images={photoList("sheet2")} />
 							)
 						}
 					</div>
