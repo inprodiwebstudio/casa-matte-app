@@ -6,4 +6,8 @@
     background: white;
     aspect-ratio: 1457/1875;
     border: 1px solid $flat-color;
+
+    &.isFullSize {
+        aspect-ratio: 16/9;
+    }
 }
