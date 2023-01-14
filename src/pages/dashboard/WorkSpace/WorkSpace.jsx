@@ -12,7 +12,7 @@ const WorkSpace = () => {
 						pageData={{
 							id     : "page1",
 							sheet1 : {
-								layoutType : "Mod2",
+								layoutType : "FrontLayout",
 								text       : "",
 								photos     : {
 									1 : "",
