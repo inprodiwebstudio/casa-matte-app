@@ -9,8 +9,16 @@ const WorkSpace = () => {
 				<div className="ghost-canva">
 					<FormatPage
 						typeFormat="LargeFormat"
-						page1="Mod13"
-						page2="Mod12"
+						pageData={{
+							id     : "page1",
+							sheet1 : {
+								layoutType : "Mod2",
+								text       : "",
+								photos     : {
+									1 : "",
+								},
+							},
+						}}
 					/>
 				</div>
 			</div>

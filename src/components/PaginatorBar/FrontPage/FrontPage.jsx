@@ -17,7 +17,19 @@ const FrontPage = () => {
 				</div>
 				<div>
 					<div className="withe-page-container">
-						<FormatPage typeFormat="LargeFormat" page1="FrontLayout" />
+						<FormatPage
+							typeFormat="LargeFormat"
+							pageData={{
+								id     : "page1",
+								sheet1 : {
+									layoutType : "FrontLayout",
+									text       : "",
+									photos     : {
+										1 : "",
+									},
+								},
+							}}
+						/>
 					</div>
 					<div className="pages-book-conatier">
 						<p>ATRÁS</p>

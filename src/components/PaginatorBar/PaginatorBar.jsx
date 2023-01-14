@@ -9,21 +9,6 @@ import { ScrollBar }                    from "core/components";
 import FrontPage                        from "./FrontPage";
 import "./PaginatorBar.scss";
 
-// const datapaginator = {
-// 	pages : {
-// 		"drager-1" : { id : "drager-1", lefpage : 1, rightPage : 2},
-// 		"drager-2" : { id : "drager-2", lefpage : 3, rightPage : 4},
-// 		"drager-3" : { id : "drager-3", lefpage : 5, rightPage : 6},
-// 		"drager-4" : { id : "drager-4", lefpage : 7, rightPage : 8},
-// 		"drager-5" : { id : "drager-5", lefpage : 9, rightPage : 10},
-// 		"drager-6" : { id : "drager-6", lefpage : 11, rightPage : 12},
-// 		"drager-7" : { id : "drager-7", lefpage : 13, rightPage : 14},
-// 		"drager-8" : { id : "drager-8", lefpage : 15, rightPage : 16},
-// 	},
-// 	pagesIds : ["drager-1", "drager-2", "drager-3", "drager-4", "drager-5", "drager-6", "drager-7", "drager-8"],
-// };
-
-
 const PaginatorBar = ({ pagesData }) => {
 	const [ pageList, setPageList ] = useState({
 		pages    : {},
