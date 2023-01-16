@@ -10,7 +10,7 @@ const WorkSpace = () => {
 					<FormatPage
 						typeFormat="LargeFormat"
 						pageData={{
-							id     : "page1",
+							id     : "FrontLayout",
 							sheet1 : {
 								layoutType : "FrontLayout",
 								text       : "",

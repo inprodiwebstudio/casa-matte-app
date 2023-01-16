@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { connect }  from "react-redux";
+import { useState, useEffect } from "react";
+import { connect }             from "react-redux";
 
 //Own components
 import Folder    from "../Folder";
@@ -32,9 +32,23 @@ const BodyGallery = ({
 }) => {
 	const isAvailableDocs = isValidArray(galleryData);
 
+	const [ myPhotos, setMyPhotos ] = useState([]);
+
+	const [ myFolders, setMyFolders ] = useState([]);
+
 	const [ isHideSelected, setIsHideSelected ] = useState(false);
 
 	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
+
+	useEffect(() => {
+		if (isValidArray(galleryData)) {
+			const newPhotos = gallerySeparation(galleryData, false);
+			const newFolders = gallerySeparation(galleryData, true);
+			setMyPhotos(newPhotos);
+			setMyFolders(newFolders);
+			return;
+		}
+	}, [galleryData]);
 
 	return (
 		<div className="BodyGallery">
@@ -127,7 +141,7 @@ const BodyGallery = ({
 						<div className="docs-list">
 							<div className="folder-grid">
 								{
-									gallerySeparation(galleryData, true).map( data => (
+									myFolders.map( data => (
 										<Folder
 											key={data?.fileId}
 											folderId={data?.fileId}
@@ -146,7 +160,7 @@ const BodyGallery = ({
 							</div>
 							<div className="photo-grid">
 								{
-									gallerySeparation(galleryData, false).map( (data, index) => (
+									myPhotos.map( (data, index) => (
 										<PhotoCard
 											key={index}
 											image={data?.url}
