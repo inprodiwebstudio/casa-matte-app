@@ -38,7 +38,7 @@ const Router = () => {
 			path     : "dashboard",
 			element  : <DashboardLayout />,
 			children : [
-				{ element : <Navigate to="/dashboard/front" replace />, index : true },
+				{ element : <Navigate to="/dashboard/frontpage" replace />, index : true },
 				{ path : ":pageId", element : <WorkSpace /> },
 			],
 		},

@@ -1,5 +1,6 @@
-import { connect }   from "react-redux";
-import { useParams } from "react-router-dom";
+import { connect }             from "react-redux";
+import { useState, useEffect } from "react";
+import { useParams }           from "react-router-dom";
 
 //Own components
 import FormatPage from "components/FormatPage";
@@ -7,20 +8,35 @@ import "./WorkSpace.scss";
 
 const WorkSpace = ({ workSpaceData }) => {
 	const { pageId } = useParams();
-	const myWorkSpaceData = workSpaceData[pageId];
 
-	console.log(myWorkSpaceData);
+	const isFrontLayout = pageId === "frontpage";
+
+	const [ myWorkSpaceData, setMyWorkSpaceData ] = useState({
+		id     : "FrontLayout",
+		sheet1 : {
+			layoutType : "FrontLayout",
+			text       : "",
+			photos     : {
+				1 : "",
+			},
+		},
+	});
+
+	useEffect(() => {
+		if (!isFrontLayout) {
+			setMyWorkSpaceData(workSpaceData[pageId]);
+		}
+	}, [pageId, workSpaceData]);
+
 	return (
 		<div className="WorkSpace">
 			<div className="canva-space">
 				<div className="ghost-canva">
 					{
-						myWorkSpaceData && (
+						workSpaceData && (
 							<FormatPage
 								typeFormat="LargeFormat"
-								pageData={{
-									...myWorkSpaceData,
-								}}
+								pageData={myWorkSpaceData}
 							/>
 						)
 					}
