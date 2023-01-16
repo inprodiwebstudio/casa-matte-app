@@ -19,8 +19,6 @@ const ItemPage = ({
 
 	const isCurrentPage = pageId === draggableId;
 
-	console.log(pageId);
-
 	return (
 		<Draggable
 			draggableId={draggableId}
