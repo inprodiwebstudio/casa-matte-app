@@ -145,8 +145,8 @@ const BodyGallery = ({
 										<Folder
 											key={data?.fileId}
 											folderId={data?.fileId}
-											name={data?.meta?.name}
-											images={[]}
+											name={data?.name}
+											images={[""]}
 											galleryMutation={galleryMutation}
 											loadingMutationGallery={loadingMutationGallery}
 											onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.fileId, name : data?.name, folderThumbs : []})}
