@@ -38,14 +38,14 @@ const Router = () => {
 			path     : "dashboard",
 			element  : <DashboardLayout />,
 			children : [
-				{ element : <Navigate to="/dashboard/home" replace />, index : true },
-				{ path : "home", element : <WorkSpace /> },
+				{ element : <Navigate to="/dashboard/front" replace />, index : true },
+				{ path : ":pageId", element : <WorkSpace /> },
 			],
 		},
 		// Redirect
 		{
 			path    : "/",
-			element : <Navigate to={"dashboard/home"} replace />,
+			element : <Navigate to="dashboard" replace />,
 		},
 		{
 			path     : "*",

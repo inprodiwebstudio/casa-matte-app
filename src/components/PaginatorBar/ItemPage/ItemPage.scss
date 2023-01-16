@@ -9,6 +9,17 @@
     transition: all ease 200ms;
     cursor: grab;
 
+    &.isActivePage {
+        background: $primary-color !important;
+        .my-page-container {
+            .pages-book-conatier {
+                p {
+                    color : $dark-color;
+                }
+            }
+        }
+    }
+
     &:hover {
         background: $primary-color;
     }

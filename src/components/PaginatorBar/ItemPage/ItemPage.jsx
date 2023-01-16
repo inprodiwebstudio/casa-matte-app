@@ -1,4 +1,5 @@
-import { Draggable } from "react-beautiful-dnd";
+import { useNavigate, useParams } from "react-router-dom";
+import { Draggable }              from "react-beautiful-dnd";
 
 //Own Components
 import FormatPage          from "components/FormatPage";
@@ -12,6 +13,14 @@ const ItemPage = ({
 	handleDelete,
 }) => {
 	const isDoublePage = pageData?.sheet2;
+	const navigate = useNavigate();
+
+	const { pageId } = useParams();
+
+	const isCurrentPage = pageId === draggableId;
+
+	console.log(pageId);
+
 	return (
 		<Draggable
 			draggableId={draggableId}
@@ -19,7 +28,8 @@ const ItemPage = ({
 		>
 			{(provided, snapShot) => (
 				<div
-					className="ItemPage"
+					className={`ItemPage ${isCurrentPage && "isActivePage"}`}
+					onClick={() => navigate(draggableId)}
 					ref={provided.innerRef}
 					{...provided.dragHandleProps}
 					{...provided.draggableProps}
