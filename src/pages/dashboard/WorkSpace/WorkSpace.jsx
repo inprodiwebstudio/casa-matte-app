@@ -37,6 +37,7 @@ const WorkSpace = ({ workSpaceData }) => {
 							<FormatPage
 								typeFormat="LargeFormat"
 								pageData={myWorkSpaceData}
+								isInWorkSpcae
 							/>
 						)
 					}

@@ -1,10 +1,18 @@
+import { connect } from "react-redux";
 //Own components
+import { bindAll }        from "helpers";
+import { workSpaceSlice } from "store/Slices";
 import "./AppShell.scss";
 
-const AppShell = ({Body, header, navbar, footer, sidebar}) => {
+const AppShell = ({Body, header, navbar, footer, sidebar, workSpaceSlice, isSelectedPage}) => {
 	return (
 		<div
 			id="AppShell"
+			{
+				...(isSelectedPage && {
+					onClick : () => workSpaceSlice.clearSelectedPageData(),
+				})
+			}
 		>
 			<div className="bodyContainer">
 				<Body />
@@ -29,4 +37,10 @@ const AppShell = ({Body, header, navbar, footer, sidebar}) => {
 	);
 };
 
-export default AppShell;
+const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
+
+const mapStateToProps = ({ workSpaceSlice }) => ({
+	isSelectedPage : workSpaceSlice?.pageDataSelected ?? null,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps) (AppShell);

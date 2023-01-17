@@ -158,14 +158,34 @@ const initialState = {
 					photos     : {},
 				},
 			},
+			page11 : {
+				id     : "page11",
+				sheet1 : {
+					layoutType : "",
+					text       : "",
+					photos     : {},
+				},
+				sheet2 : {
+					layoutType : "",
+					text       : "",
+					photos     : {},
+				},
+			},
 		},
 	},
+	pageDataSelected : null,
 };
 
 export const workSpaceSlice = createSlice({
 	name     : "workspace",
 	initialState,
 	reducers : {
+		setSelectePageData : (state, {payload}) => {
+			state.pageDataSelected = {...payload};
+		},
+		clearSelectedPageData : (state, {payload}) => {
+			state.pageDataSelected = null;
+		},
 	},
 });
 

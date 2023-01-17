@@ -20,5 +20,9 @@
     .page-body {
         width: 100%;
         height: 100%;
+
+        &.isActivePage {
+            border : 2px solid $flat-color;
+        }
     }
 }
