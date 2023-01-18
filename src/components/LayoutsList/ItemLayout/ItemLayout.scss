@@ -5,7 +5,11 @@
     cursor: pointer;
     background: white;
     aspect-ratio: 1457/1875;
-    border: 1px solid $flat-color;
+    border: 1px solid $body-color;
+
+    &.isActive {
+        border: 1px solid $dark-color;
+    }
 
     &.isFullSize {
         aspect-ratio: 16/9;

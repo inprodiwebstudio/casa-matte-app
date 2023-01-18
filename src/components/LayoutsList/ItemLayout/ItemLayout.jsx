@@ -1,5 +1,5 @@
-import { connect } from "react-redux";
-
+import { connect }   from "react-redux";
+import { useParams } from "react-router-dom";
 
 //Onw components
 import { workSpaceSlice } from "store/Slices";
@@ -9,6 +9,14 @@ import "./ItemLayout.scss";
 
 const ItemLayout = ({isFullSize, layout, pagesData, pageDataSelected, workSpaceSlice}) => {
 	const Layout = LargeFormat[layout];
+	const { pageId } = useParams();
+
+	const currentLayoutSelected = {
+		sheet1 : pagesData[pageId].sheet1.layoutType,
+		sheet2 : pagesData[pageId].sheet2.layoutType,
+	};
+
+	const isSelectedLayout = (currentLayoutSelected.sheet1 === layout) || (currentLayoutSelected.sheet2 === layout);
 
 	const handleSelectedLayout = (e) => {
 		e.stopPropagation();
@@ -25,7 +33,7 @@ const ItemLayout = ({isFullSize, layout, pagesData, pageDataSelected, workSpaceS
 		<div
 			onClick={(e) => handleSelectedLayout(e)}
 			className={
-				`ItemLayout ${isFullSize && "isFullSize"}`
+				`ItemLayout ${isFullSize && "isFullSize"} ${isSelectedLayout && "isActive"}`
 			}
 		>
 			<Layout />

@@ -12,6 +12,7 @@ const PhotoCard = ({image, onSelected, isChecked, loadingMutationGallery}) => {
 	return (
 		<div
 			className="PhotoCard"
+			draggable="true"
 			style={{
 				background : image ? `url(${resizerImage(image)}) center center / cover no-repeat` : "grey",
 			}}
