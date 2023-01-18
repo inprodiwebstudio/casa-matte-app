@@ -12,7 +12,7 @@ const ItemPage = ({
 	draggableId,
 	handleDelete,
 }) => {
-	const isDoublePage = pageData?.sheet2;
+	const isDoublePage = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(pageData?.sheet1?.layoutType);
 	const navigate = useNavigate();
 
 	const { pageId } = useParams();
@@ -44,7 +44,7 @@ const ItemPage = ({
 						<div>
 							<div className="withe-page-container">
 								{
-									isDoublePage && (
+									!isDoublePage && (
 										<div className="spacer-paginator" />
 									)
 								}

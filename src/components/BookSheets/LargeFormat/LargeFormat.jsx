@@ -9,7 +9,7 @@ import FrontLayout                 from "components/global/LayoutsPage/FrontLayo
 import "./LargeFormat.scss";
 
 const LargeFormat = ({pageData, workSpaceSlice, pageDataSelected, isInWorkSpcae}) => {
-	const isSinglePage = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(pageData?.sheet1?.layoutType || pageData?.sheet2?.layoutType);
+	const isSinglePage = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(pageData?.sheet1?.layoutType);
 
 	const LayoutPage1 = layouts[pageData?.sheet1?.layoutType];
 	const LayoutPage2 = layouts[pageData?.sheet2?.layoutType];
@@ -24,7 +24,10 @@ const LargeFormat = ({pageData, workSpaceSlice, pageDataSelected, isInWorkSpcae}
 
 	const handlerSelectedData = (currentPage) => {
 		setCurrentSelectedPage(currentPage);
-		workSpaceSlice.setSelectePageData(pageData);
+		workSpaceSlice.setSelectePageData({
+			pageId      : pageData.id,
+			currentPage : currentPage,
+		});
 	};
 
 	useEffect(() => {

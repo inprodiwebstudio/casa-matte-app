@@ -16,6 +16,13 @@ const initialState = {
 						1 : "",
 					},
 				},
+				sheet2 : {
+					layoutType : "",
+					text       : "",
+					photos     : {
+						1 : "",
+					},
+				},
 			},
 			page2 : {
 				id     : "page2",
@@ -26,11 +33,25 @@ const initialState = {
 						1 : "",
 					},
 				},
+				sheet2 : {
+					layoutType : "",
+					text       : "",
+					photos     : {
+						1 : "",
+					},
+				},
 			},
 			page3 : {
 				id     : "page3",
 				sheet1 : {
 					layoutType : "Mod3",
+					text       : "",
+					photos     : {
+						1 : "",
+					},
+				},
+				sheet2 : {
+					layoutType : "",
 					text       : "",
 					photos     : {
 						1 : "",
@@ -181,10 +202,26 @@ export const workSpaceSlice = createSlice({
 	initialState,
 	reducers : {
 		setSelectePageData : (state, {payload}) => {
-			state.pageDataSelected = {...payload};
+			state.pageDataSelected = payload;
 		},
 		clearSelectedPageData : (state, {payload}) => {
 			state.pageDataSelected = null;
+		},
+		addLayout : (state, {payload}) => {
+			const cloneData = {...state.data};
+			const isFullBook = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(payload.layout);
+			if (isFullBook) {
+				cloneData.pages[payload.pageId]["sheet1"]["layoutType"] = payload.layout;
+				cloneData.pages[payload.pageId]["sheet2"]["layoutType"] = {
+					layoutType : "",
+					text       : "",
+					photos     : {},
+				};
+				state.data = cloneData;
+				return;
+			}
+			cloneData.pages[payload.pageId][payload.sheetId]["layoutType"] = payload.layout;
+			state.data = cloneData;
 		},
 	},
 });
