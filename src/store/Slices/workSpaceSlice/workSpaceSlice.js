@@ -209,10 +209,16 @@ export const workSpaceSlice = createSlice({
 		},
 		addLayout : (state, {payload}) => {
 			const cloneData = {...state.data};
+			const parseToListImages = Array.from(Array(payload?.numberPhotos).keys()).map(e => "");
+			const myPhotos = Object.assign({}, parseToListImages);
 			const isFullBook = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(payload.layout);
 			if (isFullBook) {
-				cloneData.pages[payload.pageId]["sheet1"]["layoutType"] = payload.layout;
-				cloneData.pages[payload.pageId]["sheet2"]["layoutType"] = {
+				cloneData.pages[payload.pageId]["sheet1"] = {
+					layoutType : payload.layout,
+					text       : "",
+					photos     : myPhotos,
+				};
+				cloneData.pages[payload.pageId]["sheet2"] = {
 					layoutType : "",
 					text       : "",
 					photos     : {},
@@ -220,7 +226,11 @@ export const workSpaceSlice = createSlice({
 				state.data = cloneData;
 				return;
 			}
-			cloneData.pages[payload.pageId][payload.sheetId]["layoutType"] = payload.layout;
+			cloneData.pages[payload.pageId][payload.sheetId] = {
+				layoutType : payload.layout,
+				text       : "",
+				photos     : myPhotos,
+			};
 			state.data = cloneData;
 		},
 	},

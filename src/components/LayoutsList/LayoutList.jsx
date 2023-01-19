@@ -18,6 +18,7 @@ const LayoutList = () => {
 							<ItemLayout
 								key={item}
 								layout={item}
+								layoutData={LargeFormat[item]}
 								isFullSize={isFullSize(item)}
 							/>
 						))

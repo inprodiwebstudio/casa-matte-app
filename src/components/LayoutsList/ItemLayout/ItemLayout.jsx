@@ -7,7 +7,7 @@ import LargeFormat        from "components/global/LayoutsPage/LargeFormat";
 import { bindAll }        from "helpers";
 import "./ItemLayout.scss";
 
-const ItemLayout = ({isFullSize, layout, pagesData, pageDataSelected, workSpaceSlice}) => {
+const ItemLayout = ({isFullSize, layout, pagesData, pageDataSelected, workSpaceSlice, layoutData}) => {
 	const Layout = LargeFormat[layout]?.layout;
 	const { pageId } = useParams();
 
@@ -22,13 +22,15 @@ const ItemLayout = ({isFullSize, layout, pagesData, pageDataSelected, workSpaceS
 		e.stopPropagation();
 		if (pageDataSelected) {
 			workSpaceSlice.addLayout({
-				pageId  : pageDataSelected.pageId,
-				sheetId : pageDataSelected.currentPage,
-				layout  : layout,
+				pageId       : pageDataSelected.pageId,
+				sheetId      : pageDataSelected.currentPage,
+				layout       : layout,
+				numberPhotos : layoutData?.numberPhotos,
 			});
 			workSpaceSlice.clearSelectedPageData();
 		}
 	};
+
 	return (
 		<div
 			onClick={(e) => handleSelectedLayout(e)}
