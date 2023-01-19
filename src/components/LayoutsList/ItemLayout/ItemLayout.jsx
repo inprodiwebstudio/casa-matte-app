@@ -12,8 +12,8 @@ const ItemLayout = ({isFullSize, layout, pagesData, pageDataSelected, workSpaceS
 	const { pageId } = useParams();
 
 	const currentLayoutSelected = {
-		sheet1 : pagesData[pageId].sheet1.layoutType,
-		sheet2 : pagesData[pageId].sheet2.layoutType,
+		sheet1 : pagesData[pageId]?.sheet1?.layoutType,
+		sheet2 : pagesData[pageId]?.sheet2?.layoutType,
 	};
 
 	const isSelectedLayout = (currentLayoutSelected.sheet1 === layout) || (currentLayoutSelected.sheet2 === layout);
