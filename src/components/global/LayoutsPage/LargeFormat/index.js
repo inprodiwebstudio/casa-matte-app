@@ -16,22 +16,70 @@ import Mod15 from "./Mod15";
 import Mod16 from "./Mod16";
 
 const LargeFormat = {
-	Mod1,
-	Mod2,
-	Mod3,
-	Mod4,
-	Mod5,
-	Mod6,
-	Mod7,
-	Mod8,
-	Mod9,
-	Mod10,
-	Mod11,
-	Mod12,
-	Mod13,
-	Mod14,
-	Mod15,
-	Mod16,
+	Mod1 : {
+		layout       : Mod1,
+		numberPhotos : 1,
+	},
+	Mod2 : {
+		layout       : Mod2,
+		numberPhotos : 1,
+	},
+	Mod3 : {
+		layout       : Mod3,
+		numberPhotos : 1,
+	},
+	Mod4 : {
+		layout       : Mod4,
+		numberPhotos : 1,
+	},
+	Mod5 : {
+		layout       : Mod5,
+		numberPhotos : 1,
+	},
+	Mod6 : {
+		layout       : Mod6,
+		numberPhotos : 1,
+	},
+	Mod7 : {
+		layout       : Mod7,
+		numberPhotos : 1,
+	},
+	Mod8 : {
+		layout       : Mod8,
+		numberPhotos : 1,
+	},
+	Mod9 : {
+		layout       : Mod9,
+		numberPhotos : 1,
+	},
+	Mod10 : {
+		layout       : Mod10,
+		numberPhotos : 1,
+	},
+	Mod11 : {
+		layout       : Mod11,
+		numberPhotos : 1,
+	},
+	Mod12 : {
+		layout       : Mod12,
+		numberPhotos : 2,
+	},
+	Mod13 : {
+		layout       : Mod13,
+		numberPhotos : 2,
+	},
+	Mod14 : {
+		layout       : Mod14,
+		numberPhotos : 2,
+	},
+	Mod15 : {
+		layout       : Mod15,
+		numberPhotos : 1,
+	},
+	Mod16 : {
+		layout       : Mod16,
+		numberPhotos : 2,
+	},
 };
 
 

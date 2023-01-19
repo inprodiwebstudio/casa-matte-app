@@ -8,7 +8,7 @@ import { bindAll }        from "helpers";
 import "./ItemLayout.scss";
 
 const ItemLayout = ({isFullSize, layout, pagesData, pageDataSelected, workSpaceSlice}) => {
-	const Layout = LargeFormat[layout];
+	const Layout = LargeFormat[layout]?.layout;
 	const { pageId } = useParams();
 
 	const currentLayoutSelected = {

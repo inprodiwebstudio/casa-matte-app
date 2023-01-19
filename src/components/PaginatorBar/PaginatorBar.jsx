@@ -83,7 +83,7 @@ const PaginatorBar = ({ pagesData }) => {
 							>
 								<FrontPage />
 								{
-									pageList.pagesIds.map((pageId, index) => (
+									pageList?.pagesIds?.map((pageId, index) => (
 										<ItemPage
 											index={index}
 											key={pageId}
