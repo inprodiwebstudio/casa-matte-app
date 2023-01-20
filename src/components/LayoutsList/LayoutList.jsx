@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 //Own components
 import ItemLayout  from "./ItemLayout";
 import LargeFormat from "components/global/LayoutsPage/LargeFormat";
@@ -5,21 +7,42 @@ import "./LayoutList.scss";
 import {
 	ScrollBar,
 } from "core/components";
+import { connect } from "react-redux";
 
-const LayoutList = () => {
-	const layouts = Object.keys(LargeFormat);
+const LayoutList = ({filterLayouts}) => {
+	const [ layoutList, setLayoutList ] = useState([]);
+
 	const isFullSize = (layout) => ["Mod1", "Mod2", "Mod3"].includes(layout);
+
+	useEffect(() => {
+		const layouts = Object.values(LargeFormat);
+		if ((filterLayouts?.type === "all") && (filterLayouts?.photosQuantity === "all")) {
+			setLayoutList(layouts);
+			return;
+		}
+		if ((filterLayouts?.type === "all") || (filterLayouts?.photosQuantity === "all")) {
+			const newListLayouts = layouts.filter(layout => (
+				(layout.cat === filterLayouts.type) || (layout.numberPhotos === filterLayouts.photosQuantity)
+			));
+			setLayoutList(newListLayouts);
+			return;
+		}
+		const newListLayouts = layouts.filter(layout => (
+			(layout.cat === filterLayouts.type) && (layout.numberPhotos === filterLayouts.photosQuantity)
+		));
+		setLayoutList(newListLayouts);
+	}, [filterLayouts]);
 	return (
 		<ScrollBar>
 			<div className="LayoutList">
 				<div className="body-layout">
 					{
-						layouts.map(item => (
+						layoutList.map((item, index) => (
 							<ItemLayout
-								key={item}
-								layout={item}
-								layoutData={LargeFormat[item]}
-								isFullSize={isFullSize(item)}
+								key={index}
+								layout={item?.id}
+								layoutData={LargeFormat[item?.id]}
+								isFullSize={isFullSize(item?.id)}
 							/>
 						))
 					}
@@ -29,4 +52,8 @@ const LayoutList = () => {
 	);
 };
 
-export default LayoutList;
+const mapStateToProps = ({ workSpaceSlice }) => ({
+	filterLayouts : workSpaceSlice?.layoutFilter ?? {},
+});
+
+export default connect(mapStateToProps) (LayoutList);
