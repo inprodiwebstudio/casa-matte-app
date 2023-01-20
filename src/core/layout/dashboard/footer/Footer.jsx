@@ -14,7 +14,24 @@ const Footer = () => {
 				<ArrowTop size="20px" />
 			</div>
 			<div className="header-in-footer-container">
-				<Tabs tabList={["TODOS", "SOLO FOTOS", "SOLO TEXTO", "FOTOS Y TEXTO"]} />
+				<Tabs tabList={[
+					{
+						label  : "TODOS",
+						filter : "all",
+					},
+					{
+						label  : "SOLO FOTOS",
+						filter : "fotos",
+					},
+					{
+						label  : "SOLO TEXTO",
+						filter : "texto",
+					},
+					{
+						label  : "FOTOS Y TEXTO",
+						filter : "fotosytexto",
+					},
+				]} />
 			</div>
 			<div className="body-layouts-container">
 				<div

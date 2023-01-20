@@ -19,66 +19,82 @@ const LargeFormat = {
 	Mod1 : {
 		layout       : Mod1,
 		numberPhotos : 1,
+		cat          : "fotos",
 	},
 	Mod2 : {
 		layout       : Mod2,
 		numberPhotos : 1,
+		cat          : "fotos",
 	},
 	Mod3 : {
 		layout       : Mod3,
 		numberPhotos : 1,
+		cat          : "fotos",
 	},
 	Mod4 : {
 		layout       : Mod4,
 		numberPhotos : 1,
+		cat          : "fotos",
 	},
 	Mod5 : {
 		layout       : Mod5,
 		numberPhotos : 1,
+		cat          : "fotos",
 	},
 	Mod6 : {
 		layout       : Mod6,
 		numberPhotos : 1,
+		cat          : "fotos",
 	},
 	Mod7 : {
 		layout       : Mod7,
 		numberPhotos : 1,
+		cat          : "fotos",
 	},
 	Mod8 : {
 		layout       : Mod8,
 		numberPhotos : 1,
+		cat          : "fotos",
 	},
 	Mod9 : {
 		layout       : Mod9,
 		numberPhotos : 1,
+		cat          : "fotos",
 	},
 	Mod10 : {
 		layout       : Mod10,
 		numberPhotos : 1,
+		cat          : "fotos",
 	},
 	Mod11 : {
 		layout       : Mod11,
 		numberPhotos : 1,
+		cat          : "fotos",
 	},
 	Mod12 : {
 		layout       : Mod12,
 		numberPhotos : 2,
+		cat          : "fotos",
 	},
 	Mod13 : {
 		layout       : Mod13,
 		numberPhotos : 2,
+		cat          : "fotos",
 	},
 	Mod14 : {
 		layout       : Mod14,
 		numberPhotos : 2,
+		cat          : "fotos",
 	},
 	Mod15 : {
 		layout       : Mod15,
 		numberPhotos : 1,
+		cat          : "fotos",
 	},
 	Mod16 : {
 		layout       : Mod16,
 		numberPhotos : 2,
+		cat          : "fotos",
 	},
 };
 

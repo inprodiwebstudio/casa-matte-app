@@ -196,6 +196,10 @@ const initialState = {
 	},
 	pageDataSelected    : null,
 	currentPhotoDragger : null,
+	layoutFilter        : {
+		type           : "all",
+		photosQuantity : "all",
+	},
 };
 
 export const workSpaceSlice = createSlice({
@@ -207,6 +211,9 @@ export const workSpaceSlice = createSlice({
 		},
 		setCurrentPhotoDrager : (state, {payload}) => {
 			state.currentPhotoDragger = payload;
+		},
+		setLayoutFilter : (state, {payload}) => {
+			state.layoutFilter = payload;
 		},
 		clearPhotoDrager : (state, {payload}) => {
 			state.currentPhotoDragger = null;
