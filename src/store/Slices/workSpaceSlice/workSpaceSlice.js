@@ -194,7 +194,8 @@ const initialState = {
 			},
 		},
 	},
-	pageDataSelected : null,
+	pageDataSelected    : null,
+	currentPhotoDragger : null,
 };
 
 export const workSpaceSlice = createSlice({
@@ -204,12 +205,23 @@ export const workSpaceSlice = createSlice({
 		setSelectePageData : (state, {payload}) => {
 			state.pageDataSelected = payload;
 		},
+		setCurrentPhotoDrager : (state, {payload}) => {
+			state.currentPhotoDragger = payload;
+		},
+		clearPhotoDrager : (state, {payload}) => {
+			state.currentPhotoDragger = null;
+		},
 		clearSelectedPageData : (state, {payload}) => {
 			state.pageDataSelected = null;
 		},
+		addPhoto : (state, {payload}) => {
+			const newData = {...state.data};
+			newData.pages[payload.pageId][payload.sheetNo]["photos"][payload.layoutNo] = payload.image;
+			state.data = newData;
+		},
 		addLayout : (state, {payload}) => {
 			const cloneData = {...state.data};
-			const parseToListImages = Array.from(Array(payload?.numberPhotos).keys()).map(e => "");
+			const parseToListImages = Array.from(Array(payload?.numberPhotos - 1).keys()).map(e => "");
 			const myPhotos = Object.assign({}, parseToListImages);
 			const isFullBook = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(payload.layout);
 			if (isFullBook) {
