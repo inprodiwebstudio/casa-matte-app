@@ -24,7 +24,7 @@ const Mod4 = ({images, sheetNo, workSpaceSlice, dragerImage}) => {
 	return (
 		<div
 			className="body-mod4-layout"
-			onDrop={(e) => handleDrop(e, 1)}
+			onDrop={(e) => handleDrop(e, 0)}
 			onDragOver={(e) => handleDragOver(e)}
 			{
 				...( images && {

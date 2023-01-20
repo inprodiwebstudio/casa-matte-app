@@ -228,7 +228,7 @@ export const workSpaceSlice = createSlice({
 		},
 		addLayout : (state, {payload}) => {
 			const cloneData = {...state.data};
-			const parseToListImages = Array.from(Array(payload?.numberPhotos - 1).keys()).map(e => "");
+			const parseToListImages = Array.from(Array(payload?.numberPhotos).keys()).map(e => "");
 			const myPhotos = Object.assign({}, parseToListImages);
 			const isFullBook = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(payload.layout);
 			if (isFullBook) {
