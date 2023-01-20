@@ -13,14 +13,14 @@ const initialState = {
 					layoutType : "Mod1",
 					text       : "",
 					photos     : {
-						1 : "",
+						0 : "",
 					},
 				},
 				sheet2 : {
 					layoutType : "",
 					text       : "",
 					photos     : {
-						1 : "",
+						0 : "",
 					},
 				},
 			},
@@ -30,14 +30,14 @@ const initialState = {
 					layoutType : "Mod2",
 					text       : "",
 					photos     : {
-						1 : "",
+						0 : "",
 					},
 				},
 				sheet2 : {
 					layoutType : "",
 					text       : "",
 					photos     : {
-						1 : "",
+						0 : "",
 					},
 				},
 			},
@@ -47,14 +47,14 @@ const initialState = {
 					layoutType : "Mod3",
 					text       : "",
 					photos     : {
-						1 : "",
+						0 : "",
 					},
 				},
 				sheet2 : {
 					layoutType : "",
 					text       : "",
 					photos     : {
-						1 : "",
+						0 : "",
 					},
 				},
 			},
@@ -64,14 +64,14 @@ const initialState = {
 					layoutType : "Mod4",
 					text       : "",
 					photos     : {
-						1 : "",
+						0 : "",
 					},
 				},
 				sheet2 : {
 					layoutType : "Mod15",
 					text       : "",
 					photos     : {
-						1 : "",
+						0 : "",
 					},
 				},
 			},
@@ -81,14 +81,14 @@ const initialState = {
 					layoutType : "Mod5",
 					text       : "",
 					photos     : {
-						1 : "",
+						0 : "",
 					},
 				},
 				sheet2 : {
 					layoutType : "Mod6",
 					text       : "",
 					photos     : {
-						1 : "",
+						0 : "",
 					},
 				},
 			},
@@ -98,14 +98,14 @@ const initialState = {
 					layoutType : "Mod7",
 					text       : "",
 					photos     : {
-						1 : "",
+						0 : "",
 					},
 				},
 				sheet2 : {
 					layoutType : "Mod8",
 					text       : "",
 					photos     : {
-						1 : "",
+						0 : "",
 					},
 				},
 			},
@@ -115,14 +115,14 @@ const initialState = {
 					layoutType : "Mod9",
 					text       : "",
 					photos     : {
-						1 : "",
+						0 : "",
 					},
 				},
 				sheet2 : {
 					layoutType : "Mod10",
 					text       : "",
 					photos     : {
-						1 : "",
+						0 : "",
 					},
 				},
 			},
@@ -132,15 +132,15 @@ const initialState = {
 					layoutType : "Mod11",
 					text       : "",
 					photos     : {
-						1 : "",
+						0 : "",
 					},
 				},
 				sheet2 : {
 					layoutType : "Mod12",
 					text       : "",
 					photos     : {
+						0 : "",
 						1 : "",
-						2 : "",
 					},
 				},
 			},
@@ -150,16 +150,16 @@ const initialState = {
 					layoutType : "Mod13",
 					text       : "",
 					photos     : {
+						0 : "",
 						1 : "",
-						2 : "",
 					},
 				},
 				sheet2 : {
 					layoutType : "Mod14",
 					text       : "",
 					photos     : {
+						0 : "",
 						1 : "",
-						2 : "",
 					},
 				},
 			},
@@ -169,8 +169,8 @@ const initialState = {
 					layoutType : "Mod16",
 					text       : "",
 					photos     : {
+						0 : "",
 						1 : "",
-						2 : "",
 					},
 				},
 				sheet2 : {
