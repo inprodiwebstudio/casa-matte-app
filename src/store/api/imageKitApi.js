@@ -50,5 +50,18 @@ export const apiImageKit = createApi({
 			},
 			invalidatesTags : ["gallery"],
 		}),
+		moveFile : builder.mutation({
+			query({sourceFilePath, destinationPath}) {
+				return {
+					url    : "move",
+					method : "POST",
+					body   : {
+						sourceFilePath,
+						destinationPath,
+					},
+				};
+			},
+			invalidatesTags : (result, error, arg) => arg?.tags ? [...arg.tags] : [`${arg.module}`],
+		}),
 	}),
 });

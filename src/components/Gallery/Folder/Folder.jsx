@@ -24,7 +24,11 @@ const Folder = ({
 	gallerySelectedData,
 	loadingMutationGallery,
 }) => {
-	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
+	const selectedData = convertToArray(gallerySelectedData);
+	const isSelectedData = isValidArray(selectedData);
+
+	const [galleryImagesMutation] = apiImageKit.useMoveFileMutation();
+
 
 	const {data : imageKitData} = apiImageKit.useGetDirentsListQuery({
 		params : {
@@ -46,6 +50,21 @@ const Folder = ({
 			return null;
 		}
 		return null;
+	};
+
+	const handleMoveInfolder = () => {
+		const arrayOfPromises = selectedData.map(async (data, index) => {
+			return await galleryImagesMutation({
+				sourceFilePath  : data?.filePath,
+				destinationPath : `/${userName}/${name}/`,
+				tags            : (selectedData.length - 1 === index) ? ["gallery"] : ["null"],
+			});
+		});
+
+		Promise.allSettled([...arrayOfPromises]).then((values) => {
+		}, reason => {
+			console.error(reason);
+		});
 	};
 
 	return (
@@ -104,7 +123,7 @@ const Folder = ({
 						<div
 							className={`overlay-add-photos ${imageKitData && !isValidArray(imageKitData) && "none-background"}`}
 							{
-								...((!loadingMutationGallery && isSelectedData) && {onClick : () => console.log("Selected")})
+								...((!loadingMutationGallery && isSelectedData) && {onClick : () => handleMoveInfolder()})
 							}
 						>
 							{
