@@ -17,8 +17,9 @@ const SideBar = ({gallerySlice, galleryPath, selectedData, userName}) => {
 
 	const {data : imageKitData, isFetching : imageKitFetching} = apiImageKit.useGetDirentsListQuery({
 		params : {
-			limit    : 100,
-			userName : userName,
+			limit      : 100,
+			userName   : userName,
+			folderName : (galleryPath?.id === "route") ? null : galleryPath?.name,
 		},
 	});
 

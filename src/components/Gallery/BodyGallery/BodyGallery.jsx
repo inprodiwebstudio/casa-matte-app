@@ -149,7 +149,7 @@ const BodyGallery = ({
 											folderId={data?.fileId}
 											galleryMutation={galleryMutation}
 											loadingMutationGallery={loadingMutationGallery}
-											onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.fileId, name : data?.name, folderThumbs : []})}
+											onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.fileId, name : data?.name})}
 										/>
 									))
 								}
