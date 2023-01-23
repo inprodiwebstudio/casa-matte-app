@@ -144,9 +144,9 @@ const BodyGallery = ({
 									myFolders.map( data => (
 										<Folder
 											key={data?.fileId}
-											folderId={data?.fileId}
-											name={data?.name}
 											images={[""]}
+											name={data?.name}
+											folderId={data?.fileId}
 											galleryMutation={galleryMutation}
 											loadingMutationGallery={loadingMutationGallery}
 											onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.fileId, name : data?.name, folderThumbs : []})}
@@ -179,7 +179,7 @@ const BodyGallery = ({
 	);
 };
 
-const mapStateToProps = ({ gallerySlice }) => ({
+const mapStateToProps = ({ gallerySlice, authSlice }) => ({
 	galleryPathRoute      : gallerySlice?.galleryPathName ?? "route",
 	gallerySelectedData   : gallerySlice?.selectedData ?? {},
 	galleryTypeDropedView : gallerySlice?.typeDropedView ?? null,

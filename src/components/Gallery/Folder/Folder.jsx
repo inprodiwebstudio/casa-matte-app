@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 
 //Own omponents
+import { apiImageKit }          from "store/api/imageKitApi";
 import { MutationSpinner }      from "core/components";
 import { gallerySlice }         from "store/Slices";
 import { MoreOption, PlusIcon } from "Resources/icons";
@@ -11,13 +12,11 @@ import {
 	convertToArray,
 } from "helpers";
 
-import { UpdateThumbNails } from "./Folder.helpers";
-
 import "./Folder.scss";
 
 const Folder = ({
 	name,
-	images,
+	userName,
 	folderId,
 	gallerySlice,
 	galleryMutation,
@@ -27,49 +26,33 @@ const Folder = ({
 }) => {
 	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
 
-	const moveIntoFolder = async (currenTPhotos, photosSelected) => {
-		const isUpdatedableFolder = (images.length < 4) ? true : false;
-		const parseObjToArr = convertToArray(photosSelected);
+	const {data : imageKitData} = apiImageKit.useGetDirentsListQuery({
+		params : {
+			limit      : 5,
+			folderName : name,
+			userName   : userName,
+		},
+	});
 
-		const promisesPhotos = parseObjToArr.map(async (photo, index) => {
-			return await galleryMutation({
-				module : `gallery/${photo?.id}`,
-				tags   : (!isUpdatedableFolder && (index === parseObjToArr?.length - 1)) ? ["gallery"] : ["null"],
-				data   : {
-					status : "publish",
-					meta   : {
-						parentid : folderId,
-					},
-				},
-				method : "POST",
-			});
-		});
+	const isAvailableImages = (imageKitData && isValidArray(imageKitData)) ?? null;
 
-		Promise.allSettled([...promisesPhotos]).then(async (values) => {}, reason => {
-			console.error(reason);
-		});
-		if (isUpdatedableFolder) {
-			const newThumbNails = UpdateThumbNails(currenTPhotos, photosSelected);
-			await galleryMutation({
-				module : `gallery/${folderId}`,
-				tags   : ["gallery"],
-				data   : {
-					status : "publish",
-					meta   : {
-						thumbimages : [...newThumbNails],
-					},
-				},
-				method : "POST",
-			});
+	const folderNoSelectable = (!isAvailableImages && !isSelectedData) || loadingMutationGallery;
+
+	const imageData = (index) => {
+		if (isAvailableImages) {
+			if (imageKitData[index]) {
+				return `url(${resizerImage(imageKitData[index]?.url)})`;
+			}
+			return null;
 		}
-		gallerySlice.clearSelectedData();
+		return null;
 	};
 
 	return (
 		<div
-			className={`Folder ${((!isValidArray(images) && !isSelectedData) || loadingMutationGallery) && "cursor-regular"} ${!loadingMutationGallery && "isAvailable"}`}
+			className={`Folder ${folderNoSelectable && "cursor-regular"} ${!loadingMutationGallery && "isAvailable"}`}
 			{
-				...((isValidArray(images) && !loadingMutationGallery) && {onDoubleClick : onSelectedFolder})
+				...(!folderNoSelectable && {onDoubleClick : onSelectedFolder})
 			}
 		>
 			<div className={`header-folder ${loadingMutationGallery && "loading"}`}>
@@ -81,32 +64,32 @@ const Folder = ({
 			<div className="body-indicator-conatiner">
 				<div className="photo-thumb-nail-container">
 					<div
-						className={`photo-indicator ${images[0] && "full-size"}`}
+						className={`photo-indicator ${imageData(0) && "full-size"}`}
 						style={{
-							backgroundImage : images[0] ? `url(${resizerImage(images[0])})` : null,
+							backgroundImage : imageData(0),
 						}}
 					/>
 					<div
-						className={`photo-indicator ${images[1] && "full-size"}`}
+						className={`photo-indicator ${imageData(1) && "full-size"}`}
 						style={{
-							backgroundImage : images[1] ? `url(${resizerImage(images[1])})` : null,
+							backgroundImage : imageData(1),
 						}}
 					/>
 					<div
-						className={`photo-indicator ${images[2] && "full-size"}`}
+						className={`photo-indicator ${imageData(2) && "full-size"}`}
 						style={{
-							backgroundImage : images[2] ? `url(${resizerImage(images[2])})` : null,
+							backgroundImage : imageData(2),
 						}}
 					/>
 					<div
-						className={`photo-indicator ${images[3] && "full-size"}`}
+						className={`photo-indicator ${imageData(3) && "full-size"}`}
 						style={{
-							backgroundImage : images[3] ? `url(${resizerImage(images[3])})` : null,
+							backgroundImage : imageData(3),
 						}}
 					/>
 				</div>
 				{
-					isValidArray(images) && (
+					isAvailableImages && (
 						<div
 							className="drager-place"
 						>
@@ -117,11 +100,11 @@ const Folder = ({
 					)
 				}
 				{
-					((isSelectedData || (!isValidArray(images)) || loadingMutationGallery) && (
+					((isSelectedData || (imageKitData && !isValidArray(imageKitData)) || loadingMutationGallery) && (
 						<div
-							className={`overlay-add-photos ${!isValidArray(images) && "none-background"}`}
+							className={`overlay-add-photos ${imageKitData && !isValidArray(imageKitData) && "none-background"}`}
 							{
-								...((!loadingMutationGallery && isSelectedData) && {onClick : () => moveIntoFolder(images, gallerySelectedData)})
+								...((!loadingMutationGallery && isSelectedData) && {onClick : () => console.log("Selected")})
 							}
 						>
 							{
@@ -133,10 +116,10 @@ const Folder = ({
 							}
 							<p>
 								{
-									(!isValidArray(images) && !loadingMutationGallery) && "Primero selecciona las fotos para agregar a ésta carpeta"
+									((imageKitData && !isValidArray(imageKitData)) && !loadingMutationGallery) && "Primero selecciona las fotos para agregar a ésta carpeta"
 								}
 								{
-									(isValidArray(images) && !loadingMutationGallery) && "Haz click aquí para agregar las fotos seleccionadas"
+									((imageKitData && isValidArray(imageKitData)) && !loadingMutationGallery) && "Haz click aquí para agregar las fotos seleccionadas"
 								}
 							</p>
 						</div>
@@ -147,8 +130,9 @@ const Folder = ({
 	);
 };
 
-const mapStateToProps = ({ gallerySlice }) => ({
+const mapStateToProps = ({ gallerySlice, authSlice }) => ({
 	gallerySelectedData : gallerySlice?.selectedData ?? {},
+	userName            : authSlice?.user?.username ?? undefined,
 });
 
 const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});
