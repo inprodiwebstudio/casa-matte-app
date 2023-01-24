@@ -12,6 +12,9 @@ const modalsConfig = {
 	closeOnEscape       : true,
 	overlayOpacity      : 0.35,
 	closeOnClickOutside : true,
+	withCloseButton     : false,
+	radius              : "xs",
+	size                : "50vw",
 };
 
 export { modals, modalsConfig };

@@ -9,8 +9,7 @@ const ActionImageslayout = () => {
 	const activeModal = (e) => {
 		e.stopPropagation();
 		openContextModal({
-			modal           : "editPhoto",
-			withCloseButton : false,
+			modal : "editPhoto",
 		});
 	};
 	return (
