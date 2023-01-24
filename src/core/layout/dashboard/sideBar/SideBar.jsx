@@ -24,8 +24,10 @@ const SideBar = ({gallerySlice, galleryPath, selectedData, userName}) => {
 	});
 
 	const [galleryImagesMutation, galleryImagesMutationResult] = apiImageKit.useDeleteImagesMutation();
+	const [galleryImagesMutationMove, galleryImagesMutationMoveResult] = apiImageKit.useMoveFileMutation();
 
-	const loadingMutationGallery = galleryMutationResult.isLoading || galleryImagesMutationResult.isLoading;
+
+	const loadingMutationGallery = galleryMutationResult.isLoading || galleryImagesMutationResult.isLoading || galleryImagesMutationMoveResult.isLoading;
 
 	const isAvailableDocs = isValidArray(imageKitData);
 
@@ -99,10 +101,11 @@ const SideBar = ({gallerySlice, galleryPath, selectedData, userName}) => {
 			}
 			<div className="body-sidebar">
 				<BodyGallery
-					isFetching={imageKitFetching}
 					galleryData={imageKitData}
+					isFetching={imageKitFetching}
 					galleryMutation={galleryMutation}
 					loadingMutationGallery={loadingMutationGallery}
+					galleryImagesMutationMove={galleryImagesMutationMove}
 				/>
 			</div>
 		</div>

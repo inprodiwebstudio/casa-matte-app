@@ -19,6 +19,7 @@ import CircleArrow   from "./CircleArrow";
 import CrossSelector from "./CrossSelector";
 import FilterIcon    from "./FilterIcon";
 import PhotoGallery  from "./PhotoGallery";
+import Pencil        from "./Pencil";
 
 
 export {
@@ -26,6 +27,7 @@ export {
 	Cross,
 	Folder,
 	Thrash,
+	Pencil,
 	Reload,
 	CarIcon,
 	BigPlus,

@@ -23,12 +23,10 @@ const Folder = ({
 	onSelectedFolder,
 	gallerySelectedData,
 	loadingMutationGallery,
+	galleryImagesMutationMove,
 }) => {
 	const selectedData = convertToArray(gallerySelectedData);
 	const isSelectedData = isValidArray(selectedData);
-
-	const [galleryImagesMutation] = apiImageKit.useMoveFileMutation();
-
 
 	const {data : imageKitData} = apiImageKit.useGetDirentsListQuery({
 		params : {
@@ -54,7 +52,7 @@ const Folder = ({
 
 	const handleMoveInfolder = () => {
 		const arrayOfPromises = selectedData.map(async (data, index) => {
-			return await galleryImagesMutation({
+			return await galleryImagesMutationMove({
 				sourceFilePath  : data?.filePath,
 				destinationPath : `/${userName}/${name}/`,
 				tags            : (selectedData.length - 1 === index) ? ["gallery"] : ["null"],
@@ -62,6 +60,7 @@ const Folder = ({
 		});
 
 		Promise.allSettled([...arrayOfPromises]).then((values) => {
+			gallerySlice.clearSelectedData();
 		}, reason => {
 			console.error(reason);
 		});

@@ -4,6 +4,7 @@ import { workSpaceSlice } from "store/Slices";
 import { useParams }      from "react-router-dom";
 
 import "./Mod14.scss";
+import ActionImagesLayout from "components/global/ActionImagesLayout";
 
 const Mod14 = ({images, sheetNo, workSpaceSlice, dragerImage}) => {
 	const { pageId } = useParams();
@@ -38,7 +39,13 @@ const Mod14 = ({images, sheetNo, workSpaceSlice, dragerImage}) => {
 							},
 						} )
 					}
-				/>
+				>
+					{
+						(images && images[0]) && (
+							<ActionImagesLayout />
+						)
+					}
+				</div>
 				<div
 					className="content-children-body"
 					onDrop={(e) => handleDrop(e, 1)}

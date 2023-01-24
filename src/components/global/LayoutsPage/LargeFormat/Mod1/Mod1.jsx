@@ -4,6 +4,7 @@ import { workSpaceSlice } from "store/Slices";
 import { useParams }      from "react-router-dom";
 
 //Own components
+import ActionImagesLayout from "components/global/ActionImagesLayout";
 import "./Mod1.scss";
 
 const Mod1 = ({images, sheetNo, workSpaceSlice, dragerImage}) => {
@@ -37,7 +38,13 @@ const Mod1 = ({images, sheetNo, workSpaceSlice, dragerImage}) => {
 					},
 				} )
 			}
-		/>
+		>
+			{
+				(images && images[0]) && (
+					<ActionImagesLayout />
+				)
+			}
+		</div>
 	);
 };
 

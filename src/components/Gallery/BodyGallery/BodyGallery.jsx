@@ -29,6 +29,7 @@ const BodyGallery = ({
 	gallerySelectedData,
 	galleryTypeDropedView,
 	loadingMutationGallery,
+	galleryImagesMutationMove,
 }) => {
 	const isAvailableDocs = isValidArray(galleryData);
 
@@ -149,6 +150,7 @@ const BodyGallery = ({
 											folderId={data?.fileId}
 											galleryMutation={galleryMutation}
 											loadingMutationGallery={loadingMutationGallery}
+											galleryImagesMutationMove={galleryImagesMutationMove}
 											onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.fileId, name : data?.name})}
 										/>
 									))
