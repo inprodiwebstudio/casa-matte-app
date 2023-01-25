@@ -1,0 +1,35 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.EditPhoto {
+    .cSUGZ {
+        overflow-x: hidden !important;
+        text-transform: uppercase !important;
+    }
+    .cKLUdC {
+        width : 120px !important;
+        height: 120px !important;
+        border-radius: 0%;
+        transition: all ease 300ms;
+
+        svg {
+            width: 20px !important;
+            height: 20px !important;
+        }
+
+        .cdJDAh {
+            font-size: 12px !important;
+        }
+    }
+
+    .HOmkG {
+        color : $primary-color !important;
+    }
+
+    .bkFTDu {
+        gap : 6vh !important;
+    }
+
+    .hLjiWt {
+        text-transform: uppercase;
+    }
+}

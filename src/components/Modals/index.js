@@ -15,6 +15,7 @@ const modalsConfig = {
 	withCloseButton     : false,
 	radius              : "xs",
 	size                : "50vw",
+	padding             : "0px",
 };
 
 export { modals, modalsConfig };
