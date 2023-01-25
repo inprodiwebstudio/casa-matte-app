@@ -28,7 +28,6 @@ const EditPhoto = () => {
 				  },
 				}}
 				language="es"
-				Text={{ text : "Filerobot..." }}
 				Rotate={{ angle : 90, componentType : "buttons" }}
 				tabsIds={[TABS.ADJUST, TABS.FILTERS, TABS.FINETUNE]} // or {['Adjust', 'Annotate', 'Watermark']}
 				defaultTabId={TABS.ADJUST} // or 'Annotate'
