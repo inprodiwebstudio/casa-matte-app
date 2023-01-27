@@ -221,6 +221,9 @@ export const workSpaceSlice = createSlice({
 		clearSelectedPageData : (state, {payload}) => {
 			state.pageDataSelected = null;
 		},
+		newListPages : (state, {payload}) => {
+			state.data.pages = {...payload};
+		},
 		addPhoto : (state, {payload}) => {
 			const newData = {...state.data};
 			newData.pages[payload.pageId][payload.sheetNo]["photos"][payload.layoutNo] = payload.image;

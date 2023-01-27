@@ -3,13 +3,14 @@ import { connect }                    from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 //Own components
-import ItemPage                         from "./ItemPage";
-import { convertToArray, isValidArray } from "helpers";
-import { ScrollBar }                    from "core/components";
-import FrontPage                        from "./FrontPage";
+import ItemPage                                                   from "./ItemPage";
+import { workSpaceSlice }                                         from "store/Slices";
+import { convertToArray, isValidArray, convertToObject, bindAll } from "helpers";
+import { ScrollBar }                                              from "core/components";
+import FrontPage                                                  from "./FrontPage";
 import "./PaginatorBar.scss";
 
-const PaginatorBar = ({ pagesData }) => {
+const PaginatorBar = ({ pagesData, workSpaceSlice }) => {
 	const [ pageList, setPageList ] = useState({
 		pages    : {},
 		pagesIds : [],
@@ -40,8 +41,16 @@ const PaginatorBar = ({ pagesData }) => {
 			},
 			pagesIds : [...newpagesIds],
 		};
-
+		const newPagesOfList = convertToArray(newPagesList.pages).map((pageData, index) => {
+			const newData = {
+				...pageData,
+				sheet1 : {...newPagesList.pages[newPagesList.pagesIds[index]].sheet1},
+				sheet2 : {...newPagesList.pages[newPagesList.pagesIds[index]].sheet2},
+			};
+			return newData;
+		});
 		setPageList(newPagesList);
+		workSpaceSlice.newListPages(convertToObject(newPagesOfList));
 	};
 
 	useEffect(() => {
@@ -103,8 +112,10 @@ const PaginatorBar = ({ pagesData }) => {
 	);
 };
 
+const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
+
 const mapStateToProps = ({ workSpaceSlice }) => ({
 	pagesData : workSpaceSlice?.data?.pages ?? {},
 });
 
-export default connect(mapStateToProps) (PaginatorBar);
+export default connect(mapStateToProps, mapDispatchToProps) (PaginatorBar);
