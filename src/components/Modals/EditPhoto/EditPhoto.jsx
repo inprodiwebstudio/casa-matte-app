@@ -42,7 +42,7 @@ const EditPhoto = ({innerProps, userName}) => {
 				}}
 				moreSaveOptions={[
 					{
-						label   : "Sasveds",
+						label   : "Guardar",
 						onClick : (triggerSaveModal, triggerSave) =>
 							triggerSave(async (...args) => {
 								const file = dataURLtoFile(args[0].imageBase64, args[0].fullName);

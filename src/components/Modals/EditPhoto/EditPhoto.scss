@@ -4,12 +4,17 @@
     .cSUGZ {
         overflow-x: hidden !important;
         text-transform: uppercase !important;
+        padding: 0px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap : 6px !important;
     }
     .cKLUdC {
         width : 120px !important;
         height: 120px !important;
         border-radius: 0%;
         transition: all ease 300ms;
+        margin: 0px !important;
 
         svg {
             width: 20px !important;
@@ -38,6 +43,16 @@
     }
 
     .gPWwVi {
-        margin-left: 30px !important;
+        margin-left: 0px !important;
+        position: absolute;
+        left : 20vw;
+    }
+
+    .krQITa {
+        display: none;
+    }
+
+    .FIE_topbar-center-options {
+        margin-left: 11% !important;
     }
 }
