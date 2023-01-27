@@ -2,7 +2,9 @@
 import FilerobotImageEditor, {
 	TABS,
 } from "react-filerobot-image-editor";
-import { connect } from "react-redux";
+import { connect }        from "react-redux";
+import { closeAllModals } from "@mantine/modals";
+
 
 //Own components
 import { apiImageKit } from "store/api/imageKitApi";
@@ -47,6 +49,7 @@ const EditPhoto = ({innerProps, userName}) => {
 							triggerSave(async (...args) => {
 								const file = dataURLtoFile(args[0].imageBase64, args[0].fullName);
 								await addEditedImage(file);
+								closeAllModals();
 								return;
 							}),
 					},
