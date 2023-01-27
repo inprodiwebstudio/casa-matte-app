@@ -2,24 +2,59 @@
 import FilerobotImageEditor, {
 	TABS,
 } from "react-filerobot-image-editor";
+import { connect } from "react-redux";
 
 //Own components
+import { apiImageKit } from "store/api/imageKitApi";
 import "./EditPhoto.scss";
 
-const EditPhoto = () => {
+const EditPhoto = ({innerProps, userName}) => {
+	const [galleryImagesMutation] = apiImageKit.useAddEditedImageMutation();
+
+	const addEditedImage = async (file) => {
+		await galleryImagesMutation({
+			data : {
+				file,
+			},
+			userName,
+		});
+	};
+
+	const dataURLtoFile = (dataurl, filename) => {
+		let arr = dataurl.split(","),
+			mime = arr[0].match(/:(.*?);/)[1],
+			bstr = atob(arr[1]),
+			n = bstr.length,
+			u8arr = new Uint8Array(n);
+
+		while (n--) {
+			u8arr[n] = bstr.charCodeAt(n);
+		}
+		return new File([u8arr], filename, {type : mime});
+	};
+
 	return (
 		<div className="EditPhoto">
 			<FilerobotImageEditor
-				source="https://scaleflex.airstore.io/demo/stephen-walker-unsplash.jpg"
-				onSave={(editedImageObject, designState) =>
-					console.log("saved", editedImageObject, designState)}
-				// onClose={closeImgEditor}
+				source={innerProps?.image}
 				annotationsCommon={{
 					fill : "#bb3214",
 				}}
+				moreSaveOptions={[
+					{
+						label   : "Sasveds",
+						onClick : (triggerSaveModal, triggerSave) =>
+							triggerSave(async (...args) => {
+								const file = dataURLtoFile(args[0].imageBase64, args[0].fullName);
+								await addEditedImage(file);
+								return;
+							}),
+					},
+				]}
 				theme={{
 				  palette : {
 				        "accent-primary"        : "#E9E4D9",
+						"accent-primary-hover"  : "grey",
 				        "bg-primary-active"     : "#E9E4D9",
 						"accent-primary-active" : "#1D1D1B",
 				  },
@@ -37,4 +72,8 @@ const EditPhoto = () => {
 	);
 };
 
-export default EditPhoto;
+const mapStateToProps = ({ authSlice }) => ({
+	userName : authSlice?.user?.username ?? undefined,
+});
+
+export default connect(mapStateToProps) (EditPhoto);

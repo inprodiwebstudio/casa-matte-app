@@ -2,16 +2,16 @@ import { useState } from "react";
 import { connect }  from "react-redux";
 
 //Own components
-import { BigPlus, Check }                             from "Resources/icons";
-import { workSpaceSlice }                             from "store/Slices";
-import { resizerImage, bindAll, resizerQualityImage } from "helpers";
+import { BigPlus, Check }        from "Resources/icons";
+import { workSpaceSlice }        from "store/Slices";
+import { resizerImage, bindAll } from "helpers";
 import "./PhotoCard.scss";
 
 const PhotoCard = ({image, onSelected, isChecked, loadingMutationGallery, workSpaceSlice}) => {
 	const [ isSelected, setIsSelected ] = useState(false);
 
 	const handdleDrag = () => {
-		workSpaceSlice.setCurrentPhotoDrager(resizerQualityImage(image));
+		workSpaceSlice.setCurrentPhotoDrager(image);
 	};
 	return (
 		<div

@@ -3,8 +3,8 @@ import qs                                   from "qs";
 
 
 // Import Own Components
-import { galleryApiUrl } from "helpers";
-import { authSlice }     from "store/Slices/authSlice";
+import { galleryApiUrl, buildFormData } from "helpers";
+import { authSlice }                    from "store/Slices/authSlice";
 
 // Injects token in every request
 const baseQuery = fetchBaseQuery({
@@ -44,6 +44,17 @@ export const apiImageKit = createApi({
 				const body = data;
 				return {
 					url    : "delete",
+					method : "POST",
+					body,
+				};
+			},
+			invalidatesTags : ["gallery"],
+		}),
+		addEditedImage : builder.mutation({
+			query({data, userName}) {
+				const body = buildFormData(data);
+				return {
+					url    : `upload/edited/${userName}`,
 					method : "POST",
 					body,
 				};

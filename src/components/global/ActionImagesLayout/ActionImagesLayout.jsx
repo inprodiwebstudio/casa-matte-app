@@ -5,11 +5,14 @@ import { openContextModal } from "@mantine/modals";
 //Own components
 import "./ActionImagesLayout.scss";
 
-const ActionImageslayout = () => {
+const ActionImageslayout = ({image}) => {
 	const activeModal = (e) => {
 		e.stopPropagation();
 		openContextModal({
-			modal : "editPhoto",
+			modal      : "editPhoto",
+			innerProps : {
+				image,
+			},
 		});
 	};
 	return (
