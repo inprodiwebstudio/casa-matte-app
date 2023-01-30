@@ -44,7 +44,7 @@ const ItemPage = ({
 						<div>
 							<div className="withe-page-container">
 								{
-									!isDoublePage && (
+									(!isDoublePage && pageData.sheet2) && (
 										<div className="spacer-paginator" />
 									)
 								}

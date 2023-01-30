@@ -9,12 +9,13 @@ import FrontLayout                 from "components/global/LayoutsPage/FrontLayo
 import "./LargeFormat.scss";
 
 const LargeFormat = ({pageData, workSpaceSlice, pageDataSelected, isInWorkSpcae}) => {
-	const isSinglePage = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(pageData?.sheet1?.layoutType);
+	const [ currentSelectedPage, setCurrentSelectedPage ] = useState(null);
+
+	const isSinglePage = (["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(pageData?.sheet1?.layoutType));
 
 	const LayoutPage1 = layouts[pageData?.sheet1?.layoutType]?.layout;
 	const LayoutPage2 = layouts[pageData?.sheet2?.layoutType]?.layout;
 
-	const [ currentSelectedPage, setCurrentSelectedPage ] = useState(null);
 
 	const photoList = (sheetId) => {
 		const sheetData = pageData[sheetId];
@@ -33,13 +34,11 @@ const LargeFormat = ({pageData, workSpaceSlice, pageDataSelected, isInWorkSpcae}
 	useEffect(() => {
 		if (!pageDataSelected) {
 			setCurrentSelectedPage(null);
-			return;
 		}
-		return;
 	}, [pageDataSelected]);
 
 	return (
-		<div className="LargeFormat">
+		<div className={`LargeFormat ${(!pageData.sheet2 && (pageData?.sheet1?.layoutType !== "FrontLayout")) && "isOnePage"}`}>
 			<div
 				className={
 					`page-body ${(currentSelectedPage === "sheet1") && "isActivePage"}`
@@ -66,12 +65,12 @@ const LargeFormat = ({pageData, workSpaceSlice, pageDataSelected, isInWorkSpcae}
 				}
 			</div>
 			{
-				!isSinglePage && (
+				(!isSinglePage && pageData.sheet2) && (
 					<div className="spacer" />
 				)
 			}
 			{
-				!isSinglePage && (
+				(!isSinglePage && pageData.sheet2) && (
 					<div
 						className={
 						`page-body ${(currentSelectedPage === "sheet2") && "isActivePage"}`

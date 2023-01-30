@@ -43,9 +43,11 @@ const PaginatorBar = ({ pagesData, workSpaceSlice }) => {
 		};
 		const newPagesOfList = convertToArray(newPagesList.pages).map((pageData, index) => {
 			const newData = {
-				...pageData,
+				id     : pageData?.id,
 				sheet1 : {...newPagesList.pages[newPagesList.pagesIds[index]].sheet1},
-				sheet2 : {...newPagesList.pages[newPagesList.pagesIds[index]].sheet2},
+				...(newPagesList.pages[newPagesList.pagesIds[index]].sheet2 ? {
+					sheet2 : {...newPagesList.pages[newPagesList.pagesIds[index]].sheet2},
+				} : {}),
 			};
 			return newData;
 		});

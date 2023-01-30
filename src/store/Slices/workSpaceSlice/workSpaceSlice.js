@@ -10,13 +10,6 @@ const initialState = {
 			page1 : {
 				id     : "page1",
 				sheet1 : {
-					layoutType : "Mod1",
-					text       : "",
-					photos     : {
-						0 : "",
-					},
-				},
-				sheet2 : {
 					layoutType : "",
 					text       : "",
 					photos     : {
@@ -186,11 +179,6 @@ const initialState = {
 					text       : "",
 					photos     : {},
 				},
-				sheet2 : {
-					layoutType : "",
-					text       : "",
-					photos     : {},
-				},
 			},
 		},
 	},
@@ -233,21 +221,21 @@ export const workSpaceSlice = createSlice({
 			const cloneData = {...state.data};
 			const parseToListImages = Array.from(Array(payload?.numberPhotos).keys()).map(e => "");
 			const myPhotos = Object.assign({}, parseToListImages);
-			const isFullBook = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(payload.layout);
-			if (isFullBook) {
-				cloneData.pages[payload.pageId]["sheet1"] = {
-					layoutType : payload.layout,
-					text       : "",
-					photos     : myPhotos,
-				};
-				cloneData.pages[payload.pageId]["sheet2"] = {
-					layoutType : "",
-					text       : "",
-					photos     : {},
-				};
-				state.data = cloneData;
-				return;
-			}
+			// const isFullBook = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(payload.layout);
+			// if (isFullBook) {
+			// 	cloneData.pages[payload.pageId]["sheet1"] = {
+			// 		layoutType : payload.layout,
+			// 		text       : "",
+			// 		photos     : myPhotos,
+			// 	};
+			// 	cloneData.pages[payload.pageId]["sheet2"] = {
+			// 		layoutType : "",
+			// 		text       : "",
+			// 		photos     : {},
+			// 	};
+			// 	state.data = cloneData;
+			// 	return;
+			// }
 			cloneData.pages[payload.pageId][payload.sheetId] = {
 				layoutType : payload.layout,
 				text       : "",
