@@ -9,6 +9,7 @@ import "./ItemPage.scss";
 const ItemPage = ({
 	index,
 	pageData,
+	isFixedPage,
 	draggableId,
 	handleDelete,
 }) => {
@@ -19,54 +20,66 @@ const ItemPage = ({
 
 	const isCurrentPage = pageId === draggableId;
 
+	const RenderView = ({ provided, snapShot }) => (
+		<div
+			className={`ItemPage ${isCurrentPage && "isActivePage"} ${isFixedPage && "isFixed"}`}
+			onClick={() => navigate(draggableId)}
+			{
+				...(provided && {
+					ref : provided.innerRef,
+					...provided.dragHandleProps,
+					...provided.draggableProps,
+				})
+			}
+		>
+			<div
+				className="my-page-container"
+				style={{
+					background : snapShot?.isDragging && "#E9E4D9",
+				}}
+			>
+				<div className="drag-icon-conatainer">
+					<div style={{width : "15px", height : "15px"}} />
+				</div>
+				<div>
+					<div className="withe-page-container">
+						{
+							(!isDoublePage && pageData.sheet2) && (
+								<div className="spacer-paginator" />
+							)
+						}
+						<FormatPage
+							typeFormat="LargeFormat"
+							pageData={pageData}
+						/>
+					</div>
+					<div className={`pages-book-conatier ${!pageData?.sheet2 && "isUniqPage"}`}>
+						<p>{pageData?.sheet1?.pageNo}</p>
+						{
+							pageData?.sheet2?.pageNo && (
+								<p>{pageData?.sheet2?.pageNo}</p>
+							)
+						}
+					</div>
+				</div>
+				<div className="cross-icon-conatiner" onClick={() => handleDelete(pageData?.id, index)}>
+					<Cross size="9px" />
+				</div>
+			</div>
+		</div>
+	);
+
+	if (isFixedPage) {
+		return <RenderView />;
+	}
+
 	return (
 		<Draggable
 			draggableId={draggableId}
 			index={index}
 		>
 			{(provided, snapShot) => (
-				<div
-					className={`ItemPage ${isCurrentPage && "isActivePage"}`}
-					onClick={() => navigate(draggableId)}
-					ref={provided.innerRef}
-					{...provided.dragHandleProps}
-					{...provided.draggableProps}
-				>
-					<div
-						className="my-page-container"
-						style={{
-							background : snapShot?.isDragging && "#E9E4D9",
-						}}
-					>
-						<div className="drag-icon-conatainer">
-							<div style={{width : "15px", height : "15px"}} />
-						</div>
-						<div>
-							<div className="withe-page-container">
-								{
-									(!isDoublePage && pageData.sheet2) && (
-										<div className="spacer-paginator" />
-									)
-								}
-								<FormatPage
-									typeFormat="LargeFormat"
-									pageData={pageData}
-								/>
-							</div>
-							<div className={`pages-book-conatier ${!pageData?.sheet2 && "isUniqPage"}`}>
-								<p>{pageData?.sheet1?.pageNo}</p>
-								{
-									pageData?.sheet2?.pageNo && (
-										<p>{pageData?.sheet2?.pageNo}</p>
-									)
-								}
-							</div>
-						</div>
-						<div className="cross-icon-conatiner" onClick={() => handleDelete(pageData?.id, index)}>
-							<Cross size="9px" />
-						</div>
-					</div>
-				</div>
+				<RenderView provided={provided} snapShot={provided} />
 			)}
 		</Draggable>
 	);

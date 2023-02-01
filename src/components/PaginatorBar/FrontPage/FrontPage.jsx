@@ -1,13 +1,16 @@
 
 //Own Components
-import FormatPage from "components/FormatPage";
-import {Reload}   from "Resources/icons";
+import FormatPage      from "components/FormatPage";
+import { useNavigate } from "react-router";
+import {Reload}        from "Resources/icons";
 import "./FrontPage.scss";
 
 const FrontPage = () => {
+	const navigate = useNavigate();
 	return (
 		<div
 			className="FrontPage"
+			onClick={() => navigate("frontpage")}
 		>
 			<div
 				className="my-page-container"

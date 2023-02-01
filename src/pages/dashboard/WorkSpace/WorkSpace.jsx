@@ -6,12 +6,12 @@ import { useParams }           from "react-router-dom";
 import FormatPage from "components/FormatPage";
 import "./WorkSpace.scss";
 
-const WorkSpace = ({ workSpaceData }) => {
+const WorkSpace = ({ workSpaceData, firstPage, lastPage }) => {
 	const { pageId } = useParams();
 
 	const isFrontLayout = pageId === "frontpage";
 
-	const [ myWorkSpaceData, setMyWorkSpaceData ] = useState({
+	const defaultViewData = {
 		id     : "FrontLayout",
 		sheet1 : {
 			layoutType : "FrontLayout",
@@ -20,11 +20,24 @@ const WorkSpace = ({ workSpaceData }) => {
 				1 : "",
 			},
 		},
+	};
+
+	const [ myWorkSpaceData, setMyWorkSpaceData ] = useState({
+		...defaultViewData,
 	});
 
 	useEffect(() => {
 		if (!isFrontLayout) {
 			setMyWorkSpaceData(workSpaceData[pageId]);
+		}
+		if (pageId === "page1") {
+			setMyWorkSpaceData({...firstPage});
+		}
+		if (pageId === "lastPage") {
+			setMyWorkSpaceData({...lastPage});
+		}
+		if (isFrontLayout) {
+			setMyWorkSpaceData({...defaultViewData});
 		}
 	}, [pageId, workSpaceData]);
 
@@ -49,6 +62,8 @@ const WorkSpace = ({ workSpaceData }) => {
 
 const mapStateToProps = ({ workSpaceSlice }) => ({
 	workSpaceData : workSpaceSlice?.data?.pages ?? {},
+	firstPage     : workSpaceSlice?.data?.firtsPage ?? {},
+	lastPage      : workSpaceSlice?.data?.lastPage ?? {},
 });
 
 export default connect(mapStateToProps) (WorkSpace);

@@ -9,6 +9,10 @@
     transition: all ease 200ms;
     cursor: grab;
 
+    &.isFixed {
+        cursor: pointer;
+    }
+
     &.isActivePage {
         background: $primary-color !important;
         .my-page-container {

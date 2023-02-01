@@ -10,7 +10,7 @@ import { ScrollBar }                                              from "core/com
 import FrontPage                                                  from "./FrontPage";
 import "./PaginatorBar.scss";
 
-const PaginatorBar = ({ pagesData, workSpaceSlice }) => {
+const PaginatorBar = ({ pagesData, workSpaceSlice, fistPage, lastPage }) => {
 	const [ pageList, setPageList ] = useState({
 		pages    : {},
 		pagesIds : [],
@@ -101,18 +101,24 @@ const PaginatorBar = ({ pagesData, workSpaceSlice }) => {
 	return (
 		<div id="PaginatorBar">
 			<h3 className="header-ittle-paginator">PAGINADO</h3>
-			<DragDropContext
-				onDragEnd={dragerChangePosition}
-			>
-				<Droppable droppableId="box-droppable-1">
-					{(provided) => (
-						<ScrollBar>
+			<ScrollBar>
+				<FrontPage />
+				<ItemPage
+					isFixedPage
+					handleDelete={handleDelete}
+					draggableId={fistPage.id}
+					pageData={fistPage}
+				/>
+				<DragDropContext
+					onDragEnd={dragerChangePosition}
+				>
+					<Droppable droppableId="box-droppable-1">
+						{(provided) => (
 							<div
 								className="navbar-paginator-container"
 								ref={provided.innerRef}
 								{...provided.droppableProps}
 							>
-								<FrontPage />
 								{
 									pageList?.pagesIds?.map((pageId, index) => (
 										<ItemPage
@@ -126,10 +132,16 @@ const PaginatorBar = ({ pagesData, workSpaceSlice }) => {
 								}
 								{provided.placeholder}
 							</div>
-						</ScrollBar>
-					)}
-				</Droppable>
-			</DragDropContext>
+						)}
+					</Droppable>
+				</DragDropContext>
+				<ItemPage
+					isFixedPage
+					handleDelete={handleDelete}
+					draggableId={lastPage.id}
+					pageData={lastPage}
+				/>
+			</ScrollBar>
 		</div>
 	);
 };
@@ -138,6 +150,8 @@ const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
 
 const mapStateToProps = ({ workSpaceSlice }) => ({
 	pagesData : workSpaceSlice?.data?.pages ?? {},
+	fistPage  : workSpaceSlice?.data?.firtsPage ?? {},
+	lastPage  : workSpaceSlice?.data?.lastPage ?? {},
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (PaginatorBar);
