@@ -16,7 +16,7 @@ const PaginatorBar = ({ pagesData, workSpaceSlice }) => {
 		pagesIds : [],
 	});
 
-	let counter = 0;
+	let counter = 1;
 
 	const dragerChangePosition = result => {
 		const { destination, source, draggableId } = result;
@@ -54,7 +54,7 @@ const PaginatorBar = ({ pagesData, workSpaceSlice }) => {
 			return newData;
 		});
 
-		const newList = reOrderPages.map(page => {
+		const newList = reOrderPages.map((page, index) => {
 			const newElement = {
 				...page,
 				sheet1 : {

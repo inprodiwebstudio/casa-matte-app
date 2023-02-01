@@ -6,18 +6,29 @@ const initialState = {
 		frontPage     : {},
 		numberOfPages : 20,
 		Bound         : "",
-		pages         : {
-			page1 : {
-				id     : "page1",
-				sheet1 : {
-					pageNo     : 1,
-					layoutType : "",
-					text       : "",
-					photos     : {
-						0 : "",
-					},
+		firtsPage     : {
+			id     : "page1",
+			sheet1 : {
+				pageNo     : 1,
+				layoutType : "",
+				text       : "",
+				photos     : {
+					0 : "",
 				},
 			},
+		},
+		lastPage : {
+			id     : "lastPage",
+			sheet1 : {
+				pageNo     : 20,
+				layoutType : "",
+				text       : "",
+				photos     : {
+					0 : "",
+				},
+			},
+		},
+		pages : {
 			page2 : {
 				id     : "page2",
 				sheet1 : {
@@ -186,15 +197,6 @@ const initialState = {
 				},
 				sheet2 : {
 					pageNo     : 19,
-					layoutType : "",
-					text       : "",
-					photos     : {},
-				},
-			},
-			page11 : {
-				id     : "page11",
-				sheet1 : {
-					pageNo     : 20,
 					layoutType : "",
 					text       : "",
 					photos     : {},
