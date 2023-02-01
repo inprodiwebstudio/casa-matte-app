@@ -15,8 +15,8 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, fistPage, lastPage }) => {
 		pages    : {},
 		pagesIds : [],
 	});
-
 	let counter = 1;
+
 
 	const dragerChangePosition = result => {
 		const { destination, source, draggableId } = result;
