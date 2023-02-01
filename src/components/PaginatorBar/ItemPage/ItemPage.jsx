@@ -84,11 +84,13 @@ const ItemPage = ({
 
 	return (
 		<Draggable
-			draggableId={draggableId}
 			index={index}
+			draggableId={draggableId}
+			isDragDisabled={!pageData?.sheet2}
+			disableInteractiveElementBlocking={true}
 		>
 			{(provided, snapShot) => (
-				<RenderView provided={provided} snapShot={provided} />
+				<RenderView provided={provided} snapShot={snapShot} />
 			)}
 		</Draggable>
 	);
