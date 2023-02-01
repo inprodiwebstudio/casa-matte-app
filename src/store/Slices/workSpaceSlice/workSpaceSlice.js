@@ -10,6 +10,7 @@ const initialState = {
 			page1 : {
 				id     : "page1",
 				sheet1 : {
+					pageNo     : 1,
 					layoutType : "",
 					text       : "",
 					photos     : {
@@ -20,6 +21,7 @@ const initialState = {
 			page2 : {
 				id     : "page2",
 				sheet1 : {
+					pageNo     : 2,
 					layoutType : "Mod2",
 					text       : "",
 					photos     : {
@@ -27,6 +29,7 @@ const initialState = {
 					},
 				},
 				sheet2 : {
+					pageNo     : 3,
 					layoutType : "",
 					text       : "",
 					photos     : {
@@ -37,6 +40,7 @@ const initialState = {
 			page3 : {
 				id     : "page3",
 				sheet1 : {
+					pageNo     : 4,
 					layoutType : "Mod3",
 					text       : "",
 					photos     : {
@@ -44,6 +48,7 @@ const initialState = {
 					},
 				},
 				sheet2 : {
+					pageNo     : 5,
 					layoutType : "",
 					text       : "",
 					photos     : {
@@ -54,6 +59,7 @@ const initialState = {
 			page4 : {
 				id     : "page4",
 				sheet1 : {
+					pageNo     : 6,
 					layoutType : "Mod4",
 					text       : "",
 					photos     : {
@@ -61,6 +67,7 @@ const initialState = {
 					},
 				},
 				sheet2 : {
+					pageNo     : 7,
 					layoutType : "Mod15",
 					text       : "",
 					photos     : {
@@ -71,6 +78,7 @@ const initialState = {
 			page5 : {
 				id     : "page5",
 				sheet1 : {
+					pageNo     : 8,
 					layoutType : "Mod5",
 					text       : "",
 					photos     : {
@@ -78,6 +86,7 @@ const initialState = {
 					},
 				},
 				sheet2 : {
+					pageNo     : 9,
 					layoutType : "Mod6",
 					text       : "",
 					photos     : {
@@ -88,6 +97,7 @@ const initialState = {
 			page6 : {
 				id     : "page6",
 				sheet1 : {
+					pageNo     : 10,
 					layoutType : "Mod7",
 					text       : "",
 					photos     : {
@@ -95,6 +105,7 @@ const initialState = {
 					},
 				},
 				sheet2 : {
+					pageNo     : 11,
 					layoutType : "Mod8",
 					text       : "",
 					photos     : {
@@ -105,6 +116,7 @@ const initialState = {
 			page7 : {
 				id     : "page7",
 				sheet1 : {
+					pageNo     : 12,
 					layoutType : "Mod9",
 					text       : "",
 					photos     : {
@@ -112,6 +124,7 @@ const initialState = {
 					},
 				},
 				sheet2 : {
+					pageNo     : 13,
 					layoutType : "Mod10",
 					text       : "",
 					photos     : {
@@ -122,6 +135,7 @@ const initialState = {
 			page8 : {
 				id     : "page8",
 				sheet1 : {
+					pageNo     : 14,
 					layoutType : "Mod11",
 					text       : "",
 					photos     : {
@@ -129,6 +143,7 @@ const initialState = {
 					},
 				},
 				sheet2 : {
+					pageNo     : 15,
 					layoutType : "Mod12",
 					text       : "",
 					photos     : {
@@ -140,6 +155,7 @@ const initialState = {
 			page9 : {
 				id     : "page9",
 				sheet1 : {
+					pageNo     : 16,
 					layoutType : "Mod13",
 					text       : "",
 					photos     : {
@@ -148,6 +164,7 @@ const initialState = {
 					},
 				},
 				sheet2 : {
+					pageNo     : 17,
 					layoutType : "Mod14",
 					text       : "",
 					photos     : {
@@ -159,6 +176,7 @@ const initialState = {
 			page10 : {
 				id     : "page10",
 				sheet1 : {
+					pageNo     : 18,
 					layoutType : "Mod16",
 					text       : "",
 					photos     : {
@@ -167,6 +185,7 @@ const initialState = {
 					},
 				},
 				sheet2 : {
+					pageNo     : 19,
 					layoutType : "",
 					text       : "",
 					photos     : {},
@@ -175,6 +194,7 @@ const initialState = {
 			page11 : {
 				id     : "page11",
 				sheet1 : {
+					pageNo     : 20,
 					layoutType : "",
 					text       : "",
 					photos     : {},

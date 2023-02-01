@@ -2,8 +2,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Draggable }              from "react-beautiful-dnd";
 
 //Own Components
-import FormatPage          from "components/FormatPage";
-import { DragIcon, Cross } from "Resources/icons";
+import FormatPage from "components/FormatPage";
+import { Cross }  from "Resources/icons";
 import "./ItemPage.scss";
 
 const ItemPage = ({
@@ -39,7 +39,7 @@ const ItemPage = ({
 						}}
 					>
 						<div className="drag-icon-conatainer">
-							<DragIcon size="15px" />
+							<div style={{width : "15px", height : "15px"}} />
 						</div>
 						<div>
 							<div className="withe-page-container">
@@ -53,9 +53,13 @@ const ItemPage = ({
 									pageData={pageData}
 								/>
 							</div>
-							<div className="pages-book-conatier">
-								<p>{(index+1)*2 - 1}</p>
-								<p>{(index+1)*2}</p>
+							<div className={`pages-book-conatier ${!pageData?.sheet2 && "isUniqPage"}`}>
+								<p>{pageData?.sheet1?.pageNo}</p>
+								{
+									pageData?.sheet2?.pageNo && (
+										<p>{pageData?.sheet2?.pageNo}</p>
+									)
+								}
 							</div>
 						</div>
 						<div className="cross-icon-conatiner" onClick={() => handleDelete(pageData?.id, index)}>

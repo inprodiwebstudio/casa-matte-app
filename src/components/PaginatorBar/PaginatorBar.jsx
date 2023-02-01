@@ -16,6 +16,8 @@ const PaginatorBar = ({ pagesData, workSpaceSlice }) => {
 		pagesIds : [],
 	});
 
+	let counter = 0;
+
 	const dragerChangePosition = result => {
 		const { destination, source, draggableId } = result;
 
@@ -41,18 +43,36 @@ const PaginatorBar = ({ pagesData, workSpaceSlice }) => {
 			},
 			pagesIds : [...newpagesIds],
 		};
-		const newPagesOfList = convertToArray(newPagesList.pages).map((pageData, index) => {
+		const reOrderPages = convertToArray(newPagesList.pages).map((pageData, index) => {
 			const newData = {
 				id     : pageData?.id,
 				sheet1 : {...newPagesList.pages[newPagesList.pagesIds[index]].sheet1},
-				...(newPagesList.pages[newPagesList.pagesIds[index]].sheet2 ? {
+				...(newPagesList.pages[newPagesList.pagesIds[index]]?.sheet2 ? {
 					sheet2 : {...newPagesList.pages[newPagesList.pagesIds[index]].sheet2},
 				} : {}),
 			};
 			return newData;
 		});
+
+		const newList = reOrderPages.map(page => {
+			const newElement = {
+				...page,
+				sheet1 : {
+					...page.sheet1,
+					pageNo : counter + 1,
+				},
+				...(page.sheet2 ? {
+					sheet2 : { ...page.sheet2, pageNo : counter + 2},
+				} : {}),
+			};
+			counter += 1;
+			if (page.sheet2) {
+				counter += 1;
+			}
+			return newElement;
+		});
 		setPageList(newPagesList);
-		workSpaceSlice.newListPages(convertToObject(newPagesOfList));
+		workSpaceSlice.newListPages(convertToObject(newList));
 	};
 
 	useEffect(() => {

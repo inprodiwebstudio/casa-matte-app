@@ -66,6 +66,11 @@
             justify-content: space-between;
             padding-left: 11.5px;
             padding-right: 11.5px;
+
+            &.isUniqPage {
+                justify-content: center;
+                align-items: center;
+            }
     
             p {
                 color : $flat-color;
