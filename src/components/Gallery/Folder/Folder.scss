@@ -3,7 +3,8 @@
 .Folder {
     gap: 31.5px;
     width: 324px;
-    padding: 5px;
+    padding: 10px;
+    padding-top: 15px;
     height: 157px;
     display: flex;
     cursor: pointer;
@@ -30,6 +31,9 @@
         display: flex;
         color : $dark-color;
         justify-content: space-between;
+        
+        .more-icon-container {
+        }
 
         &.loading {
             color : $flat-color;

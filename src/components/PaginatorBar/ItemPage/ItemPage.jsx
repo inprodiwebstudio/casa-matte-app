@@ -62,8 +62,17 @@ const ItemPage = ({
 						}
 					</div>
 				</div>
-				<div className="cross-icon-conatiner" onClick={() => handleDelete(pageData?.id, index)}>
-					<Cross size="9px" />
+				<div
+					className="cross-icon-conatiner"
+					{
+						...(provided && {
+							onCLick : () => handleDelete(pageData?.id, index),
+						})
+					}
+				>
+					{
+						provided ? <Cross size="9px" /> : <div style={{width : "9px", height : "9px"}} />
+					}
 				</div>
 			</div>
 		</div>

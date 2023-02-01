@@ -9,6 +9,10 @@
     transition: all ease 200ms;
     cursor: pointer;
 
+    &.isInThisPage {
+        background: $primary-color;
+    }
+
     &:hover {
         background: $primary-color;
     }
