@@ -202,17 +202,6 @@ const initialState = {
 					photos     : {},
 				},
 			},
-			page11 : {
-				id     : "page11",
-				sheet1 : {
-					pageNo     : 20,
-					layoutType : "Mod15",
-					text       : "",
-					photos     : {
-						0 : "",
-					},
-				},
-			},
 		},
 	},
 	pageDataSelected    : null,
