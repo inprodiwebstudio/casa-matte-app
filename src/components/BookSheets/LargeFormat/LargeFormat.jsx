@@ -59,6 +59,7 @@ const LargeFormat = ({pageData, workSpaceSlice, pageDataSelected, isInWorkSpcae}
 						)
 					) : (
 						<LayoutPage1
+							isInWorkSpcae={isInWorkSpcae}
 							images={photoList("sheet1")}
 							sheetNo="sheet1"
 						/>
@@ -87,6 +88,7 @@ const LargeFormat = ({pageData, workSpaceSlice, pageDataSelected, isInWorkSpcae}
 								<div />
 							) : (
 								<LayoutPage2
+									isInWorkSpcae={isInWorkSpcae}
 									images={photoList("sheet2")}
 									sheetNo="sheet2"
 								/>
