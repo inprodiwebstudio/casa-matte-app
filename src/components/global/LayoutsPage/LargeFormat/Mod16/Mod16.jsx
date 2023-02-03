@@ -1,9 +1,10 @@
-import { bindAll }        from "helpers";
-import { connect }        from "react-redux";
-import { workSpaceSlice } from "store/Slices";
-import { useParams }      from "react-router-dom";
+import { bindAll, resizerImage } from "helpers";
+import { connect }               from "react-redux";
+import { workSpaceSlice }        from "store/Slices";
+import { useParams }             from "react-router-dom";
 
 import "./Mod16.scss";
+import ActionImagesLayout from "components/global/ActionImagesLayout";
 
 const Mod16 = ({images, sheetNo, workSpaceSlice, dragerImage}) => {
 	const { pageId } = useParams();
@@ -31,14 +32,20 @@ const Mod16 = ({images, sheetNo, workSpaceSlice, dragerImage}) => {
 					{
 						...( images && {
 							style : {
-								backgroundImage    : `url(${images[0]})`,
+								backgroundImage    : `url(${resizerImage(images[0], 900, 600)})`,
 								backgroundSize     : "cover",
 								backgroundRepeat   : "no-repeat",
 								backgroundPosition : "center",
 							},
 						} )
 					}
-				/>
+				>
+					{
+						(images && images[0]) && (
+							<ActionImagesLayout image={images[0]} />
+						)
+					}
+				</div>
 				<div
 					className="content-children-body"
 					onDrop={(e) => handleDrop(e, 1)}
@@ -46,14 +53,20 @@ const Mod16 = ({images, sheetNo, workSpaceSlice, dragerImage}) => {
 					{
 						...( images && {
 							style : {
-								backgroundImage    : `url(${images[1]})`,
+								backgroundImage    : `url(${resizerImage(images[1], 900, 600)})`,
 								backgroundSize     : "cover",
 								backgroundRepeat   : "no-repeat",
 								backgroundPosition : "center",
 							},
 						} )
 					}
-				/>
+				>
+					{
+						(images && images[1]) && (
+							<ActionImagesLayout image={images[1]} />
+						)
+					}
+				</div>
 			</div>
 		</div>
 	);

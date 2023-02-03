@@ -1,9 +1,10 @@
-import { bindAll }        from "helpers";
-import { connect }        from "react-redux";
-import { workSpaceSlice } from "store/Slices";
-import { useParams }      from "react-router-dom";
+import { bindAll, resizerImage } from "helpers";
+import { connect }               from "react-redux";
+import { workSpaceSlice }        from "store/Slices";
+import { useParams }             from "react-router-dom";
 
 import "./Mod4.scss";
+import ActionImagesLayout from "components/global/ActionImagesLayout";
 
 const Mod4 = ({images, sheetNo, workSpaceSlice, dragerImage}) => {
 	const { pageId } = useParams();
@@ -29,14 +30,20 @@ const Mod4 = ({images, sheetNo, workSpaceSlice, dragerImage}) => {
 			{
 				...( images && {
 					style : {
-						backgroundImage    : `url(${images[0]})`,
+						backgroundImage    : `url(${resizerImage(images[0], 900, 600)})`,
 						backgroundSize     : "cover",
 						backgroundRepeat   : "no-repeat",
 						backgroundPosition : "center",
 					},
 				} )
 			}
-		/>
+		>
+			{
+				(images && images[0]) && (
+					<ActionImagesLayout image={images[0]} />
+				)
+			}
+		</div>
 	);
 };
 

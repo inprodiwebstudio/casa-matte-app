@@ -14,6 +14,8 @@ const resizerQualityImage = (imgUrl, width, height) => {
 		}],
 	});
 
+	console.log(img);
+
 	return img;
 };
 

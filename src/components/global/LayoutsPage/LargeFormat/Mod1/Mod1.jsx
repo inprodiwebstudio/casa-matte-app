@@ -4,8 +4,8 @@ import { workSpaceSlice } from "store/Slices";
 import { useParams }      from "react-router-dom";
 
 //Own components
-import { resizerQualityImage, bindAll } from "helpers";
-import ActionImagesLayout               from "components/global/ActionImagesLayout";
+import { bindAll, resizerImage } from "helpers";
+import ActionImagesLayout        from "components/global/ActionImagesLayout";
 import "./Mod1.scss";
 
 const Mod1 = ({images, sheetNo, workSpaceSlice, dragerImage}) => {
@@ -24,6 +24,7 @@ const Mod1 = ({images, sheetNo, workSpaceSlice, dragerImage}) => {
 	const handleDragOver = (e) => {
 		e.preventDefault();
 	};
+
 	return (
 		<div
 			className="body-mod1-layout"
@@ -32,7 +33,7 @@ const Mod1 = ({images, sheetNo, workSpaceSlice, dragerImage}) => {
 			{
 				...( images && {
 					style : {
-						backgroundImage    : `url(${resizerQualityImage(images[0])})`,
+						backgroundImage    : `url(${resizerImage(images[0])})`,
 						backgroundSize     : "cover",
 						backgroundRepeat   : "no-repeat",
 						backgroundPosition : "center",

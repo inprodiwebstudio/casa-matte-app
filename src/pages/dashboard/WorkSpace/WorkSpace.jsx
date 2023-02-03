@@ -6,7 +6,7 @@ import { useParams }           from "react-router-dom";
 import FormatPage from "components/FormatPage";
 import "./WorkSpace.scss";
 
-const WorkSpace = ({ workSpaceData, firstPage, lastPage }) => {
+const WorkSpace = ({ workSpaceData, firstPage }) => {
 	const { pageId } = useParams();
 
 	const isFrontLayout = pageId === "frontpage";
@@ -32,9 +32,6 @@ const WorkSpace = ({ workSpaceData, firstPage, lastPage }) => {
 		}
 		if (pageId === "page1") {
 			setMyWorkSpaceData({...firstPage});
-		}
-		if (pageId === "lastPage") {
-			setMyWorkSpaceData({...lastPage});
 		}
 		if (isFrontLayout) {
 			setMyWorkSpaceData({...defaultViewData});
@@ -63,7 +60,6 @@ const WorkSpace = ({ workSpaceData, firstPage, lastPage }) => {
 const mapStateToProps = ({ workSpaceSlice }) => ({
 	workSpaceData : workSpaceSlice?.data?.pages ?? {},
 	firstPage     : workSpaceSlice?.data?.firtsPage ?? {},
-	lastPage      : workSpaceSlice?.data?.lastPage ?? {},
 });
 
 export default connect(mapStateToProps) (WorkSpace);

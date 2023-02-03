@@ -243,22 +243,29 @@ export const workSpaceSlice = createSlice({
 			const cloneData = {...state.data};
 			const parseToListImages = Array.from(Array(payload?.numberPhotos).keys()).map(e => "");
 			const myPhotos = Object.assign({}, parseToListImages);
-			// const isFullBook = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(payload.layout);
-			// if (isFullBook) {
-			// 	cloneData.pages[payload.pageId]["sheet1"] = {
-			// 		layoutType : payload.layout,
-			// 		text       : "",
-			// 		photos     : myPhotos,
-			// 	};
-			// 	cloneData.pages[payload.pageId]["sheet2"] = {
-			// 		layoutType : "",
-			// 		text       : "",
-			// 		photos     : {},
-			// 	};
-			// 	state.data = cloneData;
-			// 	return;
-			// }
+			const isFullBook = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(payload.layout);
+			const isAvailableDoublePage = cloneData.pages[payload.pageId]["sheet2"];
+			if (isFullBook && isAvailableDoublePage) {
+				cloneData.pages[payload.pageId]["sheet1"] = {
+					...cloneData.pages[payload.pageId]["sheet1"],
+					layoutType : payload.layout,
+					text       : "",
+					photos     : myPhotos,
+				};
+				cloneData.pages[payload.pageId]["sheet2"] = {
+					...cloneData.pages[payload.pageId]["sheet2"],
+					layoutType : "",
+					text       : "",
+					photos     : {},
+				};
+				state.data = cloneData;
+				return;
+			}
+			if (!isAvailableDoublePage && isFullBook) {
+				return;
+			}
 			cloneData.pages[payload.pageId][payload.sheetId] = {
+				...cloneData.pages[payload.pageId][payload.sheetId],
 				layoutType : payload.layout,
 				text       : "",
 				photos     : myPhotos,

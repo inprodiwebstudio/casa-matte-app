@@ -1,6 +1,7 @@
 import { connect }             from "react-redux";
 import { useState, useEffect } from "react";
 
+
 //Own components
 import layouts                     from "components/global/LayoutsPage/LargeFormat";
 import { convertToArray, bindAll } from "helpers";
