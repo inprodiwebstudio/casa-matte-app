@@ -17,17 +17,6 @@ const initialState = {
 				},
 			},
 		},
-		lastPage : {
-			id     : "lastPage",
-			sheet1 : {
-				pageNo     : 20,
-				layoutType : "",
-				text       : "",
-				photos     : {
-					0 : "",
-				},
-			},
-		},
 		pages : {
 			page2 : {
 				id     : "page2",
@@ -200,6 +189,17 @@ const initialState = {
 					layoutType : "",
 					text       : "",
 					photos     : {},
+				},
+			},
+			page11 : {
+				id     : "page11",
+				sheet1 : {
+					pageNo     : 20,
+					layoutType : "",
+					text       : "",
+					photos     : {
+						0 : "",
+					},
 				},
 			},
 		},

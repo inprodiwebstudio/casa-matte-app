@@ -10,7 +10,7 @@ import { ScrollBar }                                              from "core/com
 import FrontPage                                                  from "./FrontPage";
 import "./PaginatorBar.scss";
 
-const PaginatorBar = ({ pagesData, workSpaceSlice, fistPage, lastPage }) => {
+const PaginatorBar = ({ pagesData, workSpaceSlice, fistPage }) => {
 	const [ pageList, setPageList ] = useState({
 		pages    : {},
 		pagesIds : [],
@@ -139,12 +139,6 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, fistPage, lastPage }) => {
 						)}
 					</Droppable>
 				</DragDropContext>
-				<ItemPage
-					isFixedPage
-					handleDelete={handleDelete}
-					draggableId={lastPage.id}
-					pageData={lastPage}
-				/>
 			</ScrollBar>
 		</div>
 	);
@@ -155,7 +149,6 @@ const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
 const mapStateToProps = ({ workSpaceSlice }) => ({
 	pagesData : workSpaceSlice?.data?.pages ?? {},
 	fistPage  : workSpaceSlice?.data?.firtsPage ?? {},
-	lastPage  : workSpaceSlice?.data?.lastPage ?? {},
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (PaginatorBar);
