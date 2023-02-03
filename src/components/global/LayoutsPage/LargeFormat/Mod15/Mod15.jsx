@@ -1,10 +1,11 @@
-import { bindAll, resizerImage } from "helpers";
-import { connect }               from "react-redux";
-import { workSpaceSlice }        from "store/Slices";
-import { useParams }             from "react-router-dom";
+import { bindAll }        from "helpers";
+import { connect }        from "react-redux";
+import { workSpaceSlice } from "store/Slices";
+import { useParams }      from "react-router-dom";
 
 import "./Mod15.scss";
-import ActionImagesLayout from "components/global/ActionImagesLayout";
+import ActionImagesLayout      from "components/global/ActionImagesLayout";
+import { handlerResizerImage } from "../../ModsConstants";
 
 const Mod15 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) => {
 	const { pageId } = useParams();
@@ -31,7 +32,7 @@ const Mod15 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) =>
 				{
 					...( images && {
 						style : {
-							backgroundImage    : `url(${resizerImage(images[0], 900, 600)})`,
+							backgroundImage    : `url(${handlerResizerImage(images, 0, isInWorkSpcae)})`,
 							backgroundSize     : "cover",
 							backgroundRepeat   : "no-repeat",
 							backgroundPosition : "center",

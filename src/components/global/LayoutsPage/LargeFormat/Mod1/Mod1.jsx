@@ -4,8 +4,9 @@ import { workSpaceSlice } from "store/Slices";
 import { useParams }      from "react-router-dom";
 
 //Own components
-import { bindAll, resizerImage } from "helpers";
-import ActionImagesLayout        from "components/global/ActionImagesLayout";
+import { bindAll }             from "helpers";
+import { handlerResizerImage } from "../../ModsConstants";
+import ActionImagesLayout      from "components/global/ActionImagesLayout";
 import "./Mod1.scss";
 
 const Mod1 = ({images, isInWorkSpcae, sheetNo, workSpaceSlice, dragerImage}) => {
@@ -33,7 +34,7 @@ const Mod1 = ({images, isInWorkSpcae, sheetNo, workSpaceSlice, dragerImage}) => 
 			{
 				...( images && {
 					style : {
-						backgroundImage    : `url(${resizerImage(images[0])})`,
+						backgroundImage    : `url(${handlerResizerImage(images, 0, isInWorkSpcae)})`,
 						backgroundSize     : "cover",
 						backgroundRepeat   : "no-repeat",
 						backgroundPosition : "center",
