@@ -6,7 +6,7 @@ import { useParams }             from "react-router-dom";
 import "./Mod12.scss";
 import ActionImagesLayout from "components/global/ActionImagesLayout";
 
-const Mod12 = ({images, sheetNo, workSpaceSlice, dragerImage}) => {
+const Mod12 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) => {
 	const { pageId } = useParams();
 
 	const handleDrop = (e, layoutNo) => {
@@ -41,7 +41,7 @@ const Mod12 = ({images, sheetNo, workSpaceSlice, dragerImage}) => {
 					}
 				>
 					{
-						(images && images[0]) && (
+						(images && images[0] && isInWorkSpcae) && (
 							<ActionImagesLayout image={images[0]} />
 						)
 					}
@@ -62,7 +62,7 @@ const Mod12 = ({images, sheetNo, workSpaceSlice, dragerImage}) => {
 					}
 				>
 					{
-						(images && images[1]) && (
+						(images && images[1] && isInWorkSpcae) && (
 							<ActionImagesLayout image={images[1]} />
 						)
 					}

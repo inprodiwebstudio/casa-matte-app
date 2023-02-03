@@ -8,7 +8,7 @@ import { bindAll, resizerImage } from "helpers";
 import ActionImagesLayout        from "components/global/ActionImagesLayout";
 import "./Mod1.scss";
 
-const Mod1 = ({images, sheetNo, workSpaceSlice, dragerImage}) => {
+const Mod1 = ({images, isInWorkSpcae, sheetNo, workSpaceSlice, dragerImage}) => {
 	const { pageId } = useParams();
 
 	const handleDrop = (e, layoutNo) => {
@@ -42,7 +42,7 @@ const Mod1 = ({images, sheetNo, workSpaceSlice, dragerImage}) => {
 			}
 		>
 			{
-				(images && images[0]) && (
+				(images && images[0] && isInWorkSpcae) && (
 					<ActionImagesLayout image={images[0]} />
 				)
 			}
