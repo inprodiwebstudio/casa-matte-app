@@ -7,11 +7,14 @@ import { workSpaceSlice }        from "store/Slices";
 import { resizerImage, bindAll } from "helpers";
 import "./PhotoCard.scss";
 
-const PhotoCard = ({image, onSelected, isChecked, loadingMutationGallery, workSpaceSlice}) => {
+const PhotoCard = ({image, fileId, onSelected, isChecked, loadingMutationGallery, workSpaceSlice}) => {
 	const [ isSelected, setIsSelected ] = useState(false);
 
 	const handdleDrag = () => {
-		workSpaceSlice.setCurrentPhotoDrager(image);
+		workSpaceSlice.setCurrentPhotoDrager({
+			image  : image,
+			fileId : fileId,
+		});
 	};
 	return (
 		<div
@@ -53,4 +56,8 @@ const PhotoCard = ({image, onSelected, isChecked, loadingMutationGallery, workSp
 
 const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
 
-export default connect(null, mapDispatchToProps) (PhotoCard);
+const mapStateToProps = ({ workSpaceSlice }) => ({
+	workSpaceData : workSpaceSlice.data ?? {},
+});
+
+export default connect(mapStateToProps, mapDispatchToProps) (PhotoCard);

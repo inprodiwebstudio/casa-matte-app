@@ -166,6 +166,7 @@ const BodyGallery = ({
 										<PhotoCard
 											key={index}
 											image={data?.url}
+											fileId={data?.fileId}
 											loadingMutationGallery={loadingMutationGallery}
 											onSelected={() => gallerySlice.setSelectedData(data)}
 											isChecked={gallerySelectedData[data?.fileId] ? true : false}

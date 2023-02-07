@@ -42,7 +42,7 @@ const Mod14 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) =>
 					}
 				>
 					{
-						(images && images[0] && isInWorkSpcae) && (
+						(images && images[0].url && isInWorkSpcae) && (
 							<ActionImagesLayout image={images[0]} />
 						)
 					}
@@ -64,7 +64,7 @@ const Mod14 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) =>
 				>
 					{
 						(images && images[1] && isInWorkSpcae) && (
-							<ActionImagesLayout image={images[1]} />
+							<ActionImagesLayout image={images[1].url} />
 						)
 					}
 				</div>

@@ -13,7 +13,10 @@ const initialState = {
 				layoutType : "",
 				text       : "",
 				photos     : {
-					0 : "",
+					0 : {
+						id  : "",
+						url : "",
+					},
 				},
 			},
 		},
@@ -25,7 +28,10 @@ const initialState = {
 					layoutType : "Mod2",
 					text       : "",
 					photos     : {
-						0 : "",
+						0 : {
+							id  : "",
+							url : "",
+						},
 					},
 				},
 				sheet2 : {
@@ -33,7 +39,10 @@ const initialState = {
 					layoutType : "",
 					text       : "",
 					photos     : {
-						0 : "",
+						0 : {
+							id  : "",
+							url : "",
+						},
 					},
 				},
 			},
@@ -44,7 +53,10 @@ const initialState = {
 					layoutType : "Mod3",
 					text       : "",
 					photos     : {
-						0 : "",
+						0 : {
+							id  : "",
+							url : "",
+						},
 					},
 				},
 				sheet2 : {
@@ -52,7 +64,10 @@ const initialState = {
 					layoutType : "",
 					text       : "",
 					photos     : {
-						0 : "",
+						0 : {
+							id  : "",
+							url : "",
+						},
 					},
 				},
 			},
@@ -63,7 +78,10 @@ const initialState = {
 					layoutType : "Mod4",
 					text       : "",
 					photos     : {
-						0 : "",
+						0 : {
+							id  : "",
+							url : "",
+						},
 					},
 				},
 				sheet2 : {
@@ -71,7 +89,10 @@ const initialState = {
 					layoutType : "Mod15",
 					text       : "",
 					photos     : {
-						0 : "",
+						0 : {
+							id  : "",
+							url : "",
+						},
 					},
 				},
 			},
@@ -82,7 +103,10 @@ const initialState = {
 					layoutType : "Mod5",
 					text       : "",
 					photos     : {
-						0 : "",
+						0 : {
+							id  : "",
+							url : "",
+						},
 					},
 				},
 				sheet2 : {
@@ -90,7 +114,10 @@ const initialState = {
 					layoutType : "Mod6",
 					text       : "",
 					photos     : {
-						0 : "",
+						0 : {
+							id  : "",
+							url : "",
+						},
 					},
 				},
 			},
@@ -101,7 +128,10 @@ const initialState = {
 					layoutType : "Mod7",
 					text       : "",
 					photos     : {
-						0 : "",
+						0 : {
+							id  : "",
+							url : "",
+						},
 					},
 				},
 				sheet2 : {
@@ -109,7 +139,10 @@ const initialState = {
 					layoutType : "Mod8",
 					text       : "",
 					photos     : {
-						0 : "",
+						0 : {
+							id  : "",
+							url : "",
+						},
 					},
 				},
 			},
@@ -120,7 +153,10 @@ const initialState = {
 					layoutType : "Mod9",
 					text       : "",
 					photos     : {
-						0 : "",
+						0 : {
+							id  : "",
+							url : "",
+						},
 					},
 				},
 				sheet2 : {
@@ -128,7 +164,10 @@ const initialState = {
 					layoutType : "Mod10",
 					text       : "",
 					photos     : {
-						0 : "",
+						0 : {
+							id  : "",
+							url : "",
+						},
 					},
 				},
 			},
@@ -139,7 +178,10 @@ const initialState = {
 					layoutType : "Mod11",
 					text       : "",
 					photos     : {
-						0 : "",
+						0 : {
+							id  : "",
+							url : "",
+						},
 					},
 				},
 				sheet2 : {
@@ -147,8 +189,14 @@ const initialState = {
 					layoutType : "Mod12",
 					text       : "",
 					photos     : {
-						0 : "",
-						1 : "",
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
 					},
 				},
 			},
@@ -159,8 +207,14 @@ const initialState = {
 					layoutType : "Mod13",
 					text       : "",
 					photos     : {
-						0 : "",
-						1 : "",
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
 					},
 				},
 				sheet2 : {
@@ -168,8 +222,14 @@ const initialState = {
 					layoutType : "Mod14",
 					text       : "",
 					photos     : {
-						0 : "",
-						1 : "",
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
 					},
 				},
 			},
@@ -180,8 +240,14 @@ const initialState = {
 					layoutType : "Mod16",
 					text       : "",
 					photos     : {
-						0 : "",
-						1 : "",
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
 					},
 				},
 				sheet2 : {
@@ -198,7 +264,10 @@ const initialState = {
 					layoutType : "",
 					text       : "",
 					photos     : {
-						0 : "",
+						0 : {
+							id  : "",
+							url : "",
+						},
 					},
 				},
 			},
@@ -236,12 +305,15 @@ export const workSpaceSlice = createSlice({
 		},
 		addPhoto : (state, {payload}) => {
 			const newData = {...state.data};
-			newData.pages[payload.pageId][payload.sheetNo]["photos"][payload.layoutNo] = payload.image;
+			newData.pages[payload.pageId][payload.sheetNo]["photos"][payload.layoutNo] = {
+				id  : payload.image.fileId,
+				url : payload.image.image,
+			};
 			state.data = newData;
 		},
 		addLayout : (state, {payload}) => {
 			const cloneData = {...state.data};
-			const parseToListImages = Array.from(Array(payload?.numberPhotos).keys()).map(e => "");
+			const parseToListImages = Array.from(Array(payload?.numberPhotos).keys()).map(e => ({id : "", url : ""}));
 			const myPhotos = Object.assign({}, parseToListImages);
 			const isFullBook = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(payload.layout);
 			const isAvailableDoublePage = cloneData.pages[payload.pageId]["sheet2"];
