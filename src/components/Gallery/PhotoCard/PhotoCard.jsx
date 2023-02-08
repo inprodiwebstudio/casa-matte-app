@@ -1,4 +1,5 @@
 import { connect }   from "react-redux";
+import { useState }  from "react";
 import { useParams } from "react-router";
 
 //Own components
@@ -12,11 +13,19 @@ const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMut
 
 	const pageData = workSpaceData?.pages?.[pageId];
 
+	const [ isDragger, setIsDragger ] = useState(false);
+
 	const handdleDrag = () => {
+		setIsDragger(true);
 		workSpaceSlice.setCurrentPhotoDrager({
 			image  : image,
 			fileId : fileId,
 		});
+	};
+
+	const handleLeaveDragger = () => {
+		workSpaceSlice.clearPhotoDrager();
+		setIsDragger(false);
 	};
 
 	const addPhotoToLayout = (imageUrl) => {
@@ -77,10 +86,10 @@ const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMut
 
 	return (
 		<div
-			className="PhotoCard"
+			className={`PhotoCard ${isDragger && "isDragger"}`}
 			draggable="true"
 			onDragStart={() => handdleDrag()}
-			onDragEnd={() => workSpaceSlice.clearPhotoDrager()}
+			onDragEnd={() => handleLeaveDragger()}
 			style={{
 				background : image ? `url(${resizerImage(image)}) center center / cover no-repeat` : "grey",
 			}}
@@ -91,7 +100,7 @@ const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMut
 				)
 			}
 			{
-				!loadingMutationGallery && (
+				(!loadingMutationGallery && !isDragger) && (
 					<div className={`photo-overlay ${isSelected && "photo-selected"}`}>
 						<div className={`check-box ${isChecked && "isChecked"}`} onClick={() => onSelected(image)}>
 							{

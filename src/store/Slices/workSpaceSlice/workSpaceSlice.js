@@ -315,6 +315,14 @@ export const workSpaceSlice = createSlice({
 			};
 			state.data = newData;
 		},
+		removePhoto : (state, {payload}) => {
+			const newData = {...state.data};
+			newData.pages[payload.pageId][payload.sheetNo]["photos"][payload.layoutNo] = {
+				id  : "",
+				url : "",
+			};
+			state.data = newData;
+		},
 		handleAutoFill : (state, {payload}) => {
 			const newData = {...state?.data?.pages};
 			const images = payload.images;
