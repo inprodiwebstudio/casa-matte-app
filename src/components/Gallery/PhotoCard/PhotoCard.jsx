@@ -1,14 +1,19 @@
-import { useState } from "react";
-import { connect }  from "react-redux";
+import { useState }  from "react";
+import { connect }   from "react-redux";
+import { useParams } from "react-router";
 
 //Own components
-import { BigPlus, Check }        from "Resources/icons";
-import { workSpaceSlice }        from "store/Slices";
-import { resizerImage, bindAll } from "helpers";
+import { BigPlus, Check }                        from "Resources/icons";
+import { workSpaceSlice }                        from "store/Slices";
+import { resizerImage, bindAll, convertToArray } from "helpers";
 import "./PhotoCard.scss";
 
-const PhotoCard = ({image, fileId, onSelected, isChecked, loadingMutationGallery, workSpaceSlice}) => {
+const PhotoCard = ({image, fileId, onSelected, isChecked, loadingMutationGallery, workSpaceSlice, workSpaceData}) => {
 	const [ isSelected, setIsSelected ] = useState(false);
+
+	const { pageId } = useParams();
+
+	const pageData = workSpaceData?.pages?.[pageId];
 
 	const handdleDrag = () => {
 		workSpaceSlice.setCurrentPhotoDrager({
@@ -16,6 +21,65 @@ const PhotoCard = ({image, fileId, onSelected, isChecked, loadingMutationGallery
 			fileId : fileId,
 		});
 	};
+
+	const addPhotoToLayout = (imageUrl) => {
+		const isNotCompleteSheet1 = convertToArray(pageData?.sheet1?.photos).find(e => e.id === "");
+
+		const isSinglePage = (["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(pageData?.sheet1?.layoutType));
+		const isAvailableSheet2 = pageData?.sheet2?.photos[0];
+
+		setIsSelected(!isSelected);
+
+		if (isSinglePage) {
+			workSpaceSlice.addPhoto({
+				sheetNo  : "sheet1",
+				layoutNo : 0,
+				image    : {
+					fileId,
+					image : imageUrl,
+				},
+				pageId : pageData?.id,
+			});
+			return;
+		}
+		if (isNotCompleteSheet1) {
+			const listOfPhotos = convertToArray(pageData?.sheet1?.photos);
+			for (let i = 0; i < listOfPhotos.length; i++) {
+				const data = listOfPhotos[i];
+				if (data?.id === "") {
+					workSpaceSlice.addPhoto({
+						sheetNo  : "sheet1",
+						layoutNo : i,
+						image    : {
+							fileId,
+							image : imageUrl,
+						},
+						pageId : pageData?.id,
+					});
+					return;
+				}
+			}
+		}
+		if (!isNotCompleteSheet1 && isAvailableSheet2) {
+			const listOfPhotos = convertToArray(pageData?.sheet2?.photos);
+			for (let i = 0; i < listOfPhotos.length; i++) {
+				const data = listOfPhotos[i];
+				if (data?.id === "") {
+					workSpaceSlice.addPhoto({
+						sheetNo  : "sheet2",
+						layoutNo : i,
+						image    : {
+							fileId,
+							image : imageUrl,
+						},
+						pageId : pageData?.id,
+					});
+					return;
+				}
+			}
+		}
+	};
+
 	return (
 		<div
 			className="PhotoCard"
@@ -34,7 +98,7 @@ const PhotoCard = ({image, fileId, onSelected, isChecked, loadingMutationGallery
 			{
 				!loadingMutationGallery && (
 					<div className={`photo-overlay ${isSelected && "photo-selected"}`}>
-						<div className={`check-box ${isChecked && "isChecked"}`} onClick={() => onSelected()}>
+						<div className={`check-box ${isChecked && "isChecked"}`} onClick={() => onSelected(image)}>
 							{
 								isChecked && (
 									<div className="square-check" />
@@ -44,7 +108,7 @@ const PhotoCard = ({image, fileId, onSelected, isChecked, loadingMutationGallery
 						<div className="check-icon-container">
 							<Check size="20px" />
 						</div>
-						<div className="plus-icon-container" onClick={() => setIsSelected(!isSelected)}>
+						<div className="plus-icon-container" onClick={() => addPhotoToLayout(image)}>
 							<BigPlus size="80px" />
 						</div>
 					</div>

@@ -15,7 +15,7 @@ import {
 	ChargeSpinner,
 	SelectorMenuItem,
 } from "core/components";
-import { gallerySlice }                           from "store/Slices";
+import { gallerySlice, workSpaceSlice }           from "store/Slices";
 import { convertToArray, isValidArray, bindAll }  from "helpers";
 import { CircleArrow, CrossSelector, FilterIcon } from "Resources/icons";
 import "./BodyGallery.scss";
@@ -24,6 +24,8 @@ const BodyGallery = ({
 	isFetching,
 	galleryData,
 	gallerySlice,
+	workSpaceData,
+	workSpaceSlice,
 	galleryMutation,
 	galleryPathRoute,
 	gallerySelectedData,
@@ -68,6 +70,7 @@ const BodyGallery = ({
 									width={84}
 									fontSize={12}
 									type="outline"
+									onClick={() => workSpaceSlice.handleAutoFill({images : myPhotos})}
 									isLoading={loadingMutationGallery}
 								>
 									AUTOFILL
@@ -182,12 +185,13 @@ const BodyGallery = ({
 	);
 };
 
-const mapStateToProps = ({ gallerySlice, authSlice }) => ({
+const mapStateToProps = ({ gallerySlice, workSpaceSlice }) => ({
 	galleryPathRoute      : gallerySlice?.galleryPathName ?? "route",
 	gallerySelectedData   : gallerySlice?.selectedData ?? {},
+	workSpaceData         : workSpaceSlice?.data ?? {},
 	galleryTypeDropedView : gallerySlice?.typeDropedView ?? null,
 });
 
-const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});
+const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions, workSpaceSlice : workSpaceSlice.actions});
 
 export default connect(mapStateToProps, mapDispatchToProps) (BodyGallery);
