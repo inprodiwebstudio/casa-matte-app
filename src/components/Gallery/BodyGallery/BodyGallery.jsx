@@ -41,7 +41,10 @@ const BodyGallery = ({
 
 	const [ isHideSelected, setIsHideSelected ] = useState(false);
 
+	const [ selectedImagesIds, setSelectedImagesIds ] = useState([]);
+
 	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
+
 
 	useEffect(() => {
 		if (isValidArray(galleryData)) {
@@ -52,6 +55,47 @@ const BodyGallery = ({
 			return;
 		}
 	}, [galleryData]);
+
+	useEffect(() => {
+		const pagesList = convertToArray(workSpaceData?.pages);
+		const newDataSelected = [];
+		if (isValidArray(pagesList)) {
+			pagesList.forEach((data, i) => {
+				const isAVailableSheet2 = data?.sheet2;
+				const sheet1Photos = convertToArray(data?.sheet1?.photos);
+
+				if (isValidArray(sheet1Photos)) {
+					sheet1Photos.forEach((photo, e) => {
+						if (photo?.id !== "") {
+							newDataSelected.push(photo?.id);
+						}
+					});
+				}
+
+				if (isAVailableSheet2) {
+					const sheet2Photos = convertToArray(data?.sheet2?.photos);
+					if (isValidArray(sheet2Photos)) {
+						sheet2Photos.forEach((photo, e) => {
+							if (photo?.id !== "") {
+								newDataSelected.push(photo?.id);
+							}
+						});
+					}
+				}
+			});
+		}
+
+		setSelectedImagesIds(newDataSelected);
+	}, [workSpaceData, myPhotos]);
+
+
+	const isInUsePhoto = (imageId) => {
+		const findImage = selectedImagesIds.find(id => id === imageId);
+		if (findImage) {
+			return true;
+		}
+		return false;
+	};
 
 	return (
 		<div className="BodyGallery">
@@ -70,7 +114,7 @@ const BodyGallery = ({
 									width={84}
 									fontSize={12}
 									type="outline"
-									onClick={() => workSpaceSlice.handleAutoFill({images : myPhotos})}
+									onClick={() => workSpaceSlice.newAutoFill(myPhotos)}
 									isLoading={loadingMutationGallery}
 								>
 									AUTOFILL
@@ -170,6 +214,7 @@ const BodyGallery = ({
 											key={index}
 											image={data?.url}
 											fileId={data?.fileId}
+											isSelected={isInUsePhoto(data?.fileId)}
 											loadingMutationGallery={loadingMutationGallery}
 											onSelected={() => gallerySlice.setSelectedData(data)}
 											isChecked={gallerySelectedData[data?.fileId] ? true : false}

@@ -5,7 +5,9 @@ import { convertToArray } from "helpers";
 const initialState = {
 	data : {
 		sizePhotoBook : "LargeFormat",
-		frontPage     : {},
+		frontPage     : {
+			id : "Hola",
+		},
 		numberOfPages : 20,
 		Bound         : "",
 		firtsPage     : {
@@ -333,42 +335,40 @@ export const workSpaceSlice = createSlice({
 				const isSinglePage = (["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(newData[pageData?.id].sheet1?.layoutType));
 
 				if (!isNotCompleteSheet1 && !isNotCompleteSheet2) {
-					listOfPages.forEach((data, index) => {
-						const isNotCompleteSheet1 = convertToArray(newData[data?.id]["sheet1"]?.photos).find(e => e.id === "");
-						const isNotCompleteSheet2 = convertToArray(newData[data?.id]["sheet2"]?.photos).find(e => e.id === "");
-						if (isNotCompleteSheet1) {
-							const listOfPhotos = convertToArray(newData[data?.id]["sheet1"]?.photos);
+					// listOfPages.forEach((data, index) => {
+					// 	const isNotCompleteSheet1 = convertToArray(newData[data?.id]["sheet1"]?.photos).find(e => e.id === "");
+					// 	const isNotCompleteSheet2 = convertToArray(newData[data?.id]["sheet2"]?.photos).find(e => e.id === "");
+					// 	if (isNotCompleteSheet1) {
+					// 		const listOfPhotos = convertToArray(newData[data?.id]["sheet1"]?.photos);
 
-							firstLoop : for (let u = 0; u < listOfPhotos.length; u++) {
-								const data = listOfPhotos[u];
-								if (data?.id === "") {
-									console.log("entro");
+					// 		firstLoop : for (let u = 0; u < listOfPhotos.length; u++) {
+					// 			const data = listOfPhotos[u];
+					// 			if (data?.id === "") {
+					// 				newData[pageData?.id]["sheet1"]["photos"][u] = {
+					// 					id  : fileId,
+					// 					url : imageUrl,
+					// 				};
+					// 				break firstLoop;
+					// 			}
+					// 		}
+					// 	}
 
-									newData[pageData?.id]["sheet1"]["photos"][u] = {
-										id  : fileId,
-										url : imageUrl,
-									};
-									break firstLoop;
-								}
-							}
-						}
+					// 	if (isNotCompleteSheet2) {
+					// 		const listOfPhotos = convertToArray(newData[data?.id]["sheet2"]?.photos);
 
-						if (isNotCompleteSheet2) {
-							const listOfPhotos = convertToArray(newData[data?.id]["sheet2"]?.photos);
-
-							secondLoop : for (let e = 0; e < listOfPhotos.length; e++) {
-								const data = listOfPhotos[e];
-								if (data?.id === "") {
-									newData[pageData?.id]["sheet2"]["photos"][e] = {
-										id  : fileId,
-										url : imageUrl,
-									};
-									break secondLoop;
-								}
-							}
-						}
-					});
-					countPageIndex = listOfPages.length - 1;
+					// 		secondLoop : for (let e = 0; e < listOfPhotos.length; e++) {
+					// 			const data = listOfPhotos[e];
+					// 			if (data?.id === "") {
+					// 				newData[pageData?.id]["sheet2"]["photos"][e] = {
+					// 					id  : fileId,
+					// 					url : imageUrl,
+					// 				};
+					// 				break secondLoop;
+					// 			}
+					// 		}
+					// 	}
+					// });
+					// countPageIndex = listOfPages.length - 1;
 				}
 
 				if (isSinglePage) {
@@ -413,6 +413,51 @@ export const workSpaceSlice = createSlice({
 						}
 					}
 				}
+			}
+
+			state.data.pages = newData;
+		},
+		newAutoFill : (state, {payload}) => {
+			const newData = {...state?.data?.pages};
+
+			const listOfPages = [...convertToArray(newData)];
+			const listOfPhotos = [...payload];
+
+			const noImagesListKey = [];
+
+			listOfPages.forEach((data, i) => {
+				const sheet1Photos = convertToArray(data?.sheet1?.photos);
+				const sheet2Photos = data?.sheet2?.photos ? convertToArray(data?.sheet2?.photos) : null;
+
+				const isSinglePage = (["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(newData[data?.id].sheet1?.layoutType));
+
+				sheet1Photos.forEach((space, e) => {
+					if (!space?.id) {
+						noImagesListKey.push(`${data?.id}.sheet1.photos.${e}`);
+					}
+				});
+
+				if (sheet2Photos && !isSinglePage) {
+					sheet2Photos.forEach((space, e) => {
+						if (!space?.id) {
+							noImagesListKey.push(`${data?.id}.sheet2.photos.${e}`);
+						}
+					});
+				}
+			});
+
+			for (let i = 0; i < listOfPhotos.length; i++) {
+				const isAvailableContainer = noImagesListKey[i];
+				const imageData = listOfPhotos[i];
+				if (!isAvailableContainer) {
+					break;
+				}
+				const splitKeyData = noImagesListKey[i].split(".");
+
+				newData[splitKeyData[0]][splitKeyData[1]][splitKeyData[2]][splitKeyData[3]] = {
+					id  : imageData?.fileId,
+					url : imageData?.url,
+				};
 			}
 
 			state.data.pages = newData;

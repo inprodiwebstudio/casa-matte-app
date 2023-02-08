@@ -1,4 +1,3 @@
-import { useState }  from "react";
 import { connect }   from "react-redux";
 import { useParams } from "react-router";
 
@@ -8,9 +7,7 @@ import { workSpaceSlice }                        from "store/Slices";
 import { resizerImage, bindAll, convertToArray } from "helpers";
 import "./PhotoCard.scss";
 
-const PhotoCard = ({image, fileId, onSelected, isChecked, loadingMutationGallery, workSpaceSlice, workSpaceData}) => {
-	const [ isSelected, setIsSelected ] = useState(false);
-
+const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMutationGallery, workSpaceSlice, workSpaceData}) => {
 	const { pageId } = useParams();
 
 	const pageData = workSpaceData?.pages?.[pageId];
@@ -27,8 +24,6 @@ const PhotoCard = ({image, fileId, onSelected, isChecked, loadingMutationGallery
 
 		const isSinglePage = (["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(pageData?.sheet1?.layoutType));
 		const isAvailableSheet2 = pageData?.sheet2?.photos[0];
-
-		setIsSelected(!isSelected);
 
 		if (isSinglePage) {
 			workSpaceSlice.addPhoto({
