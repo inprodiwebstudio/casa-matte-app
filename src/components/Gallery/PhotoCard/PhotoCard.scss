@@ -9,6 +9,10 @@
     background-repeat: no-repeat;
     background-position: center;
 
+    &.isHidePhoto {
+        display: none;
+    }
+
     &:hover {
         .photo-overlay {
             width: 100% !important;

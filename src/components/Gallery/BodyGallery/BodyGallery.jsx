@@ -214,6 +214,7 @@ const BodyGallery = ({
 											key={index}
 											image={data?.url}
 											fileId={data?.fileId}
+											isHideSelected={isHideSelected}
 											isSelected={isInUsePhoto(data?.fileId)}
 											loadingMutationGallery={loadingMutationGallery}
 											onSelected={() => gallerySlice.setSelectedData(data)}

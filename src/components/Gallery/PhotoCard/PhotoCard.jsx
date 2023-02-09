@@ -8,7 +8,7 @@ import { workSpaceSlice }                        from "store/Slices";
 import { resizerImage, bindAll, convertToArray } from "helpers";
 import "./PhotoCard.scss";
 
-const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMutationGallery, workSpaceSlice, workSpaceData}) => {
+const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMutationGallery, workSpaceSlice, workSpaceData, isHideSelected}) => {
 	const { pageId } = useParams();
 
 	const pageData = workSpaceData?.pages?.[pageId];
@@ -86,7 +86,7 @@ const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMut
 
 	return (
 		<div
-			className={`PhotoCard ${isDragger && "isDragger"}`}
+			className={`PhotoCard ${isDragger && "isDragger"} ${(isHideSelected && isSelected) && "isHidePhoto"}`}
 			draggable="true"
 			onDragStart={() => handdleDrag()}
 			onDragEnd={() => handleLeaveDragger()}
