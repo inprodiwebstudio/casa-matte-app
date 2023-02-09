@@ -79,15 +79,23 @@ const PaginatorBar = ({ pagesData, workSpaceSlice }) => {
 			}
 			return newElement;
 		});
-		workSpaceSlice.newListPages(convertToObject(newList));
+
+		const listToSend = [
+			{...pagesData[convertToArray(pagesData)[0]?.id]},
+			...newList,
+		];
+		workSpaceSlice.newListPages(convertToObject(listToSend));
 	};
 
 	useEffect(() => {
+		// console.log(pageList);
 		const dataList = convertToArray(pagesData).slice(1, convertToArray(pagesData).length);
 		if (isValidArray(dataList)) {
+			const newPagesData = { ...pagesData };
+			delete newPagesData[convertToArray(pagesData)[0]?.id];
 			const newData = {
 				pages : {
-					...pagesData,
+					...newPagesData,
 				},
 				pagesIds : dataList.map(page => page?.id),
 			};
@@ -132,7 +140,7 @@ const PaginatorBar = ({ pagesData, workSpaceSlice }) => {
 											index={index}
 											key={pageId}
 											handleDelete={handleDelete}
-											pageData={pageList.pages[pageId]}
+											pageData={pagesData[pageId]}
 											draggableId={pageId}
 										/>
 									))
