@@ -10,12 +10,15 @@ import { ScrollBar }                                              from "core/com
 import FrontPage                                                  from "./FrontPage";
 import "./PaginatorBar.scss";
 
-const PaginatorBar = ({ pagesData, workSpaceSlice, fistPage }) => {
+const PaginatorBar = ({ pagesData, workSpaceSlice }) => {
 	const [ pageList, setPageList ] = useState({
 		pages    : {},
 		pagesIds : [],
 	});
+
 	let counter = 1;
+
+	const firstPageData = pagesData[convertToArray(pagesData)[0]?.id];
 
 	const dragerChangePosition = result => {
 		const { destination, source, draggableId } = result;
@@ -80,7 +83,7 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, fistPage }) => {
 	};
 
 	useEffect(() => {
-		const dataList = convertToArray(pagesData);
+		const dataList = convertToArray(pagesData).slice(1, convertToArray(pagesData).length);
 		if (isValidArray(dataList)) {
 			const newData = {
 				pages : {
@@ -110,8 +113,8 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, fistPage }) => {
 				<ItemPage
 					isFixedPage
 					handleDelete={handleDelete}
-					draggableId={fistPage.id}
-					pageData={fistPage}
+					draggableId={convertToArray(pagesData)[0]?.id}
+					pageData={firstPageData}
 				/>
 				<DragDropContext
 					onDragEnd={dragerChangePosition}
@@ -148,7 +151,6 @@ const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
 
 const mapStateToProps = ({ workSpaceSlice }) => ({
 	pagesData : workSpaceSlice?.data?.pages ?? {},
-	fistPage  : workSpaceSlice?.data?.firtsPage ?? {},
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (PaginatorBar);

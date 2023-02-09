@@ -8,21 +8,21 @@ const initialState = {
 		frontPage     : {},
 		numberOfPages : 20,
 		Bound         : "",
-		firtsPage     : {
-			id     : "page1",
-			sheet1 : {
-				pageNo     : 1,
-				layoutType : "",
-				text       : "",
-				photos     : {
-					0 : {
-						id  : "",
-						url : "",
+		pages         : {
+			page1 : {
+				id     : "page1",
+				sheet1 : {
+					pageNo     : 1,
+					layoutType : "",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
 					},
 				},
 			},
-		},
-		pages : {
 			page2 : {
 				id     : "page2",
 				sheet1 : {
