@@ -5,9 +5,7 @@ import { convertToArray } from "helpers";
 const initialState = {
 	data : {
 		sizePhotoBook : "LargeFormat",
-		frontPage     : {
-			id : "Hola",
-		},
+		frontPage     : {},
 		numberOfPages : 20,
 		Bound         : "",
 		firtsPage     : {
@@ -323,109 +321,7 @@ export const workSpaceSlice = createSlice({
 			};
 			state.data = newData;
 		},
-		handleAutoFill : (state, {payload}) => {
-			const newData = {...state?.data?.pages};
-			const images = payload.images;
-
-			const listOfPages = [...convertToArray(newData)];
-			let countPageIndex = 0;
-
-			loop1 : for (let i = 0; i < images.length; i++) {
-
-				const myPhotoData = images[i];
-
-				const pageData = listOfPages[countPageIndex];
-				const imageUrl = myPhotoData?.url;
-				const fileId = myPhotoData?.fileId;
-
-				const isNotCompleteSheet1 = convertToArray(newData[pageData?.id]["sheet1"]?.photos).find(e => e.id === "");
-				const isNotCompleteSheet2 = convertToArray(newData[pageData?.id]["sheet2"]?.photos).find(e => e.id === "");
-				const isSinglePage = (["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(newData[pageData?.id].sheet1?.layoutType));
-
-				if (!isNotCompleteSheet1 && !isNotCompleteSheet2) {
-					// listOfPages.forEach((data, index) => {
-					// 	const isNotCompleteSheet1 = convertToArray(newData[data?.id]["sheet1"]?.photos).find(e => e.id === "");
-					// 	const isNotCompleteSheet2 = convertToArray(newData[data?.id]["sheet2"]?.photos).find(e => e.id === "");
-					// 	if (isNotCompleteSheet1) {
-					// 		const listOfPhotos = convertToArray(newData[data?.id]["sheet1"]?.photos);
-
-					// 		firstLoop : for (let u = 0; u < listOfPhotos.length; u++) {
-					// 			const data = listOfPhotos[u];
-					// 			if (data?.id === "") {
-					// 				newData[pageData?.id]["sheet1"]["photos"][u] = {
-					// 					id  : fileId,
-					// 					url : imageUrl,
-					// 				};
-					// 				break firstLoop;
-					// 			}
-					// 		}
-					// 	}
-
-					// 	if (isNotCompleteSheet2) {
-					// 		const listOfPhotos = convertToArray(newData[data?.id]["sheet2"]?.photos);
-
-					// 		secondLoop : for (let e = 0; e < listOfPhotos.length; e++) {
-					// 			const data = listOfPhotos[e];
-					// 			if (data?.id === "") {
-					// 				newData[pageData?.id]["sheet2"]["photos"][e] = {
-					// 					id  : fileId,
-					// 					url : imageUrl,
-					// 				};
-					// 				break secondLoop;
-					// 			}
-					// 		}
-					// 	}
-					// });
-					// countPageIndex = listOfPages.length - 1;
-				}
-
-				if (isSinglePage) {
-					newData[pageData?.id]["sheet1"]["photos"][0] = {
-						id  : fileId,
-						url : imageUrl,
-					};
-					countPageIndex += 1;
-					continue loop1;
-				}
-
-				if (isNotCompleteSheet1) {
-					const listOfPhotos = convertToArray(newData[pageData.id]["sheet1"]?.photos);
-
-					loop2 : for (let j = 0; j < listOfPhotos.length; j++) {
-						const data = listOfPhotos[j];
-						if (data?.id === "") {
-							newData[pageData?.id]["sheet1"]["photos"][j] = {
-								id  : fileId,
-								url : imageUrl,
-							};
-							break loop2;
-						}
-					}
-					continue loop1;
-				}
-
-				if (isNotCompleteSheet2) {
-					const listOfPhotos = convertToArray(newData[pageData.id]["sheet2"]?.photos);
-
-					loop3 : for (let h = 0; h < listOfPhotos.length; h++) {
-						const data = listOfPhotos[h];
-						if (data?.id === "") {
-							newData[pageData.id]["sheet2"]["photos"][h] = {
-								id  : fileId,
-								url : imageUrl,
-							};
-							if (h === (listOfPhotos.length - 1)) {
-								countPageIndex += 1;
-							}
-							break loop3;
-						}
-					}
-				}
-			}
-
-			state.data.pages = newData;
-		},
-		newAutoFill : (state, {payload}) => {
+		autoFillImages : (state, {payload}) => {
 			const newData = {...state?.data?.pages};
 
 			const listOfPages = [...convertToArray(newData)];

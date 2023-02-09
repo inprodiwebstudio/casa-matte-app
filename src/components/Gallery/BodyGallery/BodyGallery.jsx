@@ -114,7 +114,7 @@ const BodyGallery = ({
 									width={84}
 									fontSize={12}
 									type="outline"
-									onClick={() => workSpaceSlice.newAutoFill(myPhotos)}
+									onClick={() => workSpaceSlice.autoFillImages(myPhotos)}
 									isLoading={loadingMutationGallery}
 								>
 									AUTOFILL
