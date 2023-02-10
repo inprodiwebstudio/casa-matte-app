@@ -1,9 +1,9 @@
 //Own components
 import "./TextInput.scss";
 
-const TextInput = ({...props}) => {
+const TextInput = ({variant, ...rest}) => {
 	return (
-		<input className="TextInput" type="text" {...props} />
+		<input className={`TextInput ${(variant === "invisible") && "invisible"}`} type="text" {...rest} />
 	);
 };
 

@@ -1,10 +1,11 @@
-import { connect } from "react-redux";
+import { connect }  from "react-redux";
+import { useState } from "react";
 
 //Own omponents
-import { apiImageKit }          from "store/api/imageKitApi";
-import { MutationSpinner }      from "core/components";
-import { gallerySlice }         from "store/Slices";
-import { MoreOption, PlusIcon } from "Resources/icons";
+import { apiImageKit }                from "store/api/imageKitApi";
+import { MutationSpinner, TextInput } from "core/components";
+import { gallerySlice }               from "store/Slices";
+import { MoreOption, PlusIcon }       from "Resources/icons";
 import {
 	bindAll,
 	isValidArray,
@@ -27,6 +28,8 @@ const Folder = ({
 }) => {
 	const selectedData = convertToArray(gallerySelectedData);
 	const isSelectedData = isValidArray(selectedData);
+
+	const [ isActiveInput, setActiveInput ] = useState(true);
 
 	const {data : imageKitData} = apiImageKit.useGetDirentsListQuery({
 		params : {
@@ -74,7 +77,7 @@ const Folder = ({
 			}
 		>
 			<div className={`header-folder ${loadingMutationGallery && "loading"}`}>
-				<h4>{name}</h4>
+				<TextInput disabled={isActiveInput} variant="invisible" value={name} />
 				<div className="more-icon-container">
 					<MoreOption size="20px" />
 				</div>

@@ -39,7 +39,7 @@ const SideBar = ({gallerySlice, galleryPath, selectedData, userName}) => {
 			data : {
 				imageIds : listOfSelectedImages,
 			},
-		});
+		}).unwrap();
 		gallerySlice.clearSelectedData();
 	};
 

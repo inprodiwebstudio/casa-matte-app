@@ -88,7 +88,6 @@ const PaginatorBar = ({ pagesData, workSpaceSlice }) => {
 	};
 
 	useEffect(() => {
-		// console.log(pageList);
 		const dataList = convertToArray(pagesData).slice(1, convertToArray(pagesData).length);
 		if (isValidArray(dataList)) {
 			const newPagesData = { ...pagesData };

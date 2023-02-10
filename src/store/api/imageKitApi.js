@@ -50,6 +50,28 @@ export const apiImageKit = createApi({
 			},
 			invalidatesTags : ["gallery"],
 		}),
+		addFolder : builder.mutation({
+			query({data, userName}) {
+				const body = data;
+				return {
+					url    : `upload/folder/${userName}`,
+					method : "POST",
+					body,
+				};
+			},
+			invalidatesTags : ["gallery"],
+		}),
+		addImage : builder.mutation({
+			query({data, userName}) {
+				const body = buildFormData(data);
+				return {
+					url    : `upload/${userName}`,
+					method : "POST",
+					body,
+				};
+			},
+			invalidatesTags : (result, error, arg) => arg?.tags ? [...arg.tags] : ["gallery"],
+		}),
 		addEditedImage : builder.mutation({
 			query({data, userName}) {
 				const body = buildFormData(data);

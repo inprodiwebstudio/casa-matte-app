@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { connect }             from "react-redux";
 import { useDropzone }         from "react-dropzone";
 
-
 //Own components
 import { gallerySlice } from "store/Slices";
+import { apiImageKit }  from "store/api/imageKitApi";
+
 
 import {
 	bindAll,
 	isValidArray,
-	uploadImageKitIo,
 } from "helpers";
 import {
 	Card,
@@ -27,6 +27,7 @@ import {
 import "./DropDoc.scss";
 
 const DropDoc = ({
+	userName,
 	gallerySlice,
 	galleryMutation,
 	galleryPathRoute,
@@ -38,44 +39,12 @@ const DropDoc = ({
 	const [ fileImage, setFileImage ] = useState([]);
 	const [ isSelectedFolder, setIsSelectedFolder ] = useState(false);
 	const [ folderName, setFolderName ] = useState("");
-	const [ completedPhotos, setPhotosCompleted ] = useState([]);
 	const [ isGenerateNewFolder, setIsGenerateNewFolder ] = useState(false);
+	const [ completedPhotos, setCompletedPhotos ] = useState([]);
 
-	const postImage = async (image, prentId, isRefetching) => {
-		const imageData = await uploadImageKitIo(image);
+	const [galleryImagesMutation] = apiImageKit.useAddImageMutation();
+	const [galleryFolderMutation] = apiImageKit.useAddFolderMutation();
 
-		const newGallery = await galleryMutation({
-			module : "gallery",
-			tags   : isRefetching ? ["gallery"] : ["null"],
-			data   : {
-				status : "publish",
-				meta   : {
-					isfolder : false,
-					fileid   : imageData?.data?.fileId,
-					imageurl : imageData?.data?.url,
-					parentid : prentId ? prentId : galleryPathRoute?.id,
-				},
-			},
-			method : "POST",
-		});
-		setPhotosCompleted(prev => {
-			const newData = [newGallery?.data, ...prev];
-			return newData;
-		});
-		if (prentId) {
-			return imageData?.data?.url;
-		}
-		return newGallery?.data;
-	};
-
-	const sendImages = (prentId) => {
-		const cloneFileList = prentId ? fileImage : (fileImage?.slice(0, fileImage?.length - 1));
-		const filesData = cloneFileList.map((image) => {
-			const availableParentId = prentId ? prentId : false;
-			return postImage(image, availableParentId);
-		});
-		return filesData;
-	};
 
 	const handleDrop = (files) => {
 		const isValidFiles = isValidArray(files);
@@ -96,10 +65,24 @@ const DropDoc = ({
 		},
 	});
 
-	const handleAddPhotos = () => {
+	const handleAddPhotos =  () => {
 		setLoading(true);
-		Promise.allSettled([...sendImages()]).then(async (values) => {
-			await postImage(fileImage[fileImage?.length - 1], false, true);
+		const listOfPromises = fileImage.map(async (file, index) => {
+			const respImage = await galleryImagesMutation({
+				data : {
+					file,
+				},
+				userName,
+				tags : (index === fileImage.length - 1) ? ["gallery"] : [],
+			});
+			setCompletedPhotos(prev => {
+				const newData = [respImage?.data, ...prev];
+				return newData;
+			});
+			return respImage;
+		});
+
+		Promise.all([...listOfPromises]).then((values) => {
 			setLoading(false);
 			gallerySlice.setTypeDropedView(null);
 		}, reason => {
@@ -111,59 +94,42 @@ const DropDoc = ({
 
 	const handleAddFolder = async () => {
 		setLoading(true);
-		if (fileImage?.length <= 0) {
-			setIsGenerateNewFolder(true);
-		}
-
-		const resFolder = await galleryMutation({
-			module : "gallery",
-			tags   : !isValidArray(fileImage) ? ["gallery"] : ["null"],
-			data   : {
-				status : "publish",
-				meta   : {
-					isfolder : true,
-					parentid : "route",
-					name     : folderName,
-				},
-			},
-			method : "POST",
-		});
-		if (resFolder?.data && (isValidArray(fileImage))) {
-			Promise.allSettled(sendImages(resFolder?.data?.id)).then(async values => {
-				const listOfImages = values.map(image => image?.value);
-
-				const thumbimages =
-				(listOfImages?.length > 5) ?
-					[listOfImages[0], listOfImages[1], listOfImages[2], listOfImages[3], listOfImages[4]] :
-					listOfImages;
-
-				setIsGenerateNewFolder(true);
-
-				await galleryMutation({
-					module : `gallery/${resFolder?.data?.id}`,
-					tags   : ["gallery"],
-					data   : {
-						status : "publish",
-						meta   : {
-							thumbimages : [...thumbimages],
-						},
+		if (isValidArray(fileImage)) {
+			const listOfPromises = fileImage.map(async (file, index) => {
+				const respImage = await galleryImagesMutation({
+					data : {
+						file,
+						folderName,
 					},
-					method : "POST",
+					userName,
+					tags : (index === fileImage.length - 1) ? ["gallery"] : [],
 				});
+				setCompletedPhotos(prev => {
+					const newData = [respImage?.data, ...prev];
+					return newData;
+				});
+				return respImage;
+			});
+
+			Promise.all([...listOfPromises]).then((values) => {
 				setLoading(false);
-				setIsGenerateNewFolder(false);
 				gallerySlice.setTypeDropedView(null);
 			}, reason => {
 				setLoading(false);
-				setIsGenerateNewFolder(false);
 				gallerySlice.setTypeDropedView(null);
 				console.error(reason);
 			});
 			return;
 		}
-		setLoading(false);
-		setIsGenerateNewFolder(false);
+		setIsGenerateNewFolder(true);
+		await galleryFolderMutation({
+			data : {
+				folderName,
+			},
+			userName,
+		});
 		gallerySlice.setTypeDropedView(null);
+		setLoading(false);
 	};
 
 	useEffect(() => {
@@ -171,6 +137,7 @@ const DropDoc = ({
 			setFileImage([]);
 		}
 	}, [galleryTypeDropedView]);
+
 
 	return (
 		<>
@@ -183,7 +150,10 @@ const DropDoc = ({
 							<Loading />
 							{
 								!isGenerateNewFolder && (
-									<div className="currentUpluaded">{completedPhotos.length} de {fileImage.length}</div>
+									<div className="loadingPhotosConainer">
+										<div className="currentUpluaded">Cargando Fotos...</div>
+										<div className="currentUpluaded">{completedPhotos.length} de {fileImage.length}</div>
+									</div>
 								)
 							}
 							{
@@ -276,9 +246,10 @@ const DropDoc = ({
 
 const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});
 
-const mapStateToProps = ({ gallerySlice }) => ({
+const mapStateToProps = ({ gallerySlice, authSlice }) => ({
 	galleryTypeDropedView : gallerySlice?.typeDropedView ?? null,
 	galleryPathRoute      : gallerySlice?.galleryPathName ?? {},
+	userName              : authSlice?.user?.username ?? undefined,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (DropDoc);

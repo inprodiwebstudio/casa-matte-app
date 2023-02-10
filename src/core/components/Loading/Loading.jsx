@@ -13,7 +13,6 @@ const Loading = () => {
 				aria-label="Loading Spinner"
 				data-testid="loader"
 			/>
-			<h5>Subiendo Fotos...</h5>
 		</div>
 	);
 };
