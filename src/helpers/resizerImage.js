@@ -1,7 +1,7 @@
 //external
 import ImageKit from "imagekit-javascript";
 
-const resizerImage = (imgUrl, width, height) => {
+const resizerImage = (imgUrl, width, height, quality) => {
 	const imagekit = new ImageKit({
 		urlEndpoint : "https://ik.imagekit.io/joabMedel",
 	});
@@ -9,8 +9,13 @@ const resizerImage = (imgUrl, width, height) => {
 	const img = imagekit.url({
 		src            : imgUrl,
 		transformation : [{
-			"height" : height ? height : "150",
-			"width"  : width ? width : "150",
+			...(!quality && {
+				"height" : height ? height : "150",
+				"width"  : width ? width : "150",
+			}),
+			...(quality && {
+				"quality" : quality,
+			}),
 		}],
 	});
 

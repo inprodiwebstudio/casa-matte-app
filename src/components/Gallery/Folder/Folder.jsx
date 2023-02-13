@@ -1,5 +1,4 @@
-import { connect }  from "react-redux";
-import { useState } from "react";
+import { connect } from "react-redux";
 
 //Own omponents
 import { apiImageKit }                from "store/api/imageKitApi";
@@ -29,7 +28,7 @@ const Folder = ({
 	const selectedData = convertToArray(gallerySelectedData);
 	const isSelectedData = isValidArray(selectedData);
 
-	const [ isActiveInput, setActiveInput ] = useState(true);
+	// const [ isActiveInput, setActiveInput ] = useState(true);
 
 	const {data : imageKitData} = apiImageKit.useGetDirentsListQuery({
 		params : {
@@ -77,7 +76,7 @@ const Folder = ({
 			}
 		>
 			<div className={`header-folder ${loadingMutationGallery && "loading"}`}>
-				<TextInput disabled={isActiveInput} variant="invisible" value={name} />
+				<TextInput variant="invisible" value={name} />
 				<div className="more-icon-container">
 					<MoreOption size="20px" />
 				</div>
