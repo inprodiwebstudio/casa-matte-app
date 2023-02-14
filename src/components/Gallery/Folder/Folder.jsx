@@ -1,4 +1,5 @@
-import { connect } from "react-redux";
+import { connect }             from "react-redux";
+import { useState, useEffect } from "react";
 
 //Own omponents
 import { apiImageKit }                from "store/api/imageKitApi";
@@ -28,7 +29,7 @@ const Folder = ({
 	const selectedData = convertToArray(gallerySelectedData);
 	const isSelectedData = isValidArray(selectedData);
 
-	// const [ isActiveInput, setActiveInput ] = useState(true);
+	const [ folderName, setFolderName ] = useState("");
 
 	const {data : imageKitData} = apiImageKit.useGetDirentsListQuery({
 		params : {
@@ -68,6 +69,16 @@ const Folder = ({
 		});
 	};
 
+	const handleEditFolderName = (e) => {
+		const value = e.target.value;
+		setFolderName(value);
+	};
+
+	useEffect(() => {
+		setFolderName(name);
+	}, [name]);
+
+
 	return (
 		<div
 			className={`Folder ${folderNoSelectable && "cursor-regular"} ${!loadingMutationGallery && "isAvailable"}`}
@@ -76,7 +87,7 @@ const Folder = ({
 			}
 		>
 			<div className={`header-folder ${loadingMutationGallery && "loading"}`}>
-				<TextInput variant="invisible" value={name} />
+				<TextInput onChange={(e) => handleEditFolderName(e)} variant="invisible" value={folderName} />
 				<div className="more-icon-container">
 					<MoreOption size="20px" />
 				</div>

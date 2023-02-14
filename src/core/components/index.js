@@ -12,4 +12,5 @@ export { default as Card }             from "./Card";
 export { default as CheckBox }         from "./CheckBox";
 export { default as Loading }          from "./Loading";
 export { default as ChargeSpinner }    from "./ChargeSpinner";
+export { default as TextArea }         from "./TextArea";
 export { default as MutationSpinner }  from "./MutationSpinner";

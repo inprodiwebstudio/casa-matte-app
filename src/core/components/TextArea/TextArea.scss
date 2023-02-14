@@ -1,0 +1,13 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.text-input-body {
+   width: 100%;
+   height: 100%;
+   resize: none;
+   outline: none !important;
+   border: none !important;
+
+   &:focus {
+       border: 1px solid #5FD15C !important;
+   }
+}
