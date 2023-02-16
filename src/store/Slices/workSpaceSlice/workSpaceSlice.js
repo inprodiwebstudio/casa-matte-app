@@ -313,6 +313,9 @@ export const workSpaceSlice = createSlice({
 			};
 			state.data = newData;
 		},
+		addText : (state, {payload}) => {
+			state.data.pages[payload.pageId][payload.sheetNo]["text"] = payload.text;
+		},
 		removePhoto : (state, {payload}) => {
 			const newData = {...state.data};
 			newData.pages[payload.pageId][payload.sheetNo]["photos"][payload.layoutNo] = {
@@ -376,13 +379,13 @@ export const workSpaceSlice = createSlice({
 				cloneData.pages[payload.pageId]["sheet1"] = {
 					...cloneData.pages[payload.pageId]["sheet1"],
 					layoutType : payload.layout,
-					text       : "",
+					text       : cloneData.pages[payload.pageId]["sheet1"]["text"],
 					photos     : myPhotos,
 				};
 				cloneData.pages[payload.pageId]["sheet2"] = {
 					...cloneData.pages[payload.pageId]["sheet2"],
 					layoutType : "",
-					text       : "",
+					text       : cloneData.pages[payload.pageId]["sheet2"]["text"],
 					photos     : {},
 				};
 				state.data = cloneData;
@@ -394,7 +397,6 @@ export const workSpaceSlice = createSlice({
 			cloneData.pages[payload.pageId][payload.sheetId] = {
 				...cloneData.pages[payload.pageId][payload.sheetId],
 				layoutType : payload.layout,
-				text       : "",
 				photos     : myPhotos,
 			};
 			state.data = cloneData;

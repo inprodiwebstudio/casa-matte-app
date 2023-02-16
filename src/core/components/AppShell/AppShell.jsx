@@ -1,10 +1,19 @@
 import { connect } from "react-redux";
-//Own components
+
+//Own component;
 import { bindAll }        from "helpers";
 import { workSpaceSlice } from "store/Slices";
 import "./AppShell.scss";
 
-const AppShell = ({Body, header, navbar, footer, sidebar, workSpaceSlice, isSelectedPage}) => {
+const AppShell = ({
+	Body,
+	header,
+	navbar,
+	footer,
+	sidebar,
+	workSpaceSlice,
+	isSelectedPage,
+}) => {
 	return (
 		<div
 			id="AppShell"

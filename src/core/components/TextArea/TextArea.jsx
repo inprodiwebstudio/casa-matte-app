@@ -1,16 +1,13 @@
 import "./TextArea.scss";
 
-const TextArea = () => {
-	const stopPropagation = (e) => {
-		e.stopPropagation();
-	};
+const TextArea = ({...rest}) => {
 	return (
 		<textarea
-			onClick={(e) => stopPropagation(e)}
 			className="text-input-body"
 			name="customTextArea"
 			id="customTextArea"
 			placeholder="Has click para escribir"
+			{...rest}
 		/>
 	);
 };

@@ -1,8 +1,11 @@
 //Own components
 import EditPhoto from "./EditPhoto";
+import EditText  from "./EditText";
+
 
 const modals = {
 	editPhoto : EditPhoto,
+	editText  : EditText,
 };
 
 const modalsConfig = {
