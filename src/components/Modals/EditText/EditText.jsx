@@ -1,18 +1,33 @@
-import { Editor }      from "react-draft-wysiwyg";
-import { EditorState } from "draft-js";
-import { useState }    from "react";
+import { Editor }                    from "react-draft-wysiwyg";
+import draftToHtml                   from "draftjs-to-html";
+import { EditorState, convertToRaw } from "draft-js";
+import { useState }                  from "react";
+import { closeAllModals }            from "@mantine/modals";
+import { workSpaceSlice }            from "store/Slices";
+import { connect }                   from "react-redux";
 
-import { Button } from "core/components";
-import { Check }  from "Resources/icons";
+
+import { Button }  from "core/components";
+import { Check }   from "Resources/icons";
+import { bindAll } from "helpers";
 import "./EditText.scss";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
-const EditText = () => {
+const EditText = ({innerProps, workSpaceSlice}) => {
 	const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+	const { pageId, sheetNo } = innerProps;
 
 	const onEditorStateChange = function(editorState) {
 		setEditorState(editorState);
 	};
+
+	const handleAddText = () => {
+		const text = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+		workSpaceSlice.addText({pageId, sheetNo, text});
+		closeAllModals();
+	};
+
 
 	return (
 		<div className="EditText">
@@ -64,6 +79,7 @@ const EditText = () => {
 					type="subtle"
 					width={117}
 					height={39}
+					onClick={() => handleAddText()}
 				>
 					Terminar
 				</Button>
@@ -72,4 +88,6 @@ const EditText = () => {
 	);
 };
 
-export default EditText;
+const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
+
+export default connect(null, mapDispatchToProps) (EditText);
