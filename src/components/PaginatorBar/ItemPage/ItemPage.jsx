@@ -66,7 +66,7 @@ const ItemPage = ({
 					className="cross-icon-conatiner"
 					{
 						...(provided && {
-							onCLick : () => handleDelete(pageData?.id, index),
+							onClick : () => handleDelete(pageData?.id, index),
 						})
 					}
 				>

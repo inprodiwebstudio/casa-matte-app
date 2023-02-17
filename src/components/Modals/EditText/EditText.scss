@@ -1,5 +1,207 @@
 @import "/src/Resources/scss/variables/colorThemes";
+@font-face {
+    font-family: "Aitana-Regular";
+    src: url("../../../Resources/Fonts/GandhiSerif-Regular.ttf");
+}
+@font-face {
+    font-family: "BlakaHollow-Regular";
+    src: url("../../../Resources/Fonts/BlakaHollow-Regular.ttf");
+}
 
 .EditText {
+    font-family: Helvetica, sans-serif;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 15px;
 
+    .button-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row-reverse;
+        padding-right: 20px;
+    }
+
+    .text-tittle {
+        font-size: 18px;
+        font-weight: 300;
+        text-align: center;
+        color : $dark-color;
+    }
+
+    .toolbarClassName {
+        background: $secondary-color !important;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .editorClassName {
+        border : 1px solid $primary-color;
+        margin-bottom: 0px !important;
+        height: calc(100% - 80px);
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 19px;
+    }
+
+    .wrapperClassName {
+        height: calc(100% - 80px);
+    }
+
+    .font-family-input {
+        @font-face {
+            font-family: "Aitana-Regular";
+            src: url("../../../Resources/Fonts/GandhiSerif-Regular.ttf");
+        }
+        @font-face {
+            font-family: "BlakaHollow-Regular";
+            src: url("../../../Resources/Fonts/BlakaHollow-Regular.ttf");
+        }
+        font-family: Helvetica;
+        background: transparent !important;
+        border : 1px solid #C3CEC0;
+        border-radius: 4px;
+        height: 44px;
+        width: 189px;
+        padding-left: 10px;
+        color: #646962 !important;
+
+        &:hover {
+            box-shadow: none !important;
+        }
+    }
+
+    .font-family-dropDown { 
+        width: 189px;
+        margin-left: -11px;
+        margin-top: 5px;
+        border : 1px solid #C3CEC0;
+        border-radius: 4px;
+        box-shadow: none !important;
+    }
+
+    .font-size-selector {
+        font-family: Helvetica;
+        background: transparent !important;
+        border : 1px solid #C3CEC0;
+        border-radius: 4px;
+        height: 44px;
+        width: 80px;
+        padding-left: 10px;
+        padding-right: 10px;
+        color: #646962 !important;
+
+        &:hover {
+            box-shadow: none !important;
+        }
+    }
+
+    .font-size-dropdown {
+        width: 80px;
+        margin-left: -11px;
+        margin-top: 5px;
+        border : 1px solid #C3CEC0;
+        border-radius: 4px;
+        box-shadow: none !important;
+    }
+
+    .color-picker-editor {
+        font-family: Helvetica;
+        background: transparent !important;
+        border : 1px solid #C3CEC0;
+        border-radius: 4px;
+        height: 44px;
+        width: 44px;
+        padding-left: 10px;
+        padding-right: 10px;
+        color: #646962 !important;
+
+        &:hover {
+            box-shadow: none !important;
+        }
+    }
+
+    .popup-styled-picker {
+        width: 190px;
+        height: 300px;
+        margin-left: -11px;
+        margin-top: 15px;
+        border : 1px solid #C3CEC0;
+        border-radius: 4px;
+        box-shadow: none !important;
+
+        & .rdw-colorpicker-modal-options {
+            overflow: hidden;
+        }
+
+        & .rdw-colorpicker-modal-style-label-active {
+            border-bottom: 2px solid $primary-color;
+        }
+    }
+
+    .inline-styled {
+        font-family: Helvetica;
+        background: transparent !important;
+        border : 1px solid #C3CEC0;
+        border-radius: 4px;
+        height: 44px;
+        width: 44px;
+        padding-left: 10px;
+        padding-right: 10px;
+        color: #646962 !important;
+
+        &:hover {
+            box-shadow: none !important;
+        }
+    }
+
+    .text-aling-styled {
+        font-family: Helvetica;
+        background: transparent !important;
+        border : 1px solid #C3CEC0;
+        border-radius: 4px;
+        height: 44px;
+        width: 44px;
+        padding-left: 10px;
+        padding-right: 10px;
+        color: #646962 !important;
+
+        &:hover {
+            box-shadow: none !important;
+        }
+    }
+
+    .history-styled {
+        background: transparent !important;
+        box-shadow: none !important;
+
+        &:hover {
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+    }
+
+    .history-undo {
+        background: transparent !important;
+        box-shadow: none !important;
+
+        &:hover {
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+    }
+
+
+    .history-redo {
+        background: transparent !important;
+        box-shadow: none !important;
+
+        &:hover {
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+    }
 }
