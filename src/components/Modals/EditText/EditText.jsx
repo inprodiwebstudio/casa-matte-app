@@ -29,6 +29,9 @@ const EditText = ({innerProps, workSpaceSlice}) => {
 	};
 
 
+	console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
+
+
 	return (
 		<div className="EditText">
 			<Editor
