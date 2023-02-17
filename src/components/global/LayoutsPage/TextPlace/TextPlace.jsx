@@ -1,19 +1,14 @@
 import { openContextModal } from "@mantine/modals";
-// import { Text }             from "@mantine/core";
 
 //Own components
 import "./TextPlace.scss";
 
 
 const TextPlace = ({pageId, sheetNo, dataPages}) => {
+	const dataTextPage = dataPages?.[pageId]?.[sheetNo]?.["text"] ?? "";
 	const handleClick = (e) => {
 		e.stopPropagation();
 	};
-	// const ConvertStringToHTML = (str) => {
-	// 	const parser = new DOMParser();
-	// 	const doc = parser.parseFromString(str, "text/html");
-	// 	return doc.body;
-	//  };
 
 	const activeEditText = (e) => {
 		e.stopPropagation();
@@ -23,6 +18,7 @@ const TextPlace = ({pageId, sheetNo, dataPages}) => {
 			innerProps : {
 				pageId,
 				sheetNo,
+				dataTextPage,
 			},
 		});
 	};
@@ -36,7 +32,7 @@ const TextPlace = ({pageId, sheetNo, dataPages}) => {
 		>
 			{
 				(dataPages?.[pageId]?.[sheetNo]?.["text"] !== "") && (
-					<div dangerouslySetInnerHTML={{__html : dataPages?.[pageId]?.[sheetNo]?.["text"]}} />
+					<div dangerouslySetInnerHTML={{__html : dataTextPage}} />
 				)
 			}
 		</div>

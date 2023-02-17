@@ -1,10 +1,12 @@
-import { Editor }                    from "react-draft-wysiwyg";
-import draftToHtml                   from "draftjs-to-html";
-import { EditorState, convertToRaw } from "draft-js";
-import { useState }                  from "react";
-import { closeAllModals }            from "@mantine/modals";
-import { workSpaceSlice }            from "store/Slices";
-import { connect }                   from "react-redux";
+import { Editor }  from "react-draft-wysiwyg";
+import draftToHtml from "draftjs-to-html";
+import htmlToDraft from "html-to-draftjs";
+
+import { EditorState, convertToRaw, ContentState } from "draft-js";
+import { useState, useEffect }                     from "react";
+import { closeAllModals }                          from "@mantine/modals";
+import { workSpaceSlice }                          from "store/Slices";
+import { connect }                                 from "react-redux";
 
 
 import { Button }  from "core/components";
@@ -16,7 +18,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 const EditText = ({innerProps, workSpaceSlice}) => {
 	const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
-	const { pageId, sheetNo } = innerProps;
+	const { pageId, sheetNo, dataTextPage } = innerProps;
 
 	const onEditorStateChange = function(editorState) {
 		setEditorState(editorState);
@@ -28,9 +30,14 @@ const EditText = ({innerProps, workSpaceSlice}) => {
 		closeAllModals();
 	};
 
-
-	console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
-
+	useEffect(() => {
+		if (dataTextPage && dataTextPage !== "") {
+			const contentBlock = htmlToDraft(dataTextPage);
+			const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+			const editorState = EditorState.createWithContent(contentState);
+			setEditorState(editorState);
+		}
+	}, [dataTextPage]);
 
 	return (
 		<div className="EditText">
