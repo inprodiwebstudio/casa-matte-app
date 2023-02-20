@@ -39,7 +39,7 @@ const LargeFormat = ({pageData, workSpaceSlice, pageDataSelected, isInWorkSpcae}
 	}, [pageDataSelected]);
 
 	return (
-		<div className={`LargeFormat ${(!pageData.sheet2 && (pageData?.sheet1?.layoutType !== "FrontLayout")) && "isOnePage"}`}>
+		<div className={`LargeFormat ${(!pageData.sheet2 && !isSinglePage) && "isOnePage"} ${isSinglePage && "isSinglePage"}`}>
 			<div
 				className={
 					`page-body ${(currentSelectedPage === "sheet1") && "isActivePage"}`
