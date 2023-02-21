@@ -4,6 +4,7 @@ import { convertToArray, History, isValidArray } from "helpers";
 
 const initialState = {
 	data : {
+		useName       : "JoabMedel",
 		sizePhotoBook : "LargeFormat",
 		frontPage     : {},
 		numberOfPages : 20,
