@@ -1,5 +1,5 @@
-import { createSlice }    from "@reduxjs/toolkit";
-import { convertToArray } from "helpers";
+import { createSlice }                           from "@reduxjs/toolkit";
+import { convertToArray, History, isValidArray } from "helpers";
 
 
 const initialState = {
@@ -275,6 +275,283 @@ const initialState = {
 			},
 		},
 	},
+	initialData : {
+		sizePhotoBook : "LargeFormat",
+		frontPage     : {},
+		numberOfPages : 20,
+		Bound         : "",
+		pages         : {
+			page1 : {
+				id     : "page1",
+				sheet1 : {
+					pageNo     : 1,
+					layoutType : "",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page2 : {
+				id     : "page2",
+				sheet1 : {
+					pageNo     : 2,
+					layoutType : "Mod2",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 3,
+					layoutType : "",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page3 : {
+				id     : "page3",
+				sheet1 : {
+					pageNo     : 4,
+					layoutType : "Mod3",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 5,
+					layoutType : "",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page4 : {
+				id     : "page4",
+				sheet1 : {
+					pageNo     : 6,
+					layoutType : "Mod4",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 7,
+					layoutType : "Mod15",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page5 : {
+				id     : "page5",
+				sheet1 : {
+					pageNo     : 8,
+					layoutType : "Mod5",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 9,
+					layoutType : "Mod6",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page6 : {
+				id     : "page6",
+				sheet1 : {
+					pageNo     : 10,
+					layoutType : "Mod7",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 11,
+					layoutType : "Mod8",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page7 : {
+				id     : "page7",
+				sheet1 : {
+					pageNo     : 12,
+					layoutType : "Mod9",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 13,
+					layoutType : "Mod10",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page8 : {
+				id     : "page8",
+				sheet1 : {
+					pageNo     : 14,
+					layoutType : "Mod11",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 15,
+					layoutType : "Mod12",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page9 : {
+				id     : "page9",
+				sheet1 : {
+					pageNo     : 16,
+					layoutType : "Mod13",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 17,
+					layoutType : "Mod14",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page10 : {
+				id     : "page10",
+				sheet1 : {
+					pageNo     : 18,
+					layoutType : "Mod16",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 19,
+					layoutType : "",
+					text       : "",
+					photos     : {},
+				},
+			},
+			page11 : {
+				id     : "page11",
+				sheet1 : {
+					pageNo     : 20,
+					layoutType : "",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+		},
+	},
+	history : {
+		undo    : [],
+		redo    : [],
+		current : null,
+	},
 	pageDataSelected    : null,
 	currentPhotoDragger : null,
 	layoutFilter        : {
@@ -304,6 +581,15 @@ export const workSpaceSlice = createSlice({
 		},
 		newListPages : (state, {payload}) => {
 			state.data.pages = {...payload};
+			const history = new History();
+			history.undoStack = state.history.undo;
+			const undoNewData = {
+				...state.data,
+				pages : {...payload},
+			};
+			history.addToUndoStack(undoNewData);
+			state.history.undo = history.undoStack;
+			state.history.current = history.currentAction;
 		},
 		addPhoto : (state, {payload}) => {
 			const newData = {...state.data};
@@ -312,9 +598,39 @@ export const workSpaceSlice = createSlice({
 				url : payload.image.image,
 			};
 			state.data = newData;
+			const history = new History();
+			history.undoStack = state.history.undo;
+			const undoNewData = {
+				...newData,
+			};
+			history.addToUndoStack(undoNewData);
+			state.history.undo = history.undoStack;
+			state.history.current = history.currentAction;
 		},
 		addText : (state, {payload}) => {
 			state.data.pages[payload.pageId][payload.sheetNo]["text"] = payload.text;
+
+			const myUndoData = {
+				...state.data,
+				pages : {
+					...state.data.pages,
+					[payload.pageId] : {
+						...state.data.pages[payload.pageId],
+						[payload.sheetNo] : {
+							...state.data.pages[payload.pageId][payload.sheetNo],
+							text : payload.text,
+						},
+					},
+				},
+			};
+			const history = new History();
+			history.undoStack = state.history.undo;
+			const undoNewData = {
+				...myUndoData,
+			};
+			history.addToUndoStack(undoNewData);
+			state.history.undo = history.undoStack;
+			state.history.current = history.currentAction;
 		},
 		removePhoto : (state, {payload}) => {
 			const newData = {...state.data};
@@ -323,6 +639,14 @@ export const workSpaceSlice = createSlice({
 				url : "",
 			};
 			state.data = newData;
+			const history = new History();
+			history.undoStack = state.history.undo;
+			const undoNewData = {
+				...newData,
+			};
+			history.addToUndoStack(undoNewData);
+			state.history.undo = history.undoStack;
+			state.history.current = history.currentAction;
 		},
 		autoFillImages : (state, {payload}) => {
 			const newData = {...state?.data?.pages};
@@ -368,6 +692,18 @@ export const workSpaceSlice = createSlice({
 			}
 
 			state.data.pages = newData;
+
+			const history = new History();
+			history.undoStack = state.history.undo;
+			const undoNewData = {
+				...state.data,
+				pages : {
+					...newData,
+				},
+			};
+			history.addToUndoStack(undoNewData);
+			state.history.undo = history.undoStack;
+			state.history.current = history.currentAction;
 		},
 		addLayout : (state, {payload}) => {
 			const cloneData = {...state.data};
@@ -400,6 +736,43 @@ export const workSpaceSlice = createSlice({
 				photos     : myPhotos,
 			};
 			state.data = cloneData;
+
+			const history = new History();
+			history.undoStack = state.history.undo;
+			const undoNewData = {
+				...cloneData,
+			};
+			history.addToUndoStack(undoNewData);
+			state.history.undo = history.undoStack;
+			state.history.current = history.currentAction;
+		},
+		undo : (state, {payload}) => {
+			const history = new History();
+			history.undoStack = state.history.undo;
+			history.redoStack = state.history.redo;
+			history.undo();
+			state.history.undo = history.undoStack;
+			state.history.redo = history.redoStack;
+			state.history.current = history.currentAction;
+			if (isValidArray(history.undoStack)) {
+				state.data = history.undoStack[history.undoStack.length - 1];
+			} else {
+				state.data = state.initialData;
+			}
+		},
+		redo : (state, {payload}) => {
+			const history = new History();
+			history.redoStack = state.history.redo;
+			history.undoStack = state.history.undo;
+			history.redo();
+			state.history.undo = history.undoStack;
+			state.history.redo = history.redoStack;
+			state.history.current = history.currentAction;
+			if (isValidArray(history.redoStack)) {
+				state.data = history.redoStack[history.redoStack.length - 1];
+			} else {
+				state.data = history.undoStack[history.undoStack.length - 1];
+			}
 		},
 	},
 });

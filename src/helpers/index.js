@@ -5,6 +5,7 @@ export { default as isValidArray }           from "./isValidArray";
 export { default as buildFormData }          from "./buildFormData";
 export { default as convertToObject }        from "./convertToObject";
 export { default as bindAll }                from "./Functions/bindAll";
+export { default as History }                from "./History";
 export { default as postRequestResponse }    from "./postRequestResponse";
 export { default as getMainLettersFromName } from "./getMainLettersFromName";
 export { default as uploadImageKitIo }       from "./uploadImageKitIo";

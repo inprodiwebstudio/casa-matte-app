@@ -20,6 +20,8 @@ import CrossSelector from "./CrossSelector";
 import FilterIcon    from "./FilterIcon";
 import PhotoGallery  from "./PhotoGallery";
 import Pencil        from "./Pencil";
+import UndoArrow     from "./UndoArrow";
+import RedoArrow     from "./RedoArrow";
 
 
 export {
@@ -33,6 +35,7 @@ export {
 	BigPlus,
 	DropFile,
 	DragIcon,
+	UndoArrow,
 	SaveIcom,
 	ArrowTop,
 	PlusIcon,
@@ -41,6 +44,7 @@ export {
 	FilterIcon,
 	FolderPlus,
 	MoveArrows,
+	RedoArrow,
 	MoreOption,
 	CircleArrow,
 	PhotoGallery,

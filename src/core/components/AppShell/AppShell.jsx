@@ -14,7 +14,6 @@ const AppShell = ({
 	workSpaceSlice,
 	isSelectedPage,
 }) => {
-
 	return (
 		<div
 			id="AppShell"

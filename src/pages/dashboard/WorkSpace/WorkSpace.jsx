@@ -1,12 +1,16 @@
 import { connect }             from "react-redux";
 import { useState, useEffect } from "react";
 import { useParams }           from "react-router-dom";
+//Helpers
 
 //Own components
-import FormatPage from "components/FormatPage";
+import { RedoArrow }             from "Resources/icons";
+import { bindAll, isValidArray } from "helpers";
+import { workSpaceSlice }        from "store/Slices";
+import FormatPage                from "components/FormatPage";
 import "./WorkSpace.scss";
 
-const WorkSpace = ({ workSpaceData }) => {
+const WorkSpace = ({ workSpaceData, workSpaceSlice, workSpaceHistory }) => {
 	const { pageId } = useParams();
 
 	const isFrontLayout = pageId === "frontpage";
@@ -35,9 +39,36 @@ const WorkSpace = ({ workSpaceData }) => {
 		}
 	}, [pageId, workSpaceData]);
 
+	const isAvailableUndo = isValidArray(workSpaceHistory.undo);
+	const isAvailableRedo = isValidArray(workSpaceHistory.redo);
+
 	return (
 		<div className="WorkSpace">
 			<div className="canva-space">
+				<div className="undo-redo-container">
+					<div
+						className={`action-styled ${!isAvailableUndo && "disabled"}`}
+						{...(
+							isAvailableUndo && {
+								onClick : () => workSpaceSlice.undo(),
+							}
+						)}
+					>
+						<RedoArrow style={{transform : "scaleX(-1)"}} size="21px" />
+						<div>Deshacer</div>
+					</div>
+					<div
+						className={`action-styled ${!isAvailableRedo && "disabled"}`}
+						{...(
+							isAvailableRedo && {
+								onClick : () => workSpaceSlice.redo(),
+							}
+						)}
+					>
+						<RedoArrow size="20px" />
+						<div>Rehacer</div>
+					</div>
+				</div>
 				<div className="ghost-canva">
 					{
 						workSpaceData && (
@@ -54,8 +85,11 @@ const WorkSpace = ({ workSpaceData }) => {
 	);
 };
 
+const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
+
 const mapStateToProps = ({ workSpaceSlice }) => ({
-	workSpaceData : workSpaceSlice?.data?.pages ?? {},
+	workSpaceData    : workSpaceSlice?.data?.pages ?? {},
+	workSpaceHistory : workSpaceSlice?.history ?? {},
 });
 
-export default connect(mapStateToProps) (WorkSpace);
+export default connect(mapStateToProps, mapDispatchToProps) (WorkSpace);
