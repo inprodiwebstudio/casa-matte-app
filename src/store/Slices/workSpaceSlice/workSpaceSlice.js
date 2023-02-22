@@ -4,11 +4,9 @@ import { convertToArray, History, isValidArray } from "helpers";
 
 const initialState = {
 	data : {
-		useName       : "JoabMedel",
 		sizePhotoBook : "LargeFormat",
 		frontPage     : {},
 		numberOfPages : 20,
-		Bound         : "",
 		pages         : {
 			page1 : {
 				id     : "page1",
@@ -280,7 +278,6 @@ const initialState = {
 		sizePhotoBook : "LargeFormat",
 		frontPage     : {},
 		numberOfPages : 20,
-		Bound         : "",
 		pages         : {
 			page1 : {
 				id     : "page1",
