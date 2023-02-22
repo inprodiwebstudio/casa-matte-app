@@ -13,9 +13,11 @@
 
 	.undo-redo-container {
 		position: absolute;
-		top: 14%;
+		top: 0;
+		bottom: 70%;
+		left: 15%;
+		right: 0;
 		gap: 30px;
-		left : 16%;
 		display: flex;
 		font-size: 12px;
 		font-weight: 300;

@@ -1,7 +1,9 @@
-import { connect } from "react-redux";
+import { connect }   from "react-redux";
+import { useEffect } from "react";
 
 //Own component;
 import { bindAll }        from "helpers";
+import { genericApi }     from "store/api/genericApi";
 import { workSpaceSlice } from "store/Slices";
 import "./AppShell.scss";
 
@@ -14,6 +16,22 @@ const AppShell = ({
 	workSpaceSlice,
 	isSelectedPage,
 }) => {
+	const { data : photobookData } = genericApi.useGetDataQuery({
+		module : "photobook/7099",
+	});
+
+	// const [colorMutation, colorMutationResult] = genericApi.useSubmitDataMutation();
+
+
+	useEffect(() => {
+		if (photobookData?.meta?.config) {
+			const myData = photobookData?.meta?.config;
+			const myReplacerString = myData.replace(/'/g, "\"");
+			const parseJSON = JSON.parse(myReplacerString);
+			workSpaceSlice.insertData(parseJSON);
+		}
+	}, [photobookData]);
+
 	return (
 		<div
 			id="AppShell"
