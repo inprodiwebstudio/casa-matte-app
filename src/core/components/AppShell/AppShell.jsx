@@ -13,6 +13,7 @@ const AppShell = ({
 	navbar,
 	footer,
 	sidebar,
+	workSpaceData,
 	workSpaceSlice,
 	isSelectedPage,
 }) => {
@@ -20,7 +21,28 @@ const AppShell = ({
 		module : "photobook/7099",
 	});
 
-	// const [colorMutation, colorMutationResult] = genericApi.useSubmitDataMutation();
+	const [dataMutation] = genericApi.useSubmitDataMutation();
+
+	const parseSendData = (data) => {
+		const myData = data;
+		const stringData = JSON.stringify(myData);
+		const myReplacerString = stringData.replace(/"/g, "'");
+		return myReplacerString;
+	};
+
+	const submitData = async () => {
+		await dataMutation({
+			module : "photobook",
+			data   : {
+				tittle : "Texto de prueba",
+				meta   : {
+					config : parseSendData(workSpaceData),
+				},
+			},
+			id     : 7099,
+			method : "POST",
+		}).unwrap();
+	};
 
 
 	useEffect(() => {
@@ -31,6 +53,12 @@ const AppShell = ({
 			workSpaceSlice.insertData(parseJSON);
 		}
 	}, [photobookData]);
+
+	useEffect(() => {
+		if (photobookData?.meta?.config) {
+			submitData();
+		}
+	}, [workSpaceData]);
 
 	return (
 		<div
@@ -68,6 +96,7 @@ const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
 
 const mapStateToProps = ({ workSpaceSlice }) => ({
 	isSelectedPage : workSpaceSlice?.pageDataSelected ?? null,
+	workSpaceData  : workSpaceSlice?.data ?? {},
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (AppShell);

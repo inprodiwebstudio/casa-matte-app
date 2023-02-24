@@ -1,8 +1,8 @@
 import qs from "qs";
 
 // Import Own Components
-import { buildFormData } from "helpers";
-import { api }           from ".";
+// import { buildFormData } from "helpers";
+import { api } from ".";
 
 export const genericApi = api.injectEndpoints({
 	endpoints : builder => ({
@@ -12,7 +12,7 @@ export const genericApi = api.injectEndpoints({
 		}),
 		submitData : builder.mutation({
 			query({module, data, method = "POST", id}) {
-				const body = buildFormData(data);
+				const body = data;
 				return {
 					url    : id ? `${module}/${id}` : module,
 					method : method,

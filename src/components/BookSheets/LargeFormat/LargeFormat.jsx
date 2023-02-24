@@ -39,7 +39,7 @@ const LargeFormat = ({pageData, workSpaceSlice, pageDataSelected, isInWorkSpcae}
 	}, [pageDataSelected]);
 
 	return (
-		<div className={`LargeFormat ${(!pageData.sheet2 && !isSinglePage) && "isOnePage"} ${isSinglePage && "isSinglePage"}`}>
+		<div className={`LargeFormat ${(!pageData?.sheet2 && !isSinglePage) && "isOnePage"} ${isSinglePage && "isSinglePage"}`}>
 			<div
 				className={
 					`page-body ${(currentSelectedPage === "sheet1") && "isActivePage"}`
@@ -67,12 +67,12 @@ const LargeFormat = ({pageData, workSpaceSlice, pageDataSelected, isInWorkSpcae}
 				}
 			</div>
 			{
-				(!isSinglePage && pageData.sheet2) && (
+				(!isSinglePage && pageData?.sheet2) && (
 					<div className="spacer" />
 				)
 			}
 			{
-				(!isSinglePage && pageData.sheet2) && (
+				(!isSinglePage && pageData?.sheet2) && (
 					<div
 						className={
 						`page-body ${(currentSelectedPage === "sheet2") && "isActivePage"}`

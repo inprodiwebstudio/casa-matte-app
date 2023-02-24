@@ -24,12 +24,17 @@
 		z-index: 2;
 
 		.action-styled {
-			cursor: pointer;
+			gap: 15px;
 			display: flex;
+			cursor: pointer;
 			align-items: center;
 			flex-direction: column;
-			gap: 15px;
 			justify-content: center;
+
+			-webkit-user-select: none;
+        	-moz-user-select: none;
+        	-ms-user-select: none;
+        	user-select: none;
 
 			&.disabled {
 				cursor: auto;
