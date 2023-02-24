@@ -17,7 +17,7 @@ const AppShell = ({
 	workSpaceSlice,
 	isSelectedPage,
 }) => {
-	const { data : photobookData } = genericApi.useGetDataQuery({
+	const { data : photobookData, isFetching } = genericApi.useGetDataQuery({
 		module : "photobook/7099",
 	});
 
@@ -54,6 +54,11 @@ const AppShell = ({
 			workSpaceSlice.insertData(parseJSON);
 		}
 	}, [photobookData]);
+
+	useEffect(() => {
+		workSpaceSlice.changeLoading(isFetching);
+	}, [isFetching]);
+
 
 	useEffect(() => {
 		if (photobookData?.meta?.config) {

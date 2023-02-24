@@ -11,7 +11,91 @@ const initialState = {
 			page1 : {
 				id     : "page1",
 				sheet1 : {
-					pageNo     : 1,
+					pageNo     : undefined,
+					layoutType : "",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page2 : {
+				id     : "page2",
+				sheet1 : {
+					pageNo     : undefined,
+					layoutType : "",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page3 : {
+				id     : "page3",
+				sheet1 : {
+					pageNo     : undefined,
+					layoutType : "",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page4 : {
+				id     : "page4",
+				sheet1 : {
+					pageNo     : undefined,
+					layoutType : "",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page5 : {
+				id     : "page5",
+				sheet1 : {
+					pageNo     : undefined,
+					layoutType : "",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page6 : {
+				id     : "page6",
+				sheet1 : {
+					pageNo     : undefined,
+					layoutType : "",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page7 : {
+				id     : "page7",
+				sheet1 : {
+					pageNo     : undefined,
 					layoutType : "",
 					text       : "",
 					photos     : {
@@ -306,6 +390,7 @@ const initialState = {
 		type           : "all",
 		photosQuantity : "all",
 	},
+	loading : true,
 };
 
 export const workSpaceSlice = createSlice({
@@ -524,6 +609,9 @@ export const workSpaceSlice = createSlice({
 			} else {
 				state.data = history.undoStack[history.undoStack.length - 1];
 			}
+		},
+		changeLoading : (state, {payload}) => {
+			state.loading = payload;
 		},
 	},
 });

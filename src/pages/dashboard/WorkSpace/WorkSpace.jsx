@@ -26,9 +26,7 @@ const WorkSpace = ({ workSpaceData, workSpaceSlice, workSpaceHistory }) => {
 		},
 	};
 
-	const [ myWorkSpaceData, setMyWorkSpaceData ] = useState({
-		...defaultViewData,
-	});
+	const [ myWorkSpaceData, setMyWorkSpaceData ] = useState({});
 
 	useEffect(() => {
 		if (!isFrontLayout) {

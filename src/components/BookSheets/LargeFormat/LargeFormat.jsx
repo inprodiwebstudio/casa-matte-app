@@ -1,5 +1,6 @@
 import { connect }             from "react-redux";
 import { useState, useEffect } from "react";
+import { Skeleton }            from "@mantine/core";
 
 
 //Own components
@@ -9,7 +10,7 @@ import { workSpaceSlice }          from "store/Slices";
 import FrontLayout                 from "components/global/LayoutsPage/FrontLayout";
 import "./LargeFormat.scss";
 
-const LargeFormat = ({pageData, workSpaceSlice, pageDataSelected, isInWorkSpcae}) => {
+const LargeFormat = ({pageData, workSpaceSlice, pageDataSelected, isInWorkSpcae, loading}) => {
 	const [ currentSelectedPage, setCurrentSelectedPage ] = useState(null);
 
 	const isSinglePage = (["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(pageData?.sheet1?.layoutType));
@@ -38,6 +39,11 @@ const LargeFormat = ({pageData, workSpaceSlice, pageDataSelected, isInWorkSpcae}
 		}
 	}, [pageDataSelected]);
 
+	if (loading) {
+		return (
+			<Skeleton className="LargeFormat isSinglePage" />
+		);
+	}
 	return (
 		<div className={`LargeFormat ${(!pageData?.sheet2 && !isSinglePage) && "isOnePage"} ${isSinglePage && "isSinglePage"}`}>
 			<div
@@ -105,6 +111,7 @@ const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
 
 const mapStateToProps = ({ workSpaceSlice }) => ({
 	pageDataSelected : workSpaceSlice?.pageDataSelected ?? null,
+	loading          : workSpaceSlice?.loading ?? true,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (LargeFormat);
