@@ -35,6 +35,7 @@ const AppShell = ({
 			module : "photobook",
 			data   : {
 				tittle : "Texto de prueba",
+				status : "publish",
 				meta   : {
 					config : parseSendData(workSpaceData),
 				},
