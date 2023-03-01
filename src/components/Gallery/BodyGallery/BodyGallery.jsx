@@ -47,6 +47,19 @@ const BodyGallery = ({
 	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
 
 	useEffect(() => {
+		if (isAvailableDocs && (currentFilter?.value === "DESC_CAPTURE")) {
+			const filterData = myPhotos?.filter(data => data?.embeddedMetadata?.DateTimeOriginal);
+			const filterNotCapture = myPhotos?.filter(data => !data?.embeddedMetadata?.DateTimeOriginal);
+			const newData = filterData?.sort((a, b) => {
+				const c = new Date(a?.embeddedMetadata?.DateTimeOriginal);
+				const d = new Date(b?.embeddedMetadata?.DateTimeOriginal);
+				return d-c;
+			});
+			setMyPhotos([...newData, ...filterNotCapture]);
+		}
+	}, [currentFilter]);
+
+	useEffect(() => {
 		if (isValidArray(galleryData)) {
 			const newPhotos = gallerySeparation(galleryData, false);
 			const newFolders = gallerySeparation(galleryData, true);
@@ -150,7 +163,7 @@ const BodyGallery = ({
 											},
 											{
 												label : "FECHA DE CAPTURA",
-												value : "DESC_CREATED",
+												value : "DESC_CAPTURE",
 											},
 										]}
 										isLoading={loadingMutationGallery}

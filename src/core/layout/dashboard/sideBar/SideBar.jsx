@@ -20,7 +20,7 @@ const SideBar = ({gallerySlice, galleryPath, selectedData, userName, filter}) =>
 			limit      : 100,
 			userName   : userName,
 			folderName : (galleryPath?.id === "route") ? null : galleryPath?.name,
-			...(filter ? {sort : filter?.value} : {}),
+			...((filter && (filter?.value !== "DESC_CAPTURE")) ? {sort : filter?.value} : {}),
 		},
 	});
 
