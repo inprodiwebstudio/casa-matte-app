@@ -25,6 +25,7 @@ const BodyGallery = ({
 	galleryData,
 	gallerySlice,
 	workSpaceData,
+	currentFilter,
 	workSpaceSlice,
 	galleryMutation,
 	galleryPathRoute,
@@ -44,7 +45,6 @@ const BodyGallery = ({
 	const [ selectedImagesIds, setSelectedImagesIds ] = useState([]);
 
 	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
-
 
 	useEffect(() => {
 		if (isValidArray(galleryData)) {
@@ -139,7 +139,23 @@ const BodyGallery = ({
 									<SelectorMenuItem
 										type="light"
 										placeholder="Ordenar por"
+										options={[
+											{
+												label : "NOMBRE",
+												value : "DESC_NAME",
+											},
+											{
+												label : "FECHA DE SUBIDA",
+												value : "DESC_CREATED",
+											},
+											{
+												label : "FECHA DE CAPTURA",
+												value : "DESC_CREATED",
+											},
+										]}
 										isLoading={loadingMutationGallery}
+										value={currentFilter}
+										onChange={(data) => gallerySlice.setFilter(data)}
 										leftIcon={<FilterIcon size="15px" />}
 									/>
 								</div>
@@ -236,6 +252,7 @@ const mapStateToProps = ({ gallerySlice, workSpaceSlice }) => ({
 	gallerySelectedData   : gallerySlice?.selectedData ?? {},
 	workSpaceData         : workSpaceSlice?.data ?? {},
 	galleryTypeDropedView : gallerySlice?.typeDropedView ?? null,
+	currentFilter         : gallerySlice?.filter ?? undefined,
 });
 
 const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions, workSpaceSlice : workSpaceSlice.actions});

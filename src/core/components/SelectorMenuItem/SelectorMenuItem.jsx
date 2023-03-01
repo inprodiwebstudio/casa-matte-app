@@ -6,13 +6,8 @@ import SelectStyles from "./SelectStyles";
 import { ArrowTop } from "Resources/icons";
 import "./SelectorMenuItem.scss";
 
-const SelectorMenuItem = ({type, placeholder, leftIcon, isLoading}) => {
+const SelectorMenuItem = ({type, placeholder, leftIcon, isLoading, options, onChange, value}) => {
 	const [ hoverDisplay, setHoverDisplay ] = useState(false);
-	const fakeOptions = [
-		{ value : "1 FOTO", label : "1 FOTO" },
-		{ value : "2 FOTOS", label : "2 FOTOS" },
-		{ value : "3 FOTOS", label : "3 FOTOS" },
-	];
 
 	const DropdownIndicator = (props) => {
 		return (
@@ -22,8 +17,9 @@ const SelectorMenuItem = ({type, placeholder, leftIcon, isLoading}) => {
 		);
 	};
 
-	const handleChange = () => {
+	const handleChange = (value) => {
 		setHoverDisplay(false);
+		onChange(value);
 	};
 	return (
 		<div
@@ -40,12 +36,13 @@ const SelectorMenuItem = ({type, placeholder, leftIcon, isLoading}) => {
 			}
 			<Select
 				isDisabled={isLoading}
-				options={fakeOptions}
+				options={options}
 				placeholder={placeholder ? placeholder : "Defaul"}
-				onChange={handleChange}
+				onChange={(value) => handleChange(value)}
 				styles={SelectStyles({type, leftIcon})}
 				menuPortalTarget={document.body}
 				components={{ DropdownIndicator }}
+				value={value}
 				noOptionsMessage={() => "No hay resultados"}
 			/>
 			{

@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { Draggable }              from "react-beautiful-dnd";
+import { connect }                from "react-redux";
 
 //Own Components
 import FormatPage from "components/FormatPage";
@@ -12,6 +13,7 @@ const ItemPage = ({
 	isFixedPage,
 	draggableId,
 	handleDelete,
+	sizePhotoBook,
 }) => {
 	const isDoublePage = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(pageData?.sheet1?.layoutType);
 	const navigate = useNavigate();
@@ -49,7 +51,7 @@ const ItemPage = ({
 							)
 						}
 						<FormatPage
-							typeFormat="LargeFormat"
+							typeFormat={sizePhotoBook ?? "LargeFormat"}
 							pageData={pageData}
 						/>
 					</div>
@@ -96,4 +98,8 @@ const ItemPage = ({
 	);
 };
 
-export default ItemPage;
+const mapStateToProps = ({ workSpaceSlice }) => ({
+	sizePhotoBook : workSpaceSlice?.data?.sizePhotoBook ?? "LargeFormat",
+});
+
+export default connect(mapStateToProps) (ItemPage);

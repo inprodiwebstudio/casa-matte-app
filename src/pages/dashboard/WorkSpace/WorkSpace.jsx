@@ -10,7 +10,7 @@ import { workSpaceSlice }        from "store/Slices";
 import FormatPage                from "components/FormatPage";
 import "./WorkSpace.scss";
 
-const WorkSpace = ({ workSpaceData, workSpaceSlice, workSpaceHistory }) => {
+const WorkSpace = ({ workSpaceData, workSpaceSlice, workSpaceHistory, sizePhotoBook }) => {
 	const { pageId } = useParams();
 
 	const isFrontLayout = pageId === "frontpage";
@@ -71,7 +71,7 @@ const WorkSpace = ({ workSpaceData, workSpaceSlice, workSpaceHistory }) => {
 					{
 						workSpaceData && (
 							<FormatPage
-								typeFormat="LargeFormat"
+								typeFormat={sizePhotoBook ?? "LargeFormat"}
 								pageData={myWorkSpaceData}
 								isInWorkSpcae
 							/>
@@ -87,6 +87,7 @@ const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
 
 const mapStateToProps = ({ workSpaceSlice }) => ({
 	workSpaceData    : workSpaceSlice?.data?.pages ?? {},
+	sizePhotoBook    : workSpaceSlice?.data?.sizePhotoBook ?? "LargeFormat",
 	workSpaceHistory : workSpaceSlice?.history ?? {},
 });
 

@@ -1,7 +1,10 @@
-import LargeFormat from "./LargeFormat";
+import LargeFormat  from "./LargeFormat";
+import SquareFormat from "./SquareFormat";
+
 
 const BookSheets = {
-	LargeFormat : LargeFormat,
+	LargeFormat  : LargeFormat,
+	SquareFormat : SquareFormat,
 };
 
 

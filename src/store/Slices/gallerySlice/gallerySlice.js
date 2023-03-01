@@ -8,6 +8,7 @@ const initialState = {
 		name         : "route",
 		folderThumbs : [],
 	},
+	filter         : undefined,
 	typeDropedView : null,
 	data           : {},
 	selectedData   : {},
@@ -54,6 +55,9 @@ export const gallerySlice = createSlice({
 		setGalleryPath : (state, {payload}) => {
 			state.galleryPathName = payload;
 			state.selectedData = {};
+		},
+		setFilter : (state, {payload}) => {
+			state.filter = payload;
 		},
 		moveToFolder : (state, {payload}) => {
 			const cloneData = { ...state.data };

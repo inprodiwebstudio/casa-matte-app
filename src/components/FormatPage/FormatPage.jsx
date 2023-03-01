@@ -8,6 +8,8 @@ const FormatPage = ({typeFormat, ...rest}) => {
 		switch (typeFormat) {
 			case "LargeFormat" :
 				return <BookSheets.LargeFormat {...rest} />;
+			case "SquareFormat" :
+				return <BookSheets.SquareFormat {...rest} />;
 			default :
 				return <div>Nuevo Formato</div>;
 		}

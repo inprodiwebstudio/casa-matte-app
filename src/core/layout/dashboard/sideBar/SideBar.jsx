@@ -10,7 +10,7 @@ import { convertToArray, isValidArray, bindAll } from "helpers";
 import { ArrowTop, FolderPlus, DropFile, Thrash} from "Resources/icons";
 import "./SideBar.scss";
 
-const SideBar = ({gallerySlice, galleryPath, selectedData, userName}) => {
+const SideBar = ({gallerySlice, galleryPath, selectedData, userName, filter}) => {
 	const [ isfullSize, setIsFullSize ] = useState(false);
 
 	const [galleryMutation, galleryMutationResult] = genericApi.useSubmitDataMutation();
@@ -20,6 +20,7 @@ const SideBar = ({gallerySlice, galleryPath, selectedData, userName}) => {
 			limit      : 100,
 			userName   : userName,
 			folderName : (galleryPath?.id === "route") ? null : galleryPath?.name,
+			...(filter ? {sort : filter?.value} : {}),
 		},
 	});
 
@@ -116,6 +117,7 @@ const mapStateToProps = ({ gallerySlice, authSlice }) => ({
 	selectedData : gallerySlice?.selectedData ?? {},
 	galleryPath  : gallerySlice?.galleryPathName ?? "route",
 	userName     : authSlice?.user?.username ?? undefined,
+	filter       : gallerySlice?.filter ?? undefined,
 });
 
 const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});
