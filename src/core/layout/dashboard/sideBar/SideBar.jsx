@@ -3,11 +3,11 @@ import { connect }  from "react-redux";
 import BodyGallery  from "components/Gallery/BodyGallery";
 
 //Own components
-import { gallerySlice }                          from "store/Slices";
-import { genericApi }                            from "store/api/genericApi";
-import { apiImageKit }                           from "store/api/imageKitApi";
-import { convertToArray, isValidArray, bindAll } from "helpers";
-import { ArrowTop, FolderPlus, DropFile, Thrash} from "Resources/icons";
+import { gallerySlice }                                      from "store/Slices";
+import { genericApi }                                        from "store/api/genericApi";
+import { apiImageKit }                                       from "store/api/imageKitApi";
+import { convertToArray, isValidArray, bindAll }             from "helpers";
+import { ArrowTop, FolderPlus, DropFile, Thrash, MoveFolder} from "Resources/icons";
 import "./SideBar.scss";
 
 const SideBar = ({gallerySlice, galleryPath, selectedData, userName, filter}) => {
@@ -42,6 +42,23 @@ const SideBar = ({gallerySlice, galleryPath, selectedData, userName, filter}) =>
 			},
 		}).unwrap();
 		gallerySlice.clearSelectedData();
+	};
+
+	const handleMoveOutFolder = () => {
+		const mySelectedData = convertToArray(selectedData);
+		const arrayOfPromises = mySelectedData.map(async (data, index) => {
+			return await galleryImagesMutationMove({
+				sourceFilePath  : data?.filePath,
+				destinationPath : `/${userName}/`,
+				tags            : (mySelectedData.length - 1 === index) ? ["gallery"] : ["null"],
+			});
+		});
+
+		Promise.allSettled([...arrayOfPromises]).then((values) => {
+			gallerySlice.clearSelectedData();
+		}, reason => {
+			console.error(reason);
+		});
 	};
 
 	return (
@@ -94,6 +111,20 @@ const SideBar = ({gallerySlice, galleryPath, selectedData, userName, filter}) =>
 									}
 								>
 									<Thrash size="20px" />
+								</div>
+							)
+						}
+						{
+							isSelectedData && (
+								<div
+									className="icon-sidebar-action"
+									{
+										...(!loadingMutationGallery && {
+											onClick : () => handleMoveOutFolder(),
+										})
+									}
+								>
+									<MoveFolder size="20px" />
 								</div>
 							)
 						}

@@ -47,6 +47,13 @@ const BodyGallery = ({
 	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
 
 	useEffect(() => {
+		if (!isAvailableDocs) {
+			gallerySlice.setGalleryPath({id : "route", name : "route"});
+		}
+	}, [galleryData]);
+
+
+	useEffect(() => {
 		if (isAvailableDocs && (currentFilter?.value === "DESC_CAPTURE")) {
 			const filterData = myPhotos?.filter(data => data?.embeddedMetadata?.DateTimeOriginal);
 			const filterNotCapture = myPhotos?.filter(data => !data?.embeddedMetadata?.DateTimeOriginal);
