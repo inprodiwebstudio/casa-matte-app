@@ -22,6 +22,7 @@ import PhotoGallery  from "./PhotoGallery";
 import Pencil        from "./Pencil";
 import UndoArrow     from "./UndoArrow";
 import RedoArrow     from "./RedoArrow";
+import MoveFolder    from "./MoveFolder";
 
 
 export {
@@ -45,6 +46,7 @@ export {
 	FolderPlus,
 	MoveArrows,
 	RedoArrow,
+	MoveFolder,
 	MoreOption,
 	CircleArrow,
 	PhotoGallery,
