@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
 	token    : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RlbXBvcmFsLmNhc2FtYXR0ZS5jb20iLCJpYXQiOjE2Nzc2ODU0MjEsIm5iZiI6MTY3NzY4NTQyMSwiZXhwIjoxNjc4MjkwMjIxLCJkYXRhIjp7InVzZXIiOnsiaWQiOiI1In19fQ.lCa9IJR0O2Ygggyf-KZsMlWd4AHjKenrTThiGsdq6jg",
-	loggedIn : true,
+	loggedIn : false,
 	user     : {
 		username : "JoabMedel",
 	},
