@@ -35,10 +35,32 @@ const initialState = {
 						},
 					},
 				},
+				sheet2 : {
+					pageNo     : undefined,
+					layoutType : "",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
 			},
 			page3 : {
 				id     : "page3",
 				sheet1 : {
+					pageNo     : undefined,
+					layoutType : "",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
 					pageNo     : undefined,
 					layoutType : "",
 					text       : "",
@@ -63,6 +85,17 @@ const initialState = {
 						},
 					},
 				},
+				sheet2 : {
+					pageNo     : undefined,
+					layoutType : "",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
 			},
 			page5 : {
 				id     : "page5",
@@ -77,10 +110,32 @@ const initialState = {
 						},
 					},
 				},
+				sheet2 : {
+					pageNo     : undefined,
+					layoutType : "",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
 			},
 			page6 : {
 				id     : "page6",
 				sheet1 : {
+					pageNo     : undefined,
+					layoutType : "",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
 					pageNo     : undefined,
 					layoutType : "",
 					text       : "",

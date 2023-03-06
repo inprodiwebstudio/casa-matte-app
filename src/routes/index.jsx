@@ -1,5 +1,7 @@
 import { lazy }                        from "react";
 import { useRoutes, Outlet, Navigate } from "react-router-dom";
+//Helpers
+
 // layouts
 import DashboardLayout from "core/layout";
 // components
@@ -38,8 +40,14 @@ const Router = () => {
 			path     : "dashboard",
 			element  : <DashboardLayout />,
 			children : [
-				{ element : <Navigate to="/dashboard/frontpage" replace />, index : true },
-				{ path : ":pageId", element : <WorkSpace /> },
+				{
+					element : <Navigate to="/dashboard/frontpage" replace />,
+					index   : true,
+				},
+				{
+					path    : ":pageId",
+					element : <WorkSpace />,
+				},
 			],
 		},
 		// Redirect

@@ -30,7 +30,8 @@ export default defineConfig({
 		},
 	},
 	define : {
-		global : {},
+		global        : {},
+		"process.env" : {},
 	},
 	//https://github.com/vitejs/vite/issues/8644
 	// esbuild : {

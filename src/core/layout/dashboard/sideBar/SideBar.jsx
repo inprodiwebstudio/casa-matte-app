@@ -4,6 +4,7 @@ import BodyGallery  from "components/Gallery/BodyGallery";
 
 //Own components
 import { gallerySlice }                                      from "store/Slices";
+import { getFiles }                                          from "helpers/Functions/iamgeKitApi";
 import { genericApi }                                        from "store/api/genericApi";
 import { apiImageKit }                                       from "store/api/imageKitApi";
 import { convertToArray, isValidArray, bindAll }             from "helpers";
@@ -60,6 +61,8 @@ const SideBar = ({gallerySlice, galleryPath, selectedData, userName, filter}) =>
 			console.error(reason);
 		});
 	};
+
+	getFiles(undefined, userName, galleryPath?.name);
 
 	return (
 		<div id="SideBar" className={isAvailableDocs ? (isfullSize && "isFullSize") : "isNoData"}>

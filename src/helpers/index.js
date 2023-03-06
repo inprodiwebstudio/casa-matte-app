@@ -12,4 +12,4 @@ export { default as uploadImageKitIo }       from "./uploadImageKitIo";
 export { default as resizerImage }           from "./resizerImage";
 export { default as resizerQualityImage }    from "./resizerQualityImage";
 export { default as filterTwoArrays }        from "./filterTwoArrays";
-
+export { default as PrivateRoute }           from "./PrivateRoute.jsx";
