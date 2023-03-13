@@ -1,8 +1,14 @@
 // import { Editor }  from "react-draft-wysiwyg";
 // import draftToHtml from "draftjs-to-html";
 // import htmlToDraft from "html-to-draftjs";
-import {CKEditor}    from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+// import {CKEditor}    from "@ckeditor/ckeditor5-react";
+// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor }  from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
+import FontFamily    from "@ckeditor/ckeditor5-font/src/fontfamily";
+// import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
+// import Font          from "@ckeditor/ckeditor5-font/src/font";
+// import Alignment from "@ckeditor/ckeditor5-alignment/src/alignment";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
 // import { EditorState, convertToRaw, ContentState } from "draft-js";
@@ -51,8 +57,35 @@ const EditText = () => {
 			<CKEditor
 				editor={ ClassicEditor }
 				data="<p>Hello from CKEditor 5!</p>"
+				// onReady={(editor) => {
+				// 	// Add the font family plugin to the editor
+				// 	editor.plugins.get("FontFamily").options.options = [
+				// 	  "default",
+				// 	  "Arial, sans-serif",
+				// 	  "Courier New, Courier, monospace",
+				// 	  "Georgia, serif",
+				// 	  "Lucida Sans Unicode, Lucida Grande, sans-serif",
+				// 	  "Tahoma, Geneva, sans-serif",
+				// 	  "Times New Roman, Times, serif",
+				// 	  "Trebuchet MS, Helvetica, sans-serif",
+				// 	  "Verdana, Geneva, sans-serif",
+				// 	];
+				// }}
 				config={ {
 					language : "es",
+					plugins  : [FontFamily],
+					toolbar  : ["fontfamily"],
+					// fontFamily : {
+					// 	options : [
+					// 	  "default",
+					// 	  "Ubuntu, Arial, sans-serif",
+					// 	  "Courier New, Courier, monospace",
+					// 	  "Georgia, serif",
+					// 	  "Lucida Sans Unicode, Lucida Grande, sans-serif",
+					// 	  "Tahoma, Geneva, sans-serif",
+					// 	  "Verdana, Geneva, sans-serif",
+					// 	],
+					// },
 				} }
 				onReady={ editor => {
 					// You can store the "editor" and use when it is needed.
