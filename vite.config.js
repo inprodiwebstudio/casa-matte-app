@@ -37,9 +37,9 @@ export default defineConfig({
 			"/api" : "https://temporal.casamatte.com",
 		},
 	},
-	define : {
-		global : {},
-	},
+	// define : {
+	// 	global : {},
+	// },
 	//https://github.com/vitejs/vite/issues/8644
 	// esbuild : {
 	// 	logOverride : { "this-is-undefined-in-esm" : "silent" },
