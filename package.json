@@ -7,7 +7,7 @@
   "scripts": {
     "start": "vite",
     "commit": "cz",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint --ext .ts,.tsx ./src",
     "lint:fix": "eslint --fix --ext .ts,.tsx ./src",
@@ -16,8 +16,11 @@
     "re-build": "rm -rf build node_modules && yarn && yarn build"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-basic-styles": "^36.0.1",
     "@ckeditor/ckeditor5-build-classic": "^36.0.1",
     "@ckeditor/ckeditor5-editor-classic": "^36.0.1",
+    "@ckeditor/ckeditor5-essentials": "^36.0.1",
+    "@ckeditor/ckeditor5-paragraph": "^36.0.1",
     "@ckeditor/ckeditor5-react": "^5.1.0",
     "@ckeditor/ckeditor5-theme-lark": "^36.0.1",
     "@ckeditor/vite-plugin-ckeditor5": "^0.1.1",
