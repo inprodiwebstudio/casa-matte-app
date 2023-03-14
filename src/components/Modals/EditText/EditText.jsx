@@ -1,7 +1,5 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
-// import draftToHtml from "draftjs-to-html";
-// import htmlToDraft from "html-to-draftjs";
 import { CKEditor }  from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
 import Essentials    from "@ckeditor/ckeditor5-essentials/src/essentials";
@@ -15,10 +13,10 @@ import Alignment     from "@ckeditor/ckeditor5-alignment/src/alignment";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
 // import { EditorState, convertToRaw, ContentState } from "draft-js";
-// import { useState, useEffect }                     from "react";
-// import { closeAllModals }                          from "@mantine/modals";
-import { workSpaceSlice } from "store/Slices";
-import { connect }        from "react-redux";
+import { useState, useEffect } from "react";
+import { closeAllModals }      from "@mantine/modals";
+import { workSpaceSlice }      from "store/Slices";
+import { connect }             from "react-redux";
 
 
 import { Button }  from "core/components";
@@ -26,33 +24,27 @@ import { Check }   from "Resources/icons";
 import { bindAll } from "helpers";
 import "./EditText.scss";
 
-const EditText = () => {
-	// const handleEditorChange = (event, editor) => {
-	// 	const data = editor.getData();
-	// 	console.log(data);
-	// };
-	// const [editorState, setEditorState] = useState(EditorState.createEmpty());
+const EditText = ({innerProps, workSpaceSlice}) => {
+	const [editorState, setEditorState] = useState(null);
 
-	// const { pageId, sheetNo, dataTextPage } = innerProps;
+	const { pageId, sheetNo, dataTextPage } = innerProps;
 
-	// const onEditorStateChange = function(editorState) {
-	// 	setEditorState(editorState);
-	// };
+	const onEditorStateChange = function(editorState) {
+		setEditorState(editorState);
+	};
 
-	// const handleAddText = () => {
-	// 	const text = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-	// 	workSpaceSlice.addText({pageId, sheetNo, text});
-	// 	closeAllModals();
-	// };
+	const handleAddText = () => {
+		const text = editorState;
+		workSpaceSlice.addText({pageId, sheetNo, text});
+		closeAllModals();
+	};
 
-	// useEffect(() => {
-	// 	if (dataTextPage && dataTextPage !== "") {
-	// 		const contentBlock = htmlToDraft(dataTextPage);
-	// 		const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
-	// 		const editorState = EditorState.createWithContent(contentState);
-	// 		setEditorState(editorState);
-	// 	}
-	// }, [dataTextPage]);
+	useEffect(() => {
+		if (dataTextPage && dataTextPage !== "") {
+			const contentBlock = dataTextPage;
+			setEditorState(contentBlock);
+		}
+	}, [dataTextPage]);
 
 	const editorConfiguration = {
 		plugins   : [ Essentials, Bold, Alignment, Italic, Paragraph, FontFamily, FontSize, FontColor],
@@ -138,19 +130,10 @@ const EditText = () => {
 			<CKEditor
 				editor={ ClassicEditor }
 				config={ editorConfiguration }
-				data="<p>Hello from CKEditor 5!</p>"
-				onReady={ editor => {
-					console.log(editor);
-				} }
+				data={editorState}
 				onChange={ ( event, editor ) => {
 					const data = editor.getData();
-					console.log( { event, editor, data } );
-				} }
-				onBlur={ ( event, editor ) => {
-					console.log( "Blur.", editor );
-				} }
-				onFocus={ ( event, editor ) => {
-					console.log( "Focus.", editor );
+					onEditorStateChange( data );
 				} }
 			/>
 			<div className="button-container">
@@ -160,7 +143,7 @@ const EditText = () => {
 					type="subtle"
 					width={117}
 					height={39}
-					onClick={() =>console.log("Se termino el texto")}
+					onClick={() => handleAddText()}
 				>
 					Terminar
 				</Button>
