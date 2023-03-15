@@ -1,21 +1,38 @@
 import { useState, useEffect } from "react";
 
 //Own components
-import ItemLayout  from "./ItemLayout";
-import LargeFormat from "components/global/LayoutsPage/LargeFormat";
+import ItemLayout   from "./ItemLayout";
+import LargeFormat  from "components/global/LayoutsPage/LargeFormat";
+import SquareFormat from "components/global/LayoutsPage/SquareFormat";
 import "./LayoutList.scss";
 import {
 	ScrollBar,
 } from "core/components";
 import { connect } from "react-redux";
 
-const LayoutList = ({filterLayouts}) => {
+const LayoutList = ({filterLayouts, formatPage}) => {
 	const [ layoutList, setLayoutList ] = useState([]);
 
-	const isFullSize = (layout) => ["Mod1", "Mod2", "Mod3"].includes(layout);
+	const isFullSize = (layout) => {
+		switch (formatPage) {
+			case "LargeFormat":
+				return ["Mod1", "Mod2", "Mod3"].includes(layout);
+			case "SquareFormat":
+				return  ["Mod6", "Mod7"].includes(layout);
+		}
+	};
+
+	const myLayouts = () => {
+		switch (formatPage) {
+			case "LargeFormat":
+				return Object.values(LargeFormat);
+			case "SquareFormat":
+				return Object.values(SquareFormat);
+		}
+	};
 
 	useEffect(() => {
-		const layouts = Object.values(LargeFormat);
+		const layouts = myLayouts();
 		if ((filterLayouts?.type === "all") && (filterLayouts?.photosQuantity === "all")) {
 			setLayoutList(layouts);
 			return;
@@ -32,6 +49,7 @@ const LayoutList = ({filterLayouts}) => {
 		));
 		setLayoutList(newListLayouts);
 	}, [filterLayouts]);
+
 	return (
 		<ScrollBar>
 			<div className="LayoutList">
@@ -40,6 +58,7 @@ const LayoutList = ({filterLayouts}) => {
 						layoutList.map((item, index) => (
 							<ItemLayout
 								key={index}
+								typeFormat={formatPage ?? "LargeFormat"}
 								layout={item?.id}
 								layoutData={LargeFormat[item?.id]}
 								isFullSize={isFullSize(item?.id)}
@@ -54,6 +73,7 @@ const LayoutList = ({filterLayouts}) => {
 
 const mapStateToProps = ({ workSpaceSlice }) => ({
 	filterLayouts : workSpaceSlice?.layoutFilter ?? {},
+	formatPage    : workSpaceSlice?.data?.sizePhotoBook ?? "LargeFormat",
 });
 
 export default connect(mapStateToProps) (LayoutList);

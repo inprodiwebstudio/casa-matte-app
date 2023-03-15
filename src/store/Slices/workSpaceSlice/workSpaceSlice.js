@@ -4,15 +4,15 @@ import { convertToArray, History, isValidArray } from "helpers";
 
 const initialState = {
 	data : {
-		sizePhotoBook : "LargeFormat",
+		sizePhotoBook : "SquareFormat",
 		frontPage     : {},
 		numberOfPages : 0,
 		pages         : {
 			page1 : {
 				id     : "page1",
 				sheet1 : {
-					pageNo     : undefined,
-					layoutType : "",
+					pageNo     : 1,
+					layoutType : "Mod1",
 					text       : "",
 					photos     : {
 						0 : {
@@ -25,8 +25,8 @@ const initialState = {
 			page2 : {
 				id     : "page2",
 				sheet1 : {
-					pageNo     : undefined,
-					layoutType : "",
+					pageNo     : 2,
+					layoutType : "Mod2",
 					text       : "",
 					photos     : {
 						0 : {
@@ -36,8 +36,8 @@ const initialState = {
 					},
 				},
 				sheet2 : {
-					pageNo     : undefined,
-					layoutType : "",
+					pageNo     : 3,
+					layoutType : "Mod3",
 					text       : "",
 					photos     : {
 						0 : {
@@ -445,7 +445,7 @@ const initialState = {
 		type           : "all",
 		photosQuantity : "all",
 	},
-	loading : true,
+	loading : false,
 };
 
 export const workSpaceSlice = createSlice({

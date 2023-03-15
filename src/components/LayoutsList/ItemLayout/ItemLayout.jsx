@@ -7,7 +7,15 @@ import LargeFormat        from "components/global/LayoutsPage/LargeFormat";
 import { bindAll }        from "helpers";
 import "./ItemLayout.scss";
 
-const ItemLayout = ({isFullSize, layout, pagesData, pageDataSelected, workSpaceSlice, layoutData}) => {
+const ItemLayout = ({
+	layout,
+	pagesData,
+	layoutData,
+	typeFormat,
+	isFullSize,
+	workSpaceSlice,
+	pageDataSelected,
+}) => {
 	const Layout = LargeFormat[layout]?.layout;
 	const { pageId } = useParams();
 
@@ -35,7 +43,7 @@ const ItemLayout = ({isFullSize, layout, pagesData, pageDataSelected, workSpaceS
 		<div
 			onClick={(e) => handleSelectedLayout(e)}
 			className={
-				`ItemLayout ${isFullSize && "isFullSize"} ${isSelectedLayout && "isActive"}`
+				`ItemLayout ${isFullSize && "isFullSize"} ${isSelectedLayout && "isActive"} ${typeFormat}`
 			}
 		>
 			<Layout />
