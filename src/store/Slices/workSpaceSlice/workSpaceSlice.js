@@ -137,7 +137,7 @@ const initialState = {
 				},
 				sheet2 : {
 					pageNo     : 11,
-					layoutType : "",
+					layoutType : "Mod9",
 					text       : "",
 					photos     : {
 						0 : {
@@ -150,7 +150,65 @@ const initialState = {
 			page7 : {
 				id     : "page7",
 				sheet1 : {
-					pageNo     : undefined,
+					pageNo     : 12,
+					layoutType : "Mod10",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 13,
+					layoutType : "Mod11",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page8 : {
+				id     : "page8",
+				sheet1 : {
+					pageNo     : 14,
+					layoutType : "Mod12",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 15,
+					layoutType : "Mod13",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page9 : {
+				id     : "page9",
+				sheet1 : {
+					pageNo     : 16,
 					layoutType : "",
 					text       : "",
 					photos     : {
