@@ -50,8 +50,8 @@ const initialState = {
 			page3 : {
 				id     : "page3",
 				sheet1 : {
-					pageNo     : undefined,
-					layoutType : "",
+					pageNo     : 4,
+					layoutType : "Mod4",
 					text       : "",
 					photos     : {
 						0 : {
@@ -61,8 +61,8 @@ const initialState = {
 					},
 				},
 				sheet2 : {
-					pageNo     : undefined,
-					layoutType : "",
+					pageNo     : 5,
+					layoutType : "Mod5",
 					text       : "",
 					photos     : {
 						0 : {
@@ -75,8 +75,8 @@ const initialState = {
 			page4 : {
 				id     : "page4",
 				sheet1 : {
-					pageNo     : undefined,
-					layoutType : "",
+					pageNo     : 6,
+					layoutType : "Mod6",
 					text       : "",
 					photos     : {
 						0 : {
@@ -86,7 +86,7 @@ const initialState = {
 					},
 				},
 				sheet2 : {
-					pageNo     : undefined,
+					pageNo     : 7,
 					layoutType : "",
 					text       : "",
 					photos     : {
