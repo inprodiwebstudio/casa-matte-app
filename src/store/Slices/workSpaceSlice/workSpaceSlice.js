@@ -125,8 +125,8 @@ const initialState = {
 			page6 : {
 				id     : "page6",
 				sheet1 : {
-					pageNo     : undefined,
-					layoutType : "",
+					pageNo     : 10,
+					layoutType : "Mod8",
 					text       : "",
 					photos     : {
 						0 : {
@@ -136,7 +136,7 @@ const initialState = {
 					},
 				},
 				sheet2 : {
-					pageNo     : undefined,
+					pageNo     : 11,
 					layoutType : "",
 					text       : "",
 					photos     : {
