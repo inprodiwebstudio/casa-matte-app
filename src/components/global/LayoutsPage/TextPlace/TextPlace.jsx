@@ -31,8 +31,10 @@ const TextPlace = ({pageId, sheetNo, dataPages}) => {
 			onClick={(e) => handleClick(e)}
 		>
 			{
-				(dataPages?.[pageId]?.[sheetNo]?.["text"] !== "") && (
+				(dataPages?.[pageId]?.[sheetNo]?.["text"] !== "") ? (
 					<div dangerouslySetInnerHTML={{__html : dataTextPage}} />
+				) : (
+					<div className="placeHolderText" style={{fontSize : "12px"}}>Has doble click para escribir...</div>
 				)
 			}
 		</div>

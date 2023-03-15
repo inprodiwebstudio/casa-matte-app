@@ -10,4 +10,11 @@
     &:focus {
         border: 1px solid #5FD15C;
     }
+
+    .placeHolderText {
+        font-size: 12;
+        color : $flat-color;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
 }
