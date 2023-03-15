@@ -11,6 +11,10 @@ import Mod10 from "./Mod10";
 import Mod11 from "./Mod11";
 import Mod12 from "./Mod12";
 import Mod13 from "./Mod13";
+import Mod14 from "./Mod14";
+import Mod15 from "./Mod15";
+import Mod16 from "./Mod16";
+import Mod17 from "./Mod17";
 
 const SquareFormat = {
 	Mod1 : {
@@ -88,6 +92,30 @@ const SquareFormat = {
 	Mod13 : {
 		id           : "Mod13",
 		layout       : Mod13,
+		numberPhotos : 2,
+		cat          : "fotos",
+	},
+	Mod14 : {
+		id           : "Mod14",
+		layout       : Mod14,
+		numberPhotos : 2,
+		cat          : "fotos",
+	},
+	Mod15 : {
+		id           : "Mod15",
+		layout       : Mod15,
+		numberPhotos : 2,
+		cat          : "fotos",
+	},
+	Mod16 : {
+		id           : "Mod16",
+		layout       : Mod16,
+		numberPhotos : 2,
+		cat          : "fotos",
+	},
+	Mod17 : {
+		id           : "Mod17",
+		layout       : Mod17,
 		numberPhotos : 2,
 		cat          : "fotos",
 	},

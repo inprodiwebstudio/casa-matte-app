@@ -209,6 +209,72 @@ const initialState = {
 				id     : "page9",
 				sheet1 : {
 					pageNo     : 16,
+					layoutType : "Mod14",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 17,
+					layoutType : "Mod15",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page10 : {
+				id     : "page10",
+				sheet1 : {
+					pageNo     : 18,
+					layoutType : "Mod16",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 19,
+					layoutType : "Mod17",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page11 : {
+				id     : "page11",
+				sheet1 : {
+					pageNo     : 20,
 					layoutType : "",
 					text       : "",
 					photos     : {
