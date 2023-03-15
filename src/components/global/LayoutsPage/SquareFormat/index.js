@@ -1,6 +1,7 @@
 import Mod1 from "./Mod1";
 import Mod2 from "./Mod2";
 import Mod3 from "./Mod3";
+import Mod4 from "./Mod4";
 
 const SquareFormat = {
 	Mod1 : {
@@ -18,6 +19,12 @@ const SquareFormat = {
 	Mod3 : {
 		id           : "Mod3",
 		layout       : Mod3,
+		numberPhotos : 1,
+		cat          : "fotos",
+	},
+	Mod4 : {
+		id           : "Mod4",
+		layout       : Mod4,
 		numberPhotos : 1,
 		cat          : "fotos",
 	},

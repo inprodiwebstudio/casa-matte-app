@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 //Onw components
 import { workSpaceSlice } from "store/Slices";
 import LargeFormat        from "components/global/LayoutsPage/LargeFormat";
+import SquareFormat       from "components/global/LayoutsPage/SquareFormat";
 import { bindAll }        from "helpers";
 import "./ItemLayout.scss";
 
@@ -16,7 +17,18 @@ const ItemLayout = ({
 	workSpaceSlice,
 	pageDataSelected,
 }) => {
-	const Layout = LargeFormat[layout]?.layout;
+	const LayoutLarge = LargeFormat[layout]?.layout;
+	const LayoutSquare = SquareFormat[layout]?.layout;
+
+	const myLayout = () => {
+		switch (typeFormat) {
+			case "LargeFormat":
+				return <LayoutLarge />;
+			case "SquareFormat":
+				return <LayoutSquare />;
+		}
+	};
+
 	const { pageId } = useParams();
 
 	const currentLayoutSelected = {
@@ -46,7 +58,7 @@ const ItemLayout = ({
 				`ItemLayout ${isFullSize && "isFullSize"} ${isSelectedLayout && "isActive"} ${typeFormat}`
 			}
 		>
-			<Layout />
+			{myLayout()}
 		</div>
 	);
 };
