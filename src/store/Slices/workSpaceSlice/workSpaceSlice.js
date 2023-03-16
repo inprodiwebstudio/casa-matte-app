@@ -415,6 +415,47 @@ const initialState = {
 				id     : "page15",
 				sheet1 : {
 					pageNo     : 28,
+					layoutType : "Mod26",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+						2 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 29,
+					layoutType : "Mod27",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+						2 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page16 : {
+				id     : "page16",
+				sheet1 : {
+					pageNo     : 30,
 					layoutType : "",
 					text       : "",
 					photos     : {
