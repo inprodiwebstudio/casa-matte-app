@@ -3,11 +3,11 @@ import { connect }        from "react-redux";
 import { workSpaceSlice } from "store/Slices";
 import { useParams }      from "react-router-dom";
 
-import "./Mod18.scss";
+import "./Mod25.scss";
 import ActionImagesLayout      from "components/global/ActionImagesLayout";
 import { handlerResizerImage } from "../../ModsConstants";
 
-const Mod18 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) => {
+const Mod25 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) => {
 	const { pageId } = useParams();
 
 	const handleDrop = (e, layoutNo) => {
@@ -24,7 +24,7 @@ const Mod18 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) =>
 		e.preventDefault();
 	};
 	return (
-		<div className="body-mod18SquareFormat-layout">
+		<div className="body-mod25SquareFormat-layout">
 			<div className="content-body">
 				<div
 					className="content-children-body"
@@ -43,12 +43,12 @@ const Mod18 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) =>
 				>
 					{
 						(images && images[0].url && isInWorkSpcae) && (
-							<ActionImagesLayout sheetNo={sheetNo} layoutNo={0} pageId={pageId} image={images[0].url} />
+							<ActionImagesLayout sheetNo={sheetNo} layoutNo={0} pageId={pageId} image={images[0]} />
 						)
 					}
 				</div>
 				<div
-					className="content-second-children-body"
+					className="content-children-body"
 					onDrop={(e) => handleDrop(e, 1)}
 					onDragOver={(e) => handleDragOver(e)}
 					{
@@ -68,6 +68,27 @@ const Mod18 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) =>
 						)
 					}
 				</div>
+				<div
+					className="content-children-body"
+					onDrop={(e) => handleDrop(e, 2)}
+					onDragOver={(e) => handleDragOver(e)}
+					{
+						...( images && {
+							style : {
+								backgroundImage    : `url(${handlerResizerImage(images, 2, isInWorkSpcae)})`,
+								backgroundSize     : "cover",
+								backgroundRepeat   : "no-repeat",
+								backgroundPosition : "center",
+							},
+						} )
+					}
+				>
+					{
+						(images && images[2].url && isInWorkSpcae) && (
+							<ActionImagesLayout sheetNo={sheetNo} layoutNo={2} pageId={pageId} image={images[2].url} />
+						)
+					}
+				</div>
 			</div>
 		</div>
 	);
@@ -79,4 +100,4 @@ const mapStateToProps = ({ workSpaceSlice }) => ({
 	dragerImage : workSpaceSlice?.currentPhotoDragger ?? null,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps) (Mod18);
+export default connect(mapStateToProps, mapDispatchToProps) (Mod25);

@@ -3,11 +3,11 @@ import { connect }        from "react-redux";
 import { workSpaceSlice } from "store/Slices";
 import { useParams }      from "react-router-dom";
 
-import "./Mod18.scss";
+import "./Mod19.scss";
 import ActionImagesLayout      from "components/global/ActionImagesLayout";
 import { handlerResizerImage } from "../../ModsConstants";
 
-const Mod18 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) => {
+const Mod19 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) => {
 	const { pageId } = useParams();
 
 	const handleDrop = (e, layoutNo) => {
@@ -24,7 +24,7 @@ const Mod18 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) =>
 		e.preventDefault();
 	};
 	return (
-		<div className="body-mod18SquareFormat-layout">
+		<div className="body-mod19SquareFormat-layout">
 			<div className="content-body">
 				<div
 					className="content-children-body"
@@ -79,4 +79,4 @@ const mapStateToProps = ({ workSpaceSlice }) => ({
 	dragerImage : workSpaceSlice?.currentPhotoDragger ?? null,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps) (Mod18);
+export default connect(mapStateToProps, mapDispatchToProps) (Mod19);

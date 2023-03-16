@@ -1,29 +1,29 @@
 @import "/src/Resources/scss/variables/colorThemes";
 
-.body-mod18SquareFormat-layout {
+.body-mod22SquareFormat-layout {
     width: 100%;
     height: 100%;
     display: flex;
-    padding-right: 54.94%;
+    padding-top: 25.17%;
+    padding-bottom: 25.17%;
+    padding-left: 4.23%; 
+    padding-right: 4.23%;
     flex-direction: row-reverse;
     .content-body {
         height: 100%;
-        width: 100%;
+        width: 100%; 
         display: flex;
-        flex-direction: column;
         gap: 0.05em;
-
+ 
         .content-children-body {
-            background: $body-color;
-            width: 100%;
-            height: 65.63%;
+            width: 32.82%; 
             flex-grow: 1;
+            background: $body-color;
         }
         .content-second-children-body {
-            background: $body-color;
-            width: 100%;
-            height : 34.37%;
+            width: 67.18%; 
             flex-grow: 1;
+            background: $body-color;
         }
     }
 }

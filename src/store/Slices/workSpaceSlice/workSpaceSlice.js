@@ -242,6 +242,179 @@ const initialState = {
 				id     : "page10",
 				sheet1 : {
 					pageNo     : 18,
+					layoutType : "Mod16",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 19,
+					layoutType : "Mod17",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page11 : {
+				id     : "page11",
+				sheet1 : {
+					pageNo     : 20,
+					layoutType : "Mod18",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 21,
+					layoutType : "Mod19",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page12 : {
+				id     : "page12",
+				sheet1 : {
+					pageNo     : 22,
+					layoutType : "Mod20",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 23,
+					layoutType : "Mod21",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page13 : {
+				id     : "page13",
+				sheet1 : {
+					pageNo     : 24,
+					layoutType : "Mod22",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 25,
+					layoutType : "Mod23",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page14 : {
+				id     : "page14",
+				sheet1 : {
+					pageNo     : 26,
+					layoutType : "Mod24",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+						2 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 27,
+					layoutType : "Mod25",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+						2 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page15 : {
+				id     : "page15",
+				sheet1 : {
+					pageNo     : 28,
 					layoutType : "",
 					text       : "",
 					photos     : {
