@@ -456,6 +456,96 @@ const initialState = {
 				id     : "page16",
 				sheet1 : {
 					pageNo     : 30,
+					layoutType : "Mod28",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+						2 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 31,
+					layoutType : "Mod29",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+						2 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page17 : {
+				id     : "page17",
+				sheet1 : {
+					pageNo     : 32,
+					layoutType : "Mod30",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+						2 : {
+							id  : "",
+							url : "",
+						},
+						3 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 33,
+					layoutType : "Mod31",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+						2 : {
+							id  : "",
+							url : "",
+						},
+						3 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page18 : {
+				id     : "page18",
+				sheet1 : {
+					pageNo     : 34,
 					layoutType : "",
 					text       : "",
 					photos     : {
