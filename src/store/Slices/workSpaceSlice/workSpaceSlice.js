@@ -546,10 +546,140 @@ const initialState = {
 				id     : "page18",
 				sheet1 : {
 					pageNo     : 34,
-					layoutType : "",
+					layoutType : "Mod32",
 					text       : "",
 					photos     : {
 						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+						2 : {
+							id  : "",
+							url : "",
+						},
+						3 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 35,
+					layoutType : "Mod33",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+						2 : {
+							id  : "",
+							url : "",
+						},
+						3 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page19 : {
+				id     : "page19",
+				sheet1 : {
+					pageNo     : 36,
+					layoutType : "Mod34",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+						2 : {
+							id  : "",
+							url : "",
+						},
+						3 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : 37,
+					layoutType : "Mod35",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+						2 : {
+							id  : "",
+							url : "",
+						},
+						3 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			page20 : {
+				id     : "page20",
+				sheet1 : {
+					pageNo     : 38,
+					layoutType : "Mod36",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+						1 : {
+							id  : "",
+							url : "",
+						},
+						2 : {
+							id  : "",
+							url : "",
+						},
+						3 : {
+							id  : "",
+							url : "",
+						},
+						4 : {
+							id  : "",
+							url : "",
+						},
+						5 : {
+							id  : "",
+							url : "",
+						},
+						6 : {
+							id  : "",
+							url : "",
+						},
+						7 : {
+							id  : "",
+							url : "",
+						},
+						8 : {
 							id  : "",
 							url : "",
 						},
