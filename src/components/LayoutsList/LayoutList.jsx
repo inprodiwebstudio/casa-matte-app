@@ -31,6 +31,15 @@ const LayoutList = ({filterLayouts, formatPage}) => {
 		}
 	};
 
+	const identifyFormatPage = (layoutId) => {
+		switch (formatPage) {
+			case "LargeFormat":
+				return LargeFormat[layoutId];
+			case "SquareFormat":
+				return SquareFormat[layoutId];
+		}
+	};
+
 	useEffect(() => {
 		const layouts = myLayouts();
 		if ((filterLayouts?.type === "all") && (filterLayouts?.photosQuantity === "all")) {
@@ -60,7 +69,7 @@ const LayoutList = ({filterLayouts, formatPage}) => {
 								key={index}
 								typeFormat={formatPage ?? "LargeFormat"}
 								layout={item?.id}
-								layoutData={LargeFormat[item?.id]}
+								layoutData={identifyFormatPage(item?.id)}
 								isFullSize={isFullSize(item?.id)}
 							/>
 						))

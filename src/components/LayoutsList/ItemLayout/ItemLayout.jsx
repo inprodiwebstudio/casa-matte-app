@@ -42,10 +42,10 @@ const ItemLayout = ({
 		e.stopPropagation();
 		if (pageDataSelected) {
 			workSpaceSlice.addLayout({
-				pageId       : pageDataSelected.pageId,
-				sheetId      : pageDataSelected.currentPage,
 				layout       : layout,
+				pageId       : pageDataSelected.pageId,
 				numberPhotos : layoutData?.numberPhotos,
+				sheetId      : pageDataSelected.currentPage,
 			});
 			workSpaceSlice.clearSelectedPageData();
 		}

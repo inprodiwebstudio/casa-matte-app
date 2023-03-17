@@ -13,10 +13,10 @@ const Mod13 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) =>
 	const handleDrop = (e, layoutNo) => {
 		e.preventDefault();
 		workSpaceSlice.addPhoto({
+			pageId   : pageId,
 			sheetNo  : sheetNo,
 			layoutNo : layoutNo,
 			image    : dragerImage,
-			pageId   : pageId,
 		});
 	};
 
