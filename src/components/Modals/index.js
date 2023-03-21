@@ -1,11 +1,13 @@
 //Own components
 import EditPhoto from "./EditPhoto";
 import EditText  from "./EditText";
+import TestPdf   from "./TestPdf";
 
 
 const modals = {
 	editPhoto : EditPhoto,
 	editText  : EditText,
+	testPdf   : TestPdf,
 };
 
 const modalsConfig = {

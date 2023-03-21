@@ -67,10 +67,10 @@ const LayoutList = ({filterLayouts, formatPage}) => {
 						layoutList.map((item, index) => (
 							<ItemLayout
 								key={index}
-								typeFormat={formatPage ?? "LargeFormat"}
 								layout={item?.id}
-								layoutData={identifyFormatPage(item?.id)}
 								isFullSize={isFullSize(item?.id)}
+								typeFormat={formatPage ?? "LargeFormat"}
+								layoutData={identifyFormatPage(item?.id)}
 							/>
 						))
 					}
