@@ -1,26 +1,27 @@
 import { useState, useEffect } from "react";
 
 //Own components
-import ItemLayout   from "./ItemLayout";
 import LargeFormat  from "components/global/LayoutsPage/LargeFormat";
 import SquareFormat from "components/global/LayoutsPage/SquareFormat";
+import ItemLayout   from "./ItemLayout";
 import "./LayoutList.scss";
 import {
 	ScrollBar,
 } from "core/components";
-import { connect } from "react-redux";
+import { connect }      from "react-redux";
+import { isValidArray } from "helpers";
 
-const LayoutList = ({filterLayouts, formatPage}) => {
+const LayoutList = ({filterLayouts, formatPage, loading}) => {
 	const [ layoutList, setLayoutList ] = useState([]);
 
-	const isFullSize = (layout) => {
-		switch (formatPage) {
-			case "LargeFormat":
-				return ["Mod1", "Mod2", "Mod3"].includes(layout);
-			case "SquareFormat":
-				return  ["Mod6", "Mod7"].includes(layout);
-		}
-	};
+	// const isFullSize = (layout) => {
+	// 	switch (formatPage) {
+	// 		case "LargeFormat":
+	// 			return ["Mod1", "Mod2", "Mod3"].includes(layout);
+	// 		case "SquareFormat":
+	// 			return  ["Mod6", "Mod7"].includes(layout);
+	// 	}
+	// };
 
 	const myLayouts = () => {
 		switch (formatPage) {
@@ -57,22 +58,20 @@ const LayoutList = ({filterLayouts, formatPage}) => {
 			(layout.cat === filterLayouts.type) && (layout.numberPhotos === filterLayouts.photosQuantity)
 		));
 		setLayoutList(newListLayouts);
-	}, [filterLayouts]);
+	}, [filterLayouts, formatPage]);
 
 	return (
 		<ScrollBar>
 			<div className="LayoutList">
 				<div className="body-layout">
 					{
-						layoutList.map((item, index) => (
-							<ItemLayout
-								key={index}
-								layout={item?.id}
-								isFullSize={isFullSize(item?.id)}
-								typeFormat={formatPage ?? "LargeFormat"}
-								layoutData={identifyFormatPage(item?.id)}
-							/>
-						))
+						(layoutList && isValidArray(layoutList) && !loading) ? (
+							layoutList.map((item, index) => (
+								<ItemLayout key={index} layoutData={identifyFormatPage(item?.id)} />
+							))
+						) : (
+							<div>Null</div>
+						)
 					}
 				</div>
 			</div>
@@ -83,6 +82,7 @@ const LayoutList = ({filterLayouts, formatPage}) => {
 const mapStateToProps = ({ workSpaceSlice }) => ({
 	filterLayouts : workSpaceSlice?.layoutFilter ?? {},
 	formatPage    : workSpaceSlice?.data?.sizePhotoBook ?? "LargeFormat",
+	loading       : workSpaceSlice?.loading ?? true,
 });
 
 export default connect(mapStateToProps) (LayoutList);

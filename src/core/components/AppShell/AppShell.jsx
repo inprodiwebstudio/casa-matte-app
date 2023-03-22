@@ -1,9 +1,9 @@
-import { connect } from "react-redux";
-// import { useEffect } from "react";
+import { connect }   from "react-redux";
+import { useEffect } from "react";
 
 //Own component;
-import { bindAll } from "helpers";
-// import { genericApi }     from "store/api/genericApi";
+import { bindAll }        from "helpers";
+import { genericApi }     from "store/api/genericApi";
 import { workSpaceSlice } from "store/Slices";
 import "./AppShell.scss";
 
@@ -17,54 +17,54 @@ const AppShell = ({
 	workSpaceSlice,
 	isSelectedPage,
 }) => {
-	// const { data : photobookData, isFetching } = genericApi.useGetDataQuery({
-	// 	module : "photobook/7099",
-	// });
+	const { data : photobookData, isFetching } = genericApi.useGetDataQuery({
+		module : "photobook/7099",
+	});
 
-	// const [dataMutation] = genericApi.useSubmitDataMutation();
+	const [dataMutation] = genericApi.useSubmitDataMutation();
 
-	// const parseSendData = (data) => {
-	// 	const myData = data;
-	// 	const stringData = JSON.stringify(myData);
-	// 	const myReplacerString = stringData.replace(/"/g, "'");
-	// 	return myReplacerString;
-	// };
+	const parseSendData = (data) => {
+		const myData = data;
+		const stringData = JSON.stringify(myData);
+		const myReplacerString = stringData.replace(/"/g, "'");
+		return myReplacerString;
+	};
 
-	// const submitData = async () => {
-	// 	await dataMutation({
-	// 		module : "photobook",
-	// 		data   : {
-	// 			tittle : "Texto de prueba",
-	// 			status : "publish",
-	// 			meta   : {
-	// 				config : parseSendData(workSpaceData),
-	// 			},
-	// 		},
-	// 		id     : 7099,
-	// 		method : "POST",
-	// 	}).unwrap();
-	// };
-
-
-	// useEffect(() => {
-	// 	if (photobookData?.meta?.config) {
-	// 		const myData = photobookData?.meta?.config;
-	// 		const myReplacerString = myData.replace(/'/g, "\"");
-	// 		const parseJSON = JSON.parse(myReplacerString);
-	// 		workSpaceSlice.insertData(parseJSON);
-	// 	}
-	// }, [photobookData]);
-
-	// useEffect(() => {
-	// 	workSpaceSlice.changeLoading(isFetching);
-	// }, [isFetching]);
+	const submitData = async () => {
+		await dataMutation({
+			module : "photobook",
+			data   : {
+				tittle : "Texto de prueba",
+				status : "publish",
+				meta   : {
+					config : parseSendData(workSpaceData),
+				},
+			},
+			id     : 7099,
+			method : "POST",
+		}).unwrap();
+	};
 
 
-	// useEffect(() => {
-	// 	if (photobookData?.meta?.config) {
-	// 		submitData();
-	// 	}
-	// }, [workSpaceData]);
+	useEffect(() => {
+		if (photobookData?.meta?.config) {
+			const myData = photobookData?.meta?.config;
+			const myReplacerString = myData.replace(/'/g, "\"");
+			const parseJSON = JSON.parse(myReplacerString);
+			workSpaceSlice.insertData(parseJSON);
+		}
+	}, [photobookData]);
+
+	useEffect(() => {
+		workSpaceSlice.changeLoading(isFetching);
+	}, [isFetching]);
+
+
+	useEffect(() => {
+		if (photobookData?.meta?.config) {
+			submitData();
+		}
+	}, [workSpaceData]);
 
 	return (
 		<div

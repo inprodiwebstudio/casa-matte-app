@@ -2,30 +2,30 @@ import { connect }   from "react-redux";
 import { useParams } from "react-router-dom";
 
 //Onw components
-import { workSpaceSlice } from "store/Slices";
 import LargeFormat        from "components/global/LayoutsPage/LargeFormat";
 import SquareFormat       from "components/global/LayoutsPage/SquareFormat";
+import { workSpaceSlice } from "store/Slices";
 import { bindAll }        from "helpers";
 import "./ItemLayout.scss";
 
 const ItemLayout = ({
-	layout,
 	pagesData,
 	layoutData,
-	typeFormat,
-	isFullSize,
+	formatPage,
 	workSpaceSlice,
 	pageDataSelected,
 }) => {
-	const LayoutLarge = LargeFormat[layout]?.layout;
-	const LayoutSquare = SquareFormat[layout]?.layout;
+	// const LayoutLarge = LargeFormat[layout]?.["layout"];
+	// const LayoutSquare = SquareFormat[layout]?.["layout"];
 
-	const myLayout = () => {
-		switch (typeFormat) {
+	const isFullSize = () => {
+		switch (formatPage) {
 			case "LargeFormat":
-				return <LayoutLarge />;
+				return ["Mod1", "Mod2", "Mod3"].includes(layoutData?.id);
 			case "SquareFormat":
-				return <LayoutSquare />;
+				return ["Mod6", "Mod7"].includes(layoutData?.id);
+			default :
+				return false;
 		}
 	};
 
@@ -36,13 +36,13 @@ const ItemLayout = ({
 		sheet2 : pagesData[pageId]?.sheet2?.layoutType,
 	};
 
-	const isSelectedLayout = (currentLayoutSelected.sheet1 === layout) || (currentLayoutSelected.sheet2 === layout);
+	const isSelectedLayout = (currentLayoutSelected.sheet1 === layoutData?.id) || (currentLayoutSelected.sheet2 === layoutData?.id);
 
 	const handleSelectedLayout = (e) => {
 		e.stopPropagation();
 		if (pageDataSelected) {
 			workSpaceSlice.addLayout({
-				layout       : layout,
+				layout       : layoutData?.id,
 				pageId       : pageDataSelected.pageId,
 				numberPhotos : layoutData?.numberPhotos,
 				sheetId      : pageDataSelected.currentPage,
@@ -51,14 +51,31 @@ const ItemLayout = ({
 		}
 	};
 
+	const uiConstructor = (layoutId) => {
+		const LayoutLarge = LargeFormat[layoutId]?.["layout"];
+		const LayoutSquare = SquareFormat[layoutId]?.["layout"];
+		switch (formatPage) {
+			case "SquareFormat" :
+				return (
+					<LayoutSquare />
+				);
+			case "LargeFormat" :
+				return (
+					<LayoutLarge />
+				);
+			default:
+				(<div />);
+		}
+	};
+
 	return (
 		<div
 			onClick={(e) => handleSelectedLayout(e)}
 			className={
-				`ItemLayout ${isFullSize && "isFullSize"} ${isSelectedLayout && "isActive"} ${typeFormat}`
+				`ItemLayout ${isFullSize() && "isFullSize"} ${isSelectedLayout && "isActive"} ${formatPage}`
 			}
 		>
-			{myLayout()}
+			{uiConstructor(layoutData?.id)}
 		</div>
 	);
 };
@@ -68,6 +85,7 @@ const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
 const mapStateToProps = ({ workSpaceSlice }) => ({
 	pageDataSelected : workSpaceSlice?.pageDataSelected ?? null,
 	pagesData        : workSpaceSlice?.data?.pages ?? {},
+	formatPage       : workSpaceSlice?.data?.sizePhotoBook ?? "LargeFormat",
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (ItemLayout);

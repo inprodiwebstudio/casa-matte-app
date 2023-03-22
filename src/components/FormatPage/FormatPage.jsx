@@ -15,7 +15,7 @@ const FormatPage = ({typeFormat, ...rest}) => {
 		}
 	}
 	return (
-		<div>EL tipo de formato no es valido</div>
+		<BookSheets.LargeFormat {...rest} />
 	);
 };
 
