@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { BarLoader }           from "react-spinners";
 
 //Own components
 import LargeFormat  from "components/global/LayoutsPage/LargeFormat";
@@ -70,7 +71,16 @@ const LayoutList = ({filterLayouts, formatPage, loading}) => {
 								<ItemLayout key={index} layoutData={identifyFormatPage(item?.id)} />
 							))
 						) : (
-							<div>Null</div>
+							<div
+								style={{
+									display        : "flex",
+									width          : "100%",
+									justifyContent : "center",
+									alignItems     : "center",
+								}}
+							>
+								<BarLoader color={"#B2AFA6"} />
+							</div>
 						)
 					}
 				</div>
