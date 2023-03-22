@@ -1,19 +1,18 @@
 //Own components
 import "./PasswordInput.scss";
 
-const PasswordInput = ({variant, label, error, ...rest}) => {
+const PasswordInput = ({variant, label, error, register, ...rest}) => {
 	return (
 		<div className={`PasswordInputContainer ${error && "error"}`}>
 			{
 				label && (
-					<label htmlFor="PasswordInput">{label}</label>
+					<label>{label}</label>
 				)
 			}
 			<input
-				name="PasswordInput"
-				id="PasswordInput"
 				className={`PasswordInput ${variant ?? ""}`}
 				type="password"
+				{...register}
 				{...rest}
 			/>
 		</div>

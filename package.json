@@ -24,7 +24,7 @@
     "@ckeditor/ckeditor5-react": "^5.1.0",
     "@ckeditor/ckeditor5-theme-lark": "^36.0.1",
     "@ckeditor/vite-plugin-ckeditor5": "^0.1.1",
-    "@hookform/resolvers": "^2.9.8",
+    "@hookform/resolvers": "^3.0.0",
     "@mantine/core": "^5.10.1",
     "@mantine/hooks": "^5.10.1",
     "@mantine/modals": "^5.10.1",
@@ -47,7 +47,7 @@
     "react-draft-wysiwyg": "^1.15.0",
     "react-dropzone": "^14.2.3",
     "react-filerobot-image-editor": "^4.3.7",
-    "react-hook-form": "^7.36.0",
+    "react-hook-form": "^7.43.7",
     "react-image-file-resizer": "^0.4.8",
     "react-perfect-scrollbar": "^1.5.8",
     "react-redux": "^8.0.2",
@@ -59,7 +59,7 @@
     "redux-persist": "^6.0.0",
     "sass": "^1.54.0",
     "styled-components": "^5.3.6",
-    "yup": "^0.32.11"
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@ckeditor/ckeditor5-alignment": "^36.0.1",
