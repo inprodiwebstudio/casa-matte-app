@@ -1,15 +1,12 @@
-import { lazy }                        from "react";
-import { useRoutes, Outlet, Navigate } from "react-router-dom";
+import { lazy }                from "react";
+import { useRoutes, Navigate } from "react-router-dom";
 //Helpers
 
 // layouts
 import DashboardLayout from "core/layout";
 // components
-import { Loadable }   from "core/components";
-import { GuestRoute } from "components/global";
+import { Loadable } from "core/components";
 
-// //Auth
-const Login = Loadable(lazy(() => import("pages/auth/Login")));
 // // Dashboard
 const WorkSpace = Loadable(lazy(() => import("pages/dashboard/WorkSpace")));
 // //Erros
@@ -19,22 +16,6 @@ const Page500   = Loadable(lazy(() => import("pages/Page500")));
 
 const Router = () => {
 	return useRoutes([
-		//Auth Routes
-		{
-			path     : "auth",
-			element  : <GuestRoute component={Outlet} />,
-			children : [
-				{
-					index   : true,
-					element : <Navigate to="/auth/login" replace />,
-				},
-				{
-					path    : "login",
-					element : <Login />,
-				},
-				{ path : "*", element : <Navigate to="/auth/login" replace />},
-			],
-		},
 		// Auth DashBoard
 		{
 			path     : "dashboard",
@@ -61,7 +42,7 @@ const Router = () => {
 				{ path : "500", element : <Page500 /> },
 				{ path : "404", element : <NotFound /> },
 				{ path : "403", element : <Forbidden /> },
-				{ path : "*", element : <Navigate to="/404" replace /> },
+				{ path : "*", element : <Navigate to="/dashboard" replace /> },
 			],
 		},
 	]);
