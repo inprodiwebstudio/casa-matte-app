@@ -1,15 +1,20 @@
 //Own components
 import "./TextInput.scss";
 
-const TextInput = ({variant, label, ...rest}) => {
+const TextInput = ({variant, label, error, ...rest}) => {
 	return (
-		<div className="TextInputContainer">
+		<div className={`TextInputContainer ${error && "error"}`}>
 			{
 				label && (
 					<label htmlFor="TextInput">{label}</label>
 				)
 			}
-			<input name="TextInput" id="TextInput" className={`TextInput ${variant ?? ""}`} type="text" {...rest} />
+			<input
+				name="TextInput"
+				id="TextInput"
+				className={`TextInput ${variant ?? ""}`}
+				type="text" {...rest}
+			/>
 		</div>
 	);
 };

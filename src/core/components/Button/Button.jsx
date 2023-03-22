@@ -12,6 +12,7 @@ const Button = ({
 	fontSize,
 	children,
 	isLoading,
+	typeButton,
 	...rest
 }) => {
 	return (
@@ -28,6 +29,9 @@ const Button = ({
 				height,
 				fontSize,
 			}}
+			{...(typeButton && {
+				type : typeButton,
+			})}
 			{...rest}
 		>
 			<div className="button-body">
