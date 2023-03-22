@@ -1,0 +1,47 @@
+@import "/src/Resources/scss/variables/colorThemes";
+@import "/src/Resources/scss/breakpoints.scss";
+
+#LoginCard {
+    z-index: 2;
+    @include laptop {
+        padding-bottom: 90px;
+    }
+    a {
+        color : $flat-color;
+        transition: all ease 300ms;
+        font-weight: 300;
+        font-size: 12px;
+        padding: 8px;
+
+        &:hover {
+            color : $dark-color;
+        }
+    }
+    &.login-card-body {
+        background: $secondary-color;
+        width: 400px;
+        height: 459px;
+        box-shadow : 0px 4px 15px rgba(178, 175, 166, 0.25);
+        padding: 20px;
+        padding-left: 25px;
+        padding-right: 25px;
+        font-size: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap : 50px;
+
+        h4 {
+            font-weight: 300;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+
+        & .form-container {
+            gap: 39px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+    }
+}

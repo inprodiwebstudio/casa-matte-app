@@ -5,12 +5,20 @@ import { useParams }           from "react-router-dom";
 
 //Own components
 import { RedoArrow }             from "Resources/icons";
+import LoginCard                 from "../LoginCard";
 import { bindAll, isValidArray } from "helpers";
 import { workSpaceSlice }        from "store/Slices";
 import FormatPage                from "components/FormatPage";
 import "./WorkSpace.scss";
 
-const WorkSpace = ({ workSpaceData, workSpaceSlice, workSpaceHistory, sizePhotoBook }) => {
+const WorkSpace = ({
+	isLoggin,
+	isLoading,
+	workSpaceData,
+	sizePhotoBook,
+	workSpaceSlice,
+	workSpaceHistory,
+}) => {
 	const { pageId } = useParams();
 
 	const isFrontLayout = pageId === "frontpage";
@@ -43,38 +51,44 @@ const WorkSpace = ({ workSpaceData, workSpaceSlice, workSpaceHistory, sizePhotoB
 	return (
 		<div className="WorkSpace">
 			<div className="canva-space">
-				<div className="undo-redo-container">
-					<div
-						className={`action-styled ${!isAvailableUndo && "disabled"}`}
-						{...(
-							isAvailableUndo && {
-								onClick : () => workSpaceSlice.undo(),
-							}
-						)}
-					>
-						<RedoArrow style={{transform : "scaleX(-1)"}} size="21px" />
-						<div>Deshacer</div>
-					</div>
-					<div
-						className={`action-styled ${!isAvailableRedo && "disabled"}`}
-						{...(
-							isAvailableRedo && {
-								onClick : () => workSpaceSlice.redo(),
-							}
-						)}
-					>
-						<RedoArrow size="20px" />
-						<div>Rehacer</div>
-					</div>
-				</div>
+				{
+					(!isLoading && !isLoggin) && (
+						<div className="undo-redo-container">
+							<div
+								className={`action-styled ${!isAvailableUndo && "disabled"}`}
+								{...(
+									isAvailableUndo && {
+										onClick : () => workSpaceSlice.undo(),
+									}
+								)}
+							>
+								<RedoArrow style={{transform : "scaleX(-1)"}} size="21px" />
+								<div>Deshacer</div>
+							</div>
+							<div
+								className={`action-styled ${!isAvailableRedo && "disabled"}`}
+								{...(
+									isAvailableRedo && {
+										onClick : () => workSpaceSlice.redo(),
+									}
+								)}
+							>
+								<RedoArrow size="20px" />
+								<div>Rehacer</div>
+							</div>
+						</div>
+					)
+				}
 				<div className="ghost-canva">
 					{
-						workSpaceData && (
+						(workSpaceData && !isLoggin) ? (
 							<FormatPage
 								typeFormat={sizePhotoBook ?? "LargeFormat"}
 								pageData={myWorkSpaceData}
 								isInWorkSpcae
 							/>
+						) : (
+							<LoginCard />
 						)
 					}
 				</div>
@@ -85,10 +99,12 @@ const WorkSpace = ({ workSpaceData, workSpaceSlice, workSpaceHistory, sizePhotoB
 
 const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
 
-const mapStateToProps = ({ workSpaceSlice }) => ({
+const mapStateToProps = ({ workSpaceSlice, authSlice }) => ({
 	workSpaceData    : workSpaceSlice?.data?.pages ?? {},
 	sizePhotoBook    : workSpaceSlice?.data?.sizePhotoBook ?? "LargeFormat",
 	workSpaceHistory : workSpaceSlice?.history ?? {},
+	isLoggin         : authSlice?.loggedIn ?? false,
+	isLoading        : workSpaceSlice?.loading ?? true,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (WorkSpace);
