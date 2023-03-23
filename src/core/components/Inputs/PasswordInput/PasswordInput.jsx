@@ -1,7 +1,7 @@
 //Own components
 import "./PasswordInput.scss";
 
-const PasswordInput = ({variant, label, error, register, ...rest}) => {
+const PasswordInput = ({variant, label, error, register, isLoading, isDisabled, ...rest}) => {
 	return (
 		<div className={`PasswordInputContainer ${error && "error"}`}>
 			{
@@ -10,8 +10,11 @@ const PasswordInput = ({variant, label, error, register, ...rest}) => {
 				)
 			}
 			<input
-				className={`PasswordInput ${variant ?? ""}`}
+				className={`PasswordInput ${variant ?? ""} ${isLoading || isDisabled && "disabledStyle"}`}
 				type="password"
+				{...(
+					(isLoading || isDisabled) && {disabled : true})
+				}
 				{...register}
 				{...rest}
 			/>

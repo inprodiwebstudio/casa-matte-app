@@ -29,6 +29,7 @@ const Button = ({
 				height,
 				fontSize,
 			}}
+			{...(isLoading && {disabled : true})}
 			{...(typeButton && {
 				type : typeButton,
 			})}

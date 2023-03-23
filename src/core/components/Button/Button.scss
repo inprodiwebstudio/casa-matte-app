@@ -20,12 +20,19 @@
 
 	&.is-loading {
 		cursor: progress !important;
-		border: 1px solid $primary-color !important;
+		opacity: 50%;
+		border: 1px solid transparent !important;
 		&.outline {
 			color : $primary-color !important;
 			&:hover {
 				background: none !important;
-				border: 1px solid $primary-color !important;
+				border: 1px solid transparent !important;
+			}
+		}
+		&.subtleActive {
+			border: 1px solid transparent !important;
+			&:hover {
+				border : 1px solid transparent !important;
 			}
 		}
 		.button-body {
@@ -61,7 +68,6 @@
 		background: none;
 		line-height: 19px;
 		color : $dark-color;
-		border: none !important;
 		transition: all ease 200ms;
 		font-family: "Aitana-Regular";
 		background-color: $primary-color;

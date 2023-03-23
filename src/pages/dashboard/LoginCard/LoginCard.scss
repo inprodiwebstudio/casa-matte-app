@@ -4,7 +4,7 @@
 #LoginCard {
     z-index: 2;
     @include laptop {
-        padding-bottom: 90px;
+        margin-bottom: 90px;
     }
     a {
         color : $flat-color;

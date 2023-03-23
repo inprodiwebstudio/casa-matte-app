@@ -54,10 +54,15 @@
         }
     
         &.filled {
-            background: white !important;
+            background: white;
             text-align: left;
             padding-left: 10px;
             text-transform: none;
+        }
+
+        &.disabledStyle { 
+            opacity: 60%;
+            background: $light-color;
         }
     
         &::placeholder {

@@ -19,6 +19,8 @@ const schema = Yup.object().shape({
 const LoginCard = () => {
 	const [loginMutation, loginMutationResult] = genericApi.useSubmitDataMutation();
 
+	const loading = loginMutationResult.isLoading;
+
 	const {
 		setError,
 		register,
@@ -70,6 +72,7 @@ const LoginCard = () => {
 			<h4>Inicio de Sesión</h4>
 			<div className="form-container">
 				<TextInput
+					isLoading={loading}
 					error={errors.username ? true : false}
 					label="CORREO ELECTRÓNICO"
 					variant="filled"
@@ -78,6 +81,7 @@ const LoginCard = () => {
 					register={register("username")}
 				/>
 				<PasswordInput
+					isLoading={loading}
 					error={errors.password ? true : false}
 					placeholder="••••••••••••"
 					label="CONTRASEÑA"
@@ -86,9 +90,11 @@ const LoginCard = () => {
 					register={register("password")}
 				/>
 			</div>
-			<Button typeButton="submit" type="subtleActive" fontSize={20}>
+			<Button isLoading={loading} typeButton="submit" type="subtleActive" fontSize={20}>
 				<div style={{marginLeft : "25px", marginRight : "25px"}}>
-					Iniciar Sesión
+					{
+						!loading ? "Iniciar Sesión" : "Cargando..."
+					}
 				</div>
 			</Button>
 			<a href="https://example.com">CREAR UNA CUENTA</a>
