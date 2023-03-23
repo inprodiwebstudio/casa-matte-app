@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 //Own components
 import { genericApi }                       from "store/api/genericApi";
+import { LoginNotification }                from "Notifications";
 import { TextInput, PasswordInput, Button } from "core/components";
 import "./LoginCard.scss";
 
@@ -40,18 +41,22 @@ const LoginCard = () => {
 				case 400:
 					setError("password");
 					setError("username");
+					LoginNotification["post"][400]();
 					break;
 				case 401:
 					setError("password");
 					setError("username");
+					LoginNotification["post"][401]();
 					break;
 				case 404:
 					setError("password");
 					setError("username");
+					LoginNotification["post"][404]();
 					break;
 				case 403:
 					setError("password");
 					setError("username");
+					LoginNotification["post"][403]();
 					break;
 				default:
 					break;
