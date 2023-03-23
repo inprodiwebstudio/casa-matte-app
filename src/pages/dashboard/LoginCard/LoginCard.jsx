@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 //HookForm
 import { useForm } from "react-hook-form";
 //Yup
@@ -6,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 
 //Own components
+import { genericApi }                       from "store/api/genericApi";
 import { TextInput, PasswordInput, Button } from "core/components";
 import "./LoginCard.scss";
 
@@ -15,7 +17,10 @@ const schema = Yup.object().shape({
 });
 
 const LoginCard = () => {
+	const [loginMutation, loginMutationResult] = genericApi.useSubmitDataMutation();
+
 	const {
+		setError,
 		register,
 		handleSubmit,
 		formState: {errors},
@@ -23,11 +28,43 @@ const LoginCard = () => {
 		resolver : yupResolver(schema),
 	});
 
+	const reactToLogin = () => {
+		if (loginMutationResult.isUninitialized) return;
+
+		if (loginMutationResult.isError) {
+			const status = loginMutationResult.error?.status;
+
+			switch (status) {
+				case 400:
+					setError("password");
+					setError("username");
+					break;
+				case 401:
+					setError("password");
+					setError("username");
+					break;
+				case 404:
+					setError("password");
+					setError("username");
+					break;
+				case 403:
+					setError("password");
+					setError("username");
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	useEffect(() => void reactToLogin(), [loginMutationResult]);
+
 	const handleSubmitForm = (...args) => {
-		handleSubmit( (data) => {
-			console.log(data);
+		handleSubmit( async (data) => {
+			await loginMutation({module : "wp-json/jwt-auth/v1/token", data : data}).unwrap();
 		})(...args);
 	};
+
 	return (
 		<form id="LoginCard" className="login-card-body" onSubmit={handleSubmitForm}>
 			<h4>Inicio de Sesión</h4>

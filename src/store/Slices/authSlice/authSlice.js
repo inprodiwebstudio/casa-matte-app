@@ -5,6 +5,8 @@ const initialState = {
 	loggedIn : true,
 	user     : {
 		username : "JoabMedel",
+		email    : "",
+		name     : "",
 	},
 };
 
@@ -13,9 +15,11 @@ export const authSlice = createSlice({
 	initialState,
 	reducers : {
 		setUserData : (state, action) => {
-			state.token    = action.payload.token;
-			state.user     = action.payload.user;
 			state.loggedIn = true;
+			state.token         = action.payload.token;
+			state.user.username = action.payload.user_nicename;
+			state.user.email    = action.payload.user_email;
+			state.user.name     = action.payload.user_display_name;
 		},
 		clearUserData : () => initialState,
 	},

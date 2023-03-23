@@ -18,7 +18,7 @@ const AppShell = ({
 	isSelectedPage,
 }) => {
 	const { data : photobookData, isFetching } = genericApi.useGetDataQuery({
-		module : "photobook/7099",
+		module : "wp-json/wp/v2/photobook/7099",
 	});
 
 	const [dataMutation] = genericApi.useSubmitDataMutation();
@@ -32,7 +32,7 @@ const AppShell = ({
 
 	const submitData = async () => {
 		await dataMutation({
-			module : "photobook",
+			module : "wp-json/wp/v2/photobook",
 			data   : {
 				tittle : "Texto de prueba",
 				status : "publish",
