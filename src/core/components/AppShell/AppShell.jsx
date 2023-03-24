@@ -13,12 +13,13 @@ const AppShell = ({
 	navbar,
 	footer,
 	sidebar,
+	photoBookId,
 	workSpaceData,
 	workSpaceSlice,
 	isSelectedPage,
 }) => {
-	const { data : photobookData, isFetching } = genericApi.useGetDataQuery({
-		module : "wp-json/wp/v2/photobook/7099",
+	const { data : photobookData, isFetching, error } = genericApi.useGetDataQuery({
+		module : `wp-json/wp/v2/photobook/${photoBookId}`,
 	});
 
 	const [dataMutation] = genericApi.useSubmitDataMutation();
@@ -40,7 +41,7 @@ const AppShell = ({
 					config : parseSendData(workSpaceData),
 				},
 			},
-			id     : 7099,
+			id     : photoBookId,
 			method : "POST",
 		}).unwrap();
 	};
@@ -56,7 +57,9 @@ const AppShell = ({
 	}, [photobookData]);
 
 	useEffect(() => {
-		workSpaceSlice.changeLoading(isFetching);
+		if (!error) {
+			workSpaceSlice.changeLoading(isFetching);
+		}
 	}, [isFetching]);
 
 
@@ -100,9 +103,10 @@ const AppShell = ({
 
 const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
 
-const mapStateToProps = ({ workSpaceSlice }) => ({
+const mapStateToProps = ({ workSpaceSlice, authSlice }) => ({
 	isSelectedPage : workSpaceSlice?.pageDataSelected ?? null,
 	workSpaceData  : workSpaceSlice?.data ?? {},
+	photoBookId    : authSlice?.user?.photoBookId ?? null,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (AppShell);

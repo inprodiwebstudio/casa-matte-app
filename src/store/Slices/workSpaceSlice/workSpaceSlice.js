@@ -4,10 +4,13 @@ import { convertToArray, History, isValidArray } from "helpers";
 
 const initialState = {
 	data : {
-		sizePhotoBook : "",
-		frontPage     : {},
-		numberOfPages : 0,
-		pages         : {
+		sizePhotoBook  : "",
+		sizeDimentions : "",
+		pasta          : "",
+		frontPage      : {},
+		numberOfPages  : 50,
+		price          : 0,
+		pages          : {
 			page1 : {
 				id     : "page1",
 				sheet1 : {
@@ -174,7 +177,7 @@ const initialState = {
 		type           : "all",
 		photosQuantity : "all",
 	},
-	loading : false,
+	loading : true,
 };
 
 export const workSpaceSlice = createSlice({
