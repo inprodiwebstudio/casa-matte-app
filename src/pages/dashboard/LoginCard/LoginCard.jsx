@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 import * as Yup        from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-
 //Own components
+import { isValidArray }                     from "helpers";
 import { genericApi }                       from "store/api/genericApi";
 import { LoginNotification }                from "Notifications";
 import { TextInput, PasswordInput, Button } from "core/components";
@@ -17,10 +17,21 @@ const schema = Yup.object().shape({
 	password : Yup.string().required("El campo es obligatorio"),
 });
 
+const { useLazyGetDataQuery } = genericApi;
+
+
 const LoginCard = () => {
 	const [loginMutation, loginMutationResult] = genericApi.useSubmitDataMutation();
 
+	const qsData = location.search.split("&");
+
+	const nameUser = qsData[0].split("=")[1];
+	const orderId = qsData[1].split("=")[1];
+	const productId = qsData[2].split("=")[1];
+
 	const loading = loginMutationResult.isLoading;
+
+	const [ fetchData ] = useLazyGetDataQuery();
 
 	const {
 		setError,
@@ -69,6 +80,17 @@ const LoginCard = () => {
 	const handleSubmitForm = (...args) => {
 		handleSubmit( async (data) => {
 			await loginMutation({module : "wp-json/jwt-auth/v1/token", data : data}).unwrap();
+			const getPostyPhotoBook = await fetchData({
+				module : "wp-json/wp/v2/photobook",
+				params : {
+					meta_query : "photobook",
+					meta_value : `${orderId}${productId}`,
+					meta_key   : "id",
+				},
+			}).unwrap();
+			if (isValidArray(getPostyPhotoBook)) {
+				console.log(getPostyPhotoBook);
+			}
 		})(...args);
 	};
 
@@ -83,6 +105,7 @@ const LoginCard = () => {
 					variant="filled"
 					placeholder="correo_electrónico@email.com"
 					name="username"
+					defaultValue={nameUser}
 					register={register("username")}
 				/>
 				<PasswordInput
