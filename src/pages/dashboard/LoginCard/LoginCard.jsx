@@ -6,7 +6,7 @@ import * as Yup        from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 //Own components
-import { isValidArray }                     from "helpers";
+import { convertToObject, isValidArray }    from "helpers";
 import { genericApi }                       from "store/api/genericApi";
 import { LoginNotification }                from "Notifications";
 import { TextInput, PasswordInput, Button } from "core/components";
@@ -18,7 +18,6 @@ const schema = Yup.object().shape({
 });
 
 const { useLazyGetDataQuery } = genericApi;
-
 
 const LoginCard = () => {
 	const [loginMutation, loginMutationResult] = genericApi.useSubmitDataMutation();
@@ -90,6 +89,106 @@ const LoginCard = () => {
 			}).unwrap();
 			if (isValidArray(getPostyPhotoBook)) {
 				console.log(getPostyPhotoBook);
+				return;
+			}
+			const getUserDetail =  await fetchData({
+				module : "wp-json/wp/v2/users",
+				params : {
+					search : nameUser,
+				},
+			}).unwrap();
+			const getUserWooComer = await fetchData({
+				module : `wp-json/wc/v3/customers/${getUserDetail[0]?.id}`,
+			}).unwrap();
+			const isSuscriber = getUserWooComer?.meta_data?.find(meta => meta?.key === "suscripcion");
+			if (isSuscriber) {
+				if (isSuscriber?.value === "true") {
+					const getOrder = await fetchData({
+						module : `wp-json/wc/v3/orders/${orderId}`,
+					}).unwrap();
+					const finderProduct = getOrder?.line_items?.find(product => product?.id === Number(productId));
+					if (finderProduct) {
+						const size = "LargeFormat";
+						const dimentions = "21x21";
+						const pasta = "Suave";
+						const bound = finderProduct?.meta_data[3]?.display_value ?? "NORMAL";
+						const numberOfPages = 40;
+
+						const arrayGenerator = Array((numberOfPages + 2)/2).fill(0);
+						const listOfPages = arrayGenerator.map((e, index) => {
+							if (index === 0) {
+								return ({
+									id     : "page1",
+									sheet1 : {
+										pageNo     : 1,
+										layoutType : "",
+										text       : "",
+										photos     : {
+											0 : {
+												id  : "",
+												url : "",
+											},
+										},
+									},
+								});
+							}
+							if (index === numberOfPages / 2) {
+								return ({
+									id     : `page${index + 1}`,
+									sheet1 : {
+										pageNo     : numberOfPages,
+										layoutType : "",
+										text       : "",
+										photos     : {
+											0 : {
+												id  : "",
+												url : "",
+											},
+										},
+									},
+								});
+							}
+							return ({
+								id     : `page${index + 1}`,
+								sheet1 : {
+									pageNo     : index * 2,
+									layoutType : "",
+									text       : "",
+									photos     : {
+										0 : {
+											id  : "",
+											url : "",
+										},
+									},
+								},
+								sheet2 : {
+									pageNo     : (index * 2) + 1,
+									layoutType : "",
+									text       : "",
+									photos     : {
+										0 : {
+											id  : "",
+											url : "",
+										},
+									},
+								},
+							});
+						});
+
+						const myPhotoBookData = {
+							sizePhotoBook  : size,
+							sizeDimentions : dimentions,
+							pasta          : pasta,
+							frontPage      : {},
+							numberOfPages  : numberOfPages,
+							price          : 0,
+							bound          : bound,
+							pages          : convertToObject(listOfPages),
+						};
+
+						console.log(myPhotoBookData);
+					}
+				}
 			}
 		})(...args);
 	};
