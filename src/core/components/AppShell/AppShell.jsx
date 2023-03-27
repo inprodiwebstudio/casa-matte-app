@@ -19,7 +19,7 @@ const AppShell = ({
 	isSelectedPage,
 }) => {
 	const { data : photobookData, isFetching, error } = genericApi.useGetDataQuery({
-		module : `wp-json/wp/v2/photobook/${photoBookId}`,
+		module : `wp-json/wp/v2/photobook/${photoBookId === "" ? null : photoBookId}`,
 	});
 
 	const [dataMutation] = genericApi.useSubmitDataMutation();

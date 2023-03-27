@@ -81,7 +81,7 @@ const WorkSpace = ({
 				}
 				<div className="ghost-canva">
 					{
-						(workSpaceData && !isLoggin) ? (
+						(workSpaceData && isLoggin) ? (
 							<FormatPage
 								typeFormat={sizePhotoBook ?? "LargeFormat"}
 								pageData={myWorkSpaceData}

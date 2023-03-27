@@ -1,15 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+//Redux
+import { connect } from "react-redux";
 //HookForm
 import { useForm } from "react-hook-form";
 //Yup
 import * as Yup        from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+//Slices
+import { authSlice } from "store/Slices";
+
 //Own components
-import { convertToObject, isValidArray }    from "helpers";
-import { genericApi }                       from "store/api/genericApi";
-import { LoginNotification }                from "Notifications";
-import { TextInput, PasswordInput, Button } from "core/components";
+import { convertToObject, isValidArray, bindAll } from "helpers";
+import { genericApi }                             from "store/api/genericApi";
+import { LoginNotification }                      from "Notifications";
+import { TextInput, PasswordInput, Button }       from "core/components";
 import "./LoginCard.scss";
 
 const schema = Yup.object().shape({
@@ -19,16 +24,17 @@ const schema = Yup.object().shape({
 
 const { useLazyGetDataQuery } = genericApi;
 
-const LoginCard = () => {
+const LoginCard = ({
+	authSlice,
+}) => {
 	const [loginMutation, loginMutationResult] = genericApi.useSubmitDataMutation();
+	const [ loading, setLoading ] = useState(false);
 
 	const qsData = location.search.split("&");
 
 	const nameUser = qsData[0].split("=")[1];
 	const orderId = qsData[1].split("=")[1];
 	const productId = qsData[2].split("=")[1];
-
-	const loading = loginMutationResult.isLoading;
 
 	const [ fetchData ] = useLazyGetDataQuery();
 
@@ -41,7 +47,7 @@ const LoginCard = () => {
 		resolver : yupResolver(schema),
 	});
 
-	const reactToLogin = () => {
+	const reactToLogin = async () => {
 		if (loginMutationResult.isUninitialized) return;
 
 		if (loginMutationResult.isError) {
@@ -52,33 +58,32 @@ const LoginCard = () => {
 					setError("password");
 					setError("username");
 					LoginNotification["post"][400]();
+					setLoading(false);
 					break;
 				case 401:
 					setError("password");
 					setError("username");
 					LoginNotification["post"][401]();
+					setLoading(false);
 					break;
 				case 404:
 					setError("password");
 					setError("username");
 					LoginNotification["post"][404]();
+					setLoading(false);
 					break;
 				case 403:
 					setError("password");
 					setError("username");
 					LoginNotification["post"][403]();
+					setLoading(false);
 					break;
 				default:
 					break;
 			}
 		}
-	};
 
-	useEffect(() => void reactToLogin(), [loginMutationResult]);
-
-	const handleSubmitForm = (...args) => {
-		handleSubmit( async (data) => {
-			await loginMutation({module : "wp-json/jwt-auth/v1/token", data : data}).unwrap();
+		if (loginMutationResult.data) {
 			const getPostyPhotoBook = await fetchData({
 				module : "wp-json/wp/v2/photobook",
 				params : {
@@ -88,7 +93,8 @@ const LoginCard = () => {
 				},
 			}).unwrap();
 			if (isValidArray(getPostyPhotoBook)) {
-				console.log(getPostyPhotoBook);
+				authSlice.setUserData({...loginMutationResult.data, photoBookId : getPostyPhotoBook[0]?.id});
+				setLoading(false);
 				return;
 			}
 			const getUserDetail =  await fetchData({
@@ -187,9 +193,24 @@ const LoginCard = () => {
 						};
 
 						console.log(myPhotoBookData);
+						setLoading(false);
+						return;
 					}
 				}
+				console.log("Tu suscripcion expiro");
+				return;
 			}
+			console.log("No es Suscriptor");
+			return;
+		}
+	};
+
+	useEffect(() => void reactToLogin(), [loginMutationResult]);
+
+	const handleSubmitForm = (...args) => {
+		setLoading(true);
+		handleSubmit( async (data) => {
+			await loginMutation({module : "wp-json/jwt-auth/v1/token", data : data}).unwrap();
 		})(...args);
 	};
 
@@ -229,4 +250,6 @@ const LoginCard = () => {
 	);
 };
 
-export default LoginCard;
+const mapDispatchToProps = bindAll({ authSlice : authSlice.actions });
+
+export default connect(null, mapDispatchToProps) (LoginCard);

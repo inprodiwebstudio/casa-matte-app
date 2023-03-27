@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	token    : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3RlbXBvcmFsLmNhc2FtYXR0ZS5jb20iLCJpYXQiOjE2Nzk0MTg0NDUsIm5iZiI6MTY3OTQxODQ0NSwiZXhwIjoxNjgwMDIzMjQ1LCJkYXRhIjp7InVzZXIiOnsiaWQiOiI1In19fQ.Vr-mAJxaTGPaVqMeaEqT5uiUsivBZ2PW8yg1DZkDZFg",
-	loggedIn : true,
+	token    : "",
+	loggedIn : false,
 	user     : {
-		username    : "JoabMedel",
+		username    : "",
 		email       : "",
 		name        : "",
-		photoBookId : 7099,
+		photoBookId : "",
 	},
 };
 
@@ -18,9 +18,10 @@ export const authSlice = createSlice({
 		setUserData : (state, action) => {
 			state.loggedIn = true;
 			state.token         = action.payload.token;
-			state.user.username = action.payload.user_nicename;
 			state.user.email    = action.payload.user_email;
+			state.user.username = action.payload.user_nicename;
 			state.user.name     = action.payload.user_display_name;
+			state.user.photoBookId = action.payload.photoBookId;
 		},
 		clearUserData : () => initialState,
 	},
