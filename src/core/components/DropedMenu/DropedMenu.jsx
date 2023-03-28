@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 //Own components
-import { ArrowTop }                   from "Resources/icons";
-import { MenuItem, SelectorMenuItem } from "core/components";
+import { ArrowTop } from "Resources/icons";
+import { MenuItem } from "core/components";
 import "./DropedMenu.scss";
 
 const DropedMenu = () => {
@@ -16,15 +16,15 @@ const DropedMenu = () => {
 				</div>
 				<div className="menu-item">
 					<label>TAMAÑO</label>
-					<SelectorMenuItem />
+					<MenuItem body="CHICO" />
 				</div>
 				<div className="menu-item">
 					<label>NÚMERO DE PÁGINAS</label>
-					<SelectorMenuItem />
+					<MenuItem body="23" />
 				</div>
 				<div className="menu-item">
-					<label>ENCUADERNADO</label>
-					<MenuItem body="SEMIFLAT" />
+					<label>Precio total</label>
+					<MenuItem body="$ 2,350.00" />
 				</div>
 			</div>
 			<div className={`selector-container ${!activeMenu && "hidden"}`}>
