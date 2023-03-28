@@ -1,5 +1,5 @@
-import { createSlice }                           from "@reduxjs/toolkit";
-import { convertToArray, History, isValidArray } from "helpers";
+import { createSlice }                                            from "@reduxjs/toolkit";
+import { convertToArray, History, isValidArray, convertToObject } from "helpers";
 
 
 const initialState = {
@@ -213,6 +213,48 @@ export const workSpaceSlice = createSlice({
 		},
 		insertData : (state, {payload}) => {
 			state.data = {...payload};
+		},
+		insertPage : (state, {payload}) => {
+			const newData = {...state.data.pages};
+			const listOfPages = convertToArray(newData);
+			const lastPage = listOfPages[listOfPages.length - 1];
+			if (lastPage?.sheet2) {
+				const newPage = {
+					id     : `page${listOfPages.length + 1}`,
+					sheet1 : {
+						pageNo     : (listOfPages.length + 1) - 2,
+						layoutType : "",
+						text       : "",
+						photos     : {
+							0 : {
+								id  : "",
+								url : "",
+							},
+						},
+					},
+				};
+				listOfPages.push(newPage);
+				state.data.pages = convertToObject(listOfPages);
+				return;
+			}
+			const newSheet = {
+				sheet2 : {
+					pageNo     : listOfPages[listOfPages.length - 1]?.sheet1?.pageNo + 1,
+					layoutType : "",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			};
+			listOfPages[listOfPages.length - 1] = {
+				...listOfPages[listOfPages.length - 1],
+				...newSheet,
+			};
+			state.data.pages = convertToObject(listOfPages);
 		},
 		addPhoto : (state, {payload}) => {
 			const newData = {...state.data};

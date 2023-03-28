@@ -4,9 +4,12 @@
 import { DropedMenu, Button } from "core/components";
 import { PlusIcon }           from "Resources/icons";
 import PaginatorBar           from "components/PaginatorBar";
+import { bindAll }            from "helpers";
+import { connect }            from "react-redux";
+import { workSpaceSlice }     from "store/Slices";
 import "./Navbar.scss";
 
-const Navbar = () => {
+const Navbar = ({workSpaceSlice}) => {
 	return (
 		<div className="Navbar">
 			<DropedMenu />
@@ -26,6 +29,7 @@ const Navbar = () => {
 					type="subtle"
 					width={117}
 					height={39}
+					onClick={() => workSpaceSlice.insertPage()}
 				>
 					Nueva
 				</Button>
@@ -34,4 +38,6 @@ const Navbar = () => {
 	);
 };
 
-export default Navbar;
+const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
+
+export default connect(null, mapDispatchToProps) (Navbar);
