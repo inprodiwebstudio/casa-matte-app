@@ -222,7 +222,7 @@ export const workSpaceSlice = createSlice({
 				const newPage = {
 					id     : `page${listOfPages.length + 1}`,
 					sheet1 : {
-						pageNo     : (listOfPages.length + 1) - 2,
+						pageNo     : ((listOfPages.length + 1)*2) - 2,
 						layoutType : "",
 						text       : "",
 						photos     : {
