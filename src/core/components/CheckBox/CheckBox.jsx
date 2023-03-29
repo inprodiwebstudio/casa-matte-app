@@ -1,3 +1,6 @@
+//Manitne components
+
+
 //Own components
 import "./CheckBox.scss";
 

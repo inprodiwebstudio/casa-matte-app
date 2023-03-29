@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { connect }             from "react-redux";
-
 //Own components
 import Folder    from "../Folder";
 import DropDoc   from "../DropDoc";
@@ -267,7 +266,7 @@ const BodyGallery = ({
 	);
 };
 
-const mapStateToProps = ({ gallerySlice, workSpaceSlice }) => ({
+const mapStateToProps = ({ gallerySlice, workSpaceSlice, authSlice }) => ({
 	galleryPathRoute      : gallerySlice?.galleryPathName ?? "route",
 	gallerySelectedData   : gallerySlice?.selectedData ?? {},
 	workSpaceData         : workSpaceSlice?.data ?? {},
