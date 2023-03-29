@@ -30,11 +30,12 @@ const LoginCard = ({
 	const [loginMutation, loginMutationResult] = genericApi.useSubmitDataMutation();
 	const [ loading, setLoading ] = useState(false);
 
-	const qsData = location.search.split("&");
+	const qsData = location.search && location.search.split("&");
 
-	const nameUser = qsData[0].split("=")[1];
-	const orderId = qsData[1].split("=")[1];
-	const productId = qsData[2].split("=")[1];
+	const nameUser = qsData ? qsData[0].split("=")[1] : "";
+	const orderId = qsData ? qsData[1].split("=")[1] : "";
+	const productId = qsData ? qsData[2].split("=")[1] : "";
+
 
 	const [ fetchData ] = useLazyGetDataQuery();
 
