@@ -14,6 +14,9 @@ const ActionImageslayout = ({image, sheetNo, layoutNo, pageId, workSpaceSlice}) 
 			modal      : "editPhoto",
 			innerProps : {
 				image,
+				pageId,
+				sheetNo,
+				layoutNo,
 			},
 		});
 	};

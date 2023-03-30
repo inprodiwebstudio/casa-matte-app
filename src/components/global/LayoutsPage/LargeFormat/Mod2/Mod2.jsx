@@ -44,7 +44,7 @@ const Mod2 = ({images, isInWorkSpcae, sheetNo, workSpaceSlice, dragerImage}) => 
 			>
 				{
 					(images && images[0].url && isInWorkSpcae) && (
-						<ActionImagesLayout sheetNo={sheetNo} layoutNo={0} pageId={pageId}  image={images[0].url} />
+						<ActionImagesLayout sheetNo={sheetNo} layoutNo={0} pageId={pageId}  image={images[0].urlPhotoEdited ? images[0].urlPhotoEdited : images[0].url} />
 					)
 				}
 			</div>

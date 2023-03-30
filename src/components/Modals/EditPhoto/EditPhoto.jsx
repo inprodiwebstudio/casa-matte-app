@@ -1,3 +1,6 @@
+//React
+import { useEffect } from "react";
+
 //React FileRobotEditor
 import FilerobotImageEditor, {
 	TABS,
@@ -7,11 +10,13 @@ import { closeAllModals } from "@mantine/modals";
 
 
 //Own components
-import { apiImageKit } from "store/api/imageKitApi";
+import { workSpaceSlice } from "store/Slices";
+import { apiImageKit }    from "store/api/imageKitApi";
+import { bindAll }        from "helpers";
 import "./EditPhoto.scss";
 
-const EditPhoto = ({innerProps, userName}) => {
-	const [galleryImagesMutation] = apiImageKit.useAddEditedImageMutation();
+const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
+	const [galleryImagesMutation, galleryMutationResult] = apiImageKit.useAddEditedImageMutation();
 
 	const addEditedImage = async (file) => {
 		await galleryImagesMutation({
@@ -34,6 +39,12 @@ const EditPhoto = ({innerProps, userName}) => {
 		}
 		return new File([u8arr], filename, {type : mime});
 	};
+
+	useEffect(() => {
+		if (!galleryMutationResult?.isError && !galleryMutationResult?.isLoading && !galleryMutationResult?.isUninitialized && galleryMutationResult?.data) {
+			workSpaceSlice.addPhotoEdited({pageId : innerProps?.pageId, sheetNo : innerProps?.sheetNo, layoutNo : innerProps?.layoutNo, imageUrl : galleryMutationResult?.data?.url});
+		}
+	}, [galleryMutationResult]);
 
 	return (
 		<div className="EditPhoto">
@@ -75,8 +86,10 @@ const EditPhoto = ({innerProps, userName}) => {
 	);
 };
 
+const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice?.actions });
+
 const mapStateToProps = ({ authSlice }) => ({
 	userName : authSlice?.user?.username ?? undefined,
 });
 
-export default connect(mapStateToProps) (EditPhoto);
+export default connect(mapStateToProps, mapDispatchToProps) (EditPhoto);

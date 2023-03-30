@@ -46,9 +46,6 @@ const BodyGallery = ({
 
 	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
 
-	// const quantityFoldersSkeleton = Array(3).fill(0);
-	// const quantityPhotosSkeleton = Array(4).fill(0);
-
 	useEffect(() => {
 		if (!isAvailableDocs) {
 			gallerySlice.setGalleryPath({id : "route", name : "route"});
@@ -73,8 +70,9 @@ const BodyGallery = ({
 		if (isValidArray(galleryData)) {
 			const newPhotos = gallerySeparation(galleryData, false);
 			const newFolders = gallerySeparation(galleryData, true);
+			const leaverFolderEdited = newFolders.filter(e => e.name !== "edited");
 			setMyPhotos(newPhotos);
-			setMyFolders(newFolders);
+			setMyFolders(leaverFolderEdited);
 			return;
 		}
 	}, [galleryData]);

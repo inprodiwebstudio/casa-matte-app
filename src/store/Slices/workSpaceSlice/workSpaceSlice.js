@@ -256,6 +256,11 @@ export const workSpaceSlice = createSlice({
 			};
 			state.data.pages = convertToObject(listOfPages);
 		},
+		addPhotoEdited : (state, {payload}) => {
+			const newData = {...state.data};
+			newData.pages[payload?.pageId][payload?.sheetNo]["photos"][payload?.layoutNo]["urlPhotoEdited"] = payload?.imageUrl;
+			state.data = newData;
+		},
 		addPhoto : (state, {payload}) => {
 			const newData = {...state.data};
 			newData.pages[payload.pageId][payload.sheetNo]["photos"][payload.layoutNo] = {
