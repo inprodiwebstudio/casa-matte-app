@@ -1,5 +1,7 @@
 import { connect }             from "react-redux";
 import { useState, useEffect } from "react";
+import { Skeleton }            from "@mantine/core";
+
 
 //Own omponents
 import { apiImageKit }                from "store/api/imageKitApi";
@@ -80,84 +82,86 @@ const Folder = ({
 
 
 	return (
-		<div
-			className={`Folder ${folderNoSelectable && "cursor-regular"} ${!loadingMutationGallery && "isAvailable"}`}
-			{
-				...(!folderNoSelectable && {onDoubleClick : onSelectedFolder})
-			}
-		>
-			<div className={`header-folder ${loadingMutationGallery && "loading"}`}>
-				<TextInput onChange={(e) => handleEditFolderName(e)} variant="invisible" value={folderName} />
-				<div className="more-icon-container">
-					<MoreOption size="20px" />
-				</div>
-			</div>
-			<div className="body-indicator-conatiner">
-				<div className="photo-thumb-nail-container">
-					<div
-						className={`photo-indicator ${imageData(0) && "full-size"}`}
-						style={{
-							backgroundImage : imageData(0),
-						}}
-					/>
-					<div
-						className={`photo-indicator ${imageData(1) && "full-size"}`}
-						style={{
-							backgroundImage : imageData(1),
-						}}
-					/>
-					<div
-						className={`photo-indicator ${imageData(2) && "full-size"}`}
-						style={{
-							backgroundImage : imageData(2),
-						}}
-					/>
-					<div
-						className={`photo-indicator ${imageData(3) && "full-size"}`}
-						style={{
-							backgroundImage : imageData(3),
-						}}
-					/>
-				</div>
+		<Skeleton visible={false}>
+			<div
+				className={`Folder ${folderNoSelectable && "cursor-regular"} ${!loadingMutationGallery && "isAvailable"}`}
 				{
-					isAvailableImages && (
-						<div
-							className="drager-place"
-						>
-							<div>
-								<PlusIcon size="20px" />
-							</div>
-						</div>
-					)
+					...(!folderNoSelectable && {onDoubleClick : onSelectedFolder})
 				}
-				{
-					((isSelectedData || (imageKitData && !isValidArray(imageKitData)) || loadingMutationGallery) && (
+			>
+				<div className={`header-folder ${loadingMutationGallery && "loading"}`}>
+					<TextInput onChange={(e) => handleEditFolderName(e)} variant="invisible" value={folderName} />
+					<div className="more-icon-container">
+						<MoreOption size="20px" />
+					</div>
+				</div>
+				<div className="body-indicator-conatiner">
+					<div className="photo-thumb-nail-container">
 						<div
-							className={`overlay-add-photos ${imageKitData && !isValidArray(imageKitData) && "none-background"}`}
-							{
-								...((!loadingMutationGallery && isSelectedData) && {onClick : () => handleMoveInfolder()})
-							}
-						>
-							{
-								loadingMutationGallery ? (
-									<MutationSpinner />
-								) : (
+							className={`photo-indicator ${imageData(0) && "full-size"}`}
+							style={{
+								backgroundImage : imageData(0),
+							}}
+						/>
+						<div
+							className={`photo-indicator ${imageData(1) && "full-size"}`}
+							style={{
+								backgroundImage : imageData(1),
+							}}
+						/>
+						<div
+							className={`photo-indicator ${imageData(2) && "full-size"}`}
+							style={{
+								backgroundImage : imageData(2),
+							}}
+						/>
+						<div
+							className={`photo-indicator ${imageData(3) && "full-size"}`}
+							style={{
+								backgroundImage : imageData(3),
+							}}
+						/>
+					</div>
+					{
+						isAvailableImages && (
+							<div
+								className="drager-place"
+							>
+								<div>
 									<PlusIcon size="20px" />
-								)
-							}
-							<p>
+								</div>
+							</div>
+						)
+					}
+					{
+						((isSelectedData || (imageKitData && !isValidArray(imageKitData)) || loadingMutationGallery) && (
+							<div
+								className={`overlay-add-photos ${imageKitData && !isValidArray(imageKitData) && "none-background"}`}
 								{
-									((imageKitData && !isValidArray(imageKitData)) && !loadingMutationGallery) && "Primero selecciona las fotos para agregar a ésta carpeta"
+									...((!loadingMutationGallery && isSelectedData) && {onClick : () => handleMoveInfolder()})
 								}
+							>
 								{
-									((imageKitData && isValidArray(imageKitData)) && !loadingMutationGallery) && "Haz click aquí para agregar las fotos seleccionadas"
+									loadingMutationGallery ? (
+										<MutationSpinner />
+									) : (
+										<PlusIcon size="20px" />
+									)
 								}
-							</p>
-						</div>
-					))
-				}
+								<p>
+									{
+										((imageKitData && !isValidArray(imageKitData)) && !loadingMutationGallery) && "Primero selecciona las fotos para agregar a ésta carpeta"
+									}
+									{
+										((imageKitData && isValidArray(imageKitData)) && !loadingMutationGallery) && "Haz click aquí para agregar las fotos seleccionadas"
+									}
+								</p>
+							</div>
+						))
+					}
+				</div>
 			</div>
-		</div>
+		</Skeleton>
 	);
 };
 

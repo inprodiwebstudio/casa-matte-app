@@ -20,6 +20,7 @@ import { CircleArrow, CrossSelector, FilterIcon } from "Resources/icons";
 import "./BodyGallery.scss";
 
 const BodyGallery = ({
+	isLoggedIn,
 	isFetching,
 	galleryData,
 	gallerySlice,
@@ -44,6 +45,9 @@ const BodyGallery = ({
 	const [ selectedImagesIds, setSelectedImagesIds ] = useState([]);
 
 	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
+
+	// const quantityFoldersSkeleton = Array(3).fill(0);
+	// const quantityPhotosSkeleton = Array(4).fill(0);
 
 	useEffect(() => {
 		if (!isAvailableDocs) {
@@ -191,19 +195,19 @@ const BodyGallery = ({
 				</div>
 			</div>
 			{
-				(isFetching) && (
+				(isFetching || !isLoggedIn) && (
 					<div style={{width : "100%", height : "100%", display : "flex", justifyContent : "center", alignItems : "center"}}>
 						<ChargeSpinner />
 					</div>
 				)
 			}
 			{
-				((!isFetching) && !isAvailableDocs) && (
+				((!isFetching) && !isAvailableDocs && isLoggedIn) && (
 					<DropDoc galleryMutation={galleryMutation} />
 				)
 			}
 			{
-				((!isFetching) && isAvailableDocs) && (
+				((!isFetching) && isAvailableDocs && isLoggedIn) && (
 					<ScrollBar>
 						{
 							galleryTypeDropedView && (
@@ -272,6 +276,7 @@ const mapStateToProps = ({ gallerySlice, workSpaceSlice, authSlice }) => ({
 	workSpaceData         : workSpaceSlice?.data ?? {},
 	galleryTypeDropedView : gallerySlice?.typeDropedView ?? null,
 	currentFilter         : gallerySlice?.filter ?? undefined,
+	isLoggedIn            : authSlice?.loggedIn ?? false,
 });
 
 const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions, workSpaceSlice : workSpaceSlice.actions});
