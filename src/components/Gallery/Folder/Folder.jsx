@@ -91,7 +91,7 @@ const Folder = ({
 			>
 				<div className={`header-folder ${loadingMutationGallery && "loading"}`}>
 					<TextInput
-						isDisabled={true}
+						// isDisabled={true}
 						onChange={(e) => handleEditFolderName(e)}
 						variant="invisible"
 						value={folderName}

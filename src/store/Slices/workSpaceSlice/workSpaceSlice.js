@@ -404,7 +404,7 @@ export const workSpaceSlice = createSlice({
 				state.data = cloneData;
 				return;
 			}
-			if (!isAvailableDoublePage && isFullBook) {
+			if (!isAvailableDoublePage && isFullBook()) {
 				return;
 			}
 			cloneData.pages[payload.pageId][payload.sheetId] = {
