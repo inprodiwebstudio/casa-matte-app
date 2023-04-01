@@ -104,12 +104,30 @@ const PaginatorBar = ({ pagesData, workSpaceSlice }) => {
 	}, [pagesData]);
 
 	const handleDelete = (pageId, index) => {
-		setPageList(prev => {
-			const newData = {...prev};
-			delete newData.pages[pageId];
-			newData.pagesIds.splice(index, 1);
-			return newData;
+		const myPagesData = {...pagesData};
+		delete myPagesData[pageId];
+		const listOfpages = convertToArray(myPagesData);
+		const newlistData = listOfpages.map((data, index) => {
+			if (index === 0) {
+				return data;
+			}
+			return {
+				...data,
+				id     : `page${index + 1}`,
+				sheet1 : {
+					...data.sheet1,
+					pageNo : index * 2,
+				},
+				...(data?.sheet2 && {
+					sheet2 : {
+						...data.sheet2,
+						pageNo : (index * 2) + 1,
+					},
+				}),
+			};
 		});
+		const newPagesData = convertToObject(newlistData);
+		workSpaceSlice.newListPages(newPagesData);
 	};
 
 	return (

@@ -46,7 +46,7 @@ const ItemPage = ({
 				<div>
 					<div className="withe-page-container">
 						{
-							(!isDoublePage && pageData.sheet2) && (
+							(!isDoublePage && pageData?.sheet2) && (
 								<div className="spacer-paginator" />
 							)
 						}
@@ -68,7 +68,7 @@ const ItemPage = ({
 					className="cross-icon-conatiner"
 					{
 						...(provided && {
-							onClick : () => handleDelete(pageData?.id, index),
+							onClick : () => handleDelete(pageData?.id),
 						})
 					}
 				>

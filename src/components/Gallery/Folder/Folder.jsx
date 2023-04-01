@@ -92,9 +92,9 @@ const Folder = ({
 				<div className={`header-folder ${loadingMutationGallery && "loading"}`}>
 					<TextInput
 						// isDisabled={true}
-						onChange={(e) => handleEditFolderName(e)}
-						variant="invisible"
 						value={folderName}
+						variant="invisible"
+						onChange={(e) => handleEditFolderName(e)}
 					/>
 					<div className="more-icon-container">
 						<MoreOption size="20px" />

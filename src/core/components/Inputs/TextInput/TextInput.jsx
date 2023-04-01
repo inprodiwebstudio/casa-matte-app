@@ -2,8 +2,11 @@
 import "./TextInput.scss";
 
 const TextInput = ({variant, label, error, register, isLoading, isDisabled, ...rest}) => {
+	const handleSubmit = (e) => {
+		e.preventDefault();
+	};
 	return (
-		<div className={`TextInputContainer ${error && "error"}`}>
+		<form onSubmit={(e) => handleSubmit(e)} className={`TextInputContainer ${error && "error"}`}>
 			{
 				label && (
 					<label>{label}</label>
@@ -18,7 +21,7 @@ const TextInput = ({variant, label, error, register, isLoading, isDisabled, ...r
 				{...register}
 				{...rest}
 			/>
-		</div>
+		</form>
 	);
 };
 
