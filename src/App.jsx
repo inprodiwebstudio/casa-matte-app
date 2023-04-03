@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { Provider }                  from "react-redux";
-import { BrowserRouter, HashRouter } from "react-router-dom";
-import { PersistGate }               from "redux-persist/integration/react";
+import { Provider }      from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { PersistGate }   from "redux-persist/integration/react";
 
 //Mantine
 import { MantineProvider }       from "@mantine/core";
@@ -25,22 +25,20 @@ export default function App() {
 	return (
 		<div id="body-app">
 			<Provider store={store}>
-				<HashRouter>
-					<BrowserRouter>
-						<PersistGate persistor={persistor}>
-							<MantineProvider withNormalizeCSS withGlobalStyles>
-								<ModalsProvider
-									modals={ modals }
-									modalProps={ modalsConfig }
-								>
-									<NotificationsProvider position="top-right" zIndex={99999}>
-										<Router />
-									</NotificationsProvider>
-								</ModalsProvider>
-							</MantineProvider>
-						</PersistGate>
-					</BrowserRouter>
-				</HashRouter>
+				<BrowserRouter>
+					<PersistGate persistor={persistor}>
+						<MantineProvider withNormalizeCSS withGlobalStyles>
+							<ModalsProvider
+								modals={ modals }
+								modalProps={ modalsConfig }
+							>
+								<NotificationsProvider position="top-right" zIndex={99999}>
+									<Router />
+								</NotificationsProvider>
+							</ModalsProvider>
+						</MantineProvider>
+					</PersistGate>
+				</BrowserRouter>
 			</Provider>
 		</div>
 	);
