@@ -10,7 +10,7 @@ import { ScrollBar }                                              from "core/com
 import FrontPage                                                  from "./FrontPage";
 import "./PaginatorBar.scss";
 
-const PaginatorBar = ({ pagesData, workSpaceSlice }) => {
+const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages }) => {
 	const [ pageList, setPageList ] = useState({
 		pages    : {},
 		pagesIds : [],
@@ -104,30 +104,40 @@ const PaginatorBar = ({ pagesData, workSpaceSlice }) => {
 	}, [pagesData]);
 
 	const handleDelete = (pageId, index) => {
-		const myPagesData = {...pagesData};
-		delete myPagesData[pageId];
-		const listOfpages = convertToArray(myPagesData);
-		const newlistData = listOfpages.map((data, index) => {
-			if (index === 0) {
-				return data;
-			}
-			return {
-				...data,
-				id     : `page${index + 1}`,
-				sheet1 : {
-					...data.sheet1,
-					pageNo : index * 2,
-				},
-				...(data?.sheet2 && {
-					sheet2 : {
-						...data.sheet2,
-						pageNo : (index * 2) + 1,
+		if (numberOfPages !== minPages) {
+			const myPagesData = {...pagesData};
+			const dataDelete = {...myPagesData[pageId]};
+			delete myPagesData[pageId];
+			const listOfpages = convertToArray(myPagesData);
+			const newlistData = listOfpages.map((data, index) => {
+				if (index === 0) {
+					return data;
+				}
+				return {
+					...data,
+					id     : `page${index + 1}`,
+					sheet1 : {
+						...data.sheet1,
+						pageNo : index * 2,
 					},
-				}),
-			};
-		});
-		const newPagesData = convertToObject(newlistData);
-		workSpaceSlice.newListPages(newPagesData);
+					...(data?.sheet2 && {
+						sheet2 : {
+							...data.sheet2,
+							pageNo : (index * 2) + 1,
+						},
+					}),
+				};
+			});
+			const newPagesData = convertToObject(newlistData);
+			workSpaceSlice.newListPages(newPagesData);
+			console.log(dataDelete);
+			if (dataDelete.sheet2) {
+				workSpaceSlice.deletePage({quantityDelete : 2});
+				return;
+			}
+			workSpaceSlice.deletePage({quantityDelete : 1});
+			return;
+		}
 	};
 
 	return (
@@ -175,7 +185,9 @@ const PaginatorBar = ({ pagesData, workSpaceSlice }) => {
 const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
 
 const mapStateToProps = ({ workSpaceSlice }) => ({
-	pagesData : workSpaceSlice?.data?.pages ?? {},
+	pagesData     : workSpaceSlice?.data?.pages ?? {},
+	minPages      : workSpaceSlice?.data?.minPages ?? 0,
+	numberOfPages : workSpaceSlice?.data?.numberOfPages ?? 0,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (PaginatorBar);

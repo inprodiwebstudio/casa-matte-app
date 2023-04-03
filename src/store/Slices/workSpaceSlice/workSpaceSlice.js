@@ -8,6 +8,8 @@ const initialState = {
 		sizeDimentions : "",
 		pasta          : "",
 		frontPage      : {},
+		minPages       : 0,
+		maxPages       : 0,
 		numberOfPages  : 50,
 		price          : 0,
 		pages          : {
@@ -235,6 +237,7 @@ export const workSpaceSlice = createSlice({
 				};
 				listOfPages.push(newPage);
 				state.data.pages = convertToObject(listOfPages);
+				state.data.numberOfPages = state.data.numberOfPages + 1;
 				return;
 			}
 			const newSheet = {
@@ -255,6 +258,14 @@ export const workSpaceSlice = createSlice({
 				...newSheet,
 			};
 			state.data.pages = convertToObject(listOfPages);
+			state.data.numberOfPages = state.data.numberOfPages + 1;
+		},
+		deletePage : (state, {payload}) => {
+			const minPages = state.data.minPages;
+			if (state.data.numberOfPages === minPages) {
+				return;
+			}
+			state.data.numberOfPages = state.data.numberOfPages - payload.quantityDelete;
 		},
 		addPhotoEdited : (state, {payload}) => {
 			const newData = {...state.data};

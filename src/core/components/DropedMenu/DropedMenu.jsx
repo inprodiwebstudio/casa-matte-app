@@ -16,11 +16,11 @@ const DropedMenu = () => {
 				</div>
 				<div className="menu-item">
 					<label>TAMAÑO</label>
-					<MenuItem body="CHICO" />
+					<MenuItem body="GRANDE" />
 				</div>
 				<div className="menu-item">
 					<label>NÚMERO DE PÁGINAS</label>
-					<MenuItem body="23" />
+					<MenuItem body="20" />
 				</div>
 				<div className="menu-item">
 					<label>Precio total</label>
