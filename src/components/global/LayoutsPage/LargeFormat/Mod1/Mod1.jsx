@@ -44,7 +44,8 @@ const Mod1 = ({images, isInWorkSpcae, sheetNo, workSpaceSlice, dragerImage}) => 
 							backgroundSize     : "cover",
 							backgroundRepeat   : "no-repeat",
 							backgroundPosition : "center",
-							transform          : "scale(1.16)",
+							transform          : "scale(1.15)",
+							objectPosition     : "left",
 						},
 					} )
 				}
