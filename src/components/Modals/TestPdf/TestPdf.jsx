@@ -2,8 +2,14 @@
 import Html                          from "react-pdf-html";
 import ReactDOMServer                from "react-dom/server";
 import { PDFViewer, Page, Document } from "@react-pdf/renderer";
+import { connect }                   from "react-redux";
 
-const TestPdf = () => {
+const TestPdf = ({photoBookData}) => {
+	console.log(photoBookData);
+
+	// const isSinglePage = (["Mod6", "Mod7", "FrontLayout"].includes(pageData?.sheet1?.layoutType));
+	// const isSinglePage = (["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(pageData?.sheet1?.layoutType));
+
 	// const styles = StyleSheet.create({
 	// 	page : {
 	// 		flexDirection : "row",
@@ -106,4 +112,8 @@ const TestPdf = () => {
 	);
 };
 
-export default TestPdf;
+const mapStateToProps = ({ workSpaceSlice }) => ({
+	photoBookData : workSpaceSlice?.data ?? null,
+});
+
+export default connect(mapStateToProps) (TestPdf);
