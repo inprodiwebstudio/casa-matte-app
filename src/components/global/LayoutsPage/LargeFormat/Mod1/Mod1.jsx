@@ -31,22 +31,30 @@ const Mod1 = ({images, isInWorkSpcae, sheetNo, workSpaceSlice, dragerImage}) => 
 			className="body-mod1-layout"
 			onDrop={(e) => handleDrop(e, 0)}
 			onDragOver={(e) => handleDragOver(e)}
-			{
-				...( images && {
-					style : {
-						backgroundImage    : `url(${handlerResizerImage(images, 0, isInWorkSpcae)})`,
-						backgroundSize     : "cover",
-						backgroundRepeat   : "no-repeat",
-						backgroundPosition : "center",
-					},
-				} )
-			}
+			style={{
+				overflow : "hidden",
+			}}
 		>
-			{
-				(images && images[0].url && isInWorkSpcae) && (
-					<ActionImagesLayout sheetNo={sheetNo} layoutNo={0} pageId={pageId} image={images[0].url} />
-				)
-			}
+			<div
+				{
+					...( images && {
+						style : {
+							height             : "100%",
+							backgroundImage    : `url(${handlerResizerImage(images, 0, isInWorkSpcae)})`,
+							backgroundSize     : "cover",
+							backgroundRepeat   : "no-repeat",
+							backgroundPosition : "center",
+							transform          : "scale(1.16)",
+						},
+					} )
+				}
+			>
+				{
+					(images && images[0].url && isInWorkSpcae) && (
+						<ActionImagesLayout sheetNo={sheetNo} layoutNo={0} pageId={pageId} image={images[0].url} />
+					)
+				}
+			</div>
 		</div>
 	);
 };

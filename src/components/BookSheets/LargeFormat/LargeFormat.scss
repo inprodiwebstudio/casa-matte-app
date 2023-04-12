@@ -10,13 +10,15 @@
 
     &.isSinglePage {
         aspect-ratio: 16 / 9;
+        // width: 600px;
+        // height: 350px;
         .page-body {
             width : 100%;
         }
     }
 
     &.isOnePage {
-        aspect-ratio: 8/9;
+        aspect-ratio: 8 / 9;
 
         .page-body {
             width : 100%;
@@ -31,7 +33,7 @@
 
     .page-body {
         height: 100%;
-        aspect-ratio: 8/9;
+        aspect-ratio: 8 / 9;
         background: white;
 
         &.isActivePage {

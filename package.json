@@ -50,6 +50,7 @@
     "react-filerobot-image-editor": "^4.3.7",
     "react-hook-form": "^7.43.7",
     "react-image-file-resizer": "^0.4.8",
+    "react-pdf-html": "^1.1.18",
     "react-perfect-scrollbar": "^1.5.8",
     "react-redux": "^8.0.2",
     "react-router": "^6.4.3",
