@@ -52,7 +52,7 @@ const WorkSpace = ({
 		<div className="WorkSpace">
 			<div className="canva-space">
 				{
-					(!isLoading && !isLoggin) && (
+					(!isLoading && isLoggin) && (
 						<div className="undo-redo-container">
 							<div
 								className={`action-styled ${!isAvailableUndo && "disabled"}`}
