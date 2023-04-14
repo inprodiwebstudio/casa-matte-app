@@ -130,7 +130,6 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages }) =>
 			});
 			const newPagesData = convertToObject(newlistData);
 			workSpaceSlice.newListPages(newPagesData);
-			console.log(dataDelete);
 			if (dataDelete.sheet2) {
 				workSpaceSlice.deletePage({quantityDelete : 2});
 				return;
