@@ -168,7 +168,8 @@ const initialState = {
 			},
 		},
 	},
-	history : {
+	initialData : {},
+	history     : {
 		undo    : [],
 		redo    : [],
 		current : null,
