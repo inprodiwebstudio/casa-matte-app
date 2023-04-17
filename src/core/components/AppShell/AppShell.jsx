@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 //Own component;
 import { bindAll }        from "helpers";
+import { PostingConfig }  from "Notifications";
 import { genericApi }     from "store/api/genericApi";
 import { workSpaceSlice } from "store/Slices";
 import "./AppShell.scss";
@@ -23,7 +24,7 @@ const AppShell = ({
 		module : `wp-json/wp/v2/photobook/${photoBookId === "" ? null : photoBookId}`,
 	});
 
-	const [dataMutation] = genericApi.useSubmitDataMutation();
+	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
 
 	const parseSendData = (data) => {
 		const myData = data;
@@ -44,7 +45,7 @@ const AppShell = ({
 			},
 			id     : photoBookId,
 			method : "POST",
-		}).unwrap();
+		});
 	};
 
 
@@ -77,6 +78,30 @@ const AppShell = ({
 			}
 		}
 	}, [workSpaceData]);
+
+	useEffect(() => {
+		if (dataMutationResult.isUninitialized) return;
+
+		if (dataMutationResult.isError) {
+			const status = dataMutationResult.error?.status;
+
+			switch (status) {
+				case 500:
+					PostingConfig["post"][500]();
+					break;
+				default:
+					PostingConfig["post"][500]();
+					break;
+			}
+		}
+
+		if (dataMutationResult.data) {
+			PostingConfig["post"]["200"]();
+			console.log("success");
+		}
+
+	}, [dataMutationResult]);
+
 
 	return (
 		<div
