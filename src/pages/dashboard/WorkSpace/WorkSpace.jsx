@@ -48,6 +48,18 @@ const WorkSpace = ({
 	const isAvailableUndo = isValidArray(workSpaceHistory.undo);
 	const isAvailableRedo = isValidArray(workSpaceHistory.redo);
 
+	function undoAndRedoActions(e) {
+		const evtobj = window.event? event : e;
+		if ((evtobj.keyCode === 90) && (evtobj.ctrlKey) && isAvailableUndo) {
+			workSpaceSlice.undo();
+		}
+		if ((evtobj.keyCode === 89) && (evtobj.ctrlKey) && isAvailableRedo) {
+			workSpaceSlice.redo();
+		}
+	}
+
+	document.onkeydown = undoAndRedoActions;
+
 	return (
 		<div className="WorkSpace">
 			<div className="canva-space">
