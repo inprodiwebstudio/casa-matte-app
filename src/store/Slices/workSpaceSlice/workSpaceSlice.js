@@ -168,7 +168,7 @@ const initialState = {
 			},
 		},
 	},
-	initialData : {},
+	initialData : undefined,
 	history     : {
 		undo    : [],
 		redo    : [],
@@ -216,6 +216,9 @@ export const workSpaceSlice = createSlice({
 		},
 		insertData : (state, {payload}) => {
 			state.data = {...payload};
+		},
+		addInitialData : (state, {payload}) => {
+			state.initialData = {...payload};
 		},
 		insertPage : (state, {payload}) => {
 			const newData = {...state.data.pages};

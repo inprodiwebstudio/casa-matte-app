@@ -13,6 +13,7 @@ const AppShell = ({
 	navbar,
 	footer,
 	sidebar,
+	initialData,
 	photoBookId,
 	workSpaceData,
 	workSpaceSlice,
@@ -67,6 +68,14 @@ const AppShell = ({
 		if (photobookData?.meta?.config) {
 			submitData();
 		}
+		if (!initialData) {
+			if (photobookData?.meta?.config) {
+				const myData = photobookData?.meta?.config;
+				const myReplacerString = myData.replace(/'/g, "\"");
+				const parseJSON = JSON.parse(myReplacerString);
+				workSpaceSlice.addInitialData(parseJSON);
+			}
+		}
 	}, [workSpaceData]);
 
 	return (
@@ -107,6 +116,7 @@ const mapStateToProps = ({ workSpaceSlice, authSlice }) => ({
 	isSelectedPage : workSpaceSlice?.pageDataSelected ?? null,
 	workSpaceData  : workSpaceSlice?.data ?? {},
 	photoBookId    : authSlice?.user?.photoBookId ?? null,
+	initialData    : workSpaceSlice?.initialData ?? undefined,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (AppShell);
