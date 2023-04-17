@@ -62,8 +62,11 @@ const WorkSpace = ({
 									}
 								)}
 							>
-								<RedoArrow style={{transform : "scaleX(-1)"}} size="21px" />
-								<div>Deshacer</div>
+								<RedoArrow style={{transform : "scaleX(-1)"}} size="20px" />
+								<div className="labelUndoRedo">
+									<div>Deshacer</div>
+									<div className="actionLabel">ctrl + Z</div>
+								</div>
 							</div>
 							<div
 								className={`action-styled ${!isAvailableRedo && "disabled"}`}
@@ -73,8 +76,11 @@ const WorkSpace = ({
 									}
 								)}
 							>
-								<RedoArrow size="20px" />
-								<div>Rehacer</div>
+								<RedoArrow size="21px" />
+								<div className="labelUndoRedo">
+									<div>Rehacer</div>
+									<div className="actionLabel">ctrl + Y</div>
+								</div>
 							</div>
 						</div>
 					)
