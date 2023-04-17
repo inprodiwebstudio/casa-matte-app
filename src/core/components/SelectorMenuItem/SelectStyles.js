@@ -1,4 +1,4 @@
-const SelectStyles = ({type, leftIcon}) => ({
+const SelectStyles = ({type, leftIcon, dropTopMenu}) => ({
 	control : (provided) => ({
 		...provided,
 		border        : (type === "filled") ? "1px solid #B2AFA6 !important" : "none",
@@ -33,7 +33,7 @@ const SelectStyles = ({type, leftIcon}) => ({
 		fontSize      : "14px",
 		fontWeight    : 300,
 		boxShadow     : "0px 4px 10px rgba(193, 189, 180, 0.2), 0px 0px 1px rgba(193, 189, 180, 0.5)",
-		top           : "-6px",
+		top           : !dropTopMenu && "-6px",
 		padding       : "0px !important",
 		paddingTop    : "0px !important",
 		paddingBottom : "0px !important",
@@ -82,8 +82,8 @@ const SelectStyles = ({type, leftIcon}) => ({
 		lineHeight      : "17px",
 		padding         : "0px",
 		paddingLeft     : "10px !important",
-		paddingTop      : "5px !important",
 		paddingBottom   : "5px !important",
+		paddingTop      : "5px !important",
 		width           : "100%",
 		cursor          : "pointer",
 		transition      : "all ease 200ms",

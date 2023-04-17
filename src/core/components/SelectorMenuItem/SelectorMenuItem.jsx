@@ -6,7 +6,7 @@ import SelectStyles from "./SelectStyles";
 import { ArrowTop } from "Resources/icons";
 import "./SelectorMenuItem.scss";
 
-const SelectorMenuItem = ({type, placeholder, leftIcon, isLoading, options, onChange, value}) => {
+const SelectorMenuItem = ({type, placeholder, leftIcon, isLoading, options, onChange, value, dropTopMenu}) => {
 	const [ hoverDisplay, setHoverDisplay ] = useState(false);
 
 	const DropdownIndicator = (props) => {
@@ -39,11 +39,12 @@ const SelectorMenuItem = ({type, placeholder, leftIcon, isLoading, options, onCh
 				options={options}
 				placeholder={placeholder ? placeholder : "Defaul"}
 				onChange={(value) => handleChange(value)}
-				styles={SelectStyles({type, leftIcon})}
+				styles={SelectStyles({type, leftIcon, dropTopMenu})}
 				menuPortalTarget={document.body}
 				components={{ DropdownIndicator }}
 				value={value}
 				noOptionsMessage={() => "No hay resultados"}
+				menuPlacement={dropTopMenu && "top"}
 			/>
 			{
 				((type !== "light") && (type !== "filled")) && (
