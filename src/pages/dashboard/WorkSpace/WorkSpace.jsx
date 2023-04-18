@@ -60,6 +60,8 @@ const WorkSpace = ({
 
 	document.onkeydown = undoAndRedoActions;
 
+	console.log(myWorkSpaceData);
+
 	return (
 		<div className="WorkSpace">
 			<div className="canva-space">
@@ -99,14 +101,18 @@ const WorkSpace = ({
 				}
 				<div className="ghost-canva">
 					{
-						(workSpaceData && isLoggin) ? (
+						(myWorkSpaceData && isLoggin) ? (
 							<FormatPage
 								typeFormat={sizePhotoBook ?? "LargeFormat"}
 								pageData={myWorkSpaceData}
 								isInWorkSpcae
 							/>
 						) : (
-							<LoginCard />
+							!isLoggin ? (
+								<LoginCard />
+							) : (
+								<div />
+							)
 						)
 					}
 				</div>

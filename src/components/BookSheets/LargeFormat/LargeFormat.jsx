@@ -58,7 +58,7 @@ const LargeFormat = ({pageData, workSpaceSlice, pageDataSelected, isInWorkSpcae,
 			>
 				{
 					!LayoutPage1 ? (
-						(pageData?.sheet1?.layoutType !== "") ? (
+						(pageData?.sheet1?.layoutType === "FrontLayout") ? (
 							<FrontLayout />
 						) : (
 							<div />
