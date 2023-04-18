@@ -6,8 +6,8 @@ const PostingConfig = ({
 		"posting" : () => (
 			showNotification({
 				id      : "postingData",
-				title   : "Guardando Cambios.",
-				message : "",
+				title   : "",
+				message : "Guardando Cambios.",
 				loading : true,
 				styles  : () => ({
 					root : {
@@ -29,6 +29,7 @@ const PostingConfig = ({
 				title   : "",
 				message : "Cambios Guardados",
 				color   : "green",
+				loading : false,
 				styles  : () => ({
 					root : {
 					  "&::before" : {

@@ -82,6 +82,10 @@ const AppShell = ({
 	useEffect(() => {
 		if (dataMutationResult.isUninitialized) return;
 
+		if (dataMutationResult.isLoading) {
+			PostingConfig["post"]["posting"]();
+		}
+
 		if (dataMutationResult.isError) {
 			const status = dataMutationResult.error?.status;
 
