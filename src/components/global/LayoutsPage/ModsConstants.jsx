@@ -12,3 +12,10 @@ export const handlerResizerImage = (images, index, isInWorkSpcae) => {
 	}
 	return resizerImage(images[index].url, 100, 100);
 };
+
+export const selectPhotoUrl = (photoData) => {
+	if (photoData?.urlPhotoEdited) {
+		return photoData?.urlPhotoEdited;
+	}
+	return photoData?.url;
+};
