@@ -1,6 +1,6 @@
 
 //Own Components
-import FormatPage                 from "components/FormatPage";
+import BookSheets                 from "components/BookSheets";
 import { useNavigate, useParams } from "react-router";
 import {Reload}                   from "Resources/icons";
 import "./FrontPage.scss";
@@ -8,6 +8,8 @@ import "./FrontPage.scss";
 const FrontPage = () => {
 	const navigate = useNavigate();
 	const { pageId } = useParams();
+
+	const LayoutComponent = BookSheets["LargeFormat"];
 
 	return (
 		<div
@@ -22,8 +24,7 @@ const FrontPage = () => {
 				</div>
 				<div>
 					<div className="withe-page-container">
-						<FormatPage
-							typeFormat="LargeFormat"
+						<LayoutComponent
 							pageData={{
 								id     : "page1",
 								sheet1 : {
