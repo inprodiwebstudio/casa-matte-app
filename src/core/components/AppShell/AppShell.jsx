@@ -1,5 +1,6 @@
 import { connect }   from "react-redux";
 import { useEffect } from "react";
+import { Font }      from "@react-pdf/renderer";
 
 //Own component;
 import { bindAll }        from "helpers";
@@ -7,6 +8,9 @@ import { PostingConfig }  from "Notifications";
 import { genericApi }     from "store/api/genericApi";
 import { workSpaceSlice } from "store/Slices";
 import "./AppShell.scss";
+//Fonts
+import blackaHollow from "Resources/Fonts/BlakaHollow-Regular.ttf";
+
 
 const AppShell = ({
 	Body,
@@ -20,6 +24,25 @@ const AppShell = ({
 	workSpaceSlice,
 	isSelectedPage,
 }) => {
+	Font.register({
+		family : "BlakaHollow-Regular",
+		src    : blackaHollow,
+		fonts  : [
+			{
+			  src : blackaHollow,
+			},
+			{
+			  src        : blackaHollow,
+			  fontWeight : "bold",
+			},
+			{
+			  src        : blackaHollow,
+			  fontWeight : "normal",
+			  fontStyle  : "italic",
+			},
+		  ],
+	});
+
 	const { data : photobookData, isFetching, error } = genericApi.useGetDataQuery({
 		module : `wp-json/wp/v2/photobook/${photoBookId === "" ? null : photoBookId}`,
 	});
@@ -101,7 +124,6 @@ const AppShell = ({
 
 		if (dataMutationResult.data) {
 			PostingConfig["post"]["200"]();
-			console.log("success");
 		}
 
 	}, [dataMutationResult]);
