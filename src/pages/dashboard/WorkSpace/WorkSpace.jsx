@@ -4,11 +4,11 @@ import { useParams }           from "react-router-dom";
 //Helpers
 
 //Own components
+import BookSheets                from "components/BookSheets";
 import { RedoArrow }             from "Resources/icons";
 import LoginCard                 from "../LoginCard";
 import { bindAll, isValidArray } from "helpers";
 import { workSpaceSlice }        from "store/Slices";
-import FormatPage                from "components/FormatPage";
 import "./WorkSpace.scss";
 
 const WorkSpace = ({
@@ -22,6 +22,8 @@ const WorkSpace = ({
 	const { pageId } = useParams();
 
 	const isFrontLayout = pageId === "frontpage";
+
+	const LayoutComponent = BookSheets[sizePhotoBook] ?? BookSheets["LargeFormat"];
 
 	const defaultViewData = {
 		id     : "FrontLayout",
@@ -60,7 +62,7 @@ const WorkSpace = ({
 
 	document.onkeydown = undoAndRedoActions;
 
-	console.log(myWorkSpaceData);
+	console.log(sizePhotoBook);
 
 	return (
 		<div className="WorkSpace">
@@ -102,10 +104,9 @@ const WorkSpace = ({
 				<div className="ghost-canva">
 					{
 						(myWorkSpaceData && isLoggin) ? (
-							<FormatPage
-								typeFormat={sizePhotoBook ?? "LargeFormat"}
-								pageData={myWorkSpaceData}
+							<LayoutComponent
 								isInWorkSpcae
+								pageData={myWorkSpaceData}
 							/>
 						) : (
 							!isLoggin ? (
