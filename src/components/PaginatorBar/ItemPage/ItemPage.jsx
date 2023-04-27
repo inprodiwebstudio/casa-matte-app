@@ -3,7 +3,7 @@ import { Draggable }              from "react-beautiful-dnd";
 import { connect }                from "react-redux";
 
 //Own Components
-import FormatPage from "components/FormatPage";
+import BookSheets from "components/BookSheets";
 import { Cross }  from "Resources/icons";
 import "./ItemPage.scss";
 
@@ -17,6 +17,8 @@ const ItemPage = ({
 }) => {
 	const isDoublePage = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(pageData?.sheet1?.layoutType);
 	const navigate = useNavigate();
+
+	const LayoutComponent = BookSheets[sizePhotoBook] ?? BookSheets["LargeFormat"];
 
 	const { pageId } = useParams();
 
@@ -50,8 +52,7 @@ const ItemPage = ({
 								<div className="spacer-paginator" />
 							)
 						}
-						<FormatPage
-							typeFormat={sizePhotoBook ?? "LargeFormat"}
+						<LayoutComponent
 							pageData={pageData}
 						/>
 					</div>
