@@ -1,111 +1,71 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import Html                          from "react-pdf-html";
-import ReactDOMServer                from "react-dom/server";
 import { PDFViewer, Page, Document } from "@react-pdf/renderer";
 import { connect }                   from "react-redux";
+//Own components
+import { convertToArray } from "helpers";
+import largeFormatLayouts from "components/global/LayoutsPage/LargeFormat";
 
 const TestPdf = ({photoBookData}) => {
-	console.log(photoBookData);
+	const listPages = convertToArray(photoBookData?.pages);
 
-	// const isSinglePage = (["Mod6", "Mod7", "FrontLayout"].includes(pageData?.sheet1?.layoutType));
-	// const isSinglePage = (["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(pageData?.sheet1?.layoutType));
+	const photoBookTypes = {
+		LargeFormat : {
+			size                  : [850, 991],
+			isInDoublePageLayouts : ["Mod1", "Mod2", "Mod3", "FrontLayout"],
+			modLayouts            : {...largeFormatLayouts},
+		},
+	};
 
-	// const styles = StyleSheet.create({
-	// 	page : {
-	// 		flexDirection : "row",
-	// 	},
-	// 	section : {
-	// 		margin          : 10,
-	// 		padding         : 10,
-	// 		flexGrow        : 1,
-	// 		backgroundColor : "red",
-	// 	},
-	// });
-	// const canvas = document.createElement("canvas");
-	// const ctx = canvas.getContext("2d");
-	// const img = new Image();
-	// img.src = "https://media.istockphoto.com/id/1336419039/es/foto/peque%C3%B1o-grupo-de-dise%C3%B1adores-discutiendo-ideas-dentro-de-una-f%C3%A1brica-sostenible.jpg?s=1024x1024&w=is&k=20&c=d8OQRXdYcL7vu6di4i1zTIM6rP-WpY1TcB4giaPt9X8=";
-	// canvas.width = img.width / 2;
-	// canvas.height = img.height;
-	// ctx.drawImage(img, 0, 0, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
-	// const imgDataLeft = canvas.toDataURL("image/jpeg", 1.0);
-	// ctx.clearRect(0, 0, canvas.width, canvas.height);
-	// ctx.drawImage(img, canvas.width, 0, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
-	// const imgDataRight = canvas.toDataURL("image/jpeg", 1.0);
+	const isLayoutDoublePage = (modLayout, witheList) => {
+		const isAvailableDouble = witheList.includes(modLayout);
+		return isAvailableDouble;
+	};
 
-	// console.log(imgDataLeft);
-	const element = (
-		<div
-			style={{
-				height : "991px",
-				width  : "850px",
-			}}
-		>
-			<div
-				style={{
-					height   : "100%",
-					width    : "100%",
-					overflow : "hidden",
-				}}
-			>
-				<img
-					src="https://media.istockphoto.com/id/1336419039/es/foto/peque%C3%B1o-grupo-de-dise%C3%B1adores-discutiendo-ideas-dentro-de-una-f%C3%A1brica-sostenible.jpg?s=1024x1024&w=is&k=20&c=d8OQRXdYcL7vu6di4i1zTIM6rP-WpY1TcB4giaPt9X8="
-					alt="test"
-					style={{
-						height         : "991px",
-						objectFit      : "cover",
-						transform      : "scale(1.33)",
-						objectPosition : "left",
-					}}
-				/>
-			</div>
-		</div>
-	);
+	const getComponent = (pageData) => {
+		const Sheet1Layout = photoBookTypes[photoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet1?.layoutType]?.pdfLayout;
+		const Sheet2Layout = photoBookTypes[photoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet2?.layoutType]?.pdfLayout;
 
-	const complete = (
-		<div
-			style={{
-				height : "991px",
-				width  : "850px",
-				// padding : "10px",
-				// paddingBottom : "30px",
-			}}
-		>
-			<div
-				style={{
-					height   : "100%",
-					width    : "100%",
-					overflow : "hidden",
-				}}
-			>
-				<img
-					src="https://media.istockphoto.com/id/1336419039/es/foto/peque%C3%B1o-grupo-de-dise%C3%B1adores-discutiendo-ideas-dentro-de-una-f%C3%A1brica-sostenible.jpg?s=1024x1024&w=is&k=20&c=d8OQRXdYcL7vu6di4i1zTIM6rP-WpY1TcB4giaPt9X8="
-					alt="test"
-					style={{
-						height         : "991px",
-						objectFit      : "cover",
-						objectPosition : "right",
-						transform      : "scale(1.33)",
-						// paddingRight   : "150px",
-					}}
-				/>
-			</div>
-		</div>
-	);
+		const isInDoublePageLayout = isLayoutDoublePage(pageData?.sheet1?.layoutType, photoBookTypes[photoBookData?.sizePhotoBook]?.isInDoublePageLayouts);
 
-	const html = ReactDOMServer.renderToStaticMarkup(element);
-	const html2 = ReactDOMServer.renderToStaticMarkup(complete);
+		if ((Sheet1Layout && Sheet2Layout) || isInDoublePageLayout) {
+			if (Sheet1Layout && isInDoublePageLayout) {
+				return (
+					<>
+						<Page size={[850, 991]}>
+							<Sheet1Layout images={pageData?.sheet1?.photos} />
+						</Page>
+						<Page size={[850, 991]}>
+							<Sheet1Layout images={pageData?.sheet1?.photos} isRightPage />
+						</Page>
+					</>
+				);
+			}
+		}
+		if (Sheet1Layout) {
+			return (
+				<>
+					<Page size={[850, 991]}>
+						<Sheet1Layout images={pageData?.sheet1?.photos} text={pageData?.sheet1?.text} />
+					</Page>
+					{Sheet2Layout && (
+						<Page size={[850, 991]}>
+							<Sheet2Layout images={pageData?.sheet2?.photos} text={pageData?.sheet2?.text} />
+						</Page>
+					)}
+				</>
+			);
+		}
+	};
 
 	return (
 		<div style={{height : "80vh"}}>
 			<PDFViewer style={{height : "80vh", width : "100%"}}>
 				<Document>
-					<Page size={[850, 991]}>
-						<Html>{html}</Html>
-					</Page>
-					<Page size={[850, 991]}>
-						<Html>{html2}</Html>
-					</Page>
+					<>
+						{
+							listPages.map((pageData, index) => getComponent(pageData))
+						}
+					</>
 				</Document>
 			</PDFViewer>
 		</div>
