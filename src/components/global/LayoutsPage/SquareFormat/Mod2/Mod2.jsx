@@ -26,7 +26,7 @@ const Mod2 = ({images, isInWorkSpcae, sheetNo, workSpaceSlice, dragerImage}) => 
 		e.preventDefault();
 	};
 	return (
-		<div className="body-mod2-layout">
+		<div className="body-mod2SquareFormat-layout">
 			<div
 				className="content-body"
 				onDrop={(e) => handleDrop(e, 0)}

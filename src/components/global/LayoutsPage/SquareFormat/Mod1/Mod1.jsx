@@ -28,7 +28,7 @@ const Mod1 = ({images, isInWorkSpcae, sheetNo, workSpaceSlice, dragerImage}) => 
 
 	return (
 		<div
-			className="body-mod1-layout"
+			className="body-mod1SquareFormat-layout"
 			onDrop={(e) => handleDrop(e, 0)}
 			onDragOver={(e) => handleDragOver(e)}
 			{
