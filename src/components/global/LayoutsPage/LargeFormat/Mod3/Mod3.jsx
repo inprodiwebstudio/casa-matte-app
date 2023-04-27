@@ -5,8 +5,8 @@ import { useParams }      from "react-router-dom";
 
 //Own components
 import "./Mod3.scss";
-import ActionImagesLayout      from "components/global/ActionImagesLayout";
-import { handlerResizerImage } from "../../ModsConstants";
+import ActionImagesLayout                      from "components/global/ActionImagesLayout";
+import { handlerResizerImage, selectPhotoUrl } from "../../ModsConstants";
 
 const Mod3 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) => {
 	const { pageId } = useParams();
@@ -43,7 +43,7 @@ const Mod3 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) => 
 			>
 				{
 					(images && images[0].url && isInWorkSpcae) && (
-						<ActionImagesLayout sheetNo={sheetNo} layoutNo={0} pageId={pageId} image={images[0].url} />
+						<ActionImagesLayout sheetNo={sheetNo} layoutNo={0} pageId={pageId} image={selectPhotoUrl(images[0])} />
 					)
 				}
 			</div>
