@@ -1,0 +1,20 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.ChargeSpinner {
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   justify-content: center;
+
+   gap: 10px;
+
+   h5 {
+       font-size: 14px;
+       font-weight: 300;
+       text-align: center;
+       color : $flat-color;
+       width: 270px;
+       text-transform: uppercase;
+   }
+}
+

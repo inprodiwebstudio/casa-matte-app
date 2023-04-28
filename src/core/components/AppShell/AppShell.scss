@@ -1,0 +1,46 @@
+@import "/src/Resources/scss/variables/colorThemes";
+@import "/src/Resources/scss/breakpoints.scss";
+
+#AppShell {
+    .shell-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100vh;
+        overflow: hidden;
+
+        .header-container {
+            height: 80px;
+            min-height: 60px;
+        }
+
+        .footer-and-nav-grouped {
+            display: flex;
+            position: relative;
+            align-items: flex-end;
+            .nav-menu {
+                width: 185px;
+                height: calc(100vh - 80px);
+            }
+
+            .footer-nav {
+                height: auto;
+                width: calc(100% - (386px + 153px));
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                @include big-tablet {
+                    width: calc(100% - (216px + 153px));
+                }
+            }
+        }
+    }
+
+    .bodyContainer {
+        background: $body-color;
+        height: 100vh;
+    }
+}

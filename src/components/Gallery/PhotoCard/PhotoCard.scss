@@ -1,0 +1,132 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.PhotoCard {
+    width      : 157px;
+    height     : 157px;
+    position : relative;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    &.isHidePhoto {
+        display: none;
+    }
+
+    &:hover {
+        .photo-overlay {
+            width: 100% !important;
+
+            .check-icon-container {
+                color : transparent !important;
+            }
+        }
+    }
+
+    .loading {
+        width: 100%;
+        height: 100%;
+        background: rgba(190, 190, 190, 0.723);
+    }
+
+    .photo-overlay {
+        top : 0;
+        right : 0;
+        bottom : 0;
+        left : 100;
+        width : 100%;
+        padding: 5px;
+        height : 100%;
+        cursor: grab;
+        position: absolute;
+        background: transparent;
+        transition: all ease 250ms;
+
+        .check-icon-container {
+            right: 0;
+            top : 46%;
+            bottom : 0;
+            width: fit-content;
+            position: absolute;
+            color: transparent;
+            height: fit-content;
+            left : calc(100% - 25px);
+            transition: all ease 250ms;
+        }
+
+        &.photo-selected {
+            width: 30px;
+            padding: 5px;
+            background: rgba(0, 0, 0, 0.5);
+
+            .check-icon-container {
+                color: white;
+            }
+        }
+
+        .check-box {
+            width: 20px;
+            height: 20px;
+            transition: all ease 250ms;
+            border : solid 2px transparent;
+            margin-left: calc(100% - 20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: transparent;
+
+            .square-check {
+                width: 12px;
+                height: 12px;
+                background: white;
+            }
+
+            &.isChecked { 
+                color : white;
+                border : solid 2px white;
+                background: rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        .plus-icon-container {
+            width: 100%;
+            display: flex;
+            color: transparent;
+            margin-top: 10.5px;
+            margin-bottom: 15px;
+            stroke: transparent;
+            justify-content: center;
+            transition: all ease 250ms;
+        }
+
+        .move-arrows-icon-container {
+            width: 100%;
+            color : transparent;
+            transition: all ease 250ms;
+        }
+
+
+        &:hover {
+            width: 100%;
+            padding: 5px !important;
+            background: rgba(0, 0, 0, 0.5);
+
+            .check-box {
+                border : solid 2px white;
+                background: none;
+                color : white;
+            }
+
+            .plus-icon-container {
+                color: white;
+                stroke: white;
+            }
+
+            .move-arrows-icon-container {
+                color : white;
+                transition: all ease 250ms;
+            }
+        }
+    }
+
+}

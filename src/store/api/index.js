@@ -14,7 +14,9 @@ const baseQuery = fetchBaseQuery({
 			headers.set("authorization", `Bearer ${token}`);
 		}
 
+		headers.set("Accept", "/");
 		headers.set("Access-Control-Allow-Origin", "*");
+		headers.set("Access-Control-Allow-Methods", "*");
 		return headers;
 	},
 });
@@ -31,11 +33,12 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 };
 
 // Retry at most 6 times.
-const baseQueryWithRetry = retry(baseQueryWithReauth, { maxRetries : 6 });
+const baseQueryWithRetry = retry(baseQueryWithReauth, { maxRetries : 2 });
 
 export const api = createApi({
-	reducerPath : "api",
-	baseQuery   : baseQueryWithRetry,
-	tagTypes    : [],
-	endpoints   : () => ({}),
+	reducerPath       : "api",
+	baseQuery         : baseQueryWithRetry,
+	keepUnusedDataFor : 3600,
+	tagTypes          : ["gallerySlice", "media"],
+	endpoints         : () => ({}),
 });

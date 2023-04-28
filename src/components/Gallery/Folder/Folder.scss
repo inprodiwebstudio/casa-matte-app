@@ -1,0 +1,109 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.Folder {
+    gap: 31.5px;
+    width: 324px;
+    padding: 10px;
+    padding-top: 15px;
+    height: 157px;
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    transition: all ease 300ms;
+    background: $light-color;
+
+    &.cursor-regular {
+        cursor: default;
+    }
+
+    &.isAvailable {
+        &:hover {
+            background: $primary-color;
+    
+            .overlay-add-photos {
+                background: rgba(233, 228, 217, 0.95) !important;
+            }
+        }
+    }
+
+    .header-folder {
+        width: 100%;
+        display: flex;
+        color : $dark-color;
+        justify-content: space-between;
+        
+        .more-icon-container {
+        }
+
+        &.loading {
+            color : $flat-color;
+        }
+
+        h4 {
+            font-size: 14px;
+            font-weight: 300;
+            text-transform: uppercase;
+        }
+    }
+
+    .body-indicator-conatiner {
+        height: 100%;
+        display: flex;
+        position: relative;
+
+        .photo-thumb-nail-container {
+            gap: 0px;
+            width: auto;
+            display: flex;
+            .photo-indicator {
+                width: 0px;
+                margin-right: 0px;
+                background-size: cover;
+                transition: all ease 250ms;
+                background-position: center;
+                background-repeat: no-repeat;
+    
+                &.full-size {
+                    width : 57.8px;
+                    margin-right: 4px;
+                }
+            }
+        }
+
+        .drager-place {
+            flex-grow: 1;
+            display: flex;
+            font-size: 12px;
+            font-weight: 300;
+            text-align: center;
+            align-items: center;
+            letter-spacing: 0.05em;
+            justify-content: center;
+            border: solid 1px $flat-color;
+        }
+
+        .overlay-add-photos {
+            gap:5px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            font-size: 12px;
+            font-weight: 300;
+            color:$flat-color;
+            padding-left: 30px;
+            padding-right: 30px;
+            position: absolute;
+            text-align: center;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            transition: all ease 250ms;
+            border: solid 1px $flat-color;
+            background: rgba(247, 245, 241, 0.95);
+
+            &.none-background {
+                background: none;
+            }
+        }
+    }
+}

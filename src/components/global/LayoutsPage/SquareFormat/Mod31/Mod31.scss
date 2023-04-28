@@ -1,0 +1,22 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.body-mod31SquareFormat-layout {
+    padding: 20%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    .content-body {
+        height: 100%;
+        width: 100%; 
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.05em;
+ 
+        .content-children-body {
+            grid-column: 1fr;
+            grid-row: 1fr;
+            background: $body-color;
+        }
+    }
+}

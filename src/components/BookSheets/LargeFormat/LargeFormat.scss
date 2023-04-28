@@ -1,0 +1,43 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.LargeFormat {
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 15px rgba(178, 175, 166, 0.2);
+
+    &.isSinglePage {
+        aspect-ratio: 16 / 9;
+        // width: 600px;
+        // height: 350px;
+        .page-body {
+            width : 100%;
+        }
+    }
+
+    &.isOnePage {
+        aspect-ratio: 8 / 9;
+
+        .page-body {
+            width : 100%;
+        }
+    }
+
+    .spacer {
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(90deg, rgb(255, 255, 255), $body-color, rgb(255, 255, 255));
+    }
+
+    .page-body {
+        height: 100%;
+        aspect-ratio: 8 / 9;
+        background: white;
+
+        &.isActivePage {
+            border : 2px solid $flat-color;
+        }
+    }
+}

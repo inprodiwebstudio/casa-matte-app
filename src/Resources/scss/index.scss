@@ -1,0 +1,36 @@
+// @font-face {
+//     font-family: "helvetica";
+//     src: url("../Fonts/HelveticaLightRegular.otf");
+// }
+@font-face {
+    font-family: "Aitana-Regular";
+    src: url("../Fonts/GandhiSerif-Regular.ttf");
+}
+
+@font-face {
+    font-family: "BlakaHollow-Regular";
+    src: url("../../../Resources/Fonts/BlakaHollow-Regular.ttf");
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0 !important;
+}
+
+a {
+    text-decoration: none;
+    
+    &:hover, &:focus, &:active {
+        text-decoration: none !important;
+    }
+}
+
+#body-app {
+    font-family: Helvetica, sans-serif;
+    letter-spacing: 0.05em;
+}

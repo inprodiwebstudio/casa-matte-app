@@ -1,0 +1,74 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+#DropedMenu {
+    width: 100%;
+    border-bottom: 2px solid #e9e4d9;
+    padding: 10px;
+
+    & .menu {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        height: 309px;
+        transition: all ease 300ms;
+        overflow: hidden;
+        &.hidden {
+            height: 0px;
+        }
+        & .menu-item {
+            label {
+                font-size: 12px;
+                font-weight: 300;
+                line-height: 14px;
+                color : $flat-color;
+                letter-spacing: 0.05em;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+            } 
+        }
+    }
+
+    .selector-container {
+        margin-top: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &.hidden {
+            margin-top: 0px;
+        }
+
+
+        .action-droped {
+            display: flex;
+            gap: 10px;
+            color : $dark-color;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            & .icon-arrow-container {
+                transform: rotate(0deg);
+                transition: all ease 300ms;
+                height: fit-content;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding-top: 1px;
+                &.hidden {
+                    padding-top: 2px;
+                    transform: rotate(180deg);
+                }
+            }
+
+            .tittle-action-droped {
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 22px;
+                color : $dark-color;
+                letter-spacing: 0.05em;
+                font-family: "Aitana-Regular";
+            }
+        }
+    }
+}

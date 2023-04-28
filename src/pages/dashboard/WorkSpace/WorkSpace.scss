@@ -1,0 +1,91 @@
+@import "/src/Resources/scss/variables/colorThemes";
+@import "/src/Resources/scss/breakpoints.scss";
+
+
+.WorkSpace {
+	padding-left: 180px;
+	padding-bottom: 145px;
+	padding-right: 354px;
+	padding-top: 80px;
+	height: 100%;
+	width: 100vw;
+	display        : flex;
+    justify-content : center;
+	align-items     : center;
+	position: relative;
+
+	@include big-tablet {
+		padding-right: 184px;
+	}
+
+	.undo-redo-container {
+		position: absolute;
+
+		display: flex;
+		gap : 50px;
+		font-size: 12px;
+		font-weight: 300;
+		width: 100vw;
+		height: 100%;
+		padding-left: 300px;
+		padding-top: 100px;
+
+		.action-styled {
+			height: fit-content;
+			width: fit-content;
+			z-index: 2;
+			gap: 0px;
+			display: flex;
+			cursor: pointer;
+			align-items: center;
+			flex-direction: column;
+			justify-content: center;
+
+			-webkit-user-select: none;
+        	-moz-user-select: none;
+        	-ms-user-select: none;
+        	user-select: none;
+
+			&.disabled {
+				cursor: auto;
+				color : grey;
+			}
+		}
+
+		.labelUndoRedo {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			
+			.actionLabel {
+				font-weight: 500;
+				font-size: 9px;
+			}
+		}
+	}
+
+	.canva-space {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		padding: 50px;
+		padding-top: 110px;
+		align-items: center;
+		justify-content: center;
+		font-size: 5vw;
+
+		@include big-tablet {
+			padding-top: 50px;
+		}
+
+		.ghost-canva {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 5vw;
+		}
+	}
+}

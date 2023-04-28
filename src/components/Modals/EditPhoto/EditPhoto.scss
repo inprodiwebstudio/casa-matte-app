@@ -1,0 +1,70 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.EditPhoto {
+    .cSUGZ {
+        overflow-x: hidden !important;
+        text-transform: uppercase !important;
+        padding: 0px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap : 6px !important;
+    }
+    .cKLUdC {
+        width : 120px !important;
+        height: 120px !important;
+        border-radius: 0%;
+        transition: all ease 300ms;
+        margin: 0px !important;
+
+        svg {
+            width: 20px !important;
+            height: 20px !important;
+        }
+
+        .cdJDAh {
+            font-size: 12px !important;
+        }
+    }
+
+    .HOmkG {
+        color : $primary-color !important;
+    }
+
+    .bkFTDu {
+        gap : 6vh !important;
+    }
+
+    .TjaNp {
+        margin : 0px 40px !important;
+    }
+
+    .hLjiWt {
+        text-transform: uppercase;
+    }
+
+    .FIE_topbar-reset-button {
+        display: none !important;
+    }
+
+    .FIE_topbar-save-button {
+        display: none !important;
+    }
+
+    .hVWIRN {
+        width : 10px !important;
+    }
+
+    .gPWwVi {
+        margin-left: 0px !important;
+        position: absolute;
+        left : 20vw;
+    }
+
+    .krQITa {
+        display: none;
+    }
+
+    .FIE_topbar-center-options {
+        margin-left: 11% !important;
+    }
+}

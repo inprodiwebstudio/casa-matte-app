@@ -1,0 +1,130 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.Button {
+	display: flex;
+	font: inherit;
+	color: inherit;
+	cursor: pointer;
+	font-size: 22px;
+	outline: inherit;
+	background: none;
+	font-weight: 400;
+	padding-top: 10px;
+	color : $flat-color;
+	align-items: center;
+	padding-bottom: 10px;
+	justify-content: center;
+	text-transform: uppercase;
+	transition: all ease 200ms;
+	border: 1px solid $dark-color !important;
+
+	&.is-loading {
+		cursor: progress !important;
+		opacity: 50%;
+		border: 1px solid transparent !important;
+		&.outline {
+			color : $primary-color !important;
+			&:hover {
+				background: none !important;
+				border: 1px solid transparent !important;
+			}
+		}
+		&.subtleActive {
+			border: 1px solid transparent !important;
+			&:hover {
+				border : 1px solid transparent !important;
+			}
+		}
+		.button-body {
+			cursor: progress !important;
+		}
+	}
+
+	&.subtle {
+		background: none;
+		border: none !important;
+		transition: all ease 200ms;
+		font-family: "Aitana-Regular";
+		line-height: 19px;
+
+		.button-body {
+			display: flex;
+			gap: 10px;
+			cursor: pointer;
+			align-items: start;
+			padding-top: 2px;
+			justify-content: center;
+		}
+
+		&:hover {
+			cursor: pointer;
+			color : $dark-color;
+			background-color: $primary-color;
+			border: none !important;
+		}
+	}
+
+	&.subtleActive {
+		background: none;
+		line-height: 19px;
+		color : $dark-color;
+		transition: all ease 200ms;
+		font-family: "Aitana-Regular";
+		background-color: $primary-color;
+		border: 1px solid transparent !important;
+
+		.button-body {
+			display: flex;
+			gap: 10px;
+			cursor: pointer;
+			align-items: start;
+			padding-top: 2px;
+			justify-content: center;
+		}
+
+		&:hover {
+			cursor: pointer;
+			border: 1px solid $dark-color !important;
+		}
+	}
+
+	&.outline {
+		font-family: "Aitana-Regular";
+		color : $dark-color !important;
+		font-style: italic;
+
+		&:hover {
+			background: rgba(0, 0, 0, 0.131);
+			border: 1px solid $dark-color !important;
+		}
+	}
+
+	&.transparent {
+		border: none !important;
+		background: none;
+		&:hover {
+			cursor: pointer;
+			background: none;
+			color : $dark-color;
+			border: none !important;
+		}
+	}
+
+	&.fullSize { 
+		width: 100%;
+		border: none;
+	}
+
+	&:hover {
+		background-color: $primary-color;
+		border: 1px solid $primary-color !important;
+	}
+
+	.button-body {
+		display: flex;
+		gap: 10px;
+		cursor: pointer;
+		align-items: center;
+		justify-content: center;
+	}
+}

@@ -6,8 +6,9 @@ import { combineReducers }              from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 
 // Import Own Components
-import { api }     from "./api";
-import * as Slices from "./Slices";
+import { api }         from "./api";
+import { apiImageKit } from "./api/imageKitApi";
+import * as Slices     from "./Slices";
 
 const rootReducer    = combineReducers({
 	...Object.entries(Slices).reduce(
@@ -17,7 +18,8 @@ const rootReducer    = combineReducers({
 		}),
 		{}
 	),
-	[api.reducerPath] : api.reducer,
+	[api.reducerPath]         : api.reducer,
+	[apiImageKit.reducerPath] : apiImageKit.reducer,
 });
 
 
@@ -35,7 +37,10 @@ export const store = configureStore({
 	reducer    : persistedReducer,
 	devTools   : import.meta.env.DEV !== "production",
 	middleware : (getDefaultMiddleware) =>
-		getDefaultMiddleware().concat(api.middleware),
+		getDefaultMiddleware().concat([
+			api.middleware,
+			apiImageKit.middleware,
+		]),
 });
 
 setupListeners(store.dispatch);

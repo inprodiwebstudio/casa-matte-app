@@ -1,0 +1,33 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.body-mod27SquareFormat-layout {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 4.2%;
+    flex-direction: row-reverse;
+    .content-body {
+        height: 100%;
+        width: 100%; 
+        display: flex;
+        gap: 0.05em;
+ 
+        .content-children-body {
+            width: 33.35%;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.05em;
+
+            .nested-child-content {
+                background: $body-color;
+                height: 50%;
+            }
+        }
+        .content-children-second-body {
+            width: 69.65%;
+            flex-grow: 1;
+            background: $body-color;
+        }
+    }
+}

@@ -1,0 +1,41 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.Tabs {
+   height: 100%;
+   display: flex;
+   width:fit-content;
+   align-items: center;
+   justify-content: center;
+   font-family: "Aitana-Regular";
+
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none; 
+
+   .box-tab {
+       width: 130px;
+       height: 100%;
+       display: flex;
+       cursor: pointer;
+       flex-wrap: nowrap;
+       text-align: center;
+       align-items: center;
+       justify-content: center;
+       border-bottom: solid 2px transparent;
+
+       h4 {
+          font-size: 12px;
+          color : $flat-color;
+       }
+
+       transition: all ease 300ms;
+
+       &.active {
+           h4 {
+               color : $dark-color;
+           }
+           border-bottom: solid 2px $dark-color;
+       }
+    }
+}

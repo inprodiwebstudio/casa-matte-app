@@ -1,0 +1,85 @@
+@import "/src/Resources/scss/variables/colorThemes";
+@font-face {
+    font-family: "Aitana-Regular";
+    src: url("../../../Resources/Fonts/GandhiSerif-Regular.ttf");
+}
+@font-face {
+    font-family: "BlakaHollow-Regular";
+    src: url("../../../Resources/Fonts/BlakaHollow-Regular.ttf");
+}
+
+.EditText {
+    font-family: Helvetica, sans-serif;
+    height: 76vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 15px;
+
+    .ck-content {
+        height: 57vh !important;
+        margin-top: 20px;
+        border: 1px solid #E9E4D9 !important;
+        margin-left: 20px;
+        margin-right: 20px;
+        box-shadow: none !important;
+    }
+
+    .ck-toolbar__items {
+        padding : 10px;
+        justify-content: center;
+    }
+    .ck-toolbar {
+        background: $secondary-color;
+        border: none;
+    }
+    .ck-dropdown {
+        background: $secondary-color;
+    }
+
+    .ck-list__item {
+        & .ck-button {
+            &.ck-on {
+                background: $primary-color;
+            }
+        }
+    }
+
+    .ck-button_with-text {
+        justify-content: left !important;
+    }
+
+    .ck-button {
+        font-size: 1rem !important;
+        &.ck-on {
+            background: $primary-color !important;
+            color : $dark-color !important;
+            border : none !important;
+            &:hover {
+                background: $primary-color !important;
+            }
+            &:active, &:focus, &:active:focus {
+                box-shadow: none !important;
+            }
+        }
+        &.ck-off {
+            border : none !important;
+            &.ck-color-grid__tile {
+                &:hover {
+                    box-shadow: inset 0 0 0 1px rgb(255, 255, 255), 0 0 0 2px $primary-color !important;
+                    cursor: pointer;
+                }
+            }
+            &:active, &:focus, &:active:focus {
+                box-shadow: none !important;
+            }
+        }
+    }
+
+    .button-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row-reverse;
+        padding-right: 20px;
+    }
+}

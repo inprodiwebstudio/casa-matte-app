@@ -1,0 +1,25 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.body-mod15SquareFormat-layout {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding-top: 3.4%;
+    padding-bottom: 3.4%;
+    padding-left: 34.9%;
+    padding-right: 34.9%;
+    flex-direction: row-reverse;
+    .content-body {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.05em;
+
+        .content-children-body {
+            background: $body-color;
+            width: 100%;
+            flex-grow: 1;
+        }
+    }
+}

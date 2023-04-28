@@ -1,0 +1,95 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.UploadingContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    .upluadIndicatorContainer {
+        gap : 20px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        color : $flat-color;
+
+        .loadingPhotosConainer {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+}
+
+.DropDoc {
+    width: 100%;
+    flex-grow: 1;
+    border: 1px dashed $flat-color;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .indicator-drop-container {
+        color: $flat-color;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        font-size: 12px;
+        font-weight: 300;
+        line-height: 14px;
+        padding-left: 38px;
+        font-style: normal;
+        text-align: center;
+        padding-right: 38px;
+        align-items: center;
+        flex-direction: column;
+        letter-spacing: 0.05em;
+        justify-content: center;
+        text-transform: uppercase;
+        cursor: pointer;
+
+        svg {
+            margin-bottom: 5px;
+        }
+    }
+
+    .options-cards-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+
+        .back-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .options-card {
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}

@@ -1,50 +1,95 @@
-import isValidArray from "./isValidArray";
+const isUndefined = (value) => value === undefined;
 
-const buildFormData = (data) => {
-	const body = new FormData();
+const isNull = (value) => value === null;
 
-	if (!data) return body;
+const isBoolean = (value) => typeof value === "boolean";
 
-	for (const item in data) {
+const isObject = (value) => value === Object(value);
 
-		if (isValidArray(data[item])) {
+const isArray = (value) => Array.isArray(value);
 
-			data[item].forEach((element) => {
+const isDate = (value) => value instanceof Date;
 
-				if (typeof element === "object") {
+const isBlob = (value) =>
+	isObject(value) &&
+  typeof value.size === "number" &&
+  typeof value.type === "string" &&
+  typeof value.slice === "function";
 
-					body.append(`${item}[]`, JSON.stringify(element));
+const isFile = (value) =>
+	isBlob(value) &&
+  typeof value.name === "string" &&
+  (isObject(value.lastModifiedDate) || typeof value.lastModified === "number");
 
-				} else {
-					if (data[item] !== undefined) {
-						body.append(`${item}[]`, element);
-					}
+const initConfig = (value) => (isUndefined(value) ? false : value);
+
+const buildFormData = (
+	data,
+	config,
+	existingFormData,
+	key
+) => {
+	config = config || {};
+	existingFormData = existingFormData || new FormData();
+
+	config.indexes = initConfig(config.indexes);
+	config.nullsAsUndefineds = initConfig(config.nullsAsUndefineds);
+	config.booleansAsIntegers = initConfig(config.booleansAsIntegers);
+	config.allowEmptyArrays = initConfig(config.allowEmptyArrays);
+	config.noFilesWithArrayNotation = initConfig(config.noFilesWithArrayNotation);
+	config.dotsForObjectNotation = initConfig(config.dotsForObjectNotation);
+
+	if (isUndefined(data)) {
+		return existingFormData;
+	} else if (isNull(data)) {
+		if (!config?.nullsAsUndefineds) {
+			existingFormData.append(key, "");
+		}
+	} else if (isBoolean(data)) {
+		if (config?.booleansAsIntegers) {
+			existingFormData.append(key, data ? "1" : "0");
+		} else {
+			existingFormData.append(key, data);
+		}
+	} else if (isArray(data)) {
+		if (data.length) {
+			data.forEach((value, index) => {
+				let keyPrefix = `${key}[${config?.indexes ? index : ""}]`;
+
+				if (config?.noFilesWithArrayNotation && isFile(value)) {
+					keyPrefix = key;
 				}
+
+				buildFormData(value, config, existingFormData, keyPrefix);
 			});
-			continue;
+		} else if (config?.allowEmptyArrays) {
+			existingFormData.append(`${key}[]`, "");
 		}
+	} else if (isDate(data)) {
+		existingFormData.append(key, data.toISOString());
+	} else if (isObject(data) && !isBlob(data)) {
+		Object.keys(data).forEach((prop) => {
+			const value = data[prop];
 
-		if (typeof data[item] === "object") {
-
-			if (data[item] instanceof File) {
-				body.append(item, data[item]);
-				continue;
+			if (isArray(value)) {
+				while (prop.length > 2 && prop.lastIndexOf("[]") === prop.length - 2) {
+					prop = prop.substring(0, prop.length - 2);
+				}
 			}
 
-			if (data[item] instanceof Date ) {
-				body.append(item,  data[item]);
-				continue;
-			}
+			const keyPrefix = key
+				? config?.dotsForObjectNotation
+					? `${key}.${prop}`
+					: `${key}[${prop}]`
+				: prop;
 
-			body.append(item, JSON.stringify(data[item]));
-			continue;
-		}
-
-		if (data[item] !== undefined) {
-			body.append(item, data[item]);
-		}
+			buildFormData(value, config, existingFormData, keyPrefix);
+		});
+	} else {
+		existingFormData.append(key, data);
 	}
-	return body;
+
+	return existingFormData;
 };
 
 export default buildFormData;

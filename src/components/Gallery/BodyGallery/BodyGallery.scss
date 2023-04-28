@@ -1,0 +1,108 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.BodyGallery {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    padding-left: 15px;
+    flex-direction: column;
+    padding-right: calc(15px - 5px);
+    display: flex;
+    
+
+    .docs-list {
+        gap: 17px;
+        flex-grow: 1;
+        display: flex;
+        overflow: hidden;
+        flex-direction: column;
+
+        .folder-grid {
+            gap: 10px;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            overflow-y: hidden;
+        }
+
+        .separator-container {
+            gap: 3px;
+            display: flex;
+            font-size: 20px;
+            font-weight: 400;
+            color: $flat-color;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            font-family: "Aitana-Regular";
+
+            .spacer-line {
+                width: 100%;
+                height: 1px;
+                background: $flat-color;
+            }
+        }
+
+        .photo-grid {
+            display: flex;
+            gap : 10px;
+            flex-wrap: wrap;
+            width: 100%;
+            overflow-y: hidden;
+        }
+    }
+
+
+    .header-gallery-container {
+        padding-top: 22px;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .header-actions-gallery {
+            width : 100%;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .actions-header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .icon-style {
+                color : $flat-color;
+                cursor: pointer;
+                transition: all ease 200ms;
+                height: 30px;
+                width: 30px;
+
+                &:hover {
+                    color : $dark-color;
+                }
+            }
+
+            .filter-selector-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .selector-input {
+                    width: 180px;
+                }
+            }
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 24px;
+            text-align: center;
+            letter-spacing: 0.05em;
+            font-family: "Aitana-Regular";
+            text-transform: uppercase;
+        }
+    }
+}

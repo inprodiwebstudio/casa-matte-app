@@ -1,0 +1,30 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.Card {
+    gap: 14px;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 14px;
+    color: $flat-color;
+    text-align: center;
+    align-items: center;
+    background: #FFFFFF;
+    letter-spacing: 0.05em;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0px 4px 10px rgba(29, 29, 27, 0.2), 0px 0px 1px rgba(29, 29, 27, 0.15);
+
+    &.isButton {
+        cursor: pointer;
+        transition: all ease 300ms;
+        box-shadow: 0px 0px 1px rgba(29, 29, 27, 0.15);
+
+        &:hover {
+            box-shadow: 0px 4px 10px rgba(29, 29, 27, 0.2), 0px 0px 1px rgba(29, 29, 27, 0.15);
+        }
+    }
+
+}
