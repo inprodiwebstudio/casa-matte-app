@@ -81,7 +81,6 @@ const WorkSpace = ({
 								<RedoArrow style={{transform : "scaleX(-1)"}} size="20px" />
 								<div className="labelUndoRedo">
 									<div>Deshacer</div>
-									<div className="actionLabel">ctrl + Z</div>
 								</div>
 							</div>
 							<div
@@ -95,7 +94,6 @@ const WorkSpace = ({
 								<RedoArrow size="21px" />
 								<div className="labelUndoRedo">
 									<div>Rehacer</div>
-									<div className="actionLabel">ctrl + Y</div>
 								</div>
 							</div>
 						</div>
