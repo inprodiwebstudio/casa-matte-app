@@ -4,9 +4,9 @@ import { workSpaceSlice } from "store/Slices";
 import { useParams }      from "react-router-dom";
 
 //Own components
-import { bindAll }             from "helpers";
-import { handlerResizerImage } from "../../ModsConstants";
-import ActionImagesLayout      from "components/global/ActionImagesLayout";
+import { bindAll }                             from "helpers";
+import { handlerResizerImage, selectPhotoUrl } from "../../ModsConstants";
+import ActionImagesLayout                      from "components/global/ActionImagesLayout";
 import "./Mod6.scss";
 
 const Mod6 = ({images, isInWorkSpcae, sheetNo, workSpaceSlice, dragerImage}) => {
@@ -44,7 +44,7 @@ const Mod6 = ({images, isInWorkSpcae, sheetNo, workSpaceSlice, dragerImage}) => 
 		>
 			{
 				(images && images[0].url && isInWorkSpcae) && (
-					<ActionImagesLayout sheetNo={sheetNo} layoutNo={0} pageId={pageId} image={images[0].url} />
+					<ActionImagesLayout sheetNo={sheetNo} layoutNo={0} pageId={pageId} image={selectPhotoUrl(images[0])} />
 				)
 			}
 		</div>

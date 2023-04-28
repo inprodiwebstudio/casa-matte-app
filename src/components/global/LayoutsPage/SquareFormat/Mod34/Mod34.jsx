@@ -4,8 +4,8 @@ import { workSpaceSlice } from "store/Slices";
 import { useParams }      from "react-router-dom";
 
 import "./Mod34.scss";
-import ActionImagesLayout      from "components/global/ActionImagesLayout";
-import { handlerResizerImage } from "../../ModsConstants";
+import ActionImagesLayout                      from "components/global/ActionImagesLayout";
+import { handlerResizerImage, selectPhotoUrl } from "../../ModsConstants";
 
 const Mod34 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) => {
 	const { pageId } = useParams();
@@ -46,7 +46,7 @@ const Mod34 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) =>
 					>
 						{
 							(images && images[0].url && isInWorkSpcae) && (
-								<ActionImagesLayout sheetNo={sheetNo} layoutNo={0} pageId={pageId} image={images[0]} />
+								<ActionImagesLayout sheetNo={sheetNo} layoutNo={0} pageId={pageId} image={selectPhotoUrl(images[0])} />
 							)
 						}
 					</div>
@@ -67,7 +67,7 @@ const Mod34 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) =>
 					>
 						{
 							(images && images[1].url && isInWorkSpcae) && (
-								<ActionImagesLayout sheetNo={sheetNo} layoutNo={1} pageId={pageId} image={images[1]} />
+								<ActionImagesLayout sheetNo={sheetNo} layoutNo={1} pageId={pageId} image={selectPhotoUrl(images[1])} />
 							)
 						}
 					</div>
@@ -88,7 +88,7 @@ const Mod34 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) =>
 					>
 						{
 							(images && images[2].url && isInWorkSpcae) && (
-								<ActionImagesLayout sheetNo={sheetNo} layoutNo={2} pageId={pageId} image={images[2]} />
+								<ActionImagesLayout sheetNo={sheetNo} layoutNo={2} pageId={pageId} image={selectPhotoUrl(images[2])} />
 							)
 						}
 					</div>
@@ -110,7 +110,7 @@ const Mod34 = ({images, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae}) =>
 				>
 					{
 						(images && images[3].url && isInWorkSpcae) && (
-							<ActionImagesLayout sheetNo={sheetNo} layoutNo={3} pageId={pageId} image={images[3]} />
+							<ActionImagesLayout sheetNo={sheetNo} layoutNo={3} pageId={pageId} image={selectPhotoUrl(images[3])} />
 						)
 					}
 				</div>
