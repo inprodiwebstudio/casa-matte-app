@@ -3,16 +3,28 @@ import { connect }        from "react-redux";
 import { workSpaceSlice } from "store/Slices";
 import { useParams }      from "react-router-dom";
 
-import "./Mod13.scss";
 //Constants
 import photoBooksConfing                       from "core/constants/photoBooksConfing";
 import ActionImagesLayout                      from "./ActionImagesLayout";
 import { handlerResizerImage, selectPhotoUrl } from "./layoutMod.helpers";
+import "./Mod13.scss";
 
-const LayoutMod = ({images, modLayout, sheetNo, workSpaceSlice, dragerImage, isInWorkSpcae, photoBookData}) => {
+const LayoutMod = ({
+	images,
+	sheetNo,
+	modLayout,
+	dragerImage,
+	isInWorkSpcae,
+	photoBookData,
+	workSpaceSlice,
+}) => {
 	const { pageId } = useParams();
 
-	const photosQuantity = photoBooksConfing[photoBookData?.product][photoBookData?.format]?.layoutMods[modLayout]?.numberPhotos ?? 0;
+	const photobookProduct = photoBookData?.product ?? "white";
+
+	const photobookFormat = photoBookData?.format ?? "vertical";
+
+	const photosQuantity = photoBooksConfing[photobookProduct][photobookFormat]?.layoutMods[modLayout]?.numberPhotos ?? 0;
 
 	const arrayPhotos = new Array(photosQuantity).fill(" ");
 
@@ -30,8 +42,10 @@ const LayoutMod = ({images, modLayout, sheetNo, workSpaceSlice, dragerImage, isI
 		e.preventDefault();
 	};
 
+	const classNameStyle = `${modLayout}-${photobookProduct}-${photobookFormat}`;
+
 	return (
-		<div className="body-mod13-layout">
+		<div className={classNameStyle}>
 			<div className="content-body">
 				{
 					arrayPhotos.map((boxContent, index) => (
@@ -43,7 +57,7 @@ const LayoutMod = ({images, modLayout, sheetNo, workSpaceSlice, dragerImage, isI
 							{
 								...( images && {
 									style : {
-										backgroundImage    : `url(${handlerResizerImage(images, index, isInWorkSpcae)})`,
+										backgroundImage    : `url(${handlerResizerImage(images[0], isInWorkSpcae)})`,
 										backgroundSize     : "cover",
 										backgroundRepeat   : "no-repeat",
 										backgroundPosition : "center",
@@ -53,7 +67,7 @@ const LayoutMod = ({images, modLayout, sheetNo, workSpaceSlice, dragerImage, isI
 						>
 							{
 								(images && images[index].url && isInWorkSpcae) && (
-									<ActionImagesLayout sheetNo={sheetNo} layoutNo={0} pageId={pageId} image={selectPhotoUrl(images[index])} />
+									<ActionImagesLayout sheetNo={sheetNo} layoutNo={index} pageId={pageId} image={selectPhotoUrl(images[index])} />
 								)
 							}
 						</div>
