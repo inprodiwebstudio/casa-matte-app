@@ -62,8 +62,6 @@ const WorkSpace = ({
 
 	document.onkeydown = undoAndRedoActions;
 
-	console.log(sizePhotoBook);
-
 	return (
 		<div className="WorkSpace">
 			<div className="canva-space">
