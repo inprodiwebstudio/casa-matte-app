@@ -7,7 +7,6 @@ import { useParams }      from "react-router-dom";
 import photoBooksConfing                       from "core/constants/photoBooksConfing";
 import ActionImagesLayout                      from "./ActionImagesLayout";
 import { handlerResizerImage, selectPhotoUrl } from "./layoutMod.helpers";
-import "./Mod13.scss";
 
 const LayoutMod = ({
 	images,
@@ -42,7 +41,7 @@ const LayoutMod = ({
 		e.preventDefault();
 	};
 
-	const classNameStyle = `${modLayout}-${photobookProduct}-${photobookFormat}`;
+	const classNameStyle = `${modLayout}-${photobookFormat}`;
 
 	return (
 		<div className={classNameStyle}>
