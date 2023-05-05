@@ -4,7 +4,7 @@ const photoBooksConfing = {
 	white : {
 		horizontal : false,
 		vertical   : {
-			aspectRatio      : 0,
+			aspectRatio      : 8/9,
 			modsInDoublePage : ["Mod1", "Mod2", "Mod3"],
 			layoutMods       : {...vertical},
 			sizes            : {
@@ -20,7 +20,7 @@ const photoBooksConfing = {
 			},
 		},
 		cuadrado : {
-			aspectRatio      : 0,
+			aspectRatio      : 1/1,
 			layoutMods       : {...cuadrado},
 			modsInDoublePage : ["Mod6", "Mod7"],
 			sizes            : {
@@ -39,7 +39,7 @@ const photoBooksConfing = {
 	sencillo : {
 		horizontal : false,
 		vertical   : {
-			aspectRatio      : 0,
+			aspectRatio      : 8/9,
 			layoutMods       : {...vertical},
 			modsInDoublePage : ["Mod1", "Mod2", "Mod3"],
 			sizes            : {
@@ -53,7 +53,7 @@ const photoBooksConfing = {
 			},
 		},
 		cuadrado : {
-			aspectRatio      : 0,
+			aspectRatio      : 1/1,
 			layoutMods       : {...cuadrado},
 			modsInDoublePage : ["Mod6", "Mod7"],
 			sizes            : {
@@ -81,7 +81,7 @@ const photoBooksConfing = {
 			},
 		},
 		vertical : {
-			aspectRatio      : 0,
+			aspectRatio      : 8/9,
 			layoutMods       : {...vertical},
 			modsInDoublePage : ["Mod1", "Mod2", "Mod3"],
 			sizes            : {
@@ -111,7 +111,7 @@ const photoBooksConfing = {
 			},
 		},
 		vertical : {
-			aspectRatio      : 0,
+			aspectRatio      : 8/9,
 			layoutMods       : {...vertical},
 			modsInDoublePage : ["Mod1", "Mod2", "Mod3"],
 			sizes            : {
