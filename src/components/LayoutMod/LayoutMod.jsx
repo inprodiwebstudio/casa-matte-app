@@ -56,7 +56,7 @@ const LayoutMod = ({
 							{
 								...( images && {
 									style : {
-										backgroundImage    : `url(${handlerResizerImage(images[0], isInWorkSpcae)})`,
+										backgroundImage    : `url(${handlerResizerImage(images[index], isInWorkSpcae)})`,
 										backgroundSize     : "cover",
 										backgroundRepeat   : "no-repeat",
 										backgroundPosition : "center",
