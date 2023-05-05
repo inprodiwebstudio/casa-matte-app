@@ -28,6 +28,8 @@ const BookPages = ({
 
 	const isInDoublePage = modsInDoublePage.includes(pageData?.sheet1?.layoutType);
 
+	const aspectRatio = photoBooksConfing[currentPhotoBook].aspectRatio;
+
 	const photoList = (sheetId) => {
 		const sheetData = pageData[sheetId];
 		const listOfImages = convertToArray(sheetData.photos);
@@ -54,7 +56,12 @@ const BookPages = ({
 		);
 	}
 	return (
-		<div className={`BookPages ${(!pageData?.sheet2 && !isInDoublePage) && "isOnePage"} ${isInDoublePage && "isSinglePage"}`}>
+		<div
+			className="BookPages"
+			style={{
+				aspectRatio : isInDoublePage ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
+			}}
+		>
 			<div
 				className={
 					`page-body ${(currentSelectedPage === "sheet1") && "isActivePage"}`
