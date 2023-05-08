@@ -66,6 +66,9 @@ const BookPages = ({
 				className={
 					`page-body ${(currentSelectedPage === "sheet1") && "isActivePage"}`
 				}
+				style={{
+					aspectRatio : isInDoublePage ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
+				}}
 				{
 					...(isInWorkSpcae && {
 						onClick : () => handlerSelectedData("sheet1"),
