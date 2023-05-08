@@ -7,6 +7,8 @@ import { useParams }      from "react-router-dom";
 import photoBooksConfing                       from "core/constants/photoBooksConfing";
 import ActionImagesLayout                      from "./ActionImagesLayout";
 import { handlerResizerImage, selectPhotoUrl } from "./layoutMod.helpers";
+//Styles
+import "./LayoutMods.scss";
 
 const LayoutMod = ({
 	images,
