@@ -65,7 +65,7 @@ const SelectStyles = ({type, leftIcon, dropTopMenu}) => ({
 		...styles,
 		fontWeight    : 300,
 		lineHeight    : "17px",
-		color         : type === "filled" ? "#B2AFA6" : "#000000",
+		color         : "#000000",
 		letterSpacing : "0.05em",
 		textTransform : type !== "light" && "uppercase",
 		fontSize      : "14px",
