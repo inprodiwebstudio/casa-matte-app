@@ -83,7 +83,7 @@ const BookPages = ({
 				{
 					(pageData?.sheet1?.layoutType !== "") && (
 						<LayoutMod
-							images={photoList}
+							images={photoList("sheet1")}
 							sheetNo={"sheet1"}
 							isInWorkSpcae={isInWorkSpcae}
 							modLayout={pageData?.sheet1?.layoutType}
@@ -114,7 +114,7 @@ const BookPages = ({
 						{
 							(pageData?.sheet2?.layoutType !== "") && (
 								<LayoutMod
-									images={photoList}
+									images={photoList("sheet2")}
 									sheetNo={"sheet2"}
 									isInWorkSpcae={isInWorkSpcae}
 									modLayout={pageData?.sheet2?.layoutType}
