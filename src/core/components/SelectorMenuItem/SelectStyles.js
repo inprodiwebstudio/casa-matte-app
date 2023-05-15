@@ -1,7 +1,7 @@
 const SelectStyles = ({type, leftIcon, dropTopMenu}) => ({
 	control : (provided) => ({
 		...provided,
-		border        : (type === "filled") ? "1px solid #B2AFA6 !important" : "none",
+		border        : (type === "filled") ? "1px solid black !important" : "none",
 		width         : "100%",
 		minHeight     : "34px",
 		paddingBottom : ((type === "light") || (type === "filled")) ? "1px" : "10px",
@@ -75,7 +75,7 @@ const SelectStyles = ({type, leftIcon, dropTopMenu}) => ({
 		textTransform   : type !== "light" && "uppercase",
 		fontFamily      : "Helvetica",
 		backgroundColor : "#fff",
-		color           : type === "filled" ? "#B2AFA6" : "#000",
+		color           : "#000",
 		fontSize        : "14px",
 		fontWeight      : 300,
 		letterSpacing   : "0.05em",
@@ -91,17 +91,14 @@ const SelectStyles = ({type, leftIcon, dropTopMenu}) => ({
 		"&:hover"       : {
 			backgroundColor : "#E9E4D9",
 			color           : "#000",
-			transition      : "all ease 200ms",
+			transition      : "all ease 100ms",
 		},
 	}),
 	indicatorSeparator : () => ({ display : "none"}),
 	dropdownIndicator  : (styles) => ({
 		...styles,
 		fontWeight : 100,
-		color      : "#B2AFA6",
-		"&:hover"  : {
-			color : "#000",
-		},
+		color      : "#000",
 	}),
 	placeholder : (styles) => ({
 		...styles,
@@ -110,7 +107,7 @@ const SelectStyles = ({type, leftIcon, dropTopMenu}) => ({
 		fontSize      : "14px",
 		letterSpacing : "0.05em",
 		textTransform : type !== "light" && "uppercase",
-		color         : ((type === "light") || (type === "filled")) ? "#B2AFA6" : "#000000",
+		color         : ((type === "light") || (type === "filled")) ? "#000000" : "#000000",
 	}),
 	menuPortal : styles => ({ ...styles, zIndex : 3}),
 });
