@@ -9,6 +9,10 @@ import "./Footer.scss";
 
 const Footer = () => {
 	const [ dropedToggle, setDropedToggle ] = useState(false);
+	const myValue = {
+		label : "Todos",
+		value : "Todos",
+	};
 	return (
 		<div id="Footer" className={`${dropedToggle && "full-size"}`}>
 			<div className={`droped-container-action ${dropedToggle && "downArrow"}`} onClick={() => setDropedToggle(!dropedToggle)}>
@@ -38,7 +42,7 @@ const Footer = () => {
 				<div
 					style={{
 						marginTop : "15px",
-						width     : "110px",
+						width     : "125px",
 					}}
 				>
 					<SelectorMenuItem
@@ -81,7 +85,12 @@ const Footer = () => {
 								label : "9 Fotos",
 								value : "9 Fotos",
 							},
+							{
+								label : "Todos",
+								value : "Todos",
+							},
 						]}
+						value={myValue}
 						dropTopMenu
 					/>
 				</div>
