@@ -67,7 +67,7 @@ const LayoutMod = ({
 							}
 						>
 							{
-								(images && images[index].url && isInWorkSpcae) && (
+								(images && images[index]?.url && isInWorkSpcae) && (
 									<ActionImagesLayout sheetNo={sheetNo} layoutNo={index} pageId={pageId} image={selectPhotoUrl(images[index])} />
 								)
 							}
