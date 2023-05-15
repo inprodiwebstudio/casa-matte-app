@@ -1,5 +1,5 @@
 import { connect }             from "react-redux";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Skeleton }            from "@mantine/core";
 
 //Own components
@@ -20,15 +20,15 @@ const BookPages = ({
 }) => {
 	const [ currentSelectedPage, setCurrentSelectedPage ] = useState(null);
 
-	const currentPhotoBook = photoBookData?.product ?? "white";
+	const currentPhotoBook = (photoBookData?.product === "" || !photoBookData?.product) ? "white" : photoBookData?.product;
 
 	const photoBookFormat = photoBookData?.format ?? "vertical";
 
-	const modsInDoublePage = photoBooksConfing[currentPhotoBook][photoBookFormat]?.modsInDoublePage;
+	const modsInDoublePage = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.modsInDoublePage;
 
-	const isInDoublePage = modsInDoublePage.includes(pageData?.sheet1?.layoutType);
+	const isInDoublePage = modsInDoublePage?.includes(pageData?.sheet1?.layoutType);
 
-	const aspectRatio = photoBooksConfing[currentPhotoBook].aspectRatio;
+	const aspectRatio = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.aspectRatio;
 
 	const photoList = (sheetId) => {
 		const sheetData = pageData[sheetId];
@@ -93,30 +93,35 @@ const BookPages = ({
 			</div>
 			{
 				(!isInDoublePage && pageData?.sheet2) && (
-					<>
-						<div className="spacer" />
-						<div
-							className={
+					<div className="spacer">&nsp;</div>
+				)
+			}
+			{
+				(!isInDoublePage && pageData?.sheet2) && (
+					<div
+						className={
 								`page-body ${(currentSelectedPage === "sheet2") && "isActivePage"}`
-							}
-							{
-								...(isInWorkSpcae && {
-									onClick : () => handlerSelectedData("sheet2"),
-								})
-							}
-						>
-							{
-								(pageData?.sheet2?.layoutType !== "") && (
-									<LayoutMod
-										images={photoList}
-										sheetNo={"sheet2"}
-										isInWorkSpcae={isInWorkSpcae}
-										modLayout={pageData?.sheet2?.layoutType}
-									/>
-								)
-							}
-						</div>
-					</>
+						}
+						style={{
+							aspectRatio : isInDoublePage ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
+						}}
+						{
+							...(isInWorkSpcae && {
+								onClick : () => handlerSelectedData("sheet2"),
+							})
+						}
+					>
+						{
+							(pageData?.sheet2?.layoutType !== "") && (
+								<LayoutMod
+									images={photoList}
+									sheetNo={"sheet2"}
+									isInWorkSpcae={isInWorkSpcae}
+									modLayout={pageData?.sheet2?.layoutType}
+								/>
+							)
+						}
+					</div>
 				)
 			}
 		</div>
