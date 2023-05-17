@@ -4,7 +4,7 @@ import { useParams }           from "react-router-dom";
 //Helpers
 
 //Own components
-import BookSheets                from "components/BookSheets";
+import BookPages                 from "components/BookPages";
 import { RedoArrow }             from "Resources/icons";
 import LoginCard                 from "../LoginCard";
 import { bindAll, isValidArray } from "helpers";
@@ -19,11 +19,11 @@ const WorkSpace = ({
 	workSpaceSlice,
 	workSpaceHistory,
 }) => {
+	document.onkeydown = undoAndRedoActions;
+
 	const { pageId } = useParams();
 
 	const isFrontLayout = pageId === "frontpage";
-
-	const LayoutComponent = BookSheets[sizePhotoBook] ?? BookSheets["LargeFormat"];
 
 	const defaultViewData = {
 		id     : "FrontLayout",
@@ -38,15 +38,6 @@ const WorkSpace = ({
 
 	const [ myWorkSpaceData, setMyWorkSpaceData ] = useState({});
 
-	useEffect(() => {
-		if (!isFrontLayout) {
-			setMyWorkSpaceData(workSpaceData[pageId]);
-		}
-		if (isFrontLayout) {
-			setMyWorkSpaceData({...defaultViewData});
-		}
-	}, [pageId, workSpaceData]);
-
 	const isAvailableUndo = isValidArray(workSpaceHistory.undo);
 	const isAvailableRedo = isValidArray(workSpaceHistory.redo);
 
@@ -60,9 +51,15 @@ const WorkSpace = ({
 		}
 	}
 
-	document.onkeydown = undoAndRedoActions;
+	useEffect(() => {
+		if (!isFrontLayout) {
+			setMyWorkSpaceData(workSpaceData[pageId]);
+		}
+		if (isFrontLayout) {
+			setMyWorkSpaceData(defaultViewData);
+		}
+	}, [pageId, workSpaceData]);
 
-	console.log(sizePhotoBook);
 
 	return (
 		<div className="WorkSpace">
@@ -81,7 +78,6 @@ const WorkSpace = ({
 								<RedoArrow style={{transform : "scaleX(-1)"}} size="20px" />
 								<div className="labelUndoRedo">
 									<div>Deshacer</div>
-									<div className="actionLabel">ctrl + Z</div>
 								</div>
 							</div>
 							<div
@@ -95,7 +91,6 @@ const WorkSpace = ({
 								<RedoArrow size="21px" />
 								<div className="labelUndoRedo">
 									<div>Rehacer</div>
-									<div className="actionLabel">ctrl + Y</div>
 								</div>
 							</div>
 						</div>
@@ -104,8 +99,9 @@ const WorkSpace = ({
 				<div className="ghost-canva">
 					{
 						(myWorkSpaceData && isLoggin) ? (
-							<LayoutComponent
+							<BookPages
 								isInWorkSpcae
+								loading={isLoading}
 								pageData={myWorkSpaceData}
 							/>
 						) : (
