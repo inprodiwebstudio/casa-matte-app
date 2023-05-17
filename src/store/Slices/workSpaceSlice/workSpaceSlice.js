@@ -1,9 +1,10 @@
 import { createSlice }                                            from "@reduxjs/toolkit";
 import { convertToArray, History, isValidArray, convertToObject } from "helpers";
 
-
 const initialState = {
 	data : {
+		product        : "",
+		format         : "",
 		sizePhotoBook  : "",
 		sizeDimentions : "",
 		pasta          : "",

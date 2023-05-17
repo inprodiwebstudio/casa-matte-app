@@ -4,31 +4,13 @@
     height: 95px;
     cursor: pointer;
     background: white;
-    // aspect-ratio: 1457/1875;
     border: 1px solid $body-color;
     display: flex;
     justify-content: start;
     align-items: flex-start;
     font-size: 20px;
 
-    &.LargeFormat {
-        aspect-ratio: 8/9;
-    }
-
-    &.SquareFormat {
-        aspect-ratio: 1/1;
-    }
-
     &.isActive {
         border: 1px solid $dark-color;
-    }
-
-    &.isFullSize {
-        &.SquareFormat {
-            aspect-ratio: 2/1;
-        }
-        &.LargeFormat {
-            aspect-ratio: 16/9;
-        }
     }
 }

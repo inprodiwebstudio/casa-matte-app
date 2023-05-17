@@ -1,35 +1,30 @@
-import { connect }   from "react-redux";
+import { connect } from "react-redux";
+//Router
 import { useParams } from "react-router-dom";
-
-//Onw components
-import LargeFormat        from "components/global/LayoutsPage/LargeFormat";
-import SquareFormat       from "components/global/LayoutsPage/SquareFormat";
+//Constants
+import photoBooksConfing from "core/constants/photoBooksConfing";
+import LayoutMod         from "components/LayoutMod/LayoutMod";
+//Slices
 import { workSpaceSlice } from "store/Slices";
-import { bindAll }        from "helpers";
+//Helpers
+import { bindAll } from "helpers";
 import "./ItemLayout.scss";
 
 const ItemLayout = ({
 	pagesData,
 	layoutData,
-	formatPage,
 	workSpaceSlice,
+	formatPhotoBook,
+	productPhotoBook,
 	pageDataSelected,
 }) => {
-	// const LayoutLarge = LargeFormat[layout]?.["layout"];
-	// const LayoutSquare = SquareFormat[layout]?.["layout"];
-
-	const isFullSize = () => {
-		switch (formatPage) {
-			case "LargeFormat":
-				return ["Mod1", "Mod2", "Mod3"].includes(layoutData?.id);
-			case "SquareFormat":
-				return ["Mod6", "Mod7"].includes(layoutData?.id);
-			default :
-				return false;
-		}
-	};
-
 	const { pageId } = useParams();
+
+	const aspectRatio = photoBooksConfing[productPhotoBook]?.[formatPhotoBook]?.aspectRatio;
+
+	const myConfigPhotoBook = photoBooksConfing[productPhotoBook]?.[formatPhotoBook];
+
+	const isInDoublePage = myConfigPhotoBook?.modsInDoublePage?.includes(layoutData?.id);
 
 	const currentLayoutSelected = {
 		sheet1 : pagesData[pageId]?.sheet1?.layoutType,
@@ -51,31 +46,19 @@ const ItemLayout = ({
 		}
 	};
 
-	const uiConstructor = (layoutId) => {
-		const LayoutLarge = LargeFormat[layoutId]?.["layout"];
-		const LayoutSquare = SquareFormat[layoutId]?.["layout"];
-		switch (formatPage) {
-			case "SquareFormat" :
-				return (
-					<LayoutSquare />
-				);
-			case "LargeFormat" :
-				return (
-					<LayoutLarge />
-				);
-			default:
-				(<div />);
-		}
-	};
-
 	return (
 		<div
 			onClick={(e) => handleSelectedLayout(e)}
 			className={
-				`ItemLayout ${isFullSize() && "isFullSize"} ${isSelectedLayout && "isActive"} ${formatPage}`
+				`ItemLayout ${isSelectedLayout && "isActive"}`
 			}
+			style={{
+				aspectRatio : isInDoublePage ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
+			}}
 		>
-			{uiConstructor(layoutData?.id)}
+			<LayoutMod
+				modLayout={layoutData?.id}
+			/>
 		</div>
 	);
 };
@@ -85,7 +68,8 @@ const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
 const mapStateToProps = ({ workSpaceSlice }) => ({
 	pageDataSelected : workSpaceSlice?.pageDataSelected ?? null,
 	pagesData        : workSpaceSlice?.data?.pages ?? {},
-	formatPage       : workSpaceSlice?.data?.sizePhotoBook ?? "LargeFormat",
+	productPhotoBook : workSpaceSlice?.data?.product ?? "white",
+	formatPhotoBook  : workSpaceSlice?.data?.format ?? "vertical",
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (ItemLayout);

@@ -2,48 +2,24 @@ import { useState, useEffect } from "react";
 import { BarLoader }           from "react-spinners";
 
 //Own components
-import LargeFormat  from "components/global/LayoutsPage/LargeFormat";
-import SquareFormat from "components/global/LayoutsPage/SquareFormat";
-import ItemLayout   from "./ItemLayout";
+import photoBooksConfing from "core/constants/photoBooksConfing";
+import ItemLayout        from "./ItemLayout";
 import "./LayoutList.scss";
 import {
 	ScrollBar,
 } from "core/components";
-import { connect }      from "react-redux";
-import { isValidArray } from "helpers";
+import { connect } from "react-redux";
+//helpers
+import { convertToArray, isValidArray } from "helpers";
 
-const LayoutList = ({filterLayouts, formatPage, loading}) => {
+const LayoutList = ({filterLayouts, productPhotoBook, loading, formatPhotoBook}) => {
 	const [ layoutList, setLayoutList ] = useState([]);
 
-	// const isFullSize = (layout) => {
-	// 	switch (formatPage) {
-	// 		case "LargeFormat":
-	// 			return ["Mod1", "Mod2", "Mod3"].includes(layout);
-	// 		case "SquareFormat":
-	// 			return  ["Mod6", "Mod7"].includes(layout);
-	// 	}
-	// };
+	const objLayouts = photoBooksConfing[productPhotoBook]?.[formatPhotoBook]?.layoutMods ?? {};
 
-	const myLayouts = () => {
-		switch (formatPage) {
-			case "LargeFormat":
-				return Object.values(LargeFormat);
-			case "SquareFormat":
-				return Object.values(SquareFormat);
-		}
-	};
-
-	const identifyFormatPage = (layoutId) => {
-		switch (formatPage) {
-			case "LargeFormat":
-				return LargeFormat[layoutId];
-			case "SquareFormat":
-				return SquareFormat[layoutId];
-		}
-	};
+	const layouts = convertToArray(objLayouts) ?? [];
 
 	useEffect(() => {
-		const layouts = myLayouts();
 		if ((filterLayouts?.type === "all") && (filterLayouts?.photosQuantity === "all")) {
 			setLayoutList(layouts);
 			return;
@@ -59,7 +35,7 @@ const LayoutList = ({filterLayouts, formatPage, loading}) => {
 			(layout.cat === filterLayouts.type) && (layout.numberPhotos === filterLayouts.photosQuantity)
 		));
 		setLayoutList(newListLayouts);
-	}, [filterLayouts, formatPage]);
+	}, [filterLayouts, formatPhotoBook]);
 
 	return (
 		<ScrollBar>
@@ -68,7 +44,7 @@ const LayoutList = ({filterLayouts, formatPage, loading}) => {
 					{
 						(layoutList && isValidArray(layoutList) && !loading) ? (
 							layoutList.map((item, index) => (
-								<ItemLayout key={index} layoutData={identifyFormatPage(item?.id)} />
+								<ItemLayout key={index} layoutData={objLayouts[item?.id]} />
 							))
 						) : (
 							<div
@@ -90,9 +66,10 @@ const LayoutList = ({filterLayouts, formatPage, loading}) => {
 };
 
 const mapStateToProps = ({ workSpaceSlice }) => ({
-	filterLayouts : workSpaceSlice?.layoutFilter ?? {},
-	formatPage    : workSpaceSlice?.data?.sizePhotoBook ?? "LargeFormat",
-	loading       : workSpaceSlice?.loading ?? true,
+	filterLayouts    : workSpaceSlice?.layoutFilter ?? {},
+	productPhotoBook : (workSpaceSlice?.data?.product === "") ? "white" : workSpaceSlice?.data?.product,
+	formatPhotoBook  : (workSpaceSlice?.data?.format === "") ? "vertical" : workSpaceSlice?.data?.format,
+	loading          : workSpaceSlice?.loading ?? true,
 });
 
 export default connect(mapStateToProps) (LayoutList);
