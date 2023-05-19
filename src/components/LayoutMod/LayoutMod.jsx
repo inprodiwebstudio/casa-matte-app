@@ -1,7 +1,6 @@
-import { bindAll }        from "helpers";
-import { connect }        from "react-redux";
-import { workSpaceSlice } from "store/Slices";
-import { useParams }      from "react-router-dom";
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { workSpaceSlice }                         from "store/Slices";
+import { useParams }                              from "react-router-dom";
 
 //Constants
 import photoBooksConfing                       from "core/constants/photoBooksConfing";
@@ -14,12 +13,14 @@ const LayoutMod = ({
 	images,
 	sheetNo,
 	modLayout,
-	dragerImage,
 	isInWorkSpcae,
-	photoBookData,
-	workSpaceSlice,
 }) => {
 	const { pageId } = useParams();
+
+	const dispatch = useDispatch();
+
+	const dragerImage = useSelector((state) => state.workSpaceSlice.currentPhotoDragger, shallowEqual);
+	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 
 	const photobookProduct = photoBookData?.product ?? "white";
 
@@ -31,12 +32,12 @@ const LayoutMod = ({
 
 	const handleDrop = (e, layoutNo) => {
 		e.preventDefault();
-		workSpaceSlice.addPhoto({
+		dispatch(workSpaceSlice.actions.addPhoto({
 			pageId   : pageId,
 			sheetNo  : sheetNo,
 			layoutNo : layoutNo,
 			image    : dragerImage,
-		});
+		}));
 	};
 
 	const handleDragOver = (e) => {
@@ -79,11 +80,4 @@ const LayoutMod = ({
 	);
 };
 
-const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
-
-const mapStateToProps = ({ workSpaceSlice }) => ({
-	dragerImage   : workSpaceSlice?.currentPhotoDragger ?? null,
-	photoBookData : workSpaceSlice?.data ?? null,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps) (LayoutMod);
+export default LayoutMod;
