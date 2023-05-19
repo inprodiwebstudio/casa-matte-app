@@ -31,9 +31,11 @@ const BookPages = ({
 	const aspectRatio = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.aspectRatio;
 
 	const photoList = (sheetId) => {
-		const sheetData = pageData[sheetId];
-		const listOfImages = convertToArray(sheetData.photos);
-		return listOfImages;
+		const sheetData = pageData?.[sheetId];
+		const listOfImages = sheetData ? convertToArray(sheetData?.photos) : undefined;
+		if (listOfImages) {
+			return listOfImages;
+		}
 	};
 
 	const handlerSelectedData = (currentPage) => {
@@ -59,7 +61,7 @@ const BookPages = ({
 		<div
 			className="BookPages"
 			style={{
-				aspectRatio : isInDoublePage ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
+				aspectRatio : (isInDoublePage || pageData?.sheet2) ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
 			}}
 		>
 			<div
@@ -91,11 +93,14 @@ const BookPages = ({
 					)
 				}
 			</div>
-			{
-				(!isInDoublePage && pageData?.sheet2) && (
-					<div className="spacer">&nsp;</div>
-				)
-			}
+			<div
+				className="spacer"
+				style={{
+					background : (isInDoublePage || !pageData?.sheet2) && "transparent",
+				}}
+			>
+				&nbsp;
+			</div>
 			{
 				(!isInDoublePage && pageData?.sheet2) && (
 					<div
