@@ -10,7 +10,6 @@ import "./AppShell.scss";
 //Fonts
 import blackaHollow from "Resources/Fonts/BlakaHollow-Regular.ttf";
 
-
 const AppShell = ({
 	Body,
 	header,
