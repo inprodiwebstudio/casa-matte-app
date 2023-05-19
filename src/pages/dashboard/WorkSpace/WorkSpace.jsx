@@ -1,27 +1,25 @@
-import { connect }             from "react-redux";
-import { useState, useEffect } from "react";
-import { useParams }           from "react-router-dom";
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { useState, useEffect }                    from "react";
+import { useParams }                              from "react-router-dom";
 //Helpers
+import { isValidArray } from "helpers";
 
 //Own components
-import BookPages                 from "components/BookPages";
-import { RedoArrow }             from "Resources/icons";
-import LoginCard                 from "../LoginCard";
-import { bindAll, isValidArray } from "helpers";
-import { workSpaceSlice }        from "store/Slices";
+import BookPages          from "components/BookPages";
+import { RedoArrow }      from "Resources/icons";
+import LoginCard          from "../LoginCard";
+import { workSpaceSlice } from "store/Slices";
 import "./WorkSpace.scss";
 
-const WorkSpace = ({
-	isLoggin,
-	isLoading,
-	workSpaceData,
-	sizePhotoBook,
-	workSpaceSlice,
-	workSpaceHistory,
-}) => {
-	document.onkeydown = undoAndRedoActions;
-
+const WorkSpace = () => {
 	const { pageId } = useParams();
+
+	const dispatch = useDispatch();
+
+	const workSpaceData = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
+	const workSpaceHistory = useSelector((state) => state.workSpaceSlice.history, shallowEqual);
+	const isLoggin = useSelector((state) => state.authSlice.loggedIn, shallowEqual);
+	const isLoading = useSelector((state) => state.workSpaceSlice?.loading, shallowEqual);
 
 	const isFrontLayout = pageId === "frontpage";
 
@@ -44,10 +42,10 @@ const WorkSpace = ({
 	function undoAndRedoActions(e) {
 		const evtobj = window.event? event : e;
 		if ((evtobj.keyCode === 90) && (evtobj.ctrlKey) && isAvailableUndo) {
-			workSpaceSlice.undo();
+			dispatch(workSpaceSlice.actions.undo({}));
 		}
 		if ((evtobj.keyCode === 89) && (evtobj.ctrlKey) && isAvailableRedo) {
-			workSpaceSlice.redo();
+			dispatch(workSpaceSlice.actions.redo({}));
 		}
 	}
 
@@ -60,7 +58,7 @@ const WorkSpace = ({
 		}
 	}, [pageId, workSpaceData]);
 
-
+	document.onkeydown = undoAndRedoActions;
 	return (
 		<div className="WorkSpace">
 			<div className="canva-space">
@@ -71,7 +69,7 @@ const WorkSpace = ({
 								className={`action-styled ${!isAvailableUndo && "disabled"}`}
 								{...(
 									isAvailableUndo && {
-										onClick : () => workSpaceSlice.undo(),
+										onClick : () => dispatch(workSpaceSlice.actions.undo()),
 									}
 								)}
 							>
@@ -84,7 +82,7 @@ const WorkSpace = ({
 								className={`action-styled ${!isAvailableRedo && "disabled"}`}
 								{...(
 									isAvailableRedo && {
-										onClick : () => workSpaceSlice.redo(),
+										onClick : () => dispatch(workSpaceSlice.actions.redo()),
 									}
 								)}
 							>
@@ -118,14 +116,4 @@ const WorkSpace = ({
 	);
 };
 
-const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
-
-const mapStateToProps = ({ workSpaceSlice, authSlice }) => ({
-	workSpaceData    : workSpaceSlice?.data?.pages ?? {},
-	sizePhotoBook    : workSpaceSlice?.data?.sizePhotoBook ?? "LargeFormat",
-	workSpaceHistory : workSpaceSlice?.history ?? {},
-	isLoggin         : authSlice?.loggedIn ?? false,
-	isLoading        : workSpaceSlice?.loading ?? true,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps) (WorkSpace);
+export default WorkSpace;
