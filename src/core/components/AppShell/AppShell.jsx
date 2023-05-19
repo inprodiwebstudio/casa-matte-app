@@ -1,9 +1,8 @@
-import { connect }   from "react-redux";
-import { useEffect } from "react";
-import { Font }      from "@react-pdf/renderer";
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { useEffect }                              from "react";
+import { Font }                                   from "@react-pdf/renderer";
 
 //Own component;
-import { bindAll }        from "helpers";
 import { PostingConfig }  from "Notifications";
 import { genericApi }     from "store/api/genericApi";
 import { workSpaceSlice } from "store/Slices";
@@ -18,11 +17,6 @@ const AppShell = ({
 	navbar,
 	footer,
 	sidebar,
-	initialData,
-	photoBookId,
-	workSpaceData,
-	workSpaceSlice,
-	isSelectedPage,
 }) => {
 	Font.register({
 		family : "BlakaHollow-Regular",
@@ -42,6 +36,13 @@ const AppShell = ({
 			},
 		  ],
 	});
+
+	const dispatch = useDispatch();
+
+	const isSelectedPage = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
+	const workSpaceData = useSelector((state) => state.workSpaceSlice?.data, shallowEqual);
+	const photoBookId = useSelector((state) => state.authSlice?.user?.photoBookId, shallowEqual);
+	const initialData = useSelector((state) => state.workSpaceSlice?.initialData, shallowEqual);
 
 	const { data : photobookData, isFetching, error } = genericApi.useGetDataQuery({
 		module : `wp-json/wp/v2/photobook/${photoBookId === "" ? null : photoBookId}`,
@@ -77,13 +78,13 @@ const AppShell = ({
 			const myData = photobookData?.meta?.config;
 			const myReplacerString = myData.replace(/'/g, "\"");
 			const parseJSON = JSON.parse(myReplacerString);
-			workSpaceSlice.insertData(parseJSON);
+			dispatch(workSpaceSlice.actions.insertData(parseJSON));
 		}
 	}, [photobookData]);
 
 	useEffect(() => {
 		if (!error) {
-			workSpaceSlice.changeLoading(isFetching);
+			dispatch(workSpaceSlice.actions.changeLoading(isFetching));
 		}
 	}, [isFetching]);
 
@@ -97,7 +98,7 @@ const AppShell = ({
 				const myData = photobookData?.meta?.config;
 				const myReplacerString = myData.replace(/'/g, "\"");
 				const parseJSON = JSON.parse(myReplacerString);
-				workSpaceSlice.addInitialData(parseJSON);
+				dispatch(workSpaceSlice.actions.addInitialData(parseJSON));
 			}
 		}
 	}, [workSpaceData]);
@@ -134,7 +135,7 @@ const AppShell = ({
 			id="AppShell"
 			{
 				...(isSelectedPage && {
-					onClick : () => workSpaceSlice.clearSelectedPageData(),
+					onClick : () => dispatch(workSpaceSlice.actions.clearSelectedPageData()),
 				})
 			}
 		>
@@ -161,13 +162,4 @@ const AppShell = ({
 	);
 };
 
-const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
-
-const mapStateToProps = ({ workSpaceSlice, authSlice }) => ({
-	isSelectedPage : workSpaceSlice?.pageDataSelected ?? null,
-	workSpaceData  : workSpaceSlice?.data ?? {},
-	photoBookId    : authSlice?.user?.photoBookId ?? null,
-	initialData    : workSpaceSlice?.initialData ?? undefined,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps) (AppShell);
+export default AppShell;
