@@ -31,7 +31,7 @@ const DropedMenu = () => {
 				<div className="action-droped" onClick={() => setActiveMenu(!activeMenu)}>
 					<h3 className="tittle-action-droped">PROYECTO</h3>
 					<div className={`icon-arrow-container ${!activeMenu && "hidden"}`}>
-						<ArrowTop size="15px" />
+						<ArrowTop size="12px" />
 					</div>
 				</div>
 			</div>
