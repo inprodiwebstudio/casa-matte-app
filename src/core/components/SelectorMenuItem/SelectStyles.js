@@ -70,6 +70,11 @@ const SelectStyles = ({type, leftIcon, dropTopMenu}) => ({
 		textTransform : type !== "light" && "uppercase",
 		fontSize      : "12px",
 	}),
+	input : (styles) => ({
+		...styles,
+		padding : "0px",
+		margin  : "0px",
+	}),
 	option : (styles) => ({
 		...styles,
 		textTransform   : type !== "light" && "uppercase",
