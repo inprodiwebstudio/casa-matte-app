@@ -36,7 +36,7 @@ const ItemLayout = ({
 	const handleSelectedLayout = (e) => {
 		e.stopPropagation();
 		if (pageDataSelected) {
-			dispatch(workSpaceSlice.addLayout({
+			dispatch(workSpaceSlice.actions.addLayout({
 				layout       : layoutData?.id,
 				pageId       : pageDataSelected.pageId,
 				numberPhotos : layoutData?.numberPhotos,
