@@ -14,9 +14,9 @@ import {
 	ChargeSpinner,
 	SelectorMenuItem,
 } from "core/components";
-import { gallerySlice, workSpaceSlice }           from "store/Slices";
-import { convertToArray, isValidArray, bindAll }  from "helpers";
-import { CircleArrow, CrossSelector, FilterIcon } from "Resources/icons";
+import { gallerySlice, workSpaceSlice }          from "store/Slices";
+import { convertToArray, isValidArray, bindAll } from "helpers";
+import { CircleArrow, FilterIcon }               from "Resources/icons";
 import "./BodyGallery.scss";
 
 const BodyGallery = ({
@@ -183,10 +183,20 @@ const BodyGallery = ({
 							</div>
 						)
 					}
-					<div className="icon-style" {...(isSelectedData && {onClick : () => gallerySlice.clearSelectedData()})}>
+					<div style={{
+						width : (isSelectedData && !loadingMutationGallery) ? "90px" : "30px",
+					}}>
 						{
 							(isSelectedData && !loadingMutationGallery) && (
-								<CrossSelector size="30px" onClick={() => gallerySlice.clearSelectedData()} />
+								<Button
+									width={84}
+									fontSize={12}
+									type="outline"
+									onClick={() => gallerySlice.clearSelectedData()}
+									isLoading={loadingMutationGallery}
+								>
+									CANCELAR
+								</Button>
 							)
 						}
 					</div>
