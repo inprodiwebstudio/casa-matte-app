@@ -47,11 +47,21 @@ const LayoutList = () => {
 			<div className="LayoutList">
 				<div className="body-layout">
 					{
-						(layoutList && isValidArray(layoutList) && !loading) ? (
+						(layoutList && isValidArray(layoutList) && !loading) && (
 							layoutList.map((item, index) => (
 								<ItemLayout key={index} layoutData={objLayouts[item?.id]} />
 							))
-						) : (
+						)
+					}
+					{
+						!isValidArray(layoutList) && (
+							<div className="not-found">
+								No se encontraron layouts
+							</div>
+						)
+					}
+					{
+						loading && (
 							<div
 								style={{
 									display        : "flex",
