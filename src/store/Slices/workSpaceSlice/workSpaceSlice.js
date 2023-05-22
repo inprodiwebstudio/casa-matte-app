@@ -179,7 +179,10 @@ const initialState = {
 	currentPhotoDragger : null,
 	layoutFilter        : {
 		type           : "all",
-		photosQuantity : "all",
+		photosQuantity : {
+			label : "TODOS",
+			value : "all",
+		},
 	},
 	loading : true,
 };
