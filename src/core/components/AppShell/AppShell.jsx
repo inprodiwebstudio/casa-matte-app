@@ -105,9 +105,9 @@ const AppShell = ({
 	useEffect(() => {
 		if (dataMutationResult.isUninitialized) return;
 
-		if (dataMutationResult.isLoading) {
-			PostingConfig["post"]["posting"]();
-		}
+		// if (dataMutationResult.isLoading) {
+		// 	PostingConfig["post"]["posting"]();
+		// }
 
 		if (dataMutationResult.isError) {
 			const status = dataMutationResult.error?.status;
@@ -122,12 +122,11 @@ const AppShell = ({
 			}
 		}
 
-		if (dataMutationResult.data) {
-			PostingConfig["post"]["200"]();
-		}
+		// if (dataMutationResult.data) {
+		// 	PostingConfig["post"]["200"]();
+		// }
 
 	}, [dataMutationResult]);
-
 
 	return (
 		<div
