@@ -1,21 +1,23 @@
-import { useState } from "react";
+import { useState }                               from "react";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
 //Own components
-import { bindAll }        from "helpers";
 import { workSpaceSlice } from "store/Slices";
 
-
 import "./Tabs.scss";
-import { connect } from "react-redux";
 
-const Tabs = ({tabList, workSpaceSlice}) => {
+const Tabs = ({tabList}) => {
 	const [ currentTab, setCurrentTab ] = useState(tabList[0].label);
 
+	const dispatch = useDispatch();
+
+	const currentFileterLayout = useSelector((state) => state.workSpaceSlice.layoutFilter, shallowEqual);
+
 	const onActionTab = (tabName, filterName) => {
-		workSpaceSlice.setLayoutFilter({
+		dispatch(workSpaceSlice.actions.setLayoutFilter({
 			type           : filterName,
-			photosQuantity : "all",
-		});
+			photosQuantity : currentFileterLayout.photosQuantity,
+		}));
 		setCurrentTab(tabName);
 	};
 
@@ -38,6 +40,4 @@ const Tabs = ({tabList, workSpaceSlice}) => {
 	);
 };
 
-const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
-
-export default connect(null, mapDispatchToProps) (Tabs);
+export default Tabs;
