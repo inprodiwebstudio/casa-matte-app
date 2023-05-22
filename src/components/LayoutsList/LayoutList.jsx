@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import { BarLoader }           from "react-spinners";
+import { useState, useEffect }       from "react";
+import { BarLoader }                 from "react-spinners";
+import { useSelector, shallowEqual } from "react-redux";
 
 //Own components
 import photoBooksConfing from "core/constants/photoBooksConfing";
@@ -8,12 +9,16 @@ import "./LayoutList.scss";
 import {
 	ScrollBar,
 } from "core/components";
-import { connect } from "react-redux";
 //helpers
 import { convertToArray, isValidArray } from "helpers";
 
-const LayoutList = ({filterLayouts, productPhotoBook, loading, formatPhotoBook}) => {
+const LayoutList = () => {
 	const [ layoutList, setLayoutList ] = useState([]);
+
+	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
+	const filterLayouts = useSelector((state) => state.workSpaceSlice.layoutFilter, shallowEqual);
+	const productPhotoBook = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
+	const formatPhotoBook = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
 
 	const objLayouts = photoBooksConfing[productPhotoBook]?.[formatPhotoBook]?.layoutMods ?? {};
 
@@ -65,11 +70,4 @@ const LayoutList = ({filterLayouts, productPhotoBook, loading, formatPhotoBook})
 	);
 };
 
-const mapStateToProps = ({ workSpaceSlice }) => ({
-	filterLayouts    : workSpaceSlice?.layoutFilter ?? {},
-	productPhotoBook : (workSpaceSlice?.data?.product === "") ? "white" : workSpaceSlice?.data?.product,
-	formatPhotoBook  : (workSpaceSlice?.data?.format === "") ? "vertical" : workSpaceSlice?.data?.format,
-	loading          : workSpaceSlice?.loading ?? true,
-});
-
-export default connect(mapStateToProps) (LayoutList);
+export default LayoutList;
