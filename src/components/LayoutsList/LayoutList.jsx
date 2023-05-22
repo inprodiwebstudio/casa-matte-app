@@ -25,19 +25,19 @@ const LayoutList = () => {
 	const layouts = convertToArray(objLayouts) ?? [];
 
 	useEffect(() => {
-		if ((filterLayouts?.type === "all") && (filterLayouts?.photosQuantity === "all")) {
+		if ((filterLayouts?.type === "all") && (filterLayouts?.photosQuantity?.value === "all")) {
 			setLayoutList(layouts);
 			return;
 		}
-		if ((filterLayouts?.type === "all") || (filterLayouts?.photosQuantity === "all")) {
+		if ((filterLayouts?.type === "all") || (filterLayouts?.photosQuantity?.value === "all")) {
 			const newListLayouts = layouts.filter(layout => (
-				(layout.cat === filterLayouts.type) || (layout.numberPhotos === filterLayouts.photosQuantity)
+				(layout.cat === filterLayouts.type) || (layout.numberPhotos === filterLayouts.photosQuantity.value)
 			));
 			setLayoutList(newListLayouts);
 			return;
 		}
 		const newListLayouts = layouts.filter(layout => (
-			(layout.cat === filterLayouts.type) && (layout.numberPhotos === filterLayouts.photosQuantity)
+			(layout.cat === filterLayouts.type) && (layout.numberPhotos === filterLayouts.photosQuantity.value)
 		));
 		setLayoutList(newListLayouts);
 	}, [filterLayouts, formatPhotoBook]);
