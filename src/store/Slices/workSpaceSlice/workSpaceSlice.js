@@ -337,6 +337,17 @@ export const workSpaceSlice = createSlice({
 			state.history.undo = history.undoStack;
 			state.history.current = history.currentAction;
 		},
+		removePhotoById : (state, {payload}) => {
+			const listOfCoordinatesPhotos = payload;
+			listOfCoordinatesPhotos.forEach(photoCoordinate => {
+				const coordinateList = photoCoordinate.split(".");
+				const pageId = coordinateList[0];
+				const sheetNo = coordinateList[1];
+				const noPhoto = coordinateList[2];
+				state.data.pages[pageId][sheetNo].photos[noPhoto].id = "";
+				state.data.pages[pageId][sheetNo].photos[noPhoto].url = "";
+			});
+		},
 		autoFillImages : (state, {payload}) => {
 			const newData = {...state?.data?.pages};
 

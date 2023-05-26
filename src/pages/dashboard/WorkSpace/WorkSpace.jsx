@@ -100,7 +100,7 @@ const WorkSpace = () => {
 							<BookPages
 								isInWorkSpcae
 								loading={isLoading}
-								pageData={myWorkSpaceData}
+								pageData={workSpaceData[pageId]}
 							/>
 						) : (
 							!isLoggin ? (

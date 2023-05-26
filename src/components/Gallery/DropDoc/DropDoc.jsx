@@ -10,6 +10,7 @@ import { apiImageKit }  from "store/api/imageKitApi";
 import {
 	bindAll,
 	isValidArray,
+	uploadImageKitIo,
 } from "helpers";
 import {
 	Card,
@@ -42,7 +43,7 @@ const DropDoc = ({
 	const [ isGenerateNewFolder, setIsGenerateNewFolder ] = useState(false);
 	const [ completedPhotos, setCompletedPhotos ] = useState([]);
 
-	const [galleryImagesMutation] = apiImageKit.useAddImageMutation();
+	// const [galleryImagesMutation] = apiImageKit.useAddImageMutation();
 	const [galleryFolderMutation] = apiImageKit.useAddFolderMutation();
 
 
@@ -68,13 +69,7 @@ const DropDoc = ({
 	const handleAddPhotos =  () => {
 		setLoading(true);
 		const listOfPromises = fileImage.map(async (file, index) => {
-			const respImage = await galleryImagesMutation({
-				data : {
-					file,
-				},
-				userName,
-				tags : (index === fileImage.length - 1) ? ["gallery"] : [],
-			});
+			const respImage = await uploadImageKitIo(file, userName);
 			setCompletedPhotos(prev => {
 				const newData = [respImage?.data, ...prev];
 				return newData;
@@ -96,14 +91,7 @@ const DropDoc = ({
 		setLoading(true);
 		if (isValidArray(fileImage)) {
 			const listOfPromises = fileImage.map(async (file, index) => {
-				const respImage = await galleryImagesMutation({
-					data : {
-						file,
-						folderName,
-					},
-					userName,
-					tags : (index === fileImage.length - 1) ? ["gallery"] : [],
-				});
+				const respImage = await uploadImageKitIo(file, userName, folderName);
 				setCompletedPhotos(prev => {
 					const newData = [respImage?.data, ...prev];
 					return newData;

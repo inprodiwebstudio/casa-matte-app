@@ -3,14 +3,14 @@ import { connect }  from "react-redux";
 import BodyGallery  from "components/Gallery/BodyGallery";
 
 //Own components
-import { gallerySlice }                                      from "store/Slices";
-import { genericApi }                                        from "store/api/genericApi";
-import { apiImageKit }                                       from "store/api/imageKitApi";
-import { convertToArray, isValidArray, bindAll }             from "helpers";
-import { ArrowTop, FolderPlus, DropFile, Thrash, MoveFolder} from "Resources/icons";
+import { gallerySlice, workSpaceSlice }                                      from "store/Slices";
+import { genericApi }                                                        from "store/api/genericApi";
+import { apiImageKit }                                                       from "store/api/imageKitApi";
+import { convertToArray, isValidArray, bindAll, coordinatesPhotoInWorkSpce } from "helpers";
+import { ArrowTop, FolderPlus, DropFile, Thrash, MoveFolder}                 from "Resources/icons";
 import "./SideBar.scss";
 
-const SideBar = ({gallerySlice, galleryPath, selectedData, userName, filter}) => {
+const SideBar = ({gallerySlice, workSpaceSlice, galleryPath, selectedData, userName, filter, workspaceData}) => {
 	const [ isfullSize, setIsFullSize ] = useState(false);
 
 	const [galleryMutation, galleryMutationResult] = genericApi.useSubmitDataMutation();
@@ -35,13 +35,21 @@ const SideBar = ({gallerySlice, galleryPath, selectedData, userName, filter}) =>
 	const isSelectedData = isValidArray(convertToArray(selectedData));
 
 	const deleteImages = async () => {
-		const listOfSelectedImages = convertToArray(selectedData).map( image => (image?.fileId));
+		let coordinatesLister = [];
+		const listOfSelectedImages = convertToArray(selectedData).map( image => {
+			coordinatesLister = [...coordinatesLister, ...coordinatesPhotoInWorkSpce(image?.fileId, workspaceData)];
+			return (
+				image?.fileId
+			);
+		});
 		await galleryImagesMutation({
 			data : {
 				imageIds : listOfSelectedImages,
 			},
 		}).unwrap();
 		gallerySlice.clearSelectedData();
+		console.log(coordinatesLister);
+		workSpaceSlice.removePhotoById(coordinatesLister);
 	};
 
 	const handleMoveOutFolder = () => {
@@ -144,13 +152,14 @@ const SideBar = ({gallerySlice, galleryPath, selectedData, userName, filter}) =>
 	);
 };
 
-const mapStateToProps = ({ gallerySlice, authSlice }) => ({
-	selectedData : gallerySlice?.selectedData ?? {},
-	galleryPath  : gallerySlice?.galleryPathName ?? "route",
-	userName     : authSlice?.user?.username ?? undefined,
-	filter       : gallerySlice?.filter ?? undefined,
+const mapStateToProps = ({ gallerySlice, authSlice, workSpaceSlice }) => ({
+	selectedData  : gallerySlice?.selectedData ?? {},
+	galleryPath   : gallerySlice?.galleryPathName ?? "route",
+	userName      : authSlice?.user?.username ?? undefined,
+	filter        : gallerySlice?.filter ?? undefined,
+	workspaceData : workSpaceSlice?.data ?? undefined,
 });
 
-const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});
+const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions, workSpaceSlice : workSpaceSlice.actions});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SideBar);
