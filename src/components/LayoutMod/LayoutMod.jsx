@@ -53,6 +53,7 @@ const LayoutMod = ({
 					arrayPhotos.map((boxContent, index) => (
 						<div
 							key={index}
+							id={`${modLayout}-${photobookFormat}-${index}-content-children-body`}
 							className="content-children-body"
 							onDrop={(e) => handleDrop(e, index)}
 							onDragOver={(e) => handleDragOver(e)}
@@ -74,7 +75,7 @@ const LayoutMod = ({
 							} */}
 							{
 								(images && images[index]?.url && isInWorkSpcae) && (
-									<ActionImagesLayout sheetNo={sheetNo} layoutNo={index} pageId={pageId} image={selectPhotoUrl(images[index])} />
+									<ActionImagesLayout containerPhotoUuid={`${modLayout}-${photobookFormat}-${index}-content-children-body`} sheetNo={sheetNo} layoutNo={index} pageId={pageId} image={selectPhotoUrl(images[index])} />
 								)
 							}
 						</div>

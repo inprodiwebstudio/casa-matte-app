@@ -76,6 +76,10 @@ const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 				    fontFamily : "Helvetica, Arial",
 				  },
 				}}
+				Crop={{
+					noPresets : true,
+					ratio     : innerProps.aspectRatio,
+				}}
 				language="es"
 				Rotate={{ angle : 90, componentType : "buttons" }}
 				tabsIds={[TABS.ADJUST, TABS.FILTERS, TABS.FINETUNE]} // or {['Adjust', 'Annotate', 'Watermark']}

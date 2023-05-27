@@ -211,7 +211,17 @@ const BodyGallery = ({
 			}
 			{
 				((!isFetching) && !isAvailableDocs && isLoggedIn) && (
-					<DropDoc galleryMutation={galleryMutation} />
+					<div
+						style={{
+							top      : "17%",
+							height   : "79%",
+							position : "absolute",
+							width    : "94%",
+							display  : "flex",
+						}}
+					>
+						<DropDoc galleryMutation={galleryMutation} />
+					</div>
 				)
 			}
 			{

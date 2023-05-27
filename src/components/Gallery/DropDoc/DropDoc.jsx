@@ -15,7 +15,6 @@ import {
 import {
 	Card,
 	Button,
-	Loading,
 	TextInput,
 } from "core/components";
 
@@ -46,6 +45,7 @@ const DropDoc = ({
 	// const [galleryImagesMutation] = apiImageKit.useAddImageMutation();
 	const [galleryFolderMutation] = apiImageKit.useAddFolderMutation();
 
+	const completePercentage = (completedPhotos.length * 100) / fileImage.length;
 
 	const handleDrop = (files) => {
 		const isValidFiles = isValidArray(files);
@@ -126,29 +126,49 @@ const DropDoc = ({
 		}
 	}, [galleryTypeDropedView]);
 
-
 	return (
 		<>
 			{
 				loading ? (
-					<div
-						className="UploadingContainer"
-					>
-						<div className="upluadIndicatorContainer">
-							<Loading />
+					<div className="toUploadContainer">
+						<div className="skeletonContainer">
 							{
-								!isGenerateNewFolder && (
-									<div className="loadingPhotosConainer">
-										<div className="currentUpluaded">Cargando Fotos...</div>
-										<div className="currentUpluaded">{completedPhotos.length} de {fileImage.length}</div>
+								completedPhotos.map((photoData, index) => (
+									<div
+										className="imageThumbContainer"
+										key={index}
+										style={{
+											background : photoData?.thumbnailUrl ? `url(${photoData?.thumbnailUrl}) center center / cover no-repeat` : "grey",
+										}}
+									>
+											&nbsp;
 									</div>
-								)
+								))
 							}
-							{
-								isGenerateNewFolder && (
-									<div className="currentUpluaded">Generando Nueva Carpeta...</div>
-								)
-							}
+						</div>
+						<div
+							className="UploadingContainer"
+						>
+							<div className="upluadIndicatorContainer">
+								{
+									!isGenerateNewFolder && (
+										<div className="tittleUploadPhotos">CARGANDO FOTOS</div>
+									)
+								}
+								<div className="bardLoader">
+									<div style={{width : `${isNaN(completePercentage) ? 0 : completePercentage}%`}} className="progressLoader">&nbsp;</div>
+								</div>
+								{
+									!isGenerateNewFolder && (
+										<div className="lenthPhotosText">{completedPhotos.length} DE {fileImage.length}</div>
+									)
+								}
+								{
+									isGenerateNewFolder && (
+										<div className="currentUpluaded">Generando Nueva Carpeta...</div>
+									)
+								}
+							</div>
 						</div>
 					</div>
 				) : (

@@ -28,6 +28,11 @@ const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMut
 		setIsDragger(false);
 	};
 
+	const handleSelectImage = (e, image) => {
+		e.stopPropagation();
+		onSelected(image);
+	};
+
 	const addPhotoToLayout = (imageUrl) => {
 		const isNotCompleteSheet1 = convertToArray(pageData?.sheet1?.photos).find(e => e.id === "");
 
@@ -101,8 +106,8 @@ const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMut
 			}
 			{
 				(!loadingMutationGallery && !isDragger) && (
-					<div className={`photo-overlay ${isSelected && "photo-selected"}`}>
-						<div className={`check-box ${isChecked && "isChecked"}`} onClick={() => onSelected(image)}>
+					<div className={`photo-overlay ${isSelected && "photo-selected"}`} onClick={() => addPhotoToLayout(image)}>
+						<div className={`check-box ${isChecked && "isChecked"}`} onClick={(e) => handleSelectImage(e, image)}>
 							{
 								isChecked && (
 									<div className="square-check" />
@@ -112,8 +117,8 @@ const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMut
 						<div className="check-icon-container">
 							<Check size="20px" />
 						</div>
-						<div className="plus-icon-container" onClick={() => addPhotoToLayout(image)}>
-							<BigPlus size="80px" />
+						<div className="plus-icon-container">
+							<BigPlus size="35px" />
 						</div>
 					</div>
 				)

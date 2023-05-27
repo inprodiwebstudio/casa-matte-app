@@ -1,26 +1,65 @@
 @import "/src/Resources/scss/variables/colorThemes";
 
-.UploadingContainer {
+.toUploadContainer {
+    position: relative;
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+    .skeletonContainer {
+        display: flex;
+        flex-wrap: wrap;
+        gap : 10px;
+        width: 350px;
 
-    .upluadIndicatorContainer {
-        gap : 20px;
+        .imageThumbContainer {
+            width: 155px;
+            height: 155px;
+        }
+    }
+    .UploadingContainer {
+        width: 100%;
+        height: 99%;
         display: flex;
         align-items: center;
         flex-direction: column;
         justify-content: center;
-        color : $flat-color;
-
-        .loadingPhotosConainer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.374);
+    
+        .upluadIndicatorContainer {
+            gap : 10px;
             display: flex;
             align-items: center;
             flex-direction: column;
             justify-content: center;
+            color : $flat-color;
+            position: fixed;
+
+            .tittleUploadPhotos {
+                color: white;
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            .lenthPhotosText {
+                color: white;
+            }
+
+            .bardLoader {
+                width: 250px;
+                height: 10px;
+                border: solid 2px white;
+                transition: all ease 250ms;
+
+                .progressLoader {
+                    background: white;
+                    height: 6px;
+                    transition: all ease 250ms;
+                }
+            }
         }
     }
 }

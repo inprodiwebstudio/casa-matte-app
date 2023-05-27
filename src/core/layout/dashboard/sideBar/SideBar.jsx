@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { connect }  from "react-redux";
 import BodyGallery  from "components/Gallery/BodyGallery";
+//Mantine
+import { openContextModal, closeAllModals } from "@mantine/modals";
 
 //Own components
 import { gallerySlice, workSpaceSlice }                                      from "store/Slices";
@@ -34,6 +36,8 @@ const SideBar = ({gallerySlice, workSpaceSlice, galleryPath, selectedData, userN
 
 	const isSelectedData = isValidArray(convertToArray(selectedData));
 
+	const selectedDataQuantity = convertToArray(selectedData).length;
+
 	const deleteImages = async () => {
 		let coordinatesLister = [];
 		const listOfSelectedImages = convertToArray(selectedData).map( image => {
@@ -48,8 +52,8 @@ const SideBar = ({gallerySlice, workSpaceSlice, galleryPath, selectedData, userN
 			},
 		}).unwrap();
 		gallerySlice.clearSelectedData();
-		console.log(coordinatesLister);
 		workSpaceSlice.removePhotoById(coordinatesLister);
+		closeAllModals();
 	};
 
 	const handleMoveOutFolder = () => {
@@ -114,7 +118,13 @@ const SideBar = ({gallerySlice, workSpaceSlice, galleryPath, selectedData, userN
 									className="icon-sidebar-action"
 									{
 										...(!loadingMutationGallery && {
-											onClick : () =>  deleteImages(),
+											onClick : () =>  openContextModal({
+												modal      : "confirmationDelete",
+												innerProps : {
+													photoQuantity  : selectedDataQuantity,
+													handdleSuccess : () => deleteImages(),
+												},
+											}),
 										})
 									}
 								>

@@ -6,8 +6,15 @@ import { useDispatch }      from "react-redux";
 //Own components
 import "./ActionImagesLayout.scss";
 
-const ActionImageslayout = ({image, sheetNo, layoutNo, pageId}) => {
+const ActionImageslayout = ({image, sheetNo, layoutNo, pageId, containerPhotoUuid}) => {
 	const dispatch = useDispatch();
+
+	const documentContainer =  document.getElementById(containerPhotoUuid);
+
+	const clientWidth = documentContainer ? documentContainer.offsetWidth : 0;
+	const clientHeight = documentContainer ? documentContainer.offsetHeight : 0;
+
+	const aspectRatio = clientWidth / clientHeight;
 
 	const activeModal = (e) => {
 		e.stopPropagation();
@@ -18,6 +25,7 @@ const ActionImageslayout = ({image, sheetNo, layoutNo, pageId}) => {
 				pageId,
 				sheetNo,
 				layoutNo,
+				aspectRatio,
 			},
 		});
 	};
