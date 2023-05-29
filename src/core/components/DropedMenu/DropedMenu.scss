@@ -47,6 +47,11 @@
             justify-content: center;
             cursor: pointer;
 
+            &.loading {
+                opacity : 20%;
+                cursor: auto;
+            };
+
             & .icon-arrow-container {
                 transform: rotate(0deg);
                 transition: all ease 300ms;
