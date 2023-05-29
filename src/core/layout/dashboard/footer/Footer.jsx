@@ -17,6 +17,8 @@ const Footer = () => {
 	const dispatch = useDispatch();
 
 	const currentFileterLayout = useSelector((state) => state.workSpaceSlice.layoutFilter, shallowEqual);
+	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
+
 
 	const handleChangeLayoutFilter = (objValue) => {
 		dispatch(workSpaceSlice.actions.setLayoutFilter({
@@ -27,11 +29,23 @@ const Footer = () => {
 
 	return (
 		<div id="Footer" className={`${dropedToggle && "full-size"}`}>
-			<div className={`droped-container-action ${dropedToggle && "downArrow"}`} onClick={() => setDropedToggle(!dropedToggle)}>
-				<ArrowTop size="20px" />
+			<div
+				className={`droped-container-action ${dropedToggle && "downArrow"}`}
+				{
+					...(!loading && {onClick : () => setDropedToggle(!dropedToggle)})
+				}
+				style={{
+					background : loading && "transparent",
+				}}
+			>
+				{
+					!loading && (
+						<ArrowTop size="20px" />
+					)
+				}
 			</div>
 			<div className="header-in-footer-container">
-				<Tabs tabList={filterTabs} />
+				<Tabs tabList={filterTabs} loading={loading} />
 			</div>
 			<div className="body-layouts-container">
 				<div
@@ -41,6 +55,7 @@ const Footer = () => {
 					}}
 				>
 					<SelectorMenuItem
+						isLoading={loading}
 						type="filled"
 						placeholder="FOTOS"
 						onChange={(objValue) => handleChangeLayoutFilter(objValue)}
