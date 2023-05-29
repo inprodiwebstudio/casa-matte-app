@@ -17,7 +17,7 @@ const SideBar = ({gallerySlice, workSpaceSlice, galleryPath, selectedData, userN
 
 	const [galleryMutation, galleryMutationResult] = genericApi.useSubmitDataMutation();
 
-	const {data : imageKitData, isFetching : imageKitFetching} = apiImageKit.useGetDirentsListQuery({
+	const {data : imageKitData, isFetching : imageKitFetching, refetch} = apiImageKit.useGetDirentsListQuery({
 		params : {
 			limit      : 100,
 			userName   : userName,
@@ -151,6 +151,7 @@ const SideBar = ({gallerySlice, workSpaceSlice, galleryPath, selectedData, userN
 			}
 			<div className="body-sidebar">
 				<BodyGallery
+					refetch={refetch}
 					galleryData={imageKitData}
 					isFetching={imageKitFetching}
 					galleryMutation={galleryMutation}
