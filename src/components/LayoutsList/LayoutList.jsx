@@ -1,9 +1,9 @@
 import { useState, useEffect }       from "react";
-import { BarLoader }                 from "react-spinners";
 import { useSelector, shallowEqual } from "react-redux";
 
 //Own components
 import photoBooksConfing from "core/constants/photoBooksConfing";
+import LoadingLayouts    from "./LoadingLayouts";
 import ItemLayout        from "./ItemLayout";
 import "./LayoutList.scss";
 import {
@@ -54,7 +54,7 @@ const LayoutList = () => {
 						)
 					}
 					{
-						!isValidArray(layoutList) && (
+						(!isValidArray(layoutList) && !loading) && (
 							<div className="not-found">
 								No se encontraron layouts
 							</div>
@@ -62,16 +62,7 @@ const LayoutList = () => {
 					}
 					{
 						loading && (
-							<div
-								style={{
-									display        : "flex",
-									width          : "100%",
-									justifyContent : "center",
-									alignItems     : "center",
-								}}
-							>
-								<BarLoader color={"#B2AFA6"} />
-							</div>
+							<LoadingLayouts />
 						)
 					}
 				</div>
