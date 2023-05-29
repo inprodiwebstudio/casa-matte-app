@@ -20,6 +20,7 @@ import { CircleArrow, FilterIcon }               from "Resources/icons";
 import "./BodyGallery.scss";
 
 const BodyGallery = ({
+	refetch,
 	isLoggedIn,
 	isFetching,
 	galleryData,
@@ -213,14 +214,16 @@ const BodyGallery = ({
 				((!isFetching) && !isAvailableDocs && isLoggedIn) && (
 					<div
 						style={{
-							top      : "17%",
-							height   : "79%",
-							position : "absolute",
-							width    : "94%",
-							display  : "flex",
+							top       : "17%",
+							height    : "78%",
+							position  : "absolute",
+							width     : "92%",
+							display   : "flex",
+							overflowY : "hidden",
+							overflowX : "hidden",
 						}}
 					>
-						<DropDoc galleryMutation={galleryMutation} />
+						<DropDoc galleryMutation={galleryMutation} refetch={refetch} />
 					</div>
 				)
 			}
@@ -239,7 +242,7 @@ const BodyGallery = ({
 										background : "rgba(247, 245, 241, 0.95)",
 									}}
 								>
-									<DropDoc galleryMutation={galleryMutation} />
+									<DropDoc galleryMutation={galleryMutation} refetch={refetch} />
 								</div>
 							)
 						}
