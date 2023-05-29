@@ -9,6 +9,9 @@
         flex-wrap: wrap;
         gap : 10px;
         width: 350px;
+        max-height: calc(100% - 10px);
+        overflow-y: hidden;
+        overflow-x: hidden;
 
         .imageThumbContainer {
             width: 155px;
