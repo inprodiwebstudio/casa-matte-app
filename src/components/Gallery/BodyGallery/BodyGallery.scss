@@ -85,6 +85,16 @@
                 }
             }
 
+            .disSelect {
+                transition: all ease 150ms;
+                border-radius: 5px;
+                color : $flat-color;
+                cursor: pointer;
+                &:hover {
+                    background: $primary-color;
+                }
+            }
+
             .filter-selector-container {
                 display: flex;
                 align-items: center;
