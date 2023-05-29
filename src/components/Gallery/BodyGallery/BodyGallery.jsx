@@ -16,7 +16,7 @@ import {
 } from "core/components";
 import { gallerySlice, workSpaceSlice }          from "store/Slices";
 import { convertToArray, isValidArray, bindAll } from "helpers";
-import { CircleArrow, FilterIcon }               from "Resources/icons";
+import { CircleArrow, FilterIcon, ActionCross }  from "Resources/icons";
 import "./BodyGallery.scss";
 
 const BodyGallery = ({
@@ -185,19 +185,14 @@ const BodyGallery = ({
 						)
 					}
 					<div style={{
-						width : (isSelectedData && !loadingMutationGallery) ? "90px" : "30px",
+						display        : "flex",
+						justifyContent : "flex-end",
+						width          : "fit-content",
+						transition     : "all ease 200ms",
 					}}>
 						{
 							(isSelectedData && !loadingMutationGallery) && (
-								<Button
-									width={84}
-									fontSize={12}
-									type="outline"
-									onClick={() => gallerySlice.clearSelectedData()}
-									isLoading={loadingMutationGallery}
-								>
-									CANCELAR
-								</Button>
+								<ActionCross onClick={() => gallerySlice.clearSelectedData()} className="disSelect" />
 							)
 						}
 					</div>
