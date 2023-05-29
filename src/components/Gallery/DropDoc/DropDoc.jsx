@@ -27,6 +27,7 @@ import {
 import "./DropDoc.scss";
 
 const DropDoc = ({
+	refetch,
 	userName,
 	gallerySlice,
 	galleryMutation,
@@ -80,6 +81,7 @@ const DropDoc = ({
 		Promise.all([...listOfPromises]).then((values) => {
 			setLoading(false);
 			gallerySlice.setTypeDropedView(null);
+			refetch();
 		}, reason => {
 			setLoading(false);
 			gallerySlice.setTypeDropedView(null);
@@ -102,6 +104,7 @@ const DropDoc = ({
 			Promise.all([...listOfPromises]).then((values) => {
 				setLoading(false);
 				gallerySlice.setTypeDropedView(null);
+				refetch();
 			}, reason => {
 				setLoading(false);
 				gallerySlice.setTypeDropedView(null);
@@ -118,6 +121,7 @@ const DropDoc = ({
 		});
 		gallerySlice.setTypeDropedView(null);
 		setLoading(false);
+		refetch();
 	};
 
 	useEffect(() => {
