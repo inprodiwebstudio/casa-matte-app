@@ -1,12 +1,16 @@
 import { useState } from "react";
 
 //Own components
-import { ArrowTop } from "Resources/icons";
-import { MenuItem } from "core/components";
+import { shallowEqual, useSelector } from "react-redux";
+import { ArrowTop }                  from "Resources/icons";
+import { MenuItem }                  from "core/components";
 import "./DropedMenu.scss";
 
 const DropedMenu = () => {
 	const [ activeMenu, setActiveMenu ] = useState(false);
+
+	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
+
 	return (
 		<div id="DropedMenu">
 			<div className={`menu ${!activeMenu && "hidden"}`}>
@@ -28,11 +32,22 @@ const DropedMenu = () => {
 				</div>
 			</div>
 			<div className={`selector-container ${!activeMenu && "hidden"}`}>
-				<div className="action-droped" onClick={() => setActiveMenu(!activeMenu)}>
+				<div
+					className={`action-droped ${loading && "loading"}`}
+					{
+						...(loading && {
+							onClick : () => setActiveMenu(!activeMenu),
+						})
+					}
+				>
 					<h3 className="tittle-action-droped">PROYECTO</h3>
-					<div className={`icon-arrow-container ${!activeMenu && "hidden"}`}>
-						<ArrowTop size="12px" />
-					</div>
+					{
+						!loading && (
+							<div className={`icon-arrow-container ${!activeMenu && "hidden"}`}>
+								<ArrowTop size="12px" />
+							</div>
+						)
+					}
 				</div>
 			</div>
 		</div>
