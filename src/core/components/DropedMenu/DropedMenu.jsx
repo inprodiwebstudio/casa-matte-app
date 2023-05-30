@@ -35,7 +35,7 @@ const DropedMenu = () => {
 				<div
 					className={`action-droped ${loading && "loading"}`}
 					{
-						...(loading && {
+						...(!loading && {
 							onClick : () => setActiveMenu(!activeMenu),
 						})
 					}
