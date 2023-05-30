@@ -113,6 +113,10 @@
             letter-spacing: 0.05em;
             font-family: "Aitana-Regular";
             text-transform: uppercase;
+
+            &.loading {
+                opacity: 20%;
+            }
         }
     }
 }
