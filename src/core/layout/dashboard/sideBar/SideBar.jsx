@@ -1,23 +1,25 @@
 import { useState } from "react";
 import { connect }  from "react-redux";
 import BodyGallery  from "components/Gallery/BodyGallery";
+//Mantine
+import { openContextModal, closeAllModals } from "@mantine/modals";
 
 //Own components
-import { gallerySlice }                                      from "store/Slices";
-import { genericApi }                                        from "store/api/genericApi";
-import { apiImageKit }                                       from "store/api/imageKitApi";
-import { convertToArray, isValidArray, bindAll }             from "helpers";
-import { ArrowTop, FolderPlus, DropFile, Thrash, MoveFolder} from "Resources/icons";
+import { gallerySlice, workSpaceSlice }                                      from "store/Slices";
+import { genericApi }                                                        from "store/api/genericApi";
+import { apiImageKit }                                                       from "store/api/imageKitApi";
+import { convertToArray, isValidArray, bindAll, coordinatesPhotoInWorkSpce } from "helpers";
+import { ArrowTop, FolderPlus, DropFile, Thrash, MoveFolder}                 from "Resources/icons";
 import "./SideBar.scss";
 
-const SideBar = ({gallerySlice, galleryPath, selectedData, userName, filter}) => {
+const SideBar = ({gallerySlice, workSpaceSlice, galleryPath, selectedData, userName, filter, workspaceData}) => {
 	const [ isfullSize, setIsFullSize ] = useState(false);
 
 	const [galleryMutation, galleryMutationResult] = genericApi.useSubmitDataMutation();
 
-	const {data : imageKitData, isFetching : imageKitFetching} = apiImageKit.useGetDirentsListQuery({
+	const {data : imageKitData, isFetching : imageKitFetching, refetch} = apiImageKit.useGetDirentsListQuery({
 		params : {
-			limit      : 100,
+			limit      : 500,
 			userName   : userName,
 			folderName : (galleryPath?.id === "route") ? null : galleryPath?.name,
 			...((filter && (filter?.value !== "DESC_CAPTURE")) ? {sort : filter?.value} : {}),
@@ -34,14 +36,24 @@ const SideBar = ({gallerySlice, galleryPath, selectedData, userName, filter}) =>
 
 	const isSelectedData = isValidArray(convertToArray(selectedData));
 
+	const selectedDataQuantity = convertToArray(selectedData).length;
+
 	const deleteImages = async () => {
-		const listOfSelectedImages = convertToArray(selectedData).map( image => (image?.fileId));
+		let coordinatesLister = [];
+		const listOfSelectedImages = convertToArray(selectedData).map( image => {
+			coordinatesLister = [...coordinatesLister, ...coordinatesPhotoInWorkSpce(image?.fileId, workspaceData)];
+			return (
+				image?.fileId
+			);
+		});
 		await galleryImagesMutation({
 			data : {
 				imageIds : listOfSelectedImages,
 			},
 		}).unwrap();
 		gallerySlice.clearSelectedData();
+		workSpaceSlice.removePhotoById(coordinatesLister);
+		closeAllModals();
 	};
 
 	const handleMoveOutFolder = () => {
@@ -106,7 +118,13 @@ const SideBar = ({gallerySlice, galleryPath, selectedData, userName, filter}) =>
 									className="icon-sidebar-action"
 									{
 										...(!loadingMutationGallery && {
-											onClick : () =>  deleteImages(),
+											onClick : () =>  openContextModal({
+												modal      : "confirmationDelete",
+												innerProps : {
+													photoQuantity  : selectedDataQuantity,
+													handdleSuccess : () => deleteImages(),
+												},
+											}),
 										})
 									}
 								>
@@ -133,6 +151,7 @@ const SideBar = ({gallerySlice, galleryPath, selectedData, userName, filter}) =>
 			}
 			<div className="body-sidebar">
 				<BodyGallery
+					refetch={refetch}
 					galleryData={imageKitData}
 					isFetching={imageKitFetching}
 					galleryMutation={galleryMutation}
@@ -144,13 +163,14 @@ const SideBar = ({gallerySlice, galleryPath, selectedData, userName, filter}) =>
 	);
 };
 
-const mapStateToProps = ({ gallerySlice, authSlice }) => ({
-	selectedData : gallerySlice?.selectedData ?? {},
-	galleryPath  : gallerySlice?.galleryPathName ?? "route",
-	userName     : authSlice?.user?.username ?? undefined,
-	filter       : gallerySlice?.filter ?? undefined,
+const mapStateToProps = ({ gallerySlice, authSlice, workSpaceSlice }) => ({
+	selectedData  : gallerySlice?.selectedData ?? {},
+	galleryPath   : gallerySlice?.galleryPathName ?? "route",
+	userName      : authSlice?.user?.username ?? undefined,
+	filter        : gallerySlice?.filter ?? undefined,
+	workspaceData : workSpaceSlice?.data ?? undefined,
 });
 
-const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});
+const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions, workSpaceSlice : workSpaceSlice.actions});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SideBar);

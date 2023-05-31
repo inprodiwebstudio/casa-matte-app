@@ -10,11 +10,12 @@ const resizerImage = (imgUrl, width, height, quality) => {
 		src            : imgUrl,
 		transformation : [{
 			...(!quality && {
-				"height" : height ? height : "150",
-				"width"  : width ? width : "150",
+				"height" : 0.2,
+				"width"  : 0.2,
 			}),
 			...(quality && {
-				"quality" : quality,
+				"width"  : quality,
+				"height" : quality,
 			}),
 		}],
 	});

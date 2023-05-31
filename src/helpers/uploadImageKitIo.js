@@ -1,7 +1,8 @@
+//General
 import axios         from "axios";
 import galleryApiUrl from "./galleryApiUrl";
 
-const uploadImageKitIo = async (image) => {
+const uploadImageKitIo = async (image, userName, folderName) => {
 	try {
 		const res = await axios.get(`${galleryApiUrl}auth`);
 		const uploadFile = await axios.postForm(
@@ -12,7 +13,8 @@ const uploadImageKitIo = async (image) => {
 				signature : res?.data?.signature,
 				expire    : res?.data?.expire,
 				token     : res?.data?.token,
-				fileName  : "cmtImage.jpg",
+				fileName  : image?.name,
+				folder    : `${userName}/${folderName ? folderName : ""}`,
 			}
 		);
 		return uploadFile;

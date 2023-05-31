@@ -41,11 +41,16 @@
 
         .action-droped {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             color : $dark-color;
             align-items: center;
             justify-content: center;
             cursor: pointer;
+
+            &.loading {
+                opacity : 20%;
+                cursor: auto;
+            };
 
             & .icon-arrow-container {
                 transform: rotate(0deg);
@@ -63,7 +68,7 @@
 
             .tittle-action-droped {
                 font-weight: 400;
-                font-size: 18px;
+                font-size: 14px;
                 line-height: 22px;
                 color : $dark-color;
                 letter-spacing: 0.05em;

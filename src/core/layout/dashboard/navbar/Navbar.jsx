@@ -1,15 +1,17 @@
 
 
 //Own components
-import { DropedMenu, Button } from "core/components";
-import { PlusIcon }           from "Resources/icons";
-import PaginatorBar           from "components/PaginatorBar";
-import { bindAll }            from "helpers";
-import { connect }            from "react-redux";
-import { workSpaceSlice }     from "store/Slices";
+import { useSelector, shallowEqual, connect } from "react-redux";
+import { DropedMenu, Button }                 from "core/components";
+import { PlusIcon }                           from "Resources/icons";
+import PaginatorBar                           from "components/PaginatorBar";
+import { bindAll }                            from "helpers";
+import { workSpaceSlice }                     from "store/Slices";
 import "./Navbar.scss";
 
 const Navbar = ({workSpaceSlice}) => {
+	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
+
 	return (
 		<div className="Navbar">
 			<DropedMenu />
@@ -24,6 +26,7 @@ const Navbar = ({workSpaceSlice}) => {
 			</div>
 			<div className="body-action-container">
 				<Button
+					isLoading={loading}
 					icon={<PlusIcon size="15px" />}
 					fontSize="16px"
 					type="subtle"

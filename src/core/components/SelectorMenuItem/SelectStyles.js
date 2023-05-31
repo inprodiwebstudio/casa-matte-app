@@ -1,4 +1,4 @@
-const SelectStyles = ({type, leftIcon, dropTopMenu}) => ({
+const SelectStyles = ({type, leftIcon, dropTopMenu, isLoading}) => ({
 	control : (provided) => ({
 		...provided,
 		border        : (type === "filled") ? "1px solid black !important" : "none",
@@ -8,6 +8,7 @@ const SelectStyles = ({type, leftIcon, dropTopMenu}) => ({
 		paddingTop    : ((type === "light") || (type === "filled")) ? "0px" : "10px",
 		background    : ((type === "light") || (type === "filled")) ? "whithe" : "none",
 		borderRadius  : "0px",
+		opacity       : isLoading ? "20%" : "100%",
 		cursor        : "pointer",
 		"&:focus"     : {
 			border    : "none",
@@ -69,6 +70,11 @@ const SelectStyles = ({type, leftIcon, dropTopMenu}) => ({
 		letterSpacing : "0.05em",
 		textTransform : type !== "light" && "uppercase",
 		fontSize      : "12px",
+	}),
+	input : (styles) => ({
+		...styles,
+		padding : "0px",
+		margin  : "0px",
 	}),
 	option : (styles) => ({
 		...styles,

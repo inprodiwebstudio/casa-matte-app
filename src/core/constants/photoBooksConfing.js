@@ -5,7 +5,7 @@ const photoBooksConfing = {
 		horizontal : false,
 		vertical   : {
 			aspectRatio      : [8, 9],
-			modsInDoublePage : ["Mod1", "Mod2", "Mod3"],
+			modsInDoublePage : ["Mod1", "Mod2", "Mod3", "FrontLayout"],
 			layoutMods       : {...vertical},
 			sizes            : {
 				chico : {
