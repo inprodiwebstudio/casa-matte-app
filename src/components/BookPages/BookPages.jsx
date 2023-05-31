@@ -1,24 +1,26 @@
-import { connect }             from "react-redux";
-import { useEffect, useState } from "react";
-import { Skeleton }            from "@mantine/core";
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { useEffect, useState }                    from "react";
+import { Skeleton }                               from "@mantine/core";
 
 //Own components
-import LayoutMod                   from "components/LayoutMod/LayoutMod";
-import photoBooksConfing           from "core/constants/photoBooksConfing";
-import { convertToArray, bindAll } from "helpers";
-import { workSpaceSlice }          from "store/Slices";
-import FrontLayout                 from "components/global/LayoutsPage/FrontLayout";
+import LayoutMod          from "components/LayoutMod/LayoutMod";
+import photoBooksConfing  from "core/constants/photoBooksConfing";
+import { convertToArray } from "helpers";
+import { workSpaceSlice } from "store/Slices";
+import FrontLayout        from "components/global/LayoutsPage/FrontLayout";
 import "./BookPages.scss";
 
 const BookPages = ({
-	loading,
 	pageData,
-	photoBookData,
 	isInWorkSpcae,
-	workSpaceSlice,
-	pageDataSelected,
 }) => {
 	const [ currentSelectedPage, setCurrentSelectedPage ] = useState(null);
+
+	const dispatch = useDispatch();
+
+	const pageDataSelected = useSelector((state) => state.workSpaceSlice.pageDataSelected, shallowEqual);
+	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
+	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 
 	const currentPhotoBook = (photoBookData?.product === "" || !photoBookData?.product) ? "white" : photoBookData?.product;
 
@@ -31,17 +33,19 @@ const BookPages = ({
 	const aspectRatio = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.aspectRatio;
 
 	const photoList = (sheetId) => {
-		const sheetData = pageData[sheetId];
-		const listOfImages = convertToArray(sheetData.photos);
-		return listOfImages;
+		const sheetData = pageData?.[sheetId];
+		const listOfImages = sheetData ? convertToArray(sheetData?.photos) : undefined;
+		if (listOfImages) {
+			return listOfImages;
+		}
 	};
 
 	const handlerSelectedData = (currentPage) => {
 		setCurrentSelectedPage(currentPage);
-		workSpaceSlice.setSelectePageData({
+		dispatch(workSpaceSlice.actions.setSelectePageData({
 			pageId      : pageData.id,
 			currentPage : currentPage,
-		});
+		}));
 	};
 
 	useEffect(() => {
@@ -59,7 +63,7 @@ const BookPages = ({
 		<div
 			className="BookPages"
 			style={{
-				aspectRatio : isInDoublePage ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
+				aspectRatio : (isInDoublePage || pageData?.sheet2) ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
 			}}
 		>
 			<div
@@ -91,11 +95,14 @@ const BookPages = ({
 					)
 				}
 			</div>
-			{
-				(!isInDoublePage && pageData?.sheet2) && (
-					<div className="spacer">&nsp;</div>
-				)
-			}
+			<div
+				className="spacer"
+				style={{
+					background : (isInDoublePage || !pageData?.sheet2) && "transparent",
+				}}
+			>
+				&nbsp;
+			</div>
 			{
 				(!isInDoublePage && pageData?.sheet2) && (
 					<div
@@ -128,12 +135,4 @@ const BookPages = ({
 	);
 };
 
-const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
-
-const mapStateToProps = ({ workSpaceSlice }) => ({
-	pageDataSelected : workSpaceSlice?.pageDataSelected ?? null,
-	loading          : workSpaceSlice?.loading ?? true,
-	photoBookData    : workSpaceSlice?.data ?? null,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps) (BookPages);
+export default BookPages;

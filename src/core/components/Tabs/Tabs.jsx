@@ -1,43 +1,50 @@
-import { useState } from "react";
+import { useState }                               from "react";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
 //Own components
-import { bindAll }        from "helpers";
+import { Loading }        from "core/components";
 import { workSpaceSlice } from "store/Slices";
 
-
 import "./Tabs.scss";
-import { connect } from "react-redux";
 
-const Tabs = ({tabList, workSpaceSlice}) => {
+const Tabs = ({tabList, loading}) => {
 	const [ currentTab, setCurrentTab ] = useState(tabList[0].label);
 
+	const dispatch = useDispatch();
+
+	const currentFileterLayout = useSelector((state) => state.workSpaceSlice.layoutFilter, shallowEqual);
+	const isLoggin = useSelector((state) => state.authSlice.loggedIn, shallowEqual);
+
+
 	const onActionTab = (tabName, filterName) => {
-		workSpaceSlice.setLayoutFilter({
+		dispatch(workSpaceSlice.actions.setLayoutFilter({
 			type           : filterName,
-			photosQuantity : "all",
-		});
+			photosQuantity : currentFileterLayout.photosQuantity,
+		}));
 		setCurrentTab(tabName);
 	};
 
 	return (
 		<div className="Tabs">
 			{
-				tabList.map((tab, index) => (
-					<div
-						className={`box-tab ${(currentTab === tab.label) && "active"}`}
-						onClick={() => onActionTab(tab.label, tab.filter)}
-						key={index}
-					>
-						<h4>
-							{tab.label}
-						</h4>
-					</div>
-				))
+				(loading || !isLoggin) ? (
+					<Loading />
+				) : (
+					tabList.map((tab, index) => (
+						<div
+							className={`box-tab ${(currentTab === tab.label) && "active"}`}
+							onClick={() => onActionTab(tab.label, tab.filter)}
+							key={index}
+						>
+							<h4>
+								{tab.label}
+							</h4>
+						</div>
+					))
+				)
 			}
 		</div>
 	);
 };
 
-const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
-
-export default connect(null, mapDispatchToProps) (Tabs);
+export default Tabs;

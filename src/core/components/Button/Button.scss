@@ -74,11 +74,11 @@
 		border: 1px solid transparent !important;
 
 		.button-body {
-			display: flex;
 			gap: 10px;
+			display: flex;
 			cursor: pointer;
-			align-items: start;
 			padding-top: 2px;
+			align-items: start;
 			justify-content: center;
 		}
 
@@ -89,9 +89,9 @@
 	}
 
 	&.outline {
-		font-family: "Aitana-Regular";
 		color : $dark-color !important;
-		font-style: italic;
+		height: 34px;
+		font-weight: 200;
 
 		&:hover {
 			background: rgba(0, 0, 0, 0.131);

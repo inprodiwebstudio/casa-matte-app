@@ -1,6 +1,8 @@
-import { connect }   from "react-redux";
-import { useState }  from "react";
-import { useParams } from "react-router";
+import { connect }             from "react-redux";
+import { useState, useEffect } from "react";
+import { useParams }           from "react-router";
+//ReactSoinner
+import { MoonLoader } from "react-spinners";
 
 //Own components
 import { BigPlus, Check }                        from "Resources/icons";
@@ -14,6 +16,8 @@ const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMut
 	const pageData = workSpaceData?.pages?.[pageId];
 
 	const [ isDragger, setIsDragger ] = useState(false);
+	const [ loadingPhoto, setLoadingphoto ] = useState(true);
+	const [ myImageUrl, setMyImageUrl ] = useState("");
 
 	const handdleDrag = () => {
 		setIsDragger(true);
@@ -26,6 +30,22 @@ const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMut
 	const handleLeaveDragger = () => {
 		workSpaceSlice.clearPhotoDrager();
 		setIsDragger(false);
+	};
+
+	const handleSelectImage = (e, image) => {
+		e.stopPropagation();
+		onSelected(image);
+	};
+
+	const handleImageLoad = () => {
+		setLoadingphoto(false);
+	  };
+
+	const loadImage = () => {
+		const img = new Image();
+		img.src = resizerImage(image);
+		img.addEventListener("load", handleImageLoad);
+		setMyImageUrl(img.src);
 	};
 
 	const addPhotoToLayout = (imageUrl) => {
@@ -84,25 +104,35 @@ const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMut
 		}
 	};
 
+	useEffect(() => {
+		loadImage();
+	}, [image]);
+
 	return (
 		<div
 			className={`PhotoCard ${isDragger && "isDragger"} ${(isHideSelected && isSelected) && "isHidePhoto"}`}
 			draggable="true"
 			onDragStart={() => handdleDrag()}
 			onDragEnd={() => handleLeaveDragger()}
-			style={{
-				background : image ? `url(${resizerImage(image)}) center center / cover no-repeat` : "grey",
-			}}
+			{
+				...(!loadingPhoto && {
+					style : {
+						background : `url(${myImageUrl}) center center / cover no-repeat`,
+					},
+				})
+			}
 		>
 			{
-				loadingMutationGallery && (
-					<div className="loading" />
+				loadingPhoto && (
+					<div className="loading">
+						<MoonLoader size={30} />
+					</div>
 				)
 			}
 			{
-				(!loadingMutationGallery && !isDragger) && (
-					<div className={`photo-overlay ${isSelected && "photo-selected"}`}>
-						<div className={`check-box ${isChecked && "isChecked"}`} onClick={() => onSelected(image)}>
+				(!loadingPhoto && !isDragger) && (
+					<div className={`photo-overlay ${isSelected && "photo-selected"}`} onClick={() => addPhotoToLayout(image)}>
+						<div className={`check-box ${isChecked && "isChecked"}`} onClick={(e) => handleSelectImage(e, image)}>
 							{
 								isChecked && (
 									<div className="square-check" />
@@ -112,8 +142,8 @@ const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMut
 						<div className="check-icon-container">
 							<Check size="20px" />
 						</div>
-						<div className="plus-icon-container" onClick={() => addPhotoToLayout(image)}>
-							<BigPlus size="80px" />
+						<div className="plus-icon-container">
+							<BigPlus size="35px" />
 						</div>
 					</div>
 				)

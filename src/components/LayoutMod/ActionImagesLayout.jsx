@@ -1,13 +1,21 @@
 import { Thrash, Pencil }   from "Resources/icons";
 import { openContextModal } from "@mantine/modals";
 import { workSpaceSlice }   from "store/Slices";
-import { connect }          from "react-redux";
+import { useDispatch }      from "react-redux";
 
 //Own components
 import "./ActionImagesLayout.scss";
-import { bindAll } from "helpers";
 
-const ActionImageslayout = ({image, sheetNo, layoutNo, pageId, workSpaceSlice}) => {
+const ActionImageslayout = ({image, sheetNo, layoutNo, pageId, containerPhotoUuid}) => {
+	const dispatch = useDispatch();
+
+	const documentContainer =  document.getElementById(containerPhotoUuid);
+
+	const clientWidth = documentContainer ? documentContainer.offsetWidth : 0;
+	const clientHeight = documentContainer ? documentContainer.offsetHeight : 0;
+
+	const aspectRatio = clientWidth / clientHeight;
+
 	const activeModal = (e) => {
 		e.stopPropagation();
 		openContextModal({
@@ -17,17 +25,18 @@ const ActionImageslayout = ({image, sheetNo, layoutNo, pageId, workSpaceSlice}) 
 				pageId,
 				sheetNo,
 				layoutNo,
+				aspectRatio,
 			},
 		});
 	};
 
 	const handleRemove = (e) => {
 		e.stopPropagation();
-		workSpaceSlice.removePhoto({
+		dispatch(workSpaceSlice.actions.removePhoto({
 			sheetNo  : sheetNo,
 			layoutNo : layoutNo,
 			pageId   : pageId,
-		});
+		}));
 	};
 	return (
 		<div className="ActionImagesLayout">
@@ -37,6 +46,4 @@ const ActionImageslayout = ({image, sheetNo, layoutNo, pageId, workSpaceSlice}) 
 	);
 };
 
-const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
-
-export default connect(null, mapDispatchToProps) (ActionImageslayout);
+export default ActionImageslayout;

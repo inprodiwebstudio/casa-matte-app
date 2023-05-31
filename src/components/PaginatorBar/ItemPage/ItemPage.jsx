@@ -1,10 +1,11 @@
+//Router
 import { useNavigate, useParams } from "react-router-dom";
-import { Draggable }              from "react-beautiful-dnd";
-import { connect }                from "react-redux";
-
+//External components
+import { Draggable } from "react-beautiful-dnd";
 //Own Components
-import BookSheets from "components/BookSheets";
-import { Cross }  from "Resources/icons";
+import BookPages from "components/BookPages";
+//Resources
+import { Cross } from "Resources/icons";
 import "./ItemPage.scss";
 
 const ItemPage = ({
@@ -13,18 +14,29 @@ const ItemPage = ({
 	isFixedPage,
 	draggableId,
 	handleDelete,
-	sizePhotoBook,
 }) => {
-	const isDoublePage = ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(pageData?.sheet1?.layoutType);
-	const navigate = useNavigate();
-
-	const LayoutComponent = BookSheets[sizePhotoBook] ?? BookSheets["LargeFormat"];
-
 	const { pageId } = useParams();
+	const navigate = useNavigate();
 
 	const isCurrentPage = pageId === draggableId;
 
-	const RenderView = ({ provided, snapShot }) => (
+	const NumbPages = () => {
+		return (
+			<div
+				className="numbPages-container"
+				style={{
+					justifyContent : pageData?.sheet2?.pageNo ? "space-between" : "center",
+				}}
+			>
+				<p>{pageData?.sheet1?.pageNo}</p>
+				{pageData?.sheet2?.pageNo && (
+					<p>{pageData?.sheet2?.pageNo}</p>
+				)}
+			</div>
+		);
+	};
+
+	const RenderView = ({ provided }) => (
 		<div
 			className={`ItemPage ${isCurrentPage && "isActivePage"} ${isFixedPage && "isFixed"}`}
 			onClick={() => navigate(draggableId)}
@@ -36,48 +48,20 @@ const ItemPage = ({
 				})
 			}
 		>
-			<div
-				className="my-page-container"
-				style={{
-					background : snapShot?.isDragging && "#E9E4D9",
-				}}
-			>
-				<div className="drag-icon-conatainer">
-					<div style={{width : "15px", height : "15px"}} />
-				</div>
-				<div>
-					<div className="withe-page-container">
-						{
-							(!isDoublePage && pageData?.sheet2) && (
-								<div className="spacer-paginator" />
-							)
-						}
-						<LayoutComponent
-							pageData={pageData}
-						/>
-					</div>
-					<div className={`pages-book-conatier ${!pageData?.sheet2 && "isUniqPage"}`}>
-						<p>{pageData?.sheet1?.pageNo}</p>
-						{
-							pageData?.sheet2?.pageNo && (
-								<p>{pageData?.sheet2?.pageNo}</p>
-							)
-						}
-					</div>
-				</div>
-				<div
-					className="cross-icon-conatiner"
-					{
-						...(provided && {
-							onClick : () => handleDelete(pageData?.id),
-						})
-					}
-				>
-					{
-						provided ? <Cross size="9px" /> : <div style={{width : "9px", height : "9px"}} />
-					}
-				</div>
+			<div className="page-container">
+				<BookPages pageData={pageData} />
+				<NumbPages />
 			</div>
+			{
+				(pageData?.id !== "page1") && (
+					<div
+						className="delete-icon"
+						onClick={() => handleDelete(pageData?.id)}
+					>
+						<Cross size="9px" />
+					</div>
+				)
+			}
 		</div>
 	);
 
@@ -92,15 +76,11 @@ const ItemPage = ({
 			isDragDisabled={!pageData?.sheet2}
 			disableInteractiveElementBlocking={true}
 		>
-			{(provided, snapShot) => (
-				<RenderView provided={provided} snapShot={snapShot} />
+			{(provided) => (
+				<RenderView provided={provided} />
 			)}
 		</Draggable>
 	);
 };
 
-const mapStateToProps = ({ workSpaceSlice }) => ({
-	sizePhotoBook : workSpaceSlice?.data?.sizePhotoBook ?? "LargeFormat",
-});
-
-export default connect(mapStateToProps) (ItemPage);
+export default ItemPage;

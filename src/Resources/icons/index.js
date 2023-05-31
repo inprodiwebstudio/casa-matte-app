@@ -23,6 +23,7 @@ import Pencil        from "./Pencil";
 import UndoArrow     from "./UndoArrow";
 import RedoArrow     from "./RedoArrow";
 import MoveFolder    from "./MoveFolder";
+import ActionCross   from "./ActionCross";
 
 
 export {
@@ -41,6 +42,7 @@ export {
 	ArrowTop,
 	PlusIcon,
 	ArrowLeft,
+	ActionCross,
 	PhotoList,
 	FilterIcon,
 	FolderPlus,
