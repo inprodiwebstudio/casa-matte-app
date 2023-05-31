@@ -68,14 +68,15 @@ const LayoutMod = ({
 								} )
 							}
 						>
-							{/* {
-								(images && images[index]?.url && isInWorkSpcae) && (
-									<img src={handlerResizerImage(images[index], isInWorkSpcae)} alt="img" defaultValue={undefined} />
-								)
-							} */}
 							{
 								(images && images[index]?.url && isInWorkSpcae) && (
-									<ActionImagesLayout containerPhotoUuid={`${modLayout}-${photobookFormat}-${index}-content-children-body`} sheetNo={sheetNo} layoutNo={index} pageId={pageId} image={selectPhotoUrl(images[index])} />
+									<ActionImagesLayout
+										containerPhotoUuid={`${modLayout}-${photobookFormat}-${index}-content-children-body`}
+										sheetNo={sheetNo}
+										layoutNo={index}
+										pageId={pageId}
+										image={selectPhotoUrl(images[index])}
+									/>
 								)
 							}
 						</div>
