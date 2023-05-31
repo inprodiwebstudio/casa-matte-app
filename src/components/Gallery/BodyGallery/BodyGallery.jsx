@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { connect }             from "react-redux";
 //Own components
-import Folder    from "../Folder";
-import DropDoc   from "../DropDoc";
-import PhotoCard from "../PhotoCard";
+import Folder         from "../Folder";
+import DropDoc        from "../DropDoc";
+import PhotoCard      from "../PhotoCard";
+import GalleryLoading from "../GalleryLoading";
 
 import { gallerySeparation } from "./BodyGallery.helpers";
 
@@ -11,15 +12,16 @@ import {
 	Button,
 	CheckBox,
 	ScrollBar,
-	ChargeSpinner,
 	SelectorMenuItem,
 } from "core/components";
-import { gallerySlice, workSpaceSlice }           from "store/Slices";
-import { convertToArray, isValidArray, bindAll }  from "helpers";
-import { CircleArrow, CrossSelector, FilterIcon } from "Resources/icons";
+import { gallerySlice, workSpaceSlice }          from "store/Slices";
+import { convertToArray, isValidArray, bindAll } from "helpers";
+import { CircleArrow, FilterIcon, ActionCross }  from "Resources/icons";
 import "./BodyGallery.scss";
 
 const BodyGallery = ({
+	loading,
+	refetch,
 	isLoggedIn,
 	isFetching,
 	galleryData,
@@ -45,6 +47,8 @@ const BodyGallery = ({
 	const [ selectedImagesIds, setSelectedImagesIds ] = useState([]);
 
 	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
+
+	const galleryLoading = loading && isFetching;
 
 	useEffect(() => {
 		if (!isAvailableDocs) {
@@ -123,7 +127,7 @@ const BodyGallery = ({
 			<div className="header-gallery-container">
 				<div className="header-actions-gallery">
 					{
-						(isAvailableDocs && (!isFetching)) && (
+						(isAvailableDocs && (!galleryLoading)) && (
 							<>
 								<CheckBox
 									isActive={isHideSelected}
@@ -144,17 +148,17 @@ const BodyGallery = ({
 						)
 					}
 				</div>
-				<h3>{galleryPathRoute?.id === "route" ? "GALERÍA" : galleryPathRoute?.name}</h3>
+				<h3 className={(galleryLoading || !isLoggedIn) && "loading"}>{galleryPathRoute?.id === "route" ? "GALERÍA" : galleryPathRoute?.name}</h3>
 				<div className="actions-header-container">
 					<div className="icon-style">
 						{
-							((galleryPathRoute?.id !== "route") && !isFetching && !loadingMutationGallery) && (
+							((galleryPathRoute?.id !== "route") && !galleryLoading && !loadingMutationGallery) && (
 								<CircleArrow size="30px" onClick={() => gallerySlice.setGalleryPath({id : "route", name : "route"})} />
 							)
 						}
 					</div>
 					{
-						(isAvailableDocs && !isFetching) && (
+						(isAvailableDocs && !galleryLoading) && (
 							<div className="filter-selector-container">
 								<div className="selector-input">
 									<SelectorMenuItem
@@ -183,29 +187,44 @@ const BodyGallery = ({
 							</div>
 						)
 					}
-					<div className="icon-style" {...(isSelectedData && {onClick : () => gallerySlice.clearSelectedData()})}>
+					<div style={{
+						display        : "flex",
+						justifyContent : "flex-end",
+						width          : "fit-content",
+						transition     : "all ease 200ms",
+					}}>
 						{
 							(isSelectedData && !loadingMutationGallery) && (
-								<CrossSelector size="30px" onClick={() => gallerySlice.clearSelectedData()} />
+								<ActionCross onClick={() => gallerySlice.clearSelectedData()} className="disSelect" />
 							)
 						}
 					</div>
 				</div>
 			</div>
 			{
-				(isFetching || !isLoggedIn) && (
-					<div style={{width : "100%", height : "100%", display : "flex", justifyContent : "center", alignItems : "center"}}>
-						<ChargeSpinner />
+				(galleryLoading || !isLoggedIn) && (
+					<GalleryLoading />
+				)
+			}
+			{
+				((!galleryLoading) && !isAvailableDocs && isLoggedIn) && (
+					<div
+						style={{
+							top       : "17%",
+							height    : "78%",
+							position  : "absolute",
+							width     : "92%",
+							display   : "flex",
+							overflowY : "hidden",
+							overflowX : "hidden",
+						}}
+					>
+						<DropDoc galleryMutation={galleryMutation} refetch={refetch} />
 					</div>
 				)
 			}
 			{
-				((!isFetching) && !isAvailableDocs && isLoggedIn) && (
-					<DropDoc galleryMutation={galleryMutation} />
-				)
-			}
-			{
-				((!isFetching) && isAvailableDocs && isLoggedIn) && (
+				((!galleryLoading) && isAvailableDocs && isLoggedIn) && (
 					<ScrollBar>
 						{
 							galleryTypeDropedView && (
@@ -219,7 +238,7 @@ const BodyGallery = ({
 										background : "rgba(247, 245, 241, 0.95)",
 									}}
 								>
-									<DropDoc galleryMutation={galleryMutation} />
+									<DropDoc galleryMutation={galleryMutation} refetch={refetch} />
 								</div>
 							)
 						}
@@ -272,6 +291,7 @@ const mapStateToProps = ({ gallerySlice, workSpaceSlice, authSlice }) => ({
 	galleryPathRoute      : gallerySlice?.galleryPathName ?? "route",
 	gallerySelectedData   : gallerySlice?.selectedData ?? {},
 	workSpaceData         : workSpaceSlice?.data ?? {},
+	loading               : workSpaceSlice?.loading ?? true,
 	galleryTypeDropedView : gallerySlice?.typeDropedView ?? null,
 	currentFilter         : gallerySlice?.filter ?? undefined,
 	isLoggedIn            : authSlice?.loggedIn ?? false,

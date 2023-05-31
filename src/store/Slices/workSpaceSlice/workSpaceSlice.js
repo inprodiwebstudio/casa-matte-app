@@ -1,9 +1,10 @@
 import { createSlice }                                            from "@reduxjs/toolkit";
 import { convertToArray, History, isValidArray, convertToObject } from "helpers";
 
-
 const initialState = {
 	data : {
+		product        : "",
+		format         : "",
 		sizePhotoBook  : "",
 		sizeDimentions : "",
 		pasta          : "",
@@ -178,7 +179,10 @@ const initialState = {
 	currentPhotoDragger : null,
 	layoutFilter        : {
 		type           : "all",
-		photosQuantity : "all",
+		photosQuantity : {
+			label : "TODOS",
+			value : "all",
+		},
 	},
 	loading : true,
 };
@@ -332,6 +336,17 @@ export const workSpaceSlice = createSlice({
 			history.addToUndoStack(undoNewData);
 			state.history.undo = history.undoStack;
 			state.history.current = history.currentAction;
+		},
+		removePhotoById : (state, {payload}) => {
+			const listOfCoordinatesPhotos = payload;
+			listOfCoordinatesPhotos.forEach(photoCoordinate => {
+				const coordinateList = photoCoordinate.split(".");
+				const pageId = coordinateList[0];
+				const sheetNo = coordinateList[1];
+				const noPhoto = coordinateList[2];
+				state.data.pages[pageId][sheetNo].photos[noPhoto].id = "";
+				state.data.pages[pageId][sheetNo].photos[noPhoto].url = "";
+			});
 		},
 		autoFillImages : (state, {payload}) => {
 			const newData = {...state?.data?.pages};

@@ -10,11 +10,11 @@ import { apiImageKit }  from "store/api/imageKitApi";
 import {
 	bindAll,
 	isValidArray,
+	uploadImageKitIo,
 } from "helpers";
 import {
 	Card,
 	Button,
-	Loading,
 	TextInput,
 } from "core/components";
 
@@ -27,6 +27,7 @@ import {
 import "./DropDoc.scss";
 
 const DropDoc = ({
+	refetch,
 	userName,
 	gallerySlice,
 	galleryMutation,
@@ -42,9 +43,10 @@ const DropDoc = ({
 	const [ isGenerateNewFolder, setIsGenerateNewFolder ] = useState(false);
 	const [ completedPhotos, setCompletedPhotos ] = useState([]);
 
-	const [galleryImagesMutation] = apiImageKit.useAddImageMutation();
+	// const [galleryImagesMutation] = apiImageKit.useAddImageMutation();
 	const [galleryFolderMutation] = apiImageKit.useAddFolderMutation();
 
+	const completePercentage = (completedPhotos.length * 100) / fileImage.length;
 
 	const handleDrop = (files) => {
 		const isValidFiles = isValidArray(files);
@@ -68,13 +70,7 @@ const DropDoc = ({
 	const handleAddPhotos =  () => {
 		setLoading(true);
 		const listOfPromises = fileImage.map(async (file, index) => {
-			const respImage = await galleryImagesMutation({
-				data : {
-					file,
-				},
-				userName,
-				tags : (index === fileImage.length - 1) ? ["gallery"] : [],
-			});
+			const respImage = await uploadImageKitIo(file, userName);
 			setCompletedPhotos(prev => {
 				const newData = [respImage?.data, ...prev];
 				return newData;
@@ -85,6 +81,7 @@ const DropDoc = ({
 		Promise.all([...listOfPromises]).then((values) => {
 			setLoading(false);
 			gallerySlice.setTypeDropedView(null);
+			refetch();
 		}, reason => {
 			setLoading(false);
 			gallerySlice.setTypeDropedView(null);
@@ -96,14 +93,7 @@ const DropDoc = ({
 		setLoading(true);
 		if (isValidArray(fileImage)) {
 			const listOfPromises = fileImage.map(async (file, index) => {
-				const respImage = await galleryImagesMutation({
-					data : {
-						file,
-						folderName,
-					},
-					userName,
-					tags : (index === fileImage.length - 1) ? ["gallery"] : [],
-				});
+				const respImage = await uploadImageKitIo(file, userName, folderName);
 				setCompletedPhotos(prev => {
 					const newData = [respImage?.data, ...prev];
 					return newData;
@@ -114,6 +104,7 @@ const DropDoc = ({
 			Promise.all([...listOfPromises]).then((values) => {
 				setLoading(false);
 				gallerySlice.setTypeDropedView(null);
+				refetch();
 			}, reason => {
 				setLoading(false);
 				gallerySlice.setTypeDropedView(null);
@@ -130,6 +121,7 @@ const DropDoc = ({
 		});
 		gallerySlice.setTypeDropedView(null);
 		setLoading(false);
+		refetch();
 	};
 
 	useEffect(() => {
@@ -138,29 +130,49 @@ const DropDoc = ({
 		}
 	}, [galleryTypeDropedView]);
 
-
 	return (
 		<>
 			{
 				loading ? (
-					<div
-						className="UploadingContainer"
-					>
-						<div className="upluadIndicatorContainer">
-							<Loading />
+					<div className="toUploadContainer">
+						<div className="skeletonContainer">
 							{
-								!isGenerateNewFolder && (
-									<div className="loadingPhotosConainer">
-										<div className="currentUpluaded">Cargando Fotos...</div>
-										<div className="currentUpluaded">{completedPhotos.length} de {fileImage.length}</div>
+								completedPhotos.map((photoData, index) => (
+									<div
+										className="imageThumbContainer"
+										key={index}
+										style={{
+											background : photoData?.thumbnailUrl ? `url(${photoData?.thumbnailUrl}) center center / cover no-repeat` : "grey",
+										}}
+									>
+											&nbsp;
 									</div>
-								)
+								))
 							}
-							{
-								isGenerateNewFolder && (
-									<div className="currentUpluaded">Generando Nueva Carpeta...</div>
-								)
-							}
+						</div>
+						<div
+							className="UploadingContainer"
+						>
+							<div className="upluadIndicatorContainer">
+								{
+									!isGenerateNewFolder && (
+										<div className="tittleUploadPhotos">CARGANDO FOTOS</div>
+									)
+								}
+								<div className="bardLoader">
+									<div style={{width : `${isNaN(completePercentage) ? 0 : completePercentage}%`}} className="progressLoader">&nbsp;</div>
+								</div>
+								{
+									!isGenerateNewFolder && (
+										<div className="lenthPhotosText">{completedPhotos.length} DE {fileImage.length}</div>
+									)
+								}
+								{
+									isGenerateNewFolder && (
+										<div className="currentUpluaded">Generando Nueva Carpeta...</div>
+									)
+								}
+							</div>
 						</div>
 					</div>
 				) : (

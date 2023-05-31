@@ -39,7 +39,7 @@ const SelectorMenuItem = ({type, placeholder, leftIcon, isLoading, options, onCh
 				options={options}
 				placeholder={placeholder ? placeholder : "Defaul"}
 				onChange={(value) => handleChange(value)}
-				styles={SelectStyles({type, leftIcon, dropTopMenu})}
+				styles={SelectStyles({type, leftIcon, dropTopMenu, isLoading})}
 				menuPortalTarget={document.body}
 				components={{ DropdownIndicator }}
 				value={value}

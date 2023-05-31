@@ -1,13 +1,15 @@
 //Own components
-import EditPhoto from "./EditPhoto";
-import EditText  from "./EditText";
-import TestPdf   from "./TestPdf";
+import EditPhoto          from "./EditPhoto";
+import EditText           from "./EditText";
+import TestPdf            from "./TestPdf";
+import ConfirmationDelete from "./ConfirmationDelete";
 
 
 const modals = {
-	editPhoto : EditPhoto,
-	editText  : EditText,
-	testPdf   : TestPdf,
+	editPhoto          : EditPhoto,
+	editText           : EditText,
+	testPdf            : TestPdf,
+	confirmationDelete : ConfirmationDelete,
 };
 
 const modalsConfig = {

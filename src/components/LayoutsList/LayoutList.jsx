@@ -1,86 +1,68 @@
-import { useState, useEffect } from "react";
-import { BarLoader }           from "react-spinners";
+import { useState, useEffect }       from "react";
+import { useSelector, shallowEqual } from "react-redux";
 
 //Own components
-import LargeFormat  from "components/global/LayoutsPage/LargeFormat";
-import SquareFormat from "components/global/LayoutsPage/SquareFormat";
-import ItemLayout   from "./ItemLayout";
+import photoBooksConfing from "core/constants/photoBooksConfing";
+import LoadingLayouts    from "./LoadingLayouts";
+import ItemLayout        from "./ItemLayout";
 import "./LayoutList.scss";
 import {
 	ScrollBar,
 } from "core/components";
-import { connect }      from "react-redux";
-import { isValidArray } from "helpers";
+//helpers
+import { convertToArray, isValidArray } from "helpers";
 
-const LayoutList = ({filterLayouts, formatPage, loading}) => {
+const LayoutList = () => {
 	const [ layoutList, setLayoutList ] = useState([]);
 
-	// const isFullSize = (layout) => {
-	// 	switch (formatPage) {
-	// 		case "LargeFormat":
-	// 			return ["Mod1", "Mod2", "Mod3"].includes(layout);
-	// 		case "SquareFormat":
-	// 			return  ["Mod6", "Mod7"].includes(layout);
-	// 	}
-	// };
+	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
+	const filterLayouts = useSelector((state) => state.workSpaceSlice.layoutFilter, shallowEqual);
+	const productPhotoBook = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
+	const formatPhotoBook = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
 
-	const myLayouts = () => {
-		switch (formatPage) {
-			case "LargeFormat":
-				return Object.values(LargeFormat);
-			case "SquareFormat":
-				return Object.values(SquareFormat);
-		}
-	};
+	const objLayouts = photoBooksConfing[productPhotoBook]?.[formatPhotoBook]?.layoutMods ?? {};
 
-	const identifyFormatPage = (layoutId) => {
-		switch (formatPage) {
-			case "LargeFormat":
-				return LargeFormat[layoutId];
-			case "SquareFormat":
-				return SquareFormat[layoutId];
-		}
-	};
+	const layouts = convertToArray(objLayouts) ?? [];
 
 	useEffect(() => {
-		const layouts = myLayouts();
-		if ((filterLayouts?.type === "all") && (filterLayouts?.photosQuantity === "all")) {
+		if ((filterLayouts?.type === "all") && (filterLayouts?.photosQuantity?.value === "all")) {
 			setLayoutList(layouts);
 			return;
 		}
-		if ((filterLayouts?.type === "all") || (filterLayouts?.photosQuantity === "all")) {
+		if ((filterLayouts?.type === "all") || (filterLayouts?.photosQuantity?.value === "all")) {
 			const newListLayouts = layouts.filter(layout => (
-				(layout.cat === filterLayouts.type) || (layout.numberPhotos === filterLayouts.photosQuantity)
+				(layout.cat === filterLayouts.type) || (layout.numberPhotos === filterLayouts.photosQuantity.value)
 			));
 			setLayoutList(newListLayouts);
 			return;
 		}
 		const newListLayouts = layouts.filter(layout => (
-			(layout.cat === filterLayouts.type) && (layout.numberPhotos === filterLayouts.photosQuantity)
+			(layout.cat === filterLayouts.type) && (layout.numberPhotos === filterLayouts.photosQuantity.value)
 		));
 		setLayoutList(newListLayouts);
-	}, [filterLayouts, formatPage]);
+	}, [filterLayouts, formatPhotoBook]);
 
 	return (
 		<ScrollBar>
 			<div className="LayoutList">
 				<div className="body-layout">
 					{
-						(layoutList && isValidArray(layoutList) && !loading) ? (
+						(layoutList && isValidArray(layoutList) && !loading) && (
 							layoutList.map((item, index) => (
-								<ItemLayout key={index} layoutData={identifyFormatPage(item?.id)} />
+								<ItemLayout key={index} layoutData={objLayouts[item?.id]} />
 							))
-						) : (
-							<div
-								style={{
-									display        : "flex",
-									width          : "100%",
-									justifyContent : "center",
-									alignItems     : "center",
-								}}
-							>
-								<BarLoader color={"#B2AFA6"} />
+						)
+					}
+					{
+						(!isValidArray(layoutList) && !loading) && (
+							<div className="not-found">
+								No se encontraron layouts
 							</div>
+						)
+					}
+					{
+						loading && (
+							<LoadingLayouts />
 						)
 					}
 				</div>
@@ -89,10 +71,4 @@ const LayoutList = ({filterLayouts, formatPage, loading}) => {
 	);
 };
 
-const mapStateToProps = ({ workSpaceSlice }) => ({
-	filterLayouts : workSpaceSlice?.layoutFilter ?? {},
-	formatPage    : workSpaceSlice?.data?.sizePhotoBook ?? "LargeFormat",
-	loading       : workSpaceSlice?.loading ?? true,
-});
-
-export default connect(mapStateToProps) (LayoutList);
+export default LayoutList;

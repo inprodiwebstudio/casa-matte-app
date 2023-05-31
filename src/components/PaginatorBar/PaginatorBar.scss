@@ -8,13 +8,17 @@
     flex-direction: column;
 
     .header-ittle-paginator {
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 400;
         line-height: 16px;
         color: $dark-color;
         width: 180px;
         text-align: center;
         letter-spacing: 0.05em;
+
+        &.loading {
+            opacity: 20%;
+        }
     }
 
     .navbar-paginator-container {

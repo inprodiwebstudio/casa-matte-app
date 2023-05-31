@@ -4,13 +4,14 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 //Own components
 import ItemPage                                                   from "./ItemPage";
+import LoadingPaginator                                           from "./LoadingPaginator";
 import { workSpaceSlice }                                         from "store/Slices";
 import { convertToArray, isValidArray, convertToObject, bindAll } from "helpers";
 import { ScrollBar }                                              from "core/components";
 import FrontPage                                                  from "./FrontPage";
 import "./PaginatorBar.scss";
 
-const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages }) => {
+const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, loading }) => {
 	const [ pageList, setPageList ] = useState({
 		pages    : {},
 		pagesIds : [],
@@ -141,42 +142,50 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages }) =>
 
 	return (
 		<div id="PaginatorBar">
-			<h3 className="header-ittle-paginator">PAGINADO</h3>
-			<ScrollBar>
-				<FrontPage />
-				<ItemPage
-					isFixedPage
-					handleDelete={handleDelete}
-					draggableId={convertToArray(pagesData)[0]?.id}
-					pageData={firstPageData}
-				/>
-				<DragDropContext
-					onDragEnd={dragerChangePosition}
-				>
-					<Droppable droppableId="box-droppable-1">
-						{(provided) => (
-							<div
-								className="navbar-paginator-container"
-								ref={provided.innerRef}
-								{...provided.droppableProps}
-							>
-								{
-									pageList?.pagesIds?.map((pageId, index) => (
-										<ItemPage
-											index={index}
-											key={pageId}
-											handleDelete={handleDelete}
-											pageData={pagesData[pageId]}
-											draggableId={pageId}
-										/>
-									))
-								}
-								{provided.placeholder}
-							</div>
-						)}
-					</Droppable>
-				</DragDropContext>
-			</ScrollBar>
+			<h3 className={`header-ittle-paginator ${loading && "loading"}`}>PAGINADO</h3>
+			{
+				loading ? (
+					<ScrollBar>
+						<LoadingPaginator />
+					</ScrollBar>
+				) : (
+					<ScrollBar>
+						<FrontPage />
+						<ItemPage
+							isFixedPage
+							handleDelete={handleDelete}
+							draggableId={convertToArray(pagesData)[0]?.id}
+							pageData={firstPageData}
+						/>
+						<DragDropContext
+							onDragEnd={dragerChangePosition}
+						>
+							<Droppable droppableId="box-droppable-1">
+								{(provided) => (
+									<div
+										className="navbar-paginator-container"
+										ref={provided.innerRef}
+										{...provided.droppableProps}
+									>
+										{
+											pageList?.pagesIds?.map((pageId, index) => (
+												<ItemPage
+													index={index}
+													key={pageId}
+													handleDelete={handleDelete}
+													pageData={pagesData[pageId]}
+													draggableId={pageId}
+												/>
+											))
+										}
+										{provided.placeholder}
+									</div>
+								)}
+							</Droppable>
+						</DragDropContext>
+					</ScrollBar>
+				)
+			}
 		</div>
 	);
 };
@@ -184,6 +193,7 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages }) =>
 const mapDispatchToProps = bindAll({ workSpaceSlice : workSpaceSlice.actions});
 
 const mapStateToProps = ({ workSpaceSlice }) => ({
+	loading       : workSpaceSlice.loading ?? true,
 	pagesData     : workSpaceSlice?.data?.pages ?? {},
 	minPages      : workSpaceSlice?.data?.minPages ?? 0,
 	numberOfPages : workSpaceSlice?.data?.numberOfPages ?? 0,
