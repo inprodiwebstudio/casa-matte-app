@@ -1,4 +1,4 @@
-const vertical = {
+const grandeVertical = {
 	Mod1 : {
 		id       : "Mod1",
 		sections : {
@@ -9,8 +9,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -32,8 +33,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -55,8 +57,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -78,8 +81,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -101,8 +105,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -124,8 +129,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -148,8 +154,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -171,8 +178,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -194,8 +202,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -217,8 +226,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -240,8 +250,10 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
+
 									},
 								},
 							},
@@ -263,8 +275,10 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
+
 									},
 								},
 							},
@@ -286,8 +300,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -302,8 +317,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -325,8 +341,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -341,8 +358,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -364,8 +382,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -380,8 +399,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -390,7 +410,7 @@ const vertical = {
 				},
 			},
 		},
-		numberPhotos : 1,
+		numberPhotos : 2,
 		cat          : "fotos",
 	},
 	Mod16 : {
@@ -403,8 +423,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -419,8 +440,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -442,8 +464,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -454,8 +477,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -470,8 +494,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -493,8 +518,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -509,8 +535,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -521,8 +548,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -544,8 +572,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -560,8 +589,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -572,8 +602,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -595,8 +626,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -607,8 +639,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -623,8 +656,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -646,8 +680,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -662,8 +697,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -678,8 +714,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -701,8 +738,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -717,8 +755,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -733,8 +772,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -756,8 +796,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -772,8 +813,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -788,8 +830,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -811,8 +854,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -827,8 +871,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -843,8 +888,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -866,8 +912,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -878,8 +925,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -894,8 +942,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -906,8 +955,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 3,
 									},
 								},
 							},
@@ -929,8 +979,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -941,8 +992,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -957,8 +1009,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -969,8 +1022,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 3,
 									},
 								},
 							},
@@ -992,8 +1046,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -1004,8 +1059,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -1020,8 +1076,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -1032,8 +1089,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 3,
 									},
 								},
 							},
@@ -1055,8 +1113,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -1067,8 +1126,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -1083,8 +1143,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -1095,8 +1156,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 3,
 									},
 								},
 							},
@@ -1118,8 +1180,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -1134,8 +1197,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -1146,8 +1210,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -1158,8 +1223,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 3,
 									},
 								},
 							},
@@ -1181,8 +1247,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -1193,8 +1260,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -1209,8 +1277,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -1225,8 +1294,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 3,
 									},
 								},
 							},
@@ -1237,8 +1307,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 4,
 									},
 								},
 							},
@@ -1260,8 +1331,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -1272,8 +1344,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -1284,8 +1357,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -1300,8 +1374,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 3,
 									},
 								},
 							},
@@ -1312,8 +1387,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 4,
 									},
 								},
 							},
@@ -1335,8 +1411,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -1347,8 +1424,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -1363,8 +1441,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -1375,8 +1454,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 3,
 									},
 								},
 							},
@@ -1387,8 +1467,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 4,
 									},
 								},
 							},
@@ -1410,8 +1491,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -1422,8 +1504,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -1434,8 +1517,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -1450,8 +1534,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 3,
 									},
 								},
 							},
@@ -1462,8 +1547,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 4,
 									},
 								},
 							},
@@ -1485,8 +1571,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -1497,8 +1584,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -1513,8 +1601,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -1525,8 +1614,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 3,
 									},
 								},
 							},
@@ -1537,8 +1627,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 4,
 									},
 								},
 							},
@@ -1560,8 +1651,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -1572,8 +1664,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -1584,8 +1677,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -1600,8 +1694,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 3,
 									},
 								},
 							},
@@ -1612,8 +1707,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 4,
 									},
 								},
 							},
@@ -1624,8 +1720,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 5,
 									},
 								},
 							},
@@ -1647,8 +1744,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -1659,8 +1757,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -1671,8 +1770,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -1687,8 +1787,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 3,
 									},
 								},
 							},
@@ -1699,8 +1800,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 4,
 									},
 								},
 							},
@@ -1711,8 +1813,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 5,
 									},
 								},
 							},
@@ -1734,8 +1837,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 0,
 									},
 								},
 							},
@@ -1746,8 +1850,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 1,
 									},
 								},
 							},
@@ -1758,8 +1863,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 2,
 									},
 								},
 							},
@@ -1774,8 +1880,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 3,
 									},
 								},
 							},
@@ -1786,8 +1893,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 4,
 									},
 								},
 							},
@@ -1798,8 +1906,9 @@ const vertical = {
 							0 : {
 								elements : {
 									0 : {
-										type    : "photo",
-										divider : false,
+										type            : "photo",
+										divider         : false,
+										numberOfElement : 5,
 									},
 								},
 							},
@@ -1811,16 +1920,9 @@ const vertical = {
 		numberPhotos : 6,
 		cat          : "fotos",
 	},
-	ModText : {
-		id           : "ModText",
-		numberPhotos : 0,
-		cat          : "texto",
-	},
 };
 
-const horizontal = null;
-
-const cuadrado = {
+const grandeCuadrado = {
 	Mod1 : {
 		id           : "Mod1",
 		numberPhotos : 1,
@@ -2003,4 +2105,4 @@ const cuadrado = {
 	},
 };
 
-export { vertical, horizontal, cuadrado };
+export { grandeVertical, grandeCuadrado };
