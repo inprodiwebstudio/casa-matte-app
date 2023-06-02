@@ -19,10 +19,11 @@ const ItemLayout = ({
 	const pagesData = useSelector((state) => state.workSpaceSlice?.data?.pages, shallowEqual);
 	const productPhotoBook = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
 	const formatPhotoBook = useSelector((state) => state.workSpaceSlice?.data?.format, shallowEqual);
+	const sizePhotoBook = useSelector((state) => state.workSpaceSlice?.data?.sizePhotoBook, shallowEqual);
 
 	const aspectRatio = photoBooksConfing[productPhotoBook]?.[formatPhotoBook]?.aspectRatio;
 
-	const myConfigPhotoBook = photoBooksConfing[productPhotoBook]?.[formatPhotoBook];
+	const myConfigPhotoBook = photoBooksConfing[productPhotoBook]?.[formatPhotoBook]?.sizes?.[sizePhotoBook];
 
 	const isInDoublePage = myConfigPhotoBook?.modsInDoublePage?.includes(layoutData?.id);
 
