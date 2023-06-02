@@ -19,8 +19,9 @@ const LayoutList = () => {
 	const filterLayouts = useSelector((state) => state.workSpaceSlice.layoutFilter, shallowEqual);
 	const productPhotoBook = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
 	const formatPhotoBook = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
+	const sizePhotoBook = useSelector((state) => state.workSpaceSlice?.data?.sizePhotoBook, shallowEqual);
 
-	const objLayouts = photoBooksConfing[productPhotoBook]?.[formatPhotoBook]?.layoutMods ?? {};
+	const objLayouts = photoBooksConfing[productPhotoBook]?.[formatPhotoBook]?.sizes?.[sizePhotoBook]?.layoutMods ?? {};
 
 	const layouts = convertToArray(objLayouts) ?? [];
 
