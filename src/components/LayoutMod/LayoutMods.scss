@@ -3,226 +3,2505 @@
 $boxbgColor : $body-color;
 
 // Vertical mods styles
-$verticalModLayouts : (
-    Mod1 : (
-        firstLevelStyles : (),
-        secondLevelStyles : (),
-        thirdLevelStyles : (
-            "width" : 100%,
-            "height" : 100%,
-        )
+$grandeVerticalModLayouts : (
+    Mod1-grande-vertical: (
+        styles : (),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 100%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
     ),
-    Mod2 : (
-        firstLevelStyles : (
+    Mod2-grande-vertical: (
+        styles : (
             "padding" : 0.8%,
         ),
-        secondLevelStyles : (),
-        thirdLevelStyles : (
-            "width" : 100%,
-            "height" : 100%,
-        )
-    ),
-    Mod3 : (
-        firstLevelStyles : (
-            "padding": 4%,
-            "padding-left": 5%,
-            "padding-right": 5%,
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 100%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
         ),
-        secondLevelStyles : (),
-        thirdLevelStyles : (
-            "width" : 100%,
-            "height" : 100%,
-        )
     ),
-    Mod4 : (
-        firstLevelStyles : (),
-        secondLevelStyles : (),
-        thirdLevelStyles : (
-            "width" : 100%,
-            "height" : 100%,
-        )
+    Mod3-grande-vertical: (
+        styles : (
+           "padding": 4%,
+           "padding-left": 5%,
+           "padding-right": 5%,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 100%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
     ),
-    Mod5 : (
-        firstLevelStyles : (
+    Mod4-grande-vertical: (
+        styles : (),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 100%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod5-grande-vertical: (
+        styles : (
+            "padding" : 0.8%
+        ),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 100%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod6-grande-vertical: (
+        styles : (
             "padding-right" : 14.68%,
         ),
-        secondLevelStyles : (),
-        thirdLevelStyles : (
-            "width" : 100%,
-            "height" : 100%,
-        )
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 100%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
     ),
-    Mod6 : (
-        firstLevelStyles : (
+    Mod7-grande-vertical: (
+        styles : (
             "padding-top": 21.40%,
             "padding-bottom" : 21.40%,
         ),
-        secondLevelStyles : (),
-        thirdLevelStyles : (
-            "width" : 100%,
-            "height" : 100%,
-        )
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 100%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
     ),
-    Mod7 : (
-        firstLevelStyles : (
+    Mod8-grande-vertical: (
+        styles : (
             "padding-top": 27.39%,
             "padding-bottom": 27.39%,
             "padding-right": 20.66%,
         ),
-        secondLevelStyles : (),
-        thirdLevelStyles : (
-            "width" : 100%,
-            "height" : 100%,
-        )
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 100%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
     ),
-    Mod8 : (
-        firstLevelStyles : (
+    Mod9-grande-vertical: (
+        styles : (
             "padding-top": 27.39%,
             "padding-bottom": 27.39%,
             "padding-left": 20.66%,
         ),
-        secondLevelStyles : (),
-        thirdLevelStyles : (
-            "width" : 100%,
-            "height" : 100%,
-        )
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 100%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
     ),
-    Mod9 : (
-        firstLevelStyles : (
+    Mod10-grande-vertical: (
+        styles : (
             "padding-top": 22.83%,
             "padding-left": 1.66%,
             "padding-right": 1.66%,
             "padding-bottom": 22.83%,
         ),
-        secondLevelStyles : (),
-        thirdLevelStyles : (
-            "width" : 100%,
-            "height" : 100%,
-        )
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 100%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
     ),
-    Mod10 : (
-        firstLevelStyles : (
+    Mod11-grande-vertical : (
+        styles : (
             "padding": 13%,
             "padding-top": 29.03%,
             "padding-bottom": 29.03%,
         ),
-        secondLevelStyles : (),
-        thirdLevelStyles : (
-            "width" : 100%,
-            "height" : 100%,
-        )
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 100%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
     ),
-    Mod11 : (
-        firstLevelStyles : (
+    Mod12-grande-vertical : (
+        styles : (
             "padding" : 18.21%,
         ),
-        secondLevelStyles : (),
-        thirdLevelStyles : (
-            "width" : 100%,
-            "height" : 100%,
-        )
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 100%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
     ),
-    Mod12 : (
-        firstLevelStyles : (
+    Mod13-grande-vertical : (
+        styles : (
             "padding" : 0.1em,
-        ),
-        secondLevelStyles : (
-            "display" : flex,
-            "flex-direction" : column,
             "gap" : 0.05em,
+            "flex-direction" : column,
         ),
-        thirdLevelStyles : (
-            "width" : 100%,
-            "height" : 50%,
-        )
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
     ),
-    Mod13 : (
-        firstLevelStyles : (
+    Mod14-grande-vertical : (
+        styles : (
             "padding-top": 12%,
             "padding-left": 13%,
             "padding-right": 13%,
             "padding-bottom": 12%,
-        ),
-        secondLevelStyles : (
-            "display" : flex,
             "flex-direction" : column,
             "gap" : 0.05em,
         ),
-        thirdLevelStyles : (
-            "width": 100%,
-            "flex-grow" : 1,
-        )
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
     ),
-    Mod14 : (
-        firstLevelStyles : (
+    Mod15-grande-vertical : (
+        styles : (
             "padding-top": 20.38%,
             "padding-left": 1.66%,
             "padding-right": 1.66%,
             "padding-bottom": 20.38%,
-        ),
-        secondLevelStyles : (
             "gap": 0.05em,
-            "display": flex,
         ),
-        thirdLevelStyles : (
-            "width": 100%,
-            "flex-grow": 1,
-        )
-    ),
-    Mod15 : (
-        firstLevelStyles : (
-            "padding": 20.38%,
-            "padding-left": 27.26%,
-            "padding-right": 27.26%,
+        section-0 : (
+            styles : (
+                "width" : 50%,
+                "height" : 100%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
         ),
-        secondLevelStyles : (),
-        thirdLevelStyles : (
-            "width": 100%,
-            "height": 100%,
-        )
+        section-1 : (
+            styles : (
+                "width" : 50%,
+                "height" : 100%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
     ),
-    Mod16 : (
-        firstLevelStyles : (
+    Mod16-grande-vertical : (
+        styles : (
             "padding-top": 24.82%,
             "padding-bottom": 24.82%,
             "padding-left": 10.44%,
             "padding-right": 10.44%,
-        ),
-        secondLevelStyles : (
-            "display" : flex,
             "gap" : 0.05em,
         ),
-        thirdLevelStyles : (
-            "width": 100%,
-            "flex-grow": 1,
-        )
+        section-0 : (
+            styles : (
+                "width" : 50%,
+                "height" : 100%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 50%,
+                "height" : 100%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod17-grande-vertical : (
+        styles : (
+            "padding" : 0.8%,
+            "padding-left": 1.66%,
+            "flex-direction" : column,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod18-grande-vertical : (
+        styles : (
+            "padding" : 0.8%,
+            "padding-right": 1.66%,
+            "flex-direction" : column,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod19-grande-vertical : (
+        styles : (
+            "padding" : 0.8%,
+            "padding-left": 1.66%,
+            "flex-direction" : column,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 30%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 70%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod20-grande-vertical : (
+        styles : (
+            "padding" : 0.8%,
+            "padding-right": 1.66%,
+            "flex-direction" : column,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 30%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 70%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod21-grande-vertical : (
+        styles : (
+            "padding" : 0.8%,
+            "padding-left": 1.66%,
+            "padding-right" : 57.6%,
+            "flex-direction" : column,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 33.33%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 100%,
+                "height" : 33.33%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-2 : (
+            styles : (
+                "width" : 100%,
+                "height" : 33.33%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod22-grande-vertical : (
+        styles : (
+            "padding-left": 22.11%,
+            "padding-right" : 22.11%,
+            "flex-direction" : column,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 33.33%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 100%,
+                "height" : 33.33%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-2 : (
+            styles : (
+                "width" : 100%,
+                "height" : 33.33%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod23-grande-vertical : (
+        styles : (
+            "padding-left" : 57.6%,
+            "flex-direction" : column,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 33.33%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 100%,
+                "height" : 33.33%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-2 : (
+            styles : (
+                "width" : 100%,
+                "height" : 33.33%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod24-grande-vertical : (
+        styles : (
+            "padding-top" : 32.08%,
+            "padding-bottom" : 32.08%,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 33.33%,
+                "height" : 100%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 33.33%,
+                "height" : 100%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-2 : (
+            styles : (
+                "width" : 33.33%,
+                "height" : 100%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod25-grande-vertical : (
+        styles : (
+            "padding" : 0.8%,
+            "padding-left" : 1.66%,
+            "flex-direction" : column,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod26-grande-vertical : (
+        styles : (
+            "flex-direction" : column,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod27-grande-vertical : (
+        styles : (
+            "padding" : 12.31%,
+            "padding-left" : 11.29%,
+            "padding-right" : 11.29%,
+            "flex-direction" : column,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod28-grande-vertical : (
+        styles : (
+            "padding" : 0.8%,
+            "padding-right" : 1.66%,
+            "flex-direction" : column,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod29-grande-vertical : (
+        styles : (
+            "padding" : 0.8%,
+            "padding-left" : 1.66%,
+            "flex-direction" : column,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 33.33%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 33.33%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-2 : (
+                styles : (
+                    "width" : 33.33%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod30-grande-vertical : (
+        styles : (
+            "padding" : 0.8%,
+            "padding-right" : 1.66%,
+            "flex-direction" : column,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 33.33%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 100%,
+                "height" : 33.33%,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-2 : (
+            styles : (
+                "width" : 100%,
+                "height" : 33.33%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod31-grande-vertical : (
+        styles : (
+            "padding" : 0.8%,
+            "padding-left" : 1.66%,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 50%,
+                "height" : 100%,
+                "display" : flex,
+                "flex-direction" : column,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 33.33%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 33.33%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-2 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 33.33%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 50%,
+                "height" : 100%,
+                "display" : flex,
+                "flex-direction" : column,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 50%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 50%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod32-grande-vertical : (
+        styles : (
+            "padding" : 0.8%,
+            "padding-right" : 1.66%,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 50%,
+                "height" : 100%,
+                "display" : flex,
+                "flex-direction" : column,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 50%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 50%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 50%,
+                "height" : 100%,
+                "display" : flex,
+                "flex-direction" : column,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 33.33%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 33.33%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-2 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 33.33%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod33-grande-vertical : (
+        styles : (
+            "padding" : 0.8%,
+            "padding-left" : 1.66%,
+            "flex-direction" : column,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 33.33%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 33.33%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-2 : (
+                styles : (
+                    "width" : 33.33%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod34-grande-vertical : (
+        styles : (
+            "padding" : 0.8%,
+            "padding-right" : 1.66%,
+            "flex-direction" : column,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 50%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 33.33%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 33.33%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-2 : (
+                styles : (
+                    "width" : 33.33%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod35-grande-vertical : (
+        styles : (
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 50%,
+                "height" : 100%,
+                "display" : flex,
+                "flex-direction" : column,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 33.33%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 33.33%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-2 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 33.33%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 50%,
+                "height" : 100%,
+                "display" : flex,
+                "flex-direction" : column,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 33.33%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 33.33%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-2 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 33.33%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod36-grande-vertical : (
+        styles : (
+            "padding" : 0.8%,
+            "padding-left" : 1.66%,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 50%,
+                "height" : 100%,
+                "display" : flex,
+                "flex-direction" : column,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 33.33%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 33.33%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-2 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 33.33%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 50%,
+                "height" : 100%,
+                "display" : flex,
+                "flex-direction" : column,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 33.33%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 33.33%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-2 : (
+                styles : (
+                    "width" : 100%,
+                    "height" : 33.33%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+    ),
+    Mod37-grande-vertical : (
+        styles : (
+            "padding" : 0.8%,
+            "padding-right" : 1.66%,
+            "flex-direction" : column,
+            "gap" : 0.05em,
+        ),
+        section-0 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 33.33%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 33.33%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-2 : (
+                styles : (
+                    "width" : 33.33%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
+        section-1 : (
+            styles : (
+                "width" : 100%,
+                "height" : 50%,
+                "display" : flex,
+                "gap" : 0.05em,
+            ),
+            subSection-0 : (
+                styles : (
+                    "width" : 33.33%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-1 : (
+                styles : (
+                    "width" : 33.33%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+            subSection-2 : (
+                styles : (
+                    "width" : 33.33%,
+                    "height" : 100%,
+                ),
+                bodyElement-0 : (
+                    styles : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                    element-0 : (
+                        "width" : 100%,
+                        "height" : 100%,
+                    ),
+                ),
+            ),
+        ),
     ),
 );
 
+$listOfMods : ($grandeVerticalModLayouts);
+
 //vertical mods layouts
-@each $ModName, $ModValue in $verticalModLayouts {
-    .#{$ModName}-vertical {
+@each $ModName, $ModValue in $listOfMods {
+    .#{$ModName} {
         width : 100%;
         height : 100%;
         display : flex;
-        $bodyModStyles : map-get($ModValue, "firstLevelStyles");
-        @each $prperty1, $value1 in $bodyModStyles {
+        $bodyStyles : map-get($ModValue, "styles");
+        @each $prperty1, $value1 in $bodyStyles {
             #{$prperty1} : #{$value1}
         }
-        .content-body {
-            width : 100%;
-            height : 100%;
-            $contentBodyStyles : map-get($ModValue, "secondLevelStyles");
-            @each $prperty2, $value2 in $contentBodyStyles {
-                #{$prperty2} : #{$value2}
-            }
-            .content-children-body {
-                background: $boxbgColor;
-                $contentChildrenStyles : map-get($ModValue, "thirdLevelStyles");
-                @each $prperty3, $value3 in $contentChildrenStyles {
-                    #{$prperty3} : #{$value3}
-                }
-            }
-        }
+        $listOfClass : map-remove($ModValue, "styles");
+        @each $sectionClass, $valueSection in $listOfClass {
+            .#{$sectionClass} {
+                $stylesSection : map-get($valueSection, "styles");
+                @each $prperty2, $value2 in $stylesSection {
+                    #{$prperty2} : #{$value2}
+                };
+                $listOfClassSubSections : map-remove($valueSection, "styles");
+                @each $subSectionClass, $valueSubsection in $listOfClassSubSections {
+                    .#{$subSectionClass} {
+                        $stylesSubSection : map-get($valueSubsection, "styles");
+                        @each $prperty3, $value3 in $stylesSubSection {
+                            #{$prperty3} : #{$value3}
+                        };
+                        $listOfClassBodyElements : map-remove($valueSubsection, "styles");
+                        @each $bodyElement, $valueBodyElement in $listOfClassBodyElements {
+                            .#{$bodyElement} {
+                                $stylesBodyElement : map-get($valueBodyElement, "styles");
+                                @each $prperty4, $value4 in $stylesBodyElement {
+                                    #{$prperty4} : #{$value4}
+                                };
+                                $listOfClassElements : map-remove($valueBodyElement, "styles");
+                                @each $element, $valueElemt in $listOfClassElements {
+                                    .#{$element} {
+                                        @each $prperty5, $value5 in $valueElemt {
+                                            #{$prperty5} : #{$value5}
+                                        };
+                                        background: $boxbgColor;
+                                    }
+                                };
+                            };
+                        };
+                    };
+                };
+            };
+        };
     }
 }
