@@ -410,10 +410,10 @@ export const workSpaceSlice = createSlice({
 			const parseToListImages = Array.from(Array(payload?.numberPhotos).keys()).map(e => ({id : "", url : ""}));
 			const myPhotos = Object.assign({}, parseToListImages);
 			const isFullBook = () => {
-				switch (cloneData?.sizePhotoBook) {
-					case "LargeFormat":
+				switch (`${cloneData?.sizePhotoBook}-${cloneData?.format}`) {
+					case "grande-vertical":
 						return ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(payload.layout);
-					case "SquareFormat" :
+					case "grande-cuadrado" :
 						return ["Mod6", "Mod7", "FrontLayout"].includes(payload.layout);
 				}
 			};
