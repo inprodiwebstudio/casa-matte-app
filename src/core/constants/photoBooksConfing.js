@@ -1,37 +1,45 @@
-import { vertical, cuadrado, horizontal } from "./modsLayoutsConfig";
+import { grandeVertical, grandeCuadrado } from "./modsLayoutsConfig";
 
 const photoBooksConfing = {
 	white : {
 		horizontal : false,
 		vertical   : {
-			aspectRatio      : [8, 9],
-			modsInDoublePage : ["Mod1", "Mod2", "Mod3", "FrontLayout"],
-			layoutMods       : {...vertical},
-			sizes            : {
+			aspectRatio : [8, 9],
+			sizes       : {
 				chico : {
-					pdfSize : [100, 100],
+					layoutMods       : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
 				},
 				mediano : {
-					pdfSize : [100, 100],
+					layoutMods       : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
 				},
 				grande : {
-					pdfSize : [100, 100],
+					layoutMods       : {...grandeVertical},
+					modsInDoublePage : ["Mod1", "Mod2", "Mod3", "FrontLayout"],
+					pdfSize          : [100, 100],
 				},
 			},
 		},
 		cuadrado : {
-			aspectRatio      : [1, 1],
-			layoutMods       : {...cuadrado},
-			modsInDoublePage : ["Mod6", "Mod7"],
-			sizes            : {
+			aspectRatio : [1, 1],
+			sizes       : {
 				chico : {
-					pdfSize : [100, 100],
+					layoutMods       : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
 				},
 				mediano : {
-					pdfSize : [100, 100],
+					layoutMods       : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
 				},
 				grande : {
-					pdfSize : [100, 100],
+					layoutMods       : {...grandeCuadrado},
+					modsInDoublePage : ["Mod6", "Mod7"],
+					pdfSize          : [100, 100],
 				},
 			},
 		},
@@ -39,58 +47,64 @@ const photoBooksConfing = {
 	sencillo : {
 		horizontal : false,
 		vertical   : {
-			aspectRatio      : [8, 9],
-			layoutMods       : {...vertical},
-			modsInDoublePage : ["Mod1", "Mod2", "Mod3"],
-			sizes            : {
+			aspectRatio : [8, 9],
+			sizes       : {
 				chico   : false,
 				mediano : {
-					pdfSize : [100, 100],
+					layoutMods       : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
 				},
 				grande : {
-					pdfSize : [100, 100],
+					layoutMods       : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
 				},
 			},
 		},
 		cuadrado : {
-			aspectRatio      : [1, 1],
-			layoutMods       : {...cuadrado},
-			modsInDoublePage : ["Mod6", "Mod7"],
-			sizes            : {
+			aspectRatio : [1, 1],
+			sizes       : {
 				chico   : false,
 				mediano : {
-					pdfSize : [100, 100],
+					layoutMods       : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
 				},
 				grande : {
-					pdfSize : [100, 100],
+					layoutMods       : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
 				},
 			},
 		},
 	},
 	clasico : {
 		horizontal : {
-			aspectRatio      : [],
-			layoutMods       : {...horizontal},
-			modsInDoublePage : [],
-			sizes            : {
+			aspectRatio : [],
+			sizes       : {
 				chico   : false,
 				mediano : false,
 				grande  : {
-					pdfSize : [100, 100],
+					layoutMods       : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
 				},
 			},
 		},
 		vertical : {
-			aspectRatio      : [8, 9],
-			layoutMods       : {...vertical},
-			modsInDoublePage : ["Mod1", "Mod2", "Mod3"],
-			sizes            : {
+			aspectRatio : [8, 9],
+			sizes       : {
 				chico   : false,
 				mediano : {
-					pdfSize : [100, 100],
+					layoutMods       : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
 				},
 				grande : {
-					pdfSize : [100, 100],
+					layoutMods       : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
 				},
 			},
 		},
@@ -98,31 +112,30 @@ const photoBooksConfing = {
 	},
 	premium : {
 		horizontal : {
-			aspectRatio      : [],
-			layoutMods       : false,
-			modsInDoublePage : [],
-			sizes            : {
+			aspectRatio : [],
+			sizes       : {
 				chico   : false,
 				mediano : false,
 				grande  : {
-					pdfSize    : [100, 100],
-					layoutMods : {},
+					layoutMods       : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
 				},
 			},
 		},
 		vertical : {
-			aspectRatio      : [8, 9],
-			layoutMods       : {...vertical},
-			modsInDoublePage : ["Mod1", "Mod2", "Mod3"],
-			sizes            : {
+			aspectRatio : [8, 9],
+			sizes       : {
 				chico   : false,
 				mediano : {
-					pdfSize    : [100, 100],
-					layoutMods : {},
+					layoutMods       : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
 				},
 				grande : {
-					pdfSize    : [100, 100],
-					layoutMods : {},
+					layoutMods       : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
 				},
 			},
 		},
