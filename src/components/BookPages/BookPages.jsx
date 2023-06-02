@@ -22,11 +22,13 @@ const BookPages = ({
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 
+	const photobookSize = photoBookData?.sizePhotoBook ?? "grande";
+
 	const currentPhotoBook = (photoBookData?.product === "" || !photoBookData?.product) ? "white" : photoBookData?.product;
 
 	const photoBookFormat = photoBookData?.format ?? "vertical";
 
-	const modsInDoublePage = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.modsInDoublePage;
+	const modsInDoublePage = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.modsInDoublePage;
 
 	const isInDoublePage = modsInDoublePage?.includes(pageData?.sheet1?.layoutType);
 
