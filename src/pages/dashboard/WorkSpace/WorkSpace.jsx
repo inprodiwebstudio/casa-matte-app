@@ -16,6 +16,9 @@ const WorkSpace = () => {
 
 	const dispatch = useDispatch();
 
+	const [ myWorkSpaceData, setMyWorkSpaceData ] = useState({});
+
+
 	const workSpaceData = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
 	const workSpaceHistory = useSelector((state) => state.workSpaceSlice.history, shallowEqual);
 	const isLoggin = useSelector((state) => state.authSlice.loggedIn, shallowEqual);
@@ -33,8 +36,6 @@ const WorkSpace = () => {
 			},
 		},
 	};
-
-	const [ myWorkSpaceData, setMyWorkSpaceData ] = useState({});
 
 	const isAvailableUndo = isValidArray(workSpaceHistory.undo);
 	const isAvailableRedo = isValidArray(workSpaceHistory.redo);
@@ -100,7 +101,7 @@ const WorkSpace = () => {
 							<BookPages
 								isInWorkSpcae
 								loading={isLoading}
-								pageData={workSpaceData[pageId]}
+								pageData={myWorkSpaceData}
 							/>
 						) : (
 							!isLoggin ? (
