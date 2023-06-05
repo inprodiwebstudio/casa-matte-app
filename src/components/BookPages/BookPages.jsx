@@ -87,7 +87,7 @@ const BookPages = ({
 					)
 				}
 				{
-					(pageData?.sheet1?.layoutType !== "") && (
+					((pageData?.sheet1?.layoutType !== "") && (pageData?.sheet1?.layoutType !== "FrontLayout")) && (
 						<LayoutMod
 							images={photoList("sheet1")}
 							sheetNo={"sheet1"}
