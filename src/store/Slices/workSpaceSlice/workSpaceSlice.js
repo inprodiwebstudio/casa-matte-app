@@ -19,7 +19,7 @@ const initialState = {
 				sheet1 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -33,7 +33,7 @@ const initialState = {
 				sheet1 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -44,7 +44,7 @@ const initialState = {
 				sheet2 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -58,7 +58,7 @@ const initialState = {
 				sheet1 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -69,7 +69,7 @@ const initialState = {
 				sheet2 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -83,7 +83,7 @@ const initialState = {
 				sheet1 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -94,7 +94,7 @@ const initialState = {
 				sheet2 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -108,7 +108,7 @@ const initialState = {
 				sheet1 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -119,7 +119,7 @@ const initialState = {
 				sheet2 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -133,7 +133,7 @@ const initialState = {
 				sheet1 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -144,7 +144,7 @@ const initialState = {
 				sheet2 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -158,7 +158,7 @@ const initialState = {
 				sheet1 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -234,7 +234,7 @@ export const workSpaceSlice = createSlice({
 					sheet1 : {
 						pageNo     : ((listOfPages.length + 1)*2) - 2,
 						layoutType : "",
-						text       : "",
+						text       : {},
 						photos     : {
 							0 : {
 								id  : "",
@@ -252,7 +252,7 @@ export const workSpaceSlice = createSlice({
 				sheet2 : {
 					pageNo     : listOfPages[listOfPages.length - 1]?.sheet1?.pageNo + 1,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
