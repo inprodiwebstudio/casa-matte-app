@@ -8,16 +8,19 @@ const photoBooksConfing = {
 			sizes       : {
 				chico : {
 					layoutMods       : {},
+					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 				mediano : {
 					layoutMods       : {},
+					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 				grande : {
 					layoutMods       : {...grandeVertical},
+					frontLayouts     : {},
 					modsInDoublePage : ["Mod1", "Mod2", "Mod3", "FrontLayout"],
 					pdfSize          : [100, 100],
 				},
@@ -28,16 +31,19 @@ const photoBooksConfing = {
 			sizes       : {
 				chico : {
 					layoutMods       : {},
+					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 				mediano : {
 					layoutMods       : {},
+					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 				grande : {
 					layoutMods       : {...grandeCuadrado},
+					frontLayouts     : {},
 					modsInDoublePage : ["Mod6", "Mod7"],
 					pdfSize          : [100, 100],
 				},
@@ -52,11 +58,13 @@ const photoBooksConfing = {
 				chico   : false,
 				mediano : {
 					layoutMods       : {},
+					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 				grande : {
 					layoutMods       : {},
+					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
@@ -68,11 +76,13 @@ const photoBooksConfing = {
 				chico   : false,
 				mediano : {
 					layoutMods       : {},
+					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 				grande : {
 					layoutMods       : {},
+					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
@@ -87,6 +97,7 @@ const photoBooksConfing = {
 				mediano : false,
 				grande  : {
 					layoutMods       : {},
+					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
@@ -98,11 +109,13 @@ const photoBooksConfing = {
 				chico   : false,
 				mediano : {
 					layoutMods       : {},
+					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 				grande : {
 					layoutMods       : {},
+					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
@@ -118,6 +131,7 @@ const photoBooksConfing = {
 				mediano : false,
 				grande  : {
 					layoutMods       : {},
+					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
@@ -129,11 +143,13 @@ const photoBooksConfing = {
 				chico   : false,
 				mediano : {
 					layoutMods       : {},
+					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 				grande : {
 					layoutMods       : {},
+					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
