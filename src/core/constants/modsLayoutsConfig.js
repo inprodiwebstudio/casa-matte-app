@@ -1920,6 +1920,408 @@ const grandeVertical = {
 		numberPhotos : 6,
 		cat          : "fotos",
 	},
+	Mod38 : {
+		id       : "Mod38",
+		sections : {
+			0 : {
+				subSections : {
+					0 : {
+						bodyElements : {
+							0 : {
+								elements : {
+									0 : {
+										type            : "text",
+										textType        : "h1",
+										divider         : false,
+										numberOfElement : 0,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		numberPhotos : 0,
+		cat          : "text",
+	},
+	Mod39 : {
+		id       : "Mod39",
+		sections : {
+			0 : {
+				subSections : {
+					0 : {
+						bodyElements : {
+							0 : {
+								elements : {
+									0 : {
+										type            : "text",
+										textType        : "h1",
+										divider         : false,
+										numberOfElement : 0,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		numberPhotos : 0,
+		cat          : "text",
+	},
+	Mod40 : {
+		id       : "Mod40",
+		sections : {
+			0 : {
+				subSections : {
+					0 : {
+						bodyElements : {
+							0 : {
+								elements : {
+									0 : {
+										type            : "text",
+										textType        : "h1",
+										divider         : false,
+										numberOfElement : 0,
+									},
+									1 : {
+										type            : "text",
+										textType        : "h5",
+										divider         : false,
+										numberOfElement : 1,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		numberPhotos : 0,
+		cat          : "text",
+	},
+	Mod41 : {
+		id       : "Mod41",
+		sections : {
+			0 : {
+				subSections : {
+					0 : {
+						bodyElements : {
+							0 : {
+								elements : {
+									0 : {
+										type            : "text",
+										textType        : "h1",
+										divider         : true,
+										numberOfElement : 0,
+									},
+									1 : {
+										type            : "text",
+										textType        : "h4",
+										divider         : false,
+										numberOfElement : 1,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		numberPhotos : 0,
+		cat          : "text",
+	},
+	Mod42 : {
+		id       : "Mod42",
+		sections : {
+			0 : {
+				subSections : {
+					0 : {
+						bodyElements : {
+							0 : {
+								elements : {
+									0 : {
+										type            : "text",
+										textType        : "regular",
+										divider         : false,
+										numberOfElement : 0,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		numberPhotos : 0,
+		cat          : "text",
+	},
+	Mod43 : {
+		id       : "Mod43",
+		sections : {
+			0 : {
+				subSections : {
+					0 : {
+						bodyElements : {
+							0 : {
+								elements : {
+									0 : {
+										type            : "text",
+										textType        : "regular",
+										divider         : true,
+										numberOfElement : 0,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		numberPhotos : 0,
+		cat          : "text",
+	},
+	Mod44 : {
+		id       : "Mod44",
+		sections : {
+			0 : {
+				subSections : {
+					0 : {
+						bodyElements : {
+							0 : {
+								elements : {
+									0 : {
+										type            : "text",
+										textType        : "h4",
+										divider         : true,
+										numberOfElement : 0,
+									},
+									1 : {
+										type            : "text",
+										textType        : "regular",
+										divider         : false,
+										numberOfElement : 1,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		numberPhotos : 0,
+		cat          : "text",
+	},
+	Mod45 : {
+		id       : "Mod45",
+		sections : {
+			0 : {
+				subSections : {
+					0 : {
+						bodyElements : {
+							0 : {
+								elements : {
+									0 : {
+										type            : "text",
+										textType        : "h4",
+										divider         : true,
+										numberOfElement : 0,
+									},
+									1 : {
+										type            : "text",
+										textType        : "regular",
+										divider         : false,
+										numberOfElement : 1,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		numberPhotos : 0,
+		cat          : "text",
+	},
+	Mod46 : {
+		id       : "Mod46",
+		sections : {
+			0 : {
+				subSections : {
+					0 : {
+						bodyElements : {
+							0 : {
+								elements : {
+									0 : {
+										type            : "text",
+										textType        : "h4",
+										divider         : true,
+										numberOfElement : 0,
+									},
+									1 : {
+										type            : "text",
+										textType        : "regular",
+										divider         : false,
+										numberOfElement : 1,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		numberPhotos : 0,
+		cat          : "text",
+	},
+	Mod47 : {
+		id       : "Mod47",
+		sections : {
+			0 : {
+				subSections : {
+					0 : {
+						bodyElements : {
+							0 : {
+								elements : {
+									0 : {
+										type            : "text",
+										textType        : "h2",
+										divider         : true,
+										numberOfElement : 0,
+									},
+									1 : {
+										type            : "text",
+										textType        : "regular",
+										divider         : false,
+										numberOfElement : 1,
+									},
+									2 : {
+										type            : "text",
+										textType        : "regular",
+										divider         : false,
+										numberOfElement : 2,
+									},
+									3 : {
+										type            : "text",
+										textType        : "regular",
+										divider         : false,
+										numberOfElement : 3,
+									},
+									4 : {
+										type            : "text",
+										textType        : "regular",
+										divider         : false,
+										numberOfElement : 4,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		numberPhotos : 0,
+		cat          : "text",
+	},
+	Mod48 : {
+		id       : "Mod48",
+		sections : {
+			0 : {
+				subSections : {
+					0 : {
+						bodyElements : {
+							0 : {
+								elements : {
+									0 : {
+										type            : "text",
+										textType        : "h2",
+										divider         : true,
+										numberOfElement : 0,
+									},
+									1 : {
+										type            : "text",
+										textType        : "regular",
+										divider         : false,
+										numberOfElement : 1,
+									},
+									2 : {
+										type            : "text",
+										textType        : "regular",
+										divider         : false,
+										numberOfElement : 2,
+									},
+									3 : {
+										type            : "text",
+										textType        : "regular",
+										divider         : false,
+										numberOfElement : 3,
+									},
+									4 : {
+										type            : "text",
+										textType        : "regular",
+										divider         : false,
+										numberOfElement : 4,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		numberPhotos : 0,
+		cat          : "text",
+	},
+	Mod49 : {
+		id       : "Mod49",
+		sections : {
+			0 : {
+				subSections : {
+					0 : {
+						bodyElements : {
+							0 : {
+								elements : {
+									0 : {
+										type            : "text",
+										textType        : "h2",
+										divider         : true,
+										numberOfElement : 0,
+									},
+									1 : {
+										type            : "text",
+										textType        : "regular",
+										divider         : false,
+										numberOfElement : 1,
+									},
+									2 : {
+										type            : "text",
+										textType        : "regular",
+										divider         : false,
+										numberOfElement : 2,
+									},
+									3 : {
+										type            : "text",
+										textType        : "regular",
+										divider         : false,
+										numberOfElement : 3,
+									},
+									4 : {
+										type            : "text",
+										textType        : "regular",
+										divider         : false,
+										numberOfElement : 4,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		numberPhotos : 0,
+		cat          : "text",
+	},
 };
 
 const grandeCuadrado = {
