@@ -75,18 +75,18 @@ const LayoutMod = ({
 															onDragOver={(e) => handleDragOver(e)}
 															id={`${classNameStyle}-section-${indexSection}-subSection-${indexSubSection}-bodyElement-${indexBodyElement}-element-${indexElement}`}
 															{
-																...( images && {
+																...( (images && element?.type === "photo") &&  {
 																	style : {
 																		backgroundImage    : `url(${handlerResizerImage(images[element?.numberOfElement], isInWorkSpcae)})`,
 																		backgroundSize     : "cover",
-																		backgroundRepeat   : "no-repeat",
 																		backgroundPosition : "center",
+																		backgroundRepeat   : "no-repeat",
 																	},
 																} )
 															}
 														>
 															{
-																(images && images[element?.numberOfElement]?.url && isInWorkSpcae) && (
+																(images && (element?.type === "photo") && images[element?.numberOfElement]?.url && isInWorkSpcae) && (
 																	<ActionImagesLayout
 																		containerPhotoUuid={`${classNameStyle}-section-${indexSection}-subSection-${indexSubSection}-bodyElement-${indexBodyElement}-element-${indexElement}`}
 																		sheetNo={sheetNo}

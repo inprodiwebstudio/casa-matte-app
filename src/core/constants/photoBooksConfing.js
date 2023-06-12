@@ -91,7 +91,7 @@ const photoBooksConfing = {
 	},
 	clasico : {
 		horizontal : {
-			aspectRatio : [],
+			aspectRatio : [0, 0],
 			sizes       : {
 				chico   : false,
 				mediano : false,
