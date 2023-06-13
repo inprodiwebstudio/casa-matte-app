@@ -10,7 +10,8 @@ import { handlerResizerImage, selectPhotoUrl } from "./imgLayout.helpers";
 import ActionImagesLayout from "./ActionImagesLayout";
 //reactRouter
 import { useParams } from "react-router-dom";
-
+//Styles
+import "./ImgLayout.scss";
 
 const ImgLayout = ({
 	sheetNo,
@@ -45,7 +46,7 @@ const ImgLayout = ({
 			className="ImgLayout"
 			id={`${pageId}-${sheetNo}-${imageNo}`}
 			{
-				...( (urlImage && (urlImage !== "")) &&  {
+				...( (urlImage?.url && (urlImage?.url !== "")) &&  {
 					style : {
 						backgroundImage    : `url(${handlerResizerImage(urlImage, isInWorkSpace)})`,
 						backgroundSize     : "cover",
@@ -56,7 +57,7 @@ const ImgLayout = ({
 			}
 		>
 			{
-				(urlImage && (urlImage !== "") && isInWorkSpace) && (
+				(urlImage?.url && (urlImage?.url !== "") && isInWorkSpace) && (
 					<ActionImagesLayout
 						containerPhotoUuid={`${pageId}-${sheetNo}-${imageNo}`}
 						sheetNo={sheetNo}
@@ -72,9 +73,9 @@ const ImgLayout = ({
 
 ImgLayout.propTypes = {
 	imageNo       : PropTypes.number.isRequired,
-	sheetNo       : PropTypes.number.isRequired,
+	sheetNo       : PropTypes.number,
 	isInWorkSpace : PropTypes.bool,
-	urlImage      : PropTypes.string,
+	urlImage      : PropTypes.object,
 };
 
 export default ImgLayout;

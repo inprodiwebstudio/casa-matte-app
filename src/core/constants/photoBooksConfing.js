@@ -1,4 +1,7 @@
-import { grandeVertical, grandeCuadrado } from "./modsLayoutsConfig";
+import { grandeCuadrado } from "./modsLayoutsConfig";
+
+//LayoutsMods
+import VerticalLarge from "components/MyModsLayouts/VerticalLarge";
 
 const photoBooksConfing = {
 	white : {
@@ -19,7 +22,7 @@ const photoBooksConfing = {
 					pdfSize          : [100, 100],
 				},
 				grande : {
-					layoutMods       : {...grandeVertical},
+					layoutMods       : {...VerticalLarge},
 					frontLayouts     : {},
 					modsInDoublePage : ["Mod1", "Mod2", "Mod3", "FrontLayout"],
 					pdfSize          : [100, 100],

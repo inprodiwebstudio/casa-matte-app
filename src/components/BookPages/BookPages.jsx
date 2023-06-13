@@ -3,9 +3,9 @@ import { useEffect, useState }                    from "react";
 import { Skeleton }                               from "@mantine/core";
 
 //Own components
-import LayoutMod          from "components/LayoutMod/LayoutMod";
-import photoBooksConfing  from "core/constants/photoBooksConfing";
-import { convertToArray } from "helpers";
+// import LayoutMod          from "components/LayoutMod/LayoutMod";
+import photoBooksConfing from "core/constants/photoBooksConfing";
+// import { convertToArray } from "helpers";
 import { workSpaceSlice } from "store/Slices";
 import FrontLayout        from "components/global/LayoutsPage/FrontLayout";
 import "./BookPages.scss";
@@ -34,13 +34,20 @@ const BookPages = ({
 
 	const aspectRatio = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.aspectRatio;
 
-	const photoList = (sheetId) => {
-		const sheetData = pageData?.[sheetId];
-		const listOfImages = sheetData ? convertToArray(sheetData?.photos) : undefined;
-		if (listOfImages) {
-			return listOfImages;
+	const handleLayoutMod = (layoutData, sheetNo) => {
+		if (layoutData?.layoutType) {
+			const LayoutMod = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.layoutMods[layoutData?.layoutType]?.layout;
+			return <LayoutMod data={layoutData} isInWorkSpcae={isInWorkSpcae} sheetNo={sheetNo} />;
 		}
 	};
+
+	// const photoList = (sheetId) => {
+	// 	const sheetData = pageData?.[sheetId];
+	// 	const listOfImages = sheetData ? convertToArray(sheetData?.photos) : undefined;
+	// 	if (listOfImages) {
+	// 		return listOfImages;
+	// 	}
+	// };
 
 	const handlerSelectedData = (currentPage) => {
 		setCurrentSelectedPage(currentPage);
@@ -88,12 +95,7 @@ const BookPages = ({
 				}
 				{
 					((pageData?.sheet1?.layoutType !== "") && (pageData?.sheet1?.layoutType !== "FrontLayout")) && (
-						<LayoutMod
-							images={photoList("sheet1")}
-							sheetNo={"sheet1"}
-							isInWorkSpcae={isInWorkSpcae}
-							modLayout={pageData?.sheet1?.layoutType}
-						/>
+						handleLayoutMod(pageData?.sheet1, 1)
 					)
 				}
 			</div>
@@ -122,12 +124,7 @@ const BookPages = ({
 					>
 						{
 							(pageData?.sheet2?.layoutType !== "") && (
-								<LayoutMod
-									images={photoList("sheet2")}
-									sheetNo={"sheet2"}
-									isInWorkSpcae={isInWorkSpcae}
-									modLayout={pageData?.sheet2?.layoutType}
-								/>
+								handleLayoutMod(pageData?.sheet2, 2)
 							)
 						}
 					</div>
