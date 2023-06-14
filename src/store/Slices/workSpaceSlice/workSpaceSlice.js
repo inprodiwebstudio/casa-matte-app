@@ -282,7 +282,7 @@ export const workSpaceSlice = createSlice({
 		},
 		addPhoto : (state, {payload}) => {
 			const newData = {...state.data};
-			newData.pages[payload.pageId][payload.sheetNo]["photos"][payload.layoutNo] = {
+			newData.pages[payload.pageId][`sheet${payload.sheetNo}`]["photos"][payload.layoutNo] = {
 				id  : payload.image.fileId,
 				url : payload.image.image,
 			};
