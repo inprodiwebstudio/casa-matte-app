@@ -34,7 +34,6 @@ import Mod33 from "./Mod33";
 import Mod34 from "./Mod34";
 import Mod35 from "./Mod35";
 import Mod36 from "./Mod36";
-import Mod37 from "./Mod37";
 
 const VerticalLarge = {
 	Mod1 : {
@@ -251,12 +250,6 @@ const VerticalLarge = {
 	Mod36 : {
 		id           : "Mod36",
 		layout       : Mod36,
-		numberPhotos : 6,
-		cat          : "fotos",
-	},
-	Mod37 : {
-		id           : "Mod37",
-		layout       : Mod37,
 		numberPhotos : 6,
 		cat          : "fotos",
 	},
