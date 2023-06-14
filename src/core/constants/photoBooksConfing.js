@@ -1,13 +1,14 @@
-import { grandeCuadrado } from "./modsLayoutsConfig";
 
 //LayoutsMods
-import VerticalLarge from "components/MyModsLayouts/VerticalLarge";
+import VerticalLarge   from "components/MyModsLayouts/VerticalLarge";
+import SquareLarge     from "components/MyModsLayouts/SquareLarge";
+import VerticalMedium  from "components/MyModsLayouts/VericalMedium";
+import HorizontalLarge from "components/MyModsLayouts/HorizontalLarge";
 
 const photoBooksConfing = {
 	white : {
-		horizontal : false,
-		vertical   : {
-			aspectRatio : [8, 9],
+		horizontal : {
+			aspectRatio : [0, 0],
 			sizes       : {
 				chico : {
 					layoutMods       : {},
@@ -17,6 +18,29 @@ const photoBooksConfing = {
 				},
 				mediano : {
 					layoutMods       : {},
+					frontLayouts     : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
+				},
+				grande : {
+					layoutMods       : {...HorizontalLarge},
+					frontLayouts     : {},
+					modsInDoublePage : ["Mod6"],
+					pdfSize          : [100, 100],
+				},
+			},
+		},
+		vertical : {
+			aspectRatio : [8, 9],
+			sizes       : {
+				chico : {
+					layoutMods       : {},
+					frontLayouts     : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
+				},
+				mediano : {
+					layoutMods       : {...VerticalMedium},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
@@ -45,10 +69,10 @@ const photoBooksConfing = {
 					pdfSize          : [100, 100],
 				},
 				grande : {
-					layoutMods       : {...grandeCuadrado},
+					layoutMods       : {...SquareLarge},
 					frontLayouts     : {},
 					modsInDoublePage : ["Mod6", "Mod7"],
-					pdfSize          : [100, 100],
+					pdfSize          : [1, 1],
 				},
 			},
 		},
