@@ -37,7 +37,7 @@ const BookPages = ({
 	const handleLayoutMod = (layoutData, sheetNo) => {
 		if (layoutData?.layoutType) {
 			const LayoutMod = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.layoutMods[layoutData?.layoutType]?.layout;
-			return <LayoutMod data={layoutData} isInWorkSpcae={isInWorkSpcae} sheetNo={sheetNo} />;
+			return <LayoutMod data={layoutData} isInWorkSpace={isInWorkSpcae} sheetNo={sheetNo} />;
 		}
 	};
 
