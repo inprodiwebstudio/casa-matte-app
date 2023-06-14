@@ -323,7 +323,7 @@ export const workSpaceSlice = createSlice({
 		},
 		removePhoto : (state, {payload}) => {
 			const newData = {...state.data};
-			newData.pages[payload.pageId][payload.sheetNo]["photos"][payload.layoutNo] = {
+			newData.pages[payload.pageId][`sheet${payload.sheetNo}`]["photos"][payload.layoutNo] = {
 				id  : "",
 				url : "",
 			};
