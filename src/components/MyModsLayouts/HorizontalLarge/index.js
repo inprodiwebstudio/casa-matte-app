@@ -31,7 +31,7 @@ import Mod30 from "./Mod30";
 import Mod31 from "./Mod31";
 import Mod32 from "./Mod32";
 
-const VerticalLarge = {
+const HorizontalLarge = {
 	Mod1 : {
 		id           : "Mod1",
 		layout       : Mod1,
@@ -228,4 +228,4 @@ const VerticalLarge = {
 };
 
 
-export default VerticalLarge;
+export default HorizontalLarge;
