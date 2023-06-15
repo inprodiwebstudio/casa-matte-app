@@ -81,7 +81,7 @@
 
 		.ghost-canva {
 			width: 100%;
-			height: 105%;
+			height: calc(105% - 6vw);
 			display: flex;
 			align-items: center;
 			justify-content: center;
