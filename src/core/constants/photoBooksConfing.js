@@ -8,7 +8,7 @@ import HorizontalLarge from "components/MyModsLayouts/HorizontalLarge";
 const photoBooksConfing = {
 	white : {
 		horizontal : {
-			aspectRatio : [0, 0],
+			aspectRatio : [496, 425],
 			sizes       : {
 				chico : {
 					layoutMods       : {},
@@ -25,7 +25,7 @@ const photoBooksConfing = {
 				grande : {
 					layoutMods       : {...HorizontalLarge},
 					frontLayouts     : {},
-					modsInDoublePage : ["Mod6"],
+					modsInDoublePage : ["Mod6", "FrontLayout"],
 					pdfSize          : [100, 100],
 				},
 			},
@@ -42,7 +42,7 @@ const photoBooksConfing = {
 				mediano : {
 					layoutMods       : {...VerticalMedium},
 					frontLayouts     : {},
-					modsInDoublePage : [],
+					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [100, 100],
 				},
 				grande : {
@@ -71,7 +71,7 @@ const photoBooksConfing = {
 				grande : {
 					layoutMods       : {...SquareLarge},
 					frontLayouts     : {},
-					modsInDoublePage : ["Mod6", "Mod7"],
+					modsInDoublePage : ["Mod6", "Mod7", "FrontLayout"],
 					pdfSize          : [1, 1],
 				},
 			},
