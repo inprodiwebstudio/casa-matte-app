@@ -2,7 +2,7 @@
 //LayoutsMods
 import VerticalLarge   from "components/MyModsLayouts/VerticalLarge";
 import SquareLarge     from "components/MyModsLayouts/SquareLarge";
-import VerticalMedium  from "components/MyModsLayouts/VericalMedium";
+import VerticalMedium  from "components/MyModsLayouts/VerticalMedium";
 import HorizontalLarge from "components/MyModsLayouts/HorizontalLarge";
 
 const photoBooksConfing = {
