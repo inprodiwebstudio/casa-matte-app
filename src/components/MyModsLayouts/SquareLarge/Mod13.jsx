@@ -11,7 +11,7 @@ const Mod13 = ({data, isInWorkSpace, sheetNo}) => {
 			pt="13.88%"
 			pb="13.88%"
 		>
-			<Stack spacing="0.05em">
+			<Stack w="100%" h="100%" spacing="0.05em">
 				<ImgLayout
 					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
