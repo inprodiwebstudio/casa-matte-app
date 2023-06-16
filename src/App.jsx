@@ -17,11 +17,6 @@ import "react-perfect-scrollbar/dist/css/styles.css";
 
 
 export default function App() {
-	// const dataBrowser = window.navigator.userAgent;
-	// console.log(dataBrowser.indexOf("Firefox"));
-
-	// window.global||= window;
-
 	return (
 		<div id="body-app">
 			<Provider store={store}>
