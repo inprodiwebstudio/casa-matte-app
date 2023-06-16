@@ -43,14 +43,6 @@ const BookPages = ({
 		}
 	};
 
-	// const photoList = (sheetId) => {
-	// 	const sheetData = pageData?.[sheetId];
-	// 	const listOfImages = sheetData ? convertToArray(sheetData?.photos) : undefined;
-	// 	if (listOfImages) {
-	// 		return listOfImages;
-	// 	}
-	// };
-
 	const handlerSelectedData = (currentPage) => {
 		setCurrentSelectedPage(currentPage);
 		dispatch(workSpaceSlice.actions.setSelectePageData({
