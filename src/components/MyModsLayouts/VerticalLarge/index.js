@@ -35,6 +35,13 @@ import Mod34 from "./Mod34";
 import Mod35 from "./Mod35";
 import Mod36 from "./Mod36";
 import Mod37 from "./Mod37";
+import Mod38 from "./Mod38";
+import Mod39 from "./Mod39";
+import Mod40 from "./Mod40";
+import Mod41 from "./Mod41";
+import Mod42 from "./Mod42";
+import Mod43 from "./Mod43";
+import Mod44 from "./Mod44";
 
 const VerticalLarge = {
 	Mod1 : {
@@ -259,6 +266,48 @@ const VerticalLarge = {
 		layout       : Mod37,
 		numberPhotos : 6,
 		cat          : "fotos",
+	},
+	Mod38 : {
+		id           : "Mod38",
+		layout       : Mod38,
+		numberPhotos : 0,
+		cat          : "texto",
+	},
+	Mod39 : {
+		id           : "Mod39",
+		layout       : Mod39,
+		numberPhotos : 0,
+		cat          : "texto",
+	},
+	Mod40 : {
+		id           : "Mod40",
+		layout       : Mod40,
+		numberPhotos : 0,
+		cat          : "texto",
+	},
+	Mod41 : {
+		id           : "Mod41",
+		layout       : Mod41,
+		numberPhotos : 0,
+		cat          : "texto",
+	},
+	Mod42 : {
+		id           : "Mod42",
+		layout       : Mod42,
+		numberPhotos : 0,
+		cat          : "texto",
+	},
+	Mod43 : {
+		id           : "Mod43",
+		layout       : Mod43,
+		numberPhotos : 0,
+		cat          : "texto",
+	},
+	Mod44 : {
+		id           : "Mod44",
+		layout       : Mod44,
+		numberPhotos : 0,
+		cat          : "texto",
 	},
 };
 
