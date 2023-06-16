@@ -49,7 +49,7 @@ const ItemPage = ({
 			}
 		>
 			<div className="page-container">
-				<BookPages pageData={pageData} />
+				<BookPages isInPaginator={true} pageData={pageData} />
 				<NumbPages />
 			</div>
 			{
