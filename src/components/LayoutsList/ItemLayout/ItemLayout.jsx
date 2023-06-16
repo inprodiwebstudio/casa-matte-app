@@ -58,7 +58,7 @@ const ItemLayout = ({
 				aspectRatio : isInDoublePage ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
 			}}
 		>
-			<Layout />
+			<Layout isThumbNail={true} />
 		</div>
 	);
 };
