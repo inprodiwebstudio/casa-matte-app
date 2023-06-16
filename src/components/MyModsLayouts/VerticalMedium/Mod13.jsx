@@ -19,7 +19,7 @@ const Mod13 = ({data, isInWorkSpace, sheetNo}) => {
 					urlImage={data?.photos[0] ?? {}}
 				/>
 			</Stack>
-			<Stack w="50%" h="33.33%">
+			<Stack w="100%" h="33.33%">
 				<ImgLayout
 					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
@@ -27,7 +27,7 @@ const Mod13 = ({data, isInWorkSpace, sheetNo}) => {
 					urlImage={data?.photos[1] ?? {}}
 				/>
 			</Stack>
-			<Stack w="50%" h="33.33%">
+			<Stack w="100%" h="33.33%">
 				<ImgLayout
 					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
