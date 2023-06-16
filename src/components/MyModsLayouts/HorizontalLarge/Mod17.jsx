@@ -9,9 +9,9 @@ const Mod17 = ({data, isInWorkSpace, sheetNo}) => {
 			h="100%"
 			pl="26.31%"
 			pr="26.31%"
-			spacing="0.5em"
+			spacing="0.05em"
 		>
-			<Stack w="70.27%" h="56.47%">
+			<Stack w="100%" h="65%">
 				<ImgLayout
 					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
@@ -19,7 +19,7 @@ const Mod17 = ({data, isInWorkSpace, sheetNo}) => {
 					urlImage={data?.photos[0] ?? {}}
 				/>
 			</Stack>
-			<Stack w="29.73%" h="43.53%">
+			<Stack w="100%" h="35%">
 				<ImgLayout
 					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}

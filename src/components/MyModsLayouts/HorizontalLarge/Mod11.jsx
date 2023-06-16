@@ -7,8 +7,8 @@ const Mod11 = ({data, isInWorkSpace, sheetNo}) => {
 		<Stack
 			w="100%"
 			h="100%"
-			pt="30%"
-			pb="30%"
+			pt="27%"
+			pb="27%"
 		>
 			<Flex w="100%" h="100%" gap="0.05em">
 				<Stack w="50%" h="100%">

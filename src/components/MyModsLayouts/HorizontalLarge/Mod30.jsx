@@ -11,7 +11,7 @@ const Mod30 = ({data, isInWorkSpace, sheetNo}) => {
 			pl="6.4%"
 			pr="6.4%"
 		>
-			<Flex w="100%" h="100%" spacing="0.05em">
+			<Flex w="100%" h="100%" gap="0.05em">
 				<Stack w="50%" h="100%" spacing="0.05em">
 					<Stack w="100%" h="50%">
 						<ImgLayout
