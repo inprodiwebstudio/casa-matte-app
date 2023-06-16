@@ -20,7 +20,7 @@ const Mod16 = ({data, isInWorkSpace, sheetNo}) => {
 						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Stack>
-				<Flex w="100%" h="29%" spacing="0.05em">
+				<Flex w="100%" h="29%" gap="0.05em">
 					<Stack h="100%" w="50%">
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
