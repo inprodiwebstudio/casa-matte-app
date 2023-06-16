@@ -62,6 +62,7 @@ const BookPages = ({
 			<Skeleton className="BookPages isSinglePage" />
 		);
 	}
+
 	return (
 		<div
 			className="BookPages"
