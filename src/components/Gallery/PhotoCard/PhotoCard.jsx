@@ -11,7 +11,17 @@ import photoBooksConfing                         from "core/constants/photoBooks
 import { resizerImage, bindAll, convertToArray } from "helpers";
 import "./PhotoCard.scss";
 
-const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMutationGallery, workSpaceSlice, workSpaceData, isHideSelected}) => {
+const PhotoCard = ({
+	image,
+	fileId,
+	isChecked,
+	isSelected,
+	onSelected,
+	workSpaceData,
+	isHideSelected,
+	workSpaceSlice,
+	loadingMutationGallery,
+}) => {
 	const { pageId } = useParams();
 
 	const photoBookType = workSpaceData?.product ?? "white";
