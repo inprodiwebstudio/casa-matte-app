@@ -9,11 +9,11 @@
     overflow: hidden;
 
     &.isInPaginator {
-        border: 1px solid #5FD15C;
+        border: 0.05em solid #5FD15C;
     }
     
     &:focus {
-        border: 1px solid #5FD15C;
+        border: 0.05em solid #5FD15C;
     }
 
     .placeHolderText {
