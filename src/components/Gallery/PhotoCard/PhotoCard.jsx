@@ -7,11 +7,18 @@ import { MoonLoader } from "react-spinners";
 //Own components
 import { BigPlus, Check }                        from "Resources/icons";
 import { workSpaceSlice }                        from "store/Slices";
+import photoBooksConfing                         from "core/constants/photoBooksConfing";
 import { resizerImage, bindAll, convertToArray } from "helpers";
 import "./PhotoCard.scss";
 
 const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMutationGallery, workSpaceSlice, workSpaceData, isHideSelected}) => {
 	const { pageId } = useParams();
+
+	const photoBookType = workSpaceData?.product ?? "white";
+	const formatPhotoBook = workSpaceData?.format ?? "vertical";
+	const sizePhotoBook = workSpaceData?.sizePhotoBook ?? "grande";
+
+	const photoBookConfig = photoBooksConfing[photoBookType ?? "white"];
 
 	const pageData = workSpaceData?.pages?.[pageId];
 
@@ -50,13 +57,14 @@ const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMut
 
 	const addPhotoToLayout = (imageUrl) => {
 		const isNotCompleteSheet1 = convertToArray(pageData?.sheet1?.photos).find(e => e.id === "");
+		const modsInDoublePage = photoBookConfig[formatPhotoBook]?.sizes[sizePhotoBook]?.modsInDoublePage;
 
-		const isSinglePage = (["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(pageData?.sheet1?.layoutType));
+		const isSinglePage = (modsInDoublePage.includes(pageData?.sheet1?.layoutType));
 		const isAvailableSheet2 = pageData?.sheet2?.photos[0];
 
 		if (isSinglePage) {
 			workSpaceSlice.addPhoto({
-				sheetNo  : "sheet1",
+				sheetNo  : 1,
 				layoutNo : 0,
 				image    : {
 					fileId,
@@ -72,7 +80,7 @@ const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMut
 				const data = listOfPhotos[i];
 				if (data?.id === "") {
 					workSpaceSlice.addPhoto({
-						sheetNo  : "sheet1",
+						sheetNo  : 1,
 						layoutNo : i,
 						image    : {
 							fileId,
@@ -90,7 +98,7 @@ const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMut
 				const data = listOfPhotos[i];
 				if (data?.id === "") {
 					workSpaceSlice.addPhoto({
-						sheetNo  : "sheet2",
+						sheetNo  : 2,
 						layoutNo : i,
 						image    : {
 							fileId,
