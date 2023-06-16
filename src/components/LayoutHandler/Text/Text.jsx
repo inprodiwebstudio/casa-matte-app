@@ -5,6 +5,7 @@ import "./Text.scss";
 
 const Text = ({
 	data,
+	align="center",
 	type="regular",
 	isThumbNail,
 	isInPaginator,
@@ -16,38 +17,38 @@ const Text = ({
 			return "Doble click para redactar...";
 		}
 		if ((type === "regular") && isThumbNail) {
-			return "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga alias obcaecati explicabo eos aut amet neque iure eligendi. Temporibus, expedita tempore. Laborum hic voluptates esse odio aliquid. Dicta, quidem perferendis. Hic, quae vero sequi deserunt enim iure ut dolore ab consequatur sint quidem tenetur dignissimos quos laudantium ea saepe quaerat aut reprehenderit debitis at officia. Fuga sequi harum eaque ex";
+			return "Lorem ipsum dolor sit amet consectetur adipisicing";
 		}
 		if (type === "h5") {
-			return "Subtitulo";
+			return "SUBTITULO";
 		}
 		return "TITULO";
 	};
 
 	const handlerSizeText = () => {
 		if (type === "regular") {
-			return "0.2em";
+			return "0.12em";
 		}
 		if (type === "h5") {
-			return "0.3em";
+			return "0.12em";
 		}
 		if (type === "h4") {
-			return "0.4em";
+			return "0.14em";
 		}
 		if (type === "h3") {
-			return "0.5em";
+			return "0.05em";
 		}
 		if (type === "h2") {
-			return "0.6em";
+			return "0.06em";
 		}
 		if (type === "h1") {
-			return "0.7em";
+			return "0.27em";
 		}
 	};
 
 	const handleShowText = () => {
 		if (!data || (data === "") || isThumbNail) {
-			handleDefaultText();
+			return handleDefaultText();
 		} else {
 			return <div dangerouslySetInnerHTML={{__html : data}} />;
 		}
@@ -69,7 +70,8 @@ const Text = ({
 			style={{
 				width,
 				height,
-				fontSize : `${handlerSizeText()} !important`,
+				textAlign : align,
+				fontSize  : handlerSizeText(),
 			}}
 			{...((!isInPaginator && !isThumbNail) && {
 				onClick      : (e) => handleClick(e),
@@ -84,6 +86,7 @@ const Text = ({
 };
 
 Text.propTypes = {
+	align         : PropTypes.string,
 	type          : PropTypes.string.isRequired,
 	isThumbNail   : PropTypes.bool,
 	isInPaginator : PropTypes.bool,
