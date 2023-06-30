@@ -1,7 +1,7 @@
 @import "/src/Resources/scss/variables/colorThemes";
 
 .ItemLayout {
-    height: 100px;
+    height: 95px;
     cursor: pointer;
     background: white;
     border: 1px solid $body-color;
@@ -9,7 +9,6 @@
     justify-content: start;
     align-items: flex-start;
     font-size: 20px;
-
 
     & .DividerLayout {
         transform: scale(1, 0.5);

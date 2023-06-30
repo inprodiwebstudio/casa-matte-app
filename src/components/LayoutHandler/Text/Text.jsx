@@ -33,7 +33,7 @@ const Text = ({
 			return "0.1em";
 		}
 		if (type === "h4") {
-			return "0.14em";
+			return "0.12em";
 		}
 		if (type === "h3") {
 			return "0.18em";
@@ -47,7 +47,7 @@ const Text = ({
 	};
 
 	const handleShowText = () => {
-		if (!data || (data === "") || isThumbNail) {
+		if (!data || (data === "")) {
 			return handleDefaultText();
 		} else {
 			return <div dangerouslySetInnerHTML={{__html : data}} />;
