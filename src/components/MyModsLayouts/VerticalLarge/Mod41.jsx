@@ -12,13 +12,15 @@ const Mod41 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			h="100%"
 			justify="flex-end"
 			align="flex-end"
-			gap="0.15em"
+			gap="0.1em"
 			direction="column"
 		>
-			<DividerLayout long="10%" position="h" />
+			<DividerLayout long="7%" position="h" />
 			<Stack spacing="0.1em">
 				<Text type="h1" data="" isInPaginator={isInPaginator} isThumbNail={isThumbNail} />
-				<Text align="right" type="h5" data="" isInPaginator={isInPaginator} isThumbNail={isThumbNail} />
+				<div>
+					<Text align="right" type="h5" data="" isInPaginator={isInPaginator} isThumbNail={isThumbNail} />
+				</div>
 			</Stack>
 		</Flex>
 	);

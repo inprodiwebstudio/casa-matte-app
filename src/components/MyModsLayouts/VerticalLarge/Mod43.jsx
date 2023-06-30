@@ -5,6 +5,17 @@ import DividerLayout from "components/LayoutHandler/DividerLayout";
 
 
 const Mod43 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+	const handleWidthTextContainer = () => {
+		if (isThumbNail) {
+			return "41px";
+		}
+		if (isInPaginator) {
+			return "99px";
+		}
+		if (isInWorkSpace) {
+			return "180px";
+		}
+	};
 	return (
 		<Flex
 			p="8%"
@@ -16,8 +27,8 @@ const Mod43 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			direction="column"
 		>
 			<DividerLayout long="10%" position="h" />
-			<Stack>
-				<Text align="right" type="regular" data="" isInPaginator={isInPaginator} isThumbNail={isThumbNail} />
+			<Stack w={handleWidthTextContainer()}>
+				<Text align="right" type="regular" data="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..." isInPaginator={isInPaginator} isThumbNail={isThumbNail} />
 			</Stack>
 		</Flex>
 	);

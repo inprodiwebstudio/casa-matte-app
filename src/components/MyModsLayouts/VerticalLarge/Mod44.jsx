@@ -5,6 +5,17 @@ import DividerLayout from "components/LayoutHandler/DividerLayout";
 
 
 const Mod44 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+	const handleWidthTextContainer = () => {
+		if (isThumbNail) {
+			return "38px";
+		}
+		if (isInPaginator) {
+			return "99px";
+		}
+		if (isInWorkSpace) {
+			return "40%";
+		}
+	};
 	return (
 		<Flex
 			p="8%"
@@ -14,7 +25,7 @@ const Mod44 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			align="flex-end"
 		>
 			<Stack
-				w="50%"
+				w={handleWidthTextContainer()}
 				mah="70%"
 				spacing="0.2em"
 				aria-hidden
@@ -25,10 +36,10 @@ const Mod44 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					justify="flex-start"
 				>
 					<Text align="left" type="h4" data="" isInPaginator={isInPaginator} isThumbNail={isThumbNail} />
-					<DividerLayout long="40%" position="h" />
+					<DividerLayout long="20%" position="h" />
 				</Flex>
 				<Flex justify="flex-start">
-					<Text align="left" type="regular" data="" isInPaginator={isInPaginator} isThumbNail={isThumbNail} />
+					<Text align="justify" type="regular" data="Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper, pharetra odio conubia dictumst malesuada lectus dis penatibus, primis orci dictum sociosqu nam platea parturient cursus." isInPaginator={isInPaginator} isThumbNail={isThumbNail} />
 				</Flex>
 			</Stack>
 		</Flex>

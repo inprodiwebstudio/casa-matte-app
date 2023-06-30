@@ -17,32 +17,32 @@ const Text = ({
 			return "Doble click para redactar...";
 		}
 		if ((type === "regular") && isThumbNail) {
-			return "Lorem ipsum dolor sit amet consectetur adipisicing";
+			return data;
 		}
 		if (type === "h5") {
-			return "SUBTITULO";
+			return "SUBTÍTULO";
 		}
-		return "TITULO";
+		return "TÍTULO";
 	};
 
 	const handlerSizeText = () => {
 		if (type === "regular") {
-			return "0.12em";
+			return "0.085em";
 		}
 		if (type === "h5") {
-			return "0.12em";
+			return "0.1em";
 		}
 		if (type === "h4") {
 			return "0.14em";
 		}
 		if (type === "h3") {
-			return "0.05em";
+			return "0.18em";
 		}
 		if (type === "h2") {
-			return "0.06em";
+			return "0.2em";
 		}
 		if (type === "h1") {
-			return "0.27em";
+			return "0.24em";
 		}
 	};
 
@@ -66,12 +66,14 @@ const Text = ({
 	return (
 		<div
 			tabIndex={1}
-			className={`Text ${isInPaginator && "isInPaginator"}`}
+			className="Text"
 			style={{
 				width,
 				height,
-				textAlign : align,
-				fontSize  : handlerSizeText(),
+				textAlign     : align,
+				letterSpacing : "0px",
+				lineHeight    : "1.2em",
+				fontSize      : handlerSizeText(),
 			}}
 			{...((!isInPaginator && !isThumbNail) && {
 				onClick      : (e) => handleClick(e),
