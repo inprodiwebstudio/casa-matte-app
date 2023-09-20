@@ -49,6 +49,20 @@ import Mod48 from "./Mod48";
 import Mod49 from "./Mod49";
 import Mod50 from "./Mod50";
 import Mod51 from "./Mod51";
+import Mod52 from "./Mod52";
+import Mod53 from "./Mod53";
+import Mod54 from "./Mod54";
+import Mod55 from "./Mod55";
+import Mod56 from "./Mod56";
+import Mod57 from "./Mod57";
+import Mod58 from "./Mod58";
+import Mod59 from "./Mod59";
+import Mod60 from "./Mod60";
+import Mod61 from "./Mod61";
+import Mod62 from "./Mod62";
+import Mod63 from "./Mod63";
+import Mod64 from "./Mod64";
+
 
 const VerticalLarge = {
 	Mod1 : {
@@ -357,6 +371,84 @@ const VerticalLarge = {
 		layout       : Mod51,
 		numberPhotos : 0,
 		cat          : "texto",
+	},
+	Mod52 : {
+		id           : "Mod52",
+		layout       : Mod52,
+		numberPhotos : 1,
+		cat          : "fotosytexto",
+	},
+	Mod53 : {
+		id           : "Mod53",
+		layout       : Mod53,
+		numberPhotos : 1,
+		cat          : "fotosytexto",
+	},
+	Mod54 : {
+		id           : "Mod54",
+		layout       : Mod54,
+		numberPhotos : 1,
+		cat          : "fotosytexto",
+	},
+	Mod55 : {
+		id           : "Mod55",
+		layout       : Mod55,
+		numberPhotos : 1,
+		cat          : "fotosytexto",
+	},
+	Mod56 : {
+		id           : "Mod56",
+		layout       : Mod56,
+		numberPhotos : 3,
+		cat          : "fotosytexto",
+	},
+	Mod57 : {
+		id           : "Mod57",
+		layout       : Mod57,
+		numberPhotos : 2,
+		cat          : "fotosytexto",
+	},
+	Mod58 : {
+		id           : "Mod58",
+		layout       : Mod58,
+		numberPhotos : 4,
+		cat          : "fotosytexto",
+	},
+	Mod59 : {
+		id           : "Mod59",
+		layout       : Mod59,
+		numberPhotos : 1,
+		cat          : "fotosytexto",
+	},
+	Mod60 : {
+		id           : "Mod60",
+		layout       : Mod60,
+		numberPhotos : 1,
+		cat          : "fotosytexto",
+	},
+	Mod61 : {
+		id           : "Mod61",
+		layout       : Mod61,
+		numberPhotos : 1,
+		cat          : "fotosytexto",
+	},
+	Mod62 : {
+		id           : "Mod62",
+		layout       : Mod62,
+		numberPhotos : 1,
+		cat          : "fotosytexto",
+	},
+	Mod63 : {
+		id           : "Mod63",
+		layout       : Mod63,
+		numberPhotos : 1,
+		cat          : "fotosytexto",
+	},
+	Mod64 : {
+		id           : "Mod64",
+		layout       : Mod64,
+		numberPhotos : 4,
+		cat          : "fotosytexto",
 	},
 };
 

@@ -72,7 +72,7 @@ const Text = ({
 				height,
 				textAlign     : align,
 				letterSpacing : "0px",
-				lineHeight    : "1.2em",
+				// lineHeight    : "1.2em",
 				fontSize      : handlerSizeText(),
 			}}
 			{...((!isInPaginator && !isThumbNail) && {
