@@ -12,6 +12,7 @@ const Text = ({
 	width="100%",
 	height="100%",
 }) => {
+	const isNullableAction = isThumbNail || isInPaginator;
 	const handleDefaultText = () => {
 		if (!isThumbNail && (type === "regular")) {
 			return "Doble click para redactar...";
@@ -66,7 +67,7 @@ const Text = ({
 	return (
 		<div
 			tabIndex={1}
-			className="Text"
+			className={!isNullableAction ? "Text isInWorkSpace" : "Text"}
 			style={{
 				width,
 				height,
@@ -75,7 +76,7 @@ const Text = ({
 				// lineHeight    : "1.2em",
 				fontSize      : handlerSizeText(),
 			}}
-			{...((!isInPaginator && !isThumbNail) && {
+			{...(!isNullableAction && {
 				onClick      : (e) => handleClick(e),
 				onDoubleClic : (e) => activeEditText(e),
 			})}

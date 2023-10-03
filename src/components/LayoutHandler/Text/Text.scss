@@ -5,16 +5,16 @@
     p {
         font-size: initial !important;
     }
+    border: 0.05em solid transparent;
 
     overflow: hidden;
 
-    &.isInPaginator {
-        border: 0.05em solid #5FD15C;
+    &.isInWorkSpace {
+        &:focus {
+            border: 0.05em solid #5FD15C;
+        }
     }
     
-    &:focus {
-        border: 0.05em solid #5FD15C;
-    }
 
     .placeHolderText {
         font-size: 12;
