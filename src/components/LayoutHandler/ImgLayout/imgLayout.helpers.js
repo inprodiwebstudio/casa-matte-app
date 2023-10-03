@@ -10,7 +10,7 @@ export const handlerResizerImage = (image, isInWorkSpcae) => {
 
 export const selectPhotoUrl = (photoData) => {
 	if (photoData?.urlPhotoEdited) {
-		return photoData?.url;
+		return photoData?.urlPhotoEdited;
 	}
 	return photoData?.url;
 };

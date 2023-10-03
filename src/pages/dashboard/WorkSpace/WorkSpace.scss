@@ -102,15 +102,18 @@
 			font-size: 100%;
 
 			@include laptop {
-				transform: scale(0.7, 0.7);
+				transform: scale(0.75, 0.75);
+				z-index: 1;
 			}
 
 			@include big-laptop {
 				transform: scale(0.7, 0.7);
+				z-index: 1;
 			}
 
 			@include big-tablet {
 				transform: scale(0.6, 0.6);
+				z-index: 1;
 			}
 		}
 	}
