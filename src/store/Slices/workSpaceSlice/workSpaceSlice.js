@@ -408,7 +408,9 @@ export const workSpaceSlice = createSlice({
 		addLayout : (state, {payload}) => {
 			const cloneData = {...state.data};
 			const parseToListImages = Array.from(Array(payload?.numberPhotos).keys()).map(e => ({id : "", url : ""}));
+			const parseToListText = Array.from(Array(payload?.numberText).keys()).map(e => (""));
 			const myPhotos = Object.assign({}, parseToListImages);
+			const myText = Object.assign({}, parseToListText);
 			const isFullBook = () => {
 				switch (`${cloneData?.sizePhotoBook}-${cloneData?.format}`) {
 					case "grande-vertical":
@@ -422,13 +424,13 @@ export const workSpaceSlice = createSlice({
 				cloneData.pages[payload.pageId]["sheet1"] = {
 					...cloneData.pages[payload.pageId]["sheet1"],
 					layoutType : payload.layout,
-					text       : cloneData.pages[payload.pageId]["sheet1"]["text"],
+					text       : myText,
 					photos     : myPhotos,
 				};
 				cloneData.pages[payload.pageId]["sheet2"] = {
 					...cloneData.pages[payload.pageId]["sheet2"],
 					layoutType : "",
-					text       : cloneData.pages[payload.pageId]["sheet2"]["text"],
+					text       : {},
 					photos     : {},
 				};
 				state.data = cloneData;
@@ -440,6 +442,7 @@ export const workSpaceSlice = createSlice({
 			cloneData.pages[payload.pageId][payload.sheetId] = {
 				...cloneData.pages[payload.pageId][payload.sheetId],
 				layoutType : payload.layout,
+				text       : myText,
 				photos     : myPhotos,
 			};
 			state.data = cloneData;

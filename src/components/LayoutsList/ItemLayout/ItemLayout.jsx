@@ -42,6 +42,7 @@ const ItemLayout = ({
 				layout       : layoutData?.id,
 				pageId       : pageDataSelected.pageId,
 				numberPhotos : layoutData?.numberPhotos,
+				numberText   : layoutData?.numberText,
 				sheetId      : pageDataSelected.currentPage,
 			}));
 			dispatch(workSpaceSlice.clearSelectedPageData());
