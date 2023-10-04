@@ -12,6 +12,7 @@ const Mod38 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			<Stack>
 				<Text
 					type="h1"
+					sheetNo={sheetNo}
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}

@@ -26,6 +26,7 @@ const Mod59 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					align="left"
 					type="h4"
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+					sheetNo={sheetNo}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}
 				/>

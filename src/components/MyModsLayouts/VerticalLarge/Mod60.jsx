@@ -33,6 +33,7 @@ const Mod60 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				<Text
 					align="right"
 					type="regular"
+					sheetNo={sheetNo}
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}

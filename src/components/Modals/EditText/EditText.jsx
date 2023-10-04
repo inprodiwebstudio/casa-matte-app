@@ -27,7 +27,7 @@ import "./EditText.scss";
 const EditText = ({innerProps, workSpaceSlice}) => {
 	const [editorState, setEditorState] = useState(null);
 
-	const { pageId, sheetNo, dataTextPage } = innerProps;
+	const { pageId, sheetNo, dataTextPage, layoutNo } = innerProps;
 
 	const onEditorStateChange = function(editorState) {
 		setEditorState(editorState);
@@ -35,7 +35,7 @@ const EditText = ({innerProps, workSpaceSlice}) => {
 
 	const handleAddText = () => {
 		const text = editorState;
-		workSpaceSlice.addText({pageId, sheetNo, text});
+		workSpaceSlice.addText({pageId, sheetNo, text, layoutNo});
 		closeAllModals();
 	};
 

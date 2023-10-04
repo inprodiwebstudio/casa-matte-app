@@ -21,6 +21,7 @@ const Mod58 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			<Stack w="60%" mb="0.15em">
 				<Text
 					align="center"
+					sheetNo={sheetNo}
 					type="h4"
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isInPaginator={isInPaginator}

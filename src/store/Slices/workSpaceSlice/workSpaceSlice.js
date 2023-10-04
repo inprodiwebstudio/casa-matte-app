@@ -297,7 +297,7 @@ export const workSpaceSlice = createSlice({
 			state.history.current = history.currentAction;
 		},
 		addText : (state, {payload}) => {
-			state.data.pages[payload.pageId][payload.sheetNo]["text"] = payload.text;
+			state.data.pages[payload.pageId][`sheet${payload.sheetNo}`]["text"][payload.layoutNo] = payload.text;
 
 			const myUndoData = {
 				...state.data,

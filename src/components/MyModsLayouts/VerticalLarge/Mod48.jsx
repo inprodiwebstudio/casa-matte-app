@@ -49,6 +49,7 @@ const Mod48 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<Center>
 						<Text
 							type="h2"
+							sheetNo={sheetNo}
 							data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
@@ -65,6 +66,7 @@ const Mod48 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<Text
 						align="center"
 						type="h5"
+						sheetNo={sheetNo}
 						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
@@ -72,6 +74,7 @@ const Mod48 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<Text
 						align="center"
 						type="h5"
+						sheetNo={sheetNo}
 						data={textInsertion(data?.text[2], defaultText03, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
@@ -79,6 +82,7 @@ const Mod48 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<Text
 						align="center"
 						type="h5"
+						sheetNo={sheetNo}
 						data={textInsertion(data?.text[3], defaultText04, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
@@ -86,6 +90,7 @@ const Mod48 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<Text
 						align="center"
 						type="h5"
+						sheetNo={sheetNo}
 						data={textInsertion(data?.text[4], defaultText05, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}

@@ -6,6 +6,7 @@ import { textInsertion }     from "helpers";
 
 
 const Mod62 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+
 	const defaultText01 = "Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper.";
 
 	return (
@@ -37,6 +38,8 @@ const Mod62 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<Text
 						align="justify"
 						type="regular"
+						textNo={0}
+						sheetNo={sheetNo}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
@@ -46,6 +49,8 @@ const Mod62 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<Text
 						align="justify"
 						type="regular"
+						textNo={1}
+						sheetNo={sheetNo}
 						data={textInsertion(data?.text[1], defaultText01, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}

@@ -1,10 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import PropTypes from "prop-types";
+import PropTypes     from "prop-types";
+import { useParams } from "react-router-dom";
+
+import { openContextModal } from "@mantine/modals";
 
 import "./Text.scss";
 
 const Text = ({
 	data,
+	sheetNo,
+	textNo,
 	align="center",
 	type="regular",
 	isThumbNail,
@@ -13,6 +18,9 @@ const Text = ({
 	height="100%",
 }) => {
 	const isNullableAction = isThumbNail || isInPaginator;
+
+	const { pageId } = useParams();
+
 	const handleDefaultText = () => {
 		if (!isThumbNail && (type === "regular")) {
 			return "Doble click para redactar...";
@@ -61,7 +69,15 @@ const Text = ({
 
 	const activeEditText = (e) => {
 		e.stopPropagation();
-		console.log("To edit text");
+		openContextModal({
+			modal      : "editText",
+			innerProps : {
+				pageId,
+				sheetNo,
+				dataTextPage : data,
+				layoutNo     : textNo,
+			},
+		});
 	};
 
 	return (
@@ -76,9 +92,10 @@ const Text = ({
 				// lineHeight    : "1.2em",
 				fontSize      : handlerSizeText(),
 			}}
+			// onDoubleClick={(e) => activeEditText(e)}
 			{...(!isNullableAction && {
-				onClick      : (e) => handleClick(e),
-				onDoubleClic : (e) => activeEditText(e),
+				onClick       : (e) => handleClick(e),
+				onDoubleClick : (e) => activeEditText(e),
 			})}
 		>
 			{
