@@ -1,10 +1,14 @@
 import {Stack, Flex, Group } from "@mantine/core";
 import ImgLayout             from "components/LayoutHandler/ImgLayout";
 import Text                  from "components/LayoutHandler/Text";
+import { textInsertion }     from "helpers";
 //Own components
 
 
 const Mod58 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+
+	const defaultText01 = "TITLE";
+
 	return (
 		<Flex
 			p="8%"
@@ -15,7 +19,13 @@ const Mod58 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			direction="column"
 		>
 			<Stack w="60%" mb="0.15em">
-				<Text align="center" type="h4" data="TITLE" isInPaginator={isInPaginator} isThumbNail={isThumbNail} />
+				<Text
+					align="center"
+					type="h4"
+					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+					isInPaginator={isInPaginator}
+					isThumbNail={isThumbNail}
+				/>
 			</Stack>
 			<Group
 				w="100%"

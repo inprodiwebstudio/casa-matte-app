@@ -1,10 +1,15 @@
-import {Stack, Flex } from "@mantine/core";
-import ImgLayout      from "components/LayoutHandler/ImgLayout";
+import {Stack, Flex }    from "@mantine/core";
+import ImgLayout         from "components/LayoutHandler/ImgLayout";
+import { textInsertion } from "helpers";
+
 //Own components
 import Text from "components/LayoutHandler/Text";
 
 
 const Mod60 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+
+	const defaultText01 = "Subtitle";
+
 	return (
 		<Flex
 			w="100%"
@@ -25,7 +30,13 @@ const Mod60 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				spacing="0.07em"
 				w="45%"
 			>
-				<Text align="right" type="regular" data="Subtitle" isInPaginator={isInPaginator} isThumbNail={isThumbNail} />
+				<Text
+					align="right"
+					type="regular"
+					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+					isInPaginator={isInPaginator}
+					isThumbNail={isThumbNail}
+				/>
 			</Stack>
 		</Flex>
 	);

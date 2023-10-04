@@ -1,11 +1,17 @@
-import {Stack, Flex } from "@mantine/core";
-import DividerLayout  from "components/LayoutHandler/DividerLayout";
-import ImgLayout      from "components/LayoutHandler/ImgLayout";
-import Text           from "components/LayoutHandler/Text";
+import {Stack, Flex }    from "@mantine/core";
+import DividerLayout     from "components/LayoutHandler/DividerLayout";
+import ImgLayout         from "components/LayoutHandler/ImgLayout";
+import Text              from "components/LayoutHandler/Text";
+import { textInsertion } from "helpers";
 //Own components
 
 
 const Mod64 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+
+	const defaultText01 = "TITLE";
+
+	const defaultText02 = "Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper.";
+
 	return (
 		<Flex
 			w="100%"
@@ -52,14 +58,20 @@ const Mod64 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						pr="9%"
 					>
 						<Stack spacing="0.09em">
-							<Text align="left" type="h4" data="TITLE" isInPaginator={isInPaginator} isThumbNail={isThumbNail} />
+							<Text
+								align="left"
+								type="h4"
+								data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+								isInPaginator={isInPaginator}
+								isThumbNail={isThumbNail}
+							/>
 							<DividerLayout long="100%" position="h" />
 						</Stack>
 						<Stack style={{overflow : "hidden"}}>
 							<Text
 								align="justify"
 								type="regular"
-								data="Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper."
+								data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 								isInPaginator={isInPaginator}
 								isThumbNail={isThumbNail}
 							/>

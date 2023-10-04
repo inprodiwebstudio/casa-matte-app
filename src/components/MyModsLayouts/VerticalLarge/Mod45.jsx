@@ -1,10 +1,12 @@
 import { Flex, Stack } from "@mantine/core";
 //Own components
-import Text          from "components/LayoutHandler/Text";
-import DividerLayout from "components/LayoutHandler/DividerLayout";
+import Text              from "components/LayoutHandler/Text";
+import DividerLayout     from "components/LayoutHandler/DividerLayout";
+import { textInsertion } from "helpers";
 
 
 const Mod45 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+
 	const handleWidthTextContainer = () => {
 		if (isThumbNail) {
 			return "38px";
@@ -16,6 +18,11 @@ const Mod45 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			return "40%";
 		}
 	};
+
+	const defaultText01 = "";
+
+	const defaultText02 = "Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper, pharetra odio conubia dictumst malesuada lectus dis penatibus, primis orci dictum sociosqu nam platea parturient cursus.";
+
 	return (
 		<Flex
 			p="8%"
@@ -35,11 +42,23 @@ const Mod45 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					gap="0.05em"
 					justify="flex-start"
 				>
-					<Text align="left" type="h4" data="" isInPaginator={isInPaginator} isThumbNail={isThumbNail} />
+					<Text
+						align="left"
+						type="h4"
+						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+					/>
 					<DividerLayout long="20%" position="h" />
 				</Flex>
 				<Flex justify="flex-start">
-					<Text align="justify" type="regular" data="Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper, pharetra odio conubia dictumst malesuada lectus dis penatibus, primis orci dictum sociosqu nam platea parturient cursus." isInPaginator={isInPaginator} isThumbNail={isThumbNail} />
+					<Text
+						align="justify"
+						type="regular"
+						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+					/>
 				</Flex>
 			</Stack>
 		</Flex>

@@ -1,10 +1,16 @@
 import {Stack, Flex } from "@mantine/core";
 import ImgLayout      from "components/LayoutHandler/ImgLayout";
 //Own components
-import Text from "components/LayoutHandler/Text";
+import Text              from "components/LayoutHandler/Text";
+import { textInsertion } from "helpers";
 
 
 const Mod52 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+
+	const defaultText01 = "";
+
+	const defaultText02 = "SUBTITTLE";
+
 	return (
 		<Flex
 			p="8%"
@@ -18,7 +24,13 @@ const Mod52 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			<Stack
 				spacing="0.07em"
 			>
-				<Text align="left" type="h1" data="" isInPaginator={isInPaginator} isThumbNail={isThumbNail} />
+				<Text
+					align="left"
+					type="h1"
+					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+					isInPaginator={isInPaginator}
+					isThumbNail={isThumbNail}
+				/>
 			</Stack>
 			<Stack w="60%" h="100%">
 				<ImgLayout
@@ -31,7 +43,13 @@ const Mod52 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			<Stack
 				spacing="0.07em"
 			>
-				<Text align="left" type="h5" data="SUBTITTLE" isInPaginator={isInPaginator} isThumbNail={isThumbNail} />
+				<Text
+					align="left"
+					type="h5"
+					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+					isInPaginator={isInPaginator}
+					isThumbNail={isThumbNail}
+				/>
 			</Stack>
 		</Flex>
 	);
