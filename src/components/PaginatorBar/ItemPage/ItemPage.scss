@@ -41,6 +41,7 @@
     & .page-container {
         width: auto;
         height: 470px;
+        max-width: 350px;
         padding: 8px;
         display: flex;
         align-items: center;
@@ -49,7 +50,7 @@
         transform: scale(0.2, 0.2);
 
         & .numbPages-container {
-            width: 65%;
+            width: 450px;
             display: flex;
 
             p {

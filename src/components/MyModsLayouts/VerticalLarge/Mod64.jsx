@@ -69,7 +69,7 @@ const Mod64 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							/>
 							<DividerLayout long="100%" position="h" />
 						</Stack>
-						<Stack style={{overflow : "hidden"}}>
+						<Stack w={"100%"} style={{overflow : "hidden"}}>
 							<Text
 								align="justify"
 								type="regular"
