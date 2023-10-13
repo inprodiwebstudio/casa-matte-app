@@ -63,8 +63,42 @@ import Mod62 from "./Mod62";
 import Mod63 from "./Mod63";
 import Mod64 from "./Mod64";
 
+import {
+	FrontMod1,
+	FrontMod2,
+	FrontMod3,
+	FrontMod4,
+} from "./FrontPages";
 
 const VerticalLarge = {
+	FrontMod1 : {
+		id           : "FrontMod1",
+		layout       : FrontMod1,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "portadas",
+	},
+	FrontMod2 : {
+		id           : "FrontMod2",
+		layout       : FrontMod2,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "portadas",
+	},
+	FrontMod3 : {
+		id           : "FrontMod3",
+		layout       : FrontMod3,
+		numberPhotos : 1,
+		numberText   : 3,
+		cat          : "portadas",
+	},
+	FrontMod4 : {
+		id           : "FrontMod4",
+		layout       : FrontMod4,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "portadas",
+	},
 	Mod1 : {
 		id           : "Mod1",
 		layout       : Mod1,

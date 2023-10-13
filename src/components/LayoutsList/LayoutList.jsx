@@ -27,14 +27,21 @@ const LayoutList = () => {
 
 	useEffect(() => {
 		if ((filterLayouts?.type === "all") && (filterLayouts?.photosQuantity?.value === "all")) {
-			setLayoutList(layouts);
+			const noCoverList = layouts.filter(layout => layout.cat !== "portadas");
+			setLayoutList(noCoverList);
 			return;
 		}
 		if ((filterLayouts?.type === "all") || (filterLayouts?.photosQuantity?.value === "all")) {
 			const newListLayouts = layouts.filter(layout => (
 				(layout.cat === filterLayouts.type) || (layout.numberPhotos === filterLayouts.photosQuantity.value)
 			));
-			setLayoutList(newListLayouts);
+			if (filterLayouts?.type !== "portadas") {
+				const noCoverList = newListLayouts.filter(layout => layout.cat !== "portadas");
+				setLayoutList(noCoverList);
+				return;
+			}
+			const noCoverList = newListLayouts.filter(layout => layout.cat === "portadas");
+			setLayoutList(noCoverList);
 			return;
 		}
 		const newListLayouts = layouts.filter(layout => (

@@ -1,14 +1,17 @@
-import { useState }                               from "react";
+import { useEffect, useState }                    from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
 //Own components
 import { Loading }        from "core/components";
 import { workSpaceSlice } from "store/Slices";
+import { useParams }      from "react-router";
 
 import "./Tabs.scss";
 
 const Tabs = ({tabList, loading}) => {
-	const [ currentTab, setCurrentTab ] = useState(tabList[0].label);
+	const { pageId } = useParams();
+
+	const [ currentTab, setCurrentTab ] = useState(tabList[0]?.label);
 
 	const dispatch = useDispatch();
 
@@ -23,6 +26,14 @@ const Tabs = ({tabList, loading}) => {
 		}));
 		setCurrentTab(tabName);
 	};
+
+	useEffect(() => {
+		if (pageId === "frontpage") {
+			setCurrentTab("PORTADAS");
+			return;
+		}
+		setCurrentTab("TODOS");
+	}, [pageId]);
 
 	return (
 		<div className="Tabs">

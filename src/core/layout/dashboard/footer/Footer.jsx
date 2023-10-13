@@ -1,4 +1,4 @@
-import { useState }                               from "react";
+import { useState, useEffect }                    from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import LayoutsList                                from "components/LayoutsList";
 
@@ -10,9 +10,19 @@ import { workSpaceSlice } from "store/Slices";
 import { Tabs, SelectorMenuItem } from "core/components";
 import { ArrowTop }               from "Resources/icons";
 import "./Footer.scss";
+import { useParams }              from "react-router";
 
 const Footer = () => {
 	const [ dropedToggle, setDropedToggle ] = useState(false);
+
+	const { pageId } = useParams();
+
+	const frontPagesTab = [{
+		label  : "PORTADAS",
+		filter : "portadas",
+	}];
+
+	const handleTabsLayouts = pageId !== "frontpage" ? filterTabs : frontPagesTab;
 
 	const dispatch = useDispatch();
 
@@ -26,6 +36,21 @@ const Footer = () => {
 			photosQuantity : objValue,
 		}));
 	};
+
+	useEffect(() => {
+	  if (pageId === "frontpage") {
+			dispatch(workSpaceSlice.actions.setLayoutFilter({
+				type           : "portadas",
+				photosQuantity : currentFileterLayout.photosQuantity,
+			}));
+			return;
+	  }
+	  dispatch(workSpaceSlice.actions.setLayoutFilter({
+			type           : "all",
+			photosQuantity : currentFileterLayout.photosQuantity,
+		}));
+		return;
+	}, [pageId]);
 
 	return (
 		<div id="Footer" className={`${dropedToggle && "full-size"}`}>
@@ -45,7 +70,7 @@ const Footer = () => {
 				}
 			</div>
 			<div className="header-in-footer-container">
-				<Tabs tabList={filterTabs} loading={loading} />
+				<Tabs tabList={handleTabsLayouts} loading={loading} />
 			</div>
 			<div className="body-layouts-container">
 				<div
