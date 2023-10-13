@@ -8,12 +8,21 @@ const initialState = {
 		sizePhotoBook  : "",
 		sizeDimentions : "",
 		pasta          : "",
-		frontPage      : {},
-		minPages       : 0,
-		maxPages       : 0,
-		numberOfPages  : 50,
-		price          : 0,
-		pages          : {
+		frontPage      : {
+			id     : "FrontLayout",
+			sheet1 : {
+				layoutType : "FrontLayout",
+				text       : "",
+				photos     : {
+					1 : "",
+				},
+			},
+		},
+		minPages      : 0,
+		maxPages      : 0,
+		numberOfPages : 50,
+		price         : 0,
+		pages         : {
 			page1 : {
 				id     : "page1",
 				sheet1 : {

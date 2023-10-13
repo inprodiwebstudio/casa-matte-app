@@ -20,22 +20,12 @@ const WorkSpace = () => {
 
 
 	const workSpaceData = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
+	const workSpaceFrontPage = useSelector((state) => state.workSpaceSlice.data?.frontPage, shallowEqual);
 	const workSpaceHistory = useSelector((state) => state.workSpaceSlice.history, shallowEqual);
 	const isLoggin = useSelector((state) => state.authSlice.loggedIn, shallowEqual);
 	const isLoading = useSelector((state) => state.workSpaceSlice?.loading, shallowEqual);
 
 	const isFrontLayout = pageId === "frontpage";
-
-	const defaultViewData = {
-		id     : "FrontLayout",
-		sheet1 : {
-			layoutType : "FrontLayout",
-			text       : "",
-			photos     : {
-				1 : "",
-			},
-		},
-	};
 
 	const isAvailableUndo = isValidArray(workSpaceHistory.undo);
 	const isAvailableRedo = isValidArray(workSpaceHistory.redo);
@@ -55,7 +45,7 @@ const WorkSpace = () => {
 			setMyWorkSpaceData(workSpaceData[pageId]);
 		}
 		if (isFrontLayout) {
-			setMyWorkSpaceData(defaultViewData);
+			setMyWorkSpaceData(workSpaceFrontPage);
 		}
 	}, [pageId, workSpaceData]);
 
