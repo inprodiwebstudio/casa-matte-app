@@ -341,8 +341,10 @@ export const workSpaceSlice = createSlice({
 			const newData = {...state.data};
 			if (payload?.pageId === "frontpage") {
 				newData.frontPage.sheet1.photos = {
-					id  : "",
-					url : "",
+					0 : {
+						id  : "",
+						url : "",
+					},
 				};
 			} else {
 				newData.pages[payload.pageId][`sheet${payload.sheetNo}`]["photos"][payload.layoutNo] = {
@@ -372,7 +374,7 @@ export const workSpaceSlice = createSlice({
 			});
 		},
 		autoFillImages : (state, {payload}) => {
-			const newData = {...state?.data?.pages};
+			const newData = {FrontLayout : {...state.data.frontPage}, ...state?.data?.pages};
 
 			const listOfPages = [...convertToArray(newData)];
 			const listOfPhotos = [...payload];
@@ -414,6 +416,8 @@ export const workSpaceSlice = createSlice({
 				};
 			}
 
+			state.data.frontPage = newData.FrontLayout;
+			delete newData.FrontLayout;
 			state.data.pages = newData;
 
 			const history = new History();
