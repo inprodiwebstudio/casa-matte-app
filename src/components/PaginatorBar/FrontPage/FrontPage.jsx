@@ -1,15 +1,19 @@
 
 //Own Components
 // import BookSheets                 from "components/BookSheets";
-import { useNavigate, useParams } from "react-router";
-import {Reload}                   from "Resources/icons";
+import { shallowEqual, useSelector } from "react-redux";
+import { useNavigate, useParams }    from "react-router";
+import {Reload}                      from "Resources/icons";
 import "./FrontPage.scss";
+import BookPages                     from "components/BookPages";
 
 const FrontPage = () => {
 	const navigate = useNavigate();
 	const { pageId } = useParams();
 
-	// const LayoutComponent = BookSheets["LargeFormat"];
+	const isLoading = useSelector((state) => state.workSpaceSlice?.loading, shallowEqual);
+
+	const workSpaceFrontPage = useSelector((state) => state.workSpaceSlice.data?.frontPage, shallowEqual);
 
 	return (
 		<div
@@ -24,19 +28,15 @@ const FrontPage = () => {
 				</div>
 				<div>
 					<div className="withe-page-container">
-						{/* <LayoutComponent
-							pageData={{
-								id     : "FrontLayout",
-								sheet1 : {
-									layoutType : "FrontMod1",
-									text       : {},
-									photos     : {
-										1 : "",
-									},
-								},
-							}}
-						/> */}
-						<></>
+						{
+							workSpaceFrontPage && (
+								<BookPages
+									isInWorkSpcae={false}
+									loading={isLoading}
+									pageData={workSpaceFrontPage}
+								/>
+							)
+						}
 					</div>
 					<div className="pages-book-conatier">
 						<p>ATRÁS</p>

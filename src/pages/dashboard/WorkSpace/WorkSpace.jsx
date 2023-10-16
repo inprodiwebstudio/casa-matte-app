@@ -18,7 +18,6 @@ const WorkSpace = () => {
 
 	const [ myWorkSpaceData, setMyWorkSpaceData ] = useState({});
 
-
 	const workSpaceData = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
 	const workSpaceFrontPage = useSelector((state) => state.workSpaceSlice.data?.frontPage, shallowEqual);
 	const workSpaceHistory = useSelector((state) => state.workSpaceSlice.history, shallowEqual);
