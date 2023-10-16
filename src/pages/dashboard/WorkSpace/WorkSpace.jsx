@@ -46,7 +46,7 @@ const WorkSpace = () => {
 		if (isFrontLayout) {
 			setMyWorkSpaceData(workSpaceFrontPage);
 		}
-	}, [pageId, workSpaceData]);
+	}, [pageId, workSpaceData, workSpaceFrontPage]);
 
 	document.onkeydown = undoAndRedoActions;
 	return (
