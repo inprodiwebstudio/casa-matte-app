@@ -3,7 +3,7 @@ export { default as galleryApiUrl }              from "./galleryApiUrl";
 export { default as convertToArray }             from "./convertToArray";
 export { default as isValidArray }               from "./isValidArray";
 export { default as buildFormData }              from "./buildFormData";
-export { default as convertToObject }            from "./convertToObject";
+export { default as convertToObject }            from "./convertToobject";
 export { default as textInsertion }              from "./textInsertion";
 export { default as bindAll }                    from "./Functions/bindAll";
 export { default as useDebounce }                from "./Hooks/useDebounce";

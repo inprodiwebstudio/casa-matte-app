@@ -30,7 +30,7 @@ const PhotoCard = ({
 
 	const photoBookConfig = photoBooksConfing[photoBookType ?? "white"];
 
-	const pageData = workSpaceData?.pages?.[pageId];
+	const pageData = pageId === "frontpage" ? workSpaceData?.frontPage : workSpaceData?.pages?.[pageId];
 
 	const [ isDragger, setIsDragger ] = useState(false);
 	const [ loadingPhoto, setLoadingphoto ] = useState(true);
