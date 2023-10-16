@@ -49,6 +49,7 @@ const WorkSpace = () => {
 	}, [pageId, workSpaceData, workSpaceFrontPage]);
 
 	document.onkeydown = undoAndRedoActions;
+
 	return (
 		<div className="WorkSpace">
 			<div className="canva-space">
