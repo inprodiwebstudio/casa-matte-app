@@ -11,7 +11,7 @@ const initialState = {
 		frontPage      : {
 			id     : "FrontLayout",
 			sheet1 : {
-				layoutType : "FrontLayout",
+				layoutType : "",
 				text       : "",
 				photos     : {
 					1 : "",

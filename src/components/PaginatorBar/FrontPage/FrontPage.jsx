@@ -1,6 +1,6 @@
 
 //Own Components
-import BookSheets                 from "components/BookSheets";
+// import BookSheets                 from "components/BookSheets";
 import { useNavigate, useParams } from "react-router";
 import {Reload}                   from "Resources/icons";
 import "./FrontPage.scss";
@@ -9,7 +9,7 @@ const FrontPage = () => {
 	const navigate = useNavigate();
 	const { pageId } = useParams();
 
-	const LayoutComponent = BookSheets["LargeFormat"];
+	// const LayoutComponent = BookSheets["LargeFormat"];
 
 	return (
 		<div
@@ -24,18 +24,19 @@ const FrontPage = () => {
 				</div>
 				<div>
 					<div className="withe-page-container">
-						<LayoutComponent
+						{/* <LayoutComponent
 							pageData={{
-								id     : "page1",
+								id     : "FrontLayout",
 								sheet1 : {
-									layoutType : "FrontLayout",
-									text       : "",
+									layoutType : "FrontMod1",
+									text       : {},
 									photos     : {
 										1 : "",
 									},
 								},
 							}}
-						/>
+						/> */}
+						<></>
 					</div>
 					<div className="pages-book-conatier">
 						<p>ATRÁS</p>

@@ -63,11 +63,12 @@ const BookPages = ({
 		);
 	}
 
+
 	return (
 		<div
 			className="BookPages"
 			style={{
-				aspectRatio : (isInDoublePage || pageData?.sheet2) ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
+				aspectRatio : (isInDoublePage || pageData?.sheet2 || pageData?.sheet1?.layoutType?.includes("Front")) ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
 			}}
 		>
 			<div
@@ -75,7 +76,7 @@ const BookPages = ({
 					`page-body ${(currentSelectedPage === "sheet1") && "isActivePage"}`
 				}
 				style={{
-					aspectRatio : isInDoublePage ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
+					aspectRatio : (isInDoublePage || pageData?.sheet1?.layoutType?.includes("Front")) ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
 				}}
 				{
 					...(isInWorkSpcae && {
@@ -84,12 +85,12 @@ const BookPages = ({
 				}
 			>
 				{
-					(pageData?.sheet1?.layoutType === "FrontLayout") && (
-						<FrontLayout />
+					(pageData?.sheet1?.layoutType.includes("Front")) && (
+						<FrontLayout pageData={pageData} isThumbNail={isThumbNail} isInPaginator={isInPaginator} isInWorkSpcae={isInWorkSpcae} />
 					)
 				}
 				{
-					((pageData?.sheet1?.layoutType !== "") && (pageData?.sheet1?.layoutType !== "FrontLayout")) && (
+					((pageData?.sheet1?.layoutType !== "") && (!pageData?.sheet1?.layoutType.includes("Front"))) && (
 						handleLayoutMod(pageData?.sheet1, 1)
 					)
 				}
