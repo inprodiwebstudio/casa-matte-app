@@ -428,7 +428,17 @@ export const workSpaceSlice = createSlice({
 						return ["Mod6", "Mod7", "FrontLayout"].includes(payload.layout);
 				}
 			};
-			const isAvailableDoublePage = cloneData.pages[payload.pageId]["sheet2"];
+			const isAvailableDoublePage = cloneData.pages[payload.pageId]?.["sheet2"];
+			if (payload?.pageId === "FrontLayout") {
+				cloneData.frontPage.sheet1 = {
+					...cloneData.frontPage.sheet1,
+					layoutType : payload.layout,
+					text       : myText,
+					photos     : myPhotos,
+				};
+				state.data = cloneData;
+				return;
+			}
 			if (isFullBook() && isAvailableDoublePage) {
 				cloneData.pages[payload.pageId]["sheet1"] = {
 					...cloneData.pages[payload.pageId]["sheet1"],
