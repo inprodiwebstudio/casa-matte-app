@@ -388,12 +388,12 @@ export const workSpaceSlice = createSlice({
 				const isSinglePage = (["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(newData[data?.id].sheet1?.layoutType));
 
 				sheet1Photos.forEach((space, e) => {
-					if (!space?.id) {
+					if (!space?.id && data?.sheet1?.layoutType !== "") {
 						noImagesListKey.push(`${data?.id}.sheet1.photos.${e}`);
 					}
 				});
 
-				if (sheet2Photos && !isSinglePage) {
+				if (sheet2Photos && !isSinglePage && data?.sheet1?.layoutType !== "") {
 					sheet2Photos.forEach((space, e) => {
 						if (!space?.id) {
 							noImagesListKey.push(`${data?.id}.sheet2.photos.${e}`);
