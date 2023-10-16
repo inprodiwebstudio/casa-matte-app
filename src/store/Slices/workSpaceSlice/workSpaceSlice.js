@@ -339,10 +339,17 @@ export const workSpaceSlice = createSlice({
 		},
 		removePhoto : (state, {payload}) => {
 			const newData = {...state.data};
-			newData.pages[payload.pageId][`sheet${payload.sheetNo}`]["photos"][payload.layoutNo] = {
-				id  : "",
-				url : "",
-			};
+			if (payload?.pageId === "frontpage") {
+				newData.frontPage.sheet1.photos = {
+					id  : "",
+					url : "",
+				};
+			} else {
+				newData.pages[payload.pageId][`sheet${payload.sheetNo}`]["photos"][payload.layoutNo] = {
+					id  : "",
+					url : "",
+				};
+			}
 			state.data = newData;
 			const history = new History();
 			history.undoStack = state.history.undo;
