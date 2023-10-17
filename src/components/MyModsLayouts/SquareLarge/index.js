@@ -35,7 +35,106 @@ import Mod34 from "./Mod34";
 import Mod35 from "./Mod35";
 import Mod36 from "./Mod36";
 
+import {
+	FrontMod1,
+	FrontMod2,
+	FrontMod3,
+	FrontMod4,
+	FrontMod5,
+	FrontMod6,
+	FrontMod7,
+	FrontMod8,
+	FrontMod9,
+	FrontMod10,
+	FrontMod11,
+	FrontMod12,
+} from "./FrontPages";
+
 const SquareLarge = {
+	FrontMod1 : {
+		id           : "FrontMod1",
+		layout       : FrontMod1,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "portadas",
+	},
+	FrontMod2 : {
+		id           : "FrontMod2",
+		layout       : FrontMod2,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "portadas",
+	},
+	FrontMod3 : {
+		id           : "FrontMod3",
+		layout       : FrontMod3,
+		numberPhotos : 1,
+		numberText   : 3,
+		cat          : "portadas",
+	},
+	FrontMod4 : {
+		id           : "FrontMod4",
+		layout       : FrontMod4,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "portadas",
+	},
+	FrontMod5 : {
+		id           : "FrontMod5",
+		layout       : FrontMod5,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "portadas",
+	},
+	FrontMod6 : {
+		id           : "FrontMod6",
+		layout       : FrontMod6,
+		numberPhotos : 1,
+		numberText   : 1,
+		cat          : "portadas",
+	},
+	FrontMod7 : {
+		id           : "FrontMod7",
+		layout       : FrontMod7,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "portadas",
+	},
+	FrontMod8 : {
+		id           : "FrontMod8",
+		layout       : FrontMod8,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "portadas",
+	},
+	FrontMod9 : {
+		id           : "FrontMod9",
+		layout       : FrontMod9,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "portadas",
+	},
+	FrontMod10 : {
+		id           : "FrontMod10",
+		layout       : FrontMod10,
+		numberPhotos : 1,
+		numberText   : 1,
+		cat          : "portadas",
+	},
+	FrontMod11 : {
+		id           : "FrontMod11",
+		layout       : FrontMod11,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "portadas",
+	},
+	FrontMod12 : {
+		id           : "FrontMod12",
+		layout       : FrontMod12,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "portadas",
+	},
 	Mod1 : {
 		id           : "Mod1",
 		layout       : Mod1,
