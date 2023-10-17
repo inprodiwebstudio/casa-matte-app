@@ -5,7 +5,7 @@ import ImgLayout      from "components/LayoutHandler/ImgLayout";
 import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
 
-const FrontMod3 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 	const defaultText01 = "";
 
 	const defaultText02 = "SUBTITTLE";
@@ -20,22 +20,12 @@ const FrontMod3 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 			gap="0.2em"
 			direction="column"
 		>
-			<Stack
-				spacing="0.03em"
-			>
+			<Stack w="70%" h="fit-content">
 				<Text
 					align="center"
-					type="h1"
+					type="LargeTitle"
 					sheetNo={sheetNo}
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-				/>
-				<Text
-					align="center"
-					type="h5"
-					sheetNo={sheetNo}
-					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}
 				/>
@@ -48,12 +38,12 @@ const FrontMod3 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					urlImage={data?.photos[0] ?? {}}
 				/>
 			</Stack>
-			<Stack>
+			<Stack w="60%" h="fit-content">
 				<Text
 					align="center"
 					type="h5"
 					sheetNo={sheetNo}
-					data={textInsertion(data?.text[2], defaultText02, isInWorkSpace)}
+					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}
 				/>
@@ -62,4 +52,4 @@ const FrontMod3 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 	);
 };
 
-export default FrontMod3;
+export default FrontMod5;

@@ -53,6 +53,9 @@ const Text = ({
 		if (type === "h1") {
 			return "0.24em";
 		}
+		if (type === "LargeTitle") {
+			return "0.35em";
+		}
 	};
 
 	const handleShowText = () => {
