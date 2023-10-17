@@ -83,9 +83,10 @@ const BodyGallery = ({
 
 	useEffect(() => {
 		const pagesList = convertToArray(workSpaceData?.pages);
+		const listOfAllPages = [workSpaceData?.frontPage, ...pagesList];
 		const newDataSelected = [];
 		if (isValidArray(pagesList)) {
-			pagesList.forEach((data, i) => {
+			listOfAllPages.forEach((data, i) => {
 				const isAVailableSheet2 = data?.sheet2;
 				const sheet1Photos = convertToArray(data?.sheet1?.photos);
 
@@ -121,6 +122,8 @@ const BodyGallery = ({
 		}
 		return false;
 	};
+
+	console.log(selectedImagesIds);
 
 	return (
 		<div className="BodyGallery">
