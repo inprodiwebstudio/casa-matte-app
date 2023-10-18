@@ -3,16 +3,17 @@ import { PDFViewer, Page, Document } from "@react-pdf/renderer";
 import { connect }                   from "react-redux";
 //Own components
 import { convertToArray } from "helpers";
-import largeFormatLayouts from "components/global/LayoutsPage/LargeFormat";
+import VerticalLarge      from "components/MyModsLayouts/VerticalLarge";
+
 
 const TestPdf = ({photoBookData}) => {
 	const listPages = convertToArray(photoBookData?.pages);
 
 	const photoBookTypes = {
-		LargeFormat : {
+		grande : {
 			size                  : [850, 991],
 			isInDoublePageLayouts : ["Mod1", "Mod2", "Mod3", "FrontLayout"],
-			modLayouts            : {...largeFormatLayouts},
+			modLayouts            : {...VerticalLarge},
 		},
 	};
 

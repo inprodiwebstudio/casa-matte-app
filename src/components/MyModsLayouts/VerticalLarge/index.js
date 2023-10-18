@@ -64,6 +64,25 @@ import Mod63 from "./Mod63";
 import Mod64 from "./Mod64";
 
 import {
+	Mod10Pdf,
+	Mod11Pdf,
+	Mod12Pdf,
+	Mod13Pdf,
+	Mod14Pdf,
+	Mod15Pdf,
+	Mod16Pdf,
+	Mod1Pdf,
+	Mod2Pdf,
+	Mod3Pdf,
+	Mod4Pdf,
+	Mod5Pdf,
+	Mod6Pdf,
+	Mod7Pdf,
+	Mod8Pdf,
+	Mod9Pdf,
+} from "./PdfMods/Regular";
+
+import {
 	FrontMod1,
 	FrontMod2,
 	FrontMod3,
@@ -83,6 +102,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
+		pdfLayout    : "",
 	},
 	FrontMod2 : {
 		id           : "FrontMod2",
@@ -90,6 +110,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
+		pdfLayout    : "",
 	},
 	FrontMod3 : {
 		id           : "FrontMod3",
@@ -97,6 +118,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 3,
 		cat          : "portadas",
+		pdfLayout    : "",
 	},
 	FrontMod4 : {
 		id           : "FrontMod4",
@@ -104,6 +126,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
+		pdfLayout    : "",
 	},
 	FrontMod5 : {
 		id           : "FrontMod5",
@@ -111,6 +134,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
+		pdfLayout    : "",
 	},
 	FrontMod6 : {
 		id           : "FrontMod6",
@@ -118,6 +142,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
+		pdfLayout    : "",
 	},
 	FrontMod7 : {
 		id           : "FrontMod7",
@@ -125,6 +150,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
+		pdfLayout    : "",
 	},
 	FrontMod8 : {
 		id           : "FrontMod8",
@@ -132,6 +158,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
+		pdfLayout    : "",
 	},
 	FrontMod9 : {
 		id           : "FrontMod9",
@@ -139,6 +166,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 1,
 		cat          : "portadas",
+		pdfLayout    : "",
 	},
 	FrontMod10 : {
 		id           : "FrontMod10",
@@ -146,42 +174,49 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 1,
 		cat          : "portadas",
+		pdfLayout    : "",
 	},
 	Mod1 : {
 		id           : "Mod1",
 		layout       : Mod1,
 		numberPhotos : 1,
 		cat          : "fotos",
+		pdfLayout    : Mod1Pdf,
 	},
 	Mod2 : {
 		id           : "Mod2",
 		layout       : Mod2,
 		numberPhotos : 1,
 		cat          : "fotos",
+		pdfLayout    : Mod2Pdf,
 	},
 	Mod3 : {
 		id           : "Mod3",
 		layout       : Mod3,
 		numberPhotos : 1,
 		cat          : "fotos",
+		pdfLayout    : Mod3Pdf,
 	},
 	Mod4 : {
 		id           : "Mod4",
 		layout       : Mod4,
 		numberPhotos : 1,
 		cat          : "fotos",
+		pdfLayout    : Mod4Pdf,
 	},
 	Mod5 : {
 		id           : "Mod5",
 		layout       : Mod5,
 		numberPhotos : 1,
 		cat          : "fotos",
+		pdfLayout    : Mod5Pdf,
 	},
 	Mod6 : {
 		id           : "Mod6",
 		layout       : Mod6,
 		numberPhotos : 1,
 		cat          : "fotos",
+		pdfLayout    : Mod6Pdf,
 
 	},
 	Mod7 : {
@@ -189,186 +224,217 @@ const VerticalLarge = {
 		layout       : Mod7,
 		numberPhotos : 1,
 		cat          : "fotos",
+		pdfLayout    : Mod7Pdf,
 	},
 	Mod8 : {
 		id           : "Mod8",
 		layout       : Mod8,
 		numberPhotos : 1,
 		cat          : "fotos",
+		pdfLayout    : Mod8Pdf,
 	},
 	Mod9 : {
 		id           : "Mod9",
 		layout       : Mod9,
 		numberPhotos : 1,
 		cat          : "fotos",
+		pdfLayout    : Mod9Pdf,
 	},
 	Mod10 : {
 		id           : "Mod10",
 		layout       : Mod10,
 		numberPhotos : 1,
 		cat          : "fotos",
+		pdfLayout    : Mod10Pdf,
 	},
 	Mod11 : {
 		id           : "Mod11",
 		layout       : Mod11,
 		numberPhotos : 1,
 		cat          : "fotos",
+		pdfLayout    : Mod11Pdf,
 	},
 	Mod12 : {
 		id           : "Mod12",
 		layout       : Mod12,
 		numberPhotos : 1,
 		cat          : "fotos",
+		pdfLayout    : Mod12Pdf,
 	},
 	Mod13 : {
 		id           : "Mod13",
 		layout       : Mod13,
 		numberPhotos : 2,
 		cat          : "fotos",
+		pdfLayout    : Mod13Pdf,
 	},
 	Mod14 : {
 		id           : "Mod14",
 		layout       : Mod14,
 		numberPhotos : 2,
 		cat          : "fotos",
+		pdfLayout    : Mod14Pdf,
 	},
 	Mod15 : {
 		id           : "Mod15",
 		layout       : Mod15,
 		numberPhotos : 2,
 		cat          : "fotos",
+		pdfLayout    : Mod15Pdf,
 	},
 	Mod16 : {
 		id           : "Mod16",
 		layout       : Mod16,
 		numberPhotos : 2,
 		cat          : "fotos",
+		pdfLayout    : Mod16Pdf,
 	},
 	Mod17 : {
 		id           : "Mod17",
 		layout       : Mod17,
 		numberPhotos : 3,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod18 : {
 		id           : "Mod18",
 		layout       : Mod18,
 		numberPhotos : 3,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod19 : {
 		id           : "Mod19",
 		layout       : Mod19,
 		numberPhotos : 3,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod20 : {
 		id           : "Mod20",
 		layout       : Mod20,
 		numberPhotos : 3,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod21 : {
 		id           : "Mod21",
 		layout       : Mod21,
 		numberPhotos : 3,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod22 : {
 		id           : "Mod22",
 		layout       : Mod22,
 		numberPhotos : 3,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod23 : {
 		id           : "Mod23",
 		layout       : Mod23,
 		numberPhotos : 3,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod24 : {
 		id           : "Mod24",
 		layout       : Mod24,
 		numberPhotos : 3,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod25 : {
 		id           : "Mod25",
 		layout       : Mod25,
 		numberPhotos : 4,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod26 : {
 		id           : "Mod26",
 		layout       : Mod26,
 		numberPhotos : 4,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod27 : {
 		id           : "Mod27",
 		layout       : Mod27,
 		numberPhotos : 4,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod28 : {
 		id           : "Mod28",
 		layout       : Mod28,
 		numberPhotos : 4,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod29 : {
 		id           : "Mod29",
 		layout       : Mod29,
 		numberPhotos : 4,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod30 : {
 		id           : "Mod30",
 		layout       : Mod30,
 		numberPhotos : 5,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod31 : {
 		id           : "Mod31",
 		layout       : Mod31,
 		numberPhotos : 5,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod32 : {
 		id           : "Mod32",
 		layout       : Mod32,
 		numberPhotos : 5,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod33 : {
 		id           : "Mod33",
 		layout       : Mod33,
 		numberPhotos : 5,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod34 : {
 		id           : "Mod34",
 		layout       : Mod34,
 		numberPhotos : 5,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod35 : {
 		id           : "Mod35",
 		layout       : Mod35,
 		numberPhotos : 6,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod36 : {
 		id           : "Mod36",
 		layout       : Mod36,
 		numberPhotos : 6,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod37 : {
 		id           : "Mod37",
 		layout       : Mod37,
 		numberPhotos : 6,
 		cat          : "fotos",
+		pdfLayout    : "",
 	},
 	Mod38 : {
 		id           : "Mod38",
@@ -376,6 +442,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 1,
 		cat          : "texto",
+		pdfLayout    : "",
 	},
 	Mod39 : {
 		id           : "Mod39",
@@ -383,6 +450,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 1,
 		cat          : "texto",
+		pdfLayout    : "",
 	},
 	Mod40 : {
 		id           : "Mod40",
@@ -390,6 +458,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
+		pdfLayout    : "",
 	},
 	Mod41 : {
 		id           : "Mod41",
@@ -397,6 +466,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
+		pdfLayout    : "",
 	},
 	Mod42 : {
 		id           : "Mod42",
@@ -404,6 +474,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 1,
 		cat          : "texto",
+		pdfLayout    : "",
 	},
 	Mod43 : {
 		id           : "Mod43",
@@ -411,6 +482,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 1,
 		cat          : "texto",
+		pdfLayout    : "",
 	},
 	Mod44 : {
 		id           : "Mod44",
@@ -418,6 +490,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
+		pdfLayout    : "",
 	},
 	Mod45 : {
 		id           : "Mod45",
@@ -425,6 +498,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
+		pdfLayout    : "",
 	},
 	Mod46 : {
 		id           : "Mod46",
@@ -432,6 +506,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
+		pdfLayout    : "",
 	},
 	Mod47 : {
 		id           : "Mod47",
@@ -439,6 +514,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 5,
 		cat          : "texto",
+		pdfLayout    : "",
 	},
 	Mod48 : {
 		id           : "Mod48",
@@ -446,6 +522,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 5,
 		cat          : "texto",
+		pdfLayout    : "",
 	},
 	Mod49 : {
 		id           : "Mod49",
@@ -453,6 +530,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 15,
 		cat          : "texto",
+		pdfLayout    : "",
 	},
 	Mod50 : {
 		id           : "Mod50",
@@ -460,6 +538,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 15,
 		cat          : "texto",
+		pdfLayout    : "",
 	},
 	Mod51 : {
 		id           : "Mod51",
@@ -467,6 +546,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 5,
 		cat          : "texto",
+		pdfLayout    : "",
 	},
 	Mod52 : {
 		id           : "Mod52",
@@ -474,6 +554,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "fotosytexto",
+		pdfLayout    : "",
 	},
 	Mod53 : {
 		id           : "Mod53",
@@ -481,6 +562,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "fotosytexto",
+		pdfLayout    : "",
 	},
 	Mod54 : {
 		id           : "Mod54",
@@ -488,6 +570,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "fotosytexto",
+		pdfLayout    : "",
 	},
 	Mod55 : {
 		id           : "Mod55",
@@ -495,6 +578,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "fotosytexto",
+		pdfLayout    : "",
 	},
 	Mod56 : {
 		id           : "Mod56",
@@ -502,6 +586,7 @@ const VerticalLarge = {
 		numberPhotos : 3,
 		numberText   : 1,
 		cat          : "fotosytexto",
+		pdfLayout    : "",
 	},
 	Mod57 : {
 		id           : "Mod57",
@@ -509,6 +594,7 @@ const VerticalLarge = {
 		numberPhotos : 2,
 		numberText   : 1,
 		cat          : "fotosytexto",
+		pdfLayout    : "",
 	},
 	Mod58 : {
 		id           : "Mod58",
@@ -516,6 +602,7 @@ const VerticalLarge = {
 		numberPhotos : 4,
 		numberText   : 1,
 		cat          : "fotosytexto",
+		pdfLayout    : "",
 	},
 	Mod59 : {
 		id           : "Mod59",
@@ -523,6 +610,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 1,
 		cat          : "fotosytexto",
+		pdfLayout    : "",
 	},
 	Mod60 : {
 		id           : "Mod60",
@@ -530,6 +618,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 1,
 		cat          : "fotosytexto",
+		pdfLayout    : "",
 	},
 	Mod61 : {
 		id           : "Mod61",
@@ -537,6 +626,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 1,
 		cat          : "fotosytexto",
+		pdfLayout    : "",
 	},
 	Mod62 : {
 		id           : "Mod62",
@@ -544,6 +634,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "fotosytexto",
+		pdfLayout    : "",
 	},
 	Mod63 : {
 		id           : "Mod63",
@@ -551,6 +642,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "fotosytexto",
+		pdfLayout    : "",
 	},
 	Mod64 : {
 		id           : "Mod64",
@@ -558,6 +650,7 @@ const VerticalLarge = {
 		numberPhotos : 4,
 		numberText   : 2,
 		cat          : "fotosytexto",
+		pdfLayout    : "",
 	},
 };
 

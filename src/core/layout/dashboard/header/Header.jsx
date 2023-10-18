@@ -1,7 +1,7 @@
 import React from "react";
 import "./Header.scss";
 //Mantine
-// import { openContextModal } from "@mantine/modals";
+import { openContextModal } from "@mantine/modals";
 
 //Own components
 import { CarIcon } from "Resources/icons";
@@ -15,9 +15,9 @@ const Header = () => {
 				<div className="icons-container">
 					<div
 						className="icon-container"
-						// onClick={() => openContextModal({
-						// 	modal : "testPdf",
-						// })}
+						onClick={() => openContextModal({
+							modal : "testPdf",
+						})}
 					>
 						<CarIcon size="20px" />
 					</div>

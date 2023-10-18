@@ -123,8 +123,6 @@ const BodyGallery = ({
 		return false;
 	};
 
-	console.log(selectedImagesIds);
-
 	return (
 		<div className="BodyGallery">
 			<div className="header-gallery-container">
