@@ -58,13 +58,19 @@ const TestPdf = ({photoBookData}) => {
 		}
 	};
 
+	const testerInsert = (pageData, index) => {
+		if (index !== 0) {
+			return getComponent(pageData);
+		}
+	};
+
 	return (
 		<div style={{height : "80vh"}}>
 			<PDFViewer style={{height : "80vh", width : "100%"}}>
 				<Document>
 					<>
 						{
-							listPages.map((pageData, index) => getComponent(pageData))
+							listPages.map((pageData, index) => testerInsert(pageData, index))
 						}
 					</>
 				</Document>
