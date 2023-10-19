@@ -12,15 +12,19 @@ const Mod1Pdf = ({images, isRightPage}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height : "991px",
-				width  : "850px",
+				height   : "991px",
+				width    : "850px",
+				// marginLeft : "-100px",
+				// marginLeft  : isRightPage ? "850px" : "0px",
+				overflow : "hidden",
 			}}
 		>
 			<div
 				style={{
-					height     : "100%",
-					width      : "100%",
-					overflow   : "hidden",
+					height     : "991px",
+					width      : "1700px",
+					marginLeft : isRightPage ? "-850px" : "0px",
+					// overflow   : "hidden",
 					background : "#E3E3E3",
 				}}
 			>
@@ -30,9 +34,9 @@ const Mod1Pdf = ({images, isRightPage}) => {
 							src={resizerImage(selectPhotoUrl(images[0]), 1700, 991)}
 							alt="test"
 							style={{
-								height         : "991px",
-								objectFit      : "cover",
-								objectPosition : isRightPage ? "right" : "left",
+								height    : "991px",
+								objectFit : "cover",
+								// objectPosition : isRightPage ? "right" : "left",
 							}}
 						/>
 					)
