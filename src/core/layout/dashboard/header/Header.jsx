@@ -1,10 +1,9 @@
 import React from "react";
 import "./Header.scss";
 //Mantine
-import { openContextModal } from "@mantine/modals";
+// import { openContextModal } from "@mantine/modals";
 
 //Own components
-import { CarIcon } from "Resources/icons";
 
 const Header = () => {
 	return (
@@ -14,12 +13,13 @@ const Header = () => {
 				<div>WHITE / SIN TÍTULO</div>
 				<div className="icons-container">
 					<div
-						className="icon-container"
-						onClick={() => openContextModal({
-							modal : "testPdf",
-						})}
+						// className="icon-container"
+						// onClick={() => openContextModal({
+						// 	modal : "testPdf",
+						// })}
 					>
-						<CarIcon size="20px" />
+						{/* <CarIcon size="20px" /> */}
+						<></>
 					</div>
 				</div>
 			</div>
