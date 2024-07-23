@@ -96,7 +96,7 @@ const PhotoCard = ({
 							fileId,
 							image : imageUrl,
 						},
-						pageId : pageData?.id,
+						pageId : pageId,
 					});
 					return;
 				}

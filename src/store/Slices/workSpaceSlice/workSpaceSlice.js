@@ -291,6 +291,9 @@ export const workSpaceSlice = createSlice({
 		},
 		addPhoto : (state, {payload}) => {
 			const newData = {...state.data};
+			if (!newData.pages[payload.pageId][`sheet${payload.sheetNo}`].layoutType) {
+				return;
+			}
 			if (payload.pageId === "frontpage") {
 				newData.frontPage.sheet1["photos"][payload.layoutNo] = {
 					id  : payload.image.fileId,
@@ -388,7 +391,7 @@ export const workSpaceSlice = createSlice({
 				const isSinglePage = (["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(newData[data?.id].sheet1?.layoutType));
 
 				sheet1Photos.forEach((space, e) => {
-					if (!space?.id && data?.sheet1?.layoutType !== "") {
+					if (!space?.id && data?.sheet1?.layoutType) {
 						noImagesListKey.push(`${data?.id}.sheet1.photos.${e}`);
 					}
 				});
