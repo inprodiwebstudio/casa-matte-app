@@ -48,7 +48,7 @@ const BodyGallery = ({
 
 	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
 
-	const galleryLoading = loading && isFetching;
+	const galleryLoading = isFetching;
 
 	useEffect(() => {
 		if (!isAvailableDocs) {

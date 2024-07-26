@@ -33,7 +33,7 @@ export const apiImageKit = createApi({
 	reducerPath       : "apiImageKit",
 	baseQuery         : baseQueryWithRetry,
 	keepUnusedDataFor : 3600,
-	tagTypes          : [],
+	tagTypes          : ["gallery"],
 	endpoints         : (builder) => ({
 		getDirentsList : builder.query({
 			query        : ({params}) => `files/?${qs.stringify(params)}`,

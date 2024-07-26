@@ -12,7 +12,14 @@ import { convertToArray, isValidArray, bindAll, coordinatesPhotoInWorkSpce } fro
 import { ArrowTop, FolderPlus, DropFile, Thrash, MoveFolder}                 from "Resources/icons";
 import "./SideBar.scss";
 
+// cloudinary.config({
+// 	cloud_name : "casaMatte",
+// 	api_key    : "864322584227584",
+// 	api_secret : "E8Hmvqo50hhgo-XAoZHdXTajh4c",
+// });
+
 const SideBar = ({gallerySlice, workSpaceSlice, galleryPath, selectedData, userName, filter, workspaceData}) => {
+
 	const [ isfullSize, setIsFullSize ] = useState(false);
 
 	const [galleryMutation, galleryMutationResult] = genericApi.useSubmitDataMutation();
