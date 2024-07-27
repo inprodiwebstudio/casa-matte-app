@@ -12,6 +12,7 @@ const baseQuery = fetchBaseQuery({
 	prepareHeaders : (headers) => {
 		headers.set("Access-Control-Allow-Origin", "*");
 		headers.set("Access-Control-Allow-Methods", "*");
+		headers.set("Authorization", `Basic ${ btoa( "864322584227584" + ":" + "E8Hmvqo50hhgo-XAoZHdXTajh4c") }`);
 		return headers;
 	},
 });
@@ -36,7 +37,7 @@ export const apiImageKit = createApi({
 	tagTypes          : ["gallery"],
 	endpoints         : (builder) => ({
 		getDirentsList : builder.query({
-			query        : ({params}) => `files/?${qs.stringify(params)}`,
+			query        : ({params}) => `resources/image/?${qs.stringify(params)}`,
 			providesTags : ["gallery"],
 		}),
 		deleteImages : builder.mutation({

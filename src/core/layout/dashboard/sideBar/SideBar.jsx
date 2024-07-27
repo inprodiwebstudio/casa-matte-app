@@ -80,6 +80,8 @@ const SideBar = ({gallerySlice, workSpaceSlice, galleryPath, selectedData, userN
 		});
 	};
 
+	console.log(imageKitFetching);
+
 	return (
 		<div id="SideBar" className={isAvailableDocs ? (isfullSize && "isFullSize") : "isNoData"}>
 			{
