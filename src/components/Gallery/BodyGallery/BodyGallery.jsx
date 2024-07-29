@@ -6,7 +6,6 @@ import DropDoc        from "../DropDoc";
 import PhotoCard      from "../PhotoCard";
 import GalleryLoading from "../GalleryLoading";
 
-import { gallerySeparation } from "./BodyGallery.helpers";
 
 import {
 	Button,
@@ -72,11 +71,11 @@ const BodyGallery = ({
 
 	useEffect(() => {
 		if (isValidArray(galleryData)) {
-			const newPhotos = gallerySeparation(galleryData, false);
-			const newFolders = gallerySeparation(galleryData, true);
-			const leaverFolderEdited = newFolders.filter(e => e.name !== "edited");
+			const newPhotos = galleryData;
+			const newFolders = [];
+			// const leaverFolderEdited = newFolders.filter(e => e.name !== "edited");
 			setMyPhotos(newPhotos);
-			setMyFolders(leaverFolderEdited);
+			setMyFolders(newFolders);
 			return;
 		}
 	}, [galleryData]);
