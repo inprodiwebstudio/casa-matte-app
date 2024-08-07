@@ -459,7 +459,12 @@ export const workSpaceSlice = createSlice({
 					...cloneData.frontPage.sheet1,
 					layoutType : payload.layout,
 					text       : myText,
-					photos     : myPhotos,
+					photos     : {
+						0 : {
+							id  : cloneData?.frontPage?.sheet1?.photos?.[0]?.id,
+							url : cloneData?.frontPage?.sheet1?.photos?.[0]?.url,
+						},
+					},
 				};
 				state.data = cloneData;
 				return;
