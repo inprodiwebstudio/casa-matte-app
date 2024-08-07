@@ -13,24 +13,6 @@ const DropedMenu = () => {
 
 	return (
 		<div id="DropedMenu">
-			<div className={`menu ${!activeMenu && "hidden"}`}>
-				<div className="menu-item">
-					<label>PASTA</label>
-					<MenuItem body="DURA" />
-				</div>
-				<div className="menu-item">
-					<label>TAMAÑO</label>
-					<MenuItem body="GRANDE" />
-				</div>
-				<div className="menu-item">
-					<label>NÚMERO DE PÁGINAS</label>
-					<MenuItem body="20" />
-				</div>
-				<div className="menu-item">
-					<label>Precio total</label>
-					<MenuItem body="$ 2,350.00" />
-				</div>
-			</div>
 			<div className={`selector-container ${!activeMenu && "hidden"}`}>
 				<div
 					className={`action-droped ${loading && "loading"}`}
@@ -48,6 +30,24 @@ const DropedMenu = () => {
 							</div>
 						)
 					}
+				</div>
+			</div>
+			<div className={`menu ${!activeMenu && "hidden"}`}>
+				<div className="menu-item">
+					<label>PASTA</label>
+					<MenuItem body="DURA" />
+				</div>
+				<div className="menu-item">
+					<label>TAMAÑO</label>
+					<MenuItem body="GRANDE" />
+				</div>
+				<div className="menu-item">
+					<label>NÚMERO DE PÁGINAS</label>
+					<MenuItem body="20" />
+				</div>
+				<div className="menu-item">
+					<label>Precio total</label>
+					<MenuItem body="$ 2,350.00" />
 				</div>
 			</div>
 		</div>

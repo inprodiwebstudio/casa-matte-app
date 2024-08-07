@@ -7,20 +7,22 @@
 
     & .menu {
         display: flex;
+        margin-top: 10px;
         flex-direction: column;
         gap: 10px;
-        height: 309px;
+        height: 270px;
         transition: all ease 300ms;
         overflow: hidden;
         &.hidden {
             height: 0px;
+            margin-top: 0px;
         }
         & .menu-item {
             label {
                 font-size: 12px;
                 font-weight: 300;
                 line-height: 14px;
-                color : $flat-color;
+                color : $dark-color;
                 letter-spacing: 0.05em;
                 letter-spacing: 0.05em;
                 text-transform: uppercase;
@@ -29,10 +31,10 @@
     }
 
     .selector-container {
-        margin-top: 25px;
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
 
         &.hidden {
             margin-top: 0px;
