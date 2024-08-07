@@ -1,8 +1,8 @@
 import { Button, Text, TextInput }                from "@mantine/core";
+import { useState }                               from "react";
 import LogoCasaMatte                              from "Resources/images/casaMatteLogo.svg";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { workSpaceSlice }                         from "store/Slices";
-import React                                      from "react";
 import "./Header.scss";
 //Mantine
 // import { openContextModal } from "@mantine/modals";
@@ -12,10 +12,19 @@ import "./Header.scss";
 const Header = () => {
 	const dispatch = useDispatch();
 
+	const [isLoading, setIsLoading] = useState(false);
+
 	const isPreviewActive = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
 
 	const handlerClickPreview = () => () => {
 		dispatch(workSpaceSlice.actions.togglePreview());
+	};
+
+	const handlerLoadingFake = () => {
+		setIsLoading(true);
+		setTimeout(() => {
+			setIsLoading(false);
+		}, 2000);
 	};
 
 	return (
@@ -52,15 +61,15 @@ const Header = () => {
 					<Button
 						radius={12}
 						size="xs"
+						loading={isLoading}
+						color="gray"
+						onClick={() => handlerLoadingFake()}
+						sx={{
+							fontFamily : "Helvetica",
+							fontWeight : "400",
+						}}
 					>
-						<Text
-							weight={400}
-							sx={{
-								fontFamily : "Helvetica",
-							}}
-						>
-							GUARDAR
-						</Text>
+						{isLoading ? "GUARDANDO..." : "GUARDAR"}
 					</Button>
 					<Button
 						radius={12}
