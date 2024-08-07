@@ -18,7 +18,16 @@ import "./SideBar.scss";
 // 	api_secret : "E8Hmvqo50hhgo-XAoZHdXTajh4c",
 // });
 
-const SideBar = ({gallerySlice, workSpaceSlice, galleryPath, selectedData, userName, filter, workspaceData}) => {
+const SideBar = ({
+	gallerySlice,
+	workSpaceSlice,
+	galleryPath,
+	selectedData,
+	isPreview,
+	userName,
+	filter,
+	workspaceData,
+}) => {
 
 	const [ isfullSize, setIsFullSize ] = useState(false);
 
@@ -81,7 +90,7 @@ const SideBar = ({gallerySlice, workSpaceSlice, galleryPath, selectedData, userN
 	};
 
 	return (
-		<div id="SideBar" className={isAvailableDocs ? (isfullSize && "isFullSize") : "isNoData"}>
+		<div id="SideBar" className={`${isAvailableDocs ? (isfullSize && "isFullSize") : "isNoData"} ${isPreview && "isInpreview"}`}>
 			{
 				((!imageKitFetching) && isAvailableDocs) && (
 					<div className={`actions-sidebar-conatiner ${isfullSize && "isFullSize"} ${loadingMutationGallery && "is-loading"}`}>
@@ -176,6 +185,7 @@ const mapStateToProps = ({ gallerySlice, authSlice, workSpaceSlice }) => ({
 	userName      : authSlice?.user?.username ?? undefined,
 	filter        : gallerySlice?.filter ?? undefined,
 	workspaceData : workSpaceSlice?.data ?? undefined,
+	isPreview     : workSpaceSlice?.isPreview ?? undefined,
 });
 
 const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions, workSpaceSlice : workSpaceSlice.actions});

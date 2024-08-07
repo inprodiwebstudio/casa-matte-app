@@ -28,6 +28,7 @@ const Footer = () => {
 
 	const currentFileterLayout = useSelector((state) => state.workSpaceSlice.layoutFilter, shallowEqual);
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
+	const isPreviewActive = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
 
 
 	const handleChangeLayoutFilter = (objValue) => {
@@ -53,7 +54,7 @@ const Footer = () => {
 	}, [pageId]);
 
 	return (
-		<div id="Footer" className={`${dropedToggle && "full-size"}`}>
+		<div id="Footer" className={`${dropedToggle && "full-size"} ${isPreviewActive && "isActivePreview"}`}>
 			<div
 				className={`droped-container-action ${dropedToggle && "downArrow"}`}
 				{

@@ -1,6 +1,8 @@
-import { Button, Text } from "@mantine/core";
-import LogoCasaMatte    from "Resources/images/casaMatteLogo.svg";
-import React            from "react";
+import { Button, Text }                           from "@mantine/core";
+import LogoCasaMatte                              from "Resources/images/casaMatteLogo.svg";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { workSpaceSlice }                         from "store/Slices";
+import React                                      from "react";
 import "./Header.scss";
 //Mantine
 // import { openContextModal } from "@mantine/modals";
@@ -8,6 +10,14 @@ import "./Header.scss";
 //Own components
 
 const Header = () => {
+	const dispatch = useDispatch();
+
+	const isPreviewActive = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
+
+	const handlerClickPreview = () => () => {
+		dispatch(workSpaceSlice.actions.togglePreview());
+	};
+
 	return (
 		<div className="Header">
 			<div className="body-container">
@@ -21,9 +31,10 @@ const Header = () => {
 					<Button
 						radius={12}
 						size="xs"
+						onClick={handlerClickPreview()}
 					>
 						<Text weight={400}>
-							VISTA PREVIA
+							{isPreviewActive ? "SALIR DE VISTA PREVIA" : "VISTA PREVIA"}
 						</Text>
 					</Button>
 					<Button

@@ -18,6 +18,9 @@
     &.isNoData {
         width: 354px;
     }
+    &.isInpreview {
+        width: 0px !important;
+    }
     @include big-tablet {
         width: 216px !important;
         &.isFullSize {
@@ -26,7 +29,7 @@
         }
     }
     @include laptop {
-        width: 386px !important;
+        width: 386px;
         &.isNoData {
             width: 354px !important;
         }

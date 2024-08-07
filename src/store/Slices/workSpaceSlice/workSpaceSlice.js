@@ -193,13 +193,17 @@ const initialState = {
 			value : "all",
 		},
 	},
-	loading : true,
+	loading   : true,
+	isPreview : false,
 };
 
 export const workSpaceSlice = createSlice({
 	name     : "workspace",
 	initialState,
 	reducers : {
+		togglePreview : (state) => {
+			state.isPreview = !state.isPreview;
+		},
 		setSelectePageData : (state, {payload}) => {
 			state.pageDataSelected = payload;
 		},

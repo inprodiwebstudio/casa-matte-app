@@ -6,6 +6,11 @@
     display: flex;
     flex-direction: column;
     background: $secondary-color;
+    transition: all ease 200ms;
+
+    &.isPreviewActive {
+        width: 0px !important;
+    }
 
     .body-action-container {
         display: flex;
