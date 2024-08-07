@@ -52,6 +52,8 @@ const Footer = () => {
 		return;
 	}, [pageId]);
 
+	console.log(currentFileterLayout.type);
+
 	return (
 		<div id="Footer" className={`${dropedToggle && "full-size"} ${isPreviewActive && "isActivePreview"}`}>
 			<div
@@ -74,7 +76,7 @@ const Footer = () => {
 			</div>
 			<div className="body-layouts-container">
 				{
-					pageId !=="frontpage" && (
+					((pageId !== "frontpage") && (currentFileterLayout.type !== "texto")) && (
 						<div
 							style={{
 								marginTop : "15px",

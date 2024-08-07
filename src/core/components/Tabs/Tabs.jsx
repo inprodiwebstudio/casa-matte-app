@@ -15,14 +15,17 @@ const Tabs = ({tabList, loading}) => {
 
 	const dispatch = useDispatch();
 
-	const currentFileterLayout = useSelector((state) => state.workSpaceSlice.layoutFilter, shallowEqual);
+	// const currentFileterLayout = useSelector((state) => state.workSpaceSlice.layoutFilter, shallowEqual);
 	const isLoggin = useSelector((state) => state.authSlice.loggedIn, shallowEqual);
 
 
 	const onActionTab = (tabName, filterName) => {
 		dispatch(workSpaceSlice.actions.setLayoutFilter({
 			type           : filterName,
-			photosQuantity : currentFileterLayout.photosQuantity,
+			photosQuantity : {
+				label : "Todos",
+				value : "all",
+			},
 		}));
 		setCurrentTab(tabName);
 	};
