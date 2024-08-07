@@ -2,12 +2,13 @@
 
 //Own components
 import { useSelector, shallowEqual, connect } from "react-redux";
-import { DropedMenu, Button }                 from "core/components";
+import { DropedMenu }                         from "core/components";
 import { PlusIcon }                           from "Resources/icons";
 import PaginatorBar                           from "components/PaginatorBar";
 import { bindAll }                            from "helpers";
 import { workSpaceSlice }                     from "store/Slices";
 import "./Navbar.scss";
+import { Text, Button }                       from "@mantine/core";
 
 const Navbar = ({workSpaceSlice}) => {
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
@@ -30,15 +31,17 @@ const Navbar = ({workSpaceSlice}) => {
 					</div>
 					<div className="body-action-container">
 						<Button
-							isLoading={loading}
-							icon={<PlusIcon size="15px" />}
-							fontSize="16px"
-							type="subtle"
-							width={117}
-							height={39}
+							radius={5}
+							size="xs"
+							color="darkCasaMatte"
+							leftIcon={<PlusIcon size="15px" />}
+							sx={{marginTop : "15px"}}
+							loading={loading}
 							onClick={() => workSpaceSlice.insertPage()}
 						>
-							Nueva
+							<Text weight={400} color="whiteCasaMatte">
+								NUEVA PAGINA
+							</Text>
 						</Button>
 					</div>
 				</>
