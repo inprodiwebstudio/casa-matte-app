@@ -30,7 +30,6 @@ const Footer = () => {
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
 	const isPreviewActive = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
 
-
 	const handleChangeLayoutFilter = (objValue) => {
 		dispatch(workSpaceSlice.actions.setLayoutFilter({
 			type           : currentFileterLayout.type,

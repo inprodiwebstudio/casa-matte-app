@@ -2,7 +2,7 @@ import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { useState, useEffect }                    from "react";
 import { useParams }                              from "react-router-dom";
 //Helpers
-import { isValidArray } from "helpers";
+import { isValidArray, convertToArray } from "helpers";
 
 //Own components
 import BookPages          from "components/BookPages";
@@ -23,6 +23,7 @@ const WorkSpace = () => {
 	const workSpaceHistory = useSelector((state) => state.workSpaceSlice.history, shallowEqual);
 	const isLoggin = useSelector((state) => state.authSlice.loggedIn, shallowEqual);
 	const isLoading = useSelector((state) => state.workSpaceSlice?.loading, shallowEqual);
+	const isPreview = useSelector((state) => state.workSpaceSlice?.isPreview, shallowEqual);
 
 	const isFrontLayout = pageId === "frontpage";
 
@@ -39,22 +40,43 @@ const WorkSpace = () => {
 		}
 	}
 
-	useEffect(() => {
-		if (!isFrontLayout) {
-			setMyWorkSpaceData(workSpaceData[pageId]);
+	const SapceViewHandler = () => {
+		if (!isLoggin) {
+			return (
+				<div className="WorkSpace">
+					<div className="canva-space">
+						<div className="ghost-canva">
+							<LoginCard />
+						</div>
+					</div>
+				</div>
+			);
 		}
-		if (isFrontLayout) {
-			setMyWorkSpaceData(workSpaceFrontPage);
+		if (isPreview && isLoggin && !isLoading ) {
+			return (
+				<div
+					className="PreviewPages"
+				>
+					{
+						convertToArray(workSpaceData).map((page, index) => (
+							<div className="photoBookContainer" key={index}>
+								<div className="pagesPreviewPhotoBook">
+									<BookPages
+										isInWorkSpcae={true}
+										loading={isLoading}
+										pageData={page}
+									/>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			);
 		}
-	}, [pageId, workSpaceData, workSpaceFrontPage]);
-
-	document.onkeydown = undoAndRedoActions;
-
-	return (
-		<div className="WorkSpace">
-			<div className="canva-space">
-				{
-					(!isLoading && isLoggin) && (
+		if (myWorkSpaceData && isLoggin && !isLoading) {
+			return (
+				<div className="WorkSpace">
+					<div className="canva-space">
 						<div className="undo-redo-container">
 							<div
 								className={`action-styled ${!isAvailableUndo && "disabled"}`}
@@ -83,27 +105,32 @@ const WorkSpace = () => {
 								</div>
 							</div>
 						</div>
-					)
-				}
-				<div className="ghost-canva">
-					{
-						(myWorkSpaceData && isLoggin) ? (
+						<div className="ghost-canva">
 							<BookPages
 								isInWorkSpcae={true}
 								loading={isLoading}
 								pageData={myWorkSpaceData}
 							/>
-						) : (
-							!isLoggin ? (
-								<LoginCard />
-							) : (
-								<div />
-							)
-						)
-					}
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
+			);
+		}
+	};
+
+	useEffect(() => {
+		if (!isFrontLayout) {
+			setMyWorkSpaceData(workSpaceData[pageId]);
+		}
+		if (isFrontLayout) {
+			setMyWorkSpaceData(workSpaceFrontPage);
+		}
+	}, [pageId, workSpaceData, workSpaceFrontPage]);
+
+	document.onkeydown = undoAndRedoActions;
+
+	return (
+		<SapceViewHandler />
 	);
 };
 
