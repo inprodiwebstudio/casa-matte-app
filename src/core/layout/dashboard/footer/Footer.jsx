@@ -52,8 +52,6 @@ const Footer = () => {
 		return;
 	}, [pageId]);
 
-	console.log(currentFileterLayout.type);
-
 	return (
 		<div id="Footer" className={`${dropedToggle && "full-size"} ${isPreviewActive && "isActivePreview"}`}>
 			<div

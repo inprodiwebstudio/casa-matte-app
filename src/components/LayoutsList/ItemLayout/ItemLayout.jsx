@@ -46,6 +46,15 @@ const ItemLayout = ({
 
 	const handleSelectedLayout = (e) => {
 		e.stopPropagation();
+		if (layoutData?.cat === "portadas") {
+			dispatch(workSpaceSlice.actions.addLayout({
+				layout       : layoutData?.id,
+				pageId       : "FrontLayout",
+				numberPhotos : layoutData?.numberPhotos,
+				numberText   : layoutData?.numberText,
+				sheetId      : "sheet1",
+			}));
+		}
 		if (pageDataSelected) {
 			dispatch(workSpaceSlice.actions.addLayout({
 				layout       : layoutData?.id,
