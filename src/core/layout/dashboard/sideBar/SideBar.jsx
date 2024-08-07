@@ -9,7 +9,7 @@ import { gallerySlice, workSpaceSlice }                                      fro
 import { genericApi }                                                        from "store/api/genericApi";
 import { apiImageKit }                                                       from "store/api/imageKitApi";
 import { convertToArray, isValidArray, bindAll, coordinatesPhotoInWorkSpce } from "helpers";
-import { ArrowTop, FolderPlus, DropFile, Thrash, MoveFolder}                 from "Resources/icons";
+import { ArrowTop, FolderPlus, DropFile, Thrash, MoveFolder, Cross}          from "Resources/icons";
 import "./SideBar.scss";
 
 // cloudinary.config({
@@ -20,6 +20,7 @@ import "./SideBar.scss";
 
 const SideBar = ({
 	gallerySlice,
+	typeDropView,
 	workSpaceSlice,
 	galleryPath,
 	selectedData,
@@ -162,6 +163,20 @@ const SideBar = ({
 								</div>
 							)
 						}
+						{
+							typeDropView !== null && (
+								<div
+									className="icon-sidebar-action"
+									{
+										...(!loadingMutationGallery && {
+											onClick : () => gallerySlice.setTypeDropedView(null),
+										})
+									}
+								>
+									<Cross size="18px" />
+								</div>
+							)
+						}
 					</div>
 				)
 			}
@@ -181,6 +196,7 @@ const SideBar = ({
 
 const mapStateToProps = ({ gallerySlice, authSlice, workSpaceSlice }) => ({
 	selectedData  : gallerySlice?.selectedData ?? {},
+	typeDropView  : gallerySlice?.typeDropedView ?? null,
 	galleryPath   : gallerySlice?.galleryPathName ?? "route",
 	userName      : authSlice?.user?.username ?? undefined,
 	filter        : gallerySlice?.filter ?? undefined,
