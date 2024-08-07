@@ -1,4 +1,4 @@
-import { Button, Text }                           from "@mantine/core";
+import { Button, Text, TextInput }                from "@mantine/core";
 import LogoCasaMatte                              from "Resources/images/casaMatteLogo.svg";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { workSpaceSlice }                         from "store/Slices";
@@ -25,7 +25,14 @@ const Header = () => {
 				<div className="title-container">
 					<div>WHITE PHOTOBOOK</div>
 					<div>/</div>
-					<div className="text-title">SIN TÍTULO</div>
+					<TextInput
+						variant="unstyled"
+						defaultValue="PROYECTO 01"
+						sx={{
+							fontSize   : "24px",
+							fontWeight : "400",
+						}}
+					/>
 				</div>
 				<div className="icons-container">
 					<Button
