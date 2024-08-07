@@ -24,22 +24,26 @@ const FrontMod8 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 				mt="8%"
 				mr="8%"
 			>
-				<Text
-					align="right"
-					type="h1"
-					sheetNo={sheetNo}
-					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-				/>
-				<Text
-					align="right"
-					type="h5"
-					sheetNo={sheetNo}
-					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-				/>
+				<div>
+					<Text
+						align="right"
+						type="h1"
+						sheetNo={sheetNo}
+						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+					/>
+				</div>
+				<div>
+					<Text
+						align="right"
+						type="h5"
+						sheetNo={sheetNo}
+						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+					/>
+				</div>
 			</Stack>
 			<Stack justify="left" w="100%" h="90%">
 				<ImgLayout

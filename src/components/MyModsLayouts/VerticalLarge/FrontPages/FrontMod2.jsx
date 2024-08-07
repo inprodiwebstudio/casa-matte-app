@@ -30,23 +30,38 @@ const FrontMod2 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 			</Stack>
 			<Stack
 				spacing="0.03em"
+				w="100%"
 			>
-				<Text
-					align="center"
-					type="h1"
-					sheetNo={sheetNo}
-					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-				/>
-				<Text
-					align="center"
-					type="h5"
-					sheetNo={sheetNo}
-					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-				/>
+				<div
+					style={{
+						paddingLeft  : "10%",
+						paddingRight : "10%",
+					}}
+				>
+					<Text
+						align="center"
+						type="h1"
+						sheetNo={sheetNo}
+						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+					/>
+				</div>
+				<div
+					style={{
+						paddingLeft  : "20%",
+						paddingRight : "20%",
+					}}
+				>
+					<Text
+						align="center"
+						type="h5"
+						sheetNo={sheetNo}
+						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+					/>
+				</div>
 			</Stack>
 		</Flex>
 	);

@@ -28,9 +28,8 @@ const FrontMod10 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) 
 				p="0.2em"
 				align="center"
 				justify="space-between"
-				spacing={0}
 			>
-				<Stack w="fit-content" sx={{writingMode : "vertical-rl"}} spacing={0}>
+				<Stack h="30%" sx={{writingMode : "vertical-rl"}} spacing={0}>
 					<Text
 						type="h5"
 						sheetNo={sheetNo}
@@ -39,7 +38,7 @@ const FrontMod10 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) 
 						isThumbNail={isThumbNail}
 					/>
 				</Stack>
-				<Stack sx={{writingMode : "vertical-rl"}} spacing={0}>
+				<Stack h="50%" sx={{writingMode : "vertical-rl"}} spacing={0}>
 					<Text
 						type="LargeTitle"
 						sheetNo={sheetNo}

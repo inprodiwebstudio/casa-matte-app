@@ -28,23 +28,36 @@ const FrontMod7 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					urlImage={data?.photos[0] ?? {}}
 				/>
 			</Stack>
-			<Stack h="fit-content" spacing="0.03em">
-				<Text
-					align="center"
-					type="h1"
-					sheetNo={sheetNo}
-					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-				/>
-				<Text
-					align="center"
-					type="h5"
-					sheetNo={sheetNo}
-					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-				/>
+			<Stack
+				h="fit-content"
+				spacing="0.03em"
+				w="70%"
+			>
+				<div>
+					<Text
+						align="center"
+						type="h1"
+						sheetNo={sheetNo}
+						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+					/>
+				</div>
+				<div
+					style={{
+						paddingLeft  : "10%",
+						paddingRight : "10%",
+					}}
+				>
+					<Text
+						align="center"
+						type="h5"
+						sheetNo={sheetNo}
+						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+					/>
+				</div>
 			</Stack>
 		</Flex>
 	);
