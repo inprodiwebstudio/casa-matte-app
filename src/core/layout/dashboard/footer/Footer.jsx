@@ -73,22 +73,26 @@ const Footer = () => {
 				<Tabs tabList={handleTabsLayouts} loading={loading} />
 			</div>
 			<div className="body-layouts-container">
-				<div
-					style={{
-						marginTop : "15px",
-						width     : "103px",
-					}}
-				>
-					<SelectorMenuItem
-						isLoading={loading}
-						type="filled"
-						placeholder="FOTOS"
-						onChange={(objValue) => handleChangeLayoutFilter(objValue)}
-						options={optionsPhotoQuantity}
-						value={currentFileterLayout.photosQuantity}
-						dropTopMenu
-					/>
-				</div>
+				{
+					pageId !=="frontpage" && (
+						<div
+							style={{
+								marginTop : "15px",
+								width     : "103px",
+							}}
+						>
+							<SelectorMenuItem
+								isLoading={loading}
+								type="filled"
+								placeholder="FOTOS"
+								onChange={(objValue) => handleChangeLayoutFilter(objValue)}
+								options={optionsPhotoQuantity}
+								value={currentFileterLayout.photosQuantity}
+								dropTopMenu
+							/>
+						</div>
+					)
+				}
 				<div className="LayoutsContainer">
 					<LayoutsList />
 				</div>
