@@ -9,7 +9,12 @@ const Mod38 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
 	return (
 		<Center w="100%" h="100%">
-			<Stack>
+			<Stack
+				w="70%"
+				p="0%"
+				pt="0%"
+				pb="0%"
+			>
 				<Text
 					type="h1"
 					sheetNo={sheetNo}

@@ -46,16 +46,13 @@ const Mod48 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				<Stack
 					spacing="0.2em"
 				>
-					<Center>
-						<Text
-							type="h2"
-							sheetNo={sheetNo}
-							data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-							isInPaginator={isInPaginator}
-							isThumbNail={isThumbNail}
-						/>
-					</Center>
-
+					<Text
+						type="h2"
+						sheetNo={sheetNo}
+						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+					/>
 					<Center>
 						<DividerLayout long="0.2em" position="h" />
 					</Center>

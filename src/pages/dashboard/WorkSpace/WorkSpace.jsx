@@ -89,7 +89,7 @@ const WorkSpace = () => {
 					{
 						(myWorkSpaceData && isLoggin) ? (
 							<BookPages
-								isInWorkSpcae
+								isInWorkSpcae={true}
 								loading={isLoading}
 								pageData={myWorkSpaceData}
 							/>

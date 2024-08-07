@@ -1,7 +1,8 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
-import { CKEditor }  from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-editor-balloon/src/ballooneditor";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+// import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
+import BalloonEditor from "@ckeditor/ckeditor5-editor-balloon/src/ballooneditor";
 import Essentials    from "@ckeditor/ckeditor5-essentials/src/essentials";
 import Bold          from "@ckeditor/ckeditor5-basic-styles/src/bold";
 import Italic        from "@ckeditor/ckeditor5-basic-styles/src/italic";
@@ -13,42 +14,43 @@ import Alignment     from "@ckeditor/ckeditor5-alignment/src/alignment";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
 // import { EditorState, convertToRaw, ContentState } from "draft-js";
-import { useState, useEffect } from "react";
-import { closeAllModals }      from "@mantine/modals";
-import { workSpaceSlice }      from "store/Slices";
-import { connect }             from "react-redux";
+import { useState } from "react";
+// import { closeAllModals }      from "@mantine/modals";
+import { workSpaceSlice } from "store/Slices";
+import { connect }        from "react-redux";
 
 
-import { Button }  from "core/components";
-import { Check }   from "Resources/icons";
+// import { Button }  from "core/components";
+// import { Check }   from "Resources/icons";
 import { bindAll } from "helpers";
 import "./EditText.scss";
 
 const EditText = ({innerProps, workSpaceSlice}) => {
 	const [editorState, setEditorState] = useState(null);
 
-	const { pageId, sheetNo, dataTextPage, layoutNo } = innerProps;
+	// const { pageId, sheetNo, dataTextPage, layoutNo } = innerProps;
 
 	const onEditorStateChange = function(editorState) {
 		setEditorState(editorState);
 	};
 
-	const handleAddText = () => {
-		const text = editorState;
-		workSpaceSlice.addText({pageId, sheetNo, text, layoutNo});
-		closeAllModals();
-	};
+	// const handleAddText = () => {
+	// 	const text = editorState;
+	// 	workSpaceSlice.addText({pageId, sheetNo, text, layoutNo});
+	// 	closeAllModals();
+	// };
 
-	useEffect(() => {
-		if (dataTextPage && dataTextPage !== "") {
-			const contentBlock = dataTextPage;
-			setEditorState(contentBlock);
-		}
-	}, [dataTextPage]);
+	// useEffect(() => {
+	// 	if (dataTextPage && dataTextPage !== "") {
+	// 		const contentBlock = dataTextPage;
+	// 		setEditorState(contentBlock);
+	// 	}
+	// }, [dataTextPage]);
 
 	const editorConfiguration = {
-		plugins   : [ Essentials, Bold, Alignment, Italic, Paragraph, FontFamily, FontSize, FontColor],
-		alignment : {
+		plugins      : [ Essentials, Bold, Alignment, Italic, Paragraph, FontFamily, FontSize, FontColor],
+		GroupHeading : false,
+		alignment    : {
 			options : [ "left", "right", "center", "justify" ],
 		},
 		fontFamily : {
@@ -66,23 +68,19 @@ const EditText = ({innerProps, workSpaceSlice}) => {
 				"Aitana-Regular",
 			],
 		},
-		toolbar : [
-			"fontfamily",
-			"fontSize",
-			 "|",
-			"bold",
-			"italic",
-			"|",
-			"fontColor",
-			"|",
-			"alignment:left",
-			"alignment:right",
-			"alignment:center",
-			"alignment:justify",
-			"|",
-			"undo",
-			"redo",
-		],
+		toolbar : {
+			items : [
+				"fontSize",
+				"fontfamily",
+				"bold",
+				"italic",
+				"fontColor",
+				"alignment:left",
+				"alignment:center",
+				"alignment:right",
+			],
+			shouldNotGroupWhenFullScreen : true,
+		},
 		language : "es",
 		tooltip  : {
 			isRendered : false,
@@ -126,28 +124,21 @@ const EditText = ({innerProps, workSpaceSlice}) => {
 	};
 
 	return (
-		<div className="EditText">
+		<div
+			className="EditText"
+		>
 			<CKEditor
-				editor={ ClassicEditor }
+				editor={ BalloonEditor }
 				config={ editorConfiguration }
 				data={editorState}
 				onChange={ ( event, editor ) => {
 					const data = editor.getData();
 					onEditorStateChange( data );
 				} }
+				onFocus={ () => {
+					console.log( "Focused!" );
+				} }
 			/>
-			<div className="button-container">
-				<Button
-					icon={<Check size="15px" />}
-					fontSize="16px"
-					type="subtle"
-					width={117}
-					height={39}
-					onClick={() => handleAddText()}
-				>
-					Terminar
-				</Button>
-			</div>
 		</div>
 	);
 };

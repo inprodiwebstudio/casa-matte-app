@@ -42,7 +42,7 @@ const Mod54 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Stack>
-				<Stack mr="10%" mt="9%">
+				<Stack mr="40%" mt="9%">
 					<Text
 						align="left"
 						type="h5"

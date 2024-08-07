@@ -1,0 +1,106 @@
+@import "/src/Resources/scss/variables/colorThemes";
+@font-face {
+    font-family: "Aitana-Regular";
+    src: url("../../../Resources/Fonts/GandhiSerif-Regular.ttf");
+}
+@font-face {
+    font-family: "BlakaHollow-Regular";
+    src: url("../../../Resources/Fonts/BlakaHollow-Regular.ttf");
+}
+
+.EditText {
+    font-family: Helvetica, sans-serif;
+    height: 100% !important;
+    width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 0px;
+
+    .ck-editor__editable_inline {
+       p {
+        margin: 0px !important;
+       }
+    }
+
+    // .ck-editor {
+    //     .ck-editor__main {
+            
+    //     }
+    // }
+
+    .ck-content {
+        height: 100% !important;
+        padding: 0px !important;
+        border: 1px solid #b6b4af !important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+        box-shadow: none !important;
+    }
+
+    .ck-focused {
+        border : 1px solid rgb(100, 211, 9) !important;
+    }
+
+
+    .ck-toolbar__items {
+        padding : 0px;
+        margin: 0px !important;
+        justify-content: center;
+    }
+    .ck-toolbar {
+        background: $secondary-color;
+        width: fit-content !important;
+        border-radius: 8px !important;
+        box-shadow: 0px 3px 10px 0px rgba(112, 110, 103, 0.217);
+    }
+    .ck-dropdown {
+        background: $secondary-color;
+    }
+
+    .ck-list__item {
+        & .ck-button {
+            &.ck-on {
+                background: $primary-color;
+            }
+        }
+    }
+
+    .ck-button_with-text {
+        justify-content: left !important;
+    }
+
+    .ck-button {
+        font-size: 9px !important;
+        &.ck-on {
+            background: rgba(100, 93, 93, 0.126) !important;
+            color : $dark-color !important;
+            border : none !important;
+            &:hover {
+                background: $primary-color !important;
+            }
+            &:active, &:focus, &:active:focus {
+                box-shadow: none !important;
+            }
+        }
+        &.ck-off {
+            border : none !important;
+            &.ck-color-grid__tile {
+                &:hover {
+                    box-shadow: inset 0 0 0 1px rgb(255, 255, 255), 0 0 0 2px $primary-color !important;
+                    cursor: pointer;
+                }
+            }
+            &:active, &:focus, &:active:focus {
+                box-shadow: none !important;
+            }
+        }
+    }
+
+    .button-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row-reverse;
+        padding-right: 20px;
+    }
+}

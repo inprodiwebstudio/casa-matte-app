@@ -20,8 +20,9 @@ const Mod41 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			direction="column"
 		>
 			<DividerLayout long="7%" position="h" />
-			<Stack spacing="0.1em">
+			<Stack spacing="0.1em" w="100%">
 				<Text
+					align="right"
 					type="h1"
 					sheetNo={sheetNo}
 					isInPaginator={isInPaginator}

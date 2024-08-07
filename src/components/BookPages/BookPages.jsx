@@ -39,7 +39,11 @@ const BookPages = ({
 	const handleLayoutMod = (layoutData, sheetNo) => {
 		if (layoutData?.layoutType) {
 			const LayoutMod = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.layoutMods[layoutData?.layoutType]?.layout;
-			return <LayoutMod isThumbNail={isThumbNail} isInPaginator={isInPaginator} data={layoutData} isInWorkSpace={isInWorkSpcae} sheetNo={sheetNo} />;
+			return (
+				<>
+					<LayoutMod isThumbNail={isThumbNail} isInPaginator={isInPaginator} data={layoutData} isInWorkSpace={isInWorkSpcae} sheetNo={sheetNo} />
+				</>
+			);
 		}
 	};
 

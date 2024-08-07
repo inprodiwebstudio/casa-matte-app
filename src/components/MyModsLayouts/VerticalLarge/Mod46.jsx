@@ -53,7 +53,10 @@ const Mod46 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					/>
 					<DividerLayout long="20%" position="h" />
 				</Flex>
-				<Flex justify="flex-start">
+				<Flex
+					justify="flex-start"
+					direction="column"
+				>
 					<Text
 						align="justify"
 						type="regular"

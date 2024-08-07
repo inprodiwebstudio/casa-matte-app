@@ -9,13 +9,16 @@ const Mod39 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
 	return (
 		<Flex
-			p="8%"
 			w="100%"
 			h="100%"
 			justify="flex-end"
 			align="flex-end"
+			p="3%"
 		>
-			<Stack>
+			<Stack
+				w={"50%"}
+				align={isThumbNail ? "flex-end" : undefined}
+			>
 				<Text
 					type="h1"
 					sheetNo={sheetNo}

@@ -1,4 +1,6 @@
-import React from "react";
+import { Button, Text } from "@mantine/core";
+import LogoCasaMatte    from "Resources/images/casaMatteLogo.svg";
+import React            from "react";
 import "./Header.scss";
 //Mantine
 // import { openContextModal } from "@mantine/modals";
@@ -9,9 +11,38 @@ const Header = () => {
 	return (
 		<div className="Header">
 			<div className="body-container">
-				<img src="https://casamatte.com/wp-content/uploads/2021/02/logo_casamatte-768x86.png" width="127" height="15" />
-				<div>WHITE / SIN TÍTULO</div>
+				<img src={LogoCasaMatte} width={170} />
+				<div className="title-container">
+					<div>WHITE PHOTOBOOK</div>
+					<div>/</div>
+					<div className="text-title">SIN TÍTULO</div>
+				</div>
 				<div className="icons-container">
+					<Button
+						radius={12}
+						size="xs"
+					>
+						<Text weight={400}>
+							VISTA PREVIA
+						</Text>
+					</Button>
+					<Button
+						radius={12}
+						size="xs"
+					>
+						<Text weight={400}>
+							GUARDAR
+						</Text>
+					</Button>
+					<Button
+						radius={12}
+						size="xs"
+						color="darkCasaMatte"
+					>
+						<Text weight={400} color="whiteCasaMatte">
+							TERMINAR
+						</Text>
+					</Button>
 					<div
 						// className="icon-container"
 						// onClick={() => openContextModal({

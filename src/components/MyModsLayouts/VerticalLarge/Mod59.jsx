@@ -21,9 +21,10 @@ const Mod59 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 		>
 			<Stack
 				spacing="0.07em"
+				w="50%"
 			>
 				<Text
-					align="left"
+					align="center"
 					type="h4"
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					sheetNo={sheetNo}

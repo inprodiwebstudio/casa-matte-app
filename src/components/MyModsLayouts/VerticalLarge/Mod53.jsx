@@ -23,15 +23,18 @@ const Mod53 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 		>
 			<Stack
 				spacing="0.07em"
+				w="70%"
 			>
-				<Text
-					align="left"
-					type="h1"
-					sheetNo={sheetNo}
-					data={textInsertion(data?.text[0], defaultText, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-				/>
+				<div>
+					<Text
+						align="center"
+						type="h1"
+						sheetNo={sheetNo}
+						data={textInsertion(data?.text[0], defaultText, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+					/>
+				</div>
 			</Stack>
 			<Stack w="100%" h="100%">
 				<ImgLayout
@@ -43,15 +46,18 @@ const Mod53 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			</Stack>
 			<Stack
 				spacing="0.07em"
+				w="50%"
 			>
-				<Text
-					align="left"
-					type="h5"
-					sheetNo={sheetNo}
-					data={textInsertion(data?.text[1], defaultText, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-				/>
+				<div>
+					<Text
+						align="center"
+						type="h5"
+						sheetNo={sheetNo}
+						data={textInsertion(data?.text[1], defaultText, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+					/>
+				</div>
 			</Stack>
 		</Flex>
 	);

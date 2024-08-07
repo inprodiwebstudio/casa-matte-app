@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@ckeditor/ckeditor5-basic-styles": "^36.0.1",
+    "@ckeditor/ckeditor5-build-balloon-block": "36.0.1",
     "@ckeditor/ckeditor5-build-classic": "^36.0.1",
     "@ckeditor/ckeditor5-editor-classic": "^36.0.1",
     "@ckeditor/ckeditor5-essentials": "^36.0.1",

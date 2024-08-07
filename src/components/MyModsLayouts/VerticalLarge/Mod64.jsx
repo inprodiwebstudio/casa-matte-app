@@ -58,27 +58,39 @@ const Mod64 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						pr="9%"
 					>
 						<Stack spacing="0.09em">
-							<Text
-								align="left"
-								type="h4"
-								sheetNo={sheetNo}
-								textNo={0}
-								data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-								isInPaginator={isInPaginator}
-								isThumbNail={isThumbNail}
-							/>
+							<div>
+								<Text
+									align="left"
+									type="h4"
+									sheetNo={sheetNo}
+									textNo={0}
+									data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+									isInPaginator={isInPaginator}
+									isThumbNail={isThumbNail}
+								/>
+							</div>
 							<DividerLayout long="100%" position="h" />
 						</Stack>
-						<Stack w={"100%"} style={{overflow : "hidden"}}>
-							<Text
-								align="justify"
-								type="regular"
-								sheetNo={sheetNo}
-								textNo={1}
-								data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
-								isInPaginator={isInPaginator}
-								isThumbNail={isThumbNail}
-							/>
+						<Stack
+							w={"100%"}
+							h="70%"
+							style={{
+								overflow : "hidden",
+							}}
+						>
+							<div
+								style={{height : "100%"}}
+							>
+								<Text
+									align="justify"
+									type="regular"
+									sheetNo={sheetNo}
+									textNo={1}
+									data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+									isInPaginator={isInPaginator}
+									isThumbNail={isThumbNail}
+								/>
+							</div>
 						</Stack>
 					</Stack>
 					<Stack h="65%">

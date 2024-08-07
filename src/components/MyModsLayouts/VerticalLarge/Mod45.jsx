@@ -12,14 +12,14 @@ const Mod45 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			return "38px";
 		}
 		if (isInPaginator) {
-			return "99px";
+			return "150px";
 		}
 		if (isInWorkSpace) {
-			return "40%";
+			return "50%";
 		}
 	};
 
-	const defaultText01 = "";
+	const defaultText01 = "Titulo 1";
 
 	const defaultText02 = "Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper, pharetra odio conubia dictumst malesuada lectus dis penatibus, primis orci dictum sociosqu nam platea parturient cursus.";
 
@@ -52,7 +52,10 @@ const Mod45 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					/>
 					<DividerLayout long="20%" position="h" />
 				</Flex>
-				<Flex justify="flex-start">
+				<Flex
+					justify="flex-start"
+					direction="column"
+				>
 					<Text
 						align="justify"
 						type="regular"

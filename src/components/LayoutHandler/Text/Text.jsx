@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 
 import { openContextModal } from "@mantine/modals";
 
+import EditorText from "./EditorText";
+
 import "./Text.scss";
 
 const Text = ({
@@ -14,8 +16,6 @@ const Text = ({
 	type="regular",
 	isThumbNail,
 	isInPaginator,
-	width="100%",
-	height="100%",
 }) => {
 	const isNullableAction = isThumbNail || isInPaginator;
 
@@ -88,11 +88,9 @@ const Text = ({
 			tabIndex={1}
 			className={!isNullableAction ? "Text isInWorkSpace" : "Text"}
 			style={{
-				width,
-				height,
 				textAlign     : align,
 				letterSpacing : "0px",
-				// lineHeight    : "1.2em",
+				height        : "100%",
 				fontSize      : handlerSizeText(),
 			}}
 			// onDoubleClick={(e) => activeEditText(e)}
@@ -102,7 +100,13 @@ const Text = ({
 			})}
 		>
 			{
+				(isInPaginator || isThumbNail) &&
 				handleShowText()
+			}
+			{
+				(!isInPaginator && !isThumbNail) && (
+					<EditorText />
+				)
 			}
 		</div>
 	);

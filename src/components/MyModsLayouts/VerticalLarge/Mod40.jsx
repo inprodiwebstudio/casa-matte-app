@@ -16,15 +16,29 @@ const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			align="flex-end"
 		>
 			<Center w="100%" h="100%">
-				<Stack spacing="0.04em">
-					<Text
-						type="h1"
-						sheetNo={sheetNo}
-						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-					/>
-					<div>
+				<Stack spacing="0.04em" w="100%">
+					<div
+						style={{
+							width        : "100%",
+							paddingLeft  : "10%",
+							paddingRight : "10%",
+							maxHeight    : "100px",
+					 }}
+					>
+						<Text
+							type="h1"
+							sheetNo={sheetNo}
+							data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+							isInPaginator={isInPaginator}
+							isThumbNail={isThumbNail}
+						/>
+					</div>
+					<div
+						style={{
+							width        : "100%",
+							paddingLeft  : "20%",
+							paddingRight : "20%",
+						}}>
 						<Text
 							type="h5"
 							sheetNo={sheetNo}

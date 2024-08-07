@@ -32,6 +32,7 @@ const FrontPage = () => {
 							workSpaceFrontPage && (
 								<BookPages
 									isInWorkSpcae={false}
+									isInPaginator={true}
 									loading={isLoading}
 									pageData={workSpaceFrontPage}
 								/>

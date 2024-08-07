@@ -29,6 +29,7 @@ const Mod60 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			<Stack
 				spacing="0.07em"
 				w="45%"
+				align="right"
 			>
 				<Text
 					align="right"

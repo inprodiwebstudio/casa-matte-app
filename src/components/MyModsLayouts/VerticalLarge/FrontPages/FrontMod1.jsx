@@ -22,23 +22,29 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 		>
 			<Stack
 				spacing="0.03em"
+				w={"100%"}
+				align="center"
 			>
-				<Text
-					align="center"
-					type="h1"
-					sheetNo={sheetNo}
-					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-				/>
-				<Text
-					align="center"
-					type="h5"
-					sheetNo={sheetNo}
-					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-				/>
+				<Stack w="80%">
+					<Text
+						align="center"
+						type="h1"
+						sheetNo={sheetNo}
+						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+					/>
+				</Stack>
+				<Stack w="50%">
+					<Text
+						align="center"
+						type="h5"
+						sheetNo={sheetNo}
+						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+					/>
+				</Stack>
 			</Stack>
 			<Stack w="100%" h="100%">
 				<ImgLayout

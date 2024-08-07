@@ -10,6 +10,7 @@ import { NotificationsProvider } from "@mantine/notifications";
 
 
 import store, { persistor }     from "store";
+import { theme }                from "./theme";
 import { modals, modalsConfig } from "components/Modals";
 import Router                   from "routes";
 import "./Resources/scss/index.scss";
@@ -22,7 +23,7 @@ export default function App() {
 			<Provider store={store}>
 				<BrowserRouter>
 					<PersistGate persistor={persistor}>
-						<MantineProvider withNormalizeCSS withGlobalStyles>
+						<MantineProvider theme={theme}>
 							<ModalsProvider
 								modals={ modals }
 								modalProps={ modalsConfig }
