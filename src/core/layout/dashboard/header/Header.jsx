@@ -40,7 +40,12 @@ const Header = () => {
 						size="xs"
 						onClick={handlerClickPreview()}
 					>
-						<Text weight={400}>
+						<Text
+							weight={400}
+							sx={{
+								fontFamily : "Helvetica",
+							}}
+						>
 							{isPreviewActive ? "SALIR DE VISTA PREVIA" : "VISTA PREVIA"}
 						</Text>
 					</Button>
@@ -48,7 +53,12 @@ const Header = () => {
 						radius={12}
 						size="xs"
 					>
-						<Text weight={400}>
+						<Text
+							weight={400}
+							sx={{
+								fontFamily : "Helvetica",
+							}}
+						>
 							GUARDAR
 						</Text>
 					</Button>
@@ -57,7 +67,13 @@ const Header = () => {
 						size="xs"
 						color="darkCasaMatte"
 					>
-						<Text weight={400} color="whiteCasaMatte">
+						<Text
+							weight={400}
+							color="whiteCasaMatte"
+							sx={{
+								fontFamily : "Helvetica",
+							}}
+						>
 							TERMINAR
 						</Text>
 					</Button>
