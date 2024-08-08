@@ -295,15 +295,17 @@ export const workSpaceSlice = createSlice({
 		},
 		addPhoto : (state, {payload}) => {
 			const newData = {...state.data};
-			if (!newData.pages[payload.pageId][`sheet${payload.sheetNo}`].layoutType) {
-				return;
-			}
 			if (payload.pageId === "frontpage") {
-				newData.frontPage.sheet1["photos"][payload.layoutNo] = {
-					id  : payload.image.fileId,
-					url : payload.image.image,
+				newData.frontPage.sheet1["photos"] = {
+					0 : {
+						id  : payload.image.fileId,
+						url : payload.image.image,
+					},
 				};
 			} else {
+				if (!newData.pages[payload.pageId]?.[`sheet${payload.sheetNo}`].layoutType) {
+					return;
+				}
 				newData.pages[payload.pageId][`sheet${payload.sheetNo}`]["photos"][payload.layoutNo] = {
 					id  : payload.image.fileId,
 					url : payload.image.image,

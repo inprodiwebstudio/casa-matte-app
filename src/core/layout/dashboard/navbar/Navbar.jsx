@@ -39,8 +39,14 @@ const Navbar = ({workSpaceSlice}) => {
 							loading={loading}
 							onClick={() => workSpaceSlice.insertPage()}
 						>
-							<Text weight={400} color="whiteCasaMatte">
-								NUEVA PAGINA
+							<Text
+								weight={400}
+								color="whiteCasaMatte"
+								sx={{
+									textTransform : "uppercase",
+								}}
+							>
+								Nueva Página
 							</Text>
 						</Button>
 					</div>

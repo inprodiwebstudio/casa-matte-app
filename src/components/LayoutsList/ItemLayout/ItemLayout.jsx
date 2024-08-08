@@ -52,7 +52,7 @@ const ItemLayout = ({
 				pageId       : "FrontLayout",
 				numberPhotos : layoutData?.numberPhotos,
 				numberText   : layoutData?.numberText,
-				sheetId      : "sheet1",
+				sheetId      : 1,
 			}));
 		}
 		if (pageDataSelected) {

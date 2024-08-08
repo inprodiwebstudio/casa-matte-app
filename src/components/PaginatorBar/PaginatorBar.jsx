@@ -142,7 +142,7 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 
 	return (
 		<div id="PaginatorBar">
-			<h3 className={`header-ittle-paginator ${loading && "loading"}`}>PAGINADO</h3>
+			<h3 className={`header-ittle-paginator ${loading && "loading"}`}>Páginas</h3>
 			{
 				loading ? (
 					<ScrollBar>
