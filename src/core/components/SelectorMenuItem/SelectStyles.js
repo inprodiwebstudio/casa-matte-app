@@ -6,7 +6,7 @@ const SelectStyles = ({type, leftIcon, dropTopMenu, isLoading}) => ({
 		minHeight     : "24px",
 		paddingBottom : ((type === "light") || (type === "filled")) ? "0px" : "10px",
 		paddingTop    : ((type === "light") || (type === "filled")) ? "0px" : "10px",
-		background    : ((type === "light") || (type === "filled")) ? "whithe" : "none",
+		background    : ((type === "light") || (type === "filled")) ? "none" : "none",
 		borderRadius  : "0px",
 		opacity       : isLoading ? "20%" : "100%",
 		cursor        : "pointer",
