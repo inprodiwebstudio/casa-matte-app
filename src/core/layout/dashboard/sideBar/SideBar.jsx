@@ -103,7 +103,7 @@ const SideBar = ({
 								})
 							}
 						>
-							<ArrowTop size="18px" className="icon-arrow-action" />
+							<ArrowTop size="16px" className="icon-arrow-action" />
 						</div>
 						<div
 							className="icon-sidebar-action"
@@ -113,7 +113,7 @@ const SideBar = ({
 								})
 							}
 						>
-							<DropFile size="18px" />
+							<DropFile size="16px" />
 						</div>
 						{
 							galleryPath?.id === "route" && (
@@ -125,7 +125,7 @@ const SideBar = ({
 										})
 									}
 								>
-									<FolderPlus size="20px" />
+									<FolderPlus size="16px" />
 								</div>
 							)
 						}
@@ -145,7 +145,7 @@ const SideBar = ({
 										})
 									}
 								>
-									<Thrash size="20px" />
+									<Thrash size="16px" />
 								</div>
 							)
 						}
@@ -159,7 +159,7 @@ const SideBar = ({
 										})
 									}
 								>
-									<MoveFolder size="20px" />
+									<MoveFolder size="16px" />
 								</div>
 							)
 						}
@@ -173,7 +173,7 @@ const SideBar = ({
 										})
 									}
 								>
-									<Cross size="18px" />
+									<Cross size="16px" />
 								</div>
 							)
 						}
