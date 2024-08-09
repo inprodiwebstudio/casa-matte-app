@@ -1,36 +1,42 @@
 @import "/src/Resources/scss/variables/colorThemes";
 
 .ItemPage {
-    width: 100%;
+    // width: 100%;
     cursor: grab;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all ease 200ms;
     position: relative;
-    padding-top: 8px;
-    height: 120px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 
     & .delete-icon {
-        top : 0;
-        left: 91.5%;
-        z-index: 2;
+        top : 5%;
+        left: 85%;
         cursor: pointer;
+        z-index: 1;
         position: absolute;
         color: transparent;
         color: transparent;
         transition: all ease 200ms;
+        width: 25px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     &:hover {
         background: $primary-color;
         .delete-icon {
             top : 0;
-            z-index: 2;
-            left: 91.5%;
+            background: rgba(44, 44, 44, 0.558);
+            border-radius: 5px;
             cursor: pointer;
             color: $dark-color;
             font-weight: bolder;
+            color: rgb(255, 255, 255) !important;
         }
     }
 
@@ -40,21 +46,24 @@
 
     & .page-container {
         width: auto;
-        height: 470px;
-        max-width: 350px;
-        padding: 8px;
+        // height: 470px;
+        // max-width: 350px;
+        // padding: 8px;
         display: flex;
         align-items: center;
         flex-direction: column;
-        font-size: 50px;
-        transform: scale(0.2, 0.2);
+        // font-size: 50px;
+        // transform: scale(0.2, 0.2);
 
         & .numbPages-container {
-            width: 450px;
             display: flex;
+            margin-top: 0px;
+            width: 55%;
+            font-size: 12px;
+            margin-top: 10px;
 
             p {
-                font-size: 50px !important;
+                // font-size: 50px !important;
                 font-weight: 300;
                 color : $dark-color;
             }

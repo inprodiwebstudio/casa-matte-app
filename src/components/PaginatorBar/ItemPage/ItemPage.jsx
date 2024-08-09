@@ -5,7 +5,7 @@ import { Draggable } from "react-beautiful-dnd";
 //Own Components
 import BookPages from "components/BookPages";
 //Resources
-import { Cross } from "Resources/icons";
+import { Thrash } from "Resources/icons";
 import "./ItemPage.scss";
 
 const ItemPage = ({
@@ -49,7 +49,11 @@ const ItemPage = ({
 			}
 		>
 			<div className="page-container">
-				<BookPages isInPaginator={true} pageData={pageData} />
+				<div
+					style={{height : "100px"}}
+				>
+					<BookPages isInPaginator={true} pageData={pageData} />
+				</div>
 				<NumbPages />
 			</div>
 			{
@@ -58,7 +62,7 @@ const ItemPage = ({
 						className="delete-icon"
 						onClick={() => handleDelete(pageData?.id)}
 					>
-						<Cross size="9px" />
+						<Thrash size="15px" />
 					</div>
 				)
 			}
