@@ -8,6 +8,7 @@ const initialState = {
 		sizePhotoBook  : "",
 		sizeDimentions : "",
 		pasta          : "",
+		modified       : undefined,
 		frontPage      : {
 			id     : "FrontLayout",
 			sheet1 : {

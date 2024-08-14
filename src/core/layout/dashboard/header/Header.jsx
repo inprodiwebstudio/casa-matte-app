@@ -8,6 +8,8 @@ import "./Header.scss";
 // import { openContextModal } from "@mantine/modals";
 
 //Own components
+import { dayjs } from "helpers";
+
 
 const Header = () => {
 	const dispatch = useDispatch();
@@ -15,6 +17,7 @@ const Header = () => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const isPreviewActive = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
+	const lastModified = useSelector((state) => state.workSpaceSlice.data.modified, shallowEqual);
 
 	const handlerClickPreview = () => () => {
 		dispatch(workSpaceSlice.actions.togglePreview());
@@ -54,7 +57,7 @@ const Header = () => {
 							fontSize      : "11px",
 						}}
 					>
-						Ultima actualización: 14 de Agosto, 2024
+						{dayjs(lastModified).format("DD [de] MMMM, YYYY, hh:mm A")}
 					</div>
 					<Button
 						radius={12}
