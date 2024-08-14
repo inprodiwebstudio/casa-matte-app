@@ -62,6 +62,17 @@ export const apiImageKit = createApi({
 			},
 			invalidatesTags : ["gallery"],
 		}),
+		deleteFolder : builder.mutation({
+			query({data, userName}) {
+				const body = data;
+				return {
+					url    : `delete/folder/${userName}`,
+					method : "POST",
+					body,
+				};
+			},
+			invalidatesTags : ["gallery"],
+		}),
 		addImage : builder.mutation({
 			query({data, userName}) {
 				const body = buildFormData(data);

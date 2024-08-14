@@ -1,5 +1,5 @@
 import { Button, Text, TextInput }                from "@mantine/core";
-import { useState }                               from "react";
+import { useEffect, useState }                    from "react";
 import LogoCasaMatte                              from "Resources/images/casaMatteLogo.svg";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { workSpaceSlice }                         from "store/Slices";
@@ -16,8 +16,11 @@ const Header = () => {
 
 	const [isLoading, setIsLoading] = useState(false);
 
+	const [ date, setDate ] = useState(undefined);
+
 	const isPreviewActive = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
 	const lastModified = useSelector((state) => state.workSpaceSlice.data.modified, shallowEqual);
+	const isModifiedData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 
 	const handlerClickPreview = () => () => {
 		dispatch(workSpaceSlice.actions.togglePreview());
@@ -29,6 +32,16 @@ const Header = () => {
 			setIsLoading(false);
 		}, 2000);
 	};
+
+	useEffect(() => {
+		if (lastModified) {
+			setDate(lastModified);
+		}
+	}, []);
+
+	useEffect(() => {
+		setDate(new Date);
+	}, [isModifiedData]);
 
 	return (
 		<div className="Header">
@@ -57,7 +70,7 @@ const Header = () => {
 							fontSize      : "11px",
 						}}
 					>
-						{dayjs(lastModified).format("DD [de] MMMM, YYYY, hh:mm A")}
+						{dayjs(date).format("DD [de] MMMM, YYYY, hh:mm A")}
 					</div>
 					<Button
 						radius={12}

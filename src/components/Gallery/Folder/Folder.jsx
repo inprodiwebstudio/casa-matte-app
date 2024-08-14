@@ -14,6 +14,8 @@ import {
 } from "helpers";
 
 import "./Folder.scss";
+import { openContextModal, closeAllModals } from "@mantine/modals";
+
 
 const Folder = ({
 	name,
@@ -31,6 +33,8 @@ const Folder = ({
 
 	const [ folderName, setFolderName ] = useState("");
 
+	const [galleryFolderMutation] = apiImageKit.useDeleteFolderMutation();
+
 	const {data : imageKitData} = apiImageKit.useGetDirentsListQuery({
 		params : {
 			limit      : 5,
@@ -38,6 +42,16 @@ const Folder = ({
 			userName   : userName,
 		},
 	});
+
+	const hadleDeleteFolder = async () => {
+		await galleryFolderMutation({
+			data : {
+				folderName,
+			},
+			userName,
+		});
+		closeAllModals();
+	};
 
 	const isAvailableImages = (imageKitData && isValidArray(imageKitData)) ?? null;
 
@@ -93,7 +107,15 @@ const Folder = ({
 					variant="invisible"
 					onChange={(e) => handleEditFolderName(e)}
 				/>
-				<div className="more-icon-container">
+				<div
+					className="more-icon-container"
+					onClick={() => openContextModal({
+						modal      : "confirmationDeleteFolder",
+						innerProps : {
+							handdleSuccess : () => hadleDeleteFolder(),
+						},
+					})}
+				>
 					<Thrash size="15px" />
 				</div>
 			</div>
