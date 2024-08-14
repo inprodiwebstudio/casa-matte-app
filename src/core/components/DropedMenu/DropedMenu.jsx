@@ -1,15 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 //Own components
-import { shallowEqual, useSelector } from "react-redux";
-import { ArrowTop }                  from "Resources/icons";
-import { MenuItem }                  from "core/components";
+import { shallowEqual, useSelector }      from "react-redux";
+import { ArrowTop }                       from "Resources/icons";
+import { MenuItem }                       from "core/components";
+import { convertToArray, currencyFormat } from "helpers";
 import "./DropedMenu.scss";
 
 const DropedMenu = () => {
 	const [ activeMenu, setActiveMenu ] = useState(false);
 
+	const [ extraPages, setExtraPages ] = useState(0);
+
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
+	const dataPages = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
+
+	const listOfPages = convertToArray(dataPages.pages);
+
+	const handlerPrice = () => {
+		const pageNumbers = listOfPages[listOfPages.length - 1]?.sheet2 ? listOfPages[listOfPages.length - 1]?.sheet2?.pageNo : listOfPages[listOfPages.length - 1]?.sheet1?.pageNo;
+
+		if (pageNumbers > 16) {
+			setExtraPages(extraPages + 1);
+		}
+		if (pageNumbers <= 16) {
+			setExtraPages(0);
+		}
+	};
+
+	useEffect(() => {
+		if (dataPages) {
+			handlerPrice();
+		}
+	}, [dataPages]);
 
 	return (
 		<div id="DropedMenu">
@@ -43,11 +66,11 @@ const DropedMenu = () => {
 				</div>
 				<div className="menu-item">
 					<label>NÚMERO DE PÁGINAS</label>
-					<MenuItem body="20" />
+					<MenuItem body={`${listOfPages[listOfPages.length - 1]?.sheet2 ? listOfPages[listOfPages.length - 1]?.sheet2?.pageNo : listOfPages[listOfPages.length - 1]?.sheet1?.pageNo}`} />
 				</div>
 				<div className="menu-item">
 					<label>Precio total</label>
-					<MenuItem body="$ 2,350.00" />
+					<MenuItem body={`${currencyFormat((50 * extraPages) + 800)}`} />
 				</div>
 			</div>
 		</div>

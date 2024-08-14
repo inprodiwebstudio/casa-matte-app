@@ -8,6 +8,7 @@ export { default as textInsertion }              from "./textInsertion";
 export { default as bindAll }                    from "./Functions/bindAll";
 export { default as useDebounce }                from "./Hooks/useDebounce";
 export { default as dayjs }                      from "./dayjs";
+export { default as currencyFormat }             from "./currencyFormat";
 export { default as History }                    from "./History";
 export { default as postRequestResponse }        from "./postRequestResponse";
 export { default as getMainLettersFromName }     from "./getMainLettersFromName";
