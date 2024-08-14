@@ -76,6 +76,7 @@ const AppShell = ({
 		if (photobookData?.meta?.config) {
 			const myData = photobookData?.meta?.config;
 			const myReplacerString = myData.replace(/'/g, "\"");
+			console.log(myReplacerString);
 			const parseJSON = JSON.parse(myReplacerString);
 			dispatch(workSpaceSlice.actions.insertData(parseJSON));
 		}

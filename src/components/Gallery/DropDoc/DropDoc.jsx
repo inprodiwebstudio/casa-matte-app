@@ -12,11 +12,17 @@ import {
 	isValidArray,
 	uploadImageKitIo,
 } from "helpers";
+
 import {
 	Card,
 	Button,
 	TextInput,
 } from "core/components";
+
+import {
+	Button as ButtonMantine,
+	Text,
+} from "@mantine/core";
 
 import {
 	Folder,
@@ -182,8 +188,7 @@ const DropDoc = ({
 								<div  {...getRootProps({className : "indicator-drop-container"})}>
 									<DropFile size="40px" />
 									<p>
-										ARRASTRA AQUÍ LAS FOTOGRAFÍAS QUE
-										QUIERAS AGREGAR A TU PROYECTO
+										haz click aquí para subir tus fotos o arrastra y suelta
 									</p>
 									<input {...getInputProps()} />
 								</div>
@@ -222,29 +227,42 @@ const DropDoc = ({
 												image={<Folder size="50px" />}
 												body="CARGAR EN UNA NUEVA CARPETA"
 											/>
-											<TextInput placeholder="NOMBRE DE LA CARPETA" onChange={(e) => setFolderName(e.target.value)} />
+											<div
+												style={{ width : "200px"}}
+											>
+												<TextInput placeholder="NOMBRE DE LA CARPETA" onChange={(e) => setFolderName(e.target.value)} />
+											</div>
 										</div>
-										<Button
-											fontSize="16px"
-											fullSize
+										<ButtonMantine
+											radius={8}
+											size="xs"
+											color="darkCasaMatte"
+											sx={{marginTop : "15px"}}
+											loading={loading}
 											onClick={() => handleAddFolder()}
+											w={110}
+											h={30}
 										>
-											CREAR
-										</Button>
+											<Text
+												weight={400}
+												color="whiteCasaMatte"
+												sx={{
+													textTransform : "uppercase",
+												}}
+											>
+												CREAR
+											</Text>
+										</ButtonMantine>
 									</div>
 									<div className="back-container">
-										{
-											galleryTypeDropedView !== "addFolder" && (
-												<Button
-													onClick={() => setIsSelectedFolder(false)}
-													icon={<ArrowLeft size="20px" />}
-													fontSize="12px"
-													type="transparent"
-												>
-													ATRÁS
-												</Button>
-											)
-										}
+										<Button
+											onClick={() => setIsSelectedFolder(false)}
+											icon={<ArrowLeft size="20px" />}
+											fontSize="12px"
+											type="transparent"
+										>
+											ATRÁS
+										</Button>
 									</div>
 								</div>
 							)

@@ -30,20 +30,32 @@ const Header = () => {
 	return (
 		<div className="Header">
 			<div className="body-container">
-				<img src={LogoCasaMatte} width={170} />
+				<img src={LogoCasaMatte} width={150} />
 				<div className="title-container">
 					<div>WHITE PHOTOBOOK</div>
 					<div>/</div>
-					<TextInput
-						variant="unstyled"
-						defaultValue="PROYECTO 01"
-						sx={{
-							fontSize   : "24px",
-							fontWeight : "400",
-						}}
-					/>
+					<div
+						style={{width : "100px"}}
+					>
+						<TextInput
+							variant="unstyled"
+							defaultValue="PROYECTO 01"
+							sx={{
+								fontSize   : "24px",
+								fontWeight : "400",
+							}}
+						/>
+					</div>
 				</div>
 				<div className="icons-container">
+					<div
+						style={{
+							textTransform : "uppercase",
+							fontSize      : "11px",
+						}}
+					>
+						Ultima actualización: 14 de Agosto, 2024
+					</div>
 					<Button
 						radius={12}
 						size="xs"

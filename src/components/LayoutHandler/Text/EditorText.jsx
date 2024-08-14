@@ -18,6 +18,7 @@ import { useState } from "react";
 // import { closeAllModals }      from "@mantine/modals";
 import { workSpaceSlice } from "store/Slices";
 import { connect }        from "react-redux";
+import { useParams }      from "react-router";
 
 
 // import { Button }  from "core/components";
@@ -25,27 +26,19 @@ import { connect }        from "react-redux";
 import { bindAll } from "helpers";
 import "./EditText.scss";
 
-const EditText = ({innerProps, workSpaceSlice}) => {
-	const [editorState, setEditorState] = useState(null);
+const EditText = ({workSpaceSlice, sheetNo, layoutNo, dataTextPage}) => {
+	const [editorState, setEditorState] = useState(dataTextPage);
 
-	// const { pageId, sheetNo, dataTextPage, layoutNo } = innerProps;
+	const { pageId } = useParams();
+
+	// const { pageId, sheetNo, layoutNo } = innerProps;
 
 	const onEditorStateChange = function(editorState) {
 		setEditorState(editorState);
+		setTimeout(() => {
+			workSpaceSlice.addText({pageId, sheetNo, text : editorState, layoutNo});
+		}, 2000);
 	};
-
-	// const handleAddText = () => {
-	// 	const text = editorState;
-	// 	workSpaceSlice.addText({pageId, sheetNo, text, layoutNo});
-	// 	closeAllModals();
-	// };
-
-	// useEffect(() => {
-	// 	if (dataTextPage && dataTextPage !== "") {
-	// 		const contentBlock = dataTextPage;
-	// 		setEditorState(contentBlock);
-	// 	}
-	// }, [dataTextPage]);
 
 	const editorConfiguration = {
 		plugins      : [ Essentials, Bold, Alignment, Italic, Paragraph, FontFamily, FontSize, FontColor],
@@ -56,13 +49,10 @@ const EditText = ({innerProps, workSpaceSlice}) => {
 		fontFamily : {
 			options : [
 				"default",
+				"Helvetica",
 				"Arial, Helvetica, sans-serif",
-				"Courier New, Courier, monospace",
 				"Georgia, serif",
-				"Lucida Sans Unicode, Lucida Grande, sans-serif",
 				"Tahoma, Geneva, sans-serif",
-				"Times New Roman, Times, serif",
-				"Trebuchet MS, Helvetica, sans-serif",
 				"Verdana, Geneva, sans-serif",
 				"BlakaHollow-Regular",
 				"Aitana-Regular",
@@ -122,6 +112,17 @@ const EditText = ({innerProps, workSpaceSlice}) => {
 			supportAllValues : true,
 		},
 	};
+
+	// useEffect(() => {
+	// 	if (dataTextPage && dataTextPage !== "") {
+	// 		const contentBlock = dataTextPage;
+	// 		setEditorState();
+	// 	}
+	// }, []);
+
+	// useEffect(() => {
+	// 	workSpaceSlice.addText({pageId, sheetNo, text : editorState, layoutNo});
+	// }, [editorState]);
 
 	return (
 		<div

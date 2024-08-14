@@ -1,0 +1,24 @@
+import { Stack } from "@mantine/core";
+//Own components
+import ImgLayout from "components/LayoutHandler/ImgLayout";
+
+const Mod8 = ({data, isInWorkSpace, sheetNo}) => {
+	return (
+		<Stack
+			w="100%"
+			h="100%"
+			pt="27.39%"
+			pb="27.39%"
+			pr="20.66%"
+		>
+			<ImgLayout
+				isInWorkSpace={isInWorkSpace}
+				sheetNo={sheetNo}
+				imageNo={0}
+				urlImage={data?.photos[0] ?? {}}
+			/>
+		</Stack>
+	);
+};
+
+export default Mod8;

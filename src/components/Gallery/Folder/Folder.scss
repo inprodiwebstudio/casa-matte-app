@@ -33,6 +33,7 @@
         justify-content: space-between;
         
         .more-icon-container {
+            cursor: pointer;
         }
 
         &.loading {
@@ -100,6 +101,12 @@
             transition: all ease 250ms;
             border: solid 1px $flat-color;
             background: rgba(247, 245, 241, 0.95);
+
+            p {
+                text-transform: uppercase;
+                letter-spacing: 0px !important;
+                font-size: 10px;
+            }
 
             &.none-background {
                 background: none;

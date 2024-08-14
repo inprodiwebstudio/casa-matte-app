@@ -17,6 +17,7 @@ import { gallerySlice, workSpaceSlice }          from "store/Slices";
 import { convertToArray, isValidArray, bindAll } from "helpers";
 import { CircleArrow, FilterIcon, ActionCross }  from "Resources/icons";
 import "./BodyGallery.scss";
+import { gallerySeparation }                     from "./BodyGallery.helpers";
 
 const BodyGallery = ({
 	loading,
@@ -71,8 +72,8 @@ const BodyGallery = ({
 
 	useEffect(() => {
 		if (isValidArray(galleryData)) {
-			const newPhotos = galleryData;
-			const newFolders = [];
+			const newPhotos = gallerySeparation(galleryData, false);
+			const newFolders = gallerySeparation(galleryData, true);
 			// const leaverFolderEdited = newFolders.filter(e => e.name !== "edited");
 			setMyPhotos(newPhotos);
 			setMyFolders(newFolders);
@@ -232,8 +233,8 @@ const BodyGallery = ({
 									style={{
 										zIndex     : "2",
 										position   : "absolute",
-										height     : "calc(100% - 180px)",
-										width      : "calc(100% - 60px)",
+										height     : "calc(100% - 173px)",
+										width      : "calc(100% - 90px)",
 										display    : "flex",
 										background : "rgba(247, 245, 241, 0.95)",
 									}}

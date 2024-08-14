@@ -105,7 +105,7 @@ const Text = ({
 			}
 			{
 				(!isInPaginator && !isThumbNail) && (
-					<EditorText />
+					<EditorText sheetNo={sheetNo} layoutNo={textNo} dataTextPage={data} />
 				)
 			}
 		</div>

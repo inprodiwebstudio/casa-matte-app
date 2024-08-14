@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { apiImageKit }                from "store/api/imageKitApi";
 import { MutationSpinner, TextInput } from "core/components";
 import { gallerySlice }               from "store/Slices";
-import { MoreOption, PlusIcon }       from "Resources/icons";
+import { Thrash, PlusIcon }           from "Resources/icons";
 import {
 	bindAll,
 	isValidArray,
@@ -94,7 +94,7 @@ const Folder = ({
 					onChange={(e) => handleEditFolderName(e)}
 				/>
 				<div className="more-icon-container">
-					<MoreOption size="20px" />
+					<Thrash size="15px" />
 				</div>
 			</div>
 			<div className="body-indicator-conatiner">
@@ -152,7 +152,7 @@ const Folder = ({
 							}
 							<p>
 								{
-									((imageKitData && !isValidArray(imageKitData)) && !loadingMutationGallery) && "Primero selecciona las fotos para agregar a ésta carpeta"
+									((imageKitData && !isValidArray(imageKitData)) && !loadingMutationGallery) && "selecciona fotos para agregar a ésta carpeta"
 								}
 								{
 									((imageKitData && isValidArray(imageKitData)) && !loadingMutationGallery) && "Haz click aquí para agregar las fotos seleccionadas"

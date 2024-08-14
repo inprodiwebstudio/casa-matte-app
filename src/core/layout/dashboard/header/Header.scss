@@ -16,6 +16,7 @@
         gap: 10px;
 
         .title-container {
+            width: fit-content;
             font-weight: lighter;
             font-size: 15px;
             flex-direction: row;
@@ -23,6 +24,7 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
+            margin-left: 20vw;
 
             .text-title {
                 font-weight: 400;
