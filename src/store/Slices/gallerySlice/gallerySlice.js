@@ -29,10 +29,10 @@ export const gallerySlice = createSlice({
 		},
 		setSelectedData : (state, {payload}) => {
 			const newData = {...state.selectedData};
-			if (newData[payload?.fileId]) {
-				delete newData[payload?.fileId];
+			if (newData[payload?.public_id]) {
+				delete newData[payload?.public_id];
 			} else {
-				newData[payload?.fileId] = payload;
+				newData[payload?.public_id] = payload;
 			}
 			state.selectedData = newData;
 		},

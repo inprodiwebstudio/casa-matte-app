@@ -58,9 +58,9 @@ const SideBar = ({
 	const deleteImages = async () => {
 		let coordinatesLister = [];
 		const listOfSelectedImages = convertToArray(selectedData).map( image => {
-			coordinatesLister = [...coordinatesLister, ...coordinatesPhotoInWorkSpce(image?.fileId, workspaceData)];
+			coordinatesLister = [...coordinatesLister, ...coordinatesPhotoInWorkSpce(image?.public_id, workspaceData)];
 			return (
-				image?.fileId
+				image?.public_id
 			);
 		});
 		await galleryImagesMutation({
@@ -68,9 +68,9 @@ const SideBar = ({
 				imageIds : listOfSelectedImages,
 			},
 		}).unwrap();
+		closeAllModals();
 		gallerySlice.clearSelectedData();
 		workSpaceSlice.removePhotoById(coordinatesLister);
-		closeAllModals();
 	};
 
 	const handleMoveOutFolder = () => {

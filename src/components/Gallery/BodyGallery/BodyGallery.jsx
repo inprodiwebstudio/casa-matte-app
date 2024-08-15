@@ -270,12 +270,12 @@ const BodyGallery = ({
 										<PhotoCard
 											key={index}
 											image={data?.url}
-											fileId={data?.fileId}
+											fileId={data?.public_id}
 											isHideSelected={isHideSelected}
-											isSelected={isInUsePhoto(data?.fileId)}
+											isSelected={isInUsePhoto(data?.public_id)}
 											loadingMutationGallery={loadingMutationGallery}
 											onSelected={() => gallerySlice.setSelectedData(data)}
-											isChecked={gallerySelectedData[data?.fileId] ? true : false}
+											isChecked={gallerySelectedData[data?.public_id] ? true : false}
 										/>
 									))
 								}
