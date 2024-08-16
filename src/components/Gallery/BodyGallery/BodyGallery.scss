@@ -51,6 +51,11 @@
             flex-wrap: wrap;
             width: 100%;
             overflow-y: hidden;
+            transition: all ease 200ms;
+
+            &.isFullSize {
+                gap : 20px;
+            }
         }
     }
 

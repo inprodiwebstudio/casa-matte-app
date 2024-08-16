@@ -4,10 +4,16 @@
     width      : 144px;
     height     : 144px;
     position : relative;
+    transition: all ease 200ms;
 
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+
+    &.isFullSize {
+        width      : 166px;
+        height     : 166px;
+    }
 
     &.isHidePhoto {
         display: none;

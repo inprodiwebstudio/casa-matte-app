@@ -15,13 +15,14 @@ import {
 } from "core/components";
 import { gallerySlice, workSpaceSlice }          from "store/Slices";
 import { convertToArray, isValidArray, bindAll } from "helpers";
-import { CircleArrow, FilterIcon, ActionCross }  from "Resources/icons";
+import { CircleArrow, ActionCross }              from "Resources/icons";
 import "./BodyGallery.scss";
 import { gallerySeparation }                     from "./BodyGallery.helpers";
 
 const BodyGallery = ({
 	loading,
 	refetch,
+	isfullSize,
 	isLoggedIn,
 	isFetching,
 	galleryData,
@@ -164,7 +165,7 @@ const BodyGallery = ({
 								<div className="selector-input">
 									<SelectorMenuItem
 										type="light"
-										placeholder="Ordenar por"
+										placeholder="ORDENAR POR..."
 										options={[
 											{
 												label : "NOMBRE",
@@ -182,7 +183,7 @@ const BodyGallery = ({
 										isLoading={loadingMutationGallery}
 										value={currentFilter}
 										onChange={(data) => gallerySlice.setFilter(data)}
-										leftIcon={<FilterIcon size="15px" />}
+										leftIcon={<></>}
 									/>
 								</div>
 							</div>
@@ -264,13 +265,14 @@ const BodyGallery = ({
 								<p>FOTOS</p>
 								<div className="spacer-line" />
 							</div>
-							<div className="photo-grid">
+							<div className={`photo-grid ${isfullSize && "isFullSize"}`}>
 								{
 									myPhotos.map( (data, index) => (
 										<PhotoCard
 											key={index}
 											image={data?.url}
 											fileId={data?.public_id}
+											isfullSize={isfullSize}
 											isHideSelected={isHideSelected}
 											isSelected={isInUsePhoto(data?.public_id)}
 											loadingMutationGallery={loadingMutationGallery}

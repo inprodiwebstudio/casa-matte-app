@@ -51,6 +51,17 @@ export const apiImageKit = createApi({
 			},
 			invalidatesTags : ["gallery"],
 		}),
+		generateSign : builder.mutation({
+			query({data}) {
+				const body = data;
+				return {
+					url    : "sign",
+					method : "POST",
+					body,
+				};
+			},
+			invalidatesTags : [],
+		}),
 		addFolder : builder.mutation({
 			query({data, userName}) {
 				const body = data;

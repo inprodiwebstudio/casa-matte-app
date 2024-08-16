@@ -183,6 +183,7 @@ const SideBar = ({
 			<div className="body-sidebar">
 				<BodyGallery
 					refetch={refetch}
+					isfullSize={isfullSize}
 					galleryData={imageKitData}
 					isFetching={imageKitFetching}
 					galleryMutation={galleryMutation}

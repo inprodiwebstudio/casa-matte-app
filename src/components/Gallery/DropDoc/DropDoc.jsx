@@ -6,6 +6,7 @@ import { useDropzone }         from "react-dropzone";
 import { gallerySlice } from "store/Slices";
 import { apiImageKit }  from "store/api/imageKitApi";
 
+import useSubmitImages from "helpers/Hooks/useSubmitImages";
 
 import {
 	bindAll,
@@ -52,6 +53,8 @@ const DropDoc = ({
 	// const [galleryImagesMutation] = apiImageKit.useAddImageMutation();
 	const [galleryFolderMutation] = apiImageKit.useAddFolderMutation();
 
+	const { handlerUploadImage } = useSubmitImages({userName : userName, folderName : folderName});
+
 	const completePercentage = (completedPhotos.length * 100) / fileImage.length;
 
 	const handleDrop = (files) => {
@@ -73,10 +76,11 @@ const DropDoc = ({
 		},
 	});
 
-	const handleAddPhotos =  () => {
+	const handleAddPhotos = () => {
 		setLoading(true);
 		const listOfPromises = fileImage.map(async (file, index) => {
-			const respImage = await uploadImageKitIo(file, userName);
+			const respImage = await handlerUploadImage(file);
+			// const respImage = await uploadImageKitIo(file, userName);
 			setCompletedPhotos(prev => {
 				const newData = [respImage?.data, ...prev];
 				return newData;
@@ -148,7 +152,7 @@ const DropDoc = ({
 										className="imageThumbContainer"
 										key={index}
 										style={{
-											background : photoData?.thumbnailUrl ? `url(${photoData?.thumbnailUrl}) center center / cover no-repeat` : "grey",
+											background : photoData?.url ? `url(${photoData?.url}) center center / cover no-repeat` : "grey",
 										}}
 									>
 											&nbsp;

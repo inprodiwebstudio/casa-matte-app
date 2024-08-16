@@ -16,6 +16,7 @@ const PhotoCard = ({
 	fileId,
 	isChecked,
 	isSelected,
+	isfullSize,
 	onSelected,
 	workSpaceData,
 	isHideSelected,
@@ -128,7 +129,7 @@ const PhotoCard = ({
 
 	return (
 		<div
-			className={`PhotoCard ${isDragger && "isDragger"} ${(isHideSelected && isSelected) && "isHidePhoto"}`}
+			className={`PhotoCard ${isfullSize && "isFullSize"} ${isDragger && "isDragger"} ${(isHideSelected && isSelected) && "isHidePhoto"}`}
 			draggable="true"
 			onDragStart={() => handdleDrag()}
 			onDragEnd={() => handleLeaveDragger()}
