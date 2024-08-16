@@ -245,22 +245,24 @@ const BodyGallery = ({
 							)
 						}
 						<div className="docs-list">
-							<div className="folder-grid">
-								{
-									myFolders.map( data => (
-										<Folder
-											key={data?.fileId}
-											images={[""]}
-											name={data?.name}
-											folderId={data?.fileId}
-											galleryMutation={galleryMutation}
-											loadingMutationGallery={loadingMutationGallery}
-											galleryImagesMutationMove={galleryImagesMutationMove}
-											onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.fileId, name : data?.name})}
-										/>
-									))
-								}
-							</div>
+							{isValidArray(myFolders) && (
+								<div className="folder-grid">
+									{
+										myFolders.map( data => (
+											<Folder
+												key={data?.fileId}
+												images={[""]}
+												name={data?.name}
+												folderId={data?.fileId}
+												galleryMutation={galleryMutation}
+												loadingMutationGallery={loadingMutationGallery}
+												galleryImagesMutationMove={galleryImagesMutationMove}
+												onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.fileId, name : data?.name})}
+											/>
+										))
+									}
+								</div>
+							)}
 							<div className="separator-container">
 								<p>FOTOS</p>
 								<div className="spacer-line" />
