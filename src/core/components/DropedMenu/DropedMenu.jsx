@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 //Own components
 import { shallowEqual, useSelector } from "react-redux";
@@ -11,29 +11,28 @@ import { convertToArray, currencyFormat, counterSheets } from "helpers";
 const DropedMenu = () => {
 	const [ activeMenu, setActiveMenu ] = useState(false);
 
-	// const [ extraPages, setExtraPages ] = useState(0);
+	const [ extraPages, setExtraPages ] = useState(0);
 
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
 	const dataPages = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
+	const maxRangePages = useSelector((state) => state.workSpaceSlice.data?.maxRangePages, shallowEqual);
+	const extraCost = useSelector((state) => state.workSpaceSlice.data?.extraCost, shallowEqual);
 
 	const listOfPages = convertToArray(dataPages.pages);
+	const counterPages = () => counterSheets(listOfPages);
 
-	// const handlerPrice = () => {
-	// 	const pageNumbers = listOfPages[listOfPages.length - 1]?.sheet2 ? listOfPages[listOfPages.length - 1]?.sheet2?.pageNo : listOfPages[listOfPages.length - 1]?.sheet1?.pageNo;
+	const handlerCost = () => {
+		const cost = extraPages * Number(extraCost);
+		return currencyFormat(cost);
+	};
 
-	// 	if (pageNumbers > 16) {
-	// 		setExtraPages(extraPages + 1);
-	// 	}
-	// 	if (pageNumbers <= 16) {
-	// 		setExtraPages(0);
-	// 	}
-	// };
-
-	// useEffect(() => {
-	// 	if (dataPages) {
-	// 		handlerPrice();
-	// 	}
-	// }, [dataPages]);
+	useEffect(() => {
+		if (counterPages() > Number(maxRangePages)) {
+			setExtraPages(counterPages() - Number(maxRangePages));
+			return;
+		}
+		setExtraPages(0);
+	}, [dataPages.pages]);
 
 	return (
 		<div id="DropedMenu">
@@ -67,11 +66,11 @@ const DropedMenu = () => {
 				</div>
 				<div className="menu-item">
 					<label>NÚMERO DE PÁGINAS</label>
-					<MenuItem body={counterSheets(listOfPages)} />
+					<MenuItem body={counterPages()} />
 				</div>
 				<div className="menu-item">
 					<label>Precio total</label>
-					<MenuItem body={`${currencyFormat(100)}`} />
+					<MenuItem body={`${handlerCost()}`} />
 				</div>
 			</div>
 		</div>
