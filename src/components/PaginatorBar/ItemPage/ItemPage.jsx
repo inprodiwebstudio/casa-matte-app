@@ -81,7 +81,6 @@ const ItemPage = ({
 		<Draggable
 			index={index}
 			draggableId={draggableId}
-			isDragDisabled={!pageData?.sheet2}
 			disableInteractiveElementBlocking={true}
 		>
 			{(provided) => (

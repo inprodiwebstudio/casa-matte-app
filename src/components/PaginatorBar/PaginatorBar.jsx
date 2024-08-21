@@ -23,7 +23,6 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 
 	const dragerChangePosition = result => {
 		const { destination, source, draggableId } = result;
-		const idCurrentDestination = pageList.pagesIds[destination.index];
 
 		if (!destination) {
 			return;
@@ -47,10 +46,6 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 			},
 			pagesIds : [...newpagesIds],
 		};
-
-		if (!pageList.pages[idCurrentDestination].sheet2) {
-			return;
-		}
 
 		const reOrderPages = convertToArray(newPagesList.pages).map((pageData, index) => {
 			const newData = {
