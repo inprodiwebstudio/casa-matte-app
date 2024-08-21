@@ -127,6 +127,12 @@ const WorkSpace = () => {
 		}
 	}, [pageId, workSpaceData, workSpaceFrontPage]);
 
+	useEffect(() => {
+		if (pageId) {
+			dispatch(workSpaceSlice.actions.handleChangePage(pageId));
+		}
+	}, [pageId]);
+
 	document.onkeydown = undoAndRedoActions;
 
 	return (

@@ -1,6 +1,5 @@
 
 //Own Components
-// import BookSheets                 from "components/BookSheets";
 import { shallowEqual, useSelector } from "react-redux";
 import { useNavigate, useParams }    from "react-router";
 import {Reload}                      from "Resources/icons";
@@ -11,14 +10,19 @@ const FrontPage = () => {
 	const navigate = useNavigate();
 	const { pageId } = useParams();
 
+
 	const isLoading = useSelector((state) => state.workSpaceSlice?.loading, shallowEqual);
 
 	const workSpaceFrontPage = useSelector((state) => state.workSpaceSlice.data?.frontPage, shallowEqual);
 
+	const handlerSelectPage = () => {
+		navigate("frontpage");
+	};
+
 	return (
 		<div
 			className={`FrontPage ${(pageId === "frontpage") && "isInThisPage"}`}
-			onClick={() => navigate("frontpage")}
+			onClick={() => handlerSelectPage()}
 		>
 			<div
 				className="my-page-container"
