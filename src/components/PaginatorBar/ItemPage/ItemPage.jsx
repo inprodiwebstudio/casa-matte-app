@@ -1,3 +1,7 @@
+//Redux
+import { useDispatch } from "react-redux";
+//Slices
+import { workSpaceSlice } from "store/Slices";
 //Router
 import { useNavigate, useParams } from "react-router-dom";
 //External components
@@ -17,8 +21,14 @@ const ItemPage = ({
 }) => {
 	const { pageId } = useParams();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const isCurrentPage = pageId === draggableId;
+
+	const handlerSelectPage = () => {
+		navigate(draggableId);
+		dispatch(workSpaceSlice.actions.handleChangePage(draggableId));
+	};
 
 	const NumbPages = () => {
 		return (
@@ -39,7 +49,7 @@ const ItemPage = ({
 	const RenderView = ({ provided }) => (
 		<div
 			className={`ItemPage ${isCurrentPage && "isActivePage"} ${isFixedPage && "isFixed"}`}
-			onClick={() => navigate(draggableId)}
+			onClick={() => handlerSelectPage()}
 			{
 				...(provided && {
 					ref : provided.innerRef,

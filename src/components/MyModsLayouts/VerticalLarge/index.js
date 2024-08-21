@@ -1,6 +1,6 @@
-// import Mod1  from "./Mod1";
-// import Mod2  from "./Mod2";
-// import Mod3  from "./Mod3";
+import Mod1  from "./Mod1";
+import Mod2  from "./Mod2";
+import Mod3  from "./Mod3";
 import Mod4  from "./Mod4";
 import Mod5  from "./Mod5";
 import Mod6  from "./Mod6";
@@ -71,6 +71,9 @@ import {
 	Mod14Pdf,
 	Mod15Pdf,
 	Mod16Pdf,
+	Mod1Pdf,
+	Mod2Pdf,
+	Mod3Pdf,
 	Mod4Pdf,
 	Mod5Pdf,
 	Mod6Pdf,
@@ -173,6 +176,27 @@ const VerticalLarge = {
 		cat          : "portadas",
 		pdfLayout    : "",
 	},
+	Mod1 : {
+		id           : "Mod1",
+		layout       : Mod1,
+		numberPhotos : 1,
+		cat          : "fotos",
+		pdfLayout    : Mod1Pdf,
+	},
+	Mod2 : {
+		id           : "Mod2",
+		layout       : Mod2,
+		numberPhotos : 1,
+		cat          : "fotos",
+		pdfLayout    : Mod2Pdf,
+	},
+	Mod3 : {
+		id           : "Mod3",
+		layout       : Mod3,
+		numberPhotos : 1,
+		cat          : "fotos",
+		pdfLayout    : Mod3Pdf,
+	},
 	Mod4 : {
 		id           : "Mod4",
 		layout       : Mod4,
@@ -180,27 +204,6 @@ const VerticalLarge = {
 		cat          : "fotos",
 		pdfLayout    : Mod4Pdf,
 	},
-	// Mod1 : {
-	// 	id           : "Mod1",
-	// 	layout       : Mod1,
-	// 	numberPhotos : 1,
-	// 	cat          : "fotos",
-	// 	pdfLayout    : Mod1Pdf,
-	// },
-	// Mod2 : {
-	// 	id           : "Mod2",
-	// 	layout       : Mod2,
-	// 	numberPhotos : 1,
-	// 	cat          : "fotos",
-	// 	pdfLayout    : Mod2Pdf,
-	// },
-	// Mod3 : {
-	// 	id           : "Mod3",
-	// 	layout       : Mod3,
-	// 	numberPhotos : 1,
-	// 	cat          : "fotos",
-	// 	pdfLayout    : Mod3Pdf,
-	// },
 	Mod5 : {
 		id           : "Mod5",
 		layout       : Mod5,

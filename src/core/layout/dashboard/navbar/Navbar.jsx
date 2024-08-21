@@ -37,7 +37,7 @@ const Navbar = ({workSpaceSlice}) => {
 							leftIcon={<PlusIcon size="15px" />}
 							sx={{marginTop : "15px"}}
 							loading={loading}
-							onClick={() => workSpaceSlice.insertPage()}
+							onClick={() => workSpaceSlice.addPage()}
 						>
 							<Text
 								weight={400}
