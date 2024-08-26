@@ -49,7 +49,18 @@ export const apiImageKit = createApi({
 					body,
 				};
 			},
-			invalidatesTags : ["gallery"],
+			invalidatesTags : [],
+		}),
+		generateUrlCompress : builder.mutation({
+			query({data}) {
+				const body = data;
+				return {
+					url    : "urlimage",
+					method : "POST",
+					body,
+				};
+			},
+			invalidatesTags : [],
 		}),
 		generateSign : builder.mutation({
 			query({data}) {
@@ -71,7 +82,7 @@ export const apiImageKit = createApi({
 					body,
 				};
 			},
-			invalidatesTags : ["gallery"],
+			invalidatesTags : [],
 		}),
 		deleteFolder : builder.mutation({
 			query({data, userName}) {
@@ -82,7 +93,7 @@ export const apiImageKit = createApi({
 					body,
 				};
 			},
-			invalidatesTags : ["gallery"],
+			invalidatesTags : [],
 		}),
 		addImage : builder.mutation({
 			query({data, userName}) {
@@ -104,7 +115,7 @@ export const apiImageKit = createApi({
 					body,
 				};
 			},
-			invalidatesTags : ["gallery"],
+			invalidatesTags : [],
 		}),
 		moveFile : builder.mutation({
 			query({sourceFilePath, destinationPath}) {
@@ -117,7 +128,7 @@ export const apiImageKit = createApi({
 					},
 				};
 			},
-			invalidatesTags : (result, error, arg) => arg?.tags ? [...arg.tags] : [`${arg.module}`],
+			invalidatesTags : [],
 		}),
 	}),
 });

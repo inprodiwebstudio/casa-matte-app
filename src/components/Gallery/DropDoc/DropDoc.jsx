@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { connect }             from "react-redux";
-import { useDropzone }         from "react-dropzone";
+import { useState, useEffect }  from "react";
+import { connect, useDispatch } from "react-redux";
+import { useDropzone }          from "react-dropzone";
 
 //Own components
 import { gallerySlice } from "store/Slices";
@@ -11,7 +11,6 @@ import useSubmitImages from "helpers/Hooks/useSubmitImages";
 import {
 	bindAll,
 	isValidArray,
-	uploadImageKitIo,
 } from "helpers";
 
 import {
@@ -34,13 +33,11 @@ import {
 import "./DropDoc.scss";
 
 const DropDoc = ({
-	refetch,
 	userName,
-	gallerySlice,
-	galleryMutation,
 	galleryPathRoute,
 	galleryTypeDropedView,
 }) => {
+	const dispatch = useDispatch();
 
 	const [ loading, setLoading ] = useState(false);
 
@@ -78,46 +75,58 @@ const DropDoc = ({
 
 	const handleAddPhotos = () => {
 		setLoading(true);
+		dispatch(gallerySlice.actions.setLoadingMutationGallery(true));
 		const listOfPromises = fileImage.map(async (file, index) => {
 			const respImage = await handlerUploadImage(file);
-			// const respImage = await uploadImageKitIo(file, userName);
 			setCompletedPhotos(prev => {
-				const newData = [respImage?.data, ...prev];
+				const newData = [respImage, ...prev];
 				return newData;
 			});
+			const constructotImageData = {
+				...respImage,
+				id       : respImage?.asset_id,
+				fileId   : respImage?.asset_id,
+				filePath : respImage?.public_id,
+				type     : "file",
+			};
+			dispatch(gallerySlice.actions.setGalleryData(constructotImageData));
 			return respImage;
 		});
 
 		Promise.all([...listOfPromises]).then((values) => {
 			setLoading(false);
-			gallerySlice.setTypeDropedView(null);
-			refetch();
+			dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
+			dispatch(gallerySlice.actions.setTypeDropedView(null));
 		}, reason => {
 			setLoading(false);
-			gallerySlice.setTypeDropedView(null);
+			dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
+			dispatch(gallerySlice.actions.setTypeDropedView(null));
 			console.error(reason);
 		});
 	};
 
 	const handleAddFolder = async () => {
 		setLoading(true);
+		dispatch(gallerySlice.actions.setLoadingMutationGallery(true));
 		if (isValidArray(fileImage)) {
 			const listOfPromises = fileImage.map(async (file, index) => {
-				const respImage = await uploadImageKitIo(file, userName, folderName);
+				const respImage = await handlerUploadImage(file);
 				setCompletedPhotos(prev => {
 					const newData = [respImage?.data, ...prev];
 					return newData;
 				});
+				dispatch(gallerySlice.actions.setGalleryData({...respImage?.data}));
 				return respImage;
 			});
 
 			Promise.all([...listOfPromises]).then((values) => {
 				setLoading(false);
-				gallerySlice.setTypeDropedView(null);
-				refetch();
+				dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
+				dispatch(gallerySlice.actions.setTypeDropedView(null));
 			}, reason => {
 				setLoading(false);
-				gallerySlice.setTypeDropedView(null);
+				dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
+				dispatch(gallerySlice.actions.setTypeDropedView(null));
 				console.error(reason);
 			});
 			return;
@@ -129,9 +138,9 @@ const DropDoc = ({
 			},
 			userName,
 		});
-		gallerySlice.setTypeDropedView(null);
+		dispatch(gallerySlice.actions.setTypeDropedView(null));
 		setLoading(false);
-		refetch();
+		dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 	};
 
 	useEffect(() => {

@@ -20,13 +20,10 @@ import { openContextModal, closeAllModals } from "@mantine/modals";
 const Folder = ({
 	name,
 	userName,
-	folderId,
 	gallerySlice,
-	galleryMutation,
 	onSelectedFolder,
 	gallerySelectedData,
 	loadingMutationGallery,
-	galleryImagesMutationMove,
 }) => {
 	const selectedData = convertToArray(gallerySelectedData);
 	const isSelectedData = isValidArray(selectedData);
@@ -34,6 +31,8 @@ const Folder = ({
 	const [ folderName, setFolderName ] = useState("");
 
 	const [galleryFolderMutation] = apiImageKit.useDeleteFolderMutation();
+
+	const [galleryImagesMutationMove] = apiImageKit.useMoveFileMutation();
 
 	const {data : imageKitData} = apiImageKit.useGetDirentsListQuery({
 		params : {

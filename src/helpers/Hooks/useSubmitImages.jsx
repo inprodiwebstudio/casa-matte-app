@@ -6,7 +6,7 @@ const { useGenerateSignMutation } = apiImageKit;
 const useSubmitImages = ({userName, folderName}) => {
 	const timestamp = Math.floor(Date.now() / 1000);
 	const [ generateSignMutation ] = useGenerateSignMutation();
-
+	const [ generateUrlCompress ] = apiImageKit.useGenerateUrlCompressMutation();
 	const handlerUploadImage = async (image) => {
 		try {
 			const { data } = await generateSignMutation({data : {
@@ -24,8 +24,17 @@ const useSubmitImages = ({userName, folderName}) => {
 					timestamp : `${data.timestamp}`,
 				}
 			);
-			return uploadFile;
+			const urlImage = await generateUrlCompress({data : {
+				public_id : uploadFile?.data?.public_id,
+				format    : uploadFile?.data?.format,
+			}});
+			const dataResp = {
+				...uploadFile.data,
+				url : urlImage.data?.url,
+			};
+			return dataResp;
 		} catch (error) {
+			console.log(error);
 			return error;
 		}
 	};

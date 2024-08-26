@@ -8,10 +8,13 @@ const initialState = {
 		name         : "route",
 		folderThumbs : [],
 	},
-	filter         : undefined,
-	typeDropedView : null,
-	data           : {},
-	selectedData   : {},
+	filter            : undefined,
+	typeDropedView    : null,
+	data              : null,
+	isFullSizeSideBar : false,
+	isLoadingData     : false,
+	isLoadingMutation : false,
+	selectedData      : null,
 };
 
 export const gallerySlice = createSlice({
@@ -19,10 +22,26 @@ export const gallerySlice = createSlice({
 	initialState,
 	reducers : {
 		setGalleryData : (state, {payload}) => {
-			state.data = {...payload, ...state.data};
+			state.data = {[payload?.id] : payload, ...state.data};
 		},
-		newGalleryData : (state, {payload}) => {
-			state.data = payload;
+		getGalleryData : (state, {payload}) => {
+			const gallletyDataInsert = convertToObject(payload);
+			state.data = gallletyDataInsert;
+		},
+		setLoadingGalleryData : (state, {payload}) => {
+			state.isLoadingData = payload;
+		},
+		setLoadingMutationGallery : (state, {payload}) => {
+			state.isLoadingMutation = payload;
+		},
+		deleteDataGallery : (state, {payload}) => {
+			const newData = {...state.data};
+			const listOfKeys = Object.keys(payload);
+			listOfKeys.forEach(key => {
+				delete newData[key];
+			});
+			state.data = newData;
+			state.selectedData = {};
 		},
 		clearSelectedData : (state) => {
 			state.selectedData = {};
@@ -35,15 +54,6 @@ export const gallerySlice = createSlice({
 				newData[payload?.public_id] = payload;
 			}
 			state.selectedData = newData;
-		},
-		deleteData : (state, {payload}) => {
-			const newData = {...state.data};
-			const listOfKeys = Object.keys(payload);
-			listOfKeys.forEach(key => {
-				delete newData[key];
-			});
-			state.data = newData;
-			state.selectedData = {};
 		},
 		setTypeDropedView : (state, {payload}) => {
 			if (payload === state.typeDropedView) {
@@ -58,6 +68,9 @@ export const gallerySlice = createSlice({
 		},
 		setFilter : (state, {payload}) => {
 			state.filter = payload;
+		},
+		toggleFullSizeSideBar : (state) => {
+			state.isFullSizeSideBar = !state.isFullSizeSideBar;
 		},
 		moveToFolder : (state, {payload}) => {
 			const cloneData = { ...state.data };

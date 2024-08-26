@@ -20,24 +20,23 @@ import "./BodyGallery.scss";
 import { gallerySeparation }                     from "./BodyGallery.helpers";
 
 const BodyGallery = ({
-	loading,
-	refetch,
-	isfullSize,
 	isLoggedIn,
-	isFetching,
 	galleryData,
 	gallerySlice,
-	workSpaceData,
 	currentFilter,
+	workSpaceData,
 	workSpaceSlice,
-	galleryMutation,
 	galleryPathRoute,
+	isLoadingMutation,
+	isFullSizeSideBar,
 	gallerySelectedData,
+	isLoadingGalleryData,
 	galleryTypeDropedView,
 	loadingMutationGallery,
-	galleryImagesMutationMove,
 }) => {
-	const isAvailableDocs = isValidArray(galleryData);
+	const galleryList = convertToArray(galleryData);
+
+	const isAvailableDocs = isValidArray(galleryList);
 
 	const [ myPhotos, setMyPhotos ] = useState([]);
 
@@ -48,15 +47,6 @@ const BodyGallery = ({
 	const [ selectedImagesIds, setSelectedImagesIds ] = useState([]);
 
 	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
-
-	const galleryLoading = isFetching;
-
-	useEffect(() => {
-		if (!isAvailableDocs) {
-			gallerySlice.setGalleryPath({id : "route", name : "route"});
-		}
-	}, [galleryData]);
-
 
 	useEffect(() => {
 		if (isAvailableDocs && (currentFilter?.value === "DESC_CAPTURE")) {
@@ -72,9 +62,9 @@ const BodyGallery = ({
 	}, [currentFilter]);
 
 	useEffect(() => {
-		if (isValidArray(galleryData)) {
-			const newPhotos = gallerySeparation(galleryData, false);
-			const newFolders = gallerySeparation(galleryData, true);
+		if (isAvailableDocs) {
+			const newPhotos = gallerySeparation(galleryList, false);
+			const newFolders = gallerySeparation(galleryList, true);
 			// const leaverFolderEdited = newFolders.filter(e => e.name !== "edited");
 			setMyPhotos(newPhotos);
 			setMyFolders(newFolders);
@@ -129,12 +119,12 @@ const BodyGallery = ({
 			<div className="header-gallery-container">
 				<div className="header-actions-gallery">
 					{
-						(isAvailableDocs && (!galleryLoading)) && (
+						(isAvailableDocs && (!isLoadingGalleryData)) && (
 							<>
 								<CheckBox
 									isActive={isHideSelected}
 									label="OCULTAR FOTOS USADAS"
-									isLoading={loadingMutationGallery}
+									isLoading={isLoadingMutation}
 									onChange={() => setIsHideSelected(!isHideSelected)}
 								/>
 								<Button
@@ -142,7 +132,7 @@ const BodyGallery = ({
 									fontSize={12}
 									type="outline"
 									onClick={() => workSpaceSlice.autoFillImages(myPhotos)}
-									isLoading={loadingMutationGallery}
+									isLoading={isLoadingMutation}
 								>
 									AUTOFILL
 								</Button>
@@ -150,17 +140,17 @@ const BodyGallery = ({
 						)
 					}
 				</div>
-				<h3 className={(galleryLoading || !isLoggedIn) && "loading"}>{galleryPathRoute?.id === "route" ? "GALERÍA" : galleryPathRoute?.name}</h3>
+				<h3 className={(isLoadingGalleryData || !isLoggedIn) && "loading"}>{galleryPathRoute?.id === "route" ? "GALERÍA" : galleryPathRoute?.name}</h3>
 				<div className="actions-header-container">
 					<div className="icon-style">
 						{
-							((galleryPathRoute?.id !== "route") && !galleryLoading && !loadingMutationGallery) && (
+							((galleryPathRoute?.id !== "route") && !isLoadingGalleryData && !isLoadingMutation) && (
 								<CircleArrow size="30px" onClick={() => gallerySlice.setGalleryPath({id : "route", name : "route"})} />
 							)
 						}
 					</div>
 					{
-						(isAvailableDocs && !galleryLoading) && (
+						(isAvailableDocs && !isLoadingGalleryData) && (
 							<div className="filter-selector-container">
 								<div className="selector-input">
 									<SelectorMenuItem
@@ -180,7 +170,7 @@ const BodyGallery = ({
 												value : "DESC_CAPTURE",
 											},
 										]}
-										isLoading={loadingMutationGallery}
+										isLoading={isLoadingMutation}
 										value={currentFilter}
 										onChange={(data) => gallerySlice.setFilter(data)}
 										leftIcon={<></>}
@@ -196,7 +186,7 @@ const BodyGallery = ({
 						transition     : "all ease 200ms",
 					}}>
 						{
-							(isSelectedData && !loadingMutationGallery) && (
+							(isSelectedData && !isLoadingGalleryData) && (
 								<ActionCross onClick={() => gallerySlice.clearSelectedData()} className="disSelect" />
 							)
 						}
@@ -204,12 +194,12 @@ const BodyGallery = ({
 				</div>
 			</div>
 			{
-				(galleryLoading || !isLoggedIn) && (
+				(isLoadingGalleryData || !isLoggedIn) && (
 					<GalleryLoading />
 				)
 			}
 			{
-				((!galleryLoading) && !isAvailableDocs && isLoggedIn) && (
+				((!isLoadingGalleryData) && !isAvailableDocs && isLoggedIn) && (
 					<div
 						style={{
 							top       : "17%",
@@ -221,12 +211,12 @@ const BodyGallery = ({
 							overflowX : "hidden",
 						}}
 					>
-						<DropDoc galleryMutation={galleryMutation} refetch={refetch} />
+						<DropDoc />
 					</div>
 				)
 			}
 			{
-				((!galleryLoading) && isAvailableDocs && isLoggedIn) && (
+				((!isLoadingGalleryData) && isAvailableDocs && isLoggedIn) && (
 					<ScrollBar>
 						{
 							galleryTypeDropedView && (
@@ -240,7 +230,7 @@ const BodyGallery = ({
 										background : "rgba(247, 245, 241, 0.95)",
 									}}
 								>
-									<DropDoc galleryMutation={galleryMutation} refetch={refetch} />
+									<DropDoc />
 								</div>
 							)
 						}
@@ -254,9 +244,7 @@ const BodyGallery = ({
 												images={[""]}
 												name={data?.name}
 												folderId={data?.fileId}
-												galleryMutation={galleryMutation}
 												loadingMutationGallery={loadingMutationGallery}
-												galleryImagesMutationMove={galleryImagesMutationMove}
 												onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.fileId, name : data?.name})}
 											/>
 										))
@@ -267,14 +255,14 @@ const BodyGallery = ({
 								<p>FOTOS</p>
 								<div className="spacer-line" />
 							</div>
-							<div className={`photo-grid ${isfullSize && "isFullSize"}`}>
+							<div className={`photo-grid ${isFullSizeSideBar && "isFullSize"}`}>
 								{
 									myPhotos.map( (data, index) => (
 										<PhotoCard
 											key={index}
 											image={data?.url}
 											fileId={data?.public_id}
-											isfullSize={isfullSize}
+											isfullSize={isFullSizeSideBar}
 											isHideSelected={isHideSelected}
 											isSelected={isInUsePhoto(data?.public_id)}
 											loadingMutationGallery={loadingMutationGallery}
@@ -293,6 +281,10 @@ const BodyGallery = ({
 };
 
 const mapStateToProps = ({ gallerySlice, workSpaceSlice, authSlice }) => ({
+	isLoadingGalleryData  : gallerySlice?.isLoadingGalleryData ?? false,
+	isLoadingMutation     : gallerySlice?.isLoadingMutation ?? false,
+	isFullSizeSideBar     : gallerySlice?.isFullSizeSideBar ?? false,
+	galleryData           : gallerySlice?.data ?? {},
 	galleryPathRoute      : gallerySlice?.galleryPathName ?? "route",
 	gallerySelectedData   : gallerySlice?.selectedData ?? {},
 	workSpaceData         : workSpaceSlice?.data ?? {},
