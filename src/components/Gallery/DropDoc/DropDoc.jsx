@@ -112,10 +112,17 @@ const DropDoc = ({
 			const listOfPromises = fileImage.map(async (file, index) => {
 				const respImage = await handlerUploadImage(file);
 				setCompletedPhotos(prev => {
-					const newData = [respImage?.data, ...prev];
+					const newData = [respImage, ...prev];
 					return newData;
 				});
-				dispatch(gallerySlice.actions.setGalleryData({...respImage?.data}));
+				const constructorData = {
+					...respImage,
+					id       : respImage?.asset_id,
+					fileId   : respImage?.asset_id,
+					filePath : respImage?.public_id,
+					type     : "folder",
+				};
+				dispatch(gallerySlice.actions.setGalleryData(constructorData));
 				return respImage;
 			});
 
@@ -132,12 +139,19 @@ const DropDoc = ({
 			return;
 		}
 		setIsGenerateNewFolder(true);
-		await galleryFolderMutation({
+		const respFolder = await galleryFolderMutation({
 			data : {
 				folderName,
 			},
 			userName,
 		});
+
+		const constructorData = {
+			...respFolder?.data,
+			type : "folder",
+			id   : respFolder?.data?.path,
+		};
+		dispatch(gallerySlice.actions.setGalleryData(constructorData));
 		dispatch(gallerySlice.actions.setTypeDropedView(null));
 		setLoading(false);
 		dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
