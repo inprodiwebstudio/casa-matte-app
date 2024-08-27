@@ -21,7 +21,6 @@ const PhotoCard = ({
 	workSpaceData,
 	isHideSelected,
 	workSpaceSlice,
-	loadingMutationGallery,
 }) => {
 	const { pageId } = useParams();
 

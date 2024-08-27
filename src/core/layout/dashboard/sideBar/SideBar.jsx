@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import BodyGallery from "components/Gallery/BodyGallery";
 //Mantine
-import { openContextModal } from "@mantine/modals";
+import { openContextModal, closeAllModals } from "@mantine/modals";
 
 //Own components
 import { gallerySlice, workSpaceSlice }                             from "store/Slices";
@@ -29,12 +29,29 @@ const SideBar = ({
 	const [ fetchGallery, { isLoading } ] = useLazyGetDirentsListQuery();
 
 	const [galleryImagesMutationMove] = apiImageKit.useMoveFileMutation();
+	const [galleryImagesMutastionDelete] = apiImageKit.useDeleteImagesMutation();
 
 	const isAvailableDocs = isValidArray(convertToArray(galleryData));
 
 	const isSelectedData = isValidArray(convertToArray(selectedData));
 
 	const selectedDataQuantity = convertToArray(selectedData).length;
+
+	const handlerDeletePhotos = async () => {
+		gallerySlice.setLoadingMutationGallery(true);
+		const mySelectedData = convertToArray(selectedData);
+		const publicIdsPhotos = mySelectedData.map(photo => photo?.public_id);
+		try {
+			await galleryImagesMutastionDelete(publicIdsPhotos);
+			gallerySlice.deleteDataGallery(selectedData);
+			gallerySlice.setLoadingMutationGallery(false);
+			closeAllModals();
+		} catch (error) {
+			gallerySlice.setLoadingMutationGallery(false);
+			closeAllModals();
+			console.error(error);
+		}
+	};
 
 	const handleMoveOutFolder = () => {
 		const mySelectedData = convertToArray(selectedData);
@@ -125,7 +142,7 @@ const SideBar = ({
 												modal      : "confirmationDelete",
 												innerProps : {
 													photoQuantity  : selectedDataQuantity,
-													handdleSuccess : () => console.log("to deleted"),
+													handdleSuccess : () => handlerDeletePhotos(),
 												},
 											}),
 										})

@@ -32,7 +32,6 @@ const BodyGallery = ({
 	gallerySelectedData,
 	isLoadingGalleryData,
 	galleryTypeDropedView,
-	loadingMutationGallery,
 }) => {
 	const galleryList = convertToArray(galleryData);
 
@@ -244,7 +243,7 @@ const BodyGallery = ({
 												images={[""]}
 												name={data?.name}
 												folderId={data?.fileId}
-												loadingMutationGallery={loadingMutationGallery}
+												loadingMutationGallery={isLoadingMutation}
 												onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.fileId, name : data?.name})}
 											/>
 										))
@@ -261,13 +260,12 @@ const BodyGallery = ({
 										<PhotoCard
 											key={index}
 											image={data?.url}
-											fileId={data?.public_id}
+											fileId={data?.id}
 											isfullSize={isFullSizeSideBar}
 											isHideSelected={isHideSelected}
-											isSelected={isInUsePhoto(data?.public_id)}
-											loadingMutationGallery={loadingMutationGallery}
+											isSelected={isInUsePhoto(data?.id)}
 											onSelected={() => gallerySlice.setSelectedData(data)}
-											isChecked={gallerySelectedData[data?.public_id] ? true : false}
+											isChecked={gallerySelectedData[data?.id] ? true : false}
 										/>
 									))
 								}

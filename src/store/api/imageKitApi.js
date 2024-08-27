@@ -41,8 +41,8 @@ export const apiImageKit = createApi({
 			providesTags : ["gallery"],
 		}),
 		deleteImages : builder.mutation({
-			query({data}) {
-				const body = data;
+			query(imagesPulicIds) {
+				const body = imagesPulicIds;
 				return {
 					url    : "delete",
 					method : "POST",
