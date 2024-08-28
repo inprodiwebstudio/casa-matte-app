@@ -19,6 +19,7 @@ import { openContextModal, closeAllModals } from "@mantine/modals";
 
 const Folder = ({
 	name,
+	folderId,
 	userName,
 	gallerySlice,
 	onSelectedFolder,
@@ -43,13 +44,23 @@ const Folder = ({
 	});
 
 	const hadleDeleteFolder = async () => {
-		await galleryFolderMutation({
-			data : {
-				folderName,
-			},
-			userName,
-		});
-		closeAllModals();
+		gallerySlice.setLoadingMutationGallery(true);
+		try {
+			await galleryFolderMutation({
+				data : {
+					folderName,
+				},
+				userName,
+			});
+			gallerySlice.setLoadingMutationGallery(false);
+			gallerySlice.deleteDataGallery({
+				[folderId] : true,
+			});
+			closeAllModals();
+		} catch (error) {
+			console.error(error);
+			gallerySlice.setLoadingMutationGallery(false);
+		}
 	};
 
 	const isAvailableImages = (imageKitData && isValidArray(imageKitData)) ?? null;

@@ -239,10 +239,10 @@ const BodyGallery = ({
 									{
 										myFolders.map( data => (
 											<Folder
-												key={data?.fileId}
+												key={data?.id}
 												images={[""]}
 												name={data?.name}
-												folderId={data?.fileId}
+												folderId={data?.id}
 												loadingMutationGallery={isLoadingMutation}
 												onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.fileId, name : data?.name})}
 											/>
