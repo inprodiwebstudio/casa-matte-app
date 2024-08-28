@@ -123,8 +123,8 @@ const AppShell = ({
 			}
 		}
 
-		// if (dataMutationResult.data) {
-		// 	PostingConfig["post"]["200"]();
+		// if (dataMutationResult.status === "fulfilled") {
+		// 	PostingConfig["post"][200]();
 		// }
 
 	}, [dataMutationResult]);

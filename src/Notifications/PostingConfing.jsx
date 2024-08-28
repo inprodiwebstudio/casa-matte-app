@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { showNotification, updateNotification } from "@mantine/notifications";
+import { showNotification } from "@mantine/notifications";
 
 const PostingConfig = ({
 	"post" : {
@@ -24,7 +24,7 @@ const PostingConfig = ({
 			})
 		),
 		"200" : () => (
-			updateNotification({
+			showNotification({
 				id      : "postingData",
 				title   : "",
 				message : "Cambios Guardados",
