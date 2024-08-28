@@ -26,7 +26,7 @@ const SideBar = ({
 	userName,
 	filter,
 }) => {
-	const [ fetchGallery, { isLoading } ] = useLazyGetDirentsListQuery();
+	const [ fetchGallery ] = useLazyGetDirentsListQuery();
 
 	const [galleryImagesMutationMove] = apiImageKit.useMoveFileMutation();
 	const [galleryImagesMutastionDelete] = apiImageKit.useDeleteImagesMutation();
@@ -70,6 +70,7 @@ const SideBar = ({
 	};
 
 	const handlerGetGallery = async () => {
+		gallerySlice.setLoadingGalleryData(true);
 		try {
 			const resp = await fetchGallery({
 				params : {
@@ -80,18 +81,16 @@ const SideBar = ({
 				},
 			});
 			gallerySlice.getGalleryData(resp.data);
+			gallerySlice.setLoadingGalleryData(false);
 		} catch (error) {
 			console.error(error);
+			gallerySlice.setLoadingGalleryData(false);
 		}
 	};
 
 	useEffect(() => {
 		handlerGetGallery();
 	}, [filter]);
-
-	useEffect(() => {
-		gallerySlice.setLoadingGalleryData(isLoading);
-	}, [isLoading]);
 
 	return (
 		<div id="SideBar" className={`${isAvailableDocs ? (isFullSizeSideBar && "isFullSize") : "isNoData"} ${isPreview && "isInpreview"}`}>

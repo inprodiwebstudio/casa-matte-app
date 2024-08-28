@@ -113,6 +113,8 @@ const BodyGallery = ({
 		return false;
 	};
 
+	console.log(isLoadingGalleryData);
+
 	return (
 		<div className="BodyGallery">
 			<div className="header-gallery-container">
@@ -279,7 +281,7 @@ const BodyGallery = ({
 };
 
 const mapStateToProps = ({ gallerySlice, workSpaceSlice, authSlice }) => ({
-	isLoadingGalleryData  : gallerySlice?.isLoadingGalleryData ?? false,
+	isLoadingGalleryData  : gallerySlice?.isLoadingData ?? false,
 	isLoadingMutation     : gallerySlice?.isLoadingMutation ?? false,
 	isFullSizeSideBar     : gallerySlice?.isFullSizeSideBar ?? false,
 	galleryData           : gallerySlice?.data ?? {},
