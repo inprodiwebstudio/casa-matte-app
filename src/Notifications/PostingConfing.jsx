@@ -44,6 +44,26 @@ const PostingConfig = ({
 				}),
 			})
 		),
+		"403" : () => (
+			showNotification({
+				// id      : "postingData",
+				title   : "Sesion expirada.",
+				message : "Tu sesión ha expirado. Inicia sesión de nuevo.",
+				color   : "yellow",
+				styles  : () => ({
+					root : {
+					  "&::before" : {
+						  borderRadius : "0px",
+						  width        : "3px",
+					  },
+					  borderRadius : "0px",
+					},
+
+					title       : { fontFamily : "Helvetica", fontWeight : "500", textTransform : "uppercase" },
+					description : { fontFamily : "Helvetica" },
+				}),
+			})
+		),
 		"500" : () => (
 			showNotification({
 				// id      : "postingData",

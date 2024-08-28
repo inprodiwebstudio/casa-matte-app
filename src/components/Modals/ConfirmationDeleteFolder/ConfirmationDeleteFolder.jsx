@@ -1,10 +1,13 @@
-import { Button }         from "core/components";
-import { closeAllModals } from "@mantine/modals";
-import React              from "react";
+import React                         from "react";
+import { shallowEqual, useSelector } from "react-redux";
+import { Button, Text }              from "@mantine/core";
+import { closeAllModals }            from "@mantine/modals";
 import "./ConfirmationDeleteFolder.scss";
 
 const ConfirmationDelete = ({innerProps}) => {
 	const { handdleSuccess } = innerProps;
+
+	const isLoadingDelete = useSelector((state) => state.gallerySlice?.isLoadingMutation, shallowEqual);
 
 	return (
 		<div className="body-confirmation-modal">
@@ -14,21 +17,35 @@ const ConfirmationDelete = ({innerProps}) => {
 			</div>
 			<div className="buttons-container">
 				<Button
-					fontSize="18px"
-					type="subtleActive"
-					width={117}
-					height={39}
+					radius={12}
+					size="md"
+					loading={isLoadingDelete}
+					color="darkCasaMatte"
 					onClick={() => handdleSuccess()}
 				>
-					Aceptar
+					<Text
+						weight={400}
+						color="whiteCasaMatte"
+						sx={{
+							fontFamily : "Helvetica",
+						}}
+					>
+						ACEPTAR
+					</Text>
 				</Button>
 				<Button
-					fontSize="18px"
-					width={117}
-					height={39}
+					radius={12}
+					size="md"
+					color="gray"
+					loading={isLoadingDelete}
 					onClick={() => closeAllModals()}
+
+					sx={{
+						fontFamily : "Helvetica",
+						fontWeight : "400",
+					}}
 				>
-					Cancelar
+					CANCELAR
 				</Button>
 			</div>
 		</div>

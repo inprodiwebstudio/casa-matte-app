@@ -39,8 +39,8 @@ const PhotoCard = ({
 	const handdleDrag = () => {
 		setIsDragger(true);
 		workSpaceSlice.setCurrentPhotoDrager({
-			image  : image,
-			fileId : fileId,
+			image : image,
+			id    : fileId,
 		});
 	};
 
@@ -77,7 +77,7 @@ const PhotoCard = ({
 				sheetNo  : 1,
 				layoutNo : 0,
 				image    : {
-					fileId,
+					id    : fileId,
 					image : imageUrl,
 				},
 				pageId : pageData?.id,

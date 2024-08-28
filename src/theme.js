@@ -22,6 +22,11 @@ export const theme = {
 				color  : "darkCasaMatte",
 			}),
 		},
+		Button : {
+			defaultProps : () => ({
+				pb : 2,
+			}),
+		},
 		Badge : {
 			defaultProps : (theme) => ({
 				variant : theme.colorScheme === "dark" ? "filled" : "outline",

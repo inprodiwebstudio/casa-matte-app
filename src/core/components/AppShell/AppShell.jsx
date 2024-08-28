@@ -3,9 +3,9 @@ import { useEffect }                              from "react";
 import { Font }                                   from "@react-pdf/renderer";
 
 //Own component;
-import { PostingConfig }  from "Notifications";
-import { genericApi }     from "store/api/genericApi";
-import { workSpaceSlice } from "store/Slices";
+import { PostingConfig }             from "Notifications";
+import { genericApi }                from "store/api/genericApi";
+import { workSpaceSlice, authSlice } from "store/Slices";
 import "./AppShell.scss";
 //Fonts
 import blackaHollow from "Resources/Fonts/BlakaHollow-Regular.ttf";
@@ -113,8 +113,9 @@ const AppShell = ({
 			const status = dataMutationResult.error?.status;
 
 			switch (status) {
-				case 500:
-					PostingConfig["post"][500]();
+				case 403:
+					PostingConfig["post"][403]();
+					dispatch(authSlice.actions.clearUserData());
 					break;
 				default:
 					PostingConfig["post"][500]();
