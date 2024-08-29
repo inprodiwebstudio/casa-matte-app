@@ -113,8 +113,6 @@ const BodyGallery = ({
 		return false;
 	};
 
-	console.log(isLoadingGalleryData);
-
 	return (
 		<div className="BodyGallery">
 			<div className="header-gallery-container">

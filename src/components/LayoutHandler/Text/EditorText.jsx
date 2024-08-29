@@ -14,15 +14,12 @@ import Alignment     from "@ckeditor/ckeditor5-alignment/src/alignment";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
 // import { EditorState, convertToRaw, ContentState } from "draft-js";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 // import { closeAllModals }      from "@mantine/modals";
 import { workSpaceSlice } from "store/Slices";
 import { connect }        from "react-redux";
 import { useParams }      from "react-router";
 
-
-// import { Button }  from "core/components";
-// import { Check }   from "Resources/icons";
 import { bindAll } from "helpers";
 import "./EditText.scss";
 
@@ -31,14 +28,24 @@ const EditText = ({workSpaceSlice, sheetNo, layoutNo, dataTextPage}) => {
 
 	const { pageId } = useParams();
 
-	// const { pageId, sheetNo, layoutNo } = innerProps;
-
-	const onEditorStateChange = function(editorState) {
-		setEditorState(editorState);
-		setTimeout(() => {
-			workSpaceSlice.addText({pageId, sheetNo, text : editorState, layoutNo});
-		}, 2000);
+	const debounce = (func, delay) => {
+		let timeout;
+		return (...args) => {
+			if (timeout) clearTimeout(timeout);
+			timeout = setTimeout(() => {
+				func(...args);
+			}, delay);
+		};
 	};
+
+	const handleEditorChange = useCallback(
+		debounce((event, editor) => {
+		  const data = editor.getData();
+		  setEditorState(data);
+		  workSpaceSlice.addText({pageId, sheetNo, text : data, layoutNo});
+		}, 5000),
+		[]
+	);
 
 	const editorConfiguration = {
 		plugins      : [ Essentials, Bold, Alignment, Italic, Paragraph, FontFamily, FontSize, FontColor],
@@ -113,17 +120,6 @@ const EditText = ({workSpaceSlice, sheetNo, layoutNo, dataTextPage}) => {
 		},
 	};
 
-	// useEffect(() => {
-	// 	if (dataTextPage && dataTextPage !== "") {
-	// 		const contentBlock = dataTextPage;
-	// 		setEditorState();
-	// 	}
-	// }, []);
-
-	// useEffect(() => {
-	// 	workSpaceSlice.addText({pageId, sheetNo, text : editorState, layoutNo});
-	// }, [editorState]);
-
 	return (
 		<div
 			className="EditText"
@@ -132,10 +128,7 @@ const EditText = ({workSpaceSlice, sheetNo, layoutNo, dataTextPage}) => {
 				editor={ BalloonEditor }
 				config={ editorConfiguration }
 				data={editorState}
-				onChange={ ( event, editor ) => {
-					const data = editor.getData();
-					onEditorStateChange( data );
-				} }
+				onChange={handleEditorChange}
 				onFocus={ () => {
 					console.log( "Focused!" );
 				} }
