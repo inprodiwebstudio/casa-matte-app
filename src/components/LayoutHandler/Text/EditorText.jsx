@@ -125,8 +125,6 @@ const EditText = ({workSpaceSlice, sheetNo, layoutNo, dataTextPage}) => {
 		},
 	};
 
-	console.log(editorState);
-
 	return (
 		<div
 			className="EditText"
