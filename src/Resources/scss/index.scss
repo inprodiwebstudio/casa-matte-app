@@ -1,15 +1,66 @@
 @font-face {
-    font-family: "Helvetica";
+    font-family: "HelveticaLight";
     src: url("../Fonts/HelveticaLightRegular.otf");
 }
 @font-face {
     font-family: "Aitana-Regular";
-    src: url("../Fonts/GandhiSerif-Regular.ttf");
+    src: url("../Fonts/Aitana-Regular.otf");
 }
-
 @font-face {
-    font-family: "BlakaHollow-Regular";
-    src: url("../../../Resources/Fonts/BlakaHollow-Regular.ttf");
+    font-family: "Cormorant-Light";
+    src: url("../Fonts/Cormorant-Light.ttf");
+}
+@font-face {
+    font-family: "Cormorant-Medium";
+    src: url("../Fonts/Cormorant-Medium.ttf");
+}
+@font-face {
+    font-family: "GandhiSans-Regular";
+    src: url("../Fonts/GandhiSans-Regular.otf");
+}
+@font-face {
+    font-family: "GandhiSerif-Regular";
+    src: url("../Fonts/GandhiSerif-Regular.otf");
+}
+@font-face {
+    font-family: "Inter-Lifght";
+    src: url("../Fonts/Inter-Light.ttf");
+}
+@font-face {
+    font-family: "Inter-Regular";
+    src: url("../Fonts/Inter-Regular.ttf");
+}
+@font-face {
+    font-family: "JosefinSans-Light";
+    src: url("../Fonts/JosefinSans-Light.ttf");
+}
+@font-face {
+    font-family: "JosefinSans-Regular";
+    src: url("../Fonts/JosefinSans-Regular.ttf");
+}
+@font-face {
+    font-family: "Made-Mirage-Regular";
+    src: url("../Fonts/MADE-Mirage-Regular.otf");
+}
+@font-face {
+    font-family: "Made-Mirage-Thin";
+    src: url("../Fonts/MADE-Mirage-Thin.otf");
+}
+@font-face {
+    font-family: "Restora-Extra-Light";
+    src: url("../Fonts/RestoraExtraLight.otf");
+}
+@font-face {
+    font-family: "Spectral-Light-Italic";
+    src: url("../Fonts/Spectral-LightItalic.ttf");
+}
+@font-face {
+    font-family: "Spectral-Medium-Italic";
+    src: url("../Fonts/Spectral-MediumItalic.ttf");
+}
+@font-face {
+    font-family: "TAN-MERINGUE";
+    src: url("../Fonts/TAN-MERINGUE.ttf");
 }
 
 * {
@@ -31,6 +82,6 @@ a {
 }
 
 #body-app {
-    font-family: Helvetica, sans-serif;
+    font-family: "HelveticaLight", sans-serif;
     letter-spacing: 1.5px;
 }

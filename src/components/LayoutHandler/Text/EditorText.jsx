@@ -14,38 +14,38 @@ import Alignment     from "@ckeditor/ckeditor5-alignment/src/alignment";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
 // import { EditorState, convertToRaw, ContentState } from "draft-js";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 // import { closeAllModals }      from "@mantine/modals";
 import { workSpaceSlice } from "store/Slices";
 import { connect }        from "react-redux";
-import { useParams }      from "react-router";
+// import { useParams }      from "react-router";
 
 import { bindAll } from "helpers";
 import "./EditText.scss";
 
 const EditText = ({workSpaceSlice, sheetNo, layoutNo, dataTextPage}) => {
-	const [editorState, setEditorState] = useState(dataTextPage);
+	const [editorState, setEditorState] = useState("<p style='text-align:center;'><span style='color:red; font-family:TAN-MERINGUE;font-size:40px;'>HOLA MUNDO</span></p>");
 
-	const { pageId } = useParams();
+	// const { pageId } = useParams();
 
-	const debounce = (func, delay) => {
-		let timeout;
-		return (...args) => {
-			if (timeout) clearTimeout(timeout);
-			timeout = setTimeout(() => {
-				func(...args);
-			}, delay);
-		};
-	};
+	// const debounce = (func, delay) => {
+	// 	let timeout;
+	// 	return (...args) => {
+	// 		if (timeout) clearTimeout(timeout);
+	// 		timeout = setTimeout(() => {
+	// 			func(...args);
+	// 		}, delay);
+	// 	};
+	// };
 
-	const handleEditorChange = useCallback(
-		debounce((event, editor) => {
-		  const data = editor.getData();
-		  setEditorState(data);
-		  workSpaceSlice.addText({pageId, sheetNo, text : data, layoutNo});
-		}, 5000),
-		[]
-	);
+	// const handleEditorChange = useCallback(
+	// 	debounce((event, editor) => {
+	// 	  const data = editor.getData();
+	// 	  setEditorState(data);
+	// 	  workSpaceSlice.addText({pageId, sheetNo, text : data, layoutNo});
+	// 	}, 5000),
+	// 	[]
+	// );
 
 	const editorConfiguration = {
 		plugins      : [ Essentials, Bold, Alignment, Italic, Paragraph, FontFamily, FontSize, FontColor],
@@ -56,20 +56,28 @@ const EditText = ({workSpaceSlice, sheetNo, layoutNo, dataTextPage}) => {
 		fontFamily : {
 			options : [
 				"default",
-				"Helvetica",
-				"Arial, Helvetica, sans-serif",
-				"Georgia, serif",
-				"Tahoma, Geneva, sans-serif",
-				"Verdana, Geneva, sans-serif",
-				"BlakaHollow-Regular",
+				"HelveticaLight",
 				"Aitana-Regular",
+				"Cormorant-Light",
+				"Cormorant-Medium",
+				"GandhiSans-Regular",
+				"GandhiSerif-Regular",
+				"Inter-Lifght",
+				"Inter-Regular",
+				"JosefinSans-Light",
+				"JosefinSans-Regular",
+				"Made-Mirage-Regular",
+				"Made-Mirage-Thin",
+				"Restora-Extra-Light",
+				"Spectral-Light-Italic",
+				"Spectral-Medium-Italic",
+				"TAN-MERINGUE",
 			],
 		},
 		toolbar : {
 			items : [
 				"fontSize",
 				"fontfamily",
-				"bold",
 				"italic",
 				"fontColor",
 				"alignment:left",
@@ -109,16 +117,15 @@ const EditText = ({workSpaceSlice, sheetNo, layoutNo, dataTextPage}) => {
 		},
 		fontSize : {
 			options : [
-				9,
-				11,
-				13,
-				17,
-				19,
-				21,
+				{ title : "Chico", model : "38px" },
+				{ title : "Regular", model : 42 },
+				{ title : "Grande", model : 48 },
 			],
-			supportAllValues : true,
+			supportAllValues : false,
 		},
 	};
+
+	console.log(editorState);
 
 	return (
 		<div
@@ -128,7 +135,11 @@ const EditText = ({workSpaceSlice, sheetNo, layoutNo, dataTextPage}) => {
 				editor={ BalloonEditor }
 				config={ editorConfiguration }
 				data={editorState}
-				onChange={handleEditorChange}
+				isActive={ true }
+				onChange={(event, editor) => {
+					const data = editor.getData();
+					setEditorState(data);
+				}}
 				onFocus={ () => {
 					console.log( "Focused!" );
 				} }

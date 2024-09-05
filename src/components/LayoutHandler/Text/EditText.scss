@@ -19,7 +19,7 @@
 
     .ck-editor__editable_inline {
        p {
-        margin: 0px !important;
+        font-size: 10px !important;
        }
     }
 
@@ -28,6 +28,14 @@
             
     //     }
     // }
+
+    .ck-toolbar__items {
+        background-color: #ff0000 !important; /* Cambiar el color de fondo */
+    }
+
+    .ck-dropdown__panel {
+        background: red !important;
+    }
 
     .ck-content {
         height: 100% !important;
