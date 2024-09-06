@@ -197,8 +197,8 @@ const BodyGallery = ({
 					<GalleryLoading />
 				)
 			}
-			{
-				((!isLoadingGalleryData) && !isAvailableDocs && isLoggedIn) && (
+			{/* {
+				(!isLoadingGalleryData && !isAvailableDocs && isLoggedIn) && (
 					<div
 						style={{
 							top       : "17%",
@@ -213,18 +213,18 @@ const BodyGallery = ({
 						<DropDoc />
 					</div>
 				)
-			}
+			} */}
 			{
-				((!isLoadingGalleryData) && isAvailableDocs && isLoggedIn) && (
+				((!isLoadingGalleryData) && isLoggedIn) && (
 					<ScrollBar>
 						{
-							galleryTypeDropedView && (
+							(galleryTypeDropedView || !isAvailableDocs) && (
 								<div
 									style={{
 										zIndex     : "2",
 										position   : "absolute",
-										height     : "calc(100% - 173px)",
-										width      : "calc(100% - 90px)",
+										height     : "calc(100% - 20vh)",
+										width      : "calc(100% - 1.8vw)",
 										display    : "flex",
 										background : "rgba(247, 245, 241, 0.95)",
 									}}
@@ -233,44 +233,48 @@ const BodyGallery = ({
 								</div>
 							)
 						}
-						<div className="docs-list">
-							{isValidArray(myFolders) && (
-								<div className="folder-grid">
-									{
-										myFolders.map( data => (
-											<Folder
-												key={data?.id}
-												images={[""]}
-												name={data?.name}
-												folderId={data?.id}
-												loadingMutationGallery={isLoadingMutation}
-												onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.fileId, name : data?.name})}
-											/>
-										))
-									}
+						{
+							isAvailableDocs && (
+								<div className="docs-list">
+									{isValidArray(myFolders) && (
+										<div className="folder-grid">
+											{
+												myFolders.map( data => (
+													<Folder
+														key={data?.id}
+														thumbNails={data?.thumbNails}
+														name={data?.name}
+														folderId={data?.id}
+														loadingMutationGallery={isLoadingMutation}
+														onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.fileId, name : data?.name})}
+													/>
+												))
+											}
+										</div>
+									)}
+									<div className="separator-container">
+										<p>FOTOS</p>
+										<div className="spacer-line" />
+									</div>
+									<div className={`photo-grid ${isFullSizeSideBar && "isFullSize"}`}>
+										{
+											myPhotos.map( (data, index) => (
+												<PhotoCard
+													key={index}
+													image={data?.url}
+													fileId={data?.id}
+													isfullSize={isFullSizeSideBar}
+													isHideSelected={isHideSelected}
+													isSelected={isInUsePhoto(data?.id)}
+													onSelected={() => gallerySlice.setSelectedData(data)}
+													isChecked={gallerySelectedData[data?.id] ? true : false}
+												/>
+											))
+										}
+									</div>
 								</div>
-							)}
-							<div className="separator-container">
-								<p>FOTOS</p>
-								<div className="spacer-line" />
-							</div>
-							<div className={`photo-grid ${isFullSizeSideBar && "isFullSize"}`}>
-								{
-									myPhotos.map( (data, index) => (
-										<PhotoCard
-											key={index}
-											image={data?.url}
-											fileId={data?.id}
-											isfullSize={isFullSizeSideBar}
-											isHideSelected={isHideSelected}
-											isSelected={isInUsePhoto(data?.id)}
-											onSelected={() => gallerySlice.setSelectedData(data)}
-											isChecked={gallerySelectedData[data?.id] ? true : false}
-										/>
-									))
-								}
-							</div>
-						</div>
+							)
+						}
 					</ScrollBar>
 				)
 			}

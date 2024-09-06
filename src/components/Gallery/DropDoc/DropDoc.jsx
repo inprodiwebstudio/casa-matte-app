@@ -117,10 +117,11 @@ const DropDoc = ({
 				});
 				const constructorData = {
 					...respImage,
-					id       : respImage?.asset_id,
-					fileId   : respImage?.asset_id,
-					filePath : respImage?.public_id,
-					type     : "folder",
+					id         : respImage?.asset_id,
+					fileId     : respImage?.asset_id,
+					filePath   : respImage?.public_id,
+					thumbNails : [],
+					type       : "folder",
 				};
 				dispatch(gallerySlice.actions.setGalleryData(constructorData));
 				return respImage;
@@ -148,8 +149,9 @@ const DropDoc = ({
 
 		const constructorData = {
 			...respFolder?.data,
-			type : "folder",
-			id   : respFolder?.data?.path,
+			type       : "folder",
+			id         : respFolder?.data?.path,
+			thumbNails : [],
 		};
 		dispatch(gallerySlice.actions.setGalleryData(constructorData));
 		dispatch(gallerySlice.actions.setTypeDropedView(null));

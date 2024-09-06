@@ -73,17 +73,32 @@ export const gallerySlice = createSlice({
 			state.isFullSizeSideBar = !state.isFullSizeSideBar;
 		},
 		moveToFolder : (state, {payload}) => {
-			const cloneData = { ...state.data };
-			const toArrSelectedData = Object.values(state.selectedData).map(data => ({...data, parentId : payload}));
-			const lenghtOfThumbImages = cloneData[payload].thumbImages;
-			const quantityToSetImages = 5 - lenghtOfThumbImages.length;
-			const newImagesThumb = toArrSelectedData.slice(0, quantityToSetImages + 1);
-
-			const newData = {...cloneData, ...convertToObject(toArrSelectedData)};
-			newData[payload].thumbImages = [...newData[payload].thumbImages, ...newImagesThumb];
-
-			state.data = newData;
-			state.selectedData = {};
+			const isMoveInFolder = !!payload?.folderId;
+			if (isMoveInFolder) {
+				const cloneListOfThumbNails = [...state.data[payload.folderId].thumbNails];
+				const isAvialableAddMoreOneImages = () => {
+					const counterLengthTotal = cloneListOfThumbNails.length + payload.iamgesSelectedData.length;
+					if (counterLengthTotal >= 5) {
+						return false;
+					}
+					return true;
+				};
+				const imagesUrl = payload.iamgesSelectedData.map(image => image.url);
+				isAvialableAddMoreOneImages() ? (
+					state.data[payload.folderId].thumbNails = [...cloneListOfThumbNails, ...imagesUrl]
+				) : (
+					state.data[payload.folderId].thumbNails[0] = imagesUrl[imagesUrl.length - 1]
+				);
+			}
+			const handlerRemoveImages = () => {
+				const newData = {...state.data};
+				payload.iamgesSelectedData.forEach(image => {
+					delete newData[image.id];
+				});
+				state.data = newData;
+				state.selectedData = {};
+			};
+			handlerRemoveImages();
 		},
 	},
 });
