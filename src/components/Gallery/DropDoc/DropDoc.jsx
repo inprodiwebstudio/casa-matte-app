@@ -89,12 +89,14 @@ const DropDoc = ({
 				filePath : respImage?.public_id,
 				type     : "file",
 			};
-			dispatch(gallerySlice.actions.setGalleryData(constructotImageData));
-			return respImage;
+			return constructotImageData;
 		});
 
-		Promise.all([...listOfPromises]).then((values) => {
+		Promise.all([...listOfPromises]).then((imageValues) => {
 			setLoading(false);
+			imageValues.forEach((image) => {
+				dispatch(gallerySlice.actions.setGalleryData(image));
+			});
 			dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 			dispatch(gallerySlice.actions.setTypeDropedView(null));
 		}, reason => {

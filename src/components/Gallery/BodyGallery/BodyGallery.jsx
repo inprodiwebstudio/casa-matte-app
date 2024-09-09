@@ -113,6 +113,19 @@ const BodyGallery = ({
 		return false;
 	};
 
+	const handlerDropeZoneView = () => {
+		if (!isAvailableDocs || galleryTypeDropedView) {
+			return true;
+		}
+		return false;
+	};
+
+	// useEffect(() => {
+	// 	if (!isAvailableDocs) {
+	// 		gallerySlice.setTypeDropedView("addFiles");
+	// 	}
+	// }, [galleryList]);
+
 	return (
 		<div className="BodyGallery">
 			<div className="header-gallery-container">
@@ -197,36 +210,21 @@ const BodyGallery = ({
 					<GalleryLoading />
 				)
 			}
-			{/* {
-				(!isLoadingGalleryData && !isAvailableDocs && isLoggedIn) && (
-					<div
-						style={{
-							top       : "17%",
-							height    : "78%",
-							position  : "absolute",
-							width     : "92%",
-							display   : "flex",
-							overflowY : "hidden",
-							overflowX : "hidden",
-						}}
-					>
-						<DropDoc />
-					</div>
-				)
-			} */}
 			{
 				((!isLoadingGalleryData) && isLoggedIn) && (
 					<ScrollBar>
 						{
-							(galleryTypeDropedView || !isAvailableDocs) && (
+							handlerDropeZoneView() && (
 								<div
 									style={{
-										zIndex     : "2",
-										position   : "absolute",
-										height     : "calc(100% - 20vh)",
-										width      : "calc(100% - 1.8vw)",
-										display    : "flex",
-										background : "rgba(247, 245, 241, 0.95)",
+										zIndex        : "2",
+										position      : "absolute",
+										height        : "100%",
+										width         : "100%",
+										paddingRight  : "35px",
+										paddingBottom : "calc(10px + 34px + 24px + 30px + 60px + 30px)",
+										display       : "flex",
+										background    : "rgba(247, 245, 241, 0.94)",
 									}}
 								>
 									<DropDoc />
