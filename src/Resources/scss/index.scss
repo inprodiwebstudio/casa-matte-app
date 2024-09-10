@@ -71,6 +71,16 @@
 
 body {
     margin: 0 !important;
+    
+    .ck-dropdown .ck-list .ck-button span {
+        font-size: 12px !important;
+        line-height: 1.5;
+    }
+
+    .ck-dropdown .ck-list {
+        height: 110px !important;
+        overflow-y: scroll;
+    }
 }
 
 a {
@@ -80,6 +90,7 @@ a {
         text-decoration: none !important;
     }
 }
+
 
 #body-app {
     font-family: "HelveticaLight", sans-serif;

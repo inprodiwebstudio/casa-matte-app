@@ -9,13 +9,13 @@ const Mod43 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
 	const handleWidthTextContainer = () => {
 		if (isThumbNail) {
-			return "41px";
+			return "60%";
 		}
 		if (isInPaginator) {
-			return "99px";
+			return "60%";
 		}
 		if (isInWorkSpace) {
-			return "180px";
+			return "60%";
 		}
 	};
 

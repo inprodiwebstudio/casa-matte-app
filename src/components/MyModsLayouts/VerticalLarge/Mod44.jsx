@@ -12,7 +12,7 @@ const Mod44 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			return "38px";
 		}
 		if (isInPaginator) {
-			return "99px";
+			return "50%";
 		}
 		if (isInWorkSpace) {
 			return "50%";

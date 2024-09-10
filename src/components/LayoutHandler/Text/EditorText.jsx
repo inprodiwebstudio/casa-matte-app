@@ -23,8 +23,86 @@ import { connect }        from "react-redux";
 import { bindAll } from "helpers";
 import "./EditText.scss";
 
+const editorConfiguration = {
+	plugins      : [ Essentials, Bold, Alignment, Italic, Paragraph, FontFamily, FontSize, FontColor],
+	GroupHeading : false,
+	alignment    : {
+		options : [ "left", "right", "center", "justify" ],
+	},
+	fontFamily : {
+		options : [
+			"default",
+			"HelveticaLight",
+			"Aitana-Regular",
+			"Cormorant-Light",
+			"Cormorant-Medium",
+			"GandhiSans-Regular",
+			"GandhiSerif-Regular",
+			"Inter-Lifght",
+			"Inter-Regular",
+			"JosefinSans-Light",
+			"JosefinSans-Regular",
+			"Made-Mirage-Regular",
+			"Made-Mirage-Thin",
+			"Restora-Extra-Light",
+			"Spectral-Light-Italic",
+			"Spectral-Medium-Italic",
+			"TAN-MERINGUE",
+		],
+	},
+	toolbar : {
+		items : [
+			"fontSize",
+			"fontfamily",
+			"italic",
+			"fontColor",
+			"alignment:left",
+			"alignment:center",
+			"alignment:right",
+		],
+		shouldNotGroupWhenFullScreen : true,
+	},
+	language : "es",
+	tooltip  : {
+		isRendered : false,
+	},
+	fontColor : {
+		colors : [
+			{
+				color : "hsl(0, 0%, 0%)",
+				label : "Black",
+			},
+			{
+				color : "hsl(0, 0%, 30%)",
+				label : "Dim grey",
+			},
+			{
+				color : "hsl(0, 0%, 60%)",
+				label : "Grey",
+			},
+			{
+				color : "hsl(0, 0%, 90%)",
+				label : "Light grey",
+			},
+			{
+				color     : "hsl(0, 0%, 100%)",
+				label     : "White",
+				hasBorder : true,
+			},
+		],
+	},
+	fontSize : {
+		options : [
+			{ title : "Chico", model : "38px"},
+			{ title : "Regular", model : "42px"},
+			{ title : "Grande", model : "46px"},
+		],
+		supportAllValues : false,
+	},
+};
+
 const EditText = ({workSpaceSlice, sheetNo, layoutNo, dataTextPage}) => {
-	const [editorState, setEditorState] = useState("<p style='text-align:center;'><span style='color:red; font-family:TAN-MERINGUE;font-size:40px;'>HOLA MUNDO</span></p>");
+	const [editorState, setEditorState] = useState("<p style='text-align:center;'><span style='color:red; font-family:TAN-MERINGUE;font-size:42px;'>HOLA MUNDO</span></p>");
 
 	// const { pageId } = useParams();
 
@@ -47,84 +125,6 @@ const EditText = ({workSpaceSlice, sheetNo, layoutNo, dataTextPage}) => {
 	// 	[]
 	// );
 
-	const editorConfiguration = {
-		plugins      : [ Essentials, Bold, Alignment, Italic, Paragraph, FontFamily, FontSize, FontColor],
-		GroupHeading : false,
-		alignment    : {
-			options : [ "left", "right", "center", "justify" ],
-		},
-		fontFamily : {
-			options : [
-				"default",
-				"HelveticaLight",
-				"Aitana-Regular",
-				"Cormorant-Light",
-				"Cormorant-Medium",
-				"GandhiSans-Regular",
-				"GandhiSerif-Regular",
-				"Inter-Lifght",
-				"Inter-Regular",
-				"JosefinSans-Light",
-				"JosefinSans-Regular",
-				"Made-Mirage-Regular",
-				"Made-Mirage-Thin",
-				"Restora-Extra-Light",
-				"Spectral-Light-Italic",
-				"Spectral-Medium-Italic",
-				"TAN-MERINGUE",
-			],
-		},
-		toolbar : {
-			items : [
-				"fontSize",
-				"fontfamily",
-				"italic",
-				"fontColor",
-				"alignment:left",
-				"alignment:center",
-				"alignment:right",
-			],
-			shouldNotGroupWhenFullScreen : true,
-		},
-		language : "es",
-		tooltip  : {
-			isRendered : false,
-		},
-		fontColor : {
-			colors : [
-				{
-					color : "hsl(0, 0%, 0%)",
-					label : "Black",
-				},
-				{
-					color : "hsl(0, 0%, 30%)",
-					label : "Dim grey",
-				},
-				{
-					color : "hsl(0, 0%, 60%)",
-					label : "Grey",
-				},
-				{
-					color : "hsl(0, 0%, 90%)",
-					label : "Light grey",
-				},
-				{
-					color     : "hsl(0, 0%, 100%)",
-					label     : "White",
-					hasBorder : true,
-				},
-			],
-		},
-		fontSize : {
-			options : [
-				{ title : "Chico", model : "38px" },
-				{ title : "Regular", model : 42 },
-				{ title : "Grande", model : 48 },
-			],
-			supportAllValues : false,
-		},
-	};
-
 	return (
 		<div
 			className="EditText"
@@ -133,7 +133,6 @@ const EditText = ({workSpaceSlice, sheetNo, layoutNo, dataTextPage}) => {
 				editor={ BalloonEditor }
 				config={ editorConfiguration }
 				data={editorState}
-				isActive={ true }
 				onChange={(event, editor) => {
 					const data = editor.getData();
 					setEditorState(data);

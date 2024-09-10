@@ -54,9 +54,9 @@ const ItemPage = ({
 		>
 			<div className="page-container">
 				<div
-					style={{height : "100px"}}
+					style={{height : "100px", overflow : "hidden", fontSize : "20px"}}
 				>
-					<BookPages isInPaginator={true} pageData={pageData} />
+					<BookPages isThumbNail={false} isInPaginator={true} pageData={pageData} />
 				</div>
 				<NumbPages />
 			</div>

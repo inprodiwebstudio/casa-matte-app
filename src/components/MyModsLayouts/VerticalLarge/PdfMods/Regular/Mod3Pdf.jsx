@@ -27,15 +27,23 @@ const Mod3Pdf = ({images, isRightPage}) => {
 			>
 				{
 					images[0]?.url && (
-						<img
-							src={resizerImage(selectPhotoUrl(images[0]), 1522, 843)}
-							alt="test"
+						<div
 							style={{
-								height         : "991px",
-								objectFit      : "cover",
-								objectPosition : isRightPage ? "right" : "left",
+								background : "gray",
+								width      : "100%",
+								position   : "absolute",
 							}}
-						/>
+						>
+							<img
+								src={resizerImage(selectPhotoUrl(images[0]), 1522, 843)}
+								alt="test"
+								style={{
+									height         : "991px",
+									objectFit      : "cover",
+									objectPosition : isRightPage ? "right" : "left",
+								}}
+							/>
+						</div>
 					)
 				}
 			</div>
