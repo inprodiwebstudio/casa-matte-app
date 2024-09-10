@@ -1,5 +1,5 @@
 import { createSlice }                                            from "@reduxjs/toolkit";
-import { convertToArray, History, isValidArray, convertToObject } from "helpers";
+import { convertToArray, convertToObject, History, isValidArray } from "helpers";
 
 const initialState = {
 	data : {
@@ -249,116 +249,87 @@ export const workSpaceSlice = createSlice({
 			const newData = {...state.data.pages};
 			const listOfPages = convertToArray(newData);
 
-			if (state.data.currentPage === "frontpage") {
-				return;
+			const indexCurrentPage = listOfPages.findIndex((page) => page.id === state.data.currentPage);
+
+			const slicePagesToReorder = listOfPages.slice(indexCurrentPage, listOfPages.length);
+
+			const lastPage = slicePagesToReorder[slicePagesToReorder.length - 1];
+
+			if (lastPage.sheet2) {
+				slicePagesToReorder.push({
+					id     : `page${lastPage.id.split("page")[1] + 1}`,
+					sheet1 : {
+						pageNo     : lastPage?.sheet2?.pageNo + 1,
+						layoutType : "",
+						text       : {},
+						photos     : {},
+					},
+				});
+			}
+			if (!lastPage.sheet2) {
+				slicePagesToReorder[slicePagesToReorder.length - 1] = {
+					sheet2 : {
+						pageNo     : lastPage?.sheet1?.pageNo + 1,
+						layoutType : "",
+						text       : {},
+						photos     : {},
+					},
+					...lastPage,
+				};
 			}
 
-			const indexPage = listOfPages.findIndex((page) => page.id === state.data.currentPage);
-			const handlerNumberPage = () => {
-				if ((state.data.currentPage === "page1") && !listOfPages[indexPage + 1].sheet2) {
-					return listOfPages[indexPage + 1].sheet1.pageNo + 1;
+			const newPagesReordered = slicePagesToReorder.map((page, index) => {
+				if (index === 0 ) {
+					return {
+						...page,
+						sheet1 : {
+							pageNo     : page?.sheet1?.pageNo,
+							layoutType : "",
+							photos     : {},
+						},
+						sheet2 : {
+							...page?.sheet1,
+							pageNo : page?.sheet2?.pageNo,
+						},
+					};
 				}
-				if (!listOfPages[indexPage].sheet2) {
-					return listOfPages[indexPage].sheet1.pageNo + 1;
+				if ((index === slicePagesToReorder.length - 1) && !slicePagesToReorder[slicePagesToReorder.length - 1]?.sheet2) {
+					return {
+						...page,
+						sheet1 : {
+							pageNo     : page?.sheet1?.pageNo,
+							layoutType : slicePagesToReorder[index - 1]?.sheet2?.layoutType,
+							photos     : slicePagesToReorder[index - 1]?.sheet2?.photos,
+						},
+					};
 				}
-				if (listOfPages[indexPage].sheet2 && (indexPage !== listOfPages.length - 1) && !listOfPages[indexPage + 1]?.sheet2) {
-					return listOfPages[indexPage + 1].sheet1.pageNo + 1;
-				}
-				return listOfPages[indexPage].sheet2.pageNo + 1;
-			};
-
-			const mySheet = {
-				pageNo     : handlerNumberPage(),
-				layoutType : "",
-				text       : {},
-				photos     : {
-					0 : {
-						id  : "",
-						url : "",
-					},
-				},
-			};
-
-			const prevPages = listOfPages.slice(0, indexPage + 1);
-			const nextPages = listOfPages.slice(indexPage + 1, listOfPages.length);
-
-			if (!listOfPages[indexPage].sheet2 && state.data.currentPage !== "page1") {
-				const lastPage = {
-					...prevPages[prevPages.length - 1],
-					sheet2 : mySheet,
-				};
-				const prevPagesNotLast = prevPages.slice(0, prevPages.length - 1);
-				const newPrevPages = [...prevPagesNotLast, lastPage];
-				const newNextPages = nextPages.map(page => ({
+				return {
 					...page,
 					sheet1 : {
-						...page.sheet1,
-						pageNo : page.sheet1.pageNo + 1,
+						pageNo     : page.sheet1?.pageNo,
+						layoutType : slicePagesToReorder[index - 1]?.sheet2?.layoutType,
+						photos     : slicePagesToReorder[index - 1]?.sheet2?.photos,
 					},
-					...(page.sheet2) && {
-						sheet2 : {
-							...page.sheet2,
-							pageNo : page.sheet2.pageNo + 1,
-						},
+					sheet2 : {
+						pageNo     : page.sheet2?.pageNo,
+						layoutType : page.sheet1?.layoutType,
+						photos     : page.sheet1?.photos,
 					},
-				}));
-				const newListPages = [...newPrevPages, ...newNextPages];
-				state.data.pages = convertToObject(newListPages);
-				state.data.numberOfPages = state.data.numberOfPages + 1;
-				return;
-			}
-			if (!listOfPages[indexPage + 1]?.sheet2 && (indexPage !== listOfPages.length - 1)) {
-				const firstPageNextPages = {
-					...nextPages[0],
-					sheet2 : mySheet,
 				};
+			});
 
-				const nextPagesNotFirst = nextPages.slice(1, nextPages.length);
+			listOfPages.splice(indexCurrentPage, slicePagesToReorder.length, ...newPagesReordered);
 
-				const pagesWithNewNo = nextPagesNotFirst.map(myPage => ({
-					...myPage,
-					sheet1 : {
-						...myPage.sheet1,
-						pageNo : myPage.sheet1.pageNo + 1,
-					},
-					...(myPage.sheet2) && {
-						sheet2 : {
-							...myPage.sheet2,
-							pageNo : myPage.sheet2.pageNo + 1,
-						},
-					},
-				}));
-				const newListPages = [...prevPages, firstPageNextPages, ...pagesWithNewNo];
-				state.data.pages = convertToObject(newListPages);
-				state.data.numberOfPages = state.data.numberOfPages + 1;
-				return;
-			}
-			if (listOfPages[indexPage + 1]?.sheet2 || (indexPage === listOfPages.length - 1)) {
-				const newAddPage = {
-					id     : `page${indexPage + 2}`,
-					sheet1 : mySheet,
-				};
-				const nextPagesNewNo = nextPages.map((myPage) => ({
-					...myPage,
-					id     : `page${Number(myPage.id.split("page")[1]) + 1}`,
-					sheet1 : {
-						...myPage.sheet1,
-						pageNo : myPage.sheet1.pageNo + 1,
-					},
-					...(myPage.sheet2) && {
-						sheet2 : {
-							...myPage.sheet2,
-							pageNo : myPage.sheet2.pageNo + 1,
-						},
-					},
-				}));
-
-				const newListPages = [...prevPages, newAddPage, ...nextPagesNewNo];
-				state.data.pages = convertToObject(newListPages);
-				state.data.numberOfPages = state.data.numberOfPages + 1;
-				return;
-			}
-
+			state.data.pages = convertToObject(listOfPages);
+			const history = new History();
+			history.undoStack = state.history.undo;
+			const undoNewData = {
+				...state.data,
+				pages : convertToObject(listOfPages),
+			};
+			history.addToUndoStack(undoNewData);
+			state.history.undo = history.undoStack;
+			state.history.current = history.currentAction;
 		},
 		deletePage : (state, {payload}) => {
 			const minPages = state.data.minPages;
