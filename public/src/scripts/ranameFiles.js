@@ -12,7 +12,14 @@ fs.readdir(folderPath, (err, files) => {
     return;
   }
 
-  const modFiles = files.filter(file => /^Mod\d+\.jsx$/.test(file));
+  const modFiles = files.filter(file => /^Mod\d+\.jsx$/.test(file)).sort((a, b) => {
+    const regex = /^Mod(\d+)\.jsx$/;
+    const matchA = a.match(regex);
+    const matchB = b.match(regex);
+    if (matchA && matchB) {
+      return parseInt(matchA[1]) - parseInt(matchB[1]);
+    }
+  });
 
   modFiles.forEach((file, index) => {
     const oldPath = path.join(folderPath, file);
