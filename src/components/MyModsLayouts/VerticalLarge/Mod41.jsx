@@ -1,13 +1,27 @@
-import {Stack, Flex } from "@mantine/core";
+import { Flex, Stack } from "@mantine/core";
 //Own components
 import Text              from "components/LayoutHandler/Text";
 import DividerLayout     from "components/LayoutHandler/DividerLayout";
 import { textInsertion } from "helpers";
 
 
-const Mod41 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod44 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+
+	const handleWidthTextContainer = () => {
+		if (isThumbNail) {
+			return "38px";
+		}
+		if (isInPaginator) {
+			return "50%";
+		}
+		if (isInWorkSpace) {
+			return "50%";
+		}
+	};
 
 	const defaultText01 = "";
+
+	const defaultText02 = "Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper, pharetra odio conubia dictumst malesuada lectus dis penatibus, primis orci dictum sociosqu nam platea parturient cursus.";
 
 	return (
 		<Flex
@@ -16,32 +30,44 @@ const Mod41 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			h="100%"
 			justify="flex-end"
 			align="flex-end"
-			gap="0.1em"
-			direction="column"
 		>
-			<DividerLayout long="7%" position="h" />
-			<Stack spacing="0.1em" w="100%">
-				<Text
-					align="right"
-					type="h1"
-					sheetNo={sheetNo}
-					isInPaginator={isInPaginator}
-					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-					isThumbNail={isThumbNail}
-				/>
-				<div>
+			<Stack
+				w={handleWidthTextContainer()}
+				mah="70%"
+				spacing="0.2em"
+				aria-hidden
+			>
+				<Flex
+					direction="column"
+					gap="0.05em"
+					justify="flex-start"
+				>
 					<Text
-						align="right"
-						type="h5"
+						align="left"
+						type="h4"
 						sheetNo={sheetNo}
-						data={textInsertion(data?.text[1], defaultText01, isInWorkSpace)}
+						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 					/>
-				</div>
+					<DividerLayout long="20%" position="h" />
+				</Flex>
+				<Flex
+					justify="flex-start"
+					direction="column"
+				>
+					<Text
+						align="justify"
+						type="regular"
+						sheetNo={sheetNo}
+						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+					/>
+				</Flex>
 			</Stack>
 		</Flex>
 	);
 };
 
-export default Mod41;
+export default Mod44;

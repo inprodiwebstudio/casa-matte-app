@@ -1,82 +1,53 @@
 import {Stack, Flex } from "@mantine/core";
+import ImgLayout      from "components/LayoutHandler/ImgLayout";
 //Own components
 import Text              from "components/LayoutHandler/Text";
-import DividerLayout     from "components/LayoutHandler/DividerLayout";
 import { textInsertion } from "helpers";
 
 
-const Mod51 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod54 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "";
-
-	const defaultText02 = "Subtitulo 1";
-
-	const defaultText03 = "Subtitulo 2";
-
-	const defaultText04 = "Subtitulo 3";
-
-	const defaultText05 = "Subtitulo 4";
+	const defaultText = "";
 
 	return (
 		<Flex
-			p="8%"
+			pt="8%"
+			// pb="8%"
 			w="100%"
 			h="100%"
-			justify="flex-end"
 			align="flex-end"
-			gap="0.1em"
+			gap="0.5em"
 			direction="column"
 		>
 			<Stack
-				spacing="0.15em"
-				sx={{overflow : "hidden"}}
-				w="25%"
+				spacing="0.4em"
+				w="59%"
+				h="88%"
 			>
-				<Stack
-					spacing="0.07em"
-				>
+				<Stack mr="10%">
 					<Text
-						align="left"
-						type="h3"
+						align="right"
+						type="h1"
 						sheetNo={sheetNo}
-						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+						data={textInsertion(data?.text[0], defaultText, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 					/>
-					<DividerLayout long="20%" position="h" />
 				</Stack>
-				<Stack
-					spacing="0.1em"
-				>
-					<Text
-						align="left"
-						type="h5"
+				<Stack w="100%" h="100%">
+					<ImgLayout
+						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
-						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
+						imageNo={0}
+						urlImage={data?.photos[0] ?? {}}
 					/>
+				</Stack>
+				<Stack mr="40%" mt="9%">
 					<Text
 						align="left"
 						type="h5"
 						sheetNo={sheetNo}
-						data={textInsertion(data?.text[2], defaultText03, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-					/>
-					<Text
-						align="left"
-						type="h5"
-						sheetNo={sheetNo}
-						data={textInsertion(data?.text[3], defaultText04, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-					/>
-					<Text
-						align="left"
-						type="h5"
-						sheetNo={sheetNo}
-						data={textInsertion(data?.text[4], defaultText05, isInWorkSpace)}
+						data={textInsertion(data?.text[1], defaultText, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 					/>
@@ -86,4 +57,4 @@ const Mod51 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 	);
 };
 
-export default Mod51;
+export default Mod54;

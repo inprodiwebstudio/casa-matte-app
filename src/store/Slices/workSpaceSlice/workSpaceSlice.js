@@ -444,7 +444,7 @@ export const workSpaceSlice = createSlice({
 				const sheet1Photos = convertToArray(data?.sheet1?.photos);
 				const sheet2Photos = data?.sheet2?.photos ? convertToArray(data?.sheet2?.photos) : null;
 
-				const isSinglePage = (["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(newData[data?.id].sheet1?.layoutType));
+				const isSinglePage = (["FrontLayout"].includes(newData[data?.id].sheet1?.layoutType));
 
 				sheet1Photos.forEach((space, e) => {
 					if (!space?.id && data?.sheet1?.layoutType) {
@@ -500,7 +500,7 @@ export const workSpaceSlice = createSlice({
 			const isFullBook = () => {
 				switch (`${cloneData?.sizePhotoBook}-${cloneData?.format}`) {
 					case "grande-vertical":
-						return ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(payload.layout);
+						return ["FrontLayout"].includes(payload.layout);
 					case "grande-cuadrado" :
 						return ["Mod6", "Mod7", "FrontLayout"].includes(payload.layout);
 				}

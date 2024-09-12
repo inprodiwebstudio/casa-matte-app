@@ -1,75 +1,56 @@
-import { Stack, Flex } from "@mantine/core";
+import {Stack, Flex, Center } from "@mantine/core";
 //Own components
-import ImgLayout from "components/LayoutHandler/ImgLayout";
+import Text              from "components/LayoutHandler/Text";
+import { textInsertion } from "helpers";
 
-const Mod37 = ({data, isInWorkSpace, sheetNo}) => {
+const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+
+	const defaultText01 = "";
+
 	return (
-		<Stack
+		<Flex
+			p="8%"
 			w="100%"
 			h="100%"
-			p="0.8%"
-			pr="1.66%"
+			justify="flex-end"
+			align="flex-end"
 		>
-			<Stack
-				spacing="0.05em"
-				h="100%"
-				w="100%"
-			>
-				<Flex w="100%" h="50%" gap="0.05em">
-					<Stack w="33.33%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
+			<Center w="100%" h="100%">
+				<Stack spacing="0.04em" w="100%">
+					<div
+						style={{
+							width        : "100%",
+							paddingLeft  : "10%",
+							paddingRight : "10%",
+							maxHeight    : "100px",
+					 }}
+					>
+						<Text
+							type="h1"
 							sheetNo={sheetNo}
-							imageNo={0}
-							urlImage={data?.photos[0] ?? {}}
+							data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+							isInPaginator={isInPaginator}
+							isThumbNail={isThumbNail}
 						/>
-					</Stack>
-					<Stack w="33.33%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
+					</div>
+					<div
+						style={{
+							width        : "100%",
+							paddingLeft  : "20%",
+							paddingRight : "20%",
+						}}>
+						<Text
+							type="h5"
 							sheetNo={sheetNo}
-							imageNo={1}
-							urlImage={data?.photos[1] ?? {}}
+							data={textInsertion(data?.text[1], defaultText01, isInWorkSpace)}
+							isInPaginator={isInPaginator}
+							isThumbNail={isThumbNail}
 						/>
-					</Stack>
-					<Stack w="33.33%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={2}
-							urlImage={data?.photos[2] ?? {}}
-						/>
-					</Stack>
-				</Flex>
-				<Flex w="100%" h="50%" gap="0.05em">
-					<Stack w="33.33%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={3}
-							urlImage={data?.photos[3] ?? {}}
-						/>
-					</Stack>
-					<Stack w="33.33%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={4}
-							urlImage={data?.photos[4] ?? {}}
-						/>
-					</Stack>
-					<Stack w="33.33%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={5}
-							urlImage={data?.photos[5] ?? {}}
-						/>
-					</Stack>
-				</Flex>
-			</Stack>
-		</Stack>
+					</div>
+				</Stack>
+			</Center>
+		</Flex>
 	);
 };
 
-export default Mod37;
+export default Mod40;

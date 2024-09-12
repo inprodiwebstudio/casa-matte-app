@@ -1,77 +1,34 @@
-import { Stack, Flex } from "@mantine/core";
+import {Stack, Flex } from "@mantine/core";
 //Own components
-import ImgLayout from "components/LayoutHandler/ImgLayout";
+import Text              from "components/LayoutHandler/Text";
+import { textInsertion } from "helpers";
 
-const Mod36 = ({data, isInWorkSpace, sheetNo}) => {
+const Mod39 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+
+	const defaultText01 = "";
+
 	return (
-		<Stack
+		<Flex
 			w="100%"
 			h="100%"
-			p="0.8%"
-			pl="1.66%"
+			justify="flex-end"
+			align="flex-end"
+			p="3%"
 		>
 			<Stack
-				spacing="0.05em"
-				h="100%"
-				w="100%"
+				w={"50%"}
+				align={isThumbNail ? "flex-end" : undefined}
 			>
-				<Flex w="100%" h="33.33%" gap="0.05em">
-					<Stack w="50%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={0}
-							urlImage={data?.photos[0] ?? {}}
-						/>
-					</Stack>
-					<Stack w="50%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={1}
-							urlImage={data?.photos[1] ?? {}}
-						/>
-					</Stack>
-				</Flex>
-				<Flex w="100%" h="33.33%" gap="0.05em">
-					<Stack w="50%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={2}
-							urlImage={data?.photos[2] ?? {}}
-						/>
-					</Stack>
-					<Stack w="50%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={3}
-							urlImage={data?.photos[3] ?? {}}
-						/>
-					</Stack>
-				</Flex>
-				<Flex w="100%" h="33.33%" gap="0.05em">
-					<Stack w="50%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={4}
-							urlImage={data?.photos[4] ?? {}}
-						/>
-					</Stack>
-					<Stack w="50%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={5}
-							urlImage={data?.photos[5] ?? {}}
-						/>
-					</Stack>
-				</Flex>
+				<Text
+					type="h1"
+					sheetNo={sheetNo}
+					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+					isInPaginator={isInPaginator}
+					isThumbNail={isThumbNail}
+				/>
 			</Stack>
-		</Stack>
+		</Flex>
 	);
 };
 
-export default Mod36;
+export default Mod39;

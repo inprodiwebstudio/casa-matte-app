@@ -1,60 +1,57 @@
-import {Stack, Flex } from "@mantine/core";
-import ImgLayout      from "components/LayoutHandler/ImgLayout";
-//Own components
+import {Stack, Flex }    from "@mantine/core";
+import ImgLayout         from "components/LayoutHandler/ImgLayout";
 import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
+//Own components
 
 
-const Mod54 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod57 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText = "";
+	const defaultText01 = "TITLE";
 
 	return (
 		<Flex
-			pt="8%"
-			// pb="8%"
+			p="8%"
 			w="100%"
 			h="100%"
-			align="flex-end"
-			gap="0.5em"
+			gap="0.05em"
+			align="center"
 			direction="column"
 		>
+			<Stack w="60%" mb="0.15em">
+				<Text
+					align="center"
+					sheetNo={sheetNo}
+					type="h4"
+					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+					isInPaginator={isInPaginator}
+					isThumbNail={isThumbNail}
+				/>
+			</Stack>
 			<Stack
-				spacing="0.4em"
-				w="59%"
-				h="88%"
+				w="100%"
+				h="50%"
 			>
-				<Stack mr="10%">
-					<Text
-						align="right"
-						type="h1"
-						sheetNo={sheetNo}
-						data={textInsertion(data?.text[0], defaultText, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-					/>
-				</Stack>
-				<Stack w="100%" h="100%">
-					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
-						sheetNo={sheetNo}
-						imageNo={0}
-						urlImage={data?.photos[0] ?? {}}
-					/>
-				</Stack>
-				<Stack mr="40%" mt="9%">
-					<Text
-						align="left"
-						type="h5"
-						sheetNo={sheetNo}
-						data={textInsertion(data?.text[1], defaultText, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-					/>
-				</Stack>
+				<ImgLayout
+					isInWorkSpace={isInWorkSpace}
+					sheetNo={sheetNo}
+					imageNo={0}
+					urlImage={data?.photos[0] ?? {}}
+				/>
+			</Stack>
+			<Stack
+				w="100%"
+				h="50%"
+			>
+				<ImgLayout
+					isInWorkSpace={isInWorkSpace}
+					sheetNo={sheetNo}
+					imageNo={1}
+					urlImage={data?.photos[1] ?? {}}
+				/>
 			</Stack>
 		</Flex>
 	);
 };
 
-export default Mod54;
+export default Mod57;

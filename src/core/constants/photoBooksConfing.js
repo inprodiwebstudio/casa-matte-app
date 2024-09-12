@@ -48,7 +48,7 @@ const photoBooksConfing = {
 				grande : {
 					layoutMods       : {...VerticalLarge},
 					frontLayouts     : {},
-					modsInDoublePage : ["Mod1", "Mod2", "Mod3", "FrontLayout"],
+					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [100, 100],
 				},
 			},

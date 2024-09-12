@@ -1,37 +1,24 @@
 import {Stack, Flex }    from "@mantine/core";
 import ImgLayout         from "components/LayoutHandler/ImgLayout";
-import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
+
 //Own components
+import Text from "components/LayoutHandler/Text";
 
 
-const Mod57 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod60 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "TITLE";
+	const defaultText01 = "Subtitle";
 
 	return (
 		<Flex
-			p="8%"
 			w="100%"
 			h="100%"
-			gap="0.05em"
 			align="center"
+			gap="0.1em"
 			direction="column"
 		>
-			<Stack w="60%" mb="0.15em">
-				<Text
-					align="center"
-					sheetNo={sheetNo}
-					type="h4"
-					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-				/>
-			</Stack>
-			<Stack
-				w="100%"
-				h="50%"
-			>
+			<Stack w="45%" h="55%" mt="24%">
 				<ImgLayout
 					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
@@ -40,18 +27,21 @@ const Mod57 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				/>
 			</Stack>
 			<Stack
-				w="100%"
-				h="50%"
+				spacing="0.07em"
+				w="45%"
+				align="right"
 			>
-				<ImgLayout
-					isInWorkSpace={isInWorkSpace}
+				<Text
+					align="right"
+					type="regular"
 					sheetNo={sheetNo}
-					imageNo={1}
-					urlImage={data?.photos[1] ?? {}}
+					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+					isInPaginator={isInPaginator}
+					isThumbNail={isThumbNail}
 				/>
 			</Stack>
 		</Flex>
 	);
 };
 
-export default Mod57;
+export default Mod60;
