@@ -7,14 +7,15 @@ const Mod35 = ({data, isInWorkSpace, sheetNo}) => {
 		<Stack
 			w="100%"
 			h="100%"
+			p="1%"
 		>
-			<Stack
-				spacing="0.05em"
+			<Flex
+				gap="0.05em"
 				h="100%"
 				w="100%"
 			>
-				<Flex w="100%" h="33.33%" gap="0.05em">
-					<Stack w="50%" h="100%">
+				<Stack w="60%" h="100%" spacing="0.05em">
+					<Stack w="100%" h="33.33%">
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
 							sheetNo={sheetNo}
@@ -22,7 +23,7 @@ const Mod35 = ({data, isInWorkSpace, sheetNo}) => {
 							urlImage={data?.photos[0] ?? {}}
 						/>
 					</Stack>
-					<Stack w="50%" h="100%">
+					<Stack w="100%" h="33.33%">
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
 							sheetNo={sheetNo}
@@ -30,9 +31,7 @@ const Mod35 = ({data, isInWorkSpace, sheetNo}) => {
 							urlImage={data?.photos[1] ?? {}}
 						/>
 					</Stack>
-				</Flex>
-				<Flex w="100%" h="33.33%" gap="0.05em">
-					<Stack w="50%" h="100%">
+					<Stack w="100%" h="33.33%">
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
 							sheetNo={sheetNo}
@@ -40,7 +39,9 @@ const Mod35 = ({data, isInWorkSpace, sheetNo}) => {
 							urlImage={data?.photos[2] ?? {}}
 						/>
 					</Stack>
-					<Stack w="50%" h="100%">
+				</Stack>
+				<Stack w="40%" h="100%" spacing="0.05em">
+					<Stack w="100%" h="50%">
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
 							sheetNo={sheetNo}
@@ -48,9 +49,7 @@ const Mod35 = ({data, isInWorkSpace, sheetNo}) => {
 							urlImage={data?.photos[3] ?? {}}
 						/>
 					</Stack>
-				</Flex>
-				<Flex w="100%" h="33.33%" gap="0.05em">
-					<Stack w="50%" h="100%">
+					<Stack w="100%" h="50%">
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
 							sheetNo={sheetNo}
@@ -58,16 +57,8 @@ const Mod35 = ({data, isInWorkSpace, sheetNo}) => {
 							urlImage={data?.photos[4] ?? {}}
 						/>
 					</Stack>
-					<Stack w="50%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={5}
-							urlImage={data?.photos[5] ?? {}}
-						/>
-					</Stack>
-				</Flex>
-			</Stack>
+				</Stack>
+			</Flex>
 		</Stack>
 	);
 };

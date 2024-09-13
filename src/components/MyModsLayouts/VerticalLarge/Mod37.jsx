@@ -5,7 +5,11 @@ import { textInsertion } from "helpers";
 
 const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "";
+	const defaultTitle = "";
+	const defaulSubtTitle = "";
+
+	// const example = "<p style='text-align:center;'><span style='color:dark; font-family:Inter-Lifght;font-size:20px;leter-spacing:10px;'>SUBTÍTULO 1</span></p>";
+
 
 	return (
 		<Flex
@@ -28,7 +32,7 @@ const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						<Text
 							type="h1"
 							sheetNo={sheetNo}
-							data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+							data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
 						/>
@@ -42,7 +46,7 @@ const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						<Text
 							type="h5"
 							sheetNo={sheetNo}
-							data={textInsertion(data?.text[1], defaultText01, isInWorkSpace)}
+							data={textInsertion(data?.text[1], defaulSubtTitle, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
 						/>

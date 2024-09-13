@@ -7,16 +7,30 @@ const Mod11 = ({data, isInWorkSpace, sheetNo}) => {
 		<Stack
 			w="100%"
 			h="100%"
-			p="13%"
-			pt="29.03%"
-			pb="29.03%"
+			p="0.1em"
 		>
-			<ImgLayout
-				isInWorkSpace={isInWorkSpace}
-				sheetNo={sheetNo}
-				imageNo={0}
-				urlImage={data?.photos[0] ?? {}}
-			/>
+			<Stack
+				spacing="0.05em"
+				w="100%"
+				h="100%"
+			>
+				<Stack w="100%" h="50%">
+					<ImgLayout
+						isInWorkSpace={isInWorkSpace}
+						sheetNo={sheetNo}
+						imageNo={0}
+						urlImage={data?.photos[0] ?? {}}
+					/>
+				</Stack>
+				<Stack w="100%" h="50%">
+					<ImgLayout
+						isInWorkSpace={isInWorkSpace}
+						sheetNo={sheetNo}
+						imageNo={1}
+						urlImage={data?.photos[1] ?? {}}
+					/>
+				</Stack>
+			</Stack>
 		</Stack>
 	);
 };

@@ -102,7 +102,7 @@ const editorConfiguration = {
 };
 
 const EditText = ({workSpaceSlice, sheetNo, layoutNo, dataTextPage}) => {
-	const [editorState, setEditorState] = useState("<p style='text-align:center;'><span style='color:red; font-family:TAN-MERINGUE;font-size:42px;'>HOLA MUNDO</span></p>");
+	const [editorState, setEditorState] = useState("<p style='text-align:center;'><span style='color:dark;font-family:Inter-Lifght;'>TÍTULO</span></p>");
 
 	// const { pageId } = useParams();
 
