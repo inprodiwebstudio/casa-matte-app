@@ -10,6 +10,8 @@
     position: relative;
     padding-top: 5px;
     padding-bottom: 5px;
+    height: 600px;
+
 
     & .delete-icon {
         top : 5%;
@@ -46,6 +48,8 @@
 
     & .page-container {
         width: auto;
+        height: 100%;
+        // height: 600px;
         // height: 470px;
         // max-width: 350px;
         // padding: 8px;
@@ -53,7 +57,7 @@
         align-items: center;
         flex-direction: column;
         // font-size: 50px;
-        // transform: scale(0.2, 0.2);
+        transform: scale(0.2, 0.2);
 
         & .numbPages-container {
             display: flex;
