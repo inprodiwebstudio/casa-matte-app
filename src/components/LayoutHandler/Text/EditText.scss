@@ -21,16 +21,23 @@
         margin-bottom: 0px !important;
     }
 
+    .ck.ck-editor__editable_inline > *:first-child {
+        margin-top: 0px !important;
+    }
+
     .ck-editor__editable_inline {
         p {
-         font-size: 10px;
-         
+            font-size: 1em !important;
         //  span {
         //     letter-spacing: 15px !important;
         //     line-height: 50px !important;
         //  }
         }
      }
+    
+    span {
+        font-size: 1em !important;
+    }
 
     //  P {
     //     letter-spacing: 15px !important;
