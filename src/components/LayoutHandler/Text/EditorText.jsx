@@ -23,8 +23,14 @@ import { connect }        from "react-redux";
 import { bindAll } from "helpers";
 import styles      from "./styles";
 
-const EditText = ({workSpaceSlice, sheetNo, layoutNo, dataTextPage}) => {
-	const { classes } = styles();
+const EditText = ({
+	sizes,
+	sheetNo,
+	layoutNo,
+	dataTextPage,
+	workSpaceSlice,
+}) => {
+	const { classes } = styles({size : sizes?.chico});
 
 	const editorConfiguration = {
 		plugins      : [ Essentials, Bold, Alignment, Italic, Paragraph, FontFamily, FontSize, FontColor],
@@ -59,6 +65,7 @@ const EditText = ({workSpaceSlice, sheetNo, layoutNo, dataTextPage}) => {
 				"fontfamily",
 				"italic",
 				"fontColor",
+				"paragraph",
 				"alignment:left",
 				"alignment:center",
 				"alignment:right",
@@ -96,12 +103,13 @@ const EditText = ({workSpaceSlice, sheetNo, layoutNo, dataTextPage}) => {
 		},
 		fontSize : {
 			options : [
-				{ title : "Chico", model : "38px"},
-				{ title : "Regular", model : "1em"},
-				{ title : "Grande", model : "46px"},
+				{ title : "Chico", model : sizes?.chico},
+				{ title : "Regular", model : sizes?.regular},
+				{ title : "Grande", model : sizes?.grande},
 			],
-			supportAllValues : false,
+			supportAllValues : true,
 		},
+		// initialData : "<p>Hello from CKEditor 5 in React!</p>",
 	};
 
 	const [editorState, setEditorState] = useState(dataTextPage);

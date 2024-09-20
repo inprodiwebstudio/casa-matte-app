@@ -5,7 +5,7 @@ import { textInsertion } from "helpers";
 
 const Mod38 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>";
 
 	return (
 		<Center w="100%" h="100%">
@@ -16,7 +16,11 @@ const Mod38 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				pb="0%"
 			>
 				<Text
-					type="h1"
+					sizes={{
+						"chico"   : "38px",
+						"regular" : "42px",
+						"grande"  : "46px",
+					}}
 					sheetNo={sheetNo}
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isInPaginator={isInPaginator}

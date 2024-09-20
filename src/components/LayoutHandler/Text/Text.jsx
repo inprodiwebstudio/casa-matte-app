@@ -7,55 +7,18 @@ import "./Text.scss";
 
 const Text = ({
 	data,
-	sheetNo,
+	sizes,
 	textNo,
+	sheetNo,
 	align="center",
-	type="regular",
 	isThumbNail,
 	isInPaginator,
 }) => {
 	const isNullableAction = isThumbNail || isInPaginator;
 
-	const handleDefaultText = () => {
-		if (!isThumbNail && (type === "regular")) {
-			return "Doble click para redactar...";
-		}
-		if ((type === "regular") && isThumbNail) {
-			return data;
-		}
-		if (type === "h5") {
-			return "SUBTÍTULO";
-		}
-		return "TÍTULO";
-	};
-
-	const handlerSizeText = () => {
-		if (type === "regular") {
-			return "0.085em";
-		}
-		if (type === "h5") {
-			return "0.1em";
-		}
-		if (type === "h4") {
-			return "0.12em";
-		}
-		if (type === "h3") {
-			return "0.18em";
-		}
-		if (type === "h2") {
-			return "0.2em";
-		}
-		if (type === "h1") {
-			return "0.24em";
-		}
-		if (type === "LargeTitle") {
-			return "0.35em";
-		}
-	};
-
 	const handleShowText = () => {
 		if (!data || (data === "")) {
-			return handleDefaultText();
+			return;
 		} else {
 			return <div dangerouslySetInnerHTML={{__html : data}} />;
 		}
@@ -73,7 +36,7 @@ const Text = ({
 				textAlign     : align,
 				letterSpacing : "0px",
 				height        : "100%",
-				fontSize      : handlerSizeText(),
+				fontSize      : "38px",
 			}}
 			{...(!isNullableAction && {
 				onClick : (e) => handleClick(e),
@@ -89,6 +52,7 @@ const Text = ({
 						sheetNo={sheetNo}
 						layoutNo={textNo}
 						dataTextPage={data}
+						sizes={sizes}
 					/>
 				)
 			}
@@ -98,7 +62,6 @@ const Text = ({
 
 Text.propTypes = {
 	align         : PropTypes.string,
-	type          : PropTypes.string.isRequired,
 	isThumbNail   : PropTypes.bool,
 	isInPaginator : PropTypes.bool,
 	data          : PropTypes.string.isRequired,

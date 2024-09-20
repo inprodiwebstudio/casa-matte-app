@@ -3,10 +3,10 @@ import { useNavigate, useParams } from "react-router-dom";
 //External components
 import { Draggable } from "react-beautiful-dnd";
 //Own Components
-import BookPages from "components/BookPages";
 //Resources
 import { Thrash } from "Resources/icons";
 import "./ItemPage.scss";
+import BookPages  from "components/BookPages";
 
 const ItemPage = ({
 	index,
@@ -53,12 +53,7 @@ const ItemPage = ({
 			}
 		>
 			<div className="page-container">
-				<div
-					style={{
-						height   : "100px",
-						fontSize : "20px",
-					}}
-				>
+				<div className="sheets-container">
 					<BookPages
 						isThumbNail={false}
 						isInPaginator={true}

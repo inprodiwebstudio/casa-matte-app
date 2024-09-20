@@ -1,6 +1,6 @@
 import { createStyles } from "@mantine/core";
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles((theme, { size }) => ({
 	editText : {
 		fontFamily     : "Helvetica, sans-serif",
 		height         : "100% !important",
@@ -19,11 +19,11 @@ const useStyles = createStyles((theme) => ({
 		},
 
 		"& .ck-editor__editable_inline p" : {
-			fontSize : "1em !important",
+			fontSize : size,
 		},
 
 		"& span" : {
-			fontSize : "1em !important",
+			fontSize : size,
 		},
 
 		"& .ck-content" : {
