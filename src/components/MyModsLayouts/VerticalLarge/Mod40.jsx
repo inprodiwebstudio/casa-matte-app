@@ -3,23 +3,12 @@ import { Flex, Stack } from "@mantine/core";
 import Text              from "components/LayoutHandler/Text";
 import DividerLayout     from "components/LayoutHandler/DividerLayout";
 import { textInsertion } from "helpers";
+import { TextShell }     from "core/components";
 
 
 const Mod43 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const handleWidthTextContainer = () => {
-		if (isThumbNail) {
-			return "60%";
-		}
-		if (isInPaginator) {
-			return "60%";
-		}
-		if (isInWorkSpace) {
-			return "60%";
-		}
-	};
-
-	const defaultText01 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...";
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 12px; font-family: JosefinSans-Light;'>Para papá, un homenaje a tu vida. Gracias por tantos años de cariño y amor. Te queremos siempre.</span></p>";
 
 	return (
 		<Flex
@@ -32,11 +21,16 @@ const Mod43 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			direction="column"
 		>
 			<DividerLayout long="10%" position="h" />
-			<Stack w={handleWidthTextContainer()}>
+			<Stack w="40%">
 				<Text
-					align="right"
-					type="regular"
+					sizes={{
+						"chico"   : "11px",
+						"regular" : "12px",
+						"grande"  : "13px",
+					}}
 					sheetNo={sheetNo}
+					textShell={() => <TextShell.Body align="flex-start" />}
+					align="right"
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}

@@ -1,18 +1,8 @@
 @import "/src/Resources/scss/variables/colorThemes";
 
 .Text {
-    cursor: pointer;
-    border: 0.05em solid transparent;
-
     overflow: hidden;
-
-    &.isInWorkSpace {
-        &:focus {
-            border: 0.05em solid #5FD15C;
-        }
-    }
     
-
     .placeHolderText {
         font-size: 12;
         color : $flat-color;

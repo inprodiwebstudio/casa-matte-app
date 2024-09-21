@@ -1,15 +1,14 @@
 import {Stack, Flex, Center } from "@mantine/core";
 //Own components
 import Text              from "components/LayoutHandler/Text";
+import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultTitle = "";
-	const defaulSubtTitle = "";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	// const example = "<p style='text-align:center;'><span style='color:dark; font-family:Inter-Lifght;font-size:20px;leter-spacing:10px;'>SUBTÍTULO 1</span></p>";
-
+	const defaulSubtTitle = "<p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>SUBTÍTULO 1</span></p>";
 
 	return (
 		<Flex
@@ -20,7 +19,7 @@ const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			align="flex-end"
 		>
 			<Center w="100%" h="100%">
-				<Stack spacing="0.04em" w="100%">
+				<Stack spacing="0.05em" w="100%">
 					<div
 						style={{
 							width        : "100%",
@@ -30,9 +29,14 @@ const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					 }}
 					>
 						<Text
-							type="h1"
+							sizes={{
+								"chico"   : "38px",
+								"regular" : "42px",
+								"grande"  : "46px",
+							}}
 							sheetNo={sheetNo}
-							data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
+							textShell={() => <TextShell.Title />}
+							data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
 						/>
@@ -44,8 +48,13 @@ const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							paddingRight : "20%",
 						}}>
 						<Text
-							type="h5"
+							sizes={{
+								"chico"   : "14px",
+								"regular" : "15px",
+								"grande"  : "16px",
+							}}
 							sheetNo={sheetNo}
+							textShell={() => <TextShell.SubTitle />}
 							data={textInsertion(data?.text[1], defaulSubtTitle, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}

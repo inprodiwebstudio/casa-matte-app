@@ -10,19 +10,20 @@ const Text = ({
 	sizes,
 	textNo,
 	sheetNo,
+	textShell,
 	align="center",
 	isThumbNail,
 	isInPaginator,
 }) => {
 	const isNullableAction = isThumbNail || isInPaginator;
 
-	const handleShowText = () => {
-		if (!data || (data === "")) {
-			return;
-		} else {
-			return <div dangerouslySetInnerHTML={{__html : data}} />;
-		}
-	};
+	// const handleShowText = () => {
+	// 	if (!data || (data === "")) {
+	// 		return;
+	// 	} else {
+	// 		return <div dangerouslySetInnerHTML={{__html : data}} />;
+	// 	}
+	// };
 
 	const handleClick = (e) => {
 		e.stopPropagation();
@@ -36,15 +37,16 @@ const Text = ({
 				textAlign     : align,
 				letterSpacing : "0px",
 				height        : "100%",
-				fontSize      : "38px",
+				width         : "100%",
+				// fontSize      : "38px",
 			}}
 			{...(!isNullableAction && {
 				onClick : (e) => handleClick(e),
 			})}
 		>
 			{
-				(isInPaginator || isThumbNail) &&
-				handleShowText()
+				((isInPaginator || isThumbNail) && textShell) &&
+				textShell()
 			}
 			{
 				(!isInPaginator && !isThumbNail) && (
