@@ -11,6 +11,7 @@ const Text = ({
 	textNo,
 	sheetNo,
 	textShell,
+	gapSpacing,
 	align="center",
 	isThumbNail,
 	isInPaginator,
@@ -55,6 +56,7 @@ const Text = ({
 						layoutNo={textNo}
 						dataTextPage={data}
 						sizes={sizes}
+						gapSpacing={gapSpacing}
 					/>
 				)
 			}
