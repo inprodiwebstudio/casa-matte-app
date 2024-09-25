@@ -21,7 +21,7 @@ const useStyles = createStyles((theme, { size, gapSpacing }) => ({
 		},
 
 		"& .ck.ck-editor__editable_inline > *:first-child" : {
-			marginTop : "0px !important",
+			marginTop : "7px !important",
 		},
 
 		"& .ck-editor__editable_inline p" : {
