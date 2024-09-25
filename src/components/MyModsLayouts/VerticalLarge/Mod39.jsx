@@ -7,19 +7,7 @@ import { textInsertion } from "helpers";
 
 const Mod42 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	// const handleWidthTextContainer = () => {
-	// 	if (isThumbNail) {
-	// 		return "5px";
-	// 	}
-	// 	if (isInPaginator) {
-	// 		return "149px";
-	// 	}
-	// 	if (isInWorkSpace) {
-	// 		return "250px";
-	// 	}
-	// };
-
-	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 12px; font-family: JosefinSans-Light;'>PARA PAPÁ. UN HOMENAJE A TU VIDA. GRACIAS POR TANTOS AÑOS DE CARIÑO Y AMOR, TE QUEREMOS SIEMPRE..</span></p>";
+	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>PARA PAPÁ. UN HOMENAJE A TU VIDA. GRACIAS POR TANTOS AÑOS DE CARIÑO Y AMOR, TE QUEREMOS SIEMPRE..</span></p>";
 
 	return (
 		<Center
@@ -37,6 +25,7 @@ const Mod42 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						"regular" : "12px",
 						"grande"  : "13px",
 					}}
+					lineHeight="18px"
 					align="left"
 					sheetNo={sheetNo}
 					textShell={() => <TextShell.Body align="flex-start" />}

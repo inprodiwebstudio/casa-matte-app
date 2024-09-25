@@ -8,9 +8,9 @@ import { TextShell }     from "core/components";
 
 const Mod47 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>ESPAÑA</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Madrid</span></p>";
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Toledo</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
 
 
 	return (
@@ -40,6 +40,7 @@ const Mod47 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							"regular" : "42px",
 							"grande"  : "46px",
 						}}
+						letterSpacing="5px"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.Title width="100%" align="center" />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}

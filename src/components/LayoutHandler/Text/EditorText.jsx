@@ -29,9 +29,11 @@ const EditText = ({
 	layoutNo,
 	dataTextPage,
 	gapSpacing,
+	lineHeight,
+	letterSpacing,
 	workSpaceSlice,
 }) => {
-	const { classes } = styles({size : sizes?.chico, gapSpacing});
+	const { classes } = styles({size : sizes?.chico, gapSpacing, lineHeight, letterSpacing});
 
 	const editorConfiguration = {
 		plugins      : [ Essentials, Bold, Alignment, Italic, Paragraph, FontFamily, FontSize, FontColor],

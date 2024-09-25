@@ -20,7 +20,7 @@ const Mod45 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			align="center"
 		>
 			<Stack
-				w="49%"
+				w="54%"
 				mah="70%"
 				spacing="0.15em"
 				aria-hidden
@@ -37,6 +37,7 @@ const Mod45 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							"grande"  : "16px",
 						}}
 						align="left"
+						letterSpacing="1.7px"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.SubTitle width="50%" align="flex-start" />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
@@ -57,6 +58,8 @@ const Mod45 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						}}
 						align="justify"
 						sheetNo={sheetNo}
+						letterSpacing="0.5px"
+						lineHeight="16px"
 						textShell={() => <TextShell.BodyParagraph align="flex-start" />}
 						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 						isInPaginator={isInPaginator}

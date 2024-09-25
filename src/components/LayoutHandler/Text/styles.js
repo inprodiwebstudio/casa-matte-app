@@ -1,6 +1,6 @@
 import { createStyles } from "@mantine/core";
 
-const useStyles = createStyles((theme, { size, gapSpacing }) => ({
+const useStyles = createStyles((theme, { size, gapSpacing, lineHeight, letterSpacing }) => ({
 	editText : {
 		fontFamily     : "Helvetica, sans-serif",
 		height         : "100% !important",
@@ -14,6 +14,8 @@ const useStyles = createStyles((theme, { size, gapSpacing }) => ({
 			display       : gapSpacing && "flex",
 			flexDirection : gapSpacing && "column",
 			gap           : gapSpacing,
+			lineHeight    : lineHeight ?? "auto",
+			letterSpacing : letterSpacing ?? "0.6px !important",
 		},
 
 		"& .ck.ck-editor__editable_inline > *:last-child" : {
@@ -35,7 +37,7 @@ const useStyles = createStyles((theme, { size, gapSpacing }) => ({
 		"& .ck-content" : {
 			height      : "100% !important",
 			padding     : "0px !important",
-			border      : "1px solid #b6b4af !important",
+			border      : "1px solid transparent !important",
 			marginLeft  : "0px !important",
 			marginRight : "0px !important",
 			boxShadow   : "none !important",

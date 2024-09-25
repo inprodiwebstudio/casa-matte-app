@@ -6,9 +6,9 @@ import { textInsertion } from "helpers";
 
 const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaulSubtTitle = "<p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>SUBTÍTULO 1</span></p>";
+	const defaulSubtTitle = "<p style='text-align: center;'><span style='font-size: 14px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>";
 
 	return (
 		<Flex
@@ -35,6 +35,7 @@ const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 								"grande"  : "46px",
 							}}
 							sheetNo={sheetNo}
+							letterSpacing="6px"
 							textShell={() => <TextShell.Title />}
 							data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 							isInPaginator={isInPaginator}
@@ -54,6 +55,7 @@ const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 								"grande"  : "16px",
 							}}
 							sheetNo={sheetNo}
+							letterSpacing="2px"
 							textShell={() => <TextShell.SubTitle />}
 							data={textInsertion(data?.text[1], defaulSubtTitle, isInWorkSpace)}
 							isInPaginator={isInPaginator}

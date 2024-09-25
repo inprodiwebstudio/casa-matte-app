@@ -10,7 +10,7 @@ const Mod41 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
 	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaulSubtTitle = "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>SUBTÍTULO 2</span></p>";
+	const defaulSubtTitle = "<p style='text-align: right;'><span style='font-size: 14px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>";
 
 	return (
 		<Flex
@@ -32,6 +32,7 @@ const Mod41 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					}}
 					align="right"
 					sheetNo={sheetNo}
+					letterSpacing="6px"
 					textShell={() => <TextShell.Title width="40%" align="flex-end" />}
 					isInPaginator={isInPaginator}
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
@@ -46,6 +47,7 @@ const Mod41 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						}}
 						align="right"
 						sheetNo={sheetNo}
+						letterSpacing="2px"
 						textShell={() => <TextShell.SubTitle width="20%" align="flex-end" />}
 						data={textInsertion(data?.text[1], defaulSubtTitle, isInWorkSpace)}
 						isInPaginator={isInPaginator}

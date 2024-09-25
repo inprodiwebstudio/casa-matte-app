@@ -24,6 +24,7 @@ const Mod38 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					}}
 					sheetNo={sheetNo}
 					textShell={() => <TextShell.Title />}
+					letterSpacing="6.5px"
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}

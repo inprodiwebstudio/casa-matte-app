@@ -12,6 +12,8 @@ const Text = ({
 	sheetNo,
 	textShell,
 	gapSpacing,
+	lineHeight,
+	letterSpacing,
 	align="center",
 	isThumbNail,
 	isInPaginator,
@@ -52,6 +54,8 @@ const Text = ({
 			{
 				(!isInPaginator && !isThumbNail) && (
 					<EditorText
+						lineHeight={lineHeight}
+						letterSpacing={letterSpacing}
 						sheetNo={sheetNo}
 						layoutNo={textNo}
 						dataTextPage={data}

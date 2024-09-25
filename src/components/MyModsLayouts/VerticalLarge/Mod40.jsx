@@ -8,7 +8,7 @@ import { TextShell }     from "core/components";
 
 const Mod43 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 12px; font-family: JosefinSans-Light;'>Para papá, un homenaje a tu vida. Gracias por tantos años de cariño y amor. Te queremos siempre.</span></p>";
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Para papá, un homenaje a tu vida. Gracias por tantos años de cariño y amor. Te queremos siempre.</span></p>";
 
 	return (
 		<Flex
@@ -21,7 +21,7 @@ const Mod43 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			direction="column"
 		>
 			<DividerLayout long="10%" position="h" />
-			<Stack w="40%">
+			<Stack w="47%">
 				<Text
 					sizes={{
 						"chico"   : "11px",
@@ -29,8 +29,9 @@ const Mod43 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						"grande"  : "13px",
 					}}
 					sheetNo={sheetNo}
-					textShell={() => <TextShell.Body align="flex-start" />}
+					textShell={() => <TextShell.Body align="flex-end" />}
 					align="right"
+					lineHeight="14px"
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}

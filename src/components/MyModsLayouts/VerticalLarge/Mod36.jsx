@@ -6,7 +6,7 @@ import { textInsertion } from "helpers";
 
 const Mod39 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>TÍTULO 2</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO 2</span></p>";
 
 	return (
 		<Flex
@@ -27,6 +27,7 @@ const Mod39 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						"grande"  : "46px",
 					}}
 					sheetNo={sheetNo}
+					letterSpacing="6px"
 					textShell={() => <TextShell.Title width="80%" align="flex-end" />}
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isInPaginator={isInPaginator}
