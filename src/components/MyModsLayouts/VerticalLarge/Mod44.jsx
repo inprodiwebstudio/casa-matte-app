@@ -24,7 +24,7 @@ const Mod47 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			<Stack
 				w="50%"
 				mah="80%"
-				spacing="0.15em"
+				spacing="0.3em"
 				aria-hidden
 				sx={{
 					overflow : "hidden",

@@ -40,7 +40,7 @@ const Mod48 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							"grande"  : "46px",
 						}}
 						sheetNo={sheetNo}
-						textShell={() => <TextShell.Title width="100%" align="center" />}
+						textShell={() => <TextShell.Title width="100%" align="left" />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
