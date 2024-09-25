@@ -1,28 +1,39 @@
-import {Stack, Flex }    from "@mantine/core";
-import ImgLayout         from "components/LayoutHandler/ImgLayout";
+import {Stack, Flex } from "@mantine/core";
+import ImgLayout      from "components/LayoutHandler/ImgLayout";
+//Own components
 import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
-//Own components
 
 
-const Mod55 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod54 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
 	const defaultText = "";
 
 	return (
 		<Flex
-			pb="8%"
+			pt="8%"
+			// pb="8%"
 			w="100%"
 			h="100%"
+			align="flex-end"
 			gap="0.5em"
 			direction="column"
 		>
 			<Stack
-				spacing="0.2em"
-				w="100%"
-				h="100%"
-				align="flex-end"
+				spacing="0.4em"
+				w="59%"
+				h="88%"
 			>
+				<Stack mr="10%">
+					<Text
+						align="right"
+						type="h1"
+						sheetNo={sheetNo}
+						data={textInsertion(data?.text[0], defaultText, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+					/>
+				</Stack>
 				<Stack w="100%" h="100%">
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
@@ -31,31 +42,19 @@ const Mod55 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Stack>
-				<Stack w="40%" mr="10%" spacing="0.15em">
-					<Stack>
-						<Text
-							align="right"
-							type="h1"
-							sheetNo={sheetNo}
-							data={textInsertion(data?.text[0], defaultText, isInWorkSpace)}
-							isInPaginator={isInPaginator}
-							isThumbNail={isThumbNail}
-						/>
-					</Stack>
-					<Stack>
-						<Text
-							align="right"
-							type="h5"
-							sheetNo={sheetNo}
-							data={textInsertion(data?.text[1], defaultText, isInWorkSpace)}
-							isInPaginator={isInPaginator}
-							isThumbNail={isThumbNail}
-						/>
-					</Stack>
+				<Stack mr="40%" mt="9%">
+					<Text
+						align="left"
+						type="h5"
+						sheetNo={sheetNo}
+						data={textInsertion(data?.text[1], defaultText, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+					/>
 				</Stack>
 			</Stack>
 		</Flex>
 	);
 };
 
-export default Mod55;
+export default Mod54;

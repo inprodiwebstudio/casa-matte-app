@@ -5,56 +5,62 @@ import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
 
 
-const Mod54 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod53 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
 	const defaultText = "";
 
 	return (
 		<Flex
-			pt="8%"
-			// pb="8%"
+			p="8%"
+			pl="4%"
+			pr="4%"
 			w="100%"
 			h="100%"
-			align="flex-end"
+			justify="center"
+			align="center"
 			gap="0.5em"
 			direction="column"
 		>
 			<Stack
-				spacing="0.4em"
-				w="59%"
-				h="88%"
+				spacing="0.07em"
+				w="70%"
 			>
-				<Stack mr="10%">
+				<div>
 					<Text
-						align="right"
+						align="center"
 						type="h1"
 						sheetNo={sheetNo}
 						data={textInsertion(data?.text[0], defaultText, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 					/>
-				</Stack>
-				<Stack w="100%" h="100%">
-					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
-						sheetNo={sheetNo}
-						imageNo={0}
-						urlImage={data?.photos[0] ?? {}}
-					/>
-				</Stack>
-				<Stack mr="40%" mt="9%">
+				</div>
+			</Stack>
+			<Stack w="100%" h="100%">
+				<ImgLayout
+					isInWorkSpace={isInWorkSpace}
+					sheetNo={sheetNo}
+					imageNo={0}
+					urlImage={data?.photos[0] ?? {}}
+				/>
+			</Stack>
+			<Stack
+				spacing="0.07em"
+				w="50%"
+			>
+				<div>
 					<Text
-						align="left"
+						align="center"
 						type="h5"
 						sheetNo={sheetNo}
 						data={textInsertion(data?.text[1], defaultText, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 					/>
-				</Stack>
+				</div>
 			</Stack>
 		</Flex>
 	);
 };
 
-export default Mod54;
+export default Mod53;

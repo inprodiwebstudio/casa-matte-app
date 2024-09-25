@@ -59,6 +59,7 @@ import Mod58 from "./Mod58";
 import Mod59 from "./Mod59";
 import Mod60 from "./Mod60";
 import Mod61 from "./Mod61";
+import Mod62 from "./Mod62";
 
 import {
 	Mod10Pdf,
@@ -524,9 +525,9 @@ const VerticalLarge = {
 	Mod49 : {
 		id           : "Mod49",
 		layout       : Mod49,
-		numberPhotos : 1,
+		numberPhotos : 0,
 		numberText   : 2,
-		cat          : "fotosytexto",
+		cat          : "texto",
 		pdfLayout    : "",
 	},
 	Mod50 : {
@@ -556,15 +557,15 @@ const VerticalLarge = {
 	Mod53 : {
 		id           : "Mod53",
 		layout       : Mod53,
-		numberPhotos : 3,
-		numberText   : 1,
+		numberPhotos : 1,
+		numberText   : 2,
 		cat          : "fotosytexto",
 		pdfLayout    : "",
 	},
 	Mod54 : {
 		id           : "Mod54",
 		layout       : Mod54,
-		numberPhotos : 2,
+		numberPhotos : 3,
 		numberText   : 1,
 		cat          : "fotosytexto",
 		pdfLayout    : "",
@@ -572,7 +573,7 @@ const VerticalLarge = {
 	Mod55 : {
 		id           : "Mod55",
 		layout       : Mod55,
-		numberPhotos : 4,
+		numberPhotos : 2,
 		numberText   : 1,
 		cat          : "fotosytexto",
 		pdfLayout    : "",
@@ -580,7 +581,7 @@ const VerticalLarge = {
 	Mod56 : {
 		id           : "Mod56",
 		layout       : Mod56,
-		numberPhotos : 1,
+		numberPhotos : 4,
 		numberText   : 1,
 		cat          : "fotosytexto",
 		pdfLayout    : "",
@@ -605,7 +606,7 @@ const VerticalLarge = {
 		id           : "Mod59",
 		layout       : Mod59,
 		numberPhotos : 1,
-		numberText   : 2,
+		numberText   : 1,
 		cat          : "fotosytexto",
 		pdfLayout    : "",
 	},
@@ -620,6 +621,14 @@ const VerticalLarge = {
 	Mod61 : {
 		id           : "Mod61",
 		layout       : Mod61,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "fotosytexto",
+		pdfLayout    : "",
+	},
+	Mod62 : {
+		id           : "Mod62",
+		layout       : Mod62,
 		numberPhotos : 4,
 		numberText   : 2,
 		cat          : "fotosytexto",

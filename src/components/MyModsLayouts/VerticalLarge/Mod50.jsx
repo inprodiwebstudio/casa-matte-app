@@ -5,15 +5,15 @@ import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
 
 
-const Mod53 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod52 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText = "";
+	const defaultText01 = "";
+
+	const defaultText02 = "SUBTITTLE";
 
 	return (
 		<Flex
 			p="8%"
-			pl="4%"
-			pr="4%"
 			w="100%"
 			h="100%"
 			justify="center"
@@ -30,13 +30,13 @@ const Mod53 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						align="center"
 						type="h1"
 						sheetNo={sheetNo}
-						data={textInsertion(data?.text[0], defaultText, isInWorkSpace)}
+						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 					/>
 				</div>
 			</Stack>
-			<Stack w="100%" h="100%">
+			<Stack w="60%" h="100%">
 				<ImgLayout
 					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
@@ -46,14 +46,14 @@ const Mod53 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			</Stack>
 			<Stack
 				spacing="0.07em"
-				w="50%"
+				w="60%"
 			>
 				<div>
 					<Text
 						align="center"
 						type="h5"
 						sheetNo={sheetNo}
-						data={textInsertion(data?.text[1], defaultText, isInWorkSpace)}
+						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 					/>
@@ -63,4 +63,4 @@ const Mod53 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 	);
 };
 
-export default Mod53;
+export default Mod52;

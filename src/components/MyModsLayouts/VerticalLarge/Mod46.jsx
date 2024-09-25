@@ -83,6 +83,7 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 								"grande"  : "26px",
 							}}
 							align="left"
+							letterSpacing="3px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
 							data={textInsertion(data?.text[5], defaultTitle02, isInWorkSpace)}
@@ -120,6 +121,7 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 								"grande"  : "26px",
 							}}
 							align="left"
+							letterSpacing="3px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
 							data={textInsertion(data?.text[5], defaultTitle03, isInWorkSpace)}

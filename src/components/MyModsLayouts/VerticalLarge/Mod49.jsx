@@ -1,66 +1,67 @@
 import {Stack, Flex } from "@mantine/core";
-import ImgLayout      from "components/LayoutHandler/ImgLayout";
 //Own components
 import Text              from "components/LayoutHandler/Text";
+import DividerLayout     from "components/LayoutHandler/DividerLayout";
 import { textInsertion } from "helpers";
+import { TextShell }     from "core/components";
 
 
-const Mod52 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod51 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "";
+	const defaultTitle = "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>TOSCANA</span></p>";
 
-	const defaultText02 = "SUBTITTLE";
+	const defaultIndices = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>FLORENCIA</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ORVIETTO</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>MONTALCINO</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>PIENZA</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SIENNA</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>BAGNO VIGNIONI</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SAN GIMINIANO</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>MONTEPULCIANO</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ANTINORI</span></p>";
 
 	return (
 		<Flex
-			p="8%"
+			p="10%"
 			w="100%"
 			h="100%"
-			justify="center"
-			align="center"
-			gap="0.5em"
-			direction="column"
+			justify="flex-end"
+			align="flex-end"
 		>
 			<Stack
-				spacing="0.07em"
-				w="70%"
+				spacing="0.15em"
+				sx={{overflow : "hidden", textTransform : "uppercase"}}
+				maw="60%"
+				miw="30%"
 			>
-				<div>
+				<Stack
+					spacing="0.15em"
+				>
 					<Text
-						align="center"
-						type="h1"
+						sizes={{
+							"chico"   : "22px",
+							"regular" : "24px",
+							"grande"  : "26px",
+						}}
+						align="left"
 						sheetNo={sheetNo}
-						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+						letterSpacing="3px"
+						textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
+						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 					/>
-				</div>
-			</Stack>
-			<Stack w="60%" h="100%">
-				<ImgLayout
-					isInWorkSpace={isInWorkSpace}
+					<DividerLayout long="20%" position="h" />
+				</Stack>
+				<Text
+					sizes={{
+						"chico"   : "12px",
+						"regular" : "14px",
+						"grande"  : "16px",
+					}}
+					align="left"
+					gapSpacing="16px"
 					sheetNo={sheetNo}
-					imageNo={0}
-					urlImage={data?.photos[0] ?? {}}
+					textShell={() => <TextShell.BodyIndices align="left" />}
+					data={textInsertion(data?.text[1], defaultIndices, isInWorkSpace)}
+					isInPaginator={isInPaginator}
+					isThumbNail={isThumbNail}
 				/>
-			</Stack>
-			<Stack
-				spacing="0.07em"
-				w="60%"
-			>
-				<div>
-					<Text
-						align="center"
-						type="h5"
-						sheetNo={sheetNo}
-						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-					/>
-				</div>
 			</Stack>
 		</Flex>
 	);
 };
 
-export default Mod52;
+export default Mod51;
