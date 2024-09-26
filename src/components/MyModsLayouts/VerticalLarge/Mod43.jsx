@@ -20,7 +20,7 @@ const Mod46 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			align="center"
 		>
 			<Stack
-				w="75%"
+				w="55%"
 				mah="90%"
 				spacing="0.15em"
 				aria-hidden

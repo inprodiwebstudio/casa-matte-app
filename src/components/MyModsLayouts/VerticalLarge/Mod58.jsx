@@ -6,19 +6,33 @@ import { textInsertion } from "helpers";
 import Text from "components/LayoutHandler/Text";
 
 
-const Mod60 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod59 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "Subtitle";
+	const defaultText01 = "TITLE";
 
 	return (
 		<Flex
+			pt="15%"
 			w="100%"
 			h="100%"
 			align="center"
-			gap="0.1em"
+			gap="0.5em"
 			direction="column"
 		>
-			<Stack w="45%" h="55%" mt="24%">
+			<Stack
+				spacing="0.07em"
+				w="50%"
+			>
+				<Text
+					align="center"
+					type="h4"
+					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+					sheetNo={sheetNo}
+					isInPaginator={isInPaginator}
+					isThumbNail={isThumbNail}
+				/>
+			</Stack>
+			<Stack w="45%" h="63%">
 				<ImgLayout
 					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
@@ -26,22 +40,8 @@ const Mod60 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					urlImage={data?.photos[0] ?? {}}
 				/>
 			</Stack>
-			<Stack
-				spacing="0.07em"
-				w="45%"
-				align="right"
-			>
-				<Text
-					align="right"
-					type="regular"
-					sheetNo={sheetNo}
-					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-				/>
-			</Stack>
 		</Flex>
 	);
 };
 
-export default Mod60;
+export default Mod59;

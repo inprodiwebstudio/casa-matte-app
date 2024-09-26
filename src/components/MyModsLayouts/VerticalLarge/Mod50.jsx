@@ -2,14 +2,15 @@ import {Stack, Flex } from "@mantine/core";
 import ImgLayout      from "components/LayoutHandler/ImgLayout";
 //Own components
 import Text              from "components/LayoutHandler/Text";
+import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
 const Mod52 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "";
+	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 38px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
 
-	const defaultText02 = "SUBTITTLE";
+	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
 
 	return (
 		<Flex
@@ -27,10 +28,16 @@ const Mod52 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			>
 				<div>
 					<Text
+						sizes={{
+							"chico"   : "38px",
+							"regular" : "42px",
+							"grande"  : "46px",
+						}}
 						align="center"
-						type="h1"
 						sheetNo={sheetNo}
-						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+						textShell={() => <TextShell.Title />}
+						letterSpacing="6.5px"
+						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 					/>
@@ -50,10 +57,16 @@ const Mod52 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			>
 				<div>
 					<Text
+						sizes={{
+							"chico"   : "14px",
+							"regular" : "15px",
+							"grande"  : "16px",
+						}}
 						align="center"
-						type="h5"
 						sheetNo={sheetNo}
-						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+						letterSpacing="2px"
+						textShell={() => <TextShell.SubTitle />}
+						data={textInsertion(data?.text[1], defaultSubtitle, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 					/>

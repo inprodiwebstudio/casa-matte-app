@@ -1,22 +1,24 @@
 import {Stack, Flex }    from "@mantine/core";
 import ImgLayout         from "components/LayoutHandler/ImgLayout";
-import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
+
 //Own components
+import Text from "components/LayoutHandler/Text";
 
 
-const Mod61 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod60 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper.";
+	const defaultText01 = "Subtitle";
 
 	return (
 		<Flex
 			w="100%"
 			h="100%"
-			pb="7%"
+			align="center"
+			gap="0.1em"
 			direction="column"
 		>
-			<Stack w="100%" h="60%">
+			<Stack w="45%" h="55%" mt="24%">
 				<ImgLayout
 					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
@@ -26,25 +28,20 @@ const Mod61 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			</Stack>
 			<Stack
 				spacing="0.07em"
-				w="100%"
-				h="40%"
-				pr="7%"
-				justify="flex-end"
-				align="flex-end"
+				w="45%"
+				align="right"
 			>
-				<Stack w="40%" h="50%">
-					<Text
-						align="justify"
-						type="regular"
-						sheetNo={sheetNo}
-						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-					/>
-				</Stack>
+				<Text
+					align="right"
+					type="regular"
+					sheetNo={sheetNo}
+					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+					isInPaginator={isInPaginator}
+					isThumbNail={isThumbNail}
+				/>
 			</Stack>
 		</Flex>
 	);
 };
 
-export default Mod61;
+export default Mod60;
