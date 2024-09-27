@@ -147,17 +147,17 @@
 
 			@include laptop {
 				height: 700px;
-				transform: scale(0.6, 0.6);
+				transform: scale(0.55, 0.55);
 				z-index: 1;
 			}
 
 			@include big-laptop {
-				transform: scale(0.7, 0.7);
+				transform: scale(0.55, 0.55);
 				z-index: 1;
 			}
 
 			@include big-tablet {
-				transform: scale(0.6, 0.6);
+				transform: scale(0.45, 0.45);
 				z-index: 1;
 			}
 		}

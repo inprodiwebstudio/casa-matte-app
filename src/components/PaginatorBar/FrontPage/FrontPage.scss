@@ -22,8 +22,12 @@
         justify-content: center;
 
         .withe-page-container {
-            height: 85px;
+            height: 100px;
             font-size: 17px;
+
+            &.frontPage-thumbnail-cuadrado {
+                height: 85px;
+            }
         }
     
         .pages-book-conatier {

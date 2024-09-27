@@ -14,6 +14,8 @@ const FrontPage = () => {
 
 	const workSpaceFrontPage = useSelector((state) => state.workSpaceSlice.data?.frontPage, shallowEqual);
 
+	const photoBookFormat = useSelector((state) => state.workSpaceSlice?.data?.format, shallowEqual);
+
 	const handlerSelectPage = () => {
 		navigate("frontpage");
 	};
@@ -27,7 +29,11 @@ const FrontPage = () => {
 				className="my-page-container"
 			>
 				<div>
-					<div className="withe-page-container">
+					<div
+						className={
+							`withe-page-container frontPage-thumbnail-${photoBookFormat}`
+						}
+					>
 						{
 							workSpaceFrontPage && (
 								<BookPages
