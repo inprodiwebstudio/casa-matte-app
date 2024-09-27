@@ -4,6 +4,7 @@ import VerticalLarge   from "components/MyModsLayouts/VerticalLarge";
 import SquareLarge     from "components/MyModsLayouts/SquareLarge";
 import VerticalMedium  from "components/MyModsLayouts/VerticalMedium";
 import HorizontalLarge from "components/MyModsLayouts/HorizontalLarge";
+import SquareSmall     from "components/MyModsLayouts/SquareSmall";
 
 const photoBooksConfing = {
 	white : {
@@ -57,9 +58,9 @@ const photoBooksConfing = {
 			aspectRatio : [1, 1],
 			sizes       : {
 				chico : {
-					layoutMods       : {},
+					layoutMods       : {...SquareSmall},
 					frontLayouts     : {},
-					modsInDoublePage : [],
+					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [100, 100],
 				},
 				mediano : {

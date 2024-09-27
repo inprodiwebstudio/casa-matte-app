@@ -1,4 +1,4 @@
-import { Stack } from "@mantine/core";
+import { Box, Group, Stack } from "@mantine/core";
 //Own components
 import ImgLayout from "components/LayoutHandler/ImgLayout";
 
@@ -7,37 +7,69 @@ const Mod23 = ({data, isInWorkSpace, sheetNo}) => {
 		<Stack
 			w="100%"
 			h="100%"
-			pl="57.6%"
+			p="0%"
 		>
 			<Stack
-				spacing="0.05em"
+				spacing="1%"
 				h="100%"
 				w="100%"
 			>
-				<Stack w="100%" h="33.33%">
-					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
-						sheetNo={sheetNo}
-						imageNo={0}
-						urlImage={data?.photos[0] ?? {}}
-					/>
-				</Stack>
-				<Stack w="100%" h="33.33%">
-					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
-						sheetNo={sheetNo}
-						imageNo={1}
-						urlImage={data?.photos[1] ?? {}}
-					/>
-				</Stack>
-				<Stack w="100%" h="33.33%">
-					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
-						sheetNo={sheetNo}
-						imageNo={2}
-						urlImage={data?.photos[2] ?? {}}
-					/>
-				</Stack>
+				<Group
+					w="100%"
+					h="calc(100% / 2 - 0.5%)"
+					spacing={"1%"}
+				>
+					<Box
+						w="calc(100% / 2 - 0.5%)"
+						h="100%"
+					>
+						<ImgLayout
+							isInWorkSpace={isInWorkSpace}
+							sheetNo={sheetNo}
+							imageNo={0}
+							urlImage={data?.photos[0] ?? {}}
+						/>
+					</Box>
+					<Box
+						w="calc(100% / 2 - 0.5%)"
+						h="100%"
+					>
+						<ImgLayout
+							isInWorkSpace={isInWorkSpace}
+							sheetNo={sheetNo}
+							imageNo={1}
+							urlImage={data?.photos[1] ?? {}}
+						/>
+					</Box>
+				</Group>
+				<Group
+					w="100%"
+					h="calc(100% / 2 - 0.5%)"
+					spacing={"1%"}
+				>
+					<Box
+						w="calc(100% / 2 - 0.5%)"
+						h="100%"
+					>
+						<ImgLayout
+							isInWorkSpace={isInWorkSpace}
+							sheetNo={sheetNo}
+							imageNo={2}
+							urlImage={data?.photos[2] ?? {}}
+						/>
+					</Box>
+					<Box
+						w="calc(100% / 2 - 0.5%)"
+						h="100%"
+					>
+						<ImgLayout
+							isInWorkSpace={isInWorkSpace}
+							sheetNo={sheetNo}
+							imageNo={3}
+							urlImage={data?.photos[3] ?? {}}
+						/>
+					</Box>
+				</Group>
 			</Stack>
 		</Stack>
 	);

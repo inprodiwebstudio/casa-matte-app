@@ -3,7 +3,11 @@ import { Stack } from "@mantine/core";
 import ImgLayout from "components/LayoutHandler/ImgLayout";
 const Mod1 = ({data, isInWorkSpace, sheetNo}) => {
 	return (
-		<Stack w="100%" h="100%">
+		<Stack
+			w="100%"
+			h="100%"
+			p="2%"
+		>
 			<ImgLayout
 				isInWorkSpace={isInWorkSpace}
 				sheetNo={sheetNo}

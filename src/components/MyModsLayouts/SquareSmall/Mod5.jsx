@@ -7,7 +7,9 @@ const Mod5 = ({data, isInWorkSpace, sheetNo}) => {
 		<Stack
 			w="100%"
 			h="100%"
-			p="0.8%"
+			p="20%"
+			pt="2%"
+			pb={"2%"}
 		>
 			<ImgLayout
 				isInWorkSpace={isInWorkSpace}
