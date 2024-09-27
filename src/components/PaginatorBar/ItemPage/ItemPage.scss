@@ -56,6 +56,10 @@
         & .sheets-container {
            height: 100px;
            font-size: 20px;
+
+           &.cuadrado {
+            height: 85px;
+           }
         }
 
         & .numbPages-container {

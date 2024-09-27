@@ -20,6 +20,7 @@ const WorkSpace = () => {
 
 	const workSpaceData = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
 	const workSpaceFrontPage = useSelector((state) => state.workSpaceSlice.data?.frontPage, shallowEqual);
+	const workSpaceFormatPage = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
 	const workSpaceHistory = useSelector((state) => state.workSpaceSlice.history, shallowEqual);
 	const isLoggin = useSelector((state) => state.authSlice.loggedIn, shallowEqual);
 	const isLoading = useSelector((state) => state.workSpaceSlice?.loading, shallowEqual);
@@ -105,7 +106,7 @@ const WorkSpace = () => {
 								</div>
 							</div>
 						</div>
-						<div className="ghost-canva">
+						<div className={`ghost-canva ${workSpaceFormatPage}-workSpace`}>
 							<BookPages
 								isInWorkSpcae={true}
 								loading={isLoading}

@@ -1,3 +1,5 @@
+//Redux
+import { useSelector, shallowEqual } from "react-redux";
 //Router
 import { useNavigate, useParams } from "react-router-dom";
 //External components
@@ -17,6 +19,8 @@ const ItemPage = ({
 }) => {
 	const { pageId } = useParams();
 	const navigate = useNavigate();
+
+	const photoBookFormat = useSelector((state) => state.workSpaceSlice?.data?.format, shallowEqual);
 
 	const isCurrentPage = pageId === draggableId;
 
@@ -53,7 +57,7 @@ const ItemPage = ({
 			}
 		>
 			<div className="page-container">
-				<div className="sheets-container">
+				<div className={`sheets-container ${photoBookFormat}`}>
 					<BookPages
 						isThumbNail={false}
 						isInPaginator={true}
