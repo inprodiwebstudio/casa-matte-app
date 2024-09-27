@@ -10,24 +10,18 @@ const Mod25 = ({data, isInWorkSpace, sheetNo}) => {
 			p="20%"
 		>
 			<Stack
-				spacing="0.08em"
+				spacing="0.1em"
 				h="100%"
 				w="100%"
 			>
 				<Group
 					w="100%"
-					h={"100%"}
-					spacing={"0.08em"}
-					sx={{
-						flex : 1,
-					}}
+					h={"calc(100% / 2 - 0.05em)"}
+					spacing={"0.1em"}
 				>
 					<Box
-						w="100%"
+						w="calc(100% / 2 - 0.05em)"
 						h="100%"
-						sx={{
-							flex : 1,
-						}}
 					>
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
@@ -37,11 +31,8 @@ const Mod25 = ({data, isInWorkSpace, sheetNo}) => {
 						/>
 					</Box>
 					<Box
-						w="100%"
+						w="calc(100% / 2 - 0.05em)"
 						h="100%"
-						sx={{
-							flex : 1,
-						}}
 					>
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
@@ -53,18 +44,12 @@ const Mod25 = ({data, isInWorkSpace, sheetNo}) => {
 				</Group>
 				<Group
 					w="100%"
-					h="100%"
-					spacing="0.08em"
-					sx={{
-						flex : 1,
-					}}
+					h="calc(100% / 2 - 0.05em)"
+					spacing="0.1em"
 				>
 					<Box
-						w="100%"
+						w="calc(100% / 2 - 0.05em)"
 						h="100%"
-						sx={{
-							flex : 1,
-						}}
 					>
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
@@ -74,10 +59,7 @@ const Mod25 = ({data, isInWorkSpace, sheetNo}) => {
 						/>
 					</Box>
 					<Box
-						sx={{
-							flex : 1,
-						}}
-						w="100%"
+						w="calc(100% / 2 - 0.05em)"
 						h="100%"
 					>
 						<ImgLayout

@@ -11,15 +11,13 @@ const Mod14 = ({data, isInWorkSpace, sheetNo}) => {
 			pb="25%"
 		>
 			<Group
-				spacing="1%"
+				spacing="0.1em"
 				w="100%"
 				h={"100%"}
 			>
 				<Box
 					h={"100%"}
-					sx={{
-						flex : 1,
-					}}
+					w="calc(100% / 3 - 0.067em)"
 				>
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
@@ -30,9 +28,7 @@ const Mod14 = ({data, isInWorkSpace, sheetNo}) => {
 				</Box>
 				<Box
 					h={"100%"}
-					sx={{
-						flex : 1,
-					}}
+					w="calc(100% / 3 - 0.067em)"
 				>
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
@@ -43,9 +39,7 @@ const Mod14 = ({data, isInWorkSpace, sheetNo}) => {
 				</Box>
 				<Box
 					h={"100%"}
-					sx={{
-						flex : 1,
-					}}
+					w="calc(100% / 3 - 0.067em)"
 				>
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}

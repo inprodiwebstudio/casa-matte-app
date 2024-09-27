@@ -12,17 +12,17 @@ const Mod26 = ({data, isInWorkSpace, sheetNo}) => {
 			pr="20%"
 		>
 			<Stack
-				spacing="1%"
+				spacing="0.1em"
 				h="100%"
 				w="100%"
 			>
 				<Group
 					w="100%"
-					h="calc(100% / 2 - 0.5%)"
-					spacing="1%"
+					h="calc(100% / 2 - 0.05em)"
+					spacing="0.1em"
 				>
 					<Box
-						w="calc(100% / 2 - 0.5%)"
+						w="calc(100% / 2 - 0.05em)"
 						h="100%"
 					>
 						<ImgLayout
@@ -33,7 +33,7 @@ const Mod26 = ({data, isInWorkSpace, sheetNo}) => {
 						/>
 					</Box>
 					<Box
-						w="calc(100% / 2 - 0.5%)"
+						w="calc(100% / 2 - 0.05em)"
 						h="100%"
 					>
 						<ImgLayout
@@ -46,11 +46,11 @@ const Mod26 = ({data, isInWorkSpace, sheetNo}) => {
 				</Group>
 				<Group
 					w="100%"
-					h="calc(100% / 2 - 0.5%)"
-					spacing={"1%"}
+					h="calc(100% / 2 - 0.05em)"
+					spacing={"0.1em"}
 				>
 					<Box
-						w="calc(100% / 2 - 0.5%)"
+						w="calc(100% / 2 - 0.05em)"
 						h="100%"
 					>
 						<ImgLayout
@@ -61,7 +61,7 @@ const Mod26 = ({data, isInWorkSpace, sheetNo}) => {
 						/>
 					</Box>
 					<Box
-						w="calc(100% / 2 - 0.5%)"
+						w="calc(100% / 2 - 0.05em)"
 						h="100%"
 					>
 						<ImgLayout
