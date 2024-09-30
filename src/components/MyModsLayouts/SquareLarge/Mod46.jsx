@@ -1,27 +1,15 @@
 import { Flex, Stack } from "@mantine/core";
 //Own components
 import Text              from "components/LayoutHandler/Text";
-import DividerLayout     from "components/LayoutHandler/DividerLayout";
+import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
 const Mod46 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const handleWidthTextContainer = () => {
-		if (isThumbNail) {
-			return "50px";
-		}
-		if (isInPaginator) {
-			return "170px";
-		}
-		if (isInWorkSpace) {
-			return "60%";
-		}
-	};
+	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>MARÍA:</span></p>";
 
-	const defaultText01 = "";
-
-	const defaultText02 = "Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper, pharetra odio conubia dictumst malesuada lectus dis penatibus, primis orci dictum sociosqu nam platea parturient cursus.<br><br>Et maecenas ante viverra potenti libero purus habitasse aliquam, non massa vivamus dictumst eu erat sodales cursus, integer lacinia rutrum urna aliquet convallis scelerisque. Volutpat condimentum quis taciti fames tempor sagittis eleifend nostra donec, proin ad dis nec sollicitudin dictum viverra semper ridiculus, potenti feugiat odio tellus nisl curabitur nunc phasellus. Luctus iaculis suscipit inceptos mollis quisque nam cum turpis cras, class ante risus ultricies dapibus justo suspendisse enim, cubilia feugiat sed est dui lacinia diam vivamus.<br><br>Curabitur quis eleifend tellus. Mauris venenatis accumsan magna, nec mattis ex molestie sit amet. Cras dignissim faucibus volutpat. Suspendisse egestas odio in libero imperdiet bibendum. Suspendisse eleifend dictum sagittis. Nam urna mi, vestibulum eget erat finibus, cursus vehicula elit. Donec imperdiet luctus tincidunt. Sed id vulputate felis. Donec sagittis feugiat ornare. Ut lacinia vehicula lacus non pretium.<br><br>Ut tempor convallis elit, eu placerat erat venenatis ac. Cras vitae pretium augue, eget facilisis sapien. Nulla facilisi. Aliquam erat volutpat. Quisque ut viverra neque. Nulla hendrerit nisl non fermentum dictum. Quisque iaculis cursus cursus. Vestibulum id commodo neque, ac posuere purus. Quisque ornare dolor eu ex cursus vulputate. Mauris eget sapien in ligula blandit eleifend. Donec lobortis risus elementum metus facilisis, et interdum lectus auctor. Quisque congue dolor sollicitudin tempus sodales. Vestibulum egestas at augue sit amet luctus. Donec gravida molestie malesuada. Nulla luctus rhoncus lorem eu tempus.";
+	const defaultText02 = "<p style='text-align: justify;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam.</span></p><p style='text-align: justify;'><span style='font-size: 18px; font-family: JosefinSans-Light;'></span></p><p style='text-align: justify;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Erri, furo, P. Ullatas treviri strae ta, delaris plinatum morunum sulatum sum esum Patum consulocaes consil hilium intemqu itesusces liis, nonsupiorum adhuiuscero eliis aus comnequam facips, num vere aridien terum. Catem. Sim ore poporisse forum ner uri ponlocu picatam me etortes tilius actuam pra? Mei sename auconum prorei ina, credica ad sedicatat. Unum acrenihiciam inte adducon suspionsulis cupiese strionsum, probse cotiae crem immorimus virmilius cotem tus, cont. Catum, vivir locaecre de tum aut que num sesidet erficonihi, conte detil verdis.</span></p><p style='text-align: justify;'><span style='font-size: 18px; font-family: JosefinSans-Light;'></span></p><p style='text-align: justify;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Averfic iverica elium, C. Vere, quo iu vissen des Catidie inte consilia atia es convent erternum etre crena, intrum, clute et? Os, uro C. Ifessedeo, clus proxime mo virisqua tum que ne milicortius, supicaet niquium inicula videt omprit.</span></p>";
 
 	return (
 		<Flex
@@ -32,40 +20,40 @@ const Mod46 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			align="center"
 		>
 			<Stack
-				w={handleWidthTextContainer()}
-				mah="70%"
+				w="80%"
+				mah="90%"
 				spacing="0.2em"
 				aria-hidden
 				style={{overflow : "hidden"}}
 			>
-				<Flex
-					direction="column"
-					gap="0.05em"
-					justify="flex-start"
-				>
-					<Text
-						align="left"
-						type="h4"
-						sheetNo={sheetNo}
-						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-					/>
-					<DividerLayout long="20%" position="h" />
-				</Flex>
-				<Flex
-					justify="flex-start"
-					direction="column"
-				>
-					<Text
-						align="justify"
-						type="regular"
-						sheetNo={sheetNo}
-						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-					/>
-				</Flex>
+				<Text
+					sizes={{
+						"chico"   : "28px",
+						"regular" : "30px",
+						"grande"  : "32px",
+					}}
+					letterSpacing="3px"
+					align="left"
+					sheetNo={sheetNo}
+					textShell={() => <TextShell.SubTitle width="50%" align="flex-start" />}
+					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+					isInPaginator={isInPaginator}
+					isThumbNail={isThumbNail}
+				/>
+				<Text
+					sizes={{
+						"chico"   : "16px",
+						"regular" : "18px",
+						"grande"  : "20px",
+					}}
+					align="justify"
+					lineHeight="26px"
+					sheetNo={sheetNo}
+					textShell={() => <TextShell.BodyParagraph align="flex-start" />}
+					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+					isInPaginator={isInPaginator}
+					isThumbNail={isThumbNail}
+				/>
 			</Stack>
 		</Flex>
 	);

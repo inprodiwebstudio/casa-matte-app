@@ -58,7 +58,7 @@ import Mod56 from "./Mod56";
 import Mod57 from "./Mod57";
 import Mod58 from "./Mod58";
 
-const VerticalLarge = {
+const SquareSmall = {
 	Mod1 : {
 		id           : "Mod1",
 		layout       : Mod1,
@@ -489,4 +489,4 @@ const VerticalLarge = {
 	},
 };
 
-export default VerticalLarge;
+export default SquareSmall;

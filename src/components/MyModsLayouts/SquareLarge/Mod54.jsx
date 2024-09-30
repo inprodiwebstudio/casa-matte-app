@@ -1,59 +1,37 @@
-import {Stack, Flex } from "@mantine/core";
-import ImgLayout      from "components/LayoutHandler/ImgLayout";
+import { Center, Stack } from "@mantine/core";
 //Own components
 import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
-
+import { TextShell }     from "core/components";
 
 const Mod54 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText = "";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 52px; font-family: TAN-MERINGUE;'>TOSCANA</span></p>";
 
 	return (
-		<Flex
-			pt="8%"
-			// pb="8%"
-			w="100%"
-			h="100%"
-			align="flex-end"
-			gap="0.5em"
-			direction="column"
-		>
+		<Center w="100%" h="100%">
 			<Stack
-				spacing="0.4em"
-				w="59%"
-				h="88%"
+				w="70%"
+				p="0%"
+				pt="0%"
+				pb="0%"
 			>
-				<Stack mr="10%">
-					<Text
-						align="right"
-						type="h1"
-						sheetNo={sheetNo}
-						data={textInsertion(data?.text[0], defaultText, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-					/>
-				</Stack>
-				<Stack w="100%" h="100%">
-					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
-						sheetNo={sheetNo}
-						imageNo={0}
-						urlImage={data?.photos[0] ?? {}}
-					/>
-				</Stack>
-				<Stack mr="40%" mt="9%">
-					<Text
-						align="left"
-						type="h5"
-						sheetNo={sheetNo}
-						data={textInsertion(data?.text[1], defaultText, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-					/>
-				</Stack>
+				<Text
+					sizes={{
+						"chico"   : "50px",
+						"regular" : "52px",
+						"grande"  : "54px",
+					}}
+					sheetNo={sheetNo}
+					textShell={() => <TextShell.Title />}
+					letterSpacing="6.5px"
+					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+					isInPaginator={isInPaginator}
+					isThumbNail={isThumbNail}
+					textNo={0}
+				/>
 			</Stack>
-		</Flex>
+		</Center>
 	);
 };
 

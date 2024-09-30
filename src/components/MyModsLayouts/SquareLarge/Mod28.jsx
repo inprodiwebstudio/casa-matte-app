@@ -1,42 +1,76 @@
-import { Stack, Flex } from "@mantine/core";
+import { Stack, Group, Box } from "@mantine/core";
 //Own components
 import ImgLayout from "components/LayoutHandler/ImgLayout";
 
-const Mod28= ({data, isInWorkSpace, sheetNo}) => {
+const Mod28 = ({data, isInWorkSpace, sheetNo}) => {
 	return (
 		<Stack
 			w="100%"
 			h="100%"
-			p="34.94%"
-			pl="2.2%"
-			pr="2.2%"
+			p="2%"
 		>
-			<Flex w="100%" h="100%" gap="0.05em">
-				<Stack h="100%" w="33.33%">
-					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
-						sheetNo={sheetNo}
-						imageNo={0}
-						urlImage={data?.photos[0] ?? {}}
-					/>
-				</Stack>
-				<Stack h="100%" w="33.33%">
-					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
-						sheetNo={sheetNo}
-						imageNo={1}
-						urlImage={data?.photos[1] ?? {}}
-					/>
-				</Stack>
-				<Stack h="100%" w="33.33%">
-					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
-						sheetNo={sheetNo}
-						imageNo={2}
-						urlImage={data?.photos[2] ?? {}}
-					/>
-				</Stack>
-			</Flex>
+			<Stack
+				spacing="0.1em"
+				h="100%"
+				w="100%"
+			>
+				<Group
+					w="100%"
+					h="calc(100% / 2 - 0.05em)"
+					spacing={"0.1em"}
+				>
+					<Box
+						w="calc(30% - 0.05em)"
+						h="100%"
+					>
+						<ImgLayout
+							isInWorkSpace={isInWorkSpace}
+							sheetNo={sheetNo}
+							imageNo={0}
+							urlImage={data?.photos[0] ?? {}}
+						/>
+					</Box>
+					<Box
+						w="calc(70% - 0.05em)"
+						h="100%"
+					>
+						<ImgLayout
+							isInWorkSpace={isInWorkSpace}
+							sheetNo={sheetNo}
+							imageNo={1}
+							urlImage={data?.photos[1] ?? {}}
+						/>
+					</Box>
+				</Group>
+				<Group
+					w="100%"
+					h="calc(100% / 2 - 0.05em)"
+					spacing={"0.1em"}
+				>
+					<Box
+						w="calc(70% - 0.05em)"
+						h="100%"
+					>
+						<ImgLayout
+							isInWorkSpace={isInWorkSpace}
+							sheetNo={sheetNo}
+							imageNo={2}
+							urlImage={data?.photos[2] ?? {}}
+						/>
+					</Box>
+					<Box
+						w="calc(30% - 0.05em)"
+						h="100%"
+					>
+						<ImgLayout
+							isInWorkSpace={isInWorkSpace}
+							sheetNo={sheetNo}
+							imageNo={3}
+							urlImage={data?.photos[3] ?? {}}
+						/>
+					</Box>
+				</Group>
+			</Stack>
 		</Stack>
 	);
 };

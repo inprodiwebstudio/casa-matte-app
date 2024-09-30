@@ -1,11 +1,14 @@
 import {Stack, Flex, Center } from "@mantine/core";
 //Own components
 import Text              from "components/LayoutHandler/Text";
+import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 46px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+
+	const defaulSubtTitle = "<p style='text-align: center;'><span style='font-size: 20px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>";
 
 	return (
 		<Flex
@@ -16,7 +19,7 @@ const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			align="flex-end"
 		>
 			<Center w="100%" h="100%">
-				<Stack spacing="0.04em" w="100%">
+				<Stack spacing="0.05em" w="100%">
 					<div
 						style={{
 							width        : "100%",
@@ -26,8 +29,14 @@ const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					 }}
 					>
 						<Text
-							type="h1"
+							sizes={{
+								"chico"   : "42px",
+								"regular" : "46px",
+								"grande"  : "48px",
+							}}
 							sheetNo={sheetNo}
+							letterSpacing="6px"
+							textShell={() => <TextShell.Title />}
 							data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
@@ -40,9 +49,15 @@ const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							paddingRight : "20%",
 						}}>
 						<Text
-							type="h5"
+							sizes={{
+								"chico"   : "18px",
+								"regular" : "20px",
+								"grande"  : "22px",
+							}}
 							sheetNo={sheetNo}
-							data={textInsertion(data?.text[1], defaultText01, isInWorkSpace)}
+							letterSpacing="2px"
+							textShell={() => <TextShell.SubTitle />}
+							data={textInsertion(data?.text[1], defaulSubtTitle, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
 						/>
