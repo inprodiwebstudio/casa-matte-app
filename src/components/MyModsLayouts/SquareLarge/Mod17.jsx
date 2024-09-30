@@ -7,9 +7,9 @@ const Mod17 = ({data, isInWorkSpace, sheetNo}) => {
 		<Stack
 			w="100%"
 			h="100%"
-			pt="34%"
-			pb="34%"
-			p="2%"
+			pt="23%"
+			pb="23%"
+			p="15%"
 		>
 			<Group
 				spacing="0.1em"
@@ -17,8 +17,8 @@ const Mod17 = ({data, isInWorkSpace, sheetNo}) => {
 				h="100%"
 			>
 				<Box
-					w="calc(100% / 3 - 0.067em)"
-					h={"100%"}
+					w="calc(100% / 2 - 0.05em)"
+					h="100%"
 				>
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
@@ -28,25 +28,14 @@ const Mod17 = ({data, isInWorkSpace, sheetNo}) => {
 					/>
 				</Box>
 				<Box
-					w="calc(100% / 3 - 0.067em)"
-					h={"100%"}
+					w="calc(100% / 2 - 0.05em)"
+					h="100%"
 				>
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={1}
 						urlImage={data?.photos[1] ?? {}}
-					/>
-				</Box>
-				<Box
-					w="calc(100% / 3 - 0.067em)"
-					h={"100%"}
-				>
-					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
-						sheetNo={sheetNo}
-						imageNo={2}
-						urlImage={data?.photos[2] ?? {}}
 					/>
 				</Box>
 			</Group>

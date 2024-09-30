@@ -7,21 +7,32 @@ const Mod27 = ({data, isInWorkSpace, sheetNo}) => {
 		<Stack
 			w="100%"
 			h="100%"
-			p="2%"
+			p="5%"
 		>
-			<Stack
+			<Group
 				spacing="0.1em"
 				h="100%"
 				w="100%"
 			>
-				<Group
-					w="100%"
-					h="calc(100% / 2 - 0.05em)"
+				<Box
+					w="calc(70% - 0.05em)"
+					h="100%"
+				>
+					<ImgLayout
+						isInWorkSpace={isInWorkSpace}
+						sheetNo={sheetNo}
+						imageNo={2}
+						urlImage={data?.photos[2] ?? {}}
+					/>
+				</Box>
+				<Stack
+					w="calc(30% - 0.05em)"
+					h="100%"
 					spacing={"0.1em"}
 				>
 					<Box
-						w="calc(30% - 0.05em)"
-						h="100%"
+						w="100%"
+						h="calc(100% / 2 - 0.05em)"
 					>
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
@@ -31,8 +42,8 @@ const Mod27 = ({data, isInWorkSpace, sheetNo}) => {
 						/>
 					</Box>
 					<Box
-						w="calc(70% - 0.05em)"
-						h="100%"
+						w="100%"
+						h="calc(100% / 2 - 0.05em)"
 					>
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
@@ -41,36 +52,8 @@ const Mod27 = ({data, isInWorkSpace, sheetNo}) => {
 							urlImage={data?.photos[1] ?? {}}
 						/>
 					</Box>
-				</Group>
-				<Group
-					w="100%"
-					h="calc(50% - 0.05em)"
-					spacing={"0.1em"}
-				>
-					<Box
-						w="calc(70% - 0.05em)"
-						h="100%"
-					>
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={2}
-							urlImage={data?.photos[2] ?? {}}
-						/>
-					</Box>
-					<Box
-						w="calc(30% - 0.05em)"
-						h="100%"
-					>
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={3}
-							urlImage={data?.photos[3] ?? {}}
-						/>
-					</Box>
-				</Group>
-			</Stack>
+				</Stack>
+			</Group>
 		</Stack>
 	);
 };

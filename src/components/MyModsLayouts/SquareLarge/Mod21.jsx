@@ -8,30 +8,22 @@ const Mod21 = ({data, isInWorkSpace, sheetNo}) => {
 			w="100%"
 			h="100%"
 			p="0%"
+			pl="5%"
+			pr="5%"
 		>
 			<Stack
-				spacing="0.1em"
 				h="100%"
 				w="100%"
+				pt="30%"
+				pb="30%"
 			>
-				<Box
-					w="100%"
-					h="calc(100% / 2 - 0.05em)"
-				>
-					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
-						sheetNo={sheetNo}
-						imageNo={0}
-						urlImage={data?.photos[0] ?? {}}
-					/>
-				</Box>
 				<Group
 					w="100%"
-					h="calc(100% / 2 - 0.05em)"
+					h="100%"
 					spacing={"0.1em"}
 				>
 					<Box
-						w="calc(100% / 2 - 0.05em)"
+						w="calc(70% - 0.05em)"
 						h="100%"
 					>
 						<ImgLayout
@@ -42,7 +34,7 @@ const Mod21 = ({data, isInWorkSpace, sheetNo}) => {
 						/>
 					</Box>
 					<Box
-						w="calc(100% / 2 - 0.05em)"
+						w="calc(30% - 0.05em)"
 						h="100%"
 					>
 						<ImgLayout

@@ -16,7 +16,7 @@ const Mod31 = ({data, isInWorkSpace, sheetNo}) => {
 			>
 				<Group
 					w="100%"
-					h="calc(100% / 2 - 0.05em)"
+					h="calc(35% - 0.05em)"
 					spacing={"0.1em"}
 				>
 					<Box
@@ -53,34 +53,17 @@ const Mod31 = ({data, isInWorkSpace, sheetNo}) => {
 						/>
 					</Box>
 				</Group>
-				<Group
-					spacing={"0.1em"}
-					h="calc(100% / 2 - 0.05em)"
+				<Box
 					w="100%"
+					h="calc(67% - 0.05em)"
 				>
-					<Box
-						w="calc(100% / 2 - 0.05em)"
-						h="100%"
-					>
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={3}
-							urlImage={data?.photos[3] ?? {}}
-						/>
-					</Box>
-					<Box
-						w="calc(100% / 2 - 0.05em)"
-						h="100%"
-					>
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={4}
-							urlImage={data?.photos[4] ?? {}}
-						/>
-					</Box>
-				</Group>
+					<ImgLayout
+						isInWorkSpace={isInWorkSpace}
+						sheetNo={sheetNo}
+						imageNo={3}
+						urlImage={data?.photos[3] ?? {}}
+					/>
+				</Box>
 			</Stack>
 		</Stack>
 	);

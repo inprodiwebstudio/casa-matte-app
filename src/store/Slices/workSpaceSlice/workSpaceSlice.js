@@ -502,7 +502,7 @@ export const workSpaceSlice = createSlice({
 					case "grande-vertical":
 						return ["FrontLayout"].includes(payload.layout);
 					case "grande-cuadrado" :
-						return ["Mod6", "Mod7", "FrontLayout"].includes(payload.layout);
+						return ["FrontLayout"].includes(payload.layout);
 				}
 			};
 			const isAvailableDoublePage = cloneData.pages[payload.pageId]?.["sheet2"];

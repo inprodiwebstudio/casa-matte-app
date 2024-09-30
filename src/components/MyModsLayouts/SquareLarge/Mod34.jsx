@@ -9,19 +9,30 @@ const Mod34 = ({data, isInWorkSpace, sheetNo}) => {
 			h="100%"
 			p="2%"
 		>
-			<Stack
+			<Group
 				spacing="0.1em"
 				h="100%"
 				w="100%"
 			>
+				<Box
+					h="100%"
+					w="calc(65% - 0.05em)"
+				>
+					<ImgLayout
+						isInWorkSpace={isInWorkSpace}
+						sheetNo={sheetNo}
+						imageNo={3}
+						urlImage={data?.photos[3] ?? {}}
+					/>
+				</Box>
 				<Group
+					h="100%"
+					w="calc(35% - 0.05em)"
 					spacing={"0.1em"}
-					h="calc(100% / 2 - 0.05em)"
-					w="100%"
 				>
 					<Box
-						w="calc(66.7% - 0.05em)"
-						h="100%"
+						h="calc(100% / 3 - 0.067em)"
+						w="100%"
 					>
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
@@ -31,8 +42,8 @@ const Mod34 = ({data, isInWorkSpace, sheetNo}) => {
 						/>
 					</Box>
 					<Box
-						w="calc(33.3% - 0.05em)"
-						h="100%"
+						h="calc(100% / 3 - 0.067em)"
+						w="100%"
 					>
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
@@ -41,18 +52,9 @@ const Mod34 = ({data, isInWorkSpace, sheetNo}) => {
 							urlImage={data?.photos[1] ?? {}}
 						/>
 					</Box>
-				</Group>
-				<Group
-					w="100%"
-					h="calc(100% / 2 - 0.05em)"
-					spacing={"0.1em"}
-					sx={{
-						display : "flex",
-					}}
-				>
 					<Box
-						w="calc(100% / 3 - 0.067em)"
-						h="100%"
+						h="calc(100% / 3 - 0.067em)"
+						w="100%"
 					>
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
@@ -61,30 +63,8 @@ const Mod34 = ({data, isInWorkSpace, sheetNo}) => {
 							urlImage={data?.photos[2] ?? {}}
 						/>
 					</Box>
-					<Box
-						w="calc(100% / 3 - 0.067em)"
-						h="100%"
-					>
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={3}
-							urlImage={data?.photos[3] ?? {}}
-						/>
-					</Box>
-					<Box
-						w="calc(100% / 3 - 0.067em)"
-						h="100%"
-					>
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={4}
-							urlImage={data?.photos[4] ?? {}}
-						/>
-					</Box>
 				</Group>
-			</Stack>
+			</Group>
 		</Stack>
 	);
 };

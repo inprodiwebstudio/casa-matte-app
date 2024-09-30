@@ -7,53 +7,38 @@ const Mod18 = ({data, isInWorkSpace, sheetNo}) => {
 		<Stack
 			w="100%"
 			h="100%"
-			p="2%"
+			pl="5%"
+			pr="5%"
+			p="27.7%"
 		>
-			<Stack
+			<Group
 				spacing="0.1em"
-				h="100%"
 				w="100%"
+				h={"100%"}
 			>
-				<Group
-					w="100%"
-					h="calc(100% / 2 - 0.05em)"
-					spacing={"0.1em"}
-				>
-					<Box
-						w="calc(100% / 2 - 0.05em)"
-						h="100%"
-					>
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={0}
-							urlImage={data?.photos[0] ?? {}}
-						/>
-					</Box>
-					<Box
-						w="calc(100% / 2 - 0.05em)"
-						h="100%"
-					>
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={1}
-							urlImage={data?.photos[1] ?? {}}
-						/>
-					</Box>
-				</Group>
 				<Box
-					w="100%"
-					h="calc(100% / 2 - 0.05em)"
+					w="calc(100% / 2 - 0.05em)"
+					h="100%"
 				>
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
-						imageNo={2}
-						urlImage={data?.photos[2] ?? {}}
+						imageNo={0}
+						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Box>
-			</Stack>
+				<Box
+					w="calc(100% / 2 - 0.05em)"
+					h="100%"
+				>
+					<ImgLayout
+						isInWorkSpace={isInWorkSpace}
+						sheetNo={sheetNo}
+						imageNo={1}
+						urlImage={data?.photos[1] ?? {}}
+					/>
+				</Box>
+			</Group>
 		</Stack>
 	);
 };

@@ -1,4 +1,4 @@
-import { Box, Group, Stack } from "@mantine/core";
+import { Box, Stack } from "@mantine/core";
 //Own components
 import ImgLayout from "components/LayoutHandler/ImgLayout";
 
@@ -7,17 +7,18 @@ const Mod14 = ({data, isInWorkSpace, sheetNo}) => {
 		<Stack
 			w="100%"
 			h="100%"
-			pt="25%"
-			pb="25%"
+			pl="25%"
+			pr="25%"
+			p="20%"
 		>
-			<Group
+			<Stack
 				spacing="0.1em"
 				w="100%"
 				h={"100%"}
 			>
 				<Box
-					h={"100%"}
-					w="calc(100% / 3 - 0.067em)"
+					h="calc(100% / 2 - 0.05em)"
+					w="100%"
 				>
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
@@ -27,8 +28,8 @@ const Mod14 = ({data, isInWorkSpace, sheetNo}) => {
 					/>
 				</Box>
 				<Box
-					h={"100%"}
-					w="calc(100% / 3 - 0.067em)"
+					h="calc(100% / 2 - 0.05em)"
+					w="100%"
 				>
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
@@ -37,18 +38,7 @@ const Mod14 = ({data, isInWorkSpace, sheetNo}) => {
 						urlImage={data?.photos[1] ?? {}}
 					/>
 				</Box>
-				<Box
-					h={"100%"}
-					w="calc(100% / 3 - 0.067em)"
-				>
-					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
-						sheetNo={sheetNo}
-						imageNo={2}
-						urlImage={data?.photos[2] ?? {}}
-					/>
-				</Box>
-			</Group>
+			</Stack>
 		</Stack>
 	);
 };
