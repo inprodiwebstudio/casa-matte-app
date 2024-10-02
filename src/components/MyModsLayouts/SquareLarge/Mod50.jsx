@@ -8,17 +8,17 @@ import { textInsertion } from "helpers";
 
 const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 34px; font-family: JosefinSans-Light;'>ESPAÑA</span></p>";
+	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 34px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
-	const defaultTitle02 = "<p style='text-align: left;'><span style='font-size: 34px; font-family: JosefinSans-Light;'>FRANCIA</span></p>";
+	const defaultTitle02 = "<p style='text-align: left;'><span style='font-size: 34px; font-family: Aitana-Regular;'>FRANCIA</span></p>";
 
-	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 34px; font-family: JosefinSans-Light;'>TURQUÍA</span></p>";
+	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 34px; font-family: Aitana-Regular;'>TURQUÍA</span></p>";
 
-	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>Salamanca</span></p>";
+	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
 
-	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>París</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>Versalles</span></p>";
+	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>París</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Versalles</span></p>";
 
-	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>Capadocia</span></p>";
+	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Capadocia</span></p>";
 
 	return (
 		<Flex
@@ -32,12 +32,9 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			<Stack
 				spacing="0.35em"
 				miw="30%"
-				sx={{
-					textTransform : "uppercase",
-				}}
 			>
 				<Stack
-					spacing="0.3em"
+					spacing="0.13em"
 					aria-hidden
 				>
 					<div>
@@ -60,12 +57,12 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "18px",
-								"regular" : "20px",
-								"grande"  : "22px",
+								"chico"   : "20px",
+								"regular" : "22px",
+								"grande"  : "24px",
 							}}
 							align="left"
-							gapSpacing="20px"
+							gapSpacing="10px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.BodyIndices align="left" />}
 							data={textInsertion(data?.text[1], defaultIndice01, isInWorkSpace)}
@@ -75,7 +72,7 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					</div>
 				</Stack>
 				<Stack
-					spacing="0.3em"
+					spacing="0.13em"
 					aria-hidden
 				>
 					<div>
@@ -98,12 +95,12 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "18px",
-								"regular" : "20px",
-								"grande"  : "22px",
+								"chico"   : "12px",
+								"regular" : "14px",
+								"grande"  : "16px",
 							}}
 							align="left"
-							gapSpacing="20px"
+							gapSpacing="10px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.BodyIndices align="left" />}
 							data={textInsertion(data?.text[6], defaultIndice02, isInWorkSpace)}
@@ -114,7 +111,7 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				</Stack>
 				<Stack
 					mah="70%"
-					spacing="0.3em"
+					spacing="0.13em"
 				>
 					<div>
 						<Text
@@ -136,12 +133,12 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "18px",
-								"regular" : "20px",
-								"grande"  : "22px",
+								"chico"   : "12px",
+								"regular" : "14px",
+								"grande"  : "16px",
 							}}
 							align="left"
-							gapSpacing="20px"
+							gapSpacing="10px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.BodyIndices align="left" />}
 							data={textInsertion(data?.text[6], defaultIndice03, isInWorkSpace)}

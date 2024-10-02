@@ -1,37 +1,45 @@
-import { Center, Stack } from "@mantine/core";
+import {Stack, Flex } from "@mantine/core";
 //Own components
 import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
+
 const Mod54 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 52px; font-family: TAN-MERINGUE;'>TOSCANA</span></p>";
+	const defaultIndices = "<p style='text-align: center;'><span style='font-size: 20px; font-family: Inter-Lifght;'>FLORENCIA</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Inter-Lifght;'>ORVIETTO</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Inter-Lifght;'>MONTALCINO</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Inter-Lifght;'>PIENZA</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Inter-Lifght;'>Smithfeld</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Inter-Lifght;'>SIENNA</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Inter-Lifght;'>BAGNO VIGNIONI</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Inter-Lifght;'>SAN GIMINIANO</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Inter-Lifght;'>MONTEPULCIANO</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Inter-Lifght;'>ANTINORI</span></p>";
 
 	return (
-		<Center w="100%" h="100%">
+		<Flex
+			p="10%"
+			w="100%"
+			h="100%"
+			justify="center"
+			align="center"
+		>
 			<Stack
-				w="70%"
-				p="0%"
-				pt="0%"
-				pb="0%"
+				sx={{overflow : "hidden", textTransform : "uppercase"}}
+				maw="60%"
+				miw="30%"
+				mah="70%"
 			>
 				<Text
 					sizes={{
-						"chico"   : "50px",
-						"regular" : "52px",
-						"grande"  : "54px",
+						"chico"   : "18px",
+						"regular" : "20px",
+						"grande"  : "22px",
 					}}
+					align="center"
+					gapSpacing="25px"
 					sheetNo={sheetNo}
-					textShell={() => <TextShell.Title />}
-					letterSpacing="6.5px"
-					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+					letterSpacing="3px"
+					textShell={() => <TextShell.BodyIndices align="center" />}
+					data={textInsertion(data?.text[1], defaultIndices, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}
-					textNo={0}
 				/>
 			</Stack>
-		</Center>
+		</Flex>
 	);
 };
 

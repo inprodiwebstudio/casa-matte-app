@@ -8,21 +8,21 @@ import { textInsertion } from "helpers";
 
 const Mod56 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 46px; font-family: JosefinSans-Regular;'>SANTIAGO</span></p>";
+	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 46px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
 
 	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 22px; font-family: Inter-Lifght;'>CHILE</span></p>";
 
 	return (
 		<Flex
-			pt="8%"
-			pb="8%"
+			p="8%"
+			pl="4%"
+			pr="4%"
 			w="100%"
 			h="100%"
 			justify="center"
 			align="center"
 			gap="0.5em"
 			direction="column"
-			sx={{textTransform : "uppercase"}}
 		>
 			<Stack
 				spacing="0.07em"

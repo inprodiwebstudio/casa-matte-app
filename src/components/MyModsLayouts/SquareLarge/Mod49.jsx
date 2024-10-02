@@ -1,152 +1,69 @@
-import { Flex, Stack } from "@mantine/core";
-import DividerLayout   from "components/LayoutHandler/DividerLayout";
+import { Flex, Stack, Center } from "@mantine/core";
 //Own components
 import Text              from "components/LayoutHandler/Text";
-import { TextShell }     from "core/components";
+import DividerLayout     from "components/LayoutHandler/DividerLayout";
 import { textInsertion } from "helpers";
+import { TextShell }     from "core/components";
 
 
 const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 34px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 46px; font-family: JosefinSans-Light;'>JAPÓN</span></p>";
 
-	const defaultTitle02 = "<p style='text-align: left;'><span style='font-size: 34px; font-family: Aitana-Regular;'>FRANCIA</span></p>";
-
-	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 34px; font-family: Aitana-Regular;'>TURQUÍA</span></p>";
-
-	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
-
-	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>París</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Versalles</span></p>";
-
-	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Capadocia</span></p>";
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>TOKIO</span></p><p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>KAMAKURA</span></p><p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>KIOTO</span></p><p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>NARA</span></p><p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>NAOSHIMA</span></p>";
 
 	return (
 		<Flex
+			p="8%"
 			w="100%"
 			h="100%"
 			justify="center"
 			align="center"
-			direction="column"
-			sx={{overflow : "hidden"}}
 		>
 			<Stack
-				spacing="0.35em"
-				miw="30%"
+				w="50%"
+				mah="80%"
+				spacing="0.5em"
+				aria-hidden
+				sx={{
+					overflow : "hidden",
+				}}
 			>
 				<Stack
-					spacing="0.13em"
-					aria-hidden
+					spacing="0.5em"
+					w="100%"
 				>
-					<div>
-						<Text
-							sizes={{
-								"chico"   : "32px",
-								"regular" : "34px",
-								"grande"  : "36px",
-							}}
-							align="left"
-							letterSpacing="3px"
-							sheetNo={sheetNo}
-							textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
-							data={textInsertion(data?.text[0], defaultTitle01, isInWorkSpace)}
-							isInPaginator={isInPaginator}
-							isThumbNail={isThumbNail}
-						/>
-					</div>
-					<DividerLayout long="0.3em" position="h" />
-					<div>
-						<Text
-							sizes={{
-								"chico"   : "20px",
-								"regular" : "22px",
-								"grande"  : "24px",
-							}}
-							align="left"
-							gapSpacing="10px"
-							sheetNo={sheetNo}
-							textShell={() => <TextShell.BodyIndices align="left" />}
-							data={textInsertion(data?.text[1], defaultIndice01, isInWorkSpace)}
-							isInPaginator={isInPaginator}
-							isThumbNail={isThumbNail}
-						/>
-					</div>
+					<Text
+						sizes={{
+							"chico"   : "42px",
+							"regular" : "46px",
+							"grande"  : "48px",
+						}}
+						letterSpacing="5px"
+						sheetNo={sheetNo}
+						textShell={() => <TextShell.Title width="100%" align="left" />}
+						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+					/>
+					<Center>
+						<DividerLayout long="0.3em" position="h" />
+					</Center>
 				</Stack>
-				<Stack
-					spacing="0.13em"
-					aria-hidden
-				>
-					<div>
-						<Text
-							sizes={{
-								"chico"   : "22px",
-								"regular" : "24px",
-								"grande"  : "26px",
-							}}
-							align="left"
-							letterSpacing="3px"
-							sheetNo={sheetNo}
-							textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
-							data={textInsertion(data?.text[5], defaultTitle02, isInWorkSpace)}
-							isInPaginator={isInPaginator}
-							isThumbNail={isThumbNail}
-						/>
-					</div>
-					<DividerLayout long="0.3em" position="h" />
-					<div>
-						<Text
-							sizes={{
-								"chico"   : "12px",
-								"regular" : "14px",
-								"grande"  : "16px",
-							}}
-							align="left"
-							gapSpacing="10px"
-							sheetNo={sheetNo}
-							textShell={() => <TextShell.BodyIndices align="left" />}
-							data={textInsertion(data?.text[6], defaultIndice02, isInWorkSpace)}
-							isInPaginator={isInPaginator}
-							isThumbNail={isThumbNail}
-						/>
-					</div>
-				</Stack>
-				<Stack
-					mah="70%"
-					spacing="0.13em"
-				>
-					<div>
-						<Text
-							sizes={{
-								"chico"   : "22px",
-								"regular" : "24px",
-								"grande"  : "26px",
-							}}
-							align="left"
-							letterSpacing="3px"
-							sheetNo={sheetNo}
-							textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
-							data={textInsertion(data?.text[5], defaultTitle03, isInWorkSpace)}
-							isInPaginator={isInPaginator}
-							isThumbNail={isThumbNail}
-						/>
-					</div>
-					<DividerLayout long="0.3em" position="h" />
-					<div>
-						<Text
-							sizes={{
-								"chico"   : "12px",
-								"regular" : "14px",
-								"grande"  : "16px",
-							}}
-							align="left"
-							gapSpacing="10px"
-							sheetNo={sheetNo}
-							textShell={() => <TextShell.BodyIndices align="left" />}
-							data={textInsertion(data?.text[6], defaultIndice03, isInWorkSpace)}
-							isInPaginator={isInPaginator}
-							isThumbNail={isThumbNail}
-						/>
-					</div>
-				</Stack>
+				<Text
+					sizes={{
+						"chico"   : "20px",
+						"regular" : "22px",
+						"grande"  : "24px",
+					}}
+					align="center"
+					sheetNo={sheetNo}
+					gapSpacing="35px"
+					textShell={() => <TextShell.BodyIndices align="center" />}
+					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+					isInPaginator={isInPaginator}
+					isThumbNail={isThumbNail}
+				/>
 			</Stack>
 		</Flex>
 	);

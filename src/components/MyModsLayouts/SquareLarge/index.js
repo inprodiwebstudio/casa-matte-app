@@ -57,6 +57,8 @@ import Mod55 from "./Mod55";
 import Mod56 from "./Mod56";
 import Mod57 from "./Mod57";
 import Mod58 from "./Mod58";
+import Mod59 from "./Mod59";
+
 
 const SquareLarge = {
 	Mod1 : {
@@ -387,7 +389,7 @@ const SquareLarge = {
 		id           : "Mod46",
 		layout       : Mod46,
 		numberPhotos : 0,
-		numberText   : 2,
+		numberText   : 3,
 		cat          : "texto",
 		pdfLayout    : "",
 	},
@@ -411,7 +413,7 @@ const SquareLarge = {
 		id           : "Mod49",
 		layout       : Mod49,
 		numberPhotos : 0,
-		numberText   : 6,
+		numberText   : 2,
 		cat          : "texto",
 		pdfLayout    : "",
 	},
@@ -427,7 +429,7 @@ const SquareLarge = {
 		id           : "Mod51",
 		layout       : Mod51,
 		numberPhotos : 0,
-		numberText   : 2,
+		numberText   : 6,
 		cat          : "texto",
 		pdfLayout    : "",
 	},
@@ -443,7 +445,7 @@ const SquareLarge = {
 		id           : "Mod53",
 		layout       : Mod53,
 		numberPhotos : 0,
-		numberText   : 1,
+		numberText   : 2,
 		cat          : "texto",
 		pdfLayout    : "",
 	},
@@ -458,9 +460,9 @@ const SquareLarge = {
 	Mod55 : {
 		id           : "Mod55",
 		layout       : Mod55,
-		numberPhotos : 1,
-		numberText   : 2,
-		cat          : "fotosytexto",
+		numberPhotos : 0,
+		numberText   : 1,
+		cat          : "texto",
 		pdfLayout    : "",
 	},
 	Mod56 : {
@@ -482,6 +484,14 @@ const SquareLarge = {
 	Mod58 : {
 		id           : "Mod58",
 		layout       : Mod58,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "fotosytexto",
+		pdfLayout    : "",
+	},
+	Mod59 : {
+		id           : "Mod59",
+		layout       : Mod59,
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "fotosytexto",

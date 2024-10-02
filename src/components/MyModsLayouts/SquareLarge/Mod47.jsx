@@ -1,17 +1,15 @@
-import { Flex, Stack, Center } from "@mantine/core";
+import { Flex, Stack } from "@mantine/core";
 //Own components
 import Text              from "components/LayoutHandler/Text";
-import DividerLayout     from "components/LayoutHandler/DividerLayout";
-import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
+import { textInsertion } from "helpers";
 
 
 const Mod47 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 46px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>MARÍA:</span></p>";
 
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Spectral-Light-Italic;'>Toledo</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
-
+	const defaultText02 = "<p style='text-align: justify;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam.</span></p><p style='text-align: justify;'><span style='font-size: 18px; font-family: JosefinSans-Light;'></span></p><p style='text-align: justify;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Erri, furo, P. Ullatas treviri strae ta, delaris plinatum morunum sulatum sum esum Patum consulocaes consil hilium intemqu itesusces liis, nonsupiorum adhuiuscero eliis aus comnequam facips, num vere aridien terum. Catem. Sim ore poporisse forum ner uri ponlocu picatam me etortes tilius actuam pra? Mei sename auconum prorei ina, credica ad sedicatat. Unum acrenihiciam inte adducon suspionsulis cupiese strionsum, probse cotiae crem immorimus virmilius cotem tus, cont. Catum, vivir locaecre de tum aut que num sesidet erficonihi, conte detil verdis.</span></p><p style='text-align: justify;'><span style='font-size: 18px; font-family: JosefinSans-Light;'></span></p><p style='text-align: justify;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Averfic iverica elium, C. Vere, quo iu vissen des Catidie inte consilia atia es convent erternum etre crena, intrum, clute et? Os, uro C. Ifessedeo, clus proxime mo virisqua tum que ne milicortius, supicaet niquium inicula videt omprit.</span></p>";
 
 	return (
 		<Flex
@@ -22,45 +20,36 @@ const Mod47 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			align="center"
 		>
 			<Stack
-				w="50%"
-				mah="80%"
-				spacing="0.3em"
+				w="80%"
+				mah="90%"
+				spacing="0.2em"
 				aria-hidden
-				sx={{
-					overflow : "hidden",
-				}}
+				style={{overflow : "hidden"}}
 			>
-				<Stack
-					spacing="0.3em"
-					w="100%"
-				>
-					<Text
-						sizes={{
-							"chico"   : "42px",
-							"regular" : "46px",
-							"grande"  : "48px",
-						}}
-						letterSpacing="5px"
-						sheetNo={sheetNo}
-						textShell={() => <TextShell.Title width="100%" align="center" />}
-						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-					/>
-					<Center>
-						<DividerLayout long="0.4em" position="v" />
-					</Center>
-				</Stack>
 				<Text
 					sizes={{
-						"chico"   : "20px",
-						"regular" : "22px",
-						"grande"  : "24px",
+						"chico"   : "28px",
+						"regular" : "30px",
+						"grande"  : "32px",
 					}}
-					align="center"
+					letterSpacing="3px"
+					align="left"
 					sheetNo={sheetNo}
-					gapSpacing="12px"
-					textShell={() => <TextShell.BodyIndices align="center" />}
+					textShell={() => <TextShell.SubTitle width="50%" align="flex-start" />}
+					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+					isInPaginator={isInPaginator}
+					isThumbNail={isThumbNail}
+				/>
+				<Text
+					sizes={{
+						"chico"   : "16px",
+						"regular" : "18px",
+						"grande"  : "20px",
+					}}
+					align="justify"
+					lineHeight="26px"
+					sheetNo={sheetNo}
+					textShell={() => <TextShell.BodyParagraph align="flex-start" />}
 					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}

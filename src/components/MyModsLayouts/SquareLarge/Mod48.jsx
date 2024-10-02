@@ -8,9 +8,10 @@ import { TextShell }     from "core/components";
 
 const Mod48 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 46px; font-family: JosefinSans-Light;'>JAPÓN</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 46px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>TOKIO</span></p><p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>KAMAKURA</span></p><p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>KIOTO</span></p><p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>NARA</span></p><p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>NAOSHIMA</span></p>";
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Spectral-Light-Italic;'>Toledo</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
+
 
 	return (
 		<Flex
@@ -23,14 +24,14 @@ const Mod48 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			<Stack
 				w="50%"
 				mah="80%"
-				spacing="0.5em"
+				spacing="0.3em"
 				aria-hidden
 				sx={{
 					overflow : "hidden",
 				}}
 			>
 				<Stack
-					spacing="0.5em"
+					spacing="0.3em"
 					w="100%"
 				>
 					<Text
@@ -41,13 +42,13 @@ const Mod48 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						}}
 						letterSpacing="5px"
 						sheetNo={sheetNo}
-						textShell={() => <TextShell.Title width="100%" align="left" />}
+						textShell={() => <TextShell.Title width="100%" align="center" />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 					/>
 					<Center>
-						<DividerLayout long="0.3em" position="h" />
+						<DividerLayout long="0.4em" position="v" />
 					</Center>
 				</Stack>
 				<Text
@@ -58,7 +59,7 @@ const Mod48 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					}}
 					align="center"
 					sheetNo={sheetNo}
-					gapSpacing="35px"
+					gapSpacing="12px"
 					textShell={() => <TextShell.BodyIndices align="center" />}
 					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 					isInPaginator={isInPaginator}

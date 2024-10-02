@@ -6,11 +6,11 @@ import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
 
-const Mod51 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod52 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultTitle = "<p style='text-align: left;'><span style='font-size: 34px; font-family: JosefinSans-Light;'>TOSCANA</span></p>";
+	const defaultTitle = "<p style='text-align: left;'><span style='font-size: 34px; font-family: Aitana-Regular;'>VIRGINIA</span></p>";
 
-	const defaultIndices = "<p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>FLORENCIA</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>ORVIETTO</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>MONTALCINO</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>PIENZA</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>Smithfeld</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>SIENNA</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>BAGNO VIGNIONI</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>SAN GIMINIANO</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>MONTEPULCIANO</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>ANTINORI</span></p>";
+	const defaultIndices = "<p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Colonial Williamsburg</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>William & Mary University</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>The Capitol</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Jamestown</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Smithfeld</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Chepokee Plantation</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Waller Mill Park</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Richmond</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Ford’s Colony</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>St. Andrew’s</span></p>";
 
 	return (
 		<Flex
@@ -22,7 +22,7 @@ const Mod51 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 		>
 			<Stack
 				spacing="0.4em"
-				sx={{overflow : "hidden", textTransform : "uppercase"}}
+				sx={{overflow : "hidden"}}
 				maw="60%"
 				miw="30%"
 			>
@@ -47,14 +47,13 @@ const Mod51 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				</Stack>
 				<Text
 					sizes={{
-						"chico"   : "18px",
-						"regular" : "20px",
-						"grande"  : "22px",
+						"chico"   : "20px",
+						"regular" : "22px",
+						"grande"  : "24px",
 					}}
 					align="left"
-					gapSpacing="25px"
+					gapSpacing="20px"
 					sheetNo={sheetNo}
-					letterSpacing="3px"
 					textShell={() => <TextShell.BodyIndices align="left" />}
 					data={textInsertion(data?.text[1], defaultIndices, isInWorkSpace)}
 					isInPaginator={isInPaginator}
@@ -65,4 +64,4 @@ const Mod51 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 	);
 };
 
-export default Mod51;
+export default Mod52;
