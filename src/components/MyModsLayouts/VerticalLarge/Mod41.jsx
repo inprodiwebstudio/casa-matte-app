@@ -21,9 +21,12 @@ const Mod44 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 		>
 			<Stack
 				w="57%"
-				mah="70%"
+				mah="75%"
 				spacing="0.15em"
 				aria-hidden
+				sx={{
+					overflow : "hidden !important",
+				}}
 			>
 				<Flex
 					direction="column"
@@ -49,6 +52,9 @@ const Mod44 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				<Flex
 					justify="flex-start"
 					direction="column"
+					sx={{
+						overflow : "hidden !important",
+					}}
 				>
 					<Text
 						sizes={{

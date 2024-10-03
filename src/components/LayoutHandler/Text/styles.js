@@ -16,6 +16,7 @@ const useStyles = createStyles((theme, { size, gapSpacing, lineHeight, letterSpa
 			gap           : gapSpacing,
 			lineHeight    : lineHeight ?? "auto",
 			letterSpacing : letterSpacing ?? "0.6px !important",
+			overflow      : "hidden",
 		},
 
 		"& .ck.ck-editor__editable_inline > *:last-child" : {
