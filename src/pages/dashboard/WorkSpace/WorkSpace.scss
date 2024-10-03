@@ -70,12 +70,11 @@
 		z-index: 2;
 		position: absolute;
 		display: flex;
-		gap : 15px;
-		font-size: 12px;
+		gap : 30px;
 		font-weight: 300;
 		width: fit-content;
-		top : 30px;
-		left : 250px;
+		top : 38px;
+		left : 230px;
 
 		.action-styled {
 			height: fit-content;
@@ -103,10 +102,11 @@
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
+
+			font-size: 10px;
 			
 			.actionLabel {
-				font-weight: 500;
-				font-size: 9px;
+				font-size: 10px;
 			}
 		}
 	}
@@ -205,7 +205,8 @@
 			}
 
 			@include laptop {
-				transform: scale(0.44, 0.44);
+				transform: scale(0.45, 0.45);
+				margin-right: 42.5px;
 				z-index: 1;
 			}
 

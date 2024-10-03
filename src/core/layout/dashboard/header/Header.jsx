@@ -45,8 +45,8 @@ const Header = () => {
 
 	return (
 		<div className="Header">
-			<div className="body-container">
-				<img src={LogoCasaMatte} width={150} />
+			<div className={`body-container ${isPreviewActive && "isActivePreview"}`}>
+				<img src={LogoCasaMatte} width={120} />
 				<div className="title-container">
 					<div>WHITE PHOTOBOOK</div>
 					<div>/</div>
@@ -57,7 +57,7 @@ const Header = () => {
 							variant="unstyled"
 							defaultValue="PROYECTO 01"
 							sx={{
-								fontSize   : "24px",
+								fontSize   : "14px",
 								fontWeight : "400",
 							}}
 						/>
@@ -67,7 +67,7 @@ const Header = () => {
 					<div
 						style={{
 							textTransform : "uppercase",
-							fontSize      : "11px",
+							fontSize      : "10px",
 						}}
 					>
 						{dayjs(date).format("DD [de] MMMM, YYYY, hh:mm A")}
