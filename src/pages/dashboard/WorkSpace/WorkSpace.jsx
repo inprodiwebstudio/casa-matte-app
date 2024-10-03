@@ -21,6 +21,7 @@ const WorkSpace = () => {
 	const workSpaceData = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
 	const workSpaceFrontPage = useSelector((state) => state.workSpaceSlice.data?.frontPage, shallowEqual);
 	const workSpaceFormatPage = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
+	const workSpaceSizePage = useSelector((state) => state.workSpaceSlice.data?.sizePhotoBook, shallowEqual);
 	const workSpaceHistory = useSelector((state) => state.workSpaceSlice.history, shallowEqual);
 	const isLoggin = useSelector((state) => state.authSlice.loggedIn, shallowEqual);
 	const isLoading = useSelector((state) => state.workSpaceSlice?.loading, shallowEqual);
@@ -61,7 +62,7 @@ const WorkSpace = () => {
 					{
 						convertToArray({"FrontLayout" : {...workSpaceFrontPage}, ...workSpaceData}).map((page, index) => (
 							<div className="photoBookContainer" key={index}>
-								<div className="pagesPreviewPhotoBook">
+								<div className={`pagesPreviewPhotoBook ${workSpaceFormatPage}-${workSpaceSizePage}-preview`}>
 									<BookPages
 										isInWorkSpcae={true}
 										loading={isLoading}
@@ -106,7 +107,7 @@ const WorkSpace = () => {
 								</div>
 							</div>
 						</div>
-						<div className={`ghost-canva ${workSpaceFormatPage}-workSpace`}>
+						<div className={`ghost-canva ${workSpaceFormatPage}-${workSpaceSizePage}-workSpace`}>
 							<BookPages
 								isInWorkSpcae={true}
 								loading={isLoading}

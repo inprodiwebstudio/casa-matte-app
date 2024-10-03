@@ -17,11 +17,33 @@
 		justify-content: center;
 
 		.pagesPreviewPhotoBook {
-			height: 750px;
+			height: 991.6px;
 			font-size: 90px;
+			transform: scale(0.68, 0.68);
+			z-index: 1;
+
+			&.cuadrado-chico-preview {
+				transform: scale(0.68, 0.68);
+
+				@include laptop {
+					transform: scale(0.8, 0.8);
+				}
+
+				@include big-laptop {
+					transform: scale(0.8, 0.8);
+				}
+			}
+
+			&.cuadrado-grande-preview {
+				transform: scale(0.68, 0.68);
+
+				@include laptop {
+					transform: scale(0.68, 0.68);
+				}
+			}
 
 			@include laptop {
-				height: 650px;
+				transform: scale(0.65, 0.65);
 			}
 		}
 	}
@@ -125,13 +147,50 @@
 			transform: scale(0.68, 0.68);
 			z-index: 1;
 
-			&.cuadrado-workSpace {
+			&.vertical-mediano-workSpace {
+				@include laptop {
+					transform: scale(0.44, 0.44);
+					z-index: 1;
+				}
+	
+				@include big-laptop {
+					transform: scale(0.5, 0.5);
+					z-index: 1;
+				}
+	
+				@include big-tablet {
+					transform: scale(0.45, 0.45);
+					z-index: 1;
+				}
+			}
+
+			&.cuadrado-chico-workSpace {
 				transform: scale(0.6, 0.6);
 
 				@include laptop {
-					height: 700px;
+					transform: scale(0.41, 0.41);
+					z-index: 1;
+					margin-right: 45px;
+				}
+	
+				@include big-laptop {
+					transform: scale(0.50, 0.50);
+					z-index: 1;
+				}
+	
+				@include big-tablet {
 					transform: scale(0.6, 0.6);
 					z-index: 1;
+				}
+			}
+
+			&.cuadrado-grande-workSpace {
+				transform: scale(0.6, 0.6);
+
+				@include laptop {
+					transform: scale(0.41, 0.41);
+					z-index: 1;
+					margin-right: 45px;
 				}
 	
 				@include big-laptop {
@@ -146,13 +205,12 @@
 			}
 
 			@include laptop {
-				height: 700px;
-				transform: scale(0.55, 0.55);
+				transform: scale(0.44, 0.44);
 				z-index: 1;
 			}
 
 			@include big-laptop {
-				transform: scale(0.55, 0.55);
+				transform: scale(0.5, 0.5);
 				z-index: 1;
 			}
 
