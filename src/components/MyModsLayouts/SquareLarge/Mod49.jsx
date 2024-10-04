@@ -58,7 +58,7 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					}}
 					align="center"
 					sheetNo={sheetNo}
-					gapSpacing="35px"
+					gapSpacing="40px"
 					textShell={() => <TextShell.BodyIndices align="center" />}
 					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 					isInPaginator={isInPaginator}

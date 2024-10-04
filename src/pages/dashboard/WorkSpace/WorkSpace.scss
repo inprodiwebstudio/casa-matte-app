@@ -19,7 +19,7 @@
 		.pagesPreviewPhotoBook {
 			height: 991.6px;
 			font-size: 90px;
-			transform: scale(0.68, 0.68);
+			transform: scale(0.8, 0.8);
 			z-index: 1;
 
 			&.cuadrado-chico-preview {
@@ -35,15 +35,22 @@
 			}
 
 			&.cuadrado-grande-preview {
-				transform: scale(0.68, 0.68);
+				transform: scale(0.8, 0.8);
 
 				@include laptop {
-					transform: scale(0.68, 0.68);
+					transform: scale(0.8, 0.8);
+				}
+
+				@include big-laptop {
+					transform: scale(0.8, 0.8);
 				}
 			}
 
 			@include laptop {
-				transform: scale(0.65, 0.65);
+				transform: scale(0.7, 0.7);
+			}
+			@include big-laptop {
+				transform: scale(0.75, 0.75);
 			}
 		}
 	}
@@ -165,7 +172,8 @@
 			}
 
 			&.cuadrado-chico-workSpace {
-				transform: scale(0.6, 0.6);
+				transform: scale(0.58, 0.58);
+				margin-right: 43px;
 
 				@include laptop {
 					transform: scale(0.41, 0.41);
@@ -174,8 +182,9 @@
 				}
 	
 				@include big-laptop {
-					transform: scale(0.50, 0.50);
+					transform: scale(0.48, 0.48);
 					z-index: 1;
+					margin-right: 35px;
 				}
 	
 				@include big-tablet {
@@ -185,17 +194,19 @@
 			}
 
 			&.cuadrado-grande-workSpace {
-				transform: scale(0.6, 0.6);
+				transform: scale(0.65, 0.65);
+				margin-right: 50px;
 
 				@include laptop {
-					transform: scale(0.41, 0.41);
+					transform: scale(0.54, 0.54);
 					z-index: 1;
-					margin-right: 45px;
+					margin-right: 51px;
 				}
 	
 				@include big-laptop {
-					transform: scale(0.50, 0.50);
+					transform: scale(0.54, 0.54);
 					z-index: 1;
+					margin-right: 51px;
 				}
 	
 				@include big-tablet {
@@ -205,14 +216,15 @@
 			}
 
 			@include laptop {
-				transform: scale(0.45, 0.45);
+				transform: scale(0.5, 0.5);
 				margin-right: 42.5px;
 				z-index: 1;
 			}
 
 			@include big-laptop {
-				transform: scale(0.5, 0.5);
+				transform: scale(0.6, 0.6);
 				z-index: 1;
+				margin-right: 50px;
 			}
 
 			@include big-tablet {

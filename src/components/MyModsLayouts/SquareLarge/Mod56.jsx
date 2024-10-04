@@ -6,65 +6,61 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod56 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod58 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 46px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
+	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 46px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 22px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const defaultSubtitle = "<p style='text-align: left;'><span style='font-size: 22px; font-family: Inter-Lifght;'>CHILE</span></p>";
 
 	return (
 		<Flex
-			p="8%"
-			pl="4%"
-			pr="4%"
 			w="100%"
 			h="100%"
+			align="flex-end"
 			justify="center"
-			align="center"
 			gap="0.5em"
 			direction="column"
 		>
 			<Stack
-				spacing="0.07em"
-				w="70%"
+				spacing="0.5em"
+				w="59%"
+				h="77%"
+				sx={{textTransform : "uppercase"}}
 			>
-				<div>
-					<Text
-						sizes={{
-							"chico"   : "42px",
-							"regular" : "46px",
-							"grande"  : "48px",
-						}}
-						align="center"
-						sheetNo={sheetNo}
-						textShell={() => <TextShell.Title />}
-						letterSpacing="6.5px"
-						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-					/>
-				</div>
-			</Stack>
-			<Stack w="100%" h="100%">
-				<ImgLayout
-					isInWorkSpace={isInWorkSpace}
-					sheetNo={sheetNo}
-					imageNo={0}
-					urlImage={data?.photos[0] ?? {}}
-				/>
-			</Stack>
-			<Stack
-				spacing="0.07em"
-				w="50%"
-			>
-				<div>
+				<Stack w="100%" h="100%" spacing="0.4em">
+					<Stack mr="10%">
+						<Text
+							sizes={{
+								"chico"   : "42px",
+								"regular" : "46px",
+								"grande"  : "48px",
+							}}
+							align="right"
+							sheetNo={sheetNo}
+							textShell={() => <TextShell.Title />}
+							letterSpacing="6.5px"
+							data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
+							isInPaginator={isInPaginator}
+							isThumbNail={isThumbNail}
+						/>
+					</Stack>
+					<Stack w="100%" h="100%">
+						<ImgLayout
+							isInWorkSpace={isInWorkSpace}
+							sheetNo={sheetNo}
+							imageNo={0}
+							urlImage={data?.photos[0] ?? {}}
+						/>
+					</Stack>
+				</Stack>
+				<Stack mr="40%">
 					<Text
 						sizes={{
 							"chico"   : "20px",
 							"regular" : "22px",
 							"grande"  : "24px",
 						}}
-						align="center"
+						align="left"
 						sheetNo={sheetNo}
 						letterSpacing="2px"
 						textShell={() => <TextShell.SubTitle />}
@@ -72,10 +68,10 @@ const Mod56 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 					/>
-				</div>
+				</Stack>
 			</Stack>
 		</Flex>
 	);
 };
 
-export default Mod56;
+export default Mod58;

@@ -8,32 +8,32 @@ import { TextShell }     from "core/components";
 
 const Mod52 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultTitle = "<p style='text-align: left;'><span style='font-size: 34px; font-family: Aitana-Regular;'>VIRGINIA</span></p>";
+	const defaultTitle = "<p style='text-align: left;'><span style='font-size: 30px; font-family: Aitana-Regular;'>VIRGINIA</span></p>";
 
-	const defaultIndices = "<p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Colonial Williamsburg</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>William & Mary University</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>The Capitol</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Jamestown</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Smithfeld</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Chepokee Plantation</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Waller Mill Park</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Richmond</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Ford’s Colony</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>St. Andrew’s</span></p>";
+	const defaultIndices = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Colonial Williamsburg</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>William & Mary University</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>The Capitol</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Jamestown</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Smithfeld</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Chepokee Plantation</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Waller Mill Park</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Richmond</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Ford’s Colony</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>St. Andrew’s</span></p>";
 
 	return (
 		<Flex
-			p="10%"
+			p="8%"
 			w="100%"
 			h="100%"
-			justify="center"
-			align="center"
+			justify="flex-end"
+			align="flex-end"
 		>
 			<Stack
-				spacing="0.4em"
+				spacing="0.2em"
 				sx={{overflow : "hidden"}}
 				maw="60%"
-				miw="30%"
+				miw="25%"
 			>
 				<Stack
-					spacing="0.4em"
+					spacing="0.2em"
 				>
 					<Text
 						sizes={{
-							"chico"   : "32px",
-							"regular" : "34px",
-							"grande"  : "36px",
+							"chico"   : "28px",
+							"regular" : "30px",
+							"grande"  : "32px",
 						}}
 						align="left"
 						sheetNo={sheetNo}
@@ -47,12 +47,12 @@ const Mod52 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				</Stack>
 				<Text
 					sizes={{
-						"chico"   : "20px",
-						"regular" : "22px",
-						"grande"  : "24px",
+						"chico"   : "16px",
+						"regular" : "18px",
+						"grande"  : "20px",
 					}}
 					align="left"
-					gapSpacing="20px"
+					gapSpacing="17px"
 					sheetNo={sheetNo}
 					textShell={() => <TextShell.BodyIndices align="left" />}
 					data={textInsertion(data?.text[1], defaultIndices, isInWorkSpace)}

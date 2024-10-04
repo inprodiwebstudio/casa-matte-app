@@ -1,81 +1,73 @@
-import {Stack, Flex } from "@mantine/core";
-import ImgLayout      from "components/LayoutHandler/ImgLayout";
-//Own components
+import {Stack, Flex }    from "@mantine/core";
+import ImgLayout         from "components/LayoutHandler/ImgLayout";
 import Text              from "components/LayoutHandler/Text";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
+//Own components
 
 
-const Mod57 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod59 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 46px; font-family: JosefinSans-Regular;'>SANTIAGO</span></p>";
+	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 46px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 22px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const defaultSubtitle = "<p style='text-align: right;'><span style='font-size: 22px; font-family: Inter-Lifght;'>CHILE</span></p>";
 
 	return (
 		<Flex
-			pt="8%"
 			pb="8%"
 			w="100%"
 			h="100%"
-			justify="center"
-			align="center"
-			gap="0.5em"
 			direction="column"
-			sx={{textTransform : "uppercase"}}
 		>
 			<Stack
-				spacing="0.07em"
-				w="70%"
+				spacing="0.7em"
+				w="100%"
+				h="100%"
+				align="flex-end"
 			>
-				<div>
+				<Stack w="100%" h="100%">
+					<ImgLayout
+						isInWorkSpace={isInWorkSpace}
+						sheetNo={sheetNo}
+						imageNo={0}
+						urlImage={data?.photos[0] ?? {}}
+					/>
+				</Stack>
+				<Stack w="100%" spacing="0.1em" pr="0.7em">
 					<Text
 						sizes={{
 							"chico"   : "42px",
 							"regular" : "46px",
 							"grande"  : "48px",
 						}}
-						align="center"
+						align="right"
 						sheetNo={sheetNo}
-						textShell={() => <TextShell.Title />}
+						textShell={() => <TextShell.Title width="40%" align="flex-end" />}
 						letterSpacing="6.5px"
 						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 					/>
-				</div>
-			</Stack>
-			<Stack w="100%" h="100%">
-				<ImgLayout
-					isInWorkSpace={isInWorkSpace}
-					sheetNo={sheetNo}
-					imageNo={0}
-					urlImage={data?.photos[0] ?? {}}
-				/>
-			</Stack>
-			<Stack
-				spacing="0.07em"
-				w="50%"
-			>
-				<div>
-					<Text
-						sizes={{
-							"chico"   : "20px",
-							"regular" : "22px",
-							"grande"  : "24px",
-						}}
-						align="center"
-						sheetNo={sheetNo}
-						letterSpacing="2px"
-						textShell={() => <TextShell.SubTitle />}
-						data={textInsertion(data?.text[1], defaultSubtitle, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-					/>
-				</div>
+					<Stack w="100%">
+						<Text
+							sizes={{
+								"chico"   : "20px",
+								"regular" : "22px",
+								"grande"  : "24px",
+							}}
+							align="left"
+							sheetNo={sheetNo}
+							letterSpacing="2px"
+							textShell={() => <TextShell.SubTitle width="20%" align="flex-end" />}
+							data={textInsertion(data?.text[1], defaultSubtitle, isInWorkSpace)}
+							isInPaginator={isInPaginator}
+							isThumbNail={isThumbNail}
+						/>
+					</Stack>
+				</Stack>
 			</Stack>
 		</Flex>
 	);
 };
 
-export default Mod57;
+export default Mod59;

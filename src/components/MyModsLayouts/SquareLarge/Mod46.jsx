@@ -1,4 +1,4 @@
-import { Flex, Stack } from "@mantine/core";
+import { Box, Flex, Group, Stack } from "@mantine/core";
 //Own components
 import Text              from "components/LayoutHandler/Text";
 import DividerLayout     from "components/LayoutHandler/DividerLayout";
@@ -7,28 +7,30 @@ import { TextShell }     from "core/components";
 
 
 const Mod45 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
-	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 30px; font-family: Aitana-Regular;'>MAMÁ</span></p>";
+	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 30px; font-family: Aitana-Regular;'>PAPÁ</span></p>";
 
-	const defaultText02 = "<p style='text-align: justify;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam.</span></p>";
+	const defaultText02 = "<p style='text-align: justify;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre</span></p>";
+
+	const defaultText03 = "<p style='text-align: justify;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam. Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed.</span></p>";
 
 	return (
 		<Flex
 			p="8%"
 			w="100%"
 			h="100%"
-			justify="flex-end"
-			align="flex-end"
+			justify="center"
+			align="center"
 		>
 			<Stack
-				w="57%"
+				w="90%"
 				mah="70%"
 				spacing="0.3em"
 				aria-hidden
+				sx={{ overflow : "hidden" }}
 			>
 				<Flex
 					direction="column"
 					gap="0.3em"
-					justify="center"
 				>
 					<Text
 						sizes={{
@@ -46,25 +48,45 @@ const Mod45 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					/>
 					<DividerLayout long="10%" position="h" />
 				</Flex>
-				<Flex
-					justify="flex-start"
-					direction="column"
+				<Group
+					position="apart"
+					align="flex-start"
+					spacing={0}
+					sx={{ overflow : "hidden" }}
 				>
-					<Text
-						sizes={{
-							"chico"   : "16px",
-							"regular" : "18px",
-							"grande"  : "20px",
-						}}
-						align="justify"
-						lineHeight="26px"
-						sheetNo={sheetNo}
-						textShell={() => <TextShell.BodyParagraph align="flex-start" />}
-						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-					/>
-				</Flex>
+					<Box w="48%">
+						<Text
+							sizes={{
+								"chico"   : "16px",
+								"regular" : "18px",
+								"grande"  : "20px",
+							}}
+							align="justify"
+							lineHeight="26px"
+							sheetNo={sheetNo}
+							textShell={() => <TextShell.BodyParagraph width="100%" align="flex-start" />}
+							data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+							isInPaginator={isInPaginator}
+							isThumbNail={isThumbNail}
+						/>
+					</Box>
+					<Box w="48%">
+						<Text
+							sizes={{
+								"chico"   : "16px",
+								"regular" : "18px",
+								"grande"  : "20px",
+							}}
+							align="justify"
+							lineHeight="26px"
+							sheetNo={sheetNo}
+							textShell={() => <TextShell.BodyParagraph width="100%" align="flex-start" />}
+							data={textInsertion(data?.text[2], defaultText03, isInWorkSpace)}
+							isInPaginator={isInPaginator}
+							isThumbNail={isThumbNail}
+						/>
+					</Box>
+				</Group>
 			</Stack>
 		</Flex>
 	);

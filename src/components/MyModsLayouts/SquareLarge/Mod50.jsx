@@ -14,11 +14,11 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
 	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 34px; font-family: Aitana-Regular;'>TURQUÍA</span></p>";
 
-	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
+	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
 
-	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>París</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Versalles</span></p>";
+	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>París</span></p><p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Versalles</span></p>";
 
-	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Capadocia</span></p>";
+	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Capadocia</span></p>";
 
 	return (
 		<Flex
@@ -57,9 +57,9 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "20px",
-								"regular" : "22px",
-								"grande"  : "24px",
+								"chico"   : "21px",
+								"regular" : "23px",
+								"grande"  : "25px",
 							}}
 							align="left"
 							gapSpacing="10px"
@@ -78,9 +78,9 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "22px",
-								"regular" : "24px",
-								"grande"  : "26px",
+								"chico"   : "32px",
+								"regular" : "34px",
+								"grande"  : "36px",
 							}}
 							align="left"
 							letterSpacing="3px"
@@ -95,9 +95,9 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "12px",
-								"regular" : "14px",
-								"grande"  : "16px",
+								"chico"   : "21px",
+								"regular" : "23px",
+								"grande"  : "25px",
 							}}
 							align="left"
 							gapSpacing="10px"
@@ -116,9 +116,9 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "22px",
-								"regular" : "24px",
-								"grande"  : "26px",
+								"chico"   : "32px",
+								"regular" : "34px",
+								"grande"  : "36px",
 							}}
 							align="left"
 							letterSpacing="3px"
@@ -133,9 +133,9 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "12px",
-								"regular" : "14px",
-								"grande"  : "16px",
+								"chico"   : "21px",
+								"regular" : "23px",
+								"grande"  : "25px",
 							}}
 							align="left"
 							gapSpacing="10px"
