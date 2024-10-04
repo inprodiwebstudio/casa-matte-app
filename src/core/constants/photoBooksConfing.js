@@ -32,7 +32,7 @@ const photoBooksConfing = {
 			},
 		},
 		vertical : {
-			aspectRatio : [8, 9],
+			aspectRatio : [425, 496],
 			sizes       : {
 				chico : {
 					layoutMods       : {},
