@@ -45,7 +45,7 @@ const Mod56 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					/>
 				</div>
 			</Stack>
-			<Stack w="100%" h="100%">
+			<Stack w="50%" h="100%">
 				<ImgLayout
 					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
