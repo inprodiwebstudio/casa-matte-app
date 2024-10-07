@@ -71,9 +71,9 @@ const BookPages = ({
 	return (
 		<div
 			className="BookPages"
-			style={{
-				aspectRatio : (isInDoublePage || pageData?.sheet2 || pageData?.sheet1?.layoutType?.includes("Front")) ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
-			}}
+			// style={{
+			// 	aspectRatio : (isInDoublePage || pageData?.sheet2 || pageData?.sheet1?.layoutType?.includes("Front")) ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
+			// }}
 		>
 			<div
 				className={
