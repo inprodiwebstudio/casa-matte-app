@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { PDFViewer, Page, Document } from "@react-pdf/renderer";
-import { connect }                   from "react-redux";
+import { PDFViewer, Page, Document} from "@react-pdf/renderer";
+import { connect }                  from "react-redux";
 //Own components
 import { convertToArray } from "helpers";
 import VerticalLarge      from "components/MyModsLayouts/VerticalLarge";
@@ -12,57 +12,58 @@ const TestPdf = ({photoBookData}) => {
 	const photoBookTypes = {
 		grande : {
 			size                  : [850, 991],
-			isInDoublePageLayouts : ["Mod1", "Mod2", "Mod3", "FrontLayout"],
+			isInDoublePageLayouts : ["FrontLayout"],
 			modLayouts            : {...VerticalLarge},
 		},
 	};
 
-	const isLayoutDoublePage = (modLayout, witheList) => {
-		const isAvailableDouble = witheList.includes(modLayout);
-		return isAvailableDouble;
-	};
+	// const isLayoutDoublePage = (modLayout, witheList) => {
+	// 	const isAvailableDouble = witheList.includes(modLayout);
+	// 	return isAvailableDouble;
+	// };
 
 	const getComponent = (pageData) => {
 		const Sheet1Layout = photoBookTypes[photoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet1?.layoutType]?.pdfLayout;
 		const Sheet2Layout = photoBookTypes[photoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet2?.layoutType]?.pdfLayout;
 
-		const isInDoublePageLayout = isLayoutDoublePage(pageData?.sheet1?.layoutType, photoBookTypes[photoBookData?.sizePhotoBook]?.isInDoublePageLayouts);
+		// const isInDoublePageLayout = isLayoutDoublePage(pageData?.sheet1?.layoutType, photoBookTypes[photoBookData?.sizePhotoBook]?.isInDoublePageLayouts);
 
-		if ((Sheet1Layout && Sheet2Layout) || isInDoublePageLayout) {
-			if (Sheet1Layout && isInDoublePageLayout) {
-				return (
-					<>
-						<Page size={[850, 991]}>
-							<Sheet1Layout images={pageData?.sheet1?.photos} />
-						</Page>
-						<Page size={[850, 991]}>
-							<Sheet1Layout images={pageData?.sheet1?.photos} isRightPage />
-						</Page>
-					</>
-				);
-			}
-		}
+		// if ((Sheet1Layout && Sheet2Layout) || isInDoublePageLayout) {
+		// 	if (Sheet1Layout && isInDoublePageLayout) {
+		// 		return (
+		// 			<>
+		// 				<Page size={[850, 991]}>
+		// 					<Sheet1Layout images={pageData?.sheet1?.photos} />
+		// 				</Page>
+		// 				<Page size={[850, 991]}>
+		// 					<Sheet1Layout images={pageData?.sheet1?.photos} isRightPage />
+		// 				</Page>
+		// 			</>
+		// 		);
+		// 	}
+		// }
+
 		if (Sheet1Layout) {
 			return (
 				<>
 					<Page size={[850, 991]}>
 						<Sheet1Layout images={pageData?.sheet1?.photos} text={pageData?.sheet1?.text} />
 					</Page>
-					{Sheet2Layout && (
+					{Sheet2Layout ? (
 						<Page size={[850, 991]}>
 							<Sheet2Layout images={pageData?.sheet2?.photos} text={pageData?.sheet2?.text} />
 						</Page>
-					)}
+					) : undefined}
 				</>
 			);
 		}
 	};
 
-	const testerInsert = (pageData, index) => {
-		if (index !== 0) {
-			return getComponent(pageData);
-		}
-	};
+	// const testerInsert = (pageData, index) => {
+	// 	if (index !== 0) {
+	// 		return getComponent(pageData);
+	// 	}
+	// };
 
 	return (
 		<div style={{height : "80vh"}}>
@@ -70,7 +71,7 @@ const TestPdf = ({photoBookData}) => {
 				<Document>
 					<>
 						{
-							listPages.map((pageData, index) => testerInsert(pageData, index))
+							listPages.map((pageData, index) => getComponent(pageData, index))
 						}
 					</>
 				</Document>

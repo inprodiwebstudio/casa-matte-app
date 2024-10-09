@@ -260,6 +260,7 @@ const BodyGallery = ({
 												<PhotoCard
 													key={index}
 													image={data?.url}
+													thumbNail={data?.urlThumbnail}
 													fileId={data?.id}
 													isfullSize={isFullSizeSideBar}
 													isHideSelected={isHideSelected}

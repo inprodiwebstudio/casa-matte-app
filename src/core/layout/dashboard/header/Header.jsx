@@ -8,7 +8,8 @@ import "./Header.scss";
 // import { openContextModal } from "@mantine/modals";
 
 //Own components
-import { dayjs } from "helpers";
+import { dayjs }            from "helpers";
+import { openContextModal } from "@mantine/modals";
 
 
 const Header = () => {
@@ -103,6 +104,12 @@ const Header = () => {
 						radius={12}
 						size="xs"
 						color="darkCasaMatte"
+						onClick={() => openContextModal({
+							modal      : "testPdf",
+							innerProps : {
+								photoBookData : isModifiedData,
+							},
+						})}
 					>
 						<Text
 							weight={400}

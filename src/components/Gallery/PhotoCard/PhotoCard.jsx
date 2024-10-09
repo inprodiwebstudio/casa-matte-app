@@ -14,6 +14,7 @@ import "./PhotoCard.scss";
 const PhotoCard = ({
 	image,
 	fileId,
+	thumbNail,
 	isChecked,
 	isSelected,
 	isfullSize,
@@ -35,6 +36,7 @@ const PhotoCard = ({
 	const [ isDragger, setIsDragger ] = useState(false);
 	const [ loadingPhoto, setLoadingphoto ] = useState(true);
 	const [ myImageUrl, setMyImageUrl ] = useState("");
+
 
 	const handdleDrag = () => {
 		setIsDragger(true);
@@ -60,7 +62,7 @@ const PhotoCard = ({
 
 	const loadImage = () => {
 		const img = new Image();
-		img.src = resizerImage(image);
+		img.src = resizerImage(thumbNail);
 		img.addEventListener("load", handleImageLoad);
 		setMyImageUrl(img.src);
 	};
