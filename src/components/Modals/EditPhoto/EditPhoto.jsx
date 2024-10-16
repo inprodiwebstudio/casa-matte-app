@@ -78,7 +78,7 @@ const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 				}}
 				Crop={{
 					noPresets : true,
-					ratio     : innerProps.aspectRatio,
+					ratio     : innerProps?.aspectRatio ?? 16 / 9,
 				}}
 				language="es"
 				Rotate={{ angle : 90, componentType : "buttons" }}

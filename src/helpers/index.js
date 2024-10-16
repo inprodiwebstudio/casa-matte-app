@@ -19,4 +19,5 @@ export { default as resizerQualityImage }        from "./resizerQualityImage";
 export { default as filterTwoArrays }            from "./filterTwoArrays";
 export { default as PrivateRoute }               from "./PrivateRoute.jsx";
 export { default as coordinatesPhotoInWorkSpce } from "./coordinatesPhotoInWorkSpce";
+export {  default as imgUrlPdf }                 from "./imgUrlPdf";
 
