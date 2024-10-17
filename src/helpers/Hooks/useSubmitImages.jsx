@@ -20,22 +20,33 @@ const useSubmitImages = ({userName, folderName}) => {
 					publicId  : "test",
 					api_key   : "864322584227584",
 					signature : data.signature,
-					folder    : `${userName}/${folderName ? folderName : isditedPhoto ? "edited" : ""}`,
+					folder    : `${userName}/${folderName ? folderName : isditedPhoto ? "_editedPhotos" : ""}`,
 					timestamp : `${data.timestamp}`,
 				}
 			);
-			const urlImage = await generateUrlCompress({data : {
+
+			if (!uploadFile?.data) return;
+
+			const urlThumnail = await generateUrlCompress({data : {
 				public_id : uploadFile?.data?.public_id,
 				format    : uploadFile?.data?.format,
 			}});
+
+			const urlPageSize = await generateUrlCompress({data : {
+				public_id : uploadFile?.data?.public_id,
+				format    : uploadFile?.data?.format,
+				width     : "1920",
+				quality   : "30",
+			}});
+
 			const dataResp = {
 				...uploadFile.data,
-				url : urlImage.data?.url,
+				url          : urlPageSize.data?.url,
+				urlThumbnail : urlThumnail.data?.url,
 			};
 			return dataResp;
 		} catch (error) {
-			console.log(error);
-			return error;
+			throw new Error(error);
 		}
 	};
 

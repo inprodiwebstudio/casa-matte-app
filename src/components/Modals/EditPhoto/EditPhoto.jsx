@@ -13,6 +13,7 @@ import { bindAll }        from "helpers";
 import fullQualityImg     from "helpers/Functions/fullQualityImage";
 import "./EditPhoto.scss";
 import useSubmitImages    from "helpers/Hooks/useSubmitImages";
+import { PostingConfig }  from "Notifications";
 
 
 const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
@@ -21,10 +22,13 @@ const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 	const urlImage = fullQualityImg(innerProps?.image);
 
 	const addEditedImage = async (file) => {
-		const myIage = await handlerUploadImage(file, true);
-
-		if (myIage) {
-			workSpaceSlice.addPhotoEdited({pageId : innerProps?.pageId, sheetNo : innerProps?.sheetNo, layoutNo : innerProps?.layoutNo, imageUrl : myIage?.url});
+		try {
+			const myImage = await handlerUploadImage(file, true);
+			workSpaceSlice.addPhotoEdited({pageId : innerProps?.pageId, sheetNo : innerProps?.sheetNo, layoutNo : innerProps?.layoutNo, imageUrl : myImage?.url});
+			closeAllModals();
+		} catch (error) {
+			PostingConfig["post"][500]();
+			console.error(error);
 		}
 	};
 
@@ -41,8 +45,6 @@ const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 		return new File([u8arr], filename, {type : mime});
 	};
 
-	console.log(innerProps?.image);
-
 	return (
 		<div className="EditPhoto">
 			<FilerobotImageEditor
@@ -57,7 +59,6 @@ const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 							triggerSave(async (...args) => {
 								const file = dataURLtoFile(args[0].imageBase64, args[0].fullName);
 								await addEditedImage(file);
-								closeAllModals();
 								return;
 							}),
 					},
@@ -70,7 +71,7 @@ const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 						"accent-primary-active" : "#1D1D1B",
 				  },
 				  typography : {
-				    fontFamily : "Helvetica, Arial",
+				    fontFamily : "Arial",
 				  },
 				}}
 				Crop={{
