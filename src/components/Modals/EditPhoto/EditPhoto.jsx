@@ -1,5 +1,3 @@
-//React
-import { useEffect } from "react";
 
 //React FileRobotEditor
 import FilerobotImageEditor, {
@@ -11,20 +9,23 @@ import { closeAllModals } from "@mantine/modals";
 
 //Own components
 import { workSpaceSlice } from "store/Slices";
-import { apiImageKit }    from "store/api/imageKitApi";
 import { bindAll }        from "helpers";
+import fullQualityImg     from "helpers/Functions/fullQualityImage";
 import "./EditPhoto.scss";
+import useSubmitImages    from "helpers/Hooks/useSubmitImages";
+
 
 const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
-	const [galleryImagesMutation, galleryMutationResult] = apiImageKit.useAddEditedImageMutation();
+	const { handlerUploadImage } = useSubmitImages({userName : userName});
+
+	const urlImage = fullQualityImg(innerProps?.image);
 
 	const addEditedImage = async (file) => {
-		await galleryImagesMutation({
-			data : {
-				file,
-			},
-			userName,
-		});
+		const myIage = await handlerUploadImage(file, true);
+
+		if (myIage) {
+			workSpaceSlice.addPhotoEdited({pageId : innerProps?.pageId, sheetNo : innerProps?.sheetNo, layoutNo : innerProps?.layoutNo, imageUrl : myIage?.url});
+		}
 	};
 
 	const dataURLtoFile = (dataurl, filename) => {
@@ -40,16 +41,12 @@ const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 		return new File([u8arr], filename, {type : mime});
 	};
 
-	useEffect(() => {
-		if (!galleryMutationResult?.isError && !galleryMutationResult?.isLoading && !galleryMutationResult?.isUninitialized && galleryMutationResult?.data) {
-			workSpaceSlice.addPhotoEdited({pageId : innerProps?.pageId, sheetNo : innerProps?.sheetNo, layoutNo : innerProps?.layoutNo, imageUrl : galleryMutationResult?.data?.url});
-		}
-	}, [galleryMutationResult]);
+	console.log(innerProps?.image);
 
 	return (
 		<div className="EditPhoto">
 			<FilerobotImageEditor
-				source={innerProps?.image}
+				source={urlImage}
 				annotationsCommon={{
 					fill : "#bb3214",
 				}}

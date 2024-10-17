@@ -7,11 +7,11 @@ const useSubmitImages = ({userName, folderName}) => {
 	const timestamp = Math.floor(Date.now() / 1000);
 	const [ generateSignMutation ] = useGenerateSignMutation();
 	const [ generateUrlCompress ] = apiImageKit.useGenerateUrlCompressMutation();
-	const handlerUploadImage = async (image) => {
+	const handlerUploadImage = async (image, isditedPhoto) => {
 		try {
 			const { data } = await generateSignMutation({data : {
 				timestamp : timestamp,
-				folder    : `${userName}/${folderName ? folderName : ""}`,
+				folder    : `${userName}/${folderName ? folderName : isditedPhoto ? "edited" : ""}`,
 			}});
 			const uploadFile = await axios.postForm(
 				"https://api.cloudinary.com/v1_1/dxvi7hk47/image/upload",
@@ -20,7 +20,7 @@ const useSubmitImages = ({userName, folderName}) => {
 					publicId  : "test",
 					api_key   : "864322584227584",
 					signature : data.signature,
-					folder    : `${userName}/${folderName ? folderName : ""}`,
+					folder    : `${userName}/${folderName ? folderName : isditedPhoto ? "edited" : ""}`,
 					timestamp : `${data.timestamp}`,
 				}
 			);
