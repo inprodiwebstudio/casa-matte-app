@@ -7,14 +7,14 @@ const Mod36 = ({data, isInWorkSpace, sheetNo}) => {
 		<Stack
 			w="100%"
 			h="100%"
-			p="1%"
+			p="0.2em"
 		>
 			<Flex
-				gap="0.05em"
+				gap="0.1em"
 				h="100%"
 				w="100%"
 			>
-				<Stack w="40%" h="100%" spacing="0.05em">
+				<Stack w="40%" h="100%" spacing="0.1em">
 					<Stack w="100%" h="50%">
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
@@ -32,7 +32,7 @@ const Mod36 = ({data, isInWorkSpace, sheetNo}) => {
 						/>
 					</Stack>
 				</Stack>
-				<Stack w="60%" h="100%" spacing="0.05em">
+				<Stack w="60%" h="100%" spacing="0.1em">
 					<Stack w="100%" h="33.33%">
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
@@ -70,7 +70,7 @@ const Mod36 = ({data, isInWorkSpace, sheetNo}) => {
 			pl="1.66%"
 		>
 			<Stack
-				spacing="0.05em"
+				spacing="0.1em"
 				h="100%"
 				w="100%"
 			>

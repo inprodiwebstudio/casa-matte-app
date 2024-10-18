@@ -12,7 +12,7 @@ const Mod22 = ({data, isInWorkSpace, sheetNo}) => {
 			pr="23%"
 		>
 			<Stack
-				spacing="0.05em"
+				spacing="0.1em"
 				h="100%"
 				w="100%"
 			>

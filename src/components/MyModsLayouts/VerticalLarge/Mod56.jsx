@@ -15,7 +15,7 @@ const Mod57 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			p="8%"
 			w="100%"
 			h="100%"
-			gap="0.05em"
+			gap="0.1em"
 			align="center"
 			direction="column"
 		>

@@ -15,11 +15,11 @@ const Mod58 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			p="8%"
 			w="100%"
 			h="100%"
-			gap="0.05em"
+			gap="0.1em"
 			align="center"
 			direction="column"
 		>
-			<Stack w="60%" mb="0.15em">
+			<Stack w="60%" mb="0.1em">
 				<Text
 					sizes={{
 						"chico"   : "14px",
@@ -37,11 +37,11 @@ const Mod58 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			</Stack>
 			<Group
 				w="100%"
-				h="50%"
-				spacing="0.05em"
+				h="calc(100% / 2 - 0.05em)"
+				spacing="0.1em"
 				grow
 			>
-				<Stack h="100%" w="49%">
+				<Stack h="100%" w="calc(100% / 2 - 0.05em)">
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
@@ -49,7 +49,7 @@ const Mod58 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Stack>
-				<Stack h="100%" w="49%">
+				<Stack h="100%" w="calc(100% / 2 - 0.05em)">
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
@@ -60,11 +60,11 @@ const Mod58 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			</Group>
 			<Group
 				w="100%"
-				h="50%"
-				spacing="0.05em"
+				h="calc(100% / 2 - 0.05em)"
+				spacing="0.1em"
 				grow
 			>
-				<Stack h="100%" w="49%">
+				<Stack h="100%" w="calc(100% / 2 - 0.05em)">
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
@@ -72,7 +72,7 @@ const Mod58 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						urlImage={data?.photos[2] ?? {}}
 					/>
 				</Stack>
-				<Stack h="100%" w="49%">
+				<Stack h="100%" w="calc(100% / 2 - 0.05em)">
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}

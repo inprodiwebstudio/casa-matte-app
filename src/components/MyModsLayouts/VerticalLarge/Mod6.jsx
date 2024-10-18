@@ -8,8 +8,8 @@ const Mod9 = ({data, isInWorkSpace, sheetNo}) => {
 			w="100%"
 			h="100%"
 			p="22.83%"
-			pl="2%"
-			pr="1.8%"
+			pl="0.2em"
+			pr="0.2em"
 		>
 			<ImgLayout
 				isInWorkSpace={isInWorkSpace}

@@ -8,11 +8,11 @@ const Mod13 = ({data, isInWorkSpace, sheetNo}) => {
 			w="100%"
 			h="100%"
 			p="20.38%"
-			pl="1.66%"
-			pr="1.66%"
+			pl="0.2em"
+			pr="0.2em"
 		>
 			<Flex
-				gap="0.05em"
+				gap="0.1em"
 				h="100%"
 				w="100%"
 			>

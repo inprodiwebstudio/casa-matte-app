@@ -16,13 +16,13 @@ const Mod64 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 		<Flex
 			w="100%"
 			h="100%"
-			p="0.05em"
-			gap="0.05em"
+			p="0.2em"
+			gap="0.1em"
 		>
 			<Stack
 				w="50%"
 				h="100%"
-				spacing="0.05em"
+				spacing="0.1em"
 				position="apart"
 			>
 				<Stack w="100%" h="50%">
@@ -45,7 +45,7 @@ const Mod64 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			<Stack
 				w="50%"
 				h="100%"
-				spacing="0.05em"
+				spacing="0.1em"
 				position="apart"
 			>
 				<Stack w="100%" h="60%" spacing="0.05em">

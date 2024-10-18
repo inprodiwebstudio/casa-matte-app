@@ -7,15 +7,15 @@ const Mod18 = ({data, isInWorkSpace, sheetNo}) => {
 		<Stack
 			w="100%"
 			h="100%"
-			p="0.8%"
-			pl="1.66%"
+			p="0.2em"
+			pl="0.2em"
 		>
 			<Stack
-				spacing="0.05em"
+				spacing="0.1em"
 				h="100%"
 				w="100%"
 			>
-				<Flex w="100%" h="50%" gap="0.05em">
+				<Flex w="100%" h="50%" gap="0.1em">
 					<Stack w="30%" h="100%">
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}

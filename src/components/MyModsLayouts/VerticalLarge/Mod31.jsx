@@ -7,10 +7,10 @@ const Mod34 = ({data, isInWorkSpace, sheetNo}) => {
 		<Stack
 			w="100%"
 			h="100%"
-			p="1%"
+			p="0.2em"
 		>
 			<Stack
-				spacing="0.05em"
+				spacing="0.1em"
 				h="100%"
 				w="100%"
 			>
@@ -22,7 +22,7 @@ const Mod34 = ({data, isInWorkSpace, sheetNo}) => {
 						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Stack>
-				<Flex w="100%" h="25%" gap="0.05em">
+				<Flex w="100%" h="25%" gap="0.1em">
 					<Stack w="50%" h="100%">
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
@@ -40,7 +40,7 @@ const Mod34 = ({data, isInWorkSpace, sheetNo}) => {
 						/>
 					</Stack>
 				</Flex>
-				<Flex w="100%" h="25%" gap="0.05em">
+				<Flex w="100%" h="25%" gap="0.1em">
 					<Stack w="50%" h="100%">
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
