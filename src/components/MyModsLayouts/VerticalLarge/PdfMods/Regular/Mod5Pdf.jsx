@@ -1,20 +1,21 @@
 import React from "react";
 
 //Own components
-import { resizerImage } from "helpers";
 // eslint-disable-next-line import/extensions
-import { selectPhotoUrl } from "components/LayoutHandler/ImgLayout/imgLayout.helpers";
-import Html               from "react-pdf-html";
-import ReactDOMServer     from "react-dom/server";
+import Html           from "react-pdf-html";
+import ReactDOMServer from "react-dom/server";
+
+import { imgUrlPdf } from "helpers";
 
 
 const Mod5Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "991px",
-				width   : "850px",
-				padding : "20px",
+				height        : "991px",
+				width         : "100%",
+				paddingTop    : "180px",
+				paddingBottom : "180px",
 			}}
 		>
 			<div
@@ -28,10 +29,10 @@ const Mod5Pdf = ({images}) => {
 				{
 					images[0]?.url && (
 						<img
-							src={resizerImage(selectPhotoUrl(images[0]), 850, 991)}
+							src={imgUrlPdf(images[0])}
 							alt="test"
 							style={{
-								height    : "991px",
+								height    : "631px",
 								objectFit : "cover",
 							}}
 						/>

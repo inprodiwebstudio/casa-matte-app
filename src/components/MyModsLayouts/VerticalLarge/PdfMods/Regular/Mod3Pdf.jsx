@@ -3,18 +3,18 @@ import ReactDOMServer from "react-dom/server";
 
 //Helpers
 // eslint-disable-next-line import/extensions
-import { selectPhotoUrl } from "components/LayoutHandler/ImgLayout/imgLayout.helpers";
-import { resizerImage }   from "helpers";
+import { imgUrlPdf } from "helpers";
 
-const Mod3Pdf = ({images, isRightPage}) => {
+
+const Mod3Pdf = ({images }) => {
 	const bodyHtml = (
 		<div
 			style={{
 				height       : "991px",
-				width        : "850px",
-				padding      : "74px",
-				paddingRight : isRightPage ? "89px" : "0px",
-				paddingLeft  : isRightPage ? "0px" : "89px",
+				width        : "100%",
+				padding      : "70px",
+				paddingRight : "150px",
+				paddingLeft  : "150px",
 			}}
 		>
 			<div
@@ -28,12 +28,11 @@ const Mod3Pdf = ({images, isRightPage}) => {
 				{
 					images[0]?.url && (
 						<img
-							src={resizerImage(selectPhotoUrl(images[0]), 1522, 843)}
+							src={imgUrlPdf(images[0])}
 							alt="test"
 							style={{
-								height         : "991px",
-								objectFit      : "cover",
-								objectPosition : isRightPage ? "right" : "left",
+								height    : "851px",
+								objectFit : "cover",
 							}}
 						/>
 					)

@@ -8,15 +8,16 @@ import ReactDOMServer from "react-dom/server";
 import { imgUrlPdf } from "helpers";
 
 
-const Mod10Pdf = ({images}) => {
+const Mod19Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height       : "991px",
-				width        : "100%",
-				padding      : "180px",
-				paddingLeft  : "20px",
-				paddingRight : "20px",
+				height        : "991px",
+				width         : "100%",
+				paddingLeft   : "201px",
+				paddingRight  : "201px",
+				paddingTop    : "20px",
+				paddingBottom : "20px",
 			}}
 		>
 			<div
@@ -24,14 +25,14 @@ const Mod10Pdf = ({images}) => {
 					height        : "100%",
 					width         : "100%",
 					display       : "flex",
-					flexDirection : "row",
+					flexDirection : "column",
 					gap           : "10px",
 				}}
 			>
 				<div
 					style={{
-						width      : "calc(50% - 5px)",
-						height     : "100%",
+						width      : "100%",
+						height     : "310.33px",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -42,7 +43,7 @@ const Mod10Pdf = ({images}) => {
 								src={imgUrlPdf(images[0])}
 								alt="test"
 								style={{
-									height    : "631px",
+									height    : "310.33px",
 									objectFit : "cover",
 								}}
 							/>
@@ -51,8 +52,8 @@ const Mod10Pdf = ({images}) => {
 				</div>
 				<div
 					style={{
-						width      : "calc(50% - 5px)",
-						height     : "100%",
+						width      : "100%",
+						height     : "310.33px",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -63,7 +64,28 @@ const Mod10Pdf = ({images}) => {
 								src={imgUrlPdf(images[1])}
 								alt="test"
 								style={{
-									height    : "631px",
+									height    : "310.33px",
+									objectFit : "cover",
+								}}
+							/>
+						)
+					}
+				</div>
+				<div
+					style={{
+						width      : "100%",
+						height     : "310.33px",
+						overflow   : "hidden",
+						background : "#E3E3E3",
+					}}
+				>
+					{
+						images[2]?.url && (
+							<img
+								src={imgUrlPdf(images[2])}
+								alt="test"
+								style={{
+									height    : "310.33px",
 									objectFit : "cover",
 								}}
 							/>
@@ -81,4 +103,4 @@ const Mod10Pdf = ({images}) => {
 	);
 };
 
-export default Mod10Pdf;
+export default Mod19Pdf;

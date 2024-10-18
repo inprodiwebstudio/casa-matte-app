@@ -8,15 +8,14 @@ import ReactDOMServer from "react-dom/server";
 import { imgUrlPdf } from "helpers";
 
 
-const Mod10Pdf = ({images}) => {
+const Mod20Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height       : "991px",
-				width        : "100%",
-				padding      : "180px",
-				paddingLeft  : "20px",
-				paddingRight : "20px",
+				height        : "991px",
+				width         : "100%",
+				paddingTop    : "273px",
+				paddingBottom : "273px",
 			}}
 		>
 			<div
@@ -30,8 +29,8 @@ const Mod10Pdf = ({images}) => {
 			>
 				<div
 					style={{
-						width      : "calc(50% - 5px)",
 						height     : "100%",
+						width      : "calc(100% - 6.667px)",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -42,7 +41,7 @@ const Mod10Pdf = ({images}) => {
 								src={imgUrlPdf(images[0])}
 								alt="test"
 								style={{
-									height    : "631px",
+									height    : "445px",
 									objectFit : "cover",
 								}}
 							/>
@@ -51,8 +50,8 @@ const Mod10Pdf = ({images}) => {
 				</div>
 				<div
 					style={{
-						width      : "calc(50% - 5px)",
 						height     : "100%",
+						width      : "calc(100% - 6.667px)",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -63,7 +62,28 @@ const Mod10Pdf = ({images}) => {
 								src={imgUrlPdf(images[1])}
 								alt="test"
 								style={{
-									height    : "631px",
+									height    : "445px",
+									objectFit : "cover",
+								}}
+							/>
+						)
+					}
+				</div>
+				<div
+					style={{
+						height     : "100%",
+						width      : "calc(100% - 6.667px)",
+						overflow   : "hidden",
+						background : "#E3E3E3",
+					}}
+				>
+					{
+						images[2]?.url && (
+							<img
+								src={imgUrlPdf(images[2])}
+								alt="test"
+								style={{
+									height    : "445px",
 									objectFit : "cover",
 								}}
 							/>
@@ -81,4 +101,4 @@ const Mod10Pdf = ({images}) => {
 	);
 };
 
-export default Mod10Pdf;
+export default Mod20Pdf;

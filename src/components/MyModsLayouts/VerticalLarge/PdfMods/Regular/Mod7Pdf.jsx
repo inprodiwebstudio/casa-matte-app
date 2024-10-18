@@ -1,11 +1,11 @@
 import React from "react";
 
 //Own components
-import { resizerImage } from "helpers";
 // eslint-disable-next-line import/extensions
-import { selectPhotoUrl } from "components/LayoutHandler/ImgLayout/imgLayout.helpers";
-import Html               from "react-pdf-html";
-import ReactDOMServer     from "react-dom/server";
+import Html           from "react-pdf-html";
+import ReactDOMServer from "react-dom/server";
+
+import { imgUrlPdf } from "helpers";
 
 
 const Mod7Pdf = ({images}) => {
@@ -13,9 +13,10 @@ const Mod7Pdf = ({images}) => {
 		<div
 			style={{
 				height        : "991px",
-				width         : "850px",
-				paddingTop    : "212px",
-				paddingBottom : "212px",
+				width         : "100%",
+				padding       : "110px",
+				paddingTop    : "280px",
+				paddingBottom : "280px",
 			}}
 		>
 			<div
@@ -29,10 +30,10 @@ const Mod7Pdf = ({images}) => {
 				{
 					images[0]?.url && (
 						<img
-							src={resizerImage(selectPhotoUrl(images[0]), 850, 567)}
+							src={imgUrlPdf(images[0])}
 							alt="test"
 							style={{
-								height    : "991px",
+								height    : "431px",
 								objectFit : "cover",
 							}}
 						/>

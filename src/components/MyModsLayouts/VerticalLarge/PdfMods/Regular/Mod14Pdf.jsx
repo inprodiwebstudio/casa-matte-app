@@ -1,68 +1,104 @@
 import React from "react";
 
 //Own components
-import { resizerImage } from "helpers";
 // eslint-disable-next-line import/extensions
-import { selectPhotoUrl } from "components/LayoutHandler/ImgLayout/imgLayout.helpers";
-import Html               from "react-pdf-html";
-import ReactDOMServer     from "react-dom/server";
+import Html           from "react-pdf-html";
+import ReactDOMServer from "react-dom/server";
+
+import { imgUrlPdf } from "helpers";
 
 
 const Mod14Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height       : "991px",
-				width        : "850px",
-				padding      : "98px",
-				paddingLeft  : "104px",
-				paddingRight : "104px",
+				height  : "991px",
+				width   : "100%",
+				padding : "20px",
 			}}
 		>
 			<div
 				style={{
-					height     : "calc(50% - 10px)",
-					width      : "100%",
-					overflow   : "hidden",
-					background : "#E3E3E3",
+					height        : "100%",
+					width         : "100%",
+					display       : "flex",
+					flexDirection : "column",
+					gap           : "10px",
 				}}
 			>
-				{
-					images[0]?.url && (
-						<img
-							src={resizerImage(selectPhotoUrl(images[0]), 622, 387)}
-							alt="test"
-							style={{
-								height    : "991px",
-								objectFit : "cover",
-							}}
-						/>
-					)
-				}
-			</div>
-			<div style={{height : "10px"}}>
-				&nbsp;
-			</div>
-			<div
-				style={{
-					height     : "calc(50% - 10px)",
-					width      : "100%",
-					overflow   : "hidden",
-					background : "#E3E3E3",
-				}}
-			>
-				{
-					images[1]?.url && (
-						<img
-							src={resizerImage(selectPhotoUrl(images[1]), 622, 387)}
-							alt="test"
-							style={{
-								height    : "991px",
-								objectFit : "cover",
-							}}
-						/>
-					)
-				}
+				<div
+					style={{
+						width      : "100%",
+						height     : "calc(50% - 5px)",
+						background : "#E3E3E3",
+						overflow   : "hidden",
+					}}
+				>
+					{
+						images[0]?.url && (
+							<img
+								src={imgUrlPdf(images[0])}
+								alt="test"
+								style={{
+									height    : "470.5px",
+									objectFit : "cover",
+								}}
+							/>
+						)
+					}
+				</div>
+				<div
+					style={{
+						width         : "100%",
+						height        : "calc(50% - 5px)",
+						display       : "flex",
+						flexDirection : "row",
+						gap           : "10px",
+					}}
+				>
+					<div
+						style={{
+							width      : "calac(30% - 5px)",
+							height     : "100%",
+							overflow   : "hidden",
+							background : "#E3E3E3",
+						}}
+					>
+						{
+							images[1]?.url && (
+								<img
+									src={imgUrlPdf(images[1])}
+									alt="test"
+									style={{
+										height    : "470.5px",
+										objectFit : "cover",
+									}}
+								/>
+							)
+						}
+					</div>
+					<div
+						style={{
+							width      : "calac(70% - 5px)",
+							height     : "100%",
+							overflow   : "hidden",
+							background : "#E3E3E3",
+						}}
+					>
+						{
+							images[2]?.url && (
+								<img
+									src={imgUrlPdf(images[2])}
+									alt="test"
+									style={{
+										height    : "470.5px",
+										objectFit : "cover",
+									}}
+								/>
+							)
+						}
+					</div>
+				</div>
 			</div>
 		</div>
 	);

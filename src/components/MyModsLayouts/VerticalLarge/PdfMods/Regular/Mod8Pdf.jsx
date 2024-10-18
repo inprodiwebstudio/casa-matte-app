@@ -1,44 +1,72 @@
 import React from "react";
 
 //Own components
-import { resizerImage } from "helpers";
 // eslint-disable-next-line import/extensions
-import { selectPhotoUrl } from "components/LayoutHandler/ImgLayout/imgLayout.helpers";
-import Html               from "react-pdf-html";
-import ReactDOMServer     from "react-dom/server";
+import Html           from "react-pdf-html";
+import ReactDOMServer from "react-dom/server";
+
+import { imgUrlPdf } from "helpers";
 
 
 const Mod8Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height        : "991px",
-				width         : "850px",
-				paddingTop    : "271px",
-				paddingBottom : "271px",
-				paddingRight  : "175px",
+				height : "991px",
+				width  : "100%",
 			}}
 		>
 			<div
 				style={{
-					height     : "100%",
-					width      : "100%",
-					overflow   : "hidden",
-					background : "#E3E3E3",
+					height        : "100%",
+					width         : "100%",
+					display       : "flex",
+					flexDirection : "column",
+					gap           : "10px",
 				}}
 			>
-				{
-					images[0]?.url && (
-						<img
-							src={resizerImage(selectPhotoUrl(images[0]), 675, 449)}
-							alt="test"
-							style={{
-								height    : "991px",
-								objectFit : "cover",
-							}}
-						/>
-					)
-				}
+				<div
+					style={{
+						height     : "calc(50% - 5px)",
+						width      : "100%",
+						overflow   : "hidden",
+						background : "#E3E3E3",
+					}}
+				>
+					{
+						images[0]?.url && (
+							<img
+								src={imgUrlPdf(images[0])}
+								alt="test"
+								style={{
+									height    : "500.5px",
+									objectFit : "cover",
+								}}
+							/>
+						)
+					}
+				</div>
+				<div
+					style={{
+						height     : "calc(50% - 5px)",
+						width      : "100%",
+						overflow   : "hidden",
+						background : "#E3E3E3",
+					}}
+				>
+					{
+						images[1]?.url && (
+							<img
+								src={imgUrlPdf(images[1])}
+								alt="test"
+								style={{
+									height    : "500.5px",
+									objectFit : "cover",
+								}}
+							/>
+						)
+					}
+				</div>
 			</div>
 		</div>
 	);

@@ -1,44 +1,75 @@
 import React from "react";
 
 //Own components
-import { resizerImage } from "helpers";
 // eslint-disable-next-line import/extensions
-import { selectPhotoUrl } from "components/LayoutHandler/ImgLayout/imgLayout.helpers";
-import Html               from "react-pdf-html";
-import ReactDOMServer     from "react-dom/server";
+import Html           from "react-pdf-html";
+import ReactDOMServer from "react-dom/server";
+
+import { imgUrlPdf } from "helpers";
 
 
 const Mod11Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height        : "991px",
-				width         : "850px",
-				padding       : "122px",
-				paddingTop    : "287px",
-				paddingBottom : "287px",
+				height       : "991px",
+				width        : "100%",
+				padding      : "210px",
+				paddingLeft  : "90px",
+				paddingRight : "90px",
 			}}
 		>
 			<div
 				style={{
-					height     : "100%",
-					width      : "100%",
-					overflow   : "hidden",
-					background : "#E3E3E3",
+					height        : "100%",
+					width         : "100%",
+					display       : "flex",
+					flexDirection : "row",
+					gap           : "10px",
 				}}
 			>
-				{
-					images[0]?.url && (
-						<img
-							src={resizerImage(selectPhotoUrl(images[0]), 606, 417)}
-							alt="test"
-							style={{
-								height    : "991px",
-								objectFit : "cover",
-							}}
-						/>
-					)
-				}
+				<div
+					style={{
+						width      : "calc(50% - 5px)",
+						height     : "100%",
+						overflow   : "hidden",
+						background : "#E3E3E3",
+					}}
+				>
+					{
+						images[0]?.url && (
+							<img
+								src={imgUrlPdf(images[0])}
+								alt="test"
+								style={{
+									height    : "571px",
+									objectFit : "cover",
+								}}
+							/>
+						)
+					}
+				</div>
+				<div
+					style={{
+						width      : "calc(50% - 5px)",
+						height     : "100%",
+						overflow   : "hidden",
+						background : "#E3E3E3",
+					}}
+				>
+					{
+						images[1]?.url && (
+							<img
+								src={imgUrlPdf(images[1])}
+								alt="test"
+								style={{
+									height    : "571px",
+									objectFit : "cover",
+								}}
+							/>
+						)
+					}
+				</div>
 			</div>
 		</div>
 	);

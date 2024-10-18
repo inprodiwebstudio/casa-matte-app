@@ -1,12 +1,10 @@
 import React from "react";
 
 //Own components
-// import { selectPhotoUrl } from "components/LayoutHandler/ImgLayout/imgLayout.helpers";
 import Html           from "react-pdf-html";
 import ReactDOMServer from "react-dom/server";
 import { imgUrlPdf }  from "helpers";
 // eslint-disable-next-line import/extensions
-// import { selectPhotoUrl } from "components/LayoutHandler/ImgLayout/imgLayout.helpers";
 
 const Mod1Pdf = ({images}) => {
 

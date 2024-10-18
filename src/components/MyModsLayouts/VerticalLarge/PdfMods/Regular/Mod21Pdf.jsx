@@ -8,7 +8,7 @@ import ReactDOMServer from "react-dom/server";
 import { imgUrlPdf } from "helpers";
 
 
-const Mod13Pdf = ({images}) => {
+const Mod21Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
@@ -28,29 +28,8 @@ const Mod13Pdf = ({images}) => {
 			>
 				<div
 					style={{
-						width      : "100%",
-						height     : "calc(50% - 5px)",
-						background : "#E3E3E3",
-						overflow   : "hidden",
-					}}
-				>
-					{
-						images[0]?.url && (
-							<img
-								src={imgUrlPdf(images[0])}
-								alt="test"
-								style={{
-									height    : "470.5px",
-									objectFit : "cover",
-								}}
-							/>
-						)
-					}
-				</div>
-				<div
-					style={{
-						width         : "100%",
 						height        : "calc(50% - 5px)",
+						width         : "100%",
 						display       : "flex",
 						flexDirection : "row",
 						gap           : "10px",
@@ -58,8 +37,29 @@ const Mod13Pdf = ({images}) => {
 				>
 					<div
 						style={{
-							width      : "calac(50% - 5px)",
 							height     : "100%",
+							width      : "calc(50% - 5px)",
+							overflow   : "hidden",
+							background : "#E3E3E3",
+						}}
+					>
+						{
+							images[0]?.url && (
+								<img
+									src={imgUrlPdf(images[0])}
+									alt="test"
+									style={{
+										height    : "470.5px",
+										objectFit : "cover",
+									}}
+								/>
+							)
+						}
+					</div>
+					<div
+						style={{
+							height     : "100%",
+							width      : "calc(50% - 5px)",
 							overflow   : "hidden",
 							background : "#E3E3E3",
 						}}
@@ -77,10 +77,20 @@ const Mod13Pdf = ({images}) => {
 							)
 						}
 					</div>
+				</div>
+				<div
+					style={{
+						height        : "calc(50% - 5px)",
+						width         : "100%",
+						display       : "flex",
+						flexDirection : "row",
+						gap           : "10px",
+					}}
+				>
 					<div
 						style={{
-							width      : "calac(50% - 5px)",
 							height     : "100%",
+							width      : "calc(50% - 5px)",
 							overflow   : "hidden",
 							background : "#E3E3E3",
 						}}
@@ -89,6 +99,27 @@ const Mod13Pdf = ({images}) => {
 							images[2]?.url && (
 								<img
 									src={imgUrlPdf(images[2])}
+									alt="test"
+									style={{
+										height    : "470.5px",
+										objectFit : "cover",
+									}}
+								/>
+							)
+						}
+					</div>
+					<div
+						style={{
+							height     : "100%",
+							width      : "calc(50% - 5px)",
+							overflow   : "hidden",
+							background : "#E3E3E3",
+						}}
+					>
+						{
+							images[3]?.url && (
+								<img
+									src={imgUrlPdf(images[3])}
 									alt="test"
 									style={{
 										height    : "470.5px",
@@ -110,4 +141,4 @@ const Mod13Pdf = ({images}) => {
 	);
 };
 
-export default Mod13Pdf;
+export default Mod21Pdf;

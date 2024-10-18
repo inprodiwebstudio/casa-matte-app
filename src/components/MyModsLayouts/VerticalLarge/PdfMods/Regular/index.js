@@ -14,4 +14,10 @@ export { default as Mod13Pdf} from "./Mod13Pdf";
 export { default as Mod14Pdf} from "./Mod14Pdf";
 export { default as Mod15Pdf} from "./Mod15Pdf";
 export { default as Mod16Pdf} from "./Mod16Pdf";
+export { default as Mod17Pdf} from "./Mod17Pdf";
+export { default as Mod18Pdf} from "./Mod18Pdf";
+export { default as Mod19Pdf} from "./Mod19Pdf";
+export { default as Mod20Pdf} from "./Mod20Pdf";
+export { default as Mod21Pdf} from "./Mod21Pdf";
+export { default as Mod22Pdf} from "./Mod22Pdf";
 
