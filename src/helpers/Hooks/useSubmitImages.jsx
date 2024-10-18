@@ -11,7 +11,7 @@ const useSubmitImages = ({userName, folderName}) => {
 		try {
 			const { data } = await generateSignMutation({data : {
 				timestamp : timestamp,
-				folder    : `${userName}/${folderName ? folderName : isditedPhoto ? "edited" : ""}`,
+				folder    : `${userName}/${folderName ? folderName : isditedPhoto ? "_editedPhotos" : ""}`,
 			}});
 			const uploadFile = await axios.postForm(
 				"https://api.cloudinary.com/v1_1/dxvi7hk47/image/upload",

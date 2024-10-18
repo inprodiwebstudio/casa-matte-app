@@ -28,7 +28,7 @@ const Mod1Pdf = ({images}) => {
 				{
 					images[0]?.url && (
 						<img
-							src={imgUrlPdf(images[0]?.url)}
+							src={imgUrlPdf(images[0])}
 							alt={images[0]?.url}
 							style={{
 								objectFit : "cover",

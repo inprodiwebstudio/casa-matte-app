@@ -1,10 +1,8 @@
 const constructorImg = (urlimg) => {
 	if (!urlimg) return;
 	const splitImage = urlimg.split("w_");
-	const folderName = urlimg.split("/")[urlimg.split("/").length - 2];
-	const fileName = urlimg.split("/")[urlimg.split("/").length - 1];
 
-	return `${splitImage[0]}q_70/v1/${folderName}/${fileName}`;
+	return `${splitImage[0]}q_60/v1${urlimg.split("v1")[1]}`;
 };
 
 export default constructorImg;

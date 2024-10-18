@@ -1,10 +1,11 @@
 /* eslint-disable import/extensions */
-// import { selectPhotoUrl } from "components/LayoutHandler/ImgLayout/imgLayout.helpers";
-import highQualityImgUrl from "helpers/Functions/highQualityImg";
+import { selectPhotoUrl } from "components/LayoutHandler/ImgLayout/imgLayout.helpers";
+import highQualityImgUrl  from "helpers/Functions/highQualityImg";
 const imgUrlPdf = (imgData) => {
 	if ( !imgData ) return "null";
 
-	const publicUrlHighRes = highQualityImgUrl(imgData);
+	const urlSelected =  selectPhotoUrl(imgData);
+	const publicUrlHighRes = highQualityImgUrl(urlSelected);
 
 	return publicUrlHighRes;
 };
