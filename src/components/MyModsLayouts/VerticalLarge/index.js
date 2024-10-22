@@ -90,6 +90,7 @@ import {
 	Mod31Pdf,
 	Mod32Pdf,
 	Mod33Pdf,
+	Mod34Pdf,
 } from "./PdfMods/Regular";
 
 import {
@@ -423,7 +424,7 @@ const VerticalLarge = {
 		layout       : Mod34,
 		numberPhotos : 5,
 		cat          : "fotos",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod34Pdf,
 	},
 	Mod35 : {
 		id           : "Mod35",
