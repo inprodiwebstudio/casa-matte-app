@@ -216,8 +216,9 @@
 			}
 
 			@include laptop {
-				transform: scale(0.5, 0.5);
+				transform: scale(0.47, 0.47);
 				margin-right: 42.5px;
+				margin-bottom: 10px;
 				z-index: 1;
 			}
 
