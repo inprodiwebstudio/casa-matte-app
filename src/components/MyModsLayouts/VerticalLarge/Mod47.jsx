@@ -54,6 +54,7 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							data={textInsertion(data?.text[0], defaultTitle01, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
+							textNo={0}
 						/>
 					</div>
 					<DividerLayout long="0.3em" position="h" />
@@ -71,6 +72,7 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							data={textInsertion(data?.text[1], defaultIndice01, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
+							textNo={1}
 						/>
 					</div>
 				</Stack>
@@ -89,9 +91,10 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							letterSpacing="3px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
-							data={textInsertion(data?.text[5], defaultTitle02, isInWorkSpace)}
+							data={textInsertion(data?.text[2], defaultTitle02, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
+							textNo={2}
 						/>
 					</div>
 					<DividerLayout long="0.3em" position="h" />
@@ -106,9 +109,10 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							gapSpacing="10px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.BodyIndices align="left" />}
-							data={textInsertion(data?.text[6], defaultIndice02, isInWorkSpace)}
+							data={textInsertion(data?.text[3], defaultIndice02, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
+							textNo={3}
 						/>
 					</div>
 				</Stack>
@@ -127,9 +131,10 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							letterSpacing="3px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
-							data={textInsertion(data?.text[5], defaultTitle03, isInWorkSpace)}
+							data={textInsertion(data?.text[4], defaultTitle03, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
+							textNo={4}
 						/>
 					</div>
 					<DividerLayout long="0.3em" position="h" />
@@ -144,9 +149,10 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							gapSpacing="10px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.BodyIndices align="left" />}
-							data={textInsertion(data?.text[6], defaultIndice03, isInWorkSpace)}
+							data={textInsertion(data?.text[5], defaultIndice03, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
+							textNo={5}
 						/>
 					</div>
 				</Stack>

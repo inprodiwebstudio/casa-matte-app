@@ -91,6 +91,21 @@ import {
 	Mod32Pdf,
 	Mod33Pdf,
 	Mod34Pdf,
+	Mod35Pdf,
+	Mod36Pdf,
+	Mod37Pdf,
+	Mod38Pdf,
+	Mod39Pdf,
+	Mod40Pdf,
+	Mod41Pdf,
+	Mod42Pdf,
+	Mod43Pdf,
+	Mod44Pdf,
+	Mod45Pdf,
+	Mod46Pdf,
+	Mod47Pdf,
+	Mod48Pdf,
+	Mod49Pdf,
 } from "./PdfMods/Regular";
 
 import {
@@ -432,7 +447,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 1,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod35Pdf,
 	},
 	Mod36 : {
 		id           : "Mod36",
@@ -440,7 +455,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 1,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod36Pdf,
 	},
 	Mod37 : {
 		id           : "Mod37",
@@ -448,7 +463,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod37Pdf,
 	},
 	Mod38 : {
 		id           : "Mod38",
@@ -456,7 +471,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod38Pdf,
 	},
 	Mod39 : {
 		id           : "Mod39",
@@ -464,7 +479,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 1,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod39Pdf,
 	},
 	Mod40 : {
 		id           : "Mod40",
@@ -472,7 +487,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 1,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod40Pdf,
 	},
 	Mod41 : {
 		id           : "Mod41",
@@ -480,7 +495,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod41Pdf,
 	},
 	Mod42 : {
 		id           : "Mod42",
@@ -488,7 +503,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod42Pdf,
 	},
 	Mod43 : {
 		id           : "Mod43",
@@ -496,7 +511,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod43Pdf,
 	},
 	Mod44 : {
 		id           : "Mod44",
@@ -504,7 +519,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 5,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod44Pdf,
 	},
 	Mod45 : {
 		id           : "Mod45",
@@ -512,15 +527,15 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 5,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod45Pdf,
 	},
 	Mod46 : {
 		id           : "Mod46",
 		layout       : Mod46,
 		numberPhotos : 0,
-		numberText   : 15,
+		numberText   : 6,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod46Pdf,
 	},
 	Mod47 : {
 		id           : "Mod47",
@@ -528,7 +543,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 15,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod47Pdf,
 	},
 	Mod48 : {
 		id           : "Mod48",
@@ -536,7 +551,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 5,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod48Pdf,
 	},
 	Mod49 : {
 		id           : "Mod49",
@@ -544,7 +559,7 @@ const VerticalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod49Pdf,
 	},
 	Mod50 : {
 		id           : "Mod50",

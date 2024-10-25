@@ -14,11 +14,11 @@ import Alignment     from "@ckeditor/ckeditor5-alignment/src/alignment";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
 // import { EditorState, convertToRaw, ContentState } from "draft-js";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 // import { closeAllModals }      from "@mantine/modals";
 import { workSpaceSlice } from "store/Slices";
 import { connect }        from "react-redux";
-// import { useParams }      from "react-router";
+import { useParams }      from "react-router";
 
 import { bindAll } from "helpers";
 import styles      from "./styles";
@@ -119,26 +119,26 @@ const EditText = ({
 
 	// console.log(dataTextPage);
 
-	// const { pageId } = useParams();
+	const { pageId } = useParams();
 
-	// const debounce = (func, delay) => {
-	// 	let timeout;
-	// 	return (...args) => {
-	// 		if (timeout) clearTimeout(timeout);
-	// 		timeout = setTimeout(() => {
-	// 			func(...args);
-	// 		}, delay);
-	// 	};
-	// };
+	const debounce = (func, delay) => {
+		let timeout;
+		return (...args) => {
+			if (timeout) clearTimeout(timeout);
+			timeout = setTimeout(() => {
+				func(...args);
+			}, delay);
+		};
+	};
 
-	// const handleEditorChange = useCallback(
-	// 	debounce((event, editor) => {
-	// 	  const data = editor.getData();
-	// 	  setEditorState(data);
-	// 	  workSpaceSlice.addText({pageId, sheetNo, text : data, layoutNo});
-	// 	}, 5000),
-	// 	[]
-	// );
+	const handleEditorChange = useCallback(
+		debounce((event, editor) => {
+		  const data = editor.getData();
+		  setEditorState(data);
+		  workSpaceSlice.addText({pageId, sheetNo, text : data, layoutNo});
+		}, 3000),
+		[]
+	);
 
 	return (
 		<div
@@ -149,8 +149,7 @@ const EditText = ({
 				config={ editorConfiguration }
 				data={editorState}
 				onChange={(event, editor) => {
-					const data = editor.getData();
-					setEditorState(data);
+					handleEditorChange(event, editor);
 				}}
 				onFocus={ () => {
 					console.log( "Focused!" );

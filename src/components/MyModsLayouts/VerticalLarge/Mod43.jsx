@@ -39,6 +39,7 @@ const Mod46 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}
+					textNo={0}
 				/>
 				<Text
 					sizes={{
@@ -53,6 +54,7 @@ const Mod46 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}
+					textNo={1}
 				/>
 			</Stack>
 		</Flex>

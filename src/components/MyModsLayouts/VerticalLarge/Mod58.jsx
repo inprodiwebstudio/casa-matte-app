@@ -30,6 +30,7 @@ const Mod59 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					sheetNo={sheetNo}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}
+					textNo={0}
 				/>
 			</Stack>
 			<Stack w="45%" h="63%">

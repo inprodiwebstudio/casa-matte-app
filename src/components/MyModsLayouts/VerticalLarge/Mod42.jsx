@@ -43,6 +43,7 @@ const Mod45 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
+						textNo={0}
 					/>
 					<DividerLayout long="20%" position="h" />
 				</Flex>
@@ -64,6 +65,7 @@ const Mod45 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
+						textNo={1}
 					/>
 				</Flex>
 			</Stack>
