@@ -56,12 +56,12 @@ const Mod52Pdf = ({text, images}) => {
 							}}
 							dangerouslySetInnerHTML={{
 								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
+								p {
+								margin: 0;
+								padding: 0;
+								}
+							</style>
+							${text01}`,
 							}}
 						/>
 					</div>
