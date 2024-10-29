@@ -112,6 +112,8 @@ import {
 	Mod53Pdf,
 	Mod54Pdf,
 	Mod55Pdf,
+	Mod56Pdf,
+	Mod57Pdf,
 } from "./PdfMods/Regular";
 
 import {
@@ -621,7 +623,7 @@ const VerticalLarge = {
 		numberPhotos : 2,
 		numberText   : 1,
 		cat          : "fotosytexto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod56Pdf,
 	},
 	Mod57 : {
 		id           : "Mod57",
@@ -629,7 +631,7 @@ const VerticalLarge = {
 		numberPhotos : 4,
 		numberText   : 1,
 		cat          : "fotosytexto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod57Pdf,
 	},
 };
 

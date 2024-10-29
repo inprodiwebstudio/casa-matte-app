@@ -53,4 +53,6 @@ export { default as Mod52Pdf} from "./Mod52Pdf";
 export { default as Mod53Pdf} from "./Mod53Pdf";
 export { default as Mod54Pdf} from "./Mod54Pdf";
 export { default as Mod55Pdf} from "./Mod55Pdf";
+export { default as Mod56Pdf} from "./Mod56Pdf";
+export { default as Mod57Pdf} from "./Mod57Pdf";
 
