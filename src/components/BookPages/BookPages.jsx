@@ -89,12 +89,12 @@ const BookPages = ({
 				}
 			>
 				{
-					(pageData?.sheet1?.layoutType.includes("Front")) && (
+					(pageData?.sheet1?.layoutType?.includes("Front")) && (
 						<FrontLayout pageData={pageData} isThumbNail={isThumbNail} isInPaginator={isInPaginator} isInWorkSpcae={isInWorkSpcae} />
 					)
 				}
 				{
-					((pageData?.sheet1?.layoutType !== "") && (!pageData?.sheet1?.layoutType.includes("Front"))) && (
+					((pageData?.sheet1?.layoutType !== "") && (!pageData?.sheet1?.layoutType?.includes("Front"))) && (
 						handleLayoutMod(pageData?.sheet1, 1)
 					)
 				}

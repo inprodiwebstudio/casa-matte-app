@@ -247,11 +247,26 @@ export const workSpaceSlice = createSlice({
 		},
 		addPage : (state) => {
 			const newData = {...state.data.pages};
-			const listOfPages = convertToArray(newData);
+			const pagesObjToArray = convertToArray(newData);
+
+			const isAvailablePage = pagesObjToArray.find((page) => page.id === state.data.currentPage);
+
+			if (!isAvailablePage) {
+				return;
+			}
+
+			const listOfPages = pagesObjToArray.filter((page) => page.id !== "page1");
 
 			const indexCurrentPage = listOfPages.findIndex((page) => page.id === state.data.currentPage);
 
-			const slicePagesToReorder = listOfPages.slice(indexCurrentPage, listOfPages.length);
+			const validIndexPage = () => {
+				if (indexCurrentPage === -1) {
+					return 0;
+				}
+				return indexCurrentPage;
+			};
+
+			const slicePagesToReorder = listOfPages.slice(validIndexPage(), listOfPages.length);
 
 			const lastPage = slicePagesToReorder[slicePagesToReorder.length - 1];
 
@@ -279,13 +294,15 @@ export const workSpaceSlice = createSlice({
 			}
 
 			const newPagesReordered = slicePagesToReorder.map((page, index) => {
-				if (index === 0 ) {
+				if (index === 0) {
 					return {
 						...page,
 						sheet1 : {
 							pageNo     : page?.sheet1?.pageNo,
 							layoutType : "",
-							photos     : {},
+							photos     : {
+								0 : {id : "", url : ""},
+							},
 						},
 						sheet2 : {
 							...page?.sheet1,
@@ -318,9 +335,9 @@ export const workSpaceSlice = createSlice({
 				};
 			});
 
-			listOfPages.splice(indexCurrentPage, slicePagesToReorder.length, ...newPagesReordered);
+			listOfPages.splice(validIndexPage(), slicePagesToReorder.length, ...newPagesReordered);
 
-			state.data.pages = convertToObject(listOfPages);
+			state.data.pages = convertToObject([pagesObjToArray[0], ...listOfPages]);
 			const history = new History();
 			history.undoStack = state.history.undo;
 			const undoNewData = {
