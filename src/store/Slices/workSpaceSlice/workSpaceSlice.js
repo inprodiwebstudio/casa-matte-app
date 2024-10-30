@@ -326,11 +326,13 @@ export const workSpaceSlice = createSlice({
 						pageNo     : page.sheet1?.pageNo,
 						layoutType : slicePagesToReorder[index - 1]?.sheet2?.layoutType,
 						photos     : slicePagesToReorder[index - 1]?.sheet2?.photos,
+						text       : slicePagesToReorder[index - 1]?.sheet2?.text ?? {},
 					},
 					sheet2 : {
 						pageNo     : page.sheet2?.pageNo,
 						layoutType : page.sheet1?.layoutType,
 						photos     : page.sheet1?.photos,
+						text       : page.sheet1?.text ?? {},
 					},
 				};
 			});
