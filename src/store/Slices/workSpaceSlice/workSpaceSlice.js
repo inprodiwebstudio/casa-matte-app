@@ -272,7 +272,7 @@ export const workSpaceSlice = createSlice({
 
 			if (lastPage.sheet2) {
 				slicePagesToReorder.push({
-					id     : `page${lastPage.id.split("page")[1] + 1}`,
+					id     : `page${Number(lastPage.id.split("page")[1]) + 1}`,
 					sheet1 : {
 						pageNo     : lastPage?.sheet2?.pageNo + 1,
 						layoutType : "",
