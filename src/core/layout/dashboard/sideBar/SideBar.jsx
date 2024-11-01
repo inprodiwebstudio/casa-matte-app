@@ -22,6 +22,7 @@ const SideBar = ({
 	typeDropView,
 	galleryData,
 	galleryPath,
+	isLoggedIn,
 	isPreview,
 	userName,
 	filter,
@@ -89,8 +90,11 @@ const SideBar = ({
 	};
 
 	useEffect(() => {
-		handlerGetGallery();
-	}, [filter]);
+		if (isLoggedIn) {
+			handlerGetGallery();
+		}
+		return;
+	}, [filter, isLoggedIn]);
 
 	return (
 		<div id="SideBar" className={`${isAvailableDocs ? (isFullSizeSideBar && "isFullSize") : "isNoData"} ${isPreview && "isInpreview"}`}>
@@ -200,6 +204,7 @@ const mapStateToProps = ({ gallerySlice, authSlice, workSpaceSlice }) => ({
 	userName             : authSlice?.user?.username ?? undefined,
 	filter               : gallerySlice?.filter ?? undefined,
 	isPreview            : workSpaceSlice?.isPreview ?? undefined,
+	isLoggedIn           : authSlice?.loggedIn ?? false,
 });
 
 const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions, workSpaceSlice : workSpaceSlice.actions});
