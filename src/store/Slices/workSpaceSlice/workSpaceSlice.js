@@ -303,6 +303,7 @@ export const workSpaceSlice = createSlice({
 							photos     : {
 								0 : {id : "", url : ""},
 							},
+							text : {},
 						},
 						sheet2 : {
 							...page?.sheet1,
@@ -317,6 +318,7 @@ export const workSpaceSlice = createSlice({
 							pageNo     : page?.sheet1?.pageNo,
 							layoutType : slicePagesToReorder[index - 1]?.sheet2?.layoutType,
 							photos     : slicePagesToReorder[index - 1]?.sheet2?.photos,
+							text       : slicePagesToReorder[index - 1]?.sheet2?.text ?? {},
 						},
 					};
 				}
