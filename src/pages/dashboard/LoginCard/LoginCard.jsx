@@ -87,14 +87,53 @@ const LoginCard = () => {
 
 				const configPhotoBook = getPostPhotoBook?.meta ?? {};
 
+				//WhiteList of sizes and formats
+				const whiteListOfSizes = ["chico", "mediano", "grande"];
+				const whiteListOfFormats = ["horizontal", "vertical", "cuadrado"];
+
+				const getFormatAndSize = () => {
+					const formatAndSize = {
+						format : "vertical", //default value,
+						size   : "grande", //default value,
+					};
+
+					if (configPhotoBook && configPhotoBook?.tamano) {
+						const parseLowerCaseNameSize = configPhotoBook?.tamano.toLowerCase();
+						const sizeFound = whiteListOfSizes.find(word => parseLowerCaseNameSize.includes(word));
+						const formatFound = whiteListOfFormats.find(word => parseLowerCaseNameSize.includes(word));
+
+						if (sizeFound && formatFound) {
+							formatAndSize.size = sizeFound;
+							formatAndSize.format = formatFound;
+						}
+					}
+
+					return formatAndSize;
+				};
+
+				const regexMatchDimenssions = /\(\d+x\d+cm\)/;
+
+				const foundDimessions = () => {
+					let dimenssions = "30x35cm";
+
+					const foundDimenssion = configPhotoBook?.tamano.match(regexMatchDimenssions);
+
+					if (foundDimenssion[0]) {
+						dimenssions = foundDimenssion[0];
+					}
+
+					return dimenssions;
+				};
+
 				const model = configPhotoBook?.modelo ?? "white";
-				// const size = configPhotoBook?.tamano ?? "grande";
-				// const dimentions = configPhotoBook?.dimensiones ?? "vertical";
+				const size = getFormatAndSize().size;
+				const format =  getFormatAndSize().format;
+				const dimentions = foundDimessions();
 				const pasta = configPhotoBook?.pasta ?? "";
 				const bound = configPhotoBook?.encuadernado ?? "";
 				const numberOfPages = configPhotoBook?.numero_de_paginas ? Number(configPhotoBook?.numero_de_paginas) : 40;
 
-				console.log(model, pasta, bound, numberOfPages);
+				console.log(format, size, dimentions);
 
 				const isAvailableConfigPages = !!configPhotoBook?.config;
 
