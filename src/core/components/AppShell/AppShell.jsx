@@ -359,11 +359,11 @@ const AppShell = ({
 
 	const isSelectedPage = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice?.data, shallowEqual);
-	const photoBookId = useSelector((state) => state.authSlice?.user?.photoBookId, shallowEqual);
+	const postIdphotoBook = useSelector((state) => state.authSlice?.user?.postId, shallowEqual);
 	const initialData = useSelector((state) => state.workSpaceSlice?.initialData, shallowEqual);
 
 	const { data : photobookData, isFetching, error } = genericApi.useGetDataQuery({
-		module : `wp-json/wp/v2/photobook/${photoBookId === "" ? null : photoBookId}`,
+		module : `wp-json/wp/v2/photobook-2-0/${postIdphotoBook === "" ? null : postIdphotoBook}`,
 	});
 
 	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
@@ -385,7 +385,7 @@ const AppShell = ({
 					config : parseSendData(workSpaceData),
 				},
 			},
-			id     : photoBookId,
+			id     : postIdphotoBook,
 			method : "POST",
 		});
 	};

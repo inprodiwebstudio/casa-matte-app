@@ -6,6 +6,8 @@
   "proxy": "https://temporal.casamatte.com",
   "scripts": {
     "start": "vite",
+    "debug": "vite --debug --host 0.0.0.0",
+    "dev":  "vite",
     "commit": "cz",
     "build": "vite build",
     "preview": "vite preview",
