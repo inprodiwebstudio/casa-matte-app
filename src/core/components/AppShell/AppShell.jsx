@@ -377,7 +377,7 @@ const AppShell = ({
 
 	const submitData = async () => {
 		await dataMutation({
-			module : "wp-json/wp/v2/photobook",
+			module : "wp-json/wp/v2/photobook-2-0",
 			data   : {
 				tittle : "Texto de prueba",
 				status : "publish",

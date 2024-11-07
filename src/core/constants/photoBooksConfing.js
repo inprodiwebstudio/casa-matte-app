@@ -185,6 +185,19 @@ const photoBooksConfing = {
 		},
 		cuadrado : false,
 	},
+	coffeTable : {
+		mediaCarta : {
+			aspectRatio : [496, 425],
+			sizes       : {
+				mediano : {
+					layoutMods       : {},
+					frontLayouts     : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
+				},
+			},
+		},
+	},
 };
 
 export default photoBooksConfing;

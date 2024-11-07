@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useDispatch }         from "react-redux";
 //HookForm
-import { useForm } from "react-hook-form";
+import { useForm }                   from "react-hook-form";
+import { workSpaceSlice, authSlice } from "store/Slices";
 //Yup
 import * as Yup        from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,6 +13,7 @@ import { genericApi }                       from "store/api/genericApi";
 import { LoginNotification }                from "Notifications";
 import { TextInput, PasswordInput, Button } from "core/components";
 import "./LoginCard.scss";
+import { convertToObject }                  from "helpers";
 
 const schema = Yup.object().shape({
 	username : Yup.string().required("El campo es obligatorio"),
@@ -20,6 +23,8 @@ const schema = Yup.object().shape({
 const { useLazyGetDataQuery } = genericApi;
 
 const LoginCard = () => {
+	const dispatch = useDispatch();
+
 	const [loginMutation, loginMutationResult] = genericApi.useSubmitDataMutation();
 	const [ loading, setLoading ] = useState(false);
 
@@ -27,6 +32,8 @@ const LoginCard = () => {
 
 	const nameUser = searchParams.get("username") ?? "";
 	const postId = searchParams.get("postId") ?? "";
+
+	const [dataMutation] = genericApi.useSubmitDataMutation();
 
 	const [ fetchData ] = useLazyGetDataQuery();
 
@@ -125,101 +132,151 @@ const LoginCard = () => {
 					return dimenssions;
 				};
 
-				const model = configPhotoBook?.modelo ?? "white";
+				const model = configPhotoBook?.modelo ? configPhotoBook?.modelo.replace(" PHOTOBOOK", "").toLowerCase() : "white";
 				const size = getFormatAndSize().size;
 				const format =  getFormatAndSize().format;
 				const dimentions = foundDimessions();
 				const pasta = configPhotoBook?.pasta ?? "";
 				const bound = configPhotoBook?.encuadernado ?? "";
+				const price = configPhotoBook?.precio_total?.replace("$", "") ?? "0";
 				const numberOfPages = configPhotoBook?.numero_de_paginas ? Number(configPhotoBook?.numero_de_paginas) : 40;
-
-				console.log(format, size, dimentions);
 
 				const isAvailableConfigPages = !!configPhotoBook?.config;
 
-				console.log(isAvailableConfigPages);
+				if (isAvailableConfigPages) {
+					return configPhotoBook?.config;
+				}
 
-				// const arrayGenerator = Array((numberOfPages + 2)/2).fill(0);
+				const configPhotoBookData = {
+					sizePhotoBook : size,
+					dimentions,
+					product       : model,
+					format,
+					frontPage     : {
+						id     : "FrontLayout",
+						text   : {},
+						sheet1 : {
+							layoutType : "",
+							text       : {},
+							photos     : {
+								"0" : {
+									id  : "",
+									url : "",
+								},
+							},
+						},
+					},
+					numberOfPages,
+					minPages      : 40,
+					maxPages      : numberOfPages,
+					currentPage   : "page1",
+					basePrice     : price.replace(" ", ""),
+					bound,
+					pasta,
+					maxRangePages : numberOfPages,
+					pages         : {},
+				};
 
-				// const listOfPages = arrayGenerator.map((e, index) => {
-				// 	if (index === 0) {
-				// 		return ({
-				// 			id     : "page1",
-				// 			sheet1 : {
-				// 				pageNo     : 1,
-				// 				layoutType : "",
-				// 				text       : "",
-				// 				photos     : {
-				// 					0 : {
-				// 						id  : "",
-				// 						url : "",
-				// 					},
-				// 				},
-				// 			},
-				// 		});
-				// 	}
-				// 	if (index === numberOfPages / 2) {
-				// 		return ({
-				// 			id     : `page${index + 1}`,
-				// 			sheet1 : {
-				// 				pageNo     : numberOfPages,
-				// 				layoutType : "",
-				// 				text       : "",
-				// 				photos     : {
-				// 					0 : {
-				// 						id  : "",
-				// 						url : "",
-				// 					},
-				// 				},
-				// 			},
-				// 		});
-				// 	}
-				// 	return ({
-				// 		id     : `page${index + 1}`,
-				// 		sheet1 : {
-				// 			pageNo     : index * 2,
-				// 			layoutType : "",
-				// 			text       : "",
-				// 			photos     : {
-				// 				0 : {
-				// 					id  : "",
-				// 					url : "",
-				// 				},
-				// 			},
-				// 		},
-				// 		sheet2 : {
-				// 			pageNo     : (index * 2) + 1,
-				// 			layoutType : "",
-				// 			text       : "",
-				// 			photos     : {
-				// 				0 : {
-				// 					id  : "",
-				// 					url : "",
-				// 				},
-				// 			},
-				// 		},
-				// 	});
-				// });
+				const totalPaginations = (numberOfPages - 1) / 2;
 
-				// const myPhotoBookData = {
-				// 	sizePhotoBook  : size,
-				// 	sizeDimentions : dimentions,
-				// 	pasta          : pasta,
-				// 	frontPage      : {},
-				// 	numberOfPages  : numberOfPages,
-				// 	price          : 0,
-				// 	bound          : bound,
-				// 	pages          : convertToObject(listOfPages),
-				// };
+				const isEvenPages = totalPaginations % 2 === 0;
 
-				// console.log(myPhotoBookData);
-				// setLoading(false);
+				const arrayGeneratorPages = Array(isEvenPages ? totalPaginations : (numberOfPages / 2) + 1).fill(0);
+
+				const listOfPages = arrayGeneratorPages.map((page, index) => {
+					if (index === 0) {
+						return ({
+							id     : "page1",
+							sheet1 : {
+								pageNo     : 1,
+								layoutType : "",
+								text       : "",
+								photos     : {
+									0 : {
+										id  : "",
+										url : "",
+									},
+								},
+							},
+						});
+					}
+					if ((index === arrayGeneratorPages.length - 1) && !isEvenPages) {
+						return ({
+							id     : `page${index + 1}`,
+							sheet1 : {
+								pageNo     : numberOfPages,
+								layoutType : "",
+								text       : {},
+								photos     : {
+									0 : {
+										id  : "",
+										url : "",
+									},
+								},
+							},
+						});
+					}
+					return ({
+						id     : `page${index + 1}`,
+						sheet1 : {
+							pageNo     : index * 2,
+							layoutType : "",
+							text       : {},
+							photos     : {
+								0 : {
+									id  : "",
+									url : "",
+								},
+							},
+						},
+						sheet2 : {
+							pageNo     : (index * 2) + 1,
+							layoutType : "",
+							text       : "",
+							photos     : {
+								0 : {
+									id  : "",
+									url : "",
+								},
+							},
+						},
+					});
+				});
+
+				configPhotoBookData.pages = convertToObject(listOfPages);
+
+				const parseSendData = (data) => {
+					const myData = data;
+					const stringData = JSON.stringify(myData);
+					const myReplacerString = stringData.replace(/"/g, "'");
+					return myReplacerString;
+				};
+
+				await dataMutation({
+					module : "wp-json/wp/v2/photobook-2-0",
+					data   : {
+						tittle : "Texto de prueba",
+						status : "publish",
+						meta   : {
+							config : parseSendData({...configPhotoBookData, modified : getPostPhotoBook?.modified ?? undefined}),
+						},
+					},
+					id     : postId,
+					method : "POST",
+				});
+
+				dispatch(workSpaceSlice.actions.insertData({...configPhotoBookData, modified : getPostPhotoBook?.modified ?? undefined}));
+				dispatch(authSlice.actions.setUserData({
+					...loginMutationResult.data,
+					postId : getPostPhotoBook?.id ?? undefined,
+				}));
+				dispatch(workSpaceSlice.actions.changeLoading(false));
+
+				setLoading(false);
 			} catch (error) {
 				console.error(error);
 				setLoading(false);
 			}
-			console.log("No es Suscriptor");
-			return;
 		}
 	};
 
