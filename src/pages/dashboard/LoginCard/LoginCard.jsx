@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useDispatch }         from "react-redux";
+import { useEffect, useState }                    from "react";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 //HookForm
 import { useForm }                   from "react-hook-form";
 import { workSpaceSlice, authSlice } from "store/Slices";
@@ -25,6 +25,8 @@ const { useLazyGetDataQuery } = genericApi;
 const LoginCard = () => {
 	const dispatch = useDispatch();
 
+	const userToken = useSelector((state) => state.authSlice.token, shallowEqual);
+
 	const [loginMutation, loginMutationResult] = genericApi.useSubmitDataMutation();
 	const [ loading, setLoading ] = useState(false);
 
@@ -45,6 +47,216 @@ const LoginCard = () => {
 	} = useForm({
 		resolver : yupResolver(schema),
 	});
+
+	const createPresetPhotoBook = async (photoBookPostId) => {
+		const photoBookMetaData = photoBookPostId?.meta;
+		//WhiteList of sizes and formats
+		const whiteListOfSizes = ["chico", "mediano", "grande"];
+		const whiteListOfFormats = ["horizontal", "vertical", "cuadrado"];
+
+		const getFormatAndSize = () => {
+			const formatAndSize = {
+				format : "vertical", //default value,
+				size   : "grande", //default value,
+			};
+
+			if (photoBookMetaData && photoBookMetaData?.tamano) {
+				const parseLowerCaseNameSize = photoBookMetaData?.tamano.toLowerCase();
+				const sizeFound = whiteListOfSizes.find(word => parseLowerCaseNameSize.includes(word));
+				const formatFound = whiteListOfFormats.find(word => parseLowerCaseNameSize.includes(word));
+
+				if (sizeFound && formatFound) {
+					formatAndSize.size = sizeFound;
+					formatAndSize.format = formatFound;
+				}
+			}
+
+			return formatAndSize;
+		};
+
+		const regexMatchDimenssions = /\(\d+x\d+cm\)/;
+
+		const foundDimessions = () => {
+			let dimenssions = "30x35cm";
+
+			const foundDimenssion = photoBookMetaData?.tamano.match(regexMatchDimenssions);
+
+			if (foundDimenssion[0]) {
+				dimenssions = foundDimenssion[0];
+			}
+
+			return dimenssions;
+		};
+
+		const model = photoBookMetaData?.modelo ? photoBookMetaData?.modelo.replace(" PHOTOBOOK", "").toLowerCase() : "white";
+		const size = getFormatAndSize().size;
+		const format =  getFormatAndSize().format;
+		const dimentions = foundDimessions();
+		const pasta = photoBookMetaData?.pasta ?? "";
+		const bound = photoBookMetaData?.encuadernado ?? "";
+		const price = photoBookMetaData?.precio_total?.replace("$", "") ?? "0";
+		const numberOfPages = photoBookMetaData?.numero_de_paginas ? Number(photoBookMetaData?.numero_de_paginas) : 40;
+
+		const configPhotoBookData = {
+			sizePhotoBook : size,
+			dimentions,
+			product       : model,
+			format,
+			frontPage     : {
+				id     : "FrontLayout",
+				text   : {},
+				sheet1 : {
+					layoutType : "",
+					text       : {},
+					photos     : {
+						"0" : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			},
+			numberOfPages,
+			minPages      : 40,
+			maxPages      : numberOfPages,
+			currentPage   : "page1",
+			basePrice     : price.replace(" ", ""),
+			bound,
+			pasta,
+			maxRangePages : numberOfPages,
+			pages         : {},
+		};
+
+		const totalPaginations = (numberOfPages - 1) / 2;
+
+		const isEvenPages = totalPaginations % 2 === 0;
+
+		const arrayGeneratorPages = Array(isEvenPages ? totalPaginations : (numberOfPages / 2) + 1).fill(0);
+
+		const listOfPages = arrayGeneratorPages.map((page, index) => {
+			if (index === 0) {
+				return ({
+					id     : "page1",
+					sheet1 : {
+						pageNo     : 1,
+						layoutType : "",
+						text       : "",
+						photos     : {
+							0 : {
+								id  : "",
+								url : "",
+							},
+						},
+					},
+				});
+			}
+			if ((index === arrayGeneratorPages.length - 1) && !isEvenPages) {
+				return ({
+					id     : `page${index + 1}`,
+					sheet1 : {
+						pageNo     : numberOfPages,
+						layoutType : "",
+						text       : {},
+						photos     : {
+							0 : {
+								id  : "",
+								url : "",
+							},
+						},
+					},
+				});
+			}
+			return ({
+				id     : `page${index + 1}`,
+				sheet1 : {
+					pageNo     : index * 2,
+					layoutType : "",
+					text       : {},
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+				sheet2 : {
+					pageNo     : (index * 2) + 1,
+					layoutType : "",
+					text       : "",
+					photos     : {
+						0 : {
+							id  : "",
+							url : "",
+						},
+					},
+				},
+			});
+		});
+
+		configPhotoBookData.pages = convertToObject(listOfPages);
+
+		const parseSendData = (data) => {
+			const myData = data;
+			const stringData = JSON.stringify(myData);
+			const myReplacerString = stringData.replace(/"/g, "'");
+			return myReplacerString;
+		};
+
+		try {
+			await dataMutation({
+				module : "wp-json/wp/v2/photobook-2-0",
+				data   : {
+					tittle : "Texto de prueba",
+					status : "publish",
+					meta   : {
+						config : parseSendData({...configPhotoBookData, modified : photoBookPostId?.modified ?? undefined}),
+					},
+				},
+				id     : postId,
+				method : "POST",
+			});
+
+			dispatch(workSpaceSlice.actions.insertData({...configPhotoBookData, modified : photoBookPostId?.modified ?? undefined}));
+			dispatch(authSlice.actions.setIsLoggedIn());
+			dispatch(workSpaceSlice.actions.changeLoading(false));
+		} catch (error) {
+			console.error(error);
+			setLoading(false);
+		}
+	};
+
+	const parseAndInserPhotoBookConfig = (photoBookConfigData) => {
+		const myData = photoBookConfigData?.meta?.config;
+		const myReplacerString = myData.replace(/'/g, "\"");
+		const parseJSON = JSON.parse(myReplacerString);
+		dispatch(workSpaceSlice.actions.insertData({...parseJSON, modified : photoBookConfigData?.modified ?? undefined}));
+	};
+
+	const handlerAvailablePhotoBookConfig = async () => {
+		try {
+			const getPostPhotoBook = await fetchData({
+				module : `wp-json/wp/v2/photobook-2-0/${postId}`,
+			}).unwrap();
+
+			const photoBookMeta = getPostPhotoBook?.meta;
+
+			if (!photoBookMeta) throw new Error("Ocurrio un problema, el metadato no existe o presenta algun conflicto");
+
+			const isAvailableConfigPhotoBook = photoBookMeta?.config && (photoBookMeta?.config !== "");
+
+			if (isAvailableConfigPhotoBook) {
+				parseAndInserPhotoBookConfig(getPostPhotoBook);
+				dispatch(authSlice.actions.setIsLoggedIn());
+				dispatch(workSpaceSlice.actions.changeLoading(false));
+				return;
+			}
+
+			createPresetPhotoBook(getPostPhotoBook);
+		} catch (error) {
+			console.error(error);
+			setLoading(false);
+		}
+	};
 
 	const reactToLogin = async () => {
 		if (loginMutationResult.isUninitialized) return;
@@ -92,187 +304,11 @@ const LoginCard = () => {
 
 				if (!haveAccessElement) throw new Error("You do not have access for this element");
 
-				const configPhotoBook = getPostPhotoBook?.meta ?? {};
-
-				//WhiteList of sizes and formats
-				const whiteListOfSizes = ["chico", "mediano", "grande"];
-				const whiteListOfFormats = ["horizontal", "vertical", "cuadrado"];
-
-				const getFormatAndSize = () => {
-					const formatAndSize = {
-						format : "vertical", //default value,
-						size   : "grande", //default value,
-					};
-
-					if (configPhotoBook && configPhotoBook?.tamano) {
-						const parseLowerCaseNameSize = configPhotoBook?.tamano.toLowerCase();
-						const sizeFound = whiteListOfSizes.find(word => parseLowerCaseNameSize.includes(word));
-						const formatFound = whiteListOfFormats.find(word => parseLowerCaseNameSize.includes(word));
-
-						if (sizeFound && formatFound) {
-							formatAndSize.size = sizeFound;
-							formatAndSize.format = formatFound;
-						}
-					}
-
-					return formatAndSize;
-				};
-
-				const regexMatchDimenssions = /\(\d+x\d+cm\)/;
-
-				const foundDimessions = () => {
-					let dimenssions = "30x35cm";
-
-					const foundDimenssion = configPhotoBook?.tamano.match(regexMatchDimenssions);
-
-					if (foundDimenssion[0]) {
-						dimenssions = foundDimenssion[0];
-					}
-
-					return dimenssions;
-				};
-
-				const model = configPhotoBook?.modelo ? configPhotoBook?.modelo.replace(" PHOTOBOOK", "").toLowerCase() : "white";
-				const size = getFormatAndSize().size;
-				const format =  getFormatAndSize().format;
-				const dimentions = foundDimessions();
-				const pasta = configPhotoBook?.pasta ?? "";
-				const bound = configPhotoBook?.encuadernado ?? "";
-				const price = configPhotoBook?.precio_total?.replace("$", "") ?? "0";
-				const numberOfPages = configPhotoBook?.numero_de_paginas ? Number(configPhotoBook?.numero_de_paginas) : 40;
-
-				const isAvailableConfigPages = !!configPhotoBook?.config;
-
-				if (isAvailableConfigPages) {
-					return configPhotoBook?.config;
-				}
-
-				const configPhotoBookData = {
-					sizePhotoBook : size,
-					dimentions,
-					product       : model,
-					format,
-					frontPage     : {
-						id     : "FrontLayout",
-						text   : {},
-						sheet1 : {
-							layoutType : "",
-							text       : {},
-							photos     : {
-								"0" : {
-									id  : "",
-									url : "",
-								},
-							},
-						},
-					},
-					numberOfPages,
-					minPages      : 40,
-					maxPages      : numberOfPages,
-					currentPage   : "page1",
-					basePrice     : price.replace(" ", ""),
-					bound,
-					pasta,
-					maxRangePages : numberOfPages,
-					pages         : {},
-				};
-
-				const totalPaginations = (numberOfPages - 1) / 2;
-
-				const isEvenPages = totalPaginations % 2 === 0;
-
-				const arrayGeneratorPages = Array(isEvenPages ? totalPaginations : (numberOfPages / 2) + 1).fill(0);
-
-				const listOfPages = arrayGeneratorPages.map((page, index) => {
-					if (index === 0) {
-						return ({
-							id     : "page1",
-							sheet1 : {
-								pageNo     : 1,
-								layoutType : "",
-								text       : "",
-								photos     : {
-									0 : {
-										id  : "",
-										url : "",
-									},
-								},
-							},
-						});
-					}
-					if ((index === arrayGeneratorPages.length - 1) && !isEvenPages) {
-						return ({
-							id     : `page${index + 1}`,
-							sheet1 : {
-								pageNo     : numberOfPages,
-								layoutType : "",
-								text       : {},
-								photos     : {
-									0 : {
-										id  : "",
-										url : "",
-									},
-								},
-							},
-						});
-					}
-					return ({
-						id     : `page${index + 1}`,
-						sheet1 : {
-							pageNo     : index * 2,
-							layoutType : "",
-							text       : {},
-							photos     : {
-								0 : {
-									id  : "",
-									url : "",
-								},
-							},
-						},
-						sheet2 : {
-							pageNo     : (index * 2) + 1,
-							layoutType : "",
-							text       : "",
-							photos     : {
-								0 : {
-									id  : "",
-									url : "",
-								},
-							},
-						},
-					});
-				});
-
-				configPhotoBookData.pages = convertToObject(listOfPages);
-
-				const parseSendData = (data) => {
-					const myData = data;
-					const stringData = JSON.stringify(myData);
-					const myReplacerString = stringData.replace(/"/g, "'");
-					return myReplacerString;
-				};
-
-				await dataMutation({
-					module : "wp-json/wp/v2/photobook-2-0",
-					data   : {
-						tittle : "Texto de prueba",
-						status : "publish",
-						meta   : {
-							config : parseSendData({...configPhotoBookData, modified : getPostPhotoBook?.modified ?? undefined}),
-						},
-					},
-					id     : postId,
-					method : "POST",
-				});
-
-				dispatch(workSpaceSlice.actions.insertData({...configPhotoBookData, modified : getPostPhotoBook?.modified ?? undefined}));
 				dispatch(authSlice.actions.setUserData({
 					...loginMutationResult.data,
 					postId : getPostPhotoBook?.id ?? undefined,
 				}));
-				dispatch(workSpaceSlice.actions.changeLoading(false));
 
-				setLoading(false);
 			} catch (error) {
 				console.error(error);
 				setLoading(false);
@@ -281,6 +317,16 @@ const LoginCard = () => {
 	};
 
 	useEffect(() => void reactToLogin(), [loginMutationResult]);
+
+	useEffect(() => {
+		if (userToken && (userToken !== "")) {
+			handlerAvailablePhotoBookConfig();
+			return;
+		}
+		dispatch(authSlice.actions.clearUserData());
+		return;
+	}, [userToken]);
+
 
 	const handleSubmitForm = (...args) => {
 		setLoading(true);

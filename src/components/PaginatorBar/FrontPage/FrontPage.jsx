@@ -13,6 +13,7 @@ const FrontPage = () => {
 	const isLoading = useSelector((state) => state.workSpaceSlice?.loading, shallowEqual);
 
 	const workSpaceFrontPage = useSelector((state) => state.workSpaceSlice.data?.frontPage, shallowEqual);
+	const isAvailableProduct = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
 
 	const photoBookFormat = useSelector((state) => state.workSpaceSlice?.data?.format, shallowEqual);
 
@@ -35,7 +36,7 @@ const FrontPage = () => {
 						}
 					>
 						{
-							workSpaceFrontPage && (
+							(workSpaceFrontPage && (isAvailableProduct !== "")) && (
 								<BookPages
 									isInWorkSpcae={false}
 									isInPaginator={true}

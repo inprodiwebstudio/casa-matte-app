@@ -26,6 +26,7 @@ const WorkSpace = () => {
 	const isLoggin = useSelector((state) => state.authSlice.loggedIn, shallowEqual);
 	const isLoading = useSelector((state) => state.workSpaceSlice?.loading, shallowEqual);
 	const isPreview = useSelector((state) => state.workSpaceSlice?.isPreview, shallowEqual);
+	const isAvailableProduct = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
 
 	const isFrontLayout = pageId === "frontpage";
 
@@ -54,7 +55,7 @@ const WorkSpace = () => {
 				</div>
 			);
 		}
-		if (isPreview && isLoggin && !isLoading ) {
+		if (isPreview && isLoggin && !isLoading && (isAvailableProduct !== "") ) {
 			return (
 				<div
 					className="PreviewPages"
@@ -75,7 +76,7 @@ const WorkSpace = () => {
 				</div>
 			);
 		}
-		if (myWorkSpaceData && isLoggin && !isLoading) {
+		if (myWorkSpaceData && isLoggin && !isLoading && (isAvailableProduct !== "")) {
 			return (
 				<div className="WorkSpace">
 					<div className="canva-space">
