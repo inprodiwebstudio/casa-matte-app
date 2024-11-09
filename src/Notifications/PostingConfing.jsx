@@ -85,6 +85,28 @@ const PostingConfig = ({
 			})
 		),
 	},
+	"get" : {
+		"404" : () => (
+			showNotification({
+				id      : "Not Found PostId",
+				title   : "PhotoBook Invalido",
+				message : "El photoBook no existe o es incorrecto. Selecciona nuevamente el photobook a personalizar",
+				color   : "red",
+				styles  : () => ({
+					root : {
+					  "&::before" : {
+						  borderRadius : "0px",
+						  width        : "3px",
+					  },
+					  borderRadius : "0px",
+					},
+
+					title       : { fontFamily : "Helvetica", fontWeight : "500", textTransform : "uppercase" },
+					description : { fontFamily : "Helvetica" },
+				}),
+			})
+		),
+	},
 });
 
 export default PostingConfig;

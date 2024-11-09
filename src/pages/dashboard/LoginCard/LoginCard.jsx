@@ -10,10 +10,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 //Own components
 import { genericApi }                       from "store/api/genericApi";
-import { LoginNotification }                from "Notifications";
+import { LoginNotification, PostingConfig } from "Notifications";
 import { TextInput, PasswordInput, Button } from "core/components";
 import "./LoginCard.scss";
-import { convertToObject }                  from "helpers";
+import { convertToObject, isValidArray }    from "helpers";
 
 const schema = Yup.object().shape({
 	username : Yup.string().required("El campo es obligatorio"),
@@ -300,7 +300,15 @@ const LoginCard = () => {
 					module : `wp-json/wp/v2/photobook-2-0/${postId}`,
 				}).unwrap();
 
+				if (!postId || isValidArray(getPostPhotoBook)) {
+					const error = new Error ();
+					error.code = 404;
+					error.message = "PostId Not Found";
+					throw error;
+				}
+
 				const haveAccessElement = getPostPhotoBook.meta?.correo_del_autor === loginMutationResult.data?.user_email;
+
 
 				if (!haveAccessElement) throw new Error("You do not have access for this element");
 
@@ -311,6 +319,9 @@ const LoginCard = () => {
 
 			} catch (error) {
 				console.error(error);
+				if (error.message === "PostId Not Found") {
+					PostingConfig["get"][404]();
+				}
 				setLoading(false);
 			}
 		}
