@@ -3,6 +3,7 @@ import EditPhoto                from "./EditPhoto";
 import EditText                 from "./EditText";
 import TestPdf                  from "./TestPdf";
 import ConfirmationDelete       from "./ConfirmationDelete";
+import ConfirmationToPrint      from "./ConfirmationToPrint";
 import ConfirmationDeleteFolder from "./ConfirmationDeleteFolder";
 
 
@@ -11,6 +12,7 @@ const modals = {
 	editText                 : EditText,
 	testPdf                  : TestPdf,
 	confirmationDelete       : ConfirmationDelete,
+	confirmationToPrint      : ConfirmationToPrint,
 	confirmationDeleteFolder : ConfirmationDeleteFolder,
 };
 

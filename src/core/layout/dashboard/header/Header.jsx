@@ -111,10 +111,8 @@ const Header = () => {
 									size="xs"
 									color="darkCasaMatte"
 									onClick={() => openContextModal({
-										modal      : "testPdf",
-										innerProps : {
-											photoBookData : isModifiedData,
-										},
+										modal      : "confirmationToPrint",
+										innerProps : {},
 									})}
 									loading={isLoadingWorspaceData}
 								>
