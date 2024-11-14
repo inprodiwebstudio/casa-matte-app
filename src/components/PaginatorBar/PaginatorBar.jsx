@@ -8,7 +8,7 @@ import LoadingPaginator                                           from "./Loadin
 import { workSpaceSlice }                                         from "store/Slices";
 import { convertToArray, isValidArray, convertToObject, bindAll } from "helpers";
 import { ScrollBar }                                              from "core/components";
-import FrontPage                                                  from "./FrontPage";
+// import FrontPage                                                  from "./FrontPage";
 import "./PaginatorBar.scss";
 
 const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, loading }) => {
@@ -145,7 +145,6 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 					</ScrollBar>
 				) : (
 					<ScrollBar>
-						<FrontPage />
 						<ItemPage
 							isFixedPage
 							handleDelete={handleDelete}

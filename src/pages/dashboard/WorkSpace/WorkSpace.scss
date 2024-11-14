@@ -151,7 +151,7 @@
 			align-items: center;
 			justify-content: center;
 			font-size: 90px;
-			transform: scale(0.62, 0.62);
+			transform: scale(0.6, 0.6);
 			z-index: 1;
 
 			&.vertical-mediano-workSpace {
@@ -223,7 +223,7 @@
 			}
 
 			@include big-laptop {
-				transform: scale(0.6, 0.6);
+				transform: scale(0.45, 0.45);
 				z-index: 1;
 				margin-right: 50px;
 			}

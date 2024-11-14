@@ -4,6 +4,7 @@ import { convertToArray, convertToObject, History, isValidArray } from "helpers"
 const initialState = {
 	data : {
 		product        : "",
+		productName    : "",
 		format         : "",
 		sizePhotoBook  : "",
 		sizeDimentions : "",

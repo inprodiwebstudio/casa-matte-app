@@ -8,6 +8,7 @@ const initialState = {
 		email    : "",
 		name     : "",
 		postId   : "",
+		userId   : "",
 	},
 };
 

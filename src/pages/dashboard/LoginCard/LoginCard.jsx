@@ -89,6 +89,7 @@ const LoginCard = () => {
 		};
 
 		const model = photoBookMetaData?.modelo ? photoBookMetaData?.modelo.replace(" PHOTOBOOK", "").toLowerCase() : "white";
+		const productName = photoBookMetaData?.modelo ?? "WHITE PHOTOBOOK";
 		const size = getFormatAndSize().size;
 		const format =  getFormatAndSize().format;
 		const dimentions = foundDimessions();
@@ -101,6 +102,7 @@ const LoginCard = () => {
 			sizePhotoBook : size,
 			dimentions,
 			product       : model,
+			productName,
 			format,
 			frontPage     : {
 				id     : "FrontLayout",
@@ -315,6 +317,7 @@ const LoginCard = () => {
 				dispatch(authSlice.actions.setUserData({
 					...loginMutationResult.data,
 					postId : getPostPhotoBook?.id ?? undefined,
+					userId : loginMutationResult?.data?.userId ?? undefined,
 				}));
 
 			} catch (error) {
