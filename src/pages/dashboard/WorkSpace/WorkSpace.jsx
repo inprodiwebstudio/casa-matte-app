@@ -61,7 +61,7 @@ const WorkSpace = () => {
 					className="PreviewPages"
 				>
 					{
-						convertToArray({"FrontLayout" : {...workSpaceFrontPage}, ...workSpaceData}).map((page, index) => (
+						convertToArray({...workSpaceData}).map((page, index) => (
 							<div className="photoBookContainer" key={index}>
 								<div className={`pagesPreviewPhotoBook ${workSpaceFormatPage}-${workSpaceSizePage}-preview`}>
 									<BookPages

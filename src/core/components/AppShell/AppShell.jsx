@@ -396,7 +396,7 @@ const AppShell = ({
 			const myData = photobookData?.meta?.config;
 			const myReplacerString = myData.replace(/'/g, "\"");
 			const parseJSON = JSON.parse(myReplacerString);
-			dispatch(workSpaceSlice.actions.insertData({...parseJSON, modified : photobookData?.modified ?? undefined}));
+			dispatch(workSpaceSlice.actions.insertData({...parseJSON, modified : photobookData?.modified, projectTittle : photobookData?.tittle?.rendered  ?? undefined}));
 		}
 	}, [photobookData]);
 

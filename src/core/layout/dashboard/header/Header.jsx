@@ -20,6 +20,7 @@ const Header = () => {
 	const [ date, setDate ] = useState(undefined);
 
 	const isPreviewActive = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
+	const productName = useSelector((state) => state.workSpaceSlice.data.productName, shallowEqual);
 	const lastModified = useSelector((state) => state.workSpaceSlice.data.modified, shallowEqual);
 	const isModifiedData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 	const isLoggedIn = useSelector((state) => state.authSlice.loggedIn, shallowEqual);
@@ -54,14 +55,14 @@ const Header = () => {
 					isLoggedIn && (
 						<>
 							<div className="title-container">
-								<div>WHITE PHOTOBOOK</div>
+								<div>{productName ?? ""}</div>
 								<div>/</div>
 								<div
 									style={{width : "100px"}}
 								>
 									<TextInput
 										variant="unstyled"
-										defaultValue="PROYECTO 01"
+										defaultValue={productName}
 										sx={{
 											fontSize   : "14px",
 											fontWeight : "400",
@@ -114,6 +115,7 @@ const Header = () => {
 										modal      : "confirmationToPrint",
 										innerProps : {},
 									})}
+									disabled={true}
 									loading={isLoadingWorspaceData}
 								>
 									<Text

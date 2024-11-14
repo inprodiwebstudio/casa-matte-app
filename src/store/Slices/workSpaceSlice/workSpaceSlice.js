@@ -9,6 +9,7 @@ const initialState = {
 		sizePhotoBook  : "",
 		sizeDimentions : "",
 		pasta          : "",
+		projectTittle  : "",
 		modified       : undefined,
 		frontPage      : {
 			id     : "FrontLayout",

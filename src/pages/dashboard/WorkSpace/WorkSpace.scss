@@ -26,11 +26,11 @@
 				transform: scale(0.68, 0.68);
 
 				@include laptop {
-					transform: scale(0.8, 0.8);
+					transform: scale(0.4, 0.4);
 				}
 
 				@include big-laptop {
-					transform: scale(0.8, 0.8);
+					transform: scale(0.4, 0.4);
 				}
 			}
 
@@ -38,16 +38,16 @@
 				transform: scale(0.8, 0.8);
 
 				@include laptop {
-					transform: scale(0.8, 0.8);
+					transform: scale(0.6, 0.6);
 				}
 
 				@include big-laptop {
-					transform: scale(0.8, 0.8);
+					transform: scale(0.6, 0.6);
 				}
 			}
 
 			@include laptop {
-				transform: scale(0.7, 0.7);
+				transform: scale(0.65, 0.65);
 			}
 			@include big-laptop {
 				transform: scale(0.75, 0.75);
@@ -173,18 +173,18 @@
 
 			&.cuadrado-chico-workSpace {
 				transform: scale(0.58, 0.58);
-				margin-right: 43px;
+				// margin-right: 43px;
 
 				@include laptop {
 					transform: scale(0.41, 0.41);
 					z-index: 1;
-					margin-right: 45px;
+					// margin-right: 45px;
 				}
 	
 				@include big-laptop {
 					transform: scale(0.48, 0.48);
 					z-index: 1;
-					margin-right: 35px;
+					// margin-right: 35px;
 				}
 	
 				@include big-tablet {
@@ -194,38 +194,36 @@
 			}
 
 			&.cuadrado-grande-workSpace {
-				transform: scale(0.65, 0.65);
-				margin-right: 50px;
+				transform: scale(0.6, 0.6);
+				margin-right: 3vw;
 
 				@include laptop {
-					transform: scale(0.54, 0.54);
+					transform: scale(0.4, 0.4);
 					z-index: 1;
-					margin-right: 51px;
 				}
 	
 				@include big-laptop {
-					transform: scale(0.54, 0.54);
+					transform: scale(0.45, 0.45);
 					z-index: 1;
-					margin-right: 51px;
+					// margin-right: 51px;
 				}
 	
 				@include big-tablet {
-					transform: scale(0.6, 0.6);
+					transform: scale(0.45, 0.45);
 					z-index: 1;
 				}
 			}
 
 			@include laptop {
-				transform: scale(0.47, 0.47);
-				margin-right: 42.5px;
+				transform: scale(0.42, 0.42);
 				margin-bottom: 10px;
 				z-index: 1;
 			}
 
 			@include big-laptop {
-				transform: scale(0.45, 0.45);
+				transform: scale(0.42, 0.42);
 				z-index: 1;
-				margin-right: 50px;
+				// margin-right: 50px;
 			}
 
 			@include big-tablet {

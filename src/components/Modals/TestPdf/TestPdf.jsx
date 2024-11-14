@@ -46,11 +46,11 @@ const TestPdf = ({photoBookData}) => {
 		if (Sheet1Layout) {
 			return (
 				<>
-					<Page size={[850, 991]}>
+					<Page size={[612, 792]}>
 						<Sheet1Layout images={pageData?.sheet1?.photos} text={pageData?.sheet1?.text} />
 					</Page>
 					{Sheet2Layout ? (
-						<Page size={[850, 991]}>
+						<Page size={[612, 792]}>
 							<Sheet2Layout images={pageData?.sheet2?.photos} text={pageData?.sheet2?.text} />
 						</Page>
 					) : undefined}
