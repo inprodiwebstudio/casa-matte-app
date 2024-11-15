@@ -88,7 +88,9 @@ const LoginCard = () => {
 			return dimenssions;
 		};
 
-		const model = photoBookMetaData?.modelo ? photoBookMetaData?.modelo.replace(" PHOTOBOOK", "").toLowerCase() : "white";
+		const parseModel = photoBookMetaData?.modelo.toUpperCase();
+
+		const model = photoBookMetaData?.modelo ? parseModel.replace("PHOTOBOOK", "").replace(" ", "").replace(" ", "").toLowerCase() : "white";
 		const productName = photoBookMetaData?.modelo ?? "WHITE PHOTOBOOK";
 		const size = getFormatAndSize().size;
 		const format =  getFormatAndSize().format;

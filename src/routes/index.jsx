@@ -22,12 +22,25 @@ const Router = () => {
 			element  : <DashboardLayout />,
 			children : [
 				{
-					element : <Navigate to="/dashboard/frontpage" replace />,
+					element : <Navigate to="/dashboard/page1" replace />,
 					index   : true,
 				},
 				{
 					path    : ":pageId",
 					element : <WorkSpace />,
+				},
+			],
+		},
+		{
+			path     : "payment",
+			children : [
+				{
+					element : <Navigate to="/payment/confirm" replace />,
+					index   : true,
+				},
+				{
+					path    : "confirm",
+					element : <div>confirm</div>,
 				},
 			],
 		},
