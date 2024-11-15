@@ -117,19 +117,19 @@ const DropDoc = ({
 					const newData = [respImage, ...prev];
 					return newData;
 				});
-				const constructorData = {
-					...respImage,
-					id         : respImage?.asset_id,
-					fileId     : respImage?.asset_id,
-					filePath   : respImage?.public_id,
-					thumbNails : [],
-					type       : "folder",
-				};
-				dispatch(gallerySlice.actions.setGalleryData(constructorData));
 				return respImage;
 			});
 
 			Promise.all([...listOfPromises]).then((values) => {
+				const thumbNails = values.map(image => image.urlThumbnail);
+				const constructorData = {
+					id         : `${userName}/${folderName}`,
+					path       : `${userName}/${folderName}`,
+					name       : folderName,
+					thumbNails : [...thumbNails],
+					type       : "folder",
+				};
+				dispatch(gallerySlice.actions.setGalleryData(constructorData));
 				setLoading(false);
 				dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 				dispatch(gallerySlice.actions.setTypeDropedView(null));
@@ -235,7 +235,7 @@ const DropDoc = ({
 											body="CARGAR A GALERÍA"
 											onSelect={() => handleAddPhotos()}
 										/>
-										{/* {
+										{
 											galleryPathRoute?.id === "route" && (
 												<Card
 													isButton
@@ -244,7 +244,7 @@ const DropDoc = ({
 													onSelect={() => setIsSelectedFolder(true)}
 												/>
 											)
-										} */}
+										}
 									</div>
 								</div>
 							)
