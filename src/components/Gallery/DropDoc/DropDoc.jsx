@@ -33,6 +33,7 @@ import {
 import "./DropDoc.scss";
 
 const DropDoc = ({
+	postId,
 	userName,
 	galleryPathRoute,
 	galleryTypeDropedView,
@@ -50,7 +51,7 @@ const DropDoc = ({
 	// const [galleryImagesMutation] = apiImageKit.useAddImageMutation();
 	const [galleryFolderMutation] = apiImageKit.useAddFolderMutation();
 
-	const { handlerUploadImage } = useSubmitImages({userName : userName, folderName : folderName});
+	const { handlerUploadImage } = useSubmitImages({userName : `${userName}/${postId}`, folderName : folderName});
 
 	const completePercentage = (completedPhotos.length * 100) / fileImage.length;
 
@@ -311,6 +312,7 @@ const mapStateToProps = ({ gallerySlice, authSlice }) => ({
 	galleryTypeDropedView : gallerySlice?.typeDropedView ?? null,
 	galleryPathRoute      : gallerySlice?.galleryPathName ?? {},
 	userName              : authSlice?.user?.username ?? undefined,
+	postId                : authSlice?.user?.postId ?? undefined,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (DropDoc);

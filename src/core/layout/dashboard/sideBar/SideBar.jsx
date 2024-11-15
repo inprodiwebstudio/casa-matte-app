@@ -25,6 +25,7 @@ const SideBar = ({
 	isLoggedIn,
 	isPreview,
 	userName,
+	postId,
 	filter,
 }) => {
 	const [ fetchGallery ] = useLazyGetDirentsListQuery();
@@ -76,7 +77,7 @@ const SideBar = ({
 			const resp = await fetchGallery({
 				params : {
 					limit      : 500,
-					userName   : userName,
+					userName   : `${userName}/${postId}`,
 					folderName : (galleryPath?.name === "route") ? null : galleryPath?.name,
 					...((filter && (filter?.value !== "DESC_CAPTURE")) ? {sort : filter?.value} : {}),
 				},
@@ -202,6 +203,7 @@ const mapStateToProps = ({ gallerySlice, authSlice, workSpaceSlice }) => ({
 	typeDropView         : gallerySlice?.typeDropedView ?? null,
 	galleryPath          : gallerySlice?.galleryPathName ?? "route",
 	userName             : authSlice?.user?.username ?? undefined,
+	postId               : authSlice?.user?.postId ?? undefined,
 	filter               : gallerySlice?.filter ?? undefined,
 	isPreview            : workSpaceSlice?.isPreview ?? undefined,
 	isLoggedIn           : authSlice?.loggedIn ?? false,

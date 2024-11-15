@@ -355,11 +355,17 @@ const AppShell = ({
 	footer,
 	sidebar,
 }) => {
+	const searchParams = new URLSearchParams(location.search);
+
+	const nameUser = searchParams.get("username") ?? "";
+	const postId = searchParams.get("postId") ?? "";
+
 	const dispatch = useDispatch();
 
 	const isSelectedPage = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice?.data, shallowEqual);
 	const postIdphotoBook = useSelector((state) => state.authSlice?.user?.postId, shallowEqual);
+	const userName = useSelector((state) => state.authSlice?.user?.username, shallowEqual);
 	const initialData = useSelector((state) => state.workSpaceSlice?.initialData, shallowEqual);
 
 	const { data : photobookData, isFetching, error } = genericApi.useGetDataQuery({
@@ -447,6 +453,14 @@ const AppShell = ({
 		// }
 
 	}, [dataMutationResult]);
+
+	useEffect(() => {
+		if (nameUser || postId) {
+			if ((nameUser !== userName) || (postId !== postIdphotoBook)) {
+				dispatch(authSlice.actions.clearUserData());
+			}
+		}
+	}, [nameUser, postId]);
 
 	return (
 		<div
