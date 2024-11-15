@@ -1,5 +1,3 @@
-//React
-import { useEffect } from "react";
 
 //React FileRobotEditor
 import FilerobotImageEditor, {
@@ -11,20 +9,27 @@ import { closeAllModals } from "@mantine/modals";
 
 //Own components
 import { workSpaceSlice } from "store/Slices";
-import { apiImageKit }    from "store/api/imageKitApi";
 import { bindAll }        from "helpers";
+import fullQualityImg     from "helpers/Functions/fullQualityImage";
 import "./EditPhoto.scss";
+import useSubmitImages    from "helpers/Hooks/useSubmitImages";
+import { PostingConfig }  from "Notifications";
+
 
 const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
-	const [galleryImagesMutation, galleryMutationResult] = apiImageKit.useAddEditedImageMutation();
+	const { handlerUploadImage } = useSubmitImages({userName : userName});
+
+	const urlImage = fullQualityImg(innerProps?.image);
 
 	const addEditedImage = async (file) => {
-		await galleryImagesMutation({
-			data : {
-				file,
-			},
-			userName,
-		});
+		try {
+			const myImage = await handlerUploadImage(file, true);
+			workSpaceSlice.addPhotoEdited({pageId : innerProps?.pageId, sheetNo : innerProps?.sheetNo, layoutNo : innerProps?.layoutNo, imageUrl : myImage?.url});
+			closeAllModals();
+		} catch (error) {
+			PostingConfig["post"][500]();
+			console.error(error);
+		}
 	};
 
 	const dataURLtoFile = (dataurl, filename) => {
@@ -40,16 +45,10 @@ const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 		return new File([u8arr], filename, {type : mime});
 	};
 
-	useEffect(() => {
-		if (!galleryMutationResult?.isError && !galleryMutationResult?.isLoading && !galleryMutationResult?.isUninitialized && galleryMutationResult?.data) {
-			workSpaceSlice.addPhotoEdited({pageId : innerProps?.pageId, sheetNo : innerProps?.sheetNo, layoutNo : innerProps?.layoutNo, imageUrl : galleryMutationResult?.data?.url});
-		}
-	}, [galleryMutationResult]);
-
 	return (
 		<div className="EditPhoto">
 			<FilerobotImageEditor
-				source={innerProps?.image}
+				source={urlImage}
 				annotationsCommon={{
 					fill : "#bb3214",
 				}}
@@ -60,7 +59,6 @@ const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 							triggerSave(async (...args) => {
 								const file = dataURLtoFile(args[0].imageBase64, args[0].fullName);
 								await addEditedImage(file);
-								closeAllModals();
 								return;
 							}),
 					},
@@ -73,12 +71,12 @@ const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 						"accent-primary-active" : "#1D1D1B",
 				  },
 				  typography : {
-				    fontFamily : "Helvetica, Arial",
+				    fontFamily : "Arial",
 				  },
 				}}
 				Crop={{
 					noPresets : true,
-					ratio     : innerProps.aspectRatio,
+					ratio     : innerProps?.aspectRatio ?? 16 / 9,
 				}}
 				language="es"
 				Rotate={{ angle : 90, componentType : "buttons" }}

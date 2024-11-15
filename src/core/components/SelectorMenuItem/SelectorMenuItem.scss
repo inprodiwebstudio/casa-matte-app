@@ -4,6 +4,7 @@
     position : relative;
     transition: all ease 200ms;
     border-bottom: solid 1px #E3E3E3;
+    border-bottom-color: #000000 !important;
 
     &.isFilled { 
         border-bottom: none !important;
@@ -18,7 +19,7 @@
         width: 15px;
         height: 15px;
         position: absolute;
-        color : $flat-color;
+        color : $dark-color;
     }
 
     &.isHover { 

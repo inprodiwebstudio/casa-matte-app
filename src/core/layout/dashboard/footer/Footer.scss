@@ -7,6 +7,10 @@
     flex-direction: column;
     transition: all ease 200ms;
 
+    &.isActivePreview {
+        height: 0px !important;
+    }
+
     &.full-size {
         height: 65vh;
 

@@ -6,7 +6,6 @@ import DropDoc        from "../DropDoc";
 import PhotoCard      from "../PhotoCard";
 import GalleryLoading from "../GalleryLoading";
 
-import { gallerySeparation } from "./BodyGallery.helpers";
 
 import {
 	Button,
@@ -16,27 +15,27 @@ import {
 } from "core/components";
 import { gallerySlice, workSpaceSlice }          from "store/Slices";
 import { convertToArray, isValidArray, bindAll } from "helpers";
-import { CircleArrow, FilterIcon, ActionCross }  from "Resources/icons";
+import { CircleArrow, ActionCross }              from "Resources/icons";
 import "./BodyGallery.scss";
+import { gallerySeparation }                     from "./BodyGallery.helpers";
 
 const BodyGallery = ({
-	loading,
-	refetch,
 	isLoggedIn,
-	isFetching,
 	galleryData,
 	gallerySlice,
-	workSpaceData,
 	currentFilter,
+	workSpaceData,
 	workSpaceSlice,
-	galleryMutation,
 	galleryPathRoute,
+	isLoadingMutation,
+	isFullSizeSideBar,
 	gallerySelectedData,
+	isLoadingGalleryData,
 	galleryTypeDropedView,
-	loadingMutationGallery,
-	galleryImagesMutationMove,
 }) => {
-	const isAvailableDocs = isValidArray(galleryData);
+	const galleryList = convertToArray(galleryData);
+
+	const isAvailableDocs = isValidArray(galleryList);
 
 	const [ myPhotos, setMyPhotos ] = useState([]);
 
@@ -47,15 +46,6 @@ const BodyGallery = ({
 	const [ selectedImagesIds, setSelectedImagesIds ] = useState([]);
 
 	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
-
-	const galleryLoading = loading && isFetching;
-
-	useEffect(() => {
-		if (!isAvailableDocs) {
-			gallerySlice.setGalleryPath({id : "route", name : "route"});
-		}
-	}, [galleryData]);
-
 
 	useEffect(() => {
 		if (isAvailableDocs && (currentFilter?.value === "DESC_CAPTURE")) {
@@ -71,21 +61,22 @@ const BodyGallery = ({
 	}, [currentFilter]);
 
 	useEffect(() => {
-		if (isValidArray(galleryData)) {
-			const newPhotos = gallerySeparation(galleryData, false);
-			const newFolders = gallerySeparation(galleryData, true);
-			const leaverFolderEdited = newFolders.filter(e => e.name !== "edited");
+		if (isAvailableDocs) {
+			const newPhotos = gallerySeparation(galleryList, false);
+			const newFolders = gallerySeparation(galleryList, true);
+			// const leaverFolderEdited = newFolders.filter(e => e.name !== "edited");
 			setMyPhotos(newPhotos);
-			setMyFolders(leaverFolderEdited);
+			setMyFolders(newFolders);
 			return;
 		}
 	}, [galleryData]);
 
 	useEffect(() => {
 		const pagesList = convertToArray(workSpaceData?.pages);
+		const listOfAllPages = [workSpaceData?.frontPage, ...pagesList];
 		const newDataSelected = [];
 		if (isValidArray(pagesList)) {
-			pagesList.forEach((data, i) => {
+			listOfAllPages.forEach((data, i) => {
 				const isAVailableSheet2 = data?.sheet2;
 				const sheet1Photos = convertToArray(data?.sheet1?.photos);
 
@@ -122,17 +113,30 @@ const BodyGallery = ({
 		return false;
 	};
 
+	const handlerDropeZoneView = () => {
+		if (!isAvailableDocs || galleryTypeDropedView) {
+			return true;
+		}
+		return false;
+	};
+
+	// useEffect(() => {
+	// 	if (!isAvailableDocs) {
+	// 		gallerySlice.setTypeDropedView("addFiles");
+	// 	}
+	// }, [galleryList]);
+
 	return (
 		<div className="BodyGallery">
 			<div className="header-gallery-container">
 				<div className="header-actions-gallery">
 					{
-						(isAvailableDocs && (!galleryLoading)) && (
+						(isAvailableDocs && (!isLoadingGalleryData)) && (
 							<>
 								<CheckBox
 									isActive={isHideSelected}
 									label="OCULTAR FOTOS USADAS"
-									isLoading={loadingMutationGallery}
+									isLoading={isLoadingMutation}
 									onChange={() => setIsHideSelected(!isHideSelected)}
 								/>
 								<Button
@@ -140,7 +144,7 @@ const BodyGallery = ({
 									fontSize={12}
 									type="outline"
 									onClick={() => workSpaceSlice.autoFillImages(myPhotos)}
-									isLoading={loadingMutationGallery}
+									isLoading={isLoadingMutation}
 								>
 									AUTOFILL
 								</Button>
@@ -148,22 +152,22 @@ const BodyGallery = ({
 						)
 					}
 				</div>
-				<h3 className={(galleryLoading || !isLoggedIn) && "loading"}>{galleryPathRoute?.id === "route" ? "GALERÍA" : galleryPathRoute?.name}</h3>
+				<h3 className={(isLoadingGalleryData || !isLoggedIn) && "loading"}>{galleryPathRoute?.id === "route" ? "GALERÍA" : galleryPathRoute?.name}</h3>
 				<div className="actions-header-container">
 					<div className="icon-style">
 						{
-							((galleryPathRoute?.id !== "route") && !galleryLoading && !loadingMutationGallery) && (
+							((galleryPathRoute?.id !== "route") && !isLoadingGalleryData && !isLoadingMutation) && (
 								<CircleArrow size="30px" onClick={() => gallerySlice.setGalleryPath({id : "route", name : "route"})} />
 							)
 						}
 					</div>
 					{
-						(isAvailableDocs && !galleryLoading) && (
+						(isAvailableDocs && !isLoadingGalleryData) && (
 							<div className="filter-selector-container">
 								<div className="selector-input">
 									<SelectorMenuItem
 										type="light"
-										placeholder="Ordenar por"
+										placeholder="ORDENAR POR..."
 										options={[
 											{
 												label : "NOMBRE",
@@ -178,10 +182,10 @@ const BodyGallery = ({
 												value : "DESC_CAPTURE",
 											},
 										]}
-										isLoading={loadingMutationGallery}
+										isLoading={isLoadingMutation}
 										value={currentFilter}
 										onChange={(data) => gallerySlice.setFilter(data)}
-										leftIcon={<FilterIcon size="15px" />}
+										leftIcon={<></>}
 									/>
 								</div>
 							</div>
@@ -194,7 +198,7 @@ const BodyGallery = ({
 						transition     : "all ease 200ms",
 					}}>
 						{
-							(isSelectedData && !loadingMutationGallery) && (
+							(isSelectedData && !isLoadingGalleryData) && (
 								<ActionCross onClick={() => gallerySlice.clearSelectedData()} className="disSelect" />
 							)
 						}
@@ -202,84 +206,74 @@ const BodyGallery = ({
 				</div>
 			</div>
 			{
-				(galleryLoading || !isLoggedIn) && (
+				(isLoadingGalleryData || !isLoggedIn) && (
 					<GalleryLoading />
 				)
 			}
 			{
-				((!galleryLoading) && !isAvailableDocs && isLoggedIn) && (
-					<div
-						style={{
-							top       : "17%",
-							height    : "78%",
-							position  : "absolute",
-							width     : "92%",
-							display   : "flex",
-							overflowY : "hidden",
-							overflowX : "hidden",
-						}}
-					>
-						<DropDoc galleryMutation={galleryMutation} refetch={refetch} />
-					</div>
-				)
-			}
-			{
-				((!galleryLoading) && isAvailableDocs && isLoggedIn) && (
+				((!isLoadingGalleryData) && isLoggedIn) && (
 					<ScrollBar>
 						{
-							galleryTypeDropedView && (
+							handlerDropeZoneView() && (
 								<div
 									style={{
-										zIndex     : "2",
-										position   : "absolute",
-										height     : "calc(100% - 180px)",
-										width      : "calc(100% - 60px)",
-										display    : "flex",
-										background : "rgba(247, 245, 241, 0.95)",
+										zIndex        : "2",
+										position      : "absolute",
+										height        : "100%",
+										width         : "100%",
+										paddingRight  : "35px",
+										paddingBottom : "calc(10px + 34px + 24px + 30px + 60px + 30px)",
+										display       : "flex",
+										background    : "rgba(247, 245, 241, 0.94)",
 									}}
 								>
-									<DropDoc galleryMutation={galleryMutation} refetch={refetch} />
+									<DropDoc />
 								</div>
 							)
 						}
-						<div className="docs-list">
-							<div className="folder-grid">
-								{
-									myFolders.map( data => (
-										<Folder
-											key={data?.fileId}
-											images={[""]}
-											name={data?.name}
-											folderId={data?.fileId}
-											galleryMutation={galleryMutation}
-											loadingMutationGallery={loadingMutationGallery}
-											galleryImagesMutationMove={galleryImagesMutationMove}
-											onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.fileId, name : data?.name})}
-										/>
-									))
-								}
-							</div>
-							<div className="separator-container">
-								<p>FOTOS</p>
-								<div className="spacer-line" />
-							</div>
-							<div className="photo-grid">
-								{
-									myPhotos.map( (data, index) => (
-										<PhotoCard
-											key={index}
-											image={data?.url}
-											fileId={data?.fileId}
-											isHideSelected={isHideSelected}
-											isSelected={isInUsePhoto(data?.fileId)}
-											loadingMutationGallery={loadingMutationGallery}
-											onSelected={() => gallerySlice.setSelectedData(data)}
-											isChecked={gallerySelectedData[data?.fileId] ? true : false}
-										/>
-									))
-								}
-							</div>
-						</div>
+						{
+							isAvailableDocs && (
+								<div className="docs-list">
+									{isValidArray(myFolders) && (
+										<div className="folder-grid">
+											{
+												myFolders.map( data => (
+													<Folder
+														key={data?.id}
+														thumbNails={data?.thumbNails}
+														name={data?.name}
+														folderId={data?.id}
+														loadingMutationGallery={isLoadingMutation}
+														onSelectedFolder={() => gallerySlice.setGalleryPath({id : data?.fileId, name : data?.name})}
+													/>
+												))
+											}
+										</div>
+									)}
+									<div className="separator-container">
+										<p>FOTOS</p>
+										<div className="spacer-line" />
+									</div>
+									<div className={`photo-grid ${isFullSizeSideBar && "isFullSize"}`}>
+										{
+											myPhotos.map( (data, index) => (
+												<PhotoCard
+													key={index}
+													image={data?.url}
+													thumbNail={data?.urlThumbnail}
+													fileId={data?.id}
+													isfullSize={isFullSizeSideBar}
+													isHideSelected={isHideSelected}
+													isSelected={isInUsePhoto(data?.id)}
+													onSelected={() => gallerySlice.setSelectedData(data)}
+													isChecked={gallerySelectedData[data?.id] ? true : false}
+												/>
+											))
+										}
+									</div>
+								</div>
+							)
+						}
 					</ScrollBar>
 				)
 			}
@@ -288,6 +282,10 @@ const BodyGallery = ({
 };
 
 const mapStateToProps = ({ gallerySlice, workSpaceSlice, authSlice }) => ({
+	isLoadingGalleryData  : gallerySlice?.isLoadingData ?? false,
+	isLoadingMutation     : gallerySlice?.isLoadingMutation ?? false,
+	isFullSizeSideBar     : gallerySlice?.isFullSizeSideBar ?? false,
+	galleryData           : gallerySlice?.data ?? {},
 	galleryPathRoute      : gallerySlice?.galleryPathName ?? "route",
 	gallerySelectedData   : gallerySlice?.selectedData ?? {},
 	workSpaceData         : workSpaceSlice?.data ?? {},

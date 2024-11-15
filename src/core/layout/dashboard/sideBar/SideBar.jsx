@@ -1,59 +1,58 @@
-import { useState } from "react";
-import { connect }  from "react-redux";
-import BodyGallery  from "components/Gallery/BodyGallery";
+import { connect } from "react-redux";
+import BodyGallery from "components/Gallery/BodyGallery";
 //Mantine
 import { openContextModal, closeAllModals } from "@mantine/modals";
 
 //Own components
-import { gallerySlice, workSpaceSlice }                                      from "store/Slices";
-import { genericApi }                                                        from "store/api/genericApi";
-import { apiImageKit }                                                       from "store/api/imageKitApi";
-import { convertToArray, isValidArray, bindAll, coordinatesPhotoInWorkSpce } from "helpers";
-import { ArrowTop, FolderPlus, DropFile, Thrash, MoveFolder}                 from "Resources/icons";
+import { gallerySlice, workSpaceSlice }                             from "store/Slices";
+import { apiImageKit }                                              from "store/api/imageKitApi";
+import { convertToArray, isValidArray, bindAll }                    from "helpers";
+import { ArrowTop, FolderPlus, DropFile, Thrash, MoveFolder, Cross} from "Resources/icons";
 import "./SideBar.scss";
+import { useEffect }                                                from "react";
 
-const SideBar = ({gallerySlice, workSpaceSlice, galleryPath, selectedData, userName, filter, workspaceData}) => {
-	const [ isfullSize, setIsFullSize ] = useState(false);
+const { useLazyGetDirentsListQuery } = apiImageKit;
 
-	const [galleryMutation, galleryMutationResult] = genericApi.useSubmitDataMutation();
+const SideBar = ({
+	isLoadingGalleryData,
+	isLoadingMutation,
+	isFullSizeSideBar,
+	selectedData,
+	gallerySlice,
+	typeDropView,
+	galleryData,
+	galleryPath,
+	isLoggedIn,
+	isPreview,
+	userName,
+	postId,
+	filter,
+}) => {
+	const [ fetchGallery ] = useLazyGetDirentsListQuery();
 
-	const {data : imageKitData, isFetching : imageKitFetching, refetch} = apiImageKit.useGetDirentsListQuery({
-		params : {
-			limit      : 500,
-			userName   : userName,
-			folderName : (galleryPath?.id === "route") ? null : galleryPath?.name,
-			...((filter && (filter?.value !== "DESC_CAPTURE")) ? {sort : filter?.value} : {}),
-		},
-	});
+	const [galleryImagesMutationMove] = apiImageKit.useMoveFileMutation();
+	const [galleryImagesMutastionDelete] = apiImageKit.useDeleteImagesMutation();
 
-	const [galleryImagesMutation, galleryImagesMutationResult] = apiImageKit.useDeleteImagesMutation();
-	const [galleryImagesMutationMove, galleryImagesMutationMoveResult] = apiImageKit.useMoveFileMutation();
-
-
-	const loadingMutationGallery = galleryMutationResult.isLoading || galleryImagesMutationResult.isLoading || galleryImagesMutationMoveResult.isLoading;
-
-	const isAvailableDocs = isValidArray(imageKitData);
+	const isAvailableDocs = isValidArray(convertToArray(galleryData));
 
 	const isSelectedData = isValidArray(convertToArray(selectedData));
 
 	const selectedDataQuantity = convertToArray(selectedData).length;
 
-	const deleteImages = async () => {
-		let coordinatesLister = [];
-		const listOfSelectedImages = convertToArray(selectedData).map( image => {
-			coordinatesLister = [...coordinatesLister, ...coordinatesPhotoInWorkSpce(image?.fileId, workspaceData)];
-			return (
-				image?.fileId
-			);
-		});
-		await galleryImagesMutation({
-			data : {
-				imageIds : listOfSelectedImages,
-			},
-		}).unwrap();
-		gallerySlice.clearSelectedData();
-		workSpaceSlice.removePhotoById(coordinatesLister);
-		closeAllModals();
+	const handlerDeletePhotos = async () => {
+		gallerySlice.setLoadingMutationGallery(true);
+		const mySelectedData = convertToArray(selectedData);
+		const publicIdsPhotos = mySelectedData.map(photo => photo?.public_id);
+		try {
+			await galleryImagesMutastionDelete(publicIdsPhotos);
+			gallerySlice.deleteDataGallery(selectedData);
+			gallerySlice.setLoadingMutationGallery(false);
+			closeAllModals();
+		} catch (error) {
+			gallerySlice.setLoadingMutationGallery(false);
+			closeAllModals();
+			console.error(error);
+		}
 	};
 
 	const handleMoveOutFolder = () => {
@@ -62,7 +61,6 @@ const SideBar = ({gallerySlice, workSpaceSlice, galleryPath, selectedData, userN
 			return await galleryImagesMutationMove({
 				sourceFilePath  : data?.filePath,
 				destinationPath : `/${userName}/`,
-				tags            : (mySelectedData.length - 1 === index) ? ["gallery"] : ["null"],
 			});
 		});
 
@@ -73,42 +71,68 @@ const SideBar = ({gallerySlice, workSpaceSlice, galleryPath, selectedData, userN
 		});
 	};
 
+	const handlerGetGallery = async () => {
+		gallerySlice.setLoadingGalleryData(true);
+		try {
+			const resp = await fetchGallery({
+				params : {
+					limit      : 500,
+					userName   : `${userName}/${postId}`,
+					folderName : (galleryPath?.name === "route") ? null : galleryPath?.name,
+					...((filter && (filter?.value !== "DESC_CAPTURE")) ? {sort : filter?.value} : {}),
+				},
+			});
+			gallerySlice.getGalleryData(resp.data);
+			gallerySlice.setLoadingGalleryData(false);
+		} catch (error) {
+			console.error(error);
+			gallerySlice.setLoadingGalleryData(false);
+		}
+	};
+
+	useEffect(() => {
+		if (isLoggedIn) {
+			handlerGetGallery();
+		}
+		return;
+	}, [filter, isLoggedIn, galleryPath]);
+
 	return (
-		<div id="SideBar" className={isAvailableDocs ? (isfullSize && "isFullSize") : "isNoData"}>
+		<div id="SideBar" className={`${isAvailableDocs ? (isFullSizeSideBar && "isFullSize") : "isNoData"} ${isPreview && "isInpreview"}`}>
 			{
-				((!imageKitFetching) && isAvailableDocs) && (
-					<div className={`actions-sidebar-conatiner ${isfullSize && "isFullSize"} ${loadingMutationGallery && "is-loading"}`}>
+				((!isLoadingGalleryData) && isAvailableDocs) && (
+					<div className={`actions-sidebar-conatiner ${isFullSizeSideBar && "isFullSize"} ${isLoadingGalleryData && "is-loading"}`}>
 						<div
 							className="icon-sidebar-action"
 							{
-								...(!loadingMutationGallery && {
-									onClick : () => setIsFullSize(!isfullSize),
+								...(!isLoadingMutation && {
+									onClick : () => gallerySlice.toggleFullSizeSideBar(),
 								})
 							}
 						>
-							<ArrowTop size="18px" className="icon-arrow-action" />
+							<ArrowTop size="16px" className="icon-arrow-action" />
 						</div>
 						<div
 							className="icon-sidebar-action"
 							{
-								...(!loadingMutationGallery && {
+								...(!isLoadingMutation && {
 									onClick : () => gallerySlice.setTypeDropedView("addFiles"),
 								})
 							}
 						>
-							<DropFile size="18px" />
+							<DropFile size="16px" />
 						</div>
 						{
 							galleryPath?.id === "route" && (
 								<div
 									className="icon-sidebar-action"
 									{
-										...(!loadingMutationGallery && {
+										...(!isLoadingMutation && {
 											onClick : () => gallerySlice.setTypeDropedView("addFolder"),
 										})
 									}
 								>
-									<FolderPlus size="20px" />
+									<FolderPlus size="16px" />
 								</div>
 							)
 						}
@@ -117,18 +141,18 @@ const SideBar = ({gallerySlice, workSpaceSlice, galleryPath, selectedData, userN
 								<div
 									className="icon-sidebar-action"
 									{
-										...(!loadingMutationGallery && {
+										...(!isLoadingMutation && {
 											onClick : () =>  openContextModal({
 												modal      : "confirmationDelete",
 												innerProps : {
 													photoQuantity  : selectedDataQuantity,
-													handdleSuccess : () => deleteImages(),
+													handdleSuccess : () => handlerDeletePhotos(),
 												},
 											}),
 										})
 									}
 								>
-									<Thrash size="20px" />
+									<Thrash size="16px" />
 								</div>
 							)
 						}
@@ -137,12 +161,26 @@ const SideBar = ({gallerySlice, workSpaceSlice, galleryPath, selectedData, userN
 								<div
 									className="icon-sidebar-action"
 									{
-										...(!loadingMutationGallery && {
+										...(!isLoadingMutation && {
 											onClick : () => handleMoveOutFolder(),
 										})
 									}
 								>
-									<MoveFolder size="20px" />
+									<MoveFolder size="16px" />
+								</div>
+							)
+						}
+						{
+							typeDropView !== null && (
+								<div
+									className="icon-sidebar-action"
+									{
+										...(!isLoadingMutation && {
+											onClick : () => gallerySlice.setTypeDropedView(null),
+										})
+									}
+								>
+									<Cross size="16px" />
 								</div>
 							)
 						}
@@ -150,25 +188,25 @@ const SideBar = ({gallerySlice, workSpaceSlice, galleryPath, selectedData, userN
 				)
 			}
 			<div className="body-sidebar">
-				<BodyGallery
-					refetch={refetch}
-					galleryData={imageKitData}
-					isFetching={imageKitFetching}
-					galleryMutation={galleryMutation}
-					loadingMutationGallery={loadingMutationGallery}
-					galleryImagesMutationMove={galleryImagesMutationMove}
-				/>
+				<BodyGallery />
 			</div>
 		</div>
 	);
 };
 
 const mapStateToProps = ({ gallerySlice, authSlice, workSpaceSlice }) => ({
-	selectedData  : gallerySlice?.selectedData ?? {},
-	galleryPath   : gallerySlice?.galleryPathName ?? "route",
-	userName      : authSlice?.user?.username ?? undefined,
-	filter        : gallerySlice?.filter ?? undefined,
-	workspaceData : workSpaceSlice?.data ?? undefined,
+	selectedData         : gallerySlice?.selectedData ?? {},
+	galleryData          : gallerySlice?.data ?? {},
+	isFullSizeSideBar    : gallerySlice?.isFullSizeSideBar ?? false,
+	isLoadingGalleryData : gallerySlice?.isLoadingData ?? false,
+	isLoadingMutation    : gallerySlice?.isLoadingMutation ?? false,
+	typeDropView         : gallerySlice?.typeDropedView ?? null,
+	galleryPath          : gallerySlice?.galleryPathName ?? "route",
+	userName             : authSlice?.user?.username ?? undefined,
+	postId               : authSlice?.user?.postId ?? undefined,
+	filter               : gallerySlice?.filter ?? undefined,
+	isPreview            : workSpaceSlice?.isPreview ?? undefined,
+	isLoggedIn           : authSlice?.loggedIn ?? false,
 });
 
 const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions, workSpaceSlice : workSpaceSlice.actions});

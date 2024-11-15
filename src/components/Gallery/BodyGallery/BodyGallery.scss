@@ -3,15 +3,15 @@
 .BodyGallery {
     width: 100%;
     height: 100%;
-    padding: 10px;
-    padding-left: 15px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     flex-direction: column;
-    padding-right: calc(15px - 5px);
     display: flex;
-    
+    position: relative;
 
     .docs-list {
-        gap: 17px;
+        gap: 0px;
         flex-grow: 1;
         display: flex;
         overflow: hidden;
@@ -23,10 +23,13 @@
             display: flex;
             flex-wrap: wrap;
             overflow-y: hidden;
+            margin-bottom: 20px;
+            margin-top: 20px;
         }
 
         .separator-container {
             gap: 3px;
+            margin-bottom: 20px;
             display: flex;
             font-size: 20px;
             font-weight: 400;
@@ -34,7 +37,7 @@
             align-items: center;
             flex-direction: column;
             justify-content: center;
-            font-family: "Aitana-Regular";
+            font-family: "Helvetica";
 
             .spacer-line {
                 width: 100%;
@@ -45,17 +48,21 @@
 
         .photo-grid {
             display: flex;
-            gap : 10px;
+            gap : 20px;
             flex-wrap: wrap;
             width: 100%;
             overflow-y: hidden;
+            transition: all ease 200ms;
+
+            &.isFullSize {
+                gap : 20px;
+            }
         }
     }
 
 
     .header-gallery-container {
-        padding-top: 22px;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
         display: flex;
         flex-direction: column;
         gap: 20px;
@@ -107,11 +114,11 @@
 
         h3 {
             font-size: 20px;
-            font-weight: 400;
+            font-weight: 200;
             line-height: 24px;
             text-align: center;
             letter-spacing: 0.05em;
-            font-family: "Aitana-Regular";
+            font-family: "Helvetica";
             text-transform: uppercase;
 
             &.loading {

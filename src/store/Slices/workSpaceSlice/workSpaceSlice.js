@@ -1,25 +1,41 @@
 import { createSlice }                                            from "@reduxjs/toolkit";
-import { convertToArray, History, isValidArray, convertToObject } from "helpers";
+import { convertToArray, convertToObject, History, isValidArray } from "helpers";
 
 const initialState = {
 	data : {
 		product        : "",
+		productName    : "",
 		format         : "",
 		sizePhotoBook  : "",
 		sizeDimentions : "",
 		pasta          : "",
-		frontPage      : {},
-		minPages       : 0,
-		maxPages       : 0,
-		numberOfPages  : 50,
-		price          : 0,
-		pages          : {
+		projectTittle  : "",
+		modified       : undefined,
+		frontPage      : {
+			id     : "FrontLayout",
+			sheet1 : {
+				layoutType : "",
+				text       : "",
+				photos     : {
+					1 : "",
+				},
+			},
+		},
+		minPages      : 0,
+		maxPages      : 0,
+		numberOfPages : 50,
+		price         : 0,
+		currentPage   : "frontpage",
+		basePrice     : undefined,
+		extraCost     : 50,
+		maxRangePages : 30,
+		pages         : {
 			page1 : {
 				id     : "page1",
 				sheet1 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -33,7 +49,7 @@ const initialState = {
 				sheet1 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -44,7 +60,7 @@ const initialState = {
 				sheet2 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -58,7 +74,7 @@ const initialState = {
 				sheet1 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -69,7 +85,7 @@ const initialState = {
 				sheet2 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -83,7 +99,7 @@ const initialState = {
 				sheet1 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -94,7 +110,7 @@ const initialState = {
 				sheet2 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -108,7 +124,7 @@ const initialState = {
 				sheet1 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -119,7 +135,7 @@ const initialState = {
 				sheet2 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -133,7 +149,7 @@ const initialState = {
 				sheet1 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -144,7 +160,7 @@ const initialState = {
 				sheet2 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -158,7 +174,7 @@ const initialState = {
 				sheet1 : {
 					pageNo     : undefined,
 					layoutType : "",
-					text       : "",
+					text       : {},
 					photos     : {
 						0 : {
 							id  : "",
@@ -184,13 +200,17 @@ const initialState = {
 			value : "all",
 		},
 	},
-	loading : true,
+	loading   : true,
+	isPreview : false,
 };
 
 export const workSpaceSlice = createSlice({
 	name     : "workspace",
 	initialState,
 	reducers : {
+		togglePreview : (state) => {
+			state.isPreview = !state.isPreview;
+		},
 		setSelectePageData : (state, {payload}) => {
 			state.pageDataSelected = payload;
 		},
@@ -224,49 +244,115 @@ export const workSpaceSlice = createSlice({
 		addInitialData : (state, {payload}) => {
 			state.initialData = {...payload};
 		},
-		insertPage : (state, {payload}) => {
+		handleChangePage : (state, {payload}) => {
+			state.data.currentPage = payload;
+		},
+		addPage : (state) => {
 			const newData = {...state.data.pages};
-			const listOfPages = convertToArray(newData);
-			const lastPage = listOfPages[listOfPages.length - 1];
-			if (lastPage?.sheet2) {
-				const newPage = {
-					id     : `page${listOfPages.length + 1}`,
-					sheet1 : {
-						pageNo     : ((listOfPages.length + 1)*2) - 2,
-						layoutType : "",
-						text       : "",
-						photos     : {
-							0 : {
-								id  : "",
-								url : "",
-							},
-						},
-					},
-				};
-				listOfPages.push(newPage);
-				state.data.pages = convertToObject(listOfPages);
-				state.data.numberOfPages = state.data.numberOfPages + 1;
+			const pagesObjToArray = convertToArray(newData);
+
+			const isAvailablePage = pagesObjToArray.find((page) => page.id === state.data.currentPage);
+
+			if (!isAvailablePage) {
 				return;
 			}
-			const newSheet = {
-				sheet2 : {
-					pageNo     : listOfPages[listOfPages.length - 1]?.sheet1?.pageNo + 1,
-					layoutType : "",
-					text       : "",
-					photos     : {
-						0 : {
-							id  : "",
-							url : "",
-						},
+
+			const listOfPages = pagesObjToArray.filter((page) => page.id !== "page1");
+
+			const indexCurrentPage = listOfPages.findIndex((page) => page.id === state.data.currentPage);
+
+			const validIndexPage = () => {
+				if (indexCurrentPage === -1) {
+					return 0;
+				}
+				return indexCurrentPage;
+			};
+
+			const slicePagesToReorder = listOfPages.slice(validIndexPage(), listOfPages.length);
+
+			const lastPage = slicePagesToReorder[slicePagesToReorder.length - 1];
+
+			if (lastPage.sheet2) {
+				slicePagesToReorder.push({
+					id     : `page${Number(lastPage.id.split("page")[1]) + 1}`,
+					sheet1 : {
+						pageNo     : lastPage?.sheet2?.pageNo + 1,
+						layoutType : "",
+						text       : {},
+						photos     : {},
 					},
-				},
+				});
+			}
+			if (!lastPage.sheet2) {
+				slicePagesToReorder[slicePagesToReorder.length - 1] = {
+					sheet2 : {
+						pageNo     : lastPage?.sheet1?.pageNo + 1,
+						layoutType : "",
+						text       : {},
+						photos     : {},
+					},
+					...lastPage,
+				};
+			}
+
+			const newPagesReordered = slicePagesToReorder.map((page, index) => {
+				if (index === 0) {
+					return {
+						...page,
+						sheet1 : {
+							pageNo     : page?.sheet1?.pageNo,
+							layoutType : "",
+							photos     : {
+								0 : {id : "", url : ""},
+							},
+							text : {},
+						},
+						sheet2 : {
+							...page?.sheet1,
+							pageNo : page?.sheet2?.pageNo,
+						},
+					};
+				}
+				if ((index === slicePagesToReorder.length - 1) && !slicePagesToReorder[slicePagesToReorder.length - 1]?.sheet2) {
+					return {
+						...page,
+						sheet1 : {
+							pageNo     : page?.sheet1?.pageNo,
+							layoutType : slicePagesToReorder[index - 1]?.sheet2?.layoutType,
+							photos     : slicePagesToReorder[index - 1]?.sheet2?.photos,
+							text       : slicePagesToReorder[index - 1]?.sheet2?.text ?? {},
+						},
+					};
+				}
+				return {
+					...page,
+					sheet1 : {
+						pageNo     : page.sheet1?.pageNo,
+						layoutType : slicePagesToReorder[index - 1]?.sheet2?.layoutType,
+						photos     : slicePagesToReorder[index - 1]?.sheet2?.photos,
+						text       : slicePagesToReorder[index - 1]?.sheet2?.text ?? {},
+					},
+					sheet2 : {
+						pageNo     : page.sheet2?.pageNo,
+						layoutType : page.sheet1?.layoutType,
+						photos     : page.sheet1?.photos,
+						text       : page.sheet1?.text ?? {},
+					},
+				};
+			});
+
+			listOfPages.splice(validIndexPage(), slicePagesToReorder.length, ...newPagesReordered);
+
+			state.data.pages = convertToObject([pagesObjToArray[0], ...listOfPages]);
+			const history = new History();
+			history.undoStack = state.history.undo;
+			const undoNewData = {
+				...state.data,
+				pages : convertToObject(listOfPages),
 			};
-			listOfPages[listOfPages.length - 1] = {
-				...listOfPages[listOfPages.length - 1],
-				...newSheet,
-			};
-			state.data.pages = convertToObject(listOfPages);
-			state.data.numberOfPages = state.data.numberOfPages + 1;
+			history.addToUndoStack(undoNewData);
+			state.history.undo = history.undoStack;
+			state.history.current = history.currentAction;
 		},
 		deletePage : (state, {payload}) => {
 			const minPages = state.data.minPages;
@@ -277,15 +363,27 @@ export const workSpaceSlice = createSlice({
 		},
 		addPhotoEdited : (state, {payload}) => {
 			const newData = {...state.data};
-			newData.pages[payload?.pageId][payload?.sheetNo]["photos"][payload?.layoutNo]["urlPhotoEdited"] = payload?.imageUrl;
+			newData.pages[payload?.pageId][`sheet${payload.sheetNo}`]["photos"][payload?.layoutNo]["urlPhotoEdited"] = payload?.imageUrl;
 			state.data = newData;
 		},
 		addPhoto : (state, {payload}) => {
 			const newData = {...state.data};
-			newData.pages[payload.pageId][payload.sheetNo]["photos"][payload.layoutNo] = {
-				id  : payload.image.fileId,
-				url : payload.image.image,
-			};
+			if (payload.pageId === "frontpage") {
+				newData.frontPage.sheet1["photos"] = {
+					0 : {
+						id  : payload.image.id,
+						url : payload.image.image,
+					},
+				};
+			} else {
+				if (!newData.pages[payload.pageId]?.[`sheet${payload.sheetNo}`].layoutType) {
+					return;
+				}
+				newData.pages[payload.pageId][`sheet${payload.sheetNo}`]["photos"][payload.layoutNo] = {
+					id  : payload.image.id,
+					url : payload.image.image,
+				};
+			}
 			state.data = newData;
 			const history = new History();
 			history.undoStack = state.history.undo;
@@ -297,7 +395,7 @@ export const workSpaceSlice = createSlice({
 			state.history.current = history.currentAction;
 		},
 		addText : (state, {payload}) => {
-			state.data.pages[payload.pageId][payload.sheetNo]["text"] = payload.text;
+			state.data.pages[payload.pageId][`sheet${payload.sheetNo}`]["text"][payload.layoutNo] = payload.text;
 
 			const myUndoData = {
 				...state.data,
@@ -323,10 +421,19 @@ export const workSpaceSlice = createSlice({
 		},
 		removePhoto : (state, {payload}) => {
 			const newData = {...state.data};
-			newData.pages[payload.pageId][payload.sheetNo]["photos"][payload.layoutNo] = {
-				id  : "",
-				url : "",
-			};
+			if (payload?.pageId === "frontpage") {
+				newData.frontPage.sheet1.photos = {
+					0 : {
+						id  : "",
+						url : "",
+					},
+				};
+			} else {
+				newData.pages[payload.pageId][`sheet${payload.sheetNo}`]["photos"][payload.layoutNo] = {
+					id  : "",
+					url : "",
+				};
+			}
 			state.data = newData;
 			const history = new History();
 			history.undoStack = state.history.undo;
@@ -349,7 +456,7 @@ export const workSpaceSlice = createSlice({
 			});
 		},
 		autoFillImages : (state, {payload}) => {
-			const newData = {...state?.data?.pages};
+			const newData = {FrontLayout : {...state.data.frontPage}, ...state?.data?.pages};
 
 			const listOfPages = [...convertToArray(newData)];
 			const listOfPhotos = [...payload];
@@ -360,15 +467,15 @@ export const workSpaceSlice = createSlice({
 				const sheet1Photos = convertToArray(data?.sheet1?.photos);
 				const sheet2Photos = data?.sheet2?.photos ? convertToArray(data?.sheet2?.photos) : null;
 
-				const isSinglePage = (["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(newData[data?.id].sheet1?.layoutType));
+				const isSinglePage = (["FrontLayout"].includes(newData[data?.id].sheet1?.layoutType));
 
 				sheet1Photos.forEach((space, e) => {
-					if (!space?.id) {
+					if (!space?.id && data?.sheet1?.layoutType) {
 						noImagesListKey.push(`${data?.id}.sheet1.photos.${e}`);
 					}
 				});
 
-				if (sheet2Photos && !isSinglePage) {
+				if (sheet2Photos && !isSinglePage && data?.sheet1?.layoutType !== "") {
 					sheet2Photos.forEach((space, e) => {
 						if (!space?.id) {
 							noImagesListKey.push(`${data?.id}.sheet2.photos.${e}`);
@@ -386,11 +493,13 @@ export const workSpaceSlice = createSlice({
 				const splitKeyData = noImagesListKey[i].split(".");
 
 				newData[splitKeyData[0]][splitKeyData[1]][splitKeyData[2]][splitKeyData[3]] = {
-					id  : imageData?.fileId,
+					id  : imageData?.id,
 					url : imageData?.url,
 				};
 			}
 
+			state.data.frontPage = newData.FrontLayout;
+			delete newData.FrontLayout;
 			state.data.pages = newData;
 
 			const history = new History();
@@ -408,27 +517,44 @@ export const workSpaceSlice = createSlice({
 		addLayout : (state, {payload}) => {
 			const cloneData = {...state.data};
 			const parseToListImages = Array.from(Array(payload?.numberPhotos).keys()).map(e => ({id : "", url : ""}));
+			const parseToListText = Array.from(Array(payload?.numberText).keys()).map(e => (""));
 			const myPhotos = Object.assign({}, parseToListImages);
+			const myText = Object.assign({}, parseToListText);
 			const isFullBook = () => {
-				switch (cloneData?.sizePhotoBook) {
-					case "LargeFormat":
-						return ["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(payload.layout);
-					case "SquareFormat" :
-						return ["Mod6", "Mod7", "FrontLayout"].includes(payload.layout);
+				switch (`${cloneData?.sizePhotoBook}-${cloneData?.format}`) {
+					case "grande-vertical":
+						return ["FrontLayout"].includes(payload.layout);
+					case "grande-cuadrado" :
+						return ["FrontLayout"].includes(payload.layout);
 				}
 			};
-			const isAvailableDoublePage = cloneData.pages[payload.pageId]["sheet2"];
+			const isAvailableDoublePage = cloneData.pages[payload.pageId]?.["sheet2"];
+			if (payload?.pageId === "FrontLayout") {
+				cloneData.frontPage.sheet1 = {
+					...cloneData.frontPage.sheet1,
+					layoutType : payload.layout,
+					text       : myText,
+					photos     : {
+						0 : {
+							id  : cloneData?.frontPage?.sheet1?.photos?.[0]?.id,
+							url : cloneData?.frontPage?.sheet1?.photos?.[0]?.url,
+						},
+					},
+				};
+				state.data = cloneData;
+				return;
+			}
 			if (isFullBook() && isAvailableDoublePage) {
 				cloneData.pages[payload.pageId]["sheet1"] = {
 					...cloneData.pages[payload.pageId]["sheet1"],
 					layoutType : payload.layout,
-					text       : cloneData.pages[payload.pageId]["sheet1"]["text"],
+					text       : myText,
 					photos     : myPhotos,
 				};
 				cloneData.pages[payload.pageId]["sheet2"] = {
 					...cloneData.pages[payload.pageId]["sheet2"],
 					layoutType : "",
-					text       : cloneData.pages[payload.pageId]["sheet2"]["text"],
+					text       : {},
 					photos     : {},
 				};
 				state.data = cloneData;
@@ -440,6 +566,7 @@ export const workSpaceSlice = createSlice({
 			cloneData.pages[payload.pageId][payload.sheetId] = {
 				...cloneData.pages[payload.pageId][payload.sheetId],
 				layoutType : payload.layout,
+				text       : myText,
 				photos     : myPhotos,
 			};
 			state.data = cloneData;

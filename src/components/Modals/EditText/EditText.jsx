@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
 import { CKEditor }  from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
+import ClassicEditor from "@ckeditor/ckeditor5-editor-balloon/src/ballooneditor";
 import Essentials    from "@ckeditor/ckeditor5-essentials/src/essentials";
 import Bold          from "@ckeditor/ckeditor5-basic-styles/src/bold";
 import Italic        from "@ckeditor/ckeditor5-basic-styles/src/italic";
@@ -27,7 +27,7 @@ import "./EditText.scss";
 const EditText = ({innerProps, workSpaceSlice}) => {
 	const [editorState, setEditorState] = useState(null);
 
-	const { pageId, sheetNo, dataTextPage } = innerProps;
+	const { pageId, sheetNo, dataTextPage, layoutNo } = innerProps;
 
 	const onEditorStateChange = function(editorState) {
 		setEditorState(editorState);
@@ -35,7 +35,7 @@ const EditText = ({innerProps, workSpaceSlice}) => {
 
 	const handleAddText = () => {
 		const text = editorState;
-		workSpaceSlice.addText({pageId, sheetNo, text});
+		workSpaceSlice.addText({pageId, sheetNo, text, layoutNo});
 		closeAllModals();
 	};
 

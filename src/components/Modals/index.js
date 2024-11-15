@@ -1,15 +1,21 @@
 //Own components
-import EditPhoto          from "./EditPhoto";
-import EditText           from "./EditText";
-import TestPdf            from "./TestPdf";
-import ConfirmationDelete from "./ConfirmationDelete";
+import EditPhoto                from "./EditPhoto";
+import EditText                 from "./EditText";
+import TestPdf                  from "./TestPdf";
+import ConfirmationDelete       from "./ConfirmationDelete";
+import ConfirmationToPrint      from "./ConfirmationToPrint";
+import ConfirmationDeleteFolder from "./ConfirmationDeleteFolder";
+import AddNewPageConfirmation   from "./AddNewPageConfirmation";
 
 
 const modals = {
-	editPhoto          : EditPhoto,
-	editText           : EditText,
-	testPdf            : TestPdf,
-	confirmationDelete : ConfirmationDelete,
+	editPhoto                : EditPhoto,
+	editText                 : EditText,
+	testPdf                  : TestPdf,
+	confirmationDelete       : ConfirmationDelete,
+	confirmationToPrint      : ConfirmationToPrint,
+	confirmationDeleteFolder : ConfirmationDeleteFolder,
+	addNewPageConfirmation   : AddNewPageConfirmation,
 };
 
 const modalsConfig = {

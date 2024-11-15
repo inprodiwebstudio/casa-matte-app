@@ -7,23 +7,42 @@ import { MoonLoader } from "react-spinners";
 //Own components
 import { BigPlus, Check }                        from "Resources/icons";
 import { workSpaceSlice }                        from "store/Slices";
+import photoBooksConfing                         from "core/constants/photoBooksConfing";
 import { resizerImage, bindAll, convertToArray } from "helpers";
 import "./PhotoCard.scss";
 
-const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMutationGallery, workSpaceSlice, workSpaceData, isHideSelected}) => {
+const PhotoCard = ({
+	image,
+	fileId,
+	thumbNail,
+	isChecked,
+	isSelected,
+	isfullSize,
+	onSelected,
+	workSpaceData,
+	isHideSelected,
+	workSpaceSlice,
+}) => {
 	const { pageId } = useParams();
 
-	const pageData = workSpaceData?.pages?.[pageId];
+	const photoBookType = workSpaceData?.product ?? "white";
+	const formatPhotoBook = workSpaceData?.format ?? "vertical";
+	const sizePhotoBook = workSpaceData?.sizePhotoBook ?? "grande";
+
+	const photoBookConfig = photoBooksConfing[photoBookType ?? "white"];
+
+	const pageData = pageId === "frontpage" ? workSpaceData?.frontPage : workSpaceData?.pages?.[pageId];
 
 	const [ isDragger, setIsDragger ] = useState(false);
 	const [ loadingPhoto, setLoadingphoto ] = useState(true);
 	const [ myImageUrl, setMyImageUrl ] = useState("");
 
+
 	const handdleDrag = () => {
 		setIsDragger(true);
 		workSpaceSlice.setCurrentPhotoDrager({
-			image  : image,
-			fileId : fileId,
+			image : image,
+			id    : fileId,
 		});
 	};
 
@@ -43,23 +62,24 @@ const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMut
 
 	const loadImage = () => {
 		const img = new Image();
-		img.src = resizerImage(image);
+		img.src = resizerImage(thumbNail);
 		img.addEventListener("load", handleImageLoad);
 		setMyImageUrl(img.src);
 	};
 
 	const addPhotoToLayout = (imageUrl) => {
 		const isNotCompleteSheet1 = convertToArray(pageData?.sheet1?.photos).find(e => e.id === "");
+		const modsInDoublePage = photoBookConfig[formatPhotoBook]?.sizes[sizePhotoBook]?.modsInDoublePage;
 
-		const isSinglePage = (["Mod1", "Mod2", "Mod3", "FrontLayout"].includes(pageData?.sheet1?.layoutType));
+		const isSinglePage = (modsInDoublePage.includes(pageData?.sheet1?.layoutType));
 		const isAvailableSheet2 = pageData?.sheet2?.photos[0];
 
 		if (isSinglePage) {
 			workSpaceSlice.addPhoto({
-				sheetNo  : "sheet1",
+				sheetNo  : 1,
 				layoutNo : 0,
 				image    : {
-					fileId,
+					id    : fileId,
 					image : imageUrl,
 				},
 				pageId : pageData?.id,
@@ -72,13 +92,13 @@ const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMut
 				const data = listOfPhotos[i];
 				if (data?.id === "") {
 					workSpaceSlice.addPhoto({
-						sheetNo  : "sheet1",
+						sheetNo  : 1,
 						layoutNo : i,
 						image    : {
 							fileId,
 							image : imageUrl,
 						},
-						pageId : pageData?.id,
+						pageId : pageId,
 					});
 					return;
 				}
@@ -90,7 +110,7 @@ const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMut
 				const data = listOfPhotos[i];
 				if (data?.id === "") {
 					workSpaceSlice.addPhoto({
-						sheetNo  : "sheet2",
+						sheetNo  : 2,
 						layoutNo : i,
 						image    : {
 							fileId,
@@ -110,7 +130,7 @@ const PhotoCard = ({image, isSelected, fileId, onSelected, isChecked, loadingMut
 
 	return (
 		<div
-			className={`PhotoCard ${isDragger && "isDragger"} ${(isHideSelected && isSelected) && "isHidePhoto"}`}
+			className={`PhotoCard ${isfullSize && "isFullSize"} ${isDragger && "isDragger"} ${(isHideSelected && isSelected) && "isHidePhoto"}`}
 			draggable="true"
 			onDragStart={() => handdleDrag()}
 			onDragEnd={() => handleLeaveDragger()}

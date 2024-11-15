@@ -59,3 +59,19 @@ const mapStateToProps = ({ workSpaceSlice }) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (Mod2);
+
+
+// const x = () => {
+// 	<Mod position="v" p={10}>
+// 		<Mod position="h">
+// 			<Img></Img>
+// 			<Paragraph>
+// 				<Paragrraph.Title></Paragrraph.Title>
+// 				<Paragrraph.Divider or="v"></Paragrraph.Divider>
+// 				<Paragrraph.Text></Paragrraph.Text>
+// 			</Paragraph>
+// 		</Mod>
+// 		<Mod></Mod>
+// 		<Mod></Mod>
+// 	</Mod>;
+// };

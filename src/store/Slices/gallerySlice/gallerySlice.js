@@ -8,10 +8,13 @@ const initialState = {
 		name         : "route",
 		folderThumbs : [],
 	},
-	filter         : undefined,
-	typeDropedView : null,
-	data           : {},
-	selectedData   : {},
+	filter            : undefined,
+	typeDropedView    : null,
+	data              : null,
+	isFullSizeSideBar : false,
+	isLoadingData     : false,
+	isLoadingMutation : false,
+	selectedData      : null,
 };
 
 export const gallerySlice = createSlice({
@@ -19,24 +22,19 @@ export const gallerySlice = createSlice({
 	initialState,
 	reducers : {
 		setGalleryData : (state, {payload}) => {
-			state.data = {...payload, ...state.data};
+			state.data = {[payload?.id] : payload, ...state.data};
 		},
-		newGalleryData : (state, {payload}) => {
-			state.data = payload;
+		getGalleryData : (state, {payload}) => {
+			const gallletyDataInsert = convertToObject(payload);
+			state.data = gallletyDataInsert;
 		},
-		clearSelectedData : (state) => {
-			state.selectedData = {};
+		setLoadingGalleryData : (state, {payload}) => {
+			state.isLoadingData = payload;
 		},
-		setSelectedData : (state, {payload}) => {
-			const newData = {...state.selectedData};
-			if (newData[payload?.fileId]) {
-				delete newData[payload?.fileId];
-			} else {
-				newData[payload?.fileId] = payload;
-			}
-			state.selectedData = newData;
+		setLoadingMutationGallery : (state, {payload}) => {
+			state.isLoadingMutation = payload;
 		},
-		deleteData : (state, {payload}) => {
+		deleteDataGallery : (state, {payload}) => {
 			const newData = {...state.data};
 			const listOfKeys = Object.keys(payload);
 			listOfKeys.forEach(key => {
@@ -44,6 +42,18 @@ export const gallerySlice = createSlice({
 			});
 			state.data = newData;
 			state.selectedData = {};
+		},
+		clearSelectedData : (state) => {
+			state.selectedData = {};
+		},
+		setSelectedData : (state, {payload}) => {
+			const newData = {...state.selectedData};
+			if (newData[payload?.id]) {
+				delete newData[payload?.id];
+			} else {
+				newData[payload?.id] = payload;
+			}
+			state.selectedData = newData;
 		},
 		setTypeDropedView : (state, {payload}) => {
 			if (payload === state.typeDropedView) {
@@ -59,18 +69,36 @@ export const gallerySlice = createSlice({
 		setFilter : (state, {payload}) => {
 			state.filter = payload;
 		},
+		toggleFullSizeSideBar : (state) => {
+			state.isFullSizeSideBar = !state.isFullSizeSideBar;
+		},
 		moveToFolder : (state, {payload}) => {
-			const cloneData = { ...state.data };
-			const toArrSelectedData = Object.values(state.selectedData).map(data => ({...data, parentId : payload}));
-			const lenghtOfThumbImages = cloneData[payload].thumbImages;
-			const quantityToSetImages = 5 - lenghtOfThumbImages.length;
-			const newImagesThumb = toArrSelectedData.slice(0, quantityToSetImages + 1);
-
-			const newData = {...cloneData, ...convertToObject(toArrSelectedData)};
-			newData[payload].thumbImages = [...newData[payload].thumbImages, ...newImagesThumb];
-
-			state.data = newData;
-			state.selectedData = {};
+			const isMoveInFolder = !!payload?.folderId;
+			if (isMoveInFolder) {
+				const cloneListOfThumbNails = [...state.data[payload.folderId].thumbNails];
+				const isAvialableAddMoreOneImages = () => {
+					const counterLengthTotal = cloneListOfThumbNails.length + payload.iamgesSelectedData.length;
+					if (counterLengthTotal >= 5) {
+						return false;
+					}
+					return true;
+				};
+				const imagesUrl = payload.iamgesSelectedData.map(image => image.url);
+				isAvialableAddMoreOneImages() ? (
+					state.data[payload.folderId].thumbNails = [...cloneListOfThumbNails, ...imagesUrl]
+				) : (
+					state.data[payload.folderId].thumbNails[0] = imagesUrl[imagesUrl.length - 1]
+				);
+			}
+			const handlerRemoveImages = () => {
+				const newData = {...state.data};
+				payload.iamgesSelectedData.forEach(image => {
+					delete newData[image.id];
+				});
+				state.data = newData;
+				state.selectedData = {};
+			};
+			handlerRemoveImages();
 		},
 	},
 });

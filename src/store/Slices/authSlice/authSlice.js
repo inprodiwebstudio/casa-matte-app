@@ -4,10 +4,11 @@ const initialState = {
 	token    : "",
 	loggedIn : false,
 	user     : {
-		username    : "",
-		email       : "",
-		name        : "",
-		photoBookId : "",
+		username : "",
+		email    : "",
+		name     : "",
+		postId   : "",
+		userId   : "",
 	},
 };
 
@@ -16,12 +17,14 @@ export const authSlice = createSlice({
 	initialState,
 	reducers : {
 		setUserData : (state, action) => {
-			state.loggedIn = true;
 			state.token         = action.payload.token;
 			state.user.email    = action.payload.user_email;
 			state.user.username = action.payload.user_nicename;
 			state.user.name     = action.payload.user_display_name;
-			state.user.photoBookId = action.payload.photoBookId;
+			state.user.postId = action.payload.postId;
+		},
+		setIsLoggedIn : (state) => {
+			state.loggedIn = true;
 		},
 		clearUserData : () => initialState,
 	},

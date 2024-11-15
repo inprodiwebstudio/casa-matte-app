@@ -1,6 +1,61 @@
 @import "/src/Resources/scss/variables/colorThemes";
 @import "/src/Resources/scss/breakpoints.scss";
 
+.PreviewPages {
+	width: 100%;
+	height: 88%;
+	overflow-y: scroll;
+	position: relative;
+	top : 12%;
+	z-index: 1;
+
+	.photoBookContainer {
+		height: 100% !important;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		.pagesPreviewPhotoBook {
+			height: 992px;
+			font-size: 90px;
+			transform: scale(0.8, 0.8);
+			z-index: 1;
+
+			&.cuadrado-chico-preview {
+				transform: scale(0.68, 0.68);
+
+				@include laptop {
+					transform: scale(0.4, 0.4);
+				}
+
+				@include big-laptop {
+					transform: scale(0.4, 0.4);
+				}
+			}
+
+			&.cuadrado-grande-preview {
+				transform: scale(0.8, 0.8);
+
+				@include laptop {
+					transform: scale(0.6, 0.6);
+				}
+
+				@include big-laptop {
+					transform: scale(0.6, 0.6);
+				}
+			}
+
+			@include laptop {
+				transform: scale(0.65, 0.65);
+			}
+			@include big-laptop {
+				transform: scale(0.75, 0.75);
+			}
+		}
+	}
+}
+
 
 .WorkSpace {
 	padding-left: 180px;
@@ -19,21 +74,18 @@
 	}
 
 	.undo-redo-container {
+		z-index: 2;
 		position: absolute;
-
 		display: flex;
-		gap : 50px;
-		font-size: 12px;
+		gap : 30px;
 		font-weight: 300;
-		width: 100vw;
-		height: 100%;
-		padding-left: 300px;
-		padding-top: 10em;
+		width: fit-content;
+		top : 38px;
+		left : 230px;
 
 		.action-styled {
 			height: fit-content;
 			width: fit-content;
-			z-index: 2;
 			gap: 0px;
 			display: flex;
 			cursor: pointer;
@@ -57,10 +109,11 @@
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
+
+			font-size: 10px;
 			
 			.actionLabel {
-				font-weight: 500;
-				font-size: 9px;
+				font-size: 10px;
 			}
 		}
 	}
@@ -69,23 +122,114 @@
 		width: 100%;
 		height: 100%;
 		display: flex;
-		padding: 50px;
-		padding-top: 110px;
 		align-items: center;
 		justify-content: center;
-		font-size: 5vw;
+		font-size: 90px;
+
+		@include laptop {
+			font-size: 90px;
+		}
+
+		@include big-laptop {
+			height: 400px;
+		}
+
 
 		@include big-tablet {
 			padding-top: 50px;
 		}
 
+		.Text {
+			// line-height: 1px !important;
+			word-spacing: 0px;
+		}
+
 		.ghost-canva {
-			width: 100%;
-			height: 105%;
+			width: 100% !important;
+			height: 992px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			font-size: 5vw;
+			font-size: 90px;
+			transform: scale(0.6, 0.6);
+			z-index: 1;
+
+			&.vertical-mediano-workSpace {
+				@include laptop {
+					transform: scale(0.44, 0.44);
+					z-index: 1;
+				}
+	
+				@include big-laptop {
+					transform: scale(0.5, 0.5);
+					z-index: 1;
+				}
+	
+				@include big-tablet {
+					transform: scale(0.45, 0.45);
+					z-index: 1;
+				}
+			}
+
+			&.cuadrado-chico-workSpace {
+				transform: scale(0.58, 0.58);
+				// margin-right: 43px;
+
+				@include laptop {
+					transform: scale(0.41, 0.41);
+					z-index: 1;
+					// margin-right: 45px;
+				}
+	
+				@include big-laptop {
+					transform: scale(0.48, 0.48);
+					z-index: 1;
+					// margin-right: 35px;
+				}
+	
+				@include big-tablet {
+					transform: scale(0.6, 0.6);
+					z-index: 1;
+				}
+			}
+
+			&.cuadrado-grande-workSpace {
+				transform: scale(0.6, 0.6);
+				margin-right: 3vw;
+
+				@include laptop {
+					transform: scale(0.4, 0.4);
+					z-index: 1;
+				}
+	
+				@include big-laptop {
+					transform: scale(0.45, 0.45);
+					z-index: 1;
+					// margin-right: 51px;
+				}
+	
+				@include big-tablet {
+					transform: scale(0.45, 0.45);
+					z-index: 1;
+				}
+			}
+
+			@include laptop {
+				transform: scale(0.42, 0.42);
+				margin-bottom: 10px;
+				z-index: 1;
+			}
+
+			@include big-laptop {
+				transform: scale(0.42, 0.42);
+				z-index: 1;
+				// margin-right: 50px;
+			}
+
+			@include big-tablet {
+				transform: scale(0.45, 0.45);
+				z-index: 1;
+			}
 		}
 	}
 }

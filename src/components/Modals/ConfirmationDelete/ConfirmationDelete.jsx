@@ -1,10 +1,13 @@
-import { Button }         from "core/components";
-import { closeAllModals } from "@mantine/modals";
-import React              from "react";
+import { Button }                    from "core/components";
+import { useSelector, shallowEqual } from "react-redux";
+import { closeAllModals }            from "@mantine/modals";
+import React                         from "react";
 import "./ConfirmationDelete.scss";
 
 const ConfirmationDelete = ({innerProps}) => {
 	const { photoQuantity, handdleSuccess } = innerProps;
+
+	const isLoadingDelete = useSelector((state) => state.gallerySlice?.isLoadingMutation, shallowEqual);
 
 	return (
 		<div className="body-confirmation-modal">
@@ -18,6 +21,7 @@ const ConfirmationDelete = ({innerProps}) => {
 					type="subtleActive"
 					width={117}
 					height={39}
+					isLoading={isLoadingDelete}
 					onClick={() => handdleSuccess()}
 				>
 					Aceptar
@@ -26,6 +30,7 @@ const ConfirmationDelete = ({innerProps}) => {
 					fontSize="18px"
 					width={117}
 					height={39}
+					isLoading={isLoadingDelete}
 					onClick={() => closeAllModals()}
 				>
 					Cancelar

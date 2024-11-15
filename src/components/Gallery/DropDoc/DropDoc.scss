@@ -96,6 +96,14 @@
         text-transform: uppercase;
         cursor: pointer;
 
+        p { 
+            margin-top: 20px;
+            color: $dark-color;
+            letter-spacing: 0.05em;
+            line-height: 16px;
+            font-size: 10px;
+        }
+
         svg {
             margin-bottom: 5px;
         }
@@ -128,7 +136,7 @@
         .options-card {
             display: flex;
             flex-direction: column;
-            gap: 80px;
+            gap: 8vh;
             height: 100%;
             align-items: center;
             justify-content: center;

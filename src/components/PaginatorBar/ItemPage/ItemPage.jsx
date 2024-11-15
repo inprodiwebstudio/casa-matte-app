@@ -1,12 +1,14 @@
+//Redux
+import { useSelector, shallowEqual } from "react-redux";
 //Router
 import { useNavigate, useParams } from "react-router-dom";
 //External components
 import { Draggable } from "react-beautiful-dnd";
 //Own Components
-import BookPages from "components/BookPages";
 //Resources
-import { Cross } from "Resources/icons";
+import { Thrash } from "Resources/icons";
 import "./ItemPage.scss";
+import BookPages  from "components/BookPages";
 
 const ItemPage = ({
 	index,
@@ -18,7 +20,14 @@ const ItemPage = ({
 	const { pageId } = useParams();
 	const navigate = useNavigate();
 
+	const photoBookFormat = useSelector((state) => state.workSpaceSlice?.data?.format, shallowEqual);
+	const isAvailableProduct = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
+
 	const isCurrentPage = pageId === draggableId;
+
+	const handlerSelectPage = () => {
+		navigate(draggableId);
+	};
 
 	const NumbPages = () => {
 		return (
@@ -39,7 +48,7 @@ const ItemPage = ({
 	const RenderView = ({ provided }) => (
 		<div
 			className={`ItemPage ${isCurrentPage && "isActivePage"} ${isFixedPage && "isFixed"}`}
-			onClick={() => navigate(draggableId)}
+			onClick={() => handlerSelectPage()}
 			{
 				...(provided && {
 					ref : provided.innerRef,
@@ -49,7 +58,17 @@ const ItemPage = ({
 			}
 		>
 			<div className="page-container">
-				<BookPages pageData={pageData} />
+				<div className={`sheets-container ${photoBookFormat}`}>
+					{
+						(isAvailableProduct !== "") && (
+							<BookPages
+								isThumbNail={false}
+								isInPaginator={true}
+								pageData={pageData}
+							/>
+						)
+					}
+				</div>
 				<NumbPages />
 			</div>
 			{
@@ -58,7 +77,7 @@ const ItemPage = ({
 						className="delete-icon"
 						onClick={() => handleDelete(pageData?.id)}
 					>
-						<Cross size="9px" />
+						<Thrash size="15px" />
 					</div>
 				)
 			}
@@ -73,7 +92,6 @@ const ItemPage = ({
 		<Draggable
 			index={index}
 			draggableId={draggableId}
-			isDragDisabled={!pageData?.sheet2}
 			disableInteractiveElementBlocking={true}
 		>
 			{(provided) => (

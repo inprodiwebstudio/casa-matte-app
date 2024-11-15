@@ -1,49 +1,55 @@
 
 //Own Components
-import BookSheets                 from "components/BookSheets";
-import { useNavigate, useParams } from "react-router";
-import {Reload}                   from "Resources/icons";
+import { shallowEqual, useSelector } from "react-redux";
+import { useNavigate, useParams }    from "react-router";
 import "./FrontPage.scss";
+import BookPages                     from "components/BookPages";
 
 const FrontPage = () => {
 	const navigate = useNavigate();
 	const { pageId } = useParams();
 
-	const LayoutComponent = BookSheets["LargeFormat"];
+
+	const isLoading = useSelector((state) => state.workSpaceSlice?.loading, shallowEqual);
+
+	const workSpaceFrontPage = useSelector((state) => state.workSpaceSlice.data?.frontPage, shallowEqual);
+	const isAvailableProduct = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
+
+	const photoBookFormat = useSelector((state) => state.workSpaceSlice?.data?.format, shallowEqual);
+
+	const handlerSelectPage = () => {
+		navigate("frontpage");
+	};
 
 	return (
 		<div
 			className={`FrontPage ${(pageId === "frontpage") && "isInThisPage"}`}
-			onClick={() => navigate("frontpage")}
+			onClick={() => handlerSelectPage()}
 		>
 			<div
 				className="my-page-container"
 			>
-				<div className="drag-icon-conatainer">
-					<div style={{width : "15px"}}>&nbsp;</div>
-				</div>
 				<div>
-					<div className="withe-page-container">
-						<LayoutComponent
-							pageData={{
-								id     : "page1",
-								sheet1 : {
-									layoutType : "FrontLayout",
-									text       : "",
-									photos     : {
-										1 : "",
-									},
-								},
-							}}
-						/>
+					<div
+						className={
+							`withe-page-container frontPage-thumbnail-${photoBookFormat}`
+						}
+					>
+						{
+							(workSpaceFrontPage && (isAvailableProduct !== "")) && (
+								<BookPages
+									isInWorkSpcae={false}
+									isInPaginator={true}
+									loading={isLoading}
+									pageData={workSpaceFrontPage}
+								/>
+							)
+						}
 					</div>
 					<div className="pages-book-conatier">
 						<p>ATRÁS</p>
 						<p>FRENTE</p>
 					</div>
-				</div>
-				<div className="cross-icon-conatiner">
-					<Reload size="9px" />
 				</div>
 			</div>
 		</div>

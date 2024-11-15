@@ -19,6 +19,10 @@ export const filterTabs = [
 
 export const optionsPhotoQuantity = [
 	{
+		label : "Todos",
+		value : "all",
+	},
+	{
 		label : "1 Foto",
 		value : 1,
 	},
@@ -53,9 +57,5 @@ export const optionsPhotoQuantity = [
 	{
 		label : "9 Fotos",
 		value : 9,
-	},
-	{
-		label : "Todos",
-		value : "all",
 	},
 ];

@@ -7,7 +7,7 @@ import { Skeleton }            from "@mantine/core";
 import layouts                     from "components/global/LayoutsPage/LargeFormat";
 import { convertToArray, bindAll } from "helpers";
 import { workSpaceSlice }          from "store/Slices";
-import FrontLayout                 from "components/global/LayoutsPage/FrontLayout";
+// import FrontLayout                 from "components/global/LayoutsPage/FrontLayout";
 import "./LargeFormat.scss";
 
 const LargeFormat = ({pageData, workSpaceSlice, pageDataSelected, isInWorkSpcae, loading}) => {
@@ -59,7 +59,7 @@ const LargeFormat = ({pageData, workSpaceSlice, pageDataSelected, isInWorkSpcae,
 				{
 					!LayoutPage1 ? (
 						(pageData?.sheet1?.layoutType === "FrontLayout") ? (
-							<FrontLayout />
+							<></>
 						) : (
 							<div />
 						)

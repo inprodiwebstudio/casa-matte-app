@@ -12,6 +12,7 @@ const baseQuery = fetchBaseQuery({
 	prepareHeaders : (headers) => {
 		headers.set("Access-Control-Allow-Origin", "*");
 		headers.set("Access-Control-Allow-Methods", "*");
+		// headers.set("Authorization", `Basic ${ btoa( "864322584227584" + ":" + "E8Hmvqo50hhgo-XAoZHdXTajh4c") }`);
 		return headers;
 	},
 });
@@ -33,22 +34,44 @@ export const apiImageKit = createApi({
 	reducerPath       : "apiImageKit",
 	baseQuery         : baseQueryWithRetry,
 	keepUnusedDataFor : 3600,
-	tagTypes          : [],
+	tagTypes          : ["gallery"],
 	endpoints         : (builder) => ({
 		getDirentsList : builder.query({
 			query        : ({params}) => `files/?${qs.stringify(params)}`,
 			providesTags : ["gallery"],
 		}),
 		deleteImages : builder.mutation({
-			query({data}) {
-				const body = data;
+			query(imagesPulicIds) {
+				const body = imagesPulicIds;
 				return {
 					url    : "delete",
 					method : "POST",
 					body,
 				};
 			},
-			invalidatesTags : ["gallery"],
+			invalidatesTags : [],
+		}),
+		generateUrlCompress : builder.mutation({
+			query({data}) {
+				const body = data;
+				return {
+					url    : "urlimage",
+					method : "POST",
+					body,
+				};
+			},
+			invalidatesTags : [],
+		}),
+		generateSign : builder.mutation({
+			query({data}) {
+				const body = data;
+				return {
+					url    : "sign",
+					method : "POST",
+					body,
+				};
+			},
+			invalidatesTags : [],
 		}),
 		addFolder : builder.mutation({
 			query({data, userName}) {
@@ -59,7 +82,18 @@ export const apiImageKit = createApi({
 					body,
 				};
 			},
-			invalidatesTags : ["gallery"],
+			invalidatesTags : [],
+		}),
+		deleteFolder : builder.mutation({
+			query({data, userName}) {
+				const body = data;
+				return {
+					url    : `delete/folder/${userName}`,
+					method : "POST",
+					body,
+				};
+			},
+			invalidatesTags : [],
 		}),
 		addImage : builder.mutation({
 			query({data, userName}) {
@@ -81,7 +115,7 @@ export const apiImageKit = createApi({
 					body,
 				};
 			},
-			invalidatesTags : ["gallery"],
+			invalidatesTags : [],
 		}),
 		moveFile : builder.mutation({
 			query({sourceFilePath, destinationPath}) {
@@ -94,7 +128,7 @@ export const apiImageKit = createApi({
 					},
 				};
 			},
-			invalidatesTags : (result, error, arg) => arg?.tags ? [...arg.tags] : [`${arg.module}`],
+			invalidatesTags : [],
 		}),
 	}),
 });
