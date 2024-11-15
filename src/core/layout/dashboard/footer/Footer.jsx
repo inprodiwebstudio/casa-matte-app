@@ -1,4 +1,4 @@
-import { useState }                               from "react";
+import { useState, useEffect }                    from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import LayoutsList                                from "components/LayoutsList";
 
@@ -10,15 +10,25 @@ import { workSpaceSlice } from "store/Slices";
 import { Tabs, SelectorMenuItem } from "core/components";
 import { ArrowTop }               from "Resources/icons";
 import "./Footer.scss";
+import { useParams }              from "react-router";
 
 const Footer = () => {
 	const [ dropedToggle, setDropedToggle ] = useState(false);
+
+	const { pageId } = useParams();
+
+	const frontPagesTab = [{
+		label  : "PORTADAS",
+		filter : "portadas",
+	}];
+
+	const handleTabsLayouts = pageId !== "frontpage" ? filterTabs : frontPagesTab;
 
 	const dispatch = useDispatch();
 
 	const currentFileterLayout = useSelector((state) => state.workSpaceSlice.layoutFilter, shallowEqual);
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
-
+	const isPreviewActive = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
 
 	const handleChangeLayoutFilter = (objValue) => {
 		dispatch(workSpaceSlice.actions.setLayoutFilter({
@@ -27,8 +37,23 @@ const Footer = () => {
 		}));
 	};
 
+	useEffect(() => {
+	  if (pageId === "frontpage") {
+			dispatch(workSpaceSlice.actions.setLayoutFilter({
+				type           : "portadas",
+				photosQuantity : currentFileterLayout.photosQuantity,
+			}));
+			return;
+	  }
+	  dispatch(workSpaceSlice.actions.setLayoutFilter({
+			type           : "all",
+			photosQuantity : currentFileterLayout.photosQuantity,
+		}));
+		return;
+	}, [pageId]);
+
 	return (
-		<div id="Footer" className={`${dropedToggle && "full-size"}`}>
+		<div id="Footer" className={`${dropedToggle && "full-size"} ${isPreviewActive && "isActivePreview"}`}>
 			<div
 				className={`droped-container-action ${dropedToggle && "downArrow"}`}
 				{
@@ -45,25 +70,29 @@ const Footer = () => {
 				}
 			</div>
 			<div className="header-in-footer-container">
-				<Tabs tabList={filterTabs} loading={loading} />
+				<Tabs tabList={handleTabsLayouts} loading={loading} />
 			</div>
 			<div className="body-layouts-container">
-				<div
-					style={{
-						marginTop : "15px",
-						width     : "103px",
-					}}
-				>
-					<SelectorMenuItem
-						isLoading={loading}
-						type="filled"
-						placeholder="FOTOS"
-						onChange={(objValue) => handleChangeLayoutFilter(objValue)}
-						options={optionsPhotoQuantity}
-						value={currentFileterLayout.photosQuantity}
-						dropTopMenu
-					/>
-				</div>
+				{
+					((pageId !== "frontpage") && (currentFileterLayout.type !== "texto")) && (
+						<div
+							style={{
+								marginTop : "15px",
+								width     : "103px",
+							}}
+						>
+							<SelectorMenuItem
+								isLoading={loading}
+								type="filled"
+								placeholder="FOTOS"
+								onChange={(objValue) => handleChangeLayoutFilter(objValue)}
+								options={optionsPhotoQuantity}
+								value={currentFileterLayout.photosQuantity}
+								dropTopMenu
+							/>
+						</div>
+					)
+				}
 				<div className="LayoutsContainer">
 					<LayoutsList />
 				</div>

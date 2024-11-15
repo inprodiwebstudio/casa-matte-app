@@ -2,7 +2,7 @@ import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { useState, useEffect }                    from "react";
 import { useParams }                              from "react-router-dom";
 //Helpers
-import { isValidArray } from "helpers";
+import { isValidArray, convertToArray } from "helpers";
 
 //Own components
 import BookPages          from "components/BookPages";
@@ -16,25 +16,19 @@ const WorkSpace = () => {
 
 	const dispatch = useDispatch();
 
+	const [ myWorkSpaceData, setMyWorkSpaceData ] = useState({});
+
 	const workSpaceData = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
+	const workSpaceFrontPage = useSelector((state) => state.workSpaceSlice.data?.frontPage, shallowEqual);
+	const workSpaceFormatPage = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
+	const workSpaceSizePage = useSelector((state) => state.workSpaceSlice.data?.sizePhotoBook, shallowEqual);
 	const workSpaceHistory = useSelector((state) => state.workSpaceSlice.history, shallowEqual);
 	const isLoggin = useSelector((state) => state.authSlice.loggedIn, shallowEqual);
 	const isLoading = useSelector((state) => state.workSpaceSlice?.loading, shallowEqual);
+	const isPreview = useSelector((state) => state.workSpaceSlice?.isPreview, shallowEqual);
+	const isAvailableProduct = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
 
 	const isFrontLayout = pageId === "frontpage";
-
-	const defaultViewData = {
-		id     : "FrontLayout",
-		sheet1 : {
-			layoutType : "FrontLayout",
-			text       : "",
-			photos     : {
-				1 : "",
-			},
-		},
-	};
-
-	const [ myWorkSpaceData, setMyWorkSpaceData ] = useState({});
 
 	const isAvailableUndo = isValidArray(workSpaceHistory.undo);
 	const isAvailableRedo = isValidArray(workSpaceHistory.redo);
@@ -49,21 +43,43 @@ const WorkSpace = () => {
 		}
 	}
 
-	useEffect(() => {
-		if (!isFrontLayout) {
-			setMyWorkSpaceData(workSpaceData[pageId]);
+	const SapceViewHandler = () => {
+		if (!isLoggin) {
+			return (
+				<div className="WorkSpace">
+					<div className="canva-space">
+						<div className="ghost-canva">
+							<LoginCard />
+						</div>
+					</div>
+				</div>
+			);
 		}
-		if (isFrontLayout) {
-			setMyWorkSpaceData(defaultViewData);
+		if (isPreview && isLoggin && !isLoading && (isAvailableProduct !== "") ) {
+			return (
+				<div
+					className="PreviewPages"
+				>
+					{
+						convertToArray({...workSpaceData}).map((page, index) => (
+							<div className="photoBookContainer" key={index}>
+								<div className={`pagesPreviewPhotoBook ${workSpaceFormatPage}-${workSpaceSizePage}-preview`}>
+									<BookPages
+										isInWorkSpcae={true}
+										loading={isLoading}
+										pageData={page}
+									/>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			);
 		}
-	}, [pageId, workSpaceData]);
-
-	document.onkeydown = undoAndRedoActions;
-	return (
-		<div className="WorkSpace">
-			<div className="canva-space">
-				{
-					(!isLoading && isLoggin) && (
+		if (myWorkSpaceData && isLoggin && !isLoading && (isAvailableProduct !== "")) {
+			return (
+				<div className="WorkSpace">
+					<div className="canva-space">
 						<div className="undo-redo-container">
 							<div
 								className={`action-styled ${!isAvailableUndo && "disabled"}`}
@@ -73,7 +89,7 @@ const WorkSpace = () => {
 									}
 								)}
 							>
-								<RedoArrow style={{transform : "scaleX(-1)"}} size="20px" />
+								<RedoArrow style={{transform : "scaleX(-1)"}} size="13px" />
 								<div className="labelUndoRedo">
 									<div>Deshacer</div>
 								</div>
@@ -86,33 +102,44 @@ const WorkSpace = () => {
 									}
 								)}
 							>
-								<RedoArrow size="21px" />
+								<RedoArrow size="13px" />
 								<div className="labelUndoRedo">
 									<div>Rehacer</div>
 								</div>
 							</div>
 						</div>
-					)
-				}
-				<div className="ghost-canva">
-					{
-						(myWorkSpaceData && isLoggin) ? (
+						<div className={`ghost-canva ${workSpaceFormatPage}-${workSpaceSizePage}-workSpace`}>
 							<BookPages
-								isInWorkSpcae
+								isInWorkSpcae={true}
 								loading={isLoading}
-								pageData={workSpaceData[pageId]}
+								pageData={myWorkSpaceData}
 							/>
-						) : (
-							!isLoggin ? (
-								<LoginCard />
-							) : (
-								<div />
-							)
-						)
-					}
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
+			);
+		}
+	};
+
+	useEffect(() => {
+		if (!isFrontLayout) {
+			setMyWorkSpaceData(workSpaceData[pageId]);
+		}
+		if (isFrontLayout) {
+			setMyWorkSpaceData(workSpaceFrontPage);
+		}
+	}, [pageId, workSpaceData, workSpaceFrontPage]);
+
+	useEffect(() => {
+		if (pageId) {
+			dispatch(workSpaceSlice.actions.handleChangePage(pageId));
+		}
+	}, [pageId]);
+
+	document.onkeydown = undoAndRedoActions;
+
+	return (
+		<SapceViewHandler />
 	);
 };
 

@@ -1,22 +1,28 @@
-import { useState, useEffect } from "react";
-import { connect }             from "react-redux";
-import { useDropzone }         from "react-dropzone";
+import { useState, useEffect }  from "react";
+import { connect, useDispatch } from "react-redux";
+import { useDropzone }          from "react-dropzone";
 
 //Own components
 import { gallerySlice } from "store/Slices";
 import { apiImageKit }  from "store/api/imageKitApi";
 
+import useSubmitImages from "helpers/Hooks/useSubmitImages";
 
 import {
 	bindAll,
 	isValidArray,
-	uploadImageKitIo,
 } from "helpers";
+
 import {
 	Card,
 	Button,
 	TextInput,
 } from "core/components";
+
+import {
+	Button as ButtonMantine,
+	Text,
+} from "@mantine/core";
 
 import {
 	Folder,
@@ -27,13 +33,12 @@ import {
 import "./DropDoc.scss";
 
 const DropDoc = ({
-	refetch,
+	postId,
 	userName,
-	gallerySlice,
-	galleryMutation,
 	galleryPathRoute,
 	galleryTypeDropedView,
 }) => {
+	const dispatch = useDispatch();
 
 	const [ loading, setLoading ] = useState(false);
 
@@ -45,6 +50,8 @@ const DropDoc = ({
 
 	// const [galleryImagesMutation] = apiImageKit.useAddImageMutation();
 	const [galleryFolderMutation] = apiImageKit.useAddFolderMutation();
+
+	const { handlerUploadImage } = useSubmitImages({userName : `${userName}/${postId}`, folderName : folderName});
 
 	const completePercentage = (completedPhotos.length * 100) / fileImage.length;
 
@@ -67,61 +74,92 @@ const DropDoc = ({
 		},
 	});
 
-	const handleAddPhotos =  () => {
+	const handleAddPhotos = () => {
 		setLoading(true);
+		dispatch(gallerySlice.actions.setLoadingMutationGallery(true));
 		const listOfPromises = fileImage.map(async (file, index) => {
-			const respImage = await uploadImageKitIo(file, userName);
+			const respImage = await handlerUploadImage(file);
 			setCompletedPhotos(prev => {
-				const newData = [respImage?.data, ...prev];
+				const newData = [respImage, ...prev];
 				return newData;
 			});
-			return respImage;
+			const constructotImageData = {
+				...respImage,
+				id       : respImage?.asset_id,
+				fileId   : respImage?.asset_id,
+				filePath : respImage?.public_id,
+				type     : "file",
+			};
+			return constructotImageData;
 		});
 
-		Promise.all([...listOfPromises]).then((values) => {
+		Promise.all([...listOfPromises]).then((imageValues) => {
 			setLoading(false);
-			gallerySlice.setTypeDropedView(null);
-			refetch();
+			imageValues.forEach((image) => {
+				dispatch(gallerySlice.actions.setGalleryData(image));
+			});
+			dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
+			dispatch(gallerySlice.actions.setTypeDropedView(null));
 		}, reason => {
 			setLoading(false);
-			gallerySlice.setTypeDropedView(null);
+			dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
+			dispatch(gallerySlice.actions.setTypeDropedView(null));
 			console.error(reason);
 		});
 	};
 
 	const handleAddFolder = async () => {
 		setLoading(true);
+		dispatch(gallerySlice.actions.setLoadingMutationGallery(true));
 		if (isValidArray(fileImage)) {
 			const listOfPromises = fileImage.map(async (file, index) => {
-				const respImage = await uploadImageKitIo(file, userName, folderName);
+				const respImage = await handlerUploadImage(file);
 				setCompletedPhotos(prev => {
-					const newData = [respImage?.data, ...prev];
+					const newData = [respImage, ...prev];
 					return newData;
 				});
 				return respImage;
 			});
 
 			Promise.all([...listOfPromises]).then((values) => {
+				const thumbNails = values.map(image => image.urlThumbnail);
+				const constructorData = {
+					id         : `${userName}/${folderName}`,
+					path       : `${userName}/${folderName}`,
+					name       : folderName,
+					thumbNails : [...thumbNails],
+					type       : "folder",
+				};
+				dispatch(gallerySlice.actions.setGalleryData(constructorData));
 				setLoading(false);
-				gallerySlice.setTypeDropedView(null);
-				refetch();
+				dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
+				dispatch(gallerySlice.actions.setTypeDropedView(null));
 			}, reason => {
 				setLoading(false);
-				gallerySlice.setTypeDropedView(null);
+				dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
+				dispatch(gallerySlice.actions.setTypeDropedView(null));
 				console.error(reason);
 			});
 			return;
 		}
 		setIsGenerateNewFolder(true);
-		await galleryFolderMutation({
+		const respFolder = await galleryFolderMutation({
 			data : {
 				folderName,
 			},
 			userName,
 		});
-		gallerySlice.setTypeDropedView(null);
+
+		const constructorData = {
+			...respFolder?.data,
+			type       : "folder",
+			id         : respFolder?.data?.path,
+			thumbNails : [],
+		};
+		dispatch(gallerySlice.actions.setGalleryData(constructorData));
+		dispatch(gallerySlice.actions.setTypeDropedView(null));
 		setLoading(false);
-		refetch();
+		dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 	};
 
 	useEffect(() => {
@@ -142,7 +180,7 @@ const DropDoc = ({
 										className="imageThumbContainer"
 										key={index}
 										style={{
-											background : photoData?.thumbnailUrl ? `url(${photoData?.thumbnailUrl}) center center / cover no-repeat` : "grey",
+											background : photoData?.url ? `url(${photoData?.url}) center center / cover no-repeat` : "grey",
 										}}
 									>
 											&nbsp;
@@ -182,8 +220,7 @@ const DropDoc = ({
 								<div  {...getRootProps({className : "indicator-drop-container"})}>
 									<DropFile size="40px" />
 									<p>
-										ARRASTRA AQUÍ LAS FOTOGRAFÍAS QUE
-										QUIERAS AGREGAR A TU PROYECTO
+										haz click aquí para subir tus fotos o arrastra y suelta
 									</p>
 									<input {...getInputProps()} />
 								</div>
@@ -222,29 +259,42 @@ const DropDoc = ({
 												image={<Folder size="50px" />}
 												body="CARGAR EN UNA NUEVA CARPETA"
 											/>
-											<TextInput placeholder="NOMBRE DE LA CARPETA" onChange={(e) => setFolderName(e.target.value)} />
+											<div
+												style={{ width : "200px"}}
+											>
+												<TextInput placeholder="NOMBRE DE LA CARPETA" onChange={(e) => setFolderName(e.target.value)} />
+											</div>
 										</div>
-										<Button
-											fontSize="16px"
-											fullSize
+										<ButtonMantine
+											radius={8}
+											size="xs"
+											color="darkCasaMatte"
+											sx={{marginTop : "15px"}}
+											loading={loading}
 											onClick={() => handleAddFolder()}
+											w={110}
+											h={30}
 										>
-											CREAR
-										</Button>
+											<Text
+												weight={400}
+												color="whiteCasaMatte"
+												sx={{
+													textTransform : "uppercase",
+												}}
+											>
+												CREAR
+											</Text>
+										</ButtonMantine>
 									</div>
 									<div className="back-container">
-										{
-											galleryTypeDropedView !== "addFolder" && (
-												<Button
-													onClick={() => setIsSelectedFolder(false)}
-													icon={<ArrowLeft size="20px" />}
-													fontSize="12px"
-													type="transparent"
-												>
-													ATRÁS
-												</Button>
-											)
-										}
+										<Button
+											onClick={() => setIsSelectedFolder(false)}
+											icon={<ArrowLeft size="20px" />}
+											fontSize="12px"
+											type="transparent"
+										>
+											ATRÁS
+										</Button>
 									</div>
 								</div>
 							)
@@ -262,6 +312,7 @@ const mapStateToProps = ({ gallerySlice, authSlice }) => ({
 	galleryTypeDropedView : gallerySlice?.typeDropedView ?? null,
 	galleryPathRoute      : gallerySlice?.galleryPathName ?? {},
 	userName              : authSlice?.user?.username ?? undefined,
+	postId                : authSlice?.user?.postId ?? undefined,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (DropDoc);

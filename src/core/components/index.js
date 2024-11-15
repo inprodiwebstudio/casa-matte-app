@@ -16,3 +16,5 @@ export { default as ChargeSpinner }    from "./ChargeSpinner";
 export { default as TextArea }         from "./TextArea";
 export { default as BoxLoading }       from "./BoxLoading";
 export { default as MutationSpinner }  from "./MutationSpinner";
+export { default as TextShell }  from "./TextShell";
+

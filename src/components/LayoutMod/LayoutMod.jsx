@@ -26,9 +26,18 @@ const LayoutMod = ({
 
 	const photobookFormat = photoBookData?.format ?? "vertical";
 
-	const photosQuantity = photoBooksConfing[photobookProduct][photobookFormat]?.layoutMods[modLayout]?.numberPhotos ?? 0;
+	const photobookSize = photoBookData?.sizePhotoBook ?? "grande";
 
-	const arrayPhotos = new Array(photosQuantity).fill(" ");
+	const configFormatPhotoBook = photoBooksConfing[photobookProduct][photobookFormat];
+
+	const modConfig = configFormatPhotoBook?.sizes[photobookSize]?.layoutMods[modLayout];
+
+	const listOfSections = Object.values(modConfig?.sections);
+
+	const listOfnestedSections = (nestedObjSection) => {
+		const list = Object.values(nestedObjSection);
+		return list;
+	};
 
 	const handleDrop = (e, layoutNo) => {
 		e.preventDefault();
@@ -44,45 +53,61 @@ const LayoutMod = ({
 		e.preventDefault();
 	};
 
-	const classNameStyle = `${modLayout}-${photobookFormat}`;
+	const classNameStyle = `${modLayout}-${photobookSize}-${photobookFormat}`;
 
 	return (
 		<div className={classNameStyle}>
-			<div className="content-body">
-				{
-					arrayPhotos.map((boxContent, index) => (
-						<div
-							key={index}
-							id={`${modLayout}-${photobookFormat}-${index}-content-children-body`}
-							className="content-children-body"
-							onDrop={(e) => handleDrop(e, index)}
-							onDragOver={(e) => handleDragOver(e)}
-							{
-								...( images && {
-									style : {
-										backgroundImage    : `url(${handlerResizerImage(images[index], isInWorkSpcae)})`,
-										backgroundSize     : "cover",
-										backgroundRepeat   : "no-repeat",
-										backgroundPosition : "center",
-									},
-								} )
-							}
-						>
-							{
-								(images && images[index]?.url && isInWorkSpcae) && (
-									<ActionImagesLayout
-										containerPhotoUuid={`${modLayout}-${photobookFormat}-${index}-content-children-body`}
-										sheetNo={sheetNo}
-										layoutNo={index}
-										pageId={pageId}
-										image={selectPhotoUrl(images[index])}
-									/>
-								)
-							}
-						</div>
-					))
-				}
-			</div>
+			{
+				listOfSections.map((section, indexSection) => (
+					<div key={indexSection} className={`section-${indexSection}`}>
+						{
+							listOfnestedSections(section?.subSections)?.map((subSection, indexSubSection) => (
+								<div key={indexSubSection} className={`subSection-${indexSubSection}`}>
+									{
+										listOfnestedSections(subSection?.bodyElements)?.map((bodyElement, indexBodyElement) => (
+											<div key={indexBodyElement} className={`bodyElement-${indexBodyElement}`}>
+												{
+													listOfnestedSections(bodyElement?.elements)?.map((element, indexElement) => (
+														<div
+															key={indexElement}
+															className={`element-${indexElement}`}
+															onDrop={(e) => handleDrop(e, element?.numberOfElement)}
+															onDragOver={(e) => handleDragOver(e)}
+															id={`${classNameStyle}-section-${indexSection}-subSection-${indexSubSection}-bodyElement-${indexBodyElement}-element-${indexElement}`}
+															{
+																...( (images && element?.type === "photo") &&  {
+																	style : {
+																		backgroundImage    : `url(${handlerResizerImage(images[element?.numberOfElement], isInWorkSpcae)})`,
+																		backgroundSize     : "cover",
+																		backgroundPosition : "center",
+																		backgroundRepeat   : "no-repeat",
+																	},
+																} )
+															}
+														>
+															{
+																(images && (element?.type === "photo") && images[element?.numberOfElement]?.url && isInWorkSpcae) && (
+																	<ActionImagesLayout
+																		containerPhotoUuid={`${classNameStyle}-section-${indexSection}-subSection-${indexSubSection}-bodyElement-${indexBodyElement}-element-${indexElement}`}
+																		sheetNo={sheetNo}
+																		layoutNo={element?.numberOfElement}
+																		pageId={pageId}
+																		image={selectPhotoUrl(images[element?.numberOfElement])}
+																	/>
+																)
+															}
+														</div>
+													))
+												}
+											</div>
+										))
+									}
+								</div>
+							))
+						}
+					</div>
+				))
+			}
 		</div>
 	);
 };

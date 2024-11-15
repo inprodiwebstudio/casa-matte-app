@@ -8,7 +8,7 @@ import LoadingPaginator                                           from "./Loadin
 import { workSpaceSlice }                                         from "store/Slices";
 import { convertToArray, isValidArray, convertToObject, bindAll } from "helpers";
 import { ScrollBar }                                              from "core/components";
-import FrontPage                                                  from "./FrontPage";
+// import FrontPage                                                  from "./FrontPage";
 import "./PaginatorBar.scss";
 
 const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, loading }) => {
@@ -23,7 +23,6 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 
 	const dragerChangePosition = result => {
 		const { destination, source, draggableId } = result;
-		const idCurrentDestination = pageList.pagesIds[destination.index];
 
 		if (!destination) {
 			return;
@@ -47,10 +46,6 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 			},
 			pagesIds : [...newpagesIds],
 		};
-
-		if (!pageList.pages[idCurrentDestination].sheet2) {
-			return;
-		}
 
 		const reOrderPages = convertToArray(newPagesList.pages).map((pageData, index) => {
 			const newData = {
@@ -142,7 +137,7 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 
 	return (
 		<div id="PaginatorBar">
-			<h3 className={`header-ittle-paginator ${loading && "loading"}`}>PAGINADO</h3>
+			<h3 className={`header-ittle-paginator ${loading && "loading"}`}>Páginas</h3>
 			{
 				loading ? (
 					<ScrollBar>
@@ -150,7 +145,6 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 					</ScrollBar>
 				) : (
 					<ScrollBar>
-						<FrontPage />
 						<ItemPage
 							isFixedPage
 							handleDelete={handleDelete}

@@ -7,7 +7,7 @@ import { Skeleton }            from "@mantine/core";
 import layouts                     from "components/global/LayoutsPage/SquareFormat";
 import { convertToArray, bindAll } from "helpers";
 import { workSpaceSlice }          from "store/Slices";
-import FrontLayout                 from "components/global/LayoutsPage/FrontLayout";
+// import FrontLayout                 from "components/global/LayoutsPage/FrontLayout";
 import "./SquareFormat.scss";
 
 const SquareFormat = ({pageData, workSpaceSlice, pageDataSelected, isInWorkSpcae, loading}) => {
@@ -59,7 +59,7 @@ const SquareFormat = ({pageData, workSpaceSlice, pageDataSelected, isInWorkSpcae
 				{
 					!LayoutPage1 ? (
 						(pageData?.sheet1?.layoutType !== "") ? (
-							<FrontLayout />
+							<></>
 						) : (
 							<div />
 						)

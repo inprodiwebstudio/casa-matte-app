@@ -6,7 +6,7 @@
    width:fit-content;
    align-items: center;
    justify-content: center;
-   font-family: "Aitana-Regular";
+   font-family: "Helvetica";
 
    -webkit-user-select: none;
    -moz-user-select: none;
@@ -26,6 +26,7 @@
 
        h4 {
           font-size: 12px;
+          font-weight: 500;
           color : $flat-color;
        }
 

@@ -37,11 +37,4 @@ export default defineConfig({
 			"/api" : "tester-casamatte.inprodi.com.mx",
 		},
 	},
-	// define : {
-	// 	global : {},
-	// },
-	//https://github.com/vitejs/vite/issues/8644
-	// esbuild : {
-	// 	logOverride : { "this-is-undefined-in-esm" : "silent" },
-	// },
 });
