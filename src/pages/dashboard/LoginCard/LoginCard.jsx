@@ -382,7 +382,6 @@ const LoginCard = () => {
 					}
 				</div>
 			</Button>
-			<a href="https://example.com">CREAR UNA CUENTA</a>
 		</form>
 	);
 };
