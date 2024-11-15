@@ -165,4 +165,5 @@ const Mod32Pdf = ({images}) => {
 	);
 };
 
+
 export default Mod32Pdf;
