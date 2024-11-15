@@ -14,6 +14,8 @@ const DropedMenu = () => {
 	const [ extraPages, setExtraPages ] = useState(0);
 
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
+	const pasta = useSelector((state) => state.workSpaceSlice.data.pasta, shallowEqual);
+	const sizePhotoBook = useSelector((state) => state.workSpaceSlice.data.sizePhotoBook, shallowEqual);
 	const dataPages = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 	const maxRangePages = useSelector((state) => state.workSpaceSlice.data?.maxRangePages, shallowEqual);
 	const extraCost = useSelector((state) => state.workSpaceSlice.data?.extraCost, shallowEqual);
@@ -58,11 +60,11 @@ const DropedMenu = () => {
 			<div className={`menu ${!activeMenu && "hidden"}`}>
 				<div className="menu-item">
 					<label>PASTA</label>
-					<MenuItem body="DURA" />
+					<MenuItem body={pasta ?? ""} />
 				</div>
 				<div className="menu-item">
 					<label>TAMAÑO</label>
-					<MenuItem body="GRANDE" />
+					<MenuItem body={sizePhotoBook ?? ""} />
 				</div>
 				<div className="menu-item">
 					<label>NÚMERO DE PÁGINAS</label>

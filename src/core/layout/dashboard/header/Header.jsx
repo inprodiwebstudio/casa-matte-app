@@ -21,6 +21,7 @@ const Header = () => {
 
 	const isPreviewActive = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
 	const productName = useSelector((state) => state.workSpaceSlice.data.productName, shallowEqual);
+	const projectTitle = useSelector((state) => state.workSpaceSlice.data.projectTittle, shallowEqual);
 	const lastModified = useSelector((state) => state.workSpaceSlice.data.modified, shallowEqual);
 	const isModifiedData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 	const isLoggedIn = useSelector((state) => state.authSlice.loggedIn, shallowEqual);
@@ -58,11 +59,11 @@ const Header = () => {
 								<div>{productName ?? ""}</div>
 								<div>/</div>
 								<div
-									style={{width : "100px"}}
+									style={{width : "180px"}}
 								>
 									<TextInput
 										variant="unstyled"
-										defaultValue={productName}
+										defaultValue={projectTitle ?? ""}
 										sx={{
 											fontSize   : "14px",
 											fontWeight : "400",
