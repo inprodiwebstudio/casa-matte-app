@@ -2,14 +2,14 @@ import { Stack } from "@mantine/core";
 //Own components
 import ImgLayout from "components/LayoutHandler/ImgLayout";
 
-const Mod6 = ({data, isInWorkSpace, sheetNo}) => {
+const Mod9 = ({data, isInWorkSpace, sheetNo}) => {
 	return (
 		<Stack
 			w="100%"
 			h="100%"
-			pt="33.40%"
-			pb="33.40%"
-			p="15%"
+			p="22.83%"
+			pl="0.2em"
+			pr="0.2em"
 		>
 			<ImgLayout
 				isInWorkSpace={isInWorkSpace}
@@ -21,4 +21,4 @@ const Mod6 = ({data, isInWorkSpace, sheetNo}) => {
 	);
 };
 
-export default Mod6;
+export default Mod9;
