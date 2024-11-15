@@ -36,6 +36,8 @@ const DropedMenu = () => {
 		setExtraPages(0);
 	}, [dataPages.pages]);
 
+	console.log(maxRangePages);
+
 	return (
 		<div id="DropedMenu">
 			<div className={`selector-container ${!activeMenu && "hidden"}`}>

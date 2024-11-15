@@ -77,7 +77,7 @@ const SideBar = ({
 				params : {
 					limit      : 500,
 					userName   : userName,
-					folderName : (galleryPath?.id === "route") ? null : galleryPath?.name,
+					folderName : (galleryPath?.name === "route") ? null : galleryPath?.name,
 					...((filter && (filter?.value !== "DESC_CAPTURE")) ? {sort : filter?.value} : {}),
 				},
 			});
@@ -94,7 +94,7 @@ const SideBar = ({
 			handlerGetGallery();
 		}
 		return;
-	}, [filter, isLoggedIn]);
+	}, [filter, isLoggedIn, galleryPath]);
 
 	return (
 		<div id="SideBar" className={`${isAvailableDocs ? (isFullSizeSideBar && "isFullSize") : "isNoData"} ${isPreview && "isInpreview"}`}>
