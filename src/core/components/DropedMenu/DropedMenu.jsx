@@ -18,14 +18,25 @@ const DropedMenu = () => {
 	const sizePhotoBook = useSelector((state) => state.workSpaceSlice.data.sizePhotoBook, shallowEqual);
 	const dataPages = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 	const maxRangePages = useSelector((state) => state.workSpaceSlice.data?.maxRangePages, shallowEqual);
-	const extraCost = useSelector((state) => state.workSpaceSlice.data?.extraCost, shallowEqual);
+	const basePrice = useSelector((state) => state.workSpaceSlice.data?.basePrice, shallowEqual);
+	// const extraCost = useSelector((state) => state.workSpaceSlice.data?.extraCost, shallowEqual);
 
 	const listOfPages = convertToArray(dataPages.pages);
 	const counterPages = () => counterSheets(listOfPages);
 
 	const handlerCost = () => {
+		let extraCost = 0;
+		if ((sizePhotoBook === "chico") || (sizePhotoBook === "mediano")) {
+			extraCost = 15;
+		}
+		extraCost = 22;
 		const cost = extraPages * Number(extraCost);
-		return currencyFormat(cost);
+		if (basePrice && basePrice !== "") {
+			const formatStringPrice = basePrice.replace(",", "");
+			const basePriceNumber = Number(formatStringPrice);
+			return currencyFormat(cost + basePriceNumber);
+		}
+		return extraCost;
 	};
 
 	useEffect(() => {
@@ -35,8 +46,6 @@ const DropedMenu = () => {
 		}
 		setExtraPages(0);
 	}, [dataPages.pages]);
-
-	console.log(maxRangePages);
 
 	return (
 		<div id="DropedMenu">

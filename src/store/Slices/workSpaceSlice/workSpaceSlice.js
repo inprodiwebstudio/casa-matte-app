@@ -26,7 +26,7 @@ const initialState = {
 		numberOfPages : 50,
 		price         : 0,
 		currentPage   : "frontpage",
-		basePrice     : 800,
+		basePrice     : undefined,
 		extraCost     : 50,
 		maxRangePages : 30,
 		pages         : {
