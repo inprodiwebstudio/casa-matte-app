@@ -5,6 +5,7 @@ import TestPdf                  from "./TestPdf";
 import ConfirmationDelete       from "./ConfirmationDelete";
 import ConfirmationToPrint      from "./ConfirmationToPrint";
 import ConfirmationDeleteFolder from "./ConfirmationDeleteFolder";
+import AddNewPageConfirmation   from "./AddNewPageConfirmation";
 
 
 const modals = {
@@ -14,6 +15,7 @@ const modals = {
 	confirmationDelete       : ConfirmationDelete,
 	confirmationToPrint      : ConfirmationToPrint,
 	confirmationDeleteFolder : ConfirmationDeleteFolder,
+	addNewPageConfirmation   : AddNewPageConfirmation,
 };
 
 const modalsConfig = {
