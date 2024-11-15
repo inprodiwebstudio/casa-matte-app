@@ -19,7 +19,6 @@ import Mod18 from "./Mod18";
 import Mod19 from "./Mod19";
 import Mod20 from "./Mod20";
 import Mod21 from "./Mod21";
-import Mod22 from "./Mod22";
 import Mod23 from "./Mod23";
 import Mod24 from "./Mod24";
 import Mod25 from "./Mod25";
@@ -78,7 +77,7 @@ import {
 	Mod19Pdf,
 	Mod20Pdf,
 	Mod21Pdf,
-	Mod22Pdf,
+	// Mod22Pdf,
 	Mod23Pdf,
 	Mod24Pdf,
 	Mod25Pdf,
@@ -358,13 +357,13 @@ const VerticalLarge = {
 		cat          : "fotos",
 		pdfLayout    : Mod21Pdf,
 	},
-	Mod22 : {
-		id           : "Mod22",
-		layout       : Mod22,
-		numberPhotos : 4,
-		cat          : "fotos",
-		pdfLayout    : Mod22Pdf,
-	},
+	// Mod22 : {
+	// 	id           : "Mod22",
+	// 	layout       : Mod22,
+	// 	numberPhotos : 4,
+	// 	cat          : "fotos",
+	// 	pdfLayout    : Mod22Pdf,
+	// },
 	Mod23 : {
 		id           : "Mod23",
 		layout       : Mod23,
