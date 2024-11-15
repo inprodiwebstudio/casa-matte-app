@@ -235,7 +235,7 @@ const DropDoc = ({
 											body="CARGAR A GALERÍA"
 											onSelect={() => handleAddPhotos()}
 										/>
-										{
+										{/* {
 											galleryPathRoute?.id === "route" && (
 												<Card
 													isButton
@@ -244,7 +244,7 @@ const DropDoc = ({
 													onSelect={() => setIsSelectedFolder(true)}
 												/>
 											)
-										}
+										} */}
 									</div>
 								</div>
 							)
