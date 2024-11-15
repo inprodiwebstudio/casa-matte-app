@@ -29,7 +29,7 @@ import Mod28 from "./Mod28";
 import Mod29 from "./Mod29";
 import Mod30 from "./Mod30";
 import Mod31 from "./Mod31";
-import Mod32 from "./Mod32";
+// import Mod32 from "./Mod32";
 import Mod33 from "./Mod33";
 import Mod34 from "./Mod34";
 import Mod35 from "./Mod35";
@@ -88,7 +88,7 @@ import {
 	Mod29Pdf,
 	Mod30Pdf,
 	Mod31Pdf,
-	Mod32Pdf,
+	// Mod32Pdf,
 	Mod33Pdf,
 	Mod34Pdf,
 	Mod35Pdf,
@@ -428,13 +428,13 @@ const VerticalLarge = {
 		cat          : "fotos",
 		pdfLayout    : Mod31Pdf,
 	},
-	Mod32 : {
-		id           : "Mod32",
-		layout       : Mod32,
-		numberPhotos : 5,
-		cat          : "fotos",
-		pdfLayout    : Mod32Pdf,
-	},
+	// Mod32 : {
+	// 	id           : "Mod32",
+	// 	layout       : Mod32,
+	// 	numberPhotos : 5,
+	// 	cat          : "fotos",
+	// 	pdfLayout    : Mod32Pdf,
+	// },
 	Mod33 : {
 		id           : "Mod33",
 		layout       : Mod33,
