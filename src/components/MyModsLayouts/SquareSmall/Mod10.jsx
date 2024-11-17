@@ -34,8 +34,8 @@ const Mod10 = ({data, isInWorkSpace, sheetNo}) => {
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
-						imageNo={0}
-						urlImage={data?.photos[0] ?? {}}
+						imageNo={1}
+						urlImage={data?.photos[1] ?? {}}
 					/>
 				</Box>
 			</Group>

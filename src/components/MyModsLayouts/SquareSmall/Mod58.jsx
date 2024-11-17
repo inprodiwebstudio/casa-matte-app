@@ -8,9 +8,9 @@ import { textInsertion } from "helpers";
 
 const Mod58 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 46px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
+	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 26px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: right;'><span style='font-size: 22px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const defaultSubtitle = "<p style='text-align: right;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
 
 	return (
 		<Flex
@@ -20,7 +20,7 @@ const Mod58 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			direction="column"
 		>
 			<Stack
-				spacing="0.7em"
+				spacing="0.5em"
 				w="100%"
 				h="100%"
 				align="flex-end"
@@ -33,12 +33,12 @@ const Mod58 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Stack>
-				<Stack w="100%" spacing="0.1em" pr="0.7em">
+				<Stack w="100%" spacing="0.05em" pr="0.5em">
 					<Text
 						sizes={{
-							"chico"   : "42px",
-							"regular" : "46px",
-							"grande"  : "48px",
+							"chico"   : "22px",
+							"regular" : "26px",
+							"grande"  : "28px",
 						}}
 						align="right"
 						sheetNo={sheetNo}
@@ -47,13 +47,14 @@ const Mod58 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
+						textNo={0}
 					/>
 					<Stack w="100%">
 						<Text
 							sizes={{
-								"chico"   : "20px",
-								"regular" : "22px",
-								"grande"  : "24px",
+								"chico"   : "13px",
+								"regular" : "15px",
+								"grande"  : "18px",
 							}}
 							align="left"
 							sheetNo={sheetNo}
@@ -62,6 +63,7 @@ const Mod58 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							data={textInsertion(data?.text[1], defaultSubtitle, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
+							textNo={1}
 						/>
 					</Stack>
 				</Stack>

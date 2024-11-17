@@ -8,17 +8,17 @@ import { textInsertion } from "helpers";
 
 const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 34px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
-	const defaultTitle02 = "<p style='text-align: left;'><span style='font-size: 34px; font-family: Aitana-Regular;'>FRANCIA</span></p>";
+	const defaultTitle02 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>FRANCIA</span></p>";
 
-	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 34px; font-family: Aitana-Regular;'>TURQUÍA</span></p>";
+	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>TURQUÍA</span></p>";
 
-	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
+	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
 
-	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>París</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Versalles</span></p>";
+	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>París</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Versalles</span></p>";
 
-	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 22px; font-family: Spectral-Light-Italic;'>Capadocia</span></p>";
+	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Capadocia</span></p>";
 
 	return (
 		<Flex
@@ -30,19 +30,19 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			sx={{overflow : "hidden"}}
 		>
 			<Stack
-				spacing="0.35em"
+				spacing="0.25em"
 				miw="30%"
 			>
 				<Stack
-					spacing="0.13em"
+					spacing="0.1em"
 					aria-hidden
 				>
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "32px",
-								"regular" : "34px",
-								"grande"  : "36px",
+								"chico"   : "22px",
+								"regular" : "24px",
+								"grande"  : "26px",
 							}}
 							align="left"
 							letterSpacing="3px"
@@ -51,28 +51,30 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							data={textInsertion(data?.text[0], defaultTitle01, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
+							textNo={0}
 						/>
 					</div>
 					<DividerLayout long="0.3em" position="h" />
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "20px",
-								"regular" : "22px",
-								"grande"  : "24px",
+								"chico"   : "15px",
+								"regular" : "18px",
+								"grande"  : "20px",
 							}}
 							align="left"
-							gapSpacing="10px"
+							gapSpacing="7px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.BodyIndices align="left" />}
 							data={textInsertion(data?.text[1], defaultIndice01, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
+							textNo={1}
 						/>
 					</div>
 				</Stack>
 				<Stack
-					spacing="0.13em"
+					spacing="0.1em"
 					aria-hidden
 				>
 					<div>
@@ -89,29 +91,31 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							data={textInsertion(data?.text[5], defaultTitle02, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
+							textNo={2}
 						/>
 					</div>
 					<DividerLayout long="0.3em" position="h" />
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "12px",
-								"regular" : "14px",
-								"grande"  : "16px",
+								"chico"   : "15px",
+								"regular" : "18px",
+								"grande"  : "20px",
 							}}
 							align="left"
-							gapSpacing="10px"
+							gapSpacing="7px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.BodyIndices align="left" />}
 							data={textInsertion(data?.text[6], defaultIndice02, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
+							textNo={3}
 						/>
 					</div>
 				</Stack>
 				<Stack
 					mah="70%"
-					spacing="0.13em"
+					spacing="0.1em"
 				>
 					<div>
 						<Text
@@ -127,23 +131,25 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							data={textInsertion(data?.text[5], defaultTitle03, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
+							textNo={4}
 						/>
 					</div>
 					<DividerLayout long="0.3em" position="h" />
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "12px",
-								"regular" : "14px",
-								"grande"  : "16px",
+								"chico"   : "15px",
+								"regular" : "18px",
+								"grande"  : "20px",
 							}}
 							align="left"
-							gapSpacing="10px"
+							gapSpacing="7px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.BodyIndices align="left" />}
 							data={textInsertion(data?.text[6], defaultIndice03, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
+							textNo={5}
 						/>
 					</div>
 				</Stack>

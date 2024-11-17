@@ -129,6 +129,29 @@ const Header = () => {
 										Imprimir
 									</Text>
 								</Button>
+								{/* <Button
+									radius={12}
+									size="xs"
+									color="darkCasaMatte"
+									onClick={() => openContextModal({
+										modal      : "testPdf",
+										innerProps : {
+											photoBookData : isModifiedData,
+										},
+									})}
+									// disabled={true}
+									loading={isLoadingWorspaceData}
+								>
+									<Text
+										weight={400}
+										color="whiteCasaMatte"
+										sx={{
+											fontFamily : "Helvetica",
+										}}
+									>
+										PDF
+									</Text>
+								</Button> */}
 								<div
 									// className="icon-container"
 									// onClick={() => openContextModal({

@@ -8,9 +8,9 @@ import { TextShell }     from "core/components";
 
 const Mod51 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultTitle = "<p style='text-align: left;'><span style='font-size: 34px; font-family: JosefinSans-Light;'>TOSCANA</span></p>";
+	const defaultTitle = "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>TOSCANA</span></p>";
 
-	const defaultIndices = "<p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>FLORENCIA</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>ORVIETTO</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>MONTALCINO</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>PIENZA</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>Smithfeld</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>SIENNA</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>BAGNO VIGNIONI</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>SAN GIMINIANO</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>MONTEPULCIANO</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>ANTINORI</span></p>";
+	const defaultIndices = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>FLORENCIA</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>ORVIETTO</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>MONTALCINO</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>PIENZA</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>Smithfeld</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SIENNA</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>BAGNO VIGNIONI</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SAN GIMINIANO</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>MONTEPULCIANO</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>ANTINORI</span></p>";
 
 	return (
 		<Flex
@@ -21,19 +21,19 @@ const Mod51 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			align="center"
 		>
 			<Stack
-				spacing="0.4em"
+				spacing="0.3em"
 				sx={{overflow : "hidden", textTransform : "uppercase"}}
 				maw="60%"
 				miw="30%"
 			>
 				<Stack
-					spacing="0.4em"
+					spacing="0.3em"
 				>
 					<Text
 						sizes={{
-							"chico"   : "32px",
-							"regular" : "34px",
-							"grande"  : "36px",
+							"chico"   : "22px",
+							"regular" : "24px",
+							"grande"  : "26px",
 						}}
 						align="left"
 						sheetNo={sheetNo}
@@ -42,23 +42,25 @@ const Mod51 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
+						textNo={0}
 					/>
 					<DividerLayout long="20%" position="h" />
 				</Stack>
 				<Text
 					sizes={{
-						"chico"   : "18px",
-						"regular" : "20px",
-						"grande"  : "22px",
+						"chico"   : "15px",
+						"regular" : "18px",
+						"grande"  : "20px",
 					}}
 					align="left"
-					gapSpacing="25px"
+					gapSpacing="15px"
 					sheetNo={sheetNo}
 					letterSpacing="3px"
 					textShell={() => <TextShell.BodyIndices align="left" />}
 					data={textInsertion(data?.text[1], defaultIndices, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}
+					textNo={1}
 				/>
 			</Stack>
 		</Flex>

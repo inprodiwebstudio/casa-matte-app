@@ -95,4 +95,47 @@ a {
 #body-app {
     font-family: "HelveticaLight", sans-serif;
     letter-spacing: 1.5px;
+
+    .container-mobile-info {
+        background: #E3E3E3;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .text-group-mobile {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 70px;
+
+            .mobile-logo-header {
+                height: fit-content;
+                display: flex;
+                flex-direction: column;
+                gap : 10px;
+
+                .att-text-container {
+                    text-transform: uppercase;
+                    font-size: 13px;
+                    text-align: center;
+                }
+            }
+        
+            .mobile-notification {
+                padding-left: 5vw;
+                padding-right: 5vw;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                text-transform: uppercase;
+                letter-spacing: 2.5px;
+                line-height: 22px;
+                font-size: 12px;
+            }
+        }
+    }
 }

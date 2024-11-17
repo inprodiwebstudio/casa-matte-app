@@ -8,9 +8,9 @@ import { TextShell }     from "core/components";
 
 const Mod41 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 46px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 26px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaulSubtTitle = "<p style='text-align: right;'><span style='font-size: 20px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>";
+	const defaulSubtTitle = "<p style='text-align: right;'><span style='font-size: 15px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>";
 
 	return (
 		<Flex
@@ -20,31 +20,32 @@ const Mod41 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			h="100%"
 			justify="flex-end"
 			align="flex-end"
-			gap="0.1em"
 			direction="column"
+			gap="20px"
 		>
 			<DividerLayout long="7%" position="h" />
-			<Stack spacing="0.05em" w="100%">
+			<Stack spacing="2px" w="100%">
 				<Text
 					sizes={{
-						"chico"   : "42px",
-						"regular" : "46px",
-						"grande"  : "48px",
+						"chico"   : "22px",
+						"regular" : "26px",
+						"grande"  : "28px",
 					}}
 					align="right"
 					sheetNo={sheetNo}
-					letterSpacing="6px"
+					letterSpacing="4px"
 					textShell={() => <TextShell.Title width="40%" align="flex-end" />}
 					isInPaginator={isInPaginator}
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isThumbNail={isThumbNail}
+					textNo={0}
 				/>
 				<div>
 					<Text
 						sizes={{
-							"chico"   : "18px",
-							"regular" : "20px",
-							"grande"  : "22px",
+							"chico"   : "13px",
+							"regular" : "15px",
+							"grande"  : "18px",
 						}}
 						align="right"
 						sheetNo={sheetNo}
@@ -53,6 +54,7 @@ const Mod41 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						data={textInsertion(data?.text[1], defaulSubtTitle, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
+						textNo={1}
 					/>
 				</div>
 			</Stack>

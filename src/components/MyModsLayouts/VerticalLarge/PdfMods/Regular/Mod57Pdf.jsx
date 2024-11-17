@@ -31,7 +31,7 @@ const Mod57Pdf = ({text, images}) => {
 			>
 				<div
 					style={{
-						width          : "100%%",
+						width          : "100%",
 						display        : "flex",
 						justifyContent : "center",
 						alignItems     : "center",
