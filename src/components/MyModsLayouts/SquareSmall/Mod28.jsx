@@ -20,7 +20,7 @@ const Mod28 = ({data, isInWorkSpace, sheetNo}) => {
 					spacing={"0.1em"}
 				>
 					<Box
-						w="calc(30% - 0.05em)"
+						w="calc(70% - 0.05em)"
 						h="100%"
 					>
 						<ImgLayout
@@ -31,7 +31,7 @@ const Mod28 = ({data, isInWorkSpace, sheetNo}) => {
 						/>
 					</Box>
 					<Box
-						w="calc(70% - 0.05em)"
+						w="calc(30% - 0.05em)"
 						h="100%"
 					>
 						<ImgLayout
@@ -48,7 +48,7 @@ const Mod28 = ({data, isInWorkSpace, sheetNo}) => {
 					spacing={"0.1em"}
 				>
 					<Box
-						w="calc(70% - 0.05em)"
+						w="calc(30% - 0.05em)"
 						h="100%"
 					>
 						<ImgLayout
@@ -59,7 +59,7 @@ const Mod28 = ({data, isInWorkSpace, sheetNo}) => {
 						/>
 					</Box>
 					<Box
-						w="calc(30% - 0.05em)"
+						w="calc(70% - 0.05em)"
 						h="100%"
 					>
 						<ImgLayout

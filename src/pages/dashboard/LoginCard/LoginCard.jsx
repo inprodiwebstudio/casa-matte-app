@@ -65,6 +65,11 @@ const LoginCard = () => {
 				const sizeFound = whiteListOfSizes.find(word => parseLowerCaseNameSize.includes(word));
 				const formatFound = whiteListOfFormats.find(word => parseLowerCaseNameSize.includes(word));
 
+				if (sizeFound && (sizeFound === "chico")) {
+					formatAndSize.size = sizeFound;
+					formatAndSize.format = "cuadrado";
+				}
+
 				if (sizeFound && formatFound) {
 					formatAndSize.size = sizeFound;
 					formatAndSize.format = formatFound;

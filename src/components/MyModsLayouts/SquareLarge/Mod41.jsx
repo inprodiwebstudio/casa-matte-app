@@ -38,6 +38,7 @@ const Mod41 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					isInPaginator={isInPaginator}
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isThumbNail={isThumbNail}
+					textNo={0}
 				/>
 				<div>
 					<Text
@@ -53,6 +54,7 @@ const Mod41 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						data={textInsertion(data?.text[1], defaulSubtTitle, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
+						textNo={1}
 					/>
 				</div>
 			</Stack>

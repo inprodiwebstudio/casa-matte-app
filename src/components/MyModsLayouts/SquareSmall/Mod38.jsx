@@ -6,7 +6,7 @@ import { TextShell }     from "core/components";
 
 const Mod38 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 46px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 26px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>";
 
 	return (
 		<Center w="100%" h="100%">
@@ -18,13 +18,13 @@ const Mod38 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			>
 				<Text
 					sizes={{
-						"chico"   : "42px",
-						"regular" : "46px",
-						"grande"  : "48px",
+						"chico"   : "22px",
+						"regular" : "26px",
+						"grande"  : "28px",
 					}}
 					sheetNo={sheetNo}
 					textShell={() => <TextShell.Title />}
-					letterSpacing="6.5px"
+					letterSpacing="4px"
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}

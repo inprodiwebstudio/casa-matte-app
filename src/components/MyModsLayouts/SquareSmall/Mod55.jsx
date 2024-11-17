@@ -8,9 +8,9 @@ import { textInsertion } from "helpers";
 
 const Mod55 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 46px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
+	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 26px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 22px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
 
 	return (
 		<Flex
@@ -31,9 +31,9 @@ const Mod55 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				<div>
 					<Text
 						sizes={{
-							"chico"   : "42px",
-							"regular" : "46px",
-							"grande"  : "48px",
+							"chico"   : "22px",
+							"regular" : "26px",
+							"grande"  : "28px",
 						}}
 						align="center"
 						sheetNo={sheetNo}
@@ -42,6 +42,7 @@ const Mod55 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
+						textNo={0}
 					/>
 				</div>
 			</Stack>
@@ -60,9 +61,9 @@ const Mod55 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				<div>
 					<Text
 						sizes={{
-							"chico"   : "20px",
-							"regular" : "22px",
-							"grande"  : "24px",
+							"chico"   : "13px",
+							"regular" : "15px",
+							"grande"  : "18px",
 						}}
 						align="center"
 						sheetNo={sheetNo}
@@ -71,6 +72,7 @@ const Mod55 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						data={textInsertion(data?.text[1], defaultSubtitle, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
+						textNo={1}
 					/>
 				</div>
 			</Stack>

@@ -84,7 +84,7 @@ const photoBooksConfing = {
 			sizes       : {
 				chico   : false,
 				mediano : {
-					layoutMods       : {},
+					layoutMods       : {...VerticalMedium},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],

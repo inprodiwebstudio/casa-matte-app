@@ -4,6 +4,7 @@ import { connect }                  from "react-redux";
 //Own components
 import { convertToArray } from "helpers";
 import VerticalLarge      from "components/MyModsLayouts/VerticalLarge";
+import SquareSmall        from "components/MyModsLayouts/SquareSmall";
 
 
 const TestPdf = ({photoBookData}) => {
@@ -14,6 +15,11 @@ const TestPdf = ({photoBookData}) => {
 			size                  : [850, 991],
 			isInDoublePageLayouts : ["FrontLayout"],
 			modLayouts            : {...VerticalLarge},
+		},
+		chico : {
+			size                  : [595, 595],
+			isInDoublePageLayouts : ["FrontLayout"],
+			modLayouts            : {...SquareSmall},
 		},
 	};
 
@@ -46,11 +52,11 @@ const TestPdf = ({photoBookData}) => {
 		if (Sheet1Layout) {
 			return (
 				<>
-					<Page size={[612, 792]}>
+					<Page size={[595, 595]}>
 						<Sheet1Layout images={pageData?.sheet1?.photos} text={pageData?.sheet1?.text} />
 					</Page>
 					{Sheet2Layout ? (
-						<Page size={[612, 792]}>
+						<Page size={[595, 595]}>
 							<Sheet2Layout images={pageData?.sheet2?.photos} text={pageData?.sheet2?.text} />
 						</Page>
 					) : undefined}

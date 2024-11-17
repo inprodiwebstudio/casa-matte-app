@@ -6,7 +6,7 @@ import { textInsertion } from "helpers";
 
 const Mod39 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 46px; font-family: Aitana-Regular;'>TÍTULO 2</span></p>";
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 26px; font-family: Aitana-Regular;'>TÍTULO 2</span></p>";
 
 	return (
 		<Flex
@@ -23,16 +23,17 @@ const Mod39 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			>
 				<Text
 					sizes={{
-						"chico"   : "42px",
-						"regular" : "46px",
-						"grande"  : "48px",
+						"chico"   : "22px",
+						"regular" : "26px",
+						"grande"  : "28px",
 					}}
 					sheetNo={sheetNo}
-					letterSpacing="6px"
+					letterSpacing="4px"
 					textShell={() => <TextShell.Title width="80%" align="flex-end" />}
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}
+					textNo={0}
 				/>
 			</Stack>
 		</Flex>
