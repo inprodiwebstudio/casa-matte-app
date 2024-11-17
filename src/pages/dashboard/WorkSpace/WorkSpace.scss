@@ -22,6 +22,25 @@
 			transform: scale(0.8, 0.8);
 			z-index: 1;
 
+			&.vertical-mediano-preview {
+				height: 792px;
+
+				@include laptop {
+					transform: scale(0.8, 0.8);
+					z-index: 1;
+				}
+	
+				@include big-laptop {
+					transform: scale(0.5, 0.5);
+					z-index: 1;
+				}
+	
+				@include big-tablet {
+					transform: scale(0.45, 0.45);
+					z-index: 1;
+				}
+			}
+
 			&.cuadrado-chico-preview {
 				transform: scale(0.8, 0.8);
 				height: 595px;
@@ -163,8 +182,11 @@
 			z-index: 1;
 
 			&.vertical-mediano-workSpace {
+				height: 792px;
+				transform: scale(0.75, 0.75);
+
 				@include laptop {
-					transform: scale(0.44, 0.44);
+					transform: scale(0.55, 0.55);
 					z-index: 1;
 				}
 	
