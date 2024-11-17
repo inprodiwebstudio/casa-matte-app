@@ -140,4 +140,5 @@ const Mod22Pdf = ({images}) => {
 	);
 };
 
+
 export default Mod22Pdf;
