@@ -5,21 +5,31 @@ import { connect }                  from "react-redux";
 import { convertToArray } from "helpers";
 import VerticalLarge      from "components/MyModsLayouts/VerticalLarge";
 import SquareSmall        from "components/MyModsLayouts/SquareSmall";
+import SquareLarge        from "components/MyModsLayouts/SquareLarge";
 
 
 const TestPdf = ({photoBookData}) => {
 	const listPages = convertToArray(photoBookData?.pages);
 
 	const photoBookTypes = {
-		grande : {
-			size                  : [850, 991],
-			isInDoublePageLayouts : ["FrontLayout"],
-			modLayouts            : {...VerticalLarge},
+		vertical : {
+			grande : {
+				size                  : [850, 991],
+				isInDoublePageLayouts : ["FrontLayout"],
+				modLayouts            : {...VerticalLarge},
+			},
 		},
-		chico : {
-			size                  : [595, 595],
-			isInDoublePageLayouts : ["FrontLayout"],
-			modLayouts            : {...SquareSmall},
+		cuadrado : {
+			grande : {
+				size                  : [850, 850],
+				isInDoublePageLayouts : ["FrontLayout"],
+				modLayouts            : {...SquareLarge},
+			},
+			chico : {
+				size                  : [595, 595],
+				isInDoublePageLayouts : ["FrontLayout"],
+				modLayouts            : {...SquareSmall},
+			},
 		},
 	};
 
@@ -29,8 +39,8 @@ const TestPdf = ({photoBookData}) => {
 	// };
 
 	const getComponent = (pageData) => {
-		const Sheet1Layout = photoBookTypes[photoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet1?.layoutType]?.pdfLayout;
-		const Sheet2Layout = photoBookTypes[photoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet2?.layoutType]?.pdfLayout;
+		const Sheet1Layout = photoBookTypes[photoBookData?.sizePhotoBook]?.[photoBookData?.format]?.modLayouts[pageData?.sheet1?.layoutType]?.pdfLayout;
+		const Sheet2Layout = photoBookTypes[photoBookData?.sizePhotoBook]?.[photoBookData?.format]?.modLayouts[pageData?.sheet2?.layoutType]?.pdfLayout;
 
 		// const isInDoublePageLayout = isLayoutDoublePage(pageData?.sheet1?.layoutType, photoBookTypes[photoBookData?.sizePhotoBook]?.isInDoublePageLayouts);
 
@@ -52,11 +62,11 @@ const TestPdf = ({photoBookData}) => {
 		if (Sheet1Layout) {
 			return (
 				<>
-					<Page size={[595, 595]}>
+					<Page size={[850, 850]}>
 						<Sheet1Layout images={pageData?.sheet1?.photos} text={pageData?.sheet1?.text} />
 					</Page>
 					{Sheet2Layout ? (
-						<Page size={[595, 595]}>
+						<Page size={[850, 850]}>
 							<Sheet2Layout images={pageData?.sheet2?.photos} text={pageData?.sheet2?.text} />
 						</Page>
 					) : undefined}
