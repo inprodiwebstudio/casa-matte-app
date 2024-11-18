@@ -56,13 +56,17 @@ import Mod54 from "./Mod54";
 import Mod55 from "./Mod55";
 import Mod56 from "./Mod56";
 
+import {
+	Mod1Pdf,
+} from "./PdfMods";
+
 const SquareLarge = {
 	Mod1 : {
 		id           : "Mod1",
 		layout       : Mod1,
 		numberPhotos : 1,
 		cat          : "fotos",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod1Pdf,
 	},
 	Mod2 : {
 		id           : "Mod2",
