@@ -7,7 +7,7 @@ import ReactDOMServer   from "react-dom/server";
 import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
 
 
-const Mod44Pdf = ({text}) => {
+const Mod47Pdf = ({text}) => {
 
 	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 26px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
@@ -101,4 +101,4 @@ const Mod44Pdf = ({text}) => {
 	);
 };
 
-export default Mod44Pdf;
+export default Mod47Pdf;

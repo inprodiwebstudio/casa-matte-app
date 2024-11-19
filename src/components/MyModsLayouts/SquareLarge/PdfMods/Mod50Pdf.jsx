@@ -7,24 +7,24 @@ import ReactDOMServer   from "react-dom/server";
 import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
 
 
-const Mod50Pdf = ({text}) => {
+const Mod49Pdf = ({text}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>ESPAÑA</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: left;'><span style='font-size: 34px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>FRANCIA</span></p>";
+	const text02 = text[1] ? text[1] : "<p style='text-align: left;'><span style='font-size: 34px; font-family: Aitana-Regular;'>FRANCIA</span></p>";
 
-	const text03 = text[2] ? text[2] : "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>TURQUÍA</span></p>";
+	const text03 = text[2] ? text[2] : "<p style='text-align: left;'><span style='font-size: 34px; font-family: Aitana-Regular;'>TURQUÍA</span></p>";
 
-	const text04 = text[3] ? text[3] : "<p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>Salamanca</span></p>";
+	const text04 = text[3] ? text[3] : "<p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
 
-	const text05 = text[4] ? text[4] : "<p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>París</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>Versalles</span></p>";
+	const text05 = text[4] ? text[4] : "<p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>París</span></p><p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Versalles</span></p>";
 
-	const text06 = text[5] ? text[5] : "<p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>Capadocia</span></p>";
+	const text06 = text[5] ? text[5] : "<p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Capadocia</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "595px",
+				height  : "850px",
 				width   : "100%",
 				padding : "20px",
 			}}
@@ -44,7 +44,7 @@ const Mod50Pdf = ({text}) => {
 					height         : "100%",
 					display        : "flex",
 					flexDirection  : "column",
-					gap            : "38px",
+					gap            : "25px",
 					justifyContent : "center",
 					alignItems     : "center",
 				}}>
@@ -60,8 +60,7 @@ const Mod50Pdf = ({text}) => {
 					>
 						<div
 							style={{
-								letterSpacing : "2.7px",
-								textTransform : "uppercase",
+								letterSpacing : "3px",
 							}}
 							dangerouslySetInnerHTML={{
 								__html : `<style>
@@ -86,8 +85,7 @@ const Mod50Pdf = ({text}) => {
 						<div
 							style={{
 								letterSpacing : "0.5px",
-								lineHeight    : "1.8px",
-								textTransform : "uppercase",
+								lineHeight    : "2px",
 							}}
 							dangerouslySetInnerHTML={{
 								__html : `<style>
@@ -112,8 +110,7 @@ const Mod50Pdf = ({text}) => {
 					>
 						<div
 							style={{
-								letterSpacing : "2.7px",
-								textTransform : "uppercase",
+								letterSpacing : "2px",
 							}}
 							dangerouslySetInnerHTML={{
 								__html : `<style>
@@ -139,7 +136,6 @@ const Mod50Pdf = ({text}) => {
 							style={{
 								letterSpacing : "0.5px",
 								lineHeight    : "2px",
-								textTransform : "uppercase",
 							}}
 							dangerouslySetInnerHTML={{
 								__html : `<style>
@@ -164,8 +160,7 @@ const Mod50Pdf = ({text}) => {
 					>
 						<div
 							style={{
-								letterSpacing : "2.7px",
-								textTransform : "uppercase",
+								letterSpacing : "2px",
 							}}
 							dangerouslySetInnerHTML={{
 								__html : `<style>
@@ -190,8 +185,7 @@ const Mod50Pdf = ({text}) => {
 						<div
 							style={{
 								letterSpacing : "0.5px",
-								lineHeight    : "1.8px",
-								textTransform : "uppercase",
+								lineHeight    : "2px",
 							}}
 							dangerouslySetInnerHTML={{
 								__html : `<style>
@@ -216,4 +210,4 @@ const Mod50Pdf = ({text}) => {
 	);
 };
 
-export default Mod50Pdf;
+export default Mod49Pdf;

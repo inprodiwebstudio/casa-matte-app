@@ -39,8 +39,8 @@ const TestPdf = ({photoBookData}) => {
 	// };
 
 	const getComponent = (pageData) => {
-		const Sheet1Layout = photoBookTypes[photoBookData?.sizePhotoBook]?.[photoBookData?.format]?.modLayouts[pageData?.sheet1?.layoutType]?.pdfLayout;
-		const Sheet2Layout = photoBookTypes[photoBookData?.sizePhotoBook]?.[photoBookData?.format]?.modLayouts[pageData?.sheet2?.layoutType]?.pdfLayout;
+		const Sheet1Layout = photoBookTypes[photoBookData?.format]?.[photoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet1?.layoutType]?.pdfLayout;
+		const Sheet2Layout = photoBookTypes[photoBookData?.format]?.[photoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet2?.layoutType]?.pdfLayout;
 
 		// const isInDoublePageLayout = isLayoutDoublePage(pageData?.sheet1?.layoutType, photoBookTypes[photoBookData?.sizePhotoBook]?.isInDoublePageLayouts);
 

@@ -12,9 +12,9 @@ const Mod24Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "595px",
+				height  : "850px",
 				width   : "100%",
-				padding : "20px",
+				padding : "40px",
 			}}
 		>
 			<div
@@ -28,8 +28,8 @@ const Mod24Pdf = ({images}) => {
 			>
 				<div
 					style={{
-						height        : "calc(50% - 5px)",
 						width         : "100%",
+						height        : "calc(50% - 5px)",
 						display       : "flex",
 						flexDirection : "row",
 						gap           : "10px",
@@ -37,8 +37,8 @@ const Mod24Pdf = ({images}) => {
 				>
 					<div
 						style={{
-							height     : "100%",
 							width      : "calc(50% - 5px)",
+							height     : "100%",
 							overflow   : "hidden",
 							background : "#E3E3E3",
 						}}
@@ -49,7 +49,7 @@ const Mod24Pdf = ({images}) => {
 									src={imgUrlPdf(images[0])}
 									alt="test"
 									style={{
-										height    : "490.5px",
+										height    : "100%",
 										objectFit : "cover",
 									}}
 								/>
@@ -58,8 +58,8 @@ const Mod24Pdf = ({images}) => {
 					</div>
 					<div
 						style={{
-							height     : "100%",
 							width      : "calc(50% - 5px)",
+							height     : "100%",
 							overflow   : "hidden",
 							background : "#E3E3E3",
 						}}
@@ -70,7 +70,7 @@ const Mod24Pdf = ({images}) => {
 									src={imgUrlPdf(images[1])}
 									alt="test"
 									style={{
-										height    : "490.5px",
+										height    : "100%",
 										objectFit : "cover",
 									}}
 								/>
@@ -80,55 +80,24 @@ const Mod24Pdf = ({images}) => {
 				</div>
 				<div
 					style={{
-						height        : "calc(50% - 5px)",
-						width         : "100%",
-						display       : "flex",
-						flexDirection : "row",
-						gap           : "10px",
+						width      : "100%",
+						height     : "calc(50% - 5px)",
+						overflow   : "hidden",
+						background : "#E3E3E3",
 					}}
 				>
-					<div
-						style={{
-							height     : "100%",
-							width      : "calc(50% - 5px)",
-							overflow   : "hidden",
-							background : "#E3E3E3",
-						}}
-					>
-						{
-							images[2]?.url && (
-								<img
-									src={imgUrlPdf(images[2])}
-									alt="test"
-									style={{
-										height    : "490.5px",
-										objectFit : "cover",
-									}}
-								/>
-							)
-						}
-					</div>
-					<div
-						style={{
-							height     : "100%",
-							width      : "calc(50% - 5px)",
-							overflow   : "hidden",
-							background : "#E3E3E3",
-						}}
-					>
-						{
-							images[3]?.url && (
-								<img
-									src={imgUrlPdf(images[3])}
-									alt="test"
-									style={{
-										height    : "490.5px",
-										objectFit : "cover",
-									}}
-								/>
-							)
-						}
-					</div>
+					{
+						images[2]?.url && (
+							<img
+								src={imgUrlPdf(images[2])}
+								alt="test"
+								style={{
+									height    : "100%",
+									objectFit : "cover",
+								}}
+							/>
+						)
+					}
 				</div>
 			</div>
 		</div>

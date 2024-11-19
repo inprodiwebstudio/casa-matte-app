@@ -12,9 +12,11 @@ const Mod20Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "595px",
-				width   : "100%",
-				padding : "70px",
+				height       : "850px",
+				width        : "100%",
+				padding      : "226px",
+				paddingLeft  : "40px",
+				paddingRight : "40px",
 			}}
 		>
 			<div
@@ -22,14 +24,14 @@ const Mod20Pdf = ({images}) => {
 					height        : "100%",
 					width         : "100%",
 					display       : "flex",
-					flexDirection : "column",
+					flexDirection : "row",
 					gap           : "10px",
 				}}
 			>
 				<div
 					style={{
-						height     : "calc(50% - 5px)",
-						width      : "100%",
+						width      : "calc(30% - 5px)",
+						height     : "100%",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -40,6 +42,7 @@ const Mod20Pdf = ({images}) => {
 								src={imgUrlPdf(images[0])}
 								alt="test"
 								style={{
+									height    : "100%",
 									objectFit : "cover",
 								}}
 							/>
@@ -48,53 +51,24 @@ const Mod20Pdf = ({images}) => {
 				</div>
 				<div
 					style={{
-						height        : "calc(50% - 5px)",
-						width         : "100%",
-						display       : "flex",
-						flexDirection : "row",
-						gap           : "10px",
+						width      : "calc(70% - 5px)",
+						height     : "100%",
+						overflow   : "hidden",
+						background : "#E3E3E3",
 					}}
 				>
-					<div
-						style={{
-							width      : "calc(50% - 5px)",
-							height     : "100%",
-							overflow   : "hidden",
-							background : "#E3E3E3",
-						}}
-					>
-						{
-							images[1]?.url && (
-								<img
-									src={imgUrlPdf(images[1])}
-									alt="test"
-									style={{
-										objectFit : "cover",
-									}}
-								/>
-							)
-						}
-					</div>
-					<div
-						style={{
-							width      : "calc(50% - 5px)",
-							height     : "100%",
-							overflow   : "hidden",
-							background : "#E3E3E3",
-						}}
-					>
-						{
-							images[2]?.url && (
-								<img
-									src={imgUrlPdf(images[2])}
-									alt="test"
-									style={{
-										objectFit : "cover",
-									}}
-								/>
-							)
-						}
-					</div>
+					{
+						images[1]?.url && (
+							<img
+								src={imgUrlPdf(images[1])}
+								alt="test"
+								style={{
+									height    : "100%",
+									objectFit : "cover",
+								}}
+							/>
+						)
+					}
 				</div>
 			</div>
 		</div>

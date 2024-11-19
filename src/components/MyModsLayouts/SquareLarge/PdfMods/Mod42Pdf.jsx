@@ -8,16 +8,16 @@ import ReactDOMServer from "react-dom/server";
 
 const Mod42Pdf = ({text}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 10px; font-family: Inter-Lifght;'>PARA PAPÁ. UN HOMENAJE A TU VIDA. GRACIAS POR TANTOS AÑOS DE CARIÑO Y AMOR, TE QUEREMOS SIEMPRE..</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>PARA PAPÁ. UN HOMENAJE A TU VIDA. GRACIAS POR TANTOS AÑOS DE CARIÑO Y AMOR, TE QUEREMOS SIEMPRE..</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
-				height       : "595px",
+				height       : "850px",
 				width        : "100%",
 				padding      : "20px",
-				paddingRight : "110px",
-				paddingLeft  : "110px",
+				paddingRight : "180px",
+				paddingLeft  : "180px",
 			}}
 		>
 
@@ -34,7 +34,7 @@ const Mod42Pdf = ({text}) => {
 					style={{
 						letterSpacing : "1px !important",
 						textAlign     : "start",
-						lineHeight    : "1.6px",
+						lineHeight    : "2px",
 					}}
 					dangerouslySetInnerHTML={{__html : text01}}
 				/>

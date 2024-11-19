@@ -12,11 +12,9 @@ const Mod36Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height        : "595px",
-				width         : "100%",
-				padding       : "20px",
-				paddingTop    : "100px",
-				paddingBottom : "100px",
+				height  : "850px",
+				width   : "100%",
+				padding : "20px",
 			}}
 		>
 			<div
@@ -31,7 +29,7 @@ const Mod36Pdf = ({images}) => {
 				<div
 					style={{
 						width         : "100%",
-						height        : "calc(50% - 5px)",
+						height        : "calc(34% - 5px)",
 						display       : "flex",
 						flexDirection : "row",
 						gap           : "10px",
@@ -39,10 +37,10 @@ const Mod36Pdf = ({images}) => {
 				>
 					<div
 						style={{
+							width      : "calc(33.33% - 6.667px)",
 							height     : "100%",
-							width      : "181.667px",
-							background : "#E3E3E3",
 							overflow   : "hidden",
+							background : "#E3E3E3",
 						}}
 					>
 						{
@@ -60,10 +58,10 @@ const Mod36Pdf = ({images}) => {
 					</div>
 					<div
 						style={{
+							width      : "calc(33.33% - 6.667px)",
 							height     : "100%",
-							width      : "181.667px",
-							background : "#E3E3E3",
 							overflow   : "hidden",
+							background : "#E3E3E3",
 						}}
 					>
 						{
@@ -81,10 +79,10 @@ const Mod36Pdf = ({images}) => {
 					</div>
 					<div
 						style={{
+							width      : "calc(33.33% - 6.667px)",
 							height     : "100%",
-							width      : "181.667px",
-							background : "#E3E3E3",
 							overflow   : "hidden",
+							background : "#E3E3E3",
 						}}
 					>
 						{
@@ -104,7 +102,7 @@ const Mod36Pdf = ({images}) => {
 				<div
 					style={{
 						width         : "100%",
-						height        : "calc(50% - 5px)",
+						height        : "calc(66% - 5px)",
 						display       : "flex",
 						flexDirection : "row",
 						gap           : "10px",
@@ -112,52 +110,62 @@ const Mod36Pdf = ({images}) => {
 				>
 					<div
 						style={{
-							height     : "100%",
-							width      : "181.667px",
-							background : "#E3E3E3",
-							overflow   : "hidden",
+							width         : "calc(33% - 5px)",
+							height        : "100%",
+							display       : "flex",
+							flexDirection : "column",
+							gap           : "10px",
 						}}
 					>
-						{
-							images[3]?.url && (
-								<img
-									src={imgUrlPdf(images[3])}
-									alt="test"
-									style={{
-										height    : "100%",
-										objectFit : "cover",
-									}}
-								/>
-							)
-						}
+						<div
+							style={{
+								height     : "calc(50% - 5px)",
+								width      : "100%",
+								overflow   : "hidden",
+								background : "#E3E3E3",
+							}}
+						>
+							{
+								images[3]?.url && (
+									<img
+										src={imgUrlPdf(images[3])}
+										alt="test"
+										style={{
+											height    : "100%",
+											objectFit : "cover",
+										}}
+									/>
+								)
+							}
+						</div>
+						<div
+							style={{
+								height     : "calc(50% - 5px)",
+								width      : "100%",
+								overflow   : "hidden",
+								background : "#E3E3E3",
+							}}
+						>
+							{
+								images[4]?.url && (
+									<img
+										src={imgUrlPdf(images[4])}
+										alt="test"
+										style={{
+											height    : "100%",
+											objectFit : "cover",
+										}}
+									/>
+								)
+							}
+						</div>
 					</div>
 					<div
 						style={{
+							width      : "calc(67% - 5px)",
 							height     : "100%",
-							width      : "181.667px",
-							background : "#E3E3E3",
 							overflow   : "hidden",
-						}}
-					>
-						{
-							images[4]?.url && (
-								<img
-									src={imgUrlPdf(images[4])}
-									alt="test"
-									style={{
-										height    : "100%",
-										objectFit : "cover",
-									}}
-								/>
-							)
-						}
-					</div>
-					<div
-						style={{
-							height     : "100%",
-							width      : "181.667px",
 							background : "#E3E3E3",
-							overflow   : "hidden",
 						}}
 					>
 						{

@@ -9,22 +9,14 @@ import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
 
 const Mod49Pdf = ({text}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 46px; font-family: JosefinSans-Light;'>JAPÓN</span></p>";
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>FRANCIA</span></p>";
-
-	const text03 = text[2] ? text[2] : "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>TURQUÍA</span></p>";
-
-	const text04 = text[3] ? text[3] : "<p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
-
-	const text05 = text[4] ? text[4] : "<p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>París</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Versalles</span></p>";
-
-	const text06 = text[5] ? text[5] : "<p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Capadocia</span></p>";
+	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>TOKIO</span></p><p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>KAMAKURA</span></p><p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>KIOTO</span></p><p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>NARA</span></p><p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>NAOSHIMA</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "595px",
+				height  : "850px",
 				width   : "100%",
 				padding : "20px",
 			}}
@@ -40,27 +32,25 @@ const Mod49Pdf = ({text}) => {
 				}}
 			>
 				<div style={{
-					width          : "40%",
+					width          : "70%",
 					height         : "100%",
 					display        : "flex",
 					flexDirection  : "column",
-					gap            : "25px",
+					gap            : "45px !important",
 					justifyContent : "center",
-					alignItems     : "center",
 				}}>
 					<div
 						style={{
 							width          : "100%",
 							display        : "flex",
 							flexDirection  : "column",
-							gap            : "10px",
-							justifyContent : "flex-start",
-							alignItems     : "flex-start",
+							justifyContent : "center",
+							alignItems     : "center",
 						}}
 					>
 						<div
 							style={{
-								letterSpacing : "3px",
+								letterSpacing : "5px",
 							}}
 							dangerouslySetInnerHTML={{
 								__html : `<style>
@@ -72,132 +62,32 @@ const Mod49Pdf = ({text}) => {
                                  ${text01}`,
 							}}
 						/>
-						<div
-							style={{
-								width          : "100%",
-								display        : "flex",
-								alignItems     : "flex-Start",
-								justifyContent : "flex-Start",
-							}}
-						>
-							<DividerLayoutPdf w="26px" />
-						</div>
-						<div
-							style={{
-								letterSpacing : "0.5px",
-								lineHeight    : "2px",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text04}`,
-							}}
-						/>
 					</div>
 					<div
 						style={{
-							width          : "100%",
-							display        : "flex",
-							flexDirection  : "column",
-							gap            : "10px",
-							justifyContent : "flex-start",
-							alignItems     : "flex-start",
+							width      : "100%",
+							display    : "flex",
+							alignItems : "center",
 						}}
 					>
-						<div
-							style={{
-								letterSpacing : "2px",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text02}`,
-							}}
-						/>
-						<div
-							style={{
-								width          : "100%",
-								display        : "flex",
-								alignItems     : "flex-Start",
-								justifyContent : "flex-Start",
-							}}
-						>
-							<DividerLayoutPdf w="26px" />
-						</div>
-						<div
-							style={{
-								letterSpacing : "0.5px",
-								lineHeight    : "2px",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text05}`,
-							}}
-						/>
+						<DividerLayoutPdf w="35px" />
 					</div>
 					<div
 						style={{
-							width          : "100%",
-							display        : "flex",
-							flexDirection  : "column",
-							gap            : "10px",
-							justifyContent : "flex-start",
-							alignItems     : "flex-start",
+							width         : "100%",
+							letterSpacing : "0.5px",
+							lineHeight    : "3px",
 						}}
-					>
-						<div
-							style={{
-								letterSpacing : "2px",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text03}`,
-							}}
-						/>
-						<div
-							style={{
-								width          : "100%",
-								display        : "flex",
-								alignItems     : "flex-Start",
-								justifyContent : "flex-Start",
-							}}
-						>
-							<DividerLayoutPdf w="26px" />
-						</div>
-						<div
-							style={{
-								letterSpacing : "0.5px",
-								lineHeight    : "2px",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text06}`,
-							}}
-						/>
-					</div>
+						dangerouslySetInnerHTML={{
+							__html : `<style>
+                               p {
+                                 margin: 0;
+                                 padding: 0;
+                               }
+                             </style>
+                             ${text02}`,
+						}}
+					/>
 				</div>
 			</div>
 		</div>

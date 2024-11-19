@@ -12,9 +12,11 @@ const Mod18Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "595px",
-				width   : "100%",
-				padding : "20px",
+				height       : "850px",
+				width        : "100%",
+				padding      : "240px",
+				paddingLeft  : "50px",
+				paddingRight : "50px",
 			}}
 		>
 			<div
@@ -22,74 +24,46 @@ const Mod18Pdf = ({images}) => {
 					height        : "100%",
 					width         : "100%",
 					display       : "flex",
-					flexDirection : "column",
+					flexDirection : "row",
 					gap           : "10px",
 				}}
 			>
 				<div
 					style={{
-						height        : "calc(50% - 5px)",
-						width         : "100%",
-						display       : "flex",
-						flexDirection : "row",
-						gap           : "10px",
-					}}
-				>
-					<div
-						style={{
-							width      : "calc(50% - 5px)",
-							height     : "100%",
-							overflow   : "hidden",
-							background : "#E3E3E3",
-						}}
-					>
-						{
-							images[0]?.url && (
-								<img
-									src={imgUrlPdf(images[0])}
-									alt="test"
-									style={{
-										objectFit : "cover",
-									}}
-								/>
-							)
-						}
-					</div>
-					<div
-						style={{
-							width      : "calc(50% - 5px)",
-							height     : "100%",
-							overflow   : "hidden",
-							background : "#E3E3E3",
-						}}
-					>
-						{
-							images[1]?.url && (
-								<img
-									src={imgUrlPdf(images[1])}
-									alt="test"
-									style={{
-										objectFit : "cover",
-									}}
-								/>
-							)
-						}
-					</div>
-				</div>
-				<div
-					style={{
-						height     : "calc(50% - 5px)",
-						width      : "100%",
+						width      : "calc(50% - 5px)",
+						height     : "100%",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
 				>
 					{
-						images[2]?.url && (
+						images[0]?.url && (
 							<img
-								src={imgUrlPdf(images[2])}
+								src={imgUrlPdf(images[0])}
 								alt="test"
 								style={{
+									height    : "100%",
+									objectFit : "cover",
+								}}
+							/>
+						)
+					}
+				</div>
+				<div
+					style={{
+						width      : "calc(50% - 5px)",
+						height     : "100%",
+						overflow   : "hidden",
+						background : "#E3E3E3",
+					}}
+				>
+					{
+						images[1]?.url && (
+							<img
+								src={imgUrlPdf(images[1])}
+								alt="test"
+								style={{
+									height    : "100%",
 									objectFit : "cover",
 								}}
 							/>

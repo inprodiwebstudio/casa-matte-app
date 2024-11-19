@@ -8,18 +8,18 @@ import ReactDOMServer from "react-dom/server";
 
 const Mod38Pdf = ({text}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 26px; font-family: Aitana-Regular;'>TÍTULO 2</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 46px; font-family: Aitana-Regular;'>TÍTULO 2</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
-				height         : "595px",
+				height         : "850px",
 				width          : "100%",
 				display        : "flex",
 				justifyContent : "flex-end",
 				alignItems     : "flex-end",
-				padding        : "20px",
-				paddingRight   : "40px",
+				padding        : "60px",
+				paddingRight   : "80px",
 			}}
 		>
 			<div

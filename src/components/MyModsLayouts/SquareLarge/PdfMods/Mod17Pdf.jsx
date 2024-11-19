@@ -12,11 +12,11 @@ const Mod17Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height        : "595px",
-				width         : "100%",
-				padding       : "20px",
-				paddingTop    : "200px",
-				paddingBottom : "200px",
+				height       : "850px",
+				width        : "100%",
+				padding      : "190px",
+				paddingLeft  : "120px",
+				paddingRight : "120px",
 			}}
 		>
 			<div
@@ -30,7 +30,7 @@ const Mod17Pdf = ({images}) => {
 			>
 				<div
 					style={{
-						width      : "calc(33.33% - 6.667px)",
+						width      : "calc(50% - 5px)",
 						height     : "100%",
 						overflow   : "hidden",
 						background : "#E3E3E3",
@@ -42,7 +42,7 @@ const Mod17Pdf = ({images}) => {
 								src={imgUrlPdf(images[0])}
 								alt="test"
 								style={{
-									height    : "595px",
+									height    : "100%",
 									objectFit : "cover",
 								}}
 							/>
@@ -51,7 +51,7 @@ const Mod17Pdf = ({images}) => {
 				</div>
 				<div
 					style={{
-						width      : "calc(33.33% - 6.667px)",
+						width      : "calc(50% - 5px)",
 						height     : "100%",
 						overflow   : "hidden",
 						background : "#E3E3E3",
@@ -63,28 +63,7 @@ const Mod17Pdf = ({images}) => {
 								src={imgUrlPdf(images[1])}
 								alt="test"
 								style={{
-									height    : "595px",
-									objectFit : "cover",
-								}}
-							/>
-						)
-					}
-				</div>
-				<div
-					style={{
-						width      : "calc(33.33% - 6.667px)",
-						height     : "100%",
-						overflow   : "hidden",
-						background : "#E3E3E3",
-					}}
-				>
-					{
-						images[2]?.url && (
-							<img
-								src={imgUrlPdf(images[2])}
-								alt="test"
-								style={{
-									height    : "595px",
+									height    : "100%",
 									objectFit : "cover",
 								}}
 							/>

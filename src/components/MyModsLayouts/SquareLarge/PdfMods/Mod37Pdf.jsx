@@ -12,7 +12,7 @@ const Mod37Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "595px",
+				height  : "850px",
 				width   : "100%",
 				padding : "20px",
 			}}
@@ -29,7 +29,7 @@ const Mod37Pdf = ({images}) => {
 				<div
 					style={{
 						width         : "100%",
-						height        : "181.667px",
+						height        : "263.333px",
 						display       : "flex",
 						flexDirection : "row",
 						gap           : "10px",
@@ -38,7 +38,7 @@ const Mod37Pdf = ({images}) => {
 					<div
 						style={{
 							height     : "100%",
-							width      : "181.667px",
+							width      : "263.333px",
 							background : "#E3E3E3",
 							overflow   : "hidden",
 						}}
@@ -59,7 +59,7 @@ const Mod37Pdf = ({images}) => {
 					<div
 						style={{
 							height     : "100%",
-							width      : "181.667px",
+							width      : "263.333px",
 							background : "#E3E3E3",
 							overflow   : "hidden",
 						}}
@@ -80,7 +80,7 @@ const Mod37Pdf = ({images}) => {
 					<div
 						style={{
 							height     : "100%",
-							width      : "181.667px",
+							width      : "263.333px",
 							background : "#E3E3E3",
 							overflow   : "hidden",
 						}}
@@ -102,7 +102,7 @@ const Mod37Pdf = ({images}) => {
 				<div
 					style={{
 						width         : "100%",
-						height        : "181.667px",
+						height        : "263.333px",
 						display       : "flex",
 						flexDirection : "row",
 						gap           : "10px",
@@ -111,7 +111,7 @@ const Mod37Pdf = ({images}) => {
 					<div
 						style={{
 							height     : "100%",
-							width      : "181.667px",
+							width      : "263.333px",
 							background : "#E3E3E3",
 							overflow   : "hidden",
 						}}
@@ -132,7 +132,7 @@ const Mod37Pdf = ({images}) => {
 					<div
 						style={{
 							height     : "100%",
-							width      : "181.667px",
+							width      : "263.333px",
 							background : "#E3E3E3",
 							overflow   : "hidden",
 						}}
@@ -153,7 +153,7 @@ const Mod37Pdf = ({images}) => {
 					<div
 						style={{
 							height     : "100%",
-							width      : "181.667px",
+							width      : "263.333px",
 							background : "#E3E3E3",
 							overflow   : "hidden",
 						}}
@@ -175,7 +175,7 @@ const Mod37Pdf = ({images}) => {
 				<div
 					style={{
 						width         : "100%",
-						height        : "181.667px",
+						height        : "263.333px",
 						display       : "flex",
 						flexDirection : "row",
 						gap           : "10px",
@@ -184,7 +184,7 @@ const Mod37Pdf = ({images}) => {
 					<div
 						style={{
 							height     : "100%",
-							width      : "181.667px",
+							width      : "263.333px",
 							background : "#E3E3E3",
 							overflow   : "hidden",
 						}}
@@ -205,7 +205,7 @@ const Mod37Pdf = ({images}) => {
 					<div
 						style={{
 							height     : "100%",
-							width      : "181.667px",
+							width      : "263.333px",
 							background : "#E3E3E3",
 							overflow   : "hidden",
 						}}
@@ -226,7 +226,7 @@ const Mod37Pdf = ({images}) => {
 					<div
 						style={{
 							height     : "100%",
-							width      : "181.667px",
+							width      : "263.333px",
 							background : "#E3E3E3",
 							overflow   : "hidden",
 						}}

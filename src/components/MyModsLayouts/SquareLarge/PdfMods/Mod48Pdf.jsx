@@ -9,14 +9,14 @@ import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
 
 const Mod48Pdf = ({text}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 26px; font-family: JosefinSans-Light;'>JAPÓN</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 46px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>TOKIO</span></p><p style='text-align: center;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>KAMAKURA</span></p><p style='text-align: center;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>KIOTO</span></p><p style='text-align: center;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>NARA</span></p><p style='text-align: center;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>NAOSHIMA</span></p>";
+	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Spectral-Light-Italic;'>Toledo</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "595px",
+				height  : "850px",
 				width   : "100%",
 				padding : "20px",
 			}}
@@ -36,7 +36,7 @@ const Mod48Pdf = ({text}) => {
 					height         : "100%",
 					display        : "flex",
 					flexDirection  : "column",
-					gap            : "35px !important",
+					gap            : "20px !important",
 					justifyContent : "center",
 				}}>
 					<div
@@ -50,7 +50,7 @@ const Mod48Pdf = ({text}) => {
 					>
 						<div
 							style={{
-								letterSpacing : "5px",
+								letterSpacing : "4px",
 							}}
 							dangerouslySetInnerHTML={{
 								__html : `<style>
@@ -66,17 +66,18 @@ const Mod48Pdf = ({text}) => {
 					<div
 						style={{
 							width      : "100%",
+							height     : "35px",
 							display    : "flex",
 							alignItems : "center",
 						}}
 					>
-						<DividerLayoutPdf w="35px" />
+						<DividerLayoutPdf h="100%" w="1px" />
 					</div>
 					<div
 						style={{
 							width         : "100%",
 							letterSpacing : "0.5px",
-							lineHeight    : "2.5px",
+							lineHeight    : "2px",
 						}}
 						dangerouslySetInnerHTML={{
 							__html : `<style>

@@ -11,9 +11,8 @@ const Mod1Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "850px",
-				width   : "100%",
-				padding : "20px",
+				height : "850px",
+				width  : "100%",
 			}}
 		>
 			<div
@@ -31,7 +30,7 @@ const Mod1Pdf = ({images}) => {
 							alt={images[0]?.url}
 							style={{
 								objectFit : "cover",
-								height    : "595px",
+								height    : "100%",
 							}}
 						/>
 					)

@@ -9,12 +9,12 @@ import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
 
 const Mod43Pdf = ({text}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Para papá, un homenaje a tu vida. Gracias por tantos años de cariño y amor. Te queremos siempre.</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Para papá, un homenaje a tu vida. Gracias por tantos años de cariño y amor. Te queremos siempre.</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
-				height        : "595px",
+				height        : "850px",
 				width         : "100%",
 				paddingRight  : "10%",
 				paddingBottom : "10%",

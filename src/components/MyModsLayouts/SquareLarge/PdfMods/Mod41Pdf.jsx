@@ -9,14 +9,14 @@ import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
 
 const Mod38Pdf = ({text}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 26px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 46px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: right;'><span style='font-size: 15px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>";
+	const text02 = text[1] ? text[1] : "<p style='text-align: right;'><span style='font-size: 20px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "595px",
+				height  : "850px",
 				width   : "100%",
 				padding : "60px",
 			}}

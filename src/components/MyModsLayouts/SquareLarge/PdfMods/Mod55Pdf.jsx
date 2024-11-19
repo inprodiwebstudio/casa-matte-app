@@ -9,19 +9,19 @@ import { imgUrlPdf } from "helpers";
 
 const Mod55Pdf = ({text, images}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 26px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 46px; font-family: JosefinSans-Light;'>SANTIAGO</span></p>";
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 22px; font-family: Inter-Lifght;'>CHILE</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
-				height        : "595px",
+				height        : "850px",
 				width         : "100%",
 				paddingTop    : "50px",
 				paddingBottom : "50px",
-				paddingLeft   : "30px",
-				paddingRight  : "30px",
+				paddingLeft   : "0px",
+				paddingRight  : "0px",
 			}}
 		>
 			<div

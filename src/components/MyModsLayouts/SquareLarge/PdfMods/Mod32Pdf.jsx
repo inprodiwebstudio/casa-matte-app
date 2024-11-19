@@ -12,7 +12,7 @@ const Mod32Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "595px",
+				height  : "850px",
 				width   : "100%",
 				padding : "20px",
 			}}
@@ -28,7 +28,28 @@ const Mod32Pdf = ({images}) => {
 			>
 				<div
 					style={{
-						height        : "calc(50% - 5px)",
+						width      : "100%",
+						height     : "calc(66% - 5px)",
+						overflow   : "hidden",
+						background : "#E3E3E3",
+					}}
+				>
+					{
+						images[0]?.url && (
+							<img
+								src={imgUrlPdf(images[0])}
+								alt="test"
+								style={{
+									height    : "100%",
+									objectFit : "cover",
+								}}
+							/>
+						)
+					}
+				</div>
+				<div
+					style={{
+						height        : "calc(34% - 5px)",
 						width         : "100%",
 						display       : "flex",
 						flexDirection : "row",
@@ -37,29 +58,9 @@ const Mod32Pdf = ({images}) => {
 				>
 					<div
 						style={{
-							width      : "calc(50% - 5px)",
-							overflow   : "hidden",
+							width      : "calc(33.33% - 6.667px)",
 							height     : "100%",
-							background : "#E3E3E3",
-						}}
-					>
-						{
-							images[0]?.url && (
-								<img
-									src={imgUrlPdf(images[0])}
-									alt="test"
-									style={{
-										objectFit : "cover",
-									}}
-								/>
-							)
-						}
-					</div>
-					<div
-						style={{
-							width      : "calc(50% - 5px)",
 							overflow   : "hidden",
-							height     : "100%",
 							background : "#E3E3E3",
 						}}
 					>
@@ -69,26 +70,17 @@ const Mod32Pdf = ({images}) => {
 									src={imgUrlPdf(images[1])}
 									alt="test"
 									style={{
+										height    : "100%",
 										objectFit : "cover",
 									}}
 								/>
 							)
 						}
 					</div>
-				</div>
-				<div
-					style={{
-						height        : "calc(50% - 5px)",
-						width         : "100%",
-						display       : "flex",
-						flexDirection : "row",
-						gap           : "10px",
-					}}
-				>
 					<div
 						style={{
-							height     : "100%",
 							width      : "calc(33.33% - 6.667px)",
+							height     : "100%",
 							overflow   : "hidden",
 							background : "#E3E3E3",
 						}}
@@ -99,6 +91,7 @@ const Mod32Pdf = ({images}) => {
 									src={imgUrlPdf(images[2])}
 									alt="test"
 									style={{
+										height    : "100%",
 										objectFit : "cover",
 									}}
 								/>
@@ -107,8 +100,8 @@ const Mod32Pdf = ({images}) => {
 					</div>
 					<div
 						style={{
-							height     : "100%",
 							width      : "calc(33.33% - 6.667px)",
+							height     : "100%",
 							overflow   : "hidden",
 							background : "#E3E3E3",
 						}}
@@ -119,26 +112,7 @@ const Mod32Pdf = ({images}) => {
 									src={imgUrlPdf(images[3])}
 									alt="test"
 									style={{
-										objectFit : "cover",
-									}}
-								/>
-							)
-						}
-					</div>
-					<div
-						style={{
-							height     : "100%",
-							width      : "calc(33.33% - 6.667px)",
-							overflow   : "hidden",
-							background : "#E3E3E3",
-						}}
-					>
-						{
-							images[4]?.url && (
-								<img
-									src={imgUrlPdf(images[4])}
-									alt="test"
-									style={{
+										height    : "100%",
 										objectFit : "cover",
 									}}
 								/>

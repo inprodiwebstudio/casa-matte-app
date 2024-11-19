@@ -10,9 +10,9 @@ const Mod3Pdf = ({images }) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "595px",
+				height  : "850px",
 				width   : "100%",
-				padding : "110px",
+				padding : "130px",
 			}}
 		>
 			<div
@@ -29,7 +29,7 @@ const Mod3Pdf = ({images }) => {
 							src={imgUrlPdf(images[0])}
 							alt="test"
 							style={{
-								height    : "595px",
+								height    : "100%",
 								objectFit : "cover",
 							}}
 						/>

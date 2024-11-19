@@ -12,10 +12,11 @@ const Mod14Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height        : "595px",
-				width         : "100%",
-				paddingTop    : "140px",
-				paddingBottom : "140px",
+				height       : "850px",
+				width        : "100%",
+				padding      : "150px",
+				paddingLeft  : "200px",
+				paddingRight : "200px",
 			}}
 		>
 			<div
@@ -23,14 +24,14 @@ const Mod14Pdf = ({images}) => {
 					height        : "100%",
 					width         : "100%",
 					display       : "flex",
-					flexDirection : "row",
+					flexDirection : "column",
 					gap           : "10px",
 				}}
 			>
 				<div
 					style={{
-						width      : "calc(33.33% - 6.667px)",
-						height     : "100%",
+						height     : "calc(50% - 5px)",
+						width      : "100%",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -41,7 +42,7 @@ const Mod14Pdf = ({images}) => {
 								src={imgUrlPdf(images[0])}
 								alt="test"
 								style={{
-									height    : "595px",
+									height    : "100%",
 									objectFit : "cover",
 								}}
 							/>
@@ -50,8 +51,8 @@ const Mod14Pdf = ({images}) => {
 				</div>
 				<div
 					style={{
-						width      : "calc(33.33% - 6.667px)",
-						height     : "100%",
+						height     : "calc(50% - 5px)",
+						width      : "100%",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -62,28 +63,7 @@ const Mod14Pdf = ({images}) => {
 								src={imgUrlPdf(images[1])}
 								alt="test"
 								style={{
-									height    : "595px",
-									objectFit : "cover",
-								}}
-							/>
-						)
-					}
-				</div>
-				<div
-					style={{
-						width      : "calc(33.33% - 6.667px)",
-						height     : "100%",
-						overflow   : "hidden",
-						background : "#E3E3E3",
-					}}
-				>
-					{
-						images[2]?.url && (
-							<img
-								src={imgUrlPdf(images[2])}
-								alt="test"
-								style={{
-									height    : "595px",
+									height    : "100%",
 									objectFit : "cover",
 								}}
 							/>

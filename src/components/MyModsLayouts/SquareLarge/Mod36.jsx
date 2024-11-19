@@ -62,8 +62,8 @@ const Mod36 = ({data, isInWorkSpace, sheetNo}) => {
 							<ImgLayout
 								isInWorkSpace={isInWorkSpace}
 								sheetNo={sheetNo}
-								imageNo={2}
-								urlImage={data?.photos[2] ?? {}}
+								imageNo={3}
+								urlImage={data?.photos[3] ?? {}}
 							/>
 						</Box>
 						<Box
@@ -73,8 +73,8 @@ const Mod36 = ({data, isInWorkSpace, sheetNo}) => {
 							<ImgLayout
 								isInWorkSpace={isInWorkSpace}
 								sheetNo={sheetNo}
-								imageNo={3}
-								urlImage={data?.photos[3] ?? {}}
+								imageNo={4}
+								urlImage={data?.photos[4] ?? {}}
 							/>
 						</Box>
 					</Stack>
@@ -85,8 +85,8 @@ const Mod36 = ({data, isInWorkSpace, sheetNo}) => {
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
 							sheetNo={sheetNo}
-							imageNo={4}
-							urlImage={data?.photos[4] ?? {}}
+							imageNo={5}
+							urlImage={data?.photos[5] ?? {}}
 						/>
 					</Box>
 				</Group>

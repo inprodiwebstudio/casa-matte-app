@@ -12,11 +12,11 @@ const Mod13Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height       : "595px",
+				height       : "850px",
 				width        : "100%",
-				padding      : "190px",
-				paddingLeft  : "60px",
-				paddingRight : "60px",
+				padding      : "85px",
+				paddingLeft  : "170px",
+				paddingRight : "170px",
 			}}
 		>
 			<div
@@ -24,14 +24,14 @@ const Mod13Pdf = ({images}) => {
 					height        : "100%",
 					width         : "100%",
 					display       : "flex",
-					flexDirection : "row",
+					flexDirection : "column",
 					gap           : "10px",
 				}}
 			>
 				<div
 					style={{
-						width      : "calc(50% - 5px)",
-						height     : "100%",
+						height     : "calc(50% - 5px)",
+						width      : "100%",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -42,7 +42,7 @@ const Mod13Pdf = ({images}) => {
 								src={imgUrlPdf(images[0])}
 								alt="test"
 								style={{
-									height    : "631px",
+									height    : "100%",
 									objectFit : "cover",
 								}}
 							/>
@@ -51,8 +51,8 @@ const Mod13Pdf = ({images}) => {
 				</div>
 				<div
 					style={{
-						width      : "calc(50% - 5px)",
-						height     : "100%",
+						height     : "calc(50% - 5px)",
+						width      : "100%",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -63,7 +63,7 @@ const Mod13Pdf = ({images}) => {
 								src={imgUrlPdf(images[1])}
 								alt="test"
 								style={{
-									height    : "595px",
+									height    : "100%",
 									objectFit : "cover",
 								}}
 							/>
