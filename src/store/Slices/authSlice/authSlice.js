@@ -23,6 +23,9 @@ export const authSlice = createSlice({
 			state.user.name     = action.payload.user_display_name;
 			state.user.postId = action.payload.postId;
 		},
+		setUserId : (state, action) => {
+			state.user.userId = action.payload;
+		},
 		setIsLoggedIn : (state) => {
 			state.loggedIn = true;
 		},

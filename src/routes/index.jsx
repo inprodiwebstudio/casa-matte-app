@@ -9,6 +9,7 @@ import { Loadable } from "core/components";
 
 // // Dashboard
 const WorkSpace = Loadable(lazy(() => import("pages/dashboard/WorkSpace")));
+const PayConfirm = Loadable(lazy(() => import("pages/PayConfirm")));
 // //Erros
 const NotFound  = Loadable(lazy(() => import("pages/Page404")));
 const Forbidden = Loadable(lazy(() => import("pages/Page403")));
@@ -40,7 +41,20 @@ const Router = () => {
 				},
 				{
 					path    : "confirm",
-					element : <div>confirm</div>,
+					element : <PayConfirm />,
+				},
+			],
+		},
+		{
+			path     : "order",
+			children : [
+				{
+					element : <Navigate to="/order/inProcess" replace />,
+					index   : true,
+				},
+				{
+					path    : "inProcess",
+					element : <div>Tu pedido se encuentra en proceso</div>,
 				},
 			],
 		},

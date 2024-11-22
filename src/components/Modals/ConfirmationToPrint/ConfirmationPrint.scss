@@ -16,12 +16,18 @@
     .text-description {
         font-weight: 300;
         font-size: 18px;
-        text-align: left !important;
+        text-align: center;
     }
 
     .buttons-container {
         display: flex;
         gap : 56px;
         justify-content: center;
+    }
+
+    .text-description-toredirect {
+        font-size: 15px;
+        font-weight: 300;
+        text-align: center;
     }
 }

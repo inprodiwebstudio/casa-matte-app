@@ -12,12 +12,12 @@ const Mod18Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height        : "991px",
+				height        : "792px",
 				width         : "100%",
-				paddingLeft   : "170px",
-				paddingRight  : "170px",
-				paddingTop    : "20px",
-				paddingBottom : "20px",
+				paddingLeft   : "19%",
+				paddingRight  : "19%",
+				paddingTop    : "10px",
+				paddingBottom : "10px",
 			}}
 		>
 			<div
@@ -32,7 +32,7 @@ const Mod18Pdf = ({images}) => {
 				<div
 					style={{
 						width      : "100%",
-						height     : "310.33px",
+						height     : "33.33%",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -43,7 +43,7 @@ const Mod18Pdf = ({images}) => {
 								src={imgUrlPdf(images[0])}
 								alt="test"
 								style={{
-									height    : "310.33px",
+									height    : "100%",
 									objectFit : "cover",
 								}}
 							/>
@@ -53,7 +53,7 @@ const Mod18Pdf = ({images}) => {
 				<div
 					style={{
 						width      : "100%",
-						height     : "310.33px",
+						height     : "33.33%",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -64,7 +64,7 @@ const Mod18Pdf = ({images}) => {
 								src={imgUrlPdf(images[1])}
 								alt="test"
 								style={{
-									height    : "310.33px",
+									height    : "100%",
 									objectFit : "cover",
 								}}
 							/>
@@ -74,7 +74,7 @@ const Mod18Pdf = ({images}) => {
 				<div
 					style={{
 						width      : "100%",
-						height     : "310.33px",
+						height     : "33.33%",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -85,7 +85,7 @@ const Mod18Pdf = ({images}) => {
 								src={imgUrlPdf(images[2])}
 								alt="test"
 								style={{
-									height    : "310.33px",
+									height    : "100%",
 									objectFit : "cover",
 								}}
 							/>

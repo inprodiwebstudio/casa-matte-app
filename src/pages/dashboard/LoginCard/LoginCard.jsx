@@ -359,11 +359,12 @@ const LoginCard = () => {
 	return (
 		<form id="LoginCard" className="login-card-body" onSubmit={handleSubmitForm}>
 			<h4>Inicio de Sesión</h4>
+			<div className="deescription-text-login">Inicia sesión con tu cuenta de Casa Matte</div>
 			<div className="form-container">
 				<TextInput
 					isLoading={loading}
 					error={errors.username ? true : false}
-					label="CORREO ELECTRÓNICO"
+					label="NOMBRE USUARIO"
 					variant="filled"
 					placeholder="correo_electrónico@email.com"
 					name="username"
@@ -373,7 +374,6 @@ const LoginCard = () => {
 				<PasswordInput
 					isLoading={loading}
 					error={errors.password ? true : false}
-					placeholder="••••••••••••"
 					label="CONTRASEÑA"
 					variant="filled"
 					name="password"

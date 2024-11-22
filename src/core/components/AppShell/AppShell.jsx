@@ -26,6 +26,7 @@ import { PostingConfig }             from "Notifications";
 import { genericApi }                from "store/api/genericApi";
 import { workSpaceSlice, authSlice } from "store/Slices";
 import "./AppShell.scss";
+import { useNavigate }               from "react-router";
 
 //Fonts
 Font.register(
@@ -356,6 +357,7 @@ const AppShell = ({
 	sidebar,
 }) => {
 	const searchParams = new URLSearchParams(location.search);
+	const navigate = useNavigate();
 
 	const nameUser = searchParams.get("username") ?? "";
 	const postId = searchParams.get("postId") ?? "";
@@ -366,6 +368,7 @@ const AppShell = ({
 	const workSpaceData = useSelector((state) => state.workSpaceSlice?.data, shallowEqual);
 	const postIdphotoBook = useSelector((state) => state.authSlice?.user?.postId, shallowEqual);
 	const userName = useSelector((state) => state.authSlice?.user?.username, shallowEqual);
+	const userId = useSelector((state) => state.authSlice?.user?.userId, shallowEqual);
 	const initialData = useSelector((state) => state.workSpaceSlice?.initialData, shallowEqual);
 
 	const { data : photobookData, isFetching, error } = genericApi.useGetDataQuery({
@@ -398,11 +401,20 @@ const AppShell = ({
 
 
 	useEffect(() => {
+		if (!userId && photobookData?.author) {
+			dispatch(authSlice.actions.setUserId(photobookData?.author));
+		}
 		if (photobookData?.meta?.config) {
 			const myData = photobookData?.meta?.config;
 			const myReplacerString = myData.replace(/'/g, "\"");
 			const parseJSON = JSON.parse(myReplacerString);
 			dispatch(workSpaceSlice.actions.insertData({...parseJSON, modified : photobookData?.modified, projectTittle : photobookData?.title?.rendered}));
+		}
+	}, [photobookData]);
+
+	useEffect(() => {
+		if (photobookData?.meta?.id_del_pedido && photobookData?.meta?.id_del_pedido !== "") {
+			navigate("/order/inProcess");
 		}
 	}, [photobookData]);
 

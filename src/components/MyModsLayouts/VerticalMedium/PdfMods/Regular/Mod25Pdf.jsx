@@ -12,12 +12,11 @@ const Mod25Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height        : "991px",
-				width         : "100%",
-				paddingLeft   : "70px",
-				paddingRight  : "70px",
-				paddingTop    : "126px",
-				paddingBottom : "126px",
+				height       : "792px",
+				width        : "100%",
+				padding      : "18%",
+				paddingLeft  : "11.29%",
+				paddingRight : "11.29%",
 			}}
 		>
 			<div
@@ -52,7 +51,7 @@ const Mod25Pdf = ({images}) => {
 									src={imgUrlPdf(images[0])}
 									alt="test"
 									style={{
-										height    : "490.5px",
+										height    : "100%",
 										objectFit : "cover",
 									}}
 								/>
@@ -73,7 +72,7 @@ const Mod25Pdf = ({images}) => {
 									src={imgUrlPdf(images[1])}
 									alt="test"
 									style={{
-										height    : "490.5px",
+										height    : "100%",
 										objectFit : "cover",
 									}}
 								/>
@@ -104,7 +103,7 @@ const Mod25Pdf = ({images}) => {
 									src={imgUrlPdf(images[2])}
 									alt="test"
 									style={{
-										height    : "490.5px",
+										height    : "100%",
 										objectFit : "cover",
 									}}
 								/>
@@ -125,7 +124,7 @@ const Mod25Pdf = ({images}) => {
 									src={imgUrlPdf(images[3])}
 									alt="test"
 									style={{
-										height    : "490.5px",
+										height    : "100%",
 										objectFit : "cover",
 									}}
 								/>

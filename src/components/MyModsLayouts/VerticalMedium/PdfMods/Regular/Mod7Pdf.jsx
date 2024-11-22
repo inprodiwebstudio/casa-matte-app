@@ -12,7 +12,7 @@ const Mod7Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height        : "991px",
+				height        : "792px",
 				width         : "100%",
 				padding       : "110px",
 				paddingTop    : "280px",
@@ -33,7 +33,7 @@ const Mod7Pdf = ({images}) => {
 							src={imgUrlPdf(images[0])}
 							alt="test"
 							style={{
-								height    : "431px",
+								height    : "100%",
 								objectFit : "cover",
 							}}
 						/>

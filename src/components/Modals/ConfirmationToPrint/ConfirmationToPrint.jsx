@@ -1,118 +1,439 @@
-import { Button, TextInput }         from "core/components";
-import { Grid }                      from "@mantine/core";
-import { shallowEqual, useSelector } from "react-redux";
-import React                         from "react";
+import { Button, TextInput }          from "core/components";
+import { Grid, Stack, Switch }        from "@mantine/core";
+import { shallowEqual, useSelector }  from "react-redux";
+import React, { useEffect, useState } from "react";
+import { genericApi }                 from "store/api/genericApi";
 import "./ConfirmationPrint.scss";
-import { yupResolver }               from "@hookform/resolvers/yup";
-import * as Yup                      from "yup";
-import { useForm }                   from "react-hook-form";
+import { yupResolver }                from "@hookform/resolvers/yup";
+import * as Yup                       from "yup";
+import { useForm }                    from "react-hook-form";
+import axios                          from "axios";
+import { closeAllModals }             from "@mantine/modals";
+import { LoginNotification }          from "Notifications";
 
 
 const ConfirmationToPrint = () => {
+	const [ isConfirmationView, setIsConfirmationView  ] = useState(false);
+	const [checkedShipping, setCheckedShipping] = useState(false);
+	const [ dataShipping, setDataShipping ] = useState(undefined);
+	const [ orderLoading, setOrderLoading ] = useState(false);
+
 	const productNameKey = useSelector((state) => state.workSpaceSlice.data?.productName, shallowEqual);
 	const photoBookPrice = useSelector((state) => state.workSpaceSlice.data?.basePrice, shallowEqual);
-	const userId = useSelector((state) => state.authSlice.user?.userId, shallowEqual);
+	const postIdphotoBook = useSelector((state) => state.authSlice?.user?.postId, shallowEqual);
+	const userEmail = useSelector((state) => state.authSlice?.user?.email, shallowEqual);
+	const userId = useSelector((state) => state.authSlice?.user?.userId, shallowEqual);
 	const formatedPrice = photoBookPrice.replace(",", "");
+
+	const [dataMutation, dataMutationResult ] = genericApi.useSubmitDataMutation();
 
 	const numberPrice = parseInt(formatedPrice);
 
 	const schema = Yup.object().shape({
-		username : Yup.string().required("El campo es obligatorio"),
-		password : Yup.string().required("El campo es obligatorio"),
+		sendPhotoBook : Yup.boolean(),
+		name          : Yup.string().required("Ingresa tu nombre"),
+		last_name     : Yup.string().required("Ingresa tu apellido"),
+		city          : Yup.string().required("Ingresa tu ciudad"),
+		state         : Yup.string().required("Ingresa tu estado"),
+		postcode      : Yup.string().required("Ingresa tu codigo postal"),
+		country       : Yup.string().required("Ingresa tu pais"),
+		phone         : Yup.string().required("Ingresa tu telefono"),
 	});
 
 	const {
-		setError,
 		register,
 		handleSubmit,
 		formState: {errors},
 	} = useForm({
-		resolver : yupResolver(schema),
+		resolver      : yupResolver(schema),
+		defaultValues : {
+			name               : "",
+			last_name          : "",
+			city               : "",
+			state              : "",
+			postcode           : "",
+			country            : "",
+			phone              : "",
+			name_shipping      : "",
+			last_name_shipping : "",
+			address_1_shipping : "",
+			city_shipping      : "",
+			state_shipping     : "",
+			postcode_shipping  : "",
+			country_shipping   : "México",
+		},
 	});
+
+	const handlerChecked = () => {
+		setCheckedShipping(!checkedShipping);
+	};
 
 	const handleSubmitForm = (...args) => {
 		handleSubmit( async (data) => {
-			console.log(data);
+			setDataShipping(data);
+			setIsConfirmationView(true);
 		})(...args);
 	};
 
-	// const createOrderWoocomerce = async () => {
-	// 	try {
-	// 		const productDataRes = await axios.get(`https://casamatte.wip-inprodi.com/wp-json/wc/v3/products?search=${encodeURIComponent(productNameKey)}`,
-	// 			{
-	// 				auth : {
-	// 					username : "ck_ecf36082e00a4cfd16000f338e25073359b78df2",
-	// 					password : "cs_23f9bd87790be9f91b91e58d0d7b6a2f9ee9d727",
-	// 				},
-	// 			}
-	// 		);
+	const createOrderWoocomerce = async () => {
+		const data = dataShipping;
+		setOrderLoading(true);
+		try {
+			const productDataRes = await axios.get(`https://casamatte.wip-inprodi.com/wp-json/wc/v3/products?search=${encodeURIComponent(productNameKey)}`,
+				{
+					auth : {
+						username : "ck_ecf36082e00a4cfd16000f338e25073359b78df2",
+						password : "cs_23f9bd87790be9f91b91e58d0d7b6a2f9ee9d727",
+					},
+				}
+			);
 
-	// 		const responseCreateOrder = await axios.post(
-	// 			"https://casamatte.wip-inprodi.com/wp-json/wc/v3/orders",
-	// 			{
-	// 				payment_method       : "bacs",
-	// 				payment_method_title : "Direct Bank Transfer",
-	// 				set_paid             : false,
-	// 				status               : "pending",
-	// 				customer_id          : userId,
-	// 				line_items           : [
-	// 					{
-	// 						product_id : productDataRes?.data[0]?.id ?? undefined,
-	// 						quantity   : 1,
-	// 						price      : numberPrice,
-	// 					},
-	// 				],
-	// 			},
-	// 			{
-	// 				auth : {
-	// 					username : "ck_ecf36082e00a4cfd16000f338e25073359b78df2",
-	// 					password : "cs_23f9bd87790be9f91b91e58d0d7b6a2f9ee9d727",
-	// 				},
-	// 			}
-	// 		);
+			const productId = productDataRes?.data[0]?.id ?? undefined;
 
-	// 		console.log(responseCreateOrder);
-	// 	} catch (err) {
-	// 		console.error(err);
-	// 	}
-	// };
+			const responseCreateOrder = await axios.post(
+				"https://casamatte.wip-inprodi.com/wp-json/wc/v3/orders",
+				{
+					payment_method       : "bacs",
+					payment_method_title : "Direct Bank Transfer",
+					set_paid             : false,
+					status               : "pending",
+					customer_id          : userId,
+					billing              : {
+						first_name : data?.name ?? undefined,
+						last_name  : data?.last_name ?? undefined,
+						address_1  : "Dirección",
+						city       : data?.city ?? undefined,
+						state      : data?.state ?? undefined,
+						postcode   : data?.postcode ?? undefined,
+						country    : data?.country ?? undefined,
+						email      : userEmail ?? undefined,
+						phone      : data?.phone ?? undefined,
+					},
+					shipping : {
+						first_name : data?.name_shipping ?? undefined,
+						last_name  : data?.last_name_shipping ?? undefined,
+						address_1  : data?.address_1_shipping ?? undefined,
+						city       : data?.city_shipping ?? undefined,
+						state      : data?.state_shipping ?? undefined,
+						postcode   : data?.postcode_shipping ?? undefined,
+						country    : data?.country_shipping ?? undefined,
+					},
+					line_items : [
+						{
+							product_id : productId, // ID del producto
+							quantity   : 1,
+							total      : numberPrice.toString(),
+							price      : numberPrice,
+						},
+					],
+					shipping_lines : [
+						{
+						  method_id    : "flat_rate", // ID del método de envío configurado en WooCommerce
+						  method_title : "Envío estándar",
+						  total        : "180.00", // Costo de envío personalizado
+						},
+					],
+				},
+				{
+					auth : {
+						username : "ck_ecf36082e00a4cfd16000f338e25073359b78df2",
+						password : "cs_23f9bd87790be9f91b91e58d0d7b6a2f9ee9d727",
+					},
+				}
+			);
+
+			await dataMutation({
+				module : "wp-json/wp/v2/photobook-2-0",
+				data   : {
+					tittle : "Texto de prueba",
+					status : "publish",
+					meta   : {
+						id_del_pedido : responseCreateOrder?.data?.id.toString(),
+					},
+				},
+				id     : postIdphotoBook,
+				method : "POST",
+			});
+
+			window.location.href = responseCreateOrder?.data?.payment_url;
+
+		} catch (err) {
+			LoginNotification["post"][500]();
+			setOrderLoading(false);
+			console.error(err);
+		}
+	};
+
+	useEffect(() => {
+		console.log(dataMutationResult);
+	}, [dataMutationResult]);
+
 
 	return (
 		<div className="body-confirmation-modal">
-			<div className="tittle-confirmation">Datos de Facturación</div>
-			<div className="text-description">
-				Completa los datos de facturación.
-			</div>
-			<form id="completeInfoOrder" className="login-card-body" onSubmit={handleSubmitForm}>
-				<Grid>
-					<Grid.Col span={4}>
-						<TextInput
-							isLoading={false}
-							error={errors.username ? true : false}
-							label="CORREO ELECTRÓNICO"
-							variant="filled"
-							placeholder="correo_electrónico@email.com"
-							name="username"
-							defaultValue={nameUser}
-							register={register("username")}
-						/>
-					</Grid.Col>
-					<Grid.Col span={4}>2</Grid.Col>
-					<Grid.Col span={4}>3</Grid.Col>
-				</Grid>
-				<div className="buttons-container">
-					<Button
-						fontSize="18px"
-						type="subtleActive"
-						width={160}
-						height={39}
-						isLoading={false}
-						onClick={() => createOrderWoocomerce()}
-					>
-						Continuar
-					</Button>
-				</div>
-			</form>
+			{
+				!isConfirmationView && (
+					<form id="completeInfoOrder" className="login-card-body" onSubmit={handleSubmitForm}>
+						<Stack spacing={60}>
+							<Stack>
+								<div className="tittle-confirmation">
+									Datos de Pedido
+								</div>
+								<Stack>
+									<div className="text-description">
+										Completa tus datos de pedido.
+									</div>
+									<Grid>
+										<Grid.Col span={12}>
+											<TextInput
+												isLoading={false}
+												error={errors.name ? true : false}
+												label="Nombre"
+												variant="filled"
+												placeholder="Tu nombre"
+												name="name"
+												defaultValue={undefined}
+												register={register("name")}
+											/>
+										</Grid.Col>
+										<Grid.Col span={12}>
+											<TextInput
+												isLoading={false}
+												error={errors.last_name ? true : false}
+												label="Apellido"
+												variant="filled"
+												placeholder="Ingresa tu apellido"
+												name="last_name"
+												defaultValue={undefined}
+												register={register("last_name")}
+											/>
+										</Grid.Col>
+										<Grid.Col span={12}>
+											<TextInput
+												isLoading={false}
+												error={errors.city ? true : false}
+												label="Ciudad"
+												variant="filled"
+												placeholder="Nombre de la ciudad"
+												name="city"
+												defaultValue={undefined}
+												register={register("city")}
+											/>
+										</Grid.Col>
+										<Grid.Col span={12}>
+											<TextInput
+												isLoading={false}
+												error={errors.state ? true : false}
+												label="Estado"
+												variant="filled"
+												placeholder="Nombre del Estado"
+												name="state"
+												defaultValue={undefined}
+												register={register("state")}
+											/>
+										</Grid.Col>
+										<Grid.Col span={12}>
+											<TextInput
+												isLoading={false}
+												error={errors.postcode ? true : false}
+												label="C.P."
+												variant="filled"
+												placeholder="Código postal"
+												name="postcode"
+												defaultValue={undefined}
+												register={register("postcode")}
+											/>
+										</Grid.Col>
+										<Grid.Col span={12}>
+											<TextInput
+												isLoading={false}
+												error={errors.country ? true : false}
+												label="País"
+												variant="filled"
+												placeholder="Ingresa el nombre del país"
+												name="country"
+												defaultValue={undefined}
+												register={register("country")}
+											/>
+										</Grid.Col>
+										<Grid.Col span={12}>
+											<TextInput
+												isLoading={false}
+												error={errors.phone ? true : false}
+												label="Número Telefónico"
+												variant="filled"
+												placeholder="Ingresa tu número telefónico"
+												name="phone"
+												defaultValue={undefined}
+												register={register("phone")}
+											/>
+										</Grid.Col>
+										<Stack mt="20px">
+											<Switch
+												label="¿Enviarlo a domicilio? ($180 MXN Nacional)"
+												color="gray"
+												checked={checkedShipping ? true : false}
+												onChange={() => handlerChecked()}
+											/>
+										</Stack>
+									</Grid>
+								</Stack>
+							</Stack>
+							{
+								checkedShipping && (
+									<Stack>
+										<div className="tittle-confirmation">
+											Datos de Envío.
+										</div>
+										<Stack>
+											<div className="text-description">
+												Completa los datos de envío.
+											</div>
+											<Grid>
+												<Grid.Col span={12}>
+													<TextInput
+														isLoading={false}
+														error={errors.name_shipping ? true : false}
+														label="Nombre"
+														variant="filled"
+														placeholder="Tu nombre"
+														name="name_shipping"
+														defaultValue={undefined}
+														register={register("name_shipping")}
+													/>
+												</Grid.Col>
+												<Grid.Col span={12}>
+													<TextInput
+														isLoading={false}
+														error={errors.last_name_shipping ? true : false}
+														label="Apellido"
+														variant="filled"
+														placeholder="Ingresa tu apellido"
+														name="last_name_shipping"
+														defaultValue={undefined}
+														register={register("last_name_shipping")}
+													/>
+												</Grid.Col>
+												<Grid.Col span={12}>
+													<TextInput
+														isLoading={false}
+														error={errors.address_1_shipping ? true : false}
+														label="Dirección"
+														variant="filled"
+														placeholder="Colonia, calle, avenida, numero, etc."
+														name="address_1_shipping"
+														defaultValue={undefined}
+														register={register("address_1_shipping")}
+													/>
+												</Grid.Col>
+												<Grid.Col span={12}>
+													<TextInput
+														isLoading={false}
+														error={errors.city_shipping ? true : false}
+														label="Ciudad"
+														variant="filled"
+														placeholder="Nombre de la ciudad"
+														name="city_shipping"
+														defaultValue={undefined}
+														register={register("city_shipping")}
+													/>
+												</Grid.Col>
+												<Grid.Col span={12}>
+													<TextInput
+														isLoading={false}
+														error={errors.state_shipping ? true : false}
+														label="Estado"
+														variant="filled"
+														placeholder="Nombre del Estado"
+														name="state_shipping"
+														defaultValue={undefined}
+														register={register("state_shipping")}
+													/>
+												</Grid.Col>
+												<Grid.Col span={12}>
+													<TextInput
+														isLoading={false}
+														error={errors.postcode_shipping ? true : false}
+														label="C.P."
+														variant="filled"
+														placeholder="Código postal"
+														name="postcode_shipping"
+														defaultValue={undefined}
+														register={register("postcode_shipping")}
+													/>
+												</Grid.Col>
+												<Grid.Col span={12}>
+													<TextInput
+														isLoading={false}
+														error={errors.country_shipping ? true : false}
+														label="País"
+														variant="filled"
+														isDisabled={true}
+														placeholder="Ingresa el nombre del país"
+														name="country_shipping"
+														defaultValue={undefined}
+														register={register("country_shipping")}
+													/>
+												</Grid.Col>
+											</Grid>
+										</Stack>
+									</Stack>
+								)
+							}
+							<div className="buttons-container">
+								<Button
+									fontSize="18px"
+									type="subtleActive"
+									width={160}
+									height={39}
+									isLoading={false}
+									typeButton="submit"
+								>
+									Continuar
+								</Button>
+							</div>
+						</Stack>
+					</form>
+				)
+			}
+			{
+				isConfirmationView && (
+					<>
+						{orderLoading && (
+							<div className="text-description" style={{textTransform : "uppercase"}}>Redirigiendo al pago espera un momento...</div>
+						)}
+						{!orderLoading && (
+							<>
+								<div className="tittle-confirmation">¿Estás seguro?</div>
+								<div className="text-description" style={{ textAlign : "center" }}>
+									Estás a punto de enviar tu photobook para impresión. Una vez que confirmes, no podrás seguir editándolo ni deshacer esta acción. Serás redirigido automáticamente al pago, y tu pedido quedará confirmado. ¿Deseas aceptar?
+								</div>
+							</>
+						)}
+						<div className="buttons-container">
+							<Button
+								fontSize="18px"
+								type="subtleActive"
+								width={300}
+								height={39}
+								isLoading={orderLoading}
+								onClick={() => createOrderWoocomerce()}
+							>
+								Aceptar y Crear Pedido
+							</Button>
+							<Button
+								fontSize="18px"
+								width={117}
+								height={39}
+								isLoading={orderLoading}
+								onClick={() => closeAllModals()}
+							>
+								Cancelar
+							</Button>
+						</div>
+					</>
+				)
+			}
 		</div>
 	);
 };

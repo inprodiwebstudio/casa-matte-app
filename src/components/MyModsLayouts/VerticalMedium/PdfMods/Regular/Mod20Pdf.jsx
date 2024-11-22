@@ -12,10 +12,10 @@ const Mod20Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height        : "991px",
+				height        : "792px",
 				width         : "100%",
-				paddingTop    : "273px",
-				paddingBottom : "273px",
+				paddingTop    : "32.08%",
+				paddingBottom : "32.08%",
 			}}
 		>
 			<div
@@ -30,7 +30,7 @@ const Mod20Pdf = ({images}) => {
 				<div
 					style={{
 						height     : "100%",
-						width      : "calc(100% - 6.667px)",
+						width      : "33.33%",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -41,7 +41,7 @@ const Mod20Pdf = ({images}) => {
 								src={imgUrlPdf(images[0])}
 								alt="test"
 								style={{
-									height    : "445px",
+									height    : "100%",
 									objectFit : "cover",
 								}}
 							/>
@@ -51,7 +51,7 @@ const Mod20Pdf = ({images}) => {
 				<div
 					style={{
 						height     : "100%",
-						width      : "calc(100% - 6.667px)",
+						width      : "33.33%",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -62,7 +62,7 @@ const Mod20Pdf = ({images}) => {
 								src={imgUrlPdf(images[1])}
 								alt="test"
 								style={{
-									height    : "445px",
+									height    : "100%",
 									objectFit : "cover",
 								}}
 							/>
@@ -72,7 +72,7 @@ const Mod20Pdf = ({images}) => {
 				<div
 					style={{
 						height     : "100%",
-						width      : "calc(100% - 6.667px)",
+						width      : "33.33%",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -83,7 +83,7 @@ const Mod20Pdf = ({images}) => {
 								src={imgUrlPdf(images[2])}
 								alt="test"
 								style={{
-									height    : "445px",
+									height    : "100%",
 									objectFit : "cover",
 								}}
 							/>

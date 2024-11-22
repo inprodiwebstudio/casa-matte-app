@@ -31,7 +31,7 @@ const photoBooksConfing = {
 		// 	},
 		// },
 		vertical : {
-			aspectRatio : [6, 7],
+			aspectRatio : [8, 9],
 			sizes       : {
 				chico : {
 					layoutMods       : {},
@@ -40,12 +40,14 @@ const photoBooksConfing = {
 					pdfSize          : [100, 100],
 				},
 				mediano : {
+					aspectRatio      : [17, 22],
 					layoutMods       : {...VerticalMedium},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [100, 100],
 				},
 				grande : {
+					aspectRatio      : [8, 9],
 					layoutMods       : {...VerticalLarge},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
@@ -57,18 +59,21 @@ const photoBooksConfing = {
 			aspectRatio : [1, 1],
 			sizes       : {
 				chico : {
+					aspectRatio      : [1, 1],
 					layoutMods       : {...SquareSmall},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [100, 100],
 				},
 				mediano : {
+					aspectRatio      : [1, 1],
 					layoutMods       : {},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 				grande : {
+					aspectRatio      : [1, 1],
 					layoutMods       : {...SquareLarge},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
@@ -80,17 +85,19 @@ const photoBooksConfing = {
 	sencillo : {
 		horizontal : false,
 		vertical   : {
-			aspectRatio : [8, 9],
+			aspectRatio : [17, 22],
 			sizes       : {
 				chico   : false,
 				mediano : {
+					aspectRatio      : [17, 22],
 					layoutMods       : {...VerticalMedium},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 				grande : {
-					layoutMods       : {},
+					aspectRatio      : [8, 9],
+					layoutMods       : {...VerticalLarge},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
@@ -100,15 +107,17 @@ const photoBooksConfing = {
 		cuadrado : {
 			aspectRatio : [1, 1],
 			sizes       : {
-				chico   : false,
-				mediano : {
-					layoutMods       : {},
+				mediano : false,
+				chico   : {
+					aspectRatio      : [1, 1],
+					layoutMods       : {...SquareSmall},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 				grande : {
-					layoutMods       : {},
+					aspectRatio      : [1, 1],
+					layoutMods       : {...SquareLarge},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
@@ -116,7 +125,7 @@ const photoBooksConfing = {
 			},
 		},
 	},
-	clasico : {
+	clásico : {
 		horizontal : {
 			aspectRatio : [0, 0],
 			sizes       : {
@@ -135,20 +144,41 @@ const photoBooksConfing = {
 			sizes       : {
 				chico   : false,
 				mediano : {
-					layoutMods       : {},
+					aspectRatio      : [17, 22],
+					layoutMods       : {...VerticalMedium},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 				grande : {
-					layoutMods       : {},
+					aspectRatio      : [8, 9],
+					layoutMods       : {...VerticalLarge},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 			},
 		},
-		cuadrado : false,
+		cuadrado : {
+			aspectRatio : [1, 1],
+			sizes       : {
+				mediano : false,
+				chico   : {
+					aspectRatio      : [1, 1],
+					layoutMods       : {...SquareSmall},
+					frontLayouts     : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
+				},
+				grande : {
+					aspectRatio      : [1, 1],
+					layoutMods       : {...SquareLarge},
+					frontLayouts     : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
+				},
+			},
+		},
 	},
 	premium : {
 		horizontal : {
@@ -169,26 +199,47 @@ const photoBooksConfing = {
 			sizes       : {
 				chico   : false,
 				mediano : {
-					layoutMods       : {},
+					aspectRatio      : [17, 22],
+					layoutMods       : {...VerticalMedium},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 				grande : {
-					layoutMods       : {},
+					aspectRatio      : [8, 9],
+					layoutMods       : {...VerticalLarge},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
+				},
+			},
+		},
+		cuadrado : {
+			aspectRatio : [1, 1],
+			sizes       : {
+				mediano : false,
+				// chico   : {
+				// 	aspectRatio      : [1, 1],
+				// 	layoutMods       : {...SquareSmall},
+				// 	frontLayouts     : {},
+				// 	modsInDoublePage : [],
+				// 	pdfSize          : [100, 100],
+				// },
+				grande  : {
+					aspectRatio      : [1, 1],
+					layoutMods       : {...SquareLarge},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 			},
 		},
-		cuadrado : false,
 	},
 	coffeTable : {
 		mediaCarta : {
 			aspectRatio : [496, 425],
 			sizes       : {
 				mediano : {
+					aspectRatio      : [496, 425],
 					layoutMods       : {},
 					frontLayouts     : {},
 					modsInDoublePage : [],
@@ -202,6 +253,7 @@ const photoBooksConfing = {
 			aspectRatio : [1, 1],
 			sizes       : {
 				grande : {
+					aspectRatio      : [1, 1],
 					layoutMods       : {...SquareLarge},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
@@ -210,17 +262,19 @@ const photoBooksConfing = {
 			},
 		},
 	},
-	"colorblock" : {
+	colorblock : {
 		vertical : {
-			aspectRatio : [6, 7],
+			aspectRatio : [8, 9],
 			sizes       : {
 				mediano : {
+					aspectRatio      : [17, 22],
 					layoutMods       : {...VerticalMedium},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [100, 100],
 				},
 				grande : {
+					aspectRatio      : [8, 9],
 					layoutMods       : {...VerticalLarge},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
@@ -232,12 +286,14 @@ const photoBooksConfing = {
 			aspectRatio : [1, 1],
 			sizes       : {
 				chico : {
+					aspectRatio      : [1, 1],
 					layoutMods       : {...SquareSmall},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [100, 100],
 				},
 				grande : {
+					aspectRatio      : [1, 1],
 					layoutMods       : {...SquareLarge},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
@@ -246,17 +302,19 @@ const photoBooksConfing = {
 			},
 		},
 	},
-	"window" : {
+	window : {
 		vertical : {
-			aspectRatio : [6, 7],
+			aspectRatio : [8, 9],
 			sizes       : {
 				mediano : {
+					aspectRatio      : [17, 22],
 					layoutMods       : {...VerticalMedium},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [100, 100],
 				},
 				grande : {
+					aspectRatio      : [8, 9],
 					layoutMods       : {...VerticalLarge},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
@@ -268,12 +326,14 @@ const photoBooksConfing = {
 			aspectRatio : [1, 1],
 			sizes       : {
 				chico : {
+					aspectRatio      : [1, 1],
 					layoutMods       : {...SquareSmall},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [100, 100],
 				},
 				grande : {
+					aspectRatio      : [1, 1],
 					layoutMods       : {...SquareLarge},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
@@ -282,11 +342,12 @@ const photoBooksConfing = {
 			},
 		},
 	},
-	"minianillo" : {
+	minianillo : {
 		cuadrado : {
 			aspectRatio : [1, 1],
 			sizes       : {
 				chico : {
+					aspectRatio      : [1, 1],
 					layoutMods       : {...SquareSmall},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
@@ -295,12 +356,26 @@ const photoBooksConfing = {
 			},
 		},
 	},
-	"miniexpress" : {
+	miniexpress : {
 		cuadrado : {
 			aspectRatio : [1, 1],
 			sizes       : {
 				chico : {
+					aspectRatio      : [1, 1],
 					layoutMods       : {...SquareSmall},
+					frontLayouts     : {},
+					modsInDoublePage : ["FrontLayout"],
+					pdfSize          : [100, 100],
+				},
+			},
+		},
+	},
+	"civily pedida" : {
+		vertical : {
+			sizes : {
+				mediano : {
+					aspectRatio      : [17, 22],
+					layoutMods       : {...VerticalMedium},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [100, 100],

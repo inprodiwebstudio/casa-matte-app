@@ -56,10 +56,10 @@ const Header = () => {
 					isLoggedIn && (
 						<>
 							<div className="title-container">
-								<div>{productName ?? ""}</div>
+								<div className="product-name-title">{productName ?? ""}</div>
 								<div>/</div>
 								<div
-									style={{width : "180px"}}
+									style={{width : "65%"}}
 								>
 									<TextInput
 										variant="unstyled"
@@ -116,7 +116,7 @@ const Header = () => {
 										modal      : "confirmationToPrint",
 										innerProps : {},
 									})}
-									disabled={true}
+									disabled={false}
 									loading={isLoadingWorspaceData}
 								>
 									<Text
