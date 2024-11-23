@@ -13,7 +13,7 @@ const Mod35Pdf = ({text}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height         : "991px",
+				height         : "792px",
 				width          : "100%",
 				display        : "flex",
 				flexDirection  : "center",

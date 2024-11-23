@@ -14,11 +14,11 @@ const useSubmitImages = ({userName, folderName}) => {
 				folder    : `${userName}/${folderName ? folderName : isditedPhoto ? "_editedPhotos" : ""}`,
 			}});
 			const uploadFile = await axios.postForm(
-				"https://api.cloudinary.com/v1_1/dxvi7hk47/image/upload",
+				"https://api.cloudinary.com/v1_1/dtjvmtfji/image/upload",
 				{
 					file      : image,
 					publicId  : "test",
-					api_key   : "864322584227584",
+					api_key   : "265817136216333",
 					signature : data.signature,
 					folder    : `${userName}/${folderName ? folderName : isditedPhoto ? "_editedPhotos" : ""}`,
 					timestamp : `${data.timestamp}`,

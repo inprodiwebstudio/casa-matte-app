@@ -79,7 +79,7 @@ const PayConfirm = () => {
 
 			setIsLoadingOrder(false);
 
-			if ( (orderData?.data?.date_paid === "") || (orderData?.data?.date_paid === null) ) {
+			if ( (orderData?.data?.date_paid !== "") || (orderData?.data?.date_paid !== null) ) {
 				setIsPay(true);
 				return;
 			}
@@ -197,7 +197,7 @@ const PayConfirm = () => {
 					<div className="body-payment">
 						{(isLoadingData && !isPay) && "Estamos validando tu informacion y el pago espera un momento"}
 						{(isLoadingData && isPay) && "Estamos generando tu photobook. Esto puede tardar unos segundos"}
-						{(!isLoadingData && isPay && !isGeneratingPDF) && "Tu photobook ha sido creado y enviado exitosamente. Casa Matte recibirá tu producto pronto y se pondrá en contacto contigo. ¡Gracias por elegirnos!"}
+						{(!isLoadingData && isPay && !isGeneratingPDF) && "Tu photobook ha sido creado y enviado exitosamente. Casa Matte recibirá tu pedido pronto y se pondrá en contacto contigo. ¡Gracias por elegirnos!"}
 						{(!isLoadingData && !isPay) && "El pago no se procesó correctamente. Por favor, verifica y realiza el pago nuevamente, o si ya lo hiciste, intenta ingresando a este link más tarde. (Puedes recargar la pagina si deseas)"}
 						{(errorToGeneratePDF && isPay && !isGeneratingPDF) && "Parece que ocurrió un problema al generar tu photobook. Por favor, intenta recargar la página o vuelve a intentarlo más tarde."}
 					</div>

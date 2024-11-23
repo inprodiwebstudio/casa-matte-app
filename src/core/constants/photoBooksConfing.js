@@ -383,6 +383,45 @@ const photoBooksConfing = {
 			},
 		},
 	},
+	"familiaranual" : {
+		vertical : {
+			sizes : {
+				grande : {
+					aspectRatio      : [8, 9],
+					layoutMods       : {...VerticalLarge},
+					frontLayouts     : {},
+					modsInDoublePage : ["FrontLayout"],
+					pdfSize          : [100, 100],
+				},
+			},
+		},
+	},
+	"lunade miel" : {
+		vertical : {
+			sizes : {
+				grande : {
+					aspectRatio      : [8, 9],
+					layoutMods       : {...VerticalLarge},
+					frontLayouts     : {},
+					modsInDoublePage : ["FrontLayout"],
+					pdfSize          : [100, 100],
+				},
+			},
+		},
+	},
+	"bautizo" : {
+		vertical : {
+			sizes : {
+				mediano : {
+					aspectRatio      : [17, 22],
+					layoutMods       : {...VerticalMedium},
+					frontLayouts     : {},
+					modsInDoublePage : ["FrontLayout"],
+					pdfSize          : [100, 100],
+				},
+			},
+		},
+	},
 };
 
 export default photoBooksConfing;

@@ -14,9 +14,9 @@ const Mod40Pdf = ({text}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "991px",
+				height  : "792px",
 				width   : "100%",
-				padding : "60px",
+				padding : "8%",
 			}}
 		>
 
@@ -47,7 +47,7 @@ const Mod40Pdf = ({text}) => {
 				}}>
 					<div
 						style={{
-							width      : "40%",
+							width      : "38%",
 							lineHeight : "1.2px",
 						}}
 						dangerouslySetInnerHTML={{

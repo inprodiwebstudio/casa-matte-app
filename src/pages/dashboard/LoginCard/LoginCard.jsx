@@ -95,6 +95,19 @@ const LoginCard = () => {
 
 		const parseModel = photoBookMetaData?.modelo.toUpperCase();
 
+		// const handlerIsEspecialProduct = () => {
+		// 	const whiteListEspecialProducts = ["PHOTOBOOK FAMILIAR ANUAL"];
+		// 	if (
+		// 		photoBookMetaData?.modelo &&
+		// 		whiteListEspecialProducts.includes(photoBookMetaData?.modelo)
+		// 	) {
+		// 		return "photobook anual";
+		// 	}
+
+		// 	const model = photoBookMetaData?.modelo ? parseModel.replace("PHOTOBOOK", "").replace(" ", "").replace(" ", "").toLowerCase() : "white";
+		// 	return model;
+		// };
+
 		const model = photoBookMetaData?.modelo ? parseModel.replace("PHOTOBOOK", "").replace(" ", "").replace(" ", "").toLowerCase() : "white";
 		const productName = photoBookMetaData?.modelo ?? "WHITE PHOTOBOOK";
 		const size = getFormatAndSize().size;

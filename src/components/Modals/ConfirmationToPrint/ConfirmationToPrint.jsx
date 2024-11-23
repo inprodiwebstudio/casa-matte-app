@@ -52,7 +52,7 @@ const ConfirmationToPrint = () => {
 			city               : "",
 			state              : "",
 			postcode           : "",
-			country            : "",
+			country            : "MX",
 			phone              : "",
 			name_shipping      : "",
 			last_name_shipping : "",
@@ -60,7 +60,7 @@ const ConfirmationToPrint = () => {
 			city_shipping      : "",
 			state_shipping     : "",
 			postcode_shipping  : "",
-			country_shipping   : "México",
+			country_shipping   : "MX",
 		},
 	});
 
@@ -253,6 +253,7 @@ const ConfirmationToPrint = () => {
 												placeholder="Ingresa el nombre del país"
 												name="country"
 												defaultValue={undefined}
+												isDisabled={true}
 												register={register("country")}
 											/>
 										</Grid.Col>
