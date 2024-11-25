@@ -75,7 +75,7 @@ const Mod57Pdf = ({text, images}) => {
 						{
 							images[0]?.url && (
 								<img
-									src={imgUrlPdf(images[1])}
+									src={imgUrlPdf(images[0])}
 									alt="test"
 									style={{
 										objectFit : "cover",
