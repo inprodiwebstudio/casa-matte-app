@@ -11,13 +11,13 @@ const Mod47Pdf = ({text}) => {
 
 	const text01 = text[0] ? text[0] : "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>ESPAÑA</span></p>";
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>FRANCIA</span></p>";
+	const text02 = text[2] ? text[2] : "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>FRANCIA</span></p>";
 
-	const text03 = text[2] ? text[2] : "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>TURQUÍA</span></p>";
+	const text03 = text[4] ? text[4] : "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>TURQUÍA</span></p>";
 
-	const text04 = text[3] ? text[3] : "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Salamanca</span></p>";
+	const text04 = text[1] ? text[1] : "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Salamanca</span></p>";
 
-	const text05 = text[4] ? text[4] : "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>París</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Versalles</span></p>";
+	const text05 = text[3] ? text[3] : "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>París</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Versalles</span></p>";
 
 	const text06 = text[5] ? text[5] : "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Capadocia</span></p>";
 
