@@ -16,7 +16,7 @@ const Mod52Pdf = ({text, images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height        : "991px",
+				height        : "792px",
 				width         : "100%",
 				paddingTop    : "60px",
 				paddingBottom : "60px",
