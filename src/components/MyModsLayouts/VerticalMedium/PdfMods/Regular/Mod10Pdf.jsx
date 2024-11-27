@@ -14,7 +14,7 @@ const Mod10Pdf = ({images}) => {
 			style={{
 				height       : "792px",
 				width        : "100%",
-				padding      : "180px",
+				padding      : "20.38%",
 				paddingLeft  : "20px",
 				paddingRight : "20px",
 			}}

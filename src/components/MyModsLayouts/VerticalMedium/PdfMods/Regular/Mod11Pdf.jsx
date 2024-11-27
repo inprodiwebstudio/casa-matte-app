@@ -14,9 +14,9 @@ const Mod11Pdf = ({images}) => {
 			style={{
 				height       : "792px",
 				width        : "100%",
-				padding      : "210px",
-				paddingLeft  : "90px",
-				paddingRight : "90px",
+				padding      : "24.82%",
+				paddingLeft  : "10.44%",
+				paddingRight : "10.44%",
 			}}
 		>
 			<div

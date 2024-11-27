@@ -15,8 +15,8 @@ const Mod6Pdf = ({images}) => {
 				height        : "792px",
 				width         : "100%",
 				padding       : "20px",
-				paddingTop    : "180px",
-				paddingBottom : "180px",
+				paddingTop    : "23%",
+				paddingBottom : "23%",
 			}}
 		>
 			<div

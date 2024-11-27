@@ -131,7 +131,7 @@ const Header = () => {
 										Imprimir
 									</Text>
 								</Button>
-								{/* <Button
+								<Button
 									radius={12}
 									size="xs"
 									color="darkCasaMatte"
@@ -153,7 +153,7 @@ const Header = () => {
 									>
 										PDF
 									</Text>
-								</Button> */}
+								</Button>
 							</div>
 						</>
 					)
