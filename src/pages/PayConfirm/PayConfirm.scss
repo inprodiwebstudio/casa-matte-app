@@ -1,0 +1,23 @@
+@import "/src/Resources/scss/variables/colorThemes";
+@import "/src/Resources/scss/breakpoints.scss";
+
+#PayConfirm {
+   width: 100vw;
+   height: 100vh;
+   background: $body-color;
+
+   & .title-body-payment {
+      font-size: 25px;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: $dark-color;
+   }
+
+   & .body-payment {
+      font-size: 15px;
+      font-weight: 300;
+      width: 55%;
+      text-align: center;
+      color: $dark-color;
+   }
+}

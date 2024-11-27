@@ -21,7 +21,7 @@ const ItemLayout = ({
 	const formatPhotoBook = useSelector((state) => state.workSpaceSlice?.data?.format, shallowEqual);
 	const sizePhotoBook = useSelector((state) => state.workSpaceSlice?.data?.sizePhotoBook, shallowEqual);
 
-	const aspectRatio = photoBooksConfing[productPhotoBook]?.[formatPhotoBook]?.aspectRatio;
+	const aspectRatio = photoBooksConfing[productPhotoBook]?.[formatPhotoBook]?.sizes?.[sizePhotoBook]?.aspectRatio;
 
 	const myConfigPhotoBook = photoBooksConfing[productPhotoBook]?.[formatPhotoBook]?.sizes?.[sizePhotoBook];
 

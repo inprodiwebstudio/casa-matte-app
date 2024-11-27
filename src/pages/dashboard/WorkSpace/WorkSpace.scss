@@ -183,15 +183,17 @@
 
 			&.vertical-mediano-workSpace {
 				height: 792px;
-				transform: scale(0.75, 0.75);
+				transform: scale(0.8, 0.8);
 
 				@include laptop {
-					transform: scale(0.55, 0.55);
+					height: 100vh;
+					transform: scale(0.6, 0.6);
 					z-index: 1;
 				}
 	
 				@include big-laptop {
-					transform: scale(0.5, 0.5);
+					height: 100vh;
+					transform: scale(0.6, 0.6);
 					z-index: 1;
 				}
 	
@@ -208,11 +210,12 @@
 				@include laptop {
 					transform: scale(0.65, 0.65);
 					z-index: 1;
-					margin-right: 40px;
+					// margin-right: 40px;
 				}
 	
 				@include big-laptop {
-					transform: scale(0.48, 0.48);
+					height: 90vh;
+					transform: scale(0.6, 0.6);
 					z-index: 1;
 				}
 	
@@ -224,31 +227,32 @@
 
 			&.cuadrado-grande-workSpace {
 				transform: scale(0.6, 0.6);
+				height: 850px;
 
 				@include laptop {
-					transform: scale(0.4, 0.4);
+					transform: scale(0.45, 0.45);
 					z-index: 1;
 				}
 	
 				@include big-laptop {
-					transform: scale(0.45, 0.45);
+					transform: scale(0.57, 0.57);
 					z-index: 1;
 				}
 	
 				@include big-tablet {
-					transform: scale(0.45, 0.45);
+					transform: scale(0.47, 0.47);
 					z-index: 1;
 				}
 			}
 
 			@include laptop {
-				transform: scale(0.42, 0.42);
+				transform: scale(0.43, 0.43);
 				margin-bottom: 10px;
 				z-index: 1;
 			}
 
 			@include big-laptop {
-				transform: scale(0.42, 0.42);
+				transform: scale(0.55, 0.55);
 				z-index: 1;
 				// margin-right: 50px;
 			}

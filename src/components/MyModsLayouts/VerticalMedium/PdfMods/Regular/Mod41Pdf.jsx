@@ -16,7 +16,7 @@ const Mod41Pdf = ({text}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "991px",
+				height  : "792px",
 				width   : "100%",
 				padding : "60px",
 			}}
@@ -39,7 +39,7 @@ const Mod41Pdf = ({text}) => {
 				}}>
 					<div
 						style={{
-							width         : "385px",
+							width         : "60%",
 							display       : "flex",
 							flexDirection : "column",
 							gap           : "20px",

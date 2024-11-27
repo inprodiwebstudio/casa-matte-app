@@ -17,7 +17,7 @@ const uploadImageKitIo = async (image, userName, folderName) => {
 			{
 				file      : image,
 				publicId  : "test",
-				api_key   : "864322584227584",
+				api_key   : "265817136216333",
 				signature : respSign,
 				folder    : `${userName}/${folderName ? folderName : ""}`,
 				timestamp : `${timestamp}`,

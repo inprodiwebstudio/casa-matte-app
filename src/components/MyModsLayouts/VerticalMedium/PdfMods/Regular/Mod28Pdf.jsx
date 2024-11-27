@@ -12,9 +12,10 @@ const Mod28Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "991px",
-				width   : "100%",
-				padding : "20px",
+				height       : "792px",
+				width        : "100%",
+				padding      : "3%",
+				paddingRight : "3%",
 			}}
 		>
 			<div
@@ -40,7 +41,7 @@ const Mod28Pdf = ({images}) => {
 								src={imgUrlPdf(images[0])}
 								alt="test"
 								style={{
-									height    : "470.5px",
+									height    : "100%",
 									objectFit : "cover",
 								}}
 							/>
@@ -70,7 +71,7 @@ const Mod28Pdf = ({images}) => {
 									src={imgUrlPdf(images[1])}
 									alt="test"
 									style={{
-										height    : "470.5px",
+										height    : "100%",
 										objectFit : "cover",
 									}}
 								/>
@@ -91,7 +92,7 @@ const Mod28Pdf = ({images}) => {
 									src={imgUrlPdf(images[2])}
 									alt="test"
 									style={{
-										height    : "470.5px",
+										height    : "100%",
 										objectFit : "cover",
 									}}
 								/>
@@ -112,7 +113,7 @@ const Mod28Pdf = ({images}) => {
 									src={imgUrlPdf(images[3])}
 									alt="test"
 									style={{
-										height    : "470.5px",
+										height    : "100%",
 										objectFit : "cover",
 									}}
 								/>

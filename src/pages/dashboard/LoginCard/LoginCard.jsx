@@ -14,6 +14,7 @@ import { LoginNotification, PostingConfig } from "Notifications";
 import { TextInput, PasswordInput, Button } from "core/components";
 import "./LoginCard.scss";
 import { convertToObject, isValidArray }    from "helpers";
+import { useNavigate }                      from "react-router";
 
 const schema = Yup.object().shape({
 	username : Yup.string().required("El campo es obligatorio"),
@@ -26,6 +27,8 @@ const LoginCard = () => {
 	const dispatch = useDispatch();
 
 	const userToken = useSelector((state) => state.authSlice.token, shallowEqual);
+
+	const navigate = useNavigate();
 
 	const [loginMutation, loginMutationResult] = genericApi.useSubmitDataMutation();
 	const [ loading, setLoading ] = useState(false);
@@ -94,6 +97,19 @@ const LoginCard = () => {
 		};
 
 		const parseModel = photoBookMetaData?.modelo.toUpperCase();
+
+		// const handlerIsEspecialProduct = () => {
+		// 	const whiteListEspecialProducts = ["PHOTOBOOK FAMILIAR ANUAL"];
+		// 	if (
+		// 		photoBookMetaData?.modelo &&
+		// 		whiteListEspecialProducts.includes(photoBookMetaData?.modelo)
+		// 	) {
+		// 		return "photobook anual";
+		// 	}
+
+		// 	const model = photoBookMetaData?.modelo ? parseModel.replace("PHOTOBOOK", "").replace(" ", "").replace(" ", "").toLowerCase() : "white";
+		// 	return model;
+		// };
 
 		const model = photoBookMetaData?.modelo ? parseModel.replace("PHOTOBOOK", "").replace(" ", "").replace(" ", "").toLowerCase() : "white";
 		const productName = photoBookMetaData?.modelo ?? "WHITE PHOTOBOOK";
@@ -251,6 +267,11 @@ const LoginCard = () => {
 
 			if (!photoBookMeta) throw new Error("Ocurrio un problema, el metadato no existe o presenta algun conflicto");
 
+			if ((photoBookMeta?.modelo === "TRAVEL COFFEE TABLE PHOTOBOOK")) {
+				navigate("/notfound/layouts");
+				return;
+			}
+
 			const isAvailableConfigPhotoBook = photoBookMeta?.config && (photoBookMeta?.config !== "");
 
 			if (isAvailableConfigPhotoBook) {
@@ -359,11 +380,12 @@ const LoginCard = () => {
 	return (
 		<form id="LoginCard" className="login-card-body" onSubmit={handleSubmitForm}>
 			<h4>Inicio de Sesión</h4>
+			<div className="deescription-text-login">Inicia sesión con tu cuenta de Casa Matte</div>
 			<div className="form-container">
 				<TextInput
 					isLoading={loading}
 					error={errors.username ? true : false}
-					label="CORREO ELECTRÓNICO"
+					label="NOMBRE USUARIO"
 					variant="filled"
 					placeholder="correo_electrónico@email.com"
 					name="username"
@@ -373,7 +395,6 @@ const LoginCard = () => {
 				<PasswordInput
 					isLoading={loading}
 					error={errors.password ? true : false}
-					placeholder="••••••••••••"
 					label="CONTRASEÑA"
 					variant="filled"
 					name="password"

@@ -15,7 +15,7 @@ const Mod43Pdf = ({text}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "991px",
+				height  : "792px",
 				width   : "100%",
 				padding : "20px",
 			}}
@@ -63,7 +63,7 @@ const Mod43Pdf = ({text}) => {
 						style={{
 							width         : "100%",
 							letterSpacing : "0.5px",
-							lineHeight    : "1.5px",
+							lineHeight    : "0.5px",
 						}}
 						dangerouslySetInnerHTML={{
 							__html : `<style>

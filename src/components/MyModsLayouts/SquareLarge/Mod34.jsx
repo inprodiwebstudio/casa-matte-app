@@ -21,8 +21,8 @@ const Mod34 = ({data, isInWorkSpace, sheetNo}) => {
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
-						imageNo={3}
-						urlImage={data?.photos[3] ?? {}}
+						imageNo={0}
+						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Box>
 				<Group
@@ -30,17 +30,6 @@ const Mod34 = ({data, isInWorkSpace, sheetNo}) => {
 					w="calc(35% - 0.05em)"
 					spacing={"0.1em"}
 				>
-					<Box
-						h="calc(100% / 3 - 0.067em)"
-						w="100%"
-					>
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={0}
-							urlImage={data?.photos[0] ?? {}}
-						/>
-					</Box>
 					<Box
 						h="calc(100% / 3 - 0.067em)"
 						w="100%"
@@ -61,6 +50,17 @@ const Mod34 = ({data, isInWorkSpace, sheetNo}) => {
 							sheetNo={sheetNo}
 							imageNo={2}
 							urlImage={data?.photos[2] ?? {}}
+						/>
+					</Box>
+					<Box
+						h="calc(100% / 3 - 0.067em)"
+						w="100%"
+					>
+						<ImgLayout
+							isInWorkSpace={isInWorkSpace}
+							sheetNo={sheetNo}
+							imageNo={3}
+							urlImage={data?.photos[3] ?? {}}
 						/>
 					</Box>
 				</Group>

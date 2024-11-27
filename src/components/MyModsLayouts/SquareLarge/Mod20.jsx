@@ -29,8 +29,8 @@ const Mod20 = ({data, isInWorkSpace, sheetNo}) => {
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
 							sheetNo={sheetNo}
-							imageNo={1}
-							urlImage={data?.photos[1] ?? {}}
+							imageNo={0}
+							urlImage={data?.photos[0] ?? {}}
 						/>
 					</Box>
 					<Box
@@ -40,8 +40,8 @@ const Mod20 = ({data, isInWorkSpace, sheetNo}) => {
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
 							sheetNo={sheetNo}
-							imageNo={2}
-							urlImage={data?.photos[2] ?? {}}
+							imageNo={1}
+							urlImage={data?.photos[1] ?? {}}
 						/>
 					</Box>
 				</Group>

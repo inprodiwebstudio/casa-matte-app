@@ -12,7 +12,7 @@ const Mod9Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height       : "991px",
+				height       : "792px",
 				width        : "100%",
 				padding      : "100px",
 				paddingLeft  : "20px",

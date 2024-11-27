@@ -51,15 +51,17 @@ const Header = () => {
 	return (
 		<div className="Header">
 			<div className={`body-container ${isPreviewActive && "isActivePreview"}`}>
-				<img src={LogoCasaMatte} width={120} />
+				<a href="https://casamatte.wip-inprodi.com/">
+					<img src={LogoCasaMatte} width={120} />
+				</a>
 				{
 					isLoggedIn && (
 						<>
 							<div className="title-container">
-								<div>{productName ?? ""}</div>
+								<div className="product-name-title">{productName ?? ""}</div>
 								<div>/</div>
 								<div
-									style={{width : "180px"}}
+									style={{width : "65%"}}
 								>
 									<TextInput
 										variant="unstyled"
@@ -116,7 +118,7 @@ const Header = () => {
 										modal      : "confirmationToPrint",
 										innerProps : {},
 									})}
-									disabled={true}
+									disabled={false}
 									loading={isLoadingWorspaceData}
 								>
 									<Text
@@ -152,15 +154,6 @@ const Header = () => {
 										PDF
 									</Text>
 								</Button> */}
-								<div
-									// className="icon-container"
-									// onClick={() => openContextModal({
-									// 	modal : "testPdf",
-									// })}
-								>
-									{/* <CarIcon size="20px" /> */}
-									<></>
-								</div>
 							</div>
 						</>
 					)
