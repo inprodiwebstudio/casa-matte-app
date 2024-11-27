@@ -131,7 +131,7 @@ const Header = () => {
 										Imprimir
 									</Text>
 								</Button>
-								<Button
+								{/* <Button
 									radius={12}
 									size="xs"
 									color="darkCasaMatte"
@@ -153,16 +153,7 @@ const Header = () => {
 									>
 										PDF
 									</Text>
-								</Button>
-								<div
-									// className="icon-container"
-									// onClick={() => openContextModal({
-									// 	modal : "testPdf",
-									// })}
-								>
-									{/* <CarIcon size="20px" /> */}
-									<></>
-								</div>
+								</Button> */}
 							</div>
 						</>
 					)
