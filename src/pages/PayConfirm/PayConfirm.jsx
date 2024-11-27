@@ -134,7 +134,7 @@ const PayConfirm = () => {
 			const formData = new FormData();
 			formData.append("file", blob, `${userData?.email}-noPedido:${orderid}-bookId:${postId}.pdf`);
 			// Enviar el archivo al backend
-			const response = await axios.post("http://localhost:3000/api/v1/uploadPdf", formData, {
+			const response = await axios.post("https://casamatteapi-production.up.railway.app/api/v1/uploadPdf", formData, {
 				headers : { "Content-Type" : "multipart/form-data" },
 			});
 			console.log("Archivo subido:", response.data);
@@ -190,15 +190,15 @@ const PayConfirm = () => {
 					<div className="title-body-payment">
 						{(isLoadingData && !isPay) && "Validando tu Pago..."}
 						{(isLoadingData && isPay) && "Generando Photo Book..."}
-						{(!isLoadingData && isPay && !isGeneratingPDF) && "¡Gracias por tu compra!"}
-						{(!isLoadingData && !isPay) && "Pago no efectuado"}
+						{(!isLoadingData && isPay && !isGeneratingPDF && !errorToGeneratePDF) && "¡Gracias por tu compra!"}
+						{(!isLoadingData && !isPay && !errorToGeneratePDF) && "Pago no efectuado"}
 						{(errorToGeneratePDF && isPay && !isGeneratingPDF) && "Ocurrió un error al generar tu photobook"}
 					</div>
 					<div className="body-payment">
 						{(isLoadingData && !isPay) && "Estamos validando tu informacion y el pago espera un momento"}
 						{(isLoadingData && isPay) && "Estamos generando tu photobook. Esto puede tardar unos segundos"}
-						{(!isLoadingData && isPay && !isGeneratingPDF) && "Tu photobook ha sido creado y enviado exitosamente. Casa Matte recibirá tu pedido pronto y se pondrá en contacto contigo. ¡Gracias por elegirnos!"}
-						{(!isLoadingData && !isPay) && "El pago no se procesó correctamente. Por favor, verifica y realiza el pago nuevamente, o si ya lo hiciste, intenta ingresando a este link más tarde. (Puedes recargar la pagina si deseas)"}
+						{(!isLoadingData && isPay && !isGeneratingPDF && !errorToGeneratePDF) && "Tu photobook ha sido creado y enviado exitosamente. Casa Matte recibirá tu pedido pronto y se pondrá en contacto contigo. ¡Gracias por elegirnos!"}
+						{(!isLoadingData && !isPay && !errorToGeneratePDF) && "El pago no se procesó correctamente. Por favor, verifica y realiza el pago nuevamente, o si ya lo hiciste, intenta ingresando a este link más tarde. (Puedes recargar la pagina si deseas)"}
 						{(errorToGeneratePDF && isPay && !isGeneratingPDF) && "Parece que ocurrió un problema al generar tu photobook. Por favor, intenta recargar la página o vuelve a intentarlo más tarde."}
 					</div>
 					{isLoadingData && (
@@ -207,7 +207,9 @@ const PayConfirm = () => {
 						</div>
 					)}
 				</Stack>
-				<img src={LogoCasaMatte} width={180} />
+				<a href="https://casamatte.wip-inprodi.com/">
+					<img src={LogoCasaMatte} width={180} />
+				</a>
 			</Stack>
 		</Center>
 	);
