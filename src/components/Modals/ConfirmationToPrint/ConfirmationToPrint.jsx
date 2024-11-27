@@ -79,7 +79,7 @@ const ConfirmationToPrint = () => {
 		const data = dataShipping;
 		setOrderLoading(true);
 		try {
-			const productDataRes = await axios.get(`https://casamatte.wip-inprodi.com/wp-json/wc/v3/products?search=${encodeURIComponent(productNameKey)}`,
+			const productDataRes = await axios.get(`https://casamatte.com/wp-json/wc/v3/products?search=${encodeURIComponent(productNameKey)}`,
 				{
 					auth : {
 						username : "ck_ecf36082e00a4cfd16000f338e25073359b78df2",
@@ -91,7 +91,7 @@ const ConfirmationToPrint = () => {
 			const productId = productDataRes?.data[0]?.id ?? undefined;
 
 			const responseCreateOrder = await axios.post(
-				"https://casamatte.wip-inprodi.com/wp-json/wc/v3/orders",
+				"https://casamatte.com/wp-json/wc/v3/orders",
 				{
 					payment_method       : "bacs",
 					payment_method_title : "Direct Bank Transfer",

@@ -34,7 +34,7 @@ export default defineConfig({
 		open  : true,
 		host  : "0.0.0.0",
 		proxy : {
-			"/api" : "casamatte.wip-inprodi.com",
+			"/api" : "casamatte.com",
 		},
 	},
 });

@@ -13,7 +13,7 @@ const NotFoundLayout = () => {
 						Por el momento el formato o producto seleccionado no está disponible en nuestro editor. Estamos trabajando para integrarlo próximamente.
 					</div>
 				</Stack>
-				<a href="https://casamatte.wip-inprodi.com/">
+				<a href="https://casamatte.com/">
 					<img src={LogoCasaMatte} width={180} />
 				</a>
 			</Stack>
