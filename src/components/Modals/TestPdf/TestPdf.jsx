@@ -37,6 +37,11 @@ const TestPdf = ({photoBookData}) => {
 				modLayouts            : {...SquareSmall},
 			},
 		},
+		chico : {
+			size                  : [595, 595],
+			isInDoublePageLayouts : ["FrontLayout"],
+			modLayouts            : {...SquareSmall},
+		},
 	};
 
 	// const isLayoutDoublePage = (modLayout, witheList) => {
