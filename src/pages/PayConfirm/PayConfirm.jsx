@@ -52,6 +52,8 @@ const PayConfirm = () => {
 	const [ isPay, setIsPay ] = useState( false );
 	const searchParams = new URLSearchParams(location.search);
 
+	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
+
 	const myPhotoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 	const userData = useSelector((state) => state.authSlice.user, shallowEqual);
 
@@ -137,6 +139,18 @@ const PayConfirm = () => {
 			const response = await axios.post("https://casamatteapi-production.up.railway.app/api/v1/uploadPdf", formData, {
 				headers : { "Content-Type" : "multipart/form-data" },
 			});
+			await dataMutation({
+				module : "wp-json/wp/v2/photobook-2-0",
+				data   : {
+					tittle : "Texto de prueba",
+					status : "publish",
+					meta   : {
+						status : "48",
+					},
+				},
+				id     : postId,
+				method : "POST",
+			});
 			console.log("Archivo subido:", response.data);
 			setIsGeneratingPDF(false);
 		} catch (error) {
@@ -182,6 +196,17 @@ const PayConfirm = () => {
 			return;
 		}
 	}, [myPhotoBookData]);
+
+	useEffect(() => {
+		if (dataMutationResult.isUninitialized) return;
+
+		if (dataMutationResult.isError) {
+			setIsLoadingOrder(false);
+			setIsGeneratingPDF(false);
+			setErrorToGeneratePDF(true);
+		}
+
+	}, [dataMutationResult]);
 
 	return (
 		<Center id="PayConfirm">
