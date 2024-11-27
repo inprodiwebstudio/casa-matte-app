@@ -51,7 +51,7 @@ const Header = () => {
 	return (
 		<div className="Header">
 			<div className={`body-container ${isPreviewActive && "isActivePreview"}`}>
-				<a href="https://casamatte.wip-inprodi.com/">
+				<a href="https://casamatte.com/">
 					<img src={LogoCasaMatte} width={120} />
 				</a>
 				{
@@ -153,7 +153,7 @@ const Header = () => {
 									>
 										PDF
 									</Text>
-								</Button>
+								</Button> */}
 							</div>
 						</>
 					)
