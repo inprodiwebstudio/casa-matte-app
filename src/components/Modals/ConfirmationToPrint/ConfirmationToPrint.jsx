@@ -120,6 +120,11 @@ const ConfirmationToPrint = () => {
 				return extraCost;
 			};
 
+			if (extraPages) {
+				console.log(extraPages.toString());
+				return;
+			}
+
 			const responseCreateOrder = await axios.post(
 				"https://casamatte.com/wp-json/wc/v3/orders",
 				{
