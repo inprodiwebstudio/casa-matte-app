@@ -120,11 +120,6 @@ const ConfirmationToPrint = () => {
 				return extraCost;
 			};
 
-			if (handlerCost()) {
-				console.log(handlerCost().toString());
-				return;
-			}
-
 			const responseCreateOrder = await axios.post(
 				"https://casamatte.com/wp-json/wc/v3/orders",
 				{
@@ -157,8 +152,8 @@ const ConfirmationToPrint = () => {
 						{
 							product_id : productId, // ID del producto
 							quantity   : 1,
-							total      : handlerCost().toString(),
-							price      : handlerCost(),
+							total      : "10",
+							price      : "10",
 						},
 					],
 					shipping_lines : [
@@ -184,7 +179,7 @@ const ConfirmationToPrint = () => {
 					status : "publish",
 					meta   : {
 						id_del_pedido : responseCreateOrder?.data?.id.toString(),
-						precio_total  : handlerCost().toString(),
+						precio_total  : "10",
 					},
 				},
 				id     : postIdphotoBook,
