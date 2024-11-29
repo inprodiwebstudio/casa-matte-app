@@ -181,7 +181,7 @@ const ConfirmationToPrint = () => {
 					meta   : {
 						id_del_pedido : responseCreateOrder?.data?.id.toString(),
 						precio_total  : handlerCost().toString(),
-						hojas_extras  : extraPages.toString(),
+						hojas_extra   : extraPages.toString(),
 					},
 				},
 				id     : postIdphotoBook,
