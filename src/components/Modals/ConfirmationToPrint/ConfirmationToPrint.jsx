@@ -1,15 +1,16 @@
-import { Button, TextInput }          from "core/components";
-import { Grid, Stack, Switch }        from "@mantine/core";
-import { shallowEqual, useSelector }  from "react-redux";
-import React, { useEffect, useState } from "react";
-import { genericApi }                 from "store/api/genericApi";
+import { Button, TextInput }             from "core/components";
+import { Grid, Stack, Switch }           from "@mantine/core";
+import { shallowEqual, useSelector }     from "react-redux";
+import React, { useEffect, useState }    from "react";
+import { genericApi }                    from "store/api/genericApi";
+import { convertToArray, counterSheets } from "helpers";
 import "./ConfirmationPrint.scss";
-import { yupResolver }                from "@hookform/resolvers/yup";
-import * as Yup                       from "yup";
-import { useForm }                    from "react-hook-form";
-import axios                          from "axios";
-import { closeAllModals }             from "@mantine/modals";
-import { LoginNotification }          from "Notifications";
+import { yupResolver }                   from "@hookform/resolvers/yup";
+import * as Yup                          from "yup";
+import { useForm }                       from "react-hook-form";
+import axios                             from "axios";
+import { closeAllModals }                from "@mantine/modals";
+import { LoginNotification }             from "Notifications";
 
 
 const ConfirmationToPrint = () => {
@@ -19,11 +20,19 @@ const ConfirmationToPrint = () => {
 	const [ orderLoading, setOrderLoading ] = useState(false);
 
 	const productNameKey = useSelector((state) => state.workSpaceSlice.data?.productName, shallowEqual);
+	const sizePhotoBook = useSelector((state) => state.workSpaceSlice.data.sizePhotoBook, shallowEqual);
+	const dataPages = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 	const photoBookPrice = useSelector((state) => state.workSpaceSlice.data?.basePrice, shallowEqual);
+	const maxRangePages = useSelector((state) => state.workSpaceSlice.data?.maxRangePages, shallowEqual);
 	const postIdphotoBook = useSelector((state) => state.authSlice?.user?.postId, shallowEqual);
 	const userEmail = useSelector((state) => state.authSlice?.user?.email, shallowEqual);
 	const userId = useSelector((state) => state.authSlice?.user?.userId, shallowEqual);
 	const formatedPrice = photoBookPrice.replace(",", "");
+
+	const listOfPages = convertToArray(dataPages.pages);
+	const counterPages = () => counterSheets(listOfPages);
+
+	const basePrice = useSelector((state) => state.workSpaceSlice.data?.basePrice, shallowEqual);
 
 	const [dataMutation, dataMutationResult ] = genericApi.useSubmitDataMutation();
 
@@ -90,6 +99,28 @@ const ConfirmationToPrint = () => {
 
 			const productId = productDataRes?.data[0]?.id ?? undefined;
 
+			let extraPages = 0;
+
+			if (counterPages() > Number(maxRangePages)) {
+				extraPages = (counterPages() - Number(maxRangePages));
+				return;
+			}
+
+			const handlerCost = () => {
+				let extraCost = 0;
+				if ((sizePhotoBook === "chico") || (sizePhotoBook === "mediano")) {
+					extraCost = 15;
+				}
+				extraCost = 22;
+				const cost = extraPages * Number(extraCost);
+				if (basePrice && basePrice !== "") {
+					const formatStringPrice = basePrice.replace(",", "");
+					const basePriceNumber = Number(formatStringPrice);
+					return cost + basePriceNumber;
+				}
+				return extraCost;
+			};
+
 			const responseCreateOrder = await axios.post(
 				"https://casamatte.com/wp-json/wc/v3/orders",
 				{
@@ -123,7 +154,7 @@ const ConfirmationToPrint = () => {
 							product_id : productId, // ID del producto
 							quantity   : 1,
 							total      : numberPrice.toString(),
-							price      : numberPrice,
+							price      : handlerCost(),
 						},
 					],
 					shipping_lines : [
@@ -149,6 +180,7 @@ const ConfirmationToPrint = () => {
 					status : "publish",
 					meta   : {
 						id_del_pedido : responseCreateOrder?.data?.id.toString(),
+						precio_total  : handlerCost().toString(),
 					},
 				},
 				id     : postIdphotoBook,
