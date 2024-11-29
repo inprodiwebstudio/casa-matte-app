@@ -153,6 +153,7 @@ const ConfirmationToPrint = () => {
 							product_id : productId, // ID del producto
 							quantity   : 1,
 							total      : "10",
+							subtotal   : "10",
 							price      : 10,
 						},
 					],
