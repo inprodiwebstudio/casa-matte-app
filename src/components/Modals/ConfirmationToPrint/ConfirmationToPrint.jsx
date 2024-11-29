@@ -121,7 +121,7 @@ const ConfirmationToPrint = () => {
 			};
 
 			if (handlerCost()) {
-				console.log(handlerCost());
+				console.log(handlerCost().toString());
 				return;
 			}
 
