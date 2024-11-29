@@ -153,7 +153,7 @@ const ConfirmationToPrint = () => {
 							product_id : productId, // ID del producto
 							quantity   : 1,
 							total      : "10",
-							price      : "10",
+							price      : 10,
 						},
 					],
 					shipping_lines : [
@@ -179,7 +179,7 @@ const ConfirmationToPrint = () => {
 					status : "publish",
 					meta   : {
 						id_del_pedido : responseCreateOrder?.data?.id.toString(),
-						precio_total  : "10",
+						precio_total  : 10,
 					},
 				},
 				id     : postIdphotoBook,
