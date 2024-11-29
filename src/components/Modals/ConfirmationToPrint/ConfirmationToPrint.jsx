@@ -103,7 +103,6 @@ const ConfirmationToPrint = () => {
 
 			if (counterPages() > Number(maxRangePages)) {
 				extraPages = (counterPages() - Number(maxRangePages));
-				return;
 			}
 
 			const handlerCost = () => {
