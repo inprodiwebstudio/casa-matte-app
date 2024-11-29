@@ -172,6 +172,11 @@ const ConfirmationToPrint = () => {
 				}
 			);
 
+			if (handlerCost()) {
+				console.log(handlerCost());
+				return;
+			}
+
 			await dataMutation({
 				module : "wp-json/wp/v2/photobook-2-0",
 				data   : {
