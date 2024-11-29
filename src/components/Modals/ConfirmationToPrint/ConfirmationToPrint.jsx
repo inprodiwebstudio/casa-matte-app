@@ -22,12 +22,12 @@ const ConfirmationToPrint = () => {
 	const productNameKey = useSelector((state) => state.workSpaceSlice.data?.productName, shallowEqual);
 	const sizePhotoBook = useSelector((state) => state.workSpaceSlice.data.sizePhotoBook, shallowEqual);
 	const dataPages = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
-	const photoBookPrice = useSelector((state) => state.workSpaceSlice.data?.basePrice, shallowEqual);
+	// const photoBookPrice = useSelector((state) => state.workSpaceSlice.data?.basePrice, shallowEqual);
 	const maxRangePages = useSelector((state) => state.workSpaceSlice.data?.maxRangePages, shallowEqual);
 	const postIdphotoBook = useSelector((state) => state.authSlice?.user?.postId, shallowEqual);
 	const userEmail = useSelector((state) => state.authSlice?.user?.email, shallowEqual);
 	const userId = useSelector((state) => state.authSlice?.user?.userId, shallowEqual);
-	const formatedPrice = photoBookPrice.replace(",", "");
+	// const formatedPrice = photoBookPrice.replace(",", "");
 
 	const listOfPages = convertToArray(dataPages.pages);
 	const counterPages = () => counterSheets(listOfPages);
@@ -36,7 +36,7 @@ const ConfirmationToPrint = () => {
 
 	const [dataMutation, dataMutationResult ] = genericApi.useSubmitDataMutation();
 
-	const numberPrice = parseInt(formatedPrice);
+	// const numberPrice = parseInt(formatedPrice);
 
 	const schema = Yup.object().shape({
 		sendPhotoBook : Yup.boolean(),
@@ -120,6 +120,11 @@ const ConfirmationToPrint = () => {
 				return extraCost;
 			};
 
+			if (handlerCost()) {
+				console.log(handlerCost());
+				return;
+			}
+
 			const responseCreateOrder = await axios.post(
 				"https://casamatte.com/wp-json/wc/v3/orders",
 				{
@@ -152,7 +157,7 @@ const ConfirmationToPrint = () => {
 						{
 							product_id : productId, // ID del producto
 							quantity   : 1,
-							total      : numberPrice.toString(),
+							total      : handlerCost().toString(),
 							price      : handlerCost(),
 						},
 					],
@@ -171,11 +176,6 @@ const ConfirmationToPrint = () => {
 					},
 				}
 			);
-
-			if (handlerCost()) {
-				console.log(handlerCost());
-				return;
-			}
 
 			await dataMutation({
 				module : "wp-json/wp/v2/photobook-2-0",
