@@ -70,7 +70,7 @@ const PayConfirm = () => {
 	const getOrderId = async () => {
 		setIsLoadingOrder(true);
 		try {
-			const orderData = await axios.get(`https://casamatte.com/wp-json/wc/v3/orders/${orderid}`,
+			const orderData = await axios.get(`https://casamatte.wip-inprodi.com/wp-json/wc/v3/orders/${orderid}`,
 				{
 					auth : {
 						username : "ck_ecf36082e00a4cfd16000f338e25073359b78df2",
@@ -136,7 +136,7 @@ const PayConfirm = () => {
 			const formData = new FormData();
 			formData.append("file", blob, `${userData?.email}-noPedido:${orderid}-bookId:${postId}.pdf`);
 			// Enviar el archivo al backend
-			const response = await axios.post("https://casamatteapi-production.up.railway.app/api/v1/uploadPdf", formData, {
+			const response = await axios.post("https://localhost:3000/api/v1/uploadPdf", formData, {
 				headers : { "Content-Type" : "multipart/form-data" },
 			});
 			await dataMutation({
@@ -232,7 +232,7 @@ const PayConfirm = () => {
 						</div>
 					)}
 				</Stack>
-				<a href="https://casamatte.com/">
+				<a href="https://casamatte.wip-inprodi.com/">
 					<img src={LogoCasaMatte} width={180} />
 				</a>
 			</Stack>
