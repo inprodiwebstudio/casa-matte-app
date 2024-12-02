@@ -32,7 +32,7 @@ const BookPages = ({
 
 	const modsInDoublePage = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.modsInDoublePage;
 
-	const isInDoublePage = modsInDoublePage?.includes(pageData?.sheet1?.layoutType);
+	const isInDoublePage = modsInDoublePage?.includes(pageData?.id);
 
 	const aspectRatio = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.aspectRatio;
 
@@ -67,13 +67,12 @@ const BookPages = ({
 		);
 	}
 
-
 	return (
 		<div
 			className="BookPages"
-			// style={{
-			// 	aspectRatio : (isInDoublePage || pageData?.sheet2 || pageData?.sheet1?.layoutType?.includes("Front")) ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
-			// }}
+			style={{
+				aspectRatio : (isInDoublePage || pageData?.sheet2 || pageData?.sheet1?.layoutType?.includes("Front")) ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
+			}}
 		>
 			<div
 				className={
@@ -89,8 +88,13 @@ const BookPages = ({
 				}
 			>
 				{
-					(pageData?.sheet1?.layoutType?.includes("Front")) && (
-						<FrontLayout pageData={pageData} isThumbNail={isThumbNail} isInPaginator={isInPaginator} isInWorkSpcae={isInWorkSpcae} />
+					(pageData?.id.includes("Front")) && (
+						<FrontLayout
+							pageData={pageData}
+							isThumbNail={isThumbNail}
+							isInPaginator={isInPaginator}
+							isInWorkSpcae={isInWorkSpcae}
+						/>
 					)
 				}
 				{

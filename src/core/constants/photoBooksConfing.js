@@ -36,7 +36,7 @@ const photoBooksConfing = {
 				chico : {
 					layoutMods       : {},
 					frontLayouts     : {},
-					modsInDoublePage : [],
+					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [100, 100],
 				},
 				mediano : {

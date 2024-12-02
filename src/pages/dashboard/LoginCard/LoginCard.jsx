@@ -129,7 +129,6 @@ const LoginCard = () => {
 			format,
 			frontPage     : {
 				id     : "FrontLayout",
-				text   : {},
 				sheet1 : {
 					layoutType : "",
 					text       : {},
