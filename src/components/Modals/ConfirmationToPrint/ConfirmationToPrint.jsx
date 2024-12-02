@@ -11,9 +11,11 @@ import { useForm }                       from "react-hook-form";
 import axios                             from "axios";
 import { closeAllModals }                from "@mantine/modals";
 import { LoginNotification }             from "Notifications";
+import { useNavigate }                   from "react-router";
 
 
 const ConfirmationToPrint = () => {
+	const navigate = useNavigate();
 	const [ isConfirmationView, setIsConfirmationView  ] = useState(false);
 	const [checkedShipping, setCheckedShipping] = useState(false);
 	const [ dataShipping, setDataShipping ] = useState(undefined);
@@ -27,6 +29,7 @@ const ConfirmationToPrint = () => {
 	const postIdphotoBook = useSelector((state) => state.authSlice?.user?.postId, shallowEqual);
 	const userEmail = useSelector((state) => state.authSlice?.user?.email, shallowEqual);
 	const userId = useSelector((state) => state.authSlice?.user?.userId, shallowEqual);
+	const userName = useSelector((state) => state.authSlice?.user?.username, shallowEqual);
 	// const formatedPrice = photoBookPrice.replace(",", "");
 
 	const listOfPages = convertToArray(dataPages.pages);
@@ -127,7 +130,7 @@ const ConfirmationToPrint = () => {
 					payment_method       : "bacs",
 					payment_method_title : "Direct Bank Transfer",
 					set_paid             : false,
-					status               : "pending",
+					status               : (userName === "casamatteadmin") ? "processing" : "pending",
 					customer_id          : userId,
 					billing              : {
 						first_name : data?.name ?? undefined,
@@ -189,7 +192,12 @@ const ConfirmationToPrint = () => {
 				method : "POST",
 			});
 
-			window.location.href = responseCreateOrder?.data?.payment_url;
+			if (userName !== "casamatteadmin") {
+				window.location.href = responseCreateOrder?.data?.payment_url;
+				return;
+			}
+
+			navigate(`payment/confirm?orderid=${responseCreateOrder?.data?.id}&postId=${postIdphotoBook}`);
 
 		} catch (err) {
 			LoginNotification["post"][500]();
