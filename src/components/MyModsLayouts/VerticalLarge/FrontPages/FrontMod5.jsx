@@ -3,12 +3,13 @@ import {Stack, Flex } from "@mantine/core";
 import ImgLayout      from "components/LayoutHandler/ImgLayout";
 //Own components
 import Text              from "components/LayoutHandler/Text";
+import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
-	const defaultText01 = "";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 48px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultText02 = "SUBTITTLE";
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex
@@ -22,12 +23,18 @@ const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 		>
 			<Stack w="70%" h="fit-content">
 				<Text
+					sizes={{
+						"chico"   : "46px",
+						"regular" : "48px",
+						"grande"  : "50px",
+					}}
 					align="center"
-					type="LargeTitle"
 					sheetNo={sheetNo}
+					textShell={() => <TextShell.Title />}
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}
+					textNo={0}
 				/>
 			</Stack>
 			<Stack w="100%" h="100%">
@@ -40,12 +47,18 @@ const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 			</Stack>
 			<Stack w="60%" h="fit-content">
 				<Text
+					sizes={{
+						"chico"   : "16px",
+						"regular" : "18px",
+						"grande"  : "20px",
+					}}
 					align="center"
-					type="h5"
 					sheetNo={sheetNo}
+					textShell={() => <TextShell.Title />}
 					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}
+					textNo={1}
 				/>
 			</Stack>
 		</Flex>

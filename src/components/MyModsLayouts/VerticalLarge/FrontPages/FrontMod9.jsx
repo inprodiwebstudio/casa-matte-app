@@ -3,10 +3,11 @@ import {Stack, Flex} from "@mantine/core";
 import ImgLayout     from "components/LayoutHandler/ImgLayout";
 //Own components
 import Text              from "components/LayoutHandler/Text";
+import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 const FrontMod9 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
-	const defaultText01 = "Título Grande";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 50px; font-family: Aitana-Regular;'>TÍTULO GRANDE</span></p>";
 
 	return (
 		<Flex
@@ -29,12 +30,18 @@ const FrontMod9 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 				// w="10%"
 			>
 				<Text
+					sizes={{
+						"chico"   : "48px",
+						"regular" : "50px",
+						"grande"  : "52px",
+					}}
 					align="center"
-					type="LargeTitle"
 					sheetNo={sheetNo}
+					textShell={() => <TextShell.Title />}
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}
+					textNo={0}
 				/>
 			</Stack>
 		</Flex>
