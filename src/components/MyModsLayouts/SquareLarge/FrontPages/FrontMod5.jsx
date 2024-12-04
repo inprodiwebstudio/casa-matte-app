@@ -13,15 +13,17 @@ const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 
 	return (
 		<Flex
-			p="8%"
+			p="17%"
+			pt="8%"
+			pb="8%"
 			w="100%"
 			h="100%"
 			justify="center"
 			align="center"
-			gap="0.2em"
+			gap="8%"
 			direction="column"
 		>
-			<Stack w="70%" h="fit-content">
+			<Stack w="100%" h="fit-content">
 				<Text
 					sizes={{
 						"chico"   : "46px",
@@ -45,7 +47,7 @@ const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					urlImage={data?.photos[0] ?? {}}
 				/>
 			</Stack>
-			<Stack w="60%" h="fit-content">
+			<Stack w="80%" h="fit-content">
 				<Text
 					sizes={{
 						"chico"   : "16px",
