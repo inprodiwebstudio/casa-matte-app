@@ -11,6 +11,8 @@ const FrontMod8 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 
 	const defaultText02 = "<p style='text-align: right;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
+	const isPreviewThumb = isInPaginator || isThumbNail;
+
 	return (
 		<Stack
 			w="100%"
@@ -21,9 +23,9 @@ const FrontMod8 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 			pb="15%"
 		>
 			<Stack
-				spacing="0.03em"
+				spacing={isPreviewThumb ? "1px" : "0px"}
 				mt="8%"
-				mr="8%"
+				pr="8%"
 			>
 				<div>
 					<Text
@@ -34,18 +36,14 @@ const FrontMod8 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 						}}
 						align="right"
 						sheetNo={sheetNo}
-						textShell={() => <TextShell.Title />}
+						textShell={() => <TextShell.Title width="50%" align="flex-end" />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 						textNo={0}
 					/>
 				</div>
-				<div
-					style={{
-						paddingLeft : "10%",
-					}}
-				>
+				<div>
 					<Text
 						sizes={{
 							"chico"   : "16px",
@@ -54,7 +52,7 @@ const FrontMod8 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 						}}
 						align="right"
 						sheetNo={sheetNo}
-						textShell={() => <TextShell.SubTitle />}
+						textShell={() => <TextShell.SubTitle width="30%" align="flex-end" />}
 						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}

@@ -6,14 +6,16 @@ import Text              from "components/LayoutHandler/Text";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
-const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const FrontMod7 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
 	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
+	const isPreviewThumb = isInPaginator || isThumbNail;
+
 	return (
 		<Flex
-			p="8%"
+			pt="7%"
 			w="100%"
 			h="100%"
 			justify="center"
@@ -22,11 +24,11 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 			direction="column"
 		>
 			<Stack
-				spacing={(isInPaginator || isThumbNail) ? "1px" : "0px"}
-				w={"100%"}
-				align="center"
+				h="fit-content"
+				spacing={isPreviewThumb ? "1px" : "0px"}
+				w="70%"
 			>
-				<Stack w="80%">
+				<div>
 					<Text
 						sizes={{
 							"chico"   : "38px",
@@ -41,8 +43,13 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 						isThumbNail={isThumbNail}
 						textNo={0}
 					/>
-				</Stack>
-				<Stack w="50%">
+				</div>
+				<div
+					style={{
+						paddingLeft  : "10%",
+						paddingRight : "10%",
+					}}
+				>
 					<Text
 						sizes={{
 							"chico"   : "16px",
@@ -57,7 +64,7 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 						isThumbNail={isThumbNail}
 						textNo={1}
 					/>
-				</Stack>
+				</div>
 			</Stack>
 			<Stack w="100%" h="100%">
 				<ImgLayout
@@ -71,4 +78,4 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 	);
 };
 
-export default FrontMod1;
+export default FrontMod7;

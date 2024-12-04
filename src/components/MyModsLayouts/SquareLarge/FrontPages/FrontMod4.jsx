@@ -6,52 +6,50 @@ import Text              from "components/LayoutHandler/Text";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
-const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+const FrontMod4 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+	const defaultText02 = "<p style='text-align: right;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex
-			p="8%"
 			w="100%"
 			h="100%"
-			justify="center"
-			align="center"
+			align="left"
 			gap="0.2em"
 			direction="column"
 		>
 			<Stack
-				spacing={(isInPaginator || isThumbNail) ? "1px" : "0px"}
-				w={"100%"}
-				align="center"
+				spacing="2px"
+				mt="8%"
+				mr="8%"
 			>
-				<Stack w="80%">
+				<Stack>
 					<Text
 						sizes={{
 							"chico"   : "38px",
 							"regular" : "42px",
 							"grande"  : "44px",
 						}}
-						align="center"
+						align="right"
 						sheetNo={sheetNo}
-						textShell={() => <TextShell.Title />}
+						textShell={() => <TextShell.Title align="flex-end" width="30%" />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 						textNo={0}
 					/>
 				</Stack>
-				<Stack w="50%">
+				<Stack>
 					<Text
 						sizes={{
 							"chico"   : "16px",
 							"regular" : "18px",
 							"grande"  : "20px",
 						}}
-						align="center"
+						align="right"
 						sheetNo={sheetNo}
-						textShell={() => <TextShell.SubTitle />}
+						textShell={() => <TextShell.SubTitle align="flex-end" width="20%" />}
 						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
@@ -59,7 +57,11 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					/>
 				</Stack>
 			</Stack>
-			<Stack w="100%" h="100%">
+			<Stack
+				h="85%"
+				w="100%"
+				pl="15%"
+			>
 				<ImgLayout
 					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
@@ -71,4 +73,4 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 	);
 };
 
-export default FrontMod1;
+export default FrontMod4;

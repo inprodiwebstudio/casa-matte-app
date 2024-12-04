@@ -11,6 +11,8 @@ const FrontMod7 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 
 	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
+	const isPreviewThumb = isInPaginator || isThumbNail;
+
 	return (
 		<Flex
 			pb="5%"
@@ -31,7 +33,7 @@ const FrontMod7 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 			</Stack>
 			<Stack
 				h="fit-content"
-				spacing="0.03em"
+				spacing={isPreviewThumb ? "1px" : "0px"}
 				w="70%"
 			>
 				<div>

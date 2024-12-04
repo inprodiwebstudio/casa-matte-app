@@ -33,7 +33,7 @@ const FrontMod4 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 						}}
 						align="right"
 						sheetNo={sheetNo}
-						textShell={() => <TextShell.Title />}
+						textShell={() => <TextShell.Title align="flex-end" width="30%" />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
@@ -49,7 +49,7 @@ const FrontMod4 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 						}}
 						align="right"
 						sheetNo={sheetNo}
-						textShell={() => <TextShell.SubTitle />}
+						textShell={() => <TextShell.SubTitle align="flex-end" width="20%" />}
 						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}

@@ -3,11 +3,13 @@ import {Stack, Flex} from "@mantine/core";
 import ImgLayout     from "components/LayoutHandler/ImgLayout";
 //Own components
 import Text              from "components/LayoutHandler/Text";
+import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 const FrontMod10 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
-	const defaultText01 = "Título";
-	const defaultText02 = "Subtítulo";
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 48px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+
+	const defaultText02 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex
@@ -29,22 +31,36 @@ const FrontMod10 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) 
 				align="center"
 				justify="space-between"
 			>
-				<Stack h="30%" sx={{writingMode : "vertical-rl"}} spacing={0}>
+				<Stack h="50%" sx={{writingMode : "vertical-rl", transform : "rotate(180deg)"}} spacing={0}>
 					<Text
-						type="h5"
+						sizes={{
+							"chico"   : "46px",
+							"regular" : "48px",
+							"grande"  : "50px",
+						}}
+						align="right"
 						sheetNo={sheetNo}
-						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-					/>
-				</Stack>
-				<Stack h="50%" sx={{writingMode : "vertical-rl"}} spacing={0}>
-					<Text
-						type="LargeTitle"
-						sheetNo={sheetNo}
+						textShell={() => <TextShell.Title />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
+						textNo={0}
+					/>
+				</Stack>
+				<Stack h="50%" sx={{writingMode : "vertical-rl", transform : "rotate(180deg)"}} spacing={0}>
+					<Text
+						sizes={{
+							"chico"   : "16px",
+							"regular" : "18px",
+							"grande"  : "20px",
+						}}
+						align="center"
+						sheetNo={sheetNo}
+						textShell={() => <TextShell.Title />}
+						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+						textNo={1}
 					/>
 				</Stack>
 			</Stack>

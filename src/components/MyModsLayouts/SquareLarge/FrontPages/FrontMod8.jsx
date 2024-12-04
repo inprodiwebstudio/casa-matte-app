@@ -6,14 +6,16 @@ import Text              from "components/LayoutHandler/Text";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
-const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const FrontMod8 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
 	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
+	const isPreviewThumb = isInPaginator || isThumbNail;
+
 	return (
 		<Flex
-			p="8%"
+			pb="5%"
 			w="100%"
 			h="100%"
 			justify="center"
@@ -21,12 +23,20 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 			gap="0.2em"
 			direction="column"
 		>
+			<Stack w="100%" h="100%">
+				<ImgLayout
+					isInWorkSpace={isInWorkSpace}
+					sheetNo={sheetNo}
+					imageNo={0}
+					urlImage={data?.photos[0] ?? {}}
+				/>
+			</Stack>
 			<Stack
-				spacing={(isInPaginator || isThumbNail) ? "1px" : "0px"}
-				w={"100%"}
-				align="center"
+				h="fit-content"
+				spacing={isPreviewThumb ? "1px" : "0px"}
+				w="70%"
 			>
-				<Stack w="80%">
+				<div>
 					<Text
 						sizes={{
 							"chico"   : "38px",
@@ -41,8 +51,13 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 						isThumbNail={isThumbNail}
 						textNo={0}
 					/>
-				</Stack>
-				<Stack w="50%">
+				</div>
+				<div
+					style={{
+						paddingLeft  : "10%",
+						paddingRight : "10%",
+					}}
+				>
 					<Text
 						sizes={{
 							"chico"   : "16px",
@@ -57,18 +72,10 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 						isThumbNail={isThumbNail}
 						textNo={1}
 					/>
-				</Stack>
-			</Stack>
-			<Stack w="100%" h="100%">
-				<ImgLayout
-					isInWorkSpace={isInWorkSpace}
-					sheetNo={sheetNo}
-					imageNo={0}
-					urlImage={data?.photos[0] ?? {}}
-				/>
+				</div>
 			</Stack>
 		</Flex>
 	);
 };
 
-export default FrontMod1;
+export default FrontMod8;
