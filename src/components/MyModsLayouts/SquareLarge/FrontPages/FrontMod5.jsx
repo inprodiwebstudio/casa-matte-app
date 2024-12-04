@@ -23,7 +23,10 @@ const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 			gap="8%"
 			direction="column"
 		>
-			<Stack w="100%" h="fit-content">
+			<Stack
+				w="100%"
+				h="fit-content"
+			>
 				<Text
 					sizes={{
 						"chico"   : "46px",
@@ -39,7 +42,10 @@ const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					textNo={0}
 				/>
 			</Stack>
-			<Stack w="100%" h="100%">
+			<Stack
+				w="100%"
+				h="100%"
+			>
 				<ImgLayout
 					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
@@ -47,7 +53,10 @@ const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					urlImage={data?.photos[0] ?? {}}
 				/>
 			</Stack>
-			<Stack w="80%" h="fit-content">
+			<Stack
+				w="80%"
+				h="fit-content"
+			>
 				<Text
 					sizes={{
 						"chico"   : "16px",
