@@ -5,6 +5,10 @@ import photoBooksConfing from "core/constants/photoBooksConfing";
 
 import { shallowEqual, useSelector } from "react-redux";
 import "./FrontLayout.scss";
+import { Stack }                     from "@mantine/core";
+import Text                          from "components/LayoutHandler/Text";
+import { TextShell }                 from "core/components";
+import { textInsertion }             from "helpers";
 
 const FrontLayout = ({
 	pageData,
@@ -12,6 +16,10 @@ const FrontLayout = ({
 	isInPaginator,
 	isInWorkSpcae,
 }) => {
+	const sipnePhotoBook = undefined;
+
+	const defaultSpineBook = "<p style='text-align: center;'><span style='font-size: 22px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 
 	const photobookSize = photoBookData?.sizePhotoBook ?? "grande";
@@ -34,7 +42,23 @@ const FrontLayout = ({
 		<div className="body-front-layout">
 			<div className="back-book" />
 			<div className={`spacer-front-book ${isInPaginator && "is-in-paginator"}`}>
-				<div className="spine-text">WEDDING BELLS</div>
+				<div className="spine-text">
+					<Stack>
+						<Text
+							sizes={{
+								"chico"   : "20px",
+								"regular" : "22px",
+								"grande"  : "24px",
+							}}
+							align="center"
+							textShell={() => <TextShell.Title />}
+							data={textInsertion(sipnePhotoBook, defaultSpineBook, true)}
+							isInPaginator={isInPaginator}
+							isThumbNail={isThumbNail}
+							textNo={0}
+						/>
+					</Stack>
+				</div>
 			</div>
 			<div className="front-book">
 				<div className="body-front-container">
