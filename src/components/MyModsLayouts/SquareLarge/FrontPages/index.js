@@ -9,3 +9,4 @@ export { default as  FrontMod8}  from "./FrontMod8";
 export { default as  FrontMod9}  from "./FrontMod9";
 export { default as  FrontMod10}  from "./FrontMod10";
 export { default as  FrontMod11} from "./FrontMod11";
+export { default as  FrontMod12} from "./FrontMod12";

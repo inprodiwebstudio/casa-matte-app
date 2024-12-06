@@ -6,14 +6,14 @@ import Text              from "components/LayoutHandler/Text";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
-const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const FrontMod12 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 48px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
 	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex
-			p="7%"
+			p="15%"
 			pt="8%"
 			pb="8%"
 			w="100%"
@@ -76,4 +76,4 @@ const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 	);
 };
 
-export default FrontMod5;
+export default FrontMod12;

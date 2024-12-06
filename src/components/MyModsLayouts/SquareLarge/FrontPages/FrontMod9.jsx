@@ -20,7 +20,7 @@ const FrontMod9 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 			align="left"
 			spacing="0.2em"
 			direction="column"
-			pb="15%"
+			pb="0%"
 		>
 			<Stack
 				spacing={isPreviewThumb ? "1px" : "0px"}
@@ -60,7 +60,7 @@ const FrontMod9 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					/>
 				</div>
 			</Stack>
-			<Stack justify="left" w="100%" h="90%">
+			<Stack justify="left" w="100%" h="80%">
 				<ImgLayout
 					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}

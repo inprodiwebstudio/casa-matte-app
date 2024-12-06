@@ -127,6 +127,7 @@ import {
 	FrontMod9,
 	FrontMod10,
 	FrontMod11,
+	FrontMod12,
 } from "./FrontPages";
 
 const SquareLarge = {
@@ -215,6 +216,14 @@ const SquareLarge = {
 		layout       : FrontMod11,
 		numberPhotos : 1,
 		numberText   : 1,
+		cat          : "portadas",
+		pdfLayout    : undefined,
+	},
+	FrontMod12 : {
+		id           : "FrontMod12",
+		layout       : FrontMod12,
+		numberPhotos : 1,
+		numberText   : 2,
 		cat          : "portadas",
 		pdfLayout    : undefined,
 	},
