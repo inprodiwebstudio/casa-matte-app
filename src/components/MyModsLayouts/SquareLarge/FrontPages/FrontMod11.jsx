@@ -7,9 +7,9 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 const FrontMod11 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
-	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 48px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 48px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultText02 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+	const defaultText02 = "<p style='text-align: right;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex
@@ -25,12 +25,28 @@ const FrontMod11 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) 
 				/>
 			</Stack>
 			<Stack
-				pl="0.1em"
-				pr="0.1em"
-				p="0.2em"
+				pl="3%"
+				pr="3%"
+				p="8%"
 				align="center"
 				justify="space-between"
 			>
+				<Stack h="50%" sx={{writingMode : "vertical-rl", transform : "rotate(180deg)"}} spacing={0}>
+					<Text
+						sizes={{
+							"chico"   : "16px",
+							"regular" : "18px",
+							"grande"  : "20px",
+						}}
+						align="left"
+						sheetNo={sheetNo}
+						textShell={() => <TextShell.SubTitle />}
+						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+						textNo={1}
+					/>
+				</Stack>
 				<Stack h="50%" sx={{writingMode : "vertical-rl", transform : "rotate(180deg)"}} spacing={0}>
 					<Text
 						sizes={{
@@ -45,22 +61,6 @@ const FrontMod11 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) 
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 						textNo={0}
-					/>
-				</Stack>
-				<Stack h="50%" sx={{writingMode : "vertical-rl", transform : "rotate(180deg)"}} spacing={0}>
-					<Text
-						sizes={{
-							"chico"   : "16px",
-							"regular" : "18px",
-							"grande"  : "20px",
-						}}
-						align="center"
-						sheetNo={sheetNo}
-						textShell={() => <TextShell.Title />}
-						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-						textNo={1}
 					/>
 				</Stack>
 			</Stack>
