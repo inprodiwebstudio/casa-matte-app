@@ -7,7 +7,7 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 const FrontMod11 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
-	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 48px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 25px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
 	const defaultText02 = "<p style='text-align: right;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
@@ -25,8 +25,8 @@ const FrontMod11 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) 
 				/>
 			</Stack>
 			<Stack
-				pl="3%"
-				pr="3%"
+				pl="8%"
+				pr="8%"
 				p="8%"
 				align="center"
 				justify="space-between"
@@ -50,9 +50,9 @@ const FrontMod11 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) 
 				<Stack h="50%" sx={{writingMode : "vertical-rl", transform : "rotate(180deg)"}} spacing={0}>
 					<Text
 						sizes={{
-							"chico"   : "46px",
-							"regular" : "48px",
-							"grande"  : "50px",
+							"chico"   : "23px",
+							"regular" : "25px",
+							"grande"  : "28px",
 						}}
 						align="right"
 						sheetNo={sheetNo}

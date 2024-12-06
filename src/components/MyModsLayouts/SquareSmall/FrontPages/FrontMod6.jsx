@@ -7,7 +7,7 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 const FrontMod6 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 48px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
 	return (
 		<Flex
@@ -22,9 +22,9 @@ const FrontMod6 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 			<Stack w="70%" h="fit-content">
 				<Text
 					sizes={{
-						"chico"   : "46px",
-						"regular" : "48px",
-						"grande"  : "50px",
+						"chico"   : "28px",
+						"regular" : "30px",
+						"grande"  : "32px",
 					}}
 					align="center"
 					sheetNo={sheetNo}

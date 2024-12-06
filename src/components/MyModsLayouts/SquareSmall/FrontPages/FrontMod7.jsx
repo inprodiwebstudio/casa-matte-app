@@ -7,9 +7,9 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 const FrontMod7 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 24px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	const isPreviewThumb = isInPaginator || isThumbNail;
 
@@ -31,9 +31,9 @@ const FrontMod7 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 				<div>
 					<Text
 						sizes={{
-							"chico"   : "38px",
-							"regular" : "42px",
-							"grande"  : "44px",
+							"chico"   : "22px",
+							"regular" : "24px",
+							"grande"  : "26px",
 						}}
 						align="center"
 						sheetNo={sheetNo}
@@ -52,9 +52,9 @@ const FrontMod7 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 				>
 					<Text
 						sizes={{
-							"chico"   : "16px",
-							"regular" : "18px",
-							"grande"  : "20px",
+							"chico"   : "10px",
+							"regular" : "12px",
+							"grande"  : "14px",
 						}}
 						align="center"
 						sheetNo={sheetNo}

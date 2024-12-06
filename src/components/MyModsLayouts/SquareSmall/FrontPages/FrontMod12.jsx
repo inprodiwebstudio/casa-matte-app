@@ -7,15 +7,15 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 const FrontMod12 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 48px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 16px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex
-			p="15%"
-			pt="8%"
-			pb="8%"
+			p="12%"
+			pt="6%"
+			pb="6%"
 			w="100%"
 			h="100%"
 			justify="center"
@@ -29,9 +29,9 @@ const FrontMod12 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) 
 			>
 				<Text
 					sizes={{
-						"chico"   : "46px",
-						"regular" : "48px",
-						"grande"  : "50px",
+						"chico"   : "28px",
+						"regular" : "30px",
+						"grande"  : "32px",
 					}}
 					align="center"
 					sheetNo={sheetNo}
@@ -59,9 +59,9 @@ const FrontMod12 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) 
 			>
 				<Text
 					sizes={{
-						"chico"   : "16px",
-						"regular" : "18px",
-						"grande"  : "20px",
+						"chico"   : "14px",
+						"regular" : "16px",
+						"grande"  : "18px",
 					}}
 					align="center"
 					sheetNo={sheetNo}
