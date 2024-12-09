@@ -108,7 +108,7 @@ const WorkSpace = () => {
 								</div>
 							</div>
 						</div>
-						<div className={`ghost-canva ${workSpaceFormatPage}-${workSpaceSizePage}-workSpace ${!myWorkSpaceData?.sheet2 && "onePage"}`}>
+						<div className={`ghost-canva ${workSpaceFormatPage}-${workSpaceSizePage}-workSpace ${(!myWorkSpaceData?.sheet2 && (myWorkSpaceData?.id !== "FrontLayout")) && "onePage"}`}>
 							<BookPages
 								isInWorkSpcae={true}
 								loading={isLoading}
@@ -137,6 +137,8 @@ const WorkSpace = () => {
 	}, [pageId]);
 
 	document.onkeydown = undoAndRedoActions;
+
+	console.log(myWorkSpaceData);
 
 	return (
 		<SapceViewHandler />
