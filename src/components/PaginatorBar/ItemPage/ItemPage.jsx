@@ -1,9 +1,10 @@
 //Redux
-import { useSelector, shallowEqual } from "react-redux";
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
 //Router
 import { useNavigate, useParams } from "react-router-dom";
 //External components
-import { Draggable } from "react-beautiful-dnd";
+import { workSpaceSlice } from "store/Slices";
+import { Draggable }      from "react-beautiful-dnd";
 //Own Components
 //Resources
 import { Thrash } from "Resources/icons";
@@ -20,6 +21,8 @@ const ItemPage = ({
 	const { pageId } = useParams();
 	const navigate = useNavigate();
 
+	const dispatch = useDispatch();
+
 	const photoBookFormat = useSelector((state) => state.workSpaceSlice?.data?.format, shallowEqual);
 	const isAvailableProduct = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
 
@@ -27,6 +30,10 @@ const ItemPage = ({
 
 	const handlerSelectPage = () => {
 		navigate(draggableId);
+		dispatch(workSpaceSlice.actions.setSelectePageData({
+			pageId      : draggableId,
+			currentPage : "sheet1",
+		}));
 	};
 
 	const NumbPages = () => {

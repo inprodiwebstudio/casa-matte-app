@@ -138,8 +138,6 @@ const WorkSpace = () => {
 
 	document.onkeydown = undoAndRedoActions;
 
-	console.log(myWorkSpaceData);
-
 	return (
 		<SapceViewHandler />
 	);

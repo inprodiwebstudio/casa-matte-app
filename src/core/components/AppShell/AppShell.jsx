@@ -364,7 +364,7 @@ const AppShell = ({
 
 	const dispatch = useDispatch();
 
-	const isSelectedPage = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
+	// const isSelectedPage = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice?.data, shallowEqual);
 	const postIdphotoBook = useSelector((state) => state.authSlice?.user?.postId, shallowEqual);
 	const userName = useSelector((state) => state.authSlice?.user?.username, shallowEqual);
@@ -482,11 +482,11 @@ const AppShell = ({
 	return (
 		<div
 			id="AppShell"
-			{
-				...(isSelectedPage && {
-					onClick : () => dispatch(workSpaceSlice.actions.clearSelectedPageData()),
-				})
-			}
+			// {
+			// 	...(isSelectedPage && {
+			// 		onClick : () => dispatch(workSpaceSlice.actions.clearSelectedPageData()),
+			// 	})
+			// }
 		>
 			<div className="bodyContainer">
 				<Body />

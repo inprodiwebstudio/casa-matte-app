@@ -1,11 +1,10 @@
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
-import { useEffect, useState }                    from "react";
+import { useState, useEffect }                    from "react";
 import { Skeleton }                               from "@mantine/core";
 
 //Own components
 // import LayoutMod          from "components/LayoutMod/LayoutMod";
-import photoBooksConfing from "core/constants/photoBooksConfing";
-// import { convertToArray } from "helpers";
+import photoBooksConfing  from "core/constants/photoBooksConfing";
 import { workSpaceSlice } from "store/Slices";
 import FrontLayout        from "components/global/LayoutsPage/FrontLayout";
 import "./BookPages.scss";
@@ -16,7 +15,7 @@ const BookPages = ({
 	isInPaginator,
 	isInWorkSpcae,
 }) => {
-	const [ currentSelectedPage, setCurrentSelectedPage ] = useState(null);
+	const [ currentSelectedPage, setCurrentSelectedPage ] = useState(undefined);
 
 	const dispatch = useDispatch();
 
@@ -58,6 +57,11 @@ const BookPages = ({
 	useEffect(() => {
 		if (!pageDataSelected) {
 			setCurrentSelectedPage(null);
+			return;
+		}
+		if (isInWorkSpcae && pageDataSelected) {
+			setCurrentSelectedPage(pageDataSelected.currentPage);
+			return;
 		}
 	}, [pageDataSelected]);
 
