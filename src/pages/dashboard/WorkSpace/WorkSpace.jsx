@@ -108,7 +108,7 @@ const WorkSpace = () => {
 								</div>
 							</div>
 						</div>
-						<div className={`ghost-canva ${workSpaceFormatPage}-${workSpaceSizePage}-workSpace`}>
+						<div className={`ghost-canva ${workSpaceFormatPage}-${workSpaceSizePage}-workSpace ${!myWorkSpaceData?.sheet2 && "onePage"}`}>
 							<BookPages
 								isInWorkSpcae={true}
 								loading={isLoading}

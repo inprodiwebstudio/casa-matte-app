@@ -7,29 +7,30 @@ import SquareSmall    from "components/MyModsLayouts/SquareSmall";
 
 const photoBooksConfing = {
 	white : {
-		// horizontal : {
-		// 	aspectRatio : [496, 425],
-		// 	sizes       : {
-		// 		chico : {
-		// 			layoutMods       : {},
-		// 			frontLayouts     : {},
-		// 			modsInDoublePage : [],
-		// 			pdfSize          : [100, 100],
-		// 		},
-		// 		mediano : {
-		// 			layoutMods       : {},
-		// 			frontLayouts     : {},
-		// 			modsInDoublePage : [],
-		// 			pdfSize          : [100, 100],
-		// 		},
-		// 		grande : {
-		// 			layoutMods       : {...HorizontalLarge},
-		// 			frontLayouts     : {},
-		// 			modsInDoublePage : ["Mod6", "FrontLayout"],
-		// 			pdfSize          : [100, 100],
-		// 		},
-		// 	},
-		// },
+		horizontal : {
+			aspectRatio : [36, 31],
+			sizes       : {
+				chico : {
+					layoutMods       : {},
+					frontLayouts     : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
+				},
+				mediano : {
+					layoutMods       : {},
+					frontLayouts     : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
+				},
+				grande : {
+					aspectRatio      : [36, 31],
+					layoutMods       : {},
+					frontLayouts     : {},
+					modsInDoublePage : ["FrontLayout"],
+					pdfSize          : [35, 30],
+				},
+			},
+		},
 		vertical : {
 			aspectRatio : [8, 9],
 			sizes       : {

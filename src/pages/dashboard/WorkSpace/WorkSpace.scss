@@ -181,6 +181,46 @@
 			transform: scale(0.6, 0.6);
 			z-index: 1;
 
+			&.horizontal-grande-workSpace {
+				height: 992px;
+				transform: scale(0.57, 0.57);
+
+				@include laptop {
+					transform: scale(0.35, 0.35);
+					z-index: 1;
+				}
+	
+				@include big-laptop {
+					transform: scale(0.45, 0.45);
+					z-index: 1;
+				}
+	
+				@include big-tablet {
+					transform: scale(0.3, 0.3);
+					z-index: 1;
+				}
+
+				&.onePage {
+					transform: scale(0.6, 0.6);
+					z-index: 1;
+
+					@include big-laptop {
+						transform: scale(0.6, 0.6);
+						z-index: 1;
+					}
+
+					@include laptop {
+						transform: scale(0.45, 0.45);
+						z-index: 1;
+					}
+
+					@include big-tablet {
+						transform: scale(0.35, 0.35);
+						z-index: 1;
+					}
+				}
+			}
+
 			&.vertical-mediano-workSpace {
 				height: 792px;
 				transform: scale(0.8, 0.8);
