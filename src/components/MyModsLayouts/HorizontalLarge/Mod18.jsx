@@ -9,12 +9,12 @@ const Mod18 = ({data, isInWorkSpace, sheetNo}) => {
 			h="100%"
 		>
 			<Group
-				spacing="0.15em"
+				spacing="0.1em"
 				w="100%"
 				h="100%"
 			>
 				<Stack
-					w="calc(50% - 0.075em)"
+					w="calc(50% - 0.05em)"
 					h="100%"
 				>
 					<ImgLayout
@@ -25,7 +25,7 @@ const Mod18 = ({data, isInWorkSpace, sheetNo}) => {
 					/>
 				</Stack>
 				<Stack
-					w="calc(50% - 0.075em)"
+					w="calc(50% - 0.05em)"
 					h="100%"
 				>
 					<ImgLayout
