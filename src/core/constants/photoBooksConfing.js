@@ -1,10 +1,11 @@
 
 //LayoutsMods
-import VerticalLarge   from "components/MyModsLayouts/VerticalLarge";
-import SquareLarge     from "components/MyModsLayouts/SquareLarge";
-import VerticalMedium  from "components/MyModsLayouts/VerticalMedium";
-import HorizontalLarge from "components/MyModsLayouts/HorizontalLarge";
-import SquareSmall     from "components/MyModsLayouts/SquareSmall";
+import VerticalLarge    from "components/MyModsLayouts/VerticalLarge";
+import SquareLarge      from "components/MyModsLayouts/SquareLarge";
+import VerticalMedium   from "components/MyModsLayouts/VerticalMedium";
+import HorizontalLarge  from "components/MyModsLayouts/HorizontalLarge";
+import SquareSmall      from "components/MyModsLayouts/SquareSmall";
+import HorizontalMedium from "components/MyModsLayouts/HorizontalMedium";
 
 const photoBooksConfing = {
 	white : {
@@ -18,9 +19,10 @@ const photoBooksConfing = {
 					pdfSize          : [100, 100],
 				},
 				mediano : {
-					layoutMods       : {},
+					aspectRatio      : [748, 587],
+					layoutMods       : {...HorizontalMedium},
 					frontLayouts     : {},
-					modsInDoublePage : [],
+					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [100, 100],
 				},
 				grande : {
