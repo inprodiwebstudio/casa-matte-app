@@ -1,0 +1,72 @@
+import { Flex, Stack } from "@mantine/core";
+//Own components
+import Text              from "components/LayoutHandler/Text";
+import { TextShell }     from "core/components";
+import { textInsertion } from "helpers";
+
+
+const Mod64 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+
+	const defaultTitle01 = "<p style='text-align: center;'><span style='font-size: 25px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+
+	const defaultIndice01 = "<p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
+
+	return (
+		<Flex
+			w="100%"
+			h="100%"
+			p="4%"
+			justify="center"
+			align="center"
+			direction="column"
+			sx={{overflow : "hidden"}}
+		>
+			<Stack
+				spacing="0.35em"
+				miw="20%"
+			>
+				<Stack
+					spacing="0.13em"
+					aria-hidden
+				>
+					<div>
+						<Text
+							sizes={{
+								"chico"   : "23px",
+								"regular" : "25px",
+								"grande"  : "27px",
+							}}
+							align="center"
+							letterSpacing="3px"
+							sheetNo={sheetNo}
+							textShell={() => <TextShell.TitleSmall width="100%" align="center" />}
+							data={textInsertion(data?.text[0], defaultTitle01, isInWorkSpace)}
+							isInPaginator={isInPaginator}
+							isThumbNail={isThumbNail}
+							textNo={0}
+						/>
+					</div>
+					<div>
+						<Text
+							sizes={{
+								"chico"   : "12px",
+								"regular" : "14px",
+								"grande"  : "16px",
+							}}
+							align="center"
+							gapSpacing="10px"
+							sheetNo={sheetNo}
+							textShell={() => <TextShell.BodyIndices align="center" />}
+							data={textInsertion(data?.text[1], defaultIndice01, isInWorkSpace)}
+							isInPaginator={isInPaginator}
+							isThumbNail={isThumbNail}
+							textNo={1}
+						/>
+					</div>
+				</Stack>
+			</Stack>
+		</Flex>
+	);
+};
+
+export default Mod64;

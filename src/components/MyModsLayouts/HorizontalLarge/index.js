@@ -57,6 +57,30 @@ import Mod56 from "./Mod56";
 import Mod57 from "./Mod57";
 import Mod58 from "./Mod58";
 import Mod59 from "./Mod59";
+import Mod60 from "./Mod60";
+import Mod61 from "./Mod61";
+import Mod62 from "./Mod62";
+import Mod63 from "./Mod63";
+import Mod64 from "./Mod64";
+import Mod65 from "./Mod65";
+import Mod66 from "./Mod66";
+import Mod67 from "./Mod67";
+import Mod68 from "./Mod68";
+import Mod69 from "./Mod69";
+import Mod70 from "./Mod70";
+import Mod71 from "./Mod71";
+import Mod72 from "./Mod72";
+import Mod73 from "./Mod73";
+import Mod74 from "./Mod74";
+import Mod75 from "./Mod75";
+import Mod76 from "./Mod76";
+import Mod77 from "./Mod77";
+import Mod78 from "./Mod78";
+import Mod79 from "./Mod79";
+import Mod80 from "./Mod80";
+import Mod81 from "./Mod81";
+import Mod82 from "./Mod82";
+import Mod83 from "./Mod83";
 
 const HorizontalLarge = {
 	Mod1 : {
@@ -412,6 +436,198 @@ const HorizontalLarge = {
 		layout       : Mod59,
 		numberPhotos : 7,
 		cat          : "fotos",
+	},
+	Mod60 : {
+		id           : "Mod60",
+		layout       : Mod60,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod61 : {
+		id           : "Mod61",
+		layout       : Mod61,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod62 : {
+		id           : "Mod62",
+		layout       : Mod62,
+		numberPhotos : 0,
+		numberText   : 6,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod63 : {
+		id           : "Mod63",
+		layout       : Mod63,
+		numberPhotos : 0,
+		numberText   : 6,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod64 : {
+		id           : "Mod64",
+		layout       : Mod64,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod65 : {
+		id           : "Mod65",
+		layout       : Mod65,
+		numberPhotos : 0,
+		numberText   : 1,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod66 : {
+		id           : "Mod66",
+		layout       : Mod66,
+		numberPhotos : 1,
+		numberText   : 1,
+		cat          : "fotosytexto",
+		pdfLayout    : undefined,
+	},
+	Mod67 : {
+		id           : "Mod67",
+		layout       : Mod67,
+		numberPhotos : 1,
+		numberText   : 1,
+		cat          : "fotosytexto",
+		pdfLayout    : undefined,
+	},
+	Mod68 : {
+		id           : "Mod68",
+		layout       : Mod68,
+		numberPhotos : 0,
+		numberText   : 1,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod69 : {
+		id           : "Mod69",
+		layout       : Mod69,
+		numberPhotos : 0,
+		numberText   : 1,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod70 : {
+		id           : "Mod70",
+		layout       : Mod70,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod71 : {
+		id           : "Mod71",
+		layout       : Mod71,
+		numberPhotos : 0,
+		numberText   : 3,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod72 : {
+		id           : "Mod72",
+		layout       : Mod72,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod73 : {
+		id           : "Mod73",
+		layout       : Mod73,
+		numberPhotos : 1,
+		numberText   : 1,
+		cat          : "fotosytexto",
+		pdfLayout    : undefined,
+	},
+	Mod74 : {
+		id           : "Mod74",
+		layout       : Mod74,
+		numberPhotos : 0,
+		numberText   : 1,
+		cat          : "fotosytexto",
+		pdfLayout    : undefined,
+	},
+	Mod75 : {
+		id           : "Mod75",
+		layout       : Mod75,
+		numberPhotos : 1,
+		numberText   : 1,
+		cat          : "fotosytexto",
+		pdfLayout    : undefined,
+	},
+	Mod76 : {
+		id           : "Mod76",
+		layout       : Mod76,
+		numberPhotos : 2,
+		numberText   : 1,
+		cat          : "fotosytexto",
+		pdfLayout    : undefined,
+	},
+	Mod77 : {
+		id           : "Mod77",
+		layout       : Mod77,
+		numberPhotos : 2,
+		numberText   : 1,
+		cat          : "fotosytexto",
+		pdfLayout    : undefined,
+	},
+	Mod78 : {
+		id           : "Mod78",
+		layout       : Mod78,
+		numberPhotos : 2,
+		numberText   : 1,
+		cat          : "fotosytexto",
+		pdfLayout    : undefined,
+	},
+	Mod79 : {
+		id           : "Mod79",
+		layout       : Mod79,
+		numberPhotos : 2,
+		numberText   : 1,
+		cat          : "fotosytexto",
+		pdfLayout    : undefined,
+	},
+	Mod80 : {
+		id           : "Mod80",
+		layout       : Mod80,
+		numberPhotos : 2,
+		numberText   : 1,
+		cat          : "fotosytexto",
+		pdfLayout    : undefined,
+	},
+	Mod81 : {
+		id           : "Mod81",
+		layout       : Mod81,
+		numberPhotos : 3,
+		numberText   : 1,
+		cat          : "fotosytexto",
+		pdfLayout    : undefined,
+	},
+	Mod82 : {
+		id           : "Mod82",
+		layout       : Mod82,
+		numberPhotos : 3,
+		numberText   : 1,
+		cat          : "fotosytexto",
+		pdfLayout    : undefined,
+	},
+	Mod83 : {
+		id           : "Mod83",
+		layout       : Mod83,
+		numberPhotos : 4,
+		numberText   : 1,
+		cat          : "fotosytexto",
+		pdfLayout    : undefined,
 	},
 };
 
