@@ -145,9 +145,10 @@ const DropDoc = ({
 		setIsGenerateNewFolder(true);
 		const respFolder = await galleryFolderMutation({
 			data : {
+				userName,
+				postId,
 				folderName,
 			},
-			userName,
 		});
 
 		const constructorData = {

@@ -18,6 +18,7 @@ import { openContextModal, closeAllModals } from "@mantine/modals";
 
 const Folder = ({
 	name,
+	postId,
 	folderId,
 	userName,
 	thumbNails,
@@ -40,9 +41,10 @@ const Folder = ({
 		try {
 			await galleryFolderMutation({
 				data : {
+					userName,
+					postId,
 					folderName,
 				},
-				userName,
 			});
 			gallerySlice.setLoadingMutationGallery(false);
 			gallerySlice.deleteDataGallery({
@@ -200,6 +202,7 @@ const Folder = ({
 const mapStateToProps = ({ gallerySlice, authSlice }) => ({
 	gallerySelectedData : gallerySlice?.selectedData ?? {},
 	userName            : authSlice?.user?.username ?? undefined,
+	postId              : authSlice?.user?.postId ?? undefined,
 });
 
 const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});

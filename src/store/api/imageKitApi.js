@@ -74,10 +74,10 @@ export const apiImageKit = createApi({
 			invalidatesTags : [],
 		}),
 		addFolder : builder.mutation({
-			query({data, userName}) {
+			query({data}) {
 				const body = data;
 				return {
-					url    : `upload/folder/${userName}`,
+					url    : "upload/folder",
 					method : "POST",
 					body,
 				};
@@ -88,7 +88,7 @@ export const apiImageKit = createApi({
 			query({data, userName}) {
 				const body = data;
 				return {
-					url    : `delete/folder/${userName}`,
+					url    : "delete/folder",
 					method : "POST",
 					body,
 				};
