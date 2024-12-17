@@ -7,53 +7,56 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 const FrontMod3 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
-
-	const defaultText03 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+	const defaultText02 = "<p style='text-align: right;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex
-			p="8%"
+			pt="5%"
 			w="100%"
 			h="100%"
 			justify="center"
 			align="center"
-			gap="0.2em"
+			gap="0.4em"
 			direction="column"
 		>
 			<Stack
 				spacing={(isInPaginator || isThumbNail) ? "1px" : "0px"}
 				w={"100%"}
-				align="center"
+				align="flex-end"
+				pr="5%"
 			>
-				<Stack w="80%">
+				<Stack
+					w="80%"
+				>
 					<Text
 						sizes={{
 							"chico"   : "38px",
 							"regular" : "42px",
 							"grande"  : "44px",
 						}}
-						align="center"
+						align="flex-end"
 						sheetNo={sheetNo}
-						textShell={() => <TextShell.Title />}
+						textShell={() => <TextShell.Title align="flex-end" />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 						textNo={0}
 					/>
 				</Stack>
-				<Stack w="50%">
+				<Stack
+					w="50%"
+				>
 					<Text
 						sizes={{
 							"chico"   : "16px",
 							"regular" : "18px",
 							"grande"  : "20px",
 						}}
-						align="center"
+						align="flex-end"
 						sheetNo={sheetNo}
-						textShell={() => <TextShell.SubTitle />}
+						textShell={() => <TextShell.SubTitle align="flex-end" />}
 						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
@@ -70,22 +73,6 @@ const FrontMod3 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					sheetNo={sheetNo}
 					imageNo={0}
 					urlImage={data?.photos[0] ?? {}}
-				/>
-			</Stack>
-			<Stack w="50%">
-				<Text
-					sizes={{
-						"chico"   : "16px",
-						"regular" : "18px",
-						"grande"  : "20px",
-					}}
-					align="center"
-					sheetNo={sheetNo}
-					textShell={() => <TextShell.SubTitle />}
-					data={textInsertion(data?.text[2], defaultText03, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-					textNo={2}
 				/>
 			</Stack>
 		</Flex>

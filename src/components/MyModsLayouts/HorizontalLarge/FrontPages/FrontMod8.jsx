@@ -7,9 +7,7 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 const FrontMod8 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
-	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
-
-	const defaultText02 = "<p style='text-align: right;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO GRANDE</span></p>";
 
 	const isPreviewThumb = isInPaginator || isThumbNail;
 
@@ -20,12 +18,14 @@ const FrontMod8 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 			align="left"
 			spacing="0.2em"
 			direction="column"
-			pb="15%"
 		>
 			<Stack
 				spacing={isPreviewThumb ? "1px" : "0px"}
 				mt="8%"
 				pr="8%"
+				sx={{
+					textTransform : "uppercase",
+				}}
 			>
 				<div>
 					<Text
@@ -34,33 +34,21 @@ const FrontMod8 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 							"regular" : "42px",
 							"grande"  : "44px",
 						}}
-						align="right"
+						align="center"
 						sheetNo={sheetNo}
-						textShell={() => <TextShell.Title width="50%" align="flex-end" />}
+						textShell={() => <TextShell.Title width="50%" align="center" />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 						textNo={0}
 					/>
 				</div>
-				<div>
-					<Text
-						sizes={{
-							"chico"   : "16px",
-							"regular" : "18px",
-							"grande"  : "20px",
-						}}
-						align="right"
-						sheetNo={sheetNo}
-						textShell={() => <TextShell.SubTitle width="30%" align="flex-end" />}
-						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-						textNo={1}
-					/>
-				</div>
 			</Stack>
-			<Stack justify="left" w="100%" h="90%">
+			<Stack
+				justify="center"
+				w="100%"
+				h="100%"
+			>
 				<ImgLayout
 					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}

@@ -156,7 +156,7 @@ const HorizontalLarge = {
 		id           : "FrontMod8",
 		layout       : FrontMod8,
 		numberPhotos : 1,
-		numberText   : 2,
+		numberText   : 1,
 		cat          : "portadas",
 		pdfLayout    : undefined,
 	},

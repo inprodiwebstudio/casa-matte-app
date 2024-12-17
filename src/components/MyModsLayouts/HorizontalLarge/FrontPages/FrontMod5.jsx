@@ -9,19 +9,20 @@ import { textInsertion } from "helpers";
 const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 48px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
-
 	return (
 		<Flex
-			p="8%"
+			p="5%"
 			w="100%"
 			h="100%"
 			justify="center"
 			align="center"
-			gap="0.2em"
+			gap="0.4em"
 			direction="column"
 		>
-			<Stack w="70%" h="fit-content">
+			<Stack
+				w="70%"
+				h="fit-content"
+			>
 				<Text
 					sizes={{
 						"chico"   : "46px",
@@ -37,28 +38,15 @@ const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					textNo={0}
 				/>
 			</Stack>
-			<Stack w="100%" h="100%">
+			<Stack
+				w="100%"
+				h="100%"
+			>
 				<ImgLayout
 					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
 					imageNo={0}
 					urlImage={data?.photos[0] ?? {}}
-				/>
-			</Stack>
-			<Stack w="60%" h="fit-content">
-				<Text
-					sizes={{
-						"chico"   : "16px",
-						"regular" : "18px",
-						"grande"  : "20px",
-					}}
-					align="center"
-					sheetNo={sheetNo}
-					textShell={() => <TextShell.Title />}
-					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-					textNo={1}
 				/>
 			</Stack>
 		</Flex>
