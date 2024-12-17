@@ -2,7 +2,7 @@ import { Group, Stack } from "@mantine/core";
 //Own components
 import ImgLayout from "components/LayoutHandler/ImgLayout";
 
-const Mod58 = ({data, isInWorkSpace, sheetNo}) => {
+const Mod59 = ({data, isInWorkSpace, sheetNo}) => {
 	return (
 		<Group
 			w="100%"
@@ -109,4 +109,4 @@ const Mod58 = ({data, isInWorkSpace, sheetNo}) => {
 	);
 };
 
-export default Mod58;
+export default Mod59;

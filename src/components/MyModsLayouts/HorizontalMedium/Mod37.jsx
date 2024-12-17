@@ -4,7 +4,7 @@ import Text              from "components/LayoutHandler/Text";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
-const Mod60 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod37 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
 	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
@@ -70,4 +70,4 @@ const Mod60 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 	);
 };
 
-export default Mod60;
+export default Mod37;
