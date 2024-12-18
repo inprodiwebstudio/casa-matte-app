@@ -7,17 +7,17 @@ import { textInsertion } from "helpers";
 
 const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
-	const defaultTitle02 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>FRANCIA</span></p>";
+	const defaultTitle02 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Aitana-Regular;'>FRANCIA</span></p>";
 
-	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>TURQUÍA</span></p>";
+	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Aitana-Regular;'>TURQUÍA</span></p>";
 
-	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
+	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
 
-	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>París</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Versalles</span></p>";
+	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>París</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Versalles</span></p>";
 
-	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Capadocia</span></p>";
+	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Capadocia</span></p>";
 
 	return (
 		<Flex
@@ -40,9 +40,9 @@ const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "22px",
-								"regular" : "24px",
-								"grande"  : "26px",
+								"chico"   : "16px",
+								"regular" : "18px",
+								"grande"  : "20px",
 							}}
 							align="left"
 							letterSpacing="3px"
@@ -57,9 +57,9 @@ const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "12px",
-								"regular" : "14px",
-								"grande"  : "16px",
+								"chico"   : "10px",
+								"regular" : "12px",
+								"grande"  : "14px",
 							}}
 							align="left"
 							gapSpacing="10px"
@@ -79,9 +79,9 @@ const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "22px",
-								"regular" : "24px",
-								"grande"  : "26px",
+								"chico"   : "16px",
+								"regular" : "18px",
+								"grande"  : "20px",
 							}}
 							align="left"
 							letterSpacing="3px"
@@ -96,9 +96,9 @@ const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "12px",
-								"regular" : "14px",
-								"grande"  : "16px",
+								"chico"   : "10px",
+								"regular" : "12px",
+								"grande"  : "14px",
 							}}
 							align="left"
 							gapSpacing="10px"
@@ -118,9 +118,9 @@ const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "22px",
-								"regular" : "24px",
-								"grande"  : "26px",
+								"chico"   : "10px",
+								"regular" : "12px",
+								"grande"  : "14px",
 							}}
 							align="left"
 							letterSpacing="3px"
@@ -135,9 +135,9 @@ const Mod40 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "12px",
-								"regular" : "14px",
-								"grande"  : "16px",
+								"chico"   : "10px",
+								"regular" : "12px",
+								"grande"  : "14px",
 							}}
 							align="left"
 							gapSpacing="10px"

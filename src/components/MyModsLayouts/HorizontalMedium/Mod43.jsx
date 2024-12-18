@@ -8,7 +8,7 @@ import { textInsertion } from "helpers";
 
 const Mod43 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 20px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>";
+	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>";
 
 	return (
 		<Flex
@@ -31,11 +31,12 @@ const Mod43 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				>
 					<Text
 						sizes={{
-							"chico"   : "18px",
-							"regular" : "20px",
-							"grande"  : "22px",
+							"chico"   : "12px",
+							"regular" : "14px",
+							"grande"  : "16px",
 						}}
 						align="right"
+						letterSpacing={"2px"}
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.SubTitle align="flex-end" />}
 						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}

@@ -7,7 +7,7 @@ import { textInsertion } from "helpers";
 
 const Mod45 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>Odi pullerit. Actus nes consid fur, senatus, essendi enatrum pra, us consum, que quam, ve, quo potimorta trurs con hosus ore dumus ommorunum dium oporat, elum hocul verobu</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Odi pullerit. Actus nes consid fur, senatus, essendi enatrum pra, us consum, que quam, ve, quo potimorta trurs con hosus ore dumus ommorunum dium oporat, elum hocul verobu</span></p>";
 
 	return (
 		<Center
@@ -21,11 +21,11 @@ const Mod45 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			>
 				<Text
 					sizes={{
-						"chico"   : "13px",
-						"regular" : "15px",
-						"grande"  : "17px",
+						"chico"   : "10px",
+						"regular" : "12px",
+						"grande"  : "14px",
 					}}
-					lineHeight="20px"
+					lineHeight="15px"
 					align="center"
 					sheetNo={sheetNo}
 					textShell={() => <TextShell.Body align="center" />}

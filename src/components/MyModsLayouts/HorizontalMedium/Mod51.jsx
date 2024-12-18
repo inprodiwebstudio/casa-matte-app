@@ -8,11 +8,11 @@ import { textInsertion } from "helpers";
 
 const Mod51 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Subtítulo 5</span></p>";
+	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 5</span></p>";
 
 	return (
 		<Stack
-			pb="15%"
+			pb="12%"
 			w="100%"
 			h="100%"
 			spacing="0.10em"
@@ -36,9 +36,9 @@ const Mod51 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			>
 				<Text
 					sizes={{
-						"chico"   : "16px",
-						"regular" : "18px",
-						"grande"  : "20px",
+						"chico"   : "12px",
+						"regular" : "14px",
+						"grande"  : "16px",
 					}}
 					align="right"
 					sheetNo={sheetNo}

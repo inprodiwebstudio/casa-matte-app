@@ -6,9 +6,9 @@ import { textInsertion } from "helpers";
 
 const Mod37 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaulSubtTitle = "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>";
+	const defaulSubtTitle = "<p style='text-align: center;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>";
 
 	return (
 		<Flex
@@ -19,7 +19,7 @@ const Mod37 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			align="flex-end"
 		>
 			<Center w="100%" h="100%">
-				<Stack spacing="0.05em" w="100%">
+				<Stack spacing="0px" w="100%">
 					<div
 						style={{
 							width        : "100%",
@@ -30,9 +30,9 @@ const Mod37 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					>
 						<Text
 							sizes={{
-								"chico"   : "38px",
-								"regular" : "42px",
-								"grande"  : "46px",
+								"chico"   : "28px",
+								"regular" : "30px",
+								"grande"  : "32px",
 							}}
 							sheetNo={sheetNo}
 							letterSpacing="6px"
@@ -51,9 +51,9 @@ const Mod37 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						}}>
 						<Text
 							sizes={{
-								"chico"   : "14px",
-								"regular" : "15px",
-								"grande"  : "16px",
+								"chico"   : "10px",
+								"regular" : "12px",
+								"grande"  : "14px",
 							}}
 							sheetNo={sheetNo}
 							letterSpacing="2px"

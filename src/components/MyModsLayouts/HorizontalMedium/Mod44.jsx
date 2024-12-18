@@ -8,14 +8,14 @@ import { textInsertion } from "helpers";
 
 const Mod44 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>Título 1</span></p>";
+	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>Título 1</span></p>";
 
 	return (
 		<Stack
 			w="100%"
 			h="100%"
-			pl="16%"
-			pr="16%"
+			pl="20%"
+			pr="20%"
 			align="center"
 			justify="center"
 			spacing={"0.5em"}
@@ -40,9 +40,9 @@ const Mod44 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			>
 				<Text
 					sizes={{
-						"chico"   : "40px",
-						"regular" : "42px",
-						"grande"  : "44px",
+						"chico"   : "28px",
+						"regular" : "30px",
+						"grande"  : "32px",
 					}}
 					align="center"
 					letterSpacing="2px"

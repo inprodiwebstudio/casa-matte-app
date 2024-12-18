@@ -7,9 +7,9 @@ import { TextShell }     from "core/components";
 
 
 const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
-	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Subtítulo 3</span></p>";
+	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 3</span></p>";
 
-	const defaultText02 = "<p style='text-align: justify;'><span style='font-size: 15px; font-family: JosefinSans-Light;'>Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper, pharetra odio conubia dictumst malesuada lectus dis penatibus, primis orci dictum sociosqu nam platea parturient cursus.</span></p>";
+	const defaultText02 = "<p style='text-align: justify;'><span style='font-size: 12px; font-family: JosefinSans-Light;'>Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper, pharetra odio conubia dictumst malesuada lectus dis penatibus, primis orci dictum sociosqu nam platea parturient cursus.</span></p>";
 
 
 	return (
@@ -37,9 +37,9 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				>
 					<Text
 						sizes={{
-							"chico"   : "16px",
-							"regular" : "18px",
-							"grande"  : "20px",
+							"chico"   : "12px",
+							"regular" : "14px",
+							"grande"  : "16px",
 						}}
 						align="left"
 						letterSpacing="3px"
@@ -55,12 +55,12 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				<Box w="100%">
 					<Text
 						sizes={{
-							"chico"   : "13px",
-							"regular" : "15px",
-							"grande"  : "18px",
+							"chico"   : "10px",
+							"regular" : "12px",
+							"grande"  : "14px",
 						}}
 						align="justify"
-						lineHeight="18px"
+						lineHeight="15px"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.BodyParagraph width="100%" align="flex-end" />}
 						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}

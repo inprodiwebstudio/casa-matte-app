@@ -7,9 +7,9 @@ import { textInsertion } from "helpers";
 
 const Mod41 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultTitle01 = "<p style='text-align: center;'><span style='font-size: 25px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+	const defaultTitle01 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
-	const defaultIndice01 = "<p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
+	const defaultIndice01 = "<p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
 
 	return (
 		<Flex
@@ -32,9 +32,9 @@ const Mod41 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "23px",
-								"regular" : "25px",
-								"grande"  : "27px",
+								"chico"   : "16px",
+								"regular" : "18px",
+								"grande"  : "20px",
 							}}
 							align="center"
 							letterSpacing="3px"
@@ -49,9 +49,9 @@ const Mod41 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					<div>
 						<Text
 							sizes={{
-								"chico"   : "12px",
-								"regular" : "14px",
-								"grande"  : "16px",
+								"chico"   : "10px",
+								"regular" : "12px",
+								"grande"  : "14px",
 							}}
 							align="center"
 							gapSpacing="10px"
