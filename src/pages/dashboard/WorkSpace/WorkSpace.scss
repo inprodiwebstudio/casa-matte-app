@@ -182,8 +182,8 @@
 			z-index: 1;
 
 			&.horizontal-grande-workSpace {
-				height: 992px;
-				transform: scale(0.57, 0.57);
+				height: 850px;
+				transform: scale(0.6, 0.6);
 
 				@include laptop {
 					transform: scale(0.35, 0.35);
@@ -201,7 +201,7 @@
 				}
 
 				&.onePage {
-					transform: scale(0.6, 0.6);
+					transform: scale(0.75, 0.75);
 					z-index: 1;
 
 					@include big-laptop {

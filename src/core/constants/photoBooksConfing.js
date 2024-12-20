@@ -26,7 +26,7 @@ const photoBooksConfing = {
 					pdfSize          : [100, 100],
 				},
 				grande : {
-					aspectRatio      : [36, 31],
+					aspectRatio      : [496, 425],
 					layoutMods       : {...HorizontalLarge},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],

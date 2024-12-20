@@ -3,6 +3,7 @@ import { PDFViewer, Page, Document} from "@react-pdf/renderer";
 import { connect }                  from "react-redux";
 //Own components
 import { convertToArray } from "helpers";
+import horizontalLarge    from "components/MyModsLayouts/HorizontalLarge";
 import VerticalLarge      from "components/MyModsLayouts/VerticalLarge";
 import VerticalMedium     from "components/MyModsLayouts/VerticalMedium";
 import SquareSmall        from "components/MyModsLayouts/SquareSmall";
@@ -23,6 +24,13 @@ const TestPdf = ({photoBookData}) => {
 				size                  : [850, 991],
 				isInDoublePageLayouts : ["FrontLayout"],
 				modLayouts            : {...VerticalLarge},
+			},
+		},
+		horizontal : {
+			grande : {
+				size                  : [992, 850],
+				isInDoublePageLayouts : ["FrontLayout"],
+				modLayouts            : {...horizontalLarge},
 			},
 		},
 		cuadrado : {
