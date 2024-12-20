@@ -155,6 +155,19 @@ import {
 	Mod57Pdf,
 	Mod58Pdf,
 	Mod59Pdf,
+	Mod60Pdf,
+	Mod61Pdf,
+	Mod62Pdf,
+	Mod63Pdf,
+	Mod64Pdf,
+	Mod65Pdf,
+	Mod66Pdf,
+	Mod67Pdf,
+	Mod68Pdf,
+	Mod69Pdf,
+	Mod70Pdf,
+	Mod71Pdf,
+	Mod72Pdf,
 } from "./PdfMods/Regular";
 
 const HorizontalLarge = {
@@ -657,7 +670,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod60Pdf,
 	},
 	Mod61 : {
 		id           : "Mod61",
@@ -665,7 +678,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod61Pdf,
 	},
 	Mod62 : {
 		id           : "Mod62",
@@ -673,7 +686,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 6,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod62Pdf,
 	},
 	Mod63 : {
 		id           : "Mod63",
@@ -681,7 +694,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 6,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod63Pdf,
 	},
 	Mod64 : {
 		id           : "Mod64",
@@ -689,7 +702,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod64Pdf,
 	},
 	Mod65 : {
 		id           : "Mod65",
@@ -697,7 +710,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 1,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod65Pdf,
 	},
 	Mod66 : {
 		id           : "Mod66",
@@ -705,7 +718,7 @@ const HorizontalLarge = {
 		numberPhotos : 1,
 		numberText   : 1,
 		cat          : "fotosytexto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod66Pdf,
 	},
 	Mod67 : {
 		id           : "Mod67",
@@ -713,7 +726,7 @@ const HorizontalLarge = {
 		numberPhotos : 1,
 		numberText   : 1,
 		cat          : "fotosytexto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod67Pdf,
 	},
 	Mod68 : {
 		id           : "Mod68",
@@ -721,7 +734,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 1,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod68Pdf,
 	},
 	Mod69 : {
 		id           : "Mod69",
@@ -729,7 +742,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 1,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod69Pdf,
 	},
 	Mod70 : {
 		id           : "Mod70",
@@ -737,7 +750,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod70Pdf,
 	},
 	Mod71 : {
 		id           : "Mod71",
@@ -745,7 +758,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 3,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod71Pdf,
 	},
 	Mod72 : {
 		id           : "Mod72",
@@ -753,7 +766,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod72Pdf,
 	},
 	Mod73 : {
 		id           : "Mod73",

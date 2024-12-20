@@ -37,7 +37,11 @@ const Mod62 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					spacing="0.13em"
 					aria-hidden
 				>
-					<div>
+					<div
+						style={{
+							textTransform : "uppercase",
+						}}
+					>
 						<Text
 							sizes={{
 								"chico"   : "22px",
@@ -76,7 +80,11 @@ const Mod62 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					spacing="0.13em"
 					aria-hidden
 				>
-					<div>
+					<div
+						style={{
+							textTransform : "uppercase",
+						}}
+					>
 						<Text
 							sizes={{
 								"chico"   : "22px",
@@ -115,7 +123,11 @@ const Mod62 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					mah="70%"
 					spacing="0.13em"
 				>
-					<div>
+					<div
+						style={{
+							textTransform : "uppercase",
+						}}
+					>
 						<Text
 							sizes={{
 								"chico"   : "22px",

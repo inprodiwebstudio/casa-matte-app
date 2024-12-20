@@ -21,10 +21,11 @@ const Mod61 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			<Stack spacing="0.05em" w="100%">
 				<div
 					style={{
-						width        : "100%",
-						paddingLeft  : "10%",
-						paddingRight : "0%",
-						maxHeight    : "100px",
+						width         : "100%",
+						paddingLeft   : "10%",
+						paddingRight  : "0%",
+						maxHeight     : "100px",
+						textTransform : "uppercase",
 					 }}
 				>
 					<Text
@@ -44,9 +45,10 @@ const Mod61 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				</div>
 				<div
 					style={{
-						width        : "100%",
-						paddingLeft  : "20%",
-						paddingRight : "0%",
+						width         : "100%",
+						paddingLeft   : "20%",
+						paddingRight  : "0%",
+						textTransform : "uppercase",
 					}}>
 					<Text
 						sizes={{

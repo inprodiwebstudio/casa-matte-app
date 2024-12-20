@@ -15,7 +15,9 @@ const Mod64 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 		<Flex
 			w="100%"
 			h="100%"
-			p="4%"
+			p="10%"
+			pl="30%"
+			pr="30%"
 			justify="center"
 			align="center"
 			direction="column"
@@ -23,13 +25,17 @@ const Mod64 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 		>
 			<Stack
 				spacing="0.35em"
-				miw="20%"
+				w={"100%"}
 			>
 				<Stack
 					spacing="0.13em"
 					aria-hidden
 				>
-					<div>
+					<div
+						style={{
+							textTransform : "uppercase",
+						}}
+					>
 						<Text
 							sizes={{
 								"chico"   : "23px",
@@ -39,7 +45,7 @@ const Mod64 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							align="center"
 							letterSpacing="3px"
 							sheetNo={sheetNo}
-							textShell={() => <TextShell.TitleSmall width="100%" align="center" />}
+							textShell={() => <TextShell.TitleSmall width="30%" align="center" />}
 							data={textInsertion(data?.text[0], defaultTitle01, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
@@ -56,7 +62,7 @@ const Mod64 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							align="center"
 							gapSpacing="10px"
 							sheetNo={sheetNo}
-							textShell={() => <TextShell.BodyIndices align="center" />}
+							textShell={() => <TextShell.BodyIndices width="20%" align="center" />}
 							data={textInsertion(data?.text[1], defaultIndice01, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}

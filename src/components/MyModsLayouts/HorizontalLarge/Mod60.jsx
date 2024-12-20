@@ -15,17 +15,18 @@ const Mod60 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			p="8%"
 			w="100%"
 			h="100%"
-			justify="flex-end"
-			align="flex-end"
+			justify="center"
+			align="center"
 		>
 			<Center w="100%" h="100%">
 				<Stack spacing="0.05em" w="100%">
 					<div
 						style={{
-							width        : "100%",
-							paddingLeft  : "10%",
-							paddingRight : "10%",
-							maxHeight    : "100px",
+							width         : "100%",
+							paddingLeft   : "10%",
+							paddingRight  : "10%",
+							maxHeight     : "100px",
+							textTransform : "uppercase",
 					 }}
 					>
 						<Text
@@ -45,9 +46,10 @@ const Mod60 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					</div>
 					<div
 						style={{
-							width        : "100%",
-							paddingLeft  : "20%",
-							paddingRight : "20%",
+							width         : "100%",
+							paddingLeft   : "20%",
+							paddingRight  : "20%",
+							textTransform : "uppercase",
 						}}>
 						<Text
 							sizes={{

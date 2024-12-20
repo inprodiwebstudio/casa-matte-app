@@ -37,6 +37,7 @@ const Mod66 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						}}
 						align="right"
 						sheetNo={sheetNo}
+						letterSpacing={"4px"}
 						textShell={() => <TextShell.SubTitle align="flex-end" />}
 						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
 						isInPaginator={isInPaginator}
