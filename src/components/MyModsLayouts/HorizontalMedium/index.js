@@ -85,6 +85,14 @@ import {
 	Mod34Pdf,
 	Mod35Pdf,
 	Mod36Pdf,
+	Mod37Pdf,
+	Mod38Pdf,
+	Mod39Pdf,
+	Mod40Pdf,
+	Mod41Pdf,
+	Mod42Pdf,
+	Mod43Pdf,
+	Mod44Pdf,
 } from "./PdfMods/Regular";
 
 import Mod60 from "./Mod60";
@@ -451,7 +459,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod37Pdf,
 	},
 	Mod38 : {
 		id           : "Mod38",
@@ -459,7 +467,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod38Pdf,
 	},
 	Mod39 : {
 		id           : "Mod39",
@@ -467,7 +475,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 6,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod39Pdf,
 	},
 	Mod40 : {
 		id           : "Mod40",
@@ -475,7 +483,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 6,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod40Pdf,
 	},
 	Mod41 : {
 		id           : "Mod41",
@@ -483,7 +491,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod41Pdf,
 	},
 	Mod42 : {
 		id           : "Mod42",
@@ -491,7 +499,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 1,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod42Pdf,
 	},
 	Mod43 : {
 		id           : "Mod43",
@@ -499,7 +507,7 @@ const HorizontalLarge = {
 		numberPhotos : 1,
 		numberText   : 1,
 		cat          : "fotosytexto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod43Pdf,
 	},
 	Mod44 : {
 		id           : "Mod44",
@@ -507,7 +515,7 @@ const HorizontalLarge = {
 		numberPhotos : 1,
 		numberText   : 1,
 		cat          : "fotosytexto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod44Pdf,
 	},
 	Mod45 : {
 		id           : "Mod45",
