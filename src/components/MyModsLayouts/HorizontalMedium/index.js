@@ -93,6 +93,7 @@ import {
 	Mod42Pdf,
 	Mod43Pdf,
 	Mod44Pdf,
+	Mod45Pdf,
 } from "./PdfMods/Regular";
 
 import Mod60 from "./Mod60";
@@ -523,7 +524,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 1,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod45Pdf,
 	},
 	Mod46 : {
 		id           : "Mod46",
