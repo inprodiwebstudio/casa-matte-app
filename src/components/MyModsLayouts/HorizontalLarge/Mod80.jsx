@@ -26,7 +26,7 @@ const Mod80 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			>
 				<Stack
 					h="100%"
-					w="calc(30% - 0.05em)"
+					w="calc(70% - 0.05em)"
 				>
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
@@ -37,7 +37,7 @@ const Mod80 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				</Stack>
 				<Stack
 					h="100%"
-					w="calc(70% - 0.05em)"
+					w="calc(30% - 0.05em)"
 				>
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
