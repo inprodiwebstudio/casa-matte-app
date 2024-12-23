@@ -4,6 +4,7 @@ import { connect }                  from "react-redux";
 //Own components
 import { convertToArray } from "helpers";
 import horizontalLarge    from "components/MyModsLayouts/HorizontalLarge";
+import horizontalMedium   from "components/MyModsLayouts/HorizontalMedium";
 import VerticalLarge      from "components/MyModsLayouts/VerticalLarge";
 import VerticalMedium     from "components/MyModsLayouts/VerticalMedium";
 import SquareSmall        from "components/MyModsLayouts/SquareSmall";
@@ -31,6 +32,11 @@ const TestPdf = ({photoBookData}) => {
 				size                  : [992, 850],
 				isInDoublePageLayouts : ["FrontLayout"],
 				modLayouts            : {...horizontalLarge},
+			},
+			mediano : {
+				size                  : [790, 615],
+				isInDoublePageLayouts : ["FrontLayout"],
+				modLayouts            : {...horizontalMedium},
 			},
 		},
 		cuadrado : {

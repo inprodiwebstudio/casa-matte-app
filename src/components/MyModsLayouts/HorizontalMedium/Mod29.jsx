@@ -21,8 +21,8 @@ const Mod29 = ({data, isInWorkSpace, sheetNo}) => {
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
-						imageNo={2}
-						urlImage={data?.photos[2] ?? {}}
+						imageNo={0}
+						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Stack>
 				<Stack

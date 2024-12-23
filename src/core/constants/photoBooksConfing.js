@@ -19,7 +19,7 @@ const photoBooksConfing = {
 					pdfSize          : [100, 100],
 				},
 				mediano : {
-					aspectRatio      : [748, 587],
+					aspectRatio      : [158, 123],
 					layoutMods       : {...HorizontalMedium},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
