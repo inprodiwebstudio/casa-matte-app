@@ -1,0 +1,77 @@
+import {Stack, Flex }    from "@mantine/core";
+import ImgLayout         from "components/LayoutHandler/ImgLayout";
+import Text              from "components/LayoutHandler/Text";
+import { TextShell }     from "core/components";
+import { textInsertion } from "helpers";
+//Own components
+
+
+const Mod37 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+
+	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 32px; font-family: JosefinSans-Light;'>VALPARAÍSO</span></p>";
+
+	const defaultSubtitle = "<p style='text-align: right;'><span style='font-size: 18px; font-family: Inter-Lifght;'>CHILE</span></p>";
+
+	return (
+		<Flex
+			pb="15%"
+			w="100%"
+			h="100%"
+			gap="0.5em"
+			direction="column"
+		>
+			<Stack
+				spacing="0.2em"
+				w="100%"
+				h="100%"
+				align="flex-end"
+				sx={{textTransform : "uppercase"}}
+			>
+				<Stack w="100%" h="100%">
+					<ImgLayout
+						isInWorkSpace={isInWorkSpace}
+						sheetNo={sheetNo}
+						imageNo={0}
+						urlImage={data?.photos[0] ?? {}}
+					/>
+				</Stack>
+				<Stack maw="70%" miw="30%" mr="5%" spacing="0em">
+					<Text
+						sizes={{
+							"chico"   : "30px",
+							"regular" : "32px",
+							"grande"  : "34px",
+						}}
+						align="right"
+						sheetNo={sheetNo}
+						textShell={() => <TextShell.Title />}
+						letterSpacing="3px"
+						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+						textNo={0}
+					/>
+					<Stack>
+						<Text
+							sizes={{
+								"chico"   : "16px",
+								"regular" : "18px",
+								"grande"  : "20px",
+							}}
+							align="right"
+							sheetNo={sheetNo}
+							letterSpacing="2px"
+							textShell={() => <TextShell.SubTitle />}
+							data={textInsertion(data?.text[1], defaultSubtitle, isInWorkSpace)}
+							isInPaginator={isInPaginator}
+							isThumbNail={isThumbNail}
+							textNo={1}
+						/>
+					</Stack>
+				</Stack>
+			</Stack>
+		</Flex>
+	);
+};
+
+export default Mod37;

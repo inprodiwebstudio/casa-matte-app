@@ -146,8 +146,6 @@ const WorkSpace = () => {
 
 	document.onkeydown = undoAndRedoActions;
 
-	console.log(workSpaceSizePage);
-
 	return (
 		<SapceViewHandler />
 	);

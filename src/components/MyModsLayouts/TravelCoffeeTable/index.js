@@ -15,6 +15,27 @@ import Mod13 from "./Mod13";
 import Mod14 from "./Mod14";
 import Mod15 from "./Mod15";
 import Mod16 from "./Mod16";
+import Mod17 from "./Mod17";
+import Mod18 from "./Mod18";
+import Mod19 from "./Mod19";
+import Mod20 from "./Mod20";
+import Mod21 from "./Mod21";
+import Mod22 from "./Mod22";
+import Mod23 from "./Mod23";
+import Mod24 from "./Mod24";
+import Mod25 from "./Mod25";
+import Mod26 from "./Mod26";
+import Mod27 from "./Mod27";
+import Mod28 from "./Mod28";
+import Mod29 from "./Mod29";
+import Mod30 from "./Mod30";
+import Mod31 from "./Mod31";
+import Mod32 from "./Mod32";
+import Mod33 from "./Mod33";
+import Mod34 from "./Mod34";
+import Mod35 from "./Mod35";
+import Mod36 from "./Mod36";
+import Mod37 from "./Mod37";
 
 const TravelCoffeeTable = {
 	Mod1 : {
@@ -127,6 +148,174 @@ const TravelCoffeeTable = {
 		layout       : Mod16,
 		numberPhotos : 4,
 		cat          : "fotos",
+		pdfLayout    : undefined,
+	},
+	Mod17 : {
+		id           : "Mod17",
+		layout       : Mod17,
+		numberPhotos : 0,
+		numberText   : 1,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod18 : {
+		id           : "Mod18",
+		layout       : Mod18,
+		numberPhotos : 0,
+		numberText   : 1,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod19 : {
+		id           : "Mod19",
+		layout       : Mod19,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod20 : {
+		id           : "Mod20",
+		layout       : Mod20,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod21 : {
+		id           : "Mod21",
+		layout       : Mod21,
+		numberPhotos : 0,
+		numberText   : 1,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod22 : {
+		id           : "Mod22",
+		layout       : Mod22,
+		numberPhotos : 0,
+		numberText   : 1,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod23 : {
+		id           : "Mod23",
+		layout       : Mod23,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod24 : {
+		id           : "Mod24",
+		layout       : Mod24,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod25 : {
+		id           : "Mod25",
+		layout       : Mod25,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod26 : {
+		id           : "Mod26",
+		layout       : Mod26,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod27 : {
+		id           : "Mod27",
+		layout       : Mod27,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod28 : {
+		id           : "Mod28",
+		layout       : Mod28,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod29 : {
+		id           : "Mod29",
+		layout       : Mod29,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod30 : {
+		id           : "Mod30",
+		layout       : Mod30,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod31 : {
+		id           : "Mod31",
+		layout       : Mod31,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod32 : {
+		id           : "Mod32",
+		layout       : Mod32,
+		numberPhotos : 0,
+		numberText   : 1,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod33 : {
+		id           : "Mod33",
+		layout       : Mod33,
+		numberPhotos : 0,
+		numberText   : 1,
+		cat          : "texto",
+		pdfLayout    : undefined,
+	},
+	Mod34 : {
+		id           : "Mod34",
+		layout       : Mod34,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "fotosytexto",
+		pdfLayout    : undefined,
+	},
+	Mod35 : {
+		id           : "Mod35",
+		layout       : Mod35,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "fotosytexto",
+		pdfLayout    : undefined,
+	},
+	Mod36 : {
+		id           : "Mod36",
+		layout       : Mod36,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "fotosytexto",
+		pdfLayout    : undefined,
+	},
+	Mod37 : {
+		id           : "Mod37",
+		layout       : Mod37,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "fotosytexto",
 		pdfLayout    : undefined,
 	},
 };
