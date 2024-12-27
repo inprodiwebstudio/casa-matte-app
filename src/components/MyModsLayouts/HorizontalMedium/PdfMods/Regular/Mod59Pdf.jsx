@@ -7,16 +7,16 @@ import ReactDOMServer from "react-dom/server";
 
 import { imgUrlPdf } from "helpers";
 
-const Mod77Pdf = ({text, images}) => {
+const Mod59Pdf = ({text, images}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
-				height       : "850px",
+				height       : "615px",
 				width        : "100%",
-				padding      : "14%",
+				padding      : "22%",
 				paddingLeft  : "12%",
 				paddingRight : "12%",
 			}}
@@ -45,7 +45,7 @@ const Mod77Pdf = ({text, images}) => {
 				>
 					<div
 						style={{
-							width      : "calc(50% - 5px)",
+							width      : "calc(33.33% - 3.333px)",
 							height     : "100%",
 							overflow   : "hidden",
 							background : "#E3E3E3",
@@ -66,7 +66,7 @@ const Mod77Pdf = ({text, images}) => {
 					</div>
 					<div
 						style={{
-							width      : "calc(50% - 5px)",
+							width      : "calc(33.33% - 3.333px)",
 							height     : "100%",
 							overflow   : "hidden",
 							background : "#E3E3E3",
@@ -85,11 +85,32 @@ const Mod77Pdf = ({text, images}) => {
 							)
 						}
 					</div>
+					<div
+						style={{
+							width      : "calc(33.33% - 3.333px)",
+							height     : "100%",
+							overflow   : "hidden",
+							background : "#E3E3E3",
+						}}
+					>
+						{
+							images[2]?.url && (
+								<img
+									src={imgUrlPdf(images[2])}
+									alt="test"
+									style={{
+										objectFit : "cover",
+										height    : "100%",
+									}}
+								/>
+							)
+						}
+					</div>
 				</div>
 				<div
 					style={{
-						marginTop      : "10px",
 						width          : "100%",
+						marginTop      : "10px",
 						maxHeight      : "6%",
 						display        : "flex",
 						justifyContent : "flex-end",
@@ -123,4 +144,4 @@ const Mod77Pdf = ({text, images}) => {
 	);
 };
 
-export default Mod77Pdf;
+export default Mod59Pdf;

@@ -7,18 +7,18 @@ import ReactDOMServer from "react-dom/server";
 
 import { imgUrlPdf } from "helpers";
 
-const Mod76Pdf = ({text, images}) => {
+const Mod52Pdf = ({text, images}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
-				height       : "850px",
+				height       : "615px",
 				width        : "100%",
-				padding      : "8%",
-				paddingLeft  : "23%",
-				paddingRight : "23%",
+				padding      : "13%",
+				paddingLeft  : "30%",
+				paddingRight : "30%",
 			}}
 		>
 			<div
@@ -27,14 +27,14 @@ const Mod76Pdf = ({text, images}) => {
 					height         : "100%",
 					display        : "flex",
 					flexDirection  : "column",
-					justifyContent : "center",
-					alignItems     : "center",
-					gap            : "10px",
+					justifyContent : "flex-end",
+					alignItems     : "flex-end",
+					gap            : "20px",
 				}}
 			>
 				<div
 					style={{
-						height     : "calc(50% - 5px)",
+						height     : "100%",
 						width      : "100%",
 						overflow   : "hidden",
 						background : "#E3E3E3",
@@ -55,34 +55,12 @@ const Mod76Pdf = ({text, images}) => {
 				</div>
 				<div
 					style={{
-						height     : "calc(50% - 5px)",
-						width      : "100%",
-						overflow   : "hidden",
-						background : "#E3E3E3",
-					}}
-				>
-					{
-						images[1]?.url && (
-							<img
-								src={imgUrlPdf(images[1])}
-								alt="test"
-								style={{
-									objectFit : "cover",
-									height    : "100%",
-								}}
-							/>
-						)
-					}
-				</div>
-				<div
-					style={{
-						marginTop      : "10px",
 						width          : "100%",
 						maxHeight      : "6%",
 						paddingRight   : "5%",
 						display        : "flex",
-						justifyContent : "center",
-						alignItems     : "center",
+						justifyContent : "flex-end",
+						alignItems     : "flex-end",
 						overflow       : "hidden",
 					}}
 				>
@@ -112,4 +90,4 @@ const Mod76Pdf = ({text, images}) => {
 	);
 };
 
-export default Mod76Pdf;
+export default Mod52Pdf;

@@ -7,18 +7,18 @@ import ReactDOMServer from "react-dom/server";
 
 import { imgUrlPdf } from "helpers";
 
-const Mod76Pdf = ({text, images}) => {
+const Mod53Pdf = ({text, images}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
-				height       : "850px",
+				height       : "615px",
 				width        : "100%",
 				padding      : "8%",
-				paddingLeft  : "23%",
-				paddingRight : "23%",
+				paddingLeft  : "28%",
+				paddingRight : "28%",
 			}}
 		>
 			<div
@@ -112,4 +112,4 @@ const Mod76Pdf = ({text, images}) => {
 	);
 };
 
-export default Mod76Pdf;
+export default Mod53Pdf;

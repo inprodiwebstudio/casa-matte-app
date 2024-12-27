@@ -73,9 +73,9 @@ const Mod78Pdf = ({text, images}) => {
 						}}
 					>
 						{
-							images[0]?.url && (
+							images[1]?.url && (
 								<img
-									src={imgUrlPdf(images[0])}
+									src={imgUrlPdf(images[1])}
 									alt="test"
 									style={{
 										objectFit : "cover",
@@ -100,6 +100,7 @@ const Mod78Pdf = ({text, images}) => {
 					<div
 						style={{
 							letterSpacing : "0.5px",
+							textTransform : "uppercase",
 						}}
 						dangerouslySetInnerHTML={{
 							__html : `<style>

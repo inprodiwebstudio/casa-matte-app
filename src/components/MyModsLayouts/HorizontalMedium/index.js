@@ -95,6 +95,20 @@ import {
 	Mod44Pdf,
 	Mod45Pdf,
 	Mod46Pdf,
+	Mod47Pdf,
+	Mod48Pdf,
+	Mod49Pdf,
+	Mod50Pdf,
+	Mod51Pdf,
+	Mod52Pdf,
+	Mod53Pdf,
+	Mod54Pdf,
+	Mod55Pdf,
+	Mod56Pdf,
+	Mod57Pdf,
+	Mod58Pdf,
+	Mod59Pdf,
+	Mod60Pdf,
 } from "./PdfMods/Regular";
 
 import Mod60 from "./Mod60";
@@ -541,7 +555,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod47Pdf,
 	},
 	Mod48 : {
 		id           : "Mod48",
@@ -549,7 +563,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 3,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod48Pdf,
 	},
 	Mod49 : {
 		id           : "Mod49",
@@ -557,7 +571,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 2,
 		cat          : "texto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod49Pdf,
 	},
 	Mod50 : {
 		id           : "Mod50",
@@ -565,7 +579,7 @@ const HorizontalLarge = {
 		numberPhotos : 1,
 		numberText   : 1,
 		cat          : "fotosytexto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod50Pdf,
 	},
 	Mod51 : {
 		id           : "Mod51",
@@ -573,7 +587,7 @@ const HorizontalLarge = {
 		numberPhotos : 0,
 		numberText   : 1,
 		cat          : "fotosytexto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod51Pdf,
 	},
 	Mod52 : {
 		id           : "Mod52",
@@ -581,7 +595,7 @@ const HorizontalLarge = {
 		numberPhotos : 1,
 		numberText   : 1,
 		cat          : "fotosytexto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod52Pdf,
 	},
 	Mod53 : {
 		id           : "Mod53",
@@ -589,7 +603,7 @@ const HorizontalLarge = {
 		numberPhotos : 2,
 		numberText   : 1,
 		cat          : "fotosytexto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod53Pdf,
 	},
 	Mod54 : {
 		id           : "Mod54",
@@ -597,7 +611,7 @@ const HorizontalLarge = {
 		numberPhotos : 2,
 		numberText   : 1,
 		cat          : "fotosytexto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod54Pdf,
 	},
 	Mod55 : {
 		id           : "Mod55",
@@ -605,7 +619,7 @@ const HorizontalLarge = {
 		numberPhotos : 2,
 		numberText   : 1,
 		cat          : "fotosytexto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod55Pdf,
 	},
 	Mod56 : {
 		id           : "Mod56",
@@ -613,7 +627,7 @@ const HorizontalLarge = {
 		numberPhotos : 2,
 		numberText   : 1,
 		cat          : "fotosytexto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod56Pdf,
 	},
 	Mod57 : {
 		id           : "Mod57",
@@ -621,7 +635,7 @@ const HorizontalLarge = {
 		numberPhotos : 2,
 		numberText   : 1,
 		cat          : "fotosytexto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod57Pdf,
 	},
 	Mod58 : {
 		id           : "Mod58",
@@ -629,7 +643,7 @@ const HorizontalLarge = {
 		numberPhotos : 3,
 		numberText   : 1,
 		cat          : "fotosytexto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod58Pdf,
 	},
 	Mod59 : {
 		id           : "Mod59",
@@ -637,7 +651,7 @@ const HorizontalLarge = {
 		numberPhotos : 3,
 		numberText   : 1,
 		cat          : "fotosytexto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod59Pdf,
 	},
 	Mod60 : {
 		id           : "Mod60",
@@ -645,7 +659,7 @@ const HorizontalLarge = {
 		numberPhotos : 4,
 		numberText   : 1,
 		cat          : "fotosytexto",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod60Pdf,
 	},
 };
 

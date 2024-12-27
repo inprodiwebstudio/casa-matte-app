@@ -45,7 +45,7 @@ const Mod80Pdf = ({text, images}) => {
 				>
 					<div
 						style={{
-							width      : "calc(70% - 5px)",
+							width      : "calc(30% - 5px)",
 							height     : "100%",
 							overflow   : "hidden",
 							background : "#E3E3E3",
@@ -66,16 +66,16 @@ const Mod80Pdf = ({text, images}) => {
 					</div>
 					<div
 						style={{
-							width      : "calc(30% - 5px)",
+							width      : "calc(70% - 5px)",
 							height     : "100%",
 							overflow   : "hidden",
 							background : "#E3E3E3",
 						}}
 					>
 						{
-							images[0]?.url && (
+							images[1]?.url && (
 								<img
-									src={imgUrlPdf(images[0])}
+									src={imgUrlPdf(images[1])}
 									alt="test"
 									style={{
 										objectFit : "cover",
