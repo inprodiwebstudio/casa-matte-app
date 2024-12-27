@@ -10,18 +10,18 @@ const Mod34 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
 	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 32px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
 
 	return (
 		<Flex
-			p="10%"
-			pt="13%"
-			pb="13%"
+			p="20%"
+			pt="8%"
+			pb="8%"
 			w="100%"
 			h="100%"
 			justify="center"
 			align="center"
-			gap="0.5em"
+			gap="0.2em"
 			direction="column"
 		>
 			<Stack
@@ -61,9 +61,9 @@ const Mod34 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				<div>
 					<Text
 						sizes={{
-							"chico"   : "16px",
-							"regular" : "18px",
-							"grande"  : "20px",
+							"chico"   : "13px",
+							"regular" : "15px",
+							"grande"  : "17px",
 						}}
 						align="center"
 						sheetNo={sheetNo}
