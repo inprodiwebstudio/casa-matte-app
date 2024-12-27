@@ -401,10 +401,10 @@ const AppShell = ({
 
 
 	useEffect(() => {
-		if ((photobookData?.meta === "TRAVEL COFFEE TABLE PHOTOBOOK")) {
-			navigate("/notfound/layouts");
-			return;
-		}
+		// if ((photobookData?.meta === "TRAVEL COFFEE TABLE PHOTOBOOK")) {
+		// 	navigate("/notfound/layouts");
+		// 	return;
+		// }
 		if (!userId && photobookData?.author) {
 			dispatch(authSlice.actions.setUserId(photobookData?.author));
 		}

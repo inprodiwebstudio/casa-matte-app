@@ -19,6 +19,7 @@ const WorkSpace = () => {
 	const [ myWorkSpaceData, setMyWorkSpaceData ] = useState({});
 
 	const workSpaceData = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
+	const productPhotoBook = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
 	const workSpaceFrontPage = useSelector((state) => state.workSpaceSlice.data?.frontPage, shallowEqual);
 	const workSpaceFormatPage = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
 	const workSpaceSizePage = useSelector((state) => state.workSpaceSlice.data?.sizePhotoBook, shallowEqual);
@@ -43,6 +44,13 @@ const WorkSpace = () => {
 		}
 	}
 
+	const handlerTypeProductFormat = () => {
+		if (productPhotoBook === "travelcoffeetable ") {
+			return "travel-coffee-table";
+		}
+		return `${workSpaceFormatPage}-${workSpaceSizePage}`;
+	};
+
 	const SapceViewHandler = () => {
 		if (!isLoggin) {
 			return (
@@ -63,7 +71,7 @@ const WorkSpace = () => {
 					{
 						convertToArray({...workSpaceData}).map((page, index) => (
 							<div className="photoBookContainer" key={index}>
-								<div className={`pagesPreviewPhotoBook ${workSpaceFormatPage}-${workSpaceSizePage}-preview`}>
+								<div className={`pagesPreviewPhotoBook ${handlerTypeProductFormat()}-preview`}>
 									<BookPages
 										isInWorkSpcae={true}
 										loading={isLoading}
@@ -108,7 +116,7 @@ const WorkSpace = () => {
 								</div>
 							</div>
 						</div>
-						<div className={`ghost-canva ${workSpaceFormatPage}-${workSpaceSizePage}-workSpace ${(!myWorkSpaceData?.sheet2 && (myWorkSpaceData?.id !== "FrontLayout")) && "onePage"}`}>
+						<div className={`ghost-canva ${handlerTypeProductFormat()}-workSpace ${(!myWorkSpaceData?.sheet2 && (myWorkSpaceData?.id !== "FrontLayout")) && "onePage"}`}>
 							<BookPages
 								isInWorkSpcae={true}
 								loading={isLoading}
@@ -137,6 +145,8 @@ const WorkSpace = () => {
 	}, [pageId]);
 
 	document.onkeydown = undoAndRedoActions;
+
+	console.log(workSpaceSizePage);
 
 	return (
 		<SapceViewHandler />

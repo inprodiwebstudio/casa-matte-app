@@ -14,7 +14,7 @@ import { LoginNotification, PostingConfig } from "Notifications";
 import { TextInput, PasswordInput, Button } from "core/components";
 import "./LoginCard.scss";
 import { convertToObject, isValidArray }    from "helpers";
-import { useNavigate }                      from "react-router";
+// import { useNavigate }                      from "react-router";
 
 const schema = Yup.object().shape({
 	username : Yup.string().required("El campo es obligatorio"),
@@ -28,7 +28,7 @@ const LoginCard = () => {
 
 	const userToken = useSelector((state) => state.authSlice.token, shallowEqual);
 
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
 	const [loginMutation, loginMutationResult] = genericApi.useSubmitDataMutation();
 	const [ loading, setLoading ] = useState(false);
@@ -266,10 +266,10 @@ const LoginCard = () => {
 
 			if (!photoBookMeta) throw new Error("Ocurrio un problema, el metadato no existe o presenta algun conflicto");
 
-			if ((photoBookMeta?.modelo === "TRAVEL COFFEE TABLE PHOTOBOOK")) {
-				navigate("/notfound/layouts");
-				return;
-			}
+			// if ((photoBookMeta?.modelo === "TRAVEL COFFEE TABLE PHOTOBOOK")) {
+			// 	navigate("/notfound/layouts");
+			// 	return;
+			// }
 
 			const isAvailableConfigPhotoBook = photoBookMeta?.config && (photoBookMeta?.config !== "");
 

@@ -1,11 +1,12 @@
 
 //LayoutsMods
-import VerticalLarge    from "components/MyModsLayouts/VerticalLarge";
-import SquareLarge      from "components/MyModsLayouts/SquareLarge";
-import VerticalMedium   from "components/MyModsLayouts/VerticalMedium";
-import HorizontalLarge  from "components/MyModsLayouts/HorizontalLarge";
-import SquareSmall      from "components/MyModsLayouts/SquareSmall";
-import HorizontalMedium from "components/MyModsLayouts/HorizontalMedium";
+import VerticalLarge     from "components/MyModsLayouts/VerticalLarge";
+import SquareLarge       from "components/MyModsLayouts/SquareLarge";
+import VerticalMedium    from "components/MyModsLayouts/VerticalMedium";
+import HorizontalLarge   from "components/MyModsLayouts/HorizontalLarge";
+import SquareSmall       from "components/MyModsLayouts/SquareSmall";
+import TravelCoffeeTable from "components/MyModsLayouts/TravelCoffeeTable";
+import HorizontalMedium  from "components/MyModsLayouts/HorizontalMedium";
 
 const photoBooksConfing = {
 	white : {
@@ -419,6 +420,19 @@ const photoBooksConfing = {
 				mediano : {
 					aspectRatio      : [17, 22],
 					layoutMods       : {...VerticalMedium},
+					frontLayouts     : {},
+					modsInDoublePage : ["FrontLayout"],
+					pdfSize          : [100, 100],
+				},
+			},
+		},
+	},
+	"travelcoffeetable " : {
+		vertical : {
+			sizes : {
+				grande : {
+					aspectRatio      : [708, 815],
+					layoutMods       : {...TravelCoffeeTable},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [100, 100],
