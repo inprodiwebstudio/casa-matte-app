@@ -10,6 +10,7 @@ import { convertToArray, isValidArray, convertToObject, bindAll } from "helpers"
 import { ScrollBar }                                              from "core/components";
 import FrontPage                                                  from "./FrontPage";
 import "./PaginatorBar.scss";
+import { openContextModal }                                       from "@mantine/modals";
 
 const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, loading }) => {
 	const [ pageList, setPageList ] = useState({
@@ -100,10 +101,12 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 	}, [pagesData]);
 
 	const handleDelete = (pageId, index) => {
-		if (numberOfPages > minPages) {
-			console.log("To delete");
-			const myPagesData = {...pagesData};
-			const dataDelete = {...myPagesData[pageId]};
+		const myPagesData = {...pagesData};
+		const dataDelete = {...myPagesData[pageId]};
+
+		const counterPages = dataDelete.sheet2 ? 2 : 1;
+
+		if ((numberOfPages - counterPages) > minPages) {
 			delete myPagesData[pageId];
 			const listOfpages = convertToArray(myPagesData);
 			const newlistData = listOfpages.map((data, index) => {
@@ -134,6 +137,10 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 			workSpaceSlice.deletePage({quantityDelete : 1});
 			return;
 		}
+		openContextModal({
+			modal      : "minPagesLimit",
+			innerProps : {},
+		});
 	};
 
 	return (
