@@ -26,7 +26,13 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 				w={"100%"}
 				align="center"
 			>
-				<Stack w="80%">
+				<Stack
+					w="80%"
+					sx={{
+						textTransform : "uppercase",
+						overflow      : "hidden",
+					}}
+				>
 					<Text
 						sizes={{
 							"chico"   : "38px",
@@ -42,7 +48,13 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 						textNo={0}
 					/>
 				</Stack>
-				<Stack w="50%">
+				<Stack
+					w="50%"
+					sx={{
+						textTransform : "uppercase",
+						overflow      : "hidden",
+					}}
+				>
 					<Text
 						sizes={{
 							"chico"   : "16px",
