@@ -2,12 +2,16 @@ import { Button, Text, TextInput }                from "@mantine/core";
 import { useEffect, useState }                    from "react";
 import LogoCasaMatte                              from "Resources/images/casaMatteLogo.svg";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { workSpaceSlice }                         from "store/Slices";
+
+import { workSpaceSlice, authSlice } from "store/Slices";
+
+import { genericApi } from "store/api/genericApi";
 import "./Header.scss";
 //Mantine
 // import { openContextModal } from "@mantine/modals";
 
 //Own components
+import { PostingConfig }    from "Notifications";
 import { dayjs }            from "helpers";
 import { openContextModal } from "@mantine/modals";
 
@@ -19,7 +23,10 @@ const Header = () => {
 
 	const [ date, setDate ] = useState(undefined);
 
+	const [ projectName, setProjectName ] = useState(undefined);
+
 	const isPreviewActive = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
+	const postIdphotoBook = useSelector((state) => state.authSlice?.user?.postId, shallowEqual);
 	const productName = useSelector((state) => state.workSpaceSlice.data.productName, shallowEqual);
 	const projectTitle = useSelector((state) => state.workSpaceSlice.data.projectTittle, shallowEqual);
 	const lastModified = useSelector((state) => state.workSpaceSlice.data.modified, shallowEqual);
@@ -27,6 +34,7 @@ const Header = () => {
 	const isLoggedIn = useSelector((state) => state.authSlice.loggedIn, shallowEqual);
 	const isLoadingWorspaceData = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
 
+	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
 	const handlerClickPreview = () => () => {
 		dispatch(workSpaceSlice.actions.togglePreview());
 	};
@@ -38,6 +46,21 @@ const Header = () => {
 		}, 2000);
 	};
 
+	const handlerChangeTitleProject = async (valueName) => {
+		setProjectName(valueName);
+		await dataMutation({
+			module : "wp-json/wp/v2/photobook-2-0",
+			data   : {
+				title : {
+					rendered : valueName,
+					raw      : valueName,
+				},
+			},
+			id     : postIdphotoBook,
+			method : "PUT",
+		});
+	};
+
 	useEffect(() => {
 		if (lastModified) {
 			setDate(lastModified);
@@ -47,6 +70,31 @@ const Header = () => {
 	useEffect(() => {
 		setDate(new Date);
 	}, [isModifiedData]);
+
+	useEffect(() => {
+		if (projectTitle && (projectTitle !== "")) {
+			setProjectName(projectTitle);
+		}
+	}, [projectTitle]);
+
+	useEffect(() => {
+		if (dataMutationResult.isUninitialized) return;
+
+		if (dataMutationResult.isError) {
+			const status = dataMutationResult.error?.status;
+
+			switch (status) {
+				case 403:
+					PostingConfig["post"][403]();
+					dispatch(authSlice.actions.clearUserData());
+					break;
+				default:
+					PostingConfig["post"][500]();
+					break;
+			}
+		}
+
+	}, [dataMutationResult]);
 
 	return (
 		<div className="Header">
@@ -65,7 +113,8 @@ const Header = () => {
 								>
 									<TextInput
 										variant="unstyled"
-										defaultValue={projectTitle ?? ""}
+										value={projectName}
+										onChange={(e) => handlerChangeTitleProject(e.target.value)}
 										sx={{
 											fontSize   : "14px",
 											fontWeight : "400",
