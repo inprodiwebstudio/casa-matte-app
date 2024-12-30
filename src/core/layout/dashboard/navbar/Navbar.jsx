@@ -26,6 +26,13 @@ const Navbar = ({workSpaceSlice}) => {
 	};
 
 	const handlerAddPage = () => {
+		if (counterPages() >= 400) {
+			openContextModal({
+				modal      : "noMorePages",
+				innerProps : {},
+			});
+			return;
+		}
 		if (counterPages() >= Number(maxRangePages)) {
 			openContextModal({
 				modal      : "addNewPageConfirmation",

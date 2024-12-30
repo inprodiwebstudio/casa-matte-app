@@ -344,6 +344,7 @@ export const workSpaceSlice = createSlice({
 			listOfPages.splice(validIndexPage(), slicePagesToReorder.length, ...newPagesReordered);
 
 			state.data.pages = convertToObject([pagesObjToArray[0], ...listOfPages]);
+			state.data.numberOfPages = state.data.numberOfPages + 1;
 			const history = new History();
 			history.undoStack = state.history.undo;
 			const undoNewData = {

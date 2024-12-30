@@ -141,7 +141,7 @@ const LoginCard = () => {
 				},
 			},
 			numberOfPages,
-			minPages      : 40,
+			minPages      : (pasta === "Dura") ? 40 : 10,
 			maxPages      : numberOfPages,
 			currentPage   : "page1",
 			basePrice     : price.replace(" ", ""),

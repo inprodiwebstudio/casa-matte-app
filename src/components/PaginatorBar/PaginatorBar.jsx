@@ -100,7 +100,8 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 	}, [pagesData]);
 
 	const handleDelete = (pageId, index) => {
-		if (numberOfPages !== minPages) {
+		if (numberOfPages > minPages) {
+			console.log("To delete");
 			const myPagesData = {...pagesData};
 			const dataDelete = {...myPagesData[pageId]};
 			delete myPagesData[pageId];
