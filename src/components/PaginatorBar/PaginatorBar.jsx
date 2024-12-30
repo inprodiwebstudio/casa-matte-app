@@ -12,7 +12,7 @@ import FrontPage                                                  from "./FrontP
 import "./PaginatorBar.scss";
 import { openContextModal }                                       from "@mantine/modals";
 
-const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, loading }) => {
+const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, loading, productType}) => {
 	const [ pageList, setPageList ] = useState({
 		pages    : {},
 		pagesIds : [],
@@ -153,7 +153,11 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 					</ScrollBar>
 				) : (
 					<ScrollBar>
-						<FrontPage />
+						{
+							(productType === "white") && (
+								<FrontPage />
+							)
+						}
 						<ItemPage
 							isFixedPage
 							handleDelete={handleDelete}
@@ -200,6 +204,7 @@ const mapStateToProps = ({ workSpaceSlice }) => ({
 	pagesData     : workSpaceSlice?.data?.pages ?? {},
 	minPages      : workSpaceSlice?.data?.minPages ?? 0,
 	numberOfPages : workSpaceSlice?.data?.numberOfPages ?? 0,
+	productType   : workSpaceSlice?.data?.product ?? 0,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (PaginatorBar);
