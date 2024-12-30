@@ -431,7 +431,7 @@ const photoBooksConfing = {
 		vertical : {
 			sizes : {
 				grande : {
-					aspectRatio      : [708, 815],
+					aspectRatio      : [354, 425],
 					layoutMods       : {...TravelCoffeeTable},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],

@@ -8,11 +8,20 @@ import horizontalMedium   from "components/MyModsLayouts/HorizontalMedium";
 import VerticalLarge      from "components/MyModsLayouts/VerticalLarge";
 import VerticalMedium     from "components/MyModsLayouts/VerticalMedium";
 import SquareSmall        from "components/MyModsLayouts/SquareSmall";
+import TravelCoffeeTable  from "components/MyModsLayouts/TravelCoffeeTable";
 import SquareLarge        from "components/MyModsLayouts/SquareLarge";
 
 
 const TestPdf = ({photoBookData}) => {
 	const listPages = convertToArray(photoBookData?.pages);
+
+	const handlerFormat = (productType) => {
+		if ( productType === "travelcoffeetable ") {
+			return "travelcoffeetable";
+		}
+		return photoBookData?.format;
+	};
+
 
 	const photoBookTypes = {
 		vertical : {
@@ -56,6 +65,13 @@ const TestPdf = ({photoBookData}) => {
 			isInDoublePageLayouts : ["FrontLayout"],
 			modLayouts            : {...SquareSmall},
 		},
+		travelcoffeetable : {
+			grande : {
+				size                  : [708, 850],
+				isInDoublePageLayouts : ["FrontLayout"],
+				modLayouts            : {...TravelCoffeeTable},
+			},
+		},
 	};
 
 	// const isLayoutDoublePage = (modLayout, witheList) => {
@@ -64,11 +80,11 @@ const TestPdf = ({photoBookData}) => {
 	// };
 
 	const getComponent = (pageData) => {
-		const Sheet1Layout = photoBookTypes[photoBookData?.format]?.[photoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet1?.layoutType]?.pdfLayout;
+		const Sheet1Layout = photoBookTypes[handlerFormat(photoBookData?.product)]?.[photoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet1?.layoutType]?.pdfLayout;
 
-		const Sheet2Layout = photoBookTypes[photoBookData?.format]?.[photoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet2?.layoutType]?.pdfLayout;
+		const Sheet2Layout = photoBookTypes[handlerFormat(photoBookData?.product)]?.[photoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet2?.layoutType]?.pdfLayout;
 
-		const sizePages = photoBookTypes[photoBookData?.format]?.[photoBookData?.sizePhotoBook]?.size;
+		const sizePages = photoBookTypes[handlerFormat(photoBookData?.product)]?.[photoBookData?.sizePhotoBook]?.size;
 
 		// const isInDoublePageLayout = isLayoutDoublePage(pageData?.sheet1?.layoutType, photoBookTypes[photoBookData?.sizePhotoBook]?.isInDoublePageLayouts);
 
