@@ -391,7 +391,7 @@ const AppShell = ({
 				tittle : "Texto de prueba",
 				status : "publish",
 				meta   : {
-					config : parseSendData({...workSpaceData, minPages : (workSpaceData?.pasta === "Dura") ? 40 : 20}),
+					config : parseSendData({...workSpaceData, minPages : (workSpaceData?.pasta === "Dura") ? 25 : 10}),
 				},
 			},
 			id     : postIdphotoBook,

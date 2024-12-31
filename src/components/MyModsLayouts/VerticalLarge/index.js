@@ -78,7 +78,6 @@ import {
 	Mod19Pdf,
 	Mod20Pdf,
 	Mod21Pdf,
-	// Mod22Pdf,
 	Mod23Pdf,
 	Mod24Pdf,
 	Mod25Pdf,
@@ -88,7 +87,6 @@ import {
 	Mod29Pdf,
 	Mod30Pdf,
 	Mod31Pdf,
-	// Mod32Pdf,
 	Mod33Pdf,
 	Mod34Pdf,
 	Mod35Pdf,
@@ -118,6 +116,14 @@ import {
 
 import {
 	Mod01FrontPdf,
+	Mod02FrontPdf,
+	Mod03FrontPdf,
+	Mod04FrontPdf,
+	Mod05FrontPdf,
+	Mod06FrontPdf,
+	Mod07FrontPdf,
+	Mod08FrontPdf,
+	Mod09FrontPdf,
 } from "./PdfMods/Fronts";
 
 import {
@@ -148,7 +154,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod02FrontPdf,
 	},
 	FrontMod3 : {
 		id           : "FrontMod3",
@@ -156,7 +162,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 3,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod03FrontPdf,
 	},
 	FrontMod4 : {
 		id           : "FrontMod4",
@@ -164,7 +170,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod04FrontPdf,
 	},
 	FrontMod5 : {
 		id           : "FrontMod5",
@@ -172,7 +178,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod05FrontPdf,
 	},
 	FrontMod6 : {
 		id           : "FrontMod6",
@@ -180,7 +186,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod06FrontPdf,
 	},
 	FrontMod7 : {
 		id           : "FrontMod7",
@@ -188,7 +194,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod07FrontPdf,
 	},
 	FrontMod8 : {
 		id           : "FrontMod8",
@@ -196,7 +202,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod08FrontPdf,
 	},
 	FrontMod9 : {
 		id           : "FrontMod9",
@@ -204,7 +210,7 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		numberText   : 1,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod09FrontPdf,
 	},
 	FrontMod10 : {
 		id           : "FrontMod10",
