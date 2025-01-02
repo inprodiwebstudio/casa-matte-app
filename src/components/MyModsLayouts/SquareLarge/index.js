@@ -113,7 +113,20 @@ import {
 	Mod54Pdf,
 	Mod55Pdf,
 	Mod56Pdf,
-} from "./PdfMods";
+} from "./PdfMods/Regular";
+
+import {
+	Mod01FrontPdf,
+	Mod02FrontPdf,
+	Mod03FrontPdf,
+	Mod04FrontPdf,
+	Mod05FrontPdf,
+	Mod06FrontPdf,
+	Mod07FrontPdf,
+	Mod08FrontPdf,
+	Mod09FrontPdf,
+	Mod10FrontPdf,
+} from "./PdfMods/Fronts";
 
 import {
 	FrontMod1,
@@ -137,7 +150,7 @@ const SquareLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod01FrontPdf,
 	},
 	FrontMod2 : {
 		id           : "FrontMod2",
@@ -145,7 +158,7 @@ const SquareLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod02FrontPdf,
 	},
 	FrontMod3 : {
 		id           : "FrontMod3",
@@ -153,7 +166,7 @@ const SquareLarge = {
 		numberPhotos : 1,
 		numberText   : 3,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod03FrontPdf,
 	},
 	FrontMod4 : {
 		id           : "FrontMod4",
@@ -161,7 +174,7 @@ const SquareLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod04FrontPdf,
 	},
 	FrontMod5 : {
 		id           : "FrontMod5",
@@ -169,7 +182,7 @@ const SquareLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod05FrontPdf,
 	},
 	FrontMod6 : {
 		id           : "FrontMod6",
@@ -177,7 +190,7 @@ const SquareLarge = {
 		numberPhotos : 1,
 		numberText   : 1,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod06FrontPdf,
 	},
 	FrontMod7 : {
 		id           : "FrontMod7",
@@ -185,7 +198,7 @@ const SquareLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod07FrontPdf,
 	},
 	FrontMod8 : {
 		id           : "FrontMod8",
@@ -193,7 +206,7 @@ const SquareLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod08FrontPdf,
 	},
 	FrontMod9 : {
 		id           : "FrontMod9",
@@ -201,7 +214,7 @@ const SquareLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod09FrontPdf,
 	},
 	FrontMod10 : {
 		id           : "FrontMod10",
@@ -209,7 +222,7 @@ const SquareLarge = {
 		numberPhotos : 1,
 		numberText   : 1,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod10FrontPdf,
 	},
 	FrontMod11 : {
 		id           : "FrontMod11",

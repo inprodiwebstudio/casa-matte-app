@@ -54,6 +54,7 @@ const TestPdf = ({photoBookData}) => {
 		cuadrado : {
 			grande : {
 				size                  : [850, 850],
+				frontSize             : [850, 850],
 				isInDoublePageLayouts : ["FrontLayout"],
 				modLayouts            : {...SquareLarge},
 			},
