@@ -60,6 +60,7 @@ const TestPdf = ({photoBookData}) => {
 			},
 			chico : {
 				size                  : [595, 595],
+				frontSize             : [595, 595],
 				isInDoublePageLayouts : ["FrontLayout"],
 				modLayouts            : {...SquareSmall},
 			},
