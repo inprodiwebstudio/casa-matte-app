@@ -124,6 +124,7 @@ import {
 	Mod07FrontPdf,
 	Mod08FrontPdf,
 	Mod09FrontPdf,
+	Mod10FrontPdf,
 } from "./PdfMods/Fronts";
 
 import {
@@ -216,9 +217,9 @@ const VerticalLarge = {
 		id           : "FrontMod10",
 		layout       : FrontMod10,
 		numberPhotos : 1,
-		numberText   : 1,
+		numberText   : 2,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod10FrontPdf,
 	},
 	Mod1 : {
 		id           : "Mod1",

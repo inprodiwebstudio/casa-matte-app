@@ -45,6 +45,7 @@ const TestPdf = ({photoBookData}) => {
 			},
 			mediano : {
 				size                  : [790, 615],
+				frontSize             : [797, 612],
 				isInDoublePageLayouts : ["FrontLayout"],
 				modLayouts            : {...horizontalMedium},
 			},
@@ -129,6 +130,8 @@ const TestPdf = ({photoBookData}) => {
 	// 		return getComponent(pageData);
 	// 	}
 	// };
+
+	console.log(sizeFrontPage);
 
 	return (
 		<div style={{height : "80vh"}}>

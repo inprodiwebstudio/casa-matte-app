@@ -4,6 +4,7 @@ import React from "react";
 // eslint-disable-next-line import/extensions
 import Html           from "react-pdf-html";
 import ReactDOMServer from "react-dom/server";
+import { imgUrlPdf }  from "helpers";
 
 
 const Mod09FrontPdf = ({text, images}) => {
@@ -19,25 +20,43 @@ const Mod09FrontPdf = ({text, images}) => {
 		>
 			<div
 				style={{
-					height        : "100%",
-					width         : "100%",
 					display       : "flex",
-					gap           : "0px",
 					flexDirection : "row",
-					background    : "red",
+					position      : "relative",
 				}}
 			>
 				<div
 					style={{
-						width           : "800px",
-						height          : "90px",
-						// overflow       : "hidden",
-						textTransform   : "uppercase",
-						// justifyContent : "flex-start",
-						// alignItems     : "flex-start",
-						transformOrigin : "bottom right",
-						transform       : "rotate(-90deg)",
-						background      : "green",
+						height     : "991px",
+						width      : "760px",
+						overflow   : "hidden",
+						background : "#E3E3E3",
+					}}
+				>
+					{
+						images[0]?.url && (
+							<img
+								src={imgUrlPdf(images[0])}
+								alt="test"
+								style={{
+									objectFit : "cover",
+									height    : "100%",
+								}}
+							/>
+						)
+					}
+				</div>
+				<div
+					style={{
+						position      : "absolute",
+						top           : "0px",
+						left          : "0px",
+						bottom        : "0px",
+						right         : "0px",
+						textTransform : "uppercase",
+						width         : "991px",
+						transform     : "rotate(-90deg)",
+						paddingTop    : "78%",
 					}}
 					dangerouslySetInnerHTML={{
 						__html : `<style>
