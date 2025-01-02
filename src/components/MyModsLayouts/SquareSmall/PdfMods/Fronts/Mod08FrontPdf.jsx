@@ -7,7 +7,7 @@ import ReactDOMServer from "react-dom/server";
 
 import { imgUrlPdf } from "helpers";
 
-const Mod07FrontPdf = ({text, images}) => {
+const Mod08FrontPdf = ({text, images}) => {
 
 	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
@@ -16,7 +16,7 @@ const Mod07FrontPdf = ({text, images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height        : "850px",
+				height        : "595px",
 				width         : "100%",
 				paddingBottom : "4%",
 				overflow      : "hidden",
@@ -116,4 +116,4 @@ const Mod07FrontPdf = ({text, images}) => {
 	);
 };
 
-export default Mod07FrontPdf;
+export default Mod08FrontPdf;

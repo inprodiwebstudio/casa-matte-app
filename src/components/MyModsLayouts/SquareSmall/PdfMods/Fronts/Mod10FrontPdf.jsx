@@ -14,7 +14,7 @@ const Mod09FrontPdf = ({text, images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height : "850px",
+				height : "595px",
 				width  : "100%",
 			}}
 		>
