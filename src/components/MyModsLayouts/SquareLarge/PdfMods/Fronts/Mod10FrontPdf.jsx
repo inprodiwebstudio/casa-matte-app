@@ -7,10 +7,9 @@ import ReactDOMServer from "react-dom/server";
 import { imgUrlPdf }  from "helpers";
 
 
-const Mod10FrontPdf = ({text, images}) => {
+const Mod09FrontPdf = ({text, images}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 48px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
-	const text02 = text[1] ? text[1] : "<p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 50px; font-family: Aitana-Regular;'>TÍTULO GRANDE</span></p>";
 
 	const bodyHtml = (
 		<div
@@ -23,13 +22,15 @@ const Mod10FrontPdf = ({text, images}) => {
 				style={{
 					display       : "flex",
 					flexDirection : "row",
+					width         : "100%",
+					height        : "100%",
 					position      : "relative",
 				}}
 			>
 				<div
 					style={{
-						height     : "100%px",
-						width      : "850px",
+						height     : "100%",
+						width      : "750px",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -49,51 +50,27 @@ const Mod10FrontPdf = ({text, images}) => {
 				</div>
 				<div
 					style={{
-						display        : "flex",
-						flexDirection  : "row",
-						justifyContent : "space-between",
-						position       : "absolute",
-						top            : "0px",
-						left           : "0px",
-						bottom         : "0px",
-						right          : "0px",
-						width          : "850px",
-						paddingTop     : "78%",
-						paddingLeft    : "1%",
-						paddingRight   : "1%",
-						transform      : "rotate(-90deg)",
+						position      : "absolute",
+						top           : "0px",
+						left          : "0px",
+						bottom        : "0px",
+						right         : "0px",
+						textTransform : "uppercase",
+						width         : "100%",
+						height        : "100%",
+						transform     : "rotate(-90deg)",
+						paddingTop    : "90.6%",
 					}}
-				>
-					<div
-						style={{
-							textTransform : "uppercase",
-							marginTop     : "2%",
-						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text02}`,
-						}}
-					/>
-					<div
-						style={{
-							textTransform : "uppercase",
-						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
+					dangerouslySetInnerHTML={{
+						__html : `<style>
                                    p {
                                      margin: 0;
                                      padding: 0;
                                    }
                                  </style>
                                  ${text01}`,
-						}}
-					/>
-				</div>
+					}}
+				/>
 			</div>
 		</div>
 	);
@@ -105,4 +82,4 @@ const Mod10FrontPdf = ({text, images}) => {
 	);
 };
 
-export default Mod10FrontPdf;
+export default Mod09FrontPdf;

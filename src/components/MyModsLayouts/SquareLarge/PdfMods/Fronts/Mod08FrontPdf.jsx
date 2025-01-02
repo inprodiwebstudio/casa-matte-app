@@ -7,44 +7,66 @@ import ReactDOMServer from "react-dom/server";
 
 import { imgUrlPdf } from "helpers";
 
-const Mod08FrontPdf = ({text, images}) => {
+const Mod07FrontPdf = ({text, images}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: right;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
 				height        : "850px",
 				width         : "100%",
-				paddingTop    : "8%",
-				paddingBottom : "15%",
+				paddingBottom : "4%",
+				overflow      : "hidden",
 			}}
 		>
 			<div
 				style={{
-					height        : "100%",
-					width         : "100%",
-					display       : "flex",
-					flexDirection : "column",
-					gap           : "20px",
+					height         : "100%",
+					width          : "100%",
+					display        : "flex",
+					flexDirection  : "column",
+					gap            : "17px",
+					justifyContent : "center",
+					alignItems     : "center",
 				}}
 			>
 				<div
 					style={{
+						height     : "100%",
+						width      : "100%",
+						overflow   : "hidden",
+						background : "#E3E3E3",
+					}}
+				>
+					{
+						images[0]?.url && (
+							<img
+								src={imgUrlPdf(images[0])}
+								alt="test"
+								style={{
+									objectFit : "cover",
+									height    : "100%",
+								}}
+							/>
+						)
+					}
+				</div>
+				<div
+					style={{
 						width          : "100%",
-						paddingRight   : "8%",
 						display        : "flex",
-						justifyContent : "flex-end",
-						alignItems     : "flex-end",
+						justifyContent : "center",
+						alignItems     : "center",
 						flexDirection  : "column",
-						gap            : "10px",
+						gap            : "15px",
 					}}
 				>
 					<div
 						style={{
-							width : "auto",
+							width : "80%",
 						}}
 					>
 						<div
@@ -64,7 +86,7 @@ const Mod08FrontPdf = ({text, images}) => {
 					</div>
 					<div
 						style={{
-							width : "auto",
+							width : "80%",
 						}}
 					>
 						<div
@@ -83,39 +105,6 @@ const Mod08FrontPdf = ({text, images}) => {
 						/>
 					</div>
 				</div>
-				<div
-					style={{
-						height         : "100%",
-						width          : "100%",
-						overflow       : "hidden",
-						display        : "flex",
-						justifyContent : "flex-start",
-						alignItems     : "flex-start",
-						background     : "#E3E3E3",
-					}}
-				>
-					<div
-						style={{
-							height     : "100%",
-							width      : "100%",
-							overflow   : "hidden",
-							background : "#E3E3E3",
-						}}
-					>
-						{
-							images[0]?.url && (
-								<img
-									src={imgUrlPdf(images[0])}
-									alt="test"
-									style={{
-										objectFit : "cover",
-										height    : "100%",
-									}}
-								/>
-							)
-						}
-					</div>
-				</div>
 			</div>
 		</div>
 	);
@@ -127,4 +116,4 @@ const Mod08FrontPdf = ({text, images}) => {
 	);
 };
 
-export default Mod08FrontPdf;
+export default Mod07FrontPdf;

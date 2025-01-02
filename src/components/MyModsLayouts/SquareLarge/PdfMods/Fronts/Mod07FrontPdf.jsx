@@ -16,10 +16,10 @@ const Mod07FrontPdf = ({text, images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height        : "850px",
-				width         : "100%",
-				paddingBottom : "7%",
-				overflow      : "hidden",
+				height     : "850px",
+				width      : "100%",
+				paddingTop : "5%",
+				overflow   : "hidden",
 			}}
 		>
 			<div
@@ -28,32 +28,11 @@ const Mod07FrontPdf = ({text, images}) => {
 					width          : "100%",
 					display        : "flex",
 					flexDirection  : "column",
-					gap            : "25px",
+					gap            : "20px",
 					justifyContent : "center",
 					alignItems     : "center",
 				}}
 			>
-				<div
-					style={{
-						height     : "100%",
-						width      : "100%",
-						overflow   : "hidden",
-						background : "#E3E3E3",
-					}}
-				>
-					{
-						images[0]?.url && (
-							<img
-								src={imgUrlPdf(images[0])}
-								alt="test"
-								style={{
-									objectFit : "cover",
-									height    : "100%",
-								}}
-							/>
-						)
-					}
-				</div>
 				<div
 					style={{
 						width          : "100%",
@@ -61,7 +40,7 @@ const Mod07FrontPdf = ({text, images}) => {
 						justifyContent : "center",
 						alignItems     : "center",
 						flexDirection  : "column",
-						gap            : "10px",
+						gap            : "15px",
 					}}
 				>
 					<div
@@ -104,6 +83,27 @@ const Mod07FrontPdf = ({text, images}) => {
 							}}
 						/>
 					</div>
+				</div>
+				<div
+					style={{
+						height     : "100%",
+						width      : "100%",
+						overflow   : "hidden",
+						background : "#E3E3E3",
+					}}
+				>
+					{
+						images[0]?.url && (
+							<img
+								src={imgUrlPdf(images[0])}
+								alt="test"
+								style={{
+									objectFit : "cover",
+									height    : "100%",
+								}}
+							/>
+						)
+					}
 				</div>
 			</div>
 		</div>

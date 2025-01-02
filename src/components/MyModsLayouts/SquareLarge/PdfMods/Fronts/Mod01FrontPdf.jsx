@@ -64,7 +64,7 @@ const Mod01FrontPdf = ({text, images}) => {
 					</div>
 					<div
 						style={{
-							width : "80%",
+							width : "50%",
 						}}
 					>
 						<div

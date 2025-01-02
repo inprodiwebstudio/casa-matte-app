@@ -7,7 +7,7 @@ import ReactDOMServer from "react-dom/server";
 
 import { imgUrlPdf } from "helpers";
 
-const Mod02FrontPdf = ({text, images}) => {
+const Mod012FrontPdf = ({text, images}) => {
 
 	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
@@ -16,9 +16,11 @@ const Mod02FrontPdf = ({text, images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "850px",
-				width   : "100%",
-				padding : "8%",
+				height        : "850px",
+				width         : "100%",
+				padding       : "15%",
+				paddingTop    : "8%",
+				paddingBottom : "8%",
 			}}
 		>
 			<div
@@ -27,11 +29,31 @@ const Mod02FrontPdf = ({text, images}) => {
 					width          : "100%",
 					display        : "flex",
 					flexDirection  : "column",
-					gap            : "15px",
+					gap            : "60px",
 					justifyContent : "center",
 					alignItems     : "center",
 				}}
 			>
+				<div
+					style={{
+						width : "80%",
+					}}
+				>
+					<div
+						style={{
+							textTransform : "uppercase",
+						}}
+						dangerouslySetInnerHTML={{
+							__html : `<style>
+                                   p {
+                                     margin: 0;
+                                     padding: 0;
+                                   }
+                                 </style>
+                                 ${text01}`,
+						}}
+					/>
+				</div>
 				<div
 					style={{
 						height     : "100%",
@@ -55,54 +77,23 @@ const Mod02FrontPdf = ({text, images}) => {
 				</div>
 				<div
 					style={{
-						width          : "100%",
-						display        : "flex",
-						justifyContent : "center",
-						alignItems     : "center",
-						flexDirection  : "column",
-						gap            : "15px",
+						width : "80%",
 					}}
 				>
 					<div
 						style={{
-							width : "80%",
+							textTransform : "uppercase",
 						}}
-					>
-						<div
-							style={{
-								textTransform : "uppercase",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
-							}}
-						/>
-					</div>
-					<div
-						style={{
-							width : "80%",
-						}}
-					>
-						<div
-							style={{
-								textTransform : "uppercase",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
+						dangerouslySetInnerHTML={{
+							__html : `<style>
                                    p {
                                      margin: 0;
                                      padding: 0;
                                    }
                                  </style>
                                  ${text02}`,
-							}}
-						/>
-					</div>
+						}}
+					/>
 				</div>
 			</div>
 		</div>
@@ -115,4 +106,4 @@ const Mod02FrontPdf = ({text, images}) => {
 	);
 };
 
-export default Mod02FrontPdf;
+export default Mod012FrontPdf;

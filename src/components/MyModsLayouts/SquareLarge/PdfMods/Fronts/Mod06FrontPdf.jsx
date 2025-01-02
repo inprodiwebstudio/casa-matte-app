@@ -9,17 +9,15 @@ import { imgUrlPdf } from "helpers";
 
 const Mod06FrontPdf = ({text, images}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
-
-	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 48px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
-				height     : "850px",
-				width      : "100%",
-				paddingTop : "7%",
-				overflow   : "hidden",
+				height   : "850px",
+				width    : "100%",
+				padding  : "8%",
+				overflow : "hidden",
 			}}
 		>
 			<div
@@ -35,54 +33,27 @@ const Mod06FrontPdf = ({text, images}) => {
 			>
 				<div
 					style={{
-						width          : "100%",
+						width          : "80%",
 						display        : "flex",
 						justifyContent : "center",
 						alignItems     : "center",
-						flexDirection  : "column",
-						gap            : "10px",
+						overflow       : "hidden",
 					}}
 				>
 					<div
 						style={{
-							width : "80%",
+							textTransform : "uppercase",
 						}}
-					>
-						<div
-							style={{
-								textTransform : "uppercase",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
+						dangerouslySetInnerHTML={{
+							__html : `<style>
                                    p {
                                      margin: 0;
                                      padding: 0;
                                    }
                                  </style>
                                  ${text01}`,
-							}}
-						/>
-					</div>
-					<div
-						style={{
-							width : "80%",
 						}}
-					>
-						<div
-							style={{
-								textTransform : "uppercase",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text02}`,
-							}}
-						/>
-					</div>
+					/>
 				</div>
 				<div
 					style={{

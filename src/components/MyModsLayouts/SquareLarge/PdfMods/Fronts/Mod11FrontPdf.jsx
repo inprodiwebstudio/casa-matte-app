@@ -4,38 +4,33 @@ import React from "react";
 // eslint-disable-next-line import/extensions
 import Html           from "react-pdf-html";
 import ReactDOMServer from "react-dom/server";
+import { imgUrlPdf }  from "helpers";
 
-import { imgUrlPdf } from "helpers";
 
-const Mod02FrontPdf = ({text, images}) => {
+const Mod11FrontPdf = ({text, images}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 48px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+	const text02 = text[1] ? text[1] : "<p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "850px",
-				width   : "100%",
-				padding : "8%",
+				height : "850px",
+				width  : "100%",
 			}}
 		>
 			<div
 				style={{
-					height         : "100%",
-					width          : "100%",
-					display        : "flex",
-					flexDirection  : "column",
-					gap            : "15px",
-					justifyContent : "center",
-					alignItems     : "center",
+					display       : "flex",
+					flexDirection : "row",
+					position      : "relative",
 				}}
 			>
 				<div
 					style={{
-						height     : "100%",
-						width      : "100%",
+						height     : "100%px",
+						width      : "750px",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -55,54 +50,53 @@ const Mod02FrontPdf = ({text, images}) => {
 				</div>
 				<div
 					style={{
-						width          : "100%",
 						display        : "flex",
-						justifyContent : "center",
-						alignItems     : "center",
-						flexDirection  : "column",
-						gap            : "15px",
+						flexDirection  : "row",
+						justifyContent : "space-between",
+						position       : "absolute",
+						top            : "0px",
+						left           : "0px",
+						bottom         : "0px",
+						right          : "0px",
+						width          : "100%",
+						paddingTop     : "90.6%",
+						paddingLeft    : "8%",
+						paddingRight   : "8%",
+						transform      : "rotate(-90deg)",
+						overflow       : "hidden",
 					}}
 				>
 					<div
 						style={{
-							width : "80%",
+							textTransform : "uppercase",
+							overflow      : "hidden",
 						}}
-					>
-						<div
-							style={{
-								textTransform : "uppercase",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
+						dangerouslySetInnerHTML={{
+							__html : `<style>
                                    p {
                                      margin: 0;
                                      padding: 0;
                                    }
                                  </style>
                                  ${text01}`,
-							}}
-						/>
-					</div>
+						}}
+					/>
 					<div
 						style={{
-							width : "80%",
+							textTransform : "uppercase",
+							marginTop     : "2%",
+							overflow      : "hidden",
 						}}
-					>
-						<div
-							style={{
-								textTransform : "uppercase",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
+						dangerouslySetInnerHTML={{
+							__html : `<style>
                                    p {
                                      margin: 0;
                                      padding: 0;
                                    }
                                  </style>
                                  ${text02}`,
-							}}
-						/>
-					</div>
+						}}
+					/>
 				</div>
 			</div>
 		</div>
@@ -115,4 +109,4 @@ const Mod02FrontPdf = ({text, images}) => {
 	);
 };
 
-export default Mod02FrontPdf;
+export default Mod11FrontPdf;

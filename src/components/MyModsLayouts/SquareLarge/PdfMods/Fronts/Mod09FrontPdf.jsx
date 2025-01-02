@@ -4,70 +4,114 @@ import React from "react";
 // eslint-disable-next-line import/extensions
 import Html           from "react-pdf-html";
 import ReactDOMServer from "react-dom/server";
-import { imgUrlPdf }  from "helpers";
 
+import { imgUrlPdf } from "helpers";
 
 const Mod09FrontPdf = ({text, images}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 50px; font-family: Aitana-Regular;'>TÍTULO GRANDE</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+
+	const text02 = text[1] ? text[1] : "<p style='text-align: right;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
-				height : "850px",
-				width  : "100%",
+				height     : "850px",
+				width      : "100%",
+				paddingTop : "6%",
 			}}
 		>
 			<div
 				style={{
+					height        : "100%",
+					width         : "100%",
 					display       : "flex",
-					flexDirection : "row",
-					position      : "relative",
+					flexDirection : "column",
+					gap           : "20px",
 				}}
 			>
 				<div
 					style={{
-						height     : "850px",
-						width      : "300px",
-						overflow   : "hidden",
-						background : "#E3E3E3",
+						width          : "100%",
+						display        : "flex",
+						paddingRight   : "8%",
+						justifyContent : "flex-end",
+						alignItems     : "flex-end",
+						flexDirection  : "column",
+						gap            : "10px",
 					}}
 				>
-					{
-						images[0]?.url && (
-							<img
-								src={imgUrlPdf(images[0])}
-								alt="test"
-								style={{
-									objectFit : "cover",
-									height    : "100%",
-								}}
-							/>
-						)
-					}
-				</div>
-				<div
-					style={{
-						position      : "absolute",
-						top           : "0px",
-						left          : "0px",
-						bottom        : "0px",
-						right         : "0px",
-						textTransform : "uppercase",
-						width         : "850px",
-						transform     : "rotate(-90deg)",
-						paddingTop    : "78%",
-					}}
-					dangerouslySetInnerHTML={{
-						__html : `<style>
+					<div
+						style={{
+							width : "auto",
+						}}
+					>
+						<div
+							style={{
+								textTransform : "uppercase",
+							}}
+							dangerouslySetInnerHTML={{
+								__html : `<style>
                                    p {
                                      margin: 0;
                                      padding: 0;
                                    }
                                  </style>
                                  ${text01}`,
+							}}
+						/>
+					</div>
+					<div
+						style={{
+							width : "auto",
+						}}
+					>
+						<div
+							style={{
+								textTransform : "uppercase",
+							}}
+							dangerouslySetInnerHTML={{
+								__html : `<style>
+                                   p {
+                                     margin: 0;
+                                     padding: 0;
+                                   }
+                                 </style>
+                                 ${text02}`,
+							}}
+						/>
+					</div>
+				</div>
+				<div
+					style={{
+						height      : "100%",
+						width       : "100%",
+						paddingLeft : "0%",
+						overflow    : "hidden",
 					}}
-				/>
+				>
+					<div
+						style={{
+							height     : "100%",
+							width      : "100%",
+							overflow   : "hidden",
+							background : "#E3E3E3",
+						}}
+					>
+						{
+							images[0]?.url && (
+								<img
+									src={imgUrlPdf(images[0])}
+									alt="test"
+									style={{
+										objectFit : "cover",
+										height    : "100%",
+									}}
+								/>
+							)
+						}
+					</div>
+				</div>
 			</div>
 		</div>
 	);

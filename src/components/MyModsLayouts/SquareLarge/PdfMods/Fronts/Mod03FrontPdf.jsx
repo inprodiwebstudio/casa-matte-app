@@ -41,7 +41,7 @@ const Mod03FrontPdf = ({text, images}) => {
 						justifyContent : "center",
 						alignItems     : "center",
 						flexDirection  : "column",
-						gap            : "10px",
+						gap            : "15px",
 					}}
 				>
 					<div

@@ -8,3 +8,5 @@ export { default as Mod07FrontPdf}  from "./Mod07FrontPdf";
 export { default as Mod08FrontPdf}  from "./Mod08FrontPdf";
 export { default as Mod09FrontPdf}  from "./Mod09FrontPdf";
 export { default as Mod10FrontPdf}  from "./Mod10FrontPdf";
+export { default as Mod11FrontPdf}  from "./Mod11FrontPdf";
+export { default as Mod12FrontPdf}  from "./Mod12FrontPdf";

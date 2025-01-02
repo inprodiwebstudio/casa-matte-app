@@ -126,6 +126,8 @@ import {
 	Mod08FrontPdf,
 	Mod09FrontPdf,
 	Mod10FrontPdf,
+	Mod11FrontPdf,
+	Mod12FrontPdf,
 } from "./PdfMods/Fronts";
 
 import {
@@ -230,7 +232,7 @@ const SquareLarge = {
 		numberPhotos : 1,
 		numberText   : 1,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod11FrontPdf,
 	},
 	FrontMod12 : {
 		id           : "FrontMod12",
@@ -238,7 +240,7 @@ const SquareLarge = {
 		numberPhotos : 1,
 		numberText   : 2,
 		cat          : "portadas",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod12FrontPdf,
 	},
 	Mod1 : {
 		id           : "Mod1",
