@@ -9,44 +9,41 @@ import { imgUrlPdf } from "helpers";
 
 const Mod03FrontPdf = ({text, images}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
-
-	const text03 = text[2] ? text[2] : "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+	const text02 = text[1] ? text[1] : "<p style='text-align: right;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "850",
-				width   : "100%",
-				padding : "8%",
+				height     : "850px",
+				width      : "100%",
+				paddingTop : "5%",
 			}}
 		>
 			<div
 				style={{
-					height         : "100%",
-					width          : "100%",
-					display        : "flex",
-					flexDirection  : "column",
-					gap            : "20px",
-					justifyContent : "center",
-					alignItems     : "center",
+					height        : "100%",
+					width         : "100%",
+					display       : "flex",
+					flexDirection : "column",
+					gap           : "20px",
 				}}
 			>
 				<div
 					style={{
 						width          : "100%",
 						display        : "flex",
-						justifyContent : "center",
-						alignItems     : "center",
+						paddingRight   : "5%",
+						justifyContent : "flex-end",
+						alignItems     : "flex-end",
 						flexDirection  : "column",
 						gap            : "10px",
 					}}
 				>
 					<div
 						style={{
-							width : "80%",
+							width : "auto",
 						}}
 					>
 						<div
@@ -66,7 +63,7 @@ const Mod03FrontPdf = ({text, images}) => {
 					</div>
 					<div
 						style={{
-							width : "80%",
+							width : "auto",
 						}}
 					>
 						<div
@@ -87,44 +84,35 @@ const Mod03FrontPdf = ({text, images}) => {
 				</div>
 				<div
 					style={{
-						height     : "100%",
-						width      : "100%",
-						overflow   : "hidden",
-						background : "#E3E3E3",
-					}}
-				>
-					{
-						images[0]?.url && (
-							<img
-								src={imgUrlPdf(images[0])}
-								alt="test"
-								style={{
-									objectFit : "cover",
-									height    : "100%",
-								}}
-							/>
-						)
-					}
-				</div>
-				<div
-					style={{
-						width : "80%",
+						height         : "100%",
+						width          : "100%",
+						overflow       : "hidden",
+						display        : "flex",
+						justifyContent : "flex-start",
+						alignItems     : "flex-start",
 					}}
 				>
 					<div
 						style={{
-							textTransform : "uppercase",
+							height     : "100%",
+							width      : "100%",
+							overflow   : "hidden",
+							background : "#E3E3E3",
 						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text03}`,
-						}}
-					/>
+					>
+						{
+							images[0]?.url && (
+								<img
+									src={imgUrlPdf(images[0])}
+									alt="test"
+									style={{
+										objectFit : "cover",
+										height    : "100%",
+									}}
+								/>
+							)
+						}
+					</div>
 				</div>
 			</div>
 		</div>

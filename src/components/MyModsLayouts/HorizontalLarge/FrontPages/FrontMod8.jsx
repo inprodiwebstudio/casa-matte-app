@@ -22,7 +22,6 @@ const FrontMod8 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 			<Stack
 				spacing={isPreviewThumb ? "1px" : "0px"}
 				mt="8%"
-				pr="8%"
 				sx={{
 					textTransform : "uppercase",
 				}}

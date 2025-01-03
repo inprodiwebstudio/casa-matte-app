@@ -9,16 +9,14 @@ import { imgUrlPdf } from "helpers";
 
 const Mod05FrontPdf = ({text, images}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
-
-	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 48px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
 				height  : "850px",
 				width   : "100%",
-				padding : "8%",
+				padding : "5%",
 			}}
 		>
 			<div
@@ -27,7 +25,7 @@ const Mod05FrontPdf = ({text, images}) => {
 					width          : "100%",
 					display        : "flex",
 					flexDirection  : "column",
-					gap            : "20px",
+					gap            : "40px",
 					justifyContent : "center",
 					alignItems     : "center",
 				}}
@@ -83,26 +81,6 @@ const Mod05FrontPdf = ({text, images}) => {
 							/>
 						)
 					}
-				</div>
-				<div
-					style={{
-						width : "80%",
-					}}
-				>
-					<div
-						style={{
-							textTransform : "uppercase",
-						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text02}`,
-						}}
-					/>
 				</div>
 			</div>
 		</div>

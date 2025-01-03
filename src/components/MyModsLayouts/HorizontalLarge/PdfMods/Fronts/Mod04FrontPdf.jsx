@@ -16,10 +16,9 @@ const Mod04FrontPdf = ({text, images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height       : "850px",
-				width        : "100%",
-				paddingTop   : "8%",
-				paddingRight : "8%",
+				height     : "850px",
+				width      : "100%",
+				paddingTop : "5%",
 			}}
 		>
 			<div
@@ -35,6 +34,7 @@ const Mod04FrontPdf = ({text, images}) => {
 					style={{
 						width          : "100%",
 						display        : "flex",
+						paddingRight   : "5%",
 						justifyContent : "flex-end",
 						alignItems     : "flex-end",
 						flexDirection  : "column",
@@ -85,18 +85,17 @@ const Mod04FrontPdf = ({text, images}) => {
 				<div
 					style={{
 						height         : "100%",
-						width          : "83%",
+						width          : "100%",
 						overflow       : "hidden",
 						display        : "flex",
 						justifyContent : "flex-start",
 						alignItems     : "flex-start",
-						background     : "#E3E3E3",
 					}}
 				>
 					<div
 						style={{
 							height     : "100%",
-							width      : "100%",
+							width      : "78%",
 							overflow   : "hidden",
 							background : "#E3E3E3",
 						}}

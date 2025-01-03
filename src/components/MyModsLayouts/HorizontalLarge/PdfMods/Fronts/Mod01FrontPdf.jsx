@@ -18,7 +18,7 @@ const Mod01FrontPdf = ({text, images}) => {
 			style={{
 				height  : "850px",
 				width   : "100%",
-				padding : "8%",
+				padding : "5%",
 			}}
 		>
 			<div

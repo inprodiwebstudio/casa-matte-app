@@ -18,7 +18,7 @@ const Mod07FrontPdf = ({text, images}) => {
 			style={{
 				height        : "850px",
 				width         : "100%",
-				paddingBottom : "7%",
+				paddingBottom : "4%",
 				overflow      : "hidden",
 			}}
 		>
@@ -28,7 +28,7 @@ const Mod07FrontPdf = ({text, images}) => {
 					width          : "100%",
 					display        : "flex",
 					flexDirection  : "column",
-					gap            : "25px",
+					gap            : "20px",
 					justifyContent : "center",
 					alignItems     : "center",
 				}}

@@ -28,8 +28,8 @@ const Mod10FrontPdf = ({text, images}) => {
 			>
 				<div
 					style={{
-						height     : "100%px",
-						width      : "760px",
+						height     : "100%",
+						width      : "88%",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -57,10 +57,11 @@ const Mod10FrontPdf = ({text, images}) => {
 						left           : "0px",
 						bottom         : "0px",
 						right          : "0px",
-						width          : "991px",
-						paddingTop     : "78%",
-						paddingLeft    : "1%",
-						paddingRight   : "1%",
+						width          : "100%",
+						height         : "30%",
+						paddingTop     : "82%",
+						paddingLeft    : "12%",
+						paddingRight   : "12%",
 						transform      : "rotate(-90deg)",
 					}}
 				>

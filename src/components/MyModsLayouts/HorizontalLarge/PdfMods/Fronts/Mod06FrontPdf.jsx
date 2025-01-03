@@ -18,7 +18,7 @@ const Mod06FrontPdf = ({text, images}) => {
 			style={{
 				height     : "850px",
 				width      : "100%",
-				paddingTop : "7%",
+				paddingTop : "5%",
 				overflow   : "hidden",
 			}}
 		>

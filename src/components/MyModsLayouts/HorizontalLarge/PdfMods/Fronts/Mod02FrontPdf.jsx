@@ -18,7 +18,7 @@ const Mod02FrontPdf = ({text, images}) => {
 			style={{
 				height  : "850px",
 				width   : "100%",
-				padding : "8%",
+				padding : "5%",
 			}}
 		>
 			<div
@@ -27,7 +27,7 @@ const Mod02FrontPdf = ({text, images}) => {
 					width          : "100%",
 					display        : "flex",
 					flexDirection  : "column",
-					gap            : "30px",
+					gap            : "20px",
 					justifyContent : "center",
 					alignItems     : "center",
 				}}

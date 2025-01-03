@@ -22,13 +22,15 @@ const Mod09FrontPdf = ({text, images}) => {
 				style={{
 					display       : "flex",
 					flexDirection : "row",
+					width         : "100%",
+					height        : "100%",
 					position      : "relative",
 				}}
 			>
 				<div
 					style={{
-						height     : "991px",
-						width      : "760px",
+						height     : "100%",
+						width      : "88%",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -48,15 +50,18 @@ const Mod09FrontPdf = ({text, images}) => {
 				</div>
 				<div
 					style={{
-						position      : "absolute",
-						top           : "0px",
-						left          : "0px",
-						bottom        : "0px",
-						right         : "0px",
-						textTransform : "uppercase",
-						width         : "991px",
-						transform     : "rotate(-90deg)",
-						paddingTop    : "78%",
+						position       : "absolute",
+						top            : "0px",
+						left           : "0px",
+						bottom         : "0px",
+						right          : "0px",
+						textTransform  : "uppercase",
+						width          : "100%",
+						height         : "30%",
+						transform      : "rotate(-90deg)",
+						alignItems     : "center",
+						justifyContent : "center",
+						paddingTop     : "80%",
 					}}
 					dangerouslySetInnerHTML={{
 						__html : `<style>
