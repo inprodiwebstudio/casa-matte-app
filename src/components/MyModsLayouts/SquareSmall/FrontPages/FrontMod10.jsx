@@ -24,9 +24,9 @@ const FrontMod10 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) 
 			</Stack>
 			<Stack
 				sx={{writingMode : "vertical-rl",  transform : "rotate(180deg)"}}
-				pl="8%"
-				pr="8%"
-				p="8%"
+				pl="4%"
+				pr="4%"
+				p="4%"
 			>
 				<Text
 					sizes={{

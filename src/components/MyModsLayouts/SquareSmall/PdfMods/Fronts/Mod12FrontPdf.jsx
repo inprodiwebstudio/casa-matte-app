@@ -9,18 +9,18 @@ import { imgUrlPdf } from "helpers";
 
 const Mod012FrontPdf = ({text, images}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 16px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
 				height        : "595px",
 				width         : "100%",
-				padding       : "15%",
-				paddingTop    : "8%",
-				paddingBottom : "8%",
+				padding       : "10%",
+				paddingTop    : "5%",
+				paddingBottom : "5%",
 			}}
 		>
 			<div
@@ -29,7 +29,7 @@ const Mod012FrontPdf = ({text, images}) => {
 					width          : "100%",
 					display        : "flex",
 					flexDirection  : "column",
-					gap            : "60px",
+					gap            : "40px",
 					justifyContent : "center",
 					alignItems     : "center",
 				}}

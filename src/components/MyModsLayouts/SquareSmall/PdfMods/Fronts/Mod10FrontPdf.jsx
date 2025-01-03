@@ -9,7 +9,7 @@ import { imgUrlPdf }  from "helpers";
 
 const Mod09FrontPdf = ({text, images}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 50px; font-family: Aitana-Regular;'>TÍTULO GRANDE</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO GRANDE</span></p>";
 
 	const bodyHtml = (
 		<div
@@ -30,7 +30,7 @@ const Mod09FrontPdf = ({text, images}) => {
 				<div
 					style={{
 						height     : "100%",
-						width      : "750px",
+						width      : "500px",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -59,7 +59,7 @@ const Mod09FrontPdf = ({text, images}) => {
 						width         : "100%",
 						height        : "100%",
 						transform     : "rotate(-90deg)",
-						paddingTop    : "90.6%",
+						paddingTop    : "89%",
 					}}
 					dangerouslySetInnerHTML={{
 						__html : `<style>

@@ -25,9 +25,9 @@ const FrontMod11 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) 
 				/>
 			</Stack>
 			<Stack
-				pl="8%"
-				pr="8%"
-				p="8%"
+				pl="4%"
+				pr="4%"
+				p="4%"
 				align="center"
 				justify="space-between"
 			>
