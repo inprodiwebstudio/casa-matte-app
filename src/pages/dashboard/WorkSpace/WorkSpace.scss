@@ -226,7 +226,7 @@
 				transform: scale(0.6, 0.6);
 
 				@include laptop {
-					transform: scale(0.35, 0.35);
+					transform: scale(0.42, 0.42);
 					z-index: 1;
 				}
 	
@@ -250,7 +250,7 @@
 					}
 
 					@include laptop {
-						transform: scale(0.45, 0.45);
+						transform: scale(0.53, 0.53);
 						z-index: 1;
 					}
 

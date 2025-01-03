@@ -41,6 +41,7 @@ const TestPdf = ({photoBookData}) => {
 		horizontal : {
 			grande : {
 				size                  : [992, 850],
+				frontSize             : [992, 850],
 				isInDoublePageLayouts : ["FrontLayout"],
 				modLayouts            : {...horizontalLarge},
 			},
