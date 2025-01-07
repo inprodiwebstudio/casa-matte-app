@@ -420,6 +420,28 @@ export const workSpaceSlice = createSlice({
 			state.history.undo = history.undoStack;
 			state.history.current = history.currentAction;
 		},
+		addTextFront : (state, {payload}) => {
+			state.data.frontPage[`sheet${payload.sheetNo}`]["text"][payload.layoutNo] = payload.text;
+
+			const myUndoData = {
+				...state.data,
+				frontPage : {
+					...state.data.frontPage,
+					[payload.sheetNo] : {
+						...state.data.frontPage[payload.sheetNo],
+						text : payload.text,
+					},
+				},
+			};
+			const history = new History();
+			history.undoStack = state.history.undo;
+			const undoNewData = {
+				...myUndoData,
+			};
+			history.addToUndoStack(undoNewData);
+			state.history.undo = history.undoStack;
+			state.history.current = history.currentAction;
+		},
 		removePhoto : (state, {payload}) => {
 			const newData = {...state.data};
 			if (payload?.pageId === "frontpage") {

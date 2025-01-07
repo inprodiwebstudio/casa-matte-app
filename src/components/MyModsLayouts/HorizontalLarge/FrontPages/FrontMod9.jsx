@@ -35,6 +35,7 @@ const FrontMod9 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 						"regular" : "50px",
 						"grande"  : "52px",
 					}}
+					isFront={true}
 					align="center"
 					sheetNo={sheetNo}
 					textShell={() => <TextShell.Title />}

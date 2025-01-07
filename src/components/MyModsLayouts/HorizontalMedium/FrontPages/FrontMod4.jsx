@@ -31,6 +31,7 @@ const FrontMod4 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 							"regular" : "42px",
 							"grande"  : "44px",
 						}}
+						isFront={true}
 						align="right"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.Title align="flex-end" width="30%" />}
@@ -47,6 +48,7 @@ const FrontMod4 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 							"regular" : "18px",
 							"grande"  : "20px",
 						}}
+						isFront={true}
 						align="right"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.SubTitle align="flex-end" width="20%" />}
