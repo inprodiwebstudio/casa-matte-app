@@ -7,6 +7,7 @@ import horizontalLarge    from "components/MyModsLayouts/HorizontalLarge";
 import horizontalMedium   from "components/MyModsLayouts/HorizontalMedium";
 import VerticalLarge      from "components/MyModsLayouts/VerticalLarge";
 import VerticalMedium     from "components/MyModsLayouts/VerticalMedium";
+import SpinePhotoBook     from "components/MyModsLayouts/SpinePdf";
 import SquareSmall        from "components/MyModsLayouts/SquareSmall";
 import TravelCoffeeTable  from "components/MyModsLayouts/TravelCoffeeTable";
 import SquareLarge        from "components/MyModsLayouts/SquareLarge";
@@ -87,6 +88,8 @@ const TestPdf = ({photoBookData}) => {
 
 	const SheetFrontLayout = photoBookTypes[handlerFormat(photoBookData?.product)]?.[photoBookData?.sizePhotoBook]?.modLayouts[photoBookData?.frontPage?.sheet1?.layoutType]?.pdfLayout;
 
+	const SheetSpineLayout = SpinePhotoBook;
+
 	const sizeFrontPage = photoBookTypes[handlerFormat(photoBookData?.product)]?.[photoBookData?.sizePhotoBook]?.frontSize;
 
 	const getComponent = (pageData) => {
@@ -139,6 +142,13 @@ const TestPdf = ({photoBookData}) => {
 		<div style={{height : "80vh"}}>
 			<PDFViewer style={{height : "80vh", width : "100%"}}>
 				<Document>
+					{
+						(photoBookData?.product === "white") && (
+							<Page size={sizeFrontPage}>
+								<SheetSpineLayout text={photoBookData?.bound} />
+							</Page>
+						)
+					}
 					{
 						(photoBookData?.product === "white") && (
 							<Page size={sizeFrontPage}>
