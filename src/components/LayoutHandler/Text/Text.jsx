@@ -6,6 +6,7 @@ import EditorText from "./EditorText";
 import "./Text.scss";
 
 const Text = ({
+	isBound,
 	isFront,
 	data,
 	sizes,
@@ -56,6 +57,7 @@ const Text = ({
 				(!isInPaginator && !isThumbNail) && (
 					<EditorText
 						isFront={isFront}
+						isBound={isBound}
 						lineHeight={lineHeight}
 						letterSpacing={letterSpacing}
 						sheetNo={sheetNo}

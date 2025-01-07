@@ -16,15 +16,15 @@ const FrontLayout = ({
 	isInPaginator,
 	isInWorkSpcae,
 }) => {
-	const sipnePhotoBook = undefined;
-
-	const defaultSpineBook = "<p style='text-align: center;'><span style='font-size: 22px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const defaultSpineBook = "<p style='text-align: center;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 
 	const photobookSize = photoBookData?.sizePhotoBook ?? "grande";
 
 	const currentPhotoBook = (photoBookData?.product === "" || !photoBookData?.product) ? "white" : photoBookData?.product;
+
+	const boundText = textInsertion(photoBookData?.bound, defaultSpineBook, true);
 
 	const photoBookFormat = photoBookData?.format ?? "vertical";
 
@@ -45,14 +45,15 @@ const FrontLayout = ({
 				<div className="spine-text">
 					<Stack>
 						<Text
+							isBound={true}
 							sizes={{
-								"chico"   : "20px",
-								"regular" : "22px",
-								"grande"  : "24px",
+								"chico"   : "28px",
+								"regular" : "30px",
+								"grande"  : "34px",
 							}}
 							align="center"
 							textShell={() => <TextShell.Title />}
-							data={textInsertion(sipnePhotoBook, defaultSpineBook, true)}
+							data={boundText}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
 							textNo={0}

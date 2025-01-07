@@ -442,6 +442,24 @@ export const workSpaceSlice = createSlice({
 			state.history.undo = history.undoStack;
 			state.history.current = history.currentAction;
 		},
+		addTextBound : (state, {payload}) => {
+			state.data.bound = payload.text;
+
+			const myUndoData = {
+				...state.data,
+				bound : {
+					...state.data.bound,
+				},
+			};
+			const history = new History();
+			history.undoStack = state.history.undo;
+			const undoNewData = {
+				...myUndoData,
+			};
+			history.addToUndoStack(undoNewData);
+			state.history.undo = history.undoStack;
+			state.history.current = history.currentAction;
+		},
 		removePhoto : (state, {payload}) => {
 			const newData = {...state.data};
 			if (payload?.pageId === "frontpage") {
