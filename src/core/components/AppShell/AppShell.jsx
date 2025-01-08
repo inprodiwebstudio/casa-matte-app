@@ -380,8 +380,7 @@ const AppShell = ({
 	const parseSendData = (data) => {
 		const myData = data;
 		const stringData = JSON.stringify(myData);
-		const myReplacerString = stringData.replace(/"/g, "'");
-		return myReplacerString;
+		return stringData;
 	};
 
 	const submitData = async () => {
@@ -410,8 +409,7 @@ const AppShell = ({
 		}
 		if (photobookData?.meta?.config) {
 			const myData = photobookData?.meta?.config;
-			const myReplacerString = myData.replace(/'/g, "\"");
-			const parseJSON = JSON.parse(myReplacerString);
+			const parseJSON = JSON.parse(myData);
 			dispatch(workSpaceSlice.actions.insertData({...parseJSON, modified : photobookData?.modified, projectTittle : photobookData?.title?.rendered}));
 		}
 	}, [photobookData]);
@@ -437,8 +435,7 @@ const AppShell = ({
 		if (!initialData) {
 			if (photobookData?.meta?.config) {
 				const myData = photobookData?.meta?.config;
-				const myReplacerString = myData.replace(/'/g, "\"");
-				const parseJSON = JSON.parse(myReplacerString);
+				const parseJSON = JSON.parse(myData);
 				dispatch(workSpaceSlice.actions.addInitialData(parseJSON));
 			}
 		}
