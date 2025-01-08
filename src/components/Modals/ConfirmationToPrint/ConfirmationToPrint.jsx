@@ -11,11 +11,9 @@ import { useForm }                       from "react-hook-form";
 import axios                             from "axios";
 import { closeAllModals }                from "@mantine/modals";
 import { LoginNotification }             from "Notifications";
-import { useNavigate }                   from "react-router";
 
 
 const ConfirmationToPrint = () => {
-	const navigate = useNavigate();
 	const [ isConfirmationView, setIsConfirmationView  ] = useState(false);
 	const [checkedShipping, setCheckedShipping] = useState(false);
 	const [ dataShipping, setDataShipping ] = useState(undefined);
