@@ -66,7 +66,7 @@ const Folder = ({
 		const arrayOfPromises = selectedData.map(async (data, index) => {
 			return await galleryImagesMutationMove({
 				sourceFilePath  : data?.filePath,
-				destinationPath : `/${userName}/${name}/`,
+				destinationPath : `/${userName}/${postId}/${name}/`,
 				tags            : (selectedData.length - 1 === index) ? ["gallery"] : ["null"],
 			});
 		});
