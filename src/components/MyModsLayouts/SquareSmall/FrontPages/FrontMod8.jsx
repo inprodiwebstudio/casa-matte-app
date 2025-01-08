@@ -1,0 +1,83 @@
+
+import {Stack, Flex } from "@mantine/core";
+import ImgLayout      from "components/LayoutHandler/ImgLayout";
+//Own components
+import Text              from "components/LayoutHandler/Text";
+import { TextShell }     from "core/components";
+import { textInsertion } from "helpers";
+
+const FrontMod8 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 24px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+
+	const isPreviewThumb = isInPaginator || isThumbNail;
+
+	return (
+		<Flex
+			pb="5%"
+			w="100%"
+			h="100%"
+			justify="center"
+			align="center"
+			gap="0.2em"
+			direction="column"
+		>
+			<Stack w="100%" h="100%">
+				<ImgLayout
+					isInWorkSpace={isInWorkSpace}
+					sheetNo={sheetNo}
+					imageNo={0}
+					urlImage={data?.photos[0] ?? {}}
+				/>
+			</Stack>
+			<Stack
+				h="fit-content"
+				spacing={isPreviewThumb ? "1px" : "0px"}
+				w="70%"
+			>
+				<div>
+					<Text
+						sizes={{
+							"chico"   : "22px",
+							"regular" : "24px",
+							"grande"  : "26px",
+						}}
+						isFront={true}
+						align="center"
+						sheetNo={sheetNo}
+						textShell={() => <TextShell.Title />}
+						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+						textNo={0}
+					/>
+				</div>
+				<div
+					style={{
+						paddingLeft  : "10%",
+						paddingRight : "10%",
+					}}
+				>
+					<Text
+						sizes={{
+							"chico"   : "10px",
+							"regular" : "12px",
+							"grande"  : "14px",
+						}}
+						isFront={true}
+						align="center"
+						sheetNo={sheetNo}
+						textShell={() => <TextShell.SubTitle />}
+						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+						textNo={1}
+					/>
+				</div>
+			</Stack>
+		</Flex>
+	);
+};
+
+export default FrontMod8;

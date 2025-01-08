@@ -364,7 +364,7 @@ const AppShell = ({
 
 	const dispatch = useDispatch();
 
-	const isSelectedPage = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
+	// const isSelectedPage = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice?.data, shallowEqual);
 	const postIdphotoBook = useSelector((state) => state.authSlice?.user?.postId, shallowEqual);
 	const userName = useSelector((state) => state.authSlice?.user?.username, shallowEqual);
@@ -390,7 +390,7 @@ const AppShell = ({
 				tittle : "Texto de prueba",
 				status : "publish",
 				meta   : {
-					config : parseSendData(workSpaceData),
+					config : parseSendData({...workSpaceData, minPages : (workSpaceData?.pasta === "Dura") ? 25 : 10}),
 				},
 			},
 			id     : postIdphotoBook,
@@ -400,10 +400,10 @@ const AppShell = ({
 
 
 	useEffect(() => {
-		if ((photobookData?.meta === "TRAVEL COFFEE TABLE PHOTOBOOK")) {
-			navigate("/notfound/layouts");
-			return;
-		}
+		// if ((photobookData?.meta === "TRAVEL COFFEE TABLE PHOTOBOOK")) {
+		// 	navigate("/notfound/layouts");
+		// 	return;
+		// }
 		if (!userId && photobookData?.author) {
 			dispatch(authSlice.actions.setUserId(photobookData?.author));
 		}
@@ -479,11 +479,11 @@ const AppShell = ({
 	return (
 		<div
 			id="AppShell"
-			{
-				...(isSelectedPage && {
-					onClick : () => dispatch(workSpaceSlice.actions.clearSelectedPageData()),
-				})
-			}
+			// {
+			// 	...(isSelectedPage && {
+			// 		onClick : () => dispatch(workSpaceSlice.actions.clearSelectedPageData()),
+			// 	})
+			// }
 		>
 			<div className="bodyContainer">
 				<Body />

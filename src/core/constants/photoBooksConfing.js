@@ -1,42 +1,47 @@
 
 //LayoutsMods
-import VerticalLarge  from "components/MyModsLayouts/VerticalLarge";
-import SquareLarge    from "components/MyModsLayouts/SquareLarge";
-import VerticalMedium from "components/MyModsLayouts/VerticalMedium";
-import SquareSmall    from "components/MyModsLayouts/SquareSmall";
+import VerticalLarge     from "components/MyModsLayouts/VerticalLarge";
+import SquareLarge       from "components/MyModsLayouts/SquareLarge";
+import VerticalMedium    from "components/MyModsLayouts/VerticalMedium";
+import HorizontalLarge   from "components/MyModsLayouts/HorizontalLarge";
+import SquareSmall       from "components/MyModsLayouts/SquareSmall";
+import TravelCoffeeTable from "components/MyModsLayouts/TravelCoffeeTable";
+import HorizontalMedium  from "components/MyModsLayouts/HorizontalMedium";
 
 const photoBooksConfing = {
 	white : {
-		// horizontal : {
-		// 	aspectRatio : [496, 425],
-		// 	sizes       : {
-		// 		chico : {
-		// 			layoutMods       : {},
-		// 			frontLayouts     : {},
-		// 			modsInDoublePage : [],
-		// 			pdfSize          : [100, 100],
-		// 		},
-		// 		mediano : {
-		// 			layoutMods       : {},
-		// 			frontLayouts     : {},
-		// 			modsInDoublePage : [],
-		// 			pdfSize          : [100, 100],
-		// 		},
-		// 		grande : {
-		// 			layoutMods       : {...HorizontalLarge},
-		// 			frontLayouts     : {},
-		// 			modsInDoublePage : ["Mod6", "FrontLayout"],
-		// 			pdfSize          : [100, 100],
-		// 		},
-		// 	},
-		// },
+		horizontal : {
+			aspectRatio : [36, 31],
+			sizes       : {
+				chico : {
+					layoutMods       : {},
+					frontLayouts     : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
+				},
+				mediano : {
+					aspectRatio      : [158, 123],
+					layoutMods       : {...HorizontalMedium},
+					frontLayouts     : {},
+					modsInDoublePage : ["FrontLayout"],
+					pdfSize          : [100, 100],
+				},
+				grande : {
+					aspectRatio      : [496, 425],
+					layoutMods       : {...HorizontalLarge},
+					frontLayouts     : {},
+					modsInDoublePage : ["FrontLayout"],
+					pdfSize          : [35, 30],
+				},
+			},
+		},
 		vertical : {
 			aspectRatio : [8, 9],
 			sizes       : {
 				chico : {
 					layoutMods       : {},
 					frontLayouts     : {},
-					modsInDoublePage : [],
+					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [100, 100],
 				},
 				mediano : {
@@ -415,6 +420,19 @@ const photoBooksConfing = {
 				mediano : {
 					aspectRatio      : [17, 22],
 					layoutMods       : {...VerticalMedium},
+					frontLayouts     : {},
+					modsInDoublePage : ["FrontLayout"],
+					pdfSize          : [100, 100],
+				},
+			},
+		},
+	},
+	"travelcoffeetable " : {
+		vertical : {
+			sizes : {
+				grande : {
+					aspectRatio      : [354, 425],
+					layoutMods       : {...TravelCoffeeTable},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [100, 100],

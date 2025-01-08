@@ -1,4 +1,4 @@
-import { Stack, Flex } from "@mantine/core";
+import { Group, Stack } from "@mantine/core";
 //Own components
 import ImgLayout from "components/LayoutHandler/ImgLayout";
 
@@ -7,66 +7,49 @@ const Mod31 = ({data, isInWorkSpace, sheetNo}) => {
 		<Stack
 			w="100%"
 			h="100%"
-			p="2.6%"
-			pl="13%"
-			pr="13%"
+			p="28%"
+			pl="18%"
+			pr="18%"
 		>
-			<Stack w="100%" h="100%" spacing="0.05em">
-				<Flex w="100%" h="33.33%" gap="0.05em">
-					<Stack w="50%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={0}
-							urlImage={data?.photos[0] ?? {}}
-						/>
-					</Stack>
-					<Stack w="50%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={1}
-							urlImage={data?.photos[1] ?? {}}
-						/>
-					</Stack>
-				</Flex>
-				<Flex w="100%" h="33.33%" gap="0.05em">
-					<Stack w="50%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={2}
-							urlImage={data?.photos[2] ?? {}}
-						/>
-					</Stack>
-					<Stack w="50%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={3}
-							urlImage={data?.photos[3] ?? {}}
-						/>
-					</Stack>
-				</Flex>
-				<Flex w="100%" h="33.33%" gap="0.05em">
-					<Stack w="50%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={4}
-							urlImage={data?.photos[4] ?? {}}
-						/>
-					</Stack>
-					<Stack w="50%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={5}
-							urlImage={data?.photos[5] ?? {}}
-						/>
-					</Stack>
-				</Flex>
-			</Stack>
+			<Group
+				spacing="0.1em"
+				w="100%"
+				h="100%"
+			>
+				<Stack
+					w="calc(33.33% - 0.067em)"
+					h="100%"
+				>
+					<ImgLayout
+						isInWorkSpace={isInWorkSpace}
+						sheetNo={sheetNo}
+						imageNo={0}
+						urlImage={data?.photos[0] ?? {}}
+					/>
+				</Stack>
+				<Stack
+					w="calc(33.33% - 0.067em)"
+					h="100%"
+				>
+					<ImgLayout
+						isInWorkSpace={isInWorkSpace}
+						sheetNo={sheetNo}
+						imageNo={1}
+						urlImage={data?.photos[1] ?? {}}
+					/>
+				</Stack>
+				<Stack
+					w="calc(33.33% - 0.067em)"
+					h="100%"
+				>
+					<ImgLayout
+						isInWorkSpace={isInWorkSpace}
+						sheetNo={sheetNo}
+						imageNo={2}
+						urlImage={data?.photos[2] ?? {}}
+					/>
+				</Stack>
+			</Group>
 		</Stack>
 	);
 };

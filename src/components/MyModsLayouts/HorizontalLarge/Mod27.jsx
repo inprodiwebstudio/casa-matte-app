@@ -1,4 +1,4 @@
-import { Stack, Flex } from "@mantine/core";
+import { Stack } from "@mantine/core";
 //Own components
 import ImgLayout from "components/LayoutHandler/ImgLayout";
 
@@ -7,12 +7,19 @@ const Mod27 = ({data, isInWorkSpace, sheetNo}) => {
 		<Stack
 			w="100%"
 			h="100%"
-			p="8.5%"
-			pl="8.6%"
-			pr="8.6%"
+			p="3%"
+			pl="30%"
+			pr="30%"
 		>
-			<Stack w="100%" h="100%" spacing="0.05em">
-				<Stack w="100%" h="50%">
+			<Stack
+				spacing="0.1em"
+				w="100%"
+				h="100%"
+			>
+				<Stack
+					h="33.33%"
+					w="100%"
+				>
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
@@ -20,24 +27,28 @@ const Mod27 = ({data, isInWorkSpace, sheetNo}) => {
 						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Stack>
-				<Flex w="100%" h="50%" gap="0.05em">
-					<Stack w="50%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={1}
-							urlImage={data?.photos[1] ?? {}}
-						/>
-					</Stack>
-					<Stack w="50%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={2}
-							urlImage={data?.photos[2] ?? {}}
-						/>
-					</Stack>
-				</Flex>
+				<Stack
+					h="33.33%"
+					w="100%"
+				>
+					<ImgLayout
+						isInWorkSpace={isInWorkSpace}
+						sheetNo={sheetNo}
+						imageNo={1}
+						urlImage={data?.photos[1] ?? {}}
+					/>
+				</Stack>
+				<Stack
+					h="33.33%"
+					w="100%"
+				>
+					<ImgLayout
+						isInWorkSpace={isInWorkSpace}
+						sheetNo={sheetNo}
+						imageNo={2}
+						urlImage={data?.photos[2] ?? {}}
+					/>
+				</Stack>
 			</Stack>
 		</Stack>
 	);

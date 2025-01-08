@@ -344,6 +344,7 @@ export const workSpaceSlice = createSlice({
 			listOfPages.splice(validIndexPage(), slicePagesToReorder.length, ...newPagesReordered);
 
 			state.data.pages = convertToObject([pagesObjToArray[0], ...listOfPages]);
+			state.data.numberOfPages = state.data.numberOfPages + 1;
 			const history = new History();
 			history.undoStack = state.history.undo;
 			const undoNewData = {
@@ -408,6 +409,46 @@ export const workSpaceSlice = createSlice({
 							text : payload.text,
 						},
 					},
+				},
+			};
+			const history = new History();
+			history.undoStack = state.history.undo;
+			const undoNewData = {
+				...myUndoData,
+			};
+			history.addToUndoStack(undoNewData);
+			state.history.undo = history.undoStack;
+			state.history.current = history.currentAction;
+		},
+		addTextFront : (state, {payload}) => {
+			state.data.frontPage[`sheet${payload.sheetNo}`]["text"][payload.layoutNo] = payload.text;
+
+			const myUndoData = {
+				...state.data,
+				frontPage : {
+					...state.data.frontPage,
+					[payload.sheetNo] : {
+						...state.data.frontPage[payload.sheetNo],
+						text : payload.text,
+					},
+				},
+			};
+			const history = new History();
+			history.undoStack = state.history.undo;
+			const undoNewData = {
+				...myUndoData,
+			};
+			history.addToUndoStack(undoNewData);
+			state.history.undo = history.undoStack;
+			state.history.current = history.currentAction;
+		},
+		addTextBound : (state, {payload}) => {
+			state.data.bound = payload.text;
+
+			const myUndoData = {
+				...state.data,
+				bound : {
+					...state.data.bound,
 				},
 			};
 			const history = new History();

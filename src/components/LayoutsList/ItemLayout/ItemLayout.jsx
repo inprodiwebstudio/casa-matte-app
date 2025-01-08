@@ -63,7 +63,7 @@ const ItemLayout = ({
 				numberText   : layoutData?.numberText,
 				sheetId      : pageDataSelected.currentPage,
 			}));
-			dispatch(workSpaceSlice.actions.clearSelectedPageData());
+			// dispatch(workSpaceSlice.actions.clearSelectedPageData());
 		}
 	};
 

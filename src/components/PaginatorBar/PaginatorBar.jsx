@@ -8,10 +8,11 @@ import LoadingPaginator                                           from "./Loadin
 import { workSpaceSlice }                                         from "store/Slices";
 import { convertToArray, isValidArray, convertToObject, bindAll } from "helpers";
 import { ScrollBar }                                              from "core/components";
-// import FrontPage                                                  from "./FrontPage";
+import FrontPage                                                  from "./FrontPage";
 import "./PaginatorBar.scss";
+import { openContextModal }                                       from "@mantine/modals";
 
-const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, loading }) => {
+const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, loading, productType}) => {
 	const [ pageList, setPageList ] = useState({
 		pages    : {},
 		pagesIds : [],
@@ -100,9 +101,12 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 	}, [pagesData]);
 
 	const handleDelete = (pageId, index) => {
-		if (numberOfPages !== minPages) {
-			const myPagesData = {...pagesData};
-			const dataDelete = {...myPagesData[pageId]};
+		const myPagesData = {...pagesData};
+		const dataDelete = {...myPagesData[pageId]};
+
+		const counterPages = dataDelete.sheet2 ? 2 : 1;
+
+		if ((numberOfPages - counterPages) > minPages) {
 			delete myPagesData[pageId];
 			const listOfpages = convertToArray(myPagesData);
 			const newlistData = listOfpages.map((data, index) => {
@@ -133,6 +137,10 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 			workSpaceSlice.deletePage({quantityDelete : 1});
 			return;
 		}
+		openContextModal({
+			modal      : "minPagesLimit",
+			innerProps : {},
+		});
 	};
 
 	return (
@@ -145,6 +153,11 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 					</ScrollBar>
 				) : (
 					<ScrollBar>
+						{
+							(productType === "white") && (
+								<FrontPage />
+							)
+						}
 						<ItemPage
 							isFixedPage
 							handleDelete={handleDelete}
@@ -191,6 +204,7 @@ const mapStateToProps = ({ workSpaceSlice }) => ({
 	pagesData     : workSpaceSlice?.data?.pages ?? {},
 	minPages      : workSpaceSlice?.data?.minPages ?? 0,
 	numberOfPages : workSpaceSlice?.data?.numberOfPages ?? 0,
+	productType   : workSpaceSlice?.data?.product ?? 0,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (PaginatorBar);

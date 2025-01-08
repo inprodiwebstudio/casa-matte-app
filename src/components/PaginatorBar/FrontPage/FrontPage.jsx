@@ -1,9 +1,11 @@
 
 //Own Components
-import { shallowEqual, useSelector } from "react-redux";
-import { useNavigate, useParams }    from "react-router";
+import { shallowEqual, useSelector, useDispatch } from "react-redux";
+import { useNavigate, useParams }                 from "react-router";
+
+import { workSpaceSlice } from "store/Slices";
 import "./FrontPage.scss";
-import BookPages                     from "components/BookPages";
+import BookPages          from "components/BookPages";
 
 const FrontPage = () => {
 	const navigate = useNavigate();
@@ -12,6 +14,8 @@ const FrontPage = () => {
 
 	const isLoading = useSelector((state) => state.workSpaceSlice?.loading, shallowEqual);
 
+	const dispatch = useDispatch();
+
 	const workSpaceFrontPage = useSelector((state) => state.workSpaceSlice.data?.frontPage, shallowEqual);
 	const isAvailableProduct = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
 
@@ -19,6 +23,10 @@ const FrontPage = () => {
 
 	const handlerSelectPage = () => {
 		navigate("frontpage");
+		dispatch(workSpaceSlice.actions.setSelectePageData({
+			pageId      : "frontpage",
+			currentPage : "sheet1",
+		}));
 	};
 
 	return (

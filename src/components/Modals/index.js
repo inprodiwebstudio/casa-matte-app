@@ -6,6 +6,8 @@ import ConfirmationDelete       from "./ConfirmationDelete";
 import ConfirmationToPrint      from "./ConfirmationToPrint";
 import ConfirmationDeleteFolder from "./ConfirmationDeleteFolder";
 import AddNewPageConfirmation   from "./AddNewPageConfirmation";
+import NoMorePages              from "./NoMorePages";
+import MinPagesLimit            from "./MinPagesLimit";
 
 
 const modals = {
@@ -16,6 +18,8 @@ const modals = {
 	confirmationToPrint      : ConfirmationToPrint,
 	confirmationDeleteFolder : ConfirmationDeleteFolder,
 	addNewPageConfirmation   : AddNewPageConfirmation,
+	noMorePages              : NoMorePages,
+	minPagesLimit            : MinPagesLimit,
 };
 
 const modalsConfig = {

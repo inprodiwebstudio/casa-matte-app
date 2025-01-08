@@ -24,6 +24,8 @@ import { bindAll } from "helpers";
 import styles      from "./styles";
 
 const EditText = ({
+	isFront,
+	isBound,
 	sizes,
 	sheetNo,
 	layoutNo,
@@ -135,7 +137,15 @@ const EditText = ({
 		debounce((event, editor) => {
 		  const data = editor.getData();
 		  setEditorState(data);
-		  workSpaceSlice.addText({pageId, sheetNo, text : data, layoutNo});
+		  if (isBound) {
+				workSpaceSlice.addTextBound({text : data});
+				return;
+		  }
+		  if (!isFront) {
+				workSpaceSlice.addText({pageId, sheetNo, text : data, layoutNo});
+				return;
+		  }
+		  workSpaceSlice.addTextFront({sheetNo, text : data, layoutNo});
 		}, 3000),
 		[]
 	);

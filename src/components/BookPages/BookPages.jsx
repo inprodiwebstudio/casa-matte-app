@@ -1,11 +1,10 @@
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
-import { useEffect, useState }                    from "react";
+import { useState, useEffect }                    from "react";
 import { Skeleton }                               from "@mantine/core";
 
 //Own components
 // import LayoutMod          from "components/LayoutMod/LayoutMod";
-import photoBooksConfing from "core/constants/photoBooksConfing";
-// import { convertToArray } from "helpers";
+import photoBooksConfing  from "core/constants/photoBooksConfing";
 import { workSpaceSlice } from "store/Slices";
 import FrontLayout        from "components/global/LayoutsPage/FrontLayout";
 import "./BookPages.scss";
@@ -16,7 +15,7 @@ const BookPages = ({
 	isInPaginator,
 	isInWorkSpcae,
 }) => {
-	const [ currentSelectedPage, setCurrentSelectedPage ] = useState(null);
+	const [ currentSelectedPage, setCurrentSelectedPage ] = useState(undefined);
 
 	const dispatch = useDispatch();
 
@@ -32,7 +31,7 @@ const BookPages = ({
 
 	const modsInDoublePage = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.modsInDoublePage;
 
-	const isInDoublePage = modsInDoublePage?.includes(pageData?.sheet1?.layoutType);
+	const isInDoublePage = modsInDoublePage?.includes(pageData?.id);
 
 	const aspectRatio = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.aspectRatio;
 
@@ -58,6 +57,11 @@ const BookPages = ({
 	useEffect(() => {
 		if (!pageDataSelected) {
 			setCurrentSelectedPage(null);
+			return;
+		}
+		if (isInWorkSpcae && pageDataSelected) {
+			setCurrentSelectedPage(pageDataSelected.currentPage);
+			return;
 		}
 	}, [pageDataSelected]);
 
@@ -67,13 +71,12 @@ const BookPages = ({
 		);
 	}
 
-
 	return (
 		<div
 			className="BookPages"
-			// style={{
-			// 	aspectRatio : (isInDoublePage || pageData?.sheet2 || pageData?.sheet1?.layoutType?.includes("Front")) ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
-			// }}
+			style={{
+				aspectRatio : (isInDoublePage || pageData?.sheet2 || pageData?.sheet1?.layoutType?.includes("Front")) ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
+			}}
 		>
 			<div
 				className={
@@ -89,8 +92,13 @@ const BookPages = ({
 				}
 			>
 				{
-					(pageData?.sheet1?.layoutType?.includes("Front")) && (
-						<FrontLayout pageData={pageData} isThumbNail={isThumbNail} isInPaginator={isInPaginator} isInWorkSpcae={isInWorkSpcae} />
+					(pageData?.id.includes("Front")) && (
+						<FrontLayout
+							pageData={pageData}
+							isThumbNail={isThumbNail}
+							isInPaginator={isInPaginator}
+							isInWorkSpcae={isInWorkSpcae}
+						/>
 					)
 				}
 				{

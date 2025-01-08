@@ -3,10 +3,15 @@ import { Document, pdf, Page } from "@react-pdf/renderer";
 import LogoCasaMatte           from "Resources/images/casaMatteLogo.svg";
 import { Loading }             from "core/components";
 
-import VerticalLarge  from "components/MyModsLayouts/VerticalLarge";
-import VerticalMedium from "components/MyModsLayouts/VerticalMedium";
-import SquareSmall    from "components/MyModsLayouts/SquareSmall";
-import SquareLarge    from "components/MyModsLayouts/SquareLarge";
+import VerticalLarge     from "components/MyModsLayouts/VerticalLarge";
+import VerticalMedium    from "components/MyModsLayouts/VerticalMedium";
+import HorizontalLarge   from "components/MyModsLayouts/HorizontalLarge";
+import HorizontalMedium  from "components/MyModsLayouts/HorizontalMedium";
+import SquareSmall       from "components/MyModsLayouts/SquareSmall";
+import SquareLarge       from "components/MyModsLayouts/SquareLarge";
+import TravelCoffeeTable from "components/MyModsLayouts/TravelCoffeeTable";
+
+import SpinePhotoBook from "components/MyModsLayouts/SpinePdf";
 
 import "./PayConfirm.scss";
 import { useEffect, useState }                    from "react";
@@ -17,31 +22,60 @@ import axios                                      from "axios";
 import { workSpaceSlice } from "store/Slices";
 import { convertToArray } from "helpers";
 
-
 const PayConfirm = () => {
 	const photoBookTypes = {
 		vertical : {
 			mediano : {
 				size                  : [612, 792],
+				frontSize             : [612, 792],
 				isInDoublePageLayouts : ["FrontLayout"],
 				modLayouts            : {...VerticalMedium},
 			},
 			grande : {
 				size                  : [850, 991],
+				frontSize             : [850, 991],
 				isInDoublePageLayouts : ["FrontLayout"],
 				modLayouts            : {...VerticalLarge},
+			},
+		},
+		horizontal : {
+			grande : {
+				size                  : [992, 850],
+				frontSize             : [992, 850],
+				isInDoublePageLayouts : ["FrontLayout"],
+				modLayouts            : {...HorizontalLarge},
+			},
+			mediano : {
+				size                  : [790, 615],
+				frontSize             : [790, 615],
+				isInDoublePageLayouts : ["FrontLayout"],
+				modLayouts            : {...HorizontalMedium},
 			},
 		},
 		cuadrado : {
 			grande : {
 				size                  : [850, 850],
+				frontSize             : [850, 850],
 				isInDoublePageLayouts : ["FrontLayout"],
 				modLayouts            : {...SquareLarge},
 			},
 			chico : {
 				size                  : [595, 595],
+				frontSize             : [595, 595],
 				isInDoublePageLayouts : ["FrontLayout"],
 				modLayouts            : {...SquareSmall},
+			},
+		},
+		chico : {
+			size                  : [595, 595],
+			isInDoublePageLayouts : ["FrontLayout"],
+			modLayouts            : {...SquareSmall},
+		},
+		travelcoffeetable : {
+			grande : {
+				size                  : [708, 850],
+				isInDoublePageLayouts : ["FrontLayout"],
+				modLayouts            : {...TravelCoffeeTable},
 			},
 		},
 	};
@@ -67,10 +101,17 @@ const PayConfirm = () => {
 	});
 
 	const isLoadingData = isFetchingPostId || isLoadingOrder || isGeneratingPDF;
+
+	const handlerFormat = (productType) => {
+		if ( productType === "travelcoffeetable ") {
+			return "travelcoffeetable";
+		}
+		return myPhotoBookData?.format;
+	};
 	const getOrderId = async () => {
 		setIsLoadingOrder(true);
 		try {
-			const orderData = await axios.get(`https://casamatte.com/wp-json/wc/v3/orders/${orderid}`,
+			const orderData = await axios.get(`https://casamatte.wip-inprodi.com/wp-json/wc/v3/orders/${orderid}`,
 				{
 					auth : {
 						username : "ck_ecf36082e00a4cfd16000f338e25073359b78df2",
@@ -92,11 +133,11 @@ const PayConfirm = () => {
 	};
 
 	const getComponent = (pageData) => {
-		const Sheet1Layout = photoBookTypes[myPhotoBookData?.format]?.[myPhotoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet1?.layoutType]?.pdfLayout;
+		const Sheet1Layout = photoBookTypes[handlerFormat(myPhotoBookData?.product)]?.[myPhotoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet1?.layoutType]?.pdfLayout;
 
-		const Sheet2Layout = photoBookTypes[myPhotoBookData?.format]?.[myPhotoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet2?.layoutType]?.pdfLayout;
+		const Sheet2Layout = photoBookTypes[handlerFormat(myPhotoBookData?.product)]?.[myPhotoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet2?.layoutType]?.pdfLayout;
 
-		const sizePages = photoBookTypes[myPhotoBookData?.format]?.[myPhotoBookData?.sizePhotoBook]?.size;
+		const sizePages = photoBookTypes[handlerFormat(myPhotoBookData?.product)]?.[myPhotoBookData?.sizePhotoBook]?.size;
 
 		if (Sheet1Layout) {
 			return (
@@ -114,10 +155,30 @@ const PayConfirm = () => {
 		}
 	};
 
+	const SheetSpineLayout = SpinePhotoBook;
+
+	const SheetFrontLayout = photoBookTypes[handlerFormat(myPhotoBookData?.product)]?.[myPhotoBookData?.sizePhotoBook]?.modLayouts[myPhotoBookData?.frontPage?.sheet1?.layoutType]?.pdfLayout;
+
+	const sizeFrontPage = photoBookTypes[handlerFormat(myPhotoBookData?.product)]?.[myPhotoBookData?.sizePhotoBook]?.frontSize;
+
 	const MyDocGenerate = ({listPages}) => {
 		return (
 			<Document>
 				<>
+					{
+						(myPhotoBookData?.product === "white") && (
+							<Page size={sizeFrontPage}>
+								<SheetSpineLayout text={myPhotoBookData?.bound} />
+							</Page>
+						)
+					}
+					{
+						(myPhotoBookData?.product === "white") && (
+							<Page size={sizeFrontPage}>
+								<SheetFrontLayout images={myPhotoBookData?.frontPage?.sheet1?.photos} text={myPhotoBookData?.frontPage?.sheet1?.text} />
+							</Page>
+						)
+					}
 					{
 						listPages.map((pageData, index) => getComponent(pageData, index))
 					}
@@ -168,8 +229,7 @@ const PayConfirm = () => {
 		// }
 			if (photobookData?.meta?.config) {
 				const myData = photobookData?.meta?.config;
-				const myReplacerString = myData.replace(/'/g, "\"");
-				const parseJSON = JSON.parse(myReplacerString);
+				const parseJSON = JSON.parse(myData);
 				dispatch(workSpaceSlice.actions.insertData({...parseJSON, modified : photobookData?.modified, projectTittle : photobookData?.title?.rendered}));
 			}
 		} catch (error) {
@@ -232,7 +292,7 @@ const PayConfirm = () => {
 						</div>
 					)}
 				</Stack>
-				<a href="https://casamatte.com/">
+				<a href="https://casamatte.wip-inprodi.com/">
 					<img src={LogoCasaMatte} width={180} />
 				</a>
 			</Stack>
