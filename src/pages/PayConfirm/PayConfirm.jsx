@@ -197,7 +197,7 @@ const PayConfirm = () => {
 			const formData = new FormData();
 			formData.append("file", blob, `${userData?.email}-noPedido:${orderid}-bookId:${postId}.pdf`);
 			// Enviar el archivo al backend
-			const response = await axios.post("https://localhost:3000/api/v1/uploadPdf", formData, {
+			const response = await axios.post("https://casa-matte-api-cs6c4.ondigitalocean.app/api/v1/uploadPdf", formData, {
 				headers : { "Content-Type" : "multipart/form-data" },
 			});
 			await dataMutation({

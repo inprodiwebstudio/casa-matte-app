@@ -143,31 +143,35 @@ const ConfirmationToPrint = () => {
 						email      : userEmail ?? undefined,
 						phone      : data?.phone ?? undefined,
 					},
-					shipping : {
-						first_name : data?.name_shipping ?? undefined,
-						last_name  : data?.last_name_shipping ?? undefined,
-						address_1  : data?.address_1_shipping ?? undefined,
-						city       : data?.city_shipping ?? undefined,
-						state      : data?.state_shipping ?? undefined,
-						postcode   : data?.postcode_shipping ?? undefined,
-						country    : data?.country_shipping ?? undefined,
-					},
+					...((checkedShipping) && {
+						shipping : {
+							first_name : data?.name_shipping ?? undefined,
+							last_name  : data?.last_name_shipping ?? undefined,
+							address_1  : data?.address_1_shipping ?? undefined,
+							city       : data?.city_shipping ?? undefined,
+							state      : data?.state_shipping ?? undefined,
+							postcode   : data?.postcode_shipping ?? undefined,
+							country    : data?.country_shipping ?? undefined,
+						},
+					}),
 					line_items : [
 						{
-							product_id : productId, // ID del producto
+							product_id : productId,
 							quantity   : 1,
 							total      : handlerCost().toString(),
 							subtotal   : handlerCost().toString(),
 							price      : handlerCost(),
 						},
 					],
-					shipping_lines : [
-						{
-						  method_id    : "flat_rate", // ID del método de envío configurado en WooCommerce
-						  method_title : "Envío estándar",
-						  total        : "180.00", // Costo de envío personalizado
-						},
-					],
+					...((checkedShipping) && {
+						shipping_lines : [
+							{
+							  method_id    : "flat_rate",
+							  method_title : "Envío estándar",
+							  total        : "180.00",
+							},
+						],
+					}),
 				},
 				{
 					auth : {
