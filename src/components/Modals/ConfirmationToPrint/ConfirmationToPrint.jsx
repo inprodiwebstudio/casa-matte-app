@@ -27,7 +27,6 @@ const ConfirmationToPrint = () => {
 	const postIdphotoBook = useSelector((state) => state.authSlice?.user?.postId, shallowEqual);
 	const userEmail = useSelector((state) => state.authSlice?.user?.email, shallowEqual);
 	const userId = useSelector((state) => state.authSlice?.user?.userId, shallowEqual);
-	const userName = useSelector((state) => state.authSlice?.user?.username, shallowEqual);
 	// const formatedPrice = photoBookPrice.replace(",", "");
 
 	const listOfPages = convertToArray(dataPages.pages);
@@ -128,7 +127,7 @@ const ConfirmationToPrint = () => {
 					payment_method       : "bacs",
 					payment_method_title : "Direct Bank Transfer",
 					set_paid             : false,
-					status               : (userName === "casamatteadmin") ? "processing" : "pending",
+					status               : "pending",
 					customer_id          : userId,
 					billing              : {
 						first_name : data?.name ?? undefined,
