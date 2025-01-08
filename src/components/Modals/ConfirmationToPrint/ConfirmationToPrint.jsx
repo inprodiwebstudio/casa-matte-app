@@ -195,7 +195,6 @@ const ConfirmationToPrint = () => {
 			});
 
 			window.location.href = responseCreateOrder?.data?.payment_url;
-			return;
 
 		} catch (err) {
 			LoginNotification["post"][500]();
