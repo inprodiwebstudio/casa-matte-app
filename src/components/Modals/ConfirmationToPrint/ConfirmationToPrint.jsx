@@ -196,12 +196,8 @@ const ConfirmationToPrint = () => {
 				method : "POST",
 			});
 
-			if (userName !== "casamatteadmin") {
-				window.location.href = responseCreateOrder?.data?.payment_url;
-				return;
-			}
-
-			navigate(`payment/confirm?orderid=${responseCreateOrder?.data?.id}&postId=${postIdphotoBook}`);
+			window.location.href = responseCreateOrder?.data?.payment_url;
+			return;
 
 		} catch (err) {
 			LoginNotification["post"][500]();
