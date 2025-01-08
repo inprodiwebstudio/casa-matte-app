@@ -14,7 +14,7 @@ const Mod20 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			w="100%"
 			h="100%"
 			p={"2%"}
-			pb={"13%"}
+			pb={"8%"}
 		>
 			<Stack
 				w={"100%"}
