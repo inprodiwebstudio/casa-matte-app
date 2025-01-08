@@ -111,7 +111,7 @@ const PayConfirm = () => {
 	const getOrderId = async () => {
 		setIsLoadingOrder(true);
 		try {
-			const orderData = await axios.get(`https://casamatte.wip-inprodi.com/wp-json/wc/v3/orders/${orderid}`,
+			const orderData = await axios.get(`https://casamatte.com/wp-json/wc/v3/orders/${orderid}`,
 				{
 					auth : {
 						username : "ck_ecf36082e00a4cfd16000f338e25073359b78df2",
@@ -292,7 +292,7 @@ const PayConfirm = () => {
 						</div>
 					)}
 				</Stack>
-				<a href="https://casamatte.wip-inprodi.com/">
+				<a href="https://casamatte.com/">
 					<img src={LogoCasaMatte} width={180} />
 				</a>
 			</Stack>
