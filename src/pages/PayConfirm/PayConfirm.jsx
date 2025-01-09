@@ -193,6 +193,8 @@ const PayConfirm = () => {
 			// Generar el documento PDF como un Blob
 			const blob = await pdf(<MyDocGenerate listPages={listPages} />).toBlob();
 
+			console.log("Gnerate pdf success");
+
 			// Crear un FormData para enviar el archivo al backend
 			const formData = new FormData();
 			formData.append("file", blob, `${userData?.email}-noPedido:${orderid}-bookId:${postId}.pdf`);
