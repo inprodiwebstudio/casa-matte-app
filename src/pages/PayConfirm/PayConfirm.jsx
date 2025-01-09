@@ -166,14 +166,14 @@ const PayConfirm = () => {
 			<Document>
 				<>
 					{
-						(myPhotoBookData?.product === "white") && (
+						((myPhotoBookData?.product === "white") && SheetSpineLayout) && (
 							<Page size={sizeFrontPage}>
 								<SheetSpineLayout text={myPhotoBookData?.bound} />
 							</Page>
 						)
 					}
 					{
-						(myPhotoBookData?.product === "white") && (
+						((myPhotoBookData?.product === "white") && SheetFrontLayout) && (
 							<Page size={sizeFrontPage}>
 								<SheetFrontLayout images={myPhotoBookData?.frontPage?.sheet1?.photos} text={myPhotoBookData?.frontPage?.sheet1?.text} />
 							</Page>
