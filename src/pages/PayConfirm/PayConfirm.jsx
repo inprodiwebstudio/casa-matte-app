@@ -233,6 +233,7 @@ const PayConfirm = () => {
 				dispatch(workSpaceSlice.actions.insertData({...parseJSON, modified : photobookData?.modified, projectTittle : photobookData?.title?.rendered}));
 			}
 		} catch (error) {
+			console.log(error);
 			setIsGeneratingPDF(false);
 			setErrorToGeneratePDF(true);
 		}
@@ -246,7 +247,6 @@ const PayConfirm = () => {
 
 	useEffect(() => {
 		if ( isPay && (photobookData?.meta?.config && (photobookData?.meta?.config !== "")) ) {
-			console.log("Entro aqui");
 			photobookPDF();
 		}
 	}, [isPay, photobookData]);
