@@ -50,6 +50,7 @@ const Mod32Pdf = ({images}) => {
 									alt="test"
 									style={{
 										objectFit : "cover",
+										height    : "100%",
 									}}
 								/>
 							)
@@ -70,6 +71,7 @@ const Mod32Pdf = ({images}) => {
 									alt="test"
 									style={{
 										objectFit : "cover",
+										height    : "100%",
 									}}
 								/>
 							)
@@ -100,6 +102,7 @@ const Mod32Pdf = ({images}) => {
 									alt="test"
 									style={{
 										objectFit : "cover",
+										height    : "100%",
 									}}
 								/>
 							)
@@ -120,6 +123,7 @@ const Mod32Pdf = ({images}) => {
 									alt="test"
 									style={{
 										objectFit : "cover",
+										height    : "100%",
 									}}
 								/>
 							)
@@ -140,6 +144,7 @@ const Mod32Pdf = ({images}) => {
 									alt="test"
 									style={{
 										objectFit : "cover",
+										height    : "100%",
 									}}
 								/>
 							)
