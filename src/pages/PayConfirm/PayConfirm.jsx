@@ -188,7 +188,6 @@ const PayConfirm = () => {
 	};
 
 	const uploadPDF = async (photoBookData) => {
-		console.log("Aqui entro");
 		try {
 			const listPages = convertToArray(photoBookData?.pages);
 			// Generar el documento PDF como un Blob
@@ -268,6 +267,8 @@ const PayConfirm = () => {
 		}
 
 	}, [dataMutationResult]);
+
+	console.log(errorToGeneratePDF);
 
 	return (
 		<Center id="PayConfirm">
