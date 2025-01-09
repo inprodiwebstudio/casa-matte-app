@@ -190,10 +190,9 @@ const PayConfirm = () => {
 	const uploadPDF = async (photoBookData) => {
 		try {
 			const listPages = convertToArray(photoBookData?.pages);
+			console.log(listPages);
 			// Generar el documento PDF como un Blob
 			const blob = await pdf(<MyDocGenerate listPages={listPages} />).toBlob();
-
-			console.log("Gnerate pdf success");
 
 			// Crear un FormData para enviar el archivo al backend
 			const formData = new FormData();
