@@ -245,7 +245,8 @@ const PayConfirm = () => {
 	}, [orderid]);
 
 	useEffect(() => {
-		if ( isPay && (photobookData?.meta?.config && photobookData?.meta?.config !== "") ) {
+		if ( isPay && (photobookData?.meta?.config && (photobookData?.meta?.config !== "")) ) {
+			console.log("Entro aqui");
 			photobookPDF();
 		}
 	}, [isPay, photobookData]);
@@ -267,8 +268,6 @@ const PayConfirm = () => {
 		}
 
 	}, [dataMutationResult]);
-
-	console.log(errorToGeneratePDF);
 
 	return (
 		<Center id="PayConfirm">
