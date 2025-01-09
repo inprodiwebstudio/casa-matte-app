@@ -166,7 +166,7 @@ const PayConfirm = () => {
 			<Document>
 				<>
 					{
-						((myPhotoBookData?.product === "white") && SheetSpineLayout) && (
+						((myPhotoBookData?.product === "white") && SheetFrontLayout) && (
 							<Page size={sizeFrontPage}>
 								<SheetSpineLayout text={myPhotoBookData?.bound} />
 							</Page>
@@ -190,7 +190,6 @@ const PayConfirm = () => {
 	const uploadPDF = async (photoBookData) => {
 		try {
 			const listPages = convertToArray(photoBookData?.pages);
-			console.log(listPages);
 			// Generar el documento PDF como un Blob
 			const blob = await pdf(<MyDocGenerate listPages={listPages} />).toBlob();
 
@@ -235,7 +234,6 @@ const PayConfirm = () => {
 				dispatch(workSpaceSlice.actions.insertData({...parseJSON, modified : photobookData?.modified, projectTittle : photobookData?.title?.rendered}));
 			}
 		} catch (error) {
-			console.log(error);
 			setIsGeneratingPDF(false);
 			setErrorToGeneratePDF(true);
 		}
