@@ -41,7 +41,7 @@ const Mod11Pdf = ({images}) => {
 								src={imgUrlPdf(images[0])}
 								alt="test"
 								style={{
-									height    : "631px",
+									height    : "100%",
 									objectFit : "cover",
 								}}
 							/>
@@ -62,7 +62,7 @@ const Mod11Pdf = ({images}) => {
 								src={imgUrlPdf(images[1])}
 								alt="test"
 								style={{
-									height    : "595px",
+									height    : "100%",
 									objectFit : "cover",
 								}}
 							/>

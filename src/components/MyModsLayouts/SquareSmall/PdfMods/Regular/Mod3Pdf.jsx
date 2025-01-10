@@ -29,7 +29,7 @@ const Mod3Pdf = ({images }) => {
 							src={imgUrlPdf(images[0])}
 							alt="test"
 							style={{
-								height    : "595px",
+								height    : "100%",
 								objectFit : "cover",
 							}}
 						/>

@@ -122,6 +122,7 @@ const Mod31Pdf = ({images}) => {
 									src={imgUrlPdf(images[3])}
 									alt="test"
 									style={{
+										height    : "100%",
 										objectFit : "cover",
 									}}
 								/>
@@ -142,6 +143,7 @@ const Mod31Pdf = ({images}) => {
 									src={imgUrlPdf(images[4])}
 									alt="test"
 									style={{
+										height    : "100%",
 										objectFit : "cover",
 									}}
 								/>
