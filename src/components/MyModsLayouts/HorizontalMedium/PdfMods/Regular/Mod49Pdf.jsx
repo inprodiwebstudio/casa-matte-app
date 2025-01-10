@@ -7,7 +7,7 @@ import ReactDOMServer   from "react-dom/server";
 import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
 
 
-const Mod49Pdf = ({text, images}) => {
+const Mod49Pdf = ({text}) => {
 
 	const text01 = text[0] ? text[0] : "<p style='text-align: left;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 3</span></p>";
 
