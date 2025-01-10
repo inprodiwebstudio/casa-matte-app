@@ -33,7 +33,7 @@ const Mod7Pdf = ({images}) => {
 							src={imgUrlPdf(images[0])}
 							alt="test"
 							style={{
-								height    : "431px",
+								height    : "100%",
 								objectFit : "cover",
 							}}
 						/>

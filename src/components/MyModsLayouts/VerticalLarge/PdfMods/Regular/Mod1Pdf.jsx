@@ -29,7 +29,7 @@ const Mod1Pdf = ({images}) => {
 							alt={images[0]?.url}
 							style={{
 								objectFit : "cover",
-								height    : "991px",
+								height    : "100%",
 							}}
 						/>
 					)
