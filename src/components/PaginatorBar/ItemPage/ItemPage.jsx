@@ -24,6 +24,7 @@ const ItemPage = ({
 	const dispatch = useDispatch();
 
 	const photoBookFormat = useSelector((state) => state.workSpaceSlice?.data?.format, shallowEqual);
+	const orderId = useSelector((state) => state.workSpaceSlice?.data?.orderId, shallowEqual);
 	const isAvailableProduct = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
 
 	const isCurrentPage = pageId === draggableId;
@@ -79,7 +80,7 @@ const ItemPage = ({
 				<NumbPages />
 			</div>
 			{
-				(pageData?.id !== "page1") && (
+				((pageData?.id !== "page1") && !orderId) && (
 					<div
 						className="delete-icon"
 						onClick={() => handleDelete(pageData?.id)}

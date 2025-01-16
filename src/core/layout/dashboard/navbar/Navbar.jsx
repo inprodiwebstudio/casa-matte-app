@@ -16,6 +16,7 @@ const Navbar = ({workSpaceSlice}) => {
 	const isPreview = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
 	const maxRangePages = useSelector((state) => state.workSpaceSlice.data?.maxRangePages, shallowEqual);
 	const dataPages = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
+	const orderId = useSelector((state) => state.workSpaceSlice?.data?.orderId, shallowEqual);
 
 	const listOfPages = convertToArray(dataPages.pages);
 	const counterPages = () => counterSheets(listOfPages);
@@ -60,27 +61,31 @@ const Navbar = ({workSpaceSlice}) => {
 					>
 						<PaginatorBar />
 					</div>
-					<div className="body-action-container">
-						<Button
-							radius={5}
-							size="xs"
-							color="darkCasaMatte"
-							leftIcon={<PlusIcon size="15px" />}
-							sx={{marginTop : "15px"}}
-							loading={loading}
-							onClick={() => handlerAddPage()}
-						>
-							<Text
-								weight={400}
-								color="whiteCasaMatte"
-								sx={{
-									textTransform : "uppercase",
-								}}
-							>
-								Nueva Página
-							</Text>
-						</Button>
-					</div>
+					{
+						!orderId && (
+							<div className="body-action-container">
+								<Button
+									radius={5}
+									size="xs"
+									color="darkCasaMatte"
+									leftIcon={<PlusIcon size="15px" />}
+									sx={{marginTop : "15px"}}
+									loading={loading}
+									onClick={() => handlerAddPage()}
+								>
+									<Text
+										weight={400}
+										color="whiteCasaMatte"
+										sx={{
+											textTransform : "uppercase",
+										}}
+									>
+										Nueva Página
+									</Text>
+								</Button>
+							</div>
+						)
+					}
 				</>
 			}
 		</div>

@@ -11,6 +11,7 @@ const initialState = {
 		pasta          : "",
 		projectTittle  : "",
 		modified       : undefined,
+		orderId        : undefined,
 		frontPage      : {
 			id     : "FrontLayout",
 			sheet1 : {

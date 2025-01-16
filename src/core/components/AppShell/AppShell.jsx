@@ -26,7 +26,6 @@ import { PostingConfig }             from "Notifications";
 import { genericApi }                from "store/api/genericApi";
 import { workSpaceSlice, authSlice } from "store/Slices";
 import "./AppShell.scss";
-import { useNavigate }               from "react-router";
 
 //Fonts
 Font.register(
@@ -357,7 +356,6 @@ const AppShell = ({
 	sidebar,
 }) => {
 	const searchParams = new URLSearchParams(location.search);
-	const navigate = useNavigate();
 
 	const nameUser = searchParams.get("username") ?? "";
 	const postId = searchParams.get("postId") ?? "";
@@ -410,14 +408,20 @@ const AppShell = ({
 		if (photobookData?.meta?.config) {
 			const myData = photobookData?.meta?.config;
 			const parseJSON = JSON.parse(myData);
-			dispatch(workSpaceSlice.actions.insertData({...parseJSON, modified : photobookData?.modified, projectTittle : photobookData?.title?.rendered}));
-		}
-	}, [photobookData]);
 
-	useEffect(() => {
-		if (photobookData?.meta?.id_del_pedido && photobookData?.meta?.id_del_pedido !== "") {
-			navigate("/order/inProcess");
-			return;
+			const orderIdHandler = () => {
+				if (photobookData?.meta?.id_del_pedido || (photobookData?.meta?.id_del_pedido !== "")) {
+					return photobookData?.meta?.id_del_pedido;
+				}
+				return undefined;
+			};
+
+			dispatch(workSpaceSlice.actions.insertData({
+				...parseJSON,
+				modified      : photobookData?.modified,
+				projectTittle : photobookData?.title?.rendered,
+				orderId       : orderIdHandler(),
+			}));
 		}
 	}, [photobookData]);
 
