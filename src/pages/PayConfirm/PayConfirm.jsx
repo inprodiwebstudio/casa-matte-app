@@ -281,7 +281,7 @@ const PayConfirm = () => {
 					</div>
 					<div className="body-payment">
 						{(isLoadingData && !isPay) && "Estamos validando tu informacion y el pago espera un momento"}
-						{(isLoadingData && isPay) && "Estamos generando tu photobook. Esto puede tardar unos minutos."}
+						{(isLoadingData && isPay) && "Estamos generando tu photobook. EL proceso puede tardar unos minutos. No cierres la ventana."}
 						{(!isLoadingData && isPay && !isGeneratingPDF && !errorToGeneratePDF) && "Tu photobook ha sido creado y enviado exitosamente. Casa Matte recibirá tu pedido pronto y se pondrá en contacto contigo. ¡Gracias por elegirnos!"}
 						{(!isLoadingData && !isPay && !errorToGeneratePDF) && "El pago no se procesó correctamente. Por favor, verifica y realiza el pago nuevamente, o si ya lo hiciste, intenta ingresando a este link más tarde. (Puedes recargar la pagina si deseas)"}
 						{(errorToGeneratePDF && isPay && !isGeneratingPDF) && "Parece que ocurrió un problema al generar tu photobook. Por favor, intenta recargar la página o vuelve a intentarlo más tarde."}
