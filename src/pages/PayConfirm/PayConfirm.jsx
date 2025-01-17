@@ -229,7 +229,8 @@ const PayConfirm = () => {
 		// }
 			if (photobookData?.meta?.config) {
 				const myData = photobookData?.meta?.config;
-				const parseJSON = JSON.parse(myData);
+				const newData = myData.replace(".heic", ".png");
+				const parseJSON = JSON.parse(newData);
 				dispatch(workSpaceSlice.actions.insertData({...parseJSON, modified : photobookData?.modified, projectTittle : photobookData?.title?.rendered}));
 			}
 		} catch (error) {
