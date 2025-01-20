@@ -156,15 +156,27 @@ const photoBooksConfing = {
 	},
 	clásico : {
 		horizontal : {
-			aspectRatio : [0, 0],
+			aspectRatio : [36, 31],
 			sizes       : {
-				chico   : false,
-				mediano : false,
-				grande  : {
+				chico : {
 					layoutMods       : {},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
+				},
+				mediano : {
+					aspectRatio      : [158, 123],
+					layoutMods       : {...HorizontalMedium},
+					frontLayouts     : {},
+					modsInDoublePage : ["FrontLayout"],
+					pdfSize          : [100, 100],
+				},
+				grande : {
+					aspectRatio      : [496, 425],
+					layoutMods       : {...HorizontalLarge},
+					frontLayouts     : {},
+					modsInDoublePage : ["FrontLayout"],
+					pdfSize          : [35, 30],
 				},
 			},
 		},
@@ -211,15 +223,27 @@ const photoBooksConfing = {
 	},
 	premium : {
 		horizontal : {
-			aspectRatio : [],
+			aspectRatio : [36, 31],
 			sizes       : {
-				chico   : false,
-				mediano : false,
-				grande  : {
+				chico : {
 					layoutMods       : {},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
+				},
+				mediano : {
+					aspectRatio      : [158, 123],
+					layoutMods       : {...HorizontalMedium},
+					frontLayouts     : {},
+					modsInDoublePage : ["FrontLayout"],
+					pdfSize          : [100, 100],
+				},
+				grande : {
+					aspectRatio      : [496, 425],
+					layoutMods       : {...HorizontalLarge},
+					frontLayouts     : {},
+					modsInDoublePage : ["FrontLayout"],
+					pdfSize          : [35, 30],
 				},
 			},
 		},
@@ -246,13 +270,6 @@ const photoBooksConfing = {
 			aspectRatio : [1, 1],
 			sizes       : {
 				mediano : false,
-				// chico   : {
-				// 	aspectRatio      : [1, 1],
-				// 	layoutMods       : {...SquareSmall},
-				// 	frontLayouts     : {},
-				// 	modsInDoublePage : [],
-				// 	pdfSize          : [100, 100],
-				// },
 				grande  : {
 					aspectRatio      : [1, 1],
 					layoutMods       : {...SquareLarge},
@@ -292,6 +309,31 @@ const photoBooksConfing = {
 		},
 	},
 	colorblock : {
+		horizontal : {
+			aspectRatio : [36, 31],
+			sizes       : {
+				chico : {
+					layoutMods       : {},
+					frontLayouts     : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
+				},
+				mediano : {
+					aspectRatio      : [158, 123],
+					layoutMods       : {...HorizontalMedium},
+					frontLayouts     : {},
+					modsInDoublePage : ["FrontLayout"],
+					pdfSize          : [100, 100],
+				},
+				grande : {
+					aspectRatio      : [496, 425],
+					layoutMods       : {...HorizontalLarge},
+					frontLayouts     : {},
+					modsInDoublePage : ["FrontLayout"],
+					pdfSize          : [35, 30],
+				},
+			},
+		},
 		vertical : {
 			aspectRatio : [8, 9],
 			sizes       : {
@@ -332,6 +374,31 @@ const photoBooksConfing = {
 		},
 	},
 	window : {
+		horizontal : {
+			aspectRatio : [36, 31],
+			sizes       : {
+				chico : {
+					layoutMods       : {},
+					frontLayouts     : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
+				},
+				mediano : {
+					aspectRatio      : [158, 123],
+					layoutMods       : {...HorizontalMedium},
+					frontLayouts     : {},
+					modsInDoublePage : ["FrontLayout"],
+					pdfSize          : [100, 100],
+				},
+				grande : {
+					aspectRatio      : [496, 425],
+					layoutMods       : {...HorizontalLarge},
+					frontLayouts     : {},
+					modsInDoublePage : ["FrontLayout"],
+					pdfSize          : [35, 30],
+				},
+			},
+		},
 		vertical : {
 			aspectRatio : [8, 9],
 			sizes       : {
