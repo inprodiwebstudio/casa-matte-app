@@ -88,8 +88,32 @@ const photoBooksConfing = {
 		},
 	},
 	sencillo : {
-		horizontal : false,
-		vertical   : {
+		horizontal : {
+			aspectRatio : [36, 31],
+			sizes       : {
+				chico : {
+					layoutMods       : {},
+					frontLayouts     : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
+				},
+				mediano : {
+					aspectRatio      : [158, 123],
+					layoutMods       : {...HorizontalMedium},
+					frontLayouts     : {},
+					modsInDoublePage : ["FrontLayout"],
+					pdfSize          : [100, 100],
+				},
+				grande : {
+					aspectRatio      : [496, 425],
+					layoutMods       : {...HorizontalLarge},
+					frontLayouts     : {},
+					modsInDoublePage : ["FrontLayout"],
+					pdfSize          : [35, 30],
+				},
+			},
+		},
+		vertical : {
 			aspectRatio : [17, 22],
 			sizes       : {
 				chico   : false,
