@@ -139,20 +139,20 @@ const PayConfirm = () => {
 
 		const sizePages = photoBookTypes[handlerFormat(myPhotoBookData?.product)]?.[myPhotoBookData?.sizePhotoBook]?.size;
 
-		if (Sheet1Layout) {
-			return (
-				<>
+		return (
+			<>
+				{Sheet1Layout ? (
 					<Page size={sizePages}>
 						<Sheet1Layout images={pageData?.sheet1?.photos} text={pageData?.sheet1?.text} />
 					</Page>
-					{Sheet2Layout ? (
-						<Page size={sizePages}>
-							<Sheet2Layout images={pageData?.sheet2?.photos} text={pageData?.sheet2?.text} />
-						</Page>
-					) : undefined}
-				</>
-			);
-		}
+				) : undefined}
+				{Sheet2Layout ? (
+					<Page size={sizePages}>
+						<Sheet2Layout images={pageData?.sheet2?.photos} text={pageData?.sheet2?.text} />
+					</Page>
+				) : undefined}
+			</>
+		);
 	};
 
 	const SheetSpineLayout = SpinePhotoBook;
