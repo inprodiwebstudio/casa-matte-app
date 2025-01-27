@@ -161,6 +161,7 @@ const PayConfirm = () => {
 
 	const sizeFrontPage = photoBookTypes[handlerFormat(myPhotoBookData?.product)]?.[myPhotoBookData?.sizePhotoBook]?.frontSize;
 
+
 	const MyDocGenerate = ({listPages}) => {
 		return (
 			<Document>
