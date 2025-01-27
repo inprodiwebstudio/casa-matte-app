@@ -159,8 +159,9 @@ const PayConfirm = () => {
 
 	const SheetFrontLayout = photoBookTypes[handlerFormat(myPhotoBookData?.product)]?.[myPhotoBookData?.sizePhotoBook]?.modLayouts[myPhotoBookData?.frontPage?.sheet1?.layoutType]?.pdfLayout;
 
-	const sizeFrontPage = photoBookTypes[handlerFormat(myPhotoBookData?.product)]?.[myPhotoBookData?.sizePhotoBook]?.frontSize;
+	//line to check siZe photbook
 
+	const sizeFrontPage = photoBookTypes[handlerFormat(myPhotoBookData?.product)]?.[myPhotoBookData?.sizePhotoBook]?.frontSize;
 
 	const MyDocGenerate = ({listPages}) => {
 		return (
