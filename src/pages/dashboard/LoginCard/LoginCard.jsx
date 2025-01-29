@@ -251,7 +251,18 @@ const LoginCard = () => {
 	const parseAndInserPhotoBookConfig = (photoBookConfigData) => {
 		const myData = photoBookConfigData?.meta?.config;
 		const parseJSON = JSON.parse(myData);
-		dispatch(workSpaceSlice.actions.insertData({...parseJSON, modified : photoBookConfigData?.modified ?? undefined}));
+		const orderIdHandler = () => {
+			if (photoBookConfigData?.meta?.id_del_pedido || (photoBookConfigData?.meta?.id_del_pedido !== "")) {
+				return photoBookConfigData?.meta?.id_del_pedido;
+			}
+			return undefined;
+		};
+
+		dispatch(workSpaceSlice.actions.insertData({
+			...parseJSON,
+			modified : photoBookConfigData?.modified ?? undefined,
+			orderId  : orderIdHandler(),
+		}));
 	};
 
 	const handlerAvailablePhotoBookConfig = async () => {
