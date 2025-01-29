@@ -189,9 +189,9 @@ const PayConfirm = () => {
 		);
 	};
 
-	const uploadPDF = async (photoBookData) => {
+	const uploadPDF = async (photBookConfig) => {
 		try {
-			const listPages = convertToArray(photoBookData?.pages);
+			const listPages = convertToArray(photBookConfig?.pages);
 			// Generar el documento PDF como un Blob
 			const blob = await pdf(<MyDocGenerate listPages={listPages} />).toBlob();
 
@@ -202,18 +202,21 @@ const PayConfirm = () => {
 			const response = await axios.post("https://casa-matte-api-cs6c4.ondigitalocean.app/api/v1/uploadPdf", formData, {
 				headers : { "Content-Type" : "multipart/form-data" },
 			});
-			await dataMutation({
-				module : "wp-json/wp/v2/photobook-2-0",
-				data   : {
-					tittle : "Texto de prueba",
-					status : "publish",
-					meta   : {
-						status : "48",
+			const isPaidAndGenerated = photobookData?.meta?.status === "48";
+			if (!isPaidAndGenerated) {
+				await dataMutation({
+					module : "wp-json/wp/v2/photobook-2-0",
+					data   : {
+						tittle : "Texto de prueba",
+						status : "publish",
+						meta   : {
+							status : "48",
+						},
 					},
-				},
-				id     : postId,
-				method : "POST",
-			});
+					id     : postId,
+					method : "POST",
+				});
+			}
 			console.log("Archivo subido:", response.data);
 			setIsGeneratingPDF(false);
 		} catch (error) {
