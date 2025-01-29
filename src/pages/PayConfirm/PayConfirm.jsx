@@ -122,7 +122,7 @@ const PayConfirm = () => {
 
 			setIsLoadingOrder(false);
 
-			if (orderData?.data?.date_paid) {
+			if (orderData?.data?.date_paid || (orderData?.data?.payment_method_title === "Pedido gratuito")) {
 				setIsPay(true);
 				return;
 			}
