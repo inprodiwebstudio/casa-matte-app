@@ -411,10 +411,18 @@ const AppShell = ({
 			const myData = photobookData?.meta?.config;
 			const parseJSON = JSON.parse(myData);
 
+			const orderIdHandler = () => {
+				if (photobookData?.meta?.id_del_pedido || (photobookData?.meta?.id_del_pedido !== "")) {
+					return photobookData?.meta?.id_del_pedido;
+				}
+				return undefined;
+			};
+
 			dispatch(workSpaceSlice.actions.insertData({
 				...parseJSON,
 				modified      : photobookData?.modified,
 				projectTittle : photobookData?.title?.rendered,
+				orderId       : orderIdHandler(),
 			}));
 		}
 	}, [photobookData]);
