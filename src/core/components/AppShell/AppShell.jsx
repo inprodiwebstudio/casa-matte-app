@@ -410,7 +410,12 @@ const AppShell = ({
 		if (photobookData?.meta?.config) {
 			const myData = photobookData?.meta?.config;
 			const parseJSON = JSON.parse(myData);
-			dispatch(workSpaceSlice.actions.insertData({...parseJSON, modified : photobookData?.modified, projectTittle : photobookData?.title?.rendered}));
+
+			dispatch(workSpaceSlice.actions.insertData({
+				...parseJSON,
+				modified      : photobookData?.modified,
+				projectTittle : photobookData?.title?.rendered,
+			}));
 		}
 	}, [photobookData]);
 

@@ -122,7 +122,7 @@ const PayConfirm = () => {
 
 			setIsLoadingOrder(false);
 
-			if ( (orderData?.data?.date_paid !== "") || (orderData?.data?.date_paid !== null) ) {
+			if ( (orderData?.data?.date_paid !== "") && (orderData?.data?.date_paid !== null) ) {
 				setIsPay(true);
 				return;
 			}
