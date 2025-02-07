@@ -55,6 +55,8 @@ import Mod54 from "./Mod54";
 import Mod55 from "./Mod55";
 import Mod56 from "./Mod56";
 import Mod57 from "./Mod57";
+import Mod58 from "./Mod58";
+import Mod59 from "./Mod59";
 
 import {
 	Mod01FrontPdf,
@@ -127,6 +129,8 @@ import {
 	Mod55Pdf,
 	Mod56Pdf,
 	Mod57Pdf,
+	Mod58Pdf,
+	Mod59Pdf,
 } from "./PdfMods/Regular";
 
 import {
@@ -645,6 +649,20 @@ const VerticalLarge = {
 		numberText   : 1,
 		cat          : "fotosytexto",
 		pdfLayout    : Mod57Pdf,
+	},
+	Mod58 : {
+		id           : "Mod58",
+		layout       : Mod58,
+		numberPhotos : 1,
+		cat          : "fotos",
+		pdfLayout    : Mod58Pdf,
+	},
+	Mod59 : {
+		id           : "Mod59",
+		layout       : Mod59,
+		numberPhotos : 1,
+		cat          : "fotos",
+		pdfLayout    : Mod59Pdf,
 	},
 };
 
