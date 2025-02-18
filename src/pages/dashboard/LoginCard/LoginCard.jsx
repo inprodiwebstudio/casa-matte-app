@@ -3289,10 +3289,10 @@ const LoginCard = () => {
 					throw error;
 				}
 
-				// const haveAccessElement = getPostPhotoBook.meta?.correo_del_autor === loginMutationResult.data?.user_email;
+				const haveAccessElement = getPostPhotoBook.meta?.correo_del_autor === loginMutationResult.data?.user_email;
 
 
-				// if (!haveAccessElement) throw new Error("You do not have access for this element");
+				if (!haveAccessElement) throw new Error("You do not have access for this element");
 
 				dispatch(authSlice.actions.setUserData({
 					...loginMutationResult.data,
