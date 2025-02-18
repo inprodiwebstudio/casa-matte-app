@@ -14,7 +14,6 @@ import { LoginNotification, PostingConfig } from "Notifications";
 import { TextInput, PasswordInput, Button } from "core/components";
 import "./LoginCard.scss";
 import { convertToObject, isValidArray }    from "helpers";
-import axios                                from "axios";
 // import { useNavigate }                      from "react-router";
 
 const schema = Yup.object().shape({
@@ -3330,23 +3329,23 @@ const LoginCard = () => {
 		})(...args);
 	};
 
-	const updateReginaJson = async () => {
-		const jsonSting = JSON.stringify(jsonRegina);
-		await axios.post("https://casamatte.com/wp-json/wp/v2/photobook-2-0/17631", {
-			"meta" : {
-				"config" : jsonSting,
-			},
-		}, {
-			headers : {
-			  "Authorization" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2Nhc2FtYXR0ZS5jb20iLCJpYXQiOjE3Mzk0NjQ4OTQsIm5iZiI6MTczOTQ2NDg5NCwiZXhwIjoxNzQwMDY5Njk0LCJkYXRhIjp7InVzZXIiOnsiaWQiOiIzNSJ9fX0.SFbd5V6484S_-w1OMNszvkxAa72uAO6sI1rmlM5VF1w",
-			  "Content-Type"  : "application/json",
-			},
-		});
-	};
+	// const updateReginaJson = async () => {
+	// 	const jsonSting = JSON.stringify(jsonRegina);
+	// 	await axios.post("https://casamatte.com/wp-json/wp/v2/photobook-2-0/17631", {
+	// 		"meta" : {
+	// 			"config" : jsonSting,
+	// 		},
+	// 	}, {
+	// 		headers : {
+	// 		  "Authorization" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2Nhc2FtYXR0ZS5jb20iLCJpYXQiOjE3Mzk0NjQ4OTQsIm5iZiI6MTczOTQ2NDg5NCwiZXhwIjoxNzQwMDY5Njk0LCJkYXRhIjp7InVzZXIiOnsiaWQiOiIzNSJ9fX0.SFbd5V6484S_-w1OMNszvkxAa72uAO6sI1rmlM5VF1w",
+	// 		  "Content-Type"  : "application/json",
+	// 		},
+	// 	});
+	// };
 
-	useEffect(() => {
-		updateReginaJson();
-	}, []);
+	// useEffect(() => {
+	// 	updateReginaJson();
+	// }, []);
 
 
 	return (
