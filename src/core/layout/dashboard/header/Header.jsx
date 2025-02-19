@@ -33,7 +33,12 @@ const Header = () => {
 	const lastModified = useSelector((state) => state.workSpaceSlice.data.modified, shallowEqual);
 	const isModifiedData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 	const isLoggedIn = useSelector((state) => state.authSlice.loggedIn, shallowEqual);
+	const userName = useSelector((state) => state.authSlice?.user?.username, shallowEqual);
+	const userEmail = useSelector((state) => state.authSlice?.user?.email, shallowEqual);
 	const isLoadingWorspaceData = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
+
+
+	const isAdminAccount = (userName === "casamatteadmin") && (userEmail === "info@casamatte.com");
 
 	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
 	const handlerClickPreview = () => () => {
@@ -204,6 +209,31 @@ const Header = () => {
 												}}
 											>
 												Pagar
+											</Text>
+										</Button>
+									)
+								}
+								{
+									isAdminAccount && (
+										<Button
+											radius={12}
+											size="xs"
+											color="darkCasaMatte"
+											onClick={() => openContextModal({
+												modal      : "testPdf",
+												innerProps : {},
+											})}
+											disabled={false}
+											loading={isLoadingWorspaceData}
+										>
+											<Text
+												weight={400}
+												color="whiteCasaMatte"
+												sx={{
+													fontFamily : "Helvetica",
+												}}
+											>
+												TestPdf
 											</Text>
 										</Button>
 									)
