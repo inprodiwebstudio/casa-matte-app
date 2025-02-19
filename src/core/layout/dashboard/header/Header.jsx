@@ -39,7 +39,7 @@ const Header = () => {
 
 
 	const isAdminAccount = (userName === "casamatteadmin") && (userEmail === "info@casamatte.com");
-	const isNataliazAccount = (userName === "casamatteadmin");
+	const isNataliazAccount = (userName === "nataliaz");
 
 	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
 	const handlerClickPreview = () => () => {
