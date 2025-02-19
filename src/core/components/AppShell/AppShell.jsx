@@ -404,10 +404,10 @@ const AppShell = ({
 		// 	navigate("/notfound/layouts");
 		// 	return;
 		// }
-		// if (photobookData?.meta?.status === "48") {
-		// 	navigate(`/payment/confirm?orderid=${photobookData?.meta?.id_del_pedido}&postId=${postIdphotoBook}`);
-		// 	return;
-		// }
+		if ((photobookData?.meta?.status === "48") && (userName !== "casamatteadmin")) {
+			navigate(`/payment/confirm?orderid=${photobookData?.meta?.id_del_pedido}&postId=${postIdphotoBook}`);
+			return;
+		}
 		if (!userId && photobookData?.author) {
 			dispatch(authSlice.actions.setUserId(photobookData?.author));
 		}
