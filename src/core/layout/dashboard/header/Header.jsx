@@ -39,6 +39,7 @@ const Header = () => {
 
 
 	const isAdminAccount = (userName === "casamatteadmin") && (userEmail === "info@casamatte.com");
+	const isNataliazAccount = (userName === "casamatteadmin");
 
 	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
 	const handlerClickPreview = () => () => {
@@ -170,7 +171,7 @@ const Header = () => {
 									{isLoading ? "GUARDANDO..." : "GUARDAR"}
 								</Button>
 								{
-									!orderId ? (
+									(!orderId && !isNataliazAccount) && (
 										<Button
 											radius={12}
 											size="xs"
@@ -192,7 +193,10 @@ const Header = () => {
 												Imprimir
 											</Text>
 										</Button>
-									) : (
+									)
+								}
+								{
+									(orderId && !isNataliazAccount) && (
 										<Button
 											radius={12}
 											size="xs"
@@ -214,7 +218,7 @@ const Header = () => {
 									)
 								}
 								{
-									isAdminAccount && (
+									(isAdminAccount && !isNataliazAccount) && (
 										<Button
 											radius={12}
 											size="xs"
