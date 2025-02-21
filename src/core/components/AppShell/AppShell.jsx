@@ -111,9 +111,9 @@ Font.register(
 
 Font.register(
 	{
-		family     : "Inter-Regular",
-		src        : interRegular,
-		fontWeight : "400",
+		family : "Inter-Regular",
+		src    : interRegular,
+		// fontWeight : "400",
 	// 	fonts  : [
 	// 		{
 	// 			src : interRegular,
