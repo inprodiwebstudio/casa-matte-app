@@ -7,7 +7,7 @@ import { textInsertion } from "helpers";
 
 const Mod69 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
-	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 12px; font-family: Inter-Light;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</span></p>";
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</span></p>";
 
 	return (
 		<Stack

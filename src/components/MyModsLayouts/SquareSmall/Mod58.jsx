@@ -10,7 +10,7 @@ const Mod58 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
 	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 26px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: right;'><span style='font-size: 15px; font-family: Inter-Light;'>CHILE</span></p>";
+	const defaultSubtitle = "<p style='text-align: right;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
 
 	return (
 		<Flex

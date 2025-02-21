@@ -9,7 +9,7 @@ import { textInsertion } from "helpers";
 const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Light;'>SUBTÍTULO</span></p>";
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex

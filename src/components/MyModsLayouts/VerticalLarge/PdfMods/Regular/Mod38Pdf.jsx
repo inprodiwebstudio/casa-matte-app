@@ -11,7 +11,7 @@ const Mod38Pdf = ({text}) => {
 
 	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: right;'><span style='font-size: 14px; font-family: Inter-Light;'>SUBTÍTULO 2</span></p>";
+	const text02 = text[1] ? text[1] : "<p style='text-align: right;'><span style='font-size: 14px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>";
 
 	const bodyHtml = (
 		<div

@@ -8,7 +8,7 @@ import ReactDOMServer from "react-dom/server";
 
 const Mod68Pdf = ({text, images}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Light;'>Odi pullerit. Actus nes consid fur, senatus, essendi enatrum pra, us consum, que quam, ve, quo potimorta trurs con hosus ore dumus ommorunum dium oporat, elum hocul verobu</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>Odi pullerit. Actus nes consid fur, senatus, essendi enatrum pra, us consum, que quam, ve, quo potimorta trurs con hosus ore dumus ommorunum dium oporat, elum hocul verobu</span></p>";
 
 	const bodyHtml = (
 		<div

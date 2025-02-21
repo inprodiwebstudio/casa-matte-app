@@ -10,7 +10,7 @@ const Mod41 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
 	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 46px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaulSubtTitle = "<p style='text-align: right;'><span style='font-size: 20px; font-family: Inter-Light;'>SUBTÍTULO 2</span></p>";
+	const defaulSubtTitle = "<p style='text-align: right;'><span style='font-size: 20px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>";
 
 	return (
 		<Flex
