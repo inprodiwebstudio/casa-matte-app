@@ -11,9 +11,9 @@ const Mod03FrontPdf = ({text, images}) => {
 
 	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 24px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 12px; font-family: Inter-Light;'>SUBTÍTULO</span></p>";
 
-	const text03 = text[2] ? text[2] : "<p style='text-align: center;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+	const text03 = text[2] ? text[2] : "<p style='text-align: center;'><span style='font-size: 12px; font-family: Inter-Light;'>SUBTÍTULO</span></p>";
 
 	const bodyHtml = (
 		<div

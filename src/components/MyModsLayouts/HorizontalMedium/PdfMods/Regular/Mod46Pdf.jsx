@@ -8,7 +8,7 @@ import ReactDOMServer from "react-dom/server";
 
 const Mod46Pdf = ({text, images}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</span></p>";
+	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 12px; font-family: Inter-Light;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</span></p>";
 
 	const bodyHtml = (
 		<div

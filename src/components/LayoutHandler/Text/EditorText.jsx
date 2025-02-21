@@ -52,7 +52,7 @@ const EditText = ({
 				"Cormorant-Medium",
 				"GandhiSans-Regular",
 				"GandhiSerif-Regular",
-				"Inter-Lifght",
+				"Inter-Light",
 				"Inter-Regular",
 				"JosefinSans-Light",
 				"JosefinSans-Regular",

@@ -14,11 +14,11 @@ const Mod51 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
 	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 34px; font-family: JosefinSans-Light;'>TURQUÍA</span></p>";
 
-	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>Salamanca</span></p>";
+	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Light;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Light;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Light;'>Salamanca</span></p>";
 
-	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>París</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>Versalles</span></p>";
+	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Light;'>París</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Light;'>Versalles</span></p>";
 
-	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Lifght;'>Capadocia</span></p>";
+	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Light;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 20px; font-family: Inter-Light;'>Capadocia</span></p>";
 
 	return (
 		<Flex

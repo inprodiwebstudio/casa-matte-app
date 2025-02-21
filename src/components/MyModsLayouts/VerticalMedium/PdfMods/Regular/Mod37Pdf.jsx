@@ -10,7 +10,7 @@ const Mod37Pdf = ({text}) => {
 
 	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>";
+	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Light;'>SUBTÍTULO 1</span></p>";
 
 	const bodyHtml = (
 		<div

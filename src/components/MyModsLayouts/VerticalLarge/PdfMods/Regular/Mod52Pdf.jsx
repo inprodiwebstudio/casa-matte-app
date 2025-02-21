@@ -11,7 +11,7 @@ const Mod52Pdf = ({text, images}) => {
 
 	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 38px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: left;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const text02 = text[1] ? text[1] : "<p style='text-align: left;'><span style='font-size: 15px; font-family: Inter-Light;'>CHILE</span></p>";
 
 	const bodyHtml = (
 		<div
