@@ -3,7 +3,7 @@ const convertToArray = (object) => {
 		const myNewListData = Object.values(object);
 		return myNewListData;
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 };
 
