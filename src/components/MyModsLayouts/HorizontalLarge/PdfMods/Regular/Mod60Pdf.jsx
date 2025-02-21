@@ -35,6 +35,7 @@ const Mod37Pdf = ({text}) => {
 					style={{
 						width         : "100%",
 						letterSpacing : "6px !important",
+						textTransform : "uppercase",
 					}}
 					dangerouslySetInnerHTML={{
 						__html : `<style>
