@@ -10,7 +10,7 @@ import cormorantLight       from "Resources/Fonts/Cormorant-Light.ttf";
 import cormorantMedium      from "Resources/Fonts/Cormorant-Medium.ttf";
 import gandhiSansRegular    from "Resources/Fonts/GandhiSans-Regular.otf";
 import gandhiSerifRegular   from "Resources/Fonts/GandhiSerif-Regular.otf";
-import interLifght          from "Resources/Fonts/Inter-Light.ttf";
+import interLight          	from "Resources/Fonts/Inter-Light.ttf";
 import interRegular         from "Resources/Fonts/Inter-Regular.ttf";
 import josefinSansLight     from "Resources/Fonts/JosefinSans-Light.ttf";
 import josefinSansRegular   from "Resources/Fonts/JosefinSans-Regular.ttf";
@@ -117,14 +117,6 @@ Font.register(
 			{
 				src : interRegular,
 			},
-			{
-				src        : interRegular,
-				fontWeight : "bold",
-			},
-			{
-				src        : interRegular,
-				fontWeight : "normal",
-			},
 	  ],
 	}
 );
@@ -171,19 +163,11 @@ Font.register(
 
 Font.register(
 	{
-		family : "Inter-Lifght",
-		src    : interLifght,
+		family : "Inter-Light",
+		src    : interLight,
 		fonts  : [
 			{
-				src : interLifght,
-			},
-			{
-				src        : interLifght,
-				fontWeight : "bold",
-			},
-			{
-				src        : interLifght,
-				fontWeight : "normal",
+				src : interLight,
 			},
 	  ],
 	}
