@@ -1,6 +1,11 @@
 const convertToArray = (object) => {
-	const myNewListData = Object.values(object);
-	return myNewListData;
+	try {
+		const myNewListData = Object.values(object);
+		return myNewListData;
+	} catch (error) {
+		console.error(error);
+		return [];
+	}
 };
 
 
