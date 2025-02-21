@@ -113,7 +113,7 @@ Font.register(
 	{
 		family     : "Inter-Regular",
 		src        : interRegular,
-		fontWeight : "regular",
+		fontWeight : "normal",
 	// 	fonts  : [
 	// 		{
 	// 			src : interRegular,
