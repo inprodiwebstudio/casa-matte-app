@@ -29,7 +29,7 @@ const Mod16Pdf = ({images}) => {
 				<div
 					style={{
 						width      : "100%",
-						height     : "calc(3.33% - 6.667px)",
+						height     : "calc(33.33% - 6.667px)",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -50,7 +50,7 @@ const Mod16Pdf = ({images}) => {
 				<div
 					style={{
 						width      : "100%",
-						height     : "calc(3.33% - 6.667px)",
+						height     : "calc(33.33% - 6.667px)",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
@@ -71,7 +71,7 @@ const Mod16Pdf = ({images}) => {
 				<div
 					style={{
 						width      : "100%",
-						height     : "calc(3.33% - 6.667px)",
+						height     : "calc(33.33% - 6.667px)",
 						overflow   : "hidden",
 						background : "#E3E3E3",
 					}}
