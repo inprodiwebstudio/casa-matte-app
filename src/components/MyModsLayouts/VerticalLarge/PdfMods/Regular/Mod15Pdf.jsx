@@ -37,7 +37,7 @@ const Mod15Pdf = ({images}) => {
 				>
 					<div
 						style={{
-							width      : "calac(30% - 5px)",
+							width      : "calc(30% - 5px)",
 							height     : "100%",
 							overflow   : "hidden",
 							background : "#E3E3E3",
@@ -58,7 +58,7 @@ const Mod15Pdf = ({images}) => {
 					</div>
 					<div
 						style={{
-							width      : "calac(70% - 5px)",
+							width      : "calc(70% - 5px)",
 							height     : "100%",
 							overflow   : "hidden",
 							background : "#E3E3E3",
