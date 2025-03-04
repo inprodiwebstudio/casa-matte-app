@@ -35,7 +35,7 @@ const Mod24Pdf = ({images}) => {
 							alt={images[0]?.url}
 							style={{
 								objectFit : "cover",
-								height    : "100%",
+								// height    : "100%",
 							}}
 						/>
 					)
@@ -56,7 +56,7 @@ const Mod24Pdf = ({images}) => {
 							alt={images[1]?.url}
 							style={{
 								objectFit : "cover",
-								height    : "100%",
+								// height    : "100%",
 							}}
 						/>
 					)
