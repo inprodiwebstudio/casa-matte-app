@@ -12,7 +12,7 @@ const Mod4Pdf = ({images}) => {
 		<div
 			style={{
 				height  : "850px",
-				width   : "100%",
+				width   : "992px",
 				padding : "3%",
 			}}
 		>
