@@ -23,7 +23,7 @@ const Mod24Pdf = ({images}) => {
 			<div
 				style={{
 					width      : "100%",
-					height     : "calc(50% - 5px)",
+					height     : "420px",
 					overflow   : "hidden",
 					background : "#E3E3E3",
 				}}
@@ -44,7 +44,7 @@ const Mod24Pdf = ({images}) => {
 			<div
 				style={{
 					width      : "100%",
-					height     : "calc(50% - 5px)",
+					height     : "420px",
 					overflow   : "hidden",
 					background : "#E3E3E3",
 				}}
