@@ -19,7 +19,7 @@ const Mod53Pdf = ({text, images}) => {
 			style={{
 				height       : "792px",
 				width        : "100%",
-				marginBottom : "35px",
+				marginBottom : "40px",
 			}}
 		>
 			<div
@@ -33,7 +33,7 @@ const Mod53Pdf = ({text, images}) => {
 			>
 				<div
 					style={{
-						height     : "83%",
+						height     : "85%",
 						width      : "100%",
 						overflow   : "hidden",
 						background : "#E3E3E3",
