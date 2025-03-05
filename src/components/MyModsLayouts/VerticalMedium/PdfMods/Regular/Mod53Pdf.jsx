@@ -56,9 +56,8 @@ const Mod53Pdf = ({text, images}) => {
 						display       : "flex",
 						flexDirection : "column",
 						gap           : "10px",
-						marginRight   : "70px",
+						marginRight   : "65px",
 						marginLeft    : "90px",
-						background    : "red !important",
 					}}
 				>
 					<div
