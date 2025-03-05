@@ -92,8 +92,8 @@ const Mod80Pdf = ({text, images}) => {
 						width          : "100%",
 						maxHeight      : "6%",
 						display        : "flex",
-						justifyContent : "center",
-						alignItems     : "center",
+						justifyContent : "flex-end",
+						alignItems     : "flex-end",
 						overflow       : "hidden",
 					}}
 				>

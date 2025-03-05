@@ -31,7 +31,7 @@ const Mod56Pdf = ({text, images}) => {
 			>
 				<div
 					style={{
-						width          : "100%%",
+						width          : "100%",
 						display        : "flex",
 						justifyContent : "center",
 						alignItems     : "center",
@@ -41,6 +41,7 @@ const Mod56Pdf = ({text, images}) => {
 						style={{
 							letterSpacing : "1.5px",
 							textTransform : "uppercase",
+							textAlign     : "center",
 						}}
 						dangerouslySetInnerHTML={{
 							__html : `<style>
