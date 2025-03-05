@@ -45,7 +45,6 @@ const Mod56Pdf = ({text, images}) => {
 							display        : "flex",
 							justifyContent : "center !important",
 							alignItems     : "center !important",
-							background     : "red !important",
 						}}
 						dangerouslySetInnerHTML={{
 							__html : `<style>
