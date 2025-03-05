@@ -42,12 +42,14 @@ const Mod56Pdf = ({text, images}) => {
 							letterSpacing : "1.5px",
 							textTransform : "uppercase",
 							textAlign     : "center",
+							background    : "red !important",
 						}}
 						dangerouslySetInnerHTML={{
 							__html : `<style>
                                 p {
                                 margin: 0;
                                 padding: 0;
+								text-align: center !important;
                                 }
                                 </style>
                                 ${text01}`,
