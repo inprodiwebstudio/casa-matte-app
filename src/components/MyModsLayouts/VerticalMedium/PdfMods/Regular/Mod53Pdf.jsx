@@ -62,7 +62,10 @@ const Mod53Pdf = ({text, images}) => {
 				>
 					<div
 						style={{
-							letterSpacing : "6.5px",
+							letterSpacing  : "6.5px",
+							textAlign      : "right !important",
+							display        : "flex",
+							justifyContent : "flex-end",
 						}}
 						dangerouslySetInnerHTML={{
 							__html : `<style>
@@ -76,7 +79,10 @@ const Mod53Pdf = ({text, images}) => {
 					/>
 					<div
 						style={{
-							letterSpacing : "2px",
+							letterSpacing  : "2px",
+							textAlign      : "right !important",
+							display        : "flex",
+							justifyContent : "flex-end",
 						}}
 						dangerouslySetInnerHTML={{
 							__html : `<style>
