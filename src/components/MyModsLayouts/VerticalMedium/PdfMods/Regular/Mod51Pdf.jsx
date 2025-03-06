@@ -80,13 +80,10 @@ const Mod51Pdf = ({text, images}) => {
                                    p {
                                      margin: 0;
                                      padding: 0;
-									 text-align: center;
+									 text-align: center !important;
                                    }
-								   span {
-								   	 text-align: center !important;
-								   }
                                  </style>
-                                 ${text02}`,
+                                 <p style="text-align:center;"><span style="font-family:Inter-Lifght;font-size:14px;">CAMELINAS</span></p><p style="text-align:center;"><span style="font-family:Inter-Lifght;font-size:14px;">Nadamos con una Manta Gigante y disfrutamos nuestra propia playita</span></p>`,
 					}}
 				/>
 			</div>
