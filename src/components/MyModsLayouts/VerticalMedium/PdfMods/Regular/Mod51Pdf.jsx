@@ -83,7 +83,7 @@ const Mod51Pdf = ({text, images}) => {
 									 text-align: center;
                                    }
 								   span {
-								   	 text-align: center;
+								   	 text-align: center !important;
 								   }
                                  </style>
                                  ${text02}`,
