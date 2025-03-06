@@ -73,6 +73,7 @@ const Mod51Pdf = ({text, images}) => {
 				<div
 					style={{
 						letterSpacing : "2px",
+						width         : "30%",
 						// textTransform : "uppercase",
 					}}
 					dangerouslySetInnerHTML={{
