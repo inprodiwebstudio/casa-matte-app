@@ -82,7 +82,7 @@ const Mod51Pdf = ({text, images}) => {
                                      padding: 0;
                                    }
                                  </style>
-								 <div style='width: 100%; background-color:rgb(247, 0, 0);'>
+								 <div style='width: 100%;'>
 								 	${text02}
 								 </div>`,
 					}}
