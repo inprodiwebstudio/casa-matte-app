@@ -72,18 +72,10 @@ const Mod51Pdf = ({text, images}) => {
 				</div>
 				<div
 					style={{
-						letterSpacing : "2px",
+						// letterSpacing : "2px",
 						// textTransform : "uppercase",
 					}}
-					dangerouslySetInnerHTML={{
-						__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text02}`,
-					}}
+					dangerouslySetInnerHTML={text02}
 				/>
 			</div>
 		</div>
