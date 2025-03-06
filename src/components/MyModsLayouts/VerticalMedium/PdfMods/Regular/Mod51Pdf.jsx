@@ -81,7 +81,11 @@ const Mod51Pdf = ({text, images}) => {
                                      margin: 0;
                                      padding: 0;
 									 text-align: center !important;
+									 width: 100% !important;
                                    }
+								   span {
+									 width: 100% !important;
+								   } 
                                  </style>
                                  <p style="text-align:center;background-color:red;"><span style="font-family:Inter-Lifght;font-size:14px;text-align:center;background-color:yellow">CAMELINAS</span></p><p style="text-align:center;"><span style="font-family:Inter-Lifght;font-size:14px;">Nadamos con una Manta Gigante y disfrutamos nuestra propia playita</span></p>`,
 					}}
