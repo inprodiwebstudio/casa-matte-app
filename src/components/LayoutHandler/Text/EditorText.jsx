@@ -68,7 +68,6 @@ const EditText = ({
 			items : [
 				"fontSize",
 				"fontfamily",
-				"italic",
 				"fontColor",
 				"paragraph",
 				"alignment:left",

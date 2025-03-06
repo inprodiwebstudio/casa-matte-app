@@ -19,7 +19,7 @@ const Mod51Pdf = ({text, images}) => {
 				height        : "792px",
 				width         : "100%",
 				paddingTop    : "50px",
-				paddingBottom : "80px",
+				paddingBottom : "100px",
 				paddingLeft   : "30px",
 				paddingRight  : "30px",
 			}}
