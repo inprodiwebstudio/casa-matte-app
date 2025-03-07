@@ -69,7 +69,7 @@ const Header = () => {
 	};
 
 	const redirectToOrders = () => {
-		window.location.href = `https://casamatte.com/dashboard/mi-cuenta/view-order/${orderId}/`;
+		window.location.href = `https://casamatte.wip-inprodi.com/dashboard/mi-cuenta/view-order/${orderId}/`;
 	};
 
 	useEffect(() => {
@@ -110,7 +110,7 @@ const Header = () => {
 	return (
 		<div className="Header">
 			<div className={`body-container ${isPreviewActive && "isActivePreview"}`}>
-				<a href="https://casamatte.com/">
+				<a href="https://casamatte.wip-inprodi.com/">
 					<img src={LogoCasaMatte} width={120} />
 				</a>
 				{
