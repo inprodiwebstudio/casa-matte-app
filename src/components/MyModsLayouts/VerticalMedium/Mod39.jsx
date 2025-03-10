@@ -5,7 +5,16 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod42 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod42 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	keyIndex,
+	modLayout,
+}) => {
 
 	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>PARA PAPÁ. UN HOMENAJE A TU VIDA. GRACIAS POR TANTOS AÑOS DE CARIÑO Y AMOR, TE QUEREMOS SIEMPRE..</span></p>";
 
@@ -18,6 +27,7 @@ const Mod42 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				mah="70%"
 				w="70%"
 				aria-hidden={true}
+				id={`${pageNo}-${keyIndex}-${modLayout}-text1`}
 			>
 				<Text
 					sizes={{

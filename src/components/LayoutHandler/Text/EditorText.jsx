@@ -5,7 +5,6 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import BalloonEditor from "@ckeditor/ckeditor5-editor-balloon/src/ballooneditor";
 import Essentials    from "@ckeditor/ckeditor5-essentials/src/essentials";
 import Bold          from "@ckeditor/ckeditor5-basic-styles/src/bold";
-import Italic        from "@ckeditor/ckeditor5-basic-styles/src/italic";
 import Paragraph     from "@ckeditor/ckeditor5-paragraph/src/paragraph";
 import FontFamily    from "@ckeditor/ckeditor5-font/src/fontfamily";
 import FontColor     from "@ckeditor/ckeditor5-font/src/fontcolor";
@@ -38,7 +37,7 @@ const EditText = ({
 	const { classes } = styles({size : sizes?.chico, gapSpacing, lineHeight, letterSpacing});
 
 	const editorConfiguration = {
-		plugins      : [ Essentials, Bold, Alignment, Italic, Paragraph, FontFamily, FontSize, FontColor],
+		plugins      : [Essentials, Bold, Alignment, Paragraph, FontFamily, FontSize, FontColor],
 		GroupHeading : false,
 		alignment    : {
 			options : [ "left", "right", "center", "justify" ],
@@ -70,6 +69,7 @@ const EditText = ({
 				"fontfamily",
 				"fontColor",
 				"paragraph",
+				"italic",
 				"alignment:left",
 				"alignment:center",
 				"alignment:right",

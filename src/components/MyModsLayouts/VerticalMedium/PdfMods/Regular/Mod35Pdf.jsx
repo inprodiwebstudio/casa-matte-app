@@ -1,14 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
-import Html           from "react-pdf-html";
-import ReactDOMServer from "react-dom/server";
+import Html            from "react-pdf-html";
+import ReactDOMServer  from "react-dom/server";
+import { textToImage } from "helpers";
 
 
-const Mod35Pdf = ({text}) => {
+const Mod35Pdf = ({
+	text,
+	keyIndex,
+	modLayout,
+	pageNo,
+}) => {
 
-	const text01 = text[0] ?? "<p style='text-align: center;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+	});
+
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text1`);
+
+		setImgSrc({
+			imgText01 : imgText01,
+		});
+	};
+
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
@@ -21,12 +41,9 @@ const Mod35Pdf = ({text}) => {
 				alignItems     : "center",
 			}}
 		>
-			<div
-				dangerouslySetInnerHTML={{__html : text01}}
-				style={{
-					letterSpacing : "6.5px !important",
-				}}
-			/>
+			<div>
+				{imgSrc.imgText01 && <img src={imgSrc.imgText01} alt="Captura de texto" />}
+			</div>
 		</div>
 	);
 

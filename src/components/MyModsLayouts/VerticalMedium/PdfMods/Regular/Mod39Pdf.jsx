@@ -1,14 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
-import Html           from "react-pdf-html";
-import ReactDOMServer from "react-dom/server";
+import Html            from "react-pdf-html";
+import ReactDOMServer  from "react-dom/server";
+import { textToImage } from "helpers";
 
 
-const Mod39Pdf = ({text}) => {
+const Mod39Pdf = ({
+	text,
+	keyIndex,
+	modLayout,
+	pageNo,
+}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>PARA PAPÁ. UN HOMENAJE A TU VIDA. GRACIAS POR TANTOS AÑOS DE CARIÑO Y AMOR, TE QUEREMOS SIEMPRE..</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+	});
+
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text1`);
+
+		setImgSrc({
+			imgText01 : imgText01,
+		});
+	};
+
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
@@ -30,14 +50,7 @@ const Mod39Pdf = ({text}) => {
 					alignItems     : "center",
 				}}
 			>
-				<div
-					style={{
-						letterSpacing : "1px !important",
-						textAlign     : "start",
-						lineHeight    : "1.6px",
-					}}
-					dangerouslySetInnerHTML={{__html : text01}}
-				/>
+				{imgSrc.imgText01 && <img src={imgSrc.imgText01} alt="Captura de texto" />}
 			</div>
 		</div>
 	);

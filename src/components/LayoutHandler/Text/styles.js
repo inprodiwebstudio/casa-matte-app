@@ -8,7 +8,6 @@ const useStyles = createStyles((theme, { size, gapSpacing, lineHeight, letterSpa
 		display        : "flex",
 		flexDirection  : "column",
 		justifyContent : "space-between",
-		paddingBottom  : 0,
 
 		"& .ck.ck-editor__editable_inline" : {
 			display       : gapSpacing && "flex",
@@ -16,7 +15,9 @@ const useStyles = createStyles((theme, { size, gapSpacing, lineHeight, letterSpa
 			gap           : gapSpacing,
 			lineHeight    : lineHeight ?? "auto",
 			letterSpacing : letterSpacing ?? "0.6px !important",
-			overflow      : "hidden",
+			overflow      : "visible !important",
+			height        : "auto !important",
+			paddingBottom : "15px !important",
 		},
 
 		"& .ck.ck-editor__editable_inline > *:last-child" : {

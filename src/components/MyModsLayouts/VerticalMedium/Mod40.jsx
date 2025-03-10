@@ -6,7 +6,16 @@ import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
 
-const Mod43 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod43 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	keyIndex,
+	modLayout,
+}) => {
 
 	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Para papá, un homenaje a tu vida. Gracias por tantos años de cariño y amor. Te queremos siempre.</span></p>";
 
@@ -21,7 +30,7 @@ const Mod43 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			direction="column"
 		>
 			<DividerLayout long="10%" position="h" />
-			<Stack w="47%">
+			<Stack w="47%" id={`${pageNo}-${keyIndex}-${modLayout}-text1`}>
 				<Text
 					sizes={{
 						"chico"   : "11px",

@@ -1,15 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
 import Html             from "react-pdf-html";
 import ReactDOMServer   from "react-dom/server";
 import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
+import { textToImage }  from "helpers";
 
 
-const Mod40Pdf = ({text}) => {
+const Mod40Pdf = ({
+	text,
+	keyIndex,
+	modLayout,
+	pageNo,
+}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Para papá, un homenaje a tu vida. Gracias por tantos años de cariño y amor. Te queremos siempre.</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+	});
+
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text1`);
+
+		setImgSrc({
+			imgText01 : imgText01,
+		});
+	};
+
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
@@ -45,21 +65,7 @@ const Mod40Pdf = ({text}) => {
 					display    : "flex",
 					alignItems : "flex-end",
 				}}>
-					<div
-						style={{
-							width      : "38%",
-							lineHeight : "1.2px",
-						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
-						}}
-					/>
+					{imgSrc.imgText01 && <img style={{ width : "50%" }} src={imgSrc.imgText01} alt="Captura de texto" />}
 				</div>
 			</div>
 		</div>

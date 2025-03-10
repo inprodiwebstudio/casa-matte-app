@@ -310,13 +310,11 @@
 				transform: scale(0.8, 0.8);
 
 				@include laptop {
-					height: 100vh;
 					transform: scale(0.6, 0.6);
 					z-index: 1;
 				}
 	
 				@include big-laptop {
-					height: 100vh;
 					transform: scale(0.6, 0.6);
 					z-index: 1;
 				}

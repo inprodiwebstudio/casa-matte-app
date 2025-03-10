@@ -1,20 +1,33 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { PDFViewer, Page, Document} from "@react-pdf/renderer";
-import { connect }                  from "react-redux";
+import { useSelector, shallowEqual, connect } from "react-redux";
+import { PDFViewer, Page, Document}           from "@react-pdf/renderer";
+import BookPages                              from "components/BookPages";
+
 //Own components
-import { convertToArray } from "helpers";
-import horizontalLarge    from "components/MyModsLayouts/HorizontalLarge";
-import horizontalMedium   from "components/MyModsLayouts/HorizontalMedium";
-import VerticalLarge      from "components/MyModsLayouts/VerticalLarge";
-import VerticalMedium     from "components/MyModsLayouts/VerticalMedium";
-import SpinePhotoBook     from "components/MyModsLayouts/SpinePdf";
-import SquareSmall        from "components/MyModsLayouts/SquareSmall";
-import TravelCoffeeTable  from "components/MyModsLayouts/TravelCoffeeTable";
-import SquareLarge        from "components/MyModsLayouts/SquareLarge";
+import { convertToArray, isValidArray } from "helpers";
+import horizontalLarge                  from "components/MyModsLayouts/HorizontalLarge";
+import horizontalMedium                 from "components/MyModsLayouts/HorizontalMedium";
+import VerticalLarge                    from "components/MyModsLayouts/VerticalLarge";
+import VerticalMedium                   from "components/MyModsLayouts/VerticalMedium";
+import SpinePhotoBook                   from "components/MyModsLayouts/SpinePdf";
+import SquareSmall                      from "components/MyModsLayouts/SquareSmall";
+import TravelCoffeeTable                from "components/MyModsLayouts/TravelCoffeeTable";
+import SquareLarge                      from "components/MyModsLayouts/SquareLarge";
+
+import "./TestPdf.scss";
+import { useEffect, useState } from "react";
 
 
 const TestPdf = ({photoBookData}) => {
 	const listPages = convertToArray(photoBookData?.pages);
+
+	const workSpaceData = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
+	const productPhotoBook = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
+	const workSpaceFormatPage = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
+	const workSpaceSizePage = useSelector((state) => state.workSpaceSlice.data?.sizePhotoBook, shallowEqual);
+	const isLoading = useSelector((state) => state.workSpaceSlice?.loading, shallowEqual);
+
+	const [ textPages, setTextPages ] = useState(undefined);
 
 	const handlerFormat = (productType) => {
 		if ( productType === "travelcoffeetable ") {
@@ -92,7 +105,7 @@ const TestPdf = ({photoBookData}) => {
 
 	const sizeFrontPage = photoBookTypes[handlerFormat(photoBookData?.product)]?.[photoBookData?.sizePhotoBook]?.frontSize;
 
-	const getComponent = (pageData) => {
+	const getComponent = (pageData, index) => {
 		const Sheet1Layout = photoBookTypes[handlerFormat(photoBookData?.product)]?.[photoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet1?.layoutType]?.pdfLayout;
 
 		const Sheet2Layout = photoBookTypes[handlerFormat(photoBookData?.product)]?.[photoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet2?.layoutType]?.pdfLayout;
@@ -120,12 +133,24 @@ const TestPdf = ({photoBookData}) => {
 			<>
 				{Sheet1Layout ? (
 					<Page size={sizePages}>
-						<Sheet1Layout images={pageData?.sheet1?.photos} text={pageData?.sheet1?.text} />
+						<Sheet1Layout
+							images={pageData?.sheet1?.photos}
+							text={pageData?.sheet1?.text}
+							modLayout={pageData?.sheet1?.layoutType}
+							pageNo={pageData?.sheet1?.pageNo}
+							keyIndex={index}
+						/>
 					</Page>
 				) : undefined}
 				{Sheet2Layout ? (
 					<Page size={sizePages}>
-						<Sheet2Layout images={pageData?.sheet2?.photos} text={pageData?.sheet2?.text} />
+						<Sheet2Layout
+							images={pageData?.sheet2?.photos}
+							text={pageData?.sheet2?.text}
+							modLayout={pageData?.sheet2?.layoutType}
+							pageNo={pageData?.sheet2?.pageNo}
+							keyIndex={index}
+						/>
 					</Page>
 				) : undefined}
 			</>
@@ -138,31 +163,87 @@ const TestPdf = ({photoBookData}) => {
 	// 	}
 	// };
 
+	const handlerTypeProductFormat = () => {
+		if (productPhotoBook === "travelcoffeetable ") {
+			return "travel-coffee-table";
+		}
+		return `${workSpaceFormatPage}-${workSpaceSizePage}`;
+	};
+
+	useEffect(() => {
+		if (workSpaceData && isValidArray(convertToArray({...workSpaceData}))) {
+			const myTextPages = convertToArray({...workSpaceData}).filter(myPage => {
+				const availableText1 = myPage?.sheet1?.text && (myPage?.sheet1?.text !== "") && myPage?.sheet1?.text[0];
+				const availableText2 = myPage?.sheet2?.text && (myPage?.sheet2?.text !== "") && myPage?.sheet2?.text[0];
+
+				return availableText1 || availableText2;
+			});
+			setTextPages(myTextPages);
+		}
+	}, [workSpaceData]);
+
+	console.log(textPages);
+
+
 	return (
-		<div style={{height : "80vh"}}>
-			<PDFViewer style={{height : "80vh", width : "100%"}}>
-				<Document>
-					{
-						(photoBookData?.product === "white") && (
-							<Page size={sizeFrontPage}>
-								<SheetSpineLayout text={photoBookData?.bound} />
-							</Page>
-						)
-					}
-					{
-						(photoBookData?.product === "white") && (
-							<Page size={sizeFrontPage}>
-								<SheetFrontLayout images={photoBookData?.frontPage?.sheet1?.photos} text={photoBookData?.frontPage?.sheet1?.text} />
-							</Page>
-						)
-					}
-					<>
-						{
-							listPages.map((pageData, index) => getComponent(pageData, index))
-						}
-					</>
-				</Document>
-			</PDFViewer>
+		<div style={{height : "90vh", overflow : "hidden"}}>
+			{
+				textPages && (
+					<PDFViewer style={{height : "100%", width : "100%"}}>
+						<Document>
+							{
+								(photoBookData?.product === "white") && (
+									<Page size={sizeFrontPage}>
+										<SheetSpineLayout text={photoBookData?.bound} />
+									</Page>
+								)
+							}
+							{
+								(photoBookData?.product === "white") && (
+									<Page size={sizeFrontPage}>
+										<SheetFrontLayout images={photoBookData?.frontPage?.sheet1?.photos} text={photoBookData?.frontPage?.sheet1?.text} />
+									</Page>
+								)
+							}
+							<>
+								{
+									listPages.map((pageData, index) => getComponent(pageData, index))
+								}
+							</>
+						</Document>
+					</PDFViewer>
+				)
+			}
+			{
+				(textPages && isValidArray(textPages)) && (
+					<div
+						style={{
+							height   : "0px",
+							width    : "100%",
+							overflow : "hidden",
+						}}
+					>
+						<div
+							className="PreviewPages"
+						>
+							{
+								textPages.map((page, index) => (
+									<div className="photoBookContainer" key={index}>
+										<div className={`pagesPreviewPhotoBook ${handlerTypeProductFormat()}-preview`}>
+											<BookPages
+												isInWorkSpcae={true}
+												loading={isLoading}
+												pageData={page}
+												keyIndex={index}
+											/>
+										</div>
+									</div>
+								))
+							}
+						</div>
+					</div>
+				)
+			}
 		</div>
 	);
 };

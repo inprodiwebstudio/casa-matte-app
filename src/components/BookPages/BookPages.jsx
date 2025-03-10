@@ -10,6 +10,7 @@ import FrontLayout        from "components/global/LayoutsPage/FrontLayout";
 import "./BookPages.scss";
 
 const BookPages = ({
+	keyIndex,
 	pageData,
 	isThumbNail,
 	isInPaginator,
@@ -38,9 +39,22 @@ const BookPages = ({
 	const handleLayoutMod = (layoutData, sheetNo) => {
 		if (layoutData?.layoutType) {
 			const LayoutMod = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.layoutMods[layoutData?.layoutType]?.layout;
+
+			const modLayout = pageData?.[`sheet${sheetNo}`]?.layoutType;
+			const pageNo = pageData?.[`sheet${sheetNo}`]?.pageNo;
+
 			return (
 				<>
-					<LayoutMod isThumbNail={isThumbNail} isInPaginator={isInPaginator} data={layoutData} isInWorkSpace={isInWorkSpcae} sheetNo={sheetNo} />
+					<LayoutMod
+						pageNo={pageNo}
+						modLayout={modLayout}
+						keyIndex={keyIndex}
+						isThumbNail={isThumbNail}
+						isInPaginator={isInPaginator}
+						data={layoutData}
+						isInWorkSpace={isInWorkSpcae}
+						sheetNo={sheetNo}
+					/>
 				</>
 			);
 		}
