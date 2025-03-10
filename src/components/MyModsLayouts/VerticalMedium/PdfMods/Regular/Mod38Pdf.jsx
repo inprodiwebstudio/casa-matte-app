@@ -1,24 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
 import Html             from "react-pdf-html";
 import ReactDOMServer   from "react-dom/server";
 import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
+import { textToImage }  from "helpers";
 
 
-const Mod38Pdf = ({text}) => {
+const Mod38Pdf = ({
+	text,
+	keyIndex,
+	modLayout,
+	pageNo,
+}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+		imgText02 : undefined,
+	});
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: right;'><span style='font-size: 14px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>";
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text1`);
+		const imgText02 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text2`);
+
+		setImgSrc({
+			imgText01 : imgText01,
+			imgText02 : imgText02,
+		});
+	};
+
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "792px",
-				width   : "100%",
-				padding : "60px",
+				height        : "792px",
+				width         : "100%",
+				padding       : "60px",
+				paddingBottom : "40px",
 			}}
 		>
 
@@ -29,7 +51,7 @@ const Mod38Pdf = ({text}) => {
 					display        : "flex",
 					justifyContent : "flex-end",
 					alignItems     : "end",
-					gap            : "20px",
+					gap            : "15px",
 				}}
 			>
 				<div
@@ -46,39 +68,19 @@ const Mod38Pdf = ({text}) => {
 					style={{
 						display       : "flex",
 						flexDirection : "column",
-						gap           : "10px",
+						gap           : "5px",
 					}}
 				>
 					<div
-						style={{
-							width         : "100%",
-							letterSpacing : "6px !important",
-						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
-						}}
-					/>
+						style={{width : "100%"}}
+					>
+						{imgSrc.imgText01 && <img src={imgSrc.imgText01} alt="Captura de texto" />}
+					</div>
 					<div
-						style={{
-							width         : "100%",
-							letterSpacing : "2px !important",
-						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text02}`,
-						}}
-					/>
+						style={{width : "100%"}}
+					>
+						{imgSrc.imgText02 && <img src={imgSrc.imgText02} alt="Captura de texto" />}
+					</div>
 				</div>
 			</div>
 		</div>

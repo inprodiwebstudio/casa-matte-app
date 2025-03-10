@@ -6,7 +6,16 @@ import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
 
-const Mod44 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod44 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	keyIndex,
+	modLayout,
+}) => {
 	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 14px; font-family: Aitana-Regular;'>MAMÁ</span></p>";
 
 	const defaultText02 = "<p style='text-align: justify;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam.</span></p>";
@@ -30,8 +39,9 @@ const Mod44 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			>
 				<Flex
 					direction="column"
-					gap="0.15em"
+					gap="0px"
 					justify="flex-start"
+					id={`${pageNo}-${keyIndex}-${modLayout}-text1`}
 				>
 					<Text
 						sizes={{
@@ -56,6 +66,7 @@ const Mod44 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					sx={{
 						overflow : "hidden !important",
 					}}
+					id={`${pageNo}-${keyIndex}-${modLayout}-text2`}
 				>
 					<Text
 						sizes={{

@@ -37,9 +37,11 @@ const Header = () => {
 	const userEmail = useSelector((state) => state.authSlice?.user?.email, shallowEqual);
 	const isLoadingWorspaceData = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
 
-
 	const isAdminAccount = (userName === "casamatteadmin") && (userEmail === "info@casamatte.com");
+	const isDevAccount = (userName === "demo") && (userEmail === "demo@demo.com");
 	const isNataliazAccount = (userName === "nataliaz");
+
+	const handlerShowTestPdf = isAdminAccount || isDevAccount;
 
 	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
 	const handlerClickPreview = () => () => {
@@ -218,7 +220,7 @@ const Header = () => {
 									)
 								}
 								{
-									(isAdminAccount && !isNataliazAccount) && (
+									(handlerShowTestPdf && !isNataliazAccount) && (
 										<Button
 											radius={12}
 											size="xs"

@@ -1,25 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
-import Html             from "react-pdf-html";
-import ReactDOMServer   from "react-dom/server";
-import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
+import Html            from "react-pdf-html";
+import ReactDOMServer  from "react-dom/server";
+import { textToImage } from "helpers";
 
 
-const Mod46Pdf = ({text}) => {
+const Mod46Pdf = ({
+	text,
+	keyIndex,
+	modLayout,
+	pageNo,
+}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+		imgText02 : undefined,
+		imgText03 : undefined,
+		imgText04 : undefined,
+		imgText05 : undefined,
+		imgText06 : undefined,
+	});
 
-	const text02 = text[2] ? text[2] : "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>FRANCIA</span></p>";
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text1`);
+		const imgText02 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text2`);
+		const imgText03 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text3`);
+		const imgText04 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text4`);
+		const imgText05 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text5`);
+		const imgText06 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text6`);
 
-	const text03 = text[4] ? text[4] : "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>TURQUÍA</span></p>";
+		setImgSrc({
+			imgText01 : imgText01,
+			imgText02 : imgText02,
+			imgText03 : imgText03,
+			imgText04 : imgText04,
+			imgText05 : imgText05,
+			imgText06 : imgText06,
+		});
+	};
 
-	const text04 = text[1] ? text[1] : "<p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
-
-	const text05 = text[3] ? text[3] : "<p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>París</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Versalles</span></p>";
-
-	const text06 = text[5] ? text[5] : "<p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Capadocia</span></p>";
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
@@ -40,7 +64,7 @@ const Mod46Pdf = ({text}) => {
 				}}
 			>
 				<div style={{
-					width          : "40%",
+					width          : "30%",
 					height         : "100%",
 					display        : "flex",
 					flexDirection  : "column",
@@ -58,45 +82,12 @@ const Mod46Pdf = ({text}) => {
 							alignItems     : "flex-start",
 						}}
 					>
-						<div
-							style={{
-								letterSpacing : "2px",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
-							}}
-						/>
-						<div
-							style={{
-								width          : "100%",
-								display        : "flex",
-								alignItems     : "flex-Start",
-								justifyContent : "flex-Start",
-							}}
-						>
-							<DividerLayoutPdf w="20px" />
+						<div>
+							{imgSrc.imgText01 && <img src={imgSrc.imgText01} alt="Captura de texto" />}
 						</div>
-						<div
-							style={{
-								letterSpacing : "0.5px",
-								lineHeight    : "2px",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text04}`,
-							}}
-						/>
+						<div>
+							{imgSrc.imgText02 && <img src={imgSrc.imgText02} alt="Captura de texto" />}
+						</div>
 					</div>
 					<div
 						style={{
@@ -108,45 +99,12 @@ const Mod46Pdf = ({text}) => {
 							alignItems     : "flex-start",
 						}}
 					>
-						<div
-							style={{
-								letterSpacing : "2px",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text02}`,
-							}}
-						/>
-						<div
-							style={{
-								width          : "100%",
-								display        : "flex",
-								alignItems     : "flex-Start",
-								justifyContent : "flex-Start",
-							}}
-						>
-							<DividerLayoutPdf w="20px" />
+						<div>
+							{imgSrc.imgText03 && <img src={imgSrc.imgText03} alt="Captura de texto" />}
 						</div>
-						<div
-							style={{
-								letterSpacing : "0.5px",
-								lineHeight    : "2px",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text05}`,
-							}}
-						/>
+						<div>
+							{imgSrc.imgText04 && <img src={imgSrc.imgText04} alt="Captura de texto" />}
+						</div>
 					</div>
 					<div
 						style={{
@@ -158,45 +116,12 @@ const Mod46Pdf = ({text}) => {
 							alignItems     : "flex-start",
 						}}
 					>
-						<div
-							style={{
-								letterSpacing : "2px",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text03}`,
-							}}
-						/>
-						<div
-							style={{
-								width          : "100%",
-								display        : "flex",
-								alignItems     : "flex-Start",
-								justifyContent : "flex-Start",
-							}}
-						>
-							<DividerLayoutPdf w="20px" />
+						<div>
+							{imgSrc.imgText05 && <img src={imgSrc.imgText05} alt="Captura de texto" />}
 						</div>
-						<div
-							style={{
-								letterSpacing : "0.5px",
-								lineHeight    : "2px",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text06}`,
-							}}
-						/>
+						<div>
+							{imgSrc.imgText06 && <img src={imgSrc.imgText06} alt="Captura de texto" />}
+						</div>
 					</div>
 				</div>
 			</div>
