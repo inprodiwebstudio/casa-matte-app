@@ -55,7 +55,7 @@ const Mod43Pdf = ({
 					width         : "52%",
 					display       : "flex",
 					flexDirection : "column",
-					gap           : "5px",
+					gap           : "3px",
 				}}>
 					<div
 						style={{

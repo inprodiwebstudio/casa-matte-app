@@ -6,7 +6,16 @@ import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
 
-const Mod48 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod48 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	keyIndex,
+	modLayout,
+}) => {
 
 	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>JAPÓN</span></p>";
 
@@ -30,8 +39,9 @@ const Mod48 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				}}
 			>
 				<Stack
-					spacing="0.35em"
+					spacing="8px"
 					w="100%"
+					id={`${pageNo}-${keyIndex}-${modLayout}-text1`}
 				>
 					<Text
 						sizes={{
@@ -51,21 +61,25 @@ const Mod48 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						<DividerLayout long="0.3em" position="h" />
 					</Center>
 				</Stack>
-				<Text
-					sizes={{
-						"chico"   : "12px",
-						"regular" : "14px",
-						"grande"  : "16px",
-					}}
-					align="center"
-					sheetNo={sheetNo}
-					gapSpacing="25px"
-					textShell={() => <TextShell.BodyIndices align="center" />}
-					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-					textNo={1}
-				/>
+				<div
+					id={`${pageNo}-${keyIndex}-${modLayout}-text2`}
+				>
+					<Text
+						sizes={{
+							"chico"   : "12px",
+							"regular" : "14px",
+							"grande"  : "16px",
+						}}
+						align="center"
+						sheetNo={sheetNo}
+						gapSpacing="25px"
+						textShell={() => <TextShell.BodyIndices align="center" />}
+						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+						textNo={1}
+					/>
+				</div>
 			</Stack>
 		</Flex>
 	);

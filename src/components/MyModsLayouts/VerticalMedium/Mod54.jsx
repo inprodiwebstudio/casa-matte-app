@@ -6,7 +6,16 @@ import { textInsertion } from "helpers";
 //Own components
 
 
-const Mod55 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod55 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	keyIndex,
+	modLayout,
+}) => {
 
 	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 38px; font-family: JosefinSans-Light;'>VALPARAÍSO</span></p>";
 
@@ -35,23 +44,27 @@ const Mod55 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Stack>
-				<Stack maw="70%" miw="30%" mr="10%" spacing="0em">
-					<Text
-						sizes={{
-							"chico"   : "38px",
-							"regular" : "42px",
-							"grande"  : "46px",
-						}}
-						align="right"
-						sheetNo={sheetNo}
-						textShell={() => <TextShell.Title />}
-						letterSpacing="6.5px"
-						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-						textNo={0}
-					/>
-					<Stack>
+				<Stack w="70%" mr="10%" spacing="0em">
+					<div
+						id={`${pageNo}-${keyIndex}-${modLayout}-text1`}
+					>
+						<Text
+							sizes={{
+								"chico"   : "38px",
+								"regular" : "42px",
+								"grande"  : "46px",
+							}}
+							align="right"
+							sheetNo={sheetNo}
+							textShell={() => <TextShell.Title />}
+							letterSpacing="6.5px"
+							data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
+							isInPaginator={isInPaginator}
+							isThumbNail={isThumbNail}
+							textNo={0}
+						/>
+					</div>
+					<Stack id={`${pageNo}-${keyIndex}-${modLayout}-text2`}>
 						<Text
 							sizes={{
 								"chico"   : "14px",

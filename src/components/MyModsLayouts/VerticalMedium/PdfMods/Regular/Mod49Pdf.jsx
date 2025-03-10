@@ -1,26 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
-import Html             from "react-pdf-html";
-import ReactDOMServer   from "react-dom/server";
-import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
+import Html            from "react-pdf-html";
+import ReactDOMServer  from "react-dom/server";
+import { textToImage } from "helpers";
 
 
-const Mod49Pdf = ({text}) => {
+const Mod49Pdf = ({
+	text,
+	keyIndex,
+	modLayout,
+	pageNo,
+}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>TOSCANA</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+		imgText02 : undefined,
+	});
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>FLORENCIA</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ORVIETTO</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>MONTALCINO</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>PIENZA</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SIENNA</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>BAGNO VIGNIONI</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SAN GIMINIANO</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>MONTEPULCIANO</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ANTINORI</span></p>";
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text1`);
+		const imgText02 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text2`);
+
+		setImgSrc({
+			imgText01 : imgText01,
+			imgText02 : imgText02,
+		});
+	};
+
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
 			style={{
 				height       : "792px",
 				width        : "100%",
-				padding      : "70px",
-				paddingRight : "20px",
-				paddingLeft  : "20px",
+				padding      : "30px",
+				paddingRight : "60px",
+				paddingLeft  : "60px",
 			}}
 		>
 
@@ -35,61 +55,18 @@ const Mod49Pdf = ({text}) => {
 			>
 				<div
 					style={{
-						width         : "35%",
+						width         : "30%",
 						display       : "flex",
 						flexDirection : "column",
-						gap           : "20px",
+						gap           : "10px",
 					}}
 				>
-					<div
-						style={{
-							letterSpacing  : "3px",
-							width          : "100%",
-							display        : "flex",
-							justifyContent : "flex-start",
-							alignItems     : "flex-start",
-							textTransform  : "uppercase",
-						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
-						}}
-					/>
-					<div
-						style={{
-							width          : "100%",
-							display        : "flex",
-							justifyContent : "flex-start",
-							alignItems     : "flex-start",
-						}}
-					>
-						<DividerLayoutPdf w="30px" />
+					<div>
+						{imgSrc.imgText01 && <img src={imgSrc.imgText01} alt="Captura de texto" />}
 					</div>
-					<div
-						style={{
-							letterSpacing  : "0.8px",
-							lineHeight     : "2.5px",
-							width          : "100%",
-							display        : "flex",
-							justifyContent : "flex-start",
-							alignItems     : "flex-start",
-							textTransform  : "uppercase",
-						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text02}`,
-						}}
-					/>
+					<div>
+						{imgSrc.imgText02 && <img src={imgSrc.imgText02} alt="Captura de texto" />}
+					</div>
 				</div>
 			</div>
 		</div>

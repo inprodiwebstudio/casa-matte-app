@@ -6,7 +6,16 @@ import { textInsertion }     from "helpers";
 //Own components
 
 
-const Mod58 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod58 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	keyIndex,
+	modLayout,
+}) => {
 
 	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 16px; font-family: Aitana-Regular;'>ATACAMA</span></p>";
 
@@ -19,7 +28,7 @@ const Mod58 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			align="center"
 			direction="column"
 		>
-			<Stack w="60%" mb="0.1em">
+			<Stack w="60%" mb="0.1em" id={`${pageNo}-${keyIndex}-${modLayout}-text1`}>
 				<Text
 					sizes={{
 						"chico"   : "14px",
