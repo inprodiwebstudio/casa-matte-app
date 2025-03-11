@@ -244,11 +244,18 @@ const TestPdf = ({photoBookData}) => {
 					</div>
 				)
 			}
-			<Button
-				onClick={() => setOpenPdf(true)}
+			<div
+				style={{
+					width      : "100%",
+					background : "red !important",
+				}}
 			>
-				ClickHere
-			</Button>
+				<Button
+					onClick={() => setOpenPdf(true)}
+				>
+					ClickHere
+				</Button>
+			</div>
 		</div>
 	);
 };
