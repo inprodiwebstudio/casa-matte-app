@@ -182,13 +182,11 @@ const TestPdf = ({photoBookData}) => {
 		}
 	}, [workSpaceData]);
 
-	console.log(textPages);
-
 
 	return (
 		<div style={{height : "90vh", overflow : "hidden"}}>
 			{
-				textPages && (
+				(textPages && isValidArray(textPages)) && (
 					<PDFViewer style={{height : "100%", width : "100%"}}>
 						<Document>
 							{
