@@ -182,6 +182,8 @@ const TestPdf = ({photoBookData}) => {
 		}
 	}, [workSpaceData]);
 
+	console.log(document.getElementById("5-1-Mod57-text1"));
+
 
 	return (
 		<div style={{height : "90vh", overflow : "hidden"}}>
