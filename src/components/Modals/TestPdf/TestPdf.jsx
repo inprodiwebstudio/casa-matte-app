@@ -216,46 +216,49 @@ const TestPdf = ({photoBookData}) => {
 			}
 			{
 				(textPages && isValidArray(textPages)) && (
-					<div
-						style={{
-							height   : "30%",
-							width    : "100%",
-							overflow : "hidden",
-						}}
-					>
+					<div style={{height : "100%", width : "100%"}}>
 						<div
-							className="PreviewPages"
+							style={{
+								width      : "100%",
+								background : "red !important",
+								height     : "50px",
+							}}
 						>
-							{
-								textPages.map((page, index) => (
-									<div className="photoBookContainer" key={index}>
-										<div className={`pagesPreviewPhotoBook ${handlerTypeProductFormat()}-preview`}>
-											<BookPages
-												isInWorkSpcae={true}
-												loading={isLoading}
-												pageData={page}
-												keyIndex={index}
-											/>
+							<Button
+								onClick={() => setOpenPdf(true)}
+							>
+								ClickHere
+							</Button>
+						</div>
+						<div
+							style={{
+								height   : "30%",
+								width    : "100%",
+								overflow : "hidden",
+							}}
+						>
+							<div
+								className="PreviewPages"
+							>
+								{
+									textPages.map((page, index) => (
+										<div className="photoBookContainer" key={index}>
+											<div className={`pagesPreviewPhotoBook ${handlerTypeProductFormat()}-preview`}>
+												<BookPages
+													isInWorkSpcae={true}
+													loading={isLoading}
+													pageData={page}
+													keyIndex={index}
+												/>
+											</div>
 										</div>
-									</div>
-								))
-							}
+									))
+								}
+							</div>
 						</div>
 					</div>
 				)
 			}
-			<div
-				style={{
-					width      : "100%",
-					background : "red !important",
-				}}
-			>
-				<Button
-					onClick={() => setOpenPdf(true)}
-				>
-					ClickHere
-				</Button>
-			</div>
 		</div>
 	);
 };
