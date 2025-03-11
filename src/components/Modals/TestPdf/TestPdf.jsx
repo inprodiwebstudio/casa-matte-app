@@ -187,11 +187,6 @@ const TestPdf = ({photoBookData}) => {
 
 	return (
 		<div style={{height : "90vh", overflow : "hidden"}}>
-			<Button
-				onClick={() => setOpenPdf(true)}
-			>
-				ClickHer
-			</Button>
 			{
 				openPdf && (
 					<PDFViewer style={{height : "60%", width : "100%"}}>
@@ -249,6 +244,11 @@ const TestPdf = ({photoBookData}) => {
 					</div>
 				)
 			}
+			<Button
+				onClick={() => setOpenPdf(true)}
+			>
+				ClickHere
+			</Button>
 		</div>
 	);
 };
