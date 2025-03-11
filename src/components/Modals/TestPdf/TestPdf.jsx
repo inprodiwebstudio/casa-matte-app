@@ -16,6 +16,7 @@ import SquareLarge                      from "components/MyModsLayouts/SquareLar
 
 import "./TestPdf.scss";
 import { useEffect, useState } from "react";
+import { Button }              from "@mantine/core";
 
 
 const TestPdf = ({photoBookData}) => {
@@ -28,6 +29,7 @@ const TestPdf = ({photoBookData}) => {
 	const isLoading = useSelector((state) => state.workSpaceSlice?.loading, shallowEqual);
 
 	const [ textPages, setTextPages ] = useState(undefined);
+	const [ openPdf, setOpenPdf ] = useState(false);
 
 	const handlerFormat = (productType) => {
 		if ( productType === "travelcoffeetable ") {
@@ -185,9 +187,14 @@ const TestPdf = ({photoBookData}) => {
 
 	return (
 		<div style={{height : "90vh", overflow : "hidden"}}>
+			<Button
+				onClick={() => setOpenPdf(true)}
+			>
+				ClickHer
+			</Button>
 			{
-				textPages && (
-					<PDFViewer style={{height : "0%", width : "100%"}}>
+				openPdf && (
+					<PDFViewer style={{height : "60%", width : "100%"}}>
 						<Document>
 							{
 								(photoBookData?.product === "white") && (
@@ -216,7 +223,7 @@ const TestPdf = ({photoBookData}) => {
 				(textPages && isValidArray(textPages)) && (
 					<div
 						style={{
-							height   : "100%",
+							height   : "30%",
 							width    : "100%",
 							overflow : "hidden",
 						}}
