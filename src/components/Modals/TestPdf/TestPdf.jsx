@@ -187,6 +187,15 @@ const TestPdf = ({photoBookData}) => {
 
 	return (
 		<div style={{height : "90vh", overflow : "hidden"}}>
+			<div
+				style={{
+					height          : "20px",
+					backgroundColor : "red",
+					width           : "200px",
+				}}
+			>
+				Hola mundo
+			</div>
 			{
 				openPdf && (
 					<PDFViewer style={{height : "60%", width : "100%"}}>
