@@ -182,14 +182,12 @@ const TestPdf = ({photoBookData}) => {
 		}
 	}, [workSpaceData]);
 
-	console.log(textPages);
-
 
 	return (
 		<div style={{height : "90vh", overflow : "hidden"}}>
 			{
 				textPages && (
-					<PDFViewer style={{height : "100%", width : "100%"}}>
+					<PDFViewer style={{height : "0%", width : "100%"}}>
 						<Document>
 							{
 								(photoBookData?.product === "white") && (
@@ -218,7 +216,7 @@ const TestPdf = ({photoBookData}) => {
 				(textPages && isValidArray(textPages)) && (
 					<div
 						style={{
-							height   : "0px",
+							height   : "600px",
 							width    : "100%",
 							overflow : "hidden",
 						}}
