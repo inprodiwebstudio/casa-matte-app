@@ -140,7 +140,6 @@ const TestPdf = ({photoBookData}) => {
 							text={pageData?.sheet1?.text}
 							modLayout={pageData?.sheet1?.layoutType}
 							pageNo={pageData?.sheet1?.pageNo}
-							keyIndex={index}
 						/>
 					</Page>
 				) : undefined}
@@ -151,7 +150,6 @@ const TestPdf = ({photoBookData}) => {
 							text={pageData?.sheet2?.text}
 							modLayout={pageData?.sheet2?.layoutType}
 							pageNo={pageData?.sheet2?.pageNo}
-							keyIndex={index}
 						/>
 					</Page>
 				) : undefined}
@@ -249,7 +247,6 @@ const TestPdf = ({photoBookData}) => {
 													isInWorkSpcae={true}
 													loading={isLoading}
 													pageData={page}
-													keyIndex={index}
 												/>
 											</div>
 										</div>
