@@ -189,12 +189,17 @@ const TestPdf = ({photoBookData}) => {
 		<div style={{height : "90vh", overflow : "hidden"}}>
 			<div
 				style={{
-					height          : "20px",
-					backgroundColor : "red",
 					width           : "200px",
+					backgroundColor : "red",
+					height          : "100px",
 				}}
 			>
-				Hola mundo
+				<Button
+					onClick={() => setOpenPdf(true)}
+					color="primary"
+				>
+					ClickHere
+				</Button>
 			</div>
 			{
 				openPdf && (
@@ -226,19 +231,6 @@ const TestPdf = ({photoBookData}) => {
 			{
 				(textPages && isValidArray(textPages)) && (
 					<div style={{height : "100%", width : "100%"}}>
-						<div
-							style={{
-								width      : "100%",
-								background : "red !important",
-								height     : "50px",
-							}}
-						>
-							<Button
-								onClick={() => setOpenPdf(true)}
-							>
-								ClickHere
-							</Button>
-						</div>
 						<div
 							style={{
 								height   : "30%",
