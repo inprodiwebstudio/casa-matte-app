@@ -4,6 +4,8 @@ import domtoimage from "dom-to-image";
 const textToImage = async (id) => {
 	const element = document.getElementById(id);
 
+	console.log(element);
+
 	if (!element) return undefined;
 
 	const width = element.clientWidth * 5; // Aumenta el ancho
@@ -19,8 +21,6 @@ const textToImage = async (id) => {
 			height          : `${element.clientHeight}px`,
 		},
 	});
-
-	console.log(imgData);
 
 	return imgData;
 };
