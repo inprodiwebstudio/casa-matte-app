@@ -13,7 +13,6 @@ const Mod47 = ({
 	isInPaginator,
 	isThumbNail,
 	pageNo,
-	keyIndex,
 	modLayout,
 }) => {
 
@@ -42,7 +41,7 @@ const Mod47 = ({
 				<Stack
 					spacing="5px"
 					w="100%"
-					id={`${pageNo}-${keyIndex}-${modLayout}-text1`}
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
 					<Text
 						sizes={{
@@ -63,7 +62,7 @@ const Mod47 = ({
 					</Center>
 				</Stack>
 				<div
-					id={`${pageNo}-${keyIndex}-${modLayout}-text2`}
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
 				>
 					<Text
 						sizes={{

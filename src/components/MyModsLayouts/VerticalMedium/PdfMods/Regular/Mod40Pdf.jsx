@@ -10,7 +10,6 @@ import { textToImage }  from "helpers";
 
 const Mod40Pdf = ({
 	text,
-	keyIndex,
 	modLayout,
 	pageNo,
 }) => {
@@ -20,7 +19,7 @@ const Mod40Pdf = ({
 	});
 
 	const insertImg = async () => {
-		const imgText01 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text1`);
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
 
 		setImgSrc({
 			imgText01 : imgText01,
@@ -65,7 +64,10 @@ const Mod40Pdf = ({
 					display    : "flex",
 					alignItems : "flex-end",
 				}}>
-					{imgSrc.imgText01 && <img style={{ width : "50%" }} src={imgSrc.imgText01} alt="Captura de texto" />}
+					{
+						imgSrc.imgText01 &&
+						<img style={{ width : "50%" }} src={imgSrc.imgText01} alt="Captura de texto" />
+					}
 				</div>
 			</div>
 		</div>

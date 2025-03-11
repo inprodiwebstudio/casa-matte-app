@@ -9,7 +9,6 @@ import { textToImage } from "helpers";
 
 const Mod43Pdf = ({
 	text,
-	keyIndex,
 	modLayout,
 	pageNo,
 }) => {
@@ -20,8 +19,8 @@ const Mod43Pdf = ({
 	});
 
 	const insertImg = async () => {
-		const imgText01 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text1`);
-		const imgText02 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text2`);
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
+		const imgText02 = await textToImage(`${pageNo}-${modLayout}-text2`);
 
 		setImgSrc({
 			imgText01 : imgText01,
@@ -52,7 +51,7 @@ const Mod43Pdf = ({
 				}}
 			>
 				<div style={{
-					width         : "52%",
+					width         : "50%",
 					display       : "flex",
 					flexDirection : "column",
 					gap           : "3px",

@@ -11,7 +11,6 @@ const Mod38 = ({
 	isInPaginator,
 	isThumbNail,
 	pageNo,
-	keyIndex,
 	modLayout,
 }) => {
 
@@ -24,7 +23,7 @@ const Mod38 = ({
 				p="0%"
 				pt="0%"
 				pb="0%"
-				id={`${pageNo}-${keyIndex}-${modLayout}-text1`}
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Text
 					sizes={{

@@ -14,7 +14,6 @@ import ReactDOMServer from "react-dom/server";
 
 const Mod42Pdf = ({
 	text,
-	keyIndex,
 	modLayout,
 	pageNo,
 }) => {
@@ -24,8 +23,8 @@ const Mod42Pdf = ({
 	});
 
 	const insertImg = async () => {
-		const imgText01 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text1`);
-		const imgText02 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text2`);
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
+		const imgText02 = await textToImage(`${pageNo}-${modLayout}-text2`);
 
 		setImgSrc({
 			imgText01 : imgText01,
@@ -56,7 +55,7 @@ const Mod42Pdf = ({
 				}}
 			>
 				<div style={{
-					width         : "48%",
+					width         : "45%",
 					display       : "flex",
 					flexDirection : "column",
 					gap           : "17px",

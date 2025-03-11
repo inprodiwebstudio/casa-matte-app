@@ -11,7 +11,6 @@ import { imgUrlPdf, textToImage } from "helpers";
 const Mod56Pdf = ({
 	text,
 	images,
-	keyIndex,
 	modLayout,
 	pageNo,
 }) => {
@@ -21,7 +20,7 @@ const Mod56Pdf = ({
 	});
 
 	const insertImg = async () => {
-		const imgText01 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text1`);
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
 
 		setImgSrc({
 			imgText01 : imgText01,

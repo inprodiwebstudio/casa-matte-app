@@ -13,7 +13,6 @@ const Mod58 = ({
 	isInPaginator,
 	isThumbNail,
 	pageNo,
-	keyIndex,
 	modLayout,
 }) => {
 
@@ -28,7 +27,7 @@ const Mod58 = ({
 			align="center"
 			direction="column"
 		>
-			<Stack w="60%" mb="0.1em" id={`${pageNo}-${keyIndex}-${modLayout}-text1`}>
+			<Stack w="60%" mb="0.1em" {...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}>
 				<Text
 					sizes={{
 						"chico"   : "14px",

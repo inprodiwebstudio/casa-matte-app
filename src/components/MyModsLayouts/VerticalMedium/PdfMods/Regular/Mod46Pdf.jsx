@@ -9,7 +9,6 @@ import { textToImage } from "helpers";
 
 const Mod46Pdf = ({
 	text,
-	keyIndex,
 	modLayout,
 	pageNo,
 }) => {
@@ -24,12 +23,12 @@ const Mod46Pdf = ({
 	});
 
 	const insertImg = async () => {
-		const imgText01 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text1`);
-		const imgText02 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text2`);
-		const imgText03 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text3`);
-		const imgText04 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text4`);
-		const imgText05 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text5`);
-		const imgText06 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text6`);
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
+		const imgText02 = await textToImage(`${pageNo}-${modLayout}-text2`);
+		const imgText03 = await textToImage(`${pageNo}-${modLayout}-text3`);
+		const imgText04 = await textToImage(`${pageNo}-${modLayout}-text4`);
+		const imgText05 = await textToImage(`${pageNo}-${modLayout}-text5`);
+		const imgText06 = await textToImage(`${pageNo}-${modLayout}-text6`);
 
 		setImgSrc({
 			imgText01 : imgText01,

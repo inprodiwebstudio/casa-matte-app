@@ -36,7 +36,7 @@ const Mod46 = ({
 				style={{overflow : "hidden"}}
 			>
 				<div
-					id={`${pageNo}-${keyIndex}-${modLayout}-text1`}
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
 					<Text
 						sizes={{
@@ -55,7 +55,7 @@ const Mod46 = ({
 					/>
 				</div>
 				<div
-					id={`${pageNo}-${keyIndex}-${modLayout}-text2`}
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
 				>
 					<Text
 						sizes={{

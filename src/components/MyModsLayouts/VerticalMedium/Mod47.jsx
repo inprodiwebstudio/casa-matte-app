@@ -13,7 +13,6 @@ const Mod49 = ({
 	isInPaginator,
 	isThumbNail,
 	pageNo,
-	keyIndex,
 	modLayout,
 }) => {
 
@@ -51,7 +50,7 @@ const Mod49 = ({
 				>
 					<Stack
 						spacing="0px"
-						id={`${pageNo}-${keyIndex}-${modLayout}-text1`}
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 					>
 						<Text
 							sizes={{
@@ -71,7 +70,7 @@ const Mod49 = ({
 						<DividerLayout long="0.3em" position="h" />
 					</Stack>
 					<div
-						id={`${pageNo}-${keyIndex}-${modLayout}-text2`}
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
 					>
 						<Text
 							sizes={{
@@ -96,7 +95,7 @@ const Mod49 = ({
 				>
 					<Stack
 						spacing={"0px"}
-						id={`${pageNo}-${keyIndex}-${modLayout}-text3`}
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text3` })}
 					>
 						<Text
 							sizes={{
@@ -116,7 +115,8 @@ const Mod49 = ({
 						<DividerLayout long="0.3em" position="h" />
 					</Stack>
 					<div
-						id={`${pageNo}-${keyIndex}-${modLayout}-text4`}
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text4` })}
+
 					>
 						<Text
 							sizes={{
@@ -141,7 +141,7 @@ const Mod49 = ({
 				>
 					<Stack
 						spacing={"0px"}
-						id={`${pageNo}-${keyIndex}-${modLayout}-text5`}
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text5` })}
 					>
 						<Text
 							sizes={{
@@ -161,7 +161,7 @@ const Mod49 = ({
 						<DividerLayout long="0.3em" position="h" />
 					</Stack>
 					<div
-						id={`${pageNo}-${keyIndex}-${modLayout}-text6`}
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text6` })}
 					>
 						<Text
 							sizes={{

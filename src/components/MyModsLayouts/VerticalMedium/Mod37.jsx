@@ -36,7 +36,7 @@ const Mod40 = ({
 							paddingRight : "10%",
 							maxHeight    : "100px",
 						}}
-						id={`${pageNo}-${keyIndex}-${modLayout}-text1`}
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 					>
 						<Text
 							sizes={{
@@ -59,7 +59,7 @@ const Mod40 = ({
 							paddingLeft  : "20%",
 							paddingRight : "20%",
 						}}
-						id={`${pageNo}-${keyIndex}-${modLayout}-text2`}
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
 					>
 						<Text
 							sizes={{

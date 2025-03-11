@@ -12,7 +12,6 @@ const Mod42 = ({
 	isInPaginator,
 	isThumbNail,
 	pageNo,
-	keyIndex,
 	modLayout,
 }) => {
 
@@ -27,7 +26,7 @@ const Mod42 = ({
 				mah="70%"
 				w="70%"
 				aria-hidden={true}
-				id={`${pageNo}-${keyIndex}-${modLayout}-text1`}
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Text
 					sizes={{

@@ -10,7 +10,6 @@ import FrontLayout        from "components/global/LayoutsPage/FrontLayout";
 import "./BookPages.scss";
 
 const BookPages = ({
-	keyIndex,
 	pageData,
 	isThumbNail,
 	isInPaginator,
@@ -48,7 +47,6 @@ const BookPages = ({
 					<LayoutMod
 						pageNo={pageNo}
 						modLayout={modLayout}
-						keyIndex={keyIndex}
 						isThumbNail={isThumbNail}
 						isInPaginator={isInPaginator}
 						data={layoutData}

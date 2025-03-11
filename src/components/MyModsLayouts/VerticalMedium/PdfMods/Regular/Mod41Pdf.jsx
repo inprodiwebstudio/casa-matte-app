@@ -9,7 +9,6 @@ import { textToImage } from "helpers";
 
 const Mod41Pdf = ({
 	text,
-	keyIndex,
 	modLayout,
 	pageNo,
 }) => {
@@ -20,8 +19,8 @@ const Mod41Pdf = ({
 	});
 
 	const insertImg = async () => {
-		const imgText01 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text1`);
-		const imgText02 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text2`);
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
+		const imgText02 = await textToImage(`${pageNo}-${modLayout}-text2`);
 
 		setImgSrc({
 			imgText01 : imgText01,
@@ -36,9 +35,11 @@ const Mod41Pdf = ({
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "792px",
-				width   : "100%",
-				padding : "60px",
+				height        : "792px",
+				width         : "100%",
+				// paddingRight  : "50px",
+				paddingBottom : "40px",
+				paddingRight  : "50px",
 			}}
 		>
 
@@ -49,7 +50,7 @@ const Mod41Pdf = ({
 					display        : "flex",
 					justifyContent : "flex-end",
 					alignItems     : "end",
-					gap            : "20px",
+					gap            : "0px",
 				}}
 			>
 				<div style={{
@@ -59,7 +60,7 @@ const Mod41Pdf = ({
 				}}>
 					<div
 						style={{
-							width         : "60%",
+							width         : "50%",
 							display       : "flex",
 							flexDirection : "column",
 							gap           : "15px",
@@ -74,12 +75,20 @@ const Mod41Pdf = ({
 								gap           : "0px",
 							}}
 						>
-							<div>
-								{imgSrc.imgText01 && <img src={imgSrc.imgText01} alt="Captura de texto" />}
+							<div
+								style={{
+									width : "100%",
+								}}
+							>
+								{imgSrc.imgText01 && <img style={{ objectFit : "cover" }} src={imgSrc.imgText01} alt="Captura de texto" />}
 							</div>
 						</div>
-						<div>
-							{imgSrc.imgText02 && <img src={imgSrc.imgText02} alt="Captura de texto" />}
+						<div
+							style={{
+								width : "100%",
+							}}
+						>
+							{imgSrc.imgText02 && <img style={{ objectFit : "cover" }} src={imgSrc.imgText02} alt="Captura de texto" />}
 						</div>
 					</div>
 				</div>

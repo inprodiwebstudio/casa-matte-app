@@ -11,7 +11,6 @@ const Mod39 = ({
 	isInPaginator,
 	isThumbNail,
 	pageNo,
-	keyIndex,
 	modLayout,
 }) => {
 
@@ -28,7 +27,7 @@ const Mod39 = ({
 			<Stack
 				w={"50%"}
 				align={isThumbNail ? "flex-end" : undefined}
-				id={`${pageNo}-${keyIndex}-${modLayout}-text1`}
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Text
 					sizes={{

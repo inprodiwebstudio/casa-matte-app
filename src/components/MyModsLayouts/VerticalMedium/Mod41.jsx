@@ -13,7 +13,6 @@ const Mod44 = ({
 	isInPaginator,
 	isThumbNail,
 	pageNo,
-	keyIndex,
 	modLayout,
 }) => {
 	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 14px; font-family: Aitana-Regular;'>MAMÁ</span></p>";
@@ -41,7 +40,7 @@ const Mod44 = ({
 					direction="column"
 					gap="0px"
 					justify="flex-start"
-					id={`${pageNo}-${keyIndex}-${modLayout}-text1`}
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
 					<Text
 						sizes={{
@@ -66,7 +65,7 @@ const Mod44 = ({
 					sx={{
 						overflow : "hidden !important",
 					}}
-					id={`${pageNo}-${keyIndex}-${modLayout}-text2`}
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
 				>
 					<Text
 						sizes={{

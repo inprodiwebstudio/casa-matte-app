@@ -9,7 +9,6 @@ import { textToImage } from "helpers";
 
 const Mod36Pdf = ({
 	text,
-	keyIndex,
 	modLayout,
 	pageNo,
 }) => {
@@ -19,7 +18,7 @@ const Mod36Pdf = ({
 	});
 
 	const insertImg = async () => {
-		const imgText01 = await textToImage(`${pageNo}-${keyIndex}-${modLayout}-text1`);
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
 
 		setImgSrc({
 			imgText01 : imgText01,
@@ -50,7 +49,18 @@ const Mod36Pdf = ({
 					alignItems     : "flex-end",
 				}}
 			>
-				{imgSrc.imgText01 && <img style={{ width : "50%" }} src={imgSrc.imgText01} alt="Captura de texto" />}
+				<div
+					style={{ width : "50%" }}
+				>
+					{
+						imgSrc.imgText01 &&
+						<img
+							src={imgSrc.imgText01}
+							alt="Captura de texto"
+							style={{ objectFit : "cover" }}
+						/>
+					}
+				</div>
 			</div>
 		</div>
 	);
