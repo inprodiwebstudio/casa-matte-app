@@ -158,7 +158,7 @@ const DropDoc = ({
 			if (isValidArray(imagesErrorPreview)) {
 				showNotification({
 					title   : "Error al previsualizar algunas imágenes",
-					message : "Algunas images no pudieron ser previsualizadas, te recomendamos que recargues la pagina.",
+					message : "Algunas images no pudieron ser previsualizadas, te recomendamos que recargues la pagina para poder previsualizarlas.",
 					color   : "blue",
 					styles  : () => ({
 						root : {
