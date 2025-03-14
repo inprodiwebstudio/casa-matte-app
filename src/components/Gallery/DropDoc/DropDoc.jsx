@@ -31,6 +31,7 @@ import {
 	PhotoList,
 } from "Resources/icons";
 import "./DropDoc.scss";
+import { showNotification, cleanNotifications } from "@mantine/notifications";
 
 const DropDoc = ({
 	postId,
@@ -47,6 +48,7 @@ const DropDoc = ({
 	const [ folderName, setFolderName ] = useState("");
 	const [ isGenerateNewFolder, setIsGenerateNewFolder ] = useState(false);
 	const [ completedPhotos, setCompletedPhotos ] = useState([]);
+	const [ photoPreview, setPhotosPreview ] = useState([]);
 
 	// const [galleryImagesMutation] = apiImageKit.useAddImageMutation();
 	const [galleryFolderMutation] = apiImageKit.useAddFolderMutation();
@@ -78,33 +80,104 @@ const DropDoc = ({
 		setLoading(true);
 		dispatch(gallerySlice.actions.setLoadingMutationGallery(true));
 		const listOfPromises = fileImage.map(async (file, index) => {
-			const respImage = await handlerUploadImage(file);
-			setCompletedPhotos(prev => {
-				const newData = [respImage, ...prev];
-				return newData;
-			});
-			const constructotImageData = {
-				...respImage,
-				id       : respImage?.asset_id,
-				fileId   : respImage?.asset_id,
-				filePath : respImage?.public_id,
-				type     : "file",
-			};
-			return constructotImageData;
+			try {
+				const respImage = await handlerUploadImage(file);
+				setCompletedPhotos(prev => {
+					const newData = [respImage, ...prev];
+					return newData;
+				});
+				if (respImage?.urlThumbnail && respImage?.url) {
+					setPhotosPreview(prev => {
+						const newData = [respImage, ...prev];
+						return newData;
+					});
+				}
+				const constructotImageData = {
+					...respImage,
+					id       : respImage?.asset_id,
+					fileId   : respImage?.asset_id,
+					filePath : respImage?.public_id,
+					type     : "file",
+				};
+				return constructotImageData;
+			} catch (error) {
+				cleanNotifications();
+				showNotification({
+					title   : "Error al subir la imagen",
+					message : `Ocurrió un problema al subir la imagen ${file.name}. Intenta más tarde.`,
+					color   : "red",
+					styles  : () => ({
+						root : {
+						  "&::before" : {
+							  borderRadius : "0px",
+							  width        : "3px",
+						  },
+						  borderRadius : "0px",
+						},
+
+						title       : { fontFamily : "Helvetica", fontWeight : "500", textTransform : "uppercase" },
+						description : { fontFamily : "Helvetica" },
+					}),
+				});
+			}
 		});
 
-		Promise.all([...listOfPromises]).then((imageValues) => {
+		Promise.allSettled([...listOfPromises]).then((imageValues) => {
 			setLoading(false);
-			imageValues.forEach((image) => {
-				dispatch(gallerySlice.actions.setGalleryData(image));
-			});
+			const successImages = imageValues.filter(image => image?.value && image?.status === "fulfilled");
+			const errorImages = imageValues.filter(image => !image?.value || (image?.status !== "fulfilled"));
+
+			const imagesSuccess = successImages.filter(myImage => (myImage?.value?.urlThumbnail && myImage?.value?.url));
+			const imagesErrorPreview = successImages.filter(myImage => (!myImage?.value?.urlThumbnail || !myImage?.value?.url));
+
+			if (isValidArray(successImages)) {
+				imagesSuccess.forEach((image) => {
+					dispatch(gallerySlice.actions.setGalleryData(image.value));
+				});
+			}
+			if (isValidArray(errorImages)) {
+				cleanNotifications();
+				showNotification({
+					title   : "Error al subir algunas imágenes",
+					message : "Algunas imágenes no pudieron ser subidas. Intenta mas tarde.",
+					color   : "yellow",
+					styles  : () => ({
+						root : {
+						  "&::before" : {
+							  borderRadius : "0px",
+							  width        : "3px",
+						  },
+						  borderRadius : "0px",
+						},
+
+						title       : { fontFamily : "Helvetica", fontWeight : "500", textTransform : "uppercase" },
+						description : { fontFamily : "Helvetica" },
+					}),
+				});
+			}
+			if (isValidArray(imagesErrorPreview)) {
+				showNotification({
+					title   : "Error al previsualizar algunas imágenes",
+					message : "Algunas images no pudieron ser previsualizadas, te recomendamos que recargues la pagina.",
+					color   : "blue",
+					styles  : () => ({
+						root : {
+						  "&::before" : {
+							  borderRadius : "0px",
+							  width        : "3px",
+						  },
+						  borderRadius : "0px",
+						},
+
+						title       : { fontFamily : "Helvetica", fontWeight : "500", textTransform : "uppercase" },
+						description : { fontFamily : "Helvetica" },
+					}),
+				});
+			}
+			setFileImage([]);
+			setCompletedPhotos([]);
 			dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 			dispatch(gallerySlice.actions.setTypeDropedView(null));
-		}, reason => {
-			setLoading(false);
-			dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
-			dispatch(gallerySlice.actions.setTypeDropedView(null));
-			console.error(reason);
 		});
 	};
 
@@ -176,7 +249,7 @@ const DropDoc = ({
 					<div className="toUploadContainer">
 						<div className="skeletonContainer">
 							{
-								completedPhotos.map((photoData, index) => (
+								photoPreview.map((photoData, index) => (
 									<div
 										className="imageThumbContainer"
 										key={index}

@@ -19,13 +19,15 @@ const useSubmitImages = ({userName, folderName}) => {
 					file      : image,
 					publicId  : "test",
 					api_key   : "265817136216333",
-					signature : data.signature,
+					signature : data?.signature,
 					folder    : `${userName}/${folderName ? folderName : isditedPhoto ? "_editedPhotos" : ""}`,
-					timestamp : `${data.timestamp}`,
+					timestamp : `${data?.timestamp}`,
 				}
 			);
 
-			if (!uploadFile?.data) return;
+			if (!uploadFile?.data) {
+				throw new Error("Error al subir la imagen");
+			}
 
 			const urlThumnail = await generateUrlCompress({data : {
 				public_id : uploadFile?.data?.public_id,
@@ -39,12 +41,17 @@ const useSubmitImages = ({userName, folderName}) => {
 				quality   : "30",
 			}});
 
-			const dataResp = {
-				...uploadFile.data,
-				url          : urlPageSize.data?.url,
-				urlThumbnail : urlThumnail.data?.url,
-			};
-			return dataResp;
+			if (urlThumnail?.data?.url && urlPageSize?.data?.url) {
+				return {
+					...uploadFile.data,
+					url          : urlPageSize?.data?.url,
+					urlThumbnail : urlThumnail?.data?.url,
+				};
+			}
+
+			if (urlThumnail?.error || urlPageSize?.error) {
+				return {};
+			}
 		} catch (error) {
 			throw new Error(error);
 		}
