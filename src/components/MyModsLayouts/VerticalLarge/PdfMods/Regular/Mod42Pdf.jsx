@@ -1,17 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
-import Html             from "react-pdf-html";
-import ReactDOMServer   from "react-dom/server";
-import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
+import Html            from "react-pdf-html";
+import ReactDOMServer  from "react-dom/server";
+import { textToImage } from "helpers";
 
 
-const Mod42Pdf = ({text}) => {
+const Mod42Pdf = ({
+	text,
+	modLayout,
+	pageNo,
+}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: left;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>MAMÁ</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+		imgText02 : undefined,
+	});
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: justify;'><span style='font-size: 12px; font-family: JosefinSans-Light;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam.</span></p>";
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
+		const imgText02 = await textToImage(`${pageNo}-${modLayout}-text2`);
+
+		setImgSrc({
+			imgText01 : imgText01,
+			imgText02 : imgText02,
+		});
+	};
+
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
@@ -48,36 +67,33 @@ const Mod42Pdf = ({text}) => {
 					>
 						<div
 							style={{
-								letterSpacing : "1.7px",
+								width : "100%",
 							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
-							}}
-						/>
-						<DividerLayoutPdf w="20%" />
+						>
+							{
+								imgSrc.imgText01 &&
+									<img
+										src={imgSrc.imgText01}
+										alt="Captura de texto"
+										style={{ objectFit : "cover" }}
+									/>
+							}
+						</div>
 					</div>
 					<div
 						style={{
-							width         : "100%",
-							letterSpacing : "0.5px",
-							lineHeight    : "1.5px",
+							width : "100%",
 						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                               p {
-                                 margin: 0;
-                                 padding: 0;
-                               }
-                             </style>
-                             ${text02}`,
-						}}
-					/>
+					>
+						{
+							imgSrc.imgText02 &&
+							<img
+								src={imgSrc.imgText02}
+								alt="Captura de texto"
+								style={{ objectFit : "cover" }}
+							/>
+						}
+					</div>
 				</div>
 			</div>
 		</div>

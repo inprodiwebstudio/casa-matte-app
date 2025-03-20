@@ -5,7 +5,15 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod62 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod62 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
@@ -30,17 +38,18 @@ const Mod62 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			sx={{overflow : "hidden"}}
 		>
 			<Stack
-				spacing="0.35em"
-				miw="20%"
+				spacing="0.2em"
+				w="20%"
 			>
 				<Stack
-					spacing="0.13em"
+					spacing="0em"
 					aria-hidden
 				>
 					<div
 						style={{
 							textTransform : "uppercase",
 						}}
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 					>
 						<Text
 							sizes={{
@@ -58,7 +67,9 @@ const Mod62 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							textNo={0}
 						/>
 					</div>
-					<div>
+					<div
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
+					>
 						<Text
 							sizes={{
 								"chico"   : "12px",
@@ -77,13 +88,14 @@ const Mod62 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					</div>
 				</Stack>
 				<Stack
-					spacing="0.13em"
+					spacing="0em"
 					aria-hidden
 				>
 					<div
 						style={{
 							textTransform : "uppercase",
 						}}
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text3` })}
 					>
 						<Text
 							sizes={{
@@ -101,7 +113,9 @@ const Mod62 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							textNo={2}
 						/>
 					</div>
-					<div>
+					<div
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text4` })}
+					>
 						<Text
 							sizes={{
 								"chico"   : "12px",
@@ -121,12 +135,13 @@ const Mod62 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				</Stack>
 				<Stack
 					mah="70%"
-					spacing="0.13em"
+					spacing="0em"
 				>
 					<div
 						style={{
 							textTransform : "uppercase",
 						}}
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text5` })}
 					>
 						<Text
 							sizes={{
@@ -144,7 +159,9 @@ const Mod62 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							textNo={4}
 						/>
 					</div>
-					<div>
+					<div
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text6` })}
+					>
 						<Text
 							sizes={{
 								"chico"   : "12px",

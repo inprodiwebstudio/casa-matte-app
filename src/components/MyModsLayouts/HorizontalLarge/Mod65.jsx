@@ -4,7 +4,15 @@ import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
-const Mod65 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod65 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 25px; font-family: JosefinSans-Light;'>Título pequeño 1</span></p>";
 

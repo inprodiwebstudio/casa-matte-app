@@ -4,7 +4,15 @@ import Text              from "components/LayoutHandler/Text";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
-const Mod61 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod61 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
@@ -27,6 +35,7 @@ const Mod61 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						maxHeight     : "100px",
 						textTransform : "uppercase",
 					 }}
+					 {...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
 					<Text
 						sizes={{
@@ -49,7 +58,9 @@ const Mod61 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						paddingLeft   : "20%",
 						paddingRight  : "0%",
 						textTransform : "uppercase",
-					}}>
+					}}
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
+				>
 					<Text
 						sizes={{
 							"chico"   : "14px",

@@ -6,7 +6,15 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod49 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
@@ -37,7 +45,10 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					spacing="0.13em"
 					aria-hidden
 				>
-					<div>
+					<Stack
+						spacing="0px"
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
+					>
 						<Text
 							sizes={{
 								"chico"   : "22px",
@@ -53,9 +64,11 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							isThumbNail={isThumbNail}
 							textNo={0}
 						/>
-					</div>
-					<DividerLayout long="0.3em" position="h" />
-					<div>
+						<DividerLayout long="0.3em" position="h" />
+					</Stack>
+					<div
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
+					>
 						<Text
 							sizes={{
 								"chico"   : "12px",
@@ -77,7 +90,10 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					spacing="0.13em"
 					aria-hidden
 				>
-					<div>
+					<Stack
+						spacing="0px"
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text3` })}
+					>
 						<Text
 							sizes={{
 								"chico"   : "22px",
@@ -93,9 +109,11 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							isThumbNail={isThumbNail}
 							textNo={2}
 						/>
-					</div>
-					<DividerLayout long="0.3em" position="h" />
-					<div>
+						<DividerLayout long="0.3em" position="h" />
+					</Stack>
+					<div
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text4` })}
+					>
 						<Text
 							sizes={{
 								"chico"   : "12px",
@@ -117,7 +135,10 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					mah="70%"
 					spacing="0.13em"
 				>
-					<div>
+					<Stack
+						spacing="0px"
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text5` })}
+					>
 						<Text
 							sizes={{
 								"chico"   : "22px",
@@ -133,9 +154,11 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							isThumbNail={isThumbNail}
 							textNo={4}
 						/>
-					</div>
-					<DividerLayout long="0.3em" position="h" />
-					<div>
+						<DividerLayout long="0.3em" position="h" />
+					</Stack>
+					<div
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text6` })}
+					>
 						<Text
 							sizes={{
 								"chico"   : "12px",

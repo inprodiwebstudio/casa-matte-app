@@ -5,7 +5,15 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod64 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod64 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultTitle01 = "<p style='text-align: center;'><span style='font-size: 25px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
@@ -24,17 +32,18 @@ const Mod64 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			sx={{overflow : "hidden"}}
 		>
 			<Stack
-				spacing="0.35em"
+				spacing="0em"
 				w={"100%"}
 			>
 				<Stack
-					spacing="0.13em"
+					spacing="0.1em"
 					aria-hidden
 				>
 					<div
 						style={{
 							textTransform : "uppercase",
 						}}
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 					>
 						<Text
 							sizes={{
@@ -52,7 +61,9 @@ const Mod64 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							textNo={0}
 						/>
 					</div>
-					<div>
+					<div
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
+					>
 						<Text
 							sizes={{
 								"chico"   : "12px",

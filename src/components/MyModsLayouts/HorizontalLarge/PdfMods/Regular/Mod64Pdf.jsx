@@ -1,16 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
-import Html           from "react-pdf-html";
-import ReactDOMServer from "react-dom/server";
+import Html            from "react-pdf-html";
+import ReactDOMServer  from "react-dom/server";
+import { textToImage } from "helpers";
 
 
-const Mod64Pdf = ({text}) => {
+const Mod64Pdf = ({
+	text,
+	modLayout,
+	pageNo,
+}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 25px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+		imgText02 : undefined,
+	});
 
-	const text04 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
+		const imgText02 = await textToImage(`${pageNo}-${modLayout}-text2`);
+
+		setImgSrc({
+			imgText01 : imgText01,
+			imgText02 : imgText02,
+		});
+	};
+
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
@@ -23,7 +43,6 @@ const Mod64Pdf = ({text}) => {
 				overflow     : "hidden",
 			}}
 		>
-
 			<div
 				style={{
 					minWidth       : "100%",
@@ -35,29 +54,28 @@ const Mod64Pdf = ({text}) => {
 			>
 				<div
 					style={{
-						width          : "100%",
+						width          : "90%",
 						display        : "flex",
 						flexDirection  : "column",
-						gap            : "16px",
+						gap            : "10px",
 						justifyContent : "center",
 						alignItems     : "center",
 					}}
 				>
 					<div
 						style={{
-							letterSpacing : "2px",
-							textTransform : "uppercase",
+							width : "100%",
 						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
-						}}
-					/>
+					>
+						{
+							imgSrc.imgText01 &&
+								<img
+									src={imgSrc.imgText01}
+									alt="Captura de texto"
+									style={{ objectFit : "cover" }}
+								/>
+						}
+					</div>
 					<div
 						style={{
 							width : "100%",
@@ -65,19 +83,18 @@ const Mod64Pdf = ({text}) => {
 					>
 						<div
 							style={{
-								letterSpacing : "0.5px",
-								lineHeight    : "2px",
+								width : "100%",
 							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text04}`,
-							}}
-						/>
+						>
+							{
+								imgSrc.imgText02 &&
+								<img
+									src={imgSrc.imgText02}
+									alt="Captura de texto"
+									style={{ objectFit : "cover" }}
+								/>
+							}
+						</div>
 					</div>
 				</div>
 			</div>
