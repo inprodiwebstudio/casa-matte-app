@@ -32,6 +32,7 @@ import {
 } from "Resources/icons";
 import "./DropDoc.scss";
 import { showNotification, cleanNotifications } from "@mantine/notifications";
+import { closeAllModals, openContextModal }     from "@mantine/modals";
 
 const DropDoc = ({
 	postId,
@@ -77,6 +78,7 @@ const DropDoc = ({
 	});
 
 	const handleAddPhotos = () => {
+		closeAllModals();
 		setLoading(true);
 		dispatch(gallerySlice.actions.setLoadingMutationGallery(true));
 		const listOfPromises = fileImage.map(async (file, index) => {
@@ -182,6 +184,7 @@ const DropDoc = ({
 	};
 
 	const handleAddFolder = async () => {
+		closeAllModals();
 		setLoading(true);
 		dispatch(gallerySlice.actions.setLoadingMutationGallery(true));
 		if (isValidArray(fileImage)) {
@@ -308,7 +311,13 @@ const DropDoc = ({
 											isButton
 											image={<PhotoList size="50px" />}
 											body="CARGAR A GALERÍA"
-											onSelect={() => handleAddPhotos()}
+											onSelect={() =>
+												openContextModal({
+													modal      : "disclaimerDropPhotos",
+													innerProps : {
+														handdleSuccess : () => handleAddPhotos(),
+													},
+												})}
 										/>
 										{
 											galleryPathRoute?.id === "route" && (
@@ -345,7 +354,13 @@ const DropDoc = ({
 											color="darkCasaMatte"
 											sx={{marginTop : "15px"}}
 											loading={loading}
-											onClick={() => handleAddFolder()}
+											onClick={() => () =>
+												openContextModal({
+													modal      : "disclaimerDropPhotos",
+													innerProps : {
+														handdleSuccess : () => handleAddFolder(),
+													},
+												})}
 											w={110}
 											h={30}
 										>

@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+import PropTypes               from "prop-types";
 //Redux
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 //Slices
@@ -12,6 +13,7 @@ import ActionImagesLayout from "./ActionImagesLayout";
 import { useParams } from "react-router-dom";
 //Styles
 import "./ImgLayout.scss";
+import { cleanNotifications, showNotification } from "@mantine/notifications";
 
 const ImgLayout = ({
 	sheetNo,
@@ -24,6 +26,8 @@ const ImgLayout = ({
 	const dispatch = useDispatch();
 
 	const dragerImage = useSelector((state) => state.workSpaceSlice.currentPhotoDragger, shallowEqual);
+
+	const [ isLowQuality, setIsLowQuality ] = useState(false);
 
 	const handleDrop = (e) => {
 		e.preventDefault();
@@ -39,11 +43,46 @@ const ImgLayout = ({
 		e.preventDefault();
 	};
 
+
+	const handlerQuality = () => {
+		const megapixels = urlImage.pixels / 1_000_000;
+
+		if (urlImage && (megapixels < 8)) {
+			cleanNotifications();
+			showNotification({
+				title   : "Alerta baja calidad",
+				message : `La imagen en el recuadro señalado presenta una baja calidad. De ${megapixels} pixeles. Recomendamos que la resolución de la imagen sea de 8 Mega Pixeles o superior.`,
+				color   : "yellow",
+				styles  : () => ({
+					root : {
+									  "&::before" : {
+										  borderRadius : "0px",
+										  width        : "3px",
+									  },
+									  borderRadius : "0px",
+					},
+
+					title       : { fontFamily : "Helvetica", fontWeight : "500", textTransform : "uppercase" },
+					description : { fontFamily : "Helvetica" },
+				}),
+			});
+			setIsLowQuality(true);
+			return;
+		}
+		setIsLowQuality(false);
+	};
+
+	useEffect(() => {
+		if (urlImage && isInWorkSpace) {
+			handlerQuality();
+		}
+	}, [urlImage]);
+
 	return (
 		<div
 			onDrop={(e) => handleDrop(e)}
 			onDragOver={(e) => handleDragOver(e)}
-			className="ImgLayout"
+			className={`ImgLayout ${isLowQuality ? "low-quality" : ""}`}
 			id={`${pageId}-${sheetNo}-${imageNo}`}
 			{
 				...( (urlImage?.url && (urlImage?.url !== "")) &&  {
@@ -58,13 +97,15 @@ const ImgLayout = ({
 		>
 			{
 				(urlImage?.url && (urlImage?.url !== "") && isInWorkSpace) && (
-					<ActionImagesLayout
-						containerPhotoUuid={`${pageId}-${sheetNo}-${imageNo}`}
-						sheetNo={sheetNo}
-						layoutNo={imageNo}
-						pageId={pageId}
-						image={selectPhotoUrl(urlImage)}
-					/>
+					<>
+						<ActionImagesLayout
+							containerPhotoUuid={`${pageId}-${sheetNo}-${imageNo}`}
+							sheetNo={sheetNo}
+							layoutNo={imageNo}
+							pageId={pageId}
+							image={selectPhotoUrl(urlImage)}
+						/>
+					</>
 				)
 			}
 		</div>

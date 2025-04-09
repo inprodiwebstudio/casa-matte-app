@@ -373,8 +373,9 @@ export const workSpaceSlice = createSlice({
 			if (payload.pageId === "frontpage") {
 				newData.frontPage.sheet1["photos"] = {
 					0 : {
-						id  : payload.image.id,
-						url : payload.image.image,
+						id     : payload.image.id,
+						url    : payload.image.image,
+						pixels : payload.image.pixels,
 					},
 				};
 			} else {
@@ -382,8 +383,9 @@ export const workSpaceSlice = createSlice({
 					return;
 				}
 				newData.pages[payload.pageId][`sheet${payload.sheetNo}`]["photos"][payload.layoutNo] = {
-					id  : payload.image.id,
-					url : payload.image.image,
+					id     : payload.image.id,
+					url    : payload.image.image,
+					pixels : payload.image.pixels,
 				};
 			}
 			state.data = newData;

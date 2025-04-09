@@ -40,7 +40,7 @@ const TestPdf = ({photoBookData}) => {
 	const photoBookTypes = {
 		vertical : {
 			mediano : {
-				size                  : [612, 792],
+				size                  : [652, 832],
 				frontSize             : [612, 792],
 				isInDoublePageLayouts : ["FrontLayout"],
 				modLayouts            : {...VerticalMedium},

@@ -14,6 +14,7 @@ import "./PhotoCard.scss";
 const PhotoCard = ({
 	image,
 	fileId,
+	pixels,
 	thumbNail,
 	isChecked,
 	isSelected,
@@ -43,6 +44,7 @@ const PhotoCard = ({
 		workSpaceSlice.setCurrentPhotoDrager({
 			image : image,
 			id    : fileId,
+			pixels,
 		});
 	};
 
@@ -81,6 +83,7 @@ const PhotoCard = ({
 				image    : {
 					id    : fileId,
 					image : imageUrl,
+					pixels,
 				},
 				pageId : pageData?.id,
 			});
@@ -95,10 +98,11 @@ const PhotoCard = ({
 						sheetNo  : 1,
 						layoutNo : i,
 						image    : {
-							fileId,
+							id    : fileId,
 							image : imageUrl,
+							pixels,
 						},
-						pageId : pageId,
+						pageId,
 					});
 					return;
 				}
@@ -113,8 +117,9 @@ const PhotoCard = ({
 						sheetNo  : 2,
 						layoutNo : i,
 						image    : {
-							fileId,
+							id    : fileId,
 							image : imageUrl,
+							pixels,
 						},
 						pageId : pageData?.id,
 					});
