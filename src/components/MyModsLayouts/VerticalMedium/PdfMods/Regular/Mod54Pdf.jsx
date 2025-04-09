@@ -74,12 +74,12 @@ const Mod54Pdf = ({
 				</div>
 				<div
 					style={{
-						display        : "flex",
-						alignItems     : "center",
-						justifyContent : "center",
-						flexDirection  : "column",
-						gap            : "0px",
-						width          : "100%",
+						display       : "flex",
+						alignItems    : "flex-end",
+						flexDirection : "column",
+						gap           : "0px",
+						paddingRight  : "45px",
+						width         : "100%",
 					}}
 				>
 					<div
