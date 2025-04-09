@@ -79,7 +79,6 @@ const Mod54Pdf = ({
 						justifyContent : "center",
 						flexDirection  : "column",
 						gap            : "0px",
-						paddingRight   : "45px",
 						width          : "100%",
 					}}
 				>
