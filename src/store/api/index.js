@@ -21,11 +21,11 @@ const baseQuery = fetchBaseQuery({
 	},
 });
 
-// Logs the user out if token isn't valid
+// Logs the user out if token isn't valid or postId isn't valid
 const baseQueryWithReauth = async (args, api, extraOptions) => {
 	const result = await baseQuery(args, api, extraOptions);
 
-	if (result.error && result.error.status === 401) {
+	if (result.error && result.error.status === 403) {
 		api.dispatch(authSlice.actions.clearUserData());
 	}
 
@@ -33,7 +33,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 };
 
 // Retry at most 6 times.
-const baseQueryWithRetry = retry(baseQueryWithReauth, { maxRetries : 2 });
+const baseQueryWithRetry = retry(baseQueryWithReauth, { maxRetries : 1 });
 
 export const api = createApi({
 	reducerPath       : "api",

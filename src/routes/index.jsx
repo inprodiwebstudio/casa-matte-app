@@ -11,10 +11,11 @@ import { Loadable } from "core/components";
 const WorkSpace = Loadable(lazy(() => import("pages/dashboard/WorkSpace")));
 const PayConfirm = Loadable(lazy(() => import("pages/PayConfirm")));
 const LayoutsNotFound = Loadable(lazy(() => import("pages/NotFoundLayouts")));
+const AuthTokenValidate = Loadable(lazy(() => import("pages/AuthTokenValidate")));
 // //Erros
 const NotFound  = Loadable(lazy(() => import("pages/Page404")));
-const Forbidden = Loadable(lazy(() => import("pages/Page403")));
-const Page500   = Loadable(lazy(() => import("pages/Page500")));
+// const Forbidden = Loadable(lazy(() => import("pages/Page403")));
+// const Page500   = Loadable(lazy(() => import("pages/Page500")));
 
 const Router = () => {
 	return useRoutes([
@@ -32,6 +33,10 @@ const Router = () => {
 					element : <WorkSpace />,
 				},
 			],
+		},
+		{
+			path    : "auth-validation",
+			element : <AuthTokenValidate />,
 		},
 		{
 			path     : "payment",
@@ -72,20 +77,20 @@ const Router = () => {
 				},
 			],
 		},
+		{ path : "404", element : <NotFound /> },
 		// Redirect
 		{
 			path    : "/",
 			element : <Navigate to="dashboard" replace />,
 		},
-		{
-			path     : "*",
-			children : [
-				{ path : "500", element : <Page500 /> },
-				{ path : "404", element : <NotFound /> },
-				{ path : "403", element : <Forbidden /> },
-				{ path : "*", element : <Navigate to="/dashboard" replace /> },
-			],
-		},
+		// {
+		// 	path     : "*",
+		// 	children : [
+		// 		{ path : "500", element : <Page500 /> },
+		// 		{ path : "404", element : <NotFound /> },
+		// 		{ path : "403", element : <Forbidden /> },
+		// 	],
+		// },
 	]);
 };
 
