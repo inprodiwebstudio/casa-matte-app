@@ -8,7 +8,6 @@ import Footer       from "./dashboard/footer";
 import SideBar      from "./dashboard/sideBar";
 
 export default function Layout() {
-	console.log("render Layout");
 	return (
 		<AppShell
 			Body={Outlet}

@@ -8,8 +8,11 @@ const MessageCharge = () => {
 			align="center"
 		>
 			<Text
-				color="darkCasaMatte"
-				weight={500}
+				color="darkCasaMatte.6"
+				weight={300}
+				sx={{
+					letterSpacing : "4px",
+				}}
 			>
 				VALIDANDO AUTENTIFICACIÓN...
 			</Text>
