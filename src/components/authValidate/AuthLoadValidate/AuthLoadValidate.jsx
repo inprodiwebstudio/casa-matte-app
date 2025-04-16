@@ -21,6 +21,8 @@ const AuthLoadValidate = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const userId = getParamURL("userId");
+	const postId = getParamURL("postId");
+
 
 	const validPath = isValidPath();
 
@@ -34,6 +36,7 @@ const AuthLoadValidate = () => {
 				userId   : respUserData?.id ?? undefined,
 			}));
 			dispatch(authSlice.actions.setIsLoggedIn());
+			navigate(`/dashboard/${postId}`);
 			return respUserData;
 		} catch (error) {
 			if ((error.status === 500) || (error.status === "FETCH_ERROR")) {

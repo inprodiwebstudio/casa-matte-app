@@ -3,7 +3,7 @@ import { useRoutes, Navigate } from "react-router-dom";
 //Helpers
 
 // layouts
-import DashboardLayout from "core/layout";
+import CorrectAccessGuard from "components/global/CorrectAccessGuard";
 // components
 import { Loadable } from "core/components";
 
@@ -12,6 +12,7 @@ const WorkSpace = Loadable(lazy(() => import("pages/dashboard/WorkSpace")));
 const PayConfirm = Loadable(lazy(() => import("pages/PayConfirm")));
 const LayoutsNotFound = Loadable(lazy(() => import("pages/NotFoundLayouts")));
 const AuthValidate = Loadable(lazy(() => import("pages/AuthValidate")));
+const PrivateRoute = Loadable(lazy(() => import("components/global/PrivateRoute")));
 // //Erros
 const ErrorPage = Loadable(lazy(() => import("pages/ErrorPage")));
 
@@ -20,14 +21,10 @@ const Router = () => {
 		// Auth DashBoard
 		{
 			path     : "dashboard",
-			element  : <DashboardLayout />,
+			element  : <PrivateRoute component={CorrectAccessGuard} />,
 			children : [
 				{
-					element : <Navigate to="/dashboard/page1" replace />,
-					index   : true,
-				},
-				{
-					path    : ":pageId",
+					path    : ":postId",
 					element : <WorkSpace />,
 				},
 			],
