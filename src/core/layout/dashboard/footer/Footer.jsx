@@ -10,25 +10,23 @@ import { workSpaceSlice } from "store/Slices";
 import { Tabs, SelectorMenuItem } from "core/components";
 import { ArrowTop }               from "Resources/icons";
 import "./Footer.scss";
-import { useParams }              from "react-router";
 
 const Footer = () => {
-	const [ dropedToggle, setDropedToggle ] = useState(false);
+	const currentFileterLayout = useSelector((state) => state.workSpaceSlice.layoutFilter, shallowEqual);
+	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
+	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
+	const isPreviewActive = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
 
-	const { pageId } = useParams();
+	const [ dropedToggle, setDropedToggle ] = useState(false);
 
 	const frontPagesTab = [{
 		label  : "PORTADAS",
 		filter : "portadas",
 	}];
 
-	const handleTabsLayouts = pageId !== "frontpage" ? filterTabs : frontPagesTab;
+	const handleTabsLayouts = currentPageId !== "frontpage" ? filterTabs : frontPagesTab;
 
 	const dispatch = useDispatch();
-
-	const currentFileterLayout = useSelector((state) => state.workSpaceSlice.layoutFilter, shallowEqual);
-	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
-	const isPreviewActive = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
 
 	const handleChangeLayoutFilter = (objValue) => {
 		dispatch(workSpaceSlice.actions.setLayoutFilter({
@@ -38,7 +36,7 @@ const Footer = () => {
 	};
 
 	useEffect(() => {
-	  if (pageId === "frontpage") {
+	  if (currentPageId === "frontpage") {
 			dispatch(workSpaceSlice.actions.setLayoutFilter({
 				type           : "portadas",
 				photosQuantity : currentFileterLayout.photosQuantity,
@@ -50,7 +48,7 @@ const Footer = () => {
 			photosQuantity : currentFileterLayout.photosQuantity,
 		}));
 		return;
-	}, [pageId]);
+	}, [currentPageId]);
 
 	return (
 		<div id="Footer" className={`${dropedToggle && "full-size"} ${isPreviewActive && "isActivePreview"}`}>
@@ -74,7 +72,7 @@ const Footer = () => {
 			</div>
 			<div className="body-layouts-container">
 				{
-					((pageId !== "frontpage") && (currentFileterLayout.type !== "texto")) && (
+					((currentPageId !== "frontpage") && (currentFileterLayout.type !== "texto")) && (
 						<div
 							style={{
 								marginTop : "15px",

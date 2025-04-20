@@ -4,18 +4,17 @@ import { useDispatch, useSelector, shallowEqual } from "react-redux";
 //Own components
 import { Loading }        from "core/components";
 import { workSpaceSlice } from "store/Slices";
-import { useParams }      from "react-router";
 
 import "./Tabs.scss";
 
 const Tabs = ({tabList, loading}) => {
-	const { pageId } = useParams();
 
 	const [ currentTab, setCurrentTab ] = useState(tabList[0]?.label);
 
 	const dispatch = useDispatch();
 
 	// const currentFileterLayout = useSelector((state) => state.workSpaceSlice.layoutFilter, shallowEqual);
+	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const isLoggin = useSelector((state) => state.authSlice.loggedIn, shallowEqual);
 
 
@@ -31,12 +30,12 @@ const Tabs = ({tabList, loading}) => {
 	};
 
 	useEffect(() => {
-		if (pageId === "frontpage") {
+		if (currentPageId === "frontpage") {
 			setCurrentTab("PORTADAS");
 			return;
 		}
 		setCurrentTab("TODOS");
-	}, [pageId]);
+	}, [currentPageId]);
 
 	return (
 		<div className="Tabs">

@@ -1,6 +1,4 @@
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
-//Router
-import { useParams } from "react-router-dom";
 //Constants
 import photoBooksConfing from "core/constants/photoBooksConfing";
 //Slices
@@ -10,11 +8,10 @@ import "./ItemLayout.scss";
 const ItemLayout = ({
 	layoutData,
 }) => {
-	const { pageId } = useParams();
-
 	const dispatch = useDispatch();
 
 	const pageDataSelected = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
+	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const pagesData = useSelector((state) => state.workSpaceSlice?.data?.pages, shallowEqual);
 	const frontPageData = useSelector((state) => state.workSpaceSlice?.data?.frontPage, shallowEqual);
 	const productPhotoBook = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
@@ -31,14 +28,14 @@ const ItemLayout = ({
 
 
 	const currentLayoutSelected = () => {
-		if (pageId === "frontpage") {
+		if (currentPageId === "frontpage") {
 			return {
 				sheet1 : frontPageData?.sheet1?.layoutType,
 			};
 		}
 		return {
-			sheet1 : pagesData[pageId]?.sheet1?.layoutType,
-			sheet2 : pagesData[pageId]?.sheet2?.layoutType,
+			sheet1 : pagesData[currentPageId]?.sheet1?.layoutType,
+			sheet2 : pagesData[currentPageId]?.sheet2?.layoutType,
 		};
 	};
 

@@ -26,7 +26,7 @@ import { PostingConfig }             from "Notifications";
 import { genericApi }                from "store/api/genericApi";
 import { workSpaceSlice, authSlice } from "store/Slices";
 import "./AppShell.scss";
-import { useNavigate }               from "react-router";
+import { useNavigate, useParams }    from "react-router";
 
 //Fonts
 Font.register(
@@ -341,23 +341,18 @@ const AppShell = ({
 	footer,
 	sidebar,
 }) => {
-	const searchParams = new URLSearchParams(location.search);
+	const { postId } = useParams();
 	const navigate = useNavigate();
-
-	const nameUser = searchParams.get("username") ?? "";
-	const postId = searchParams.get("postId") ?? "";
 
 	const dispatch = useDispatch();
 
 	// const isSelectedPage = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice?.data, shallowEqual);
-	const postIdphotoBook = useSelector((state) => state.authSlice?.user?.postId, shallowEqual);
-	const userName = useSelector((state) => state.authSlice?.user?.username, shallowEqual);
 	const userId = useSelector((state) => state.authSlice?.user?.userId, shallowEqual);
 	const initialData = useSelector((state) => state.workSpaceSlice?.initialData, shallowEqual);
 
 	const { data : photobookData, isFetching, error } = genericApi.useGetDataQuery({
-		module : `wp-json/wp/v2/photobook-2-0/${postIdphotoBook === "" ? null : postIdphotoBook}`,
+		module : `wp-json/wp/v2/photobook-2-0/${postId}`,
 	});
 
 	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
@@ -378,7 +373,7 @@ const AppShell = ({
 					config : parseSendData({...workSpaceData, minPages : (workSpaceData?.pasta === "Dura") ? 25 : 10}),
 				},
 			},
-			id     : postIdphotoBook,
+			id     : postId,
 			method : "POST",
 		});
 	};
@@ -393,9 +388,6 @@ const AppShell = ({
 		// 	navigate(`/payment/confirm?orderid=${photobookData?.meta?.id_del_pedido}&postId=${postIdphotoBook}`);
 		// 	return;
 		// }
-		if (!userId && photobookData?.author) {
-			dispatch(authSlice.actions.setUserId(photobookData?.author));
-		}
 		if (photobookData?.meta?.config) {
 			const myData = photobookData?.meta?.config;
 			const parseJSON = JSON.parse(myData);
@@ -463,14 +455,6 @@ const AppShell = ({
 		// }
 
 	}, [dataMutationResult]);
-
-	useEffect(() => {
-		if (nameUser || postId) {
-			if ((nameUser !== userName) || (postId !== postIdphotoBook)) {
-				dispatch(authSlice.actions.clearUserData());
-			}
-		}
-	}, [nameUser, postId]);
 
 	return (
 		<div

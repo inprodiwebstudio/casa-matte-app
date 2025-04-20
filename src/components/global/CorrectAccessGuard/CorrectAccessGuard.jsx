@@ -7,8 +7,10 @@ import Dashboard from "core/layout";
 import { Navigate, useNavigate, useParams } from "react-router";
 import { useEffect }                        from "react";
 import { useSelector, shallowEqual }        from "react-redux";
+import { usePhotoBookPreset }               from "helpers/Hooks/usePhotoBookPreset";
 
 const CorrectAccessGuard = () => {
+	const { createPresetPhotoBook } = usePhotoBookPreset();
 	const userId = useSelector((state) => state.authSlice.user.userId, shallowEqual);
 
 	const { postId } = useParams();
@@ -46,8 +48,9 @@ const CorrectAccessGuard = () => {
 	useEffect(() => {
 		if (!photobookData) return;
 		if (!isOwner()) {
-			navigate("/error/403");
+			return navigate("/error/403");
 		}
+		createPresetPhotoBook(photobookData);
 	}, [photobookData]);
 
 	return (

@@ -1,6 +1,5 @@
-import { connect }             from "react-redux";
-import { useState, useEffect } from "react";
-import { useParams }           from "react-router";
+import { connect, shallowEqual, useSelector } from "react-redux";
+import { useState, useEffect }                from "react";
 //ReactSoinner
 import { MoonLoader } from "react-spinners";
 
@@ -24,7 +23,7 @@ const PhotoCard = ({
 	isHideSelected,
 	workSpaceSlice,
 }) => {
-	const { pageId } = useParams();
+	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 
 	const photoBookType = workSpaceData?.product ?? "white";
 	const formatPhotoBook = workSpaceData?.format ?? "vertical";
@@ -32,7 +31,7 @@ const PhotoCard = ({
 
 	const photoBookConfig = photoBooksConfing[photoBookType ?? "white"];
 
-	const pageData = pageId === "frontpage" ? workSpaceData?.frontPage : workSpaceData?.pages?.[pageId];
+	const pageData = currentPageId === "frontpage" ? workSpaceData?.frontPage : workSpaceData?.pages?.[currentPageId];
 
 	const [ isDragger, setIsDragger ] = useState(false);
 	const [ loadingPhoto, setLoadingphoto ] = useState(true);
@@ -102,7 +101,7 @@ const PhotoCard = ({
 							image : imageUrl,
 							pixels,
 						},
-						pageId,
+						pageId : currentPageId,
 					});
 					return;
 				}

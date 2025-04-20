@@ -9,8 +9,6 @@ import { workSpaceSlice } from "store/Slices";
 import { handlerResizerImage, selectPhotoUrl } from "./imgLayout.helpers";
 //OwnComponents
 import ActionImagesLayout from "./ActionImagesLayout";
-//reactRouter
-import { useParams } from "react-router-dom";
 //Styles
 import "./ImgLayout.scss";
 import { cleanNotifications, showNotification } from "@mantine/notifications";
@@ -21,7 +19,7 @@ const ImgLayout = ({
 	urlImage,
 	isInWorkSpace,
 }) => {
-	const { pageId } = useParams();
+	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 
 	const dispatch = useDispatch();
 
@@ -32,7 +30,7 @@ const ImgLayout = ({
 	const handleDrop = (e) => {
 		e.preventDefault();
 		dispatch(workSpaceSlice.actions.addPhoto({
-			pageId   : pageId,
+			pageId   : currentPageId,
 			sheetNo  : sheetNo,
 			layoutNo : imageNo,
 			image    : dragerImage,
@@ -83,7 +81,7 @@ const ImgLayout = ({
 			onDrop={(e) => handleDrop(e)}
 			onDragOver={(e) => handleDragOver(e)}
 			className={`ImgLayout ${isLowQuality ? "low-quality" : ""}`}
-			id={`${pageId}-${sheetNo}-${imageNo}`}
+			id={`${currentPageId}-${sheetNo}-${imageNo}`}
 			{
 				...( (urlImage?.url && (urlImage?.url !== "")) &&  {
 					style : {
@@ -99,10 +97,10 @@ const ImgLayout = ({
 				(urlImage?.url && (urlImage?.url !== "") && isInWorkSpace) && (
 					<>
 						<ActionImagesLayout
-							containerPhotoUuid={`${pageId}-${sheetNo}-${imageNo}`}
+							containerPhotoUuid={`${currentPageId}-${sheetNo}-${imageNo}`}
 							sheetNo={sheetNo}
 							layoutNo={imageNo}
-							pageId={pageId}
+							pageId={currentPageId}
 							image={selectPhotoUrl(urlImage)}
 						/>
 					</>
