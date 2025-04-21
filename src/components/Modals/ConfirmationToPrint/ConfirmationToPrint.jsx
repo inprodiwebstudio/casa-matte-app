@@ -52,8 +52,8 @@ const ConfirmationToPrint = ({ innerProps }) => {
 							city       : "test",
 							state      : "fill",
 							postcode   : "00000",
-							country    : "fill",
-							email      : "fill-test@gmail.com",
+							country    : "MX",
+							email      : "demo44@demo.com",
 							phone      : "0000000000",
 						},
 						line_items : [
