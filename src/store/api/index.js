@@ -7,6 +7,20 @@ import { apiUrl } from "helpers";
 const baseQuery = fetchBaseQuery({
 	baseUrl        : apiUrl,
 	prepareHeaders : (headers) => {
+		const userName = "adminapp";
+		const applicationPassword = "QkUi tQZW TIET 12f3 zYQI WJrs";
+
+		const toBase64 = (str) => {
+			const encoder = new TextEncoder();
+			const data = encoder.encode(str);
+			let binary = "";
+			data.forEach((byte) => binary += String.fromCharCode(byte));
+			return window.btoa(binary);
+		};
+
+		const token = toBase64(`${userName}:${applicationPassword}`);
+
+		headers.set("authorization", `Basic ${token}`);
 		headers.set("Accept", "/");
 		headers.set("Access-Control-Allow-Origin", "*");
 		headers.set("Access-Control-Allow-Methods", "*");

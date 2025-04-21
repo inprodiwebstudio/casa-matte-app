@@ -4,12 +4,14 @@ import LoadingAccess  from "./LoadingAccess";
 
 import Dashboard from "core/layout";
 
-import { Navigate, useNavigate, useParams } from "react-router";
-import { useEffect }                        from "react";
-import { useSelector, shallowEqual }        from "react-redux";
-import { usePhotoBookPreset }               from "helpers/Hooks/usePhotoBookPreset";
+import { workSpaceSlice }                         from "store/Slices";
+import { Navigate, useNavigate, useParams }       from "react-router";
+import { useEffect }                              from "react";
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { usePhotoBookPreset }                     from "helpers/Hooks/usePhotoBookPreset";
 
 const CorrectAccessGuard = () => {
+	const dispatch = useDispatch();
 	const { createPresetPhotoBook } = usePhotoBookPreset();
 	const userId = useSelector((state) => state.authSlice.user.userId, shallowEqual);
 
@@ -41,6 +43,17 @@ const CorrectAccessGuard = () => {
 		return false;
 	};
 
+	const addCurrentPhotoBookConfig = (photoBookConfigData) => {
+		const myData = photoBookConfigData?.meta?.config;
+		const parseJSON = JSON.parse(myData);
+
+		dispatch(workSpaceSlice.actions.insertData({
+			...parseJSON,
+			modified : photoBookConfigData?.modified ?? undefined,
+			orderId  : photoBookConfigData?.meta?.id_del_pedido ?? undefined,
+		}));
+	};
+
 	useEffect(() => {
 		handlerPhotoBookNotFound();
 	}, [error]);
@@ -49,6 +62,9 @@ const CorrectAccessGuard = () => {
 		if (!photobookData) return;
 		if (!isOwner()) {
 			return navigate("/error/403");
+		}
+		if (photobookData?.meta?.config) {
+			return addCurrentPhotoBookConfig(photobookData);
 		}
 		createPresetPhotoBook(photobookData);
 	}, [photobookData]);

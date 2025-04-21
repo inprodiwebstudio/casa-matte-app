@@ -1,38 +1,26 @@
-import { Button }         from "core/components";
-import { closeAllModals } from "@mantine/modals";
-import React              from "react";
+import { useState }                  from "react";
+import BodyConfirm                   from "./BodyConfirm";
+import IncompletedPagesBody          from "./IncompletedPagesBody";
+import { shallowEqual, useSelector } from "react-redux";
+import { isValidArray }              from "helpers";
+import { inCompletePages }           from "./ConfirmationToPrint.helpers";
 import "./ConfirmationPrint.scss";
 
 
 const ConfirmationToPrint = () => {
+	const pages = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
+	const [notCompletedPages, setNotCompletedPages] = useState([]);
+
+	const handlerSubmit = () => {
+		setNotCompletedPages(inCompletePages(Object.values(pages)));
+	};
+
 	return (
-		<div className="body-confirmation-modal">
-			<div className="tittle-confirmation">¿Estás seguro?</div>
-			<div className="text-description" style={{ textAlign : "center" }}>
-				Estás a punto de enviar tu photobook para impresión. Una vez que confirmes, no podrás seguir editándolo ni deshacer esta acción. Serás redirigido automáticamente al pago, y tu pedido quedará confirmado. ¿Deseas aceptar?
-			</div>
-			<div className="buttons-container">
-				<Button
-					fontSize="18px"
-					type="subtleActive"
-					width={300}
-					height={39}
-					isLoading={false}
-					onClick={() => console.log("redirect to send handler")}
-				>
-					Aceptar y evitar
-				</Button>
-				<Button
-					fontSize="18px"
-					width={117}
-					height={39}
-					isLoading={false}
-					onClick={() => closeAllModals()}
-				>
-					Cancelar
-				</Button>
-			</div>
-		</div>
+		<>
+			{
+				!isValidArray(notCompletedPages) ? <BodyConfirm onSubmit={handlerSubmit} /> : <IncompletedPagesBody pages={notCompletedPages} />
+			}
+		</>
 	);
 };
 

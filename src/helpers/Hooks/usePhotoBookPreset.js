@@ -26,6 +26,7 @@ export const usePhotoBookPreset = () => {
 			minPages      : meta?.pasta === "Dura" ? 25 : 10,
 			maxPages      : numberOfPages,
 			currentPage   : "page1",
+			projectTittle : "TITULO",
 			basePrice     : price.replace(" ", ""),
 			bound         : meta?.encuadernado ?? "",
 			pasta         : meta?.pasta ?? "",

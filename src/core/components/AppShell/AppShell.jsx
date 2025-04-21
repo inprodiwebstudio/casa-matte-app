@@ -26,7 +26,7 @@ import { PostingConfig }             from "Notifications";
 import { genericApi }                from "store/api/genericApi";
 import { workSpaceSlice, authSlice } from "store/Slices";
 import "./AppShell.scss";
-import { useNavigate, useParams }    from "react-router";
+import { useParams }                 from "react-router";
 
 //Fonts
 Font.register(
@@ -342,18 +342,13 @@ const AppShell = ({
 	sidebar,
 }) => {
 	const { postId } = useParams();
-	const navigate = useNavigate();
 
 	const dispatch = useDispatch();
 
 	// const isSelectedPage = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice?.data, shallowEqual);
-	const userId = useSelector((state) => state.authSlice?.user?.userId, shallowEqual);
 	const initialData = useSelector((state) => state.workSpaceSlice?.initialData, shallowEqual);
 
-	const { data : photobookData, isFetching, error } = genericApi.useGetDataQuery({
-		module : `wp-json/wp/v2/photobook-2-0/${postId}`,
-	});
 
 	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
 
@@ -367,7 +362,10 @@ const AppShell = ({
 		await dataMutation({
 			module : "wp-json/wp/v2/photobook-2-0",
 			data   : {
-				tittle : "Texto de prueba",
+				title : {
+					rendered : workSpaceData.projectTittle,
+					raw      : workSpaceData.projectTittle,
+				},
 				status : "publish",
 				meta   : {
 					config : parseSendData({...workSpaceData, minPages : (workSpaceData?.pasta === "Dura") ? 25 : 10}),
@@ -380,52 +378,11 @@ const AppShell = ({
 
 
 	useEffect(() => {
-		// if ((photobookData?.meta === "TRAVEL COFFEE TABLE PHOTOBOOK")) {
-		// 	navigate("/notfound/layouts");
-		// 	return;
-		// }
-		// if ((photobookData?.meta?.status === "48") && (userName !== "nataliaz")) {
-		// 	navigate(`/payment/confirm?orderid=${photobookData?.meta?.id_del_pedido}&postId=${postIdphotoBook}`);
-		// 	return;
-		// }
-		if (photobookData?.meta?.config) {
-			const myData = photobookData?.meta?.config;
-			const parseJSON = JSON.parse(myData);
-
-			const orderIdHandler = () => {
-				if (photobookData?.meta?.id_del_pedido || (photobookData?.meta?.id_del_pedido !== "")) {
-					return photobookData?.meta?.id_del_pedido;
-				}
-				return undefined;
-			};
-
-			dispatch(workSpaceSlice.actions.insertData({
-				...parseJSON,
-				modified      : photobookData?.modified,
-				projectTittle : photobookData?.title?.rendered,
-				orderId       : orderIdHandler(),
-			}));
-		}
-	}, [photobookData]);
-
-
-	useEffect(() => {
-		if (!error) {
-			dispatch(workSpaceSlice.actions.changeLoading(isFetching));
-		}
-	}, [isFetching]);
-
-
-	useEffect(() => {
-		if (photobookData?.meta?.config) {
+		if (workSpaceData) {
 			submitData();
 		}
 		if (!initialData) {
-			if (photobookData?.meta?.config) {
-				const myData = photobookData?.meta?.config;
-				const parseJSON = JSON.parse(myData);
-				dispatch(workSpaceSlice.actions.addInitialData(parseJSON));
-			}
+			dispatch(workSpaceSlice.actions.addInitialData(workSpaceData));
 		}
 	}, [workSpaceData]);
 

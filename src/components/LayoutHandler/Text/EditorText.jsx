@@ -133,11 +133,12 @@ const EditText = ({
 		  const data = editor.getData();
 		  setEditorState(data);
 		  if (isBound) {
+				console.log("Is bound");
 				workSpaceSlice.addTextBound({text : data});
 				return;
 		  }
 		  if (!isFront) {
-				workSpaceSlice.addText({currentPageId, sheetNo, text : data, layoutNo});
+				workSpaceSlice.addText({pageId : currentPageId, sheetNo, text : data, layoutNo});
 				return;
 		  }
 		  workSpaceSlice.addTextFront({sheetNo, text : data, layoutNo});

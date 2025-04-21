@@ -201,7 +201,7 @@ const initialState = {
 			value : "all",
 		},
 	},
-	loading   : true,
+	loading   : false,
 	isPreview : false,
 };
 

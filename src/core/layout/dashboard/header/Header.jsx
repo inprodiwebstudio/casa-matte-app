@@ -66,7 +66,7 @@ const Header = () => {
 				},
 			},
 			id     : postIdphotoBook,
-			method : "PUT",
+			method : "POST",
 		});
 	};
 
@@ -125,7 +125,7 @@ const Header = () => {
 									style={{width : "65%"}}
 								>
 									<TextInput
-										variant="unstyled"
+										// variant="unstyled"
 										value={projectName}
 										onChange={(e) => handlerChangeTitleProject(e.target.value)}
 										sx={{
