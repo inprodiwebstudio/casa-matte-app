@@ -24,7 +24,6 @@ const useSubmitImages = ({userName, folderName}) => {
 				folder           : `${userName}/${folderName ? folderName : isditedPhoto ? "_editedPhotos" : ""}`,
 				lastModifiedDate : constructorImage?.lastModifiedDate,
 			}});
-			console.log(data);
 			const uploadFile = await axios.postForm(
 				"https://api.cloudinary.com/v1_1/dtjvmtfji/image/upload",
 				{

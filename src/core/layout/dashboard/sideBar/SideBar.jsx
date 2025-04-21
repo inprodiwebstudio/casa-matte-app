@@ -10,6 +10,7 @@ import { convertToArray, isValidArray, bindAll }                    from "helper
 import { ArrowTop, FolderPlus, DropFile, Thrash, MoveFolder, Cross} from "Resources/icons";
 import "./SideBar.scss";
 import { useEffect }                                                from "react";
+import { useParams }                                                from "react-router";
 
 const { useLazyGetDirentsListQuery } = apiImageKit;
 
@@ -25,10 +26,10 @@ const SideBar = ({
 	isLoggedIn,
 	isPreview,
 	userName,
-	postId,
 	filter,
 }) => {
 	const [ fetchGallery ] = useLazyGetDirentsListQuery();
+	const { postId } = useParams();
 
 	const [galleryImagesMutationMove] = apiImageKit.useMoveFileMutation();
 	const [galleryImagesMutastionDelete] = apiImageKit.useDeleteImagesMutation();
@@ -203,7 +204,6 @@ const mapStateToProps = ({ gallerySlice, authSlice, workSpaceSlice }) => ({
 	typeDropView         : gallerySlice?.typeDropedView ?? null,
 	galleryPath          : gallerySlice?.galleryPathName ?? "route",
 	userName             : authSlice?.user?.username ?? undefined,
-	postId               : authSlice?.user?.postId ?? undefined,
 	filter               : gallerySlice?.filter ?? undefined,
 	isPreview            : workSpaceSlice?.isPreview ?? undefined,
 	isLoggedIn           : authSlice?.loggedIn ?? false,

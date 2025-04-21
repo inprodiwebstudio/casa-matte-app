@@ -33,14 +33,16 @@ import {
 import "./DropDoc.scss";
 import { showNotification, cleanNotifications } from "@mantine/notifications";
 import { closeAllModals, openContextModal }     from "@mantine/modals";
+import { useParams }                            from "react-router";
 
 const DropDoc = ({
-	postId,
 	userName,
 	galleryPathRoute,
 	galleryTypeDropedView,
 }) => {
 	const dispatch = useDispatch();
+
+	const { postId } = useParams();
 
 	const [ loading, setLoading ] = useState(false);
 
@@ -401,7 +403,6 @@ const mapStateToProps = ({ gallerySlice, authSlice }) => ({
 	galleryTypeDropedView : gallerySlice?.typeDropedView ?? null,
 	galleryPathRoute      : gallerySlice?.galleryPathName ?? {},
 	userName              : authSlice?.user?.username ?? undefined,
-	postId                : authSlice?.user?.postId ?? undefined,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (DropDoc);
