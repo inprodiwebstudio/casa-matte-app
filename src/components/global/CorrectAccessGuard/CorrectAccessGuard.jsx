@@ -30,6 +30,8 @@ const CorrectAccessGuard = () => {
 
 	const isLoading = isFetching;
 
+	const isCorrectAccess = (!isLoading && !error && photobookData) ? true : false;
+
 	const handlerPhotoBookNotFound = () => {
 		if (error?.status === 404) {
 			navigate("/error/404");
@@ -56,7 +58,9 @@ const CorrectAccessGuard = () => {
 	};
 
 	useEffect(() => {
-		handlerPhotoBookNotFound();
+		if (error) {
+			handlerPhotoBookNotFound();
+		}
 	}, [error]);
 
 	useEffect(() => {
@@ -76,10 +80,10 @@ const CorrectAccessGuard = () => {
 				isLoading && <LoadingAccess />
 			}
 			{
-				(!isLoading && (photobookData.meta?.status === "48")) && <PayConfirm />
+				(isCorrectAccess && (photobookData?.meta?.status === "48")) && <PayConfirm />
 			}
 			{
-				(!isLoading && (photobookData.meta?.status === "26")) && <Dashboard />
+				(isCorrectAccess && (photobookData?.meta?.status === "26")) && <Dashboard />
 			}
 		</>
 	);

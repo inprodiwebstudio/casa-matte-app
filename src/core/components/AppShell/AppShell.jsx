@@ -378,7 +378,7 @@ const AppShell = ({
 
 
 	useEffect(() => {
-		if (workSpaceData) {
+		if (workSpaceData?.productName) {
 			submitData();
 		}
 		if (!initialData) {
@@ -388,10 +388,6 @@ const AppShell = ({
 
 	useEffect(() => {
 		if (dataMutationResult.isUninitialized) return;
-
-		// if (dataMutationResult.isLoading) {
-		// 	PostingConfig["post"]["posting"]();
-		// }
 
 		if (dataMutationResult.isError) {
 			const status = dataMutationResult.error?.status;
@@ -412,6 +408,8 @@ const AppShell = ({
 		// }
 
 	}, [dataMutationResult]);
+
+	console.log(workSpaceData);
 
 	return (
 		<div
