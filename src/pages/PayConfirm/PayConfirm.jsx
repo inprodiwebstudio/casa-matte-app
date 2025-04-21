@@ -219,7 +219,7 @@ const PayConfirm = () => {
 				<Stack spacing={15} align="center">
 					<div className="title-body-payment">
 						{(isLoadingData) && "Generando Photo Book..."}
-						{(!isLoadingData && !isGeneratingPDF && !errorToGeneratePDF) && "¡Gracias por tu compra!"}
+						{(!isLoadingData && !isGeneratingPDF && !errorToGeneratePDF) && "¡Gracias por elegirnos!"}
 						{(errorToGeneratePDF && !isGeneratingPDF) && "Ocurrió un error al generar tu photobook"}
 					</div>
 					<div className="body-payment">

@@ -9,7 +9,7 @@ const BodyConfirm = ({
 		<div className="body-confirmation-modal">
 			<div className="tittle-confirmation">¿Estás seguro?</div>
 			<div className="text-description" style={{ textAlign : "center" }}>
-				Estás a punto de enviar tu photobook para impresión. Una vez que confirmes, no podrás seguir editándolo ni deshacer esta acción. Serás redirigido automáticamente al pago, y tu pedido quedará confirmado. ¿Deseas aceptar?
+				Estás a punto de enviar tu photobook para impresión. Una vez que confirmes, no podrás seguir editándolo ni deshacer esta acción. Tu pedido quedará confirmado. ¿Deseas aceptar?
 			</div>
 			<div className="buttons-container">
 				<Button
