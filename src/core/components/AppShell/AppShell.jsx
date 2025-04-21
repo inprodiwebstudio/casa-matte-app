@@ -409,16 +409,9 @@ const AppShell = ({
 
 	}, [dataMutationResult]);
 
-	console.log(workSpaceData);
-
 	return (
 		<div
 			id="AppShell"
-			// {
-			// 	...(isSelectedPage && {
-			// 		onClick : () => dispatch(workSpaceSlice.actions.clearSelectedPageData()),
-			// 	})
-			// }
 		>
 			<div className="bodyContainer">
 				<Body />
