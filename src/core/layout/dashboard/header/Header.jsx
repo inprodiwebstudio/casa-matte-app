@@ -26,7 +26,6 @@ const Header = () => {
 	const [ projectName, setProjectName ] = useState(undefined);
 
 	const isPreviewActive = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
-	const orderId = useSelector((state) => state.workSpaceSlice?.data?.orderId, shallowEqual);
 	const postIdphotoBook = useSelector((state) => state.authSlice?.user?.postId, shallowEqual);
 	const productName = useSelector((state) => state.workSpaceSlice.data.productName, shallowEqual);
 	const projectTitle = useSelector((state) => state.workSpaceSlice.data.projectTittle, shallowEqual);
@@ -39,7 +38,6 @@ const Header = () => {
 
 	const isAdminAccount = (userName === "casamatteadmin") && (userEmail === "info@casamatte.com");
 	const isDevAccount = (userName === "demo") && (userEmail === "demo@demo.com");
-	const isNataliazAccount = (userName === "nataliaz");
 
 	const handlerShowTestPdf = isAdminAccount || isDevAccount;
 
@@ -68,10 +66,6 @@ const Header = () => {
 			id     : postIdphotoBook,
 			method : "POST",
 		});
-	};
-
-	const redirectToOrders = () => {
-		window.location.href = `https://casamatte.wip-inprodi.com/dashboard/mi-cuenta/view-order/${orderId}/`;
 	};
 
 	useEffect(() => {
@@ -172,55 +166,29 @@ const Header = () => {
 								>
 									{isLoading ? "GUARDANDO..." : "GUARDAR"}
 								</Button>
+								<Button
+									radius={12}
+									size="xs"
+									color="darkCasaMatte"
+									onClick={() => openContextModal({
+										modal      : "confirmationToPrint",
+										innerProps : {},
+									})}
+									disabled={false}
+									loading={isLoadingWorspaceData}
+								>
+									<Text
+										weight={400}
+										color="whiteCasaMatte"
+										sx={{
+											fontFamily : "Helvetica",
+										}}
+									>
+										Imprimir
+									</Text>
+								</Button>
 								{
-									(!orderId && !isNataliazAccount) && (
-										<Button
-											radius={12}
-											size="xs"
-											color="darkCasaMatte"
-											onClick={() => openContextModal({
-												modal      : "confirmationToPrint",
-												innerProps : {},
-											})}
-											disabled={false}
-											loading={isLoadingWorspaceData}
-										>
-											<Text
-												weight={400}
-												color="whiteCasaMatte"
-												sx={{
-													fontFamily : "Helvetica",
-												}}
-											>
-												Imprimir
-											</Text>
-										</Button>
-									)
-								}
-								{
-									(orderId && !isNataliazAccount) && (
-										<Button
-											radius={12}
-											size="xs"
-											color="darkCasaMatte"
-											onClick={() => redirectToOrders()}
-											disabled={false}
-											loading={isLoadingWorspaceData}
-										>
-											<Text
-												weight={400}
-												color="whiteCasaMatte"
-												sx={{
-													fontFamily : "Helvetica",
-												}}
-											>
-												Pagar
-											</Text>
-										</Button>
-									)
-								}
-								{
-									(handlerShowTestPdf && !isNataliazAccount) && (
+									(handlerShowTestPdf) && (
 										<Button
 											radius={12}
 											size="xs"
