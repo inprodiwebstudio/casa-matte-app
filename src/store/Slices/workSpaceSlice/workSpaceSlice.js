@@ -248,6 +248,9 @@ export const workSpaceSlice = createSlice({
 		handleChangePage : (state, {payload}) => {
 			state.data.currentPage = payload;
 		},
+		handleChangepRrojectTitle : (state, {payload}) => {
+			state.data.projectTittle = payload;
+		},
 		addPage : (state) => {
 			const newData = {...state.data.pages};
 			const pagesObjToArray = convertToArray(newData);

@@ -363,8 +363,8 @@ const AppShell = ({
 			module : "wp-json/wp/v2/photobook-2-0",
 			data   : {
 				title : {
-					rendered : workSpaceData.projectTittle,
-					raw      : workSpaceData.projectTittle,
+					rendered : workSpaceData?.projectTittle ?? "TITULO",
+					raw      : workSpaceData?.projectTittle ?? "TITULO",
 				},
 				status : "publish",
 				meta   : {

@@ -3,15 +3,13 @@ import { useEffect, useState }                    from "react";
 import LogoCasaMatte                              from "Resources/images/casaMatteLogo.png";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
-import { workSpaceSlice, authSlice } from "store/Slices";
+import { workSpaceSlice } from "store/Slices";
 
-import { genericApi } from "store/api/genericApi";
 import "./Header.scss";
 //Mantine
 // import { openContextModal } from "@mantine/modals";
 
 //Own components
-import { PostingConfig }    from "Notifications";
 import { useParams }        from "react-router";
 import { dayjs }            from "helpers";
 import { openContextModal } from "@mantine/modals";
@@ -29,7 +27,6 @@ const Header = () => {
 	const [ projectName, setProjectName ] = useState(undefined);
 
 	const isPreviewActive = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
-	const postIdphotoBook = useSelector((state) => state.authSlice?.user?.postId, shallowEqual);
 	const productName = useSelector((state) => state.workSpaceSlice.data.productName, shallowEqual);
 	const projectTitle = useSelector((state) => state.workSpaceSlice.data.projectTittle, shallowEqual);
 	const lastModified = useSelector((state) => state.workSpaceSlice.data.modified, shallowEqual);
@@ -43,8 +40,6 @@ const Header = () => {
 	const isDevAccount = (userName === "demo") && (userEmail === "demo@demo.com");
 
 	const handlerShowTestPdf = isAdminAccount || isDevAccount;
-
-	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
 	const handlerClickPreview = () => () => {
 		dispatch(workSpaceSlice.actions.togglePreview());
 	};
@@ -58,17 +53,7 @@ const Header = () => {
 
 	const handlerChangeTitleProject = async (valueName) => {
 		setProjectName(valueName);
-		await dataMutation({
-			module : "wp-json/wp/v2/photobook-2-0",
-			data   : {
-				title : {
-					rendered : valueName,
-					raw      : valueName,
-				},
-			},
-			id     : postIdphotoBook,
-			method : "POST",
-		});
+		dispatch(workSpaceSlice.actions.handleChangepRrojectTitle(valueName));
 	};
 
 	useEffect(() => {
@@ -86,25 +71,6 @@ const Header = () => {
 			setProjectName(projectTitle);
 		}
 	}, [projectTitle]);
-
-	useEffect(() => {
-		if (dataMutationResult.isUninitialized) return;
-
-		if (dataMutationResult.isError) {
-			const status = dataMutationResult.error?.status;
-
-			switch (status) {
-				case 403:
-					PostingConfig["post"][403]();
-					dispatch(authSlice.actions.clearUserData());
-					break;
-				default:
-					PostingConfig["post"][500]();
-					break;
-			}
-		}
-
-	}, [dataMutationResult]);
 
 	return (
 		<div className="Header">
