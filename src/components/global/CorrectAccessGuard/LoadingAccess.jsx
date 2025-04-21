@@ -1,7 +1,7 @@
 import { Center, Stack, useMantineTheme } from "@mantine/core";
 import { BlankPage }                      from "core/components";
 import { ClipLoader }                     from "react-spinners";
-import LogoCasaMatte                      from "Resources/images/casaMatteLogo.svg";
+import LogoCasaMatte                      from "Resources/images/casaMatteLogo.png";
 
 
 const LoadingAccess = () => {

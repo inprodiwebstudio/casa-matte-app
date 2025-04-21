@@ -1,6 +1,6 @@
 import { Center, Stack } from "@mantine/core";
 
-import LogoCasaMatte from "Resources/images/casaMatteLogo.svg";
+import LogoCasaMatte from "Resources/images/casaMatteLogo.png";
 
 import "./NotFoundLayouts.scss";
 

@@ -9,7 +9,6 @@ import { Loadable } from "core/components";
 
 // // Dashboard
 const WorkSpace = Loadable(lazy(() => import("pages/dashboard/WorkSpace")));
-const PayConfirm = Loadable(lazy(() => import("pages/PayConfirm")));
 const LayoutsNotFound = Loadable(lazy(() => import("pages/NotFoundLayouts")));
 const AuthValidate = Loadable(lazy(() => import("pages/AuthValidate")));
 const PrivateRoute = Loadable(lazy(() => import("components/global/PrivateRoute")));
@@ -32,19 +31,6 @@ const Router = () => {
 		{
 			path    : "auth-validate",
 			element : <AuthValidate />,
-		},
-		{
-			path     : "payment",
-			children : [
-				{
-					element : <Navigate to="/payment/confirm" replace />,
-					index   : true,
-				},
-				{
-					path    : "confirm",
-					element : <PayConfirm />,
-				},
-			],
 		},
 		{
 			path     : "order",

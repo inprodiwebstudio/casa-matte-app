@@ -1,7 +1,7 @@
 import { Stack }      from "@mantine/core";
 import { ClipLoader } from "react-spinners";
 
-import LogoCasaMatte from "Resources/images/casaMatteLogo.svg";
+import LogoCasaMatte from "Resources/images/casaMatteLogo.png";
 
 const LoadingWithLogo = () => {
 	return (

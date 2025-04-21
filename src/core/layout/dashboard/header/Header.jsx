@@ -1,6 +1,6 @@
 import { Button, Text, TextInput }                from "@mantine/core";
 import { useEffect, useState }                    from "react";
-import LogoCasaMatte                              from "Resources/images/casaMatteLogo.svg";
+import LogoCasaMatte                              from "Resources/images/casaMatteLogo.png";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
 import { workSpaceSlice, authSlice } from "store/Slices";
@@ -12,12 +12,15 @@ import "./Header.scss";
 
 //Own components
 import { PostingConfig }    from "Notifications";
+import { useParams }        from "react-router";
 import { dayjs }            from "helpers";
 import { openContextModal } from "@mantine/modals";
 
 
 const Header = () => {
 	const dispatch = useDispatch();
+
+	const { postId } = useParams();
 
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -172,7 +175,9 @@ const Header = () => {
 									color="darkCasaMatte"
 									onClick={() => openContextModal({
 										modal      : "confirmationToPrint",
-										innerProps : {},
+										innerProps : {
+											postId,
+										},
 									})}
 									disabled={false}
 									loading={isLoadingWorspaceData}

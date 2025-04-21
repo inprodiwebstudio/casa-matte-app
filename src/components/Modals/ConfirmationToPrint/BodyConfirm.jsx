@@ -3,6 +3,7 @@ import { closeAllModals } from "@mantine/modals";
 
 const BodyConfirm = ({
 	onSubmit,
+	isLoading,
 }) => {
 	return (
 		<div className="body-confirmation-modal">
@@ -16,7 +17,7 @@ const BodyConfirm = ({
 					type="subtleActive"
 					width={300}
 					height={39}
-					isLoading={false}
+					isLoading={isLoading}
 					onClick={onSubmit}
 				>
 					Aceptar y enviar
@@ -25,7 +26,7 @@ const BodyConfirm = ({
 					fontSize="18px"
 					width={117}
 					height={39}
-					isLoading={false}
+					isLoading={isLoading}
 					onClick={() => closeAllModals()}
 				>
 					Cancelar

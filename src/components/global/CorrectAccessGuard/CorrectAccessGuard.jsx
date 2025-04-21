@@ -7,6 +7,7 @@ import Dashboard from "core/layout";
 import { workSpaceSlice }                         from "store/Slices";
 import { Navigate, useNavigate, useParams }       from "react-router";
 import { useEffect }                              from "react";
+import PayConfirm                                 from "pages/PayConfirm";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { usePhotoBookPreset }                     from "helpers/Hooks/usePhotoBookPreset";
 
@@ -27,7 +28,7 @@ const CorrectAccessGuard = () => {
 		module : `wp-json/wp/v2/photobook-2-0/${postId}`,
 	});
 
-	const isLoading = isFetching && !photobookData;
+	const isLoading = isFetching;
 
 	const handlerPhotoBookNotFound = () => {
 		if (error?.status === 404) {
@@ -72,11 +73,13 @@ const CorrectAccessGuard = () => {
 	return (
 		<>
 			{
-				isLoading ?
-					<LoadingAccess />
-					: (
-						<Dashboard />
-					)
+				isLoading && <LoadingAccess />
+			}
+			{
+				(!isLoading && (photobookData.meta?.status === "48")) && <PayConfirm />
+			}
+			{
+				(!isLoading && (photobookData.meta?.status === "26")) && <Dashboard />
 			}
 		</>
 	);

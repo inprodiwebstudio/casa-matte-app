@@ -2,7 +2,7 @@ import { Button, Center, Stack, Text } from "@mantine/core";
 import { BlankPage }                   from "core/components";
 import { useNavigate }                 from "react-router";
 
-import LogoCasaMatte from "Resources/images/casaMatteLogo.svg";
+import LogoCasaMatte from "Resources/images/casaMatteLogo.png";
 
 const ErrorPageLayout = ({
 	errorCode,
