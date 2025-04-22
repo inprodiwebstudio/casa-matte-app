@@ -18,6 +18,7 @@ const ConfirmationToPrint = ({ innerProps }) => {
 
 	const pages = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
 	const userId = useSelector((state) => state.authSlice?.user?.userId, shallowEqual);
+	const userEmail = useSelector((state) => state.authSlice?.user?.email, shallowEqual);
 
 	const [ dataMutation, { isLoading } ] = genericApi.useSubmitDataMutation();
 
@@ -53,7 +54,7 @@ const ConfirmationToPrint = ({ innerProps }) => {
 							state      : "fill",
 							postcode   : "00000",
 							country    : "MX",
-							email      : "demo44@demo.com",
+							email      : userEmail,
 							phone      : "0000000000",
 						},
 						line_items : [
