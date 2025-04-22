@@ -1,35 +1,30 @@
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { useState, useEffect }                    from "react";
-import { useParams }                              from "react-router-dom";
 //Helpers
 import { isValidArray, convertToArray } from "helpers";
 
 //Own components
 import BookPages          from "components/BookPages";
 import { RedoArrow }      from "Resources/icons";
-import LoginCard          from "../LoginCard";
 import { workSpaceSlice } from "store/Slices";
 import "./WorkSpace.scss";
 
 const WorkSpace = () => {
-	const { pageId } = useParams();
-
 	const dispatch = useDispatch();
 
-	const [ myWorkSpaceData, setMyWorkSpaceData ] = useState({});
+	const [ myWorkSpaceData, setMyWorkSpaceData ] = useState(undefined);
 
+	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
 	const productPhotoBook = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
 	const workSpaceFrontPage = useSelector((state) => state.workSpaceSlice.data?.frontPage, shallowEqual);
 	const workSpaceFormatPage = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
 	const workSpaceSizePage = useSelector((state) => state.workSpaceSlice.data?.sizePhotoBook, shallowEqual);
 	const workSpaceHistory = useSelector((state) => state.workSpaceSlice.history, shallowEqual);
-	const isLoggin = useSelector((state) => state.authSlice.loggedIn, shallowEqual);
-	const isLoading = useSelector((state) => state.workSpaceSlice?.loading, shallowEqual);
 	const isPreview = useSelector((state) => state.workSpaceSlice?.isPreview, shallowEqual);
 	const isAvailableProduct = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
 
-	const isFrontLayout = pageId === "frontpage";
+	const isFrontLayout = currentPageId === "frontpage";
 
 	const isAvailableUndo = isValidArray(workSpaceHistory.undo);
 	const isAvailableRedo = isValidArray(workSpaceHistory.redo);
@@ -52,18 +47,7 @@ const WorkSpace = () => {
 	};
 
 	const SapceViewHandler = () => {
-		if (!isLoggin) {
-			return (
-				<div className="WorkSpace">
-					<div className="canva-space">
-						<div className="ghost-canva">
-							<LoginCard />
-						</div>
-					</div>
-				</div>
-			);
-		}
-		if (isPreview && isLoggin && !isLoading && (isAvailableProduct !== "") ) {
+		if (isPreview && (isAvailableProduct !== "") ) {
 			return (
 				<div
 					className="PreviewPages"
@@ -74,7 +58,7 @@ const WorkSpace = () => {
 								<div className={`pagesPreviewPhotoBook ${handlerTypeProductFormat()}-preview`}>
 									<BookPages
 										isInWorkSpcae={true}
-										loading={isLoading}
+										loading={false}
 										pageData={page}
 									/>
 								</div>
@@ -84,7 +68,7 @@ const WorkSpace = () => {
 				</div>
 			);
 		}
-		if (myWorkSpaceData && isLoggin && !isLoading && (isAvailableProduct !== "")) {
+		if (myWorkSpaceData && (isAvailableProduct !== "")) {
 			return (
 				<div className="WorkSpace">
 					<div className="canva-space">
@@ -119,7 +103,7 @@ const WorkSpace = () => {
 						<div className={`ghost-canva ${handlerTypeProductFormat()}-workSpace ${(!myWorkSpaceData?.sheet2 && (myWorkSpaceData?.id !== "FrontLayout")) && "onePage"}`}>
 							<BookPages
 								isInWorkSpcae={true}
-								loading={isLoading}
+								loading={false}
 								pageData={myWorkSpaceData}
 							/>
 						</div>
@@ -131,23 +115,21 @@ const WorkSpace = () => {
 
 	useEffect(() => {
 		if (!isFrontLayout) {
-			setMyWorkSpaceData(workSpaceData[pageId]);
+			setMyWorkSpaceData(workSpaceData[currentPageId]);
 		}
 		if (isFrontLayout) {
 			setMyWorkSpaceData(workSpaceFrontPage);
 		}
-	}, [pageId, workSpaceData, workSpaceFrontPage]);
-
-	useEffect(() => {
-		if (pageId) {
-			dispatch(workSpaceSlice.actions.handleChangePage(pageId));
-		}
-	}, [pageId]);
+	}, [currentPageId, workSpaceData, workSpaceFrontPage]);
 
 	document.onkeydown = undoAndRedoActions;
 
 	return (
-		<SapceViewHandler />
+		<>
+			{
+				myWorkSpaceData && <SapceViewHandler />
+			}
+		</>
 	);
 };
 

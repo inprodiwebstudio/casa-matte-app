@@ -1,6 +1,6 @@
 import { Center, Stack }       from "@mantine/core";
 import { Document, pdf, Page } from "@react-pdf/renderer";
-import LogoCasaMatte           from "Resources/images/casaMatteLogo.svg";
+import LogoCasaMatte           from "Resources/images/casaMatteLogo.png";
 import { Loading }             from "core/components";
 
 import VerticalLarge     from "components/MyModsLayouts/VerticalLarge";
@@ -15,6 +15,7 @@ import SpinePhotoBook from "components/MyModsLayouts/SpinePdf";
 
 import "./PayConfirm.scss";
 import { useEffect, useState }                    from "react";
+import { useParams }                              from "react-router";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { genericApi }                             from "store/api/genericApi";
 import axios                                      from "axios";
@@ -23,6 +24,7 @@ import { workSpaceSlice } from "store/Slices";
 import { convertToArray } from "helpers";
 
 const PayConfirm = () => {
+	const { postId } = useParams();
 	const photoBookTypes = {
 		vertical : {
 			mediano : {
@@ -80,56 +82,25 @@ const PayConfirm = () => {
 		},
 	};
 
-	const [ isLoadingOrder, setIsLoadingOrder ] = useState( false );
 	const [ isGeneratingPDF, setIsGeneratingPDF ] = useState( false );
 	const [ errorToGeneratePDF, setErrorToGeneratePDF ] = useState( false );
-	const [ isPay, setIsPay ] = useState( false );
-	const searchParams = new URLSearchParams(location.search);
-
-	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
 
 	const myPhotoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 	const userData = useSelector((state) => state.authSlice.user, shallowEqual);
 
 	const dispatch = useDispatch();
 
-	const orderid = searchParams.get("orderid") ?? "";
-	const postId = searchParams.get("postId") ?? "";
-
 	const { data : photobookData, isLoading : isFetchingPostId } = genericApi.useGetDataQuery({
 		module : `wp-json/wp/v2/photobook-2-0/${postId === "" ? null : postId}`,
 	});
 
-	const isLoadingData = isFetchingPostId || isLoadingOrder || isGeneratingPDF;
+	const isLoadingData = isFetchingPostId || isGeneratingPDF;
 
 	const handlerFormat = (productType) => {
 		if ( productType === "travelcoffeetable ") {
 			return "travelcoffeetable";
 		}
 		return myPhotoBookData?.format;
-	};
-	const getOrderId = async () => {
-		setIsLoadingOrder(true);
-		try {
-			const orderData = await axios.get(`https://casamatte.com/wp-json/wc/v3/orders/${orderid}`,
-				{
-					auth : {
-						username : "ck_ecf36082e00a4cfd16000f338e25073359b78df2",
-						password : "cs_23f9bd87790be9f91b91e58d0d7b6a2f9ee9d727",
-					},
-				}
-			);
-
-			setIsLoadingOrder(false);
-
-			if (orderData?.data?.date_paid || (orderData?.data?.payment_method_title === "Pedido gratuito")) {
-				setIsPay(true);
-				return;
-			}
-		} catch (error) {
-			setIsLoadingOrder(false);
-			console.error(error);
-		}
 	};
 
 	const getComponent = (pageData) => {
@@ -197,26 +168,11 @@ const PayConfirm = () => {
 
 			// Crear un FormData para enviar el archivo al backend
 			const formData = new FormData();
-			formData.append("file", blob, `${userData?.email}-noPedido:${orderid}-bookId:${postId}.pdf`);
+			formData.append("file", blob, `${userData?.email}-noPedido:${myPhotoBookData.orderId}-bookId:${postId}.pdf`);
 			// Enviar el archivo al backend
 			const response = await axios.post("https://casa-matte-api-cs6c4.ondigitalocean.app/api/v1/uploadPdf", formData, {
 				headers : { "Content-Type" : "multipart/form-data" },
 			});
-			const isPaidAndGenerated = photobookData?.meta?.status === "48";
-			if (!isPaidAndGenerated) {
-				await dataMutation({
-					module : "wp-json/wp/v2/photobook-2-0",
-					data   : {
-						tittle : "Texto de prueba",
-						status : "publish",
-						meta   : {
-							status : "48",
-						},
-					},
-					id     : postId,
-					method : "POST",
-				});
-			}
 			console.log("Archivo subido:", response.data);
 			setIsGeneratingPDF(false);
 		} catch (error) {
@@ -245,16 +201,10 @@ const PayConfirm = () => {
 	};
 
 	useEffect(() => {
-		if ( orderid ) {
-			getOrderId();
-		}
-	}, [orderid]);
-
-	useEffect(() => {
-		if ( isPay && (photobookData?.meta?.config && (photobookData?.meta?.config !== "")) ) {
+		if (photobookData?.meta?.config && (photobookData?.meta?.config !== "")) {
 			photobookPDF();
 		}
-	}, [isPay, photobookData]);
+	}, [photobookData]);
 
 	useEffect(() => {
 		if ((myPhotoBookData?.product && (myPhotoBookData?.product !== ""))) {
@@ -263,34 +213,19 @@ const PayConfirm = () => {
 		}
 	}, [myPhotoBookData]);
 
-	useEffect(() => {
-		if (dataMutationResult.isUninitialized) return;
-
-		if (dataMutationResult.isError) {
-			setIsLoadingOrder(false);
-			setIsGeneratingPDF(false);
-			setErrorToGeneratePDF(true);
-		}
-
-	}, [dataMutationResult]);
-
 	return (
 		<Center id="PayConfirm">
 			<Stack spacing={80} align="center">
 				<Stack spacing={15} align="center">
 					<div className="title-body-payment">
-						{(isLoadingData && !isPay) && "Validando tu Pago..."}
-						{(isLoadingData && isPay) && "Generando Photo Book..."}
-						{(!isLoadingData && isPay && !isGeneratingPDF && !errorToGeneratePDF) && "¡Gracias por tu compra!"}
-						{(!isLoadingData && !isPay && !errorToGeneratePDF) && "Pago no efectuado"}
-						{(errorToGeneratePDF && isPay && !isGeneratingPDF) && "Ocurrió un error al generar tu photobook"}
+						{(isLoadingData) && "Generando Photo Book..."}
+						{(!isLoadingData && !isGeneratingPDF && !errorToGeneratePDF) && "¡Gracias por elegirnos!"}
+						{(errorToGeneratePDF && !isGeneratingPDF) && "Ocurrió un error al generar tu photobook"}
 					</div>
 					<div className="body-payment">
-						{(isLoadingData && !isPay) && "Estamos validando tu informacion y el pago espera un momento"}
-						{(isLoadingData && isPay) && "Estamos generando tu photobook. EL proceso puede tardar unos minutos. No cierres o recargues la pagina hasta que el proceso termine."}
-						{(!isLoadingData && isPay && !isGeneratingPDF && !errorToGeneratePDF) && "Tu photobook ha sido creado y enviado exitosamente. Casa Matte recibirá tu pedido pronto y se pondrá en contacto contigo. ¡Gracias por elegirnos!"}
-						{(!isLoadingData && !isPay && !errorToGeneratePDF) && "El pago no se procesó correctamente. Por favor, verifica y realiza el pago nuevamente, o si ya lo hiciste, intenta ingresando a este link más tarde. (Puedes recargar la pagina si deseas)"}
-						{(errorToGeneratePDF && isPay && !isGeneratingPDF) && "Parece que ocurrió un problema al generar tu photobook. Por favor, intenta recargar la página o vuelve a intentarlo más tarde."}
+						{(isLoadingData) && "Estamos generando tu photobook. EL proceso puede tardar unos minutos. No cierres o recargues la pagina hasta que el proceso termine."}
+						{(!isLoadingData && !isGeneratingPDF && !errorToGeneratePDF) && "Tu photobook ha sido creado y enviado exitosamente. Casa Matte recibirá tu pedido pronto y se pondrá en contacto contigo. ¡Gracias por elegirnos!"}
+						{(errorToGeneratePDF && !isGeneratingPDF) && "Parece que ocurrió un problema al generar tu photobook. Por favor, intenta recargar la página o vuelve a intentarlo más tarde."}
 					</div>
 					{isLoadingData && (
 						<div style={{ marginTop : "20px" }}>
@@ -298,7 +233,7 @@ const PayConfirm = () => {
 						</div>
 					)}
 				</Stack>
-				<a href="https://casamatte.com/">
+				<a href="https://casamatte.wip-inprodi.com/">
 					<img src={LogoCasaMatte} width={180} />
 				</a>
 			</Stack>

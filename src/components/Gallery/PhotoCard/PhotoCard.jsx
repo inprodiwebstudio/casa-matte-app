@@ -1,6 +1,5 @@
-import { connect }             from "react-redux";
-import { useState, useEffect } from "react";
-import { useParams }           from "react-router";
+import { connect, shallowEqual, useSelector } from "react-redux";
+import { useState, useEffect }                from "react";
 //ReactSoinner
 import { MoonLoader } from "react-spinners";
 
@@ -14,6 +13,7 @@ import "./PhotoCard.scss";
 const PhotoCard = ({
 	image,
 	fileId,
+	pixels,
 	thumbNail,
 	isChecked,
 	isSelected,
@@ -23,7 +23,7 @@ const PhotoCard = ({
 	isHideSelected,
 	workSpaceSlice,
 }) => {
-	const { pageId } = useParams();
+	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 
 	const photoBookType = workSpaceData?.product ?? "white";
 	const formatPhotoBook = workSpaceData?.format ?? "vertical";
@@ -31,7 +31,7 @@ const PhotoCard = ({
 
 	const photoBookConfig = photoBooksConfing[photoBookType ?? "white"];
 
-	const pageData = pageId === "frontpage" ? workSpaceData?.frontPage : workSpaceData?.pages?.[pageId];
+	const pageData = currentPageId === "frontpage" ? workSpaceData?.frontPage : workSpaceData?.pages?.[currentPageId];
 
 	const [ isDragger, setIsDragger ] = useState(false);
 	const [ loadingPhoto, setLoadingphoto ] = useState(true);
@@ -43,6 +43,7 @@ const PhotoCard = ({
 		workSpaceSlice.setCurrentPhotoDrager({
 			image : image,
 			id    : fileId,
+			pixels,
 		});
 	};
 
@@ -81,6 +82,7 @@ const PhotoCard = ({
 				image    : {
 					id    : fileId,
 					image : imageUrl,
+					pixels,
 				},
 				pageId : pageData?.id,
 			});
@@ -95,10 +97,11 @@ const PhotoCard = ({
 						sheetNo  : 1,
 						layoutNo : i,
 						image    : {
-							fileId,
+							id    : fileId,
 							image : imageUrl,
+							pixels,
 						},
-						pageId : pageId,
+						pageId : currentPageId,
 					});
 					return;
 				}
@@ -113,8 +116,9 @@ const PhotoCard = ({
 						sheetNo  : 2,
 						layoutNo : i,
 						image    : {
-							fileId,
+							id    : fileId,
 							image : imageUrl,
+							pixels,
 						},
 						pageId : pageData?.id,
 					});

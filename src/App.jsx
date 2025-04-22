@@ -13,7 +13,7 @@ import store, { persistor }     from "store";
 import { theme }                from "./theme";
 import { modals, modalsConfig } from "components/Modals";
 import Router                   from "routes";
-import LogoCasaMatte            from "Resources/images/casaMatteLogo.svg";
+import LogoCasaMatte            from "Resources/images/casaMatteLogo.png";
 import "./Resources/scss/index.scss";
 import "react-perfect-scrollbar/dist/css/styles.css";
 

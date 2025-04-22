@@ -1,6 +1,6 @@
 import { Center, Stack } from "@mantine/core";
 
-import LogoCasaMatte from "Resources/images/casaMatteLogo.svg";
+import LogoCasaMatte from "Resources/images/casaMatteLogo.png";
 
 import "./NotFoundLayouts.scss";
 
@@ -13,7 +13,7 @@ const NotFoundLayout = () => {
 						Por el momento el formato o producto seleccionado no está disponible en nuestro editor. Estamos trabajando para integrarlo próximamente.
 					</div>
 				</Stack>
-				<a href="https://casamatte.com/">
+				<a href="https://casamatte.wip-inprodi.com/">
 					<img src={LogoCasaMatte} width={180} />
 				</a>
 			</Stack>

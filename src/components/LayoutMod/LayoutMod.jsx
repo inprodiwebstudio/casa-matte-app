@@ -1,6 +1,5 @@
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { workSpaceSlice }                         from "store/Slices";
-import { useParams }                              from "react-router-dom";
 
 //Constants
 import photoBooksConfing                       from "core/constants/photoBooksConfing";
@@ -15,11 +14,11 @@ const LayoutMod = ({
 	modLayout,
 	isInWorkSpcae,
 }) => {
-	const { pageId } = useParams();
 
 	const dispatch = useDispatch();
 
 	const dragerImage = useSelector((state) => state.workSpaceSlice.currentPhotoDragger, shallowEqual);
+	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 
 	const photobookProduct = photoBookData?.product ?? "white";
@@ -42,7 +41,7 @@ const LayoutMod = ({
 	const handleDrop = (e, layoutNo) => {
 		e.preventDefault();
 		dispatch(workSpaceSlice.actions.addPhoto({
-			pageId   : pageId,
+			pageId   : currentPageId,
 			sheetNo  : sheetNo,
 			layoutNo : layoutNo,
 			image    : dragerImage,
@@ -91,7 +90,7 @@ const LayoutMod = ({
 																		containerPhotoUuid={`${classNameStyle}-section-${indexSection}-subSection-${indexSubSection}-bodyElement-${indexBodyElement}-element-${indexElement}`}
 																		sheetNo={sheetNo}
 																		layoutNo={element?.numberOfElement}
-																		pageId={pageId}
+																		pageId={currentPageId}
 																		image={selectPhotoUrl(images[element?.numberOfElement])}
 																	/>
 																)

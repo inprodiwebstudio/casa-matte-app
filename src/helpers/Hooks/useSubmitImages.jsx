@@ -3,25 +3,37 @@ import axios           from "axios";
 
 const { useGenerateSignMutation } = apiImageKit;
 
+import { heicToPng } from "helpers";
+
+// const imageToJpeg = async (image) => {
+// 	const blob = await image.arrayBuffer();
+// 	const buffer = Buffer.from(blob);
+// 	return buffer;
+// };
+
 const useSubmitImages = ({userName, folderName}) => {
 	// const timestamp = Math.floor(Date.now() / 1000);
 	const [ generateSignMutation ] = useGenerateSignMutation();
 	const [ generateUrlCompress ] = apiImageKit.useGenerateUrlCompressMutation();
 	const handlerUploadImage = async (image, isditedPhoto) => {
 		try {
+			const constructorImage = await heicToPng(image);
+
 			const { data } = await generateSignMutation({data : {
 				// timestamp : timestamp,
-				folder : `${userName}/${folderName ? folderName : isditedPhoto ? "_editedPhotos" : ""}`,
+				folder           : `${userName}/${folderName ? folderName : isditedPhoto ? "_editedPhotos" : ""}`,
+				lastModifiedDate : constructorImage?.lastModifiedDate,
 			}});
 			const uploadFile = await axios.postForm(
 				"https://api.cloudinary.com/v1_1/dtjvmtfji/image/upload",
 				{
-					file      : image,
+					file      : constructorImage,
 					publicId  : "test",
 					api_key   : "265817136216333",
 					signature : data?.signature,
 					folder    : `${userName}/${folderName ? folderName : isditedPhoto ? "_editedPhotos" : ""}`,
 					timestamp : `${data?.timestamp}`,
+					context   : `dateCaptured=${data?.lastModifiedDate}`,
 				}
 			);
 

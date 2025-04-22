@@ -15,9 +15,8 @@ import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 // import { EditorState, convertToRaw, ContentState } from "draft-js";
 import { useCallback, useState } from "react";
 // import { closeAllModals }      from "@mantine/modals";
-import { workSpaceSlice } from "store/Slices";
-import { connect }        from "react-redux";
-import { useParams }      from "react-router";
+import { workSpaceSlice }                     from "store/Slices";
+import { connect, useSelector, shallowEqual } from "react-redux";
 
 import { bindAll } from "helpers";
 import styles      from "./styles";
@@ -34,6 +33,7 @@ const EditText = ({
 	letterSpacing,
 	workSpaceSlice,
 }) => {
+	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const { classes } = styles({size : sizes?.chico, gapSpacing, lineHeight, letterSpacing});
 
 	const editorConfiguration = {
@@ -118,10 +118,6 @@ const EditText = ({
 
 	const [editorState, setEditorState] = useState(dataTextPage);
 
-	// console.log(dataTextPage);
-
-	const { pageId } = useParams();
-
 	const debounce = (func, delay) => {
 		let timeout;
 		return (...args) => {
@@ -137,11 +133,12 @@ const EditText = ({
 		  const data = editor.getData();
 		  setEditorState(data);
 		  if (isBound) {
+				console.log("Is bound");
 				workSpaceSlice.addTextBound({text : data});
 				return;
 		  }
 		  if (!isFront) {
-				workSpaceSlice.addText({pageId, sheetNo, text : data, layoutNo});
+				workSpaceSlice.addText({pageId : currentPageId, sheetNo, text : data, layoutNo});
 				return;
 		  }
 		  workSpaceSlice.addTextFront({sheetNo, text : data, layoutNo});

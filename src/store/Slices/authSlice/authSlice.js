@@ -1,14 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	token    : "",
 	loggedIn : false,
 	user     : {
 		username : "",
-		email    : "",
-		name     : "",
-		postId   : "",
 		userId   : "",
+		email    : "",
 	},
 };
 
@@ -17,14 +14,13 @@ export const authSlice = createSlice({
 	initialState,
 	reducers : {
 		setUserData : (state, action) => {
-			state.token         = action.payload.token;
-			state.user.email    = action.payload.user_email;
-			state.user.username = action.payload.user_nicename;
-			state.user.name     = action.payload.user_display_name;
-			state.user.postId = action.payload.postId;
+			state.user = action.payload;
 		},
 		setUserId : (state, action) => {
 			state.user.userId = action.payload;
+		},
+		updateEmail : (state, action) => {
+			state.user.email = action.payload;
 		},
 		setIsLoggedIn : (state) => {
 			state.loggedIn = true;

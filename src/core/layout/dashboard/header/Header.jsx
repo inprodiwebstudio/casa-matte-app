@@ -1,23 +1,24 @@
 import { Button, Text, TextInput }                from "@mantine/core";
 import { useEffect, useState }                    from "react";
-import LogoCasaMatte                              from "Resources/images/casaMatteLogo.svg";
+import LogoCasaMatte                              from "Resources/images/casaMatteLogo.png";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
-import { workSpaceSlice, authSlice } from "store/Slices";
+import { workSpaceSlice } from "store/Slices";
 
-import { genericApi } from "store/api/genericApi";
 import "./Header.scss";
 //Mantine
 // import { openContextModal } from "@mantine/modals";
 
 //Own components
-import { PostingConfig }    from "Notifications";
+import { useParams }        from "react-router";
 import { dayjs }            from "helpers";
 import { openContextModal } from "@mantine/modals";
 
 
 const Header = () => {
 	const dispatch = useDispatch();
+
+	const { postId } = useParams();
 
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -26,8 +27,6 @@ const Header = () => {
 	const [ projectName, setProjectName ] = useState(undefined);
 
 	const isPreviewActive = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
-	const orderId = useSelector((state) => state.workSpaceSlice?.data?.orderId, shallowEqual);
-	const postIdphotoBook = useSelector((state) => state.authSlice?.user?.postId, shallowEqual);
 	const productName = useSelector((state) => state.workSpaceSlice.data.productName, shallowEqual);
 	const projectTitle = useSelector((state) => state.workSpaceSlice.data.projectTittle, shallowEqual);
 	const lastModified = useSelector((state) => state.workSpaceSlice.data.modified, shallowEqual);
@@ -39,11 +38,8 @@ const Header = () => {
 
 	const isAdminAccount = (userName === "casamatteadmin") && (userEmail === "info@casamatte.com");
 	const isDevAccount = (userName === "demo") && (userEmail === "demo@demo.com");
-	const isNataliazAccount = (userName === "nataliaz");
 
 	const handlerShowTestPdf = isAdminAccount || isDevAccount;
-
-	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
 	const handlerClickPreview = () => () => {
 		dispatch(workSpaceSlice.actions.togglePreview());
 	};
@@ -57,21 +53,7 @@ const Header = () => {
 
 	const handlerChangeTitleProject = async (valueName) => {
 		setProjectName(valueName);
-		await dataMutation({
-			module : "wp-json/wp/v2/photobook-2-0",
-			data   : {
-				title : {
-					rendered : valueName,
-					raw      : valueName,
-				},
-			},
-			id     : postIdphotoBook,
-			method : "PUT",
-		});
-	};
-
-	const redirectToOrders = () => {
-		window.location.href = `https://casamatte.com/dashboard/mi-cuenta/view-order/${orderId}/`;
+		dispatch(workSpaceSlice.actions.handleChangepRrojectTitle(valueName));
 	};
 
 	useEffect(() => {
@@ -90,29 +72,10 @@ const Header = () => {
 		}
 	}, [projectTitle]);
 
-	useEffect(() => {
-		if (dataMutationResult.isUninitialized) return;
-
-		if (dataMutationResult.isError) {
-			const status = dataMutationResult.error?.status;
-
-			switch (status) {
-				case 403:
-					PostingConfig["post"][403]();
-					dispatch(authSlice.actions.clearUserData());
-					break;
-				default:
-					PostingConfig["post"][500]();
-					break;
-			}
-		}
-
-	}, [dataMutationResult]);
-
 	return (
 		<div className="Header">
 			<div className={`body-container ${isPreviewActive && "isActivePreview"}`}>
-				<a href="https://casamatte.com/">
+				<a href="https://casamatte.wip-inprodi.com/">
 					<img src={LogoCasaMatte} width={120} />
 				</a>
 				{
@@ -125,7 +88,7 @@ const Header = () => {
 									style={{width : "65%"}}
 								>
 									<TextInput
-										variant="unstyled"
+										// variant="unstyled"
 										value={projectName}
 										onChange={(e) => handlerChangeTitleProject(e.target.value)}
 										sx={{
@@ -172,55 +135,31 @@ const Header = () => {
 								>
 									{isLoading ? "GUARDANDO..." : "GUARDAR"}
 								</Button>
+								<Button
+									radius={12}
+									size="xs"
+									color="darkCasaMatte"
+									onClick={() => openContextModal({
+										modal      : "confirmationToPrint",
+										innerProps : {
+											postId,
+										},
+									})}
+									disabled={false}
+									loading={isLoadingWorspaceData}
+								>
+									<Text
+										weight={400}
+										color="whiteCasaMatte"
+										sx={{
+											fontFamily : "Helvetica",
+										}}
+									>
+										Imprimir
+									</Text>
+								</Button>
 								{
-									(!orderId && !isNataliazAccount) && (
-										<Button
-											radius={12}
-											size="xs"
-											color="darkCasaMatte"
-											onClick={() => openContextModal({
-												modal      : "confirmationToPrint",
-												innerProps : {},
-											})}
-											disabled={false}
-											loading={isLoadingWorspaceData}
-										>
-											<Text
-												weight={400}
-												color="whiteCasaMatte"
-												sx={{
-													fontFamily : "Helvetica",
-												}}
-											>
-												Imprimir
-											</Text>
-										</Button>
-									)
-								}
-								{
-									(orderId && !isNataliazAccount) && (
-										<Button
-											radius={12}
-											size="xs"
-											color="darkCasaMatte"
-											onClick={() => redirectToOrders()}
-											disabled={false}
-											loading={isLoadingWorspaceData}
-										>
-											<Text
-												weight={400}
-												color="whiteCasaMatte"
-												sx={{
-													fontFamily : "Helvetica",
-												}}
-											>
-												Pagar
-											</Text>
-										</Button>
-									)
-								}
-								{
-									(handlerShowTestPdf && !isNataliazAccount) && (
+									(handlerShowTestPdf) && (
 										<Button
 											radius={12}
 											size="xs"

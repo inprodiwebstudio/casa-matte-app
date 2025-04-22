@@ -8,6 +8,7 @@ import ConfirmationDeleteFolder from "./ConfirmationDeleteFolder";
 import AddNewPageConfirmation   from "./AddNewPageConfirmation";
 import NoMorePages              from "./NoMorePages";
 import MinPagesLimit            from "./MinPagesLimit";
+import DisclaimerDropPhotos     from "./DisclaimerDropPhotos";
 
 
 const modals = {
@@ -19,6 +20,7 @@ const modals = {
 	confirmationDeleteFolder : ConfirmationDeleteFolder,
 	addNewPageConfirmation   : AddNewPageConfirmation,
 	noMorePages              : NoMorePages,
+	disclaimerDropPhotos     : DisclaimerDropPhotos,
 	minPagesLimit            : MinPagesLimit,
 };
 
