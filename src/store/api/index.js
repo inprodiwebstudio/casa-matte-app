@@ -8,7 +8,7 @@ const baseQuery = fetchBaseQuery({
 	baseUrl        : apiUrl,
 	prepareHeaders : (headers) => {
 		const userName = "adminapp";
-		const applicationPassword = "QkUi tQZW TIET 12f3 zYQI WJrs";
+		const applicationPassword = "cVf8 n8wv gB6t GLxd 0rYg 7cYO";
 
 		const toBase64 = (str) => {
 			const encoder = new TextEncoder();
