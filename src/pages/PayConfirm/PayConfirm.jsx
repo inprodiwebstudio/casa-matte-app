@@ -185,9 +185,6 @@ const PayConfirm = () => {
 	const photobookPDF = () => {
 		setIsGeneratingPDF(true);
 		try {
-			// if (!userId && photobookData?.author) {
-		// 	dispatch(authSlice.actions.setUserId(photobookData?.author));
-		// }
 			if (photobookData?.meta?.config) {
 				const myData = photobookData?.meta?.config;
 				const newData = myData.replace(".heic", ".png");

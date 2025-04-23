@@ -30,6 +30,7 @@ import { useEffect, useState }                    from "react";
 import PayConfirm                                 from "pages/PayConfirm";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { usePhotoBookPreset }                     from "helpers/Hooks/usePhotoBookPreset";
+import NotPaid                                    from "components/NotPaid";
 
 const { useLazyGetDataQuery } = genericApi;
 
@@ -345,6 +346,7 @@ const CorrectAccessGuard = () => {
 	const userEmail = useSelector((state) => state.authSlice.user.email, shallowEqual);
 
 	const [ statusView, setStatusView ] = useState("loading");
+	const [ urlLinkPay, setUrlLinkPay ] = useState("");
 
 	const { postId } = useParams();
 
@@ -388,13 +390,24 @@ const CorrectAccessGuard = () => {
 	const isPaidExtra = async (orderId) => {
 		try {
 			const orderData = await getOrdeInfo({ module : `wp-json/wc/v3/orders/${orderId}` }).unwrap();
-			if (orderData?.date_paid) {
+			if (orderData.date_paid) {
 				return true;
 			}
+			setUrlLinkPay(orderData?.payment_url);
 			return false;
 		} catch (error) {
 			console.error(error);
 		}
+	};
+
+	const handlerAvailableExtra = async (idOrderExtra) => {
+		const isPaid = await isPaidExtra(idOrderExtra);
+		if (isPaid) {
+			setStatusView("done");
+			return;
+		}
+		setStatusView("notPaidExtras");
+		return;
 	};
 
 	useEffect(() => {
@@ -411,19 +424,13 @@ const CorrectAccessGuard = () => {
 		}
 		if (!userEmail || (userEmail === "")) {
 			dispatch(authSlice.actions.updateEmail(photobookData?.meta?.correo_del_autor));
-			return;
 		}
 		if (photobookData?.meta?.status === "48") {
-			if (photobookData?.meta?.id_pedido_hojas_extra !== "") {
-				const isPaid = isPaidExtra(photobookData?.meta?.id_pedido_hojas_extra);
-				if (isPaid) {
-					setStatusView("done");
-					return;
-				}
-				setStatusView("notPaidExtras");
+			if (!photobookData?.meta?.id_pedido_hojas_extra) {
+				setStatusView("done");
 				return;
 			}
-			setStatusView("done");
+			handlerAvailableExtra(photobookData?.meta?.id_pedido_hojas_extra);
 			return;
 		}
 		if (photobookData?.meta?.config) {
@@ -442,7 +449,7 @@ const CorrectAccessGuard = () => {
 				(statusView === "loading") && <LoadingAccess />
 			}
 			{
-				(statusView === "notPaidExtras") && <div>Not paid</div>
+				(statusView === "notPaidExtras") && <NotPaid paymentLink={urlLinkPay} />
 			}
 			{
 				(statusView === "done") && <PayConfirm />
