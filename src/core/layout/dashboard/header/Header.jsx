@@ -75,7 +75,7 @@ const Header = () => {
 	return (
 		<div className="Header">
 			<div className={`body-container ${isPreviewActive && "isActivePreview"}`}>
-				<a href="https://casamatte.wip-inprodi.com/">
+				<a href="https://casamatte.wip-inprodi.com/dashboard/">
 					<img src={LogoCasaMatte} width={120} />
 				</a>
 				{
