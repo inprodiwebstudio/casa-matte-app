@@ -26,10 +26,13 @@ import tanmeringue          from "Resources/Fonts/TAN-MERINGUE.ttf";
 
 import { authSlice, workSpaceSlice }              from "store/Slices";
 import { Navigate, useNavigate, useParams }       from "react-router";
-import { useEffect }                              from "react";
+import { useEffect, useState }                    from "react";
 import PayConfirm                                 from "pages/PayConfirm";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { usePhotoBookPreset }                     from "helpers/Hooks/usePhotoBookPreset";
+import NotPaid                                    from "components/NotPaid";
+
+const { useLazyGetDataQuery } = genericApi;
 
 Font.register(
 	{
@@ -342,6 +345,9 @@ const CorrectAccessGuard = () => {
 	const userId = useSelector((state) => state.authSlice.user.userId, shallowEqual);
 	const userEmail = useSelector((state) => state.authSlice.user.email, shallowEqual);
 
+	const [ statusView, setStatusView ] = useState("loading");
+	const [ urlLinkPay, setUrlLinkPay ] = useState("");
+
 	const { postId } = useParams();
 
 	const navigate = useNavigate();
@@ -350,19 +356,17 @@ const CorrectAccessGuard = () => {
 		return <Navigate to="/error/404" replace />;
 	}
 
-	const { data : photobookData, error, isFetching } = genericApi.useGetDataQuery({
+	const { data : photobookData, error } = genericApi.useGetDataQuery({
 		module : `wp-json/wp/v2/photobook-2-0/${postId}`,
 	});
 
-	const isLoading = isFetching;
+	const [ getOrdeInfo ] = useLazyGetDataQuery();
 
-	const isCorrectAccess = (!isLoading && !error && photobookData) ? true : false;
-
-	const handlerPhotoBookNotFound = () => {
-		if (error?.status === 404) {
+	const handlerPhotoBookNotFound = (status) => {
+		if (status === 404) {
 			navigate("/error/404");
 		}
-		if (error?.status === 500) {
+		if (status === 500) {
 			navigate("/error/500");
 		}
 	};
@@ -383,9 +387,33 @@ const CorrectAccessGuard = () => {
 		}));
 	};
 
+	const isPaidExtra = async (orderId) => {
+		try {
+			const orderData = await getOrdeInfo({ module : `wp-json/wc/v3/orders/${orderId}` }).unwrap();
+			if (orderData.date_paid) {
+				return true;
+			}
+			setUrlLinkPay(orderData?.payment_url);
+			return false;
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	const handlerAvailableExtra = async (idOrderExtra) => {
+		const isPaid = await isPaidExtra(idOrderExtra);
+		if (isPaid) {
+			setStatusView("done");
+			return;
+		}
+		setStatusView("notPaidExtras");
+		return;
+	};
+
 	useEffect(() => {
 		if (error) {
-			handlerPhotoBookNotFound();
+			handlerPhotoBookNotFound(error.status);
+			return;
 		}
 	}, [error]);
 
@@ -397,22 +425,37 @@ const CorrectAccessGuard = () => {
 		if (!userEmail || (userEmail === "")) {
 			dispatch(authSlice.actions.updateEmail(photobookData?.meta?.correo_del_autor));
 		}
+		if (photobookData?.meta?.status === "48") {
+			if (!photobookData?.meta?.id_pedido_hojas_extra) {
+				setStatusView("done");
+				return;
+			}
+			handlerAvailableExtra(photobookData?.meta?.id_pedido_hojas_extra);
+			return;
+		}
 		if (photobookData?.meta?.config) {
-			return addCurrentPhotoBookConfig(photobookData);
+			addCurrentPhotoBookConfig(photobookData);
+			setStatusView("continue");
+			return;
 		}
 		createPresetPhotoBook(photobookData);
+		setStatusView("continue");
+		return;
 	}, [photobookData]);
 
 	return (
 		<>
 			{
-				isLoading && <LoadingAccess />
+				(statusView === "loading") && <LoadingAccess />
 			}
 			{
-				(isCorrectAccess && (photobookData?.meta?.status === "48")) && <PayConfirm />
+				(statusView === "notPaidExtras") && <NotPaid paymentLink={urlLinkPay} />
 			}
 			{
-				(isCorrectAccess && (photobookData?.meta?.status === "26")) && <Dashboard />
+				(statusView === "done") && <PayConfirm />
+			}
+			{
+				(statusView === "continue") && <Dashboard />
 			}
 		</>
 	);

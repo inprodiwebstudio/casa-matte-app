@@ -185,9 +185,6 @@ const PayConfirm = () => {
 	const photobookPDF = () => {
 		setIsGeneratingPDF(true);
 		try {
-			// if (!userId && photobookData?.author) {
-		// 	dispatch(authSlice.actions.setUserId(photobookData?.author));
-		// }
 			if (photobookData?.meta?.config) {
 				const myData = photobookData?.meta?.config;
 				const newData = myData.replace(".heic", ".png");
@@ -233,7 +230,7 @@ const PayConfirm = () => {
 						</div>
 					)}
 				</Stack>
-				<a href="https://casamatte.com/">
+				<a href="https://casamatte.wip-inprodi.com/">
 					<img src={LogoCasaMatte} width={180} />
 				</a>
 			</Stack>
