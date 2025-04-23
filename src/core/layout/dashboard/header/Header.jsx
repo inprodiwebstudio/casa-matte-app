@@ -37,7 +37,7 @@ const Header = () => {
 	const isLoadingWorspaceData = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
 
 	const isAdminAccount = (userName === "casamatteadmin") && (userEmail === "info@casamatte.com");
-	const isDevAccount = (userName === "demo") && (userEmail === "demo@demo.com");
+	const isDevAccount = (userName === "demo") && (userEmail === "demo44@demo.com");
 
 	const handlerShowTestPdf = isAdminAccount || isDevAccount;
 	const handlerClickPreview = () => () => {

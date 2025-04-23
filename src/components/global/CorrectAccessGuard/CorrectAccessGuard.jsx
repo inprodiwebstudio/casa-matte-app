@@ -1,9 +1,27 @@
 /* eslint-disable import/extensions */
-
 import { genericApi } from "store/api/genericApi";
 import LoadingAccess  from "./LoadingAccess";
+import { Font }       from "@react-pdf/renderer";
 
 import Dashboard from "core/layout";
+
+//Fonts
+import helveticaLight       from "Resources/Fonts/HelveticaLightRegular.otf";
+import aitanaRegular        from "Resources/Fonts/Aitana-Regular.otf";
+import cormorantLight       from "Resources/Fonts/Cormorant-Light.ttf";
+import cormorantMedium      from "Resources/Fonts/Cormorant-Medium.ttf";
+import gandhiSansRegular    from "Resources/Fonts/GandhiSans-Regular.otf";
+import gandhiSerifRegular   from "Resources/Fonts/GandhiSerif-Regular.otf";
+import interLight          	from "Resources/Fonts/Inter-Light.ttf";
+import interRegular         from "Resources/Fonts/Inter-Regular.ttf";
+import josefinSansLight     from "Resources/Fonts/JosefinSans-Light.ttf";
+import josefinSansRegular   from "Resources/Fonts/JosefinSans-Regular.ttf";
+import madeMirageRegular    from "Resources/Fonts/MADE-Mirage-Regular.otf";
+import madeMirageThin       from "Resources/Fonts/MADE-Mirage-Thin.otf";
+import restoraExtraLight    from "Resources/Fonts/RestoraExtraLight.otf";
+import spectralLightItalic  from "Resources/Fonts/Spectral-LightItalic.ttf";
+import spectralMediumItalic from "Resources/Fonts/Spectral-MediumItalic.ttf";
+import tanmeringue          from "Resources/Fonts/TAN-MERINGUE.ttf";
 
 import { authSlice, workSpaceSlice }              from "store/Slices";
 import { Navigate, useNavigate, useParams }       from "react-router";
@@ -14,6 +32,311 @@ import { usePhotoBookPreset }                     from "helpers/Hooks/usePhotoBo
 import NotPaid                                    from "components/NotPaid";
 
 const { useLazyGetDataQuery } = genericApi;
+
+Font.register(
+	{
+		family : "HelveticaLight",
+		src    : helveticaLight,
+		fonts  : [
+			{
+				src : helveticaLight,
+			},
+			{
+				src        : helveticaLight,
+				fontWeight : "bold",
+			},
+			{
+				src        : helveticaLight,
+				fontWeight : "normal",
+			},
+	  ],
+	}
+);
+
+Font.register(
+	{
+		family : "Aitana-Regular",
+		src    : aitanaRegular,
+		fonts  : [
+			{
+				src : aitanaRegular,
+			},
+			{
+				src        : aitanaRegular,
+				fontWeight : "bold",
+			},
+			{
+				src        : aitanaRegular,
+				fontWeight : "normal",
+			},
+	  ],
+	}
+);
+
+Font.register(
+	{
+		family : "Cormorant-Light",
+		src    : cormorantLight,
+		fonts  : [
+			{
+				src : cormorantLight,
+			},
+			{
+				src        : cormorantLight,
+				fontWeight : "bold",
+			},
+			{
+				src        : cormorantLight,
+				fontWeight : "normal",
+			},
+	  ],
+	}
+);
+
+Font.register(
+	{
+		family : "Cormorant-Medium",
+		src    : cormorantMedium,
+		fonts  : [
+			{
+				src : cormorantMedium,
+			},
+			{
+				src        : cormorantMedium,
+				fontWeight : "bold",
+			},
+			{
+				src        : cormorantMedium,
+				fontWeight : "normal",
+			},
+	  ],
+	}
+);
+
+Font.register(
+	{
+		family     : "Inter-Regular",
+		src        : interRegular,
+		fontWeight : "normal",
+		fonts      : [
+			{
+				src : interRegular,
+			},
+	  ],
+	}
+);
+
+Font.register(
+	{
+		family : "GandhiSans-Regular",
+		src    : gandhiSansRegular,
+		fonts  : [
+			{
+				src : gandhiSansRegular,
+			},
+			{
+				src        : gandhiSansRegular,
+				fontWeight : "bold",
+			},
+			{
+				src        : gandhiSansRegular,
+				fontWeight : "normal",
+			},
+	  ],
+	}
+);
+
+Font.register(
+	{
+		family : "GandhiSerif-Regular",
+		src    : gandhiSerifRegular,
+		fonts  : [
+			{
+				src : gandhiSerifRegular,
+			},
+			{
+				src        : gandhiSerifRegular,
+				fontWeight : "bold",
+			},
+			{
+				src        : gandhiSerifRegular,
+				fontWeight : "normal",
+			},
+	  ],
+	}
+);
+
+Font.register(
+	{
+		family : "Inter-Lifght",
+		src    : interLight,
+		fonts  : [
+			{
+				src : interLight,
+			},
+	  ],
+	}
+);
+
+Font.register(
+	{
+		family : "JosefinSans-Light",
+		src    : josefinSansLight,
+		fonts  : [
+			{
+				src : josefinSansLight,
+			},
+			{
+				src        : josefinSansLight,
+				fontWeight : "bold",
+			},
+			{
+				src        : josefinSansLight,
+				fontWeight : "normal",
+			},
+	  ],
+	}
+);
+
+Font.register(
+	{
+		family : "JosefinSans-Regular",
+		src    : josefinSansRegular,
+		fonts  : [
+			{
+				src : josefinSansRegular,
+			},
+			{
+				src        : josefinSansRegular,
+				fontWeight : "bold",
+			},
+			{
+				src        : josefinSansRegular,
+				fontWeight : "normal",
+			},
+	  ],
+	}
+);
+
+Font.register(
+	{
+		family : "Made-Mirage-Regular",
+		src    : madeMirageRegular,
+		fonts  : [
+			{
+				src : madeMirageRegular,
+			},
+			{
+				src        : madeMirageRegular,
+				fontWeight : "bold",
+			},
+			{
+				src        : madeMirageRegular,
+				fontWeight : "normal",
+			},
+	  ],
+	}
+);
+
+Font.register(
+	{
+		family : "Made-Mirage-Thin",
+		src    : madeMirageThin,
+		fonts  : [
+			{
+				src : madeMirageThin,
+			},
+			{
+				src        : madeMirageThin,
+				fontWeight : "bold",
+			},
+			{
+				src        : madeMirageThin,
+				fontWeight : "normal",
+			},
+	  ],
+	}
+);
+
+Font.register(
+	{
+		family : "Restora-Extra-Light",
+		src    : restoraExtraLight,
+		fonts  : [
+			{
+				src : restoraExtraLight,
+			},
+			{
+				src        : restoraExtraLight,
+				fontWeight : "bold",
+			},
+			{
+				src        : restoraExtraLight,
+				fontWeight : "normal",
+			},
+	  ],
+	}
+);
+
+Font.register(
+	{
+		family : "Spectral-Light-Italic",
+		src    : spectralLightItalic,
+		fonts  : [
+			{
+				src : spectralLightItalic,
+			},
+			{
+				src        : spectralLightItalic,
+				fontWeight : "bold",
+			},
+			{
+				src        : spectralLightItalic,
+				fontWeight : "normal",
+			},
+	  ],
+	}
+);
+
+Font.register(
+	{
+		family : "Spectral-Medium-Italic",
+		src    : spectralMediumItalic,
+		fonts  : [
+			{
+				src : spectralMediumItalic,
+			},
+			{
+				src        : spectralMediumItalic,
+				fontWeight : "bold",
+			},
+			{
+				src        : spectralMediumItalic,
+				fontWeight : "normal",
+			},
+	  ],
+	}
+);
+
+Font.register(
+	{
+		family : "TAN-MERINGUE",
+		src    : tanmeringue,
+		fonts  : [
+			{
+				src : tanmeringue,
+			},
+			{
+				src        : tanmeringue,
+				fontWeight : "bold",
+			},
+			{
+				src        : tanmeringue,
+				fontWeight : "normal",
+			},
+	  ],
+	}
+);
 
 const CorrectAccessGuard = () => {
 	const dispatch = useDispatch();
