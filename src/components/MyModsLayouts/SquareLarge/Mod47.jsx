@@ -5,7 +5,15 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod47 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod47 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>MARÍA:</span></p>";
 
@@ -22,9 +30,10 @@ const Mod47 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			<Stack
 				w="60%"
 				mah="90%"
-				spacing="0.2em"
+				spacing="0.1em"
 				aria-hidden
 				style={{overflow : "hidden"}}
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Text
 					sizes={{
