@@ -6,7 +6,15 @@ import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
 
-const Mod47 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod47 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 26px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
@@ -16,6 +24,7 @@ const Mod47 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 	return (
 		<Flex
 			p="8%"
+			pb="5%"
 			w="100%"
 			h="100%"
 			justify="center"
@@ -31,8 +40,11 @@ const Mod47 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				}}
 			>
 				<Stack
-					spacing="0.2em"
+					spacing={
+						isInWorkSpace ? "0em" : "0.15em"
+					}
 					w="100%"
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
 					<Text
 						sizes={{
@@ -52,21 +64,28 @@ const Mod47 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						<DividerLayout long="0.4em" position="v" />
 					</Center>
 				</Stack>
-				<Text
-					sizes={{
-						"chico"   : "15px",
-						"regular" : "18px",
-						"grande"  : "20px",
+				<div
+					style={{
+						width : "100%",
 					}}
-					align="center"
-					sheetNo={sheetNo}
-					gapSpacing="10px"
-					textShell={() => <TextShell.BodyIndices align="center" />}
-					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-					textNo={1}
-				/>
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
+				>
+					<Text
+						sizes={{
+							"chico"   : "15px",
+							"regular" : "18px",
+							"grande"  : "20px",
+						}}
+						align="center"
+						sheetNo={sheetNo}
+						gapSpacing="10px"
+						textShell={() => <TextShell.BodyIndices align="center" />}
+						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+						textNo={1}
+					/>
+				</div>
 			</Stack>
 		</Flex>
 	);

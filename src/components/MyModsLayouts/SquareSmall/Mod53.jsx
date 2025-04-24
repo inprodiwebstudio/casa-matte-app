@@ -5,7 +5,15 @@ import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
 
-const Mod53 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod53 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultIndices = "<p style='text-align: center;'><span style='font-size: 13px; font-family: Inter-Lifght;'>FLORENCIA</span></p><p style='text-align: center;'><span style='font-size: 13px; font-family: Inter-Lifght;'>ORVIETTO</span></p><p style='text-align: center;'><span style='font-size: 13px; font-family: Inter-Lifght;'>MONTALCINO</span></p><p style='text-align: center;'><span style='font-size: 13px; font-family: Inter-Lifght;'>PIENZA</span></p><p style='text-align: center;'><span style='font-size: 13px; font-family: Inter-Lifght;'>Smithfeld</span></p><p style='text-align: center;'><span style='font-size: 13px; font-family: Inter-Lifght;'>SIENNA</span></p><p style='text-align: center;'><span style='font-size: 13px; font-family: Inter-Lifght;'>BAGNO VIGNIONI</span></p><p style='text-align: center;'><span style='font-size: 13px; font-family: Inter-Lifght;'>SAN GIMINIANO</span></p><p style='text-align: center;'><span style='font-size: 13px; font-family: Inter-Lifght;'>MONTEPULCIANO</span></p>";
 
@@ -19,9 +27,8 @@ const Mod53 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 		>
 			<Stack
 				sx={{overflow : "hidden", textTransform : "uppercase"}}
-				maw="60%"
-				miw="30%"
-				mah="70%"
+				w="80%"
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Text
 					sizes={{

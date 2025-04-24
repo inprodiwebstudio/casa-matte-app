@@ -1,210 +1,58 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
-import Html             from "react-pdf-html";
-import ReactDOMServer   from "react-dom/server";
-import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
+import Html            from "react-pdf-html";
+import ReactDOMServer  from "react-dom/server";
+import { textToImage } from "helpers";
 
 
-const Mod50Pdf = ({text}) => {
+const Mod50Pdf = ({
+	text,
+	pageNo,
+	modLayout,
+}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>ESPAÑA</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+	});
 
-	const text02 = text[2] ? text[2] : "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>FRANCIA</span></p>";
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
 
-	const text03 = text[4] ? text[4] : "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>TURQUÍA</span></p>";
+		setImgSrc({
+			imgText01 : imgText01,
+		});
+	};
 
-	const text04 = text[1] ? text[1] : "<p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>Salamanca</span></p>";
-
-	const text05 = text[3] ? text[3] : "<p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>París</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>Versalles</span></p>";
-
-	const text06 = text[5] ? text[5] : "<p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>Capadocia</span></p>";
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "595px",
-				width   : "100%",
-				padding : "20px",
+				height         : "595px",
+				width          : "100%",
+				display        : "flex",
+				justifyContent : "center",
+				paddingLeft    : "5%",
 			}}
 		>
 
 			<div
 				style={{
-					height         : "100%",
-					width          : "100%",
-					display        : "flex",
-					justifyContent : "center",
-					alignItems     : "center",
+					width : "93%",
 				}}
 			>
-				<div style={{
-					width          : "40%",
-					height         : "100%",
-					display        : "flex",
-					flexDirection  : "column",
-					gap            : "38px",
-					justifyContent : "center",
-					alignItems     : "center",
-				}}>
-					<div
-						style={{
-							width          : "100%",
-							display        : "flex",
-							flexDirection  : "column",
-							gap            : "10px",
-							justifyContent : "flex-start",
-							alignItems     : "flex-start",
-						}}
-					>
-						<div
-							style={{
-								letterSpacing : "2.7px",
-								textTransform : "uppercase",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
-							}}
-						/>
-						<div
-							style={{
-								width          : "100%",
-								display        : "flex",
-								alignItems     : "flex-Start",
-								justifyContent : "flex-Start",
-							}}
-						>
-							<DividerLayoutPdf w="26px" />
-						</div>
-						<div
-							style={{
-								letterSpacing : "0.5px",
-								lineHeight    : "1.8px",
-								textTransform : "uppercase",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text04}`,
-							}}
-						/>
-					</div>
-					<div
-						style={{
-							width          : "100%",
-							display        : "flex",
-							flexDirection  : "column",
-							gap            : "10px",
-							justifyContent : "flex-start",
-							alignItems     : "flex-start",
-						}}
-					>
-						<div
-							style={{
-								letterSpacing : "2.7px",
-								textTransform : "uppercase",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text02}`,
-							}}
-						/>
-						<div
-							style={{
-								width          : "100%",
-								display        : "flex",
-								alignItems     : "flex-Start",
-								justifyContent : "flex-Start",
-							}}
-						>
-							<DividerLayoutPdf w="26px" />
-						</div>
-						<div
-							style={{
-								letterSpacing : "0.5px",
-								lineHeight    : "2px",
-								textTransform : "uppercase",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text05}`,
-							}}
-						/>
-					</div>
-					<div
-						style={{
-							width          : "100%",
-							display        : "flex",
-							flexDirection  : "column",
-							gap            : "10px",
-							justifyContent : "flex-start",
-							alignItems     : "flex-start",
-						}}
-					>
-						<div
-							style={{
-								letterSpacing : "2.7px",
-								textTransform : "uppercase",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text03}`,
-							}}
-						/>
-						<div
-							style={{
-								width          : "100%",
-								display        : "flex",
-								alignItems     : "flex-Start",
-								justifyContent : "flex-Start",
-							}}
-						>
-							<DividerLayoutPdf w="26px" />
-						</div>
-						<div
-							style={{
-								letterSpacing : "0.5px",
-								lineHeight    : "1.8px",
-								textTransform : "uppercase",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text06}`,
-							}}
-						/>
-					</div>
-				</div>
+				{
+					imgSrc.imgText01 &&
+					<img
+						src={imgSrc.imgText01}
+						alt="Captura de texto"
+						style={{ objectFit : "cover" }}
+					/>
+				}
 			</div>
 		</div>
 	);
