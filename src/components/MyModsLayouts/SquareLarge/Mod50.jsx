@@ -6,7 +6,15 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod50 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 34px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
@@ -28,13 +36,16 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			align="center"
 			direction="column"
 			sx={{overflow : "hidden"}}
+			pr="5%"
+			pl="36%"
 		>
 			<Stack
-				spacing="0.35em"
-				miw="30%"
+				spacing={isInWorkSpace ? "0.3em" : "0.2em"}
+				w="100%"
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Stack
-					spacing="0.13em"
+					spacing={isInWorkSpace ? "0em" : "0.13em"}
 					aria-hidden
 				>
 					<div>
@@ -47,7 +58,7 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							align="left"
 							letterSpacing="3px"
 							sheetNo={sheetNo}
-							textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
+							textShell={() => <TextShell.TitleSmall width="60%" align="left" />}
 							data={textInsertion(data?.text[0], defaultTitle01, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
@@ -65,7 +76,7 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							align="left"
 							gapSpacing="10px"
 							sheetNo={sheetNo}
-							textShell={() => <TextShell.BodyIndices align="left" />}
+							textShell={() => <TextShell.BodyIndices width="50%" align="left" />}
 							data={textInsertion(data?.text[1], defaultIndice01, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
@@ -74,7 +85,7 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					</div>
 				</Stack>
 				<Stack
-					spacing="0.13em"
+					spacing={isInWorkSpace ? "0em" : "0.13em"}
 					aria-hidden
 				>
 					<div>
@@ -87,7 +98,7 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							align="left"
 							letterSpacing="3px"
 							sheetNo={sheetNo}
-							textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
+							textShell={() => <TextShell.TitleSmall width="60%" align="left" />}
 							data={textInsertion(data?.text[5], defaultTitle02, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
@@ -105,7 +116,7 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							align="left"
 							gapSpacing="10px"
 							sheetNo={sheetNo}
-							textShell={() => <TextShell.BodyIndices align="left" />}
+							textShell={() => <TextShell.BodyIndices width="50%" align="left" />}
 							data={textInsertion(data?.text[6], defaultIndice02, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
@@ -114,8 +125,7 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					</div>
 				</Stack>
 				<Stack
-					mah="70%"
-					spacing="0.13em"
+					spacing={isInWorkSpace ? "0em" : "0.13em"}
 				>
 					<div>
 						<Text
@@ -127,7 +137,7 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							align="left"
 							letterSpacing="3px"
 							sheetNo={sheetNo}
-							textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
+							textShell={() => <TextShell.TitleSmall width="60%" align="left" />}
 							data={textInsertion(data?.text[5], defaultTitle03, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
@@ -145,7 +155,7 @@ const Mod50 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							align="left"
 							gapSpacing="10px"
 							sheetNo={sheetNo}
-							textShell={() => <TextShell.BodyIndices align="left" />}
+							textShell={() => <TextShell.BodyIndices width="50%" align="left" />}
 							data={textInsertion(data?.text[6], defaultIndice03, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}

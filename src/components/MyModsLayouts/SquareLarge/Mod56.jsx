@@ -6,7 +6,15 @@ import { textInsertion } from "helpers";
 //Own components
 
 
-const Mod59 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod59 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 46px; font-family: Aitana-Regular;'>ISLA NEGRA</span></p>";
 
@@ -14,13 +22,13 @@ const Mod59 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
 	return (
 		<Flex
-			pb="8%"
+			pb="5%"
 			w="100%"
 			h="100%"
 			direction="column"
 		>
 			<Stack
-				spacing="0.7em"
+				spacing="0.5em"
 				w="100%"
 				h="100%"
 				align="flex-end"
@@ -33,7 +41,12 @@ const Mod59 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Stack>
-				<Stack w="100%" spacing="0.1em" pr="0.7em">
+				<Stack
+					w="100%"
+					spacing={isInWorkSpace ? "0em" : "0.1em"}
+					pr="0.7em"
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
+				>
 					<Text
 						sizes={{
 							"chico"   : "42px",

@@ -1,96 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
-import Html             from "react-pdf-html";
-import ReactDOMServer   from "react-dom/server";
-import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
+import Html            from "react-pdf-html";
+import ReactDOMServer  from "react-dom/server";
+import { textToImage } from "helpers";
 
 
-const Mod53Pdf = ({text}) => {
+const Mod53Pdf = ({
+	text,
+	pageNo,
+	modLayout,
+}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: left;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>TOSCANA</span></p>";
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>FLORENCIA</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>ORVIETTO</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>MONTALCINO</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>PIENZA</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SIENNA</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>Chepokee Plantation</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>BAGNO VIGNIONI</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SAN GIMINIANO</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>MONTEPULCIANO</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>MONTEPULCIANO</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+	});
+
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
+
+		setImgSrc({
+			imgText01 : imgText01,
+		});
+	};
+
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
 			style={{
-				height        : "850px",
-				width         : "100%",
-				padding       : "40px",
-				paddingTop    : "40px",
-				paddingBottom : "40px",
+				height         : "850px",
+				width          : "100%",
+				display        : "flex",
+				justifyContent : "flex-end",
+				alignItems     : "flex-end",
+				paddingRight   : "50px",
+				paddingBottom  : "50px",
 			}}
 		>
-
 			<div
 				style={{
-					height         : "100%",
-					width          : "100%",
-					display        : "flex",
-					justifyContent : "flex-end",
-					alignItems     : "flex-end",
+					width : "25%",
 				}}
 			>
-				<div
-					style={{
-						width         : "35%",
-						display       : "flex",
-						flexDirection : "column",
-						gap           : "25px",
-					}}
-				>
-					<div
-						style={{
-							letterSpacing  : "3px",
-							width          : "100%",
-							display        : "flex",
-							justifyContent : "flex-start",
-							alignItems     : "flex-start",
-							textTransform  : "uppercase",
-						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
-						}}
-					/>
-					<div
-						style={{
-							width          : "100%",
-							display        : "flex",
-							justifyContent : "flex-start",
-							alignItems     : "flex-start",
-						}}
-					>
-						<DividerLayoutPdf w="40px" />
-					</div>
-					<div
-						style={{
-							letterSpacing  : "2px",
-							lineHeight     : "2px",
-							width          : "100%",
-							display        : "flex",
-							justifyContent : "flex-start",
-							alignItems     : "flex-start",
-							textTransform  : "uppercase",
-						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text02}`,
-						}}
-					/>
-				</div>
+				{
+					imgSrc.imgText01 &&
+						<img
+							src={imgSrc.imgText01}
+							alt="Captura de texto"
+							style={{ objectFit : "cover" }}
+						/>
+				}
 			</div>
 		</div>
 	);

@@ -6,7 +6,15 @@ import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
 
-const Mod52 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod52 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultTitle = "<p style='text-align: left;'><span style='font-size: 30px; font-family: Aitana-Regular;'>VIRGINIA</span></p>";
 
@@ -23,11 +31,11 @@ const Mod52 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			<Stack
 				spacing="0.2em"
 				sx={{overflow : "hidden"}}
-				maw="60%"
-				miw="25%"
+				w="35%"
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Stack
-					spacing="0.2em"
+					spacing={isInWorkSpace ? "0em" : "0.1em"}
 				>
 					<Text
 						sizes={{
