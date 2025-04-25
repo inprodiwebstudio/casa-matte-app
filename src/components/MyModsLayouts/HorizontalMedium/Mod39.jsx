@@ -5,7 +5,15 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod39 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod39 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
@@ -24,17 +32,19 @@ const Mod39 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			w="100%"
 			h="100%"
 			p="4%"
+			pb="5%"
 			justify="flex-end"
 			align="flex-end"
 			direction="column"
 			sx={{overflow : "hidden"}}
 		>
 			<Stack
-				spacing="0.35em"
-				miw="20%"
+				spacing={isInWorkSpace ? "0.2em" : "0.3em"}
+				w="22%"
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Stack
-					spacing="0.13em"
+					spacing={isInWorkSpace ? "0em" : "0.1em"}
 					aria-hidden
 				>
 					<div>
@@ -73,7 +83,7 @@ const Mod39 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					</div>
 				</Stack>
 				<Stack
-					spacing="0.13em"
+					spacing={isInWorkSpace ? "0em" : "0.1em"}
 					aria-hidden
 				>
 					<div>
@@ -112,8 +122,7 @@ const Mod39 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					</div>
 				</Stack>
 				<Stack
-					mah="70%"
-					spacing="0.13em"
+					spacing={isInWorkSpace ? "0em" : "0.1em"}
 				>
 					<div>
 						<Text

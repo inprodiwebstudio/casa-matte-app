@@ -6,7 +6,15 @@ import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
 
-const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod49 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 3</span></p>";
 
 	const defaultText02 = "<p style='text-align: justify;'><span style='font-size: 12px; font-family: JosefinSans-Light;'>Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper, pharetra odio conubia dictumst malesuada lectus dis penatibus, primis orci dictum sociosqu nam platea parturient cursus.</span></p>";
@@ -15,6 +23,7 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 	return (
 		<Flex
 			p="4%"
+			pb="3%"
 			w="100%"
 			h="100%"
 			align="flex-end"
@@ -23,13 +32,14 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			<Stack
 				w="35%"
 				mah="100%"
-				spacing="0.2em"
+				spacing="0.1em"
 				aria-hidden
-				sx={{ overflow : "hidden"}}
+				sx={{ overflow : "hidden" }}
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Flex
 					direction="column"
-					gap="0.2em"
+					gap={isInWorkSpace ? "0em" : "0.1em"}
 					w="100%"
 					style={{
 						textTransform : "uppercase",
@@ -52,7 +62,9 @@ const Mod49 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					/>
 					<DividerLayout long="13%" position="h" />
 				</Flex>
-				<Box w="100%">
+				<Box
+					w="100%"
+				>
 					<Text
 						sizes={{
 							"chico"   : "10px",

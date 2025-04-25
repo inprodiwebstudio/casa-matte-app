@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
 import Html           from "react-pdf-html";
 import ReactDOMServer from "react-dom/server";
 
-import { imgUrlPdf } from "helpers";
+import { imgUrlPdf, textToImage } from "helpers";
 
-const Mod53Pdf = ({text, images}) => {
+const Mod53Pdf = ({
+	text,
+	images,
+	pageNo,
+	modLayout,
+}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+	});
+
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
+
+		setImgSrc({
+			imgText01 : imgText01,
+		});
+	};
+
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
@@ -29,7 +48,7 @@ const Mod53Pdf = ({text, images}) => {
 					flexDirection  : "column",
 					justifyContent : "center",
 					alignItems     : "center",
-					gap            : "10px",
+					gap            : "8px",
 				}}
 			>
 				<div
@@ -76,30 +95,17 @@ const Mod53Pdf = ({text, images}) => {
 				</div>
 				<div
 					style={{
-						marginTop      : "10px",
-						width          : "100%",
-						maxHeight      : "6%",
-						paddingRight   : "5%",
-						display        : "flex",
-						justifyContent : "center",
-						alignItems     : "center",
-						overflow       : "hidden",
+						width : "100%",
 					}}
 				>
-					<div
-						style={{
-							letterSpacing : "0.5px",
-						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
-						}}
-					/>
+					{
+						imgSrc.imgText01 &&
+						<img
+							src={imgSrc.imgText01}
+							alt="Captura de texto"
+							style={{ objectFit : "cover" }}
+						/>
+					}
 				</div>
 			</div>
 		</div>

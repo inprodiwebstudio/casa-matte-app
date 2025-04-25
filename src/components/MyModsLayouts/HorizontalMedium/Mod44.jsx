@@ -6,7 +6,15 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod44 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod44 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>Título 1</span></p>";
 
@@ -18,7 +26,7 @@ const Mod44 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			pr="20%"
 			align="center"
 			justify="center"
-			spacing={"0.5em"}
+			spacing={"0.2em"}
 		>
 			<Stack
 				w="100%"
@@ -33,10 +41,10 @@ const Mod44 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			</Stack>
 			<Stack
 				w="100%"
-				mah="6%"
 				style={{
 					textTransform : "uppercase",
 				}}
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Text
 					sizes={{
