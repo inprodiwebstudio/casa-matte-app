@@ -2,7 +2,7 @@ import { Card, Stack, Divider, Text, Group, Button } from "@mantine/core";
 import { SaveIcom }                                  from "Resources/icons";
 
 
-const PhotoBookDownload = ({ photoBookData }) => {
+const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	console.log(photoBookData);
 	return (
 		<Card
@@ -135,11 +135,11 @@ const PhotoBookDownload = ({ photoBookData }) => {
 					<Button
 						color="darkCasaMatte.6"
 						size="xs"
-						onClick={() => console.log("click")}
 						mt="20px"
 						sx={{
 							fontWeight : "200",
 						}}
+						onClick={onReturn}
 						loading={false}
 						fullWidth
 					>

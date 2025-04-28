@@ -54,7 +54,10 @@ const CardSearchPhotoBook = () => {
 		<>
 			{
 				photoBookData ? <>
-					<PhotoBookDownload photoBookData={photoBookData} />
+					<PhotoBookDownload
+						photoBookData={photoBookData}
+						onReturn={() => setPhotoBookData(undefined)}
+					/>
 				</> : <Card
 					radius="13px"
 					shadow="lg"
