@@ -1,4 +1,4 @@
-export const loadImageWithRetry = (url, maxAttempts = 3) => {
+export const loadImageWithRetry = (url, maxAttempts = 5) => {
 	return new Promise((resolve, reject) => {
 		let attempts = 0;
 
