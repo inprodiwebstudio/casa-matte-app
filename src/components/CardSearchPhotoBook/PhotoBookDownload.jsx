@@ -12,7 +12,9 @@ import HorizontalLarge  from "components/MyModsLayouts/HorizontalLarge";
 import HorizontalMedium from "components/MyModsLayouts/HorizontalMedium";
 import SquareSmall      from "components/MyModsLayouts/SquareSmall";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import saveAs                  from "file-saver";
+import saveAs from "file-saver";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import JSZip                   from "jszip";
 import SquareLarge             from "components/MyModsLayouts/SquareLarge";
 import TravelCoffeeTable       from "components/MyModsLayouts/TravelCoffeeTable";
 import { Document, Page, pdf } from "@react-pdf/renderer";
@@ -181,13 +183,21 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		);
 	};
 
+
+	const zipDownload = async (pdfBlob) => {
+		const zip = new JSZip();
+		zip.file(`${photoBookData?.metas?.correo_del_autor[0]}-noPedido-${photoBookData?.metas?.id_del_pedido[0]}-photobookId_${photoBookData?.id}/${photoBookData?.metas?.correo_del_autor[0]}-noPedido-${photoBookData?.metas?.id_del_pedido[0]}-photobookId_${photoBookData?.id}.pdf`, pdfBlob);
+		const content = await zip.generateAsync({ type : "blob" });
+		saveAs(content, `${photoBookData?.metas?.correo_del_autor[0]}-noPedido-${photoBookData?.metas?.id_del_pedido[0]}-photobookId_${photoBookData?.id}.zip`);
+	};
+
 	const createPDFPhotoBook = async (photBookConfig) => {
 		try {
 			const listPages = convertToArray(photBookConfig?.pages);
 			// Generar el documento PDF como un Blob
 			const blob = await pdf(<MyDocGenerate listPages={listPages} />).toBlob();
 
-			saveAs(blob, `${photoBookData?.metas?.correo_del_autor[0]}-noPedido-${photoBookData?.metas?.id_del_pedido[0]}-photobookId_${photoBookData?.id}.pdf`);
+			await zipDownload(blob);
 		} catch (error) {
 			console.error("Error al subir el archivo:", error);
 		}
@@ -210,8 +220,6 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			getConfigDataPhotoBook();
 		}
 	}, [photoBookData]);
-
-	console.log(photoBookData);
 
 	return (
 		<Card
