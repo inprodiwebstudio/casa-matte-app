@@ -1,24 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
 import Html             from "react-pdf-html";
 import ReactDOMServer   from "react-dom/server";
 import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
+import { textToImage }  from "helpers";
 
 
-const Mod38Pdf = ({text}) => {
+const Mod38Pdf = ({
+	text,
+	pageNo,
+	modLayout,
+}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 26px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+		imgText02 : undefined,
+	});
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: right;'><span style='font-size: 15px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>";
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
+		const imgText02 = await textToImage(`${pageNo}-${modLayout}-text2`);
+
+		setImgSrc({
+			imgText01 : imgText01,
+			imgText02 : imgText02,
+		});
+	};
+
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "595px",
-				width   : "100%",
-				padding : "60px",
+				height        : "595px",
+				width         : "100%",
+				padding       : "60px",
+				paddingBottom : "30px",
 			}}
 		>
 			<div
@@ -28,7 +49,7 @@ const Mod38Pdf = ({text}) => {
 					display        : "flex",
 					justifyContent : "flex-end",
 					alignItems     : "end",
-					gap            : "25px",
+					gap            : "8px",
 				}}
 			>
 				<div
@@ -40,43 +61,43 @@ const Mod38Pdf = ({text}) => {
 						alignItems     : "flex-end",
 					}}
 				>
-					<DividerLayoutPdf w="8%" />
+					<DividerLayoutPdf w="7%" />
 				</div>
 				<div
 					style={{
 						display       : "flex",
+						alignItems    : "flex-end",
 						flexDirection : "column",
-						gap           : "10px",
 					}}
 				>
 					<div
 						style={{
-							letterSpacing : "4px !important",
+							width : "100%",
 						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
-						}}
-					/>
+					>
+						{
+							imgSrc.imgText01 &&
+							<img
+								src={imgSrc.imgText01}
+								alt="Captura de texto"
+								style={{ objectFit : "cover" }}
+							/>
+						}
+					</div>
 					<div
 						style={{
-							letterSpacing : "2px !important",
+							width : "100%",
 						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text02}`,
-						}}
-					/>
+					>
+						{
+							imgSrc.imgText02 &&
+							<img
+								src={imgSrc.imgText02}
+								alt="Captura de texto"
+								style={{ objectFit : "cover" }}
+							/>
+						}
+					</div>
 				</div>
 			</div>
 		</div>

@@ -1,67 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
-import Html           from "react-pdf-html";
-import ReactDOMServer from "react-dom/server";
+import Html            from "react-pdf-html";
+import ReactDOMServer  from "react-dom/server";
+import { textToImage } from "helpers";
 
 
-const Mod37Pdf = ({text}) => {
+const Mod37Pdf = ({
+	text,
+	pageNo,
+	modLayout,
+}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+	});
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>";
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
+
+		setImgSrc({
+			imgText01 : imgText01,
+		});
+	};
+
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
 			style={{
-				hheight : "615px",
-				width   : "100%",
-				padding : "4%",
+				height         : "615px",
+				width          : "100%",
+				padding        : "4%",
+				paddingBottom  : "3%",
+				display        : "flex",
+				justifyContent : "center",
+				alignItems     : "center",
 			}}
 		>
-
 			<div
 				style={{
-					height         : "100%",
-					width          : "100%",
-					display        : "flex",
-					justifyContent : "center",
-					alignItems     : "center",
-					gap            : "10px",
+					width : "100%",
 				}}
 			>
-				<div
-					style={{
-						width         : "100%",
-						letterSpacing : "6px !important",
-					}}
-					dangerouslySetInnerHTML={{
-						__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
-					}}
-				/>
-				<div
-					style={{
-						width         : "100%",
-						letterSpacing : "2px !important",
-						textTransform : "uppercase",
-					}}
-					dangerouslySetInnerHTML={{
-						__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text02}`,
-					}}
-				/>
+				{
+					imgSrc.imgText01 &&
+						<img
+							src={imgSrc.imgText01}
+							alt="Captura de texto"
+							style={{ objectFit : "cover" }}
+						/>
+				}
 			</div>
 		</div>
 	);

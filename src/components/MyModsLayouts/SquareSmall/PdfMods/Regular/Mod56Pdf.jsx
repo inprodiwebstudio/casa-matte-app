@@ -1,17 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
 import Html           from "react-pdf-html";
 import ReactDOMServer from "react-dom/server";
 
-import { imgUrlPdf } from "helpers";
+import { imgUrlPdf, textToImage } from "helpers";
 
-const Mod56Pdf = ({text, images}) => {
+const Mod56Pdf = ({
+	images,
+	text,
+	pageNo,
+	modLayout,
+}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 26px; font-family: JosefinSans-Regular;'>SANTIAGO</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+		imgText02 : undefined,
+	});
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
+		const imgText02 = await textToImage(`${pageNo}-${modLayout}-text2`);
+
+		setImgSrc({
+			imgText01 : imgText01,
+			imgText02 : imgText02,
+		});
+	};
+
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
@@ -29,26 +49,25 @@ const Mod56Pdf = ({text, images}) => {
 					height         : "100%",
 					width          : "100%",
 					display        : "flex",
-					gap            : "40px",
+					gap            : "20px",
 					justifyContent : "center",
 					alignItems     : "center",
 				}}
 			>
 				<div
 					style={{
-						letterSpacing : "6.5px",
-						textTransform : "uppercase",
+						width : "77%",
 					}}
-					dangerouslySetInnerHTML={{
-						__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
-					}}
-				/>
+				>
+					{
+						imgSrc.imgText01 &&
+						<img
+							src={imgSrc.imgText01}
+							alt="Captura de texto"
+							style={{ objectFit : "cover" }}
+						/>
+					}
+				</div>
 				<div
 					style={{
 						height     : "100%",
@@ -72,19 +91,18 @@ const Mod56Pdf = ({text, images}) => {
 				</div>
 				<div
 					style={{
-						letterSpacing : "2px",
-						textTransform : "uppercase",
+						width : "77%",
 					}}
-					dangerouslySetInnerHTML={{
-						__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text02}`,
-					}}
-				/>
+				>
+					{
+						imgSrc.imgText02 &&
+						<img
+							src={imgSrc.imgText02}
+							alt="Captura de texto"
+							style={{ objectFit : "cover" }}
+						/>
+					}
+				</div>
 			</div>
 		</div>
 	);

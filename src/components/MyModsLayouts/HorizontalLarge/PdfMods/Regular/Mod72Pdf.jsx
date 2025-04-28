@@ -1,24 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
-import Html             from "react-pdf-html";
-import ReactDOMServer   from "react-dom/server";
-import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
+import Html            from "react-pdf-html";
+import ReactDOMServer  from "react-dom/server";
+import { textToImage } from "helpers";
 
 
-const Mod72Pdf = ({text, images}) => {
+const Mod72Pdf = ({
+	text,
+	images,
+	modLayout,
+	pageNo,
+}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: left;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Subtítulo 3</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+	});
 
-	const text02 = text[0] ? text[0] : "<p style='text-align: justify;'><span style='font-size: 15px; font-family: JosefinSans-Light;'>Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper, pharetra odio conubia dictumst malesuada lectus dis penatibus, primis orci dictum sociosqu nam platea parturient cursus.</span></p>";
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
+
+		setImgSrc({
+			imgText01 : imgText01,
+		});
+	};
+
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
 			style={{
 				height         : "850px",
 				width          : "100%",
-				padding        : "4%",
+				padding        : "5%",
+				paddingBottom  : "3%",
 				display        : "flex",
 				justifyContent : "flex-end",
 				alignItems     : "flex-end",
@@ -26,64 +44,17 @@ const Mod72Pdf = ({text, images}) => {
 		>
 			<div
 				style={{
-					width          : "36%",
-					maxHeight      : "100%",
-					display        : "flex",
-					gap            : "25px",
-					flexDirection  : "column",
-					justifyContent : "flex-end",
-					alignItems     : "flex-end",
-					overflow       : "hidden",
+					width : "35%",
 				}}
 			>
-				<div
-					style={{
-						display        : "flex",
-						width          : "100%",
-						flexDirection  : "column",
-						justifyContent : "flex-start",
-						alignItems     : "flex-start",
-						gap            : "20px",
-					}}
-				>
-					<div
-						style={{
-							letterSpacing : "3px",
-							textTransform : "uppercase",
-						}}
-					>
-						<div
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
-							}}
-						/>
-					</div>
-					<DividerLayoutPdf w="14%" />
-				</div>
-				<div
-					style={{
-						lineHeight : "1.4px",
-						width      : "100%",
-					}}
-				>
-					<div
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text02}`,
-						}}
+				{
+					imgSrc.imgText01 &&
+					<img
+						src={imgSrc.imgText01}
+						alt="Captura de texto"
+						style={{ objectFit : "cover" }}
 					/>
-				</div>
+				}
 			</div>
 		</div>
 	);

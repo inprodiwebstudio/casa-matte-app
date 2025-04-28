@@ -1,93 +1,86 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
-import Html             from "react-pdf-html";
-import ReactDOMServer   from "react-dom/server";
-import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
+import Html            from "react-pdf-html";
+import ReactDOMServer  from "react-dom/server";
+import { textToImage } from "helpers";
 
 
-const Mod48Pdf = ({text}) => {
+const Mod48Pdf = ({
+	text,
+	pageNo,
+	modLayout,
+}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 26px; font-family: JosefinSans-Light;'>JAPÓN</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+		imgText02 : undefined,
+	});
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>TOKIO</span></p><p style='text-align: center;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>KAMAKURA</span></p><p style='text-align: center;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>KIOTO</span></p><p style='text-align: center;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>NARA</span></p><p style='text-align: center;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>NAOSHIMA</span></p>";
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
+		const imgText02 = await textToImage(`${pageNo}-${modLayout}-text2`);
+
+		setImgSrc({
+			imgText01 : imgText01,
+			imgText02 : imgText02,
+		});
+	};
+
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "595px",
-				width   : "100%",
-				padding : "20px",
+				height         : "595px",
+				width          : "100%",
+				padding        : "20px",
+				paddingBottom  : "10px",
+				display        : "flex",
+				justifyContent : "center",
+				alignItems     : "center",
 			}}
 		>
 
-			<div
-				style={{
-					height         : "100%",
-					width          : "100%",
-					display        : "flex",
-					justifyContent : "center",
-					alignItems     : "center",
-				}}
-			>
-				<div style={{
-					width          : "70%",
-					height         : "100%",
-					display        : "flex",
-					flexDirection  : "column",
-					gap            : "35px !important",
-					justifyContent : "center",
-				}}>
-					<div
-						style={{
-							width          : "100%",
-							display        : "flex",
-							flexDirection  : "column",
-							justifyContent : "center",
-							alignItems     : "center",
-						}}
-					>
-						<div
-							style={{
-								letterSpacing : "5px",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
-							}}
-						/>
-					</div>
-					<div
-						style={{
-							width      : "100%",
-							display    : "flex",
-							alignItems : "center",
-						}}
-					>
-						<DividerLayoutPdf w="35px" />
-					</div>
-					<div
-						style={{
-							width         : "100%",
-							letterSpacing : "0.5px",
-							lineHeight    : "2.5px",
-						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                               p {
-                                 margin: 0;
-                                 padding: 0;
-                               }
-                             </style>
-                             ${text02}`,
-						}}
-					/>
+			<div style={{
+				width          : "70%",
+				height         : "100%",
+				display        : "flex",
+				flexDirection  : "column",
+				gap            : "23px !important",
+				justifyContent : "center",
+				alignItems     : "center",
+			}}>
+				<div
+					style={{
+						width : "60%",
+					}}
+				>
+					{
+						imgSrc.imgText01 &&
+							<img
+								src={imgSrc.imgText01}
+								alt="Captura de texto"
+								style={{ objectFit : "cover" }}
+							/>
+					}
+				</div>
+				<div
+					style={{
+						width : "60%",
+					}}
+				>
+					{
+						imgSrc.imgText02 &&
+							<img
+								src={imgSrc.imgText02}
+								alt="Captura de texto"
+								style={{ objectFit : "cover" }}
+							/>
+					}
 				</div>
 			</div>
 		</div>

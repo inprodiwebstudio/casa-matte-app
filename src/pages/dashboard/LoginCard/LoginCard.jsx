@@ -1,19 +1,20 @@
-import { useEffect, useState }                    from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useState }    from "react";
+import { useDispatch } from "react-redux";
+
+import { authSlice } from "store/Slices";
 //HookForm
-import { useForm }                   from "react-hook-form";
-import { workSpaceSlice, authSlice } from "store/Slices";
+import { useForm } from "react-hook-form";
 //Yup
 import * as Yup        from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 
 //Own components
-import { genericApi }                       from "store/api/genericApi";
-import { LoginNotification, PostingConfig } from "Notifications";
-import { TextInput, PasswordInput, Button } from "core/components";
+import { genericApi }                                  from "store/api/genericApi";
+import { TextInput, PasswordInput, Button, BlankPage } from "core/components";
 import "./LoginCard.scss";
-import { convertToObject, isValidArray }    from "helpers";
+import { Center, useMantineTheme }                     from "@mantine/core";
+import { showNotification }                            from "@mantine/notifications";
 // import { useNavigate }                      from "react-router";
 
 const schema = Yup.object().shape({
@@ -25,20 +26,9 @@ const { useLazyGetDataQuery } = genericApi;
 
 const LoginCard = () => {
 	const dispatch = useDispatch();
+	const theme = useMantineTheme();
 
-	const userToken = useSelector((state) => state.authSlice.token, shallowEqual);
-
-	// const navigate = useNavigate();
-
-	const [loginMutation, loginMutationResult] = genericApi.useSubmitDataMutation();
 	const [ loading, setLoading ] = useState(false);
-
-	const searchParams = new URLSearchParams(location.search);
-
-	const nameUser = searchParams.get("username") ?? "";
-	const postId = searchParams.get("postId") ?? "";
-
-	const [dataMutation] = genericApi.useSubmitDataMutation();
 
 	const [ fetchData ] = useLazyGetDataQuery();
 
@@ -51,372 +41,103 @@ const LoginCard = () => {
 		resolver : yupResolver(schema),
 	});
 
-	const createPresetPhotoBook = async (photoBookPostId) => {
-		const photoBookMetaData = photoBookPostId?.meta;
-		//WhiteList of sizes and formats
-		const whiteListOfSizes = ["chico", "mediano", "grande"];
-		const whiteListOfFormats = ["horizontal", "vertical", "cuadrado"];
-
-		const getFormatAndSize = () => {
-			const formatAndSize = {
-				format : "vertical", //default value,
-				size   : "grande", //default value,
-			};
-
-			if (photoBookMetaData && photoBookMetaData?.tamano) {
-				const parseLowerCaseNameSize = photoBookMetaData?.tamano.toLowerCase();
-				const sizeFound = whiteListOfSizes.find(word => parseLowerCaseNameSize.includes(word));
-				const formatFound = whiteListOfFormats.find(word => parseLowerCaseNameSize.includes(word));
-
-				if (sizeFound && (sizeFound === "chico")) {
-					formatAndSize.size = sizeFound;
-					formatAndSize.format = "cuadrado";
-				}
-
-				if (sizeFound && formatFound) {
-					formatAndSize.size = sizeFound;
-					formatAndSize.format = formatFound;
-				}
-			}
-
-			return formatAndSize;
-		};
-
-		const regexMatchDimenssions = /\(\d+x\d+cm\)/;
-
-		const foundDimessions = () => {
-			let dimenssions = "30x35cm";
-
-			const foundDimenssion = photoBookMetaData?.tamano.match(regexMatchDimenssions);
-
-			if (foundDimenssion[0]) {
-				dimenssions = foundDimenssion[0];
-			}
-
-			return dimenssions;
-		};
-
-		const parseModel = photoBookMetaData?.modelo.toUpperCase();
-
-		// const handlerIsEspecialProduct = () => {
-		// 	const whiteListEspecialProducts = ["PHOTOBOOK FAMILIAR ANUAL"];
-		// 	if (
-		// 		photoBookMetaData?.modelo &&
-		// 		whiteListEspecialProducts.includes(photoBookMetaData?.modelo)
-		// 	) {
-		// 		return "photobook anual";
-		// 	}
-
-		// 	const model = photoBookMetaData?.modelo ? parseModel.replace("PHOTOBOOK", "").replace(" ", "").replace(" ", "").toLowerCase() : "white";
-		// 	return model;
-		// };
-
-		const model = photoBookMetaData?.modelo ? parseModel.replace("PHOTOBOOK", "").replace(" ", "").replace(" ", "").toLowerCase() : "white";
-		const productName = photoBookMetaData?.modelo ?? "WHITE PHOTOBOOK";
-		const size = getFormatAndSize().size;
-		const format =  getFormatAndSize().format;
-		const dimentions = foundDimessions();
-		const pasta = photoBookMetaData?.pasta ?? "";
-		const bound = photoBookMetaData?.encuadernado ?? "";
-		const price = photoBookMetaData?.precio_total?.replace("$", "") ?? "0";
-		const numberOfPages = photoBookMetaData?.numero_de_paginas ? Number(photoBookMetaData?.numero_de_paginas) : 40;
-
-		const configPhotoBookData = {
-			sizePhotoBook : size,
-			dimentions,
-			product       : model,
-			productName,
-			format,
-			frontPage     : {
-				id     : "FrontLayout",
-				sheet1 : {
-					layoutType : "",
-					text       : {},
-					photos     : {
-						"0" : {
-							id  : "",
-							url : "",
-						},
-					},
-				},
-			},
-			numberOfPages,
-			minPages      : (pasta === "Dura") ? 25 : 10,
-			maxPages      : numberOfPages,
-			currentPage   : "page1",
-			basePrice     : price.replace(" ", ""),
-			bound,
-			pasta,
-			maxRangePages : numberOfPages,
-			pages         : {},
-		};
-
-		const totalPaginations = (numberOfPages - 1) / 2;
-
-		const isEvenPages = totalPaginations % 2 === 0;
-
-		const arrayGeneratorPages = Array(isEvenPages ? totalPaginations : (numberOfPages / 2) + 1).fill(0);
-
-		const listOfPages = arrayGeneratorPages.map((page, index) => {
-			if (index === 0) {
-				return ({
-					id     : "page1",
-					sheet1 : {
-						pageNo     : 1,
-						layoutType : "",
-						text       : "",
-						photos     : {
-							0 : {
-								id  : "",
-								url : "",
-							},
-						},
-					},
-				});
-			}
-			if ((index === arrayGeneratorPages.length - 1) && !isEvenPages) {
-				return ({
-					id     : `page${index + 1}`,
-					sheet1 : {
-						pageNo     : numberOfPages,
-						layoutType : "",
-						text       : {},
-						photos     : {
-							0 : {
-								id  : "",
-								url : "",
-							},
-						},
-					},
-				});
-			}
-			return ({
-				id     : `page${index + 1}`,
-				sheet1 : {
-					pageNo     : index * 2,
-					layoutType : "",
-					text       : {},
-					photos     : {
-						0 : {
-							id  : "",
-							url : "",
-						},
-					},
-				},
-				sheet2 : {
-					pageNo     : (index * 2) + 1,
-					layoutType : "",
-					text       : "",
-					photos     : {
-						0 : {
-							id  : "",
-							url : "",
-						},
-					},
-				},
-			});
-		});
-
-		configPhotoBookData.pages = convertToObject(listOfPages);
-
-		const parseSendData = (data) => {
-			const myData = data;
-			const stringData = JSON.stringify(myData);
-			return stringData;
-		};
-
-		try {
-			await dataMutation({
-				module : "wp-json/wp/v2/photobook-2-0",
-				data   : {
-					tittle : "Texto de prueba",
-					status : "publish",
-					meta   : {
-						config : parseSendData({...configPhotoBookData, modified : photoBookPostId?.modified ?? undefined}),
-					},
-				},
-				id     : postId,
-				method : "POST",
-			});
-
-			dispatch(workSpaceSlice.actions.insertData({...configPhotoBookData, modified : photoBookPostId?.modified ?? undefined}));
-			dispatch(authSlice.actions.setIsLoggedIn());
-			dispatch(workSpaceSlice.actions.changeLoading(false));
-		} catch (error) {
-			console.error(error);
-			setLoading(false);
-		}
-	};
-
-	const parseAndInserPhotoBookConfig = (photoBookConfigData) => {
-		const myData = photoBookConfigData?.meta?.config;
-		const parseJSON = JSON.parse(myData);
-		const orderIdHandler = () => {
-			if (photoBookConfigData?.meta?.id_del_pedido || (photoBookConfigData?.meta?.id_del_pedido !== "")) {
-				return photoBookConfigData?.meta?.id_del_pedido;
-			}
-			return undefined;
-		};
-
-		dispatch(workSpaceSlice.actions.insertData({
-			...parseJSON,
-			modified : photoBookConfigData?.modified ?? undefined,
-			orderId  : orderIdHandler(),
-		}));
-	};
-
-	const handlerAvailablePhotoBookConfig = async () => {
-		try {
-			const getPostPhotoBook = await fetchData({
-				module : `wp-json/wp/v2/photobook-2-0/${postId}`,
-			}).unwrap();
-
-			const photoBookMeta = getPostPhotoBook?.meta;
-
-			if (!photoBookMeta) throw new Error("Ocurrio un problema, el metadato no existe o presenta algun conflicto");
-
-			// if ((photoBookMeta?.modelo === "TRAVEL COFFEE TABLE PHOTOBOOK")) {
-			// 	navigate("/notfound/layouts");
-			// 	return;
-			// }
-
-			const isAvailableConfigPhotoBook = photoBookMeta?.config && (photoBookMeta?.config !== "");
-
-			if (isAvailableConfigPhotoBook) {
-				parseAndInserPhotoBookConfig(getPostPhotoBook);
-				dispatch(authSlice.actions.setIsLoggedIn());
-				dispatch(workSpaceSlice.actions.changeLoading(false));
-				return;
-			}
-
-			createPresetPhotoBook(getPostPhotoBook);
-		} catch (error) {
-			console.error(error);
-			setLoading(false);
-		}
-	};
-
-	const reactToLogin = async () => {
-		if (loginMutationResult.isUninitialized) return;
-
-		if (loginMutationResult.isError) {
-			const status = loginMutationResult.error?.status;
-
-			switch (status) {
-				case 400:
-					setError("password");
-					setError("username");
-					LoginNotification["post"][400]();
-					setLoading(false);
-					break;
-				case 401:
-					setError("password");
-					setError("username");
-					LoginNotification["post"][401]();
-					setLoading(false);
-					break;
-				case 404:
-					setError("password");
-					setError("username");
-					LoginNotification["post"][404]();
-					setLoading(false);
-					break;
-				case 403:
-					setError("password");
-					setError("username");
-					LoginNotification["post"][403]();
-					setLoading(false);
-					break;
-				default:
-					break;
-			}
-		}
-
-		if (loginMutationResult.data) {
-			try {
-				const getPostPhotoBook = await fetchData({
-					module : `wp-json/wp/v2/photobook-2-0/${postId}`,
-				}).unwrap();
-
-				if (!postId || isValidArray(getPostPhotoBook)) {
-					const error = new Error ();
-					error.code = 404;
-					error.message = "PostId Not Found";
-					throw error;
-				}
-
-				// const haveAccessElement = getPostPhotoBook.meta?.correo_del_autor === loginMutationResult.data?.user_email;
-
-
-				// if (!haveAccessElement) throw new Error("You do not have access for this element");
-
-				dispatch(authSlice.actions.setUserData({
-					...loginMutationResult.data,
-					postId : getPostPhotoBook?.id ?? undefined,
-					userId : loginMutationResult?.data?.userId ?? undefined,
-				}));
-
-			} catch (error) {
-				console.error(error);
-				if (error.message === "PostId Not Found") {
-					PostingConfig["get"][404]();
-				}
-				setLoading(false);
-			}
-		}
-	};
-
-	useEffect(() => void reactToLogin(), [loginMutationResult]);
-
-	useEffect(() => {
-		if (userToken && (userToken !== "")) {
-			handlerAvailablePhotoBookConfig();
-			return;
-		}
-		dispatch(authSlice.actions.clearUserData());
-		return;
-	}, [userToken]);
-
-
 	const handleSubmitForm = (...args) => {
 		setLoading(true);
 		handleSubmit( async (data) => {
-			await loginMutation({module : "wp-json/jwt-auth/v1/token", data : data}).unwrap();
+			const adminEmail = "info@casamatte.com";
+			const devEmail = "demo44@demo.com";
+
+			const passwordAdmin = "admin_casamatte025";
+
+			const currentEmail = data.username;
+			const currentPassword = data.password;
+
+			const isValidEmail = (currentEmail === adminEmail) || (currentEmail === devEmail);
+
+			if (!isValidEmail || (currentPassword !== passwordAdmin)) {
+				setError("username");
+				setError("password");
+				return;
+			}
+
+			const userName = (currentEmail === adminEmail) ? "Administrador" : "demo";
+
+			try {
+				const userData = await fetchData({ module : `wp-json/wp/v2/users?slug=${userName}`}).unwrap();
+
+				dispatch(authSlice.actions.setUserData({
+					username : userData[0]?.name ?? undefined,
+					userId   : userData[0]?.id ?? undefined,
+				}));
+				dispatch(authSlice.actions.setIsLoggedIn());
+				setLoading(false);
+			} catch (err) {
+				setLoading(false);
+				showNotification({
+					title   : "Error al iniciar sesión",
+					message : "Ocurrió un error al iniciar sesión. Intenta mas tarde",
+					color   : "red",
+					styles  : () => ({
+						root : {
+										  "&::before" : {
+											  borderRadius : "0px",
+											  width        : "3px",
+										  },
+										  borderRadius : "0px",
+						},
+
+						title       : { fontFamily : "Helvetica", fontWeight : "500", textTransform : "uppercase" },
+						description : { fontFamily : "Helvetica" },
+					}),
+				});
+			}
 		})(...args);
 	};
 
 	return (
-		<form id="LoginCard" className="login-card-body" onSubmit={handleSubmitForm}>
-			<h4>Inicio de Sesión</h4>
-			<div className="deescription-text-login">Inicia sesión con tu cuenta de Casa Matte</div>
-			<div className="form-container">
-				<TextInput
-					isLoading={loading}
-					error={errors.username ? true : false}
-					label="NOMBRE USUARIO"
-					variant="filled"
-					placeholder="correo_electrónico@email.com"
-					name="username"
-					defaultValue={nameUser}
-					register={register("username")}
-				/>
-				<PasswordInput
-					isLoading={loading}
-					error={errors.password ? true : false}
-					label="CONTRASEÑA"
-					variant="filled"
-					name="password"
-					register={register("password")}
-				/>
-			</div>
-			<Button isLoading={loading} typeButton="submit" type="subtleActive" fontSize={20}>
-				<div style={{marginLeft : "25px", marginRight : "25px"}}>
-					{
-						!loading ? "Iniciar Sesión" : "Cargando..."
-					}
-				</div>
-			</Button>
-		</form>
+		<BlankPage
+			backgroundColor={theme.colors.whiteCasaMatte[8]}
+		>
+			<Center
+				h="100vh"
+			>
+				<form id="LoginCard" className="login-card-body" onSubmit={handleSubmitForm}>
+					<h4>Inicio de Sesión</h4>
+					<div className="deescription-text-login">Ingresa con tu cuenta de administrador</div>
+					<div className="form-container">
+						<TextInput
+							isLoading={loading}
+							error={errors.username ? true : false}
+							label="CORREO"
+							variant="filled"
+							placeholder="correo_electrónico@email.com"
+							name="username"
+							register={register("username")}
+						/>
+						<PasswordInput
+							isLoading={loading}
+							error={errors.password ? true : false}
+							label="CONTRASEÑA"
+							variant="filled"
+							name="password"
+							register={register("password")}
+						/>
+					</div>
+					<Button
+						isLoading={loading}
+						typeButton="submit"
+						type="subtleActive"
+						fontSize={20}
+					>
+						<div style={{marginLeft : "25px", marginRight : "25px"}}>
+							{
+								!loading ? "Iniciar Sesión" : "Cargando..."
+							}
+						</div>
+					</Button>
+				</form>
+			</Center>
+		</BlankPage>
 	);
 };
 

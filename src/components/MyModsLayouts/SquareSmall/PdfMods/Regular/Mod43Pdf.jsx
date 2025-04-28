@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
 import Html             from "react-pdf-html";
 import ReactDOMServer   from "react-dom/server";
 import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
+import { textToImage }  from "helpers";
 
 
-const Mod43Pdf = ({text}) => {
+const Mod43Pdf = ({
+	text,
+	pageNo,
+	modLayout,
+}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Para papá, un homenaje a tu vida. Gracias por tantos años de cariño y amor. Te queremos siempre.</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+	});
+
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
+
+		setImgSrc({
+			imgText01 : imgText01,
+		});
+	};
+
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
@@ -17,7 +36,7 @@ const Mod43Pdf = ({text}) => {
 				height        : "595px",
 				width         : "100%",
 				paddingRight  : "10%",
-				paddingBottom : "10%",
+				paddingBottom : "5%",
 			}}
 		>
 			<div
@@ -27,7 +46,7 @@ const Mod43Pdf = ({text}) => {
 					display        : "flex",
 					justifyContent : "flex-end",
 					alignItems     : "end",
-					gap            : "12px",
+					gap            : "8px",
 				}}
 			>
 				<div
@@ -48,20 +67,18 @@ const Mod43Pdf = ({text}) => {
 				}}>
 					<div
 						style={{
-							width         : "37%",
-							lineHeight    : "1.2px",
-							letterSpacing : "0.5px !important",
+							width : "37%",
 						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
-						}}
-					/>
+					>
+						{
+							imgSrc.imgText01 &&
+							<img
+								src={imgSrc.imgText01}
+								alt="Captura de texto"
+								style={{ objectFit : "cover" }}
+							/>
+						}
+					</div>
 				</div>
 			</div>
 		</div>

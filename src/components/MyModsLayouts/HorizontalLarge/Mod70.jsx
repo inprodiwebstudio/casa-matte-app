@@ -5,7 +5,15 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod70 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod70 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Subtítulo 3</span></p>";
 
@@ -22,9 +30,10 @@ const Mod70 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			<Stack
 				w="55%"
 				mah="90%"
-				spacing="0.15em"
+				spacing={isInWorkSpace ? "0em" : "0.15em"}
 				aria-hidden
 				style={{overflow : "hidden"}}
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<div
 					style={{

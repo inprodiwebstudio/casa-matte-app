@@ -1,18 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
-import Html             from "react-pdf-html";
-import ReactDOMServer   from "react-dom/server";
-import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
+import Html            from "react-pdf-html";
+import ReactDOMServer  from "react-dom/server";
+import { textToImage } from "helpers";
 
 
-const Mod46Pdf = ({text}) => {
-	const text01 = text[0] ? text[0] :  "<p style='text-align: left;'><span style='font-size: 30px; font-family: Aitana-Regular;'>PAPÁ</span></p>";
+const Mod46Pdf = ({
+	text,
+	pageNo,
+	modLayout,
+}) => {
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: justify;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+	});
 
-	const text03 = text[2] ? text[2] : "<p style='text-align: justify;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam. Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed.</span></p>";
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
+
+		setImgSrc({
+			imgText01 : imgText01,
+		});
+	};
+
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
@@ -28,88 +43,17 @@ const Mod46Pdf = ({text}) => {
 		>
 			<div
 				style={{
-					height         : "100%",
-					width          : "80%",
-					display        : "flex",
-					justifyContent : "center",
-					alignItems     : "center",
-					gap            : "30px",
+					width : "70%",
 				}}
 			>
-				<div style={{
-					width          : "100%",
-					display        : "flex",
-					flexDirection  : "column",
-					alignItems     : "flex-start",
-					justifyContent : "flex-start",
-					gap            : "30px",
-				}}>
-					<div
-						style={{
-							letterSpacing : "1.7px",
-						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
-						}}
-					/>
-					<DividerLayoutPdf w="10%" />
-				</div>
-				<div
-					style={{
-						display        : "flex",
-						flexDirection  : "row",
-						justifyContent : "space-between",
-						width          : "100%",
-						height         : "auto",
-					}}
-				>
-					<div
-						style={{
-							width : "48%",
-						}}
-					>
-						<div
-							style={{
-								lineHeight : "1.5px",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text02}`,
-							}}
+				{
+					imgSrc.imgText01 &&
+						<img
+							src={imgSrc.imgText01}
+							alt="Captura de texto"
+							style={{ objectFit : "cover" }}
 						/>
-					</div>
-					<div
-						style={{
-							width : "48%",
-						}}
-					>
-						<div
-							style={{
-								lineHeight : "1.5px",
-							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text03}`,
-							}}
-						/>
-					</div>
-				</div>
+				}
 			</div>
 		</div>
 	);

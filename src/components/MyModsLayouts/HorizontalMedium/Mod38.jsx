@@ -4,7 +4,15 @@ import Text              from "components/LayoutHandler/Text";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
-const Mod38 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod38 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
@@ -13,12 +21,17 @@ const Mod38 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 	return (
 		<Flex
 			p="4%"
+			pb={isInWorkSpace && "3%"}
 			w="100%"
 			h="100%"
 			justify="flex-end"
 			align="flex-end"
 		>
-			<Stack spacing="0.05em" w="100%">
+			<Stack
+				spacing={isInWorkSpace ? "0em" : "0.1em"}
+				w="100%"
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
+			>
 				<div
 					style={{
 						width        : "100%",

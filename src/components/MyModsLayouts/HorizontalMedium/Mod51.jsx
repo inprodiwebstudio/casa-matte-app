@@ -6,13 +6,21 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod51 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod51 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 5</span></p>";
 
 	return (
 		<Stack
-			pb="12%"
+			pb="9%"
 			w="100%"
 			h="100%"
 			spacing="0.10em"
@@ -31,8 +39,9 @@ const Mod51 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			<Stack
 				w="100%"
 				align="flex-end"
-				mah="6%"
+				mah="10%"
 				pr="5%"
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Text
 					sizes={{

@@ -5,7 +5,15 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod46 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod46 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 20px; font-family: JosefinSans-Light;'>MARÍA:</span></p>";
 
@@ -22,40 +30,54 @@ const Mod46 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			<Stack
 				w="80%"
 				mah="90%"
-				spacing="0.1em"
+				spacing="0em"
 				aria-hidden
 				style={{overflow : "hidden"}}
 			>
-				<Text
-					sizes={{
-						"chico"   : "18px",
-						"regular" : "20px",
-						"grande"  : "22px",
+				<div
+					style={{
+						width : "100%",
 					}}
-					letterSpacing="3px"
-					align="left"
-					sheetNo={sheetNo}
-					textShell={() => <TextShell.SubTitle width="50%" align="flex-start" />}
-					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-					textNo={0}
-				/>
-				<Text
-					sizes={{
-						"chico"   : "8px",
-						"regular" : "10px",
-						"grande"  : "13px",
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
+				>
+					<Text
+						sizes={{
+							"chico"   : "18px",
+							"regular" : "20px",
+							"grande"  : "22px",
+						}}
+						letterSpacing="3px"
+						align="left"
+						sheetNo={sheetNo}
+						textShell={() => <TextShell.SubTitle width="50%" align="flex-start" />}
+						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+						textNo={0}
+					/>
+				</div>
+				<div
+					style={{
+						width : "100%",
 					}}
-					align="justify"
-					lineHeight="10px"
-					sheetNo={sheetNo}
-					textShell={() => <TextShell.BodyParagraph align="flex-start" />}
-					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-					textNo={1}
-				/>
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
+				>
+					<Text
+						sizes={{
+							"chico"   : "8px",
+							"regular" : "10px",
+							"grande"  : "13px",
+						}}
+						align="justify"
+						lineHeight="10px"
+						sheetNo={sheetNo}
+						textShell={() => <TextShell.BodyParagraph align="flex-start" />}
+						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+						textNo={1}
+					/>
+				</div>
 			</Stack>
 		</Flex>
 	);

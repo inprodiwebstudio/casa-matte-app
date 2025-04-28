@@ -6,7 +6,15 @@ import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
 
-const Mod41 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod41 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 26px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
@@ -14,33 +22,45 @@ const Mod41 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
 	return (
 		<Flex
-			pb="10%"
+			pb="6%"
 			pr="10%"
 			w="100%"
 			h="100%"
 			justify="flex-end"
 			align="flex-end"
 			direction="column"
-			gap="20px"
+			gap="0.09em"
 		>
 			<DividerLayout long="7%" position="h" />
-			<Stack spacing="2px" w="100%">
-				<Text
-					sizes={{
-						"chico"   : "22px",
-						"regular" : "26px",
-						"grande"  : "28px",
+			<Stack spacing="0px" w="100%">
+				<div
+					style={{
+						width : "100%",
 					}}
-					align="right"
-					sheetNo={sheetNo}
-					letterSpacing="4px"
-					textShell={() => <TextShell.Title width="40%" align="flex-end" />}
-					isInPaginator={isInPaginator}
-					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-					isThumbNail={isThumbNail}
-					textNo={0}
-				/>
-				<div>
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
+				>
+					<Text
+						sizes={{
+							"chico"   : "22px",
+							"regular" : "26px",
+							"grande"  : "28px",
+						}}
+						align="right"
+						sheetNo={sheetNo}
+						letterSpacing="4px"
+						textShell={() => <TextShell.Title width="40%" align="flex-end" />}
+						isInPaginator={isInPaginator}
+						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+						isThumbNail={isThumbNail}
+						textNo={0}
+					/>
+				</div>
+				<div
+					style={{
+						width : "100%",
+					}}
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
+				>
 					<Text
 						sizes={{
 							"chico"   : "13px",

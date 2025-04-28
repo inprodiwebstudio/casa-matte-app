@@ -37,7 +37,7 @@ const Header = () => {
 	const isLoadingWorspaceData = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
 
 	const isAdminAccount = (userName === "casamatteadmin") && (userEmail === "info@casamatte.com");
-	const isDevAccount = (userName === "demo") && (userEmail === "demo@demo.com");
+	const isDevAccount = (userName === "demo") && (userEmail === "demo44@demo.com");
 
 	const handlerShowTestPdf = isAdminAccount || isDevAccount;
 	const handlerClickPreview = () => () => {
@@ -75,7 +75,7 @@ const Header = () => {
 	return (
 		<div className="Header">
 			<div className={`body-container ${isPreviewActive && "isActivePreview"}`}>
-				<a href="https://casamatte.com/dashboard/">
+				<a href="https://casamatte.wip-inprodi.com/">
 					<img src={LogoCasaMatte} width={120} />
 				</a>
 				{

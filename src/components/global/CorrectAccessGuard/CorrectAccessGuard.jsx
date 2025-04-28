@@ -1,5 +1,4 @@
 /* eslint-disable import/extensions */
-
 import { genericApi } from "store/api/genericApi";
 import LoadingAccess  from "./LoadingAccess";
 import { Font }       from "@react-pdf/renderer";

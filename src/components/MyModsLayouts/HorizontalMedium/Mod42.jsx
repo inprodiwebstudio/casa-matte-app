@@ -4,7 +4,15 @@ import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
-const Mod42 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod42 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Título pequeño 1</span></p>";
 
@@ -18,6 +26,7 @@ const Mod42 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				style={{
 					textTransform : "uppercase",
 				}}
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Text
 					sizes={{

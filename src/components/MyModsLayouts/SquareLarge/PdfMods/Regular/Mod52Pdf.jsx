@@ -1,95 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
-import Html             from "react-pdf-html";
-import ReactDOMServer   from "react-dom/server";
-import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
+import Html            from "react-pdf-html";
+import ReactDOMServer  from "react-dom/server";
+import { textToImage } from "helpers";
 
 
-const Mod52Pdf = ({text}) => {
+const Mod52Pdf = ({
+	text,
+	pageNo,
+	modLayout,
+}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: left;'><span style='font-size: 30px; font-family: Aitana-Regular;'>VIRGINIA</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+	});
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Colonial Williamsburg</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>William & Mary University</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>The Capitol</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Jamestown</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Smithfeld</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Chepokee Plantation</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Waller Mill Park</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Richmond</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Ford’s Colony</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>St. Andrew’s</span></p>";
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
+
+		setImgSrc({
+			imgText01 : imgText01,
+		});
+	};
+
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
 			style={{
-				height        : "850px",
-				width         : "100%",
-				paddingBottom : "40px",
-				// padding      : "70px",
-				// paddingRight : "20px",
-				// paddingLeft  : "20px",
+				height         : "850px",
+				width          : "100%",
+				display        : "flex",
+				justifyContent : "flex-end",
+				alignItems     : "flex-end",
+				paddingRight   : "40px",
+				paddingBottom  : "40px",
 			}}
 		>
 
 			<div
 				style={{
-					height         : "100%",
-					width          : "100%",
-					display        : "flex",
-					justifyContent : "flex-end",
-					alignItems     : "flex-end",
+					width : "29%",
 				}}
 			>
-				<div
-					style={{
-						width         : "35%",
-						display       : "flex",
-						flexDirection : "column",
-						gap           : "20px",
-					}}
-				>
-					<div
-						style={{
-							letterSpacing  : "3px",
-							width          : "100%",
-							display        : "flex",
-							justifyContent : "flex-start",
-							alignItems     : "flex-start",
-						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
-						}}
-					/>
-					<div
-						style={{
-							width          : "100%",
-							display        : "flex",
-							justifyContent : "flex-start",
-							alignItems     : "flex-start",
-						}}
-					>
-						<DividerLayoutPdf w="30px" />
-					</div>
-					<div
-						style={{
-							letterSpacing  : "0.5px",
-							lineHeight     : "2px",
-							width          : "100%",
-							display        : "flex",
-							justifyContent : "flex-start",
-							alignItems     : "flex-start",
-						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text02}`,
-						}}
-					/>
-				</div>
+				{
+					imgSrc.imgText01 &&
+						<img
+							src={imgSrc.imgText01}
+							alt="Captura de texto"
+							style={{ objectFit : "cover" }}
+						/>
+				}
 			</div>
 		</div>
 	);

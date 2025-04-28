@@ -2,40 +2,27 @@
 @import "/src/Resources/scss/breakpoints.scss";
 
 #LoginCard {
-    z-index: 2;
-    @include laptop {
-        margin-bottom: 90px;
-    }
-    a {
-        color : $flat-color;
-        transition: all ease 300ms;
-        font-weight: 300;
-        font-size: 12px;
-        padding: 8px;
-
-        &:hover {
-            color : $dark-color;
-        }
-    }
     &.login-card-body {
         background: $secondary-color;
         width: 400px;
         height: 459px;
         box-shadow : 0px 4px 15px rgba(178, 175, 166, 0.25);
         padding: 20px;
-        padding-left: 25px;
-        padding-right: 25px;
+        padding-top: 38px;
+        padding-left: 30px;
+        padding-right: 30px;
         font-size: 1rem;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap : 40px;
-        transform : scale(2, 2);
+        border-radius: 20px;
 
         & .deescription-text-login {
             text-align: center;
-            font-size: 14px;
-            width: 50%;
+            font-size: 11px;
+            width: 80%;
+            text-transform: uppercase;
         }
 
         h4 {

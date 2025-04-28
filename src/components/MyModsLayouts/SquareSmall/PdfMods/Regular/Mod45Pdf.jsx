@@ -1,24 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
 import Html             from "react-pdf-html";
 import ReactDOMServer   from "react-dom/server";
 import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
+import { textToImage }  from "helpers";
 
 
-const Mod45Pdf = ({text}) => {
+const Mod45Pdf = ({
+	text,
+	pageNo,
+	modLayout,
+}) => {
 
-	const text01 = text[0] ? text[0] : "<p style='text-align: left;'><span style='font-size: 20px; font-family: JosefinSans-Light;'>MAMÁ</span></p>";
+	const [imgSrc, setImgSrc] = useState({
+		imgText01 : undefined,
+		imgText02 : undefined,
+	});
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: justify;'><span style='font-size: 10px; font-family: JosefinSans-Light;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam.</span></p>";
+	const insertImg = async () => {
+		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
+		const imgText02 = await textToImage(`${pageNo}-${modLayout}-text2`);
+
+		setImgSrc({
+			imgText01 : imgText01,
+			imgText02 : imgText02,
+		});
+	};
+
+	useEffect(() => {
+		insertImg();
+	}, []);
 
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "595px",
-				width   : "100%",
-				padding : "30px",
+				height        : "595px",
+				width         : "100%",
+				padding       : "30px",
+				paddingBottom : "25px",
 			}}
 		>
 
@@ -44,50 +65,64 @@ const Mod45Pdf = ({text}) => {
 							width         : "300px",
 							display       : "flex",
 							flexDirection : "column",
-							gap           : "18px",
+							gap           : "4px",
 						}}
 					>
 						<div
 							style={{
-								width         : "100%",
-								display       : "flex",
-								flexDirection : "column",
-								alignItems    : "flex-start",
-								gap           : "10px",
+								width          : "100%",
+								display        : "flex",
+								flexDirection  : "column",
+								justifyContent : "center",
+								alignItems     : "center",
+								gap            : "0px",
 							}}
 						>
 							<div
 								style={{
-									letterSpacing : "1.7px",
+									width : "90%",
 								}}
-								dangerouslySetInnerHTML={{
-									__html : `<style>
-                                   p {
-                                     margin: 0;
-                                     padding: 0;
-                                   }
-                                 </style>
-                                 ${text01}`,
+							>
+								{
+									imgSrc.imgText01 &&
+									<img
+										src={imgSrc.imgText01}
+										alt="Captura de texto"
+										style={{ objectFit : "cover" }}
+									/>
+								}
+							</div>
+							<div
+								style={{
+									width : "90%",
 								}}
-							/>
-							<DividerLayoutPdf w="10%" />
+							>
+								<DividerLayoutPdf w="10%" />
+							</div>
 						</div>
 						<div
 							style={{
-								width         : "100%",
-								letterSpacing : "0.5px",
-								lineHeight    : "1.2px",
+								display        : "flex",
+								justifyContent : "center",
+								alignItems     : "center",
+								width          : "100%",
 							}}
-							dangerouslySetInnerHTML={{
-								__html : `<style>
-                               p {
-                                 margin: 0;
-                                 padding: 0;
-                               }
-                             </style>
-                             ${text02}`,
-							}}
-						/>
+						>
+							<div
+								style={{
+									width : "90%",
+								}}
+							>
+								{
+									imgSrc.imgText02 &&
+									<img
+										src={imgSrc.imgText02}
+										alt="Captura de texto"
+										style={{ objectFit : "cover" }}
+									/>
+								}
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
