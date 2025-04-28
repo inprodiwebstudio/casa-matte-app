@@ -11,7 +11,7 @@ export const theme = {
 			variants : {
 				default : (theme) => ({
 					input : {
-						backgroundColor : theme.colorScheme === "dark" ? undefined: theme.colors.gray[0],
+						backgroundColor : theme.colorScheme === "dark" ? "red": theme.colors.gray[0],
 					},
 				}),
 			},

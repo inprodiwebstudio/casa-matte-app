@@ -12,6 +12,8 @@ const WorkSpace = Loadable(lazy(() => import("pages/dashboard/WorkSpace")));
 const LayoutsNotFound = Loadable(lazy(() => import("pages/NotFoundLayouts")));
 const AuthValidate = Loadable(lazy(() => import("pages/AuthValidate")));
 const PrivateRoute = Loadable(lazy(() => import("components/global/PrivateRoute")));
+const PrivateAdminRoute = Loadable(lazy(() => import("components/global/PrivateAdminRoute")));
+const SearchPhotoBook = Loadable(lazy(() => import("pages/SearchPhotoBook")));
 // //Erros
 const ErrorPage = Loadable(lazy(() => import("pages/ErrorPage")));
 
@@ -31,6 +33,10 @@ const Router = () => {
 		{
 			path    : "auth-validate",
 			element : <AuthValidate />,
+		},
+		{
+			path    : "admin",
+			element : <PrivateAdminRoute component={SearchPhotoBook} />,
 		},
 		{
 			path     : "order",
