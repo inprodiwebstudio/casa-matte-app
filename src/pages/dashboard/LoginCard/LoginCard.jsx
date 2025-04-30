@@ -60,7 +60,7 @@ const LoginCard = () => {
 				return;
 			}
 
-			const userName = (currentEmail === adminEmail) ? "Administrador" : "demo";
+			const userName = (currentEmail === adminEmail) ? "casamatteadmin" : "demo";
 
 			try {
 				const userData = await fetchData({ module : `wp-json/wp/v2/users?slug=${userName}`}).unwrap();
