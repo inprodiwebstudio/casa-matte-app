@@ -59,7 +59,7 @@ const ConfirmationToPrint = ({ innerProps }) => {
 						},
 						line_items : [
 							{
-								product_id : 28632,
+								product_id : 28553,
 								quantity   : 1,
 								total      : handlerExtraCost().toString(),
 								subtotal   : handlerExtraCost().toString(),

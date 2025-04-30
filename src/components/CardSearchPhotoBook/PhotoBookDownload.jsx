@@ -18,10 +18,16 @@ import JSZip                   from "jszip";
 import SquareLarge             from "components/MyModsLayouts/SquareLarge";
 import TravelCoffeeTable       from "components/MyModsLayouts/TravelCoffeeTable";
 import { Document, Page, pdf } from "@react-pdf/renderer";
+import { useDispatch }         from "react-redux";
+import { workSpaceSlice }      from "store/Slices";
+import { openContextModal }    from "@mantine/modals";
 
 const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const [ photoBookConfigData, setPhotoBookConfigData ] = useState(undefined);
 	const [ isLoading, setIsLoading ] = useState(false);
+
+	const dispatch = useDispatch();
+
 
 	const photoBookTypes = {
 		vertical : {
@@ -84,6 +90,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		const myData = photoBookData?.metas?.config[0];
 		const newData = myData.replace(".heic", ".png");
 		const parseJSON = JSON.parse(newData);
+		dispatch(workSpaceSlice.actions.insertData({...parseJSON}));
 		setPhotoBookConfigData({...parseJSON});
 	};
 
@@ -116,7 +123,6 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		  await Promise.all(imageUrls.map((url) => loadImageWithRetry(url)));
 		  return true; // Todo OK
 		} catch (error) {
-			console.log(error);
 		  console.error("Error cargando imágenes:", error.message);
 		  return false; // Al menos una imagen falló
 		}
@@ -209,7 +215,12 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		const urlPhotos = listOfPhotos(photoBookConfigData?.pages);
 		const imagesOk = await validateAllImages(urlPhotos);
 		if (imagesOk) {
-			await createPDFPhotoBook(photoBookConfigData);
+			openContextModal({
+				modal      : "testPdf",
+				innerProps : {
+					photoBookData : photoBookConfigData,
+				},
+			});
 			setIsLoading(false);
 			return;
 		}
@@ -348,7 +359,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 						rightIcon={<SaveIcom size="12px" />}
 						fullWidth
 					>
-						DESCARGAR
+						PREVISUALIZAR Y DESCARGAR
 					</Button>
 					<Button
 						color="darkCasaMatte.6"
