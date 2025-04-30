@@ -1,5 +1,5 @@
 import { Card, Stack, Divider, Text, Group, Button } from "@mantine/core";
-import { convertToArray }                            from "helpers";
+import { convertToArray, isValidArray, textToImage } from "helpers";
 import { useEffect, useState }                       from "react";
 import { SaveIcom }                                  from "Resources/icons";
 import { loadImageWithRetry }                        from "./cardSearchPhotoBook.helpers";
@@ -18,8 +18,15 @@ import JSZip                   from "jszip";
 import SquareLarge             from "components/MyModsLayouts/SquareLarge";
 import TravelCoffeeTable       from "components/MyModsLayouts/TravelCoffeeTable";
 import { Document, Page, pdf } from "@react-pdf/renderer";
+import GhostPages              from "./GhostPages";
+import { workSpaceSlice }      from "store/Slices";
+import { useDispatch }         from "react-redux";
+import { openContextModal }    from "@mantine/modals";
 
 const PhotoBookDownload = ({ photoBookData, onReturn }) => {
+	const dispatch = useDispatch();
+
+
 	const [ photoBookConfigData, setPhotoBookConfigData ] = useState(undefined);
 	const [ isLoading, setIsLoading ] = useState(false);
 
@@ -85,6 +92,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		const newData = myData.replace(".heic", ".png");
 		const parseJSON = JSON.parse(newData);
 		setPhotoBookConfigData({...parseJSON});
+		dispatch(workSpaceSlice.actions.insertData({ ...parseJSON }));
 	};
 
 	const listOfPhotos = (pages) => {
@@ -128,7 +136,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		return photoBookConfigData?.format;
 	};
 
-	const getComponent = (pageData) => {
+	const getComponent = (pageData, imagesText) => {
 		const Sheet1Layout = photoBookTypes[handlerFormat(photoBookConfigData?.product)]?.[photoBookConfigData?.sizePhotoBook]?.modLayouts[pageData?.sheet1?.layoutType]?.pdfLayout;
 
 		const Sheet2Layout = photoBookTypes[handlerFormat(photoBookConfigData?.product)]?.[photoBookConfigData?.sizePhotoBook]?.modLayouts[pageData?.sheet2?.layoutType]?.pdfLayout;
@@ -139,12 +147,24 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			<>
 				{Sheet1Layout ? (
 					<Page size={sizePages}>
-						<Sheet1Layout images={pageData?.sheet1?.photos} text={pageData?.sheet1?.text} />
+						<Sheet1Layout
+							images={pageData?.sheet1?.photos}
+							text={pageData?.sheet1?.text}
+							modLayout={pageData?.sheet1?.layoutType}
+							pageNo={pageData?.sheet1?.pageNo}
+							textImages={imagesText?.sheet1}
+						/>
 					</Page>
 				) : undefined}
 				{Sheet2Layout ? (
 					<Page size={sizePages}>
-						<Sheet2Layout images={pageData?.sheet2?.photos} text={pageData?.sheet2?.text} />
+						<Sheet2Layout
+							images={pageData?.sheet2?.photos}
+							text={pageData?.sheet2?.text}
+							modLayout={pageData?.sheet2?.layoutType}
+							pageNo={pageData?.sheet2?.pageNo}
+							textImages={imagesText?.sheet2}
+						/>
 					</Page>
 				) : undefined}
 			</>
@@ -157,7 +177,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 	const sizeFrontPage = photoBookTypes[handlerFormat(photoBookConfigData?.product)]?.[photoBookConfigData?.sizePhotoBook]?.frontSize;
 
-	const MyDocGenerate = ({listPages}) => {
+	const MyDocGenerate = ({listPages, imagesText}) => {
 		return (
 			<Document>
 				<>
@@ -176,7 +196,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 						)
 					}
 					{
-						listPages.map((pageData, index) => getComponent(pageData, index))
+						listPages.map((pageData, index) => getComponent(pageData, imagesText[index]))
 					}
 				</>
 			</Document>
@@ -194,8 +214,40 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const createPDFPhotoBook = async (photBookConfig) => {
 		try {
 			const listPages = convertToArray(photBookConfig?.pages);
-			// Generar el documento PDF como un Blob
-			const blob = await pdf(<MyDocGenerate listPages={listPages} />).toBlob();
+
+			const textImages = listPages.map(async (pageData) => {
+				const textToImages = async (dataText) => {
+					const listOfText = convertToArray(dataText.text);
+					if (isValidArray(listOfText)) {
+						const imagesText = await Promise.all(listOfText.map( async (text, index) => {
+							if (!text) return undefined;
+							const idRefDomText = `${dataText.pageNo}-${dataText.layoutType}-text${index+1}`;
+							const blobImageText = await textToImage(idRefDomText);
+							return blobImageText;
+						}));
+						return imagesText;
+					}
+					return [];
+				};
+
+				const imagesTextSheet1 = await textToImages(pageData?.sheet1);
+
+				if (pageData?.sheet2) {
+					const imagesTextSheet2 = await textToImages(pageData?.sheet2);
+					return {
+						sheet1 : imagesTextSheet1,
+						sheet2 : imagesTextSheet2,
+					};
+				}
+
+				return {
+					sheet1 : imagesTextSheet1,
+				};
+			});
+
+			const listOfImagesText = await Promise.all(textImages);
+
+			const blob = await pdf(<MyDocGenerate imagesText={listOfImagesText} listPages={listPages} />).toBlob();
 
 			await zipDownload(blob);
 		} catch (error) {
@@ -222,149 +274,175 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	}, [photoBookData]);
 
 	return (
-		<Card
-			radius="13px"
-			shadow="lg"
-			w="40%"
-			p="30px"
-			pt="35px"
-			style={{
-				backgroundColor : "#F7F5F1",
-			}}
-			withBorder
-		>
-			<Stack>
-				<Stack spacing={3}>
-					<Text
-						style={{
-							letterSpacing : "4px",
-						}}
-					>
-						DATOS DEL PEDIDO
-					</Text>
-					<Group spacing={30}>
-						<Stack spacing={3}>
-							<Text
-								color="gray"
-								size="13px"
-								weight={400}
-							>
-								NO DE PEDIDO
-							</Text>
-							<Text
-								weight={400}
-								size="14px"
-							>
-								#{photoBookData?.metas?.id_del_pedido[0] ?? "--"}
-							</Text>
-						</Stack>
-						<Stack spacing={3}>
-							<Text
-								color="gray"
-								size="13px"
-								weight={400}
-							>
-								ID PHOTOBOOK
-							</Text>
-							<Text
-								weight={400}
-								size="14px"
-							>
-								{photoBookData?.id ?? "--"}
-							</Text>
-						</Stack>
-						<Stack spacing={3}>
-							<Text
-								color="gray"
-								size="13px"
-								weight={400}
-							>
-								CORREO DEL AUTOR
-							</Text>
-							<Text
-								weight={400}
-								size="14px"
-							>
-								{photoBookData?.metas?.correo_del_autor[0] ?? "--"}
-							</Text>
-						</Stack>
-					</Group>
+		<Stack>
+			<Card
+				radius="13px"
+				shadow="lg"
+				w="40%"
+				p="30px"
+				pt="35px"
+				style={{
+					backgroundColor : "#F7F5F1",
+				}}
+				withBorder
+			>
+				<Stack>
+					<Stack spacing={3}>
+						<Text
+							style={{
+								letterSpacing : "4px",
+							}}
+						>
+							DATOS DEL PEDIDO
+						</Text>
+						<Group spacing={30}>
+							<Stack spacing={3}>
+								<Text
+									color="gray"
+									size="13px"
+									weight={400}
+								>
+									NO DE PEDIDO
+								</Text>
+								<Text
+									weight={400}
+									size="14px"
+								>
+									#{photoBookData?.metas?.id_del_pedido[0] ?? "--"}
+								</Text>
+							</Stack>
+							<Stack spacing={3}>
+								<Text
+									color="gray"
+									size="13px"
+									weight={400}
+								>
+									ID PHOTOBOOK
+								</Text>
+								<Text
+									weight={400}
+									size="14px"
+								>
+									{photoBookData?.id ?? "--"}
+								</Text>
+							</Stack>
+							<Stack spacing={3}>
+								<Text
+									color="gray"
+									size="13px"
+									weight={400}
+								>
+									CORREO DEL AUTOR
+								</Text>
+								<Text
+									weight={400}
+									size="14px"
+								>
+									{photoBookData?.metas?.correo_del_autor[0] ?? "--"}
+								</Text>
+							</Stack>
+						</Group>
+					</Stack>
+					<Divider size="sm" variant="dashed" />
+					<Stack spacing={3}>
+						<Text
+							style={{
+								letterSpacing : "4px",
+							}}
+						>
+							INFORMACIÓN DEL PHOTOBOOK
+						</Text>
+						<Group
+							spacing={30}
+						>
+							<Stack spacing={3}>
+								<Text
+									color="gray"
+									size="13px"
+									weight={400}
+								>
+									MODELO
+								</Text>
+								<Text
+									weight={400}
+									size="14px"
+								>
+									{photoBookData?.metas?.modelo[0] ?? "--"}
+								</Text>
+							</Stack>
+							<Stack spacing={3}>
+								<Text
+									color="gray"
+									size="13px"
+									weight={400}
+								>
+									TAMAÑO
+								</Text>
+								<Text
+									weight={400}
+									size="14px"
+								>
+									{photoBookData?.metas?.tamano[0] ?? "--"}
+								</Text>
+							</Stack>
+						</Group>
+					</Stack>
+					<Stack spacing={"0px"}>
+						<Button
+							color="darkCasaMatte.7"
+							size="xs"
+							mt="20px"
+							sx={{
+								fontWeight : "200",
+							}}
+							loading={isLoading}
+							onClick={() => handlerDownload()}
+							rightIcon={<SaveIcom size="12px" />}
+							fullWidth
+						>
+							DESCARGAR
+						</Button>
+						<Button
+							color="darkCasaMatte.7"
+							size="xs"
+							mt="20px"
+							sx={{
+								fontWeight : "200",
+							}}
+							loading={isLoading}
+							onClick={() => openContextModal({
+								modal      : "testPdf",
+								innerProps : {
+									photoBookData : photoBookConfigData,
+								},
+							})}
+							rightIcon={<SaveIcom size="12px" />}
+							fullWidth
+						>
+							PRE VISUALIZAR
+						</Button>
+						<Button
+							color="darkCasaMatte.6"
+							size="xs"
+							mt="20px"
+							sx={{
+								fontWeight : "200",
+							}}
+							onClick={onReturn}
+							loading={isLoading}
+							fullWidth
+						>
+							REGRESAR
+						</Button>
+					</Stack>
 				</Stack>
-				<Divider size="sm" variant="dashed" />
-				<Stack spacing={3}>
-					<Text
-						style={{
-							letterSpacing : "4px",
-						}}
-					>
-						INFORMACIÓN DEL PHOTOBOOK
-					</Text>
-					<Group
-						spacing={30}
-					>
-						<Stack spacing={3}>
-							<Text
-								color="gray"
-								size="13px"
-								weight={400}
-							>
-								MODELO
-							</Text>
-							<Text
-								weight={400}
-								size="14px"
-							>
-								{photoBookData?.metas?.modelo[0] ?? "--"}
-							</Text>
-						</Stack>
-						<Stack spacing={3}>
-							<Text
-								color="gray"
-								size="13px"
-								weight={400}
-							>
-								TAMAÑO
-							</Text>
-							<Text
-								weight={400}
-								size="14px"
-							>
-								{photoBookData?.metas?.tamano[0] ?? "--"}
-							</Text>
-						</Stack>
-					</Group>
-				</Stack>
-				<Stack spacing={"0px"}>
-					<Button
-						color="darkCasaMatte.7"
-						size="xs"
-						mt="20px"
-						sx={{
-							fontWeight : "200",
-						}}
-						loading={isLoading}
-						onClick={() => handlerDownload()}
-						rightIcon={<SaveIcom size="12px" />}
-						fullWidth
-					>
-						DESCARGAR
-					</Button>
-					<Button
-						color="darkCasaMatte.6"
-						size="xs"
-						mt="20px"
-						sx={{
-							fontWeight : "200",
-						}}
-						onClick={onReturn}
-						loading={isLoading}
-						fullWidth
-					>
-						REGRESAR
-					</Button>
-				</Stack>
-			</Stack>
-		</Card>
+			</Card>
+			{
+				photoBookConfigData && (
+					<GhostPages photoBookData={photoBookConfigData} />
+				)
+			}
+		</Stack>
 	);
 };
 
