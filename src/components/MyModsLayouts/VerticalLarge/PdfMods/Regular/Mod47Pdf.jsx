@@ -1,48 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
-import Html            from "react-pdf-html";
-import ReactDOMServer  from "react-dom/server";
-import { textToImage } from "helpers";
+import Html           from "react-pdf-html";
+import ReactDOMServer from "react-dom/server";
 
 
 const Mod47Pdf = ({
 	text,
 	modLayout,
 	pageNo,
+	textImages,
 }) => {
-
-	const [imgSrc, setImgSrc] = useState({
-		imgText01 : undefined,
-		imgText02 : undefined,
-		imgText03 : undefined,
-		imgText04 : undefined,
-		imgText05 : undefined,
-		imgText06 : undefined,
-	});
-
-	const insertImg = async () => {
-		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
-		const imgText02 = await textToImage(`${pageNo}-${modLayout}-text2`);
-		const imgText03 = await textToImage(`${pageNo}-${modLayout}-text3`);
-		const imgText04 = await textToImage(`${pageNo}-${modLayout}-text4`);
-		const imgText05 = await textToImage(`${pageNo}-${modLayout}-text5`);
-		const imgText06 = await textToImage(`${pageNo}-${modLayout}-text6`);
-
-		setImgSrc({
-			imgText01 : imgText01,
-			imgText02 : imgText02,
-			imgText03 : imgText03,
-			imgText04 : imgText04,
-			imgText05 : imgText05,
-			imgText06 : imgText06,
-		});
-	};
-
-	useEffect(() => {
-		insertImg();
-	}, []);
 
 	const bodyHtml = (
 		<div
@@ -87,12 +56,13 @@ const Mod47Pdf = ({
 							}}
 						>
 							{
-								imgSrc.imgText01 &&
+								textImages[0] && (
 									<img
-										src={imgSrc.imgText01}
+										src={textImages[0]}
 										alt="Captura de texto"
 										style={{ objectFit : "cover" }}
 									/>
+								)
 							}
 						</div>
 						<div
@@ -101,51 +71,13 @@ const Mod47Pdf = ({
 							}}
 						>
 							{
-								imgSrc.imgText02 &&
+								textImages[1] && (
 									<img
-										src={imgSrc.imgText02}
+										src={textImages[1]}
 										alt="Captura de texto"
 										style={{ objectFit : "cover" }}
 									/>
-							}
-						</div>
-					</div>
-					<div
-						style={{
-							width          : "100%",
-							display        : "flex",
-							flexDirection  : "column",
-							gap            : "10px",
-							justifyContent : "flex-start",
-							alignItems     : "flex-start",
-						}}
-					>
-						<div
-							style={{
-								width : "100%",
-							}}
-						>
-							{
-								imgSrc.imgText03 &&
-									<img
-										src={imgSrc.imgText03}
-										alt="Captura de texto"
-										style={{ objectFit : "cover" }}
-									/>
-							}
-						</div>
-						<div
-							style={{
-								width : "100%",
-							}}
-						>
-							{
-								imgSrc.imgText04 &&
-									<img
-										src={imgSrc.imgText04}
-										alt="Captura de texto"
-										style={{ objectFit : "cover" }}
-									/>
+								)
 							}
 						</div>
 					</div>
@@ -165,12 +97,13 @@ const Mod47Pdf = ({
 							}}
 						>
 							{
-								imgSrc.imgText05 &&
+								textImages[2] && (
 									<img
-										src={imgSrc.imgText05}
+										src={textImages[2]}
 										alt="Captura de texto"
 										style={{ objectFit : "cover" }}
 									/>
+								)
 							}
 						</div>
 						<div
@@ -179,12 +112,54 @@ const Mod47Pdf = ({
 							}}
 						>
 							{
-								imgSrc.imgText06 &&
+								textImages[3] && (
 									<img
-										src={imgSrc.imgText06}
+										src={textImages[3]}
 										alt="Captura de texto"
 										style={{ objectFit : "cover" }}
 									/>
+								)
+							}
+						</div>
+					</div>
+					<div
+						style={{
+							width          : "100%",
+							display        : "flex",
+							flexDirection  : "column",
+							gap            : "10px",
+							justifyContent : "flex-start",
+							alignItems     : "flex-start",
+						}}
+					>
+						<div
+							style={{
+								width : "100%",
+							}}
+						>
+							{
+								textImages[4] && (
+									<img
+										src={textImages[4]}
+										alt="Captura de texto"
+										style={{ objectFit : "cover" }}
+									/>
+								)
+							}
+						</div>
+						<div
+							style={{
+								width : "100%",
+							}}
+						>
+							{
+								textImages[5] && (
+									<img
+										src={textImages[5]}
+										alt="Captura de texto"
+										style={{ objectFit : "cover" }}
+									/>
+								)
 							}
 						</div>
 					</div>

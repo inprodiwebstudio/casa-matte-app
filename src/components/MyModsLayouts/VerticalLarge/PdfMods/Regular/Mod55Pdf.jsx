@@ -1,35 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
 import Html           from "react-pdf-html";
 import ReactDOMServer from "react-dom/server";
 
-import { imgUrlPdf, textToImage } from "helpers";
-
 
 const Mod55Pdf = ({
 	text,
-	images,
 	modLayout,
 	pageNo,
+	textImages,
 }) => {
-
-	const [imgSrc, setImgSrc] = useState({
-		imgText01 : undefined,
-	});
-
-	const insertImg = async () => {
-		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
-
-		setImgSrc({
-			imgText01 : imgText01,
-		});
-	};
-
-	useEffect(() => {
-		insertImg();
-	}, []);
 
 	const bodyHtml = (
 		<div
@@ -62,12 +44,13 @@ const Mod55Pdf = ({
 						}}
 					>
 						{
-							imgSrc.imgText01 &&
+							textImages[0] && (
 								<img
-									src={imgSrc.imgText01}
+									src={textImages[0]}
 									alt="Captura de texto"
 									style={{ objectFit : "cover" }}
 								/>
+							)
 						}
 					</div>
 				</div>
@@ -88,14 +71,11 @@ const Mod55Pdf = ({
 						}}
 					>
 						{
-							images[0]?.url && (
+							textImages[1] && (
 								<img
-									src={imgUrlPdf(images[0])}
-									alt="test"
-									style={{
-										objectFit : "cover",
-										height    : "100%",
-									}}
+									src={textImages[1]}
+									alt="Captura de texto"
+									style={{ objectFit : "cover" }}
 								/>
 							)
 						}
@@ -118,14 +98,11 @@ const Mod55Pdf = ({
 							}}
 						>
 							{
-								images[1]?.url && (
+								textImages[2] && (
 									<img
-										src={imgUrlPdf(images[1])}
-										alt="test"
-										style={{
-											objectFit : "cover",
-											height    : "100%",
-										}}
+										src={textImages[2]}
+										alt="Captura de texto"
+										style={{ objectFit : "cover" }}
 									/>
 								)
 							}
@@ -139,14 +116,11 @@ const Mod55Pdf = ({
 							}}
 						>
 							{
-								images[2]?.url && (
+								textImages[3] && (
 									<img
-										src={imgUrlPdf(images[2])}
-										alt="test"
-										style={{
-											objectFit : "cover",
-											height    : "100%",
-										}}
+										src={textImages[3]}
+										alt="Captura de texto"
+										style={{ objectFit : "cover" }}
 									/>
 								)
 							}

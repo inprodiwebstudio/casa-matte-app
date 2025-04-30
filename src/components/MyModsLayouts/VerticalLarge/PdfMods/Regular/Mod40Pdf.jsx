@@ -1,34 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
 import Html             from "react-pdf-html";
 import ReactDOMServer   from "react-dom/server";
 import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
-import { textToImage }  from "helpers";
 
 
 const Mod40Pdf = ({
 	text,
 	modLayout,
 	pageNo,
+	textImages,
 }) => {
-
-	const [imgSrc, setImgSrc] = useState({
-		imgText01 : undefined,
-	});
-
-	const insertImg = async () => {
-		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
-
-		setImgSrc({
-			imgText01 : imgText01,
-		});
-	};
-
-	useEffect(() => {
-		insertImg();
-	}, []);
 
 	const bodyHtml = (
 		<div
@@ -70,12 +54,13 @@ const Mod40Pdf = ({
 						}}
 					>
 						{
-							imgSrc.imgText01 &&
-							<img
-								src={imgSrc.imgText01}
-								alt="Captura de texto"
-								style={{ objectFit : "cover" }}
-							/>
+							textImages[0] && (
+								<img
+									src={textImages[0]}
+									alt="Captura de texto"
+									style={{ objectFit : "cover" }}
+								/>
+							)
 						}
 					</div>
 				</div>

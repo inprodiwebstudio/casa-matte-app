@@ -1,37 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
-import Html            from "react-pdf-html";
-import ReactDOMServer  from "react-dom/server";
-import { textToImage } from "helpers";
+import Html           from "react-pdf-html";
+import ReactDOMServer from "react-dom/server";
 
 
 const Mod37Pdf = ({
 	text,
 	modLayout,
 	pageNo,
+	textImages,
 }) => {
-
-	const [imgSrc, setImgSrc] = useState({
-		imgText01 : undefined,
-		imgText02 : undefined,
-	});
-
-	const insertImg = async () => {
-		const imgText01 = await textToImage(`${pageNo}-${modLayout}-text1`);
-		const imgText02 = await textToImage(`${pageNo}-${modLayout}-text2`);
-
-		setImgSrc({
-			imgText01 : imgText01,
-			imgText02 : imgText02,
-		});
-	};
-
-	useEffect(() => {
-		insertImg();
-	}, []);
-
 	const bodyHtml = (
 		<div
 			style={{
@@ -57,12 +37,13 @@ const Mod37Pdf = ({
 					}}
 				>
 					{
-						imgSrc.imgText01 &&
-						<img
-							src={imgSrc.imgText01}
-							alt="Captura de texto"
-							style={{ objectFit : "cover" }}
-						/>
+						textImages[0] && (
+							<img
+								src={textImages[0]}
+								alt="Captura de texto"
+								style={{ objectFit : "cover" }}
+							/>
+						)
 					}
 				</div>
 				<div
@@ -71,12 +52,13 @@ const Mod37Pdf = ({
 					}}
 				>
 					{
-						imgSrc.imgText02 &&
-						<img
-							src={imgSrc.imgText02}
-							alt="Captura de texto"
-							style={{ objectFit : "cover" }}
-						/>
+						textImages[1] && (
+							<img
+								src={textImages[1]}
+								alt="Captura de texto"
+								style={{ objectFit : "cover" }}
+							/>
+						)
 					}
 				</div>
 			</div>
