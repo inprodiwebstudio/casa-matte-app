@@ -1,6 +1,6 @@
-import telaTexture     from "/Resources/images/texturesFronts/tela_textura.jpg";
-import curlPielTexture from "/Resources/images/texturesFronts/curlpiel_textura.jpg";
-import papelTexture    from "/Resources/images/texturesFronts/papel_textura.jpg";
+import telaTexture     from "../../Resources/images/texturesFronts/tela_textura.jpg";
+import curlPielTexture from "../../Resources/images/texturesFronts/curlpiel_textura.jpg";
+import papelTexture    from "../../Resources/images/texturesFronts/papel_textura.jpg";
 
 const frontThemesTextures = {
 	BRIGHT : {

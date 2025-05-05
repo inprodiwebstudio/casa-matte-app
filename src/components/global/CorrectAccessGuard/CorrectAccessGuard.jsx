@@ -30,6 +30,7 @@ import PayConfirm                                 from "pages/PayConfirm";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { usePhotoBookPreset }                     from "helpers/Hooks/usePhotoBookPreset";
 import NotPaid                                    from "components/NotPaid";
+import handlerMaterialAndColorLining              from "helpers/handlerMaterialAndColorLining";
 
 const { useLazyGetDataQuery } = genericApi;
 
@@ -379,8 +380,14 @@ const CorrectAccessGuard = () => {
 		const myData = photoBookConfigData?.meta?.config;
 		const parseJSON = JSON.parse(myData);
 
+		const cover = !photoBookConfigData.meta.color_de_tela ? undefined : {
+			material : handlerMaterialAndColorLining(photoBookConfigData.meta.color_de_tela).materialName,
+			color    : handlerMaterialAndColorLining(photoBookConfigData.meta.color_de_tela).colorName,
+		};
+
 		dispatch(workSpaceSlice.actions.insertData({
 			...parseJSON,
+			cover    : cover,
 			modified : photoBookConfigData?.modified ?? undefined,
 			orderId  : photoBookConfigData?.meta?.id_del_pedido ?? undefined,
 		}));
