@@ -387,7 +387,7 @@ const CorrectAccessGuard = () => {
 
 		dispatch(workSpaceSlice.actions.insertData({
 			...parseJSON,
-			cover    : cover,
+			cover    : parseJSON?.cover ? parseJSON?.cover : cover,
 			modified : photoBookConfigData?.modified ?? undefined,
 			orderId  : photoBookConfigData?.meta?.id_del_pedido ?? undefined,
 		}));

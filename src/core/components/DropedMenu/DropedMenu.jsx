@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 //Own components
 import { shallowEqual, useSelector } from "react-redux";
+import ColorPickerCover              from "./ColorPickerCover";
 import { ArrowTop }                  from "Resources/icons";
 import { MenuItem }                  from "core/components";
 // import { convertToArray, currencyFormat } from "helpers";
@@ -72,6 +73,10 @@ const DropedMenu = () => {
 				<div className="menu-item">
 					<label>PASTA</label>
 					<MenuItem body={pasta ?? ""} />
+				</div>
+				<div className="menu-item">
+					<label>COLOR DE PORTADA</label>
+					<ColorPickerCover />
 				</div>
 				<div className="menu-item">
 					<label>TAMAÑO</label>

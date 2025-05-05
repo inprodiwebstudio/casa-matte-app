@@ -22,6 +22,7 @@ const initialState = {
 				},
 			},
 		},
+		cover         : undefined,
 		minPages      : 0,
 		maxPages      : 0,
 		numberOfPages : 50,
@@ -217,6 +218,9 @@ export const workSpaceSlice = createSlice({
 		},
 		setCurrentPhotoDrager : (state, {payload}) => {
 			state.currentPhotoDragger = payload;
+		},
+		changeColorCover : (state, {payload}) => {
+			state.data.cover.color = payload;
 		},
 		setLayoutFilter : (state, {payload}) => {
 			state.layoutFilter = payload;
