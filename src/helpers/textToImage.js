@@ -2,7 +2,6 @@
 import domtoimage from "dom-to-image";
 
 const textToImage = async (id) => {
-	console.log(id);
 	const element = document.getElementById(id);
 
 	if (!element) return undefined;
