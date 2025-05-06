@@ -16,7 +16,7 @@ const FrontMod6 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 	return (
 		<Flex
 			p="0%"
-			pl="0%"
+			pl="15%"
 			w="100%"
 			h="100%"
 			sx={{position : "relative"}}

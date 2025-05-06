@@ -1,16 +1,53 @@
+import { Stack }                     from "@mantine/core";
+import Text                          from "components/LayoutHandler/Text";
+import { TextShell }                 from "core/components";
+import { textInsertion }             from "helpers";
+import { shallowEqual, useSelector } from "react-redux";
+
 const SpineCover = ({
 	isInPaginator,
+	isThumbNail,
 }) => {
+	const defaultSpineBook = "<p style='text-align: center;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+
+	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
+
+	const boundText = textInsertion(photoBookData?.bound, defaultSpineBook, true);
+
 	return (
 		<div
 			style={{
-				width       : "5%",
-				height      : "100%",
-				borderRight : `${isInPaginator ? "1px" : "3px"} solid rgb(217, 216, 216)`,
-				borderLeft  : `${isInPaginator ? "1px" : "3px"} solid rgb(217, 216, 216)`,
+				width          : "5%",
+				height         : "100%",
+				borderRight    : `${isInPaginator ? "1px" : "3px"} solid rgb(217, 216, 216)`,
+				borderLeft     : `${isInPaginator ? "1px" : "3px"} solid rgb(217, 216, 216)`,
+				display        : "flex",
+				justifyContent : "center",
+				alignItems     : "center",
 			}}
 		>
-			&nbsp;
+			<Stack
+				style={{
+					writingMode : "vertical-rl",
+				}}
+				justify="center"
+				align="center"
+			>
+				<Text
+					isBound={true}
+					sizes={{
+						"chico"   : "28px",
+						"regular" : "30px",
+						"grande"  : "34px",
+					}}
+					align="center"
+					textShell={() => <TextShell.Title />}
+					data={boundText}
+					isInPaginator={isInPaginator}
+					isThumbNail={isThumbNail}
+					textNo={0}
+				/>
+			</Stack>
 		</div>
 	);
 };

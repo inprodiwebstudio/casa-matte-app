@@ -80,7 +80,7 @@ const CoverBook = ({
 				>
 				&nbsp;
 				</Box>
-				<SpineCover isInPaginator={isInPaginator} />
+				<SpineCover isThumbNail={isThumbNail} isInPaginator={isInPaginator} />
 				<Box
 					style={{
 						height : "100%",
