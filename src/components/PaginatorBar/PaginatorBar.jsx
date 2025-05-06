@@ -8,15 +8,18 @@ import LoadingPaginator                                           from "./Loadin
 import { workSpaceSlice }                                         from "store/Slices";
 import { convertToArray, isValidArray, convertToObject, bindAll } from "helpers";
 import { ScrollBar }                                              from "core/components";
-import FrontPage                                                  from "./FrontPage";
+// import FrontPage                                                  from "./FrontPage";
 import "./PaginatorBar.scss";
-import { openContextModal }                                       from "@mantine/modals";
+import { openContextModal } from "@mantine/modals";
+import CoverBookItem        from "./CoverBookItem";
+import { Group }            from "@mantine/core";
 
 const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, loading, productType}) => {
 	const [ pageList, setPageList ] = useState({
 		pages    : {},
 		pagesIds : [],
 	});
+
 
 	let counter = 1;
 
@@ -153,11 +156,20 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 					</ScrollBar>
 				) : (
 					<ScrollBar>
-						{
-							(productType === "white") && (
-								<FrontPage />
-							)
-						}
+						<CoverBookItem />
+						<Group
+							position="center"
+							mb="10px"
+							mt="5px"
+						>
+							<p
+								style={{
+									fontSize : "12px",
+								}}
+							>
+								PORTADA
+							</p>
+						</Group>
 						<ItemPage
 							isFixedPage
 							handleDelete={handleDelete}

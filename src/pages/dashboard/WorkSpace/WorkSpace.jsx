@@ -8,6 +8,7 @@ import BookPages          from "components/BookPages";
 import { RedoArrow }      from "Resources/icons";
 import { workSpaceSlice } from "store/Slices";
 import "./WorkSpace.scss";
+import CoverBook          from "components/CoverBook";
 
 const WorkSpace = () => {
 	const dispatch = useDispatch();
@@ -101,11 +102,17 @@ const WorkSpace = () => {
 							</div>
 						</div>
 						<div className={`ghost-canva ${handlerTypeProductFormat()}-workSpace ${(!myWorkSpaceData?.sheet2 && (myWorkSpaceData?.id !== "FrontLayout")) && "onePage"}`}>
-							<BookPages
-								isInWorkSpcae={true}
-								loading={false}
-								pageData={myWorkSpaceData}
-							/>
+							{
+								isFrontLayout ? (
+									<CoverBook isInWorkSpace />
+								) : (
+									<BookPages
+										isInWorkSpcae={true}
+										loading={false}
+										pageData={myWorkSpaceData}
+									/>
+								)
+							}
 						</div>
 					</div>
 				</div>

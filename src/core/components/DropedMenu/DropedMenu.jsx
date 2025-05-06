@@ -15,6 +15,7 @@ const DropedMenu = () => {
 	const [ extraPages, setExtraPages ] = useState(0);
 
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
+	const coverData = useSelector((state) => state.workSpaceSlice.data.cover, shallowEqual);
 	const pasta = useSelector((state) => state.workSpaceSlice.data.pasta, shallowEqual);
 	const sizePhotoBook = useSelector((state) => state.workSpaceSlice.data.sizePhotoBook, shallowEqual);
 	const dataPages = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
@@ -74,10 +75,14 @@ const DropedMenu = () => {
 					<label>PASTA</label>
 					<MenuItem body={pasta ?? ""} />
 				</div>
-				<div className="menu-item">
-					<label>COLOR DE PORTADA</label>
-					<ColorPickerCover />
-				</div>
+				{
+					coverData && (
+						<div className="menu-item">
+							<label>COLOR DE PORTADA</label>
+							<ColorPickerCover />
+						</div>
+					)
+				}
 				<div className="menu-item">
 					<label>TAMAÑO</label>
 					<MenuItem body={sizePhotoBook ?? ""} />
