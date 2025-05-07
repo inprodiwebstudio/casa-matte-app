@@ -1,0 +1,93 @@
+import { Badge, Center, ScrollArea, Stack, Table, Text } from "@mantine/core";
+import { isValidArray }                                  from "helpers";
+import React                                             from "react";
+import { ClipLoader }                                    from "react-spinners";
+
+
+const TableOrders = ({
+	isLoading,
+	data,
+	onSelectOrder,
+}) => {
+	return (
+		<Stack
+			sx={{
+				flex : 1,
+			}}
+		>
+			{
+				isLoading && (
+					<Center
+						h="100%"
+					>
+						<ClipLoader />
+					</Center>
+				)
+			}
+			{
+				(!isLoading && !isValidArray(data)) && (
+					<Center
+						h="100%"
+					>
+						<Text>NO SE ENCONTRARON ORDENES</Text>
+					</Center>
+				)
+			}
+			{
+				(data && isValidArray(data)) && (
+					<ScrollArea
+						h="29%"
+					>
+						<Table highlightOnHover striped>
+							<thead>
+								<tr>
+									<th>
+										<Text>NO DE PEDIDO</Text>
+									</th>
+									<th>
+										<Text>NO DE PHOTOBOOK</Text>
+									</th>
+									<th>
+										<Text>CORREO</Text>
+									</th>
+									<th>
+										<Text>STATUS</Text>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								{
+									data.map((photoBook, index) => {
+										return (
+											<tr
+												key={index}
+												onClick={() => onSelectOrder(photoBook)}
+											>
+												<td>
+													<Text>{!photoBook.meta.id_del_pedido ? "--" : `#${photoBook.meta.id_del_pedido}`}</Text>
+												</td>
+												<td>
+													<Text>#{photoBook.id}</Text>
+												</td>
+												<td>
+													<Text>{photoBook.meta.correo_del_autor}</Text>
+												</td>
+												<td>
+													<Badge variant="light" color={(photoBook.meta.status === "48") ? "green" : "orange"}>
+														{photoBook.meta.status === "48" ? "COMPLETADO" : "EDITANDO"}
+													</Badge>
+												</td>
+											</tr>
+										);
+									})
+								}
+							</tbody>
+						</Table>
+					</ScrollArea>
+				)
+			}
+		</Stack>
+	);
+};
+
+export default TableOrders;
