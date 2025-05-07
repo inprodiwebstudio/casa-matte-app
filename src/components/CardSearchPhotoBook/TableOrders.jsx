@@ -36,7 +36,7 @@ const TableOrders = ({
 			{
 				(data && isValidArray(data)) && (
 					<ScrollArea
-						h="29%"
+						h="70vh"
 					>
 						<Table highlightOnHover striped>
 							<thead>
