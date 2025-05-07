@@ -34,7 +34,7 @@ const TableOrders = ({
 				)
 			}
 			{
-				(data && isValidArray(data)) && (
+				(data && isValidArray(data) && !isLoading) && (
 					<ScrollArea
 						h="29%"
 					>
