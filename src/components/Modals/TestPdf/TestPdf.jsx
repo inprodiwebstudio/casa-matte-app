@@ -131,24 +131,34 @@ const TestPdf = ({photoBookData}) => {
 
 		return (
 			<>
-				{Sheet1Layout ? (
+				<Page size={sizePages}>
+					{
+						Sheet1Layout ? (
+							<Sheet1Layout
+								images={pageData?.sheet1?.photos}
+								text={pageData?.sheet1?.text}
+								modLayout={pageData?.sheet1?.layoutType}
+								pageNo={pageData?.sheet1?.pageNo}
+							/>
+						) : (
+							""
+						)
+					}
+				</Page>
+				{pageData.sheet2 ? (
 					<Page size={sizePages}>
-						<Sheet1Layout
-							images={pageData?.sheet1?.photos}
-							text={pageData?.sheet1?.text}
-							modLayout={pageData?.sheet1?.layoutType}
-							pageNo={pageData?.sheet1?.pageNo}
-						/>
-					</Page>
-				) : undefined}
-				{Sheet2Layout ? (
-					<Page size={sizePages}>
-						<Sheet2Layout
-							images={pageData?.sheet2?.photos}
-							text={pageData?.sheet2?.text}
-							modLayout={pageData?.sheet2?.layoutType}
-							pageNo={pageData?.sheet2?.pageNo}
-						/>
+						{
+							Sheet2Layout ? (
+								<Sheet2Layout
+									images={pageData?.sheet2?.photos}
+									text={pageData?.sheet2?.text}
+									modLayout={pageData?.sheet2?.layoutType}
+									pageNo={pageData?.sheet2?.pageNo}
+								/>
+							) : (
+								""
+							)
+						}
 					</Page>
 				) : undefined}
 			</>
