@@ -87,7 +87,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	};
 
 	const getConfigDataPhotoBook = () => {
-		const myData = photoBookData?.metas?.config[0];
+		const myData = photoBookData?.meta?.config;
 		const newData = myData.replace(/\.heic/g, ".jpg");
 		const parseJSON = JSON.parse(newData);
 		dispatch(workSpaceSlice.actions.insertData({...parseJSON}));
@@ -193,9 +193,9 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 	const zipDownload = async (pdfBlob) => {
 		const zip = new JSZip();
-		zip.file(`${photoBookData?.metas?.correo_del_autor[0]}-noPedido-${photoBookData?.metas?.id_del_pedido[0]}-photobookId_${photoBookData?.id}/${photoBookData?.metas?.correo_del_autor[0]}-noPedido-${photoBookData?.metas?.id_del_pedido[0]}-photobookId_${photoBookData?.id}.pdf`, pdfBlob);
+		zip.file(`${photoBookData?.meta?.correo_del_autor}-noPedido-${photoBookData?.meta?.id_del_pedido}-photobookId_${photoBookData?.id}/${photoBookData?.meta?.correo_del_autor}-noPedido-${photoBookData?.meta?.id_del_pedido}-photobookId_${photoBookData?.id}.pdf`, pdfBlob);
 		const content = await zip.generateAsync({ type : "blob" });
-		saveAs(content, `${photoBookData?.metas?.correo_del_autor[0]}-noPedido-${photoBookData?.metas?.id_del_pedido[0]}-photobookId_${photoBookData?.id}.zip`);
+		saveAs(content, `${photoBookData?.meta?.correo_del_autor}-noPedido-${photoBookData?.meta?.id_del_pedido}-photobookId_${photoBookData?.id}.zip`);
 	};
 
 	const createPDFPhotoBook = async (photBookConfig) => {
@@ -228,7 +228,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	};
 
 	useEffect(() => {
-		if (photoBookData) {
+		if (photoBookData && (photoBookData?.meta?.config !== "")) {
 			getConfigDataPhotoBook();
 		}
 	}, [photoBookData]);
@@ -267,7 +267,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 								weight={400}
 								size="14px"
 							>
-								#{photoBookData?.metas?.id_del_pedido[0] ?? "--"}
+								#{photoBookData?.meta?.id_del_pedido ?? "--"}
 							</Text>
 						</Stack>
 						<Stack spacing={3}>
@@ -297,7 +297,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 								weight={400}
 								size="14px"
 							>
-								{photoBookData?.metas?.correo_del_autor[0] ?? "--"}
+								{photoBookData?.meta?.correo_del_autor ?? "--"}
 							</Text>
 						</Stack>
 					</Group>
@@ -326,7 +326,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 								weight={400}
 								size="14px"
 							>
-								{photoBookData?.metas?.modelo[0] ?? "--"}
+								{photoBookData?.meta?.modelo ?? "--"}
 							</Text>
 						</Stack>
 						<Stack spacing={3}>
@@ -341,7 +341,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 								weight={400}
 								size="14px"
 							>
-								{photoBookData?.metas?.tamano[0] ?? "--"}
+								{photoBookData?.meta?.tamano ?? "--"}
 							</Text>
 						</Stack>
 					</Group>
@@ -357,6 +357,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 						loading={isLoading}
 						onClick={() => handlerDownload()}
 						rightIcon={<SaveIcom size="12px" />}
+						disabled={!photoBookConfigData}
 						fullWidth
 					>
 						PREVISUALIZAR Y DESCARGAR
