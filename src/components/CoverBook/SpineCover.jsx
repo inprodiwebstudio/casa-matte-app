@@ -11,8 +11,13 @@ const SpineCover = ({
 	const defaultSpineBook = "<p style='text-align: center;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
+	const availableSpine = useSelector((state) => state.workSpaceSlice.data.availableSpine, shallowEqual);
 
 	const boundText = textInsertion(photoBookData?.bound, defaultSpineBook, true);
+
+	const productType = photoBookData?.product;
+
+	const isAvailablEditeSpine = (productType === "white") || availableSpine;
 
 	return (
 		<div
@@ -33,20 +38,24 @@ const SpineCover = ({
 				justify="center"
 				align="center"
 			>
-				<Text
-					isBound={true}
-					sizes={{
-						"chico"   : "28px",
-						"regular" : "30px",
-						"grande"  : "34px",
-					}}
-					align="center"
-					textShell={() => <TextShell.Title />}
-					data={boundText}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-					textNo={0}
-				/>
+				{
+					isAvailablEditeSpine && (
+						<Text
+							isBound={true}
+							sizes={{
+								"chico"   : "28px",
+								"regular" : "30px",
+								"grande"  : "34px",
+							}}
+							align="center"
+							textShell={() => <TextShell.Title />}
+							data={boundText}
+							isInPaginator={isInPaginator}
+							isThumbNail={isThumbNail}
+							textNo={0}
+						/>
+					)
+				}
 			</Stack>
 		</div>
 	);

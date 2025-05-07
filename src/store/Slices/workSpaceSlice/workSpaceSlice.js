@@ -22,16 +22,17 @@ const initialState = {
 				},
 			},
 		},
-		cover         : undefined,
-		minPages      : 0,
-		maxPages      : 0,
-		numberOfPages : 50,
-		price         : 0,
-		currentPage   : "frontpage",
-		basePrice     : undefined,
-		extraCost     : 50,
-		maxRangePages : 30,
-		pages         : {
+		cover          : undefined,
+		availableSpine : false,
+		minPages       : 0,
+		maxPages       : 0,
+		numberOfPages  : 50,
+		price          : 0,
+		currentPage    : "frontpage",
+		basePrice      : undefined,
+		extraCost      : 50,
+		maxRangePages  : 30,
+		pages          : {
 			page1 : {
 				id     : "page1",
 				sheet1 : {

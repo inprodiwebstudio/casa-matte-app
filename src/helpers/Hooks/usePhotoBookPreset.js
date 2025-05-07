@@ -1,6 +1,7 @@
-import { useDispatch }    from "react-redux";
-import { workSpaceSlice } from "store/Slices";
-import convertToObject    from "helpers/convertToobject";
+import { useDispatch }               from "react-redux";
+import { workSpaceSlice }            from "store/Slices";
+import convertToObject               from "helpers/convertToobject";
+import handlerMaterialAndColorLining from "helpers/handlerMaterialAndColorLining";
 
 export const usePhotoBookPreset = () => {
 	const dispatch = useDispatch();
@@ -15,23 +16,30 @@ export const usePhotoBookPreset = () => {
 		const price = meta?.precio_total?.replace("$", "") ?? "0";
 		const numberOfPages = meta?.numero_de_paginas ? Number(meta?.numero_de_paginas) : 40;
 
+		const cover = !meta.color_de_tela ? undefined : {
+			material : handlerMaterialAndColorLining(!meta.color_de_tela).materialName,
+			color    : handlerMaterialAndColorLining(!meta.color_de_tela).colorName,
+		};
+
 		const configPhotoBookData = {
-			sizePhotoBook : formatAndSize.size,
-			dimentions    : dimensions,
-			product       : model.modelKey,
-			productName   : model.productName,
-			format        : formatAndSize.format,
-			frontPage     : defaultFrontPage(),
+			sizePhotoBook  : formatAndSize.size,
+			dimentions     : dimensions,
+			product        : model.modelKey,
+			productName    : model.productName,
+			format         : formatAndSize.format,
+			frontPage      : defaultFrontPage(),
 			numberOfPages,
-			minPages      : meta?.pasta === "Dura" ? 25 : 10,
-			maxPages      : numberOfPages,
-			currentPage   : "page1",
-			projectTittle : "TITULO",
-			basePrice     : price.replace(" ", ""),
-			bound         : meta?.encuadernado ?? "",
-			pasta         : meta?.pasta ?? "",
-			maxRangePages : numberOfPages,
-			pages         : convertToObject(generatePages(numberOfPages)),
+			minPages       : meta?.pasta === "Dura" ? 25 : 10,
+			maxPages       : numberOfPages,
+			currentPage    : "page1",
+			projectTittle  : "TITULO",
+			basePrice      : price.replace(" ", ""),
+			bound          : meta?.encuadernado ?? "",
+			pasta          : meta?.pasta ?? "",
+			maxRangePages  : numberOfPages,
+			availableSpine : !meta?.grabado_en_lomo ? false : true,
+			cover,
+			pages          : convertToObject(generatePages(numberOfPages)),
 		};
 
 		try {

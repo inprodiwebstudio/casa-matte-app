@@ -387,9 +387,10 @@ const CorrectAccessGuard = () => {
 
 		dispatch(workSpaceSlice.actions.insertData({
 			...parseJSON,
-			cover    : parseJSON?.cover ? parseJSON?.cover : cover,
-			modified : photoBookConfigData?.modified ?? undefined,
-			orderId  : photoBookConfigData?.meta?.id_del_pedido ?? undefined,
+			availableSpine : !photoBookConfigData?.meta?.grabado_en_lomo ? false : true,
+			cover          : parseJSON?.cover ? parseJSON?.cover : cover,
+			modified       : photoBookConfigData?.modified ?? undefined,
+			orderId        : photoBookConfigData?.meta?.id_del_pedido ?? undefined,
 		}));
 	};
 
