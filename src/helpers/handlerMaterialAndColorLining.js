@@ -6,6 +6,7 @@ const handlerMaterialAndColorLining = (colorMaterial) => {
 	let materialName = "";
 	let colorName = "";
 
+
 	for (const materialGroup of materialsGroup) {
 		const containMaterial = colorMaterial.includes(materialGroup);
 

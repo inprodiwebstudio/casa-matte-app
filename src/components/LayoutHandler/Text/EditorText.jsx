@@ -133,7 +133,6 @@ const EditText = ({
 		  const data = editor.getData();
 		  setEditorState(data);
 		  if (isBound) {
-				console.log("Is bound");
 				workSpaceSlice.addTextBound({text : data});
 				return;
 		  }
@@ -157,9 +156,6 @@ const EditText = ({
 				onChange={(event, editor) => {
 					handleEditorChange(event, editor);
 				}}
-				onFocus={ () => {
-					console.log( "Focused!" );
-				} }
 			/>
 		</div>
 	);
