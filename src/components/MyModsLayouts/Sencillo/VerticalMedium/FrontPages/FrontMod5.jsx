@@ -46,6 +46,19 @@ const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 			>
                 &nbsp;
 			</div>
+			<div
+				style={{
+					width           : "100%",
+					height          : "0.02em",
+					position        : "absolute",
+					left            : "0%",
+					top             : isInWorkSpace ? "89.2%" : "83%",
+					backgroundColor : "white",
+					marginTop       : "0.5em",
+				}}
+			>
+				&nbsp;
+			</div>
 			<Stack w="100%" h="100%">
 				<ImgLayout
 					isInWorkSpace={isInWorkSpace}
@@ -62,6 +75,7 @@ const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					left         : "0%",
 					top          : isInWorkSpace ? "45%" : "50%",
 					paddingRight : "10%",
+					paddingLeft  : "15%",
 				}}
 			>
 				<Stack

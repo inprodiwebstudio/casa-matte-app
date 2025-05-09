@@ -9,9 +9,9 @@ import { TextShell }     from "core/components";
 //Own components
 
 const FrontMod3 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+	const defaultText02 = "<p style='text-align: right;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex
@@ -46,6 +46,19 @@ const FrontMod3 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 			>
                 &nbsp;
 			</div>
+			<div
+				style={{
+					width           : "100%",
+					height          : "0.02em",
+					position        : "absolute",
+					left            : "0%",
+					top             : isInWorkSpace ? "89.2%" : "83%",
+					backgroundColor : "white",
+					marginTop       : "0.5em",
+				}}
+			>
+				&nbsp;
+			</div>
 			<Stack w="100%" h="100%">
 				<ImgLayout
 					isInWorkSpace={isInWorkSpace}
@@ -60,9 +73,9 @@ const FrontMod3 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					width        : "100%",
 					position     : "absolute",
 					left         : "0%",
-					top          : isInWorkSpace ? "80%" : "80%",
+					top          : isInWorkSpace ? "76%" : "80%",
 					paddingLeft  : "3%",
-					paddingRight : "14%",
+					paddingRight : "15%",
 				}}
 			>
 				<Stack
@@ -87,9 +100,9 @@ const FrontMod3 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 									"grande"  : "44px",
 								}}
 								isFront={true}
-								align="center"
+								align="right"
 								sheetNo={sheetNo}
-								textShell={() => <TextShell.Title width="30px" />}
+								textShell={() => <TextShell.Title align="right" width="30px" />}
 								data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 								isInPaginator={isInPaginator}
 								isThumbNail={isThumbNail}
@@ -107,9 +120,9 @@ const FrontMod3 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 									"grande"  : "20px",
 								}}
 								isFront={true}
-								align="center"
+								align="right"
 								sheetNo={sheetNo}
-								textShell={() => <TextShell.SubTitle width="20px" />}
+								textShell={() => <TextShell.SubTitle align="right" width="30px" />}
 								data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 								isInPaginator={isInPaginator}
 								isThumbNail={isThumbNail}
