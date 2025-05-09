@@ -89,6 +89,7 @@ const FrontMod4 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					<Stack
 						miw="40%"
 						maw="100%"
+						pl={isInWorkSpace ? "4%" : "0%"}
 					>
 						<Text
 							sizes={{
