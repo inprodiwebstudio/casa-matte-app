@@ -88,7 +88,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 	const getConfigDataPhotoBook = () => {
 		const myData = photoBookData?.meta?.config;
-		const newData = myData.replace(/\.heic/g, ".jpg");
+		const newData = myData.replace(/\.(heic|webp)/g, ".jpg");
 		const parseJSON = JSON.parse(newData);
 		dispatch(workSpaceSlice.actions.insertData({...parseJSON}));
 		setPhotoBookConfigData({...parseJSON});
