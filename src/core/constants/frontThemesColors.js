@@ -1,6 +1,7 @@
 import telaTexture     from "../../Resources/images/texturesFronts/tela_textura.jpg";
 import curlPielTexture from "../../Resources/images/texturesFronts/curlpiel_textura.jpg";
 import papelTexture    from "../../Resources/images/texturesFronts/papel_textura.jpg";
+import pielTexture     from "../../Resources/images/texturesFronts/piel_textura.jpg";
 
 const frontThemesTextures = {
 	BRIGHT : {
@@ -200,51 +201,51 @@ const frontThemesTextures = {
 	CURPIEL : {
 		Marfil : {
 			color      : "#A79E8C",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 		Avena : {
 			color      : "#c8bdac",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 		Topo : {
 			color      : "#918575",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 		"Gris claro" : {
 			color      : "#8D8E8A",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 		"Girs obscuro" : {
 			color      : "#48443F",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 		Negro : {
 			color      : "#232323",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 		"Azul marino" : {
 			color      : "#28384E",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 		Tabaco : {
 			color      : "#3A2519",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 		Chocolate : {
 			color      : "#593E29",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 		Arcilla : {
 			color      : "#532722",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 		Ladrillo : {
 			color      : "#7A342A",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 		Camello : {
 			color      : "#7E552C",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 	},
 	"PIEL VEGANA" : {
