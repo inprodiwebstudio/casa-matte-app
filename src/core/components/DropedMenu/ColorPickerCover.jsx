@@ -38,7 +38,10 @@ const ColorPickerCover = () => {
 							}}
 							w="20px"
 							h="20px"
-							onClick={() => dispatch(workSpaceSlice.actions.changeColorCover(color))}
+							onClick={() => dispatch(workSpaceSlice.actions.changeColorCover({
+								material : coverData?.material,
+								color    : color,
+							}))}
 						>
 						&nbsp;
 						</Box>
@@ -72,7 +75,12 @@ const ColorPickerCover = () => {
 										}}
 										w="20px"
 										h="20px"
-										onClick={() => dispatch(workSpaceSlice.actions.changeColorCover(color))}
+										onClick={() => dispatch(workSpaceSlice.actions.changeColorCover(
+											{
+												material : handlerSecondColors,
+												color    : color,
+											}
+										))}
 									>
 										&nbsp;
 									</Box>

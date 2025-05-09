@@ -222,7 +222,7 @@ export const workSpaceSlice = createSlice({
 			state.currentPhotoDragger = payload;
 		},
 		changeColorCover : (state, {payload}) => {
-			state.data.cover.color = payload;
+			state.data.cover = payload;
 		},
 		changeColorEngraving : (state, {payload}) => {
 			state.data.engraving.currentColor = payload;
