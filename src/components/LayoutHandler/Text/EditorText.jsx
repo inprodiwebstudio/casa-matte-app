@@ -34,7 +34,11 @@ const EditText = ({
 	workSpaceSlice,
 }) => {
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
-	const { classes } = styles({size : sizes?.chico, gapSpacing, lineHeight, letterSpacing});
+	const currentColorEngravingText = useSelector((state) => state.workSpaceSlice.data?.engraving?.currentColor?.colorHex, shallowEqual);
+
+	const isAvailableChangeColorText = currentColorEngravingText && (currentPageId === "frontpage");
+
+	const { classes } = styles({size : sizes?.chico, gapSpacing, lineHeight, letterSpacing, gravingColor : isAvailableChangeColorText ? currentColorEngravingText : undefined});
 
 	const editorConfiguration = {
 		plugins      : [Essentials, Bold, Alignment, Paragraph, FontFamily, FontSize, FontColor],

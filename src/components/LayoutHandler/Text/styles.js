@@ -1,6 +1,6 @@
 import { createStyles } from "@mantine/core";
 
-const useStyles = createStyles((theme, { size, gapSpacing, lineHeight, letterSpacing }) => ({
+const useStyles = createStyles((theme, { size, gapSpacing, lineHeight, letterSpacing, gravingColor }) => ({
 	editText : {
 		fontFamily     : "Helvetica, sans-serif",
 		height         : "100% !important",
@@ -37,6 +37,7 @@ const useStyles = createStyles((theme, { size, gapSpacing, lineHeight, letterSpa
 		},
 
 		"& .ck-content" : {
+			color       : gravingColor ?? undefined,
 			height      : "100% !important",
 			padding     : "0px !important",
 			border      : "1px solid transparent !important",

@@ -45,7 +45,7 @@ const frontThemesTextures = {
 			textureUrl : telaTexture,
 		},
 		"Verde perico" : {
-			color      : "#F15E23",
+			color      : "#809949",
 			textureUrl : telaTexture,
 		},
 	},
@@ -199,11 +199,11 @@ const frontThemesTextures = {
 	},
 	CURPIEL : {
 		Marfil : {
-			color      : "#F5CD21",
+			color      : "#A79E8C",
 			textureUrl : curlPielTexture,
 		},
 		Avena : {
-			color      : "#F15E23",
+			color      : "#c8bdac",
 			textureUrl : curlPielTexture,
 		},
 		Topo : {

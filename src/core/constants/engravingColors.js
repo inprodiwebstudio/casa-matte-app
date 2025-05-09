@@ -1,17 +1,17 @@
-import Holografico  from "../../Resources/images/engravingTextures/1. holográfico.png";
-import Plata        from "../../Resources/images/engravingTextures/2. plata.png";
-import Dorado       from "../../Resources/images/engravingTextures/3. dorado.png";
-import Cobre        from "../../Resources/images/engravingTextures/4. cobre.png";
-import OroRosa      from "../../Resources/images/engravingTextures/5. oro rosa.png";
-import Rosa         from "../../Resources/images/engravingTextures/6. rosa.png";
-import Magenta      from "../../Resources/images/engravingTextures/7. mangenta.png";
-import Rojo         from "../../Resources/images/engravingTextures/8. rojo.png";
-import AzulRey      from "../../Resources/images/engravingTextures/9. azul rey.png";
-import Turquesa     from "../../Resources/images/engravingTextures/10. turquesa.png";
-import VerdeClaro   from "../../Resources/images/engravingTextures/11. verde claro.png";
-import Negro        from "../../Resources/images/engravingTextures/12. negro.png";
-import Blanco       from "../../Resources/images/engravingTextures/13. blanco.png";
-import Transparente from "../../Resources/images/engravingTextures/14. transparente.png";
+import Holografico  from "../../Resources/images/engravingTextures/holográfico.jpg";
+import Plata        from "../../Resources/images/engravingTextures/plata.jpg";
+import Dorado       from "../../Resources/images/engravingTextures/dorado.jpg";
+import Cobre        from "../../Resources/images/engravingTextures/cobre.jpg";
+import OroRosa      from "../../Resources/images/engravingTextures/oro_rosa.jpg";
+import Rosa         from "../../Resources/images/engravingTextures/rosa.jpg";
+import Magenta      from "../../Resources/images/engravingTextures/mangenta.jpg";
+import Rojo         from "../../Resources/images/engravingTextures/rojo.jpg";
+import AzulRey      from "../../Resources/images/engravingTextures/azul_rey.jpg";
+import Turquesa     from "../../Resources/images/engravingTextures/turquesa.jpg";
+import VerdeClaro   from "../../Resources/images/engravingTextures/verde_claro.jpg";
+import Negro        from "../../Resources/images/engravingTextures/negro.jpg";
+import Blanco       from "../../Resources/images/engravingTextures/blanco.jpg";
+import Transparente from "../../Resources/images/engravingTextures/transparente.jpg";
 
 const engravingColors = {
 	Holográfico : {

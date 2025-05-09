@@ -23,6 +23,7 @@ const initialState = {
 			},
 		},
 		cover          : undefined,
+		engraving      : undefined,
 		availableSpine : false,
 		minPages       : 0,
 		maxPages       : 0,
@@ -222,6 +223,9 @@ export const workSpaceSlice = createSlice({
 		},
 		changeColorCover : (state, {payload}) => {
 			state.data.cover.color = payload;
+		},
+		changeColorEngraving : (state, {payload}) => {
+			state.data.engraving.currentColor = payload;
 		},
 		setLayoutFilter : (state, {payload}) => {
 			state.layoutFilter = payload;

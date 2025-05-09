@@ -2,6 +2,7 @@ import { useDispatch }               from "react-redux";
 import { workSpaceSlice }            from "store/Slices";
 import convertToObject               from "helpers/convertToobject";
 import handlerMaterialAndColorLining from "helpers/handlerMaterialAndColorLining";
+import handlerGravingColorData       from "helpers/handlerGravingColor";
 
 export const usePhotoBookPreset = () => {
 	const dispatch = useDispatch();
@@ -19,6 +20,19 @@ export const usePhotoBookPreset = () => {
 		const cover = !meta.color_de_tela ? undefined : {
 			material : handlerMaterialAndColorLining(meta.color_de_tela).materialName,
 			color    : handlerMaterialAndColorLining(meta.color_de_tela).colorName,
+		};
+
+		const handlerEngravingData = () => {
+			const isAvailableEngraving = meta?.color_de_grabado !== "";
+
+			if (!isAvailableEngraving) {
+				return undefined;
+			}
+
+			return {
+				currentColor : handlerGravingColorData(meta?.color_de_grabado).currentColor,
+				listOfColors : handlerGravingColorData(meta?.color_de_grabado).listOfColors,
+			};
 		};
 
 		const configPhotoBookData = {
@@ -39,6 +53,7 @@ export const usePhotoBookPreset = () => {
 			maxRangePages  : numberOfPages,
 			availableSpine : !meta?.grabado_en_lomo ? false : true,
 			cover,
+			engraving      : handlerEngravingData(),
 			pages          : convertToObject(generatePages(numberOfPages)),
 		};
 

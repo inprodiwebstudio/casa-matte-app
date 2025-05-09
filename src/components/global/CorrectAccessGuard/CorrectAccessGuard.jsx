@@ -31,6 +31,7 @@ import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { usePhotoBookPreset }                     from "helpers/Hooks/usePhotoBookPreset";
 import NotPaid                                    from "components/NotPaid";
 import handlerMaterialAndColorLining              from "helpers/handlerMaterialAndColorLining";
+import handlerGravingColorData                    from "helpers/handlerGravingColor";
 
 const { useLazyGetDataQuery } = genericApi;
 
@@ -385,10 +386,24 @@ const CorrectAccessGuard = () => {
 			color    : handlerMaterialAndColorLining(photoBookConfigData.meta.color_de_tela).colorName,
 		};
 
+		const handlerEngravingData = () => {
+			const isAvailableEngraving = photoBookConfigData?.meta?.color_de_grabado !== "";
+
+			if (!isAvailableEngraving) {
+				return undefined;
+			}
+
+			return {
+				currentColor : handlerGravingColorData(photoBookConfigData?.meta?.color_de_grabado).currentColor,
+				listOfColors : handlerGravingColorData(photoBookConfigData?.meta?.color_de_grabado).listOfColors,
+			};
+		};
+
 		dispatch(workSpaceSlice.actions.insertData({
 			...parseJSON,
 			availableSpine : !photoBookConfigData?.meta?.grabado_en_lomo ? false : true,
 			cover          : parseJSON?.cover ? parseJSON?.cover : cover,
+			engraving      : handlerEngravingData(),
 			modified       : photoBookConfigData?.modified ?? undefined,
 			orderId        : photoBookConfigData?.meta?.id_del_pedido ?? undefined,
 		}));
