@@ -78,7 +78,7 @@ const CardSearchPhotoBook = () => {
 
 	useEffect(() => {
 		if (ordersPhotoBook && isValidArray(ordersPhotoBook)) {
-			const filteredOrders = ordersPhotoBook.filter(order => (order?.meta?.status === "48"));
+			const filteredOrders = ordersPhotoBook.filter(order => (order?.meta?.status === "48") || (order?.meta?.status === "26"));
 			setPhotoBooksOrders(filteredOrders);
 			setInitialPhotoBooksOrders(filteredOrders);
 		}
