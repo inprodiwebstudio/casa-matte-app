@@ -67,7 +67,7 @@ const engravingColors = {
 		texture : Blanco,
 	},
 	Transparente : {
-		color   : "#FFFFFF00",
+		color   : "#28282873",
 		texture : Transparente,
 	},
 };

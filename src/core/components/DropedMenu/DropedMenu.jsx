@@ -92,13 +92,23 @@ const DropedMenu = () => {
 					}
 					{
 						engravingData && (
-							<div className="menu-item">
-								<label>GRAVADO</label>
+							<div
+								className="menu-item"
+								style={{
+									marginTop : "10px",
+								}}
+							>
+								<label>COLOR DE GRAVADO</label>
 								<ColorPickerEngraving />
 							</div>
 						)
 					}
-					<div className="menu-item">
+					<div
+						className="menu-item"
+						style={{
+							marginTop : "10px",
+						}}
+					>
 						<label>TAMAÑO</label>
 						<MenuItem body={sizePhotoBook ?? ""} />
 					</div>

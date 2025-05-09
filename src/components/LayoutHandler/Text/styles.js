@@ -47,7 +47,7 @@ const useStyles = createStyles((theme, { size, gapSpacing, lineHeight, letterSpa
 		},
 
 		"& .ck-focused" : {
-			border : "1px solid rgb(100, 211, 9) !important",
+			border : "1px solid rgb(85, 121, 248) !important",
 		},
 
 		"& .ck-dropdown" : {
