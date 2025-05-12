@@ -4,6 +4,7 @@ import VerticalLarge           from "components/MyModsLayouts/VerticalLarge";
 import SquareLarge             from "components/MyModsLayouts/SquareLarge";
 import VerticalMedium          from "components/MyModsLayouts/VerticalMedium";
 import VerticalMediumSencillo  from "components/MyModsLayouts/Sencillo/VerticalMedium";
+import VerticalLargeSencillo   from "components/MyModsLayouts/Sencillo/VerticalLarge";
 import VerticalMediumPremium   from "components/MyModsLayouts/Premium/VerticalMedium";
 import SquareLargePremium      from "components/MyModsLayouts/Premium/SquareLarge";
 import SquareSmallPremium      from "components/MyModsLayouts/Premium/SquareSmall";
@@ -133,7 +134,7 @@ const photoBooksConfing = {
 				},
 				grande : {
 					aspectRatio      : [8, 9],
-					layoutMods       : {...VerticalLarge},
+					layoutMods       : {...VerticalLargeSencillo},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
