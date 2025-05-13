@@ -31,7 +31,7 @@ const BookPages = ({
 
 	const modsInDoublePage = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.modsInDoublePage;
 
-	const isInDoublePage = modsInDoublePage?.includes(pageData?.id);
+	const isInDoublePage = modsInDoublePage?.includes(pageData?.sheet1?.layoutType || "FrontLayout");
 
 	const aspectRatio = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.aspectRatio;
 

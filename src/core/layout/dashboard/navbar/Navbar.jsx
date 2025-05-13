@@ -15,10 +15,11 @@ const Navbar = ({workSpaceSlice}) => {
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
 	const isPreview = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
 	const maxRangePages = useSelector((state) => state.workSpaceSlice.data?.maxRangePages, shallowEqual);
+	const photoBookProduct = useSelector((state) => state.workSpaceSlice.data.product, shallowEqual);
 	const dataPages = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 
 	const listOfPages = convertToArray(dataPages.pages);
-	const counterPages = () => counterSheets(listOfPages);
+	const counterPages = () => counterSheets(listOfPages, photoBookProduct === "layflat");
 
 	const insertNewPage = () => {
 		workSpaceSlice.addPage();

@@ -31,7 +31,7 @@ export const usePhotoBookPreset = () => {
 			bound         : meta?.encuadernado ?? "",
 			pasta         : meta?.pasta ?? "",
 			maxRangePages : numberOfPages,
-			pages         : convertToObject(generatePages(numberOfPages)),
+			pages         : convertToObject(generatePages(numberOfPages, model.modelKey === "layflat")),
 		};
 
 		try {
@@ -87,10 +87,30 @@ const defaultFrontPage = () => ({
 	},
 });
 
-const generatePages = (numberOfPages) => {
+const generatePages = (numberOfPages, isLayflat) => {
 	const totalPaginations = (numberOfPages - 1) / 2;
 	const isEvenPages = totalPaginations % 2 === 0;
 	const pageCount = isEvenPages ? totalPaginations : (numberOfPages / 2) + 1;
+
+	if (isLayflat) {
+		return Array(numberOfPages).fill(0).map((_, index) => {
+			return {
+				id     : `page${index + 1}`,
+				sheet1 : {
+					pageNo     : index + 1,
+					layoutType : "",
+					text       : {},
+					photos     : { 0 : { id : "", url : "" } },
+				},
+				sheet2 : {
+					pageNo     : index + 1,
+					layoutType : "",
+					text       : "",
+					photos     : { 0 : { id : "", url : "" } },
+				},
+			};
+		});
+	}
 
 	return Array(pageCount).fill(0).map((_, index) => {
 		if (index === 0) {
