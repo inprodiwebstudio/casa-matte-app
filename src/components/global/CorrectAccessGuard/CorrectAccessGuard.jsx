@@ -30,6 +30,7 @@ import PayConfirm                                 from "pages/PayConfirm";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { usePhotoBookPreset }                     from "helpers/Hooks/usePhotoBookPreset";
 import NotPaid                                    from "components/NotPaid";
+import { convertToArray }                         from "helpers";
 
 const { useLazyGetDataQuery } = genericApi;
 
@@ -378,6 +379,27 @@ const CorrectAccessGuard = () => {
 	const addCurrentPhotoBookConfig = (photoBookConfigData) => {
 		const myData = photoBookConfigData?.meta?.config;
 		const parseJSON = JSON.parse(myData);
+
+		if ((parseJSON?.product === "layflat") && (!parseJSON?.pages?.page1.sheet2)) {
+			const pagesList = convertToArray(parseJSON?.pages);
+			const lastPageId = pagesList?.[pagesList?.length - 1]?.id;
+
+			parseJSON.pages.page1.sheet2 = {
+				pageNo     : 2,
+				layoutType : "",
+				text       : "",
+				photos     : { 0 : { id : "", url : "" } },
+			};
+
+			if (!parseJSON?.pages[lastPageId].sheet2) {
+				parseJSON.pages[lastPageId].sheet2 = {
+					pageNo     : parseJSON.pages[lastPageId].sheet1.pageNo + 1,
+					layoutType : "",
+					text       : "",
+					photos     : { 0 : { id : "", url : "" } },
+				};
+			}
+		}
 
 		dispatch(workSpaceSlice.actions.insertData({
 			...parseJSON,

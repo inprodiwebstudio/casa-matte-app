@@ -17,6 +17,7 @@ const ImgLayout = ({
 	sheetNo,
 	imageNo,
 	urlImage,
+	isCoverImage,
 	isInWorkSpace,
 }) => {
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
@@ -80,7 +81,7 @@ const ImgLayout = ({
 		<div
 			onDrop={(e) => handleDrop(e)}
 			onDragOver={(e) => handleDragOver(e)}
-			className={`ImgLayout ${isLowQuality ? "low-quality" : ""}`}
+			className={`ImgLayout ${isLowQuality ? "low-quality" : ""} ${isCoverImage && "relevantColor"}`}
 			id={`${currentPageId}-${sheetNo}-${imageNo}`}
 			{
 				...( (urlImage?.url && (urlImage?.url !== "")) &&  {
