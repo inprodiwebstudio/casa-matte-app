@@ -98,10 +98,10 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 		listOfPages.forEach((page) => {
 			const pageId = page.id;
-			const { sheet1, sheet2 } = page;
+			const { sheet2 } = page;
 
 			const insertNewPhotosInPage = (sheetKey) => {
-				const { photos } = sheetKey;
+				const { photos } = page[sheetKey];
 				const listOfPhotos = convertToArray(photos);
 
 				if (isValidArray(listOfPhotos)) {
@@ -118,12 +118,22 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 							}
 							if (!editedPhotoUrl) {
 								const base64PhotoUrl = await fetchImageAsBase64WithRetry(photoData.url);
-								newData.urlPhotoEdited = base64PhotoUrlEdited;
+								newData.url = base64PhotoUrl;
 							}
+							console.log(newData);
+							dispatch(workSpaceSlice.actions.insertPhotoBase64Url({
+								pageId, sheetNo : sheetKey, photoIndex : photoNoKey, imageData : newData,
+							}));
 						}
 					});
 				}
 			};
+
+			insertNewPhotosInPage("sheet1");
+
+			if (sheet2) {
+				insertNewPhotosInPage("sheet2");
+			}
 		});
 	};
 
