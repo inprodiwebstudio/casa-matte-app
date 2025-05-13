@@ -11,9 +11,9 @@ import { closeAllModals } from "@mantine/modals";
 import { workSpaceSlice } from "store/Slices";
 import { bindAll }        from "helpers";
 import fullQualityImg     from "helpers/Functions/fullQualityImage";
-import "./EditPhoto.scss";
-import useSubmitImages    from "helpers/Hooks/useSubmitImages";
-import { PostingConfig }  from "Notifications";
+// import "./EditPhoto.scss";
+import useSubmitImages   from "helpers/Hooks/useSubmitImages";
+import { PostingConfig } from "Notifications";
 
 
 const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
@@ -52,6 +52,7 @@ const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 				annotationsCommon={{
 					fill : "#bb3214",
 				}}
+				isVisible={true}
 				moreSaveOptions={[
 					{
 						label   : "Guardar",

@@ -1,8 +1,8 @@
 import { Card, Stack, Divider, Text, Group, Button } from "@mantine/core";
-import { convertToArray }                            from "helpers";
+import { convertToArray, isValidArray }              from "helpers";
 import { useEffect, useState }                       from "react";
 import { SaveIcom }                                  from "Resources/icons";
-import { loadImageWithRetry }                        from "./cardSearchPhotoBook.helpers";
+import { fetchImageAsBase64WithRetry }               from "./cardSearchPhotoBook.helpers";
 
 import SpinePhotoBook from "components/MyModsLayouts/SpinePdf";
 
@@ -20,7 +20,6 @@ import TravelCoffeeTable       from "components/MyModsLayouts/TravelCoffeeTable"
 import { Document, Page, pdf } from "@react-pdf/renderer";
 import { useDispatch }         from "react-redux";
 import { workSpaceSlice }      from "store/Slices";
-import { openContextModal }    from "@mantine/modals";
 
 const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const [ photoBookConfigData, setPhotoBookConfigData ] = useState(undefined);
@@ -94,37 +93,43 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		setPhotoBookConfigData({...parseJSON});
 	};
 
-	const listOfPhotos = (pages) => {
-		const urlPhotos = [];
+	const insertNewImagesBlob = (pages) => {
 		const listOfPages = convertToArray(pages);
 
 		listOfPages.forEach((page) => {
-			const photosSheet1 = convertToArray(page?.sheet1?.photos);
-			const photosSheet2 = page?.sheet2?.photos ? convertToArray(page?.sheet2?.photos) : undefined;
+			const pageId = page.id;
+			const { sheet1, sheet2 } = page;
 
-			const listPhotosSheet1 = photosSheet1.filter(photo => ((photo?.url !== "") && (photo?.id !== "")));
-			const listPhotosSheet2 = photosSheet2 ? photosSheet2.filter(photo => ((photo?.url !== "") && (photo?.id !== ""))) : [];
+			const insertNewPhotosInPage = (sheetKey) => {
+				const { photos } = sheetKey;
+				const listOfPhotos = convertToArray(photos);
 
-			const allPhotos = [...listPhotosSheet1, ...listPhotosSheet2];
-			const allUrl = allPhotos.map(photo => {
-				if (photo?.urlPhotoEdited) {
-					return photo?.urlPhotoEdited;
+				if (isValidArray(listOfPhotos)) {
+					listOfPhotos.foreEach(async (photoData, index) => {
+						const photoNoKey = index;
+						if (photoData?.id) {
+							const selectedPhotoUrl = photoData?.urlPhotoEdited;
+							if (selectedPhotoUrl) {
+								const base64PhotoUrlEdited = await fetchImageAsBase64WithRetry(photoData?.urlPhotoEdited);
+								const newDataphoto = {
+									...photoData,
+									urlPhotoEdited : base64PhotoUrlEdited,
+								};
+							}
+						}
+					});
 				}
-				return photo?.url;
-			});
-
-			urlPhotos.push(...allUrl);
+			};
 		});
-		return urlPhotos;
 	};
 
 	const validateAllImages = async (imageUrls) => {
 		try {
-		  await Promise.all(imageUrls.map((url) => loadImageWithRetry(url)));
-		  return true; // Todo OK
+		  const base64Images = await Promise.all(imageUrls.map(async (url) => await fetchImageAsBase64WithRetry(url)));
+		  return base64Images;
 		} catch (error) {
 		  console.error("Error cargando imágenes:", error.message);
-		  return false; // Al menos una imagen falló
+		  return [];
 		}
 	};
 
@@ -212,18 +217,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 	const handlerDownload = async () => {
 		setIsLoading(true);
-		const urlPhotos = listOfPhotos(photoBookConfigData?.pages);
-		const imagesOk = await validateAllImages(urlPhotos);
-		if (imagesOk) {
-			openContextModal({
-				modal      : "testPdf",
-				innerProps : {
-					photoBookData : photoBookConfigData,
-				},
-			});
-			setIsLoading(false);
-			return;
-		}
+		insertNewImagesBlob(photoBookConfigData?.pages);
 		setIsLoading(false);
 	};
 

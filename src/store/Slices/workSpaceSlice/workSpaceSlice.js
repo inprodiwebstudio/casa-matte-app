@@ -227,6 +227,10 @@ export const workSpaceSlice = createSlice({
 		changeColorEngraving : (state, {payload}) => {
 			state.data.engraving.currentColor = payload;
 		},
+		inserPhotoBase64Url : (state, {payload}) => {
+			const { pageId, sheetNo, photoIndex, imageData } = payload;
+			state.data.pages[pageId][sheetNo].photos[photoIndex] = imageData;
+		},
 		setLayoutFilter : (state, {payload}) => {
 			state.layoutFilter = payload;
 		},
