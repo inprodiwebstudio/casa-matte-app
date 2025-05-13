@@ -26,6 +26,7 @@ import tanmeringue          from "Resources/Fonts/TAN-MERINGUE.ttf";
 import { authSlice, workSpaceSlice }              from "store/Slices";
 import { Navigate, useNavigate, useParams }       from "react-router";
 import { useEffect, useState }                    from "react";
+import PayConfirm                                 from "pages/PayConfirm";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { usePhotoBookPreset }                     from "helpers/Hooks/usePhotoBookPreset";
 import NotPaid                                    from "components/NotPaid";
@@ -447,7 +448,6 @@ const CorrectAccessGuard = () => {
 		}
 		if (photobookData?.meta?.status === "48") {
 			if (!photobookData?.meta?.id_pedido_hojas_extra) {
-				addCurrentPhotoBookConfig(photobookData);
 				setStatusView("done");
 				return;
 			}
@@ -473,7 +473,7 @@ const CorrectAccessGuard = () => {
 				(statusView === "notPaidExtras") && <NotPaid paymentLink={urlLinkPay} />
 			}
 			{
-				(statusView === "done") && <Dashboard />
+				(statusView === "done") && <PayConfirm />
 			}
 			{
 				(statusView === "continue") && <Dashboard />
