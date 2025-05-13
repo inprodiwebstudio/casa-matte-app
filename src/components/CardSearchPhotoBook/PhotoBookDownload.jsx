@@ -108,13 +108,17 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 					listOfPhotos.foreEach(async (photoData, index) => {
 						const photoNoKey = index;
 						if (photoData?.id) {
-							const selectedPhotoUrl = photoData?.urlPhotoEdited;
-							if (selectedPhotoUrl) {
-								const base64PhotoUrlEdited = await fetchImageAsBase64WithRetry(photoData?.urlPhotoEdited);
-								const newDataphoto = {
-									...photoData,
-									urlPhotoEdited : base64PhotoUrlEdited,
-								};
+							const editedPhotoUrl = photoData.urlPhotoEdited;
+							const newData = {
+								...photoData,
+							};
+							if (editedPhotoUrl) {
+								const base64PhotoUrlEdited = await fetchImageAsBase64WithRetry(editedPhotoUrl);
+								newData.urlPhotoEdited = base64PhotoUrlEdited;
+							}
+							if (!editedPhotoUrl) {
+								const base64PhotoUrl = await fetchImageAsBase64WithRetry(photoData.url);
+								newData.urlPhotoEdited = base64PhotoUrlEdited;
 							}
 						}
 					});
