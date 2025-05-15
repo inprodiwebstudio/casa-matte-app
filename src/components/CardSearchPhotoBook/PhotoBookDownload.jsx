@@ -1,5 +1,5 @@
 import { Card, Stack, Divider, Text, Group, Button } from "@mantine/core";
-import { convertToArray, isValidArray }              from "helpers";
+import { convertToArray }                            from "helpers";
 import { useEffect, useState }                       from "react";
 import { SaveIcom }                                  from "Resources/icons";
 import { fetchImageAsBase64WithRetry }               from "./cardSearchPhotoBook.helpers";
@@ -91,50 +91,6 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		const parseJSON = JSON.parse(newData);
 		dispatch(workSpaceSlice.actions.insertData({...parseJSON}));
 		setPhotoBookConfigData({...parseJSON});
-	};
-
-	const insertNewImagesBlob = (pages) => {
-		const listOfPages = convertToArray(pages);
-
-		listOfPages.forEach((page) => {
-			const pageId = page.id;
-			const { sheet2 } = page;
-
-			const insertNewPhotosInPage = (sheetKey) => {
-				const { photos } = page[sheetKey];
-				const listOfPhotos = convertToArray(photos);
-
-				if (isValidArray(listOfPhotos)) {
-					listOfPhotos.foreEach(async (photoData, index) => {
-						const photoNoKey = index;
-						if (photoData?.id) {
-							const editedPhotoUrl = photoData.urlPhotoEdited;
-							const newData = {
-								...photoData,
-							};
-							if (editedPhotoUrl) {
-								const base64PhotoUrlEdited = await fetchImageAsBase64WithRetry(editedPhotoUrl);
-								newData.urlPhotoEdited = base64PhotoUrlEdited;
-							}
-							if (!editedPhotoUrl) {
-								const base64PhotoUrl = await fetchImageAsBase64WithRetry(photoData.url);
-								newData.url = base64PhotoUrl;
-							}
-							console.log(newData);
-							dispatch(workSpaceSlice.actions.insertPhotoBase64Url({
-								pageId, sheetNo : sheetKey, photoIndex : photoNoKey, imageData : newData,
-							}));
-						}
-					});
-				}
-			};
-
-			insertNewPhotosInPage("sheet1");
-
-			if (sheet2) {
-				insertNewPhotosInPage("sheet2");
-			}
-		});
 	};
 
 	const validateAllImages = async (imageUrls) => {
@@ -231,7 +187,6 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 	const handlerDownload = async () => {
 		setIsLoading(true);
-		insertNewImagesBlob(photoBookConfigData?.pages);
 		setIsLoading(false);
 	};
 

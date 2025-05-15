@@ -1,3 +1,5 @@
+import { isValidArray } from "helpers";
+
 export const fetchImageAsBase64WithRetry = async (url, maxAttempts = 5) => {
 	let attempts = 0;
 
@@ -22,4 +24,18 @@ export const fetchImageAsBase64WithRetry = async (url, maxAttempts = 5) => {
 			await new Promise((res) => setTimeout(res, 500));
 		}
 	}
+};
+
+export const subsTarctImagesInPagesData = (objPages) => {
+	if (!objPages) return new Error("Not pass pages data");
+
+	const pages = Object.values(objPages);
+
+	if (!isValidArray(pages)) return new Error("Error pages. Not valid array pages");
+
+	const listOfImagesInPhotoBook = [];
+
+	pages.forEach((page) => {
+		const { sheet1, sheet2 } = page;
+	});
 };
