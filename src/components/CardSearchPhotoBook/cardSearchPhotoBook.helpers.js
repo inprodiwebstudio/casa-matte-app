@@ -19,6 +19,11 @@ export const loadImageWithRetry = (url, maxAttempts = 5) => {
 			};
 		};
 
-		tryLoad();
+		imagesInSheet(1);
+		if (sheet2) {
+			imagesInSheet(2);
+		}
 	});
+
+	return listOfImagesInPhotoBook;
 };
