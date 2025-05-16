@@ -9,6 +9,7 @@ export const loadImageWithRetry = (url) => {
 			img.onerror = () => {
 				highQualityImgUrl(url);
 			};
+			console.log("Done image");
 		};
 
 		tryLoad();
