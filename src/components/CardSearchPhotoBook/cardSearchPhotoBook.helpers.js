@@ -1,5 +1,4 @@
 import highQualityImgUrl from "helpers/Functions/highQualityImg";
-
 export const loadImageWithRetry = (url, maxAttempts = 5) => {
 	return new Promise((resolve, reject) => {
 		let attempts = 0;
@@ -19,11 +18,6 @@ export const loadImageWithRetry = (url, maxAttempts = 5) => {
 			};
 		};
 
-		imagesInSheet(1);
-		if (sheet2) {
-			imagesInSheet(2);
-		}
+		tryLoad();
 	});
-
-	return listOfImagesInPhotoBook;
 };
