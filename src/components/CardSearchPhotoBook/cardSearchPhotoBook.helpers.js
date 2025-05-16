@@ -1,11 +1,10 @@
-import highQualityImgUrl from "helpers/Functions/highQualityImg";
 export const loadImageWithRetry = (url, maxAttempts = 5) => {
 	return new Promise((resolve, reject) => {
 		let attempts = 0;
 
 		const tryLoad = () => {
 			const img = new Image();
-			img.src = highQualityImgUrl(url);
+			img.src = url;
 
 			img.onload = () => resolve(url);
 			img.onerror = () => {
