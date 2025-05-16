@@ -382,7 +382,7 @@ const SquareLarge = {
 	Mod44 : {
 		id           : "Mod44",
 		layout       : Mod44,
-		numberPhotos : 9,
+		numberPhotos : 1,
 		cat          : "fotos",
 		pdfLayout    : undefined,
 	},
