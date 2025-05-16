@@ -1,5 +1,5 @@
 import highQualityImgUrl from "helpers/Functions/highQualityImg";
-export const loadImageWithRetry = (url, maxAttempts = 5) => {
+export const loadImageWithRetry = (url, maxAttempts = 1) => {
 	return new Promise((resolve, reject) => {
 		let attempts = 0;
 
