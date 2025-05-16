@@ -1,4 +1,5 @@
-import { isValidArray } from "helpers";
+import { isValidArray }  from "helpers";
+import highQualityImgUrl from "helpers/Functions/highQualityImg";
 
 export const fetchImageAsBase64WithRetry = async (url, maxAttempts = 5) => {
 	let attempts = 0;
@@ -36,6 +37,33 @@ export const subsTarctImagesInPagesData = (objPages) => {
 	const listOfImagesInPhotoBook = [];
 
 	pages.forEach((page) => {
-		const { sheet1, sheet2 } = page;
+		const pageId = page.id;
+		const { sheet2 } = page;
+
+		const imagesInSheet = (sheetNo) => {
+			if (page[`sheet${sheetNo}`].layoutType === "") return;
+			const sheetKey = `sheet${sheetNo}`;
+			const photos = page[sheetKey]?.photos;
+			const photosArray = Object.values(photos);
+			if (isValidArray(photosArray)) {
+				photosArray.forEach((photo, index) => {
+					if (photo.id !== "") {
+						listOfImagesInPhotoBook.push({
+							pageId,
+							sheetKey,
+							photoNo  : index,
+							imageUrl : highQualityImgUrl(photo.urlPhotoEdited ? photo.urlPhotoEdited : photo.url),
+						});
+					}
+				});
+			}
+		};
+
+		imagesInSheet(1);
+		if (sheet2) {
+			imagesInSheet(2);
+		}
 	});
+
+	return listOfImagesInPhotoBook;
 };

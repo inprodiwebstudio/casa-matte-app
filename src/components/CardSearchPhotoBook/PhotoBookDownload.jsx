@@ -1,8 +1,9 @@
-import { Card, Stack, Divider, Text, Group, Button } from "@mantine/core";
-import { convertToArray }                            from "helpers";
-import { useEffect, useState }                       from "react";
-import { SaveIcom }                                  from "Resources/icons";
-import { fetchImageAsBase64WithRetry }               from "./cardSearchPhotoBook.helpers";
+import { Card, Stack, Divider, Text, Group, Button }               from "@mantine/core";
+import { convertToArray }                                          from "helpers";
+import { useEffect, useState }                                     from "react";
+import { SaveIcom }                                                from "Resources/icons";
+import { fetchImageAsBase64WithRetry, subsTarctImagesInPagesData } from "./cardSearchPhotoBook.helpers";
+import { openContextModal }                                        from "@mantine/modals";
 
 import SpinePhotoBook from "components/MyModsLayouts/SpinePdf";
 
@@ -20,6 +21,7 @@ import TravelCoffeeTable       from "components/MyModsLayouts/TravelCoffeeTable"
 import { Document, Page, pdf } from "@react-pdf/renderer";
 import { useDispatch }         from "react-redux";
 import { workSpaceSlice }      from "store/Slices";
+import { showNotification }    from "@mantine/notifications";
 
 const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const [ photoBookConfigData, setPhotoBookConfigData ] = useState(undefined);
@@ -91,16 +93,6 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		const parseJSON = JSON.parse(newData);
 		dispatch(workSpaceSlice.actions.insertData({...parseJSON}));
 		setPhotoBookConfigData({...parseJSON});
-	};
-
-	const validateAllImages = async (imageUrls) => {
-		try {
-		  const base64Images = await Promise.all(imageUrls.map(async (url) => await fetchImageAsBase64WithRetry(url)));
-		  return base64Images;
-		} catch (error) {
-		  console.error("Error cargando imágenes:", error.message);
-		  return [];
-		}
 	};
 
 	const handlerFormat = (productType) => {
@@ -187,6 +179,53 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 	const handlerDownload = async () => {
 		setIsLoading(true);
+		const clonePages = {...photoBookConfigData.pages};
+		const photosInPages = subsTarctImagesInPagesData(photoBookConfigData?.pages);
+
+		for (const photoData of photosInPages) {
+			try {
+				const base64Image = await fetchImageAsBase64WithRetry(photoData.imageUrl);
+
+				clonePages[photoData.pageId] = {
+					...clonePages[photoData.pageId],
+					[photoData.sheetKey] : {
+						...clonePages[photoData.pageId][photoData.sheetKey],
+						photos : {
+							...clonePages[photoData.pageId][photoData.sheetKey].photos,
+							[photoData.photoNo] : {
+								...clonePages[photoData.pageId][photoData.sheetKey].photos[photoData.photoNo],
+								url : base64Image,
+							},
+						},
+					},
+				};
+			} catch (error) {
+				console.error(error);
+				showNotification({
+					title   : "Error al cargar algunas imágenes",
+					message : "Algunas imágenes no pudieron ser cargadas. Borra cache e intenta nuevamente.",
+					color   : "red",
+					styles  : () => ({
+						root : {
+										  "&::before" : {
+											  borderRadius : "0px",
+											  width        : "3px",
+										  },
+										  borderRadius : "0px",
+						},
+
+						title       : { fontFamily : "Helvetica", fontWeight : "500", textTransform : "uppercase" },
+						description : { fontFamily : "Helvetica" },
+					}),
+				});
+				return setIsLoading(false);
+			}
+		}
+		await dispatch(workSpaceSlice.actions.newListPages(clonePages));
+		openContextModal({
+			modal      : "testPdf",
+			innerProps : {},
+		});
 		setIsLoading(false);
 	};
 
