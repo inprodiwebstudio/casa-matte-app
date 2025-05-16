@@ -6,6 +6,9 @@ export const loadImageWithRetry = (url) => {
 			img.src = highQualityImgUrl(url);
 
 			img.onload = () => resolve(url);
+			img.onerror = () => {
+				highQualityImgUrl(url);
+			};
 		};
 
 		tryLoad();
