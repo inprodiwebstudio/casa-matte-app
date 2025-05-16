@@ -2,6 +2,7 @@ import { Card, Stack, Divider, Text, Group, Button } from "@mantine/core";
 import { convertToArray }                            from "helpers";
 import { useEffect, useState }                       from "react";
 import { SaveIcom }                                  from "Resources/icons";
+import { loadImageWithRetry }                        from "./cardSearchPhotoBook.helpers";
 
 import SpinePhotoBook from "components/MyModsLayouts/SpinePdf";
 
@@ -13,15 +14,13 @@ import SquareSmall      from "components/MyModsLayouts/SquareSmall";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import saveAs from "file-saver";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import JSZip                                                       from "jszip";
-import SquareLarge                                                 from "components/MyModsLayouts/SquareLarge";
-import TravelCoffeeTable                                           from "components/MyModsLayouts/TravelCoffeeTable";
-import { Document, Page, pdf }                                     from "@react-pdf/renderer";
-import { useDispatch }                                             from "react-redux";
-import { workSpaceSlice }                                          from "store/Slices";
-import { openContextModal }                                        from "@mantine/modals";
-import { showNotification }                                        from "@mantine/notifications";
-import { fetchImageAsBase64WithRetry, subsTarctImagesInPagesData } from "./cardSearchPhotoBook.helpers";
+import JSZip                   from "jszip";
+import SquareLarge             from "components/MyModsLayouts/SquareLarge";
+import TravelCoffeeTable       from "components/MyModsLayouts/TravelCoffeeTable";
+import { Document, Page, pdf } from "@react-pdf/renderer";
+import { useDispatch }         from "react-redux";
+import { workSpaceSlice }      from "store/Slices";
+import { openContextModal }    from "@mantine/modals";
 
 const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const [ photoBookConfigData, setPhotoBookConfigData ] = useState(undefined);
@@ -119,6 +118,16 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		return urlPhotos;
 	};
 
+	const validateAllImages = async (imageUrls) => {
+		try {
+		  await Promise.all(imageUrls.map((url) => loadImageWithRetry(url)));
+		  return true;
+		} catch (error) {
+		  console.error("Error cargando imágenes:", error.message);
+		  return false;
+		}
+	};
+
 	const handlerFormat = (productType) => {
 		if ( productType === "travelcoffeetable ") {
 			return "travelcoffeetable";
@@ -203,53 +212,18 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 	const handlerDownload = async () => {
 		setIsLoading(true);
-		const clonePages = {...photoBookConfigData.pages};
-		const photosInPages = subsTarctImagesInPagesData(photoBookConfigData?.pages);
-
-		for (const photoData of photosInPages) {
-			try {
-				const base64Image = await fetchImageAsBase64WithRetry(photoData.imageUrl);
-
-				clonePages[photoData.pageId] = {
-					...clonePages[photoData.pageId],
-					[photoData.sheetKey] : {
-						...clonePages[photoData.pageId][photoData.sheetKey],
-						photos : {
-							...clonePages[photoData.pageId][photoData.sheetKey].photos,
-							[photoData.photoNo] : {
-								...clonePages[photoData.pageId][photoData.sheetKey].photos[photoData.photoNo],
-								url : base64Image,
-							},
-						},
-					},
-				};
-			} catch (error) {
-				console.error(error);
-				showNotification({
-					title   : "Error al cargar algunas imágenes",
-					message : "Algunas imágenes no pudieron ser cargadas. Borra cache e intenta nuevamente.",
-					color   : "red",
-					styles  : () => ({
-						root : {
-										  "&::before" : {
-											  borderRadius : "0px",
-											  width        : "3px",
-										  },
-										  borderRadius : "0px",
-						},
-
-						title       : { fontFamily : "Helvetica", fontWeight : "500", textTransform : "uppercase" },
-						description : { fontFamily : "Helvetica" },
-					}),
-				});
-				return setIsLoading(false);
-			}
+		const urlPhotos = listOfPhotos(photoBookConfigData?.pages);
+		const imagesOk = await validateAllImages(urlPhotos);
+		if (imagesOk) {
+			openContextModal({
+				modal      : "testPdf",
+				innerProps : {
+					photoBookData : photoBookConfigData,
+				},
+			});
+			setIsLoading(false);
+			return;
 		}
-		await dispatch(workSpaceSlice.actions.newListPages(clonePages));
-		openContextModal({
-			modal      : "testPdf",
-			innerProps : {},
-		});
 		setIsLoading(false);
 	};
 
