@@ -6,7 +6,7 @@ import { textInsertion } from "helpers";
 //Own components
 
 
-const Mod55 = ({
+const Mod54 = ({
 	data,
 	isInWorkSpace,
 	sheetNo,
@@ -88,4 +88,4 @@ const Mod55 = ({
 	);
 };
 
-export default Mod55;
+export default Mod54;

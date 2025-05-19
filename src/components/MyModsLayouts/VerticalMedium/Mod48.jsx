@@ -6,7 +6,7 @@ import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
 
-const Mod51 = ({
+const Mod48 = ({
 	data,
 	isInWorkSpace,
 	sheetNo,
@@ -79,4 +79,4 @@ const Mod51 = ({
 	);
 };
 
-export default Mod51;
+export default Mod48;
