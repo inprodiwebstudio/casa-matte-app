@@ -119,13 +119,9 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	};
 
 	const validateAllImages = async (imageUrls) => {
-		try {
-		  await Promise.allSettled(imageUrls.map(async (url) => await loadImageWithRetry(url)));
-		  return true;
-		} catch (error) {
-		  console.error("Error cargando imágenes:", error.message);
-		  return false;
-		}
+		 const results =  await Promise.allSettled(imageUrls.map((url) => loadImageWithRetry(url)));
+		 console.log(results);
+		 return true;
 	};
 
 	const handlerFormat = (productType) => {
