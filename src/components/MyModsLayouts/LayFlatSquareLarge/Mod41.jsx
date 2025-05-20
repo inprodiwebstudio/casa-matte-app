@@ -22,8 +22,8 @@ const Mod40 = ({data, isInWorkSpace, sheetNo}) => {
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
-						imageNo={3}
-						urlImage={data?.photos[3] ?? {}}
+						imageNo={0}
+						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Stack>
 				<Stack
@@ -33,8 +33,8 @@ const Mod40 = ({data, isInWorkSpace, sheetNo}) => {
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
-						imageNo={4}
-						urlImage={data?.photos[4] ?? {}}
+						imageNo={1}
+						urlImage={data?.photos[1] ?? {}}
 					/>
 				</Stack>
 				<Stack
@@ -44,8 +44,8 @@ const Mod40 = ({data, isInWorkSpace, sheetNo}) => {
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
-						imageNo={5}
-						urlImage={data?.photos[5] ?? {}}
+						imageNo={2}
+						urlImage={data?.photos[2] ?? {}}
 					/>
 				</Stack>
 			</Group>
