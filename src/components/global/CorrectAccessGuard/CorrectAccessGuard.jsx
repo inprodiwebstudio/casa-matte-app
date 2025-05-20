@@ -26,7 +26,6 @@ import tanmeringue          from "Resources/Fonts/TAN-MERINGUE.ttf";
 import { authSlice, workSpaceSlice }              from "store/Slices";
 import { Navigate, useNavigate, useParams }       from "react-router";
 import { useEffect, useState }                    from "react";
-import PayConfirm                                 from "pages/PayConfirm";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { usePhotoBookPreset }                     from "helpers/Hooks/usePhotoBookPreset";
 import NotPaid                                    from "components/NotPaid";
@@ -473,7 +472,7 @@ const CorrectAccessGuard = () => {
 				(statusView === "notPaidExtras") && <NotPaid paymentLink={urlLinkPay} />
 			}
 			{
-				(statusView === "done") && <PayConfirm />
+				(statusView === "done") && <Dashboard />
 			}
 			{
 				(statusView === "continue") && <Dashboard />
