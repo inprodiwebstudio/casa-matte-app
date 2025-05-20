@@ -119,7 +119,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	};
 
 	const validateAllImages = async (imageUrls) => {
-		const results = await Promise.all(imageUrls.map((url) => loadImageWithRetry(url)));
+		const results = await Promise.allSettled(imageUrls.map((url) => loadImageWithRetry(url)));
 		console.log(results);
 		return true;
 	};
