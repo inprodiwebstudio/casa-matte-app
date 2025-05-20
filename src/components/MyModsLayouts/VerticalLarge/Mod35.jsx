@@ -4,7 +4,7 @@ import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
-const Mod38 = ({
+const Mod35 = ({
 	data,
 	isInWorkSpace,
 	sheetNo,
@@ -44,4 +44,4 @@ const Mod38 = ({
 	);
 };
 
-export default Mod38;
+export default Mod35;
