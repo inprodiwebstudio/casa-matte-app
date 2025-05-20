@@ -446,11 +446,8 @@ const CorrectAccessGuard = () => {
 			dispatch(authSlice.actions.updateEmail(photobookData?.meta?.correo_del_autor));
 		}
 		if (photobookData?.meta?.status === "48") {
-			if (!photobookData?.meta?.id_pedido_hojas_extra) {
-				setStatusView("done");
-				return;
-			}
-			handlerAvailableExtra(photobookData?.meta?.id_pedido_hojas_extra);
+			addCurrentPhotoBookConfig(photobookData);
+			setStatusView("continue");
 			return;
 		}
 		if (photobookData?.meta?.config) {
