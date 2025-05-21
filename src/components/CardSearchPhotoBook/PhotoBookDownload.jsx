@@ -6,21 +6,23 @@ import { loadImageWithRetry }                        from "./cardSearchPhotoBook
 
 import SpinePhotoBook from "components/MyModsLayouts/SpinePdf";
 
-import VerticalLarge    from "components/MyModsLayouts/VerticalLarge";
-import VerticalMedium   from "components/MyModsLayouts/VerticalMedium";
-import HorizontalLarge  from "components/MyModsLayouts/HorizontalLarge";
-import HorizontalMedium from "components/MyModsLayouts/HorizontalMedium";
-import SquareSmall      from "components/MyModsLayouts/SquareSmall";
+import VerticalLarge      from "components/MyModsLayouts/VerticalLarge";
+import VerticalMedium     from "components/MyModsLayouts/VerticalMedium";
+import HorizontalLarge    from "components/MyModsLayouts/HorizontalLarge";
+import HorizontalMedium   from "components/MyModsLayouts/HorizontalMedium";
+import layflatSquareLarge from "components/MyModsLayouts/LayFlatSquareLarge";
+import SquareSmall        from "components/MyModsLayouts/SquareSmall";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import saveAs from "file-saver";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import JSZip                   from "jszip";
-import SquareLarge             from "components/MyModsLayouts/SquareLarge";
-import TravelCoffeeTable       from "components/MyModsLayouts/TravelCoffeeTable";
-import { Document, Page, pdf } from "@react-pdf/renderer";
-import { useDispatch }         from "react-redux";
-import { workSpaceSlice }      from "store/Slices";
-import { openContextModal }    from "@mantine/modals";
+import JSZip                         from "jszip";
+import SquareLarge                   from "components/MyModsLayouts/SquareLarge";
+import TravelCoffeeTable             from "components/MyModsLayouts/TravelCoffeeTable";
+import { Document, Page, pdf, View } from "@react-pdf/renderer";
+import { useDispatch }               from "react-redux";
+import { workSpaceSlice }            from "store/Slices";
+import { openContextModal }          from "@mantine/modals";
+import { convertPDFToImages }        from "helpers/Functions/convertPdfJpg";
 
 const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const [ photoBookConfigData, setPhotoBookConfigData ] = useState(undefined);
@@ -84,6 +86,50 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 				modLayouts            : {...TravelCoffeeTable},
 			},
 		},
+		layflatCuadrado : {
+			grande : {
+				size                  : [1700, 850],
+				isInDoublePageLayouts : [
+					"FrontLayout",
+					"Mod44",
+					"Mod45",
+					"Mod46",
+					"Mod47",
+					"Mod48",
+					"Mod49",
+					"Mod50",
+					"Mod51",
+					"Mod52",
+					"Mod53",
+					"Mod54",
+					"Mod55",
+					"Mod56",
+					"Mod57",
+					"Mod58",
+					"Mod59",
+					"Mod60",
+					"Mod61",
+					"Mod62",
+					"Mod63",
+					"Mod64",
+					"Mod65",
+					"Mod66",
+					"Mod67",
+					"Mod68",
+					"Mod69",
+					"Mod70",
+					"Mod71",
+					"Mod72",
+					"Mod73",
+					"Mod74",
+					"Mod75",
+					"Mod76",
+					"Mod77",
+					"Mod78",
+				],
+				modLayouts : {...layflatSquareLarge},
+			},
+		},
 	};
 
 	const getConfigDataPhotoBook = () => {
@@ -124,30 +170,126 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		return true;
 	};
 
-	const handlerFormat = (productType) => {
+	const handlerFormat = (productType, format) => {
 		if ( productType === "travelcoffeetable ") {
 			return "travelcoffeetable";
 		}
-		return photoBookConfigData?.format;
+		if ( (productType === "layflat") && (format === "cuadrado") ) {
+			return "layflatCuadrado";
+		}
+		return photoBookData?.format;
+	};
+
+	const isLayoutDoublePage = (modLayout, witheList) => {
+		const isAvailableDouble = witheList.includes(modLayout);
+		return isAvailableDouble;
 	};
 
 	const getComponent = (pageData) => {
-		const Sheet1Layout = photoBookTypes[handlerFormat(photoBookConfigData?.product)]?.[photoBookConfigData?.sizePhotoBook]?.modLayouts[pageData?.sheet1?.layoutType]?.pdfLayout;
+		const Sheet1Layout = photoBookTypes[handlerFormat(photoBookConfigData?.product, photoBookConfigData?.format)]?.[photoBookConfigData?.sizePhotoBook]?.modLayouts[pageData?.sheet1?.layoutType]?.pdfLayout;
 
-		const Sheet2Layout = photoBookTypes[handlerFormat(photoBookConfigData?.product)]?.[photoBookConfigData?.sizePhotoBook]?.modLayouts[pageData?.sheet2?.layoutType]?.pdfLayout;
+		const Sheet2Layout = photoBookTypes[handlerFormat(photoBookConfigData?.product, photoBookConfigData?.format)]?.[photoBookConfigData?.sizePhotoBook]?.modLayouts[pageData?.sheet2?.layoutType]?.pdfLayout;
 
-		const sizePages = photoBookTypes[handlerFormat(photoBookConfigData?.product)]?.[photoBookConfigData?.sizePhotoBook]?.size;
+		const sizePages = photoBookTypes[handlerFormat(photoBookConfigData?.product, photoBookConfigData?.format)]?.[photoBookConfigData?.sizePhotoBook]?.size;
+
+		const isInDoublePageLayout = isLayoutDoublePage(pageData?.sheet1?.layoutType, photoBookTypes[handlerFormat(photoBookConfigData?.product, photoBookConfigData?.format)]?.[photoBookConfigData?.sizePhotoBook]?.isInDoublePageLayouts);
+
+		// if ((Sheet1Layout && Sheet2Layout) || isInDoublePageLayout) {
+		// 	if (Sheet1Layout && isInDoublePageLayout) {
+		// 		return (
+		// 			<>
+		// 				<Page size={[850, 991]}>
+		// 					<Sheet1Layout images={pageData?.sheet1?.photos} />
+		// 				</Page>
+		// 				<Page size={[850, 991]}>
+		// 					<Sheet1Layout images={pageData?.sheet1?.photos} isRightPage />
+		// 				</Page>
+		// 			</>
+		// 		);
+		// 	}
+		// }
+		if ( photoBookConfigData?.product === "layflat" ) {
+			return (
+				<Page
+					size={sizePages}
+					style={{display : "flex", flexDirection : "row"}}
+				>
+					<View
+						style={{
+							width  : isInDoublePageLayout ? "100%" : "50%",
+							height : "100%",
+						}}
+					>
+						{
+							Sheet1Layout ? (
+								<Sheet1Layout
+									images={pageData?.sheet1?.photos}
+									text={pageData?.sheet1?.text}
+									modLayout={pageData?.sheet1?.layoutType}
+									pageNo={pageData?.sheet1?.pageNo}
+								/>
+							) : (
+								""
+							)
+						}
+					</View>
+					{
+						!isInDoublePageLayout && (
+							<View
+								style={{
+									width  : "50%",
+									height : "100%",
+								}}
+							>
+								{
+									Sheet2Layout ? (
+										<Sheet2Layout
+											images={pageData?.sheet2?.photos}
+											text={pageData?.sheet2?.text}
+											modLayout={pageData?.sheet2?.layoutType}
+											pageNo={pageData?.sheet2?.pageNo}
+										/>
+									) : (
+										""
+									)
+								}
+							</View>
+						)
+					}
+				</Page>
+			);
+		}
 
 		return (
 			<>
-				{Sheet1Layout ? (
+				<Page size={sizePages}>
+					{
+						Sheet1Layout ? (
+							<Sheet1Layout
+								images={pageData?.sheet1?.photos}
+								text={pageData?.sheet1?.text}
+								modLayout={pageData?.sheet1?.layoutType}
+								pageNo={pageData?.sheet1?.pageNo}
+							/>
+						) : (
+							""
+						)
+					}
+				</Page>
+				{pageData.sheet2 ? (
 					<Page size={sizePages}>
-						<Sheet1Layout images={pageData?.sheet1?.photos} text={pageData?.sheet1?.text} />
-					</Page>
-				) : undefined}
-				{Sheet2Layout ? (
-					<Page size={sizePages}>
-						<Sheet2Layout images={pageData?.sheet2?.photos} text={pageData?.sheet2?.text} />
+						{
+							Sheet2Layout ? (
+								<Sheet2Layout
+									images={pageData?.sheet2?.photos}
+									text={pageData?.sheet2?.text}
+									modLayout={pageData?.sheet2?.layoutType}
+									pageNo={pageData?.sheet2?.pageNo}
+								/>
+							) : (
+								""
+							)
+						}
 					</Page>
 				) : undefined}
 			</>
@@ -194,15 +336,33 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		saveAs(content, `${photoBookData?.meta?.correo_del_autor}-noPedido-${photoBookData?.meta?.id_del_pedido}-photobookId_${photoBookData?.id}.zip`);
 	};
 
+	const downloadImagesAsZip = async (imagesDataUrls, zipName = "imagenes") => {
+		const zip = new JSZip();
+
+		imagesDataUrls.forEach((dataUrl, index) => {
+			const base64Data = dataUrl.split(",")[1];
+			zip.file(`pagina_${index + 1}.jpg`, base64Data, { base64 : true });
+		});
+
+		const content = await zip.generateAsync({ type : "blob" });
+		saveAs(content, `${zipName}.zip`);
+	};
+
 	const createPDFPhotoBook = async (photBookConfig) => {
 		try {
 			const listPages = convertToArray(photBookConfig?.pages);
 			// Generar el documento PDF como un Blob
 			const blob = await pdf(<MyDocGenerate listPages={listPages} />).toBlob();
 
-			await zipDownload(blob);
+			const images = await convertPDFToImages(blob);
+
+			await downloadImagesAsZip(images);
+			return;
+
+			// await zipDownload(blob);
 		} catch (error) {
 			console.error("Error al subir el archivo:", error);
+			return;
 		}
 	};
 
@@ -210,6 +370,11 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		setIsLoading(true);
 		const urlPhotos = listOfPhotos(photoBookConfigData?.pages);
 		const imagesOk = await validateAllImages(urlPhotos);
+		if (photoBookConfigData.product === "layflat") {
+			await createPDFPhotoBook(photoBookConfigData);
+			setIsLoading(false);
+			return;
+		}
 		if (imagesOk) {
 			openContextModal({
 				modal      : "testPdf",
