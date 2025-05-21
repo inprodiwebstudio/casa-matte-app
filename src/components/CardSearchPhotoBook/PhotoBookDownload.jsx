@@ -356,7 +356,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 			const images = await convertPDFToImages(blob);
 
-			await downloadImagesAsZip(images);
+			await downloadImagesAsZip(images, `${photoBookData?.meta?.id_del_pedido}-${photoBookData?.meta?.correo_del_autor}`);
 			return;
 
 			// await zipDownload(blob);

@@ -90,8 +90,6 @@ const CardSearchPhotoBook = () => {
 		}
 	}, [ orderId ]);
 
-	console.log(photoBookData);
-
 	return (
 		<>
 			{
