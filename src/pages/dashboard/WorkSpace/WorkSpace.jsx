@@ -100,7 +100,9 @@ const WorkSpace = () => {
 								</div>
 							</div>
 						</div>
-						<div className={`ghost-canva ${handlerTypeProductFormat()}-workSpace ${(!myWorkSpaceData?.sheet2 && (myWorkSpaceData?.id !== "FrontLayout")) && "onePage"}`}>
+						<div
+							className={`ghost-canva ${handlerTypeProductFormat()}-workSpace ${(!myWorkSpaceData?.sheet2 && (myWorkSpaceData?.id !== "FrontLayout")) && "onePage"}`}
+						>
 							<BookPages
 								isInWorkSpcae={true}
 								loading={false}
@@ -116,6 +118,7 @@ const WorkSpace = () => {
 	useEffect(() => {
 		if (!isFrontLayout) {
 			setMyWorkSpaceData(workSpaceData[currentPageId]);
+			dispatch(workSpaceSlice.actions.setCurrentPageData(workSpaceData[currentPageId]));
 		}
 		if (isFrontLayout) {
 			setMyWorkSpaceData(workSpaceFrontPage);
