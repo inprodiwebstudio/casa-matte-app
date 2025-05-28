@@ -496,7 +496,7 @@ const photoBooksConfing = {
 			},
 		},
 	},
-	"lunade miel" : {
+	"lunademiel" : {
 		vertical : {
 			sizes : {
 				grande : {
