@@ -58,27 +58,35 @@ const Mod53 = ({
 			</Stack>
 			<Stack
 				w="100%"
-				align="center"
 				mah="10%"
 				sx={{
-					textTransform : "uppercase",
+					overflow : "hidden",
 				}}
-				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
-				<Text
-					sizes={{
-						"chico"   : "12px",
-						"regular" : "14px",
-						"grande"  : "16px",
-					}}
+				<Stack
+					w="100%"
 					align="center"
-					sheetNo={sheetNo}
-					textShell={() => <TextShell.SubTitle align="center" />}
-					data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-					textNo={0}
-				/>
+					h="fit-content"
+					sx={{
+						textTransform : "uppercase",
+					}}
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
+				>
+					<Text
+						sizes={{
+							"chico"   : "12px",
+							"regular" : "14px",
+							"grande"  : "16px",
+						}}
+						align="center"
+						sheetNo={sheetNo}
+						textShell={() => <TextShell.SubTitle align="center" />}
+						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+						textNo={0}
+					/>
+				</Stack>
 			</Stack>
 		</Stack>
 	);

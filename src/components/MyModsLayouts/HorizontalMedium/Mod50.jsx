@@ -39,24 +39,32 @@ const Mod50 = ({
 			</Stack>
 			<Stack
 				w="100%"
-				align="flex-end"
 				mah="10%"
-				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
+				sx={{
+					overflow : "hidden",
+				}}
 			>
-				<Text
-					sizes={{
-						"chico"   : "10px",
-						"regular" : "14px",
-						"grande"  : "16px",
-					}}
-					align="right"
-					sheetNo={sheetNo}
-					textShell={() => <TextShell.SubTitle align="flex-end" />}
-					data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-					textNo={0}
-				/>
+				<Stack
+					w="100%"
+					align="flex-end"
+					h="fit-content"
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
+				>
+					<Text
+						sizes={{
+							"chico"   : "10px",
+							"regular" : "14px",
+							"grande"  : "16px",
+						}}
+						align="right"
+						sheetNo={sheetNo}
+						textShell={() => <TextShell.SubTitle align="flex-end" />}
+						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+						textNo={0}
+					/>
+				</Stack>
 			</Stack>
 		</Stack>
 	);
