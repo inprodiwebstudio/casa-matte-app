@@ -186,8 +186,9 @@ const initialState = {
 			},
 		},
 	},
-	initialData : undefined,
-	history     : {
+	currentPageData : undefined,
+	initialData     : undefined,
+	history         : {
 		undo    : [],
 		redo    : [],
 		current : null,
@@ -226,6 +227,9 @@ export const workSpaceSlice = createSlice({
 		},
 		clearSelectedPageData : (state, {payload}) => {
 			state.pageDataSelected = null;
+		},
+		setCurrentPageData : (state, {payload}) => {
+			state.currentPageData = payload;
 		},
 		newListPages : (state, {payload}) => {
 			state.data.pages = {...payload};

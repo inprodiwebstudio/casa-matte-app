@@ -20,6 +20,7 @@ const BookPages = ({
 	const dispatch = useDispatch();
 
 	const pageDataSelected = useSelector((state) => state.workSpaceSlice.pageDataSelected, shallowEqual);
+	// const currentPageData = useSelector((state) => state.workSpaceSlice.pageDataSelected, shallowEqual);
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 
