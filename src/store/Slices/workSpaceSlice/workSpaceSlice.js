@@ -231,6 +231,10 @@ export const workSpaceSlice = createSlice({
 		setCurrentPageData : (state, {payload}) => {
 			state.currentPageData = payload;
 		},
+		setTextCurrentPage : (state, {payload}) => {
+			const {sheetNo, layoutNo, text} = payload;
+			state.currentPageData[`sheet${sheetNo}`].text[layoutNo] = text;
+		},
 		newListPages : (state, {payload}) => {
 			state.data.pages = {...payload};
 			const history = new History();
