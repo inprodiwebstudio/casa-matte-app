@@ -45,7 +45,6 @@ const CardSearchPhotoBook = () => {
 					status           : photoBook?.metas?.status[0],
 				},
 			}));
-			console.log(constructorPhotoBooksData);
 			setPhotoBooksOrders(constructorPhotoBooksData);
 		} catch (error) {
 			console.error(error);
