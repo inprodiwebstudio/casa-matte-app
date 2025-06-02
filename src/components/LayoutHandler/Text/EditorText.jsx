@@ -13,7 +13,6 @@ import Alignment     from "@ckeditor/ckeditor5-alignment/src/alignment";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
 // import { EditorState, convertToRaw, ContentState } from "draft-js";
-import { useCallback } from "react";
 // import { closeAllModals }      from "@mantine/modals";
 import { workSpaceSlice }                     from "store/Slices";
 import { connect, useSelector, shallowEqual } from "react-redux";
@@ -119,31 +118,18 @@ const EditText = ({
 		},
 	};
 
-	const debounce = (func, delay) => {
-		let timeout;
-		return (...args) => {
-			if (timeout) clearTimeout(timeout);
-			timeout = setTimeout(() => {
-				func(...args);
-			}, delay);
-		};
-	};
-
-	const handleEditorChange = useCallback(
-		debounce((event, editor) => {
-		  const data = editor.getData();
+	const handleEditorChange = (event, editor) => {
+		 const data = editor.getData();
 		  if (isBound) {
-				workSpaceSlice.addTextBound({text : data});
-				return;
+			workSpaceSlice.addTextBound({text : data});
+			return;
 		  }
 		  if (!isFront) {
-				workSpaceSlice.setTextCurrentPage({sheetNo, layoutNo, text : data});
-				return;
+			workSpaceSlice.setTextCurrentPage({sheetNo, layoutNo, text : data});
+			return;
 		  }
 		  workSpaceSlice.addTextFront({sheetNo, text : data, layoutNo});
-		}, 3000),
-		[]
-	);
+	};
 
 	return (
 		<div
