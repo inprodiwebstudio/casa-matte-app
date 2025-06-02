@@ -33,7 +33,8 @@ const CardSearchPhotoBook = () => {
 
 		try {
 			const photoBookData = await fetchPhotoBook({ module : `wp-json/wp/v2/photobook-2-0/meta/?meta_value=${myOreder}`}).unwrap();
-			const constructorPhotoBooksData = photoBookData.map((photoBook) => ({
+			const filteredBooks = photoBookData.filter((photoBook) => (photoBook?.metas?.status === "48") || (photoBook?.metas?.status === "26"));
+			const constructorPhotoBooksData = filteredBooks.map((photoBook) => ({
 				id   : photoBook?.id,
 				meta : {
 					config           : photoBook?.metas?.config[0],
@@ -45,9 +46,7 @@ const CardSearchPhotoBook = () => {
 				},
 			}));
 			console.log(constructorPhotoBooksData);
-			const photoBooksFiltered = constructorPhotoBooksData.filter((photoBook) => (photoBook?.meta?.status === "48") || (photoBook?.meta?.status === "26"));
-			console.log(photoBooksFiltered);
-			setPhotoBooksOrders(photoBooksFiltered);
+			setPhotoBooksOrders(constructorPhotoBooksData);
 		} catch (error) {
 			console.error(error);
 		}
