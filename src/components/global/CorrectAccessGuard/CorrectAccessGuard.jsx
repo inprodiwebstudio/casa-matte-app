@@ -424,7 +424,8 @@ const CorrectAccessGuard = () => {
 	const handlerAvailableExtra = async (idOrderExtra) => {
 		const isPaid = await isPaidExtra(idOrderExtra);
 		if (isPaid) {
-			setStatusView("done");
+			addCurrentPhotoBookConfig(photobookData);
+			setStatusView("continue");
 			return;
 		}
 		setStatusView("notPaidExtras");
