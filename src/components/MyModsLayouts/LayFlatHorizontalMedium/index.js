@@ -96,6 +96,7 @@ import {
 	Mod30Pdf,
 	Mod31Pdf,
 	Mod32Pdf,
+	Mod33Pdf,
 } from "./PdfMods/Regular";
 
 const HorizontalMedium = {
@@ -328,7 +329,7 @@ const HorizontalMedium = {
 		layout       : Mod33,
 		numberPhotos : 1,
 		cat          : "fotos",
-		pdfLayout    : undefined,
+		pdfLayout    : Mod33Pdf,
 	},
 	Mod34 : {
 		id           : "Mod34",
