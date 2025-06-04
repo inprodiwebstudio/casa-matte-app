@@ -536,6 +536,17 @@ const photoBooksConfing = {
 		},
 	},
 	"layflat" : {
+		"horizontal" : {
+			sizes : {
+				mediano : {
+					aspectRatio      : [199, 576],
+					layoutMods       : {},
+					frontLayouts     : {},
+					modsInDoublePage : [],
+					pdfSize          : [],
+				},
+			},
+		},
 		"vertical" : {
 			sizes : {
 				mediano : {
