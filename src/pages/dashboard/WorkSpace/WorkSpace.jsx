@@ -43,6 +43,9 @@ const WorkSpace = () => {
 		if (productPhotoBook === "travelcoffeetable ") {
 			return "travel-coffee-table";
 		}
+		if ((productPhotoBook === "layflat") && (workSpaceFormatPage === "horizontal") && (workSpaceSizePage === "mediano")) {
+			return `${workSpaceFormatPage}-${workSpaceSizePage}-layflat`;
+		}
 		return `${workSpaceFormatPage}-${workSpaceSizePage}`;
 	};
 
