@@ -6,13 +6,15 @@ import ReactDOMServer from "react-dom/server";
 import { imgUrlPdf }  from "helpers";
 // eslint-disable-next-line import/extensions
 
-const Mod25Pdf = ({images}) => {
+const Mod26Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "100%",
-				width   : "100%",
-				padding : "7%",
+				height       : "100%",
+				width        : "100%",
+				padding      : "3%",
+				paddingLeft  : "13%",
+				paddingRight : "13%",
 			}}
 		>
 			<div
@@ -20,44 +22,44 @@ const Mod25Pdf = ({images}) => {
 					width         : "100%",
 					height        : "100%",
 					display       : "flex",
-					flexDirection : "row",
+					flexDirection : "column",
 					gap           : "10px",
 				}}
 			>
 				<div
 					style={{
-						height        : "100%",
-						width         : "calc(50% - 5px)",
+						background : "#E3E3E3",
+						width      : "100%",
+						height     : "calc(50% - 5px)",
+					}}
+				>
+					{
+						images[0]?.url && (
+							<img
+								src={imgUrlPdf(images[0])}
+								alt={images[0]?.url}
+								style={{
+									objectFit : "cover",
+									height    : "100%",
+								}}
+							/>
+						)
+					}
+				</div>
+				<div
+					style={{
+						width         : "100%",
+						height        : "calc(50% - 5px)",
 						display       : "flex",
-						flexDirection : "column",
+						flexDirection : "row",
 						gap           : "10px",
 					}}
 				>
 					<div
 						style={{
 							background : "#E3E3E3",
-							width      : "100%",
-							height     : "calc(50% - 5px)",
-						}}
-					>
-						{
-							images[0]?.url && (
-								<img
-									src={imgUrlPdf(images[0])}
-									alt={images[0]?.url}
-									style={{
-										objectFit : "cover",
-										height    : "100%",
-									}}
-								/>
-							)
-						}
-					</div>
-					<div
-						style={{
-							background : "#E3E3E3",
-							width      : "100%",
-							height     : "calc(50% - 5px)",
+							height     : "100%",
+							width      : "calc(50% - 5px)",
 						}}
 					>
 						{
@@ -73,26 +75,26 @@ const Mod25Pdf = ({images}) => {
 							)
 						}
 					</div>
-				</div>
-				<div
-					style={{
-						background : "#E3E3E3",
-						height     : "100%",
-						width      : "calc(50% - 5px)",
-					}}
-				>
-					{
-						images[2]?.url && (
-							<img
-								src={imgUrlPdf(images[2])}
-								alt={images[2]?.url}
-								style={{
-									objectFit : "cover",
-									height    : "100%",
-								}}
-							/>
-						)
-					}
+					<div
+						style={{
+							background : "#E3E3E3",
+							height     : "100%",
+							width      : "calc(50% - 5px)",
+						}}
+					>
+						{
+							images[2]?.url && (
+								<img
+									src={imgUrlPdf(images[2])}
+									alt={images[2]?.url}
+									style={{
+										objectFit : "cover",
+										height    : "100%",
+									}}
+								/>
+							)
+						}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -105,4 +107,4 @@ const Mod25Pdf = ({images}) => {
 	);
 };
 
-export default Mod25Pdf;
+export default Mod26Pdf;

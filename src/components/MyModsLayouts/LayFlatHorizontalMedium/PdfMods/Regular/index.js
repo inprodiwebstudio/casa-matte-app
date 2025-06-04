@@ -23,3 +23,11 @@ export { default as Mod22Pdf}  from "./Mod22Pdf";
 export { default as Mod23Pdf}  from "./Mod23Pdf";
 export { default as Mod24Pdf}  from "./Mod24Pdf";
 export { default as Mod25Pdf}  from "./Mod25Pdf";
+export { default as Mod26Pdf}  from "./Mod26Pdf";
+export { default as Mod27Pdf}  from "./Mod27Pdf";
+export { default as Mod28Pdf}  from "./Mod28Pdf";
+export { default as Mod29Pdf}  from "./Mod29Pdf";
+export { default as Mod30Pdf}  from "./Mod30Pdf";
+export { default as Mod31Pdf}  from "./Mod31Pdf";
+export { default as Mod32Pdf}  from "./Mod32Pdf";
+
