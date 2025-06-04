@@ -13,6 +13,7 @@ import Alignment     from "@ckeditor/ckeditor5-alignment/src/alignment";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
 // import { EditorState, convertToRaw, ContentState } from "draft-js";
+import { useCallback, useState } from "react";
 // import { closeAllModals }      from "@mantine/modals";
 import { workSpaceSlice }                     from "store/Slices";
 import { connect, useSelector, shallowEqual } from "react-redux";
@@ -32,12 +33,8 @@ const EditText = ({
 	letterSpacing,
 	workSpaceSlice,
 }) => {
-	const currentPageData = useSelector((state) => state.workSpaceSlice.currentPageData, shallowEqual);
+	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const { classes } = styles({size : sizes?.chico, gapSpacing, lineHeight, letterSpacing});
-
-	const myText = currentPageData[`sheet${sheetNo}`]?.text[layoutNo];
-
-	const stateOfText = !myText ? dataTextPage : myText;
 
 	const editorConfiguration = {
 		plugins      : [Essentials, Bold, Alignment, Paragraph, FontFamily, FontSize, FontColor],
@@ -116,20 +113,37 @@ const EditText = ({
 			],
 			supportAllValues : true,
 		},
+		// initialData : "<p>Hello from CKEditor 5 in React!</p>",
 	};
 
-	const handleEditorChange = (event, editor) => {
-		 const data = editor.getData();
+	const [editorState, setEditorState] = useState(dataTextPage);
+
+	const debounce = (func, delay) => {
+		let timeout;
+		return (...args) => {
+			if (timeout) clearTimeout(timeout);
+			timeout = setTimeout(() => {
+				func(...args);
+			}, delay);
+		};
+	};
+
+	const handleEditorChange = useCallback(
+		debounce((event, editor) => {
+		  const data = editor.getData();
+		  setEditorState(data);
 		  if (isBound) {
-			workSpaceSlice.addTextBound({text : data});
-			return;
+				workSpaceSlice.addTextBound({text : data});
+				return;
 		  }
 		  if (!isFront) {
-			workSpaceSlice.setTextCurrentPage({sheetNo, layoutNo, text : data});
-			return;
+				workSpaceSlice.addText({pageId : currentPageId, sheetNo, text : data, layoutNo});
+				return;
 		  }
 		  workSpaceSlice.addTextFront({sheetNo, text : data, layoutNo});
-	};
+		}, 3000),
+		[]
+	);
 
 	return (
 		<div
@@ -138,7 +152,7 @@ const EditText = ({
 			<CKEditor
 				editor={ BalloonEditor }
 				config={ editorConfiguration }
-				data={ stateOfText }
+				data={editorState}
 				onChange={(event, editor) => {
 					handleEditorChange(event, editor);
 				}}
