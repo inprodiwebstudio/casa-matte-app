@@ -231,6 +231,14 @@ export const workSpaceSlice = createSlice({
 		setCurrentPageData : (state, {payload}) => {
 			state.currentPageData = payload;
 		},
+		setTextCurrentPage : (state, {payload}) => {
+			const {sheetNo, layoutNo, text} = payload;
+			state.currentPageData[`sheet${sheetNo}`].text[layoutNo] = text;
+		},
+		changePageData : (state, {payload}) => {
+			const { pageKey, newDataPage } = payload;
+			state.data.pages[pageKey] = newDataPage;
+		},
 		newListPages : (state, {payload}) => {
 			state.data.pages = {...payload};
 			const history = new History();
@@ -745,6 +753,44 @@ export const workSpaceSlice = createSlice({
 							"Mod76",
 							"Mod77",
 							"Mod78",
+						].includes(payload.layout);
+					case "layflat-mediano-horizontal":
+						return [
+							"FrontLayout",
+							"Mod32",
+							"Mod33",
+							"Mod34",
+							"Mod35",
+							"Mod36",
+							"Mod37",
+							"Mod38",
+							"Mod39",
+							"Mod40",
+							"Mod41",
+							"Mod42",
+							"Mod43",
+							"Mod44",
+							"Mod45",
+							"Mod46",
+							"Mod47",
+							"Mod48",
+							"Mod49",
+							"Mod50",
+							"Mod51",
+							"Mod52",
+							"Mod53",
+							"Mod54",
+							"Mod55",
+							"Mod56",
+							"Mod57",
+							"Mod57",
+							"Mod58",
+							"Mod59",
+							"Mod60",
+							"Mod61",
+							"Mod62",
+							"Mod63",
+							"Mod64",
 						].includes(payload.layout);
 					case "grande-cuadrado" :
 						return ["FrontLayout"].includes(payload.layout);

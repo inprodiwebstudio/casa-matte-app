@@ -45,7 +45,8 @@ const CardSearchPhotoBook = () => {
 					status           : photoBook?.metas?.status[0],
 				},
 			}));
-			setPhotoBooksOrders(constructorPhotoBooksData);
+			const photoBooksFiltered = constructorPhotoBooksData.filter((photoBook) => (photoBook?.meta?.status === "48") || (photoBook?.meta?.status === "26"));
+			setPhotoBooksOrders(photoBooksFiltered);
 		} catch (error) {
 			console.error(error);
 		}

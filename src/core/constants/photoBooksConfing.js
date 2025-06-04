@@ -1,16 +1,17 @@
 
 //LayoutsMods
-import VerticalLarge       from "components/MyModsLayouts/VerticalLarge";
-import SquareLarge         from "components/MyModsLayouts/SquareLarge";
-import VerticalMedium      from "components/MyModsLayouts/VerticalMedium";
-import HorizontalLarge     from "components/MyModsLayouts/HorizontalLarge";
-import SquareSmall         from "components/MyModsLayouts/SquareSmall";
-import TravelCoffeeTable   from "components/MyModsLayouts/TravelCoffeeTable";
-import HorizontalMedium    from "components/MyModsLayouts/HorizontalMedium";
-import LayFlat             from "components/MyModsLayouts/LayFlat";
-import LayFlatSquareMedium from "components/MyModsLayouts/LayFlatSquareMedium";
-import LayFlatSquareLarge  from "components/MyModsLayouts/LayFlatSquareLarge";
-import LayFlatSquareSmall  from "components/MyModsLayouts/LayFlatSquareSmall";
+import VerticalLarge           from "components/MyModsLayouts/VerticalLarge";
+import SquareLarge             from "components/MyModsLayouts/SquareLarge";
+import VerticalMedium          from "components/MyModsLayouts/VerticalMedium";
+import HorizontalLarge         from "components/MyModsLayouts/HorizontalLarge";
+import SquareSmall             from "components/MyModsLayouts/SquareSmall";
+import TravelCoffeeTable       from "components/MyModsLayouts/TravelCoffeeTable";
+import HorizontalMedium        from "components/MyModsLayouts/HorizontalMedium";
+import LayFlat                 from "components/MyModsLayouts/LayFlat";
+import LayFlatSquareMedium     from "components/MyModsLayouts/LayFlatSquareMedium";
+import LayFlatSquareLarge      from "components/MyModsLayouts/LayFlatSquareLarge";
+import LayFlatSquareSmall      from "components/MyModsLayouts/LayFlatSquareSmall";
+import LayFlatHorizontalMedium from "components/MyModsLayouts/LayFlatHorizontalMedium";
 
 const photoBooksConfing = {
 	white : {
@@ -536,6 +537,53 @@ const photoBooksConfing = {
 		},
 	},
 	"layflat" : {
+		"horizontal" : {
+			sizes : {
+				mediano : {
+					aspectRatio      : [11, 8],
+					layoutMods       : {...LayFlatHorizontalMedium},
+					frontLayouts     : {},
+					modsInDoublePage : [
+						"FrontLayout",
+						"Mod32",
+						"Mod33",
+						"Mod34",
+						"Mod35",
+						"Mod36",
+						"Mod37",
+						"Mod38",
+						"Mod39",
+						"Mod40",
+						"Mod41",
+						"Mod42",
+						"Mod43",
+						"Mod44",
+						"Mod45",
+						"Mod46",
+						"Mod47",
+						"Mod48",
+						"Mod49",
+						"Mod50",
+						"Mod51",
+						"Mod52",
+						"Mod53",
+						"Mod54",
+						"Mod55",
+						"Mod55",
+						"Mod56",
+						"Mod57",
+						"Mod58",
+						"Mod59",
+						"Mod60",
+						"Mod61",
+						"Mod62",
+						"Mod63",
+						"Mod64",
+					],
+					pdfSize : [],
+				},
+			},
+		},
 		"vertical" : {
 			sizes : {
 				mediano : {
