@@ -22,7 +22,6 @@ const WorkSpace = () => {
 	const workSpaceSizePage = useSelector((state) => state.workSpaceSlice.data?.sizePhotoBook, shallowEqual);
 	const workSpaceHistory = useSelector((state) => state.workSpaceSlice.history, shallowEqual);
 	const isPreview = useSelector((state) => state.workSpaceSlice?.isPreview, shallowEqual);
-	// const currentPageData = useSelector((state) => state.workSpaceSlice?.currentPageData, shallowEqual);
 	const isAvailableProduct = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
 
 	const isFrontLayout = currentPageId === "frontpage";
@@ -43,9 +42,6 @@ const WorkSpace = () => {
 	const handlerTypeProductFormat = () => {
 		if (productPhotoBook === "travelcoffeetable ") {
 			return "travel-coffee-table";
-		}
-		if ((productPhotoBook === "layflat") && (workSpaceFormatPage === "horizontal") && (workSpaceSizePage === "mediano")) {
-			return `${workSpaceFormatPage}-${workSpaceSizePage}-layflat`;
 		}
 		return `${workSpaceFormatPage}-${workSpaceSizePage}`;
 	};
@@ -128,12 +124,6 @@ const WorkSpace = () => {
 			setMyWorkSpaceData(workSpaceFrontPage);
 		}
 	}, [currentPageId, workSpaceData, workSpaceFrontPage]);
-
-	// useEffect(() => {
-	// 	if (currentPageData) {
-	// 		dispatch(workSpaceSlice.actions.changePageData({ pageNo : currentPageData?.id, newDataPage : currentPageData }));
-	// 	}
-	// }, [currentPageId]);
 
 	document.onkeydown = undoAndRedoActions;
 
