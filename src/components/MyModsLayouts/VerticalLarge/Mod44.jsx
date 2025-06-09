@@ -39,7 +39,7 @@ const Mod44 = ({
 				}}
 			>
 				<Stack
-					spacing="0.3em"
+					spacing="0.2em"
 					w="100%"
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
