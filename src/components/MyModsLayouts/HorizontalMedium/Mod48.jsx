@@ -33,14 +33,14 @@ const Mod48 = ({
 			<Stack
 				w="100%"
 				mah="90%"
-				spacing={isInWorkSpace ? "0.1em" : "0.2em"}
+				spacing={isInWorkSpace ? "0.15em" : "0.2em"}
 				aria-hidden
 				sx={{ overflow : "hidden" }}
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Flex
 					direction="column"
-					gap={isInWorkSpace ? "0em" : "0.2em"}
+					gap={isInWorkSpace ? "0.12em" : "0.2em"}
 					style={{
 						textTransform : "uppercase",
 					}}
