@@ -521,16 +521,64 @@ export const workSpaceSlice = createSlice({
 			state.history.undo = history.undoStack;
 			state.history.current = history.currentAction;
 		},
-		removePhotoById : (state, {payload}) => {
-			const listOfCoordinatesPhotos = payload;
-			listOfCoordinatesPhotos.forEach(photoCoordinate => {
-				const coordinateList = photoCoordinate.split(".");
-				const pageId = coordinateList[0];
-				const sheetNo = coordinateList[1];
-				const noPhoto = coordinateList[2];
-				state.data.pages[pageId][sheetNo].photos[noPhoto].id = "";
-				state.data.pages[pageId][sheetNo].photos[noPhoto].url = "";
+		removePhotosDeleted : (state, {payload}) => {
+			const { imagesIds } = payload;
+			const cloneDataPages = {...state.data.pages};
+			let stringyDataPages = JSON.stringify(cloneDataPages);
+
+			imagesIds.forEach(id => {
+				const regex = new RegExp(`"${id}"`, "g");
+				stringyDataPages = stringyDataPages.replace(regex, "\"\"");
 			});
+
+			const dataPagesLeaveImages = JSON.parse(stringyDataPages);
+			const listOfPagesLeaveImages = [...convertToArray(dataPagesLeaveImages)];
+
+			const parseDeleteImagesSheet = (sheetData) => {
+				const listOfPhotos = convertToArray(sheetData?.photos);
+
+				if (isValidArray(listOfPhotos)) {
+					const isNotAvailablePhotos = (listOfPhotos.length === 1) && (!listOfPhotos[0]?.id && !listOfPhotos[0]?.url);
+					if (isNotAvailablePhotos) {
+						return sheetData;
+					}
+					const newListOfPhotos = listOfPhotos.map((photo) => {
+						if ((photo?.id === "") && photo?.url) {
+							return {
+								...photo,
+								url            : "",
+								urlPhotoEdited : "",
+							};
+						}
+						return photo;
+					});
+					const newObjectPhotos = newListOfPhotos.reduce((acc, photo, index) => {
+						acc[index] = photo;
+						return acc;
+					});
+					return {
+						...sheetData,
+						photos : newObjectPhotos,
+					};
+				}
+
+				return sheetData;
+			};
+
+			const listOfPagesDeletedImages = listOfPagesLeaveImages.map((pageData) => {
+				return {
+					...pageData,
+					sheet1 : parseDeleteImagesSheet(pageData?.sheet1),
+					...(pageData?.sheet2 && {sheet2 : parseDeleteImagesSheet(pageData?.sheet2)}),
+				};
+			});
+
+			const newPagesDataDeletedImages = convertToObject(listOfPagesDeletedImages);
+
+			state.data = {
+				...state.data,
+				pages : newPagesDataDeletedImages,
+			};
 		},
 		autoFillImages : (state, {payload}) => {
 			const newData = {FrontLayout : {...state.data.frontPage}, ...state?.data?.pages};

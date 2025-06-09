@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import BodyGallery from "components/Gallery/BodyGallery";
 //Mantine
-import { openContextModal, closeAllModals } from "@mantine/modals";
+import { closeAllModals, openContextModal } from "@mantine/modals";
 
 //Own components
 import { gallerySlice, workSpaceSlice }                             from "store/Slices";
@@ -18,6 +18,7 @@ const SideBar = ({
 	isLoadingGalleryData,
 	isLoadingMutation,
 	isFullSizeSideBar,
+	workSpaceSlice,
 	selectedData,
 	gallerySlice,
 	typeDropView,
@@ -44,8 +45,10 @@ const SideBar = ({
 		gallerySlice.setLoadingMutationGallery(true);
 		const mySelectedData = convertToArray(selectedData);
 		const publicIdsPhotos = mySelectedData.map(photo => photo?.public_id);
+		const listOfIds = mySelectedData.map(photo => photo?.id);
 		try {
 			await galleryImagesMutastionDelete(publicIdsPhotos);
+			workSpaceSlice.removePhotosDeleted({imagesIds : listOfIds});
 			gallerySlice.deleteDataGallery(selectedData);
 			gallerySlice.setLoadingMutationGallery(false);
 			closeAllModals();
@@ -206,6 +209,7 @@ const mapStateToProps = ({ gallerySlice, authSlice, workSpaceSlice }) => ({
 	userName             : authSlice?.user?.username ?? undefined,
 	filter               : gallerySlice?.filter ?? undefined,
 	isPreview            : workSpaceSlice?.isPreview ?? undefined,
+	photoBookData        : workSpaceSlice?.data ?? undefined,
 	isLoggedIn           : authSlice?.loggedIn ?? false,
 });
 
