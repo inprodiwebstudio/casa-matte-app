@@ -511,7 +511,6 @@ const SquareSmall = {
 		layout         : Mod38,
 		numberPhotos   : 0,
 		numberText     : 1,
-		textContainers : 1,
 		numberTextImgs : 1,
 		cat            : "texto",
 		pdfLayout      : Mod38Pdf,
