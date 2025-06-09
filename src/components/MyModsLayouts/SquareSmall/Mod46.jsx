@@ -30,7 +30,7 @@ const Mod46 = ({
 			<Stack
 				w="80%"
 				mah="90%"
-				spacing="0em"
+				spacing="0.1em"
 				aria-hidden
 				style={{overflow : "hidden"}}
 			>

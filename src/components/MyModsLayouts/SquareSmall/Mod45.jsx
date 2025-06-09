@@ -33,15 +33,13 @@ const Mod45 = ({
 			<Stack
 				w="57%"
 				mah="70%"
-				spacing={
-					isInWorkSpace ? "0.03em" : "0.1em"
-				}
+				spacing={"0.11em"}
 				aria-hidden
 			>
 				<Flex
 					direction="column"
 					gap={
-						isInWorkSpace ? "0em" : "0.1em"
+						isInWorkSpace ? "0.11em" : "0.1em"
 					}
 					justify="center"
 				>

@@ -38,7 +38,7 @@ const Mod50 = ({
 			sx={{overflow : "hidden"}}
 		>
 			<Stack
-				spacing={isInWorkSpace ? "0.3em" : "0.2em"}
+				spacing={isInWorkSpace ? "0.35em" : "0.2em"}
 				w="100%"
 				pl="35%"
 				pr="5%"
@@ -48,7 +48,7 @@ const Mod50 = ({
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Stack
-					spacing={isInWorkSpace ? "0em" : "0.1em" }
+					spacing={isInWorkSpace ? "0.11em" : "0.1em" }
 					aria-hidden
 				>
 					<div>
@@ -88,7 +88,7 @@ const Mod50 = ({
 					</div>
 				</Stack>
 				<Stack
-					spacing={isInWorkSpace ? "0em" : "0.1em" }
+					spacing={isInWorkSpace ? "0.11em" : "0.1em" }
 					aria-hidden
 				>
 					<div>
@@ -128,7 +128,7 @@ const Mod50 = ({
 					</div>
 				</Stack>
 				<Stack
-					spacing={isInWorkSpace ? "0em" : "0.1em" }
+					spacing={isInWorkSpace ? "0.11em" : "0.1em" }
 				>
 					<div>
 						<Text
