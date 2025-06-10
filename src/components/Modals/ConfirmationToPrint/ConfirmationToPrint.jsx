@@ -8,36 +8,39 @@ import "./ConfirmationPrint.scss";
 import axios                    from "axios";
 import { PostingConfig }        from "Notifications";
 import { closeAllModals }       from "@mantine/modals";
+import { isValidArray }         from "helpers";
+import { inCompletePages }      from "./ConfirmationToPrint.helpers";
+import IncompletedPagesBody     from "./IncompletedPagesBody";
 
 
 const ConfirmationToPrint = ({ innerProps }) => {
 	const { postId } = innerProps;
 	const { handlerExtraCost } = useExtraPriceHandler();
 
-	// const pages = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
+	const pages = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
 	const userId = useSelector((state) => state.authSlice?.user?.userId, shallowEqual);
 	const userEmail = useSelector((state) => state.authSlice?.user?.email, shallowEqual);
 
 	const [ dataMutation, { isLoading } ] = genericApi.useSubmitDataMutation();
 
-	// const [notCompletedPages, setNotCompletedPages] = useState([]);
+	const [notCompletedPages, setNotCompletedPages] = useState([]);
 
 	const [isLoadingOrder, setIsLoadingOrder] = useState(false);
 
 	const handlerSubmit = async () => {
-		// if (
-		// 	isValidArray(
-		// 		inCompletePages(Object.values(pages))
-		// 	)
-		// ) {
-		// 	setNotCompletedPages(inCompletePages(Object.values(pages)));
-		// 	return;
-		// }
+		if (
+			isValidArray(
+				inCompletePages(Object.values(pages))
+			)
+		) {
+			setNotCompletedPages(inCompletePages(Object.values(pages)));
+			return;
+		}
 		if (handlerExtraCost() > 0) {
 			setIsLoadingOrder(true);
 			try {
 				const responseCreateOrder = await axios.post(
-					"https://casamatte.com/wp-json/wc/v3/orders",
+					"https://casamatte.wip-inprodi.com/wp-json/wc/v3/orders",
 					{
 						payment_method       : "bacs",
 						payment_method_title : "Direct Bank Transfer",
@@ -113,10 +116,13 @@ const ConfirmationToPrint = ({ innerProps }) => {
 
 	return (
 		<>
-			<BodyConfirm
-				onSubmit={handlerSubmit}
-				isLoading={isLoading || isLoadingOrder}
-			/>
+			{
+				!isValidArray(notCompletedPages) ?
+					<BodyConfirm
+						onSubmit={handlerSubmit}
+						isLoading={isLoading || isLoadingOrder}
+					/> : <IncompletedPagesBody pages={notCompletedPages} />
+			}
 		</>
 	);
 };
