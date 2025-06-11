@@ -37,7 +37,7 @@ const CardSearchPhotoBook = () => {
 			const constructorPhotoBooksData = filteredBooks.map((photoBook) => ({
 				id   : photoBook?.id,
 				meta : {
-					config           : photoBook?.metas?.config[0] ?? "",
+					config           : photoBook?.metas?.config[0] ? photoBook?.metas?.config[0] : "",
 					modelo           : photoBook?.metas?.modelo[0],
 					tamano           : photoBook?.metas?.tamano[0],
 					id_del_pedido    : photoBook?.metas?.id_del_pedido[0],
