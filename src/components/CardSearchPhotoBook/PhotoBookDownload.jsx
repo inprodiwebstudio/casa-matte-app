@@ -1,8 +1,8 @@
-import { Card, Stack, Divider, Text, Group, Button } from "@mantine/core";
-import { convertToArray }                            from "helpers";
-import { useEffect, useState }                       from "react";
-import { SaveIcom }                                  from "Resources/icons";
-import { loadImageWithRetry }                        from "./cardSearchPhotoBook.helpers";
+import { Card, Stack, Divider, Text, Group, Button }  from "@mantine/core";
+import { convertToArray }                             from "helpers";
+import { useEffect, useState }                        from "react";
+import { SaveIcom }                                   from "Resources/icons";
+import { listTextPagesAvailable, loadImageWithRetry } from "./cardSearchPhotoBook.helpers";
 
 import SpinePhotoBook from "components/MyModsLayouts/SpinePdf";
 
@@ -393,6 +393,12 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			getConfigDataPhotoBook();
 		}
 	}, [photoBookData]);
+
+	useEffect(() => {
+		if (photoBookConfigData?.pages) {
+			console.log(listTextPagesAvailable(photoBookConfigData?.pages));
+		}
+	}, [photoBookConfigData]);
 
 	return (
 		<Card
