@@ -288,24 +288,6 @@ export const workSpaceSlice = createSlice({
 
 			const lastPage = slicePagesToReorder[slicePagesToReorder.length - 1];
 
-			if (state.data.product === "layflat") {
-				slicePagesToReorder.push({
-					id     : `page${Number(lastPage.id.split("page")[1]) + 1}`,
-					sheet1 : {
-						pageNo     : lastPage.id.split("page")[1] + 1,
-						layoutType : "",
-						text       : {},
-						photos     : {},
-					},
-					sheet2 : {
-						pageNo     : lastPage.id.split("page")[1] + 1,
-						layoutType : "",
-						text       : {},
-						photos     : {},
-					},
-				});
-			}
-
 			if (lastPage.sheet2) {
 				slicePagesToReorder.push({
 					id     : `page${Number(lastPage.id.split("page")[1]) + 1}`,
@@ -388,6 +370,41 @@ export const workSpaceSlice = createSlice({
 			history.addToUndoStack(undoNewData);
 			state.history.undo = history.undoStack;
 			state.history.current = history.currentAction;
+		},
+		addSpread : (state) => {
+			const cloneDataPages = {...state.data.pages};
+			const currentListOfPages = convertToArray(cloneDataPages);
+			const currentIndexPage = currentListOfPages.findIndex((page) => page.id === state.currentPageData.id);
+			const slicePagesToReorder = currentListOfPages.slice(currentIndexPage + 1, currentListOfPages.length);
+			slicePagesToReorder.unshift({
+				id     : slicePagesToReorder[0].id,
+				sheet1 : {
+					pageNo     : slicePagesToReorder[0].id.split("page")[1],
+					layoutType : "",
+					text       : {},
+					photos     : {},
+				},
+				sheet2 : {
+					pageNo     : slicePagesToReorder[0].id.split("page")[1],
+					layoutType : "",
+					text       : {},
+					photos     : {},
+				},
+			});
+			const pagesReordered = slicePagesToReorder.map((pageData, index) => {
+				if (index === 0) {
+					return pageData;
+				}
+				return {
+					...pageData,
+					id : `page${Number(pageData.id.split("page")[1]) + 1}`,
+				};
+			});
+			const pagesBeforeInsert = currentListOfPages.slice(0, currentIndexPage + 1);
+			const finalPages = [...pagesBeforeInsert, ...pagesReordered];
+			const newPagesObject = convertToObject(finalPages);
+
+			state.data.pages = newPagesObject;
 		},
 		deletePage : (state, {payload}) => {
 			const minPages = state.data.minPages;

@@ -22,7 +22,11 @@ const Navbar = ({workSpaceSlice}) => {
 	const counterPages = () => counterSheets(listOfPages, photoBookProduct === "layflat");
 
 	const insertNewPage = () => {
-		workSpaceSlice.addPage();
+		if (photoBookProduct === "layflat") {
+			workSpaceSlice.addSpread();
+		} else {
+			workSpaceSlice.addPage();
+		}
 		closeAllModals();
 	};
 
