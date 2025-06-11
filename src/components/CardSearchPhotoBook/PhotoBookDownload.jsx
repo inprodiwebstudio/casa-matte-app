@@ -23,10 +23,13 @@ import { useDispatch }               from "react-redux";
 import { workSpaceSlice }            from "store/Slices";
 import { openContextModal }          from "@mantine/modals";
 import { convertPDFToImages }        from "helpers/Functions/convertPdfJpg";
+import GhostTextPagesDom             from "./GhostTextPagesDom";
 
 const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const [ photoBookConfigData, setPhotoBookConfigData ] = useState(undefined);
 	const [ isLoading, setIsLoading ] = useState(false);
+
+	const [ textPages, setTextPages ] = useState(undefined);
 
 	const dispatch = useDispatch();
 
@@ -396,155 +399,169 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 	useEffect(() => {
 		if (photoBookConfigData?.pages) {
-			console.log(listTextPagesAvailable(photoBookConfigData?.pages));
+			setTextPages(listTextPagesAvailable(photoBookConfigData?.pages));
 		}
 	}, [photoBookConfigData]);
 
 	return (
-		<Card
-			radius="13px"
-			shadow="lg"
-			w="40%"
-			p="30px"
-			pt="35px"
-			style={{
-				backgroundColor : "#F7F5F1",
-			}}
-			withBorder
+		<Stack
+			w="100%"
+			h="100%"
+			align="center"
+			justify="center"
 		>
-			<Stack>
-				<Stack spacing={3}>
-					<Text
-						style={{
-							letterSpacing : "4px",
-						}}
-					>
-						DATOS DEL PEDIDO
-					</Text>
-					<Group spacing={30}>
-						<Stack spacing={3}>
-							<Text
-								color="gray"
-								size="13px"
-								weight={400}
-							>
-								NO DE PEDIDO
-							</Text>
-							<Text
-								weight={400}
-								size="14px"
-							>
-								#{photoBookData?.meta?.id_del_pedido ?? "--"}
-							</Text>
-						</Stack>
-						<Stack spacing={3}>
-							<Text
-								color="gray"
-								size="13px"
-								weight={400}
-							>
-								ID PHOTOBOOK
-							</Text>
-							<Text
-								weight={400}
-								size="14px"
-							>
-								{photoBookData?.id ?? "--"}
-							</Text>
-						</Stack>
-						<Stack spacing={3}>
-							<Text
-								color="gray"
-								size="13px"
-								weight={400}
-							>
-								CORREO DEL AUTOR
-							</Text>
-							<Text
-								weight={400}
-								size="14px"
-							>
-								{photoBookData?.meta?.correo_del_autor ?? "--"}
-							</Text>
-						</Stack>
-					</Group>
+			<Card
+				radius="13px"
+				shadow="lg"
+				w="40%"
+				p="30px"
+				pt="35px"
+				style={{
+					backgroundColor : "#F7F5F1",
+				}}
+				withBorder
+			>
+				<Stack>
+					<Stack spacing={3}>
+						<Text
+							style={{
+								letterSpacing : "4px",
+							}}
+						>
+							DATOS DEL PEDIDO
+						</Text>
+						<Group spacing={30}>
+							<Stack spacing={3}>
+								<Text
+									color="gray"
+									size="13px"
+									weight={400}
+								>
+									NO DE PEDIDO
+								</Text>
+								<Text
+									weight={400}
+									size="14px"
+								>
+									#{photoBookData?.meta?.id_del_pedido ?? "--"}
+								</Text>
+							</Stack>
+							<Stack spacing={3}>
+								<Text
+									color="gray"
+									size="13px"
+									weight={400}
+								>
+									ID PHOTOBOOK
+								</Text>
+								<Text
+									weight={400}
+									size="14px"
+								>
+									{photoBookData?.id ?? "--"}
+								</Text>
+							</Stack>
+							<Stack spacing={3}>
+								<Text
+									color="gray"
+									size="13px"
+									weight={400}
+								>
+									CORREO DEL AUTOR
+								</Text>
+								<Text
+									weight={400}
+									size="14px"
+								>
+									{photoBookData?.meta?.correo_del_autor ?? "--"}
+								</Text>
+							</Stack>
+						</Group>
+					</Stack>
+					<Divider size="sm" variant="dashed" />
+					<Stack spacing={3}>
+						<Text
+							style={{
+								letterSpacing : "4px",
+							}}
+						>
+							INFORMACIÓN DEL PHOTOBOOK
+						</Text>
+						<Group
+							spacing={30}
+						>
+							<Stack spacing={3}>
+								<Text
+									color="gray"
+									size="13px"
+									weight={400}
+								>
+									MODELO
+								</Text>
+								<Text
+									weight={400}
+									size="14px"
+								>
+									{photoBookData?.meta?.modelo ?? "--"}
+								</Text>
+							</Stack>
+							<Stack spacing={3}>
+								<Text
+									color="gray"
+									size="13px"
+									weight={400}
+								>
+									TAMAÑO
+								</Text>
+								<Text
+									weight={400}
+									size="14px"
+								>
+									{photoBookData?.meta?.tamano ?? "--"}
+								</Text>
+							</Stack>
+						</Group>
+					</Stack>
+					<Stack spacing={"0px"}>
+						<Button
+							color="darkCasaMatte.7"
+							size="xs"
+							mt="20px"
+							sx={{
+								fontWeight : "200",
+							}}
+							loading={isLoading}
+							onClick={() => handlerDownload()}
+							rightIcon={<SaveIcom size="12px" />}
+							disabled={!photoBookConfigData}
+							fullWidth
+						>
+							PREVISUALIZAR Y DESCARGAR
+						</Button>
+						<Button
+							color="darkCasaMatte.6"
+							size="xs"
+							mt="20px"
+							sx={{
+								fontWeight : "200",
+							}}
+							onClick={onReturn}
+							loading={isLoading}
+							fullWidth
+						>
+							REGRESAR
+						</Button>
+					</Stack>
 				</Stack>
-				<Divider size="sm" variant="dashed" />
-				<Stack spacing={3}>
-					<Text
-						style={{
-							letterSpacing : "4px",
-						}}
-					>
-						INFORMACIÓN DEL PHOTOBOOK
-					</Text>
-					<Group
-						spacing={30}
-					>
-						<Stack spacing={3}>
-							<Text
-								color="gray"
-								size="13px"
-								weight={400}
-							>
-								MODELO
-							</Text>
-							<Text
-								weight={400}
-								size="14px"
-							>
-								{photoBookData?.meta?.modelo ?? "--"}
-							</Text>
-						</Stack>
-						<Stack spacing={3}>
-							<Text
-								color="gray"
-								size="13px"
-								weight={400}
-							>
-								TAMAÑO
-							</Text>
-							<Text
-								weight={400}
-								size="14px"
-							>
-								{photoBookData?.meta?.tamano ?? "--"}
-							</Text>
-						</Stack>
-					</Group>
-				</Stack>
-				<Stack spacing={"0px"}>
-					<Button
-						color="darkCasaMatte.7"
-						size="xs"
-						mt="20px"
-						sx={{
-							fontWeight : "200",
-						}}
-						loading={isLoading}
-						onClick={() => handlerDownload()}
-						rightIcon={<SaveIcom size="12px" />}
-						disabled={!photoBookConfigData}
-						fullWidth
-					>
-						PREVISUALIZAR Y DESCARGAR
-					</Button>
-					<Button
-						color="darkCasaMatte.6"
-						size="xs"
-						mt="20px"
-						sx={{
-							fontWeight : "200",
-						}}
-						onClick={onReturn}
-						loading={isLoading}
-						fullWidth
-					>
-						REGRESAR
-					</Button>
-				</Stack>
-			</Stack>
-		</Card>
+			</Card>
+			{
+				textPages && (
+					<GhostTextPagesDom
+						textPages={textPages}
+					/>
+				)
+			}
+		</Stack>
 	);
 };
 
