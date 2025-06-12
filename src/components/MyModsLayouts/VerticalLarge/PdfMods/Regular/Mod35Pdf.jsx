@@ -2,20 +2,19 @@ import React from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
-import Html                          from "react-pdf-html";
-import ReactDOMServer                from "react-dom/server";
-import { shallowEqual, useSelector } from "react-redux";
+import Html           from "react-pdf-html";
+import ReactDOMServer from "react-dom/server";
 
 
 const Mod35Pdf = ({
 	text,
+	textImgs,
 	modLayout,
 	pageNo,
 }) => {
 
-	const textImgsDictionary = useSelector((state) => state.workSpaceSlice.textsImgs, shallowEqual);
 	const myTextImgsMod = {
-		0 : textImgsDictionary[`${pageNo}-${modLayout}-text1`]?.textImg ?? null,
+		0 : textImgs[`${pageNo}-${modLayout}-text1`]?.textImg ?? null,
 	};
 
 	const bodyHtml = (

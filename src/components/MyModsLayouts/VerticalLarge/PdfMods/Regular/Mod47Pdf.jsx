@@ -2,25 +2,24 @@ import React from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
-import Html                          from "react-pdf-html";
-import ReactDOMServer                from "react-dom/server";
-import { shallowEqual, useSelector } from "react-redux";
+import Html           from "react-pdf-html";
+import ReactDOMServer from "react-dom/server";
 
 
 const Mod47Pdf = ({
 	text,
+	textImgs,
 	modLayout,
 	pageNo,
 }) => {
 
-	const textImgsDictionary = useSelector((state) => state.workSpaceSlice.textsImgs, shallowEqual);
 	const myTextImgsMod = {
-		0 : textImgsDictionary[`${pageNo}-${modLayout}-text1`]?.textImg ?? null,
-		1 : textImgsDictionary[`${pageNo}-${modLayout}-text2`]?.textImg ?? null,
-		2 : textImgsDictionary[`${pageNo}-${modLayout}-text3`]?.textImg ?? null,
-		3 : textImgsDictionary[`${pageNo}-${modLayout}-text4`]?.textImg ?? null,
-		4 : textImgsDictionary[`${pageNo}-${modLayout}-text5`]?.textImg ?? null,
-		5 : textImgsDictionary[`${pageNo}-${modLayout}-text6`]?.textImg ?? null,
+		0 : textImgs[`${pageNo}-${modLayout}-text1`]?.textImg ?? null,
+		1 : textImgs[`${pageNo}-${modLayout}-text2`]?.textImg ?? null,
+		2 : textImgs[`${pageNo}-${modLayout}-text3`]?.textImg ?? null,
+		3 : textImgs[`${pageNo}-${modLayout}-text4`]?.textImg ?? null,
+		4 : textImgs[`${pageNo}-${modLayout}-text5`]?.textImg ?? null,
+		5 : textImgs[`${pageNo}-${modLayout}-text6`]?.textImg ?? null,
 	};
 
 	const bodyHtml = (

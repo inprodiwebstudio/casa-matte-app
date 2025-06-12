@@ -12,18 +12,18 @@ import HorizontalLarge    from "components/MyModsLayouts/HorizontalLarge";
 import HorizontalMedium   from "components/MyModsLayouts/HorizontalMedium";
 import layflatSquareLarge from "components/MyModsLayouts/LayFlatSquareLarge";
 import SquareSmall        from "components/MyModsLayouts/SquareSmall";
+import SpecsConfigPdf     from "components/MyModsLayouts/SpecsConfigPdf";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import saveAs from "file-saver";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import JSZip                         from "jszip";
-import SquareLarge                   from "components/MyModsLayouts/SquareLarge";
-import TravelCoffeeTable             from "components/MyModsLayouts/TravelCoffeeTable";
-import { Document, Page, pdf, View } from "@react-pdf/renderer";
-import { useDispatch }               from "react-redux";
-import { workSpaceSlice }            from "store/Slices";
-import { openContextModal }          from "@mantine/modals";
-import { convertPDFToImages }        from "helpers/Functions/convertPdfJpg";
-import GhostTextPagesDom             from "./GhostTextPagesDom";
+import JSZip                                      from "jszip";
+import SquareLarge                                from "components/MyModsLayouts/SquareLarge";
+import TravelCoffeeTable                          from "components/MyModsLayouts/TravelCoffeeTable";
+import { Document, Page, pdf, View }              from "@react-pdf/renderer";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { workSpaceSlice }                         from "store/Slices";
+import { convertPDFToImages }                     from "helpers/Functions/convertPdfJpg";
+import GhostTextPagesDom                          from "./GhostTextPagesDom";
 
 const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const [ photoBookConfigData, setPhotoBookConfigData ] = useState(undefined);
@@ -135,6 +135,8 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		},
 	};
 
+	const textImgsObj = useSelector((state) => state.workSpaceSlice.textsImgs, shallowEqual);
+
 	const getConfigDataPhotoBook = () => {
 		const myData = photoBookData?.meta?.config;
 		const newData = myData.replace(/\.(heic|webp)/g, ".jpg");
@@ -228,6 +230,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 								<Sheet1Layout
 									images={pageData?.sheet1?.photos}
 									text={pageData?.sheet1?.text}
+									textImgs={textImgsObj}
 									modLayout={pageData?.sheet1?.layoutType}
 									pageNo={pageData?.sheet1?.pageNo}
 								/>
@@ -249,6 +252,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 										<Sheet2Layout
 											images={pageData?.sheet2?.photos}
 											text={pageData?.sheet2?.text}
+											textImgs={textImgsObj}
 											modLayout={pageData?.sheet2?.layoutType}
 											pageNo={pageData?.sheet2?.pageNo}
 										/>
@@ -271,6 +275,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 							<Sheet1Layout
 								images={pageData?.sheet1?.photos}
 								text={pageData?.sheet1?.text}
+								textImgs={textImgsObj}
 								modLayout={pageData?.sheet1?.layoutType}
 								pageNo={pageData?.sheet1?.pageNo}
 							/>
@@ -286,6 +291,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 								<Sheet2Layout
 									images={pageData?.sheet2?.photos}
 									text={pageData?.sheet2?.text}
+									textImgs={textImgsObj}
 									modLayout={pageData?.sheet2?.layoutType}
 									pageNo={pageData?.sheet2?.pageNo}
 								/>
@@ -301,28 +307,14 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 	const SheetSpineLayout = SpinePhotoBook;
 
-	const SheetFrontLayout = photoBookTypes[handlerFormat(photoBookConfigData?.product)]?.[photoBookConfigData?.sizePhotoBook]?.modLayouts[photoBookConfigData?.frontPage?.sheet1?.layoutType]?.pdfLayout;
+	const SheetFrontLayout = photoBookTypes[handlerFormat(photoBookConfigData?.product, photoBookConfigData?.format)]?.[photoBookConfigData?.sizePhotoBook]?.modLayouts[photoBookConfigData?.frontPage?.sheet1?.layoutType]?.pdfLayout;
 
-	const sizeFrontPage = photoBookTypes[handlerFormat(photoBookConfigData?.product)]?.[photoBookConfigData?.sizePhotoBook]?.frontSize;
+	const sizeFrontPage = photoBookTypes[handlerFormat(photoBookConfigData?.product, photoBookConfigData?.format)]?.[photoBookConfigData?.sizePhotoBook]?.frontSize;
 
 	const MyDocGenerate = ({listPages}) => {
 		return (
 			<Document>
 				<>
-					{
-						((photoBookConfigData?.product === "white") && SheetFrontLayout) && (
-							<Page size={sizeFrontPage}>
-								<SheetSpineLayout text={photoBookConfigData?.bound} />
-							</Page>
-						)
-					}
-					{
-						((photoBookConfigData?.product === "white") && SheetFrontLayout) && (
-							<Page size={sizeFrontPage}>
-								<SheetFrontLayout images={photoBookConfigData?.frontPage?.sheet1?.photos} text={photoBookConfigData?.frontPage?.sheet1?.text} />
-							</Page>
-						)
-					}
 					{
 						listPages.map((pageData, index) => getComponent(pageData, index))
 					}
@@ -331,10 +323,61 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		);
 	};
 
+	const MyDocFrontGenerate = () => {
+		return (
+			<Document>
+				<>
+					{
+						((photoBookConfigData?.product === "white") && SheetFrontLayout) && (
+							<Page size={sizeFrontPage}>
+								<SheetFrontLayout
+									images={photoBookConfigData?.frontPage?.sheet1?.photos}
+									text={photoBookConfigData?.frontPage?.sheet1?.text}
+								/>
+							</Page>
+						)
+					}
+				</>
+			</Document>
+		);
+	};
 
-	const zipDownload = async (pdfBlob) => {
+	const MyDocBoundGenerate = () => {
+		return (
+			<Document>
+				<>
+					{
+						((photoBookConfigData?.product === "white") && SheetFrontLayout) && (
+							<Page size={sizeFrontPage}>
+								<SheetSpineLayout
+									text={photoBookConfigData?.bound}
+								/>
+							</Page>
+						)
+					}
+				</>
+			</Document>
+		);
+	};
+
+	const MyDocFrontSpecsConfig = () => {
+		return (
+			<Document>
+				<>
+					<Page size="A4">
+						<SpecsConfigPdf />
+					</Page>
+				</>
+			</Document>
+		);
+	};
+
+	const zipDownload = async (pdfBlob, frontPdfBlob, boundPdfBlob, SpecsConfigBlob) => {
 		const zip = new JSZip();
-		zip.file(`${photoBookData?.meta?.correo_del_autor}-noPedido-${photoBookData?.meta?.id_del_pedido}-photobookId_${photoBookData?.id}/${photoBookData?.meta?.correo_del_autor}-noPedido-${photoBookData?.meta?.id_del_pedido}-photobookId_${photoBookData?.id}.pdf`, pdfBlob);
+		zip.file(`${photoBookData?.meta?.correo_del_autor}-noPedido-${photoBookData?.meta?.id_del_pedido}-photobookId_${photoBookData?.id}/Paginas.pdf`, pdfBlob);
+		zip.file(`${photoBookData?.meta?.correo_del_autor}-noPedido-${photoBookData?.meta?.id_del_pedido}-photobookId_${photoBookData?.id}/Portada.pdf`, frontPdfBlob);
+		zip.file(`${photoBookData?.meta?.correo_del_autor}-noPedido-${photoBookData?.meta?.id_del_pedido}-photobookId_${photoBookData?.id}/Lomo.pdf`, boundPdfBlob);
+		zip.file(`${photoBookData?.meta?.correo_del_autor}-noPedido-${photoBookData?.meta?.id_del_pedido}-photobookId_${photoBookData?.id}/Especificaciones.pdf`, SpecsConfigBlob);
 		const content = await zip.generateAsync({ type : "blob" });
 		saveAs(content, `${photoBookData?.meta?.correo_del_autor}-noPedido-${photoBookData?.meta?.id_del_pedido}-photobookId_${photoBookData?.id}.zip`);
 	};
@@ -379,13 +422,14 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			return;
 		}
 		if (imagesOk) {
-			openContextModal({
-				modal      : "testPdf",
-				innerProps : {
-					photoBookData : photoBookConfigData,
-				},
-			});
-			setIsLoading(false);
+			const listPages = convertToArray(photoBookConfigData?.pages);
+
+			const blobPagesPhotoBook = await pdf(<MyDocGenerate listPages={listPages} />).toBlob();
+			const blobFrontPhotoBook = await pdf(<MyDocFrontGenerate />).toBlob();
+			const blobSpinePhotoBook = await pdf(<MyDocBoundGenerate />).toBlob();
+			const blobSpecsConfigPhotoBook = await pdf(<MyDocFrontSpecsConfig />).toBlob();
+
+			zipDownload(blobPagesPhotoBook, blobFrontPhotoBook, blobSpinePhotoBook, blobSpecsConfigPhotoBook);
 			return;
 		}
 		setIsLoading(false);
@@ -565,7 +609,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 							disabled={!photoBookConfigData}
 							fullWidth
 						>
-							PREVISUALIZAR Y DESCARGAR
+							DESCARGAR
 						</Button>
 						<Button
 							color="darkCasaMatte.6"

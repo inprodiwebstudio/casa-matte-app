@@ -5,21 +5,20 @@ import React from "react";
 import Html           from "react-pdf-html";
 import ReactDOMServer from "react-dom/server";
 
-import { imgUrlPdf }                 from "helpers";
-import { shallowEqual, useSelector } from "react-redux";
+import { imgUrlPdf } from "helpers";
 
 
 const Mod54Pdf = ({
 	text,
 	images,
+	textImgs,
 	modLayout,
 	pageNo,
 }) => {
 
-	const textImgsDictionary = useSelector((state) => state.workSpaceSlice.textsImgs, shallowEqual);
 	const myTextImgsMod = {
-		0 : textImgsDictionary[`${pageNo}-${modLayout}-text1`]?.textImg ?? null,
-		1 : textImgsDictionary[`${pageNo}-${modLayout}-text2`]?.textImg ?? null,
+		0 : textImgs[`${pageNo}-${modLayout}-text1`]?.textImg ?? null,
+		1 : textImgs[`${pageNo}-${modLayout}-text2`]?.textImg ?? null,
 	};
 
 	const bodyHtml = (

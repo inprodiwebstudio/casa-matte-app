@@ -2,22 +2,21 @@ import React from "react";
 
 //Own components
 // eslint-disable-next-line import/extensions
-import Html                          from "react-pdf-html";
-import ReactDOMServer                from "react-dom/server";
-import DividerLayoutPdf              from "components/LayoutHandler/DividerLayoutPdf";
-import { shallowEqual, useSelector } from "react-redux";
+import Html             from "react-pdf-html";
+import ReactDOMServer   from "react-dom/server";
+import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
 
 
 const Mod38Pdf = ({
 	text,
+	textImgs,
 	modLayout,
 	pageNo,
 }) => {
 
-	const textImgsDictionary = useSelector((state) => state.workSpaceSlice.textsImgs, shallowEqual);
 	const myTextImgsMod = {
-		0 : textImgsDictionary[`${pageNo}-${modLayout}-text1`]?.textImg ?? null,
-		1 : textImgsDictionary[`${pageNo}-${modLayout}-text2`]?.textImg ?? null,
+		0 : textImgs[`${pageNo}-${modLayout}-text1`]?.textImg ?? null,
+		1 : textImgs[`${pageNo}-${modLayout}-text2`]?.textImg ?? null,
 	};
 
 	const bodyHtml = (
