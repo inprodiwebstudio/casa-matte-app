@@ -42,8 +42,9 @@ export const listTextPagesAvailable = (pages) => {
 	const insertCleanSheet = (pageNo) => {
 		return {
 			pageNo,
-			text   : {},
-			photos : {},
+			layoutType : "",
+			text       : {},
+			photos     : {},
 		};
 	};
 	const textPagesWithoutImages = pagesAvailableText.map((page) => {
@@ -54,4 +55,23 @@ export const listTextPagesAvailable = (pages) => {
 		};
 	});
 	return textPagesWithoutImages;
+};
+
+export const handlerIdsTextPages = (listPages, configProductPhotoBook) => {
+	let idsTextPages = [];
+	const handlerGenerateIdsPage = (sheetData) => {
+		const modLayoutId = sheetData?.layoutType;
+		const pageNo = sheetData?.pageNo;
+		const numberTextImgs = configProductPhotoBook[modLayoutId]?.numberTextImgs;
+		const arrayNumberTextImgs = Array.from({ length : numberTextImgs }, (_, i) => i);
+		const listOfIdsTexts = arrayNumberTextImgs.map((numberText) => `${pageNo}-${modLayoutId}-text${numberText+1}`);
+		return listOfIdsTexts;
+	};
+
+	listPages.forEach((page) => {
+		const listOfIdsSheet1 = page?.sheet1?.layoutType ? handlerGenerateIdsPage(page?.sheet1) : [];
+		const listOfIdsSheet2 = (page?.sheet2 && page?.sheet2?.layoutType) ? handlerGenerateIdsPage(page?.sheet2) : [];
+		idsTextPages = [...idsTextPages, ...listOfIdsSheet1, ...listOfIdsSheet2];
+	});
+	return idsTextPages;
 };

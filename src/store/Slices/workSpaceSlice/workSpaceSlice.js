@@ -186,6 +186,7 @@ const initialState = {
 			},
 		},
 	},
+	textsImgs       : undefined,
 	currentPageData : undefined,
 	initialData     : undefined,
 	history         : {
@@ -895,6 +896,10 @@ export const workSpaceSlice = createSlice({
 			history.addToUndoStack(undoNewData);
 			state.history.undo = history.undoStack;
 			state.history.current = history.currentAction;
+		},
+		addTextImgs : (state, {payload}) => {
+			const { textImgs } = payload;
+			state.textsImgs = textImgs;
 		},
 		undo : (state, {payload}) => {
 			const history = new History();

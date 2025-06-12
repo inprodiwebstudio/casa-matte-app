@@ -1,8 +1,8 @@
-import { Card, Stack, Divider, Text, Group, Button }  from "@mantine/core";
-import { convertToArray }                             from "helpers";
-import { useEffect, useState }                        from "react";
-import { SaveIcom }                                   from "Resources/icons";
-import { listTextPagesAvailable, loadImageWithRetry } from "./cardSearchPhotoBook.helpers";
+import { Card, Stack, Divider, Text, Group, Button }                       from "@mantine/core";
+import { convertToArray, convertToObject, isValidArray, textToImage }      from "helpers";
+import { useEffect, useState }                                             from "react";
+import { SaveIcom }                                                        from "Resources/icons";
+import { handlerIdsTextPages, listTextPagesAvailable, loadImageWithRetry } from "./cardSearchPhotoBook.helpers";
 
 import SpinePhotoBook from "components/MyModsLayouts/SpinePdf";
 
@@ -180,7 +180,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		if ( (productType === "layflat") && (format === "cuadrado") ) {
 			return "layflatCuadrado";
 		}
-		return photoBookData?.format;
+		return format;
 	};
 
 	const isLayoutDoublePage = (modLayout, witheList) => {
@@ -392,6 +392,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	};
 
 	useEffect(() => {
+		setIsLoading(true);
 		if (photoBookData && (photoBookData?.meta?.config !== "")) {
 			getConfigDataPhotoBook();
 		}
@@ -403,21 +404,49 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		}
 	}, [photoBookConfigData]);
 
+	useEffect(() => {
+		const isAvailableTextPages = textPages && isValidArray(textPages);
+		if (isAvailableTextPages) {
+			const modsLayoutsConfigPhotoBook = photoBookTypes[handlerFormat(photoBookConfigData?.product, photoBookConfigData?.format)]?.[photoBookConfigData?.sizePhotoBook]?.modLayouts;
+			const listIdsTextImgs = handlerIdsTextPages(textPages, modsLayoutsConfigPhotoBook);
+			const blobTextImgs = listIdsTextImgs.map(async (textId) => {
+				const textImg = await textToImage(textId);
+				return {
+					id : textId,
+					textImg,
+				};
+			});
+			Promise.all(blobTextImgs).then((textImgs) => {
+				const textImgsObj = convertToObject(textImgs);
+				dispatch(workSpaceSlice.actions.addTextImgs({ textImgs : textImgsObj }));
+				setIsLoading(false);
+			}).catch((error) => {
+				console.log(error);
+				setIsLoading(false);
+			});
+		}
+	}, [textPages]);
+
 	return (
 		<Stack
 			w="100%"
 			h="100%"
 			align="center"
 			justify="center"
+			style={{
+				position : "relative",
+			}}
 		>
 			<Card
 				radius="13px"
 				shadow="lg"
 				w="40%"
 				p="30px"
+				h="380px"
 				pt="35px"
 				style={{
 					backgroundColor : "#F7F5F1",
+					position        : "absolute",
 				}}
 				withBorder
 			>

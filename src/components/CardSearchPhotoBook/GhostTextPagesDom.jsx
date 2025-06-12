@@ -16,10 +16,14 @@ const GhostTextPagesDom = ({textPages}) => {
 	};
 
 	return (
-		<div style={{height : "100%", width : "100%"}}>
+		<div
+			style={{
+				height : "100%",
+				width  : "100%",
+			}}>
 			<div
 				style={{
-					height   : "500px",
+					height   : "0px",
 					width    : "100%",
 					overflow : "hidden",
 				}}
