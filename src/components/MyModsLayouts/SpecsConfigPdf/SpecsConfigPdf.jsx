@@ -137,7 +137,7 @@ const SpinePage = () => {
 								height       : "20px",
 								borderRadius : "50%",
 								border       : "1px solid black",
-								background   : "#D9D9D9",
+								background   : "#D6C872",
 							}}
 						>
 							&nbsp;
@@ -174,7 +174,7 @@ const SpinePage = () => {
 								height       : "20px",
 								borderRadius : "50%",
 								border       : "1px solid black",
-								background   : "#D9D9D9",
+								background   : "#FF00FF",
 							}}
 						>
 							&nbsp;
