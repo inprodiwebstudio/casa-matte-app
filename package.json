@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy": "https://casamatte.com/",
+  "proxy": "https://casamatte.wip-inprodi.com/",
   "scripts": {
     "start": "vite",
     "debug": "vite --debug --host 0.0.0.0",
@@ -51,6 +51,7 @@
     "jszip": "^3.10.1",
     "localforage": "^1.10.0",
     "path": "^0.12.7",
+    "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^5.2.133",
     "pdfjs-lib": "^0.0.149",
     "prop-types": "^15.8.1",

@@ -38,7 +38,7 @@ const Mod62 = ({
 			sx={{overflow : "hidden"}}
 		>
 			<Stack
-				spacing="0.2em"
+				spacing="0.3em"
 				w="20%"
 			>
 				<Stack

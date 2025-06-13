@@ -41,7 +41,7 @@ const Mod47 = ({
 			>
 				<Stack
 					spacing={
-						isInWorkSpace ? "0em" : "0.15em"
+						isInWorkSpace ? "0.12em" : "0.13em"
 					}
 					w="100%"
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}

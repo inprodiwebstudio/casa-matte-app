@@ -29,13 +29,13 @@ const Mod49 = ({
 			align="flex-end"
 		>
 			<Stack
-				spacing="0.15em"
+				spacing="0.2em"
 				sx={{overflow : "hidden", textTransform : "uppercase"}}
 				maw="60%"
 				miw="30%"
 			>
 				<Stack
-					spacing="0em"
+					spacing="0.11em"
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
 					<Text

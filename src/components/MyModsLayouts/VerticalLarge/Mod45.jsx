@@ -31,14 +31,14 @@ const Mod45 = ({
 			<Stack
 				w="50%"
 				mah="80%"
-				spacing="0.35em"
+				spacing="0.4em"
 				aria-hidden
 				sx={{
 					overflow : "hidden",
 				}}
 			>
 				<Stack
-					spacing="0.35em"
+					spacing="0.3em"
 					w="100%"
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
