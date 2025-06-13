@@ -21,7 +21,6 @@ const ItemPage = ({
 
 	const photoBookFormat = useSelector((state) => state.workSpaceSlice?.data?.format, shallowEqual);
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
-	const orderId = useSelector((state) => state.workSpaceSlice?.data?.orderId, shallowEqual);
 	const isAvailableProduct = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
 	const photoBookProduct = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
 
@@ -90,7 +89,7 @@ const ItemPage = ({
 				<NumbPages />
 			</div>
 			{
-				((pageData?.id !== "page1") && !orderId) && (
+				(pageData?.id !== "page1") && (
 					<div
 						className="delete-icon"
 						onClick={() => handleDelete(pageData?.id)}
