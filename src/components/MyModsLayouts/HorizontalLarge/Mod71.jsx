@@ -40,7 +40,7 @@ const Mod71 = ({
 			>
 				<Flex
 					direction="column"
-					gap={isInWorkSpace ? "0em" : "0.1em"}
+					gap={isInWorkSpace ? "0.12em" : "0.1em"}
 					style={{
 						textTransform : "uppercase",
 					}}

@@ -46,7 +46,7 @@ const Mod46 = ({
 					aria-hidden
 				>
 					<Stack
-						spacing="0px"
+						spacing="0.12em"
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 					>
 						<Text
@@ -91,7 +91,7 @@ const Mod46 = ({
 					aria-hidden
 				>
 					<Stack
-						spacing="0px"
+						spacing="0.13em"
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text3` })}
 					>
 						<Text
@@ -136,7 +136,7 @@ const Mod46 = ({
 					spacing="0.13em"
 				>
 					<Stack
-						spacing="0px"
+						spacing="0.13em"
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text5` })}
 					>
 						<Text

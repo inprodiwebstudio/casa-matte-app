@@ -30,12 +30,12 @@ const Mod44 = ({
 			<Stack
 				w="57%"
 				mah="70%"
-				spacing="0px"
+				spacing="0.1em"
 				aria-hidden
 			>
 				<Flex
 					direction="column"
-					gap="0.04em"
+					gap="0.1em"
 					justify="center"
 				>
 					<div

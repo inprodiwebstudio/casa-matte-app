@@ -35,7 +35,7 @@ const Mod51 = ({
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Stack
-					spacing={isInWorkSpace ? "0.08em" : "0.2em"}
+					spacing={isInWorkSpace ? "0.1em" : "0.2em"}
 				>
 					<Text
 						sizes={{

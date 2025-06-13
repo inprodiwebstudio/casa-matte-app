@@ -40,14 +40,14 @@ const Mod49 = ({
 			pb="10%"
 		>
 			<Stack
-				spacing={isInWorkSpace ? "0.04em" : "0.2em"}
+				spacing={isInWorkSpace ? "0.15em" : "0.2em"}
 				w="100%"
 				pl="30%"
 				pr="10%"
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Stack
-					spacing={isInWorkSpace ? "0.03em" : "0.1em"}
+					spacing={isInWorkSpace ? "0.05em" : "0.1em"}
 					aria-hidden
 				>
 					<div>
@@ -87,7 +87,7 @@ const Mod49 = ({
 					</div>
 				</Stack>
 				<Stack
-					spacing={isInWorkSpace ? "0.03em" : "0.1em"}
+					spacing={isInWorkSpace ? "0.05em" : "0.1em"}
 					aria-hidden
 				>
 					<div>
@@ -127,7 +127,7 @@ const Mod49 = ({
 					</div>
 				</Stack>
 				<Stack
-					spacing={isInWorkSpace ? "0.03em" : "0.1em"}
+					spacing={isInWorkSpace ? "0.05em" : "0.1em"}
 					aria-hidden
 				>
 					<div>
