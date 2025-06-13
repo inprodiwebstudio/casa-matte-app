@@ -4,15 +4,15 @@ import { useEffect, useState }                                             from 
 import { SaveIcom }                                                        from "Resources/icons";
 import { handlerIdsTextPages, listTextPagesAvailable, loadImageWithRetry } from "./cardSearchPhotoBook.helpers";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { PDFDocument }                            from "pdf-lib";
-import SpinePhotoBook                             from "components/MyModsLayouts/SpinePdf";
-import VerticalLarge                              from "components/MyModsLayouts/VerticalLarge";
-import VerticalMedium                             from "components/MyModsLayouts/VerticalMedium";
-import HorizontalLarge                            from "components/MyModsLayouts/HorizontalLarge";
-import HorizontalMedium                           from "components/MyModsLayouts/HorizontalMedium";
-import layflatSquareLarge                         from "components/MyModsLayouts/LayFlatSquareLarge";
-import SquareSmall                                from "components/MyModsLayouts/SquareSmall";
-import SpecsConfigPdf                             from "components/MyModsLayouts/SpecsConfigPdf";
+import { PDFDocument }    from "pdf-lib";
+import SpinePhotoBook     from "components/MyModsLayouts/SpinePdf";
+import VerticalLarge      from "components/MyModsLayouts/VerticalLarge";
+import VerticalMedium     from "components/MyModsLayouts/VerticalMedium";
+import HorizontalLarge    from "components/MyModsLayouts/HorizontalLarge";
+import HorizontalMedium   from "components/MyModsLayouts/HorizontalMedium";
+import layflatSquareLarge from "components/MyModsLayouts/LayFlatSquareLarge";
+import SquareSmall        from "components/MyModsLayouts/SquareSmall";
+// import SpecsConfigPdf                             from "components/MyModsLayouts/SpecsConfigPdf";
 import saveAs                                     from "file-saver";
 import JSZip                                      from "jszip";
 import SquareLarge                                from "components/MyModsLayouts/SquareLarge";
@@ -327,15 +327,15 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		);
 	};
 
-	const MyDocFrontSpecsConfig = () => {
-		return (
-			<Document>
-				<Page size="A4">
-					<SpecsConfigPdf />
-				</Page>
-			</Document>
-		);
-	};
+	// const MyDocFrontSpecsConfig = () => {
+	// 	return (
+	// 		<Document>
+	// 			<Page size="A4">
+	// 				<SpecsConfigPdf />
+	// 			</Page>
+	// 		</Document>
+	// 	);
+	// };
 
 	const zipDownload = async (pdfBlob, frontPdfBlob, boundPdfBlob, SpecsConfigBlob) => {
 		const zip = new JSZip();
@@ -401,17 +401,16 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 				setGenerationStatus("generating_auxiliary");
 				setProgress(90);
-				const [blobFrontPhotoBook, blobSpinePhotoBook, blobSpecsConfigPhotoBook] = await Promise.all([
+				const [blobFrontPhotoBook, blobSpinePhotoBook] = await Promise.all([
 					photoBookConfigData?.product === "white" ? pdf(<MyDocFrontGenerate />).toBlob() : null,
 					photoBookConfigData?.product === "white" ? pdf(<MyDocBoundGenerate />).toBlob() : null,
-					pdf(<MyDocFrontSpecsConfig />).toBlob(),
 				]);
 
 				setGenerationStatus("combining");
 				const mergedBlob = await combinePdfChunks(blobChunks);
 
 				setGenerationStatus("packaging");
-				await zipDownload(mergedBlob, blobFrontPhotoBook, blobSpinePhotoBook, blobSpecsConfigPhotoBook);
+				await zipDownload(mergedBlob, blobFrontPhotoBook, blobSpinePhotoBook);
 			}
 
 			setGenerationStatus("completed");
