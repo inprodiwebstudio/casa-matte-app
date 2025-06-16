@@ -1,8 +1,8 @@
-import { Card, Stack, Divider, Text, Group, Button, Progress }             from "@mantine/core";
-import { convertToArray, convertToObject, isValidArray, textToImage }      from "helpers";
-import { useEffect, useState }                                             from "react";
-import { SaveIcom }                                                        from "Resources/icons";
-import { handlerIdsTextPages, listTextPagesAvailable, loadImageWithRetry } from "./cardSearchPhotoBook.helpers";
+import { Card, Stack, Divider, Text, Group, Button, Progress }        from "@mantine/core";
+import { convertToArray, convertToObject, isValidArray, textToImage } from "helpers";
+import { useEffect, useState }                                        from "react";
+import { SaveIcom }                                                   from "Resources/icons";
+import { handlerIdsTextPages, listTextPagesAvailable }                from "./cardSearchPhotoBook.helpers";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { PDFDocument }    from "pdf-lib";
 import SpinePhotoBook     from "components/MyModsLayouts/SpinePdf";
@@ -111,29 +111,29 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		setPhotoBookConfigData({ ...parseJSON });
 	};
 
-	const listOfPhotos = (pages) => {
-		const urlPhotos = [];
-		const listOfPages = convertToArray(pages);
+	// const listOfPhotos = (pages) => {
+	// 	const urlPhotos = [];
+	// 	const listOfPages = convertToArray(pages);
 
-		listOfPages.forEach((page) => {
-			const photosSheet1 = convertToArray(page?.sheet1?.photos);
-			const photosSheet2 = page?.sheet2?.photos ? convertToArray(page?.sheet2?.photos) : undefined;
+	// 	listOfPages.forEach((page) => {
+	// 		const photosSheet1 = convertToArray(page?.sheet1?.photos);
+	// 		const photosSheet2 = page?.sheet2?.photos ? convertToArray(page?.sheet2?.photos) : undefined;
 
-			const listPhotosSheet1 = photosSheet1.filter(photo => ((photo?.url !== "") && (photo?.id !== "")));
-			const listPhotosSheet2 = photosSheet2 ? photosSheet2.filter(photo => ((photo?.url !== "") && (photo?.id !== ""))) : [];
+	// 		const listPhotosSheet1 = photosSheet1.filter(photo => ((photo?.url !== "") && (photo?.id !== "")));
+	// 		const listPhotosSheet2 = photosSheet2 ? photosSheet2.filter(photo => ((photo?.url !== "") && (photo?.id !== ""))) : [];
 
-			const allPhotos = [...listPhotosSheet1, ...listPhotosSheet2];
-			const allUrl = allPhotos.map(photo => {
-				if (photo?.urlPhotoEdited) {
-					return photo?.urlPhotoEdited;
-				}
-				return photo?.url;
-			});
+	// 		const allPhotos = [...listPhotosSheet1, ...listPhotosSheet2];
+	// 		const allUrl = allPhotos.map(photo => {
+	// 			if (photo?.urlPhotoEdited) {
+	// 				return photo?.urlPhotoEdited;
+	// 			}
+	// 			return photo?.url;
+	// 		});
 
-			urlPhotos.push(...allUrl);
-		});
-		return urlPhotos;
-	};
+	// 		urlPhotos.push(...allUrl);
+	// 	});
+	// 	return urlPhotos;
+	// };
 
 	const validateAllImages = async (imageUrls) => {
 		const listImgsUrls = imageUrls.map(url => loadImageWithRetry(url));
@@ -378,16 +378,16 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		setProgress(0);
 
 		try {
-			const urlPhotos = listOfPhotos(photoBookConfigData?.pages);
-			setGenerationStatus("validating_images");
-			setProgress(10);
+			// const urlPhotos = listOfPhotos(photoBookConfigData?.pages);
+			// setGenerationStatus("validating_images");
+			// setProgress(10);
 
-			const imagesOk = await validateAllImages(urlPhotos);
-			if (!imagesOk) {
-				setIsLoading(false);
-				setGenerationStatus("error");
-				return;
-			}
+			// const imagesOk = await validateAllImages(urlPhotos);
+			// if (!imagesOk) {
+			// 	setIsLoading(false);
+			// 	setGenerationStatus("error");
+			// 	return;
+			// }
 
 			const listPages = convertToArray(photoBookConfigData?.pages);
 
