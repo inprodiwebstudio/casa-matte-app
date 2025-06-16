@@ -135,10 +135,10 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	// 	return urlPhotos;
 	// };
 
-	// const validateAllImages = async (imageUrls) => {
-	// 	const results = await Promise.allSettled(imageUrls.map((url) => loadImageWithRetry(url)));
-	// 	return results.every(result => result.status === "fulfilled");
-	// };
+	const validateAllImages = async (imageUrls) => {
+		const listImgsUrls = imageUrls.map(url => loadImageWithRetry(url));
+		return Promise.all(listImgsUrls).then(() => true).catch(() => false);
+	};
 
 	const handlerFormat = (productType, format) => {
 		if (productType === "travelcoffeetable ") {
@@ -264,7 +264,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 			for (let i = 0; i < chunks.length; i++) {
 				setProgress(Math.round((i / chunks.length) * 90));
-				await new Promise(resolve => setTimeout(resolve, 300));
+				await new Promise(resolve => setTimeout(resolve, 200));
 
 				const chunkBlob = await pdf(
 					<Document>
