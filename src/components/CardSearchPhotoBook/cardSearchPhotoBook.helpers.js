@@ -1,6 +1,6 @@
 import { convertToArray, isValidArray } from "helpers";
 import highQualityImg                   from "helpers/Functions/highQualityImg";
-export const loadImageWithRetry = (url, maxAttempts = 1) => {
+export const loadImageWithRetry = (url, maxAttempts = 3) => {
 	return new Promise((resolve, reject) => {
 		let attempts = 0;
 
@@ -9,6 +9,7 @@ export const loadImageWithRetry = (url, maxAttempts = 1) => {
 			img.src = highQualityImg(url || null);
 
 			img.onload = () => resolve(url);
+
 			img.onerror = () => {
 				attempts++;
 				if (attempts < maxAttempts) {
