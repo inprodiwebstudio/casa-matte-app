@@ -3,7 +3,20 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { PinturaEditor } from "@pqina/react-pintura";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { getEditorDefaults } from "@pqina/pintura";
+import {
+	getEditorDefaults,
+	locale_en_gb,
+	plugin_crop_locale_en_gb,
+	plugin_finetune_locale_en_gb,
+	plugin_filter_locale_en_gb,
+	plugin_annotate_locale_en_gb,
+	plugin_decorate_locale_en_gb,
+	plugin_redact_locale_en_gb,
+	plugin_resize_locale_en_gb,
+	plugin_sticker_locale_en_gb,
+	plugin_frame_locale_en_gb,
+	markup_editor_locale_en_gb,
+} from "@pqina/pintura";
 
 import { connect }        from "react-redux";
 import { closeAllModals } from "@mantine/modals";
@@ -52,16 +65,50 @@ const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 		return new File([u8arr], filename, {type : mime});
 	};
 
+	console.log(inlineResult);
+	console.log({
+		...locale_en_gb,
+		...plugin_crop_locale_en_gb,
+		...plugin_finetune_locale_en_gb,
+		...plugin_filter_locale_en_gb,
+		...plugin_annotate_locale_en_gb,
+		...plugin_decorate_locale_en_gb,
+		...plugin_redact_locale_en_gb,
+		...plugin_resize_locale_en_gb,
+		...plugin_sticker_locale_en_gb,
+		...plugin_frame_locale_en_gb,
+		...markup_editor_locale_en_gb,
+	});
+
 	return (
-		<div style={{ height : "700px" }}>
+		<div style={{ height : "90vh" }}>
 			<PinturaEditor
 				{...getEditorDefaults()}
+				locale={{
+					...getEditorDefaults().locale,
+					labelButtonExport          : "Guardar",
+					cropLabel                  : "Recortar",
+					filterLabel                : "Filtros",
+					finetuneLabel              : "Ajustes",
+					cropLabelTabRotation       : "Rotar",
+					cropLabelTabZoom           : "Zoom",
+					cropLabelButtonRotateLeft  : "Rotar a la izquierda",
+					cropLabelButtonRotateRight : "Rotar a la derecha",
+					finetuneLabelBrightness    : "Brillo",
+					finetuneLabelContrast      : "Contraste",
+					finetuneLabelSaturation    : "Saturación",
+					finetuneLabelExposure      : "Exposición",
+					finetuneLabelTemperature   : "Temperatura",
+					finetuneLabelClarity       : "Claridad",
+				}}
+				utils={[
+					"crop",
+					"filter",
+					"finetune",
+				]}
 				src={urlImage}
-				onProcess={(res) =>
-					setInlineResult(URL.createObjectURL(res.dest))}
+				onProcess={(res) => setInlineResult(URL.createObjectURL(res.dest))}
 			/>
-
-			{inlineResult && <img src={inlineResult} alt="" />}
 		</div>
 	);
 };
