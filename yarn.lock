@@ -1074,6 +1074,11 @@
   resolved "https://registry.yarnpkg.com/@pqina/pintura/-/pintura-8.92.16.tgz#b72f99014dc642cbcf1b2ea01694cd756b6bdd83"
   integrity sha512-w1juxd764Z0RPbrKzddWTa668FgEDZR1NglN0T42xBBTeoMz3AdRNn2UwERNfcz6O3e+FkR0TaG4vYqRNN4WOQ==
 
+"@pqina/react-pintura@^9.0.4":
+  version "9.0.4"
+  resolved "https://registry.yarnpkg.com/@pqina/react-pintura/-/react-pintura-9.0.4.tgz#5a8694b5e0caa1f94a85f6733cba2c8bb8146fb2"
+  integrity sha512-KTJ6cXRGw59fgyxis63FyHzMR6kOf4P/sxIoaoHLkEyKX5plPTX5CXW6z9joMX23pZUutYAIXKUm0y61ITX6ZQ==
+
 "@radix-ui/number@1.0.0":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@radix-ui/number/-/number-1.0.0.tgz"
