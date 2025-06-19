@@ -5,17 +5,6 @@ import { PinturaEditor } from "@pqina/react-pintura";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {
 	getEditorDefaults,
-	locale_en_gb,
-	plugin_crop_locale_en_gb,
-	plugin_finetune_locale_en_gb,
-	plugin_filter_locale_en_gb,
-	plugin_annotate_locale_en_gb,
-	plugin_decorate_locale_en_gb,
-	plugin_redact_locale_en_gb,
-	plugin_resize_locale_en_gb,
-	plugin_sticker_locale_en_gb,
-	plugin_frame_locale_en_gb,
-	markup_editor_locale_en_gb,
 } from "@pqina/pintura";
 
 import { connect }        from "react-redux";
@@ -23,7 +12,6 @@ import { closeAllModals } from "@mantine/modals";
 
 
 //Own components
-import { useState }       from "react";
 import { workSpaceSlice } from "store/Slices";
 import { bindAll }        from "helpers";
 import fullQualityImg     from "helpers/Functions/fullQualityImage";
@@ -37,7 +25,7 @@ import "@pqina/pintura/pintura.css";
 const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 	const { handlerUploadImage } = useSubmitImages({userName : userName});
 
-	const [inlineResult, setInlineResult] = useState();
+	// const [inlineResult, setInlineResult] = useState();
 
 	const urlImage = fullQualityImg(innerProps?.image);
 
@@ -51,34 +39,6 @@ const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 			console.error(error);
 		}
 	};
-
-	const dataURLtoFile = (dataurl, filename) => {
-		let arr = dataurl.split(","),
-			mime = arr[0].match(/:(.*?);/)[1],
-			bstr = atob(arr[1]),
-			n = bstr.length,
-			u8arr = new Uint8Array(n);
-
-		while (n--) {
-			u8arr[n] = bstr.charCodeAt(n);
-		}
-		return new File([u8arr], filename, {type : mime});
-	};
-
-	console.log(inlineResult);
-	console.log({
-		...locale_en_gb,
-		...plugin_crop_locale_en_gb,
-		...plugin_finetune_locale_en_gb,
-		...plugin_filter_locale_en_gb,
-		...plugin_annotate_locale_en_gb,
-		...plugin_decorate_locale_en_gb,
-		...plugin_redact_locale_en_gb,
-		...plugin_resize_locale_en_gb,
-		...plugin_sticker_locale_en_gb,
-		...plugin_frame_locale_en_gb,
-		...markup_editor_locale_en_gb,
-	});
 
 	return (
 		<div style={{ height : "90vh" }}>
@@ -107,7 +67,7 @@ const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 					"finetune",
 				]}
 				src={urlImage}
-				onProcess={(res) => setInlineResult(URL.createObjectURL(res.dest))}
+				onProcess={(res) => addEditedImage(res?.dest)}
 			/>
 		</div>
 	);
