@@ -384,6 +384,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 			const imagesOk = await validateAllImages(urlPhotos);
 			if (!imagesOk) {
+				console.log("Error en la precarga de las imagenes");
 				setIsLoading(false);
 				setGenerationStatus("error");
 				return;
