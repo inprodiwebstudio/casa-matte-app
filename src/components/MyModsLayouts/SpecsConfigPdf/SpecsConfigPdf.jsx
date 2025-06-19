@@ -181,6 +181,58 @@ const SpinePage = () => {
 						</div>
 					</div>
 				</div>
+				<div
+					style={{
+						display       : "flex",
+						flexDirection : "row",
+						gap           : "5px",
+						fontSize      : "17px",
+					}}
+				>
+					<div>Correo del cliente :</div>
+					<div
+						style={{
+							display       : "flex",
+							flexDirection : "row",
+							gap           : "2px",
+							fontSize      : "17px",
+						}}
+					>
+						<div
+							style={{
+								fontWeight : "bold",
+							}}
+						>
+							demo44@demo.com
+						</div>
+					</div>
+				</div>
+				<div
+					style={{
+						display       : "flex",
+						flexDirection : "row",
+						gap           : "5px",
+						fontSize      : "17px",
+					}}
+				>
+					<div>No de Paginas :</div>
+					<div
+						style={{
+							display       : "flex",
+							flexDirection : "row",
+							gap           : "2px",
+							fontSize      : "17px",
+						}}
+					>
+						<div
+							style={{
+								fontWeight : "bold",
+							}}
+						>
+							80
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
