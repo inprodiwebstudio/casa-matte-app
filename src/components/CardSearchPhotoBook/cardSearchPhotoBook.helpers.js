@@ -15,6 +15,7 @@ export const loadImageWithRetry = (url, maxAttempts = 3) => {
 				if (attempts < maxAttempts) {
 					setTimeout(tryLoad, 500);
 				} else {
+					console.error(`No se pudo cargar la imagen: ${url}`);
 					reject(new Error(`No se pudo cargar la imagen: ${url}`));
 				}
 			};
