@@ -6,7 +6,6 @@ export async function convertPDFToImages(pdfBlob) {
 	const arrayBuffer = await pdfBlob.arrayBuffer();
 	const pdf = await pdfjsLib.getDocument({ data : arrayBuffer }).promise;
 
-	console.log(pdf.numPages);
 
 	const images = [];
 

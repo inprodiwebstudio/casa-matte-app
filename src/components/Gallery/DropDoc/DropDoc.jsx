@@ -10,6 +10,7 @@ import useSubmitImages from "helpers/Hooks/useSubmitImages";
 
 import {
 	bindAll,
+	convertToArray,
 	isValidArray,
 } from "helpers";
 
@@ -37,6 +38,7 @@ import { useParams }                            from "react-router";
 
 const DropDoc = ({
 	userName,
+	photosData,
 	galleryPathRoute,
 	galleryTypeDropedView,
 }) => {
@@ -185,6 +187,21 @@ const DropDoc = ({
 		});
 	};
 
+	const handlerSubmitPhotos = () => {
+		const listOfPhotos = convertToArray(photosData);
+		const isAvailablePhotos = isValidArray(listOfPhotos);
+
+		if (!isAvailablePhotos) {
+			return openContextModal({
+				modal      : "disclaimerDropPhotos",
+				innerProps : {
+					handdleSuccess : () => handleAddPhotos(),
+				},
+			});
+		}
+		return handleAddPhotos();
+	};
+
 	const handleAddFolder = async () => {
 		closeAllModals();
 		setLoading(true);
@@ -313,13 +330,7 @@ const DropDoc = ({
 											isButton
 											image={<PhotoList size="50px" />}
 											body="CARGAR A GALERÍA"
-											onSelect={() =>
-												openContextModal({
-													modal      : "disclaimerDropPhotos",
-													innerProps : {
-														handdleSuccess : () => handleAddPhotos(),
-													},
-												})}
+											onSelect={() => handlerSubmitPhotos()}
 										/>
 										{
 											galleryPathRoute?.id === "route" && (
@@ -401,6 +412,7 @@ const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});
 
 const mapStateToProps = ({ gallerySlice, authSlice }) => ({
 	galleryTypeDropedView : gallerySlice?.typeDropedView ?? null,
+	photosData            : gallerySlice?.data ?? null,
 	galleryPathRoute      : gallerySlice?.galleryPathName ?? {},
 	userName              : authSlice?.user?.username ?? undefined,
 });

@@ -545,8 +545,8 @@ export const workSpaceSlice = createSlice({
 			let stringyDataPages = JSON.stringify(cloneDataPages);
 
 			imagesIds.forEach(id => {
-				const regex = new RegExp(`"${id}"`, "g");
-				stringyDataPages = stringyDataPages.replace(regex, "\"\"");
+				const regex = new RegExp(id, "g");
+				stringyDataPages = stringyDataPages.replace(regex, "");
 			});
 
 			const dataPagesLeaveImages = JSON.parse(stringyDataPages);
@@ -568,12 +568,12 @@ export const workSpaceSlice = createSlice({
 								urlPhotoEdited : "",
 							};
 						}
-						return photo;
+						return {...photo};
 					});
 					const newObjectPhotos = newListOfPhotos.reduce((acc, photo, index) => {
 						acc[index] = photo;
 						return acc;
-					});
+					}, {});
 					return {
 						...sheetData,
 						photos : newObjectPhotos,
