@@ -117,7 +117,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			];
 
 			return photos
-				.filter(photo => photo?.url && photo?.id)
+				.filter(photo => (photo?.url && photo?.id))
 				.map(photo => photo?.urlPhotoEdited || photo?.url);
 		});
 	};
