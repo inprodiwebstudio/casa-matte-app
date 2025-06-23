@@ -45,10 +45,10 @@ const SideBar = ({
 		gallerySlice.setLoadingMutationGallery(true);
 		const mySelectedData = convertToArray(selectedData);
 		const publicIdsPhotos = mySelectedData.map(photo => photo?.public_id);
-		// const listOfIds = mySelectedData.map(photo => photo?.id);
+		const listOfIds = mySelectedData.map(photo => photo?.id);
 		try {
 			await galleryImagesMutastionDelete(publicIdsPhotos);
-			// workSpaceSlice.removePhotosDeleted({imagesIds : listOfIds});
+			workSpaceSlice.removePhotosDeleted({imagesIds : listOfIds});
 			gallerySlice.deleteDataGallery(selectedData);
 			gallerySlice.setLoadingMutationGallery(false);
 			closeAllModals();
