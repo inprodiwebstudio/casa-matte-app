@@ -9,6 +9,7 @@ export const useExtraPriceHandler = () => {
 	const sizePhotoBook = useSelector((state) => state.workSpaceSlice.data.sizePhotoBook, shallowEqual);
 	const maxRangePages = useSelector((state) => state.workSpaceSlice.data?.maxRangePages, shallowEqual);
 	const dataPages = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
+	const productType = useSelector((state) => state.workSpaceSlice.data.product, shallowEqual);
 
 	const listOfPages = convertToArray(dataPages.pages);
 	const counterPages = () => counterSheets(listOfPages);
@@ -24,6 +25,15 @@ export const useExtraPriceHandler = () => {
 	};
 
 	useEffect(() => {
+		if (productType === "layflat") {
+			const myCounterPages = convertToArray(dataPages.pages).length;
+			if (myCounterPages > maxRangePages) {
+				setExtraPages(myCounterPages - Number(maxRangePages));
+				return;
+			}
+			setExtraPages(0);
+			return;
+		}
 		if (counterPages() > Number(maxRangePages)) {
 			setExtraPages(counterPages() - Number(maxRangePages));
 			return;
