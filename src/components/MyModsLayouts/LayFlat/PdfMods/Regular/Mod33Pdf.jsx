@@ -6,7 +6,7 @@ import ReactDOMServer from "react-dom/server";
 import { imgUrlPdf }  from "helpers";
 // eslint-disable-next-line import/extensions
 
-const Mod1Pdf = ({images}) => {
+const Mod33Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
@@ -37,4 +37,4 @@ const Mod1Pdf = ({images}) => {
 	);
 };
 
-export default Mod1Pdf;
+export default Mod33Pdf;
