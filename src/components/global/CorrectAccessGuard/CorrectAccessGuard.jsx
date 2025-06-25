@@ -450,6 +450,10 @@ const CorrectAccessGuard = () => {
 			dispatch(authSlice.actions.updateEmail(photobookData?.meta?.correo_del_autor));
 		}
 		if (photobookData?.meta?.status === "48") {
+			if (photobookData?.id === 30840) {
+				setStatusView("done");
+				return;
+			}
 			if (!photobookData?.meta?.id_pedido_hojas_extra) {
 				addCurrentPhotoBookConfig(photobookData);
 				setStatusView("continue");
