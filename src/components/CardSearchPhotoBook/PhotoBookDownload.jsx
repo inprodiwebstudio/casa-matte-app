@@ -104,8 +104,12 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const getFormatKey = () => {
 		const { product, format } = photoBookConfigData || {};
 
-		if (product === "travelcoffeetable") return "travelcoffeetable";
-		if ((product === "layflat") && (format === "cuadrado")) return "layflatCuadrado";
+		if ( product === "travelcoffeetable ") {
+			return "travelcoffeetable";
+		}
+		if ( (product === "layflat") && format ) {
+			return `${product}${format.charAt(0).toUpperCase() + format.slice(1).toLowerCase()}`;
+		}
 		return format;
 	};
 
