@@ -110,7 +110,6 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		if ( (product === "layflat") && format ) {
 			return `${product}${format.charAt(0).toUpperCase() + format.slice(1).toLowerCase()}`;
 		}
-		return format;
 	};
 
 	const listOfPhotos = (pages) => {
