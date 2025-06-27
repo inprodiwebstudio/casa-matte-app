@@ -1,6 +1,6 @@
-import { Grid }                      from "@mantine/core";
+import { Grid, Group }               from "@mantine/core";
 import { useSelector, shallowEqual } from "react-redux";
-import { useState }                  from "react";
+import { useState, useMemo }         from "react";
 import {
 	DndContext,
 	closestCenter,
@@ -18,15 +18,12 @@ import {
 	sortableKeyboardCoordinates,
 	rectSortingStrategy,
 } from "@dnd-kit/sortable";
-import { SortableBookPage} from "./BookPage";
-import { convertToArray }  from "helpers";
-import photoBooksConfing   from "core/constants/photoBooksConfing";
-// Ajusta la ruta según tu store
-
+import { SortableBookPage } from "./BookPage";
+import { convertToArray }   from "helpers";
+import photoBooksConfing    from "core/constants/photoBooksConfing";
 import "./ManagePagesDataGrid.scss";
 
 const ManagePagesDataGrid = () => {
-	// const dispatch = useDispatch();
 	const { data: photoBookData } = useSelector((state) => state.workSpaceSlice, shallowEqual);
 	const photoBookDataPages = photoBookData?.pages || {};
 	const [activePage, setActivePage] = useState(null);
@@ -35,28 +32,54 @@ const ManagePagesDataGrid = () => {
 	const currentPhotoBookConfig = photoBooksConfing[photoBookData?.product]?.[photoBookData?.format]?.sizes?.[photoBookData?.sizePhotoBook];
 	const aspectRatio = currentPhotoBookConfig?.aspectRatio ?? [1, 1];
 
-	// Transformación inicial de datos
-	const initialPages = convertToArray(photoBookDataPages)
-		.map((pageData) =>
-			Object.values(pageData)
-				.filter(page => page?.pageNo)
-				.map((page, index) => ({
-					...page,
-					id           : `${pageData?.id}-${page.pageNo}`, // ID único para DnD
-					spreadPageId : pageData?.id,
-					sheetId      : `sheet${index + 1}`,
-				}))
-		)
-		.flat()
-		.sort((a, b) => a.pageNo - b.pageNo);
+	// Transformación inicial de datos y agrupación en spreads
+	const spreads = useMemo(() => {
+		const initialPages = convertToArray(photoBookDataPages)
+			.map((pageData) =>
+				Object.values(pageData)
+					.filter(page => page?.pageNo)
+					.map((page, index) => ({
+						...page,
+						id           : `${pageData?.id}-${page.pageNo}`,
+						spreadPageId : pageData?.id,
+						sheetId      : `sheet${index + 1}`,
+					}))
+			)
+			.flat()
+			.sort((a, b) => a.pageNo - b.pageNo);
 
-	const [pages, setPages] = useState(initialPages);
+		const spreads = [];
 
-	// Sensores para DnD (mouse/touch y teclado)
+		// Primera página siempre sola
+		if (initialPages.length > 0) {
+			spreads.push({
+				id    : `spread-${initialPages[0].id}`,
+				pages : [initialPages[0]],
+				type  : "single",
+			});
+		}
+
+		// Agrupar el resto en pares (spreads)
+		for (let i = 1; i < initialPages.length; i += 2) {
+			const currentPage = initialPages[i];
+			const nextPage = initialPages[i + 1];
+
+			spreads.push({
+				id    : `spread-${currentPage.id}`,
+				pages : nextPage ? [currentPage, nextPage] : [currentPage],
+				type  : nextPage ? "double" : "single",
+			});
+		}
+
+		return spreads;
+	}, [photoBookDataPages]);
+
+	const [spreadsState, setSpreadsState] = useState(spreads);
+
 	const sensors = useSensors(
 		useSensor(PointerSensor, {
 			activationConstraint : {
-				distance : 5, // Retraso de 5px antes de iniciar el drag
+				distance : 5,
 			},
 		}),
 		useSensor(KeyboardSensor, {
@@ -64,33 +87,61 @@ const ManagePagesDataGrid = () => {
 		})
 	);
 
-	// Función al soltar un elemento
 	const handleDragEnd = (event) => {
 		const { active, over } = event;
 
-		if (active.id !== over.id) {
-			setPages((prevPages) => {
-				const oldIndex = prevPages.findIndex((page) => page.id === active.id);
-				const newIndex = prevPages.findIndex((page) => page.id === over.id);
+		if (active?.id && over?.id && active.id !== over.id) {
+			setSpreadsState((prevSpreads) => {
+				// Reconstruir el array plano para el reordenamiento
+				const flatPages = prevSpreads.flatMap(spread => spread.pages);
+				const oldIndex = flatPages.findIndex((page) => page.id === active.id);
+				const newIndex = flatPages.findIndex((page) => page.id === over.id);
 
-				// Intercambiar las páginas directamente (swap)
-				const newPages = [...prevPages];
-				[newPages[oldIndex], newPages[newIndex]] = [newPages[newIndex], newPages[oldIndex]];// Swap ES6
+				// Intercambiar las páginas
+				const newFlatPages = [...flatPages];
+				[newFlatPages[oldIndex], newFlatPages[newIndex]] = [newFlatPages[newIndex], newFlatPages[oldIndex]];
 
-				const originalPages = [...prevPages];
-				console.log(originalPages[oldIndex], originalPages[newIndex]);
+				// Actualizar los números de página
+				newFlatPages.forEach((page, idx) => {
+					page.pageNo = idx + 1;
+				});
 
-				// Actualizar Redux
-
-				return newPages;
+				// Volver a agrupar en spreads
+				return groupPagesIntoSpreads(newFlatPages);
 			});
 		}
 		setActivePage(null);
 	};
 
-	// Función al empezar a arrastrar
+	const groupPagesIntoSpreads = (pagesArray) => {
+		const newSpreads = [];
+
+		if (pagesArray.length > 0) {
+			newSpreads.push({
+				id    : `spread-${pagesArray[0].id}`,
+				pages : [pagesArray[0]],
+				type  : "single",
+			});
+		}
+
+		for (let i = 1; i < pagesArray.length; i += 2) {
+			const currentPage = pagesArray[i];
+			const nextPage = pagesArray[i + 1];
+
+			newSpreads.push({
+				id    : `spread-${currentPage.id}`,
+				pages : nextPage ? [currentPage, nextPage] : [currentPage],
+				type  : nextPage ? "double" : "single",
+			});
+		}
+
+		return newSpreads;
+	};
+
 	const handleDragStart = (event) => {
-		setActivePage(pages.find((page) => page.id === event.active.id));
+		const activeId = event.active.id;
+		const allPages = spreadsState.flatMap(spread => spread.pages);
+		setActivePage(allPages.find((page) => page.id === activeId));
 	};
 
 	return (
@@ -101,31 +152,44 @@ const ManagePagesDataGrid = () => {
 			onDragEnd={handleDragEnd}
 			onDragStart={handleDragStart}
 		>
-			<SortableContext items={pages} strategy={rectSortingStrategy}>
-				<Grid w="100%" gutter={12}>
-					{pages.map((page, index) => (
-						<SortableBookPage
-							key={page.id}
-							index={index}
-							pageData={page}
-							aspectRatio={aspectRatio}
-						/>
+			<SortableContext items={spreadsState.flatMap(s => s.pages)} strategy={rectSortingStrategy}>
+				<Grid
+					w="100%"
+					gutter={20}
+				>
+					{spreadsState.map((spread, index) => (
+						<Grid.Col key={spread.id} span={4}>
+							<Group
+								position="center"
+								spacing="0px"
+							>
+								{spread.pages.map((page) => (
+									<SortableBookPage
+										key={page.id}
+										pageData={page}
+										aspectRatio={aspectRatio}
+									/>
+								))}
+							</Group>
+						</Grid.Col>
 					))}
 				</Grid>
 			</SortableContext>
 
-			{/* Overlay durante el arrastre */}
 			<DragOverlay adjustScale={false}>
 				{activePage ? (
 					<div
 						style={{
-							background  : "rgba(0, 0, 0, 0.29)",
-							width       : "100%",
-							boxShadow   : "0px 0px 15px rgba(0, 0, 0, 0.5)",
-							aspectRatio : `${aspectRatio[0]} / ${aspectRatio[1]}`,
-							opacity     : 0.9,
-							transform   : "scale(1.05)",
-							transition  : "transform 0.1s ease",
+							background     : "rgba(0, 0, 0, 0.37)",
+							boxShadow      : "0px 5px 15px rgba(0, 0, 0, 0.2)",
+							aspectRatio    : `${aspectRatio[0]} / ${aspectRatio[1]}`,
+							opacity        : 0.9,
+							transform      : "scale(1.03)",
+							transition     : "transform 0.1s ease",
+							borderRadius   : "2px",
+							display        : "flex",
+							justifyContent : "center",
+							alignItems     : "center",
 						}}
 					>
 						&nbsp;
