@@ -15,14 +15,17 @@
         // width : 1388px !important;
         width: calc(73vw - 13px) !important;
     }
-    &.isNoData {
-        width: 354px;
-    }
     &.isInpreview {
         width: 0px !important;
     }
+    &.isNoData {
+        width: 354px !important;
+    }
     @include big-tablet {
         width: 216px !important;
+        &.isInpreview {
+            width: 0px !important;
+        }
         &.isFullSize {
             // width: 900px !important;
             width: calc(62vw - 11px) !important;
@@ -30,6 +33,9 @@
     }
     @include laptop {
         width: 412px;
+        &.isInpreview {
+            width: 0px !important;
+        }
         &.isNoData {
             width: 354px !important;
         }
@@ -40,6 +46,9 @@
     }
     @include tablet {
         width: 216px !important;
+        &.isInpreview {
+            width: 0px !important;
+        }
         &.isNoData {
             width: 228px !important;
         }

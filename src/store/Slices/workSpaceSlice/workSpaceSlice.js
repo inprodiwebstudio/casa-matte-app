@@ -203,16 +203,16 @@ const initialState = {
 			value : "all",
 		},
 	},
-	loading   : false,
-	isPreview : false,
+	loading        : false,
+	statusViewPage : "",
 };
 
 export const workSpaceSlice = createSlice({
 	name     : "workspace",
 	initialState,
 	reducers : {
-		togglePreview : (state) => {
-			state.isPreview = !state.isPreview;
+		changeStatusViewPage : (state, {payload}) => {
+			state.statusViewPage = payload;
 		},
 		setSelectePageData : (state, {payload}) => {
 			state.pageDataSelected = payload;
