@@ -122,7 +122,7 @@ import {
 	Mod56Pdf,
 	Mod57Pdf,
 	Mod58Pdf,
-	Mod59Pdf,
+	// Mod59Pdf,
 	Mod60Pdf,
 	Mod61Pdf,
 	Mod62Pdf,
@@ -543,7 +543,7 @@ const VerticalLarge = {
 		layout       : Mod59,
 		numberPhotos : 10,
 		cat          : "fotos",
-		pdfLayout    : Mod59Pdf,
+		pdfLayout    : undefined,
 	},
 	Mod60 : {
 		id           : "Mod60",
