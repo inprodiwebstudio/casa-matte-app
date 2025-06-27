@@ -75,7 +75,10 @@ const ManagePagesDataGrid = () => {
 
 				// Intercambiar las páginas directamente (swap)
 				const newPages = [...prevPages];
-				[newPages[oldIndex], newPages[newIndex]] = [newPages[newIndex], newPages[oldIndex]]; // Swap ES6
+				[newPages[oldIndex], newPages[newIndex]] = [newPages[newIndex], newPages[oldIndex]];// Swap ES6
+
+				const originalPages = [...prevPages];
+				console.log(originalPages[oldIndex], originalPages[newIndex]);
 
 				// Actualizar Redux
 

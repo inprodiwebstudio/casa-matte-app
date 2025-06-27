@@ -52,7 +52,7 @@ export const SortableBookPage = ({ pageData, aspectRatio, index }) => {
 
 	return (
 		<Grid.Col
-			span={2}
+			span={4}
 			ref={setNodeRef}
 			style={style}
 			{...attributes}

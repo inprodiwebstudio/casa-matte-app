@@ -214,6 +214,24 @@ export const workSpaceSlice = createSlice({
 		changeStatusViewPage : (state, {payload}) => {
 			state.statusViewPage = payload;
 		},
+		changePageContainer : (state, {payload}) => {
+			const { oldPageData, newPageData } = payload;
+			const newDataPages = {
+				...state.data.pages,
+				[oldPageData.spreadPageId] : {
+					...state.data.pages[oldPageData.spreadPageId],
+					layoutType : newPageData.layoutType,
+					photos     : {...newPageData.photos},
+					text       : {...newPageData.text},
+				},
+				[newPageData.spreadPageId] : {
+					...state.data.pages[newPageData.spreadPageId],
+					layoutType : oldPageData.layoutType,
+					photos     : {...oldPageData.photos},
+					text       : {...oldPageData.text},
+				},
+			};
+		},
 		setSelectePageData : (state, {payload}) => {
 			state.pageDataSelected = payload;
 		},
