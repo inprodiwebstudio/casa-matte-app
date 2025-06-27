@@ -6,9 +6,10 @@ import { workSpaceSlice } from "store/Slices";
 import { Draggable }      from "react-beautiful-dnd";
 //Own Components
 //Resources
-import { Thrash } from "Resources/icons";
+import { Thrash }                           from "Resources/icons";
+import { closeAllModals, openContextModal } from "@mantine/modals";
 import "./ItemPage.scss";
-import BookPages  from "components/BookPages";
+import BookPages                            from "components/BookPages";
 
 const ItemPage = ({
 	index,
@@ -32,6 +33,19 @@ const ItemPage = ({
 			currentPage : "sheet1",
 		}));
 		dispatch(workSpaceSlice.actions.handleChangePage(draggableId));
+	};
+
+	const onDeletePage = () => {
+		const myhandlerSucessDelete = () => {
+			closeAllModals();
+			handleDelete(pageData?.id);
+		};
+		openContextModal({
+			modal      : "deletePageConfirm",
+			innerProps : {
+				handdleSuccess : () => myhandlerSucessDelete(),
+			},
+		});
 	};
 
 	const NumbPages = () => {
@@ -92,7 +106,7 @@ const ItemPage = ({
 				(pageData?.id !== "page1") && (
 					<div
 						className="delete-icon"
-						onClick={() => handleDelete(pageData?.id)}
+						onClick={() => onDeletePage()}
 					>
 						<Thrash size="15px" />
 					</div>
