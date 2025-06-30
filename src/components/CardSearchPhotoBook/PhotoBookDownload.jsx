@@ -388,7 +388,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 								text={photoBookConfigData?.frontPage?.sheet1?.text}
 							/>
 						) : (
-							<>No hay información de portada</>
+							"No hay información de portada. Indicarle al cliente que seleccione una portada."
 						)
 					}
 				</Page>
