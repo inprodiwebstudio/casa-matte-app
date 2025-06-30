@@ -26,7 +26,6 @@ import {
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { PDFDocument }                            from "pdf-lib";
 import SpinePhotoBook                             from "components/MyModsLayouts/SpinePdf";
-import SpecsConfig                                from "components/MyModsLayouts/SpecsConfigPdf";
 import saveAs                                     from "file-saver";
 import JSZip                                      from "jszip";
 import { Document, Page, pdf, View }              from "@react-pdf/renderer";
@@ -316,14 +315,13 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		);
 	};
 
-	const zipDownload = async (pdfBlob, frontPdfBlob, boundPdfBlob, specsPdfBlob) => {
+	const zipDownload = async (pdfBlob, frontPdfBlob, boundPdfBlob) => {
 		const zip = new JSZip();
 		const baseName = `${photoBookData.meta.correo_del_autor}-noPedido-${photoBookData.meta.id_del_pedido}-photobookId_${photoBookData.id}`;
 
 		zip.file(`${baseName}/Paginas.pdf`, pdfBlob);
 		if (frontPdfBlob) zip.file(`${baseName}/Portada.pdf`, frontPdfBlob);
 		if (boundPdfBlob) zip.file(`${baseName}/Lomo.pdf`, boundPdfBlob);
-		if (specsPdfBlob) zip.file(`${baseName}/Especificaciones.pdf`, specsPdfBlob);
 
 		saveAs(await zip.generateAsync({ type : "blob" }), `${baseName}.zip`);
 	};
@@ -343,12 +341,11 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			if (photoBookConfigData.product === "layflat") {
 				await createPDFPhotoBook(photoBookConfigData);
 			} else {
-				const [blobChunks, [blobFront, blobSpine, blobSpecs]] = await Promise.all([
+				const [blobChunks, [blobFront, blobSpine]] = await Promise.all([
 					generatePdfInChunks(convertToArray(photoBookConfigData.pages)),
 					photoBookConfigData.product === "white" ? Promise.all([
 						pdf(<FrontCover />).toBlob(),
 						pdf(<SpineCover />).toBlob(),
-						pdf(<SpecsConfigPage />).toBlob(),
 					]) : [null, null],
 				]);
 
@@ -356,7 +353,6 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 					await combinePdfChunks(blobChunks),
 					blobFront,
 					blobSpine,
-					blobSpecs,
 				);
 			}
 
@@ -404,13 +400,13 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		</Document>
 	);
 
-	const SpecsConfigPage = () => (
-		<Document>
-			<Page size="A4">
-				<SpecsConfig />
-			</Page>
-		</Document>
-	);
+	// const SpecsConfigPage = () => (
+	// 	<Document>
+	// 		<Page size="A4">
+	// 			<SpecsConfig />
+	// 		</Page>
+	// 	</Document>
+	// );
 
 	const StatusCard = () => (
 		<Card
