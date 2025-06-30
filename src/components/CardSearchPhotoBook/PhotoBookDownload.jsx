@@ -380,14 +380,18 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 		return (
 			<Document>
-				{SheetLayout && (
-					<Page size={config.frontSize}>
-						<SheetLayout
-							images={photoBookConfigData?.frontPage?.sheet1?.photos}
-							text={photoBookConfigData?.frontPage?.sheet1?.text}
-						/>
-					</Page>
-				)}
+				<Page size={config.frontSize}>
+					{
+						SheetLayout ? (
+							<SheetLayout
+								images={photoBookConfigData?.frontPage?.sheet1?.photos}
+								text={photoBookConfigData?.frontPage?.sheet1?.text}
+							/>
+						) : (
+							<>No hay información de portada</>
+						)
+					}
+				</Page>
 			</Document>
 		);
 	};
