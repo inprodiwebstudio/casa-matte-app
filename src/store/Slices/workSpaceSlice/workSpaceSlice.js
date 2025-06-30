@@ -215,20 +215,56 @@ export const workSpaceSlice = createSlice({
 			state.statusViewPage = payload;
 		},
 		changePageContainer : (state, {payload}) => {
-			const { oldPageData, newPageData } = payload;
-			const newDataPages = {
-				...state.data.pages,
-				[oldPageData.spreadPageId] : {
-					...state.data.pages[oldPageData.spreadPageId],
-					layoutType : newPageData.layoutType,
-					photos     : {...newPageData.photos},
-					text       : {...newPageData.text},
+			const { originPageKey, destinationPageKey } = payload;
+
+			const abstractIdPages = (pageKey) => {
+				return {
+					pageId  : pageKey.split("-")[0],
+					sheetId : pageKey.split("-")[1],
+				};
+			};
+
+			const originKeysPage = {
+				pageId  : abstractIdPages(originPageKey).pageId,
+				sheetId : abstractIdPages(originPageKey).sheetId,
+			};
+
+			const destinationKeysPage = {
+				pageId  : abstractIdPages(destinationPageKey).pageId,
+				sheetId : abstractIdPages(destinationPageKey).sheetId,
+			};
+
+			const newDataPagesInsert = {
+				originData : {
+					... state.data.pages[originKeysPage.pageId][originKeysPage.sheetId],
 				},
-				[newPageData.spreadPageId] : {
-					...state.data.pages[newPageData.spreadPageId],
-					layoutType : oldPageData.layoutType,
-					photos     : {...oldPageData.photos},
-					text       : {...oldPageData.text},
+				destinationData : {
+					... state.data.pages[destinationKeysPage.pageId][destinationKeysPage.sheetId],
+				},
+			};
+
+			state.data = {
+				...state.data,
+				pages : {
+					...state.data.pages,
+					[originKeysPage.pageId] : {
+						...state.data.pages[originKeysPage.pageId],
+						[originKeysPage.sheetId] : {
+							...state.data.pages[originKeysPage.pageId][originKeysPage.sheetId],
+							layoutType : newDataPagesInsert.destinationData.layoutType,
+							photos     : newDataPagesInsert.destinationData.photos,
+							text       : newDataPagesInsert.destinationData.text ?? {0 : ""},
+						},
+					},
+					[destinationKeysPage.pageId] : {
+						...state.data.pages[destinationKeysPage.pageId],
+						[destinationKeysPage.sheetId] : {
+							...state.data.pages[destinationKeysPage.pageId][destinationKeysPage.sheetId],
+							layoutType : newDataPagesInsert.originData.layoutType,
+							photos     : newDataPagesInsert.originData.photos,
+							text       : newDataPagesInsert.originData.text ?? {0 : ""},
+						},
+					},
 				},
 			};
 		},

@@ -2,7 +2,7 @@
 import { useSortable }               from "@dnd-kit/sortable";
 import photoBooksConfing             from "core/constants/photoBooksConfing";
 import { shallowEqual, useSelector } from "react-redux";
-import { useMemo, useState }         from "react";
+import { useMemo }                   from "react";
 import { Text }                      from "@mantine/core";
 
 export const SortableBookPage = ({ pageData, aspectRatio }) => {
@@ -15,8 +15,6 @@ export const SortableBookPage = ({ pageData, aspectRatio }) => {
 		isOver,
 	} = useSortable({ id : pageData.id });
 
-	const [isActivePage, setIsActivePage] = useState(false);
-
 	const { pageNo } = pageData;
 
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
@@ -26,10 +24,6 @@ export const SortableBookPage = ({ pageData, aspectRatio }) => {
 		? "white"
 		: photoBookData?.product;
 	const photoBookFormat = photoBookData?.format ?? "vertical";
-
-	const togleActivePage = () => {
-		setIsActivePage(!isActivePage);
-	};
 
 	const handlerLayoutMod = useMemo(() => {
 		const LayoutMod = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.layoutMods[pageData?.layoutType]?.layout;
@@ -66,7 +60,6 @@ export const SortableBookPage = ({ pageData, aspectRatio }) => {
 			style={style}
 			{...attributes}
 			{...listeners}
-			onClick={togleActivePage}
 		>
 			<div
 				style={{
@@ -79,7 +72,6 @@ export const SortableBookPage = ({ pageData, aspectRatio }) => {
 					justifyContent : "center",
 					alignItems     : "center",
 					pointerEvents  : "none",
-					border         : isActivePage && "1px solid rgb(65, 66, 67)",
 				}}
 			>
 				{handlerLayoutMod}

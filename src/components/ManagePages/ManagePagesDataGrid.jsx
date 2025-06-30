@@ -1,6 +1,6 @@
-import { Grid, Group }               from "@mantine/core";
-import { useSelector, shallowEqual } from "react-redux";
-import { useState, useMemo }         from "react";
+import { Grid, Group }                            from "@mantine/core";
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { useState, useMemo }                      from "react";
 import {
 	DndContext,
 	closestCenter,
@@ -22,17 +22,17 @@ import { SortableBookPage } from "./BookPage";
 import { convertToArray }   from "helpers";
 import photoBooksConfing    from "core/constants/photoBooksConfing";
 import "./ManagePagesDataGrid.scss";
+import { workSpaceSlice }   from "store/Slices";
 
 const ManagePagesDataGrid = () => {
 	const { data: photoBookData } = useSelector((state) => state.workSpaceSlice, shallowEqual);
+	const dispatch = useDispatch();
 	const photoBookDataPages = photoBookData?.pages || {};
 	const [activePage, setActivePage] = useState(null);
 
-	// Configuración del libro
 	const currentPhotoBookConfig = photoBooksConfing[photoBookData?.product]?.[photoBookData?.format]?.sizes?.[photoBookData?.sizePhotoBook];
 	const aspectRatio = currentPhotoBookConfig?.aspectRatio ?? [1, 1];
 
-	// Transformación inicial de datos y agrupación en spreads
 	const spreads = useMemo(() => {
 		const initialPages = convertToArray(photoBookDataPages)
 			.map((pageData) =>
@@ -50,7 +50,6 @@ const ManagePagesDataGrid = () => {
 
 		const spreads = [];
 
-		// Primera página siempre sola
 		if (initialPages.length > 0) {
 			spreads.push({
 				id    : `spread-${initialPages[0].id}`,
@@ -59,7 +58,6 @@ const ManagePagesDataGrid = () => {
 			});
 		}
 
-		// Agrupar el resto en pares (spreads)
 		for (let i = 1; i < initialPages.length; i += 2) {
 			const currentPage = initialPages[i];
 			const nextPage = initialPages[i + 1];
@@ -92,21 +90,26 @@ const ManagePagesDataGrid = () => {
 
 		if (active?.id && over?.id && active.id !== over.id) {
 			setSpreadsState((prevSpreads) => {
-				// Reconstruir el array plano para el reordenamiento
 				const flatPages = prevSpreads.flatMap(spread => spread.pages);
 				const oldIndex = flatPages.findIndex((page) => page.id === active.id);
 				const newIndex = flatPages.findIndex((page) => page.id === over.id);
 
-				// Intercambiar las páginas
 				const newFlatPages = [...flatPages];
 				[newFlatPages[oldIndex], newFlatPages[newIndex]] = [newFlatPages[newIndex], newFlatPages[oldIndex]];
 
-				// Actualizar los números de página
+				const newDataPage = newFlatPages[newIndex];
+				const oldDataPage = newFlatPages[oldIndex];
+
+				const originPageKey = `${oldDataPage.spreadPageId}-${oldDataPage.sheetId}`;
+				const destinationPageKey = `${newDataPage.spreadPageId}-${newDataPage.sheetId}`;
+
+				dispatch(workSpaceSlice.actions.changePageContainer({originPageKey, destinationPageKey}));
+				// const newDataPage = newFlatPages[newIndex];
+
 				newFlatPages.forEach((page, idx) => {
 					page.pageNo = idx + 1;
 				});
 
-				// Volver a agrupar en spreads
 				return groupPagesIntoSpreads(newFlatPages);
 			});
 		}
