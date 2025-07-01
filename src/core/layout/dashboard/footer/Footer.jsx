@@ -15,7 +15,7 @@ const Footer = () => {
 	const currentFileterLayout = useSelector((state) => state.workSpaceSlice.layoutFilter, shallowEqual);
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
-	const isPreviewActive = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
+	const statusViewPage = useSelector((state) => state.workSpaceSlice?.statusViewPage, shallowEqual);
 
 	const [ dropedToggle, setDropedToggle ] = useState(false);
 
@@ -51,7 +51,7 @@ const Footer = () => {
 	}, [currentPageId]);
 
 	return (
-		<div id="Footer" className={`${dropedToggle && "full-size"} ${isPreviewActive && "isActivePreview"}`}>
+		<div id="Footer" className={`${dropedToggle && "full-size"} ${(statusViewPage === "preview") && "isActivePreview"}`}>
 			<div
 				className={`droped-container-action ${dropedToggle && "downArrow"}`}
 				{
