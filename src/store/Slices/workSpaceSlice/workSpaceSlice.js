@@ -224,49 +224,53 @@ export const workSpaceSlice = createSlice({
 				};
 			};
 
-			const originKeysPage = {
-				pageId  : abstractIdPages(originPageKey).pageId,
-				sheetId : abstractIdPages(originPageKey).sheetId,
-			};
-
-			const destinationKeysPage = {
-				pageId  : abstractIdPages(destinationPageKey).pageId,
-				sheetId : abstractIdPages(destinationPageKey).sheetId,
+			const originAndDestinationKeys = {
+				origin : {
+					pageId  : abstractIdPages(originPageKey).pageId,
+					sheetId : abstractIdPages(originPageKey).sheetId,
+				},
+				destination : {
+					pageId  : abstractIdPages(destinationPageKey).pageId,
+					sheetId : abstractIdPages(destinationPageKey).sheetId,
+				},
 			};
 
 			const newDataPagesInsert = {
 				originData : {
-					... state.data.pages[originKeysPage.pageId][originKeysPage.sheetId],
+					... state.data.pages[originAndDestinationKeys.origin.pageId][originAndDestinationKeys.origin.sheetId],
 				},
 				destinationData : {
-					... state.data.pages[destinationKeysPage.pageId][destinationKeysPage.sheetId],
+					... state.data.pages[originAndDestinationKeys.destination.pageId][originAndDestinationKeys.destination.sheetId],
 				},
 			};
 
-			state.data = {
+			const newDataPages = {
 				...state.data,
 				pages : {
 					...state.data.pages,
-					[originKeysPage.pageId] : {
-						...state.data.pages[originKeysPage.pageId],
-						[originKeysPage.sheetId] : {
-							...state.data.pages[originKeysPage.pageId][originKeysPage.sheetId],
+					[originAndDestinationKeys.origin.pageId] : {
+						...state.data.pages[originAndDestinationKeys.origin.pageId],
+						[originAndDestinationKeys.origin.sheetId] : {
+							...state.data.pages[originAndDestinationKeys.origin.pageId][originAndDestinationKeys.origin.sheetId],
 							layoutType : newDataPagesInsert.destinationData.layoutType,
 							photos     : newDataPagesInsert.destinationData.photos,
 							text       : newDataPagesInsert.destinationData.text ?? {0 : ""},
 						},
 					},
-					[destinationKeysPage.pageId] : {
-						...state.data.pages[destinationKeysPage.pageId],
-						[destinationKeysPage.sheetId] : {
-							...state.data.pages[destinationKeysPage.pageId][destinationKeysPage.sheetId],
-							layoutType : newDataPagesInsert.originData.layoutType,
-							photos     : newDataPagesInsert.originData.photos,
-							text       : newDataPagesInsert.originData.text ?? {0 : ""},
-						},
-					},
 				},
 			};
+
+			newDataPages.pages[originAndDestinationKeys.destination.pageId] = {
+				...newDataPages.pages[originAndDestinationKeys.destination.pageId],
+				[originAndDestinationKeys.destination.sheetId] : {
+					...newDataPages.pages[originAndDestinationKeys.destination.pageId][originAndDestinationKeys.destination.sheetId],
+					layoutType : newDataPagesInsert.originData.layoutType,
+					photos     : newDataPagesInsert.originData.photos,
+					text       : newDataPagesInsert.originData.text ?? {0 : ""},
+				},
+			};
+
+			state.data = newDataPages;
 		},
 		setSelectePageData : (state, {payload}) => {
 			state.pageDataSelected = payload;

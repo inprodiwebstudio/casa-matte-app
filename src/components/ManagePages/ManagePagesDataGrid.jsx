@@ -97,11 +97,12 @@ const ManagePagesDataGrid = () => {
 				const newFlatPages = [...flatPages];
 				[newFlatPages[oldIndex], newFlatPages[newIndex]] = [newFlatPages[newIndex], newFlatPages[oldIndex]];
 
-				const newDataPage = newFlatPages[newIndex];
-				const oldDataPage = newFlatPages[oldIndex];
+				const oldDataPage = newFlatPages[newIndex];
+				const newDataPage = newFlatPages[oldIndex];
 
 				const originPageKey = `${oldDataPage.spreadPageId}-${oldDataPage.sheetId}`;
 				const destinationPageKey = `${newDataPage.spreadPageId}-${newDataPage.sheetId}`;
+
 
 				dispatch(workSpaceSlice.actions.changePageContainer({originPageKey, destinationPageKey}));
 				// const newDataPage = newFlatPages[newIndex];
