@@ -23,6 +23,11 @@ export default function App() {
 		navigator.userAgent
 	);
 
+	window.addEventListener("popstate", (event) => {
+		event.preventDefault();
+		window.location.href = "https://casamatte.wip-inprodi.com/dashboard/";
+	});
+
 	if (isMobile) {
 		return (
 			<div id="body-app">

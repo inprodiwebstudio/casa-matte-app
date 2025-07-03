@@ -1,11 +1,13 @@
-import VerticalLarge      from "components/MyModsLayouts/VerticalLarge";
-import VerticalMedium     from "components/MyModsLayouts/VerticalMedium";
-import HorizontalLarge    from "components/MyModsLayouts/HorizontalLarge";
-import HorizontalMedium   from "components/MyModsLayouts/HorizontalMedium";
-import layflatSquareLarge from "components/MyModsLayouts/LayFlatSquareLarge";
-import SquareSmall        from "components/MyModsLayouts/SquareSmall";
-import SquareLarge        from "components/MyModsLayouts/SquareLarge";
-import TravelCoffeeTable  from "components/MyModsLayouts/TravelCoffeeTable";
+import VerticalLarge           from "components/MyModsLayouts/VerticalLarge";
+import VerticalMedium          from "components/MyModsLayouts/VerticalMedium";
+import HorizontalLarge         from "components/MyModsLayouts/HorizontalLarge";
+import HorizontalMedium        from "components/MyModsLayouts/HorizontalMedium";
+import layflatSquareLarge      from "components/MyModsLayouts/LayFlatSquareLarge";
+import layflatVerticalMedium   from "components/MyModsLayouts/LayFlat";
+import layflatHorizontalMedium from "components/MyModsLayouts/LayFlatHorizontalMedium";
+import SquareSmall             from "components/MyModsLayouts/SquareSmall";
+import SquareLarge             from "components/MyModsLayouts/SquareLarge";
+import TravelCoffeeTable       from "components/MyModsLayouts/TravelCoffeeTable";
 
 export const PHOTO_BOOK_TYPES = {
 	vertical : {
@@ -62,16 +64,132 @@ export const PHOTO_BOOK_TYPES = {
 			modLayouts            : { ...TravelCoffeeTable },
 		},
 	},
+	layflatHorizontal : {
+		mediano : {
+			size                  : [1584, 576],
+			isInDoublePageLayouts : [
+				"FrontLayout",
+				"Mod32",
+				"Mod33",
+				"Mod34",
+				"Mod35",
+				"Mod36",
+				"Mod37",
+				"Mod38",
+				"Mod39",
+				"Mod40",
+				"Mod41",
+				"Mod42",
+				"Mod43",
+				"Mod44",
+				"Mod45",
+				"Mod46",
+				"Mod47",
+				"Mod48",
+				"Mod49",
+				"Mod50",
+				"Mod51",
+				"Mod52",
+				"Mod53",
+				"Mod54",
+				"Mod55",
+				"Mod55",
+				"Mod56",
+				"Mod57",
+				"Mod58",
+				"Mod59",
+				"Mod60",
+				"Mod61",
+				"Mod62",
+				"Mod63",
+				"Mod64",
+			],
+			modLayouts : {...layflatHorizontalMedium},
+		},
+	},
 	layflatCuadrado : {
 		grande : {
 			size                  : [1700, 850],
 			isInDoublePageLayouts : [
-				"FrontLayout", "Mod44", "Mod45", "Mod46", "Mod47", "Mod48", "Mod49", "Mod50",
-				"Mod51", "Mod52", "Mod53", "Mod54", "Mod55", "Mod56", "Mod57", "Mod58", "Mod59",
-				"Mod60", "Mod61", "Mod62", "Mod63", "Mod64", "Mod65", "Mod66", "Mod67", "Mod68",
-				"Mod69", "Mod70", "Mod71", "Mod72", "Mod73", "Mod74", "Mod75", "Mod76", "Mod77", "Mod78",
+				"FrontLayout",
+				"Mod44",
+				"Mod45",
+				"Mod46",
+				"Mod47",
+				"Mod48",
+				"Mod49",
+				"Mod50",
+				"Mod51",
+				"Mod52",
+				"Mod53",
+				"Mod54",
+				"Mod55",
+				"Mod56",
+				"Mod57",
+				"Mod58",
+				"Mod59",
+				"Mod60",
+				"Mod61",
+				"Mod62",
+				"Mod63",
+				"Mod64",
+				"Mod65",
+				"Mod66",
+				"Mod67",
+				"Mod68",
+				"Mod69",
+				"Mod70",
+				"Mod71",
+				"Mod72",
+				"Mod73",
+				"Mod74",
+				"Mod75",
+				"Mod76",
+				"Mod77",
+				"Mod78",
 			],
-			modLayouts : { ...layflatSquareLarge },
+			modLayouts : {...layflatSquareLarge},
+		},
+	},
+	layflatVertical : {
+		mediano : {
+			size                  : [1218, 790],
+			isInDoublePageLayouts : [
+				"FrontLayout",
+				"Mod33",
+				"Mod34",
+				"Mod35",
+				"Mod36",
+				"Mod37",
+				"Mod38",
+				"Mod39",
+				"Mod40",
+				"Mod41",
+				"Mod42",
+				"Mod43",
+				"Mod44",
+				"Mod45",
+				"Mod46",
+				"Mod47",
+				"Mod48",
+				"Mod49",
+				"Mod50",
+				"Mod51",
+				"Mod52",
+				"Mod53",
+				"Mod54",
+				"Mod55",
+				"Mod56",
+				"Mod57",
+				"Mod58",
+				"Mod59",
+				"Mod60",
+				"Mod61",
+				"Mod62",
+				"Mod63",
+				"Mod64",
+			],
+			modLayouts : {...layflatVerticalMedium},
 		},
 	},
 };

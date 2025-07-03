@@ -103,8 +103,12 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const getFormatKey = () => {
 		const { product, format } = photoBookConfigData || {};
 
-		if (product === "travelcoffeetable") return "travelcoffeetable";
-		if ((product === "layflat") && (format === "cuadrado")) return "layflatCuadrado";
+		if ( product === "travelcoffeetable ") {
+			return "travelcoffeetable";
+		}
+		if ( (product === "layflat") && format ) {
+			return `${product}${format.charAt(0).toUpperCase() + format.slice(1).toLowerCase()}`;
+		}
 		return format;
 	};
 
@@ -116,7 +120,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			];
 
 			return photos
-				.filter(photo => photo?.url && photo?.id)
+				.filter(photo => (photo?.url && photo?.id))
 				.map(photo => photo?.urlPhotoEdited || photo?.url);
 		});
 	};
@@ -348,7 +352,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 				await zipDownload(
 					await combinePdfChunks(blobChunks),
 					blobFront,
-					blobSpine
+					blobSpine,
 				);
 			}
 
@@ -376,14 +380,18 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 		return (
 			<Document>
-				{SheetLayout && (
-					<Page size={config.frontSize}>
-						<SheetLayout
-							images={photoBookConfigData?.frontPage?.sheet1?.photos}
-							text={photoBookConfigData?.frontPage?.sheet1?.text}
-						/>
-					</Page>
-				)}
+				<Page size={config.frontSize}>
+					{
+						SheetLayout ? (
+							<SheetLayout
+								images={photoBookConfigData?.frontPage?.sheet1?.photos}
+								text={photoBookConfigData?.frontPage?.sheet1?.text}
+							/>
+						) : (
+							"No hay información de portada. Indicarle al cliente que seleccione una portada."
+						)
+					}
+				</Page>
 			</Document>
 		);
 	};
@@ -395,6 +403,14 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			</Page>
 		</Document>
 	);
+
+	// const SpecsConfigPage = () => (
+	// 	<Document>
+	// 		<Page size="A4">
+	// 			<SpecsConfig />
+	// 		</Page>
+	// 	</Document>
+	// );
 
 	const StatusCard = () => (
 		<Card

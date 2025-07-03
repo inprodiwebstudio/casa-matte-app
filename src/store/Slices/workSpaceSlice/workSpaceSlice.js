@@ -203,16 +203,74 @@ const initialState = {
 			value : "all",
 		},
 	},
-	loading   : false,
-	isPreview : false,
+	loading        : false,
+	statusViewPage : "",
 };
 
 export const workSpaceSlice = createSlice({
 	name     : "workspace",
 	initialState,
 	reducers : {
-		togglePreview : (state) => {
-			state.isPreview = !state.isPreview;
+		changeStatusViewPage : (state, {payload}) => {
+			state.statusViewPage = payload;
+		},
+		changePageContainer : (state, {payload}) => {
+			const { originPageKey, destinationPageKey } = payload;
+
+			const abstractIdPages = (pageKey) => {
+				return {
+					pageId  : pageKey.split("-")[0],
+					sheetId : pageKey.split("-")[1],
+				};
+			};
+
+			const originAndDestinationKeys = {
+				origin : {
+					pageId  : abstractIdPages(originPageKey).pageId,
+					sheetId : abstractIdPages(originPageKey).sheetId,
+				},
+				destination : {
+					pageId  : abstractIdPages(destinationPageKey).pageId,
+					sheetId : abstractIdPages(destinationPageKey).sheetId,
+				},
+			};
+
+			const newDataPagesInsert = {
+				originData : {
+					... state.data.pages[originAndDestinationKeys.origin.pageId][originAndDestinationKeys.origin.sheetId],
+				},
+				destinationData : {
+					... state.data.pages[originAndDestinationKeys.destination.pageId][originAndDestinationKeys.destination.sheetId],
+				},
+			};
+
+			const newDataPages = {
+				...state.data,
+				pages : {
+					...state.data.pages,
+					[originAndDestinationKeys.origin.pageId] : {
+						...state.data.pages[originAndDestinationKeys.origin.pageId],
+						[originAndDestinationKeys.origin.sheetId] : {
+							...state.data.pages[originAndDestinationKeys.origin.pageId][originAndDestinationKeys.origin.sheetId],
+							layoutType : newDataPagesInsert.destinationData.layoutType,
+							photos     : newDataPagesInsert.destinationData.photos,
+							text       : newDataPagesInsert.destinationData.text ?? {0 : ""},
+						},
+					},
+				},
+			};
+
+			newDataPages.pages[originAndDestinationKeys.destination.pageId] = {
+				...newDataPages.pages[originAndDestinationKeys.destination.pageId],
+				[originAndDestinationKeys.destination.sheetId] : {
+					...newDataPages.pages[originAndDestinationKeys.destination.pageId][originAndDestinationKeys.destination.sheetId],
+					layoutType : newDataPagesInsert.originData.layoutType,
+					photos     : newDataPagesInsert.originData.photos,
+					text       : newDataPagesInsert.originData.text ?? {0 : ""},
+				},
+			};
+
+			state.data = newDataPages;
 		},
 		setSelectePageData : (state, {payload}) => {
 			state.pageDataSelected = payload;
@@ -545,8 +603,8 @@ export const workSpaceSlice = createSlice({
 			let stringyDataPages = JSON.stringify(cloneDataPages);
 
 			imagesIds.forEach(id => {
-				const regex = new RegExp(`"${id}"`, "g");
-				stringyDataPages = stringyDataPages.replace(regex, "\"\"");
+				const regex = new RegExp(id, "g");
+				stringyDataPages = stringyDataPages.replace(regex, "");
 			});
 
 			const dataPagesLeaveImages = JSON.parse(stringyDataPages);
@@ -568,12 +626,12 @@ export const workSpaceSlice = createSlice({
 								urlPhotoEdited : "",
 							};
 						}
-						return photo;
+						return {...photo};
 					});
 					const newObjectPhotos = newListOfPhotos.reduce((acc, photo, index) => {
 						acc[index] = photo;
 						return acc;
-					});
+					}, {});
 					return {
 						...sheetData,
 						photos : newObjectPhotos,

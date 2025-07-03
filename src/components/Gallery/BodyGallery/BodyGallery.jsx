@@ -120,6 +120,15 @@ const BodyGallery = ({
 		return false;
 	};
 
+	const handlerOnDragOverFiles = (e) => {
+		// e.preventDefault();
+
+		const types = e.dataTransfer.types;
+		if (types.includes("Files") && !galleryTypeDropedView) {
+			gallerySlice.setTypeDropedView("addFiles");
+		}
+	};
+
 	// useEffect(() => {
 	// 	if (!isAvailableDocs) {
 	// 		gallerySlice.setTypeDropedView("addFiles");
@@ -127,7 +136,10 @@ const BodyGallery = ({
 	// }, [galleryList]);
 
 	return (
-		<div className="BodyGallery">
+		<div
+			className="BodyGallery"
+			onDragOver={handlerOnDragOverFiles}
+		>
 			<div className="header-gallery-container">
 				<div className="header-actions-gallery">
 					{

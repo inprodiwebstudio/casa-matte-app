@@ -16,6 +16,7 @@ export const usePhotoBookPreset = () => {
 		const numberOfPages = meta?.numero_de_paginas ? Number(meta?.numero_de_paginas) : 40;
 
 		const configPhotoBookData = {
+			postTypeId    : productData?.id ?? undefined,
 			sizePhotoBook : formatAndSize.size,
 			dimentions    : dimensions,
 			product       : model.modelKey,

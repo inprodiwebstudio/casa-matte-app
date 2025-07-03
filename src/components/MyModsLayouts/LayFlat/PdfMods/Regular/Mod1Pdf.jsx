@@ -10,32 +10,23 @@ const Mod1Pdf = ({images}) => {
 	const bodyHtml = (
 		<div
 			style={{
-				height : "100%",
-				width  : "100%",
+				height     : "100%",
+				width      : "100%",
+				background : "#E3E3E3",
 			}}
 		>
-			<div
-				style={{
-					height     : "100%",
-					width      : "100%",
-					overflow   : "hidden",
-					background : "#E3E3E3",
-					position   : "relative",
-				}}
-			>
-				{
-					images[0]?.url && (
-						<img
-							src={imgUrlPdf(images[0])}
-							alt={images[0]?.url}
-							style={{
-								objectFit : "cover",
-								height    : "100%",
-							}}
-						/>
-					)
-				}
-			</div>
+			{
+				images[0]?.url && (
+					<img
+						src={imgUrlPdf(images[0])}
+						alt={images[0]?.url}
+						style={{
+							objectFit : "cover",
+							height    : "100%",
+						}}
+					/>
+				)
+			}
 		</div>
 	);
 

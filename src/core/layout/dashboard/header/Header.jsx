@@ -3,7 +3,9 @@ import { useEffect, useState }                    from "react";
 import LogoCasaMatte                              from "Resources/images/casaMatteLogo.png";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
-import { workSpaceSlice } from "store/Slices";
+import { workSpaceSlice, authSlice } from "store/Slices";
+
+import { genericApi } from "store/api/genericApi";
 
 import "./Header.scss";
 //Mantine
@@ -11,6 +13,7 @@ import "./Header.scss";
 
 //Own components
 import { useParams }        from "react-router";
+import { PostingConfig }    from "Notifications";
 import { dayjs }            from "helpers";
 import { openContextModal } from "@mantine/modals";
 
@@ -19,8 +22,6 @@ const Header = () => {
 	const dispatch = useDispatch();
 
 	const { postId } = useParams();
-
-	const [isLoading, setIsLoading] = useState(false);
 
 	const [ date, setDate ] = useState(undefined);
 
@@ -35,25 +36,51 @@ const Header = () => {
 	const userName = useSelector((state) => state.authSlice?.user?.username, shallowEqual);
 	const userEmail = useSelector((state) => state.authSlice?.user?.email, shallowEqual);
 	const isLoadingWorspaceData = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
+	const statusViewPage = useSelector((state) => state.workSpaceSlice?.statusViewPage, shallowEqual);
+
+	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
+
 
 	const isAdminAccount = (userName === "casamatteadmin") && (userEmail === "info@casamatte.com");
 	const isDevAccount = (userName === "demo") && (userEmail === "demo44@demo.com");
 
 	const handlerShowTestPdf = isAdminAccount || isDevAccount;
 	const handlerClickPreview = () => () => {
-		dispatch(workSpaceSlice.actions.togglePreview());
-	};
-
-	const handlerLoadingFake = () => {
-		setIsLoading(true);
-		setTimeout(() => {
-			setIsLoading(false);
-		}, 2000);
+		if (statusViewPage === "preview") {
+			dispatch(workSpaceSlice.actions.changeStatusViewPage("workspace"));
+			return;
+		}
+		dispatch(workSpaceSlice.actions.changeStatusViewPage("preview"));
 	};
 
 	const handlerChangeTitleProject = async (valueName) => {
 		setProjectName(valueName);
 		dispatch(workSpaceSlice.actions.handleChangepRrojectTitle(valueName));
+	};
+
+	const parseSendData = (data) => {
+		const myData = data;
+		const stringData = JSON.stringify(myData);
+		return stringData;
+	};
+
+	const submitData = async () => {
+		await dataMutation({
+			module : "wp-json/wp/v2/photobook-2-0",
+			data   : {
+				title : {
+					rendered : isModifiedData?.projectTittle ?? "TITULO",
+					raw      : isModifiedData?.projectTittle ?? "TITULO",
+				},
+				status : "publish",
+				meta   : {
+					config : parseSendData({...isModifiedData, minPages : (isModifiedData?.pasta === "Dura") ? 25 : 10}),
+				},
+			},
+			id     : postId,
+			method : "POST",
+		});
+		setDate(new Date);
 	};
 
 	useEffect(() => {
@@ -71,6 +98,24 @@ const Header = () => {
 			setProjectName(projectTitle);
 		}
 	}, [projectTitle]);
+
+	useEffect(() => {
+		if (dataMutationResult.isUninitialized) return;
+
+		if (dataMutationResult.isError) {
+			const status = dataMutationResult.error?.status;
+
+			switch (status) {
+				case 403:
+					PostingConfig["post"][403]();
+					dispatch(authSlice.actions.clearUserData());
+					break;
+				default:
+					PostingConfig["post"][500]();
+					break;
+			}
+		}
+	}, [dataMutationResult]);
 
 	return (
 		<div className="Header">
@@ -125,15 +170,15 @@ const Header = () => {
 								<Button
 									radius={12}
 									size="xs"
-									loading={isLoading}
+									loading={dataMutationResult.isLoading}
 									color="gray"
-									onClick={() => handlerLoadingFake()}
+									onClick={() => submitData()}
 									sx={{
 										fontFamily : "Helvetica",
 										fontWeight : "400",
 									}}
 								>
-									{isLoading ? "GUARDANDO..." : "GUARDAR"}
+									{dataMutationResult.isLoading ? "GUARDANDO..." : "GUARDAR"}
 								</Button>
 								<Button
 									radius={12}
