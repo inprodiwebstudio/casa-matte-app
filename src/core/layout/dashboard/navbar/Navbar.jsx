@@ -68,18 +68,22 @@ const Navbar = ({workSpaceSlice}) => {
 				(statusViewPage !== "preview") &&
 				<>
 					<DropedMenu />
-					<Center>
-						<Button
-							radius={5}
-							size="xs"
-							color="gray"
-							sx={{marginTop : "15px", textTransform : "uppercase"}}
-							loading={loading}
-							onClick={() => toggleManagePagesView()}
-						>
-							{isManagePagesView ? "Regresar" : "Ordenar Paginas"}
-						</Button>
-					</Center>
+					{
+						(photoBookProduct !== "layflat") && (
+							<Center>
+								<Button
+									radius={5}
+									size="xs"
+									color="gray"
+									sx={{marginTop : "15px", textTransform : "uppercase"}}
+									loading={loading}
+									onClick={() => toggleManagePagesView()}
+								>
+									{isManagePagesView ? "Regresar" : "Ordenar Paginas"}
+								</Button>
+							</Center>
+						)
+					}
 					<div
 						style={{
 							overflowY : "hidden",
