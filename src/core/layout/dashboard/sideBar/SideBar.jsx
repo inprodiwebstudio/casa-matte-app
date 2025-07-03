@@ -25,7 +25,7 @@ const SideBar = ({
 	galleryData,
 	galleryPath,
 	isLoggedIn,
-	isPreview,
+	statusViewPage,
 	userName,
 	filter,
 }) => {
@@ -102,7 +102,7 @@ const SideBar = ({
 	}, [filter, isLoggedIn, galleryPath]);
 
 	return (
-		<div id="SideBar" className={`${isAvailableDocs ? (isFullSizeSideBar && "isFullSize") : "isNoData"} ${isPreview && "isInpreview"}`}>
+		<div id="SideBar" className={`${(statusViewPage === "preview") && "isInpreview"} ${isAvailableDocs ? (isFullSizeSideBar && "isFullSize") : "isNoData"}`}>
 			{
 				((!isLoadingGalleryData) && isAvailableDocs) && (
 					<div className={`actions-sidebar-conatiner ${isFullSizeSideBar && "isFullSize"} ${isLoadingGalleryData && "is-loading"}`}>
@@ -208,7 +208,7 @@ const mapStateToProps = ({ gallerySlice, authSlice, workSpaceSlice }) => ({
 	galleryPath          : gallerySlice?.galleryPathName ?? "route",
 	userName             : authSlice?.user?.username ?? undefined,
 	filter               : gallerySlice?.filter ?? undefined,
-	isPreview            : workSpaceSlice?.isPreview ?? undefined,
+	statusViewPage       : workSpaceSlice?.statusViewPage ?? undefined,
 	photoBookData        : workSpaceSlice?.data ?? undefined,
 	isLoggedIn           : authSlice?.loggedIn ?? false,
 });

@@ -1,22 +1,27 @@
 
 
 //Own components
-import { useSelector, shallowEqual, connect }     from "react-redux";
-import { DropedMenu }                             from "core/components";
-import { PlusIcon }                               from "Resources/icons";
-import PaginatorBar                               from "components/PaginatorBar";
-import { bindAll, convertToArray, counterSheets } from "helpers";
-import { workSpaceSlice }                         from "store/Slices";
+import { useSelector, shallowEqual, connect, useDispatch } from "react-redux";
+import { DropedMenu }                                      from "core/components";
+import { PlusIcon }                                        from "Resources/icons";
+import PaginatorBar                                        from "components/PaginatorBar";
+import { bindAll, convertToArray, counterSheets }          from "helpers";
+import { workSpaceSlice }                                  from "store/Slices";
 import "./Navbar.scss";
-import { Text, Button }                           from "@mantine/core";
-import { closeAllModals, openContextModal }       from "@mantine/modals";
+import { Text, Button, Center }                            from "@mantine/core";
+import { closeAllModals, openContextModal }                from "@mantine/modals";
 
 const Navbar = ({workSpaceSlice}) => {
+	const dispatch = useDispatch();
+
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
-	const isPreview = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
 	const maxRangePages = useSelector((state) => state.workSpaceSlice.data?.maxRangePages, shallowEqual);
 	const photoBookProduct = useSelector((state) => state.workSpaceSlice.data.product, shallowEqual);
 	const dataPages = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
+	const statusViewPage = useSelector((state) => state.workSpaceSlice?.statusViewPage, shallowEqual);
+
+	const isManagePagesView = statusViewPage === "managePages";
+
 
 	const listOfPages = convertToArray(dataPages.pages);
 	const counterPages = () => counterSheets(listOfPages, photoBookProduct === "layflat");
@@ -50,12 +55,31 @@ const Navbar = ({workSpaceSlice}) => {
 		workSpaceSlice.addPage();
 	};
 
+	const toggleManagePagesView = () => {
+		if (statusViewPage === "managePages") {
+			return dispatch(workSpaceSlice.changeStatusViewPage("workspace"));
+		}
+		dispatch(workSpaceSlice.changeStatusViewPage("managePages"));
+	};
+
 	return (
-		<div className={`Navbar ${isPreview && "isPreviewActive"}`}>
+		<div className={`Navbar ${(statusViewPage === "preview") && "isPreviewActive"}`}>
 			{
-				!isPreview &&
+				(statusViewPage !== "preview") &&
 				<>
 					<DropedMenu />
+					<Center>
+						<Button
+							radius={5}
+							size="xs"
+							color="gray"
+							sx={{marginTop : "15px", textTransform : "uppercase"}}
+							loading={loading}
+							onClick={() => toggleManagePagesView()}
+						>
+							{isManagePagesView ? "Regresar" : "Ordenar Paginas"}
+						</Button>
+					</Center>
 					<div
 						style={{
 							overflowY : "hidden",

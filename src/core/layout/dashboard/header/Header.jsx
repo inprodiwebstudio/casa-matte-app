@@ -36,6 +36,7 @@ const Header = () => {
 	const userName = useSelector((state) => state.authSlice?.user?.username, shallowEqual);
 	const userEmail = useSelector((state) => state.authSlice?.user?.email, shallowEqual);
 	const isLoadingWorspaceData = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
+	const statusViewPage = useSelector((state) => state.workSpaceSlice?.statusViewPage, shallowEqual);
 
 	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
 
@@ -45,7 +46,11 @@ const Header = () => {
 
 	const handlerShowTestPdf = isAdminAccount || isDevAccount;
 	const handlerClickPreview = () => () => {
-		dispatch(workSpaceSlice.actions.togglePreview());
+		if (statusViewPage === "preview") {
+			dispatch(workSpaceSlice.actions.changeStatusViewPage("workspace"));
+			return;
+		}
+		dispatch(workSpaceSlice.actions.changeStatusViewPage("preview"));
 	};
 
 	const handlerChangeTitleProject = async (valueName) => {
@@ -115,7 +120,7 @@ const Header = () => {
 	return (
 		<div className="Header">
 			<div className={`body-container ${isPreviewActive && "isActivePreview"}`}>
-				<a href="https://casamatte.com/">
+				<a href="https://casamatte.wip-inprodi.com/">
 					<img src={LogoCasaMatte} width={120} />
 				</a>
 				{
