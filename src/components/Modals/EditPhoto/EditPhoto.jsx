@@ -1,8 +1,12 @@
 
-//React FileRobotEditor
-import FilerobotImageEditor, {
-	TABS,
-} from "react-filerobot-image-editor";
+//React PhotoEditor
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { PinturaEditor } from "@pqina/react-pintura";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import {
+	getEditorDefaults,
+} from "@pqina/pintura";
+
 import { connect }        from "react-redux";
 import { closeAllModals } from "@mantine/modals";
 
@@ -11,13 +15,17 @@ import { closeAllModals } from "@mantine/modals";
 import { workSpaceSlice } from "store/Slices";
 import { bindAll }        from "helpers";
 import fullQualityImg     from "helpers/Functions/fullQualityImage";
-import "./EditPhoto.scss";
 import useSubmitImages    from "helpers/Hooks/useSubmitImages";
 import { PostingConfig }  from "Notifications";
 
+//Styles
+// eslint-disable-next-line import/no-extraneous-dependencies
+import "@pqina/pintura/pintura.css";
 
 const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 	const { handlerUploadImage } = useSubmitImages({userName : userName});
+
+	// const [inlineResult, setInlineResult] = useState();
 
 	const urlImage = fullQualityImg(innerProps?.image);
 
@@ -32,57 +40,34 @@ const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 		}
 	};
 
-	const dataURLtoFile = (dataurl, filename) => {
-		let arr = dataurl.split(","),
-			mime = arr[0].match(/:(.*?);/)[1],
-			bstr = atob(arr[1]),
-			n = bstr.length,
-			u8arr = new Uint8Array(n);
-
-		while (n--) {
-			u8arr[n] = bstr.charCodeAt(n);
-		}
-		return new File([u8arr], filename, {type : mime});
-	};
-
 	return (
-		<div className="EditPhoto">
-			<FilerobotImageEditor
-				source={urlImage}
-				annotationsCommon={{
-					fill : "#bb3214",
+		<div style={{ height : "90vh" }}>
+			<PinturaEditor
+				{...getEditorDefaults()}
+				locale={{
+					...getEditorDefaults().locale,
+					labelButtonExport          : "Guardar",
+					cropLabel                  : "Recortar",
+					filterLabel                : "Filtros",
+					finetuneLabel              : "Ajustes",
+					cropLabelTabRotation       : "Rotar",
+					cropLabelTabZoom           : "Zoom",
+					cropLabelButtonRotateLeft  : "Rotar a la izquierda",
+					cropLabelButtonRotateRight : "Rotar a la derecha",
+					finetuneLabelBrightness    : "Brillo",
+					finetuneLabelContrast      : "Contraste",
+					finetuneLabelSaturation    : "Saturación",
+					finetuneLabelExposure      : "Exposición",
+					finetuneLabelTemperature   : "Temperatura",
+					finetuneLabelClarity       : "Claridad",
 				}}
-				moreSaveOptions={[
-					{
-						label   : "Guardar",
-						onClick : (triggerSaveModal, triggerSave) =>
-							triggerSave(async (...args) => {
-								const file = dataURLtoFile(args[0].imageBase64, args[0].fullName);
-								await addEditedImage(file);
-								return;
-							}),
-					},
+				utils={[
+					"crop",
+					"filter",
+					"finetune",
 				]}
-				theme={{
-				  palette : {
-				        "accent-primary"        : "#E9E4D9",
-						"accent-primary-hover"  : "grey",
-				        "bg-primary-active"     : "#E9E4D9",
-						"accent-primary-active" : "#1D1D1B",
-				  },
-				  typography : {
-				    fontFamily : "Arial",
-				  },
-				}}
-				Crop={{
-					noPresets : true,
-					ratio     : innerProps?.aspectRatio ?? 16 / 9,
-				}}
-				language="es"
-				Rotate={{ angle : 90, componentType : "buttons" }}
-				tabsIds={[TABS.ADJUST, TABS.FILTERS, TABS.FINETUNE]} // or {['Adjust', 'Annotate', 'Watermark']}
-				defaultTabId={TABS.ADJUST} // or 'Annotate'
-				// defaultToolId={TOOLS.TEXT} // or 'Text'
+				src={urlImage}
+				onProcess={(res) => addEditedImage(res?.dest)}
 			/>
 		</div>
 	);

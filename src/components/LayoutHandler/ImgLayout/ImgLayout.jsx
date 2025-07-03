@@ -49,10 +49,11 @@ const ImgLayout = ({
 		if (urlImage && (megapixels < 8)) {
 			cleanNotifications();
 			showNotification({
-				title   : "Alerta baja calidad",
-				message : `La imagen en el recuadro señalado presenta una baja calidad. De ${megapixels} pixeles. Recomendamos que la resolución de la imagen sea de 8 Mega Pixeles o superior.`,
-				color   : "yellow",
-				styles  : () => ({
+				title     : "Alerta baja calidad",
+				message   : `La imagen en el recuadro señalado presenta una baja calidad. De ${megapixels} pixeles. Recomendamos que la resolución de la imagen sea de 8 Mega Pixeles o superior.`,
+				color     : "yellow",
+				autoClose : 10000,
+				styles    : () => ({
 					root : {
 									  "&::before" : {
 										  borderRadius : "0px",
