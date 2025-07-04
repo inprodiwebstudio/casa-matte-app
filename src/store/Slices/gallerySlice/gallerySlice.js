@@ -35,9 +35,17 @@ export const gallerySlice = createSlice({
 				};
 			});
 
-			const gallerySorted = constructGalleryList.sort((a, b) => new Date(b?.context?.dateCaptured) - new Date(a?.context?.dateCaptured));
 
-			const myNewGalleryData = convertToObject(gallerySorted);
+			const handlerGallerySorted = () => {
+				switch (state.filter?.value) {
+					case "CAPTURE_DATE":
+						return constructGalleryList.sort((a, b) => new Date(b?.context?.dateCaptured) - new Date(a?.context?.dateCaptured));
+					default:
+						return constructGalleryList.sort((a, b) => new Date(b?.uploaded_at) - new Date(a?.uploaded_at));
+				}
+			};
+
+			const myNewGalleryData = convertToObject(handlerGallerySorted());
 			// state.data = newDataList;
 			state.data = myNewGalleryData;
 		},
