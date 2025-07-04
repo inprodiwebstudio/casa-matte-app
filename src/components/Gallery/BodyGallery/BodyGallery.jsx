@@ -173,10 +173,6 @@ const BodyGallery = ({
 										placeholder="ORDENAR POR..."
 										options={[
 											{
-												label : "NOMBRE",
-												value : "DESC_NAME",
-											},
-											{
 												label : "FECHA DE SUBIDA",
 												value : "UPLOAD_DATE",
 											},

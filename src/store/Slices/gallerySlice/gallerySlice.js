@@ -8,7 +8,10 @@ const initialState = {
 		name         : "route",
 		folderThumbs : [],
 	},
-	filter            : undefined,
+	filter : {
+		label : "FECHA DE CAPTURA",
+		value : "CAPTURE_DATE",
+	},
 	typeDropedView    : null,
 	data              : null,
 	isFullSizeSideBar : false,
