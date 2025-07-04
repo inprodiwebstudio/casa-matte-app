@@ -76,7 +76,7 @@ const Mod57Pdf = ({
 							width      : "65%",
 							height     : "100%",
 							overflow   : "hidden",
-							background : "#E3E3E3",
+							background : "white",
 						}}
 					>
 						{

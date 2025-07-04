@@ -45,7 +45,7 @@ const Mod44Pdf = ({
 						height     : "60%",
 						width      : "100%",
 						overflow   : "hidden",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{

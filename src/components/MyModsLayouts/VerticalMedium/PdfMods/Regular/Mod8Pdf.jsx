@@ -30,7 +30,7 @@ const Mod8Pdf = ({images}) => {
 						height     : "calc(50% - 5px)",
 						width      : "100%",
 						overflow   : "hidden",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -51,7 +51,7 @@ const Mod8Pdf = ({images}) => {
 						height     : "calc(50% - 5px)",
 						width      : "100%",
 						overflow   : "hidden",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{

@@ -24,7 +24,7 @@ const Mod54Pdf = ({images}) => {
 				style={{
 					width      : "calc(33.33% - 3.333px)",
 					height     : "100%",
-					background : "#E3E3E3",
+					background : "white",
 				}}
 			>
 				{
@@ -45,7 +45,7 @@ const Mod54Pdf = ({images}) => {
 				style={{
 					width      : "calc(33.33% - 3.333px)",
 					height     : "100%",
-					background : "#E3E3E3",
+					background : "white",
 				}}
 			>
 				{
@@ -75,7 +75,7 @@ const Mod54Pdf = ({images}) => {
 					style={{
 						width      : "100%",
 						height     : "calc(50% - 5px)",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -95,7 +95,7 @@ const Mod54Pdf = ({images}) => {
 					style={{
 						width      : "100%",
 						height     : "calc(50% - 5px)",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{

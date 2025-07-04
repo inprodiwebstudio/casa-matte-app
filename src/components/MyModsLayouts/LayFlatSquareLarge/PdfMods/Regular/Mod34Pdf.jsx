@@ -29,7 +29,7 @@ const Mod34Pdf = ({images})=> {
 			>
 				<div
 					style={{
-						background : "#E3E3E3",
+						background : "white",
 						height     : "calc(33.33% - 3.333px)",
 						width      : "100%",
 					}}
@@ -49,7 +49,7 @@ const Mod34Pdf = ({images})=> {
 				</div>
 				<div
 					style={{
-						background : "#E3E3E3",
+						background : "white",
 						height     : "calc(33.33% - 3.333px)",
 						width      : "100%",
 					}}
@@ -69,7 +69,7 @@ const Mod34Pdf = ({images})=> {
 				</div>
 				<div
 					style={{
-						background : "#E3E3E3",
+						background : "white",
 						height     : "calc(33.33% - 3.333px)",
 						width      : "100%",
 					}}
@@ -92,7 +92,7 @@ const Mod34Pdf = ({images})=> {
 				style={{
 					height     : "100%",
 					width      : "calc(70% - 5px)",
-					background : "#E3E3E3",
+					background : "white",
 				}}
 			>
 				{
