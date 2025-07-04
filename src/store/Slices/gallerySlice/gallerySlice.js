@@ -1,5 +1,5 @@
-import { createSlice }     from "@reduxjs/toolkit";
-import { convertToObject } from "helpers";
+import { createSlice }                     from "@reduxjs/toolkit";
+import { convertToArray, convertToObject } from "helpers";
 
 
 const initialState = {
@@ -25,7 +25,21 @@ export const gallerySlice = createSlice({
 	initialState,
 	reducers : {
 		setGalleryData : (state, {payload}) => {
-			state.data = {[payload?.id] : payload, ...state.data};
+			const insertNewData = {[payload?.id] : payload, ...state.data};
+
+			const constructGalleryList = convertToArray(insertNewData).map(image => {
+				const handlerContextDateCaptured = image.context?.custom ?? image.context;
+				return {
+					...image,
+					context : handlerContextDateCaptured,
+				};
+			});
+
+			const gallerySorted = constructGalleryList.sort((a, b) => new Date(b?.context?.dateCaptured) - new Date(a?.context?.dateCaptured));
+
+			const myNewGalleryData = convertToObject(gallerySorted);
+			// state.data = newDataList;
+			state.data = myNewGalleryData;
 		},
 		getGalleryData : (state, {payload}) => {
 			const gallletyDataInsert = convertToObject(payload);
