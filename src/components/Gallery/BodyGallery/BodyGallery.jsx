@@ -48,10 +48,6 @@ const BodyGallery = ({
 	const isSelectedData = isValidArray(convertToArray(gallerySelectedData));
 
 	useEffect(() => {
-		console.log(currentFilter);
-	}, [currentFilter]);
-
-	useEffect(() => {
 		if (isAvailableDocs) {
 			const newPhotos = gallerySeparation(galleryList, false);
 			const newFolders = gallerySeparation(galleryList, true);

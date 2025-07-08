@@ -462,7 +462,7 @@ const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload,
 		shadow="lg"
 		w="40%"
 		p="30px"
-		h="380px"
+		h="420px"
 		pt="35px"
 		style={{ backgroundColor : "#F7F5F1", position : "absolute" }}
 		withBorder

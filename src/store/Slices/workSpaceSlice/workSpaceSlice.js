@@ -3,16 +3,17 @@ import { convertToArray, convertToObject, History, isValidArray } from "helpers"
 
 const initialState = {
 	data : {
-		product        : "",
-		productName    : "",
-		format         : "",
-		sizePhotoBook  : "",
-		sizeDimentions : "",
-		pasta          : "",
-		projectTittle  : "",
-		modified       : undefined,
-		orderId        : undefined,
-		frontPage      : {
+		product            : "",
+		productName        : "",
+		format             : "",
+		sizePhotoBook      : "",
+		sizeDimentions     : "",
+		pasta              : "",
+		projectTittle      : "",
+		currentTextsInPage : {},
+		modified           : undefined,
+		orderId            : undefined,
+		frontPage          : {
 			id     : "FrontLayout",
 			sheet1 : {
 				layoutType : "",
@@ -213,6 +214,9 @@ export const workSpaceSlice = createSlice({
 	reducers : {
 		changeStatusViewPage : (state, {payload}) => {
 			state.statusViewPage = payload;
+		},
+		setCurrentTextsInPage : (state, {payload}) => {
+			state.data.currentTextsInPage = payload;
 		},
 		changePageContainer : (state, {payload}) => {
 			const { originPageKey, destinationPageKey } = payload;

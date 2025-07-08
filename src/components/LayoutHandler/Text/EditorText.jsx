@@ -13,7 +13,7 @@ import Alignment     from "@ckeditor/ckeditor5-alignment/src/alignment";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
 // import { EditorState, convertToRaw, ContentState } from "draft-js";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 // import { closeAllModals }      from "@mantine/modals";
 import { workSpaceSlice }                     from "store/Slices";
 import { connect, useSelector, shallowEqual } from "react-redux";
@@ -33,8 +33,12 @@ const EditText = ({
 	letterSpacing,
 	workSpaceSlice,
 }) => {
+	const [currentFontSize, setCurrentFontSize] = useState(undefined);
+
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
-	const { classes } = styles({size : sizes?.chico, gapSpacing, lineHeight, letterSpacing});
+	const { classes } = styles({size : currentFontSize, gapSpacing, lineHeight, letterSpacing});
+
+	const editorRef = useRef();
 
 	const editorConfiguration = {
 		plugins      : [Essentials, Bold, Alignment, Paragraph, FontFamily, FontSize, FontColor],
@@ -107,9 +111,32 @@ const EditText = ({
 		},
 		fontSize : {
 			options : [
-				{ title : "Chico", model : sizes?.chico},
-				{ title : "Regular", model : sizes?.regular},
-				{ title : "Grande", model : sizes?.grande},
+				{title : "15pt", model : "15px"},
+				{title : "16pt", model : "16px"},
+				{title : "17pt", model : "17px"},
+				{title : "18pt", model : "18px"},
+				{title : "19pt", model : "19px"},
+				{title : "20pt", model : "20px"},
+				{title : "21pt", model : "21px"},
+				{title : "22pt", model : "22px"},
+				{title : "23pt", model : "23px"},
+				{title : "24pt", model : "24px"},
+				{title : "25pt", model : "25px"},
+				{title : "26pt", model : "26px"},
+				{title : "27pt", model : "27px"},
+				{title : "28pt", model : "28px"},
+				{title : "29pt", model : "29px"},
+				{title : "30pt", model : "30px"},
+				{title : "31pt", model : "31px"},
+				{title : "32pt", model : "32px"},
+				{title : "33pt", model : "33px"},
+				{title : "34pt", model : "34px"},
+				{title : "35pt", model : "35px"},
+				{title : "36pt", model : "36px"},
+				{title : "37pt", model : "37px"},
+				{title : "38pt", model : "38px"},
+				{title : "39pt", model : "39px"},
+				{title : "40pt", model : "40px"},
 			],
 			supportAllValues : true,
 		},
@@ -145,6 +172,25 @@ const EditText = ({
 		[]
 	);
 
+	const getCurrentFontSize = (editor) => {
+		editorRef.current = editor;
+
+		const handlerSetcurrentFontSize = () => {
+			const selection = editor.model.document.selection;
+			const fontSize = selection.getAttribute("fontSize");
+
+			if (fontSize) {
+				setCurrentFontSize(fontSize);
+			}
+		};
+
+		handlerSetcurrentFontSize();
+
+		editor.model.document.on("change:data", () => {
+			handlerSetcurrentFontSize();
+		});
+	};
+
 	return (
 		<div
 			className={classes.editText}
@@ -153,6 +199,7 @@ const EditText = ({
 				editor={ BalloonEditor }
 				config={ editorConfiguration }
 				data={editorState}
+				onReady={getCurrentFontSize}
 				onChange={(event, editor) => {
 					handleEditorChange(event, editor);
 				}}
