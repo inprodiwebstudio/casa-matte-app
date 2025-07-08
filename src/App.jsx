@@ -25,7 +25,7 @@ export default function App() {
 
 	window.addEventListener("popstate", (event) => {
 		event.preventDefault();
-		window.location.href = "https://casamatte.com/dashboard/";
+		window.location.href = "https://casamatte.wip-inprodi.com/dashboard/";
 	});
 
 	if (isMobile) {
