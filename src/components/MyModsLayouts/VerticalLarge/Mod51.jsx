@@ -67,6 +67,7 @@ const Mod51 = ({
 				spacing="0.07em"
 				w="50%"
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
+				h="fit-content"
 			>
 				<div>
 					<Text
