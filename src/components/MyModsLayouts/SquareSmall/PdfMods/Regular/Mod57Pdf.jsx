@@ -58,7 +58,7 @@ const Mod57Pdf = ({
 							<img
 								src={myTextImgsMod[0]}
 								alt="Captura de texto"
-								style={{ objectFit : "cover" }}
+								style={{ objectFit : "contain", height : "auto", width : "100%", objectPosition : "right" }}
 							/>
 						}
 					</div>
@@ -119,7 +119,7 @@ const Mod57Pdf = ({
 								<img
 									src={myTextImgsMod[1]}
 									alt="Captura de texto"
-									style={{ objectFit : "cover" }}
+									style={{ objectFit : "contain", height : "auto", width : "100%", objectPosition : "left" }}
 								/>
 							}
 						</div>
