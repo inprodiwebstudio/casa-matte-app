@@ -42,6 +42,7 @@ const Mod57 = ({
 				>
 					<Stack
 						mr="10%"
+						h="fit-content"
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 					>
 						<Text
@@ -72,6 +73,7 @@ const Mod57 = ({
 				<Stack
 					mr="40%"
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
+					h="fit-content"
 				>
 					<Text
 						sizes={{
