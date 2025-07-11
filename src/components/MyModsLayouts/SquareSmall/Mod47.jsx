@@ -16,9 +16,9 @@ const Mod47 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 26px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 25px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Toledo</span></p><p style='text-align: center;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Toledo</span></p><p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
 
 
 	return (
@@ -31,7 +31,7 @@ const Mod47 = ({
 			align="center"
 		>
 			<Stack
-				w="50%"
+				w="90%"
 				mah="80%"
 				spacing="0.2em"
 				aria-hidden
@@ -52,7 +52,8 @@ const Mod47 = ({
 							"regular" : "26px",
 							"grande"  : "28px",
 						}}
-						letterSpacing="5px"
+						typeText="subtitle"
+						letterSpacing="2px"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.Title width="100%" align="center" />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
@@ -61,7 +62,7 @@ const Mod47 = ({
 						textNo={0}
 					/>
 					<Center>
-						<DividerLayout long="0.4em" position="v" />
+						<DividerLayout long="0.3em" position="v" />
 					</Center>
 				</Stack>
 				<div
@@ -76,9 +77,11 @@ const Mod47 = ({
 							"regular" : "18px",
 							"grande"  : "20px",
 						}}
+						typeText="index"
 						align="center"
 						sheetNo={sheetNo}
 						gapSpacing="10px"
+						letterSpacing={"1px"}
 						textShell={() => <TextShell.BodyIndices align="center" />}
 						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 						isInPaginator={isInPaginator}

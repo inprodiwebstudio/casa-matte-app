@@ -15,7 +15,7 @@ const Mod53 = ({
 	modLayout,
 }) => {
 
-	const defaultIndices = "<p style='text-align: center;'><span style='font-size: 13px; font-family: Inter-Lifght;'>FLORENCIA</span></p><p style='text-align: center;'><span style='font-size: 13px; font-family: Inter-Lifght;'>ORVIETTO</span></p><p style='text-align: center;'><span style='font-size: 13px; font-family: Inter-Lifght;'>MONTALCINO</span></p><p style='text-align: center;'><span style='font-size: 13px; font-family: Inter-Lifght;'>PIENZA</span></p><p style='text-align: center;'><span style='font-size: 13px; font-family: Inter-Lifght;'>Smithfeld</span></p><p style='text-align: center;'><span style='font-size: 13px; font-family: Inter-Lifght;'>SIENNA</span></p><p style='text-align: center;'><span style='font-size: 13px; font-family: Inter-Lifght;'>BAGNO VIGNIONI</span></p><p style='text-align: center;'><span style='font-size: 13px; font-family: Inter-Lifght;'>SAN GIMINIANO</span></p><p style='text-align: center;'><span style='font-size: 13px; font-family: Inter-Lifght;'>MONTEPULCIANO</span></p>";
+	const defaultIndices = "<p style='text-align: center;'><span style='font-size: 10px; font-family: Inter-Lifght;'>FLORENCIA</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: Inter-Lifght;'>ORVIETTO</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: Inter-Lifght;'>MONTALCINO</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: Inter-Lifght;'>PIENZA</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: Inter-Lifght;'>Smithfeld</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: Inter-Lifght;'>SIENNA</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: Inter-Lifght;'>BAGNO VIGNIONI</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: Inter-Lifght;'>SAN GIMINIANO</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: Inter-Lifght;'>MONTEPULCIANO</span></p>";
 
 	return (
 		<Flex
@@ -27,7 +27,7 @@ const Mod53 = ({
 		>
 			<Stack
 				sx={{overflow : "hidden", textTransform : "uppercase"}}
-				w="80%"
+				w="50%"
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Text
@@ -36,10 +36,11 @@ const Mod53 = ({
 						"regular" : "18px",
 						"grande"  : "20px",
 					}}
+					typeText="index"
 					align="center"
-					gapSpacing="20px"
+					gapSpacing="17px"
 					sheetNo={sheetNo}
-					letterSpacing="3px"
+					letterSpacing="1px"
 					textShell={() => <TextShell.BodyIndices align="center" />}
 					data={textInsertion(data?.text[1], defaultIndices, isInWorkSpace)}
 					isInPaginator={isInPaginator}

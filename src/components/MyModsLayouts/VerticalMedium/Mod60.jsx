@@ -1,51 +1,356 @@
-import {Stack, Flex }    from "@mantine/core";
-import ImgLayout         from "components/LayoutHandler/ImgLayout";
-import Text              from "components/LayoutHandler/Text";
-import { textInsertion } from "helpers";
+import { Flex, Group, Stack } from "@mantine/core";
+import DividerLayout          from "components/LayoutHandler/DividerLayout";
 //Own components
+import Text              from "components/LayoutHandler/Text";
+import { TextShell }     from "core/components";
+import { textInsertion } from "helpers";
 
 
-const Mod61 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod60 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
-	const defaultText01 = "Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper.";
+	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+
+	const defaultTitle02 = "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>FRANCIA</span></p>";
+
+	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>ITALIA</span></p>";
+
+	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>MADRID</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>SEGOVIA</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>TOLEDO</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>SALAMANCA</span></p>";
+
+	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>VERSAILLES</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>NORMANDIA</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>PROVENCE</span></p>";
+
+	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>MILAN</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ROMA</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>FLORENCIA</span></p>";
+
+	const defaultTitle04 = "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+
+	const defaultTitle05 = "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>FRANCIA</span></p>";
+
+	const defaultTitle06 = "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>ITALIA</span></p>";
+
+	const defaultIndice04 = "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>MADRID</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>SEGOVIA</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>TOLEDO</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>SALAMANCA</span></p>";
+
+	const defaultIndice05 = "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>VERSAILLES</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>NORMANDIA</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>PROVENCE</span></p>";
+
+	const defaultIndice06 = "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>MILAN</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ROMA</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>FLORENCIA</span></p>";
 
 	return (
 		<Flex
 			w="100%"
 			h="100%"
-			pb="7%"
+			justify="center"
+			align="center"
 			direction="column"
+			sx={{overflow : "hidden"}}
 		>
-			<Stack w="100%" h="60%">
-				<ImgLayout
-					isInWorkSpace={isInWorkSpace}
-					sheetNo={sheetNo}
-					imageNo={0}
-					urlImage={data?.photos[0] ?? {}}
-				/>
-			</Stack>
-			<Stack
-				spacing="0.07em"
-				w="100%"
-				h="40%"
-				pr="7%"
-				justify="flex-end"
-				align="flex-end"
-			>
-				<Stack w="40%" h="50%">
-					<Text
-						align="justify"
-						type="regular"
-						sheetNo={sheetNo}
-						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-						textNo={0}
-					/>
+			<Group w="100%" justify="center" position="center" spacing={isInWorkSpace ? "0.7em" : "0.15em"}>
+				<Stack
+					spacing="0.35em"
+					miw={isInWorkSpace ? "10%" : "30%"}
+				>
+					<Stack
+						spacing={isInWorkSpace ? "15px" : "0.15em"}
+						aria-hidden
+					>
+						<Stack
+							spacing={isInWorkSpace ? "12px" : "0.15em"}
+							{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
+						>
+							<Text
+								sizes={{
+									"chico"   : "22px",
+									"regular" : "24px",
+									"grande"  : "26px",
+								}}
+								typeText="subtitle"
+								align="left"
+								letterSpacing="1.5px"
+								sheetNo={sheetNo}
+								textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
+								data={textInsertion(data?.text[0], defaultTitle01, isInWorkSpace)}
+								isInPaginator={isInPaginator}
+								isThumbNail={isThumbNail}
+								textNo={0}
+							/>
+							<DividerLayout long={isInWorkSpace ? "0.2em" : "0.3em"} position="h" />
+						</Stack>
+						<div
+							{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
+						>
+							<Text
+								sizes={{
+									"chico"   : "12px",
+									"regular" : "14px",
+									"grande"  : "16px",
+								}}
+								typeText="index"
+								align="left"
+								gapSpacing="10px"
+								letterSpacing={"1px"}
+								sheetNo={sheetNo}
+								textShell={() => <TextShell.BodyIndices align="left" />}
+								data={textInsertion(data?.text[1], defaultIndice01, isInWorkSpace)}
+								isInPaginator={isInPaginator}
+								isThumbNail={isThumbNail}
+								textNo={1}
+							/>
+						</div>
+					</Stack>
+					<Stack
+						spacing={isInWorkSpace ? "15px" : "0.15em"}
+						aria-hidden
+					>
+						<Stack
+							spacing={isInWorkSpace ? "12px" : "0.15em"}
+							{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text3` })}
+						>
+							<Text
+								sizes={{
+									"chico"   : "22px",
+									"regular" : "24px",
+									"grande"  : "26px",
+								}}
+								typeText="subtitle"
+								align="left"
+								letterSpacing="1.5px"
+								sheetNo={sheetNo}
+								textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
+								data={textInsertion(data?.text[2], defaultTitle02, isInWorkSpace)}
+								isInPaginator={isInPaginator}
+								isThumbNail={isThumbNail}
+								textNo={2}
+							/>
+							<DividerLayout long={isInWorkSpace ? "0.2em" : "0.3em"} position="h" />
+						</Stack>
+						<div
+							{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text4` })}
+						>
+							<Text
+								sizes={{
+									"chico"   : "12px",
+									"regular" : "14px",
+									"grande"  : "16px",
+								}}
+								typeText="index"
+								align="left"
+								gapSpacing="10px"
+								letterSpacing={"1px"}
+								sheetNo={sheetNo}
+								textShell={() => <TextShell.BodyIndices align="left" />}
+								data={textInsertion(data?.text[3], defaultIndice02, isInWorkSpace)}
+								isInPaginator={isInPaginator}
+								isThumbNail={isThumbNail}
+								textNo={3}
+							/>
+						</div>
+					</Stack>
+					<Stack
+						spacing={isInWorkSpace ? "15px" : "0.15em"}
+						aria-hidden
+					>
+						<Stack
+							spacing={isInWorkSpace ? "12px" : "0.15em"}
+							{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text5` })}
+						>
+							<Text
+								sizes={{
+									"chico"   : "22px",
+									"regular" : "24px",
+									"grande"  : "26px",
+								}}
+								typeText="subtitle"
+								align="left"
+								letterSpacing="1.5px"
+								sheetNo={sheetNo}
+								textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
+								data={textInsertion(data?.text[4], defaultTitle03, isInWorkSpace)}
+								isInPaginator={isInPaginator}
+								isThumbNail={isThumbNail}
+								textNo={4}
+							/>
+							<DividerLayout long={isInWorkSpace ? "0.2em" : "0.3em"} position="h" />
+						</Stack>
+						<div
+							{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text12` })}
+						>
+							<Text
+								sizes={{
+									"chico"   : "12px",
+									"regular" : "14px",
+									"grande"  : "16px",
+								}}
+								typeText="index"
+								align="left"
+								gapSpacing="10px"
+								sheetNo={sheetNo}
+								letterSpacing={"1px"}
+								textShell={() => <TextShell.BodyIndices align="left" />}
+								data={textInsertion(data?.text[5], defaultIndice03, isInWorkSpace)}
+								isInPaginator={isInPaginator}
+								isThumbNail={isThumbNail}
+								textNo={5}
+							/>
+						</div>
+					</Stack>
 				</Stack>
-			</Stack>
+				<Stack
+					spacing="0.35em"
+					miw={isInWorkSpace ? "11%" : "30%"}
+				>
+					<Stack
+						spacing={isInWorkSpace ? "15px" : "0.15em"}
+						aria-hidden
+					>
+						<Stack
+							spacing={isInWorkSpace ? "12px" : "0.15em"}
+							{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text7` })}
+						>
+							<Text
+								sizes={{
+									"chico"   : "22px",
+									"regular" : "24px",
+									"grande"  : "26px",
+								}}
+								typeText="subtitle"
+								align="left"
+								letterSpacing="1.5px"
+								sheetNo={sheetNo}
+								textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
+								data={textInsertion(data?.text[0], defaultTitle04, isInWorkSpace)}
+								isInPaginator={isInPaginator}
+								isThumbNail={isThumbNail}
+								textNo={0}
+							/>
+							<DividerLayout long={isInWorkSpace ? "0.2em" : "0.3em"} position="h" />
+						</Stack>
+						<div
+							{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text8` })}
+						>
+							<Text
+								sizes={{
+									"chico"   : "12px",
+									"regular" : "14px",
+									"grande"  : "16px",
+								}}
+								typeText="index"
+								align="left"
+								gapSpacing="10px"
+								letterSpacing={"1px"}
+								sheetNo={sheetNo}
+								textShell={() => <TextShell.BodyIndices align="left" />}
+								data={textInsertion(data?.text[1], defaultIndice04, isInWorkSpace)}
+								isInPaginator={isInPaginator}
+								isThumbNail={isThumbNail}
+								textNo={1}
+							/>
+						</div>
+					</Stack>
+					<Stack
+						spacing={isInWorkSpace ? "15px" : "0.15em"}
+						aria-hidden
+					>
+						<Stack
+							spacing={isInWorkSpace ? "12px" : "0.15em"}
+							{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text9` })}
+						>
+							<Text
+								sizes={{
+									"chico"   : "22px",
+									"regular" : "24px",
+									"grande"  : "26px",
+								}}
+								typeText="subtitle"
+								align="left"
+								letterSpacing="1.5px"
+								sheetNo={sheetNo}
+								textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
+								data={textInsertion(data?.text[2], defaultTitle05, isInWorkSpace)}
+								isInPaginator={isInPaginator}
+								isThumbNail={isThumbNail}
+								textNo={2}
+							/>
+							<DividerLayout long={isInWorkSpace ? "0.2em" : "0.3em"} position="h" />
+						</Stack>
+						<div
+							{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text10` })}
+						>
+							<Text
+								sizes={{
+									"chico"   : "12px",
+									"regular" : "14px",
+									"grande"  : "16px",
+								}}
+								typeText="index"
+								align="left"
+								gapSpacing="10px"
+								letterSpacing={"1px"}
+								sheetNo={sheetNo}
+								textShell={() => <TextShell.BodyIndices align="left" />}
+								data={textInsertion(data?.text[3], defaultIndice05, isInWorkSpace)}
+								isInPaginator={isInPaginator}
+								isThumbNail={isThumbNail}
+								textNo={3}
+							/>
+						</div>
+					</Stack>
+					<Stack
+						spacing={isInWorkSpace ? "15px" : "0.15em"}
+						aria-hidden
+					>
+						<Stack
+							spacing={isInWorkSpace ? "12px" : "0.15em"}
+							{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text11` })}
+						>
+							<Text
+								sizes={{
+									"chico"   : "22px",
+									"regular" : "24px",
+									"grande"  : "26px",
+								}}
+								typeText="subtitle"
+								align="left"
+								letterSpacing="1.5px"
+								sheetNo={sheetNo}
+								textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
+								data={textInsertion(data?.text[4], defaultTitle06, isInWorkSpace)}
+								isInPaginator={isInPaginator}
+								isThumbNail={isThumbNail}
+								textNo={4}
+							/>
+							<DividerLayout long={isInWorkSpace ? "0.2em" : "0.3em"} position="h" />
+						</Stack>
+						<div
+							{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text12` })}
+						>
+							<Text
+								sizes={{
+									"chico"   : "12px",
+									"regular" : "14px",
+									"grande"  : "16px",
+								}}
+								typeText="index"
+								align="left"
+								gapSpacing="10px"
+								sheetNo={sheetNo}
+								letterSpacing={"1px"}
+								textShell={() => <TextShell.BodyIndices align="left" />}
+								data={textInsertion(data?.text[5], defaultIndice06, isInWorkSpace)}
+								isInPaginator={isInPaginator}
+								isThumbNail={isThumbNail}
+								textNo={5}
+							/>
+						</div>
+					</Stack>
+				</Stack>
+			</Group>
 		</Flex>
 	);
 };
 
-export default Mod61;
+export default Mod60;

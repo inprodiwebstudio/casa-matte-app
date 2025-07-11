@@ -16,9 +16,9 @@ const Mod58 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 26px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
+	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 28px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: right;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const defaultSubtitle = "<p style='text-align: right;'><span style='font-size: 12px; font-family: Inter-Lifght;'>CHILE</span></p>";
 
 	return (
 		<Flex
@@ -43,7 +43,7 @@ const Mod58 = ({
 				</Stack>
 				<Stack
 					w="100%"
-					spacing={isInWorkSpace ? "0em" : "0.1em"}
+					spacing={isInWorkSpace ? "2px" : "0.1em"}
 					pr="0.5em"
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
@@ -53,25 +53,27 @@ const Mod58 = ({
 							"regular" : "26px",
 							"grande"  : "28px",
 						}}
+						typeText="title"
 						align="right"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.Title width="40%" align="flex-end" />}
-						letterSpacing="6.5px"
+						letterSpacing="2px"
 						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 						textNo={0}
 					/>
-					<Stack w="100%">
+					<Stack w="100%" pr={isInWorkSpace ? "4px" : "0px"}>
 						<Text
 							sizes={{
 								"chico"   : "13px",
 								"regular" : "15px",
 								"grande"  : "18px",
 							}}
+							typeText="subtitle"
 							align="left"
 							sheetNo={sheetNo}
-							letterSpacing="2px"
+							letterSpacing="1px"
 							textShell={() => <TextShell.SubTitle width="20%" align="flex-end" />}
 							data={textInsertion(data?.text[1], defaultSubtitle, isInWorkSpace)}
 							isInPaginator={isInPaginator}

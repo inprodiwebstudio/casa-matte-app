@@ -16,17 +16,17 @@ const Mod49 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
-	const defaultTitle02 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>FRANCIA</span></p>";
+	const defaultTitle02 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Aitana-Regular;'>FRANCIA</span></p>";
 
-	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>TURQUÍA</span></p>";
+	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Aitana-Regular;'>TURQUÍA</span></p>";
 
-	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
+	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
 
-	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>París</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Versalles</span></p>";
+	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>París</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Versalles</span></p>";
 
-	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Capadocia</span></p>";
+	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Capadocia</span></p>";
 
 	return (
 		<Flex
@@ -40,14 +40,14 @@ const Mod49 = ({
 			pb="10%"
 		>
 			<Stack
-				spacing={isInWorkSpace ? "0.15em" : "0.2em"}
-				w="100%"
+				spacing={isInWorkSpace ? "18px" : "0.2em"}
+				w="78%"
 				pl="30%"
 				pr="10%"
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Stack
-					spacing={isInWorkSpace ? "0.05em" : "0.1em"}
+					spacing={isInWorkSpace ? "10px" : "0.1em"}
 					aria-hidden
 				>
 					<div>
@@ -57,6 +57,7 @@ const Mod49 = ({
 								"regular" : "24px",
 								"grande"  : "26px",
 							}}
+							typeText="subtitle"
 							align="left"
 							letterSpacing="3px"
 							sheetNo={sheetNo}
@@ -75,6 +76,7 @@ const Mod49 = ({
 								"regular" : "18px",
 								"grande"  : "20px",
 							}}
+							typeText="index"
 							align="left"
 							gapSpacing="7px"
 							sheetNo={sheetNo}
@@ -87,7 +89,7 @@ const Mod49 = ({
 					</div>
 				</Stack>
 				<Stack
-					spacing={isInWorkSpace ? "0.05em" : "0.1em"}
+					spacing={isInWorkSpace ? "10px" : "0.1em"}
 					aria-hidden
 				>
 					<div>
@@ -97,6 +99,7 @@ const Mod49 = ({
 								"regular" : "24px",
 								"grande"  : "26px",
 							}}
+							typeText="subtitle"
 							align="left"
 							letterSpacing="3px"
 							sheetNo={sheetNo}
@@ -115,6 +118,7 @@ const Mod49 = ({
 								"regular" : "18px",
 								"grande"  : "20px",
 							}}
+							typeText="index"
 							align="left"
 							gapSpacing="7px"
 							sheetNo={sheetNo}
@@ -127,7 +131,7 @@ const Mod49 = ({
 					</div>
 				</Stack>
 				<Stack
-					spacing={isInWorkSpace ? "0.05em" : "0.1em"}
+					spacing={isInWorkSpace ? "10px" : "0.1em"}
 					aria-hidden
 				>
 					<div>
@@ -137,6 +141,7 @@ const Mod49 = ({
 								"regular" : "24px",
 								"grande"  : "26px",
 							}}
+							typeText="subtitle"
 							align="left"
 							letterSpacing="3px"
 							sheetNo={sheetNo}
@@ -155,6 +160,7 @@ const Mod49 = ({
 								"regular" : "18px",
 								"grande"  : "20px",
 							}}
+							typeText="index"
 							align="left"
 							gapSpacing="7px"
 							sheetNo={sheetNo}

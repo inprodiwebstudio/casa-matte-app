@@ -14,7 +14,7 @@ const Mod54 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: TAN-MERINGUE;'>TOSCANA</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 36px; font-family: TAN-MERINGUE;'>TOSCANA</span></p>";
 
 	return (
 		<Center w="100%" h="100%">
@@ -31,6 +31,7 @@ const Mod54 = ({
 						"regular" : "42px",
 						"grande"  : "45px",
 					}}
+					typeText="title"
 					sheetNo={sheetNo}
 					textShell={() => <TextShell.Title />}
 					letterSpacing="6.5px"

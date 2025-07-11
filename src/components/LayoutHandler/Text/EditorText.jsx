@@ -30,6 +30,7 @@ const EditText = ({
 	dataTextPage,
 	gapSpacing,
 	lineHeight,
+	typeText,
 	letterSpacing,
 	workSpaceSlice,
 }) => {
@@ -40,6 +41,43 @@ const EditText = ({
 
 	const editorRef = useRef();
 
+	const fontFamilies = [
+		"default",
+		"HelveticaLight",
+		"Aitana-Regular",
+		"Cormorant-Light",
+		"Cormorant-Medium",
+		"GandhiSans-Regular",
+		"GandhiSerif-Regular",
+		"Inter-Lifght",
+		"Inter-Regular",
+		"JosefinSans-Light",
+		"JosefinSans-Regular",
+		"Made-Mirage-Regular",
+		"Made-Mirage-Thin",
+		"Restora-Extra-Light",
+		"Spectral-Light-Italic",
+		"Spectral-Medium-Italic",
+		"TAN-MERINGUE",
+	];
+
+	const availableFontFamilies = {
+		title      : fontFamilies,
+		smallTitle : fontFamilies,
+		subtitle   : fontFamilies.filter((fontFamily) => (fontFamily !== "TAN-MERINGUE")),
+		index      : fontFamilies.filter((fontFamily) =>
+			(fontFamily !== "TAN-MERINGUE")&&
+		(fontFamily !== "Cormorant-Light")&&
+		(fontFamily !== "Cormorant-Medium")
+		),
+		body : fontFamilies.filter((fontFamily) =>
+			(fontFamily !== "TAN-MERINGUE")&&
+		(fontFamily !== "Made-Mirage-Regular")&&
+		(fontFamily !== "Made-Mirage-Thin")&&
+		(fontFamily !== "Restora-Extra-Light")
+		),
+	};
+
 	const editorConfiguration = {
 		plugins      : [Essentials, Bold, Alignment, Paragraph, FontFamily, FontSize, FontColor],
 		GroupHeading : false,
@@ -47,25 +85,7 @@ const EditText = ({
 			options : [ "left", "right", "center", "justify" ],
 		},
 		fontFamily : {
-			options : [
-				"default",
-				"HelveticaLight",
-				"Aitana-Regular",
-				"Cormorant-Light",
-				"Cormorant-Medium",
-				"GandhiSans-Regular",
-				"GandhiSerif-Regular",
-				"Inter-Lifght",
-				"Inter-Regular",
-				"JosefinSans-Light",
-				"JosefinSans-Regular",
-				"Made-Mirage-Regular",
-				"Made-Mirage-Thin",
-				"Restora-Extra-Light",
-				"Spectral-Light-Italic",
-				"Spectral-Medium-Italic",
-				"TAN-MERINGUE",
-			],
+			options : availableFontFamilies[typeText ?? "body"],
 		},
 		toolbar : {
 			items : [
@@ -77,6 +97,7 @@ const EditText = ({
 				"alignment:left",
 				"alignment:center",
 				"alignment:right",
+				"alignment:justify",
 			],
 			shouldNotGroupWhenFullScreen : true,
 		},
@@ -111,6 +132,11 @@ const EditText = ({
 		},
 		fontSize : {
 			options : [
+				{title : "10pt", model : "10px"},
+				{title : "11pt", model : "11px"},
+				{title : "12pt", model : "12px"},
+				{title : "13pt", model : "13px"},
+				{title : "14pt", model : "14px"},
 				{title : "15pt", model : "15px"},
 				{title : "16pt", model : "16px"},
 				{title : "17pt", model : "17px"},

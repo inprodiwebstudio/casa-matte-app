@@ -16,9 +16,9 @@ const Mod44 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 28px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Toledo</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Toledo</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
 
 
 	return (
@@ -39,7 +39,7 @@ const Mod44 = ({
 				}}
 			>
 				<Stack
-					spacing={isInWorkSpace ? "15px" : "0.3em"}
+					spacing={isInWorkSpace ? "20px" : "0.3em"}
 					w="100%"
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
@@ -49,7 +49,8 @@ const Mod44 = ({
 							"regular" : "42px",
 							"grande"  : "46px",
 						}}
-						letterSpacing="5px"
+						letterSpacing="3px"
+						typeText="subtitle"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.Title width="100%" align="center" />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
@@ -58,7 +59,7 @@ const Mod44 = ({
 						textNo={0}
 					/>
 					<Center>
-						<DividerLayout long="0.4em" position="v" />
+						<DividerLayout long="0.3em" position="v" />
 					</Center>
 				</Stack>
 				<div
@@ -71,6 +72,7 @@ const Mod44 = ({
 							"grande"  : "16px",
 						}}
 						align="center"
+						typeText="index"
 						sheetNo={sheetNo}
 						gapSpacing="12px"
 						textShell={() => <TextShell.BodyIndices align="center" />}
