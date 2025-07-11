@@ -50,7 +50,7 @@ const Mod41 = ({
 							"grande"  : "16px",
 						}}
 						align="left"
-						typeText="subTitle"
+						typeText="subtitle"
 						letterSpacing="1.7px"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.SubTitle width="50%" align="flex-start" />}

@@ -132,6 +132,15 @@ const EditText = ({
 		},
 		fontSize : {
 			options : [
+				{title : "1pt", model : "1px"},
+				{title : "2pt", model : "2px"},
+				{title : "3pt", model : "3px"},
+				{title : "4pt", model : "4px"},
+				{title : "5pt", model : "5px"},
+				{title : "6pt", model : "6px"},
+				{title : "7pt", model : "7px"},
+				{title : "8pt", model : "8px"},
+				{title : "9pt", model : "9px"},
 				{title : "10pt", model : "10px"},
 				{title : "11pt", model : "11px"},
 				{title : "12pt", model : "12px"},
@@ -185,15 +194,15 @@ const EditText = ({
 		debounce((event, editor) => {
 		  const data = editor.getData();
 		  setEditorState(data);
-		  if (isBound) {
-				workSpaceSlice.addTextBound({text : data});
-				return;
-		  }
-		  if (!isFront) {
-				workSpaceSlice.addText({pageId : currentPageId, sheetNo, text : data, layoutNo});
-				return;
-		  }
-		  workSpaceSlice.addTextFront({sheetNo, text : data, layoutNo});
+		//   if (isBound) {
+		// 		workSpaceSlice.addTextBound({text : data});
+		// 		return;
+		//   }
+		//   if (!isFront) {
+		// 		workSpaceSlice.addText({pageId : currentPageId, sheetNo, text : data, layoutNo});
+		// 		return;
+		//   }
+		//   workSpaceSlice.addTextFront({sheetNo, text : data, layoutNo});
 		}, 3000),
 		[]
 	);

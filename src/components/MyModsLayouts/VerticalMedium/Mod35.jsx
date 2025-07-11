@@ -32,6 +32,7 @@ const Mod35 = ({
 						"grande"  : "46px",
 					}}
 					sheetNo={sheetNo}
+					typeText="title"
 					textShell={() => <TextShell.Title />}
 					letterSpacing="4.8px"
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
