@@ -16,20 +16,19 @@ const Mod54 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 38px; font-family: JosefinSans-Light;'>VALPARAÍSO</span></p>";
+	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>VALPARAÍSO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: right;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const defaultSubtitle = "<p style='text-align: right;'><span style='font-size: 16px; font-family: Inter-Lifght;'>CHILE</span></p>";
 
 	return (
 		<Flex
 			pb="8%"
 			w="100%"
 			h="100%"
-			gap="0.5em"
 			direction="column"
 		>
 			<Stack
-				spacing="0.2em"
+				spacing={isInWorkSpace ? "55px" : "0.2em"}
 				w="100%"
 				h="100%"
 				align="flex-end"
@@ -45,8 +44,8 @@ const Mod54 = ({
 				</Stack>
 				<Stack
 					w="70%"
-					mr="10%"
-					spacing="0em"
+					mr="7%"
+					spacing={isInWorkSpace ? "2px" : "0.06em"}
 				>
 					<div
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
@@ -59,7 +58,7 @@ const Mod54 = ({
 							}}
 							align="right"
 							sheetNo={sheetNo}
-							textShell={() => <TextShell.Title />}
+							textShell={() => <TextShell.Title align="flex-end" />}
 							letterSpacing="6.5px"
 							data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
 							isInPaginator={isInPaginator}
@@ -79,7 +78,7 @@ const Mod54 = ({
 							align="right"
 							sheetNo={sheetNo}
 							letterSpacing="2px"
-							textShell={() => <TextShell.SubTitle />}
+							textShell={() => <TextShell.SubTitle align="flex-end" />}
 							data={textInsertion(data?.text[1], defaultSubtitle, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}

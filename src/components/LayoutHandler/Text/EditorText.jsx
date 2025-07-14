@@ -194,15 +194,15 @@ const EditText = ({
 		debounce((event, editor) => {
 		  const data = editor.getData();
 		  setEditorState(data);
-		//   if (isBound) {
-		// 		workSpaceSlice.addTextBound({text : data});
-		// 		return;
-		//   }
-		//   if (!isFront) {
-		// 		workSpaceSlice.addText({pageId : currentPageId, sheetNo, text : data, layoutNo});
-		// 		return;
-		//   }
-		//   workSpaceSlice.addTextFront({sheetNo, text : data, layoutNo});
+		  if (isBound) {
+				workSpaceSlice.addTextBound({text : data});
+				return;
+		  }
+		  if (!isFront) {
+				workSpaceSlice.addText({pageId : currentPageId, sheetNo, text : data, layoutNo});
+				return;
+		  }
+		  workSpaceSlice.addTextFront({sheetNo, text : data, layoutNo});
 		}, 3000),
 		[]
 	);

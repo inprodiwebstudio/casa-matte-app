@@ -16,23 +16,24 @@ const Mod50 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 38px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
+	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 14px; font-family: Inter-Lifght;'>CHILE</span></p>";
 
 	return (
 		<Flex
-			p="8%"
+			pt="10%"
+			pb="10%"
 			w="100%"
 			h="100%"
 			justify="center"
 			align="center"
-			gap="0.5em"
+			gap={isInWorkSpace ? "8%" : "0.35em"}
 			direction="column"
 		>
 			<Stack
 				spacing="0em"
-				w="70%"
+				w="80%"
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Text
@@ -51,7 +52,7 @@ const Mod50 = ({
 					textNo={0}
 				/>
 			</Stack>
-			<Stack w="60%" h="100%">
+			<Stack w="53%" h="100%">
 				<ImgLayout
 					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
@@ -61,7 +62,7 @@ const Mod50 = ({
 			</Stack>
 			<Stack
 				spacing="0em"
-				w="60%"
+				w="53%"
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
 			>
 				<Text

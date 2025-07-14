@@ -16,7 +16,7 @@ const Mod44 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 35px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
 	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Toledo</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
 
@@ -32,14 +32,14 @@ const Mod44 = ({
 			<Stack
 				w="50%"
 				mah="80%"
-				spacing="0.3em"
+				spacing={isInWorkSpace ? "25px" : "0.15em"}
 				aria-hidden
 				sx={{
 					overflow : "hidden",
 				}}
 			>
 				<Stack
-					spacing="0.2em"
+					spacing={isInWorkSpace ? "20px" : "0.15em"}
 					w="100%"
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
@@ -49,7 +49,7 @@ const Mod44 = ({
 							"regular" : "42px",
 							"grande"  : "46px",
 						}}
-						letterSpacing="5px"
+						letterSpacing="3px"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.Title width="100%" align="center" />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
@@ -58,7 +58,7 @@ const Mod44 = ({
 						textNo={0}
 					/>
 					<Center>
-						<DividerLayout long="0.4em" position="v" />
+						<DividerLayout long="0.3em" position="v" />
 					</Center>
 				</Stack>
 				<div
@@ -72,7 +72,7 @@ const Mod44 = ({
 						}}
 						align="center"
 						sheetNo={sheetNo}
-						gapSpacing="12px"
+						gapSpacing="10px"
 						textShell={() => <TextShell.BodyIndices align="center" />}
 						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 						isInPaginator={isInPaginator}

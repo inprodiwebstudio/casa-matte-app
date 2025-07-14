@@ -16,20 +16,21 @@ const Mod55 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 16px; font-family: JosefinSans-Light;'>SANTIAGO</span></p>";
+	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>SANTIAGO</span></p>";
 
 	return (
 		<Flex
-			p="8%"
+			p="3%"
+			pt="5%"
 			w="100%"
 			h="100%"
-			gap="0.1em"
+			gap={"0.1em"}
 			align="center"
 			direction="column"
 		>
 			<Stack
 				w="60%"
-				mb="0.15em"
+				mb={isInWorkSpace ? "20px" : "0.05em"}
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Text

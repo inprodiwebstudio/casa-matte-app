@@ -29,12 +29,12 @@ const Mod48 = ({
 			align="flex-end"
 		>
 			<Stack
-				spacing="0.15em"
+				spacing={isInWorkSpace ? "20px" : "0.2em"}
 				sx={{overflow : "hidden"}}
-				w="30%"
+				w="20%"
 			>
 				<Stack
-					spacing="0.15em"
+					spacing={isInWorkSpace ? "15px" : "0.12em"}
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
 					<Text
@@ -52,7 +52,7 @@ const Mod48 = ({
 						isThumbNail={isThumbNail}
 						textNo={0}
 					/>
-					<DividerLayout long="20%" position="h" />
+					<DividerLayout long={isInWorkSpace ? "17%" : "20%"} position="h" />
 				</Stack>
 				<div
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}

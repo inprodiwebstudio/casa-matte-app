@@ -38,18 +38,18 @@ const Mod47 = ({
 			sx={{overflow : "hidden"}}
 		>
 			<Stack
-				spacing="0.35em"
-				miw="30%"
+				spacing={isInWorkSpace ? "50px" : "0.3em"}
+				miw="15%"
 				sx={{
 					textTransform : "uppercase",
 				}}
 			>
 				<Stack
-					spacing="0.13em"
+					spacing={isInWorkSpace ? "15px" : "0.13em"}
 					aria-hidden
 				>
 					<Stack
-						spacing="0.12em"
+						spacing={isInWorkSpace ? "11px" : "0.13em"}
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 					>
 						<Text
@@ -59,7 +59,7 @@ const Mod47 = ({
 								"grande"  : "26px",
 							}}
 							align="left"
-							letterSpacing="3px"
+							letterSpacing="2px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
 							data={textInsertion(data?.text[0], defaultTitle01, isInWorkSpace)}
@@ -90,11 +90,11 @@ const Mod47 = ({
 					</div>
 				</Stack>
 				<Stack
-					spacing="0.13em"
+					spacing={isInWorkSpace ? "15px" : "0.13em"}
 					aria-hidden
 				>
 					<Stack
-						spacing="0.12em"
+						spacing={isInWorkSpace ? "11px" : "0.13em"}
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text3` })}
 					>
 						<Text
@@ -104,7 +104,7 @@ const Mod47 = ({
 								"grande"  : "26px",
 							}}
 							align="left"
-							letterSpacing="3px"
+							letterSpacing="2px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
 							data={textInsertion(data?.text[2], defaultTitle02, isInWorkSpace)}
@@ -135,11 +135,10 @@ const Mod47 = ({
 					</div>
 				</Stack>
 				<Stack
-					mah="70%"
-					spacing="0.13em"
+					spacing={isInWorkSpace ? "15px" : "0.13em"}
 				>
 					<Stack
-						spacing="0.12em"
+						spacing={isInWorkSpace ? "11px" : "0.13em"}
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text5` })}
 					>
 						<Text
@@ -149,7 +148,7 @@ const Mod47 = ({
 								"grande"  : "26px",
 							}}
 							align="left"
-							letterSpacing="3px"
+							letterSpacing="2px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
 							data={textInsertion(data?.text[4], defaultTitle03, isInWorkSpace)}
