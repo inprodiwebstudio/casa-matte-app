@@ -16,9 +16,9 @@ const Mod47 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 25px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 25px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Toledo</span></p><p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Índice 1</span></p><p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Índice 2</span></p><p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Índice 3</span></p><p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Índice 4</span></p>";
 
 
 	return (
@@ -38,12 +38,13 @@ const Mod47 = ({
 				sx={{
 					overflow : "hidden",
 				}}
+				align="center"
 			>
 				<Stack
 					spacing={
 						isInWorkSpace ? "0.12em" : "0.13em"
 					}
-					w="100%"
+					w={isInWorkSpace ? "100%" : "40%"}
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
 					<Text
@@ -67,7 +68,7 @@ const Mod47 = ({
 				</Stack>
 				<div
 					style={{
-						width : "100%",
+						width : isInWorkSpace ? "100%" : "50%",
 					}}
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
 				>

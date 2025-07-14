@@ -16,9 +16,9 @@ const Mod56 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 28px; font-family: JosefinSans-Regular;'>SANTIAGO</span></p>";
+	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 28px; font-family: JosefinSans-Regular;'>TÍTULO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 12px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex
