@@ -16,9 +16,9 @@ const Mod53 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 30px; font-family: Aitana-Regular;'>ISLA NEGRA</span></p>";
+	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: right;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Chile</span></p>";
+	const defaultSubtitle = "<p style='text-align: right;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex

@@ -16,29 +16,29 @@ const Mod60 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultTitle02 = "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>FRANCIA</span></p>";
+	const defaultTitle02 = "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>ITALIA</span></p>";
+	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>MADRID</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>SEGOVIA</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>TOLEDO</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>SALAMANCA</span></p>";
+	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 1</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 2</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 4</span></p>";
 
-	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>VERSAILLES</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>NORMANDIA</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>PROVENCE</span></p>";
+	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 1</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 2</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 4</span></p>";
 
-	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>MILAN</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ROMA</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>FLORENCIA</span></p>";
+	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 1</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 2</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 4</span></p>";
 
-	const defaultTitle04 = "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+	const defaultTitle04 = "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultTitle05 = "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>FRANCIA</span></p>";
+	const defaultTitle05 = "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultTitle06 = "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>ITALIA</span></p>";
+	const defaultTitle06 = "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultIndice04 = "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>MADRID</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>SEGOVIA</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>TOLEDO</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>SALAMANCA</span></p>";
+	const defaultIndice04 = "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 1</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 2</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 4</span></p>";
 
-	const defaultIndice05 = "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>VERSAILLES</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>NORMANDIA</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>PROVENCE</span></p>";
+	const defaultIndice05 = "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 1</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 2</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 4</span></p>";
 
-	const defaultIndice06 = "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>MILAN</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ROMA</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>FLORENCIA</span></p>";
+	const defaultIndice06 = "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 1</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 2</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 4</span></p>";
 
 	return (
 		<Flex

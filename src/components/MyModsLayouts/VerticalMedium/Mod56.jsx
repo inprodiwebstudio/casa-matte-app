@@ -16,7 +16,7 @@ const Mod56 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 16px; font-family: JosefinSans-Light;'>PATAGONIA</span></p>";
+	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 16px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
 	return (
 		<Flex

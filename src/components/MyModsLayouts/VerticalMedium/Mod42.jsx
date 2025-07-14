@@ -15,7 +15,7 @@ const Mod42 = ({
 	pageNo,
 	modLayout,
 }) => {
-	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 15px; font-family: JosefinSans-Light;'>MAMÁ</span></p>";
+	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 15px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
 	const defaultText02 = "<p style='text-align: justify;'><span style='font-size: 10px; font-family: JosefinSans-Light;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam.</span></p>";
 
@@ -29,7 +29,7 @@ const Mod42 = ({
 			align="center"
 		>
 			<Stack
-				w="47%"
+				w={isInWorkSpace ? "43%" : "50%"}
 				mah="70%"
 				spacing="0.17em"
 				aria-hidden
@@ -56,7 +56,7 @@ const Mod42 = ({
 						isThumbNail={isThumbNail}
 						textNo={0}
 					/>
-					<DividerLayout long="9%" position="h" />
+					<DividerLayout long={isInWorkSpace ? "9%" : "0.5em"} position="h" />
 				</Flex>
 				<Flex
 					justify="flex-start"
@@ -73,7 +73,7 @@ const Mod42 = ({
 						sheetNo={sheetNo}
 						typeText="body"
 						letterSpacing="0.5px"
-						lineHeight="16px"
+						lineHeight="13px"
 						textShell={() => <TextShell.BodyParagraph align="flex-start" />}
 						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 						isInPaginator={isInPaginator}

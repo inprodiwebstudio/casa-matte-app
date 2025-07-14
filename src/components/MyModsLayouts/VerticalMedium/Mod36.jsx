@@ -38,7 +38,7 @@ const Mod39 = ({
 					}}
 					typeText="title"
 					sheetNo={sheetNo}
-					letterSpacing="6px"
+					letterSpacing="3px"
 					textShell={() => <TextShell.Title width="80%" align="flex-end" />}
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isInPaginator={isInPaginator}

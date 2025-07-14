@@ -16,9 +16,9 @@ const Mod38 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 38px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 28px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaulSubtTitle = "<p style='text-align: right;'><span style='font-size: 15px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>";
+	const defaulSubtTitle = "<p style='text-align: right;'><span style='font-size: 10px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>";
 
 	return (
 		<Flex
@@ -35,11 +35,14 @@ const Mod38 = ({
 				w="100%"
 				justify="flex-end"
 				align="flex-end"
-				mr="10px"
+				mr={isInWorkSpace ? "10px" : "0.05em"}
 			>
-				<DividerLayout long="6%" position="h" />
+				<DividerLayout long={isInWorkSpace ? "5%" : "10%"} position="h" />
 			</Flex>
-			<Stack spacing="0.08em" w="100%">
+			<Stack
+				spacing={isInWorkSpace ? "4px" : "0.05em"}
+				w="100%"
+			>
 				<div
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
@@ -52,7 +55,7 @@ const Mod38 = ({
 						align="right"
 						typeText="title"
 						sheetNo={sheetNo}
-						letterSpacing="6px"
+						letterSpacing="3px"
 						textShell={() => <TextShell.Title width="40%" align="flex-end" />}
 						isInPaginator={isInPaginator}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}

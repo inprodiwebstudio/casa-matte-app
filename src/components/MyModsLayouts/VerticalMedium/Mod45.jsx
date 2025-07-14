@@ -16,9 +16,9 @@ const Mod45 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 32px; font-family: JosefinSans-Light;'>JAPÓN</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 32px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 10px; font-family: JosefinSans-Light;'>TOKIO</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: JosefinSans-Light;'>KAMAKURA</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: JosefinSans-Light;'>KIOTO</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: JosefinSans-Light;'>NARA</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: JosefinSans-Light;'>NAOSHIMA</span></p>";
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 10px; font-family: JosefinSans-Light;'>Índice 1</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: JosefinSans-Light;'>Índice 2</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: JosefinSans-Light;'>Índice 3</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: JosefinSans-Light;'>Índice 4</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: JosefinSans-Light;'>Índice 5</span></p>";
 
 	return (
 		<Flex
@@ -31,14 +31,14 @@ const Mod45 = ({
 			<Stack
 				w={isInWorkSpace ? "70%" : "50%"}
 				mah="80%"
-				spacing="0.4em"
+				spacing={isInWorkSpace ? "30px" : "0.3em"}
 				aria-hidden
 				sx={{
 					overflow : "hidden",
 				}}
 			>
 				<Stack
-					spacing={isInWorkSpace ? "0.3em" : "0.4em"}
+					spacing={isInWorkSpace ? "25px" : "0.2em"}
 					w="100%"
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
@@ -58,7 +58,11 @@ const Mod45 = ({
 						textNo={0}
 					/>
 					<Center>
-						<DividerLayout long="0.4em" position="h" weight={isInWorkSpace ? "2.5px" : "0.01em"} />
+						<DividerLayout
+							long="0.4em"
+							position="h"
+							weight={isInWorkSpace ? "2px" : "0.01em"}
+						/>
 					</Center>
 				</Stack>
 				<div
