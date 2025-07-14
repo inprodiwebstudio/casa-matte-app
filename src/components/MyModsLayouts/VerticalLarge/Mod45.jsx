@@ -16,9 +16,9 @@ const Mod45 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 35px; font-family: JosefinSans-Light;'>JAPÓN</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 35px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>TOKIO</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>KAMAKURA</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>KIOTO</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>NARA</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>NAOSHIMA</span></p>";
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Índice 1</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Índice 2</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Índice 3</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Índice 4</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Índice 5</span></p>";
 
 	return (
 		<Flex

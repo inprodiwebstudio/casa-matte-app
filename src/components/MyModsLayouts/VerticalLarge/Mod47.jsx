@@ -16,17 +16,17 @@ const Mod47 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>ESPAÑA</span></p>";
+	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaultTitle02 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>FRANCIA</span></p>";
+	const defaultTitle02 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>TURQUÍA</span></p>";
+	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Salamanca</span></p>";
+	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ÍNDICE 1</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ÍNDICE 2</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p>";
 
-	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>París</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Versalles</span></p>";
+	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ÍNDICE 1</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ÍNDICE 2</span></p>";
 
-	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Capadocia</span></p>";
+	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ÍNDICE 1</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ÍNDICE 2</span></p>";
 
 	return (
 		<Flex
@@ -39,7 +39,7 @@ const Mod47 = ({
 		>
 			<Stack
 				spacing={isInWorkSpace ? "50px" : "0.3em"}
-				miw="15%"
+				miw={isInWorkSpace ? "10%" : "30%"}
 				sx={{
 					textTransform : "uppercase",
 				}}
