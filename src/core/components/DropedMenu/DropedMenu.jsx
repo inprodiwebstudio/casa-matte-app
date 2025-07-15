@@ -98,7 +98,7 @@ const DropedMenu = () => {
 									marginTop : "10px",
 								}}
 							>
-								<label>COLOR DE GRAVADO</label>
+								<label>COLOR DE GRABADO</label>
 								<ColorPickerEngraving />
 							</div>
 						)
