@@ -14,7 +14,7 @@ const Mod39 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 46px; font-family: Aitana-Regular;'>TÍTULO 2</span></p>";
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO 2</span></p>";
 
 	return (
 		<Flex
@@ -23,7 +23,7 @@ const Mod39 = ({
 			justify="flex-end"
 			align="flex-end"
 			pb={isInWorkSpace ? "5%" : "10%"}
-			pr="10%"
+			pr="8%"
 		>
 			<Stack
 				w={"70%"}

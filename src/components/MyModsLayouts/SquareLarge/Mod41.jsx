@@ -16,27 +16,37 @@ const Mod41 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 46px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaulSubtTitle = "<p style='text-align: right;'><span style='font-size: 20px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>";
+	const defaulSubtTitle = "<p style='text-align: right;'><span style='font-size: 15px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>";
 
 	return (
 		<Flex
 			pb="8%"
-			pr="10%"
+			pr="8%"
 			pl="10%"
 			w="100%"
 			h="100%"
 			align="flex-end"
 		>
 			<Stack
-				spacing="0.1em"
+				spacing={isInWorkSpace ? "20px" : "0.1em"}
 				w="100%"
 				align="flex-end"
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
-				<DividerLayout long="7%" position="h" />
-				<Stack spacing={isInWorkSpace ? "0em" : "0.1em"} w="100%">
+				<Flex
+					w="100%"
+					justify="flex-end"
+					pr={isInWorkSpace ? "7px" : "0px"}
+				>
+					<DividerLayout
+						long="7%"
+						weight={isInWorkSpace ? "2px" : "0.015em"}
+						position="h"
+					/>
+				</Flex>
+				<Stack spacing={isInWorkSpace ? "3px" : "0.1em"} w="100%">
 					<Text
 						sizes={{
 							"chico"   : "42px",
@@ -52,7 +62,11 @@ const Mod41 = ({
 						isThumbNail={isThumbNail}
 						textNo={0}
 					/>
-					<div>
+					<div
+						style={{
+							paddingRight : isInWorkSpace ? "5px" : "0px",
+						}}
+					>
 						<Text
 							sizes={{
 								"chico"   : "18px",
