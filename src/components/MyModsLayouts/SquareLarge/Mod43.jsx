@@ -16,7 +16,7 @@ const Mod43 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Para papá, un homenaje a tu vida. Gracias por tantos años de cariño y amor. Te queremos siempre.</span></p>";
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Para papá, un homenaje a tu vida. Gracias por tantos años de cariño y amor. Te queremos siempre.</span></p>";
 
 	return (
 		<Flex
