@@ -22,9 +22,9 @@ const Mod74Pdf = ({
 	const bodyHtml = (
 		<div
 			style={{
-				height        : "850px",
-				width         : "100%",
-				paddingBottom : "12%",
+				height : "850px",
+				width  : "100%",
+				// paddingBottom : "12%",
 			}}
 		>
 			<div
@@ -36,6 +36,7 @@ const Mod74Pdf = ({
 					justifyContent : "flex-end",
 					alignItems     : "flex-end",
 					gap            : "16px",
+					marginBottom   : "10%",
 				}}
 			>
 				<div
@@ -69,7 +70,7 @@ const Mod74Pdf = ({
 						<img
 							src={myTextImgsMod[0]}
 							alt="Captura de texto"
-							style={{ objectFit : "cover" }}
+							style={{ objectFit : "contain", height : "auto", width : "100%" }}
 						/>
 					}
 				</div>

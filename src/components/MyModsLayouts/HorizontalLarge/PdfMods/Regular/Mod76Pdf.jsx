@@ -93,7 +93,7 @@ const Mod76Pdf = ({
 						<img
 							src={myTextImgsMod[0]}
 							alt="Captura de texto"
-							style={{ objectFit : "cover" }}
+							style={{ objectFit : "contain", height : "auto", width : "100%" }}
 						/>
 					}
 				</div>

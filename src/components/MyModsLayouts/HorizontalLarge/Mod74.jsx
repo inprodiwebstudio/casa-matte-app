@@ -39,7 +39,7 @@ const Mod73 = ({
 			<Stack
 				w="100%"
 				align="flex-end"
-				mah="10%"
+				mah="20%"
 				pr="5%"
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
