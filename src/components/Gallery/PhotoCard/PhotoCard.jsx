@@ -132,8 +132,6 @@ const PhotoCard = ({
 		loadImage();
 	}, [image]);
 
-	console.log(myImageUrl);
-
 	return (
 		<div
 			className={`PhotoCard ${isfullSize && "isFullSize"} ${isDragger && "isDragger"} ${(isHideSelected && isSelected) && "isHidePhoto"}`}
