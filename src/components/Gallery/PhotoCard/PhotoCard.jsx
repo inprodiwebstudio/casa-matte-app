@@ -141,7 +141,7 @@ const PhotoCard = ({
 			{
 				...(!loadingPhoto && {
 					style : {
-						background : `url(${myImageUrl}) center center / cover no-repeat`,
+						background : "url(\"" + myImageUrl + "\") center center / cover no-repeat",
 					},
 				})
 			}
