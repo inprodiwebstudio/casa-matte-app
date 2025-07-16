@@ -65,6 +65,7 @@ const PhotoCard = ({
 		const img = new Image();
 		img.src = resizerImage(thumbNail);
 		img.addEventListener("load", handleImageLoad);
+		console.log(img.src);
 		setMyImageUrl(img.src);
 	};
 
