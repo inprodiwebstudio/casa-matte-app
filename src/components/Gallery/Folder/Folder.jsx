@@ -132,25 +132,25 @@ const Folder = ({
 								<div
 									className={`photo-indicator ${thumbNails[0] && "full-size"}`}
 									style={{
-										backgroundImage : `url(${thumbNails[0]})`,
+										backgroundImage : "url(\"" + thumbNails[0] + "\")",
 									}}
 								/>
 								<div
 									className={`photo-indicator ${thumbNails[1] && "full-size"}`}
 									style={{
-										backgroundImage : `url(${thumbNails[1]})`,
+										backgroundImage : "url(\"" + thumbNails[1] + "\")",
 									}}
 								/>
 								<div
 									className={`photo-indicator ${thumbNails[2] && "full-size"}`}
 									style={{
-										backgroundImage : `url(${thumbNails[2]})`,
+										backgroundImage : "url(\"" + thumbNails[2] + "\")",
 									}}
 								/>
 								<div
 									className={`photo-indicator ${thumbNails[3] && "full-size"}`}
 									style={{
-										backgroundImage : `url(${thumbNails[3]})`,
+										backgroundImage : "url(\"" + thumbNails[0] + "\")",
 									}}
 								/>
 							</>
