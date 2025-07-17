@@ -16,9 +16,9 @@ const Mod49 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 46px; font-family: JosefinSans-Light;'>JAPÓN</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 35px; font-family: JosefinSans-Light;'>JAPÓN</span></p>";
 
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>TOKIO</span></p><p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>KAMAKURA</span></p><p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>KIOTO</span></p><p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>NARA</span></p><p style='text-align: center;'><span style='font-size: 22px; font-family: JosefinSans-Light;'>NAOSHIMA</span></p>";
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>TOKIO</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>KAMAKURA</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>KIOTO</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>NARA</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>NAOSHIMA</span></p>";
 
 	return (
 		<Flex
@@ -31,7 +31,7 @@ const Mod49 = ({
 			<Stack
 				w="50%"
 				mah="80%"
-				spacing="0.5em"
+				spacing={isInWorkSpace ? "45px" : "0.3em"}
 				aria-hidden
 				sx={{
 					overflow : "hidden",
@@ -39,7 +39,7 @@ const Mod49 = ({
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Stack
-					spacing={isInWorkSpace ? "0.2em" : "0.3em"}
+					spacing={isInWorkSpace ? "35px" : "0.25em"}
 					w="100%"
 				>
 					<Text
@@ -48,7 +48,7 @@ const Mod49 = ({
 							"regular" : "46px",
 							"grande"  : "48px",
 						}}
-						letterSpacing="5px"
+						letterSpacing="3px"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.Title width="100%" align="left" />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
@@ -57,7 +57,11 @@ const Mod49 = ({
 						textNo={0}
 					/>
 					<Center>
-						<DividerLayout long="0.3em" position="h" />
+						<DividerLayout
+							long={isInWorkSpace ? "10%" : "0.3em"}
+							position="h"
+							weight={isInWorkSpace ? "2px" : "0.015em"}
+						/>
 					</Center>
 				</Stack>
 				<Text
@@ -68,7 +72,7 @@ const Mod49 = ({
 					}}
 					align="center"
 					sheetNo={sheetNo}
-					gapSpacing="40px"
+					gapSpacing="25px"
 					textShell={() => <TextShell.BodyIndices align="center" />}
 					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 					isInPaginator={isInPaginator}
