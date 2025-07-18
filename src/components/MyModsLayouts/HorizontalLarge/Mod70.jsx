@@ -30,7 +30,7 @@ const Mod70 = ({
 			<Stack
 				w="55%"
 				mah="90%"
-				spacing={isInWorkSpace ? "0.12em" : "0.15em"}
+				spacing={isInWorkSpace ? "25px" : "0.15em"}
 				aria-hidden
 				style={{overflow : "hidden"}}
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
