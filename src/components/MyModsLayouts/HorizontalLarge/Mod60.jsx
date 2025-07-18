@@ -14,9 +14,9 @@ const Mod60 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 40px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaulSubtTitle = "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>";
+	const defaulSubtTitle = "<p style='text-align: center;'><span style='font-size: 14px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>";
 
 	return (
 		<Flex
@@ -27,7 +27,10 @@ const Mod60 = ({
 			align="center"
 		>
 			<Center w="100%" h="100%">
-				<Stack spacing="0em" w="100%">
+				<Stack
+					spacing={isInWorkSpace ? "0px" : "0.1em"}
+					w="100%"
+				>
 					<div
 						style={{
 							width         : "100%",
