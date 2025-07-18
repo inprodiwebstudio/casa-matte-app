@@ -43,6 +43,7 @@ const Mod47 = ({
 				sx={{
 					textTransform : "uppercase",
 				}}
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Stack
 					spacing="0.13em"

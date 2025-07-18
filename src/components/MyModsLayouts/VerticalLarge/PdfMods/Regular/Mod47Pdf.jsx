@@ -15,19 +15,13 @@ const Mod47Pdf = ({
 
 	const myTextImgsMod = {
 		0 : textImgs[`${pageNo}-${modLayout}-text1`]?.textImg ?? null,
-		1 : textImgs[`${pageNo}-${modLayout}-text2`]?.textImg ?? null,
-		2 : textImgs[`${pageNo}-${modLayout}-text3`]?.textImg ?? null,
-		3 : textImgs[`${pageNo}-${modLayout}-text4`]?.textImg ?? null,
-		4 : textImgs[`${pageNo}-${modLayout}-text5`]?.textImg ?? null,
-		5 : textImgs[`${pageNo}-${modLayout}-text6`]?.textImg ?? null,
 	};
 
 	const bodyHtml = (
 		<div
 			style={{
-				height  : "991px",
-				width   : "100%",
-				padding : "20px",
+				height : "991px",
+				width  : "100%",
 			}}
 		>
 
@@ -40,132 +34,19 @@ const Mod47Pdf = ({
 					alignItems     : "center",
 				}}
 			>
-				<div style={{
-					width          : "30%",
-					height         : "100%",
-					display        : "flex",
-					flexDirection  : "column",
-					gap            : "30px",
-					justifyContent : "center",
-					alignItems     : "center",
-				}}>
-					<div
-						style={{
-							width          : "100%",
-							display        : "flex",
-							flexDirection  : "column",
-							gap            : "10px",
-							justifyContent : "flex-start",
-							alignItems     : "flex-start",
-						}}
-					>
-						<div
-							style={{
-								width : "100%",
-							}}
-						>
-							{
-								myTextImgsMod[0] &&
-									<img
-										src={myTextImgsMod[0]}
-										alt="Captura de texto"
-										style={{ objectFit : "cover" }}
-									/>
-							}
-						</div>
-						<div
-							style={{
-								width : "100%",
-							}}
-						>
-							{
-								myTextImgsMod[1] &&
-									<img
-										src={myTextImgsMod[1]}
-										alt="Captura de texto"
-										style={{ objectFit : "cover" }}
-									/>
-							}
-						</div>
-					</div>
-					<div
-						style={{
-							width          : "100%",
-							display        : "flex",
-							flexDirection  : "column",
-							gap            : "10px",
-							justifyContent : "flex-start",
-							alignItems     : "flex-start",
-						}}
-					>
-						<div
-							style={{
-								width : "100%",
-							}}
-						>
-							{
-								myTextImgsMod[2] &&
-									<img
-										src={myTextImgsMod[2]}
-										alt="Captura de texto"
-										style={{ objectFit : "cover" }}
-									/>
-							}
-						</div>
-						<div
-							style={{
-								width : "100%",
-							}}
-						>
-							{
-								myTextImgsMod[3] &&
-									<img
-										src={myTextImgsMod[3]}
-										alt="Captura de texto"
-										style={{ objectFit : "cover" }}
-									/>
-							}
-						</div>
-					</div>
-					<div
-						style={{
-							width          : "100%",
-							display        : "flex",
-							flexDirection  : "column",
-							gap            : "10px",
-							justifyContent : "flex-start",
-							alignItems     : "flex-start",
-						}}
-					>
-						<div
-							style={{
-								width : "100%",
-							}}
-						>
-							{
-								myTextImgsMod[4] &&
-									<img
-										src={myTextImgsMod[4]}
-										alt="Captura de texto"
-										style={{ objectFit : "cover" }}
-									/>
-							}
-						</div>
-						<div
-							style={{
-								width : "100%",
-							}}
-						>
-							{
-								myTextImgsMod[5] &&
-									<img
-										src={myTextImgsMod[5]}
-										alt="Captura de texto"
-										style={{ objectFit : "cover" }}
-									/>
-							}
-						</div>
-					</div>
+				<div
+					style={{
+						width : "100%",
+					}}
+				>
+					{
+						myTextImgsMod[0] &&
+						<img
+							src={myTextImgsMod[0]}
+							alt="Captura de texto"
+							style={{ objectFit : "contain", height : "auto", width : "100%" }}
+						/>
+					}
 				</div>
 			</div>
 		</div>
