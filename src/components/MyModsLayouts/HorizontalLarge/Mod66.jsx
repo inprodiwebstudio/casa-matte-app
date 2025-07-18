@@ -16,7 +16,7 @@ const Mod66 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 20px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>";
+	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>";
 
 	return (
 		<Flex
@@ -25,8 +25,8 @@ const Mod66 = ({
 			h="100%"
 		>
 			<Stack
-				p={isInWorkSpace ? "3%" : "5%"}
-				pr="5%"
+				p={isInWorkSpace ? "40px" : "5%"}
+				pr={isInWorkSpace ? "35px" : "5%"}
 				w="70%"
 				h="100%"
 				align="flex-end"
@@ -47,7 +47,7 @@ const Mod66 = ({
 						}}
 						align="right"
 						sheetNo={sheetNo}
-						letterSpacing={"4px"}
+						letterSpacing="2px"
 						textShell={() => <TextShell.SubTitle align="flex-end" />}
 						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
 						isInPaginator={isInPaginator}

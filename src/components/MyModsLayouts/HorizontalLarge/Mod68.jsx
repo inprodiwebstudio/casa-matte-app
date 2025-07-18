@@ -15,7 +15,7 @@ const Mod68 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>Odi pullerit. Actus nes consid fur, senatus, essendi enatrum pra, us consum, que quam, ve, quo potimorta trurs con hosus ore dumus ommorunum dium oporat, elum hocul verobu</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 14px; font-family: Inter-Lifght;'>Odi pullerit. Actus nes consid fur, senatus, essendi enatrum pra, us consum, que quam, ve, quo potimorta trurs con hosus ore dumus ommorunum dium oporat, elum hocul verobu</span></p>";
 
 	return (
 		<Center
@@ -24,7 +24,7 @@ const Mod68 = ({
 		>
 			<Stack
 				mah="70%"
-				w="50%"
+				w="40%"
 				aria-hidden={true}
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
