@@ -427,7 +427,7 @@ const CorrectAccessGuard = () => {
 		const isPaid = await isPaidExtra(idOrderExtra);
 		if (isPaid) {
 			addCurrentPhotoBookConfig(photobookData);
-			setStatusView("done");
+			setStatusView("continue");
 			return;
 		}
 		setStatusView("notPaidExtras");
