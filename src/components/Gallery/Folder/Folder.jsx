@@ -150,7 +150,7 @@ const Folder = ({
 								<div
 									className={`photo-indicator ${thumbNails[3] && "full-size"}`}
 									style={{
-										backgroundImage : "url(\"" + thumbNails[0] + "\")",
+										backgroundImage : "url(\"" + thumbNails[3] + "\")",
 									}}
 								/>
 							</>
