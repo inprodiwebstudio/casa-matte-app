@@ -367,13 +367,7 @@ const DropDoc = ({
 											color="darkCasaMatte"
 											sx={{marginTop : "15px"}}
 											loading={loading}
-											onClick={() => () =>
-												openContextModal({
-													modal      : "disclaimerDropPhotos",
-													innerProps : {
-														handdleSuccess : () => handleAddFolder(),
-													},
-												})}
+											onClick={() => handleAddFolder()}
 											w={110}
 											h={30}
 										>

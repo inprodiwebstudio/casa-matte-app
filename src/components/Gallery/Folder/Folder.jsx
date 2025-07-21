@@ -18,10 +18,10 @@ import { openContextModal, closeAllModals } from "@mantine/modals";
 
 const Folder = ({
 	name,
-	postId,
 	folderId,
 	userName,
 	thumbNails,
+	postTypeId,
 	gallerySlice,
 	onSelectedFolder,
 	gallerySelectedData,
@@ -42,7 +42,7 @@ const Folder = ({
 			await galleryFolderMutation({
 				data : {
 					userName,
-					postId,
+					postTypeId,
 					folderName,
 				},
 			});
@@ -66,7 +66,7 @@ const Folder = ({
 		const arrayOfPromises = selectedData.map(async (data, index) => {
 			return await galleryImagesMutationMove({
 				sourceFilePath  : data?.filePath,
-				destinationPath : `/${userName}/${postId}/${name}/`,
+				destinationPath : `/${userName}/${postTypeId}/${name}/`,
 				tags            : (selectedData.length - 1 === index) ? ["gallery"] : ["null"],
 			});
 		});
@@ -199,10 +199,10 @@ const Folder = ({
 	);
 };
 
-const mapStateToProps = ({ gallerySlice, authSlice }) => ({
+const mapStateToProps = ({ gallerySlice, authSlice, workSpaceSlice }) => ({
 	gallerySelectedData : gallerySlice?.selectedData ?? {},
 	userName            : authSlice?.user?.username ?? undefined,
-	postId              : authSlice?.user?.postId ?? undefined,
+	postTypeId          : workSpaceSlice?.data?.postTypeId ?? undefined,
 });
 
 const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});

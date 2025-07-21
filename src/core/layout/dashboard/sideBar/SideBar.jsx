@@ -25,6 +25,7 @@ const SideBar = ({
 	galleryData,
 	galleryPath,
 	isLoggedIn,
+	postTypeId,
 	statusViewPage,
 	userName,
 	filter,
@@ -60,18 +61,22 @@ const SideBar = ({
 	};
 
 	const handleMoveOutFolder = () => {
+		gallerySlice.setLoadingGalleryData(true);
 		const mySelectedData = convertToArray(selectedData);
 		const arrayOfPromises = mySelectedData.map(async (data, index) => {
 			return await galleryImagesMutationMove({
 				sourceFilePath  : data?.filePath,
-				destinationPath : `/${userName}/`,
+				destinationPath : `/${userName}/${postTypeId}/`,
 			});
 		});
 
-		Promise.allSettled([...arrayOfPromises]).then((values) => {
+		Promise.all([...arrayOfPromises]).then((values) => {
 			gallerySlice.clearSelectedData();
+			gallerySlice.deleteDataGallery(selectedData);
+			gallerySlice.setLoadingGalleryData(false);
 		}, reason => {
 			console.error(reason);
+			gallerySlice.setLoadingGalleryData(false);
 		});
 	};
 
@@ -100,6 +105,19 @@ const SideBar = ({
 		}
 		return;
 	}, [filter, isLoggedIn, galleryPath]);
+
+	useEffect(() => {
+		const isInfolder = galleryPath?.name !== "route";
+		const isAvaialableGalleryData = isValidArray(convertToArray(galleryData));
+
+		const isNotAvailablePhotosInFolder = !isAvaialableGalleryData && isInfolder;
+
+		if (isNotAvailablePhotosInFolder) {
+			gallerySlice.setGalleryPath({ id : "route", name : "route" });
+			return;
+		}
+		return;
+	}, [galleryData]);
 
 	return (
 		<div id="SideBar" className={`${(statusViewPage === "preview") && "isInpreview"} ${isAvailableDocs ? (isFullSizeSideBar && "isFullSize") : "isNoData"}`}>
@@ -210,6 +228,7 @@ const mapStateToProps = ({ gallerySlice, authSlice, workSpaceSlice }) => ({
 	filter               : gallerySlice?.filter ?? undefined,
 	statusViewPage       : workSpaceSlice?.statusViewPage ?? undefined,
 	photoBookData        : workSpaceSlice?.data ?? undefined,
+	postTypeId           : workSpaceSlice?.data?.postTypeId ?? undefined,
 	isLoggedIn           : authSlice?.loggedIn ?? false,
 });
 
