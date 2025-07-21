@@ -87,7 +87,7 @@ const ImgLayout = ({
 			{
 				...( (urlImage?.url && (urlImage?.url !== "")) &&  {
 					style : {
-						backgroundImage    : "url(\"" + handlerResizerImage(urlImage, isInWorkSpace) + "\")}",
+						backgroundImage    : "url(\"" + handlerResizerImage(urlImage, isInWorkSpace) + "\")",
 						backgroundSize     : "cover",
 						backgroundPosition : "center",
 						backgroundRepeat   : "no-repeat",
