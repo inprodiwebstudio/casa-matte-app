@@ -25,6 +25,7 @@ const SideBar = ({
 	galleryData,
 	galleryPath,
 	isLoggedIn,
+	postTypeId,
 	statusViewPage,
 	userName,
 	filter,
@@ -64,7 +65,7 @@ const SideBar = ({
 		const arrayOfPromises = mySelectedData.map(async (data, index) => {
 			return await galleryImagesMutationMove({
 				sourceFilePath  : data?.filePath,
-				destinationPath : `/${userName}/`,
+				destinationPath : `/${userName}/${postTypeId}/`,
 			});
 		});
 
@@ -210,6 +211,7 @@ const mapStateToProps = ({ gallerySlice, authSlice, workSpaceSlice }) => ({
 	filter               : gallerySlice?.filter ?? undefined,
 	statusViewPage       : workSpaceSlice?.statusViewPage ?? undefined,
 	photoBookData        : workSpaceSlice?.data ?? undefined,
+	postTypeId           : workSpaceSlice?.data?.postTypeId ?? undefined,
 	isLoggedIn           : authSlice?.loggedIn ?? false,
 });
 
