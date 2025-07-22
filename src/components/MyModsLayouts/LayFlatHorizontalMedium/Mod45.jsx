@@ -13,7 +13,7 @@ const Mod45 = ({data, isInWorkSpace, sheetNo}) => {
 				h="100%"
 				w="100%"
 			>
-				<Stack  w="75%" h="100%">
+				<Stack w="75%" h="100%">
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
@@ -25,9 +25,9 @@ const Mod45 = ({data, isInWorkSpace, sheetNo}) => {
 					w="25%"
 					h="100%"
 					spacing={"0.1em"}
-					pr="1%"
-					pt="1%"
-					pb="1%"
+					pr={isInWorkSpace ? "16px" : "1%"}
+					pt={isInWorkSpace ? "16px" : "1%"}
+					pb={isInWorkSpace ? "16px" : "1%"}
 				>
 					<Stack
 						w="100%"

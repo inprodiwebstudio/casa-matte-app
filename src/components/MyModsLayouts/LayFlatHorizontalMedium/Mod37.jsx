@@ -9,7 +9,7 @@ const Mod37 = ({data, isInWorkSpace, sheetNo}) => {
 			h="100%"
 		>
 			<Flex
-				gap="0.1em"
+				gap={isInWorkSpace ? "10px" : "0.1em"}
 				h="100%"
 				w="100%"
 			>
@@ -21,7 +21,7 @@ const Mod37 = ({data, isInWorkSpace, sheetNo}) => {
 						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Stack>
-				<Stack  w="25%" h="100%">
+				<Stack w="25%" h="100%">
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}

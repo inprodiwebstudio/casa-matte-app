@@ -10,7 +10,7 @@ const Mod41 = ({data, isInWorkSpace, sheetNo}) => {
 			p="2%"
 		>
 			<Flex
-				gap="0.1em"
+				gap={isInWorkSpace ? "10px" : "0.1em"}
 				h="100%"
 				w="100%"
 			>
