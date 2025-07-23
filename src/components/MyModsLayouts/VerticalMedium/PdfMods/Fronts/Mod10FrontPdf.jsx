@@ -33,7 +33,7 @@ const Mod10FrontPdf = ({text, images}) => {
 						height     : "100%px",
 						width      : "530px",
 						overflow   : "hidden",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{

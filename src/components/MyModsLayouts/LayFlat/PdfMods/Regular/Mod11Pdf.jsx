@@ -20,7 +20,7 @@ const Mod11Pdf = ({images}) => {
 		>
 			<div
 				style={{
-					background : "#E3E3E3",
+					background : "white",
 					width      : "100%",
 					height     : "calc(100% - 0.5px - 50%)",
 				}}
@@ -40,7 +40,7 @@ const Mod11Pdf = ({images}) => {
 			</div>
 			<div
 				style={{
-					background : "#E3E3E3",
+					background : "white",
 					width      : "100%",
 					height     : "calc(100% - 0.5% - 50%)",
 				}}

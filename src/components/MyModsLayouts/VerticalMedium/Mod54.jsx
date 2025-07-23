@@ -16,24 +16,23 @@ const Mod54 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 38px; font-family: JosefinSans-Light;'>VALPARAÍSO</span></p>";
+	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: right;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const defaultSubtitle = "<p style='text-align: right;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex
-			pb="8%"
+			pb="22%"
 			w="100%"
 			h="100%"
 			gap="0.5em"
 			direction="column"
 		>
 			<Stack
-				spacing="0.2em"
+				spacing={isInWorkSpace ? "4%" : "8%"}
 				w="100%"
 				h="100%"
 				align="flex-end"
-				sx={{textTransform : "uppercase"}}
 			>
 				<Stack w="100%" h="100%">
 					<ImgLayout
@@ -43,7 +42,11 @@ const Mod54 = ({
 						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Stack>
-				<Stack w="70%" mr="10%" spacing="0em">
+				<Stack
+					w="90%"
+					mr="8%"
+					spacing={isInWorkSpace ? "0px" : "0.1em"}
+				>
 					<div
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 					>
@@ -53,9 +56,10 @@ const Mod54 = ({
 								"regular" : "42px",
 								"grande"  : "46px",
 							}}
+							typeText="title"
 							align="right"
 							sheetNo={sheetNo}
-							textShell={() => <TextShell.Title />}
+							textShell={() => <TextShell.Title align="flex-end" />}
 							letterSpacing="6.5px"
 							data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
 							isInPaginator={isInPaginator}
@@ -63,19 +67,18 @@ const Mod54 = ({
 							textNo={0}
 						/>
 					</div>
-					<Stack
-						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
-					>
+					<Stack {...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}>
 						<Text
 							sizes={{
 								"chico"   : "14px",
 								"regular" : "15px",
 								"grande"  : "16px",
 							}}
+							typeText="subtitle"
 							align="right"
 							sheetNo={sheetNo}
 							letterSpacing="2px"
-							textShell={() => <TextShell.SubTitle />}
+							textShell={() => <TextShell.SubTitle align="flex-end" />}
 							data={textInsertion(data?.text[1], defaultSubtitle, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}

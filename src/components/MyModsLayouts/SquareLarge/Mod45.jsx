@@ -15,9 +15,9 @@ const Mod45 = ({
 	pageNo,
 	modLayout,
 }) => {
-	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 30px; font-family: Aitana-Regular;'>MAMÁ</span></p>";
+	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Aitana-Regular;'>MAMÁ</span></p>";
 
-	const defaultText02 = "<p style='text-align: justify;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam.</span></p>";
+	const defaultText02 = "<p style='text-align: justify;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam.</span></p>";
 
 	return (
 		<Flex
@@ -28,15 +28,15 @@ const Mod45 = ({
 			align="flex-end"
 		>
 			<Stack
-				w="57%"
+				w="43%"
 				mah="70%"
-				spacing="0.2em"
+				spacing={isInWorkSpace ? "20px" : "0.2em"}
 				aria-hidden
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Flex
 					direction="column"
-					gap="0.1em"
+					gap={isInWorkSpace ? "13px" : "0.1em"}
 					justify="center"
 				>
 					<Text
@@ -46,7 +46,7 @@ const Mod45 = ({
 							"grande"  : "32px",
 						}}
 						align="left"
-						letterSpacing="3px"
+						letterSpacing="2px"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.SubTitle width="50%" align="flex-start" />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
@@ -67,7 +67,7 @@ const Mod45 = ({
 							"grande"  : "20px",
 						}}
 						align="justify"
-						lineHeight="26px"
+						lineHeight="16px"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.BodyParagraph align="flex-start" />}
 						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}

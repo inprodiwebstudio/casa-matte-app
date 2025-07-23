@@ -14,7 +14,7 @@ const Mod38 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 26px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>";
 
 	return (
 		<Center w="100%" h="100%">
@@ -31,6 +31,7 @@ const Mod38 = ({
 						"regular" : "26px",
 						"grande"  : "28px",
 					}}
+					typeText="title"
 					sheetNo={sheetNo}
 					textShell={() => <TextShell.Title />}
 					letterSpacing="4px"

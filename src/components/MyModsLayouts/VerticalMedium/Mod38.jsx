@@ -16,22 +16,33 @@ const Mod38 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 28px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaulSubtTitle = "<p style='text-align: right;'><span style='font-size: 14px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>";
+	const defaulSubtTitle = "<p style='text-align: right;'><span style='font-size: 10px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>";
 
 	return (
 		<Flex
-			p="8%"
+			p="5%"
+			pb="6%"
 			w="100%"
 			h="100%"
 			justify="flex-end"
 			align="flex-end"
-			gap="0.1em"
+			gap="0.15em"
 			direction="column"
 		>
-			<DividerLayout long="7%" position="h" />
-			<Stack spacing="0.05em" w="100%">
+			<Flex
+				w="100%"
+				justify="flex-end"
+				align="flex-end"
+				mr={isInWorkSpace ? "10px" : "0.05em"}
+			>
+				<DividerLayout long={isInWorkSpace ? "5%" : "10%"} position="h" />
+			</Flex>
+			<Stack
+				spacing={isInWorkSpace ? "4px" : "0.05em"}
+				w="100%"
+			>
 				<div
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
@@ -42,8 +53,9 @@ const Mod38 = ({
 							"grande"  : "46px",
 						}}
 						align="right"
+						typeText="title"
 						sheetNo={sheetNo}
-						letterSpacing="6px"
+						letterSpacing="3px"
 						textShell={() => <TextShell.Title width="40%" align="flex-end" />}
 						isInPaginator={isInPaginator}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
@@ -53,6 +65,9 @@ const Mod38 = ({
 				</div>
 				<div
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
+					style={{
+						marginRight : isInWorkSpace ? "10px" : "0px",
+					}}
 				>
 					<Text
 						sizes={{
@@ -61,6 +76,7 @@ const Mod38 = ({
 							"grande"  : "16px",
 						}}
 						align="right"
+						typeText="subtitle"
 						sheetNo={sheetNo}
 						letterSpacing="2px"
 						textShell={() => <TextShell.SubTitle width="20%" align="flex-end" />}

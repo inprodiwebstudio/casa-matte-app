@@ -26,7 +26,7 @@ const Mod63Pdf = ({images}) => {
 					style={{
 						height     : "100%",
 						width      : "100%",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -58,7 +58,7 @@ const Mod63Pdf = ({images}) => {
 						style={{
 							width      : "calc(50% - 5px)",
 							height     : "100%",
-							background : "#E3E3E3",
+							background : "white",
 						}}
 					>
 						{
@@ -78,7 +78,7 @@ const Mod63Pdf = ({images}) => {
 						style={{
 							width      : "calc(50% - 5px)",
 							height     : "100%",
-							background : "#E3E3E3",
+							background : "white",
 						}}
 					>
 						{

@@ -1,5 +1,5 @@
-import { createSlice }     from "@reduxjs/toolkit";
-import { convertToObject } from "helpers";
+import { createSlice }                     from "@reduxjs/toolkit";
+import { convertToArray, convertToObject } from "helpers";
 
 
 const initialState = {
@@ -8,7 +8,10 @@ const initialState = {
 		name         : "route",
 		folderThumbs : [],
 	},
-	filter            : undefined,
+	filter : {
+		label : "FECHA DE CAPTURA",
+		value : "CAPTURE_DATE",
+	},
 	typeDropedView    : null,
 	data              : null,
 	isFullSizeSideBar : false,
@@ -22,7 +25,29 @@ export const gallerySlice = createSlice({
 	initialState,
 	reducers : {
 		setGalleryData : (state, {payload}) => {
-			state.data = {[payload?.id] : payload, ...state.data};
+			const insertNewData = {[payload?.id] : payload, ...state.data};
+
+			const constructGalleryList = convertToArray(insertNewData).map(image => {
+				const handlerContextDateCaptured = image.context?.custom ?? image.context;
+				return {
+					...image,
+					context : handlerContextDateCaptured,
+				};
+			});
+
+
+			const handlerGallerySorted = () => {
+				switch (state.filter?.value) {
+					case "CAPTURE_DATE":
+						return constructGalleryList.sort((a, b) => new Date(b?.context?.dateCaptured) - new Date(a?.context?.dateCaptured));
+					default:
+						return constructGalleryList.sort((a, b) => new Date(b?.uploaded_at) - new Date(a?.uploaded_at));
+				}
+			};
+
+			const myNewGalleryData = convertToObject(handlerGallerySorted());
+			// state.data = newDataList;
+			state.data = myNewGalleryData;
 		},
 		getGalleryData : (state, {payload}) => {
 			const gallletyDataInsert = convertToObject(payload);

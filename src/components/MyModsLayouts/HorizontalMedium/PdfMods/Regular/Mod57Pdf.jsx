@@ -57,7 +57,7 @@ const Mod57Pdf = ({
 							width      : "calc(30% - 5px)",
 							height     : "100%",
 							overflow   : "hidden",
-							background : "#E3E3E3",
+							background : "white",
 						}}
 					>
 						{
@@ -78,7 +78,7 @@ const Mod57Pdf = ({
 							width      : "calc(70% - 5px)",
 							height     : "100%",
 							overflow   : "hidden",
-							background : "#E3E3E3",
+							background : "white",
 						}}
 					>
 						{

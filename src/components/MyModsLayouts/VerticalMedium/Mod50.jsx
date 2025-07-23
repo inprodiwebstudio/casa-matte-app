@@ -16,18 +16,19 @@ const Mod50 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 38px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
+	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex
-			p="8%"
+			pt="15%"
+			pb="15%"
 			w="100%"
 			h="100%"
 			justify="center"
 			align="center"
-			gap="0.3em"
+			gap="10%"
 			direction="column"
 		>
 			<Stack
@@ -41,17 +42,18 @@ const Mod50 = ({
 						"regular" : "42px",
 						"grande"  : "46px",
 					}}
+					typeText="title"
 					align="center"
 					sheetNo={sheetNo}
 					textShell={() => <TextShell.Title />}
-					letterSpacing="6.5px"
+					letterSpacing="4px"
 					data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}
 					textNo={0}
 				/>
 			</Stack>
-			<Stack w="60%" h="100%">
+			<Stack w="55%" h="100%">
 				<ImgLayout
 					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
@@ -70,6 +72,7 @@ const Mod50 = ({
 						"regular" : "15px",
 						"grande"  : "16px",
 					}}
+					typeText="subtitle"
 					align="center"
 					sheetNo={sheetNo}
 					letterSpacing="2px"

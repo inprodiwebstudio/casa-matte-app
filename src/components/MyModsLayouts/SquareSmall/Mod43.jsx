@@ -21,15 +21,19 @@ const Mod43 = ({
 	return (
 		<Flex
 			pr="10%"
-			pb="5%"
+			pb="8%"
 			w="100%"
 			h="100%"
 			justify="flex-end"
 			align="flex-end"
-			gap="0.07em"
+			gap={isInWorkSpace ? "15px" : "5%"}
 			direction="column"
 		>
-			<DividerLayout long="10%" position="h" />
+			<DividerLayout
+				long={isInWorkSpace ? "5%" : "10%"}
+				weight={isInWorkSpace ? "2px" : "0.01em"}
+				position="h"
+			/>
 			<Stack
 				w="37%"
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
@@ -40,6 +44,7 @@ const Mod43 = ({
 						"regular" : "10px",
 						"grande"  : "13px",
 					}}
+					typeText="body"
 					sheetNo={sheetNo}
 					textShell={() => <TextShell.Body align="flex-end" />}
 					align="right"

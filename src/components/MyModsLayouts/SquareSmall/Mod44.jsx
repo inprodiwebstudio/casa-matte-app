@@ -15,7 +15,7 @@ const Mod44 = ({
 	pageNo,
 	modLayout,
 }) => {
-	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 20px; font-family: Aitana-Regular;'>MAMÁ</span></p>";
+	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
 	const defaultText02 = "<p style='text-align: justify;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam.</span></p>";
 
@@ -28,14 +28,14 @@ const Mod44 = ({
 			align="center"
 		>
 			<Stack
-				w="57%"
+				w="51%"
 				mah="70%"
-				spacing="0.1em"
+				spacing={isInWorkSpace ? "18px" : "0.2em"}
 				aria-hidden
 			>
 				<Flex
 					direction="column"
-					gap="0.1em"
+					gap={isInWorkSpace ? "14px" : "0.1em"}
 					justify="center"
 				>
 					<div
@@ -50,8 +50,9 @@ const Mod44 = ({
 								"regular" : "20px",
 								"grande"  : "23px",
 							}}
+							typeText="subtitle"
 							align="left"
-							letterSpacing="3px"
+							letterSpacing="1px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.SubTitle width="50%" align="flex-start" />}
 							data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
@@ -60,7 +61,7 @@ const Mod44 = ({
 							textNo={0}
 						/>
 					</div>
-					<DividerLayout long="10%" position="h" />
+					<DividerLayout long={isInWorkSpace ? "9%" : "10%"} position="h" />
 				</Flex>
 				<Flex
 					justify="flex-start"
@@ -78,6 +79,7 @@ const Mod44 = ({
 								"regular" : "10px",
 								"grande"  : "13px",
 							}}
+							typeText="body"
 							align="justify"
 							lineHeight="13px"
 							sheetNo={sheetNo}

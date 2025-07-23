@@ -16,7 +16,7 @@ const Mod67 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>Título 1</span></p>";
+	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>Título 1</span></p>";
 
 	return (
 		<Stack
@@ -27,7 +27,7 @@ const Mod67 = ({
 			pr="16%"
 			align="center"
 			justify="center"
-			spacing={"0.3em"}
+			spacing={isInWorkSpace ? "45px" : "0.2em"}
 		>
 			<Stack
 				w="100%"

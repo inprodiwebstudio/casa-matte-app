@@ -57,6 +57,7 @@ import Mod56 from "./Mod56";
 import Mod57 from "./Mod57";
 import Mod58 from "./Mod58";
 import Mod59 from "./Mod59";
+import Mod60 from "./Mod60";
 
 import {
 	Mod01FrontPdf,
@@ -686,6 +687,13 @@ const VerticalLarge = {
 		numberPhotos : 1,
 		cat          : "fotos",
 		pdfLayout    : Mod59Pdf,
+	},
+	Mod60 : {
+		id           : "Mod60",
+		layout       : Mod60,
+		numberPhotos : 12,
+		cat          : "texto",
+		pdfLayout    : undefined,
 	},
 };
 

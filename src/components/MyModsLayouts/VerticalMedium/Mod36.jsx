@@ -14,7 +14,7 @@ const Mod39 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO 2</span></p>";
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 28px; font-family: Aitana-Regular;'>TÍTULO 2</span></p>";
 
 	return (
 		<Flex
@@ -22,10 +22,11 @@ const Mod39 = ({
 			h="100%"
 			justify="flex-end"
 			align="flex-end"
-			p="3%"
+			pr="9%"
+			pb="7%"
 		>
 			<Stack
-				w={"50%"}
+				w={"90%"}
 				align={isThumbNail ? "flex-end" : undefined}
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
@@ -35,8 +36,9 @@ const Mod39 = ({
 						"regular" : "42px",
 						"grande"  : "46px",
 					}}
+					typeText="title"
 					sheetNo={sheetNo}
-					letterSpacing="6px"
+					letterSpacing="3px"
 					textShell={() => <TextShell.Title width="80%" align="flex-end" />}
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isInPaginator={isInPaginator}

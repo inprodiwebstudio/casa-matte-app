@@ -14,7 +14,7 @@ const Mod35 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 28px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>";
 
 	return (
 		<Center w="100%" h="100%">
@@ -32,8 +32,9 @@ const Mod35 = ({
 						"grande"  : "46px",
 					}}
 					sheetNo={sheetNo}
+					typeText="title"
 					textShell={() => <TextShell.Title />}
-					letterSpacing="6.5px"
+					letterSpacing="4.8px"
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}

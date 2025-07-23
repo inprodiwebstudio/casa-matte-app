@@ -16,9 +16,9 @@ const Mod48 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 46px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 35px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Spectral-Light-Italic;'>Toledo</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Toledo</span></p><p style='text-align: center;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
 
 
 	return (
@@ -32,7 +32,7 @@ const Mod48 = ({
 			<Stack
 				w="50%"
 				mah="80%"
-				spacing="0.3em"
+				spacing={isInWorkSpace ? "33px" : "0.2em"}
 				aria-hidden
 				sx={{
 					overflow : "hidden",
@@ -40,7 +40,7 @@ const Mod48 = ({
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Stack
-					spacing={isInWorkSpace ? "0.1em" : "0.3em"}
+					spacing={isInWorkSpace ? "25px" : "0.1em"}
 					w="100%"
 				>
 					<Text
@@ -49,7 +49,7 @@ const Mod48 = ({
 							"regular" : "46px",
 							"grande"  : "48px",
 						}}
-						letterSpacing="5px"
+						letterSpacing="2px"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.Title width="100%" align="center" />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}

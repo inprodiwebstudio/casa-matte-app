@@ -24,7 +24,7 @@ const Mod39 = ({
 		>
 			<Stack
 				mah="70%"
-				w="70%"
+				w="50%"
 				aria-hidden={true}
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>

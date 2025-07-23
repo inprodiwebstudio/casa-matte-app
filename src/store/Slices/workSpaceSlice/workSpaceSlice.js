@@ -3,16 +3,17 @@ import { convertToArray, convertToObject, History, isValidArray } from "helpers"
 
 const initialState = {
 	data : {
-		product        : "",
-		productName    : "",
-		format         : "",
-		sizePhotoBook  : "",
-		sizeDimentions : "",
-		pasta          : "",
-		projectTittle  : "",
-		modified       : undefined,
-		orderId        : undefined,
-		frontPage      : {
+		product            : "",
+		productName        : "",
+		format             : "",
+		sizePhotoBook      : "",
+		sizeDimentions     : "",
+		pasta              : "",
+		projectTittle      : "",
+		currentTextsInPage : {},
+		modified           : undefined,
+		orderId            : undefined,
+		frontPage          : {
 			id     : "FrontLayout",
 			sheet1 : {
 				layoutType : "",

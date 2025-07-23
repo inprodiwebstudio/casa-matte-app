@@ -16,9 +16,9 @@ const Mod51 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>VIRGINIA</span></p>";
+	const defaultTitle = "<p style='text-align: left;'><span style='font-size: 20px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultIndices = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Colonial Williamsburg</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>William & Mary University</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>The Capitol</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Jamestown</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Smithfeld</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Chepokee Plantation</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Waller Mill Park</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Richmond</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Ford’s Colony</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>St. Andrew’s</span></p>";
+	const defaultIndices = "<p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 1</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 2</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 3</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 4</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 5</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 6</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 7</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 8</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 9</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 10</span></p>";
 
 	return (
 		<Flex
@@ -29,13 +29,13 @@ const Mod51 = ({
 			align="center"
 		>
 			<Stack
-				spacing="0.2em"
+				spacing={isInWorkSpace ? "25px" : "0.1em"}
 				sx={{overflow : "hidden"}}
-				w={"45%"}
+				w={"30%"}
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Stack
-					spacing={isInWorkSpace ? "0.1em" : "0.2em"}
+					spacing={isInWorkSpace ? "20px" : "0.1em"}
 				>
 					<Text
 						sizes={{
@@ -43,6 +43,7 @@ const Mod51 = ({
 							"regular" : "24px",
 							"grande"  : "26px",
 						}}
+						typeText="subtitle"
 						align="left"
 						sheetNo={sheetNo}
 						letterSpacing="3px"
@@ -52,14 +53,15 @@ const Mod51 = ({
 						isThumbNail={isThumbNail}
 						textNo={0}
 					/>
-					<DividerLayout long="20%" position="h" />
+					<DividerLayout long="12%" position="h" />
 				</Stack>
 				<Text
 					sizes={{
 						"chico"   : "15px",
-						"regular" : "18px",
+						"regular" : "10px",
 						"grande"  : "20px",
 					}}
+					typeText="index"
 					align="left"
 					gapSpacing="12px"
 					sheetNo={sheetNo}
