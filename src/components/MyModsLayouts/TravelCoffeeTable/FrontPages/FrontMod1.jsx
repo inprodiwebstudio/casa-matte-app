@@ -61,7 +61,7 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					}}
 					h="100%"
 					align="center"
-					spacing={isInWorkSpace ? "10%" : "20%"}
+					spacing={isInWorkSpace ? "0%" : "20%"}
 				>
 					<Stack w="80%">
 						<Text
@@ -80,7 +80,12 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 							textNo={0}
 						/>
 					</Stack>
-					<Stack w="55%" h="70%">
+					<Stack
+						w={isInWorkSpace ? "450px" : "70%"}
+						h={isInWorkSpace ? "440px" : "90%"}
+						mt={isInWorkSpace ? "75px" : "0%"}
+						mb={isInWorkSpace ? "140px" : "0%"}
+					>
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}
 							sheetNo={sheetNo}
@@ -90,7 +95,7 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					</Stack>
 					<Stack
 						w="80%"
-						mt={isInWorkSpace ? "30%" : "20%"}
+						mt={isInWorkSpace ? "0%" : "20%"}
 					>
 						<Text
 							sizes={{
