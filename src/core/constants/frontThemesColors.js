@@ -68,7 +68,7 @@ const frontThemesTextures = {
 			textureUrl : telaTexture,
 		},
 		"Lino Cold" : {
-			color      : "#E79BBA",
+			color      : "#8f8f8fff",
 			textureUrl : telaTexture,
 		},
 		"Lino Natural" : {

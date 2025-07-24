@@ -34,6 +34,7 @@ const EditText = ({
 	workSpaceSlice,
 }) => {
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
+	const product = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
 	const currentColorEngravingText = useSelector((state) => state.workSpaceSlice.data?.engraving?.currentColor?.colorHex, shallowEqual);
 
 	const isAvailableChangeColorText = currentColorEngravingText && (currentPageId === "frontpage");
@@ -199,6 +200,9 @@ const EditText = ({
 	return (
 		<div
 			className={classes.editText}
+			style={{
+				color : ((product === "premium") && (currentPageId === "frontpage")) && "#1c1c1c6c",
+			}}
 		>
 			<CKEditor
 				editor={ BalloonEditor }
