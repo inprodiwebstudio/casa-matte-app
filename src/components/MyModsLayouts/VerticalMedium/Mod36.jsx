@@ -20,31 +20,40 @@ const Mod39 = ({
 		<Flex
 			w="100%"
 			h="100%"
-			justify="flex-end"
-			align="flex-end"
 			pr="9%"
 			pb="7%"
+			justify="flex-end"
+			align="flex-end"
 		>
 			<Stack
-				w={"90%"}
-				align={isThumbNail ? "flex-end" : undefined}
-				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
+				w="90%"
+				mah="120px"
+				sx={{
+					overflow : "hidden",
+				}}
 			>
-				<Text
-					sizes={{
-						"chico"   : "38px",
-						"regular" : "42px",
-						"grande"  : "46px",
-					}}
-					typeText="title"
-					sheetNo={sheetNo}
-					letterSpacing="3px"
-					textShell={() => <TextShell.Title width="80%" align="flex-end" />}
-					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-					textNo={0}
-				/>
+				<Stack
+					w={"100%"}
+					h="fit-content"
+					align={isThumbNail ? "flex-end" : undefined}
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
+				>
+					<Text
+						sizes={{
+							"chico"   : "38px",
+							"regular" : "42px",
+							"grande"  : "46px",
+						}}
+						typeText="title"
+						sheetNo={sheetNo}
+						letterSpacing="3px"
+						textShell={() => <TextShell.Title width="80%" align="flex-end" />}
+						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+						textNo={0}
+					/>
+				</Stack>
 			</Stack>
 		</Flex>
 	);

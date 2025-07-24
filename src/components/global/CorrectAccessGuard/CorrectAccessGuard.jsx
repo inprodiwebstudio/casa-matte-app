@@ -451,7 +451,7 @@ const CorrectAccessGuard = () => {
 		}
 		if (photobookData?.meta?.status === "48") {
 			if (!photobookData?.meta?.id_pedido_hojas_extra) {
-				setStatusView("done");
+				setStatusView("continue");
 				return;
 			}
 			handlerAvailableExtra(photobookData?.meta?.id_pedido_hojas_extra);
