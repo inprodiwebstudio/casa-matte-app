@@ -13,7 +13,7 @@ const SpineCover = ({
 
 	const isLargePhotoBook = photoBookData?.sizePhotoBook === "grande";
 
-	const defaultSpineBook = `<p style="text-align: center;"><span style="font-size: ${isLargePhotoBook ? "28" : "18"}px; font-family: Aitana-Regular;">TÍTULO</span></p>`;
+	const defaultSpineBook = `<p style="text-align: center;"><span style="font-size: ${isLargePhotoBook ? "28" : "22"}px; font-family: Aitana-Regular;">TÍTULO</span></p>`;
 
 	const boundText = textInsertion(photoBookData?.bound, defaultSpineBook, true);
 
