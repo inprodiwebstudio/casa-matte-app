@@ -26,7 +26,7 @@ const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					width           : "0.02em",
 					height          : "100%",
 					position        : "absolute",
-					left            : "90%",
+					left            : "93%",
 					top             : "0",
 					backgroundColor : "white",
 				}}
@@ -39,9 +39,8 @@ const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					height          : "0.02em",
 					position        : "absolute",
 					left            : "0%",
-					top             : "0%",
+					top             : "7%",
 					backgroundColor : "white",
-					marginTop       : "0.5em",
 				}}
 			>
                 &nbsp;
@@ -52,9 +51,8 @@ const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					height          : "0.02em",
 					position        : "absolute",
 					left            : "0%",
-					top             : isInWorkSpace ? "89.2%" : "83%",
+					top             : "93%",
 					backgroundColor : "white",
-					marginTop       : "0.5em",
 				}}
 			>
 				&nbsp;
@@ -73,9 +71,9 @@ const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					width        : "100%",
 					position     : "absolute",
 					left         : "0%",
-					top          : isInWorkSpace ? "45%" : "50%",
-					paddingRight : "10%",
-					paddingLeft  : "15%",
+					top          : isInWorkSpace ? "47%" : "47%",
+					paddingRight : "14%",
+					paddingLeft  : "22%",
 				}}
 			>
 				<Stack
@@ -88,6 +86,7 @@ const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 				>
 					<Stack
 						w="100%"
+						mah={isInWorkSpace ? "56px" : "10px"}
 					>
 						<Text
 							sizes={{
@@ -107,6 +106,7 @@ const FrontMod5 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					</Stack>
 					<Stack
 						w="100%"
+						mah={isInWorkSpace ? "40px" : "10px"}
 					>
 						<Text
 							sizes={{

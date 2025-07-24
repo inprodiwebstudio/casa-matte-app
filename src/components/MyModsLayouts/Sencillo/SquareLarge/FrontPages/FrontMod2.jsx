@@ -26,7 +26,7 @@ const FrontMod2 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					width           : "0.02em",
 					height          : "100%",
 					position        : "absolute",
-					left            : "90%",
+					left            : "93%",
 					top             : "0",
 					backgroundColor : "white",
 				}}
@@ -39,9 +39,8 @@ const FrontMod2 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					height          : "0.02em",
 					position        : "absolute",
 					left            : "0%",
-					top             : "0%",
+					top             : "7%",
 					backgroundColor : "white",
-					marginTop       : "0.5em",
 				}}
 			>
                 &nbsp;
@@ -52,9 +51,8 @@ const FrontMod2 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					height          : "0.02em",
 					position        : "absolute",
 					left            : "0%",
-					top             : isInWorkSpace ? "89.2%" : "83%",
+					top             : "93%",
 					backgroundColor : "white",
-					marginTop       : "0.5em",
 				}}
 			>
 				&nbsp;
@@ -73,9 +71,9 @@ const FrontMod2 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					width        : "100%",
 					position     : "absolute",
 					left         : "0%",
-					top          : isInWorkSpace ? "11%" : "16%",
-					paddingLeft  : "15%",
-					paddingRight : "10%",
+					top          : isInWorkSpace ? "15%" : "16%",
+					paddingLeft  : "19%",
+					paddingRight : "11%",
 				}}
 			>
 				<Stack
@@ -87,7 +85,8 @@ const FrontMod2 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					align="center"
 				>
 					<Stack
-						w="95%"
+						w="100%"
+						mah={isInWorkSpace ? "56px" : "10px"}
 					>
 						<Text
 							sizes={{
@@ -105,7 +104,10 @@ const FrontMod2 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 							textNo={0}
 						/>
 					</Stack>
-					<Stack w="80%">
+					<Stack
+						w="80%"
+						mah={isInWorkSpace ? "40px" : "10px"}
+					>
 						<Text
 							sizes={{
 								"chico"   : "16px",

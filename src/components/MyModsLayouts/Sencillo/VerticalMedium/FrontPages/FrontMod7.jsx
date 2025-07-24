@@ -8,7 +8,7 @@ import Text              from "components/LayoutHandler/Text";
 //Own components
 
 const FrontMod7 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 28px; font-family: Aitana-Regular;'>TÍTULO GRANDE</span></p>";
 
 	return (
 		<Flex
@@ -23,7 +23,7 @@ const FrontMod7 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					width           : "0.02em",
 					height          : "100%",
 					position        : "absolute",
-					left            : "90%",
+					left            : "93%",
 					top             : "0",
 					backgroundColor : "white",
 				}}
@@ -36,9 +36,8 @@ const FrontMod7 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					height          : "0.02em",
 					position        : "absolute",
 					left            : "0%",
-					top             : "0%",
+					top             : "5%",
 					backgroundColor : "white",
-					marginTop       : "0.5em",
 				}}
 			>
                 &nbsp;
@@ -49,9 +48,8 @@ const FrontMod7 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					height          : "0.02em",
 					position        : "absolute",
 					left            : "0%",
-					top             : isInWorkSpace ? "89.2%" : "83%",
+					top             : "95%",
 					backgroundColor : "white",
-					marginTop       : "0.5em",
 				}}
 			>
 				&nbsp;
@@ -67,16 +65,18 @@ const FrontMod7 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 			</Stack>
 			<Stack
 				sx={{
-					width        : "100%",
-					position     : "absolute",
-					left         : "77%",
-					top          : isInWorkSpace ? "42%" : "16%",
-					paddingRight : "10%",
+					width         : "100%",
+					position      : "absolute",
+					left          : "0%",
+					paddingLeft   : "83%",
+					height        : "100%",
+					paddingTop    : "15%",
+					paddingBottom : "15%",
 				}}
 			>
 				<Stack
 					sx={{
-						width  : "100%",
+						width  : "fit-content",
 						height : "100%",
 					}}
 					spacing={!isInWorkSpace ? "0.1em" : "0px"}
@@ -84,6 +84,7 @@ const FrontMod7 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 				>
 					<Stack
 						w="100%"
+						h="100%"
 						sx={{
 							writingMode : "vertical-rl",
 							transform   : "rotate(180deg)",
@@ -91,9 +92,9 @@ const FrontMod7 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					>
 						<Text
 							sizes={{
-								"chico"   : "38px",
-								"regular" : "42px",
-								"grande"  : "44px",
+								"chico"   : "20px",
+								"regular" : "28px",
+								"grande"  : "32px",
 							}}
 							isFront={true}
 							align="center"

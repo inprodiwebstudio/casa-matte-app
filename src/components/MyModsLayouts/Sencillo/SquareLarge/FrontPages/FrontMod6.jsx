@@ -26,7 +26,7 @@ const FrontMod6 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					width           : "0.02em",
 					height          : "100%",
 					position        : "absolute",
-					left            : "90%",
+					left            : "93%",
 					top             : "0",
 					backgroundColor : "white",
 				}}
@@ -39,9 +39,8 @@ const FrontMod6 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					height          : "0.02em",
 					position        : "absolute",
 					left            : "0%",
-					top             : "0%",
+					top             : "7%",
 					backgroundColor : "white",
-					marginTop       : "0.5em",
 				}}
 			>
                 &nbsp;
@@ -52,9 +51,8 @@ const FrontMod6 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					height          : "0.02em",
 					position        : "absolute",
 					left            : "0%",
-					top             : isInWorkSpace ? "89.2%" : "83%",
+					top             : "93%",
 					backgroundColor : "white",
-					marginTop       : "0.5em",
 				}}
 			>
 				&nbsp;
@@ -73,9 +71,9 @@ const FrontMod6 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					width        : "100%",
 					position     : "absolute",
 					left         : "0%",
-					top          : isInWorkSpace ? "10%" : "16%",
-					paddingRight : "10%",
-					paddingLeft  : "15%",
+					top          : isInWorkSpace ? "13%" : "17%",
+					paddingRight : "15%",
+					paddingLeft  : "23%",
 				}}
 			>
 				<Stack
@@ -112,9 +110,9 @@ const FrontMod6 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					width        : "100%",
 					position     : "absolute",
 					left         : "0%",
-					top          : isInWorkSpace ? "87%" : "85%",
-					paddingRight : "10%",
-					paddingLeft  : "15%",
+					top          : isInWorkSpace ? "84%" : "85%",
+					paddingRight : "15%",
+					paddingLeft  : "23%",
 				}}
 			>
 				<Stack

@@ -9,9 +9,9 @@ import { TextShell }     from "core/components";
 //Own components
 
 const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 28px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 10px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex
@@ -26,7 +26,7 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					width           : "0.02em",
 					height          : "100%",
 					position        : "absolute",
-					left            : "90%",
+					left            : "93%",
 					top             : "0",
 					backgroundColor : "white",
 				}}
@@ -39,9 +39,8 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					height          : "0.02em",
 					position        : "absolute",
 					left            : "0%",
-					top             : "0%",
+					top             : "7%",
 					backgroundColor : "white",
-					marginTop       : "0.5em",
 				}}
 			>
 				&nbsp;
@@ -52,9 +51,8 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					height          : "0.02em",
 					position        : "absolute",
 					left            : "0%",
-					top             : isInWorkSpace ? "89.2%" : "83%",
+					top             : "93%",
 					backgroundColor : "white",
-					marginTop       : "0.5em",
 				}}
 			>
 				&nbsp;
@@ -73,8 +71,8 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					width        : "100%",
 					position     : "absolute",
 					left         : "0%",
-					top          : "76%",
-					paddingLeft  : "15%",
+					top          : "77%",
+					paddingLeft  : "18%",
 					paddingRight : "10%",
 				}}
 			>
@@ -87,13 +85,14 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					align="center"
 				>
 					<Stack
-						w="95%"
+						w="100%"
+						mah={isInWorkSpace ? "56px" : "10px"}
 					>
 						<Text
 							sizes={{
-								"chico"   : "38px",
-								"regular" : "42px",
-								"grande"  : "44px",
+								"chico"   : "20px",
+								"regular" : "28px",
+								"grande"  : "34px",
 							}}
 							isFront={true}
 							align="center"
@@ -105,12 +104,15 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 							textNo={0}
 						/>
 					</Stack>
-					<Stack w="80%">
+					<Stack
+						w="80%"
+						mah={isInWorkSpace ? "40px" : "10px"}
+					>
 						<Text
 							sizes={{
-								"chico"   : "16px",
-								"regular" : "18px",
-								"grande"  : "20px",
+								"chico"   : "5px",
+								"regular" : "10px",
+								"grande"  : "15px",
 							}}
 							isFront={true}
 							align="center"
