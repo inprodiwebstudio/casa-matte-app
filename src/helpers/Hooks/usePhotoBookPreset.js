@@ -51,7 +51,7 @@ export const usePhotoBookPreset = () => {
 			bound          : meta?.encuadernado ?? "",
 			pasta          : meta?.pasta ?? "",
 			maxRangePages  : numberOfPages,
-			availableSpine : !meta?.grabado_en_lomo ? false : true,
+			availableSpine : (meta?.grabado_en_lomo === "Sin grabado") ? false : true,
 			cover,
 			engraving      : handlerEngravingData(),
 			pages          : convertToObject(generatePages(numberOfPages)),

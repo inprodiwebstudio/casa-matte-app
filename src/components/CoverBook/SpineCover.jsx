@@ -8,10 +8,12 @@ const SpineCover = ({
 	isInPaginator,
 	isThumbNail,
 }) => {
-	const defaultSpineBook = "<p style='text-align: center;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
-
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 	const availableSpine = useSelector((state) => state.workSpaceSlice.data.availableSpine, shallowEqual);
+
+	const isLargePhotoBook = photoBookData?.sizePhotoBook === "grande";
+
+	const defaultSpineBook = `<p style="text-align: center;"><span style="font-size: ${isLargePhotoBook ? "28" : "18"}px; font-family: Aitana-Regular;">TÍTULO</span></p>`;
 
 	const boundText = textInsertion(photoBookData?.bound, defaultSpineBook, true);
 

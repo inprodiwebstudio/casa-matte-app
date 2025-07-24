@@ -36,6 +36,8 @@ const CoverBook = ({
 		return <></>;
 	};
 
+	console.log(coverData?.material);
+
 	return (
 		<Group
 			spacing={0}
@@ -52,14 +54,15 @@ const CoverBook = ({
 				h="100%"
 				spacing={0}
 				style={{
-					position        : "absolute",
-					top             : 0,
-					left            : 0,
-					right           : 0,
-					bottom          : 0,
-					backgroundImage : coverData && `url(${frontThemesTextures[coverData?.material][coverData?.color].textureUrl})`,
-					backgroundSize  : "cover",
-					opacity         : 0.2,
+					position         : "absolute",
+					top              : 0,
+					left             : 0,
+					right            : 0,
+					bottom           : 0,
+					backgroundImage  : coverData && `url(${frontThemesTextures[coverData?.material][coverData?.color].textureUrl})`,
+					backgroundSize   : (coverData?.material === "CURPIEL") ? "cover" : "contain",
+					backgroundRepeat : coverData?.material === "CURPIEL" ? "no-repeat" : "repeat",
+					opacity          : 0.2,
 				}}
 			>
 				&nbsp;

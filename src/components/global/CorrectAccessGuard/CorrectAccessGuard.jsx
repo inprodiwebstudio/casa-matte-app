@@ -401,7 +401,7 @@ const CorrectAccessGuard = () => {
 
 		dispatch(workSpaceSlice.actions.insertData({
 			...parseJSON,
-			availableSpine : !photoBookConfigData?.meta?.grabado_en_lomo ? false : true,
+			availableSpine : (photoBookConfigData?.meta?.grabado_en_lomo === "Sin grabado") ? false : true,
 			cover          : parseJSON?.cover ? parseJSON?.cover : cover,
 			engraving      : handlerEngravingData(),
 			modified       : photoBookConfigData?.modified ?? undefined,

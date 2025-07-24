@@ -201,89 +201,89 @@ const frontThemesTextures = {
 	CURPIEL : {
 		Marfil : {
 			color      : "#A79E8C",
-			textureUrl : pielTexture,
+			textureUrl : curlPielTexture,
 		},
 		Avena : {
 			color      : "#c8bdac",
-			textureUrl : pielTexture,
+			textureUrl : curlPielTexture,
 		},
 		Topo : {
 			color      : "#918575",
-			textureUrl : pielTexture,
+			textureUrl : curlPielTexture,
 		},
 		"Gris claro" : {
 			color      : "#8D8E8A",
-			textureUrl : pielTexture,
+			textureUrl : curlPielTexture,
 		},
 		"Girs obscuro" : {
 			color      : "#48443F",
-			textureUrl : pielTexture,
+			textureUrl : curlPielTexture,
 		},
 		Negro : {
 			color      : "#232323",
-			textureUrl : pielTexture,
+			textureUrl : curlPielTexture,
 		},
 		"Azul marino" : {
 			color      : "#28384E",
-			textureUrl : pielTexture,
+			textureUrl : curlPielTexture,
 		},
 		Tabaco : {
 			color      : "#3A2519",
-			textureUrl : pielTexture,
+			textureUrl : curlPielTexture,
 		},
 		Chocolate : {
 			color      : "#593E29",
-			textureUrl : pielTexture,
+			textureUrl : curlPielTexture,
 		},
 		Arcilla : {
 			color      : "#532722",
-			textureUrl : pielTexture,
+			textureUrl : curlPielTexture,
 		},
 		Ladrillo : {
 			color      : "#7A342A",
-			textureUrl : pielTexture,
+			textureUrl : curlPielTexture,
 		},
 		Camello : {
 			color      : "#7E552C",
-			textureUrl : pielTexture,
+			textureUrl : curlPielTexture,
 		},
 	},
 	"PIEL VEGANA" : {
 		Marfil : {
 			color      : "#A79E8C",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 		Topo : {
 			color      : "#897D78",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 		"Gris claro" : {
 			color      : "#8F8F8F",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 		"Gris obscuro" : {
 			color      : "#65676E",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 		Negro : {
 			color      : "#323232",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 		Tabaco : {
 			color      : "#514A45",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 		Chocolate : {
 			color      : "#593833",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 		Camello : {
 			color      : "#845143",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 		"Azul rey" : {
 			color      : "#475A6D",
-			textureUrl : curlPielTexture,
+			textureUrl : pielTexture,
 		},
 	},
 };
