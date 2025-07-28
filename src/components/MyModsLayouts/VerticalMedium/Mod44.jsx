@@ -6,7 +6,7 @@ import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
 
-const Mod47 = ({
+const Mod44 = ({
 	data,
 	isInWorkSpace,
 	sheetNo,
@@ -16,9 +16,9 @@ const Mod47 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 28px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Toledo</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Índice 1</span></p><p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Índice 2</span></p><p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Índice 3</span></p><p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Índice 4</span></p>";
 
 
 	return (
@@ -32,14 +32,14 @@ const Mod47 = ({
 			<Stack
 				w="50%"
 				mah="80%"
-				spacing="0.3em"
+				spacing={isInWorkSpace ? "20px" : "0.1em"}
 				aria-hidden
 				sx={{
 					overflow : "hidden",
 				}}
 			>
 				<Stack
-					spacing="5px"
+					spacing={isInWorkSpace ? "15px" : "0.1em"}
 					w="100%"
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
@@ -49,7 +49,8 @@ const Mod47 = ({
 							"regular" : "42px",
 							"grande"  : "46px",
 						}}
-						letterSpacing="5px"
+						letterSpacing="3px"
+						typeText="subtitle"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.Title width="100%" align="center" />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
@@ -58,7 +59,7 @@ const Mod47 = ({
 						textNo={0}
 					/>
 					<Center>
-						<DividerLayout long="0.4em" position="v" />
+						<DividerLayout long={isInWorkSpace ? "30px" : "0.35em"} position="v" />
 					</Center>
 				</Stack>
 				<div
@@ -71,6 +72,7 @@ const Mod47 = ({
 							"grande"  : "16px",
 						}}
 						align="center"
+						typeText="index"
 						sheetNo={sheetNo}
 						gapSpacing="12px"
 						textShell={() => <TextShell.BodyIndices align="center" />}
@@ -85,4 +87,4 @@ const Mod47 = ({
 	);
 };
 
-export default Mod47;
+export default Mod44;

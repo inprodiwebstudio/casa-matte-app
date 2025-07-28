@@ -6,17 +6,18 @@ import "./DividerLayout.scss";
 const DividerLayout = ({
 	position="h",
 	long="100%",
+	weight="0.01em",
 }) => {
 	const handlerPosition = () => {
 		if (position === "h") {
 			return {
 				width  : long,
-				height : "0.01em",
+				height : weight,
 			};
 		}
 		if (position === "v") {
 			return {
-				width  : "0.01em",
+				width  : weight,
 				height : long,
 			};
 		}

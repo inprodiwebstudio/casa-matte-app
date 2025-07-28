@@ -4,6 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "proxy": "https://casamatte.wip-inprodi.com/",
+  "engines": {
+    "node": "18.12.0",
+    "yarn": ">=3.0.0"
+  },
   "scripts": {
     "start": "vite",
     "debug": "vite --debug --host 0.0.0.0",
@@ -27,11 +31,16 @@
     "@ckeditor/ckeditor5-react": "^5.1.0",
     "@ckeditor/ckeditor5-theme-lark": "^36.0.1",
     "@ckeditor/vite-plugin-ckeditor5": "^0.1.1",
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/modifiers": "^9.0.0",
+    "@dnd-kit/sortable": "^10.0.0",
     "@hookform/resolvers": "^3.0.0",
     "@mantine/core": "^5.10.1",
     "@mantine/hooks": "^5.10.1",
     "@mantine/modals": "^5.10.1",
     "@mantine/notifications": "^5.10.1",
+    "@pqina/pintura": "^8.92.16",
+    "@pqina/react-pintura": "^9.0.4",
     "@react-pdf/renderer": "^3.1.8",
     "@reduxjs/toolkit": "^1.8.5",
     "axios": "^1.2.1",
@@ -51,6 +60,9 @@
     "jszip": "^3.10.1",
     "localforage": "^1.10.0",
     "path": "^0.12.7",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^5.2.133",
+    "pdfjs-lib": "^0.0.149",
     "prop-types": "^15.8.1",
     "qs": "^6.11.0",
     "react": "^18.2.0",
@@ -61,7 +73,7 @@
     "react-filerobot-image-editor": "^4.3.7",
     "react-hook-form": "^7.43.7",
     "react-image-file-resizer": "^0.4.8",
-    "react-pdf-html": "^1.1.18",
+    "react-pdf-html": "1.1.18",
     "react-perfect-scrollbar": "^1.5.8",
     "react-redux": "^8.0.2",
     "react-router": "^6.4.3",
@@ -70,7 +82,7 @@
     "react-spinners": "^0.13.7",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
-    "sass": "^1.54.0",
+    "sass": "1.54.0",
     "styled-components": "^5.3.6",
     "yup": "^1.0.2"
   },
@@ -94,5 +106,6 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
-  }
+  },
+  "packageManager": "yarn@4.9.2"
 }

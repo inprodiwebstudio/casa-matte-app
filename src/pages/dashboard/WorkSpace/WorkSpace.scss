@@ -151,7 +151,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 90px;
+		font-size: 90px !important;
 
 		@include laptop {
 			font-size: 90px;
@@ -305,6 +305,49 @@
 				}
 			}
 
+			&.horizontal-mediano-layflat-workSpace {
+				height: 576px;
+				transform: scale(0.75, 0.75);
+
+				@include laptop {
+					margin-left: 5px;
+					transform: scale(0.54, 0.54);
+					z-index: 1;
+				}
+	
+				@include big-laptop {
+					margin-right: 30px;
+					transform: scale(0.65, 0.65);
+					z-index: 1;
+				}
+	
+				@include big-tablet {
+					margin-right: 45px;
+					transform: scale(0.45, 0.45);
+					z-index: 1;
+				}
+
+				&.onePage {
+					transform: scale(0.95, 0.95);
+					z-index: 1;
+
+					@include big-laptop {
+						transform: scale(0.95, 0.95);
+						z-index: 1;
+					}
+
+					@include laptop {
+						transform: scale(0.7, 0.7);
+						z-index: 1;
+					}
+
+					@include big-tablet {
+						transform: scale(0.65, 0.65);
+						z-index: 1;
+					}
+				}
+			}
+
 			&.vertical-mediano-workSpace {
 				height: 792px;
 				transform: scale(0.8, 0.8);
@@ -363,6 +406,26 @@
 						transform: scale(0.7, 0.7);
 						z-index: 1;
 					}
+				}
+			}
+
+			&.cuadrado-mediano-workSpace {
+				transform: scale(0.55, 0.55);
+				height: 850px;
+
+				@include laptop {
+					transform: scale(0.40, 0.40);
+					z-index: 1;
+				}
+	
+				@include big-laptop {
+					transform: scale(0.52, 0.52);
+					z-index: 1;
+				}
+	
+				@include big-tablet {
+					transform: scale(0.42, 0.42);
+					z-index: 1;
 				}
 			}
 

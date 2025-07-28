@@ -3,16 +3,17 @@ import { convertToArray, convertToObject, History, isValidArray } from "helpers"
 
 const initialState = {
 	data : {
-		product        : "",
-		productName    : "",
-		format         : "",
-		sizePhotoBook  : "",
-		sizeDimentions : "",
-		pasta          : "",
-		projectTittle  : "",
-		modified       : undefined,
-		orderId        : undefined,
-		frontPage      : {
+		product            : "",
+		productName        : "",
+		format             : "",
+		sizePhotoBook      : "",
+		sizeDimentions     : "",
+		pasta              : "",
+		projectTittle      : "",
+		currentTextsInPage : {},
+		modified           : undefined,
+		orderId            : undefined,
+		frontPage          : {
 			id     : "FrontLayout",
 			sheet1 : {
 				layoutType : "",
@@ -189,8 +190,10 @@ const initialState = {
 			},
 		},
 	},
-	initialData : undefined,
-	history     : {
+	textsImgs       : undefined,
+	currentPageData : undefined,
+	initialData     : undefined,
+	history         : {
 		undo    : [],
 		redo    : [],
 		current : null,
@@ -204,16 +207,74 @@ const initialState = {
 			value : "all",
 		},
 	},
-	loading   : false,
-	isPreview : false,
+	loading        : false,
+	statusViewPage : "",
 };
 
 export const workSpaceSlice = createSlice({
 	name     : "workspace",
 	initialState,
 	reducers : {
-		togglePreview : (state) => {
-			state.isPreview = !state.isPreview;
+		changeStatusViewPage : (state, {payload}) => {
+			state.statusViewPage = payload;
+		},
+		changePageContainer : (state, {payload}) => {
+			const { originPageKey, destinationPageKey } = payload;
+
+			const abstractIdPages = (pageKey) => {
+				return {
+					pageId  : pageKey.split("-")[0],
+					sheetId : pageKey.split("-")[1],
+				};
+			};
+
+			const originAndDestinationKeys = {
+				origin : {
+					pageId  : abstractIdPages(originPageKey).pageId,
+					sheetId : abstractIdPages(originPageKey).sheetId,
+				},
+				destination : {
+					pageId  : abstractIdPages(destinationPageKey).pageId,
+					sheetId : abstractIdPages(destinationPageKey).sheetId,
+				},
+			};
+
+			const newDataPagesInsert = {
+				originData : {
+					... state.data.pages[originAndDestinationKeys.origin.pageId][originAndDestinationKeys.origin.sheetId],
+				},
+				destinationData : {
+					... state.data.pages[originAndDestinationKeys.destination.pageId][originAndDestinationKeys.destination.sheetId],
+				},
+			};
+
+			const newDataPages = {
+				...state.data,
+				pages : {
+					...state.data.pages,
+					[originAndDestinationKeys.origin.pageId] : {
+						...state.data.pages[originAndDestinationKeys.origin.pageId],
+						[originAndDestinationKeys.origin.sheetId] : {
+							...state.data.pages[originAndDestinationKeys.origin.pageId][originAndDestinationKeys.origin.sheetId],
+							layoutType : newDataPagesInsert.destinationData.layoutType,
+							photos     : newDataPagesInsert.destinationData.photos,
+							text       : newDataPagesInsert.destinationData.text ?? {0 : ""},
+						},
+					},
+				},
+			};
+
+			newDataPages.pages[originAndDestinationKeys.destination.pageId] = {
+				...newDataPages.pages[originAndDestinationKeys.destination.pageId],
+				[originAndDestinationKeys.destination.sheetId] : {
+					...newDataPages.pages[originAndDestinationKeys.destination.pageId][originAndDestinationKeys.destination.sheetId],
+					layoutType : newDataPagesInsert.originData.layoutType,
+					photos     : newDataPagesInsert.originData.photos,
+					text       : newDataPagesInsert.originData.text ?? {0 : ""},
+				},
+			};
+
+			state.data = newDataPages;
 		},
 		setSelectePageData : (state, {payload}) => {
 			state.pageDataSelected = payload;
@@ -239,6 +300,17 @@ export const workSpaceSlice = createSlice({
 		},
 		clearSelectedPageData : (state, {payload}) => {
 			state.pageDataSelected = null;
+		},
+		setCurrentPageData : (state, {payload}) => {
+			state.currentPageData = payload;
+		},
+		setTextCurrentPage : (state, {payload}) => {
+			const {sheetNo, layoutNo, text} = payload;
+			state.currentPageData[`sheet${sheetNo}`].text[layoutNo] = text;
+		},
+		changePageData : (state, {payload}) => {
+			const { pageKey, newDataPage } = payload;
+			state.data.pages[pageKey] = newDataPage;
 		},
 		newListPages : (state, {payload}) => {
 			state.data.pages = {...payload};
@@ -372,6 +444,41 @@ export const workSpaceSlice = createSlice({
 			state.history.undo = history.undoStack;
 			state.history.current = history.currentAction;
 		},
+		addSpread : (state) => {
+			const cloneDataPages = {...state.data.pages};
+			const currentListOfPages = convertToArray(cloneDataPages);
+			const currentIndexPage = currentListOfPages.findIndex((page) => page.id === state.currentPageData.id);
+			const slicePagesToReorder = currentListOfPages.slice(currentIndexPage + 1, currentListOfPages.length);
+			slicePagesToReorder.unshift({
+				id     : slicePagesToReorder[0].id,
+				sheet1 : {
+					pageNo     : slicePagesToReorder[0].id.split("page")[1],
+					layoutType : "",
+					text       : {},
+					photos     : {},
+				},
+				sheet2 : {
+					pageNo     : slicePagesToReorder[0].id.split("page")[1],
+					layoutType : "",
+					text       : {},
+					photos     : {},
+				},
+			});
+			const pagesReordered = slicePagesToReorder.map((pageData, index) => {
+				if (index === 0) {
+					return pageData;
+				}
+				return {
+					...pageData,
+					id : `page${Number(pageData.id.split("page")[1]) + 1}`,
+				};
+			});
+			const pagesBeforeInsert = currentListOfPages.slice(0, currentIndexPage + 1);
+			const finalPages = [...pagesBeforeInsert, ...pagesReordered];
+			const newPagesObject = convertToObject(finalPages);
+
+			state.data.pages = newPagesObject;
+		},
 		deletePage : (state, {payload}) => {
 			const minPages = state.data.minPages;
 			if (state.data.numberOfPages === minPages) {
@@ -504,16 +611,64 @@ export const workSpaceSlice = createSlice({
 			state.history.undo = history.undoStack;
 			state.history.current = history.currentAction;
 		},
-		removePhotoById : (state, {payload}) => {
-			const listOfCoordinatesPhotos = payload;
-			listOfCoordinatesPhotos.forEach(photoCoordinate => {
-				const coordinateList = photoCoordinate.split(".");
-				const pageId = coordinateList[0];
-				const sheetNo = coordinateList[1];
-				const noPhoto = coordinateList[2];
-				state.data.pages[pageId][sheetNo].photos[noPhoto].id = "";
-				state.data.pages[pageId][sheetNo].photos[noPhoto].url = "";
+		removePhotosDeleted : (state, {payload}) => {
+			const { imagesIds } = payload;
+			const cloneDataPages = {...state.data.pages};
+			let stringyDataPages = JSON.stringify(cloneDataPages);
+
+			imagesIds.forEach(id => {
+				const regex = new RegExp(id, "g");
+				stringyDataPages = stringyDataPages.replace(regex, "");
 			});
+
+			const dataPagesLeaveImages = JSON.parse(stringyDataPages);
+			const listOfPagesLeaveImages = [...convertToArray(dataPagesLeaveImages)];
+
+			const parseDeleteImagesSheet = (sheetData) => {
+				const listOfPhotos = convertToArray(sheetData?.photos);
+
+				if (isValidArray(listOfPhotos)) {
+					const isNotAvailablePhotos = (listOfPhotos.length === 1) && (!listOfPhotos[0]?.id && !listOfPhotos[0]?.url);
+					if (isNotAvailablePhotos) {
+						return sheetData;
+					}
+					const newListOfPhotos = listOfPhotos.map((photo) => {
+						if ((photo?.id === "") && photo?.url) {
+							return {
+								...photo,
+								url            : "",
+								urlPhotoEdited : "",
+							};
+						}
+						return {...photo};
+					});
+					const newObjectPhotos = newListOfPhotos.reduce((acc, photo, index) => {
+						acc[index] = photo;
+						return acc;
+					}, {});
+					return {
+						...sheetData,
+						photos : newObjectPhotos,
+					};
+				}
+
+				return sheetData;
+			};
+
+			const listOfPagesDeletedImages = listOfPagesLeaveImages.map((pageData) => {
+				return {
+					...pageData,
+					sheet1 : parseDeleteImagesSheet(pageData?.sheet1),
+					...(pageData?.sheet2 && {sheet2 : parseDeleteImagesSheet(pageData?.sheet2)}),
+				};
+			});
+
+			const newPagesDataDeletedImages = convertToObject(listOfPagesDeletedImages);
+
+			state.data = {
+				...state.data,
+				pages : newPagesDataDeletedImages,
+			};
 		},
 		autoFillImages : (state, {payload}) => {
 			const newData = {FrontLayout : {...state.data.frontPage}, ...state?.data?.pages};
@@ -581,9 +736,200 @@ export const workSpaceSlice = createSlice({
 			const myPhotos = Object.assign({}, parseToListImages);
 			const myText = Object.assign({}, parseToListText);
 			const isFullBook = () => {
-				switch (`${cloneData?.sizePhotoBook}-${cloneData?.format}`) {
+				switch (`${cloneData?.product}-${cloneData?.sizePhotoBook}-${cloneData?.format}`) {
 					case "grande-vertical":
 						return ["FrontLayout"].includes(payload.layout);
+					case "layflat-mediano-vertical":
+						return [
+							"FrontLayout",
+							"Mod33",
+							"Mod34",
+							"Mod35",
+							"Mod36",
+							"Mod37",
+							"Mod38",
+							"Mod39",
+							"Mod40",
+							"Mod41",
+							"Mod42",
+							"Mod43",
+							"Mod44",
+							"Mod45",
+							"Mod46",
+							"Mod47",
+							"Mod48",
+							"Mod49",
+							"Mod50",
+							"Mod51",
+							"Mod52",
+							"Mod53",
+							"Mod54",
+							"Mod55",
+							"Mod56",
+							"Mod57",
+							"Mod58",
+							"Mod59",
+							"Mod60",
+							"Mod61",
+							"Mod62",
+							"Mod63",
+							"Mod64",
+						].includes(payload.layout);
+					case "layflat-mediano-cuadrado":
+						return [
+							"FrontLayout",
+							"Mod44",
+							"Mod45",
+							"Mod46",
+							"Mod47",
+							"Mod48",
+							"Mod49",
+							"Mod50",
+							"Mod51",
+							"Mod52",
+							"Mod53",
+							"Mod54",
+							"Mod55",
+							"Mod56",
+							"Mod57",
+							"Mod58",
+							"Mod59",
+							"Mod60",
+							"Mod61",
+							"Mod62",
+							"Mod63",
+							"Mod64",
+							"Mod65",
+							"Mod66",
+							"Mod67",
+							"Mod68",
+							"Mod69",
+							"Mod70",
+							"Mod71",
+							"Mod72",
+							"Mod73",
+							"Mod74",
+							"Mod75",
+							"Mod76",
+							"Mod77",
+							"Mod78",
+						].includes(payload.layout);
+					case "layflat-grande-cuadrado":
+						return [
+							"FrontLayout",
+							"Mod44",
+							"Mod45",
+							"Mod46",
+							"Mod47",
+							"Mod48",
+							"Mod49",
+							"Mod50",
+							"Mod51",
+							"Mod52",
+							"Mod53",
+							"Mod54",
+							"Mod55",
+							"Mod56",
+							"Mod57",
+							"Mod58",
+							"Mod59",
+							"Mod60",
+							"Mod61",
+							"Mod62",
+							"Mod63",
+							"Mod64",
+							"Mod65",
+							"Mod66",
+							"Mod67",
+							"Mod68",
+							"Mod69",
+							"Mod70",
+							"Mod71",
+							"Mod72",
+							"Mod73",
+							"Mod74",
+							"Mod75",
+							"Mod76",
+							"Mod77",
+							"Mod78",
+						].includes(payload.layout);
+					case "layflat-chico-cuadrado":
+						return [
+							"FrontLayout",
+							"Mod44",
+							"Mod45",
+							"Mod46",
+							"Mod47",
+							"Mod48",
+							"Mod49",
+							"Mod50",
+							"Mod51",
+							"Mod52",
+							"Mod53",
+							"Mod54",
+							"Mod55",
+							"Mod56",
+							"Mod57",
+							"Mod58",
+							"Mod59",
+							"Mod60",
+							"Mod61",
+							"Mod62",
+							"Mod63",
+							"Mod64",
+							"Mod65",
+							"Mod66",
+							"Mod67",
+							"Mod68",
+							"Mod69",
+							"Mod70",
+							"Mod71",
+							"Mod72",
+							"Mod73",
+							"Mod74",
+							"Mod75",
+							"Mod76",
+							"Mod77",
+							"Mod78",
+						].includes(payload.layout);
+					case "layflat-mediano-horizontal":
+						return [
+							"FrontLayout",
+							"Mod32",
+							"Mod33",
+							"Mod34",
+							"Mod35",
+							"Mod36",
+							"Mod37",
+							"Mod38",
+							"Mod39",
+							"Mod40",
+							"Mod41",
+							"Mod42",
+							"Mod43",
+							"Mod44",
+							"Mod45",
+							"Mod46",
+							"Mod47",
+							"Mod48",
+							"Mod49",
+							"Mod50",
+							"Mod51",
+							"Mod52",
+							"Mod53",
+							"Mod54",
+							"Mod55",
+							"Mod56",
+							"Mod57",
+							"Mod57",
+							"Mod58",
+							"Mod59",
+							"Mod60",
+							"Mod61",
+							"Mod62",
+							"Mod63",
+							"Mod64",
+						].includes(payload.layout);
 					case "grande-cuadrado" :
 						return ["FrontLayout"].includes(payload.layout);
 				}
@@ -639,6 +985,10 @@ export const workSpaceSlice = createSlice({
 			history.addToUndoStack(undoNewData);
 			state.history.undo = history.undoStack;
 			state.history.current = history.currentAction;
+		},
+		addTextImgs : (state, {payload}) => {
+			const { textImgs } = payload;
+			state.textsImgs = textImgs;
 		},
 		undo : (state, {payload}) => {
 			const history = new History();

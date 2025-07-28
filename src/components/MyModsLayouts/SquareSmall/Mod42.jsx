@@ -24,7 +24,7 @@ const Mod42 = ({
 		>
 			<Stack
 				mah="70%"
-				w="65%"
+				w="60%"
 				aria-hidden={true}
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
@@ -34,6 +34,7 @@ const Mod42 = ({
 						"regular" : "10px",
 						"grande"  : "13px",
 					}}
+					typeText="body"
 					lineHeight="15px"
 					align="center"
 					letterSpacing={"1px"}

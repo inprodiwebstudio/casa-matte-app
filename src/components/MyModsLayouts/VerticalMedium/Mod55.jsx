@@ -6,7 +6,7 @@ import { textInsertion }     from "helpers";
 //Own components
 
 
-const Mod56 = ({
+const Mod55 = ({
 	data,
 	isInWorkSpace,
 	sheetNo,
@@ -16,7 +16,7 @@ const Mod56 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 16px; font-family: JosefinSans-Light;'>SANTIAGO</span></p>";
+	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 16px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
 	return (
 		<Flex
@@ -86,4 +86,4 @@ const Mod56 = ({
 	);
 };
 
-export default Mod56;
+export default Mod55;

@@ -6,7 +6,7 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod53 = ({
+const Mod51 = ({
 	data,
 	isInWorkSpace,
 	sheetNo,
@@ -16,20 +16,20 @@ const Mod53 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 38px; font-family: JosefinSans-Light;'>SANTIAGO</span></p>";
+	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 38px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex
-			p="8%"
+			p="11%"
 			pl="4%"
 			pr="4%"
 			w="100%"
 			h="100%"
 			justify="center"
 			align="center"
-			gap="0.5em"
+			gap={isInWorkSpace ? "11%" : "0.3em"}
 			direction="column"
 		>
 			<Stack
@@ -67,6 +67,7 @@ const Mod53 = ({
 				spacing="0.07em"
 				w="50%"
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
+				h="fit-content"
 			>
 				<div>
 					<Text
@@ -90,4 +91,4 @@ const Mod53 = ({
 	);
 };
 
-export default Mod53;
+export default Mod51;

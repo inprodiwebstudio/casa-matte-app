@@ -6,7 +6,7 @@ import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
 
-const Mod45 = ({
+const Mod42 = ({
 	data,
 	isInWorkSpace,
 	sheetNo,
@@ -15,7 +15,7 @@ const Mod45 = ({
 	pageNo,
 	modLayout,
 }) => {
-	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>MAMÁ</span></p>";
+	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
 	const defaultText02 = "<p style='text-align: justify;'><span style='font-size: 12px; font-family: JosefinSans-Light;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam.</span></p>";
 
@@ -28,14 +28,14 @@ const Mod45 = ({
 			align="center"
 		>
 			<Stack
-				w="54%"
+				w="42%"
 				mah="70%"
-				spacing="0.15em"
+				spacing={isInWorkSpace ? "16px" : "0.15em"}
 				aria-hidden
 			>
 				<Flex
 					direction="column"
-					gap="0.15em"
+					gap={isInWorkSpace ? "12px" : "0.1em"}
 					justify="flex-start"
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
@@ -54,7 +54,7 @@ const Mod45 = ({
 						isThumbNail={isThumbNail}
 						textNo={0}
 					/>
-					<DividerLayout long="20%" position="h" />
+					<DividerLayout long={isInWorkSpace ? "9%" : "20%"} position="h" />
 				</Flex>
 				<Flex
 					justify="flex-start"
@@ -69,7 +69,7 @@ const Mod45 = ({
 						}}
 						align="justify"
 						sheetNo={sheetNo}
-						letterSpacing="0.5px"
+						letterSpacing="0.2px"
 						lineHeight="16px"
 						textShell={() => <TextShell.BodyParagraph align="flex-start" />}
 						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
@@ -83,4 +83,4 @@ const Mod45 = ({
 	);
 };
 
-export default Mod45;
+export default Mod42;

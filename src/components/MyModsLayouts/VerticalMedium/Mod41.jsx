@@ -6,7 +6,7 @@ import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
 
-const Mod44 = ({
+const Mod41 = ({
 	data,
 	isInWorkSpace,
 	sheetNo,
@@ -15,22 +15,23 @@ const Mod44 = ({
 	pageNo,
 	modLayout,
 }) => {
-	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 14px; font-family: Aitana-Regular;'>MAMÁ</span></p>";
+	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 15px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultText02 = "<p style='text-align: justify;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam.</span></p>";
+	const defaultText02 = "<p style='text-align: justify;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam.</span></p>";
 
 	return (
 		<Flex
-			p="8%"
+			pr="9%"
+			pb="9%"
 			w="100%"
 			h="100%"
 			justify="flex-end"
 			align="flex-end"
 		>
 			<Stack
-				w="57%"
+				w="50%"
 				mah="75%"
-				spacing="0.15em"
+				spacing="0.17em"
 				aria-hidden
 				sx={{
 					overflow : "hidden !important",
@@ -38,7 +39,7 @@ const Mod44 = ({
 			>
 				<Flex
 					direction="column"
-					gap="0px"
+					gap={isInWorkSpace ? "10px" : "0.1em"}
 					justify="flex-start"
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
@@ -49,6 +50,7 @@ const Mod44 = ({
 							"grande"  : "16px",
 						}}
 						align="left"
+						typeText="subtitle"
 						letterSpacing="1.7px"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.SubTitle width="50%" align="flex-start" />}
@@ -57,7 +59,10 @@ const Mod44 = ({
 						isThumbNail={isThumbNail}
 						textNo={0}
 					/>
-					<DividerLayout long="20%" position="h" />
+					<DividerLayout
+						long={isInWorkSpace ? "10%" : "15%"}
+						position="h"
+					/>
 				</Flex>
 				<Flex
 					justify="flex-start"
@@ -74,6 +79,7 @@ const Mod44 = ({
 							"grande"  : "13px",
 						}}
 						align="justify"
+						typeText="body"
 						lineHeight="16px"
 						sheetNo={sheetNo}
 						letterSpacing="0.5px"
@@ -89,4 +95,4 @@ const Mod44 = ({
 	);
 };
 
-export default Mod44;
+export default Mod41;

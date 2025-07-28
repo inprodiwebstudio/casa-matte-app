@@ -5,7 +5,7 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod42 = ({
+const Mod39 = ({
 	data,
 	isInWorkSpace,
 	sheetNo,
@@ -24,7 +24,7 @@ const Mod42 = ({
 		>
 			<Stack
 				mah="70%"
-				w="70%"
+				w="50%"
 				aria-hidden={true}
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
@@ -48,4 +48,4 @@ const Mod42 = ({
 	);
 };
 
-export default Mod42;
+export default Mod39;

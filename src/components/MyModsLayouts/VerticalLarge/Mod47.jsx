@@ -6,7 +6,7 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod49 = ({
+const Mod47 = ({
 	data,
 	isInWorkSpace,
 	sheetNo,
@@ -16,17 +16,17 @@ const Mod49 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>ESPAÑA</span></p>";
+	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaultTitle02 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>FRANCIA</span></p>";
+	const defaultTitle02 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>TURQUÍA</span></p>";
+	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Salamanca</span></p>";
+	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ÍNDICE 1</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ÍNDICE 2</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p>";
 
-	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>París</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Versalles</span></p>";
+	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ÍNDICE 1</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ÍNDICE 2</span></p>";
 
-	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Capadocia</span></p>";
+	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ÍNDICE 1</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ÍNDICE 2</span></p>";
 
 	return (
 		<Flex
@@ -38,18 +38,19 @@ const Mod49 = ({
 			sx={{overflow : "hidden"}}
 		>
 			<Stack
-				spacing="0.35em"
-				miw="30%"
+				spacing={isInWorkSpace ? "50px" : "0.3em"}
+				miw={isInWorkSpace ? "10%" : "30%"}
 				sx={{
 					textTransform : "uppercase",
 				}}
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Stack
-					spacing="0.13em"
+					spacing={isInWorkSpace ? "15px" : "0.13em"}
 					aria-hidden
 				>
 					<Stack
-						spacing="0px"
+						spacing={isInWorkSpace ? "11px" : "0.13em"}
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 					>
 						<Text
@@ -59,7 +60,7 @@ const Mod49 = ({
 								"grande"  : "26px",
 							}}
 							align="left"
-							letterSpacing="3px"
+							letterSpacing="2px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
 							data={textInsertion(data?.text[0], defaultTitle01, isInWorkSpace)}
@@ -90,11 +91,11 @@ const Mod49 = ({
 					</div>
 				</Stack>
 				<Stack
-					spacing="0.13em"
+					spacing={isInWorkSpace ? "15px" : "0.13em"}
 					aria-hidden
 				>
 					<Stack
-						spacing="0px"
+						spacing={isInWorkSpace ? "11px" : "0.13em"}
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text3` })}
 					>
 						<Text
@@ -104,7 +105,7 @@ const Mod49 = ({
 								"grande"  : "26px",
 							}}
 							align="left"
-							letterSpacing="3px"
+							letterSpacing="2px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
 							data={textInsertion(data?.text[2], defaultTitle02, isInWorkSpace)}
@@ -135,11 +136,10 @@ const Mod49 = ({
 					</div>
 				</Stack>
 				<Stack
-					mah="70%"
-					spacing="0.13em"
+					spacing={isInWorkSpace ? "15px" : "0.13em"}
 				>
 					<Stack
-						spacing="0px"
+						spacing={isInWorkSpace ? "11px" : "0.13em"}
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text5` })}
 					>
 						<Text
@@ -149,7 +149,7 @@ const Mod49 = ({
 								"grande"  : "26px",
 							}}
 							align="left"
-							letterSpacing="3px"
+							letterSpacing="2px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
 							data={textInsertion(data?.text[4], defaultTitle03, isInWorkSpace)}
@@ -184,4 +184,4 @@ const Mod49 = ({
 	);
 };
 
-export default Mod49;
+export default Mod47;

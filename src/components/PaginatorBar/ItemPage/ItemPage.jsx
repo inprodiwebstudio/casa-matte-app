@@ -6,9 +6,10 @@ import { workSpaceSlice } from "store/Slices";
 import { Draggable }      from "react-beautiful-dnd";
 //Own Components
 //Resources
-import { Thrash } from "Resources/icons";
+import { Thrash }                           from "Resources/icons";
+import { closeAllModals, openContextModal } from "@mantine/modals";
 import "./ItemPage.scss";
-import BookPages  from "components/BookPages";
+import BookPages                            from "components/BookPages";
 
 const ItemPage = ({
 	index,
@@ -21,8 +22,8 @@ const ItemPage = ({
 
 	const photoBookFormat = useSelector((state) => state.workSpaceSlice?.data?.format, shallowEqual);
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
-	const orderId = useSelector((state) => state.workSpaceSlice?.data?.orderId, shallowEqual);
 	const isAvailableProduct = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
+	const photoBookProduct = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
 
 	const isCurrentPage = currentPageId === draggableId;
 
@@ -34,7 +35,32 @@ const ItemPage = ({
 		dispatch(workSpaceSlice.actions.handleChangePage(draggableId));
 	};
 
+	const onDeletePage = () => {
+		const myhandlerSucessDelete = () => {
+			closeAllModals();
+			handleDelete(pageData?.id);
+		};
+		openContextModal({
+			modal      : "deletePageConfirm",
+			innerProps : {
+				handdleSuccess : () => myhandlerSucessDelete(),
+			},
+		});
+	};
+
 	const NumbPages = () => {
+		if (photoBookProduct === "layflat") {
+			return (
+				<div
+					className="numbPages-container"
+					style={{
+						justifyContent : "center",
+					}}
+				>
+					<p>{Number(pageData?.id?.split("page")[1])}</p>
+				</div>
+			);
+		}
 		return (
 			<div
 				className="numbPages-container"
@@ -77,10 +103,10 @@ const ItemPage = ({
 				<NumbPages />
 			</div>
 			{
-				((pageData?.id !== "page1") && !orderId) && (
+				(pageData?.id !== "page1") && (
 					<div
 						className="delete-icon"
-						onClick={() => handleDelete(pageData?.id)}
+						onClick={() => onDeletePage()}
 					>
 						<Thrash size="15px" />
 					</div>

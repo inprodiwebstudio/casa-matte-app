@@ -4,7 +4,7 @@ import Text              from "components/LayoutHandler/Text";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
-const Mod40 = ({
+const Mod37 = ({
 	data,
 	isInWorkSpace,
 	sheetNo,
@@ -27,7 +27,7 @@ const Mod40 = ({
 			align="flex-end"
 		>
 			<Center w="100%" h="100%">
-				<Stack spacing="0.05em" w="100%">
+				<Stack spacing={isInWorkSpace ? "6px" : "0.1em"} w="100%">
 					<div
 						style={{
 							width        : "100%",
@@ -81,4 +81,4 @@ const Mod40 = ({
 	);
 };
 
-export default Mod40;
+export default Mod37;

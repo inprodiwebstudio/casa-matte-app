@@ -1,0 +1,13 @@
+/* En tu archivo SCSS */
+.dnd-overlay {
+  z-index: 1000;
+  pointer-events: none;
+}
+
+[data-draggable="true"] {
+  touch-action: none; /* Mejora el comportamiento en móviles */
+}
+
+.selectedPage {
+  border: 1px solid transparent;
+}

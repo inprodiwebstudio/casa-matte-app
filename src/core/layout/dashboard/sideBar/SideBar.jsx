@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import BodyGallery from "components/Gallery/BodyGallery";
 //Mantine
-import { openContextModal, closeAllModals } from "@mantine/modals";
+import { closeAllModals, openContextModal } from "@mantine/modals";
 
 //Own components
 import { gallerySlice, workSpaceSlice }                             from "store/Slices";
@@ -18,13 +18,15 @@ const SideBar = ({
 	isLoadingGalleryData,
 	isLoadingMutation,
 	isFullSizeSideBar,
+	workSpaceSlice,
 	selectedData,
 	gallerySlice,
 	typeDropView,
 	galleryData,
 	galleryPath,
 	isLoggedIn,
-	isPreview,
+	postTypeId,
+	statusViewPage,
 	userName,
 	filter,
 }) => {
@@ -44,8 +46,10 @@ const SideBar = ({
 		gallerySlice.setLoadingMutationGallery(true);
 		const mySelectedData = convertToArray(selectedData);
 		const publicIdsPhotos = mySelectedData.map(photo => photo?.public_id);
+		const listOfIds = mySelectedData.map(photo => photo?.id);
 		try {
 			await galleryImagesMutastionDelete(publicIdsPhotos);
+			workSpaceSlice.removePhotosDeleted({imagesIds : listOfIds});
 			gallerySlice.deleteDataGallery(selectedData);
 			gallerySlice.setLoadingMutationGallery(false);
 			closeAllModals();
@@ -57,18 +61,22 @@ const SideBar = ({
 	};
 
 	const handleMoveOutFolder = () => {
+		gallerySlice.setLoadingGalleryData(true);
 		const mySelectedData = convertToArray(selectedData);
 		const arrayOfPromises = mySelectedData.map(async (data, index) => {
 			return await galleryImagesMutationMove({
 				sourceFilePath  : data?.filePath,
-				destinationPath : `/${userName}/`,
+				destinationPath : `/${userName}/${postTypeId}/`,
 			});
 		});
 
-		Promise.allSettled([...arrayOfPromises]).then((values) => {
+		Promise.all([...arrayOfPromises]).then((values) => {
 			gallerySlice.clearSelectedData();
+			gallerySlice.deleteDataGallery(selectedData);
+			gallerySlice.setLoadingGalleryData(false);
 		}, reason => {
 			console.error(reason);
+			gallerySlice.setLoadingGalleryData(false);
 		});
 	};
 
@@ -98,8 +106,21 @@ const SideBar = ({
 		return;
 	}, [filter, isLoggedIn, galleryPath]);
 
+	useEffect(() => {
+		const isInfolder = galleryPath?.name !== "route";
+		const isAvaialableGalleryData = isValidArray(convertToArray(galleryData));
+
+		const isNotAvailablePhotosInFolder = !isAvaialableGalleryData && isInfolder;
+
+		if (isNotAvailablePhotosInFolder) {
+			gallerySlice.setGalleryPath({ id : "route", name : "route" });
+			return;
+		}
+		return;
+	}, [galleryData]);
+
 	return (
-		<div id="SideBar" className={`${isAvailableDocs ? (isFullSizeSideBar && "isFullSize") : "isNoData"} ${isPreview && "isInpreview"}`}>
+		<div id="SideBar" className={`${(statusViewPage === "preview") && "isInpreview"} ${isAvailableDocs ? (isFullSizeSideBar && "isFullSize") : "isNoData"}`}>
 			{
 				((!isLoadingGalleryData) && isAvailableDocs) && (
 					<div className={`actions-sidebar-conatiner ${isFullSizeSideBar && "isFullSize"} ${isLoadingGalleryData && "is-loading"}`}>
@@ -205,7 +226,9 @@ const mapStateToProps = ({ gallerySlice, authSlice, workSpaceSlice }) => ({
 	galleryPath          : gallerySlice?.galleryPathName ?? "route",
 	userName             : authSlice?.user?.username ?? undefined,
 	filter               : gallerySlice?.filter ?? undefined,
-	isPreview            : workSpaceSlice?.isPreview ?? undefined,
+	statusViewPage       : workSpaceSlice?.statusViewPage ?? undefined,
+	photoBookData        : workSpaceSlice?.data ?? undefined,
+	postTypeId           : workSpaceSlice?.data?.postTypeId ?? undefined,
 	isLoggedIn           : authSlice?.loggedIn ?? false,
 });
 

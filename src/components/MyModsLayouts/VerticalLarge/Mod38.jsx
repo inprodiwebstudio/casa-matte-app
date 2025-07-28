@@ -6,7 +6,7 @@ import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
 
-const Mod41 = ({
+const Mod38 = ({
 	data,
 	isInWorkSpace,
 	sheetNo,
@@ -18,7 +18,7 @@ const Mod41 = ({
 
 	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaulSubtTitle = "<p style='text-align: right;'><span style='font-size: 14px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>";
+	const defaulSubtTitle = "<p style='text-align: right;'><span style='font-size: 16px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>";
 
 	return (
 		<Flex
@@ -27,11 +27,24 @@ const Mod41 = ({
 			h="100%"
 			justify="flex-end"
 			align="flex-end"
-			gap="0.12em"
+			gap={isInWorkSpace ? "2%" : "5%"}
 			direction="column"
 		>
-			<DividerLayout long="7%" position="h" />
-			<Stack spacing="0em" w="100%">
+			<Flex
+				w="100%"
+				justify="flex-end"
+				pr={isInWorkSpace ? "10px" : "0px"}
+			>
+				<DividerLayout
+					long={isInWorkSpace ? "6.5%" : "15%"}
+					position="h"
+					weight={isInWorkSpace ? "2px" : "0.015em"}
+				/>
+			</Flex>
+			<Stack
+				spacing={isInWorkSpace ? "5px" : "0.05em"}
+				w="100%"
+			>
 				<div
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
@@ -53,6 +66,9 @@ const Mod41 = ({
 				</div>
 				<div
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
+					style={{
+						paddingRight : isInWorkSpace ? "8px" : "0px",
+					}}
 				>
 					<Text
 						sizes={{
@@ -75,4 +91,4 @@ const Mod41 = ({
 	);
 };
 
-export default Mod41;
+export default Mod38;

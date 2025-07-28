@@ -4,7 +4,7 @@ export const inCompletePages = (pages) => {
 	const isIncompletedPhotos = (objectPhotos) => {
 		const photos = Object.values(objectPhotos);
 
-		return photos.some((photo) => (photo.id === "") || (photo.url === ""));
+		return photos.some((photo) => ((photo.id === "") || (photo.url === "")));
 	};
 	pages.forEach((page) => {
 		const { sheet1, sheet2 } = page;

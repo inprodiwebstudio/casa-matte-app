@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useSelector, shallowEqual, connect } from "react-redux";
-import { PDFViewer, Page, Document}           from "@react-pdf/renderer";
+import { PDFViewer, Page, Document, View}     from "@react-pdf/renderer";
 import BookPages                              from "components/BookPages";
 
 //Own components
@@ -12,6 +12,9 @@ import VerticalMedium                   from "components/MyModsLayouts/VerticalM
 import SpinePhotoBook                   from "components/MyModsLayouts/SpinePdf";
 import SquareSmall                      from "components/MyModsLayouts/SquareSmall";
 import TravelCoffeeTable                from "components/MyModsLayouts/TravelCoffeeTable";
+import layflatSquareLarge               from "components/MyModsLayouts/LayFlatSquareLarge";
+import layflatVerticalMedium            from "components/MyModsLayouts/LayFlat";
+import layflatHorizontalMedium          from "components/MyModsLayouts/LayFlatHorizontalMedium";
 import SquareLarge                      from "components/MyModsLayouts/SquareLarge";
 
 import "./TestPdf.scss";
@@ -29,9 +32,12 @@ const TestPdf = ({photoBookData}) => {
 
 	const [ textPages, setTextPages ] = useState(undefined);
 
-	const handlerFormat = (productType) => {
+	const handlerFormat = (productType, format) => {
 		if ( productType === "travelcoffeetable ") {
 			return "travelcoffeetable";
+		}
+		if ( (productType === "layflat") && format ) {
+			return `${productType}${format.charAt(0).toUpperCase() + format.slice(1).toLowerCase()}`;
 		}
 		return photoBookData?.format;
 	};
@@ -92,12 +98,140 @@ const TestPdf = ({photoBookData}) => {
 				modLayouts            : {...TravelCoffeeTable},
 			},
 		},
+		layflatHorizontal : {
+			mediano : {
+				size                  : [1584, 576],
+				isInDoublePageLayouts : [
+					"FrontLayout",
+					"Mod32",
+					"Mod33",
+					"Mod34",
+					"Mod35",
+					"Mod36",
+					"Mod37",
+					"Mod38",
+					"Mod39",
+					"Mod40",
+					"Mod41",
+					"Mod42",
+					"Mod43",
+					"Mod44",
+					"Mod45",
+					"Mod46",
+					"Mod47",
+					"Mod48",
+					"Mod49",
+					"Mod50",
+					"Mod51",
+					"Mod52",
+					"Mod53",
+					"Mod54",
+					"Mod55",
+					"Mod55",
+					"Mod56",
+					"Mod57",
+					"Mod58",
+					"Mod59",
+					"Mod60",
+					"Mod61",
+					"Mod62",
+					"Mod63",
+					"Mod64",
+				],
+				modLayouts : {...layflatHorizontalMedium},
+			},
+		},
+		layflatCuadrado : {
+			grande : {
+				size                  : [1700, 850],
+				isInDoublePageLayouts : [
+					"FrontLayout",
+					"Mod44",
+					"Mod45",
+					"Mod46",
+					"Mod47",
+					"Mod48",
+					"Mod49",
+					"Mod50",
+					"Mod51",
+					"Mod52",
+					"Mod53",
+					"Mod54",
+					"Mod55",
+					"Mod56",
+					"Mod57",
+					"Mod58",
+					"Mod59",
+					"Mod60",
+					"Mod61",
+					"Mod62",
+					"Mod63",
+					"Mod64",
+					"Mod65",
+					"Mod66",
+					"Mod67",
+					"Mod68",
+					"Mod69",
+					"Mod70",
+					"Mod71",
+					"Mod72",
+					"Mod73",
+					"Mod74",
+					"Mod75",
+					"Mod76",
+					"Mod77",
+					"Mod78",
+				],
+				modLayouts : {...layflatSquareLarge},
+			},
+		},
+		layflatVertical : {
+			mediano : {
+				size                  : [1218, 790],
+				isInDoublePageLayouts : [
+					"FrontLayout",
+					"Mod33",
+					"Mod34",
+					"Mod35",
+					"Mod36",
+					"Mod37",
+					"Mod38",
+					"Mod39",
+					"Mod40",
+					"Mod41",
+					"Mod42",
+					"Mod43",
+					"Mod44",
+					"Mod45",
+					"Mod46",
+					"Mod47",
+					"Mod48",
+					"Mod49",
+					"Mod50",
+					"Mod51",
+					"Mod52",
+					"Mod53",
+					"Mod54",
+					"Mod55",
+					"Mod56",
+					"Mod57",
+					"Mod58",
+					"Mod59",
+					"Mod60",
+					"Mod61",
+					"Mod62",
+					"Mod63",
+					"Mod64",
+				],
+				modLayouts : {...layflatVerticalMedium},
+			},
+		},
 	};
 
-	// const isLayoutDoublePage = (modLayout, witheList) => {
-	// 	const isAvailableDouble = witheList.includes(modLayout);
-	// 	return isAvailableDouble;
-	// };
+	const isLayoutDoublePage = (modLayout, witheList) => {
+		const isAvailableDouble = witheList.includes(modLayout);
+		return isAvailableDouble;
+	};
 
 	const SheetFrontLayout = photoBookTypes[handlerFormat(photoBookData?.product)]?.[photoBookData?.sizePhotoBook]?.modLayouts[photoBookData?.frontPage?.sheet1?.layoutType]?.pdfLayout;
 
@@ -106,13 +240,13 @@ const TestPdf = ({photoBookData}) => {
 	const sizeFrontPage = photoBookTypes[handlerFormat(photoBookData?.product)]?.[photoBookData?.sizePhotoBook]?.frontSize;
 
 	const getComponent = (pageData, index) => {
-		const Sheet1Layout = photoBookTypes[handlerFormat(photoBookData?.product)]?.[photoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet1?.layoutType]?.pdfLayout;
+		const Sheet1Layout = photoBookTypes[handlerFormat(photoBookData?.product, photoBookData?.format)]?.[photoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet1?.layoutType]?.pdfLayout;
 
-		const Sheet2Layout = photoBookTypes[handlerFormat(photoBookData?.product)]?.[photoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet2?.layoutType]?.pdfLayout;
+		const Sheet2Layout = photoBookTypes[handlerFormat(photoBookData?.product, photoBookData?.format)]?.[photoBookData?.sizePhotoBook]?.modLayouts[pageData?.sheet2?.layoutType]?.pdfLayout;
 
-		const sizePages = photoBookTypes[handlerFormat(photoBookData?.product)]?.[photoBookData?.sizePhotoBook]?.size;
+		const sizePages = photoBookTypes[handlerFormat(photoBookData?.product, photoBookData?.format)]?.[photoBookData?.sizePhotoBook]?.size;
 
-		// const isInDoublePageLayout = isLayoutDoublePage(pageData?.sheet1?.layoutType, photoBookTypes[photoBookData?.sizePhotoBook]?.isInDoublePageLayouts);
+		const isInDoublePageLayout = isLayoutDoublePage(pageData?.sheet1?.layoutType, photoBookTypes[handlerFormat(photoBookData?.product, photoBookData?.format)]?.[photoBookData?.sizePhotoBook]?.isInDoublePageLayouts);
 
 		// if ((Sheet1Layout && Sheet2Layout) || isInDoublePageLayout) {
 		// 	if (Sheet1Layout && isInDoublePageLayout) {
@@ -128,6 +262,57 @@ const TestPdf = ({photoBookData}) => {
 		// 		);
 		// 	}
 		// }
+		if ( photoBookData?.product === "layflat" ) {
+			return (
+				<Page
+					size={sizePages}
+					style={{display : "flex", flexDirection : "row"}}
+				>
+					<View
+						style={{
+							width  : isInDoublePageLayout ? "100%" : "50%",
+							height : "100%",
+						}}
+					>
+						{
+							Sheet1Layout ? (
+								<Sheet1Layout
+									images={pageData?.sheet1?.photos}
+									text={pageData?.sheet1?.text}
+									modLayout={pageData?.sheet1?.layoutType}
+									pageNo={pageData?.sheet1?.pageNo}
+								/>
+							) : (
+								""
+							)
+						}
+					</View>
+					{
+						!isInDoublePageLayout && (
+							<View
+								style={{
+									width  : "50%",
+									height : "100%",
+								}}
+							>
+								{
+									Sheet2Layout ? (
+										<Sheet2Layout
+											images={pageData?.sheet2?.photos}
+											text={pageData?.sheet2?.text}
+											modLayout={pageData?.sheet2?.layoutType}
+											pageNo={pageData?.sheet2?.pageNo}
+										/>
+									) : (
+										""
+									)
+								}
+							</View>
+						)
+					}
+				</Page>
+			);
+		}
 
 		return (
 			<>

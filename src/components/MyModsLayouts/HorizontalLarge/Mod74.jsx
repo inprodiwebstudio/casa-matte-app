@@ -16,14 +16,14 @@ const Mod73 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Subtítulo 5</span></p>";
+	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 5</span></p>";
 
 	return (
 		<Stack
 			pb="12%"
 			w="100%"
 			h="100%"
-			spacing="0.08em"
+			spacing={isInWorkSpace ? "25px" : "0.2em"}
 		>
 			<Stack
 				w="100%"
@@ -39,8 +39,9 @@ const Mod73 = ({
 			<Stack
 				w="100%"
 				align="flex-end"
-				mah="10%"
+				mah="20%"
 				pr="5%"
+				pl="5%"
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Text

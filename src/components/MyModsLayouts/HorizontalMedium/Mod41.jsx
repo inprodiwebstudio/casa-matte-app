@@ -36,7 +36,7 @@ const Mod41 = ({
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Stack
-					spacing={isInWorkSpace ? "0em" : "0.2em"}
+					spacing={isInWorkSpace ? "0.12em" : "0.2em"}
 					aria-hidden
 				>
 					<div>

@@ -20,6 +20,7 @@ const BookPages = ({
 	const dispatch = useDispatch();
 
 	const pageDataSelected = useSelector((state) => state.workSpaceSlice.pageDataSelected, shallowEqual);
+	// const currentPageData = useSelector((state) => state.workSpaceSlice.pageDataSelected, shallowEqual);
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 
@@ -31,7 +32,7 @@ const BookPages = ({
 
 	const modsInDoublePage = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.modsInDoublePage;
 
-	const isInDoublePage = modsInDoublePage?.includes(pageData?.id);
+	const isInDoublePage = modsInDoublePage?.includes(pageData?.sheet1?.layoutType || pageData?.id);
 
 	const aspectRatio = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.aspectRatio;
 

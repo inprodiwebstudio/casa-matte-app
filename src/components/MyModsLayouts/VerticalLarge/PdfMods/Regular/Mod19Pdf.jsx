@@ -34,7 +34,7 @@ const Mod19Pdf = ({images}) => {
 						width      : "100%",
 						height     : "310.33px",
 						overflow   : "hidden",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -55,7 +55,7 @@ const Mod19Pdf = ({images}) => {
 						width      : "100%",
 						height     : "310.33px",
 						overflow   : "hidden",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -76,7 +76,7 @@ const Mod19Pdf = ({images}) => {
 						width      : "100%",
 						height     : "310.33px",
 						overflow   : "hidden",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{

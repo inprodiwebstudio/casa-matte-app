@@ -92,24 +92,32 @@ const Mod60 = ({
 			</Stack>
 			<Stack
 				w="100%"
-				align="flex-end"
 				mah="10%"
-				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
+				sx={{
+					overflow : "hidden",
+				}}
 			>
-				<Text
-					sizes={{
-						"chico"   : "12px",
-						"regular" : "14px",
-						"grande"  : "16px",
-					}}
+				<Stack
+					w="100%"
 					align="flex-end"
-					sheetNo={sheetNo}
-					textShell={() => <TextShell.SubTitle align="flex-end" />}
-					data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-					textNo={0}
-				/>
+					h="fit-content"
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
+				>
+					<Text
+						sizes={{
+							"chico"   : "12px",
+							"regular" : "14px",
+							"grande"  : "16px",
+						}}
+						align="flex-end"
+						sheetNo={sheetNo}
+						textShell={() => <TextShell.SubTitle align="flex-end" />}
+						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+						textNo={0}
+					/>
+				</Stack>
 			</Stack>
 		</Stack>
 	);

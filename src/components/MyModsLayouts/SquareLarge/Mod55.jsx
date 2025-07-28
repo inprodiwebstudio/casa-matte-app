@@ -16,9 +16,9 @@ const Mod57 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 46px; font-family: JosefinSans-Light;'>SANTIAGO</span></p>";
+	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>SANTIAGO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 22px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 14px; font-family: Inter-Lifght;'>CHILE</span></p>";
 
 	return (
 		<Flex
@@ -28,7 +28,7 @@ const Mod57 = ({
 			h="100%"
 			justify="center"
 			align="center"
-			gap="0.3em"
+			gap={isInWorkSpace ? "35px" : "0.2em"}
 			direction="column"
 			sx={{textTransform : "uppercase"}}
 		>
@@ -47,7 +47,7 @@ const Mod57 = ({
 						align="center"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.Title />}
-						letterSpacing="6.5px"
+						letterSpacing="5px"
 						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}

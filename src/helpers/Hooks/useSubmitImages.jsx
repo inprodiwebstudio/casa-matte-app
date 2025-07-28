@@ -20,7 +20,6 @@ const useSubmitImages = ({userName, folderName}) => {
 			const constructorImage = await heicToPng(image);
 
 			const { data } = await generateSignMutation({data : {
-				// timestamp : timestamp,
 				folder           : `${userName}/${folderName ? folderName : isditedPhoto ? "_editedPhotos" : ""}`,
 				lastModifiedDate : constructorImage?.lastModifiedDate,
 			}});

@@ -6,7 +6,7 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod54 = ({
+const Mod52 = ({
 	data,
 	isInWorkSpace,
 	sheetNo,
@@ -16,25 +16,29 @@ const Mod54 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 38px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
+	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: left;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const defaultSubtitle = "<p style='text-align: left;'><span style='font-size: 14px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex
-			pt="8%"
 			w="100%"
 			h="100%"
 			align="flex-end"
+			justify="center"
 			gap="0.5em"
 			direction="column"
 		>
 			<Stack
-				spacing="0.2em"
-				w="59%"
-				h="88%"
+				spacing="3%"
+				w="60%"
+				h="70%"
 			>
-				<Stack w="100%" h="100%" spacing="0.4em">
+				<Stack
+					w="100%"
+					h="100%"
+					spacing="5%"
+				>
 					<Stack mr="10%" {...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}>
 						<Text
 							sizes={{
@@ -61,7 +65,10 @@ const Mod54 = ({
 						/>
 					</Stack>
 				</Stack>
-				<Stack mr="40%" {...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}>
+				<Stack
+					mr="40%"
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
+				>
 					<Text
 						sizes={{
 							"chico"   : "14px",
@@ -71,7 +78,7 @@ const Mod54 = ({
 						align="left"
 						sheetNo={sheetNo}
 						letterSpacing="2px"
-						textShell={() => <TextShell.SubTitle />}
+						textShell={() => <TextShell.SubTitle align="flex-start" />}
 						data={textInsertion(data?.text[1], defaultSubtitle, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
@@ -83,4 +90,4 @@ const Mod54 = ({
 	);
 };
 
-export default Mod54;
+export default Mod52;

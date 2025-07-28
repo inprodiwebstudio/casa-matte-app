@@ -5,6 +5,7 @@ import { isValidArray, convertToArray } from "helpers";
 
 //Own components
 import BookPages          from "components/BookPages";
+import ManagePagesView    from "../ManagePagesView";
 import { RedoArrow }      from "Resources/icons";
 import { workSpaceSlice } from "store/Slices";
 import "./WorkSpace.scss";
@@ -22,7 +23,7 @@ const WorkSpace = () => {
 	const workSpaceFormatPage = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
 	const workSpaceSizePage = useSelector((state) => state.workSpaceSlice.data?.sizePhotoBook, shallowEqual);
 	const workSpaceHistory = useSelector((state) => state.workSpaceSlice.history, shallowEqual);
-	const isPreview = useSelector((state) => state.workSpaceSlice?.isPreview, shallowEqual);
+	const statusViewPage = useSelector((state) => state.workSpaceSlice?.statusViewPage, shallowEqual);
 	const isAvailableProduct = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
 
 	const isFrontLayout = currentPageId === "frontpage";
@@ -44,11 +45,14 @@ const WorkSpace = () => {
 		if (productPhotoBook === "travelcoffeetable ") {
 			return "travel-coffee-table";
 		}
+		if ((productPhotoBook === "layflat") && (workSpaceFormatPage === "horizontal") && (workSpaceSizePage === "mediano")) {
+			return `${workSpaceFormatPage}-${workSpaceSizePage}-layflat`;
+		}
 		return `${workSpaceFormatPage}-${workSpaceSizePage}`;
 	};
 
 	const SapceViewHandler = () => {
-		if (isPreview && (isAvailableProduct !== "") ) {
+		if ((statusViewPage === "preview") && (isAvailableProduct !== "") ) {
 			return (
 				<div
 					className="PreviewPages"
@@ -69,60 +73,66 @@ const WorkSpace = () => {
 				</div>
 			);
 		}
-		if (myWorkSpaceData && (isAvailableProduct !== "")) {
+		if ((statusViewPage === "managePages") && (isAvailableProduct !== "")) {
 			return (
-				<div className="WorkSpace">
-					<div className="canva-space">
-						<div className="undo-redo-container">
-							<div
-								className={`action-styled ${!isAvailableUndo && "disabled"}`}
-								{...(
-									isAvailableUndo && {
-										onClick : () => dispatch(workSpaceSlice.actions.undo()),
-									}
-								)}
-							>
-								<RedoArrow style={{transform : "scaleX(-1)"}} size="13px" />
-								<div className="labelUndoRedo">
-									<div>Deshacer</div>
-								</div>
-							</div>
-							<div
-								className={`action-styled ${!isAvailableRedo && "disabled"}`}
-								{...(
-									isAvailableRedo && {
-										onClick : () => dispatch(workSpaceSlice.actions.redo()),
-									}
-								)}
-							>
-								<RedoArrow size="13px" />
-								<div className="labelUndoRedo">
-									<div>Rehacer</div>
-								</div>
-							</div>
-						</div>
-						<div className={`ghost-canva ${handlerTypeProductFormat()}-workSpace ${(!myWorkSpaceData?.sheet2 && (myWorkSpaceData?.id !== "FrontLayout")) && "onePage"}`}>
-							{
-								isFrontLayout ? (
-									<CoverBook isInWorkSpace />
-								) : (
-									<BookPages
-										isInWorkSpcae={true}
-										loading={false}
-										pageData={myWorkSpaceData}
-									/>
-								)
-							}
-						</div>
-					</div>
-				</div>
+				<ManagePagesView />
 			);
 		}
+		return (
+			<div className="WorkSpace">
+				<div className="canva-space">
+					<div className="undo-redo-container">
+						<div
+							className={`action-styled ${!isAvailableUndo && "disabled"}`}
+							{...(
+								isAvailableUndo && {
+									onClick : () => dispatch(workSpaceSlice.actions.undo()),
+								}
+							)}
+						>
+							<RedoArrow style={{transform : "scaleX(-1)"}} size="13px" />
+							<div className="labelUndoRedo">
+								<div>Deshacer</div>
+							</div>
+						</div>
+						<div
+							className={`action-styled ${!isAvailableRedo && "disabled"}`}
+							{...(
+								isAvailableRedo && {
+									onClick : () => dispatch(workSpaceSlice.actions.redo()),
+								}
+							)}
+						>
+							<RedoArrow size="13px" />
+							<div className="labelUndoRedo">
+								<div>Rehacer</div>
+							</div>
+						</div>
+					</div>
+					<div
+						className={`ghost-canva ${handlerTypeProductFormat()}-workSpace ${(!myWorkSpaceData?.sheet2 && (myWorkSpaceData?.id !== "FrontLayout")) && "onePage"}`}
+					>
+						{
+							isFrontLayout ? (
+								<CoverBook isInWorkSpace />
+							) : (
+								<BookPages
+									isInWorkSpcae={true}
+									loading={false}
+									pageData={myWorkSpaceData}
+								/>
+							)
+						}
+					</div>
+				</div>
+			</div>
+		);
 	};
 
 	useEffect(() => {
 		if (!isFrontLayout) {
 			setMyWorkSpaceData(workSpaceData[currentPageId]);
+			dispatch(workSpaceSlice.actions.setCurrentPageData(workSpaceData[currentPageId]));
 		}
 		if (isFrontLayout) {
 			setMyWorkSpaceData(workSpaceFrontPage);

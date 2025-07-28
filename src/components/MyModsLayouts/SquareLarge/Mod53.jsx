@@ -16,9 +16,9 @@ const Mod52 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: left;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>TOSCANA</span></p>";
+	const defaultTitle = "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>TOSCANA</span></p>";
 
-	const defaultIndices = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>FLORENCIA</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>ORVIETTO</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>MONTALCINO</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>PIENZA</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SIENNA</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>Chepokee Plantation</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>BAGNO VIGNIONI</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SAN GIMINIANO</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>MONTEPULCIANO</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>MONTEPULCIANO</span></p>";
+	const defaultIndices = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>FLORENCIA</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ORVIETTO</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>MONTALCINO</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>PIENZA</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SIENNA</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Chepokee Plantation</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>BAGNO VIGNIONI</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SAN GIMINIANO</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>MONTEPULCIANO</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>MONTEPULCIANO</span></p>";
 
 	return (
 		<Flex
@@ -29,13 +29,13 @@ const Mod52 = ({
 			align="flex-end"
 		>
 			<Stack
-				spacing={isInWorkSpace ? "0.2em" : "0.1em"}
-				w="32%"
+				spacing={isInWorkSpace ? "30px" : "0.1em"}
+				w="24%"
 				sx={{ textTransform : "uppercase", overflow : "hidden" }}
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Stack
-					spacing={isInWorkSpace ? "0.05em" : "0.1em"}
+					spacing={isInWorkSpace ? "20px" : "0.1em"}
 				>
 					<Text
 						sizes={{
@@ -45,7 +45,7 @@ const Mod52 = ({
 						}}
 						align="left"
 						sheetNo={sheetNo}
-						letterSpacing="3px"
+						letterSpacing="2px"
 						textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
 						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
 						isInPaginator={isInPaginator}
@@ -61,7 +61,7 @@ const Mod52 = ({
 						"grande"  : "20px",
 					}}
 					align="left"
-					gapSpacing="17px"
+					gapSpacing="20px"
 					sheetNo={sheetNo}
 					textShell={() => <TextShell.BodyIndices align="left" />}
 					data={textInsertion(data?.text[1], defaultIndices, isInWorkSpace)}

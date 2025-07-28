@@ -16,9 +16,9 @@ const Mod52 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: left;'><span style='font-size: 30px; font-family: Aitana-Regular;'>VIRGINIA</span></p>";
+	const defaultTitle = "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>VIRGINIA</span></p>";
 
-	const defaultIndices = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Colonial Williamsburg</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>William & Mary University</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>The Capitol</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Jamestown</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Smithfeld</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Chepokee Plantation</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Waller Mill Park</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Richmond</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Ford’s Colony</span></p><p style='text-align: left;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>St. Andrew’s</span></p>";
+	const defaultIndices = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Colonial Williamsburg</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>William & Mary University</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>The Capitol</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Jamestown</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Smithfeld</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Chepokee Plantation</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Waller Mill Park</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Richmond</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Ford’s Colony</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>St. Andrew’s</span></p>";
 
 	return (
 		<Flex
@@ -31,11 +31,11 @@ const Mod52 = ({
 			<Stack
 				spacing="0.2em"
 				sx={{overflow : "hidden"}}
-				w="35%"
+				w="23%"
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Stack
-					spacing={isInWorkSpace ? "0em" : "0.1em"}
+					spacing={isInWorkSpace ? "0.15em" : "0.1em"}
 				>
 					<Text
 						sizes={{
@@ -61,7 +61,7 @@ const Mod52 = ({
 						"grande"  : "20px",
 					}}
 					align="left"
-					gapSpacing="17px"
+					gapSpacing="14px"
 					sheetNo={sheetNo}
 					textShell={() => <TextShell.BodyIndices align="left" />}
 					data={textInsertion(data?.text[1], defaultIndices, isInWorkSpace)}

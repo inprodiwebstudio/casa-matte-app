@@ -6,7 +6,7 @@ import { textInsertion } from "helpers";
 //Own components
 
 
-const Mod55 = ({
+const Mod53 = ({
 	data,
 	isInWorkSpace,
 	sheetNo,
@@ -16,9 +16,9 @@ const Mod55 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 38px; font-family: Aitana-Regular;'>ISLA NEGRA</span></p>";
+	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: right;'><span style='font-size: 15px; font-family: Spectral-Light-Italic;'>Chile</span></p>";
+	const defaultSubtitle = "<p style='text-align: right;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Subtítulo</span></p>";
 
 	return (
 		<Flex
@@ -29,7 +29,7 @@ const Mod55 = ({
 			direction="column"
 		>
 			<Stack
-				spacing="0.2em"
+				spacing={isInWorkSpace ? "5%" : "0.3em"}
 				w="100%"
 				h="100%"
 				align="flex-end"
@@ -42,7 +42,11 @@ const Mod55 = ({
 						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Stack>
-				<Stack w="70%" mr="10%" spacing="0em">
+				<Stack
+					w="80%"
+					mr="8%"
+					spacing={isInWorkSpace ? "2px" : "0.1em"}
+				>
 					<div
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 					>
@@ -54,8 +58,8 @@ const Mod55 = ({
 							}}
 							align="right"
 							sheetNo={sheetNo}
-							textShell={() => <TextShell.Title />}
-							letterSpacing="6.5px"
+							textShell={() => <TextShell.Title align="flex-end" />}
+							letterSpacing="4.5px"
 							data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
@@ -64,6 +68,7 @@ const Mod55 = ({
 					</div>
 					<Stack
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
+						pr={isInWorkSpace ? "7px" : "0px"}
 					>
 						<Text
 							sizes={{
@@ -74,7 +79,7 @@ const Mod55 = ({
 							align="right"
 							sheetNo={sheetNo}
 							letterSpacing="2px"
-							textShell={() => <TextShell.SubTitle />}
+							textShell={() => <TextShell.SubTitle align="flex-end" />}
 							data={textInsertion(data?.text[1], defaultSubtitle, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
@@ -87,4 +92,4 @@ const Mod55 = ({
 	);
 };
 
-export default Mod55;
+export default Mod53;

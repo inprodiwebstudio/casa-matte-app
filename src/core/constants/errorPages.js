@@ -17,7 +17,7 @@ const errorPages = {
 	"500" : {
 		code    : "500",
 		title   : "Error en conexión",
-		message : "Lo sentimos, ha ocurrido un error en la conexión. Por favor, recarga o intenta mas tarde.",
+		message : "Lo sentimos, ha ocurrido un error en la conexión. Por favor, recarga o intenta más tarde.",
 	},
 };
 

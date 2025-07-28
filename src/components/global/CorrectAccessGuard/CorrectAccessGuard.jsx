@@ -30,8 +30,7 @@ import PayConfirm                                 from "pages/PayConfirm";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { usePhotoBookPreset }                     from "helpers/Hooks/usePhotoBookPreset";
 import NotPaid                                    from "components/NotPaid";
-import handlerMaterialAndColorLining              from "helpers/handlerMaterialAndColorLining";
-import handlerGravingColorData                    from "helpers/handlerGravingColor";
+import { convertToArray }                         from "helpers";
 
 const { useLazyGetDataQuery } = genericApi;
 
@@ -345,6 +344,7 @@ const CorrectAccessGuard = () => {
 	const { createPresetPhotoBook } = usePhotoBookPreset();
 	const userId = useSelector((state) => state.authSlice.user.userId, shallowEqual);
 	const userEmail = useSelector((state) => state.authSlice.user.email, shallowEqual);
+	const worspaceData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 
 	const [ statusView, setStatusView ] = useState("loading");
 	const [ urlLinkPay, setUrlLinkPay ] = useState("");
@@ -381,31 +381,32 @@ const CorrectAccessGuard = () => {
 		const myData = photoBookConfigData?.meta?.config;
 		const parseJSON = JSON.parse(myData);
 
-		const cover = !photoBookConfigData.meta.color_de_tela ? undefined : {
-			material : handlerMaterialAndColorLining(photoBookConfigData.meta.color_de_tela).materialName,
-			color    : handlerMaterialAndColorLining(photoBookConfigData.meta.color_de_tela).colorName,
-		};
+		if ((parseJSON?.product === "layflat") && (!parseJSON?.pages?.page1.sheet2)) {
+			const pagesList = convertToArray(parseJSON?.pages);
+			const lastPageId = pagesList?.[pagesList?.length - 1]?.id;
 
-		const handlerEngravingData = () => {
-			const isAvailableEngraving = photoBookConfigData?.meta?.color_de_grabado !== "";
-
-			if (!isAvailableEngraving) {
-				return undefined;
-			}
-
-			return {
-				currentColor : handlerGravingColorData(photoBookConfigData?.meta?.color_de_grabado).currentColor,
-				listOfColors : handlerGravingColorData(photoBookConfigData?.meta?.color_de_grabado).listOfColors,
+			parseJSON.pages.page1.sheet2 = {
+				pageNo     : 2,
+				layoutType : "",
+				text       : "",
+				photos     : { 0 : { id : "", url : "" } },
 			};
-		};
+
+			if (!parseJSON?.pages[lastPageId].sheet2) {
+				parseJSON.pages[lastPageId].sheet2 = {
+					pageNo     : parseJSON.pages[lastPageId].sheet1.pageNo + 1,
+					layoutType : "",
+					text       : "",
+					photos     : { 0 : { id : "", url : "" } },
+				};
+			}
+		}
 
 		dispatch(workSpaceSlice.actions.insertData({
 			...parseJSON,
-			availableSpine : (photoBookConfigData?.meta?.grabado_en_lomo === "Sin grabado") ? false : true,
-			cover          : parseJSON?.cover ? parseJSON?.cover : cover,
-			engraving      : handlerEngravingData(),
-			modified       : photoBookConfigData?.modified ?? undefined,
-			orderId        : photoBookConfigData?.meta?.id_del_pedido ?? undefined,
+			postTypeId : postId,
+			modified   : photoBookConfigData?.modified ?? undefined,
+			orderId    : photoBookConfigData?.meta?.id_del_pedido ?? undefined,
 		}));
 	};
 
@@ -425,6 +426,7 @@ const CorrectAccessGuard = () => {
 	const handlerAvailableExtra = async (idOrderExtra) => {
 		const isPaid = await isPaidExtra(idOrderExtra);
 		if (isPaid) {
+			addCurrentPhotoBookConfig(photobookData);
 			setStatusView("done");
 			return;
 		}
@@ -449,10 +451,14 @@ const CorrectAccessGuard = () => {
 		}
 		if (photobookData?.meta?.status === "48") {
 			if (!photobookData?.meta?.id_pedido_hojas_extra) {
-				setStatusView("done");
+				setStatusView("continue");
 				return;
 			}
 			handlerAvailableExtra(photobookData?.meta?.id_pedido_hojas_extra);
+			return;
+		}
+		if ((worspaceData.orderId !== "") && (worspaceData?.postTypeId === postId)) {
+			setStatusView("continue");
 			return;
 		}
 		if (photobookData?.meta?.config) {
@@ -464,6 +470,7 @@ const CorrectAccessGuard = () => {
 		setStatusView("continue");
 		return;
 	}, [photobookData]);
+
 
 	return (
 		<>

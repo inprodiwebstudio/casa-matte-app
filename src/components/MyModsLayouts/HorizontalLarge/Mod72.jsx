@@ -17,7 +17,7 @@ const Mod72 = ({
 }) => {
 	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Subtítulo 3</span></p>";
 
-	const defaultText02 = "<p style='text-align: justify;'><span style='font-size: 15px; font-family: JosefinSans-Light;'>Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper, pharetra odio conubia dictumst malesuada lectus dis penatibus, primis orci dictum sociosqu nam platea parturient cursus.</span></p>";
+	const defaultText02 = "<p style='text-align: justify;'><span style='font-size: 12px; font-family: JosefinSans-Light;'>Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper, pharetra odio conubia dictumst malesuada lectus dis penatibus, primis orci dictum sociosqu nam platea parturient cursus.</span></p>";
 
 
 	return (
@@ -29,16 +29,16 @@ const Mod72 = ({
 			justify="flex-end"
 		>
 			<Stack
-				w="35%"
+				w="31%"
 				mah="100%"
-				spacing="0.1em"
+				spacing={isInWorkSpace ? "20px" : "0.1em"}
 				aria-hidden
 				sx={{ overflow : "hidden"}}
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Flex
 					direction="column"
-					gap={isInWorkSpace ? "0em" : "0.1em"}
+					gap={isInWorkSpace ? "15px" : "0.1em"}
 					w="100%"
 					style={{
 						textTransform : "uppercase",
@@ -51,7 +51,7 @@ const Mod72 = ({
 							"grande"  : "20px",
 						}}
 						align="left"
-						letterSpacing="3px"
+						letterSpacing="2px"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.SubTitle width="50%" align="flex-start" />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
@@ -69,7 +69,7 @@ const Mod72 = ({
 							"grande"  : "18px",
 						}}
 						align="justify"
-						lineHeight="18px"
+						lineHeight="13px"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.BodyParagraph width="100%" align="flex-end" />}
 						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}

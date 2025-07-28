@@ -36,6 +36,7 @@ export const usePhotoBookPreset = () => {
 		};
 
 		const configPhotoBookData = {
+			postTypeId     : productData?.id ?? undefined,
 			sizePhotoBook  : formatAndSize.size,
 			dimentions     : dimensions,
 			product        : model.modelKey,
@@ -45,7 +46,7 @@ export const usePhotoBookPreset = () => {
 			numberOfPages,
 			minPages       : meta?.pasta === "Dura" ? 25 : 10,
 			maxPages       : numberOfPages,
-			currentPage    : "frontpage",
+			currentPage    : "page1",
 			projectTittle  : "TITULO",
 			basePrice      : price.replace(" ", ""),
 			bound          : meta?.encuadernado ?? "",
@@ -54,7 +55,7 @@ export const usePhotoBookPreset = () => {
 			availableSpine : (meta?.grabado_en_lomo === "Sin grabado") ? false : true,
 			cover,
 			engraving      : handlerEngravingData(),
-			pages          : convertToObject(generatePages(numberOfPages)),
+			pages          : convertToObject(generatePages(numberOfPages, model.modelKey === "layflat")),
 		};
 
 		try {
@@ -110,10 +111,30 @@ const defaultFrontPage = () => ({
 	},
 });
 
-const generatePages = (numberOfPages) => {
+const generatePages = (numberOfPages, isLayflat) => {
 	const totalPaginations = (numberOfPages - 1) / 2;
 	const isEvenPages = totalPaginations % 2 === 0;
 	const pageCount = isEvenPages ? totalPaginations : (numberOfPages / 2) + 1;
+
+	if (isLayflat) {
+		return Array(numberOfPages).fill(0).map((_, index) => {
+			return {
+				id     : `page${index + 1}`,
+				sheet1 : {
+					pageNo     : index + 1,
+					layoutType : "",
+					text       : {},
+					photos     : { 0 : { id : "", url : "" } },
+				},
+				sheet2 : {
+					pageNo     : index + 1,
+					layoutType : "",
+					text       : "",
+					photos     : { 0 : { id : "", url : "" } },
+				},
+			};
+		});
+	}
 
 	return Array(pageCount).fill(0).map((_, index) => {
 		if (index === 0) {

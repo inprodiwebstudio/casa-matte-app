@@ -13,7 +13,7 @@ import Alignment     from "@ckeditor/ckeditor5-alignment/src/alignment";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
 // import { EditorState, convertToRaw, ContentState } from "draft-js";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 // import { closeAllModals }      from "@mantine/modals";
 import { workSpaceSlice }                     from "store/Slices";
 import { connect, useSelector, shallowEqual } from "react-redux";
@@ -30,16 +30,58 @@ const EditText = ({
 	dataTextPage,
 	gapSpacing,
 	lineHeight,
+	typeText,
 	letterSpacing,
 	workSpaceSlice,
 }) => {
+	const [currentFontSize, setCurrentFontSize] = useState(undefined);
+
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const product = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
 	const currentColorEngravingText = useSelector((state) => state.workSpaceSlice.data?.engraving?.currentColor?.colorHex, shallowEqual);
 
 	const isAvailableChangeColorText = currentColorEngravingText && (currentPageId === "frontpage");
 
-	const { classes } = styles({size : sizes?.chico, gapSpacing, lineHeight, letterSpacing, gravingColor : isAvailableChangeColorText ? currentColorEngravingText : undefined});
+	const { classes } = styles({size : currentFontSize, gapSpacing, lineHeight, letterSpacing, gravingColor : isAvailableChangeColorText ? currentColorEngravingText : undefined});
+
+	const editorRef = useRef();
+
+	const fontFamilies = [
+		"default",
+		"HelveticaLight",
+		"Aitana-Regular",
+		"Cormorant-Light",
+		"Cormorant-Medium",
+		"GandhiSans-Regular",
+		"GandhiSerif-Regular",
+		"Inter-Lifght",
+		"Inter-Regular",
+		"JosefinSans-Light",
+		"JosefinSans-Regular",
+		"Made-Mirage-Regular",
+		"Made-Mirage-Thin",
+		"Restora-Extra-Light",
+		"Spectral-Light-Italic",
+		"Spectral-Medium-Italic",
+		"TAN-MERINGUE",
+	];
+
+	const availableFontFamilies = {
+		title      : fontFamilies,
+		smallTitle : fontFamilies,
+		subtitle   : fontFamilies.filter((fontFamily) => (fontFamily !== "TAN-MERINGUE")),
+		index      : fontFamilies.filter((fontFamily) =>
+			(fontFamily !== "TAN-MERINGUE")&&
+		(fontFamily !== "Cormorant-Light")&&
+		(fontFamily !== "Cormorant-Medium")
+		),
+		body : fontFamilies.filter((fontFamily) =>
+			(fontFamily !== "TAN-MERINGUE")&&
+		(fontFamily !== "Made-Mirage-Regular")&&
+		(fontFamily !== "Made-Mirage-Thin")&&
+		(fontFamily !== "Restora-Extra-Light")
+		),
+	};
 
 	const editorConfiguration = {
 		plugins      : [Essentials, Bold, Alignment, Paragraph, FontFamily, FontSize, FontColor],
@@ -48,25 +90,7 @@ const EditText = ({
 			options : [ "left", "right", "center", "justify" ],
 		},
 		fontFamily : {
-			options : [
-				"default",
-				"HelveticaLight",
-				"Aitana-Regular",
-				"Cormorant-Light",
-				"Cormorant-Medium",
-				"GandhiSans-Regular",
-				"GandhiSerif-Regular",
-				"Inter-Lifght",
-				"Inter-Regular",
-				"JosefinSans-Light",
-				"JosefinSans-Regular",
-				"Made-Mirage-Regular",
-				"Made-Mirage-Thin",
-				"Restora-Extra-Light",
-				"Spectral-Light-Italic",
-				"Spectral-Medium-Italic",
-				"TAN-MERINGUE",
-			],
+			options : availableFontFamilies[typeText ?? "body"],
 		},
 		toolbar : {
 			items : [
@@ -78,6 +102,7 @@ const EditText = ({
 				"alignment:left",
 				"alignment:center",
 				"alignment:right",
+				"alignment:justify",
 			],
 			shouldNotGroupWhenFullScreen : true,
 		},
@@ -197,6 +222,25 @@ const EditText = ({
 		[]
 	);
 
+	const getCurrentFontSize = (editor) => {
+		editorRef.current = editor;
+
+		const handlerSetcurrentFontSize = () => {
+			const selection = editor.model.document.selection;
+			const fontSize = selection.getAttribute("fontSize");
+
+			if (fontSize) {
+				setCurrentFontSize(fontSize);
+			}
+		};
+
+		handlerSetcurrentFontSize();
+
+		editor.model.document.on("change:data", () => {
+			handlerSetcurrentFontSize();
+		});
+	};
+
 	return (
 		<div
 			className={classes.editText}
@@ -208,6 +252,7 @@ const EditText = ({
 				editor={ BalloonEditor }
 				config={ editorConfiguration }
 				data={editorState}
+				onReady={getCurrentFontSize}
 				onChange={(event, editor) => {
 					handleEditorChange(event, editor);
 				}}

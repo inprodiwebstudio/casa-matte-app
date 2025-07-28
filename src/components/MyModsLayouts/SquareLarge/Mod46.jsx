@@ -15,11 +15,11 @@ const Mod45 = ({
 	pageNo,
 	modLayout,
 }) => {
-	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 30px; font-family: Aitana-Regular;'>PAPÁ</span></p>";
+	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Aitana-Regular;'>PAPÁ</span></p>";
 
-	const defaultText02 = "<p style='text-align: justify;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre</span></p>";
+	const defaultText02 = "<p style='text-align: justify;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre</span></p>";
 
-	const defaultText03 = "<p style='text-align: justify;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam. Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed.</span></p>";
+	const defaultText03 = "<p style='text-align: justify;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam. Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed.</span></p>";
 
 	return (
 		<Flex
@@ -32,14 +32,14 @@ const Mod45 = ({
 			<Stack
 				w="90%"
 				mah="70%"
-				spacing="0.3em"
+				spacing={isInWorkSpace ? "20px" : "0.1em"}
 				aria-hidden
 				sx={{ overflow : "hidden" }}
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Flex
 					direction="column"
-					gap="0.2em"
+					gap={isInWorkSpace ? "15px" : "0.1em"}
 				>
 					<Text
 						sizes={{
@@ -48,7 +48,7 @@ const Mod45 = ({
 							"grande"  : "32px",
 						}}
 						align="left"
-						letterSpacing="3px"
+						letterSpacing="2px"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.SubTitle width="50%" align="flex-start" />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
@@ -56,7 +56,7 @@ const Mod45 = ({
 						isThumbNail={isThumbNail}
 						textNo={0}
 					/>
-					<DividerLayout long="10%" position="h" />
+					<DividerLayout long={isInWorkSpace ? "4%" : "10%"} position="h" />
 				</Flex>
 				<Group
 					position="apart"
@@ -72,7 +72,7 @@ const Mod45 = ({
 								"grande"  : "20px",
 							}}
 							align="justify"
-							lineHeight="26px"
+							lineHeight="20px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.BodyParagraph width="100%" align="flex-start" />}
 							data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
@@ -89,7 +89,7 @@ const Mod45 = ({
 								"grande"  : "20px",
 							}}
 							align="justify"
-							lineHeight="26px"
+							lineHeight="20px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.BodyParagraph width="100%" align="flex-start" />}
 							data={textInsertion(data?.text[2], defaultText03, isInWorkSpace)}

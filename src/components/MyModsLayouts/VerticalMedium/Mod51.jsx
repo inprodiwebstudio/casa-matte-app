@@ -6,7 +6,7 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod53 = ({
+const Mod52 = ({
 	data,
 	isInWorkSpace,
 	sheetNo,
@@ -16,25 +16,24 @@ const Mod53 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 38px; font-family: JosefinSans-Light;'>SANTIAGO</span></p>";
+	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex
-			p="8%"
-			pl="4%"
-			pr="4%"
+			p="4%"
+			pt="20%"
+			pb="20%"
 			w="100%"
 			h="100%"
 			justify="center"
 			align="center"
-			gap="0.2em"
+			gap="10%"
 			direction="column"
 		>
 			<Stack
-				spacing="0.07em"
-				w="70%"
+				w="100%"
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<div>
@@ -44,6 +43,7 @@ const Mod53 = ({
 							"regular" : "42px",
 							"grande"  : "46px",
 						}}
+						typeText="title"
 						align="center"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.Title />}
@@ -75,6 +75,7 @@ const Mod53 = ({
 							"regular" : "15px",
 							"grande"  : "16px",
 						}}
+						typeText="subtitle"
 						align="center"
 						sheetNo={sheetNo}
 						letterSpacing="2px"
@@ -90,4 +91,4 @@ const Mod53 = ({
 	);
 };
 
-export default Mod53;
+export default Mod52;

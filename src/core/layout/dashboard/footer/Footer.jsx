@@ -4,18 +4,25 @@ import LayoutsList                                from "components/LayoutsList";
 
 //Constants
 import { filterTabs, optionsPhotoQuantity } from "./footerConstants";
+import photoBooksConfing                    from "core/constants/photoBooksConfing";
 //Slices
 import { workSpaceSlice } from "store/Slices";
 //Owwn components
 import { Tabs, SelectorMenuItem } from "core/components";
 import { ArrowTop }               from "Resources/icons";
 import "./Footer.scss";
+import { convertToArray }         from "helpers";
 
 const Footer = () => {
 	const currentFileterLayout = useSelector((state) => state.workSpaceSlice.layoutFilter, shallowEqual);
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
-	const isPreviewActive = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
+	const statusViewPage = useSelector((state) => state.workSpaceSlice?.statusViewPage, shallowEqual);
+	const productPhotoBook = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
+	const formatPhotoBook = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
+	const sizePhotoBook = useSelector((state) => state.workSpaceSlice?.data?.sizePhotoBook, shallowEqual);
+
+	const objLayouts = photoBooksConfing[productPhotoBook]?.[formatPhotoBook]?.sizes?.[sizePhotoBook]?.layoutMods ?? {};
 
 	const [ dropedToggle, setDropedToggle ] = useState(false);
 
@@ -24,7 +31,9 @@ const Footer = () => {
 		filter : "portadas",
 	}];
 
-	const handleTabsLayouts = currentPageId !== "frontpage" ? filterTabs : frontPagesTab;
+	const myFilteredTabsLayouts = (productPhotoBook === "layflat") ? filterTabs.filter(tabData => (tabData.filter !== "fotosytexto") && (tabData.filter !== "texto")) : filterTabs;
+
+	const handleTabsLayouts = currentPageId !== "frontpage" ? myFilteredTabsLayouts : frontPagesTab;
 
 	const dispatch = useDispatch();
 
@@ -33,6 +42,29 @@ const Footer = () => {
 			type           : currentFileterLayout.type,
 			photosQuantity : objValue,
 		}));
+	};
+
+	const optionsPhotosQuantityFiltered = () => {
+		const listOfLayoutsConfig = convertToArray(objLayouts);
+
+		const quantityOfPhotosAvailable = [];
+
+		listOfLayoutsConfig.forEach((layout) => {
+			const availableQuantityPhoto = quantityOfPhotosAvailable.find(item => item === layout.numberPhotos);
+
+			if (!availableQuantityPhoto && (layout.numberPhotos !== 0)) {
+				quantityOfPhotosAvailable.push(layout.numberPhotos);
+			}
+		});
+
+		const optionsPhotosQuantity = quantityOfPhotosAvailable.map((item) => {
+			return {
+				label : `${item} Foto${item > 1 ? "s" : ""}`,
+				value : item,
+			};
+		});
+
+		return [optionsPhotoQuantity[0], ...optionsPhotosQuantity];
 	};
 
 	useEffect(() => {
@@ -51,7 +83,7 @@ const Footer = () => {
 	}, [currentPageId]);
 
 	return (
-		<div id="Footer" className={`${dropedToggle && "full-size"} ${isPreviewActive && "isActivePreview"}`}>
+		<div id="Footer" className={`${dropedToggle && "full-size"} ${(statusViewPage === "preview") && "isActivePreview"}`}>
 			<div
 				className={`droped-container-action ${dropedToggle && "downArrow"}`}
 				{
@@ -84,7 +116,7 @@ const Footer = () => {
 								type="filled"
 								placeholder="FOTOS"
 								onChange={(objValue) => handleChangeLayoutFilter(objValue)}
-								options={optionsPhotoQuantity}
+								options={optionsPhotosQuantityFiltered()}
 								value={currentFileterLayout.photosQuantity}
 								dropTopMenu
 							/>

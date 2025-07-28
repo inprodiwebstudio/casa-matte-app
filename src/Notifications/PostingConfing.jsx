@@ -67,10 +67,11 @@ const PostingConfig = ({
 		"500" : () => (
 			showNotification({
 				// id      : "postingData",
-				title   : "Ocurrió un problema.",
-				message : "Tus cambios no han sido guardados. Intenta más tarde.",
-				color   : "red",
-				styles  : () => ({
+				title     : "Error en conexión.",
+				message   : "Lo sentimos, hubo un error de conexión. Tu progreso no se guardó correctamente. Por favor, intenta nuevamente.",
+				color     : "red",
+				autoClose : 10000,
+				styles    : () => ({
 					root : {
 					  "&::before" : {
 						  borderRadius : "0px",

@@ -6,7 +6,7 @@ import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
 
-const Mod43 = ({
+const Mod40 = ({
 	data,
 	isInWorkSpace,
 	sheetNo,
@@ -20,7 +20,8 @@ const Mod43 = ({
 
 	return (
 		<Flex
-			p="8%"
+			p="9%"
+			pb="8%"
 			w="100%"
 			h="100%"
 			justify="flex-end"
@@ -28,8 +29,12 @@ const Mod43 = ({
 			gap="0.15em"
 			direction="column"
 		>
-			<DividerLayout long="10%" position="h" />
-			<Stack w="47%" {...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}>
+			<DividerLayout
+				long={isInWorkSpace ? "5%" : "10%"}
+				position="h"
+				weight={isInWorkSpace ? "2px" : "0.01em"}
+			/>
+			<Stack w="50%" {...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}>
 				<Text
 					sizes={{
 						"chico"   : "11px",
@@ -39,6 +44,7 @@ const Mod43 = ({
 					sheetNo={sheetNo}
 					textShell={() => <TextShell.Body align="flex-end" />}
 					align="right"
+					typeText="body"
 					lineHeight="14px"
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isInPaginator={isInPaginator}
@@ -50,4 +56,4 @@ const Mod43 = ({
 	);
 };
 
-export default Mod43;
+export default Mod40;
