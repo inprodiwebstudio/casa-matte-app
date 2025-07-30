@@ -8,15 +8,13 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 50px; font-family: TAN-MERINGUE;'>AMALFI</span></p>";
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 20px; font-family: Inter-Lifght;'>ENERO 2023</span></p>";
-	const defaultText03 = "<p style='text-align: center;'><span style='font-size: 20px; font-family: Inter-Lifght;'>OAXACA — TEOTITLÁN — SAN JOSÉ — OCOTLÁN</span></p>";
-
-	// const defaultText02 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 72px; font-family: TAN-MERINGUE;'>AMALFI</span></p>";
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 22px; font-family: Inter-Lifght;'>ENERO 2023</span></p>";
+	const defaultText03 = "<p style='text-align: center;'><span style='font-size: 22px; font-family: Inter-Lifght;'>OAXACA — TEOTITLÁN — SAN JOSÉ — OCOTLÁN</span></p>";
 
 	return (
 		<Flex
-			p="8%"
+			p="0%"
 			w="100%"
 			h="100%"
 			justify="center"
@@ -62,6 +60,7 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					}}
 					h="100%"
 					align="center"
+					justify="center"
 					spacing={isInWorkSpace ? "0%" : "20%"}
 				>
 					<Stack
@@ -88,10 +87,10 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 						/>
 					</Stack>
 					<Stack
-						w={isInWorkSpace ? "450px" : "70%"}
-						h={isInWorkSpace ? "440px" : "90%"}
-						mt={isInWorkSpace ? "75px" : "0%"}
-						mb={isInWorkSpace ? "140px" : "0%"}
+						w={isInWorkSpace ? "350px" : "70%"}
+						h={isInWorkSpace ? "350px" : "90%"}
+						mt={isInWorkSpace ? "70px" : "0%"}
+						mb={isInWorkSpace ? "150px" : "0%"}
 					>
 						<ImgLayout
 							isInWorkSpace={isInWorkSpace}

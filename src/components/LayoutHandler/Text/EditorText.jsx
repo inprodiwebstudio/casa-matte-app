@@ -188,62 +188,37 @@ const EditText = ({
 			],
 			supportAllValues : true,
 		},
-		// initialData : "<p>Hello from CKEditor 5 in React!</p>",
 	};
 
 	const [editorState, setEditorState] = useState(dataTextPage);
 
-	// const debounce = (func, delay) => {
-	// 	let timeout;
-	// 	return (...args) => {
-	// 		if (timeout) clearTimeout(timeout);
-	// 		timeout = setTimeout(() => {
-	// 			func(...args);
-	// 		}, delay);
-	// 	};
-	// };
+	const debounce = (func, delay) => {
+		let timeout;
+		return (...args) => {
+			if (timeout) clearTimeout(timeout);
+			timeout = setTimeout(() => {
+				func(...args);
+			}, delay);
+		};
+	};
 
-	// const handlerDefaultStyles = (editorData) => {
-	// 	const parser = new DOMParser();
-	// 	const doc = parser.parseFromString(editorData, "text/html");
-
-	// 	doc.querySelectorAll("p").forEach(p => {
-	// 		p.style.fontFamily = "TAN-MERINGUE";
-	// 		p.style.fontSize = "50px";
-	// 	});
-
-	// 	return doc.body.innerHTML;
-	// };
-
-	const handleEditorChange = useCallback((event, editor) => {
-		const data = editor.getData();
-		const selection = editor.model.document.selection;
-
-		const fontSize = selection.getAttribute("fontSize");
-		const fontFamily = selection.getAttribute("fontFamily");
-
-		const isNotAvailableStyles = !fontSize && !fontFamily;
-
-		if (isNotAvailableStyles) {
-			const defaultStyles = "<p style='text-align: center;'><span style='font-size: 50px; font-family: TAN-MERINGUE;'>&nbsp;</span></p>";
-			setEditorState(defaultStyles);
-			return;
-		}
-
-		setEditorState(data);
-	}, []);
-
-	const handlerSetTextData = (textData) => {
-		if (isBound) {
-			workSpaceSlice.addTextBound({text : textData});
-			return;
+	const handleEditorChange = useCallback(
+		debounce((event, editor) => {
+		  const data = editor.getData();
+		  setEditorState(data);
+		  if (isBound) {
+				workSpaceSlice.addTextBound({text : data});
+				return;
 		  }
 		  if (!isFront) {
-			workSpaceSlice.addText({pageId : currentPageId, sheetNo, text : textData, layoutNo});
-			return;
+				workSpaceSlice.addText({pageId : currentPageId, sheetNo, text : data, layoutNo});
+				return;
 		  }
-		   workSpaceSlice.addTextFront({sheetNo, text : textData, layoutNo});
-	};
+		  workSpaceSlice.addTextFront({sheetNo, text : data, layoutNo});
+		}, 3000),
+		[]
+	);
+
 
 	const getCurrentFontSize = (editor) => {
 		editorRef.current = editor;
@@ -276,9 +251,6 @@ const EditText = ({
 				config={ editorConfiguration }
 				data={editorState}
 				onReady={getCurrentFontSize}
-				onBlur={(event, editor) => {
-					handlerSetTextData(editor.getData());
-				}}
 				onChange={(event, editor) => {
 					handleEditorChange(event, editor);
 				}}
