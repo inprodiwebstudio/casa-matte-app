@@ -9,6 +9,8 @@ const textToImage = async (id) => {
 	const width = element.clientWidth * 5;
 	const height = element.clientHeight * 5;
 
+	//convert to image fn
+
 	const imgData = await domtoimage.toPng(element, {
 		width  : width,
 		height : height,
