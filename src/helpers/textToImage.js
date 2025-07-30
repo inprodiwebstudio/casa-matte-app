@@ -8,7 +8,8 @@ const textToImage = async (id) => {
 	const width = element.clientWidth;
 	const height =  parseFloat(style.height);
 
-	if (!element) return undefined;
+	const width = element.clientWidth * 5;
+	const height = element.clientHeight * 5;
 
 	const imgData = await domtoimage.toPng(element, {
 		width  : width * 5,
@@ -16,8 +17,8 @@ const textToImage = async (id) => {
 		style  : {
 			transform       : `scale(${5})`,
 			transformOrigin : "top left",
-			width           : `${width}px`, // Mantiene el tamaño real en el DOM
-			height          : `${height}px`,
+			width           : `${element.clientWidth}px`,
+			height          : `${element.clientHeight}px`,
 		},
 	});
 
