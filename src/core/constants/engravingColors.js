@@ -1,4 +1,4 @@
-import Holografico  from "../../Resources/images/engravingTextures/holográfico.jpg";
+import Holografico  from "../../Resources/images/engravingTextures/holographic.jpg";
 import Plata        from "../../Resources/images/engravingTextures/plata.jpg";
 import Dorado       from "../../Resources/images/engravingTextures/dorado.jpg";
 import Cobre        from "../../Resources/images/engravingTextures/cobre.jpg";
