@@ -38,11 +38,12 @@ const Mod63 = ({
 			sx={{overflow : "hidden"}}
 		>
 			<Stack
-				spacing="0.2em"
-				w="20%"
+				spacing={isInWorkSpace ? "40px" : "0.4em"}
+				miw="16%"
+				w={isInWorkSpace ? "auto" : "20%"}
 			>
 				<Stack
-					spacing="0em"
+					spacing={isInWorkSpace ? "10px" : "0.1em"}
 					aria-hidden
 				>
 					<div
@@ -58,7 +59,7 @@ const Mod63 = ({
 								"grande"  : "26px",
 							}}
 							align="left"
-							letterSpacing="3px"
+							letterSpacing="2px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
 							data={textInsertion(data?.text[0], defaultTitle01, isInWorkSpace)}
@@ -77,7 +78,7 @@ const Mod63 = ({
 								"grande"  : "16px",
 							}}
 							align="left"
-							gapSpacing="10px"
+							gapSpacing="8px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.BodyIndices align="left" />}
 							data={textInsertion(data?.text[1], defaultIndice01, isInWorkSpace)}
@@ -88,7 +89,7 @@ const Mod63 = ({
 					</div>
 				</Stack>
 				<Stack
-					spacing="0em"
+					spacing={isInWorkSpace ? "10px" : "0.1em"}
 					aria-hidden
 				>
 					<div
@@ -104,7 +105,7 @@ const Mod63 = ({
 								"grande"  : "26px",
 							}}
 							align="left"
-							letterSpacing="3px"
+							letterSpacing="2px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
 							data={textInsertion(data?.text[2], defaultTitle02, isInWorkSpace)}
@@ -124,7 +125,7 @@ const Mod63 = ({
 								"grande"  : "16px",
 							}}
 							align="left"
-							gapSpacing="10px"
+							gapSpacing="8px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.BodyIndices align="left" />}
 							data={textInsertion(data?.text[3], defaultIndice02, isInWorkSpace)}
@@ -135,8 +136,8 @@ const Mod63 = ({
 					</div>
 				</Stack>
 				<Stack
-					mah="70%"
-					spacing="0em"
+					spacing={isInWorkSpace ? "10px" : "0.1em"}
+					aria-hidden
 				>
 					<div
 						style={{
@@ -151,7 +152,7 @@ const Mod63 = ({
 								"grande"  : "26px",
 							}}
 							align="left"
-							letterSpacing="3px"
+							letterSpacing="2px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
 							data={textInsertion(data?.text[4], defaultTitle03, isInWorkSpace)}
@@ -170,7 +171,7 @@ const Mod63 = ({
 								"grande"  : "16px",
 							}}
 							align="left"
-							gapSpacing="10px"
+							gapSpacing="8px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.BodyIndices align="left" />}
 							data={textInsertion(data?.text[5], defaultIndice03, isInWorkSpace)}

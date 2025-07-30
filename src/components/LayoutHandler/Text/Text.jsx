@@ -18,6 +18,7 @@ const Text = ({
 	letterSpacing,
 	align="center",
 	isThumbNail,
+	typeText="body",
 	isInPaginator,
 }) => {
 	const isNullableAction = isThumbNail || isInPaginator;
@@ -56,6 +57,7 @@ const Text = ({
 			{
 				(!isInPaginator && !isThumbNail) && (
 					<EditorText
+						typeText={typeText}
 						isFront={isFront}
 						isBound={isBound}
 						lineHeight={lineHeight}

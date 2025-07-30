@@ -1,6 +1,8 @@
-import { useDispatch }    from "react-redux";
-import { workSpaceSlice } from "store/Slices";
-import convertToObject    from "helpers/convertToobject";
+import { useDispatch }               from "react-redux";
+import { workSpaceSlice }            from "store/Slices";
+import convertToObject               from "helpers/convertToobject";
+import handlerMaterialAndColorLining from "helpers/handlerMaterialAndColorLining";
+import handlerGravingColorData       from "helpers/handlerGravingColor";
 
 export const usePhotoBookPreset = () => {
 	const dispatch = useDispatch();
@@ -15,24 +17,45 @@ export const usePhotoBookPreset = () => {
 		const price = meta?.precio_total?.replace("$", "") ?? "0";
 		const numberOfPages = meta?.numero_de_paginas ? Number(meta?.numero_de_paginas) : 40;
 
+		const cover = !meta.color_de_tela ? undefined : {
+			material : handlerMaterialAndColorLining(meta.color_de_tela).materialName,
+			color    : handlerMaterialAndColorLining(meta.color_de_tela).colorName,
+		};
+
+		const handlerEngravingData = () => {
+			const isAvailableEngraving = meta?.color_de_grabado !== "";
+
+			if (!isAvailableEngraving) {
+				return undefined;
+			}
+
+			return {
+				currentColor : handlerGravingColorData(meta?.color_de_grabado).currentColor,
+				listOfColors : handlerGravingColorData(meta?.color_de_grabado).listOfColors,
+			};
+		};
+
 		const configPhotoBookData = {
-			postTypeId    : productData?.id ?? undefined,
-			sizePhotoBook : formatAndSize.size,
-			dimentions    : dimensions,
-			product       : model.modelKey,
-			productName   : model.productName,
-			format        : formatAndSize.format,
-			frontPage     : defaultFrontPage(),
+			postTypeId     : productData?.id ?? undefined,
+			sizePhotoBook  : formatAndSize.size,
+			dimentions     : dimensions,
+			product        : model.modelKey,
+			productName    : model.productName,
+			format         : formatAndSize.format,
+			frontPage      : defaultFrontPage(),
 			numberOfPages,
-			minPages      : meta?.pasta === "Dura" ? 25 : 10,
-			maxPages      : numberOfPages,
-			currentPage   : "page1",
-			projectTittle : "TITULO",
-			basePrice     : price.replace(" ", ""),
-			bound         : meta?.encuadernado ?? "",
-			pasta         : meta?.pasta ?? "",
-			maxRangePages : numberOfPages,
-			pages         : convertToObject(generatePages(numberOfPages, model.modelKey === "layflat")),
+			minPages       : meta?.pasta === "Dura" ? 25 : 10,
+			maxPages       : numberOfPages,
+			currentPage    : "page1",
+			projectTittle  : "TITULO",
+			basePrice      : price.replace(" ", ""),
+			bound          : meta?.encuadernado ?? "",
+			pasta          : meta?.pasta ?? "",
+			maxRangePages  : numberOfPages,
+			availableSpine : (meta?.grabado_en_lomo === "Sin grabado") ? false : true,
+			cover,
+			engraving      : handlerEngravingData(),
+			pages          : convertToObject(generatePages(numberOfPages, model.modelKey === "layflat")),
 		};
 
 		try {
@@ -80,9 +103,13 @@ const getModel = (modelo = "") => {
 const defaultFrontPage = () => ({
 	id     : "FrontLayout",
 	sheet1 : {
-		layoutType : "",
-		text       : {},
-		photos     : {
+		layoutType : "FrontMod1",
+		text       : {
+			"0" : "",
+			"1" : "",
+			"2" : "",
+		},
+		photos : {
 			"0" : { id : "", url : "" },
 		},
 	},

@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy": "https://casamatte.com/",
+  "proxy": "https://casamatte.wip-inprodi.com/",
   "engines": {
     "node": "18.12.0",
     "yarn": ">=3.0.0"
@@ -106,5 +106,6 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
-  }
+  },
+  "packageManager": "yarn@4.9.2"
 }

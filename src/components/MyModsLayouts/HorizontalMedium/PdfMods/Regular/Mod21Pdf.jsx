@@ -33,7 +33,7 @@ const Mod21Pdf = ({images}) => {
 						height     : "calc(60% - 5px)",
 						width      : "100%",
 						overflow   : "hidden",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -54,7 +54,7 @@ const Mod21Pdf = ({images}) => {
 						height     : "calc(40% - 5px)",
 						width      : "100%",
 						overflow   : "hidden",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{

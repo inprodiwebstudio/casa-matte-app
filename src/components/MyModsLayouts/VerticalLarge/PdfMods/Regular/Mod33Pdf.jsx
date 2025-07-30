@@ -39,7 +39,7 @@ const Mod33Pdf = ({images}) => {
 						style={{
 							height     : "calc(50% - 5px)",
 							width      : "100%",
-							background : "#E3E3E3",
+							background : "white",
 							overflow   : "hidden",
 						}}
 					>
@@ -60,7 +60,7 @@ const Mod33Pdf = ({images}) => {
 						style={{
 							height     : "calc(50% - 5px)",
 							width      : "100%",
-							background : "#E3E3E3",
+							background : "white",
 							overflow   : "hidden",
 						}}
 					>
@@ -92,7 +92,7 @@ const Mod33Pdf = ({images}) => {
 							height     : "calc(33.33% - 6.667px)",
 							width      : "100%",
 							gap        : "10px",
-							background : "#E3E3E3",
+							background : "white",
 							overflow   : "hidden",
 						}}
 					>
@@ -114,7 +114,7 @@ const Mod33Pdf = ({images}) => {
 							height     : "calc(33.33% - 6.667px)",
 							width      : "100%",
 							gap        : "10px",
-							background : "#E3E3E3",
+							background : "white",
 							overflow   : "hidden",
 						}}
 					>
@@ -136,7 +136,7 @@ const Mod33Pdf = ({images}) => {
 							height     : "calc(33.33% - 6.667px)",
 							width      : "100%",
 							gap        : "10px",
-							background : "#E3E3E3",
+							background : "white",
 							overflow   : "hidden",
 						}}
 					>

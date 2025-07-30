@@ -15,7 +15,7 @@ const Mod42 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 18px; font-family: Inter-Lifght;'>PARA PAPÁ. UN HOMENAJE A TU VIDA. GRACIAS POR TANTOS AÑOS DE CARIÑO Y AMOR, TE QUEREMOS SIEMPRE..</span></p>";
+	const defaultText01 = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>PARA PAPÁ. UN HOMENAJE A TU VIDA. GRACIAS POR TANTOS AÑOS DE CARIÑO Y AMOR, TE QUEREMOS SIEMPRE..</span></p>";
 
 	return (
 		<Center
@@ -24,7 +24,7 @@ const Mod42 = ({
 		>
 			<Stack
 				mah="70%"
-				w="62%"
+				w="50%"
 				aria-hidden={true}
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
@@ -34,7 +34,7 @@ const Mod42 = ({
 						"regular" : "18px",
 						"grande"  : "20px",
 					}}
-					lineHeight="32px"
+					lineHeight="20px"
 					align="left"
 					sheetNo={sheetNo}
 					textShell={() => <TextShell.Body align="left" />}

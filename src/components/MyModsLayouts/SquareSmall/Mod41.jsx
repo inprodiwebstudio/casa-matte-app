@@ -16,13 +16,13 @@ const Mod41 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 26px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaulSubtTitle = "<p style='text-align: right;'><span style='font-size: 15px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>";
+	const defaulSubtTitle = "<p style='text-align: right;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>";
 
 	return (
 		<Flex
-			pb="6%"
+			pb="8%"
 			pr="10%"
 			w="100%"
 			h="100%"
@@ -31,8 +31,21 @@ const Mod41 = ({
 			direction="column"
 			gap="0.09em"
 		>
-			<DividerLayout long="7%" position="h" />
-			<Stack spacing="0px" w="100%">
+			<div
+				style={{
+					width          : "100%",
+					display        : "flex",
+					justifyContent : "flex-end",
+					marginRight    : isInWorkSpace ? "8px" : "0px",
+				}}
+			>
+				<DividerLayout
+					long={isInWorkSpace ? "5%" : "7%"}
+					position="h"
+					weight={isInWorkSpace ? "2px" : "0.01em"}
+				/>
+			</div>
+			<Stack spacing={isInWorkSpace ? "2px" : "1px"} w="100%">
 				<div
 					style={{
 						width : "100%",
@@ -45,6 +58,7 @@ const Mod41 = ({
 							"regular" : "26px",
 							"grande"  : "28px",
 						}}
+						typeText="title"
 						align="right"
 						sheetNo={sheetNo}
 						letterSpacing="4px"
@@ -57,7 +71,8 @@ const Mod41 = ({
 				</div>
 				<div
 					style={{
-						width : "100%",
+						width        : "100%",
+						paddingRight : isInWorkSpace ? "4px" : "0px",
 					}}
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
 				>
@@ -67,6 +82,7 @@ const Mod41 = ({
 							"regular" : "15px",
 							"grande"  : "18px",
 						}}
+						typeText="subtitle"
 						align="right"
 						sheetNo={sheetNo}
 						letterSpacing="2px"

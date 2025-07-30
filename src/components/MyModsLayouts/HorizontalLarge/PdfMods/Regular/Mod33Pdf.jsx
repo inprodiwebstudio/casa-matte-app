@@ -35,7 +35,7 @@ const Mod33Pdf = ({images}) => {
 						height     : "calc(50% - 5px)",
 						width      : "100%",
 						overflow   : "hidden",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -56,7 +56,7 @@ const Mod33Pdf = ({images}) => {
 						height     : "calc(50% - 5px)",
 						width      : "100%",
 						overflow   : "hidden",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -78,7 +78,7 @@ const Mod33Pdf = ({images}) => {
 					height     : "100%",
 					width      : "calc(70% - 5px)",
 					overflow   : "hidden",
-					background : "#E3E3E3",
+					background : "white",
 				}}
 			>
 				{

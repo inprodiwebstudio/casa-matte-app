@@ -20,10 +20,10 @@ const Mod36Pdf = ({
 	const bodyHtml = (
 		<div
 			style={{
-				height       : "792px",
-				width        : "100%",
-				padding      : "20px",
-				paddingRight : "35px",
+				height        : "792px",
+				width         : "100%",
+				paddingBottom : "7%",
+				paddingRight  : "9%",
 			}}
 		>
 
@@ -37,14 +37,19 @@ const Mod36Pdf = ({
 				}}
 			>
 				<div
-					style={{ width : "50%" }}
+					style={{ width : "85%" }}
 				>
 					{
 						myTextImgsMod[0] &&
 						<img
 							src={myTextImgsMod[0]}
 							alt="Captura de texto"
-							style={{ objectFit : "cover" }}
+							style={{
+								objectFit      : "cover",
+								height         : "auto",
+								width          : "100%",
+								objectPosition : "center",
+							}}
 						/>
 					}
 				</div>

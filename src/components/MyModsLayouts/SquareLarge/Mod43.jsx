@@ -16,7 +16,7 @@ const Mod43 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 18px; font-family: Spectral-Light-Italic;'>Para papá, un homenaje a tu vida. Gracias por tantos años de cariño y amor. Te queremos siempre.</span></p>";
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Para papá, un homenaje a tu vida. Gracias por tantos años de cariño y amor. Te queremos siempre.</span></p>";
 
 	return (
 		<Flex
@@ -29,10 +29,20 @@ const Mod43 = ({
 			<Stack
 				w="100%"
 				align="flex-end"
-				spacing="0.1em"
+				spacing={isInWorkSpace ? "25px" : "0.2em"}
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
-				<DividerLayout long="10%" position="h" />
+				<Flex
+					w="100%"
+					justify="flex-end"
+					mr={isInWorkSpace ? "5px" : "0%"}
+				>
+					<DividerLayout
+						long={isInWorkSpace ? "6%" : "10%"}
+						position="h"
+						weight={isInWorkSpace ? "2px" : "0.015em"}
+					/>
+				</Flex>
 				<Stack w="45%">
 					<Text
 						sizes={{
@@ -43,7 +53,7 @@ const Mod43 = ({
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.Body align="flex-end" />}
 						align="right"
-						lineHeight="28px"
+						lineHeight="16px"
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}

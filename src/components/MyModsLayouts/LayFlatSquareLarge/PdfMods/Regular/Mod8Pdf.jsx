@@ -19,7 +19,7 @@ const Mod8Pdf = ({images}) => {
 		>
 			<div
 				style={{
-					background : "#E3E3E3",
+					background : "white",
 					width      : "100%",
 					height     : "100%",
 				}}

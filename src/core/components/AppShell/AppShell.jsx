@@ -42,7 +42,8 @@ const AppShell = ({
 				},
 				status : "publish",
 				meta   : {
-					config : parseSendData({...workSpaceData, minPages : (workSpaceData?.pasta === "Dura") ? 25 : 10}),
+					collage : "https://res.cloudinary.com/demo/image/upload/c_auto,g_auto,h_250,w_271/$w_250/l_docs:kitchen-apartment/c_auto,g_auto,h_250,w_250/fl_layer_apply,x_$w_add_30/$h_250/l_docs:study-apartment/c_auto,g_auto,h_250,w_250/fl_layer_apply,g_east,y_$h_add_30/l_docs:lounge-apartment/c_auto,g_auto,h_250,w_250/fl_layer_apply,g_south_west/b_burlywood/c_lpad,h_590,w_590/docs/dining-apartment.jpg",
+					config  : parseSendData({...workSpaceData, minPages : (workSpaceData?.pasta === "Dura") ? 25 : 10}),
 				},
 			},
 			id     : postId,

@@ -14,7 +14,7 @@ const Mod38 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 46px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>";
 
 	return (
 		<Center w="100%" h="100%">

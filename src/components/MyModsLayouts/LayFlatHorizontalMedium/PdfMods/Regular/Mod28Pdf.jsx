@@ -35,7 +35,7 @@ const Mod28Pdf = ({images}) => {
 				>
 					<div
 						style={{
-							background : "#E3E3E3",
+							background : "white",
 							height     : "100%",
 							width      : "calc(50% - 5px)",
 						}}
@@ -55,7 +55,7 @@ const Mod28Pdf = ({images}) => {
 					</div>
 					<div
 						style={{
-							background : "#E3E3E3",
+							background : "white",
 							height     : "100%",
 							width      : "calc(50% - 5px)",
 						}}
@@ -85,7 +85,7 @@ const Mod28Pdf = ({images}) => {
 				>
 					<div
 						style={{
-							background : "#E3E3E3",
+							background : "white",
 							height     : "100%",
 							width      : "calc(50% - 5px)",
 						}}
@@ -105,7 +105,7 @@ const Mod28Pdf = ({images}) => {
 					</div>
 					<div
 						style={{
-							background : "#E3E3E3",
+							background : "white",
 							height     : "100%",
 							width      : "calc(50% - 5px)",
 						}}

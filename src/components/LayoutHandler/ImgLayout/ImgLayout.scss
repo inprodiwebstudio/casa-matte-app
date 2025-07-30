@@ -5,6 +5,9 @@
    height: 100%;
    background: $body-color;
 
+   &.isUnderImage {
+      background: rgb(181, 181, 181);
+   }
    &.relevantColor {
       background: rgb(202, 202, 202);
    }

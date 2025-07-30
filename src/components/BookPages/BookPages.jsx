@@ -16,6 +16,7 @@ const BookPages = ({
 	isInWorkSpcae,
 }) => {
 	const [ currentSelectedPage, setCurrentSelectedPage ] = useState(undefined);
+	const [ showModLayout, setShowModLayout ] = useState(false);
 
 	const dispatch = useDispatch();
 
@@ -44,7 +45,13 @@ const BookPages = ({
 			const pageNo = pageData?.[`sheet${sheetNo}`]?.pageNo;
 
 			return (
-				<>
+				<div
+					style={{
+						width      : "100%",
+						height     : "100%",
+						transition : "all 0.2s ease-in-out",
+						...(isInWorkSpcae && {opacity : showModLayout ? 1 : 0 }),
+					}}>
 					<LayoutMod
 						pageNo={pageNo}
 						modLayout={modLayout}
@@ -54,7 +61,7 @@ const BookPages = ({
 						isInWorkSpace={isInWorkSpcae}
 						sheetNo={sheetNo}
 					/>
-				</>
+				</div>
 			);
 		}
 	};
@@ -83,6 +90,12 @@ const BookPages = ({
 			<Skeleton className="BookPages isSinglePage" />
 		);
 	}
+
+	useEffect(() => {
+		setTimeout(() => {
+			setShowModLayout(true);
+		}, 10);
+	}, []);
 
 	return (
 		<div

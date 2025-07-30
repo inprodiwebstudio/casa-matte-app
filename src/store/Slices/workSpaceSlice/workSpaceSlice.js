@@ -3,16 +3,17 @@ import { convertToArray, convertToObject, History, isValidArray } from "helpers"
 
 const initialState = {
 	data : {
-		product        : "",
-		productName    : "",
-		format         : "",
-		sizePhotoBook  : "",
-		sizeDimentions : "",
-		pasta          : "",
-		projectTittle  : "",
-		modified       : undefined,
-		orderId        : undefined,
-		frontPage      : {
+		product            : "",
+		productName        : "",
+		format             : "",
+		sizePhotoBook      : "",
+		sizeDimentions     : "",
+		pasta              : "",
+		projectTittle      : "",
+		currentTextsInPage : {},
+		modified           : undefined,
+		orderId            : undefined,
+		frontPage          : {
 			id     : "FrontLayout",
 			sheet1 : {
 				layoutType : "",
@@ -22,15 +23,18 @@ const initialState = {
 				},
 			},
 		},
-		minPages      : 0,
-		maxPages      : 0,
-		numberOfPages : 50,
-		price         : 0,
-		currentPage   : "frontpage",
-		basePrice     : undefined,
-		extraCost     : 50,
-		maxRangePages : 30,
-		pages         : {
+		cover          : undefined,
+		engraving      : undefined,
+		availableSpine : false,
+		minPages       : 0,
+		maxPages       : 0,
+		numberOfPages  : 50,
+		price          : 0,
+		currentPage    : "frontpage",
+		basePrice      : undefined,
+		extraCost      : 50,
+		maxRangePages  : 30,
+		pages          : {
 			page1 : {
 				id     : "page1",
 				sheet1 : {
@@ -277,6 +281,16 @@ export const workSpaceSlice = createSlice({
 		},
 		setCurrentPhotoDrager : (state, {payload}) => {
 			state.currentPhotoDragger = payload;
+		},
+		changeColorCover : (state, {payload}) => {
+			state.data.cover = payload;
+		},
+		changeColorEngraving : (state, {payload}) => {
+			state.data.engraving.currentColor = payload;
+		},
+		insertPhotoBase64Url : (state, {payload}) => {
+			const { pageId, sheetNo, photoIndex, imageData } = payload;
+			state.data.pages[pageId][sheetNo].photos[photoIndex] = imageData;
 		},
 		setLayoutFilter : (state, {payload}) => {
 			state.layoutFilter = payload;

@@ -15,9 +15,9 @@ const Mod37 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 28px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaulSubtTitle = "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>";
+	const defaulSubtTitle = "<p style='text-align: center;'><span style='font-size: 10px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>";
 
 	return (
 		<Flex
@@ -27,8 +27,14 @@ const Mod37 = ({
 			justify="flex-end"
 			align="flex-end"
 		>
-			<Center w="100%" h="100%">
-				<Stack spacing="0px" w="100%">
+			<Center
+				w="100%"
+				h="100%"
+			>
+				<Stack
+					spacing={isInWorkSpace ? "2px" : "0.05em"}
+					w="100%"
+				>
 					<div
 						style={{
 							width        : "100%",
@@ -44,8 +50,9 @@ const Mod37 = ({
 								"regular" : "42px",
 								"grande"  : "46px",
 							}}
+							typeText="title"
 							sheetNo={sheetNo}
-							letterSpacing="6px"
+							letterSpacing="4px"
 							textShell={() => <TextShell.Title />}
 							data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 							isInPaginator={isInPaginator}
@@ -67,6 +74,7 @@ const Mod37 = ({
 								"regular" : "15px",
 								"grande"  : "16px",
 							}}
+							typeText="subtitle"
 							sheetNo={sheetNo}
 							letterSpacing="2px"
 							textShell={() => <TextShell.SubTitle />}
