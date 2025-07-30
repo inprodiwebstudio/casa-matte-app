@@ -23,6 +23,25 @@ const CoverBook = ({
 
 	const aspectRatio = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.aspectRatio;
 
+	const isSencilloPhotoBook = currentPhotoBook === "sencillo";
+
+	const marginSizesSencillo = {
+		"cuadrado" : {
+			"grande" : "65px",
+			"chico"  : "40px",
+		},
+		"vertical" : {
+			"grande"  : "70px",
+			"mediano" : "43px",
+		},
+		"horizontal" : {
+			"grande"  : "65px",
+			"mediano" : "50px",
+		},
+	};
+
+	const sizeMarginSencillo = marginSizesSencillo[photoBookFormat]?.[photobookSize];
+
 	const handleLayoutMod = () => {
 		if (photoBookData?.frontPage?.sheet1?.layoutType) {
 			const LayoutMod = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.layoutMods[photoBookData?.frontPage?.sheet1?.layoutType]?.layout;
@@ -55,6 +74,7 @@ const CoverBook = ({
 			setShowModLayout(true);
 		}, 10);
 	}, []);
+
 	return (
 		<Group
 			spacing={0}
@@ -79,11 +99,183 @@ const CoverBook = ({
 					backgroundImage  : coverData && `url(${frontThemesTextures[coverData?.material][coverData?.color].textureUrl})`,
 					backgroundSize   : (coverData?.material === "CURPIEL") ? "50% 100%" : "cover",
 					backgroundRepeat : (coverData?.material === "CURPIEL") ? "repeat" : "no-repeat",
-					opacity          : 0.7,
+					opacity          : 0.2,
 				}}
 			>
 				&nbsp;
 			</Group>
+			{
+				(isSencilloPhotoBook && isInWorkSpace) && (
+					<>
+						<div
+							style={{
+								position       : "absolute",
+								width          : "100%",
+								height         : sizeMarginSencillo,
+								background     : "#35353599",
+								backdropFilter : "blur(3px)",
+								top            : 0,
+								zIndex         : 1,
+								fontSize       : "0.1em",
+								display        : "flex",
+								justifyContent : "center",
+								alignItems     : "center",
+								color          : "#fff",
+								gap            : "30px",
+								overflow       : "hidden",
+							}}
+						>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+						</div>
+						<div
+							style={{
+								position       : "absolute",
+								width          : "100%",
+								height         : sizeMarginSencillo,
+								background     : "#35353599",
+								backdropFilter : "blur(3px)",
+								bottom         : 0,
+								zIndex         : 1,
+								fontSize       : "0.1em",
+								display        : "flex",
+								justifyContent : "center",
+								alignItems     : "center",
+								color          : "#fff",
+								gap            : "30px",
+								overflow       : "hidden",
+							}}
+						>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+						</div>
+						<div
+							style={{
+								position       : "absolute",
+								width          : sizeMarginSencillo,
+								height         : `calc(100% - ${sizeMarginSencillo} - ${sizeMarginSencillo})`,
+								background     : "#35353599",
+								backdropFilter : "blur(3px)",
+								top            : sizeMarginSencillo,
+								left           : 0,
+								zIndex         : 1,
+								fontSize       : "0.1em",
+								display        : "flex",
+								justifyContent : "center",
+								alignItems     : "center",
+								color          : "#fff",
+								gap            : "30px",
+								overflow       : "hidden",
+								writingMode    : "vertical-rl",
+							}}
+						>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+						</div>
+						<div
+							style={{
+								position       : "absolute",
+								width          : sizeMarginSencillo,
+								height         : `calc(100% - ${sizeMarginSencillo} - ${sizeMarginSencillo})`,
+								background     : "#35353599",
+								backdropFilter : "blur(3px)",
+								top            : sizeMarginSencillo,
+								right          : 0,
+								zIndex         : 1,
+								fontSize       : "0.1em",
+								display        : "flex",
+								justifyContent : "center",
+								alignItems     : "center",
+								color          : "#fff",
+								gap            : "30px",
+								overflow       : "hidden",
+								writingMode    : "vertical-rl",
+							}}
+						>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+							<div>
+								- AREA - DE - CORTE -
+							</div>
+						</div>
+					</>
+				)
+			}
+			{
+				isSencilloPhotoBook && (
+					<Group
+						w="100%"
+						h="100%"
+						spacing={0}
+						style={{
+							position   : "absolute",
+							top        : 0,
+							left       : 0,
+							right      : 0,
+							bottom     : 0,
+							background : "transparent",
+							...(isInWorkSpace && {border : `${sizeMarginSencillo} solid #c4c3c3`}),
+						}}
+					>
+					&nbsp;
+					</Group>
+				)
+			}
 			<Group
 				w="100%"
 				h="100%"

@@ -19,11 +19,11 @@ const engravingColors = {
 		texture : Holografico,
 	},
 	Plata : {
-		color   : "#C0C0C0",
+		color   : "#d4d4d4ff",
 		texture : Plata,
 	},
 	Dorado : {
-		color   : "#FFD700",
+		color   : "#bea307ff",
 		texture : Dorado,
 	},
 	Cobre : {

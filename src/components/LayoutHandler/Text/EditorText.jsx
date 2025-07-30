@@ -90,7 +90,7 @@ const EditText = ({
 		fontFamily : {
 			options : availableFontFamilies[typeText ?? "body"],
 		},
-		toolbar : {
+		toolbar : ((product === "travelcoffeetable ") && isFront) ? undefined : {
 			items : [
 				"fontSize",
 				"fontfamily",
