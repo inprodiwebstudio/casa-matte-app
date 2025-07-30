@@ -64,7 +64,12 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					align="center"
 					spacing={isInWorkSpace ? "0%" : "20%"}
 				>
-					<Stack w="80%">
+					<Stack
+						w="80%"
+						sx={{
+							textTransform : "uppercase",
+						}}
+					>
 						<Text
 							sizes={{
 								"chico"   : "68px",
