@@ -97,9 +97,9 @@ const CoverBook = ({
 					right            : 0,
 					bottom           : 0,
 					backgroundImage  : coverData && `url(${frontThemesTextures[coverData?.material][coverData?.color].textureUrl})`,
-					backgroundSize   : (coverData?.material === "CURPIEL") ? "50% 100%" : "cover",
-					backgroundRepeat : (coverData?.material === "CURPIEL") ? "repeat" : "no-repeat",
-					opacity          : 0.2,
+					backgroundSize   : (coverData?.material === "PIEL VEGANA") ? "50% 100%" : "cover",
+					backgroundRepeat : (coverData?.material === "PIEL VEGANA") ? "repeat" : "no-repeat",
+					opacity          : 0.6,
 				}}
 			>
 				&nbsp;
