@@ -8,7 +8,7 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 70px; font-family: TAN-MERINGUE;'>AMALFI</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 50px; font-family: TAN-MERINGUE;'>AMALFI</span></p>";
 	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 20px; font-family: Inter-Lifght;'>ENERO 2023</span></p>";
 	const defaultText03 = "<p style='text-align: center;'><span style='font-size: 20px; font-family: Inter-Lifght;'>OAXACA — TEOTITLÁN — SAN JOSÉ — OCOTLÁN</span></p>";
 
@@ -46,6 +46,7 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 							}}
 							isFront={true}
 							align="center"
+							typeText="subtitle"
 							sheetNo={sheetNo}
 							textShell={() => <></>}
 							data={textInsertion(data?.text[2], defaultText03, isInWorkSpace)}
@@ -70,6 +71,7 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 								"regular" : "70px",
 								"grande"  : "72px",
 							}}
+							typeText="title"
 							isFront={true}
 							align="center"
 							sheetNo={sheetNo}
@@ -106,6 +108,7 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 							isFront={true}
 							align="center"
 							sheetNo={sheetNo}
+							typeText="subtitle"
 							textShell={() => <TextShell.Title />}
 							data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 							isInPaginator={isInPaginator}

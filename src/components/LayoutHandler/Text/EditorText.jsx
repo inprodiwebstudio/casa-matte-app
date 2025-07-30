@@ -12,9 +12,7 @@ import FontSize      from "@ckeditor/ckeditor5-font/src/fontsize";
 import Alignment     from "@ckeditor/ckeditor5-alignment/src/alignment";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
-// import { EditorState, convertToRaw, ContentState } from "draft-js";
-import { useCallback, useRef, useState } from "react";
-// import { closeAllModals }      from "@mantine/modals";
+import { useCallback, useRef, useState }      from "react";
 import { workSpaceSlice }                     from "store/Slices";
 import { connect, useSelector, shallowEqual } from "react-redux";
 
@@ -195,32 +193,57 @@ const EditText = ({
 
 	const [editorState, setEditorState] = useState(dataTextPage);
 
-	const debounce = (func, delay) => {
-		let timeout;
-		return (...args) => {
-			if (timeout) clearTimeout(timeout);
-			timeout = setTimeout(() => {
-				func(...args);
-			}, delay);
-		};
-	};
+	// const debounce = (func, delay) => {
+	// 	let timeout;
+	// 	return (...args) => {
+	// 		if (timeout) clearTimeout(timeout);
+	// 		timeout = setTimeout(() => {
+	// 			func(...args);
+	// 		}, delay);
+	// 	};
+	// };
 
-	const handleEditorChange = useCallback(
-		debounce((event, editor) => {
-		  const data = editor.getData();
-		  setEditorState(data);
-		  if (isBound) {
-				workSpaceSlice.addTextBound({text : data});
-				return;
+	// const handlerDefaultStyles = (editorData) => {
+	// 	const parser = new DOMParser();
+	// 	const doc = parser.parseFromString(editorData, "text/html");
+
+	// 	doc.querySelectorAll("p").forEach(p => {
+	// 		p.style.fontFamily = "TAN-MERINGUE";
+	// 		p.style.fontSize = "50px";
+	// 	});
+
+	// 	return doc.body.innerHTML;
+	// };
+
+	const handleEditorChange = useCallback((event, editor) => {
+		const data = editor.getData();
+		const selection = editor.model.document.selection;
+
+		const fontSize = selection.getAttribute("fontSize");
+		const fontFamily = selection.getAttribute("fontFamily");
+
+		const isNotAvailableStyles = !fontSize && !fontFamily;
+
+		if (isNotAvailableStyles) {
+			const defaultStyles = "<p style='text-align: center;'><span style='font-size: 50px; font-family: TAN-MERINGUE;'>&nbsp;</span></p>";
+			setEditorState(defaultStyles);
+			return;
+		}
+
+		setEditorState(data);
+	}, []);
+
+	const handlerSetTextData = (textData) => {
+		if (isBound) {
+			workSpaceSlice.addTextBound({text : textData});
+			return;
 		  }
 		  if (!isFront) {
-				workSpaceSlice.addText({pageId : currentPageId, sheetNo, text : data, layoutNo});
-				return;
+			workSpaceSlice.addText({pageId : currentPageId, sheetNo, text : textData, layoutNo});
+			return;
 		  }
-		  workSpaceSlice.addTextFront({sheetNo, text : data, layoutNo});
-		}, 3000),
-		[]
-	);
+		   workSpaceSlice.addTextFront({sheetNo, text : textData, layoutNo});
+	};
 
 	const getCurrentFontSize = (editor) => {
 		editorRef.current = editor;
@@ -253,6 +276,9 @@ const EditText = ({
 				config={ editorConfiguration }
 				data={editorState}
 				onReady={getCurrentFontSize}
+				onBlur={(event, editor) => {
+					handlerSetTextData(editor.getData());
+				}}
 				onChange={(event, editor) => {
 					handleEditorChange(event, editor);
 				}}

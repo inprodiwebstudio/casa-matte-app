@@ -37,11 +37,11 @@ export const usePhotoBookPreset = () => {
 
 		const configPhotoBookData = {
 			postTypeId     : productData?.id ?? undefined,
-			sizePhotoBook  : formatAndSize.size,
+			sizePhotoBook  : "grande",
 			dimentions     : dimensions,
-			product        : model.modelKey,
-			productName    : model.productName,
-			format         : formatAndSize.format,
+			product        : "travelcoffeetable ",
+			productName    : "travelcoffeetable ",
+			format         : "vertical",
 			frontPage      : defaultFrontPage(),
 			numberOfPages,
 			minPages       : meta?.pasta === "Dura" ? 25 : 10,

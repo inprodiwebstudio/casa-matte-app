@@ -5,9 +5,9 @@ const useStyles = createStyles((theme, { size, gapSpacing, lineHeight, letterSpa
 		fontFamily     : "Helvetica, sans-serif",
 		height         : "100% !important",
 		width          : "100% !important",
-		display        : "flex",
 		flexDirection  : "column",
 		justifyContent : "space-between",
+		display        : !size ? "none" : "flex",
 
 		"& .ck.ck-editor__editable_inline" : {
 			display       : gapSpacing && "flex",

@@ -3,12 +3,15 @@ import SpineCover                    from "./SpineCover";
 import photoBooksConfing             from "core/constants/photoBooksConfing";
 import frontThemesTextures           from "core/constants/frontThemesColors";
 import { shallowEqual, useSelector } from "react-redux";
+import { useEffect, useState }       from "react";
 
 const CoverBook = ({
 	isInPaginator,
 	isThumbNail,
 	isInWorkSpace,
 }) => {
+	const [ showModLayout, setShowModLayout ] = useState(false);
+
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 	const coverData = useSelector((state) => state.workSpaceSlice.data.cover);
 
@@ -24,20 +27,34 @@ const CoverBook = ({
 		if (photoBookData?.frontPage?.sheet1?.layoutType) {
 			const LayoutMod = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.layoutMods[photoBookData?.frontPage?.sheet1?.layoutType]?.layout;
 			if (LayoutMod) {
-				return <LayoutMod
-					isThumbNail={isThumbNail}
-					isInPaginator={isInPaginator}
-					data={photoBookData?.frontPage?.sheet1}
-					isInWorkSpace={isInWorkSpace}
-					sheetNo={1}
-				/>;
+				return (
+					<div
+						style={{
+							width      : "100%",
+							height     : "100%",
+							transition : "all 0.2s ease-in-out",
+							...(isInWorkSpace && {opacity : showModLayout ? 1 : 0 }),
+						}}
+					>
+						<LayoutMod
+							isThumbNail={isThumbNail}
+							isInPaginator={isInPaginator}
+							data={photoBookData?.frontPage?.sheet1}
+							isInWorkSpace={isInWorkSpace}
+							sheetNo={1}
+						/>
+					</div>
+				);
 			}
 		}
 		return <></>;
 	};
 
-	console.log(coverData?.material);
-
+	useEffect(() => {
+		setTimeout(() => {
+			setShowModLayout(true);
+		}, 10);
+	}, []);
 	return (
 		<Group
 			spacing={0}
@@ -60,8 +77,8 @@ const CoverBook = ({
 					right            : 0,
 					bottom           : 0,
 					backgroundImage  : coverData && `url(${frontThemesTextures[coverData?.material][coverData?.color].textureUrl})`,
-					backgroundSize   : (coverData?.material === "CURPIEL") ? "cover" : "50% 100%",
-					backgroundRepeat : coverData?.material === "CURPIEL" ? "no-repeat" : "repeat",
+					backgroundSize   : (coverData?.material === "CURPIEL") ? "50% 100%" : "cover",
+					backgroundRepeat : (coverData?.material === "CURPIEL") ? "repeat" : "no-repeat",
 					opacity          : 0.7,
 				}}
 			>
