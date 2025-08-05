@@ -34,15 +34,18 @@ const Mod37 = ({
 							width          : "100%",
 							display        : "flex",
 							justifyContent : "center",
+							alignItems     : "center",
 							overflow       : "hidden",
 							maxHeight      : "100px",
 						}}
 					>
 						<div
 							style={{
-								width        : "100%",
-								paddingLeft  : "10%",
-								paddingRight : "10%",
+								width          : "100%",
+								height         : "auto",
+								display        : "flex",
+								justifyContent : "center",
+								alignItems     : "center",
 							}}
 							{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 						>
