@@ -101,7 +101,10 @@ const Mod52Pdf = ({
 					>
 						<div
 							style={{
-								width : "70%",
+								width      : "100%",
+								display    : "flex",
+								alignItems : "flex-start",
+								background : "red",
 							}}
 						>
 							{
