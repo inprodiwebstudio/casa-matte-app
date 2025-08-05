@@ -37,7 +37,7 @@ const Mod37 = ({
 							alignItems     : "center",
 							overflow       : "visible",
 							maxHeight      : "100px",
-							background     : "red !important",
+							background     : "red",
 						}}
 					>
 						<div
