@@ -35,7 +35,7 @@ const Mod37 = ({
 							display        : "flex",
 							justifyContent : "center",
 							alignItems     : "center",
-							overflow       : "hidden",
+							overflow       : "visible",
 							maxHeight      : "100px",
 						}}
 					>
