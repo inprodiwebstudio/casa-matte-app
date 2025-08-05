@@ -31,27 +31,36 @@ const Mod37 = ({
 				<Stack spacing="0px" w="100%">
 					<div
 						style={{
-							width        : "100%",
-							paddingLeft  : "10%",
-							paddingRight : "10%",
-							maxHeight    : "100px",
+							width          : "100%",
+							display        : "flex",
+							justifyContent : "center",
+							overflow       : "hidden",
+							maxHeight      : "100px",
 						}}
-						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 					>
-						<Text
-							sizes={{
-								"chico"   : "38px",
-								"regular" : "42px",
-								"grande"  : "46px",
+						<div
+							style={{
+								width        : "100%",
+								paddingLeft  : "10%",
+								paddingRight : "10%",
 							}}
-							sheetNo={sheetNo}
-							letterSpacing="6px"
-							textShell={() => <TextShell.Title />}
-							data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-							isInPaginator={isInPaginator}
-							isThumbNail={isThumbNail}
-							textNo={0}
-						/>
+							{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
+						>
+							<Text
+								sizes={{
+									"chico"   : "38px",
+									"regular" : "42px",
+									"grande"  : "46px",
+								}}
+								sheetNo={sheetNo}
+								letterSpacing="6px"
+								textShell={() => <TextShell.Title />}
+								data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+								isInPaginator={isInPaginator}
+								isThumbNail={isThumbNail}
+								textNo={0}
+							/>
+						</div>
 					</div>
 					<div
 						style={{
