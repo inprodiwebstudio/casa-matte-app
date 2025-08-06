@@ -27,7 +27,7 @@ const Mod37 = ({
 			justify="flex-end"
 			align="flex-end"
 		>
-			<Center w="100%" h="100%">
+			<Center w="100%" h="100%" {...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}>
 				<Stack spacing="0px" w="100%">
 					<div
 						style={{
@@ -38,7 +38,6 @@ const Mod37 = ({
 							overflow       : "visible",
 							maxHeight      : "200px",
 						}}
-						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 					>
 						<div
 							style={{
@@ -71,7 +70,6 @@ const Mod37 = ({
 							paddingLeft  : "20%",
 							paddingRight : "20%",
 						}}
-						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
 					>
 						<Text
 							sizes={{
