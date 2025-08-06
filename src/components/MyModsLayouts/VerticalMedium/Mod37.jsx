@@ -36,8 +36,9 @@ const Mod37 = ({
 							justifyContent : "center",
 							alignItems     : "center",
 							overflow       : "visible",
-							maxHeight      : "100px",
+							maxHeight      : "200px",
 						}}
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 					>
 						<div
 							style={{
@@ -47,7 +48,6 @@ const Mod37 = ({
 								justifyContent : "center",
 								alignItems     : "center",
 							}}
-							{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 						>
 							<Text
 								sizes={{
