@@ -20,6 +20,8 @@ const textToImage = async (id) => {
 		},
 	});
 
+	console.log(imgData);
+
 	return imgData;
 };
 
