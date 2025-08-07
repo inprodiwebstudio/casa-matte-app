@@ -36,10 +36,6 @@ const AppShell = ({
 		return stringData;
 	};
 
-	// const test = "https://res.cloudinary.com/dtjvmtfji/image/upload/c_auto,g_auto,h_250,w_250/$w_250/l_demo:29305:umwxfugn2oxg1ib9pjsk.jpg/c_auto,g_auto,h_250,w_250/fl_layer_apply,x_$w_add_0/$h_250/l_demo:29305:umwxfugn2oxg1ib9pjsk.jpg/c_auto,g_auto,h_250,w_250/fl_layer_apply,g_east,y_$h_add_0/l_demo:29305:jes3oy7mqjsj3shnpfnt.jpg/c_auto,g_auto,h_250,w_250/fl_layer_apply,g_south_west/demo/29305/umwxfugn2oxg1ib9pjsk.jpg";
-
-	// const otherTest = "https://res.cloudinary.com/dtjvmtfji/image/upload/c_auto,g_auto,h_250,w_250/$w_250/l_demo:29305:umwxfugn2oxg1ib9pjsk.jpg/c_auto,g_auto,h_250,w_250/fl_layer_apply,x_$w_add_0/demo/29305/umwxfugn2oxg1ib9pjsk.jpg";
-
 	const submitData = async () => {
 		await dataMutation({
 			module : "wp-json/wp/v2/photobook-2-0",
