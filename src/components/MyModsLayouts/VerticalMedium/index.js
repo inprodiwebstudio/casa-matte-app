@@ -534,7 +534,7 @@ const VerticalLarge = {
 		layout         : Mod42,
 		numberPhotos   : 0,
 		numberText     : 2,
-		numberTextImgs : 2,
+		numberTextImgs : 1,
 		cat            : "texto",
 		pdfLayout      : Mod42Pdf,
 	},

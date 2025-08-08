@@ -27,6 +27,7 @@ const Mod42 = ({
 			h="100%"
 			justify="center"
 			align="center"
+			{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 		>
 			<Stack
 				w="54%"
@@ -38,7 +39,6 @@ const Mod42 = ({
 					direction="column"
 					gap="0px"
 					justify="flex-start"
-					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
 					<Text
 						sizes={{
@@ -60,7 +60,6 @@ const Mod42 = ({
 				<Flex
 					justify="flex-start"
 					direction="column"
-					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
 				>
 					<Text
 						sizes={{
