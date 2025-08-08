@@ -50,7 +50,20 @@ const Mod42Pdf = ({
 					>
 						{myTextImgsMod[0] && <img src={myTextImgsMod[0]} alt="Captura de texto" />}
 					</div>
-					{myTextImgsMod[1] && <img src={myTextImgsMod[1]} alt="Captura de texto" />}
+					<div
+						style={{
+							width : "100%",
+						}}
+					>
+						{
+							myTextImgsMod[1] && 
+							<img
+								src={myTextImgsMod[1]}
+								alt="Captura de texto"
+								style={{ objectFit : "contain", height : "auto", width : "100%" }}
+							/>
+						}
+					</div>
 				</div>
 			</div>
 		</div>
