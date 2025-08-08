@@ -434,6 +434,34 @@ export const workSpaceSlice = createSlice({
 			const cloneDataPages = {...state.data.pages};
 			const currentListOfPages = convertToArray(cloneDataPages);
 			const currentIndexPage = currentListOfPages.findIndex((page) => page.id === state.currentPageData.id);
+
+			if (currentIndexPage === (currentListOfPages.length - 1)) {
+				const pageData = currentListOfPages[currentIndexPage];
+
+				const pageId = `page${Number(pageData.id.split("page")[1]) + 1}`;
+				const newPageData = {
+					id     : pageId,
+					sheet1 : {
+						pageNo     : pageData.sheet1.pageNo + 1,
+						layoutType : "",
+						text       : {},
+						photos     : {},
+					},
+					sheet2 : {
+						pageNo     : pageData.sheet1.pageNo + 2,
+						layoutType : "",
+						text       : {},
+						photos     : {},
+					},
+				};
+
+				const newListPages = [...currentListOfPages, newPageData];
+				const newObjPages = convertToObject(newListPages);
+
+				state.data.pages = newObjPages;
+				return;
+			}
+
 			const slicePagesToReorder = currentListOfPages.slice(currentIndexPage + 1, currentListOfPages.length);
 			slicePagesToReorder.unshift({
 				id     : slicePagesToReorder[0].id,
