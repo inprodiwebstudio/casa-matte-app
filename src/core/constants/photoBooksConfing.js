@@ -523,7 +523,7 @@ const photoBooksConfing = {
 			},
 		},
 	},
-	"travelcoffeetable " : {
+	"travelcoffeetable" : {
 		vertical : {
 			sizes : {
 				grande : {
