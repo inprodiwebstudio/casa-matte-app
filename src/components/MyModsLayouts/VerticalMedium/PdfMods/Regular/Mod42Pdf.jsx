@@ -28,9 +28,9 @@ const Mod42Pdf = ({
 		>
 
 			{
-				myTextImgsMod[1] && 
+				myTextImgsMod[0] && 
 				<img
-					src={myTextImgsMod[1]}
+					src={myTextImgsMod[0]}
 					alt="Captura de texto"
 					style={{ objectFit : "contain", height : "auto", width : "100%" }}
 				/>
