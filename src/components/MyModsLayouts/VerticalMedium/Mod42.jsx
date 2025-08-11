@@ -21,72 +21,65 @@ const Mod42 = ({
 
 
 	return (
-		<div
-			style={{
-				width: "100%",
-				height: "100%",
-			}}
+		<Flex
+			p="8%"
+			w="100%"
+			h="100%"
+			justify="center"
+			align="center"
 			{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 		>
-			<Flex
-				p="8%"
-				w="100%"
-				h="100%"
-				justify="center"
-				align="center"
+			<Stack
+				w="54%"
+				h="70%"
+				spacing="0.15em"
+				aria-hidden
 			>
-				<Stack
-					w="54%"
-					h="70%"
-					spacing="0.15em"
-					aria-hidden
+				<Flex
+					direction="column"
+					gap="0px"
+					justify="flex-start"
 				>
-					<Flex
-						direction="column"
-						gap="0px"
-						justify="flex-start"
-					>
-						<Text
-							sizes={{
-								"chico"   : "14px",
-								"regular" : "15px",
-								"grande"  : "16px",
-							}}
-							align="left"
-							letterSpacing="1.7px"
-							sheetNo={sheetNo}
-							textShell={() => <TextShell.SubTitle width="50%" align="flex-start" />}
-							data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-							isInPaginator={isInPaginator}
-							isThumbNail={isThumbNail}
-							textNo={0}
-						/>
-						<DividerLayout long="20%" position="h" />
-					</Flex>
-					<Flex
-						justify="flex-start"
-						direction="column"
-					>
-						<Text
-							sizes={{
-								"chico"   : "11px",
-								"regular" : "12px",
-								"grande"  : "13px",
-							}}
-							align="justify"
-							sheetNo={sheetNo}
-							letterSpacing="0.5px"
-							lineHeight="16px"
-							textShell={() => <TextShell.BodyParagraph align="flex-start" />}
-							data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
-							isInPaginator={isInPaginator}
-							isThumbNail={isThumbNail}
-							textNo={1}
-						/>
-					</Flex>
-				</Stack>
-			</Flex>
-		</div>
+					<Text
+						sizes={{
+							"chico"   : "14px",
+							"regular" : "15px",
+							"grande"  : "16px",
+						}}
+						align="left"
+						letterSpacing="1.7px"
+						sheetNo={sheetNo}
+						textShell={() => <TextShell.SubTitle width="50%" align="flex-start" />}
+						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+						textNo={0}
+					/>
+					<DividerLayout long="20%" position="h" />
+				</Flex>
+				<Flex
+					justify="flex-start"
+					direction="column"
+				>
+					<Text
+						sizes={{
+							"chico"   : "11px",
+							"regular" : "12px",
+							"grande"  : "13px",
+						}}
+						align="justify"
+						sheetNo={sheetNo}
+						letterSpacing="0.5px"
+						lineHeight="16px"
+						textShell={() => <TextShell.BodyParagraph align="flex-start" />}
+						data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+						textNo={1}
+					/>
+				</Flex>
+			</Stack>
+		</Flex>
 	);
 };
 
