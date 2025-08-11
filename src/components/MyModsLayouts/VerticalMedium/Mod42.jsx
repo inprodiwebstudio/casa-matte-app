@@ -31,7 +31,7 @@ const Mod42 = ({
 		>
 			<Stack
 				w="54%"
-				mah="70%"
+				h="70%"
 				spacing="0.15em"
 				aria-hidden
 			>

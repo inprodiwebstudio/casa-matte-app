@@ -25,7 +25,6 @@ const Mod42Pdf = ({
 			style={{
 				height  : "792px",
 				width   : "100%",
-				padding : "20px",
 			}}
 		>
 
