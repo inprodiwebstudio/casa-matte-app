@@ -8,7 +8,7 @@ import "./ConfirmationPrint.scss";
 import axios                    from "axios";
 import { PostingConfig }        from "Notifications";
 import { closeAllModals }       from "@mantine/modals";
-import { isValidArray }         from "helpers";
+import { dayjs, isValidArray }         from "helpers";
 import { inCompletePages }      from "./ConfirmationToPrint.helpers";
 import IncompletedPagesBody     from "./IncompletedPagesBody";
 
@@ -84,6 +84,7 @@ const ConfirmationToPrint = ({ innerProps }) => {
 						meta   : {
 							id_pedido_hojas_extra : responseCreateOrder?.data?.id.toString(),
 							status                : "48",
+							fecha_de_termino : dayjs(new Date()).format("YYYY-MM-DD"),
 						},
 					},
 					id     : postId,
@@ -106,6 +107,7 @@ const ConfirmationToPrint = ({ innerProps }) => {
 				status : "publish",
 				meta   : {
 					status : "48",
+					fecha_de_termino : dayjs(new Date()).format("YYYY-MM-DD"),
 				},
 			},
 			id     : postId,

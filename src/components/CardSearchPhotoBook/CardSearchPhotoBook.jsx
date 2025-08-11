@@ -19,7 +19,7 @@ const CardSearchPhotoBook = () => {
 	const [ fetchPhotoBook, { isLoading : isFetching, error } ] = useLazyGetDataQuery();
 
 	const { data : ordersPhotoBook, isLoading } = useGetDataQuery({
-		module : "wp-json/wp/v2/photobook-2-0?per_page=100",
+		module : "wp-json/miapi/v1/post-filtrado?per_page=5",
 	});
 
 	const loading = isLoading || isFetching;
@@ -80,9 +80,8 @@ const CardSearchPhotoBook = () => {
 
 	useEffect(() => {
 		if (ordersPhotoBook && isValidArray(ordersPhotoBook)) {
-			const filteredOrders = ordersPhotoBook.filter(order => (order?.meta?.status === "48") || (order?.meta?.status === "26"));
-			setPhotoBooksOrders(filteredOrders);
-			setInitialPhotoBooksOrders(filteredOrders);
+			setPhotoBooksOrders(ordersPhotoBook);
+			setInitialPhotoBooksOrders(ordersPhotoBook);
 		}
 	}, [ ordersPhotoBook ]);
 
