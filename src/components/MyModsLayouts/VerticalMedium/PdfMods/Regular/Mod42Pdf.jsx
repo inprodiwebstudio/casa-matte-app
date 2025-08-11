@@ -18,6 +18,8 @@ const Mod42Pdf = ({
 		0 : textImgs[`${pageNo}-${modLayout}-text1`]?.textImg ?? null,
 	};
 
+	console.log(myTextImgsMod[0]);
+
 	const bodyHtml = (
 		<div
 			style={{
