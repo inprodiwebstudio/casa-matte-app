@@ -6,6 +6,8 @@ const textToImage = async (id) => {
 
 	if (!element) return undefined;
 
+	await document.fonts.ready;
+
 	const width = element.clientWidth * 5; // Aumenta el ancho
 	const height = element.clientHeight * 5; // Aumenta la altura
 
