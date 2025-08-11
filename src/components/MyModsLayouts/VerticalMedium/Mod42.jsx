@@ -22,11 +22,11 @@ const Mod42 = ({
 
 	return (
 		<div
-		style={{
-			width: "100%",
-			height: "100%",
-		}}
-		{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
+			style={{
+				width: "100%",
+				height: "100%",
+			}}
+			{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 		>
 			<Flex
 				p="8%"
