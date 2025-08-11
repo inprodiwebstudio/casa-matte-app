@@ -14,7 +14,7 @@ const textToImage = async (id) => {
 		height : height,
 		style  : {
 			transform       : `scale(${5})`,
-			transformOrigin : "top",
+			transformOrigin : "top left",
 			width           : `${element.clientWidth}px`, // Mantiene el tamaño real en el DOM
 			height          : `${element.clientHeight}px`,
 		},
