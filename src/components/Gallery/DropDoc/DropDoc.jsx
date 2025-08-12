@@ -39,6 +39,7 @@ import { useParams }                            from "react-router";
 const DropDoc = ({
 	userName,
 	photosData,
+	isInPageUpload,
 	galleryPathRoute,
 	galleryTypeDropedView,
 }) => {
@@ -191,7 +192,7 @@ const DropDoc = ({
 		const listOfPhotos = convertToArray(photosData);
 		const isAvailablePhotos = isValidArray(listOfPhotos);
 
-		if (!isAvailablePhotos) {
+		if (!isAvailablePhotos && !isInPageUpload) {
 			return openContextModal({
 				modal      : "disclaimerDropPhotos",
 				innerProps : {

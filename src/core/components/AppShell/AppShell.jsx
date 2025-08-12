@@ -1,5 +1,5 @@
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
-import { useEffect }                              from "react";
+import { useEffect, useState }                    from "react";
 
 //Own component;
 import { PostingConfig }             from "Notifications";
@@ -7,6 +7,7 @@ import { genericApi }                from "store/api/genericApi";
 import { workSpaceSlice, authSlice } from "store/Slices";
 import "./AppShell.scss";
 import { useParams }                 from "react-router";
+import { isValidArray }              from "helpers";
 
 const AppShell = ({
 	Body,
@@ -19,8 +20,11 @@ const AppShell = ({
 
 	const dispatch = useDispatch();
 
+	const [urlCollage, setUrlCollage] = useState("");
+
 	// const isSelectedPage = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice?.data, shallowEqual);
+	const galleryData = useSelector((state) => state.gallerySlice?.data, shallowEqual);
 	const initialData = useSelector((state) => state.workSpaceSlice?.initialData, shallowEqual);
 
 
@@ -42,7 +46,7 @@ const AppShell = ({
 				},
 				status : "publish",
 				meta   : {
-					collage : "https://res.cloudinary.com/demo/image/upload/c_auto,g_auto,h_250,w_271/$w_250/l_docs:kitchen-apartment/c_auto,g_auto,h_250,w_250/fl_layer_apply,x_$w_add_30/$h_250/l_docs:study-apartment/c_auto,g_auto,h_250,w_250/fl_layer_apply,g_east,y_$h_add_30/l_docs:lounge-apartment/c_auto,g_auto,h_250,w_250/fl_layer_apply,g_south_west/b_burlywood/c_lpad,h_590,w_590/docs/dining-apartment.jpg",
+					collage : urlCollage,
 					config  : parseSendData({...workSpaceData, minPages : (workSpaceData?.pasta === "Dura") ? 25 : 10}),
 				},
 			},
@@ -51,7 +55,6 @@ const AppShell = ({
 		});
 	};
 
-
 	useEffect(() => {
 		if (workSpaceData?.productName) {
 			submitData();
@@ -59,7 +62,7 @@ const AppShell = ({
 		if (!initialData) {
 			dispatch(workSpaceSlice.actions.addInitialData(workSpaceData));
 		}
-	}, [workSpaceData]);
+	}, [workSpaceData, urlCollage]);
 
 	useEffect(() => {
 		if (dataMutationResult.isUninitialized) return;
@@ -78,6 +81,69 @@ const AppShell = ({
 			}
 		}
 	}, [dataMutationResult]);
+
+	useEffect(() => {
+		const listOfphotos = galleryData && Object.values(galleryData).filter(photo => photo?.format === "jpg");
+
+		if (isValidArray(listOfphotos)) {
+			const handlerConstructURLCollage = () => {
+				const firstImages = isValidArray(listOfphotos) && listOfphotos.slice(0, 4);
+
+				const prefixUrl = "https://res.cloudinary.com/dtjvmtfji/image/upload/";
+				const sizesImgs = "c_auto,g_auto,h_150,w_150/";
+				const layerApply = "fl_layer_apply";
+				const positionImagesConstructor = (indexImage) => {
+					switch (indexImage) {
+						case 0:
+							return "$w_150/";
+						case 1:
+							return `${layerApply},x_$w_add_0/$h_150/`;
+						case 2:
+							return `${layerApply},g_east,y_$h_add_0/`;
+						default:
+							return `${layerApply},g_south_west/`;
+					}
+				};
+
+				if (firstImages.length === 1) {
+					const listOfPathRoutes = firstImages[0]?.url.split("/");
+
+					const userName = listOfPathRoutes[0];
+					const photoBookNo = listOfPathRoutes[1];
+					const fileName = listOfPathRoutes[2];
+					const extensionFormat = firstImages[0]?.format;
+
+					const fileNameWithFormat = `${fileName}.${extensionFormat}`;
+
+					const myFinalUrl = `${prefixUrl}${sizesImgs}${userName}/${photoBookNo}/${fileNameWithFormat}`;
+
+					return myFinalUrl;
+				}
+
+				let finalUrl = `${prefixUrl}${sizesImgs}`;
+
+				firstImages.forEach((photo, index) => {
+					const listOfPathRoutes = photo?.public_id?.split("/");
+					const userName = listOfPathRoutes[0];
+					const photoBookNo = listOfPathRoutes[1];
+					const fileName = listOfPathRoutes[2];
+
+					const extensionFormat = photo?.format;
+					const fileNameWithFormat = `${fileName}.${extensionFormat}`;
+
+					if (index === ( firstImages.length - 1)) {
+						finalUrl += `${positionImagesConstructor(index)}${userName}/${photoBookNo}/${fileNameWithFormat}`;
+					} else {
+						finalUrl += `${positionImagesConstructor(index)}l_${userName}:${photoBookNo}:${fileNameWithFormat}/c_auto,g_auto,h_150,w_150/`;
+					}
+				});
+
+				return finalUrl;
+			};
+
+			setUrlCollage(handlerConstructURLCollage);
+		}
+	}, [galleryData]);
 
 	return (
 		<div
