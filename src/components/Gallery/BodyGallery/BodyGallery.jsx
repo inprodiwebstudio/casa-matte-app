@@ -5,7 +5,7 @@ import Folder         from "../Folder";
 import DropDoc        from "../DropDoc";
 import PhotoCard      from "../PhotoCard";
 import GalleryLoading from "../GalleryLoading";
-
+import { FaMobile } from "react-icons/fa";
 
 import {
 	Button,
@@ -16,8 +16,11 @@ import {
 import { gallerySlice, workSpaceSlice }          from "store/Slices";
 import { convertToArray, isValidArray, bindAll } from "helpers";
 import { CircleArrow, ActionCross }              from "Resources/icons";
+import { openContextModal } from "@mantine/modals";
+import { Center, Button as ButtonMantine } from "@mantine/core";
 import "./BodyGallery.scss";
 import { gallerySeparation }                     from "./BodyGallery.helpers";
+import { IconContext } from "react-icons";
 
 const BodyGallery = ({
 	isLoggedIn,
@@ -116,6 +119,12 @@ const BodyGallery = ({
 		}
 	};
 
+	const handlerOnclickPhotosMovil = () => {
+		openContextModal({
+			modal      : "qrGeneratorPhotos",
+		});
+	}
+
 	// useEffect(() => {
 	// 	if (!isAvailableDocs) {
 	// 		gallerySlice.setTypeDropedView("addFiles");
@@ -199,6 +208,28 @@ const BodyGallery = ({
 						}
 					</div>
 				</div>
+				{
+					!isAvailableDocs && (
+						<Center>
+							<ButtonMantine
+								radius={5}
+								size="xs"
+								color="gray"
+								onClick={handlerOnclickPhotosMovil}
+								leftIcon={
+									<IconContext.Provider value={{ color: "white", size: "15px" }}>
+										<div>
+											<FaMobile />
+										</div>
+									</IconContext.Provider>
+								}
+								
+							>
+								Subir desde móvil
+							</ButtonMantine>
+						</Center>
+					)
+				}
 			</div>
 			{
 				(isLoadingGalleryData || !isLoggedIn) && (

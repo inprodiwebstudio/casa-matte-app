@@ -12,7 +12,7 @@ const UploadImages = () => {
 
   useEffect(() => {
     dispatch(authSlice.actions.setUserData({
-        userId   : authorId ?? undefined,
+        username   : authorId ?? undefined,
     }));
   }, [authorId]);
 

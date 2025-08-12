@@ -19,7 +19,7 @@ const CardSearchPhotoBook = () => {
 	const [ fetchPhotoBook, { isLoading : isFetching, error } ] = useLazyGetDataQuery();
 
 	const { data : ordersPhotoBook, isLoading } = useGetDataQuery({
-		module : "wp-json/miapi/v1/post-filtrado?per_page=5",
+		module : "wp-json/miapi/v1/post-filtrado?per_page=300",
 	});
 
 	const loading = isLoading || isFetching;

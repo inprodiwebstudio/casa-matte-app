@@ -19,7 +19,7 @@ import "react-perfect-scrollbar/dist/css/styles.css";
 
 
 export default function App() {
-	const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Tablet|Kindle|Silk|PlayBook/i.test(
+	const isMobile = /Android|iPad|iPod|BlackBerry|Opera Mini|Tablet|Kindle|Silk|PlayBook/i.test(
 		navigator.userAgent
 	);
 
