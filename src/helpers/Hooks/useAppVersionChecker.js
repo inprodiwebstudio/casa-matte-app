@@ -9,7 +9,7 @@ export const useAppVersionChecker = (interval = 30000) => {
 
 		const checkVersion = async () => {
 			try {
-				const res = await fetch(`/version.json?ts=${Date.now()}`);
+				const res = await fetch(`public/version.json?ts=${Date.now()}`);
 				const data = await res.json();
 
 				if (!versionCache) {
