@@ -1,5 +1,5 @@
 import { Badge, Center, ScrollArea, Stack, Table, Text } from "@mantine/core";
-import { isValidArray }                                  from "helpers";
+import { dayjs, isValidArray }                                  from "helpers";
 import React                                             from "react";
 import { ClipLoader }                                    from "react-spinners";
 
@@ -51,6 +51,9 @@ const TableOrders = ({
 										<Text>CORREO</Text>
 									</th>
 									<th>
+										<Text>Fecha de Finalización</Text>
+									</th>
+									<th>
 										<Text>STATUS</Text>
 									</th>
 								</tr>
@@ -71,6 +74,9 @@ const TableOrders = ({
 												</td>
 												<td>
 													<Text>{photoBook.correo_del_autor}</Text>
+												</td>
+												<td>
+													<Text>{photoBook.fecha_de_termino ? dayjs(photoBook.fecha_de_termino).format("DD [de] MMMM, YYYY") : "--"}</Text>
 												</td>
 												<td>
 													<Badge variant="light" color={(photoBook.status === "48") ? "green" : "orange"}>
