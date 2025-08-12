@@ -35,15 +35,11 @@ const CardSearchPhotoBook = () => {
 			const photoBookData = await fetchPhotoBook({ module : `wp-json/wp/v2/photobook-2-0/meta/?meta_value=${myOreder}`}).unwrap();
 			const filteredBooks = photoBookData.filter((photoBook) => (photoBook?.metas?.status[0] === "48") || (photoBook?.metas?.status[0] === "26"));
 			const constructorPhotoBooksData = filteredBooks.map((photoBook) => ({
-				id   : photoBook?.id,
-				meta : {
-					config           : photoBook?.metas?.config?.[0] ?? "",
-					modelo           : photoBook?.metas?.modelo[0],
-					tamano           : photoBook?.metas?.tamano?.[0] ?? undefined,
-					id_del_pedido    : photoBook?.metas?.id_del_pedido[0],
-					correo_del_autor : photoBook?.metas?.correo_del_autor[0],
-					status           : photoBook?.metas?.status[0],
-				},
+				post_id   	  	 : photoBook?.id,
+				config    	  	  : photoBook?.metas?.config?.[0] ?? "",
+				id_del_pedido 	 : photoBook?.metas?.id_del_pedido[0],
+				correo_del_autor : photoBook?.metas?.correo_del_autor[0],
+				status           : photoBook?.metas?.status[0],
 			}));
 			const photoBooksFiltered = constructorPhotoBooksData.filter((photoBook) => (photoBook?.meta?.status === "48") || (photoBook?.meta?.status === "26"));
 			setPhotoBooksOrders(photoBooksFiltered);
