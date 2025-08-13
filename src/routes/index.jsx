@@ -29,7 +29,6 @@ const Router = () => {
 				modal      : "refreshNotification",
 				innerProps : {},
 			});
-			console.log("add log test change");
 		}
 	}, [hasUpdate]);
 

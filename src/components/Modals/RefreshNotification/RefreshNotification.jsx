@@ -18,7 +18,6 @@ const RefreshNotification = () => {
                     type="subtleActive"
                     width={117}
                     height={39}
-                    isLoading={isLoadingDelete}
                     onClick={() => refreshAction()}
                 >
                     Recargar
