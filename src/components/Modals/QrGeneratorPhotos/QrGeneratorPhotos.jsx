@@ -13,6 +13,10 @@ const QrGeneratorPhotos = () => {
 
     const linkValueQr = `https://app.casamatte.com/uploadImages/${authorId}/${postId}` ;
 
+    const handlerRefresh = () => {
+        window.location.reload();
+    };
+
     return (
         <div className="body-confirmation-modal">
             <div className="tittle-confirmation">Agregar fotos desde tu móvil</div>
@@ -33,9 +37,9 @@ const QrGeneratorPhotos = () => {
                         fontSize="18px"
                         width={117}
                         height={39}
-                        onClick={() => closeAllModals()}
+                        onClick={() => handlerRefresh()}
                     >
-                        Cerrar
+                        TERMINAR
                     </Button>
                </Center>
             </div>

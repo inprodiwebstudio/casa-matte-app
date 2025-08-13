@@ -35,6 +35,8 @@ import "./DropDoc.scss";
 import { showNotification, cleanNotifications } from "@mantine/notifications";
 import { closeAllModals, openContextModal }     from "@mantine/modals";
 import { useParams }                            from "react-router";
+import { IconContext } from "react-icons";
+import { FaMobile, FaLaptop } from "react-icons/fa";
 
 const DropDoc = ({
 	userName,
@@ -48,6 +50,7 @@ const DropDoc = ({
 	const { postId } = useParams();
 
 	const [ loading, setLoading ] = useState(false);
+	const [ isViewSelectDrop, setIsViewSelectDrop ] = useState(true);
 
 	const [ fileImage, setFileImage ] = useState([]);
 	const [ isSelectedFolder, setIsSelectedFolder ] = useState(false);
@@ -259,11 +262,53 @@ const DropDoc = ({
 		dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 	};
 
+	const handlerOnclickPhotosMovil = () => {
+		openContextModal({
+			modal      : "qrGeneratorPhotos",
+		});
+		dispatch(gallerySlice.actions.setTypeDropedView(null));
+	};
+
 	useEffect(() => {
 		if (galleryTypeDropedView === "addFolder") {
 			setFileImage([]);
 		}
 	}, [galleryTypeDropedView]);
+
+	if (isViewSelectDrop && !isInPageUpload && (galleryTypeDropedView !== "addFolder")) {
+		return (
+			<div className="DropDoc">
+				<div className="options-cards-container">
+					<div className="options-card">
+						<Card
+							isButton
+							image={
+								<IconContext.Provider value={{ size: "50px" }}>
+									<div>
+										<FaLaptop />
+									</div>
+								</IconContext.Provider>
+							}
+							body="CARGAR DESDE COMPUTADORA"
+							onSelect={() => setIsViewSelectDrop(false)}
+						/>
+						<Card
+							isButton
+							image={
+								<IconContext.Provider value={{ size: "50px" }}>
+									<div>
+										<FaMobile />
+									</div>
+								</IconContext.Provider>
+							}
+							body="CARGAR DESDE MOVIL"
+							onSelect={handlerOnclickPhotosMovil}
+						/>
+					</div>
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<>
