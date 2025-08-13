@@ -214,34 +214,6 @@ const SideBar = ({
 								</div>
 							)
 						}
-						{
-							typeDropView !== null && (
-								<div
-									className="icon-sidebar-action"
-									{
-										...(!isLoadingMutation && {
-											onClick : () => gallerySlice.setTypeDropedView(null),
-										})
-									}
-								>
-									<Cross size="16px" />
-								</div>
-							)
-						}
-						{
-							isAvailableDocs && (
-								<div
-									className="icon-sidebar-action"
-									onClick={() => onClickMobilAction()}
-								>
-									<IconContext.Provider value={{ size: "16px" }}>
-										<div>
-											<FaMobile />
-										</div>
-									</IconContext.Provider>
-								</div>
-							)
-						}
 					</div>
 				)
 			}

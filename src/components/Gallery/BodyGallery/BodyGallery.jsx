@@ -119,12 +119,6 @@ const BodyGallery = ({
 		}
 	};
 
-	const handlerOnclickPhotosMovil = () => {
-		openContextModal({
-			modal      : "qrGeneratorPhotos",
-		});
-	}
-
 	// useEffect(() => {
 	// 	if (!isAvailableDocs) {
 	// 		gallerySlice.setTypeDropedView("addFiles");
@@ -208,28 +202,6 @@ const BodyGallery = ({
 						}
 					</div>
 				</div>
-				{
-					!isAvailableDocs && (
-						<Center>
-							<ButtonMantine
-								radius={5}
-								size="xs"
-								color="gray"
-								onClick={handlerOnclickPhotosMovil}
-								leftIcon={
-									<IconContext.Provider value={{ color: "white", size: "15px" }}>
-										<div>
-											<FaMobile />
-										</div>
-									</IconContext.Provider>
-								}
-								
-							>
-								Subir desde móvil
-							</ButtonMantine>
-						</Center>
-					)
-				}
 			</div>
 			{
 				(isLoadingGalleryData || !isLoggedIn) && (
