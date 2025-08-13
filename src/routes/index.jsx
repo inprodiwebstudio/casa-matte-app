@@ -21,6 +21,7 @@ const ErrorPage = Loadable(lazy(() => import("pages/ErrorPage")));
 
 const Router = () => {
 	const { hasUpdate } = useAppVersionChecker();
+
 	
 	useEffect(() => {
 		if (hasUpdate) {
@@ -28,6 +29,7 @@ const Router = () => {
 				modal      : "refreshNotification",
 				innerProps : {},
 			});
+			console.log("add log test change");
 		}
 	}, [hasUpdate]);
 
