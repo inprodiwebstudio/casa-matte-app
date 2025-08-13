@@ -140,6 +140,8 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		const sizeKey = photoBookConfigData?.sizePhotoBook;
 		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
 
+		console.log(config);
+
 		if (!config) return null;
 
 		const { size, isInDoublePageLayouts, modLayouts } = config;
