@@ -13,6 +13,7 @@
     "debug": "vite --debug --host 0.0.0.0",
     "dev": "vite",
     "commit": "cz",
+    "prebuild": "echo \"{\\\"version\\\": \\\"$(date +%s)\\\"}\" > public/version.json",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint --ext .ts,.tsx ./src",
