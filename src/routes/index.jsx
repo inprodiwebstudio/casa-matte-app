@@ -29,6 +29,7 @@ const Router = () => {
 				modal      : "refreshNotification",
 				innerProps : {},
 			});
+			console.log("hay actualizaciones");
 		}
 	}, [hasUpdate]);
 
