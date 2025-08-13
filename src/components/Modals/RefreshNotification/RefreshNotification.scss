@@ -1,0 +1,27 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.body-confirmation-modal {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    .tittle-confirmation {
+        font-size: 27px;
+        font-weight: 400;
+        text-align: center;
+        font-family: "Aitana-Regular";
+    }
+
+    .text-description {
+        font-weight: 300;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .buttons-container {
+        display: flex;
+        gap : 56px;
+        justify-content: center;
+    }
+}

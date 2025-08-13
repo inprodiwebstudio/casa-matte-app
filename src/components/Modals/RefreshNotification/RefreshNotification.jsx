@@ -1,6 +1,5 @@
 import { Button }                    from "core/components";
-import React                         from "react";
-import "./DisclaimerDropPhotos.scss";
+import "./RefreshNotification.scss";
 
 const RefreshNotification = () => {
     const refreshAction = () => {
