@@ -108,7 +108,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const getFormatKey = () => {
 		const { product, format } = photoBookConfigData || {};
 
-		if ( product === "travelcoffeetable ") {
+		if ( product === "travelcoffeetable") {
 			return "travelcoffeetable";
 		}
 		if ( (product === "layflat") && format ) {
