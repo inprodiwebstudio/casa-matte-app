@@ -11,6 +11,7 @@ import MinPagesLimit            from "./MinPagesLimit";
 import DisclaimerDropPhotos     from "./DisclaimerDropPhotos";
 import DeletePageConfirm        from "./DeletePageConfirm";
 import QrGeneratorPhotos        from "./QrGeneratorPhotos";
+import RefreshNotification      from "./RefreshNotification";
 
 
 const modals = {
@@ -26,6 +27,7 @@ const modals = {
 	minPagesLimit            : MinPagesLimit,
 	deletePageConfirm        : DeletePageConfirm,
 	qrGeneratorPhotos        : QrGeneratorPhotos,
+	refreshNotification      : RefreshNotification,
 };
 
 const modalsConfig = {
