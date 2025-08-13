@@ -10,6 +10,7 @@ import NoMorePages              from "./NoMorePages";
 import MinPagesLimit            from "./MinPagesLimit";
 import DisclaimerDropPhotos     from "./DisclaimerDropPhotos";
 import DeletePageConfirm        from "./DeletePageConfirm";
+import RefreshNotification      from "./RefreshNotification";
 
 
 const modals = {
@@ -24,6 +25,7 @@ const modals = {
 	disclaimerDropPhotos     : DisclaimerDropPhotos,
 	minPagesLimit            : MinPagesLimit,
 	deletePageConfirm        : DeletePageConfirm,
+	refreshNotification      : RefreshNotification,
 };
 
 const modalsConfig = {

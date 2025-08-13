@@ -20,15 +20,16 @@ const ErrorPage = Loadable(lazy(() => import("pages/ErrorPage")));
 
 const Router = () => {
 	const { hasUpdate } = useAppVersionChecker();
-
-	console.log("New change available");
 	
 	useEffect(() => {
 		if (hasUpdate) {
-			console.log("Reload Page");
-			// window.location.reload();
+			openContextModal({
+				modal      : "refreshNotification",
+				innerProps : {},
+			});
 		}
 	}, [hasUpdate]);
+
 	return useRoutes([
 		// Auth DashBoard
 		{
