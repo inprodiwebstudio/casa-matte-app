@@ -56,6 +56,7 @@ const AppShell = ({
 	};
 
 	useEffect(() => {
+		console.log(urlCollage);
 		if (workSpaceData?.productName) {
 			submitData();
 		}
