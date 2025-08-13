@@ -30,6 +30,7 @@ const Router = () => {
 				modal      : "refreshNotification",
 				innerProps : {},
 			});
+			console.log("Available update");
 		}
 	}, [hasUpdate]);
 
