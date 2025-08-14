@@ -6,7 +6,15 @@ import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
 
-const Mod26 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod26 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 28px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
@@ -20,6 +28,7 @@ const Mod26 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			h="100%"
 			justify="center"
 			align="center"
+			{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 		>
 			<Stack
 				w="50%"
