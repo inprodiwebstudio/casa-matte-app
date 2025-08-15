@@ -45,11 +45,6 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 	const dispatch = useDispatch();
 	const textImgsObj = useSelector((state) => state.workSpaceSlice.textsImgs, shallowEqual);
-	const modelPhotoBook = useSelector((state) => state.workSpaceSlice.data?.productName, shallowEqual);
-	const dimensionPhotoBook = useSelector((state) => state.workSpaceSlice.data?.dimentions, shallowEqual);
-	const formatPhotoBook = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
-	const sizePhotoBook = useSelector((state) => state.workSpaceSlice.data?.sizePhotoBook, shallowEqual);
-
 
 	// Efectos
 	useEffect(() => {
@@ -448,10 +443,6 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	return (
 		<Stack w="100%" h="100%" align="center" justify="center" style={{ position : "relative" }}>
 			<OrderInfoCard
-				sizePhotoBook={sizePhotoBook}
-				formatPhotoBook={formatPhotoBook}
-				dimensionPhotoBook={dimensionPhotoBook}
-				modelPhotoBook={modelPhotoBook}
 				photoBookData={photoBookData}
 				isLoading={isLoading}
 				generationStatus={generationStatus}
@@ -465,7 +456,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	);
 };
 
-const OrderInfoCard = ({photoBookData, modelPhotoBook, dimensionPhotoBook, formatPhotoBook, sizePhotoBook, isLoading, generationStatus, onDownload, onReturn }) => (
+const OrderInfoCard = ({photoBookData, isLoading, generationStatus, onDownload, onReturn }) => (
 	<Card
 		radius="13px"
 		shadow="lg"
@@ -491,8 +482,8 @@ const OrderInfoCard = ({photoBookData, modelPhotoBook, dimensionPhotoBook, forma
 			<OrderSection
 				title="INFORMACIÓN DEL PHOTOBOOK"
 				items={[
-					{ label : "MODELO", value : modelPhotoBook ?? "--" },
-					{ label : "TAMAÑO", value : `${sizePhotoBook} ${formatPhotoBook} ${dimensionPhotoBook}` ?? "--" },
+					{ label : "MODELO", value : photoBookData?.modelo ?? "--" },
+					{ label : "TAMAÑO", value : `${photoBookData?.tamano}` ?? "--" },
 				]}
 			/>
 
