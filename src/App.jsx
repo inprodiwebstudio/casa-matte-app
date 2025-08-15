@@ -56,7 +56,10 @@ export default function App() {
 									modals={ modals }
 									modalProps={ modalsConfig }
 								>
-									<NotificationsProvider position="top-right" zIndex={99999}>
+									<NotificationsProvider
+										position="top-right"
+										zIndex={5}
+									>
 										<Router />
 									</NotificationsProvider>
 								</ModalsProvider>

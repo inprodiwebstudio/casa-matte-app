@@ -106,7 +106,7 @@ const AppShell = ({
 				};
 
 				if (firstImages.length === 1) {
-					const listOfPathRoutes = firstImages[0]?.url.split("/");
+					const listOfPathRoutes = firstImages[0]?.public_id?.split("/");
 
 					const userName = listOfPathRoutes[0];
 					const photoBookNo = listOfPathRoutes[1];
