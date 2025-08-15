@@ -56,7 +56,6 @@ const AppShell = ({
 	};
 
 	useEffect(() => {
-		console.log(urlCollage);
 		if (workSpaceData?.productName) {
 			submitData();
 		}
@@ -84,7 +83,7 @@ const AppShell = ({
 	}, [dataMutationResult]);
 
 	useEffect(() => {
-		const listOfphotos = galleryData && Object.values(galleryData).filter(photo => photo?.format === "jpg");
+		const listOfphotos = galleryData ? Object.values(galleryData).filter(photo => (photo?.format === "jpg") || (photo?.format === "png")) : [];
 
 		if (isValidArray(listOfphotos)) {
 			const handlerConstructURLCollage = () => {
@@ -142,7 +141,7 @@ const AppShell = ({
 				return finalUrl;
 			};
 
-			setUrlCollage(handlerConstructURLCollage);
+			setUrlCollage(handlerConstructURLCollage());
 		}
 	}, [galleryData]);
 
