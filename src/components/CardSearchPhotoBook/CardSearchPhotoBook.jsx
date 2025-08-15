@@ -42,7 +42,7 @@ const CardSearchPhotoBook = () => {
 				status           : photoBook?.metas?.status[0],
 				modelo : photoBook?.metas?.modelo[0] ?? "",
 				tamano : photoBook?.metas?.tamano[0] ?? "",
-				fecha_de_termino : "",
+				fecha_de_termino : photoBook?.metas?.fecha_de_termino?.[0] ?? "",
 			}));
 			const photoBooksFiltered = constructorPhotoBooksData.filter((photoBook) => (photoBook?.status === "48") || (photoBook?.status === "26"));
 			setPhotoBooksOrders(photoBooksFiltered);
