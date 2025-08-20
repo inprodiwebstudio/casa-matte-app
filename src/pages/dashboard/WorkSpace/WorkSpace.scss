@@ -46,12 +46,12 @@
 				height: 595px;
 
 				@include laptop {
-					transform: scale(1.1, 1.1);
+					transform: scale(0.9, 0.9);
 					z-index: 1;
 				}
 	
 				@include big-laptop {
-					transform: scale(0.48, 0.48);
+					transform: scale(0.6, 0.6);
 					z-index: 1;
 				}
 	
@@ -65,11 +65,35 @@
 				transform: scale(0.8, 0.8);
 
 				@include laptop {
-					transform: scale(0.6, 0.6);
+					transform: scale(0.57, 0.57);
 				}
 
 				@include big-laptop {
 					transform: scale(0.6, 0.6);
+				}
+			}
+
+			&.horizontal-grande-preview {
+				transform: scale(0.8, 0.8);
+
+				@include laptop {
+					transform: scale(0.58, 0.58);
+				}
+
+				@include big-laptop {
+					transform: scale(0.6, 0.6);
+				}
+			}
+
+			&.horizontal-mediano-preview {
+				transform: scale(0.8, 0.8);
+
+				@include laptop {
+					transform: scale(0.55, 0.55);
+				}
+
+				@include big-laptop {
+					transform: scale(0.55, 0.55);
 				}
 			}
 
