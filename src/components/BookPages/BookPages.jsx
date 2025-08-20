@@ -3,11 +3,11 @@ import { useState, useEffect }                    from "react";
 import { Skeleton }                               from "@mantine/core";
 
 //Own components
-// import LayoutMod          from "components/LayoutMod/LayoutMod";
 import photoBooksConfing  from "core/constants/photoBooksConfing";
 import { workSpaceSlice } from "store/Slices";
 import FrontLayout        from "components/global/LayoutsPage/FrontLayout";
 import "./BookPages.scss";
+import DeletePageActionButton from "./DeletePageActionButton";
 
 const BookPages = ({
 	pageData,
@@ -132,15 +132,27 @@ const BookPages = ({
 						handleLayoutMod(pageData?.sheet1, 1)
 					)
 				}
+				{
+					isInPaginator && (
+						<DeletePageActionButton
+							isLeftSide
+							pageData={pageData}
+						/>
+					)
+				}
 			</div>
-			<div
-				className="spacer"
-				style={{
-					background : (isInDoublePage || !pageData?.sheet2) && "transparent",
-				}}
-			>
-				&nbsp;
-			</div>
+			{
+				isInWorkSpcae && (
+					<div
+						className="spacer"
+						style={{
+							background : (isInDoublePage || !pageData?.sheet2) && "transparent",
+						}}
+					>
+						&nbsp;
+					</div>
+				)
+			}
 			{
 				(!isInDoublePage && pageData?.sheet2) && (
 					<div
@@ -159,6 +171,13 @@ const BookPages = ({
 						{
 							(pageData?.sheet2?.layoutType !== "") && (
 								handleLayoutMod(pageData?.sheet2, 2)
+							)
+						}
+						{
+							isInPaginator && (
+								<DeletePageActionButton
+									pageData={pageData}
+								/>
 							)
 						}
 					</div>

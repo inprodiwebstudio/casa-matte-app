@@ -479,12 +479,12 @@ export const workSpaceSlice = createSlice({
 
 			state.data.pages = newPagesObject;
 		},
-		deletePage : (state, {payload}) => {
+		deletePage : (state) => {
 			const minPages = state.data.minPages;
 			if (state.data.numberOfPages === minPages) {
 				return;
 			}
-			state.data.numberOfPages = state.data.numberOfPages - payload.quantityDelete;
+			state.data.numberOfPages = state.data.numberOfPages - 1;
 		},
 		addPhotoEdited : (state, {payload}) => {
 			const newData = {...state.data};

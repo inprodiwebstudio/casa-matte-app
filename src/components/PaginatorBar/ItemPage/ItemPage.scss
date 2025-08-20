@@ -10,37 +10,9 @@
     position: relative;
     padding-top: 5px;
     padding-bottom: 5px;
-    // height: 600px;
-    // overflow: hidden;
-    // max-height: 150px;
-
-    & .delete-icon {
-        top : 5%;
-        left: 85%;
-        cursor: pointer;
-        z-index: 1;
-        position: absolute;
-        color: transparent;
-        color: transparent;
-        transition: all ease 200ms;
-        width: 25px;
-        height: 25px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
 
     &:hover {
         background: $primary-color;
-        .delete-icon {
-            top : 0;
-            background: rgba(44, 44, 44, 0.558);
-            border-radius: 5px;
-            cursor: pointer;
-            color: $dark-color;
-            font-weight: bolder;
-            color: rgb(255, 255, 255) !important;
-        }
     }
 
     &.isActivePage {
