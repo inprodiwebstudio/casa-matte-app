@@ -26,7 +26,6 @@ const AppShell = ({
 	const workSpaceData = useSelector((state) => state.workSpaceSlice?.data, shallowEqual);
 	const galleryData = useSelector((state) => state.gallerySlice?.data, shallowEqual);
 	const initialData = useSelector((state) => state.workSpaceSlice?.initialData, shallowEqual);
-	const galleryData = useSelector((state) => state.gallerySlice?.data, shallowEqual);
 
 
 	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
