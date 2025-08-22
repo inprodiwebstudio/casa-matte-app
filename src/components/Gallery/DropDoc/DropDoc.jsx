@@ -183,9 +183,13 @@ const DropDoc = ({
 						description : { fontFamily : "Helvetica" },
 					}),
 				});
+				setFileImage([]);
+				setCompletedPhotos([]);
+				setIsSelectedFolder(false);
 			}
 			setFileImage([]);
 			setCompletedPhotos([]);
+			setIsSelectedFolder(false);
 			dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 			dispatch(gallerySlice.actions.setTypeDropedView(null));
 		});
@@ -233,10 +237,16 @@ const DropDoc = ({
 				setLoading(false);
 				dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 				dispatch(gallerySlice.actions.setTypeDropedView(null));
+				setFileImage([]);
+				setCompletedPhotos([]);
+				setIsSelectedFolder(false);
 			}, reason => {
 				setLoading(false);
 				dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 				dispatch(gallerySlice.actions.setTypeDropedView(null));
+				setFileImage([]);
+				setCompletedPhotos([]);
+				setIsSelectedFolder(false);
 				console.error(reason);
 			});
 			return;
@@ -259,6 +269,7 @@ const DropDoc = ({
 		dispatch(gallerySlice.actions.setGalleryData(constructorData));
 		dispatch(gallerySlice.actions.setTypeDropedView(null));
 		setLoading(false);
+		setIsSelectedFolder(false);
 		dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 	};
 
@@ -362,7 +373,7 @@ const DropDoc = ({
 								<div  {...getRootProps({className : "indicator-drop-container"})}>
 									<DropFile size="40px" />
 									<p>
-										haz click aquí para subir tus fotos o arrastra y suelta
+										{isInPageUpload ? "Tap para subir tus fotos" : "haz click aquí para subir tus fotos o arrastra y suelta"}
 									</p>
 									<input {...getInputProps()} />
 								</div>

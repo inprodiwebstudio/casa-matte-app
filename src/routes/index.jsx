@@ -6,8 +6,8 @@ import { useRoutes, Navigate } from "react-router-dom";
 import CorrectAccessGuard from "components/global/CorrectAccessGuard";
 // components
 import { Loadable } from "core/components";
-import { useAppVersionChecker } from "helpers/Hooks/useAppVerisonChecker";
-import { openContextModal } from "@mantine/modals";
+// import { useAppVersionChecker } from "helpers/Hooks/useAppVerisonChecker";
+// import { openContextModal } from "@mantine/modals";
 
 // // Dashboard
 const WorkSpace = Loadable(lazy(() => import("pages/dashboard/WorkSpace")));
@@ -21,17 +21,17 @@ const SearchPhotoBook = Loadable(lazy(() => import("pages/SearchPhotoBook")));
 const ErrorPage = Loadable(lazy(() => import("pages/ErrorPage")));
 
 const Router = () => {
-	const { hasUpdate } = useAppVersionChecker();
+	// const { hasUpdate } = useAppVersionChecker();
 
 	
-	useEffect(() => {
-		if (hasUpdate) {
-			openContextModal({
-				modal      : "refreshNotification",
-				innerProps : {},
-			});
-		}
-	}, [hasUpdate]);
+	// useEffect(() => {
+	// 	if (hasUpdate) {
+	// 		openContextModal({
+	// 			modal      : "refreshNotification",
+	// 			innerProps : {},
+	// 		});
+	// 	}
+	// }, [hasUpdate]);
 
 	return useRoutes([
 		// Auth DashBoard
