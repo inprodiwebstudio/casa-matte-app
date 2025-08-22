@@ -16,14 +16,14 @@ const Mod56 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 26px; font-family: JosefinSans-Regular;'>SANTIAGO</span></p>";
+	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 28px; font-family: JosefinSans-Regular;'>TÍTULO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex
-			pt="8%"
-			pb="8%"
+			pt="10%"
+			pb="10%"
 			w="100%"
 			h="100%"
 			justify="center"
@@ -44,10 +44,11 @@ const Mod56 = ({
 							"regular" : "26px",
 							"grande"  : "28px",
 						}}
+						typeText="title"
 						align="center"
 						sheetNo={sheetNo}
 						textShell={() => <TextShell.Title />}
-						letterSpacing="6.5px"
+						letterSpacing="2px"
 						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
@@ -75,6 +76,7 @@ const Mod56 = ({
 							"regular" : "15px",
 							"grande"  : "18px",
 						}}
+						typeText="subtitle"
 						align="center"
 						sheetNo={sheetNo}
 						letterSpacing="2px"

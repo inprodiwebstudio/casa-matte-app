@@ -97,7 +97,7 @@ const Mod03FrontPdf = ({text, images}) => {
 							height     : "100%",
 							width      : "100%",
 							overflow   : "hidden",
-							background : "#E3E3E3",
+							background : "white",
 						}}
 					>
 						{

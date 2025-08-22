@@ -16,20 +16,20 @@ const Mod53 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 38px; font-family: Aitana-Regular;'>ISLA NEGRA</span></p>";
+	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: right;'><span style='font-size: 15px; font-family: Spectral-Light-Italic;'>Chile</span></p>";
+	const defaultSubtitle = "<p style='text-align: right;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex
-			pb="8%"
+			pb="22%"
 			w="100%"
 			h="100%"
 			gap="0.5em"
 			direction="column"
 		>
 			<Stack
-				spacing="0.3em"
+				spacing={isInWorkSpace ? "4%" : "8%"}
 				w="100%"
 				h="100%"
 				align="flex-end"
@@ -43,9 +43,9 @@ const Mod53 = ({
 					/>
 				</Stack>
 				<Stack
-					w="70%"
-					mr="10%"
-					spacing="0px"
+					w="90%"
+					mr="8%"
+					spacing={isInWorkSpace ? "0px" : "0.1em"}
 				>
 					<div
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
@@ -56,9 +56,10 @@ const Mod53 = ({
 								"regular" : "42px",
 								"grande"  : "46px",
 							}}
+							typeText="title"
 							align="right"
 							sheetNo={sheetNo}
-							textShell={() => <TextShell.Title />}
+							textShell={() => <TextShell.Title align="flex-end" />}
 							letterSpacing="6.5px"
 							data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
 							isInPaginator={isInPaginator}
@@ -73,10 +74,11 @@ const Mod53 = ({
 								"regular" : "15px",
 								"grande"  : "16px",
 							}}
+							typeText="subtitle"
 							align="right"
 							sheetNo={sheetNo}
 							letterSpacing="2px"
-							textShell={() => <TextShell.SubTitle />}
+							textShell={() => <TextShell.SubTitle align="flex-end" />}
 							data={textInsertion(data?.text[1], defaultSubtitle, isInWorkSpace)}
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}

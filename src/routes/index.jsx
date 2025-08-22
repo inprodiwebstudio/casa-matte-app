@@ -6,11 +6,12 @@ import { useRoutes, Navigate } from "react-router-dom";
 import CorrectAccessGuard from "components/global/CorrectAccessGuard";
 // components
 import { Loadable } from "core/components";
-import { useAppVersionChecker } from "helpers/Hooks/useAppVersionChecker";
-import { openContextModal } from "@mantine/modals";
+// import { useAppVersionChecker } from "helpers/Hooks/useAppVerisonChecker";
+// import { openContextModal } from "@mantine/modals";
 
 // // Dashboard
 const WorkSpace = Loadable(lazy(() => import("pages/dashboard/WorkSpace")));
+const UploadImages = Loadable(lazy(() => import("pages/UploadImages")));
 const LayoutsNotFound = Loadable(lazy(() => import("pages/NotFoundLayouts")));
 const AuthValidate = Loadable(lazy(() => import("pages/AuthValidate")));
 const PrivateRoute = Loadable(lazy(() => import("components/global/PrivateRoute")));
@@ -20,17 +21,17 @@ const SearchPhotoBook = Loadable(lazy(() => import("pages/SearchPhotoBook")));
 const ErrorPage = Loadable(lazy(() => import("pages/ErrorPage")));
 
 const Router = () => {
-	const { hasUpdate } = useAppVersionChecker();
+	// const { hasUpdate } = useAppVersionChecker();
 
 	
-	useEffect(() => {
-		if (hasUpdate) {
-			openContextModal({
-				modal      : "refreshNotification",
-				innerProps : {},
-			});
-		}
-	}, [hasUpdate]);
+	// useEffect(() => {
+	// 	if (hasUpdate) {
+	// 		openContextModal({
+	// 			modal      : "refreshNotification",
+	// 			innerProps : {},
+	// 		});
+	// 	}
+	// }, [hasUpdate]);
 
 	return useRoutes([
 		// Auth DashBoard
@@ -51,6 +52,28 @@ const Router = () => {
 		{
 			path    : "admin",
 			element : <PrivateAdminRoute component={SearchPhotoBook} />,
+		},
+		{
+			path : "uploadImages",
+			children : [
+				{
+					element : <Navigate to="/uploadImages/:authorId" replace />,
+					index   : true,
+				},
+				{
+					path    : ":authorId",
+					children : [
+						{
+							element : <Navigate to="/uploadImages/:authorId/:postId" replace />,
+							index   : true,
+						},
+						{
+							path    : ":postId",
+							element : <UploadImages />,
+						}
+					]
+				},
+			]
 		},
 		{
 			path     : "order",

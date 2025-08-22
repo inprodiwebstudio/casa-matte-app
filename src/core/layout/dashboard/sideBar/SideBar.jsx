@@ -8,6 +8,8 @@ import { gallerySlice, workSpaceSlice }                             from "store/
 import { apiImageKit }                                              from "store/api/imageKitApi";
 import { convertToArray, isValidArray, bindAll }                    from "helpers";
 import { ArrowTop, FolderPlus, DropFile, Thrash, MoveFolder, Cross} from "Resources/icons";
+import { IconContext } from "react-icons";
+import { FaMobile } from "react-icons/fa";
 import "./SideBar.scss";
 import { useEffect }                                                from "react";
 import { useParams }                                                from "react-router";
@@ -98,6 +100,12 @@ const SideBar = ({
 			gallerySlice.setLoadingGalleryData(false);
 		}
 	};
+
+	const onClickMobilAction = () => {
+		openContextModal({
+			modal      : "qrGeneratorPhotos",
+		});
+	}
 
 	useEffect(() => {
 		if (isLoggedIn) {

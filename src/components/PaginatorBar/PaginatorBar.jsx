@@ -8,15 +8,17 @@ import LoadingPaginator                                           from "./Loadin
 import { workSpaceSlice }                                         from "store/Slices";
 import { convertToArray, isValidArray, convertToObject, bindAll } from "helpers";
 import { ScrollBar }                                              from "core/components";
-import FrontPage                                                  from "./FrontPage";
+// import FrontPage                                                  from "./FrontPage";
 import "./PaginatorBar.scss";
-import { openContextModal }                                       from "@mantine/modals";
+import CoverBookItem        from "./CoverBookItem";
+import { Group }            from "@mantine/core";
 
 const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, loading, productType}) => {
 	const [ pageList, setPageList ] = useState({
 		pages    : {},
 		pagesIds : [],
 	});
+
 
 	let counter = 1;
 
@@ -99,49 +101,7 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 			return;
 		}
 	}, [pagesData]);
-
-	const handleDelete = (pageId, index) => {
-		const myPagesData = {...pagesData};
-		const dataDelete = {...myPagesData[pageId]};
-
-		const counterPages = dataDelete.sheet2 ? 2 : 1;
-
-		if ((numberOfPages - counterPages) > minPages) {
-			delete myPagesData[pageId];
-			const listOfpages = convertToArray(myPagesData);
-			const newlistData = listOfpages.map((data, index) => {
-				if (index === 0) {
-					return data;
-				}
-				return {
-					...data,
-					id     : `page${index + 1}`,
-					sheet1 : {
-						...data.sheet1,
-						pageNo : index * 2,
-					},
-					...(data?.sheet2 && {
-						sheet2 : {
-							...data.sheet2,
-							pageNo : (index * 2) + 1,
-						},
-					}),
-				};
-			});
-			const newPagesData = convertToObject(newlistData);
-			workSpaceSlice.newListPages(newPagesData);
-			if (dataDelete.sheet2) {
-				workSpaceSlice.deletePage({quantityDelete : 2});
-				return;
-			}
-			workSpaceSlice.deletePage({quantityDelete : 1});
-			return;
-		}
-		openContextModal({
-			modal      : "minPagesLimit",
-			innerProps : {},
-		});
-	};
+	
 
 	return (
 		<div id="PaginatorBar">
@@ -153,14 +113,22 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 					</ScrollBar>
 				) : (
 					<ScrollBar>
-						{
-							(productType === "white") && (
-								<FrontPage />
-							)
-						}
+						<CoverBookItem />
+						<Group
+							position="center"
+							mb="10px"
+							mt="5px"
+						>
+							<p
+								style={{
+									fontSize : "12px",
+								}}
+							>
+								PORTADA
+							</p>
+						</Group>
 						<ItemPage
 							isFixedPage
-							handleDelete={handleDelete}
 							draggableId={convertToArray(pagesData)[0]?.id}
 							pageData={firstPageData}
 						/>
@@ -179,7 +147,6 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 												<ItemPage
 													index={index}
 													key={pageId}
-													handleDelete={handleDelete}
 													pageData={pagesData[pageId]}
 													draggableId={pageId}
 												/>

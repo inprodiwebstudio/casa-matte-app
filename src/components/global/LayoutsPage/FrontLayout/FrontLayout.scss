@@ -16,9 +16,9 @@
         padding-top: 3%;
         padding-bottom: 3%;
         border-style: solid;
-        border-left-width: 3px;
-        border-right-width: 3px;
-        border-image: linear-gradient(to left,rgb(255, 255, 255),rgba(0, 0, 0, 0.2), rgb(255, 255, 255)) 1 100%;
+        border-left-width: 5px;
+        border-right-width: 5px;
+        border-image: linear-gradient(to left,rgb(255, 255, 255),rgba(142, 142, 142, 0.2), rgb(255, 255, 255)) 1 100%;
 
         &.is-in-paginator {
             border-left-width: 1px;

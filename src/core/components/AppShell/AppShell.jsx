@@ -24,6 +24,7 @@ const AppShell = ({
 
 	// const isSelectedPage = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice?.data, shallowEqual);
+	const galleryData = useSelector((state) => state.gallerySlice?.data, shallowEqual);
 	const initialData = useSelector((state) => state.workSpaceSlice?.initialData, shallowEqual);
 	const galleryData = useSelector((state) => state.gallerySlice?.data, shallowEqual);
 
@@ -55,8 +56,8 @@ const AppShell = ({
 		});
 	};
 
-
 	useEffect(() => {
+		console.log(urlCollage);
 		if (workSpaceData?.productName) {
 			submitData();
 		}

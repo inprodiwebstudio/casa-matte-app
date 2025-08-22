@@ -32,7 +32,7 @@ const Mod73Pdf = ({images}) => {
 					style={{
 						width      : "calc(20% - 2px)",
 						height     : "100%",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -53,7 +53,7 @@ const Mod73Pdf = ({images}) => {
 					style={{
 						width      : "calc(20% - 2px)",
 						height     : "100%",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -74,7 +74,7 @@ const Mod73Pdf = ({images}) => {
 					style={{
 						width      : "calc(20% - 2px)",
 						height     : "100%",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -95,7 +95,7 @@ const Mod73Pdf = ({images}) => {
 					style={{
 						width      : "calc(20% - 2px)",
 						height     : "100%",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -116,7 +116,7 @@ const Mod73Pdf = ({images}) => {
 					style={{
 						width      : "calc(20% - 2px)",
 						height     : "100%",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -147,7 +147,7 @@ const Mod73Pdf = ({images}) => {
 					style={{
 						width      : "calc(20% - 2px)",
 						height     : "100%",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -168,7 +168,7 @@ const Mod73Pdf = ({images}) => {
 					style={{
 						width      : "calc(20% - 2px)",
 						height     : "100%",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -189,7 +189,7 @@ const Mod73Pdf = ({images}) => {
 					style={{
 						width      : "calc(20% - 2px)",
 						height     : "100%",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -210,7 +210,7 @@ const Mod73Pdf = ({images}) => {
 					style={{
 						width      : "calc(20% - 2px)",
 						height     : "100%",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -231,7 +231,7 @@ const Mod73Pdf = ({images}) => {
 					style={{
 						width      : "calc(20% - 2px)",
 						height     : "100%",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{

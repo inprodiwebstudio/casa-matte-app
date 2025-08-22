@@ -14,7 +14,7 @@ const Mod65 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 25px; font-family: JosefinSans-Light;'>Título pequeño 1</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>Título Grande</span></p>";
 
 	return (
 		<Center w="100%" h="100%">
@@ -36,7 +36,7 @@ const Mod65 = ({
 					}}
 					sheetNo={sheetNo}
 					textShell={() => <TextShell.Title />}
-					letterSpacing="6.5px"
+					letterSpacing="4px"
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 					isInPaginator={isInPaginator}
 					isThumbNail={isThumbNail}

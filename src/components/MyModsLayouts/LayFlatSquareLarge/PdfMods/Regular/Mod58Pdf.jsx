@@ -21,7 +21,7 @@ const Mod58Pdf = ({images}) => {
 				style={{
 					width      : "calc(70% - 5px)",
 					height     : "100%",
-					background : "#E3E3E3",
+					background : "white",
 				}}
 			>
 				{
@@ -54,7 +54,7 @@ const Mod58Pdf = ({images}) => {
 					style={{
 						height     : "calc(50% - 5px)",
 						width      : "100%",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -74,7 +74,7 @@ const Mod58Pdf = ({images}) => {
 					style={{
 						height     : "calc(50% - 5px)",
 						width      : "100%",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{

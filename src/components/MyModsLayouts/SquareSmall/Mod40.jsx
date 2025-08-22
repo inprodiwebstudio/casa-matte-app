@@ -14,9 +14,9 @@ const Mod40 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 26px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaulSubtTitle = "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>";
+	const defaulSubtTitle = "<p style='text-align: center;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>";
 
 	return (
 		<Flex
@@ -28,7 +28,7 @@ const Mod40 = ({
 		>
 			<Center w="100%" h="100%">
 				<Stack
-					spacing="0px"
+					spacing={isInWorkSpace ? "2px" : "1px"}
 					w="100%"
 				>
 					<div
@@ -46,6 +46,7 @@ const Mod40 = ({
 								"regular" : "26px",
 								"grande"  : "28px",
 							}}
+							typeText="title"
 							sheetNo={sheetNo}
 							letterSpacing="4px"
 							textShell={() => <TextShell.Title />}
@@ -69,6 +70,7 @@ const Mod40 = ({
 								"regular" : "15px",
 								"grande"  : "18px",
 							}}
+							typeText="subtitle"
 							sheetNo={sheetNo}
 							letterSpacing="2px"
 							textShell={() => <TextShell.SubTitle />}

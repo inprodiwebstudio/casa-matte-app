@@ -17,6 +17,7 @@ const ImgLayout = ({
 	sheetNo,
 	imageNo,
 	urlImage,
+	isUnderImage,
 	isCoverImage,
 	isInWorkSpace,
 }) => {
@@ -82,7 +83,9 @@ const ImgLayout = ({
 		<div
 			onDrop={(e) => handleDrop(e)}
 			onDragOver={(e) => handleDragOver(e)}
-			className={`ImgLayout ${isLowQuality ? "low-quality" : ""} ${isCoverImage && "relevantColor"}`}
+			className={
+				`ImgLayout ${isUnderImage ? "isUnderImage" : ""} ${isLowQuality ? "low-quality" : ""} ${isCoverImage && "relevantColor"}`
+			}
 			id={`${currentPageId}-${sheetNo}-${imageNo}`}
 			{
 				...( (urlImage?.url && (urlImage?.url !== "")) &&  {

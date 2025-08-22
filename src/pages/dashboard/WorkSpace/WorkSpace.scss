@@ -46,12 +46,12 @@
 				height: 595px;
 
 				@include laptop {
-					transform: scale(1.1, 1.1);
+					transform: scale(0.9, 0.9);
 					z-index: 1;
 				}
 	
 				@include big-laptop {
-					transform: scale(0.48, 0.48);
+					transform: scale(0.6, 0.6);
 					z-index: 1;
 				}
 	
@@ -65,11 +65,35 @@
 				transform: scale(0.8, 0.8);
 
 				@include laptop {
-					transform: scale(0.6, 0.6);
+					transform: scale(0.57, 0.57);
 				}
 
 				@include big-laptop {
 					transform: scale(0.6, 0.6);
+				}
+			}
+
+			&.horizontal-grande-preview {
+				transform: scale(0.8, 0.8);
+
+				@include laptop {
+					transform: scale(0.58, 0.58);
+				}
+
+				@include big-laptop {
+					transform: scale(0.6, 0.6);
+				}
+			}
+
+			&.horizontal-mediano-preview {
+				transform: scale(0.7, 0.7);
+
+				@include laptop {
+					transform: scale(0.55, 0.55);
+				}
+
+				@include big-laptop {
+					transform: scale(0.55, 0.55);
 				}
 			}
 
@@ -151,7 +175,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 90px;
+		font-size: 90px !important;
 
 		@include laptop {
 			font-size: 90px;
@@ -267,7 +291,6 @@
 				transform: scale(0.75, 0.75);
 
 				@include laptop {
-					margin-right: 45px;
 					transform: scale(0.52, 0.52);
 					z-index: 1;
 				}
@@ -373,8 +396,7 @@
 				height: 595px;
 
 				@include laptop {
-					transform: scale(0.65, 0.65);
-					margin-right: 40px;
+					transform: scale(0.62, 0.62);
 					z-index: 1;
 				}
 	

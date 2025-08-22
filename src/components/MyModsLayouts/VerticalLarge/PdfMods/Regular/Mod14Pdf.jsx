@@ -30,7 +30,7 @@ const Mod14Pdf = ({images}) => {
 					style={{
 						width      : "100%",
 						height     : "calc(50% - 5px)",
-						background : "#E3E3E3",
+						background : "white",
 						overflow   : "hidden",
 					}}
 				>
@@ -61,7 +61,7 @@ const Mod14Pdf = ({images}) => {
 							width      : "calc(30% - 5px)",
 							height     : "100%",
 							overflow   : "hidden",
-							background : "#E3E3E3",
+							background : "white",
 						}}
 					>
 						{
@@ -82,7 +82,7 @@ const Mod14Pdf = ({images}) => {
 							width      : "calc(70% - 5px)",
 							height     : "100%",
 							overflow   : "hidden",
-							background : "#E3E3E3",
+							background : "white",
 						}}
 					>
 						{

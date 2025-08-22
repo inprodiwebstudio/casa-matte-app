@@ -8,7 +8,7 @@ import "./ConfirmationPrint.scss";
 import axios                    from "axios";
 import { PostingConfig }        from "Notifications";
 import { closeAllModals }       from "@mantine/modals";
-import { isValidArray }         from "helpers";
+import { dayjs, isValidArray }         from "helpers";
 import { inCompletePages }      from "./ConfirmationToPrint.helpers";
 import IncompletedPagesBody     from "./IncompletedPagesBody";
 
@@ -40,7 +40,7 @@ const ConfirmationToPrint = ({ innerProps }) => {
 			setIsLoadingOrder(true);
 			try {
 				const responseCreateOrder = await axios.post(
-					"https://casamatte.com/wp-json/wc/v3/orders",
+					"https://casamatte.wip-inprodi.com/wp-json/wc/v3/orders",
 					{
 						payment_method       : "bacs",
 						payment_method_title : "Direct Bank Transfer",
@@ -84,6 +84,7 @@ const ConfirmationToPrint = ({ innerProps }) => {
 						meta   : {
 							id_pedido_hojas_extra : responseCreateOrder?.data?.id.toString(),
 							status                : "48",
+							fecha_de_termino : dayjs(new Date()).format("YYYY-MM-DD"),
 						},
 					},
 					id     : postId,
@@ -106,6 +107,7 @@ const ConfirmationToPrint = ({ innerProps }) => {
 				status : "publish",
 				meta   : {
 					status : "48",
+					fecha_de_termino : dayjs(new Date()).format("YYYY-MM-DD"),
 				},
 			},
 			id     : postId,

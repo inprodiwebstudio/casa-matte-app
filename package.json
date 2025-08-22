@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy": "https://casamatte.com/",
+  "proxy": "https://casamatte.wip-inprodi.com/",
   "engines": {
     "node": "18.12.0",
     "yarn": ">=3.0.0"
@@ -73,9 +73,11 @@
     "react-dropzone": "^14.2.3",
     "react-filerobot-image-editor": "^4.3.7",
     "react-hook-form": "^7.43.7",
+    "react-icons": "^5.5.0",
     "react-image-file-resizer": "^0.4.8",
     "react-pdf-html": "1.1.18",
     "react-perfect-scrollbar": "^1.5.8",
+    "react-qr-code": "^2.0.18",
     "react-redux": "^8.0.2",
     "react-router": "^6.4.3",
     "react-router-dom": "^6.4.0",
@@ -107,5 +109,6 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
-  }
+  },
+  "packageManager": "yarn@4.9.2"
 }

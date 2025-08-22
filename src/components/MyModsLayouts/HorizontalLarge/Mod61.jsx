@@ -14,19 +14,22 @@ const Mod61 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 36px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaulSubtTitle = "<p style='text-align: right;'><span style='font-size: 15px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>";
+	const defaulSubtTitle = "<p style='text-align: right;'><span style='font-size: 14px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>";
 
 	return (
 		<Flex
-			p="4%"
+			p={isInWorkSpace ? "50px" : "10%"}
 			w="100%"
 			h="100%"
 			justify="flex-end"
 			align="flex-end"
 		>
-			<Stack spacing="0.05em" w="100%">
+			<Stack
+				spacing={isInWorkSpace ? "3px" : "0.1em" }
+				w="100%"
+			>
 				<div
 					style={{
 						width         : "100%",
@@ -45,7 +48,7 @@ const Mod61 = ({
 						}}
 						sheetNo={sheetNo}
 						letterSpacing="6px"
-						textShell={() => <TextShell.Title />}
+						textShell={() => <TextShell.Title align="flex-end" />}
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
@@ -56,8 +59,8 @@ const Mod61 = ({
 					style={{
 						width         : "100%",
 						paddingLeft   : "20%",
-						paddingRight  : "0%",
 						textTransform : "uppercase",
+						paddingRight  : isInWorkSpace ? "5px" : "0px",
 					}}
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
 				>
@@ -68,8 +71,8 @@ const Mod61 = ({
 							"grande"  : "16px",
 						}}
 						sheetNo={sheetNo}
-						letterSpacing="2px"
-						textShell={() => <TextShell.SubTitle />}
+						letterSpacing="3px"
+						textShell={() => <TextShell.SubTitle align="flex-end" />}
 						data={textInsertion(data?.text[1], defaulSubtTitle, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}

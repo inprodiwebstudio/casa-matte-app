@@ -19,7 +19,7 @@ const Mod45Pdf = ({images}) => {
 				style={{
 					height     : "100%",
 					width      : "100%",
-					background : "#E3E3E3",
+					background : "white",
 				}}
 			>
 				{

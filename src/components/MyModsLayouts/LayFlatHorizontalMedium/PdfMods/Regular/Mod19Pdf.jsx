@@ -28,7 +28,7 @@ const Mod19Pdf = ({images}) => {
 			>
 				<div
 					style={{
-						background : "#E3E3E3",
+						background : "white",
 						width      : "100%",
 						height     : "calc(33.33% - 3.333px)",
 					}}
@@ -48,7 +48,7 @@ const Mod19Pdf = ({images}) => {
 				</div>
 				<div
 					style={{
-						background : "#E3E3E3",
+						background : "white",
 						width      : "100%",
 						height     : "calc(33.33% - 3.333px)",
 					}}
@@ -68,7 +68,7 @@ const Mod19Pdf = ({images}) => {
 				</div>
 				<div
 					style={{
-						background : "#E3E3E3",
+						background : "white",
 						width      : "100%",
 						height     : "calc(33.33% - 3.333px)",
 					}}

@@ -35,10 +35,13 @@ import "./DropDoc.scss";
 import { showNotification, cleanNotifications } from "@mantine/notifications";
 import { closeAllModals, openContextModal }     from "@mantine/modals";
 import { useParams }                            from "react-router";
+import { IconContext } from "react-icons";
+import { FaMobile, FaLaptop } from "react-icons/fa";
 
 const DropDoc = ({
 	userName,
 	photosData,
+	isInPageUpload,
 	galleryPathRoute,
 	galleryTypeDropedView,
 }) => {
@@ -47,6 +50,7 @@ const DropDoc = ({
 	const { postId } = useParams();
 
 	const [ loading, setLoading ] = useState(false);
+	const [ isViewSelectDrop, setIsViewSelectDrop ] = useState(true);
 
 	const [ fileImage, setFileImage ] = useState([]);
 	const [ isSelectedFolder, setIsSelectedFolder ] = useState(false);
@@ -179,9 +183,13 @@ const DropDoc = ({
 						description : { fontFamily : "Helvetica" },
 					}),
 				});
+				setFileImage([]);
+				setCompletedPhotos([]);
+				setIsSelectedFolder(false);
 			}
 			setFileImage([]);
 			setCompletedPhotos([]);
+			setIsSelectedFolder(false);
 			dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 			dispatch(gallerySlice.actions.setTypeDropedView(null));
 		});
@@ -191,7 +199,7 @@ const DropDoc = ({
 		const listOfPhotos = convertToArray(photosData);
 		const isAvailablePhotos = isValidArray(listOfPhotos);
 
-		if (!isAvailablePhotos) {
+		if (!isAvailablePhotos && !isInPageUpload) {
 			return openContextModal({
 				modal      : "disclaimerDropPhotos",
 				innerProps : {
@@ -229,10 +237,16 @@ const DropDoc = ({
 				setLoading(false);
 				dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 				dispatch(gallerySlice.actions.setTypeDropedView(null));
+				setFileImage([]);
+				setCompletedPhotos([]);
+				setIsSelectedFolder(false);
 			}, reason => {
 				setLoading(false);
 				dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 				dispatch(gallerySlice.actions.setTypeDropedView(null));
+				setFileImage([]);
+				setCompletedPhotos([]);
+				setIsSelectedFolder(false);
 				console.error(reason);
 			});
 			return;
@@ -255,7 +269,15 @@ const DropDoc = ({
 		dispatch(gallerySlice.actions.setGalleryData(constructorData));
 		dispatch(gallerySlice.actions.setTypeDropedView(null));
 		setLoading(false);
+		setIsSelectedFolder(false);
 		dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
+	};
+
+	const handlerOnclickPhotosMovil = () => {
+		openContextModal({
+			modal      : "qrGeneratorPhotos",
+		});
+		dispatch(gallerySlice.actions.setTypeDropedView(null));
 	};
 
 	useEffect(() => {
@@ -263,6 +285,41 @@ const DropDoc = ({
 			setFileImage([]);
 		}
 	}, [galleryTypeDropedView]);
+
+	if (isViewSelectDrop && !isInPageUpload && (galleryTypeDropedView !== "addFolder")) {
+		return (
+			<div className="DropDoc">
+				<div className="options-cards-container">
+					<div className="options-card">
+						<Card
+							isButton
+							image={
+								<IconContext.Provider value={{ size: "50px" }}>
+									<div>
+										<FaLaptop />
+									</div>
+								</IconContext.Provider>
+							}
+							body="CARGAR DESDE COMPUTADORA"
+							onSelect={() => setIsViewSelectDrop(false)}
+						/>
+						<Card
+							isButton
+							image={
+								<IconContext.Provider value={{ size: "50px" }}>
+									<div>
+										<FaMobile />
+									</div>
+								</IconContext.Provider>
+							}
+							body="CARGAR DESDE MOVIL"
+							onSelect={handlerOnclickPhotosMovil}
+						/>
+					</div>
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<>
@@ -316,7 +373,7 @@ const DropDoc = ({
 								<div  {...getRootProps({className : "indicator-drop-container"})}>
 									<DropFile size="40px" />
 									<p>
-										haz click aquí para subir tus fotos o arrastra y suelta
+										{isInPageUpload ? "Tap para subir tus fotos" : "haz click aquí para subir tus fotos o arrastra y suelta"}
 									</p>
 									<input {...getInputProps()} />
 								</div>

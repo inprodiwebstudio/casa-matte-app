@@ -14,7 +14,7 @@ const Mod39 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 26px; font-family: Aitana-Regular;'>TÍTULO 2</span></p>";
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO 2</span></p>";
 
 	return (
 		<Flex
@@ -22,7 +22,7 @@ const Mod39 = ({
 			h="100%"
 			justify="flex-end"
 			align="flex-end"
-			pb="5%"
+			pb="8%"
 			pr="10%"
 		>
 			<Stack
@@ -36,6 +36,7 @@ const Mod39 = ({
 						"regular" : "26px",
 						"grande"  : "28px",
 					}}
+					typeText="title"
 					sheetNo={sheetNo}
 					letterSpacing="4px"
 					textShell={() => <TextShell.Title width="80%" align="flex-end" />}

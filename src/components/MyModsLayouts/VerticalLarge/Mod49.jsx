@@ -16,9 +16,9 @@ const Mod49 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>TOSCANA</span></p>";
+	const defaultTitle = "<p style='text-align: left;'><span style='font-size: 24px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaultIndices = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>FLORENCIA</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ORVIETTO</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>MONTALCINO</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>PIENZA</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SIENNA</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>BAGNO VIGNIONI</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SAN GIMINIANO</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>MONTEPULCIANO</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>ANTINORI</span></p>";
+	const defaultIndices = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Índice 1</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Índice 2</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Índice 3</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Índice 4</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Índice 5</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Índice 6</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Índice 7</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Índice 8</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Índice 9</span></p><p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>Índice 10</span></p>";
 
 	return (
 		<Flex
@@ -29,12 +29,12 @@ const Mod49 = ({
 			align="flex-end"
 		>
 			<Stack
-				spacing="0.18em"
+				spacing={isInWorkSpace ? "20px" : "0.12em"}
 				sx={{overflow : "hidden", textTransform : "uppercase"}}
-				w="30%"
+				w={isInWorkSpace ? "20%" : "30%"}
 			>
 				<Stack
-					spacing="0.12em"
+					spacing={isInWorkSpace ? "12px" : "0.12em"}
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
 					<Text
@@ -52,7 +52,7 @@ const Mod49 = ({
 						isThumbNail={isThumbNail}
 						textNo={0}
 					/>
-					<DividerLayout long="20%" position="h" />
+					<DividerLayout long={isInWorkSpace ? "20%" : "20%"} position="h" />
 				</Stack>
 				<div
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}

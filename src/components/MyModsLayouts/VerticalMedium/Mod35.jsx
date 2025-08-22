@@ -1,4 +1,4 @@
-import { Center, Stack } from "@mantine/core";
+import { Center } from "@mantine/core";
 //Own components
 import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
@@ -14,7 +14,7 @@ const Mod35 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 28px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>";
 
 	return (
 		<div

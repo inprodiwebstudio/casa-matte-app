@@ -17,10 +17,12 @@ const textToImage = async (id) => {
 		style  : {
 			transform       : `scale(${5})`,
 			transformOrigin : "top left",
-			width           : `${element.clientWidth}px`, // Mantiene el tamaño real en el DOM
+			width           : `${element.clientWidth}px`,
 			height          : `${element.clientHeight}px`,
 		},
 	});
+
+	console.log(imgData);
 
 	return imgData;
 };

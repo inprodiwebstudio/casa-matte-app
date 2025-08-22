@@ -1,13 +1,13 @@
 import { createStyles } from "@mantine/core";
 
-const useStyles = createStyles((theme, { size, gapSpacing, lineHeight, letterSpacing }) => ({
+const useStyles = createStyles((theme, { size, gapSpacing, lineHeight, letterSpacing, gravingColor }) => ({
 	editText : {
 		fontFamily     : "Helvetica, sans-serif",
 		height         : "100% !important",
 		width          : "100% !important",
-		display        : "flex",
 		flexDirection  : "column",
 		justifyContent : "space-between",
+		display        : !size ? "none" : "flex",
 
 		"& .ck.ck-editor__editable_inline" : {
 			display       : gapSpacing && "flex",
@@ -37,6 +37,7 @@ const useStyles = createStyles((theme, { size, gapSpacing, lineHeight, letterSpa
 		},
 
 		"& .ck-content" : {
+			color       : gravingColor ?? undefined,
 			height      : "100% !important",
 			padding     : "0px !important",
 			border      : "1px solid transparent !important",
@@ -46,7 +47,7 @@ const useStyles = createStyles((theme, { size, gapSpacing, lineHeight, letterSpa
 		},
 
 		"& .ck-focused" : {
-			border : "1px solid rgb(100, 211, 9) !important",
+			border : "1px solid rgb(85, 121, 248) !important",
 		},
 
 		"& .ck-dropdown" : {
