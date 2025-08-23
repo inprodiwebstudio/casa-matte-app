@@ -1,4 +1,4 @@
-import { Center } from "@mantine/core";
+import { Center, Stack } from "@mantine/core";
 //Own components
 import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
