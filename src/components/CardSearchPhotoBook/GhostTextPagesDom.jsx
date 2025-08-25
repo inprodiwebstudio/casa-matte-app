@@ -23,7 +23,8 @@ const GhostTextPagesDom = ({textPages}) => {
 			}}>
 			<div
 				style={{
-					height   : "0px",
+					marginTop : "500px",
+					height   : "800px",
 					width    : "100%",
 					overflow : "hidden",
 				}}

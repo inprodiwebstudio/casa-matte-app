@@ -1,3 +1,4 @@
+
 // eslint-disable-next-line import/no-extraneous-dependencies
 import domtoimage from "dom-to-image";
 
@@ -17,12 +18,10 @@ const textToImage = async (id) => {
 		style  : {
 			transform       : `scale(${5})`,
 			transformOrigin : "top left",
-			width           : `${element.clientWidth}px`,
+			width           : `${element.clientWidth}px`, // Mantiene el tamaño real en el DOM
 			height          : `${element.clientHeight}px`,
 		},
 	});
-
-	console.log(imgData);
 
 	return imgData;
 };

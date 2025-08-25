@@ -49,7 +49,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	// Efectos
 	useEffect(() => {
 		setIsLoading(true);
-		if (photoBookData?.meta?.config) {
+		if (photoBookData?.config) {
 			getConfigDataPhotoBook();
 		}
 	}, [photoBookData]);
@@ -139,8 +139,6 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		const formatKey = getFormatKey();
 		const sizeKey = photoBookConfigData?.sizePhotoBook;
 		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
-
-		console.log(config);
 
 		if (!config) return null;
 
