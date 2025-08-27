@@ -7,6 +7,7 @@ import {
 	getEditorDefaults,
 } from "@pqina/pintura";
 
+import { useState }       from "react";
 import { connect }        from "react-redux";
 import { closeAllModals } from "@mantine/modals";
 
@@ -24,6 +25,7 @@ import "@pqina/pintura/pintura.css";
 
 const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 	const { handlerUploadImage } = useSubmitImages({userName : userName});
+	const [ isUploading, setIsUploading ] = useState(undefined);
 
 	// const [inlineResult, setInlineResult] = useState();
 
@@ -31,12 +33,16 @@ const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 
 	const addEditedImage = async (file) => {
 		try {
+			setIsUploading("Cargando imagen...");
 			const myImage = await handlerUploadImage(file, true);
 			workSpaceSlice.addPhotoEdited({pageId : innerProps?.pageId, sheetNo : innerProps?.sheetNo, layoutNo : innerProps?.layoutNo, imageUrl : myImage?.url});
+			setIsUploading(undefined);
+
 			closeAllModals();
 		} catch (error) {
 			PostingConfig["post"][500]();
 			console.error(error);
+			throw error;
 		}
 	};
 
@@ -67,6 +73,7 @@ const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 					"finetune",
 				]}
 				src={urlImage}
+				status={isUploading}
 				onProcess={(res) => addEditedImage(res?.dest)}
 			/>
 		</div>

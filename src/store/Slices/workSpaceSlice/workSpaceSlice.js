@@ -502,7 +502,13 @@ export const workSpaceSlice = createSlice({
 		},
 		addPhotoEdited : (state, {payload}) => {
 			const newData = {...state.data};
-			newData.pages[payload?.pageId][`sheet${payload.sheetNo}`]["photos"][payload?.layoutNo]["urlPhotoEdited"] = payload?.imageUrl;
+
+			const isFrontPageImage = payload?.pageId === "frontpage";
+			if (isFrontPageImage) {
+				newData.frontPage.sheet1["photos"][payload?.layoutNo]["urlPhotoEdited"] = payload?.imageUrl;
+			} else {
+				newData.pages[payload?.pageId][`sheet${payload.sheetNo}`]["photos"][payload?.layoutNo]["urlPhotoEdited"] = payload?.imageUrl;
+			}
 			state.data = newData;
 		},
 		addPhoto : (state, {payload}) => {
