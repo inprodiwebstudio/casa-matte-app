@@ -3,6 +3,7 @@ import VerticalMedium          from "components/MyModsLayouts/VerticalMedium";
 import HorizontalLarge         from "components/MyModsLayouts/HorizontalLarge";
 import HorizontalMedium        from "components/MyModsLayouts/HorizontalMedium";
 import layflatSquareLarge      from "components/MyModsLayouts/LayFlatSquareLarge";
+import layflatSquareMedium     from "components/MyModsLayouts/LayFlatSquareMedium";
 import layflatVerticalMedium   from "components/MyModsLayouts/LayFlat";
 import layflatHorizontalMedium from "components/MyModsLayouts/LayFlatHorizontalMedium";
 import SquareSmall             from "components/MyModsLayouts/SquareSmall";
@@ -149,6 +150,48 @@ export const PHOTO_BOOK_TYPES = {
 				"Mod78",
 			],
 			modLayouts : {...layflatSquareLarge},
+		},
+		mediano : {
+			size                  : [1418, 709],
+			isInDoublePageLayouts : [
+				"FrontLayout",
+				"Mod44",
+				"Mod45",
+				"Mod46",
+				"Mod47",
+				"Mod48",
+				"Mod49",
+				"Mod50",
+				"Mod51",
+				"Mod52",
+				"Mod53",
+				"Mod54",
+				"Mod55",
+				"Mod56",
+				"Mod57",
+				"Mod58",
+				"Mod59",
+				"Mod60",
+				"Mod61",
+				"Mod62",
+				"Mod63",
+				"Mod64",
+				"Mod65",
+				"Mod66",
+				"Mod67",
+				"Mod68",
+				"Mod69",
+				"Mod70",
+				"Mod71",
+				"Mod72",
+				"Mod73",
+				"Mod74",
+				"Mod75",
+				"Mod76",
+				"Mod77",
+				"Mod78",
+			],
+			modLayouts : {...layflatSquareMedium},
 		},
 	},
 	layflatVertical : {
