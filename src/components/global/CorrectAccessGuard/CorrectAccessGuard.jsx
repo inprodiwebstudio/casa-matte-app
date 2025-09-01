@@ -344,7 +344,7 @@ const CorrectAccessGuard = () => {
 	const { createPresetPhotoBook } = usePhotoBookPreset();
 	const userId = useSelector((state) => state.authSlice.user.userId, shallowEqual);
 	const userEmail = useSelector((state) => state.authSlice.user.email, shallowEqual);
-	const worspaceData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
+	// const worspaceData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 
 	const [ statusView, setStatusView ] = useState("loading");
 	const [ urlLinkPay, setUrlLinkPay ] = useState("");
@@ -456,11 +456,18 @@ const CorrectAccessGuard = () => {
 			handlerAvailableExtra(photobookData?.meta?.id_pedido_hojas_extra);
 			return;
 		}
-		if ((worspaceData.orderId !== "") && (worspaceData?.postTypeId === postId)) {
-			setStatusView("continue");
-			return;
-		}
 		if (photobookData?.meta?.config) {
+			// const isAvailableProgressLocalBook = worspaceData?.postTypeId && (worspaceData?.postTypeId !== "");
+
+			// if (isAvailableProgressLocalBook) {
+			// 	const stringJsonCurrentProgress = JSON.stringify(worspaceData);
+			// 	const stringJsonNewProgress = JSON.stringify(photoBookConfigData?.meta?.config);
+
+			// 	if (stringJsonCurrentProgress === stringJsonNewProgress) {
+			// 		setStatusView("continue");
+			// 		return;
+			// 	}
+			// }
 			addCurrentPhotoBookConfig(photobookData);
 			setStatusView("continue");
 			return;

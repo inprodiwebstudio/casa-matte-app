@@ -1,5 +1,6 @@
 // import "regenerator-runtime/runtime"; Uncomment this line if bugs appear.
-import localForage                      from "localforage";
+// import localForage                      from "localforage";
+import sessionStorage                   from "redux-persist/lib/storage/session";
 import { configureStore }               from "@reduxjs/toolkit";
 import { setupListeners }               from "@reduxjs/toolkit/query";
 import { combineReducers }              from "redux";
@@ -25,7 +26,7 @@ const rootReducer    = combineReducers({
 
 const persistConfig = {
 	key       : "root",
-	storage   : localForage,
+	storage   : sessionStorage,
 	whitelist : [
 		"authSlice",
 		"workSpaceSlice",

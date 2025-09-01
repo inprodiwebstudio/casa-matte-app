@@ -1,31 +1,33 @@
 //Own components
-import EditPhoto                from "./EditPhoto";
-import EditText                 from "./EditText";
-import TestPdf                  from "./TestPdf";
-import ConfirmationDelete       from "./ConfirmationDelete";
-import ConfirmationToPrint      from "./ConfirmationToPrint";
-import ConfirmationDeleteFolder from "./ConfirmationDeleteFolder";
-import AddNewPageConfirmation   from "./AddNewPageConfirmation";
-import NoMorePages              from "./NoMorePages";
-import MinPagesLimit            from "./MinPagesLimit";
-import DisclaimerDropPhotos     from "./DisclaimerDropPhotos";
-import DeletePageConfirm        from "./DeletePageConfirm";
-import RefreshNotification      from "./RefreshNotification";
+import EditPhoto                 from "./EditPhoto";
+import EditText                  from "./EditText";
+import TestPdf                   from "./TestPdf";
+import ConfirmationDelete        from "./ConfirmationDelete";
+import ConfirmationToPrint       from "./ConfirmationToPrint";
+import ConfirmationDeleteFolder  from "./ConfirmationDeleteFolder";
+import AddNewPageConfirmation    from "./AddNewPageConfirmation";
+import NoMorePages               from "./NoMorePages";
+import MinPagesLimit             from "./MinPagesLimit";
+import DisclaimerDropPhotos      from "./DisclaimerDropPhotos";
+import DeletePageConfirm         from "./DeletePageConfirm";
+import RefreshNotification       from "./RefreshNotification";
+import DisclaimerNoMatchProgress from "./DisclaimerNoMatchProgress";
 
 
 const modals = {
-	editPhoto                : EditPhoto,
-	editText                 : EditText,
-	testPdf                  : TestPdf,
-	confirmationDelete       : ConfirmationDelete,
-	confirmationToPrint      : ConfirmationToPrint,
-	confirmationDeleteFolder : ConfirmationDeleteFolder,
-	addNewPageConfirmation   : AddNewPageConfirmation,
-	noMorePages              : NoMorePages,
-	disclaimerDropPhotos     : DisclaimerDropPhotos,
-	minPagesLimit            : MinPagesLimit,
-	deletePageConfirm        : DeletePageConfirm,
-	refreshNotification      : RefreshNotification,
+	editPhoto                 : EditPhoto,
+	editText                  : EditText,
+	testPdf                   : TestPdf,
+	confirmationDelete        : ConfirmationDelete,
+	confirmationToPrint       : ConfirmationToPrint,
+	confirmationDeleteFolder  : ConfirmationDeleteFolder,
+	addNewPageConfirmation    : AddNewPageConfirmation,
+	noMorePages               : NoMorePages,
+	disclaimerDropPhotos      : DisclaimerDropPhotos,
+	minPagesLimit             : MinPagesLimit,
+	deletePageConfirm         : DeletePageConfirm,
+	refreshNotification       : RefreshNotification,
+	disclaimerNoMatchProgress : DisclaimerNoMatchProgress,
 };
 
 const modalsConfig = {
