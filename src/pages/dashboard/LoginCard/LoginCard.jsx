@@ -49,7 +49,7 @@ const LoginCard = () => {
 
 			const passwordAdmin = "admin_casamatte025";
 
-			const currentEmail = data.username;
+			const currentEmail = data.username.trim();
 			const currentPassword = data.password;
 
 			const isValidEmail = (currentEmail === adminEmail) || (currentEmail === devEmail);
