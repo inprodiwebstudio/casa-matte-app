@@ -1,7 +1,7 @@
 import React              from "react";
 import { Button, Text }   from "@mantine/core";
 import { closeAllModals } from "@mantine/modals";
-import "./ConfirmationDeleteFolder.scss";
+// import "./ConfirmationDeleteFolder.scss";
 
 const DisclaimerNoMatchProgress = () => {
 	return (
