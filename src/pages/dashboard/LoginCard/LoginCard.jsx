@@ -57,6 +57,25 @@ const LoginCard = () => {
 			if (!isValidEmail || (currentPassword !== passwordAdmin)) {
 				setError("username");
 				setError("password");
+				if (currentEmail !== adminEmail) {
+					showNotification({
+						title   : "Error al iniciar sesión",
+						message : "El correo es incorrecto",
+						color   : "red",
+						styles  : () => ({
+							root : {
+										  "&::before" : {
+											  borderRadius : "0px",
+											  width        : "3px",
+										  },
+										  borderRadius : "0px",
+							},
+
+							title       : { fontFamily : "Helvetica", fontWeight : "500", textTransform : "uppercase" },
+							description : { fontFamily : "Helvetica" },
+						}),
+					});
+				}
 				if (currentPassword !== passwordAdmin) {
 					showNotification({
 						title   : "Error al iniciar sesión",
