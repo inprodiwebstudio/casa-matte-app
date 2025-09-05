@@ -35,6 +35,10 @@ const Mod36 = ({
 						"regular" : "42px",
 						"grande"  : "46px",
 					}}
+					positionDefault={{
+						x : 550,
+						y : 480,
+					}}
 					sheetNo={sheetNo}
 					letterSpacing="6px"
 					textShell={() => <TextShell.Title width="40%" align="flex-end" />}

@@ -1,10 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { useState, useEffect } from "react";
-import PropTypes               from "prop-types";
+import { useState, useEffect, useContext } from "react";
+import PropTypes                           from "prop-types";
 //Redux
-import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
+//Contexts
+import { currentConfigPhotoBookContext } from "contexts/configContext";
+import { pageIdContext }                 from "contexts/pageIdContext";
 //Slices
-import { workSpaceSlice } from "store/Slices";
 //Helpers
 import { handlerResizerImage, selectPhotoUrl } from "./imgLayout.helpers";
 //OwnComponents
@@ -21,21 +23,40 @@ const ImgLayout = ({
 	isCoverImage,
 	isInWorkSpace,
 }) => {
-	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
+	const {setCurrentConfigPhotoBook, currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+	const {myCurrentPageId,  isInPaginatorBar} = useContext(pageIdContext);
 
-	const dispatch = useDispatch();
+	const currentPhotoData = currentConfigPhotoBook?.[`sheet${sheetNo}`]?.photos?.[imageNo] ?? undefined;
+
+	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 
 	const dragerImage = useSelector((state) => state.workSpaceSlice.currentPhotoDragger, shallowEqual);
 
 	const [ isLowQuality, setIsLowQuality ] = useState(false);
 
+	const handlerPhotoData = () => {
+		if ((isInPaginatorBar && (myCurrentPageId === currentPageId)) || isInWorkSpace) {
+			return currentPhotoData;
+		}
+		return urlImage;
+	};
+
 	const handleDrop = (e) => {
 		e.preventDefault();
-		dispatch(workSpaceSlice.actions.addPhoto({
-			pageId   : currentPageId,
-			sheetNo  : sheetNo,
-			layoutNo : imageNo,
-			image    : dragerImage,
+		setCurrentConfigPhotoBook(prev => ({
+			...prev,
+			[`sheet${sheetNo}`] : {
+				...prev[`${sheetNo}`],
+				photos : {
+					...prev[`${sheetNo}`]?.photos,
+					[imageNo] : {
+						id             : dragerImage?.id ?? undefined,
+						url            : dragerImage?.image ?? undefined,
+						pixels         : dragerImage?.pixels ?? undefined,
+						urlPhotoEdited : undefined,
+					},
+				},
+			},
 		}));
 	};
 
@@ -45,9 +66,9 @@ const ImgLayout = ({
 
 
 	const handlerQuality = () => {
-		const megapixels = urlImage.pixels / 1_000_000;
+		const megapixels = handlerPhotoData()?.pixels / 1_000_000;
 
-		if (urlImage && (megapixels < 8)) {
+		if (handlerPhotoData() && (megapixels < 8)) {
 			cleanNotifications();
 			showNotification({
 				title     : "Alerta baja calidad",
@@ -74,10 +95,10 @@ const ImgLayout = ({
 	};
 
 	useEffect(() => {
-		if (urlImage && isInWorkSpace) {
+		if (handlerPhotoData() && isInWorkSpace) {
 			handlerQuality();
 		}
-	}, [urlImage]);
+	}, [currentPhotoData]);
 
 	return (
 		<div
@@ -88,9 +109,9 @@ const ImgLayout = ({
 			}
 			id={`${currentPageId}-${sheetNo}-${imageNo}`}
 			{
-				...( (urlImage?.url && (urlImage?.url !== "")) &&  {
+				...( ((handlerPhotoData()?.url && (handlerPhotoData()?.url !== ""))) &&  {
 					style : {
-						backgroundImage    : "url(\"" + handlerResizerImage(urlImage, isInWorkSpace) + "\")",
+						backgroundImage    : "url(\"" + handlerResizerImage(handlerPhotoData(), isInWorkSpace) + "\")",
 						backgroundSize     : "cover",
 						backgroundPosition : "center",
 						backgroundRepeat   : "no-repeat",
@@ -99,14 +120,14 @@ const ImgLayout = ({
 			}
 		>
 			{
-				(urlImage?.url && (urlImage?.url !== "") && isInWorkSpace) && (
+				(handlerPhotoData()?.url && (handlerPhotoData()?.url !== "") && isInWorkSpace) && (
 					<>
 						<ActionImagesLayout
 							containerPhotoUuid={`${currentPageId}-${sheetNo}-${imageNo}`}
 							sheetNo={sheetNo}
 							layoutNo={imageNo}
 							pageId={currentPageId}
-							image={selectPhotoUrl(urlImage)}
+							image={selectPhotoUrl(handlerPhotoData())}
 						/>
 					</>
 				)

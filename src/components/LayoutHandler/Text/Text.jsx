@@ -20,6 +20,14 @@ const Text = ({
 	isThumbNail,
 	typeText="body",
 	isInPaginator,
+	positionDefault={
+		x : 0,
+		y : 0,
+	},
+	sizesDefault={
+		width  : "auto",
+		height : "auto",
+	},
 }) => {
 	const isNullableAction = isThumbNail || isInPaginator;
 
@@ -57,6 +65,8 @@ const Text = ({
 			{
 				(!isInPaginator && !isThumbNail) && (
 					<EditorText
+						positionDefault={positionDefault}
+						sizesDefault={sizesDefault}
 						typeText={typeText}
 						isFront={isFront}
 						isBound={isBound}

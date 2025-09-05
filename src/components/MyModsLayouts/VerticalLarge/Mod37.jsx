@@ -43,6 +43,10 @@ const Mod37 = ({
 								"regular" : "42px",
 								"grande"  : "46px",
 							}}
+							positionDefault={{
+								x : 500,
+								y : 500,
+							}}
 							sheetNo={sheetNo}
 							letterSpacing="6px"
 							textShell={() => <TextShell.Title />}
@@ -65,6 +69,10 @@ const Mod37 = ({
 								"chico"   : "14px",
 								"regular" : "15px",
 								"grande"  : "16px",
+							}}
+							positionDefault={{
+								x : 200,
+								y : 200,
 							}}
 							sheetNo={sheetNo}
 							letterSpacing="2px"

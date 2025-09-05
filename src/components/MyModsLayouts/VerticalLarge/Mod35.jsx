@@ -1,4 +1,5 @@
 import { Center, Stack } from "@mantine/core";
+
 //Own components
 import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
@@ -13,7 +14,6 @@ const Mod35 = ({
 	pageNo,
 	modLayout,
 }) => {
-
 	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>";
 
 	return (
@@ -30,6 +30,10 @@ const Mod35 = ({
 						"chico"   : "38px",
 						"regular" : "42px",
 						"grande"  : "46px",
+					}}
+					positionDefault={{
+						x : 260,
+						y : 250,
 					}}
 					sheetNo={sheetNo}
 					textShell={() => <TextShell.Title />}

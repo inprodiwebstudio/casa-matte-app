@@ -6,7 +6,7 @@ import { workSpaceSlice } from "store/Slices";
 import { Draggable }      from "react-beautiful-dnd";
 //Own Components
 import "./ItemPage.scss";
-import BookPages                            from "components/BookPages";
+import BookPages from "components/BookPages";
 
 const ItemPage = ({
 	index,

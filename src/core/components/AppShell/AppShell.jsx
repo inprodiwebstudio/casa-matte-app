@@ -1,6 +1,7 @@
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { useEffect, useState }                    from "react";
 
+import { CurrentConfigPhotoBookProvider } from "contexts/configContext";
 //Own component;
 import { PostingConfig }             from "Notifications";
 import { genericApi }                from "store/api/genericApi";
@@ -56,7 +57,6 @@ const AppShell = ({
 	};
 
 	useEffect(() => {
-		console.log(urlCollage);
 		if (workSpaceData?.productName) {
 			submitData();
 		}
@@ -147,29 +147,31 @@ const AppShell = ({
 	}, [galleryData]);
 
 	return (
-		<div
-			id="AppShell"
-		>
-			<div className="bodyContainer">
-				<Body />
-			</div>
-			<div className="shell-container">
-				<div className="header-container">
-					{header}
+		<CurrentConfigPhotoBookProvider>
+			<div
+				id="AppShell"
+			>
+				<div className="bodyContainer">
+					<Body />
 				</div>
-				<div className="footer-and-nav-grouped">
-					<div className="nav-menu">
-						{navbar}
+				<div className="shell-container">
+					<div className="header-container">
+						{header}
 					</div>
-					<div className="footer-nav">
-						{footer}
-					</div>
-					<div>
-						{sidebar}
+					<div className="footer-and-nav-grouped">
+						<div className="nav-menu">
+							{navbar}
+						</div>
+						<div className="footer-nav">
+							{footer}
+						</div>
+						<div>
+							{sidebar}
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</CurrentConfigPhotoBookProvider>
 	);
 };
 

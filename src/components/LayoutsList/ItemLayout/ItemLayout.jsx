@@ -4,6 +4,7 @@ import photoBooksConfing from "core/constants/photoBooksConfing";
 //Slices
 import { workSpaceSlice } from "store/Slices";
 import "./ItemLayout.scss";
+import { PageIdProvider } from "contexts/pageIdContext";
 
 const ItemLayout = ({
 	layoutData,
@@ -65,17 +66,19 @@ const ItemLayout = ({
 	};
 
 	return (
-		<div
-			onClick={(e) => handleSelectedLayout(e)}
-			className={
+		<PageIdProvider pageId={undefined}>
+			<div
+				onClick={(e) => handleSelectedLayout(e)}
+				className={
 				`ItemLayout ${isSelectedLayout && "isActive"}`
-			}
-			style={{
-				aspectRatio : isInDoublePage ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
-			}}
-		>
-			<Layout isThumbNail={true} />
-		</div>
+				}
+				style={{
+					aspectRatio : isInDoublePage ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
+				}}
+			>
+				<Layout isThumbNail={true} />
+			</div>
+		</PageIdProvider>
 	);
 };
 

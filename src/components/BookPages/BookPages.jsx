@@ -1,13 +1,16 @@
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
-import { useState, useEffect }                    from "react";
 import { Skeleton }                               from "@mantine/core";
+import { useState, useEffect }                    from "react";
+
+//ContextProvider
+import { PageIdProvider } from "contexts/pageIdContext";
 
 //Own components
-import photoBooksConfing  from "core/constants/photoBooksConfing";
-import { workSpaceSlice } from "store/Slices";
-import FrontLayout        from "components/global/LayoutsPage/FrontLayout";
-import "./BookPages.scss";
+import photoBooksConfing      from "core/constants/photoBooksConfing";
+import { workSpaceSlice }     from "store/Slices";
+import FrontLayout            from "components/global/LayoutsPage/FrontLayout";
 import DeletePageActionButton from "./DeletePageActionButton";
+import "./BookPages.scss";
 
 const BookPages = ({
 	pageData,
@@ -98,92 +101,98 @@ const BookPages = ({
 	}, []);
 
 	return (
-		<div
-			className="BookPages"
-			style={{
-				aspectRatio : (isInDoublePage || pageData?.sheet2 || pageData?.sheet1?.layoutType?.includes("Front")) ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
-			}}
-		>
+		<PageIdProvider pageId={pageData?.id} isPaginatorBar={isInPaginator}>
 			<div
-				className={
-					`page-body ${(currentSelectedPage === "sheet1") && "isActivePage"}`
-				}
+				className="BookPages"
 				style={{
-					aspectRatio : (isInDoublePage || pageData?.sheet1?.layoutType?.includes("Front")) ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
+					aspectRatio : (isInDoublePage || pageData?.sheet2 || pageData?.sheet1?.layoutType?.includes("Front")) ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
 				}}
-				{
-					...(isInWorkSpcae && {
-						onClick : () => handlerSelectedData("sheet1"),
-					})
-				}
 			>
+				<div
+					className={
+					`page-body ${(currentSelectedPage === "sheet1") && "isActivePage"}`
+					}
+					style={{
+						aspectRatio : (isInDoublePage || pageData?.sheet1?.layoutType?.includes("Front")) ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
+						position    : "relative",
+					}}
+					id="draggable-zone-sheet1"
+					{
+						...(isInWorkSpcae && {
+							onClick : () => handlerSelectedData("sheet1"),
+						})
+					}
+				>
+					{
+						(pageData?.id.includes("Front")) && (
+							<FrontLayout
+								pageData={pageData}
+								isThumbNail={isThumbNail}
+								isInPaginator={isInPaginator}
+								isInWorkSpcae={isInWorkSpcae}
+							/>
+						)
+					}
+					{
+						((pageData?.sheet1?.layoutType !== "") && (!pageData?.sheet1?.layoutType?.includes("Front"))) && (
+							handleLayoutMod(pageData?.sheet1, 1)
+						)
+					}
+					{
+						isInPaginator && (
+							<DeletePageActionButton
+								isLeftSide
+								pageData={pageData}
+							/>
+						)
+					}
+				</div>
 				{
-					(pageData?.id.includes("Front")) && (
-						<FrontLayout
-							pageData={pageData}
-							isThumbNail={isThumbNail}
-							isInPaginator={isInPaginator}
-							isInWorkSpcae={isInWorkSpcae}
-						/>
+					isInWorkSpcae && (
+						<div
+							className="spacer"
+							style={{
+								background : (isInDoublePage || !pageData?.sheet2) && "transparent",
+							}}
+						>
+						&nbsp;
+						</div>
 					)
 				}
 				{
-					((pageData?.sheet1?.layoutType !== "") && (!pageData?.sheet1?.layoutType?.includes("Front"))) && (
-						handleLayoutMod(pageData?.sheet1, 1)
-					)
-				}
-				{
-					isInPaginator && (
-						<DeletePageActionButton
-							isLeftSide
-							pageData={pageData}
-						/>
+					(!isInDoublePage && pageData?.sheet2) && (
+						<div
+							className={
+								`page-body ${(currentSelectedPage === "sheet2") && "isActivePage"}`
+							}
+							style={{
+								aspectRatio : isInDoublePage ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
+								position    : "relative",
+							}}
+							id="draggable-zone-sheet2"
+							{
+								...(isInWorkSpcae && {
+									onClick : () => handlerSelectedData("sheet2"),
+								})
+							}
+						>
+							{
+								(pageData?.sheet2?.layoutType !== "") && (
+									handleLayoutMod(pageData?.sheet2, 2)
+								)
+							}
+							{
+								isInPaginator && (
+									<DeletePageActionButton
+										pageData={pageData}
+									/>
+								)
+							}
+						</div>
 					)
 				}
 			</div>
-			{
-				isInWorkSpcae && (
-					<div
-						className="spacer"
-						style={{
-							background : (isInDoublePage || !pageData?.sheet2) && "transparent",
-						}}
-					>
-						&nbsp;
-					</div>
-				)
-			}
-			{
-				(!isInDoublePage && pageData?.sheet2) && (
-					<div
-						className={
-								`page-body ${(currentSelectedPage === "sheet2") && "isActivePage"}`
-						}
-						style={{
-							aspectRatio : isInDoublePage ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
-						}}
-						{
-							...(isInWorkSpcae && {
-								onClick : () => handlerSelectedData("sheet2"),
-							})
-						}
-					>
-						{
-							(pageData?.sheet2?.layoutType !== "") && (
-								handleLayoutMod(pageData?.sheet2, 2)
-							)
-						}
-						{
-							isInPaginator && (
-								<DeletePageActionButton
-									pageData={pageData}
-								/>
-							)
-						}
-					</div>
-				)
-			}
-		</div>
+		</PageIdProvider>
 	);
 };
 
