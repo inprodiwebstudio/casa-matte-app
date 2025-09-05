@@ -10,6 +10,9 @@ import {
 import { connect }        from "react-redux";
 import { closeAllModals } from "@mantine/modals";
 
+//Contexts
+import { currentConfigPhotoBookContext } from "contexts/configContext";
+
 
 //Own components
 import { workSpaceSlice } from "store/Slices";
@@ -21,8 +24,10 @@ import { PostingConfig }  from "Notifications";
 //Styles
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "@pqina/pintura/pintura.css";
+import { useContext } from "react";
 
-const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
+const EditPhoto = ({innerProps, userName}) => {
+	const {setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 	const { handlerUploadImage } = useSubmitImages({userName : userName});
 
 	// const [inlineResult, setInlineResult] = useState();
@@ -32,7 +37,20 @@ const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 	const addEditedImage = async (file) => {
 		try {
 			const myImage = await handlerUploadImage(file, true);
-			workSpaceSlice.addPhotoEdited({pageId : innerProps?.pageId, sheetNo : innerProps?.sheetNo, layoutNo : innerProps?.layoutNo, imageUrl : myImage?.url});
+			setCurrentConfigPhotoBook(prev => ({
+				...prev,
+				[`sheet${innerProps?.sheetNo}`] : {
+					...prev?.[`sheet${innerProps?.sheetNo}`],
+					photos : {
+						...prev?.[`sheet${innerProps?.sheetNo}`]?.photos,
+						[innerProps?.layoutNo] : {
+							...prev?.[`sheet${innerProps?.sheetNo}`]?.photos?.[innerProps?.layoutNo],
+							urlPhotoEdited : myImage?.url,
+						},
+					},
+				},
+			}));
+			// workSpaceSlice.addPhotoEdited({pageId : innerProps?.pageId, sheetNo : innerProps?.sheetNo, layoutNo : innerProps?.layoutNo, imageUrl : myImage?.url});
 			closeAllModals();
 		} catch (error) {
 			PostingConfig["post"][500]();

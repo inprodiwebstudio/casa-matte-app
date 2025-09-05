@@ -1,7 +1,6 @@
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { useEffect, useState }                    from "react";
 
-import { CurrentConfigPhotoBookProvider } from "contexts/configContext";
 //Own component;
 import { PostingConfig }             from "Notifications";
 import { genericApi }                from "store/api/genericApi";
@@ -147,31 +146,29 @@ const AppShell = ({
 	}, [galleryData]);
 
 	return (
-		<CurrentConfigPhotoBookProvider>
-			<div
-				id="AppShell"
-			>
-				<div className="bodyContainer">
-					<Body />
+		<div
+			id="AppShell"
+		>
+			<div className="bodyContainer">
+				<Body />
+			</div>
+			<div className="shell-container">
+				<div className="header-container">
+					{header}
 				</div>
-				<div className="shell-container">
-					<div className="header-container">
-						{header}
+				<div className="footer-and-nav-grouped">
+					<div className="nav-menu">
+						{navbar}
 					</div>
-					<div className="footer-and-nav-grouped">
-						<div className="nav-menu">
-							{navbar}
-						</div>
-						<div className="footer-nav">
-							{footer}
-						</div>
-						<div>
-							{sidebar}
-						</div>
+					<div className="footer-nav">
+						{footer}
+					</div>
+					<div>
+						{sidebar}
 					</div>
 				</div>
 			</div>
-		</CurrentConfigPhotoBookProvider>
+		</div>
 	);
 };
 

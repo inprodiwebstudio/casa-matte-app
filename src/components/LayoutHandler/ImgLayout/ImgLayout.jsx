@@ -46,9 +46,9 @@ const ImgLayout = ({
 		setCurrentConfigPhotoBook(prev => ({
 			...prev,
 			[`sheet${sheetNo}`] : {
-				...prev[`${sheetNo}`],
+				...prev[`sheet${sheetNo}`],
 				photos : {
-					...prev[`${sheetNo}`]?.photos,
+					...prev[`sheet${sheetNo}`]?.photos,
 					[imageNo] : {
 						id             : dragerImage?.id ?? undefined,
 						url            : dragerImage?.image ?? undefined,
