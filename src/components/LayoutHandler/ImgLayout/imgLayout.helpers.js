@@ -6,7 +6,7 @@ export const handlerResizerImage = (image, isInWorkSpcae) => {
 		width : 1920,
 	};
 	const sizesPaginatorThumbnail = {
-		width : 300,
+		width : 150,
 	};
 	if (isInWorkSpcae) {
 		return changeResolutionImgUrl(myImageUrl, sizesWorkSpace, 70);
