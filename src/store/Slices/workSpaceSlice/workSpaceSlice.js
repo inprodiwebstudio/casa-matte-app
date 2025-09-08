@@ -308,9 +308,30 @@ export const workSpaceSlice = createSlice({
 			const {sheetNo, layoutNo, text} = payload;
 			state.currentPageData[`sheet${sheetNo}`].text[layoutNo] = text;
 		},
-		changePageData : (state, {payload}) => {
-			const { pageKey, newDataPage } = payload;
-			state.data.pages[pageKey] = newDataPage;
+		updatePageContent : (state, {payload}) => {
+			const { currentConfigPhotoBook } = payload;
+			const parseContentPage = {
+				...state?.currentPageData,
+				"sheet1" : {
+					...state?.currentPageData?.sheet1,
+					layoutType : currentConfigPhotoBook?.sheet1?.modlayoutId,
+					photos     : currentConfigPhotoBook?.sheet1?.photos,
+					text       : currentConfigPhotoBook?.sheet1?.texts,
+				},
+				...(state?.currentPageData?.sheet2 && { "sheet2" : {
+					...state?.currentPageData?.sheet2,
+					layoutType : currentConfigPhotoBook?.sheet2?.modlayoutId,
+					photos     : currentConfigPhotoBook?.sheet2?.photos,
+					text       : currentConfigPhotoBook?.sheet2?.texts,
+				} }),
+			};
+
+			const newPagesContent = {
+				...state.data.pages,
+				[state.currentPageData.id] : parseContentPage,
+			};
+
+			state.data.pages = newPagesContent;
 		},
 		newListPages : (state, {payload}) => {
 			state.data.pages = {...payload};

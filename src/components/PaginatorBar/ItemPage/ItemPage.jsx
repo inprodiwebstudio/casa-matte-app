@@ -1,12 +1,15 @@
 //Redux
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { useContext }                             from "react";
 //Router
 //External components
-import { workSpaceSlice } from "store/Slices";
-import { Draggable }      from "react-beautiful-dnd";
+// import { workSpaceSlice } from "store/Slices";
+import { Draggable } from "react-beautiful-dnd";
 //Own Components
 import "./ItemPage.scss";
-import BookPages from "components/BookPages";
+import BookPages                         from "components/BookPages";
+import { workSpaceSlice }                from "store/Slices";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
 
 const ItemPage = ({
 	index,
@@ -14,6 +17,8 @@ const ItemPage = ({
 	isFixedPage,
 	draggableId,
 }) => {
+	const {currentConfigPhotoBook, setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+
 	const dispatch = useDispatch();
 
 	const photoBookFormat = useSelector((state) => state.workSpaceSlice?.data?.format, shallowEqual);
@@ -24,10 +29,21 @@ const ItemPage = ({
 	const isCurrentPage = currentPageId === draggableId;
 
 	const handlerSelectPage = () => {
-		dispatch(workSpaceSlice.actions.setSelectePageData({
-			pageId      : draggableId,
-			currentPage : "sheet1",
+		dispatch(workSpaceSlice.actions.updatePageContent({
+			currentConfigPhotoBook,
 		}));
+		setCurrentConfigPhotoBook({
+			sheet1 : {
+				modlayoutId : undefined,
+				texts       : undefined,
+				photos      : undefined,
+			},
+			sheet2 : {
+				modlayoutId : undefined,
+				texts       : undefined,
+				photos      : undefined,
+			},
+		});
 		dispatch(workSpaceSlice.actions.handleChangePage(draggableId));
 	};
 
