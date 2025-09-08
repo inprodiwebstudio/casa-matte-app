@@ -24,11 +24,12 @@ import { PostingConfig }  from "Notifications";
 //Styles
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "@pqina/pintura/pintura.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 const EditPhoto = ({innerProps, userName}) => {
 	const {setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 	const { handlerUploadImage } = useSubmitImages({userName : userName});
+	const [statusLoading, setStatusLoading] = useState(undefined);
 
 	// const [inlineResult, setInlineResult] = useState();
 
@@ -36,6 +37,7 @@ const EditPhoto = ({innerProps, userName}) => {
 
 	const addEditedImage = async (file) => {
 		try {
+			setStatusLoading("Cargando imagen ...");
 			const myImage = await handlerUploadImage(file, true);
 			setCurrentConfigPhotoBook(prev => ({
 				...prev,
@@ -50,7 +52,6 @@ const EditPhoto = ({innerProps, userName}) => {
 					},
 				},
 			}));
-			// workSpaceSlice.addPhotoEdited({pageId : innerProps?.pageId, sheetNo : innerProps?.sheetNo, layoutNo : innerProps?.layoutNo, imageUrl : myImage?.url});
 			closeAllModals();
 		} catch (error) {
 			PostingConfig["post"][500]();
@@ -85,6 +86,7 @@ const EditPhoto = ({innerProps, userName}) => {
 					"finetune",
 				]}
 				src={urlImage}
+				status={statusLoading}
 				onProcess={(res) => addEditedImage(res?.dest)}
 			/>
 		</div>
