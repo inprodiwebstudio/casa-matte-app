@@ -10,6 +10,7 @@ import { RedoArrow }      from "Resources/icons";
 import { workSpaceSlice } from "store/Slices";
 import "./WorkSpace.scss";
 import CoverBook          from "components/CoverBook";
+import SpreadBook         from "components/global/SpreadBook";
 
 const WorkSpace = () => {
 	const dispatch = useDispatch();
@@ -116,10 +117,11 @@ const WorkSpace = () => {
 							isFrontLayout ? (
 								<CoverBook isInWorkSpace />
 							) : (
-								<BookPages
-									isInWorkSpcae={true}
-									loading={false}
-									pageData={myWorkSpaceData}
+								<SpreadBook
+									numberOfSheets={1}
+									contents={{
+										ContentSheet1 : undefined,
+									}}
 								/>
 							)
 						}
