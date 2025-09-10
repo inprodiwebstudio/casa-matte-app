@@ -1,6 +1,10 @@
+import { useContext }                             from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 //Constants
-import photoBooksConfing from "core/constants/photoBooksConfing";
+import photoBooksConfing                 from "core/constants/photoBooksConfing";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
+//Helpers
+import { arrayObjGenerator } from "helpers";
 //Slices
 import { workSpaceSlice } from "store/Slices";
 import "./ItemLayout.scss";
@@ -10,10 +14,10 @@ const ItemLayout = ({
 	layoutData,
 }) => {
 	const dispatch = useDispatch();
+	const {currentConfigPhotoBook, setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 
 	const pageDataSelected = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
-	const pagesData = useSelector((state) => state.workSpaceSlice?.data?.pages, shallowEqual);
 	const frontPageData = useSelector((state) => state.workSpaceSlice?.data?.frontPage, shallowEqual);
 	const productPhotoBook = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
 	const formatPhotoBook = useSelector((state) => state.workSpaceSlice?.data?.format, shallowEqual);
@@ -35,8 +39,8 @@ const ItemLayout = ({
 			};
 		}
 		return {
-			sheet1 : pagesData[currentPageId]?.sheet1?.layoutType,
-			sheet2 : pagesData[currentPageId]?.sheet2?.layoutType,
+			sheet1 : currentConfigPhotoBook?.sheet1?.modlayoutId,
+			sheet2 : currentConfigPhotoBook?.sheet2?.modlayoutId,
 		};
 	};
 
@@ -54,14 +58,29 @@ const ItemLayout = ({
 			}));
 		}
 		if (pageDataSelected) {
-			dispatch(workSpaceSlice.actions.addLayout({
-				layout       : layoutData?.id,
-				pageId       : pageDataSelected.pageId,
-				numberPhotos : layoutData?.numberPhotos,
-				numberText   : layoutData?.numberText,
-				sheetId      : pageDataSelected.currentPage,
+			setCurrentConfigPhotoBook(prev => ({
+				...prev,
+				[pageDataSelected.currentPage] : {
+					...prev[pageDataSelected.currentPage],
+					modlayoutId : layoutData?.id,
+					photos      : arrayObjGenerator(layoutData?.numberPhotos, {
+						id  : "",
+						url : "",
+					}),
+					texts : arrayObjGenerator(layoutData?.numberText, {
+						text     : "",
+						position : undefined,
+						sizes    : undefined,
+					}),
+				},
 			}));
-			// dispatch(workSpaceSlice.actions.clearSelectedPageData());
+			// dispatch(workSpaceSlice.actions.addLayout({
+			// 	layout       : layoutData?.id,
+			// 	pageId       : pageDataSelected.pageId,
+			// 	numberPhotos : layoutData?.numberPhotos,
+			// 	numberText   : layoutData?.numberText,
+			// 	sheetId      : pageDataSelected.currentPage,
+			// }));
 		}
 	};
 

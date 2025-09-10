@@ -23,4 +23,5 @@ export { default as textToImage }                from "./textToImage";
 export {  default as imgUrlPdf }                 from "./imgUrlPdf";
 export {  default as getParamURL }               from "./getParamURL";
 export {  default as heicToPng }                 from "./heicTopng";
+export {  default as arrayObjGenerator }         from "./arrayObjGenerator";
 

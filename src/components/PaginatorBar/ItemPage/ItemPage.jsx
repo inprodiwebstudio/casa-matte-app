@@ -32,6 +32,10 @@ const ItemPage = ({
 		dispatch(workSpaceSlice.actions.updatePageContent({
 			currentConfigPhotoBook,
 		}));
+		dispatch(workSpaceSlice.actions.setSelectePageData({
+			pageId      : pageData.id,
+			currentPage : "sheet1",
+		}));
 		setCurrentConfigPhotoBook({
 			sheet1 : {
 				modlayoutId : undefined,

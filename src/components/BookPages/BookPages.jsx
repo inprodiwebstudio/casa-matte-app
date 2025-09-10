@@ -1,9 +1,10 @@
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { Skeleton }                               from "@mantine/core";
-import { useState, useEffect }                    from "react";
+import { useState, useEffect, useContext }        from "react";
 
 //ContextProvider
-import { PageIdProvider } from "contexts/pageIdContext";
+import { PageIdProvider }              from "contexts/pageIdContext";
+import {currentConfigPhotoBookContext} from "contexts/configContext";
 
 //Own components
 import photoBooksConfing      from "core/constants/photoBooksConfing";
@@ -18,6 +19,7 @@ const BookPages = ({
 	isInPaginator,
 	isInWorkSpcae,
 }) => {
+	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 	const [ currentSelectedPage, setCurrentSelectedPage ] = useState(undefined);
 	const [ showModLayout, setShowModLayout ] = useState(false);
 
@@ -42,7 +44,15 @@ const BookPages = ({
 
 	const handleLayoutMod = (layoutData, sheetNo) => {
 		if (layoutData?.layoutType) {
-			const LayoutMod = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.layoutMods[layoutData?.layoutType]?.layout;
+			const handlerSlectCurrentModLayout = () => {
+				const isConsumeDataFromContext = isInWorkSpcae || (isInPaginator && (pageData?.id === pageDataSelected?.pageId));
+
+				if (isConsumeDataFromContext) {
+					return currentConfigPhotoBook?.[`sheet${sheetNo}`]?.modlayoutId;
+				}
+				return layoutData?.layoutType;
+			};
+			const LayoutMod = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.layoutMods[handlerSlectCurrentModLayout()]?.layout;
 
 			const modLayout = pageData?.[`sheet${sheetNo}`]?.layoutType;
 			const pageNo = pageData?.[`sheet${sheetNo}`]?.pageNo;
@@ -55,15 +65,19 @@ const BookPages = ({
 						transition : "all 0.2s ease-in-out",
 						...(isInWorkSpcae && {opacity : showModLayout ? 1 : 0 }),
 					}}>
-					<LayoutMod
-						pageNo={pageNo}
-						modLayout={modLayout}
-						isThumbNail={isThumbNail}
-						isInPaginator={isInPaginator}
-						data={layoutData}
-						isInWorkSpace={isInWorkSpcae}
-						sheetNo={sheetNo}
-					/>
+					{
+						LayoutMod && (
+							<LayoutMod
+								pageNo={pageNo}
+								modLayout={modLayout}
+								isThumbNail={isThumbNail}
+								isInPaginator={isInPaginator}
+								data={layoutData}
+								isInWorkSpace={isInWorkSpcae}
+								sheetNo={sheetNo}
+							/>
+						)
+					}
 				</div>
 			);
 		}
