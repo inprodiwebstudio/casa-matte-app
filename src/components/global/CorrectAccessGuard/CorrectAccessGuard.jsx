@@ -426,13 +426,8 @@ const CorrectAccessGuard = () => {
 	const handlerAvailableExtra = async (idOrderExtra) => {
 		const isPaid = await isPaidExtra(idOrderExtra);
 		if (isPaid) {
-			const isMarianaBook = (photobookData?.author === 1977) && (photobookData?.id === 18573);
-			if (isMarianaBook) {
-				addCurrentPhotoBookConfig(photobookData);
-				setStatusView("continue");
-				return;
-			}
-			setStatusView("done");
+			addCurrentPhotoBookConfig(photobookData);
+			setStatusView("continue");
 			return;
 		}
 		setStatusView("notPaidExtras");
@@ -456,13 +451,8 @@ const CorrectAccessGuard = () => {
 		}
 		if (photobookData?.meta?.status === "48") {
 			if (!photobookData?.meta?.id_pedido_hojas_extra) {
-				const isMarianaBook = (photobookData?.author === 1977) && (photobookData?.id === 18573);
-				if (isMarianaBook) {
-					addCurrentPhotoBookConfig(photobookData);
-					setStatusView("continue");
-					return;
-				}
-				setStatusView("done");
+				addCurrentPhotoBookConfig(photobookData);
+				setStatusView("continue");
 				return;
 			}
 			handlerAvailableExtra(photobookData?.meta?.id_pedido_hojas_extra);
