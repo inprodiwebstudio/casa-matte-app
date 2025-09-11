@@ -118,7 +118,7 @@ const WorkSpace = () => {
 								<CoverBook isInWorkSpace />
 							) : (
 								<SpreadBook
-									numberOfSheets={1}
+									isAvailableRightSheet={false}
 									contents={{
 										ContentSheet1 : undefined,
 									}}

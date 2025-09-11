@@ -13,6 +13,7 @@ export const CurrentConfigPhotoBookProvider = ({children}) => {
 		photos      : undefined,
 	};
 	const [currentConfigPhotoBook, setCurrentConfigPhotoBook] = useState({
+		pageId : undefined,
 		sheet1 : defaultDataConfig,
 		sheet2 : defaultDataConfig,
 	});
@@ -53,6 +54,7 @@ export const CurrentConfigPhotoBookProvider = ({children}) => {
 			};
 
 			setCurrentConfigPhotoBook({
+				pageId : photoCurrentPageData?.id ?? undefined,
 				sheet1 : {
 					modlayoutId : photoCurrentPageData?.sheet1?.layoutType ?? undefined,
 					texts       : parseTextsObject(photoCurrentPageData?.sheet1?.text ?? undefined),
