@@ -16,11 +16,22 @@ const SpreadLayoutsWorkspace = () => {
 
 	return (
 		<SpreadBook
+			isWorkSpace={true}
 			isAvailableRightSheet={isAvailableRightPage}
 			contents={{
-				ContentSheet1 : () => <ModLayoutHandler modLayoutKey={sheet1?.modlayoutId} type="layout" />,
+				ContentSheet1 : () => <ModLayoutHandler
+					sheetNo={1}
+					photos={sheet1.photos}
+					modLayoutKey={sheet1?.modlayoutId}
+					type="layout"
+				/>,
 				...(isAvailableRightPage && {
-					ContentSheet2 : () => <ModLayoutHandler modLayoutKey={sheet2?.modlayoutId} type="layout" />,
+					ContentSheet2 : () => <ModLayoutHandler
+						sheetNo={2}
+						photos={sheet2.photos}
+						modLayoutKey={sheet2?.modlayoutId}
+						type="layout"
+					/>,
 				}),
 			}}
 		/>

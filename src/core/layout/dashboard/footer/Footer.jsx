@@ -1,4 +1,4 @@
-import { useState, useEffect }                    from "react";
+import { useState, useEffect, useContext }        from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import LayoutsList                                from "components/LayoutsList";
 
@@ -8,13 +8,18 @@ import photoBooksConfing                    from "core/constants/photoBooksConfi
 //Slices
 import { workSpaceSlice } from "store/Slices";
 //Owwn components
-import { Tabs, SelectorMenuItem } from "core/components";
-import { ArrowTop }               from "Resources/icons";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
+import { Tabs, SelectorMenuItem }        from "core/components";
+import { ArrowTop }                      from "Resources/icons";
 import "./Footer.scss";
-import { convertToArray }         from "helpers";
+import { convertToArray }                from "helpers";
+import { Button, Stack, Text }           from "@mantine/core";
 
 const Footer = () => {
+	const {setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+
 	const currentFileterLayout = useSelector((state) => state.workSpaceSlice.layoutFilter, shallowEqual);
+	const sheetDataSelected = useSelector((state) => state.workSpaceSlice.pageDataSelected, shallowEqual);
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
 	const statusViewPage = useSelector((state) => state.workSpaceSlice?.statusViewPage, shallowEqual);
@@ -67,6 +72,34 @@ const Footer = () => {
 		return [optionsPhotoQuantity[0], ...optionsPhotosQuantity];
 	};
 
+	const handlerAddNewText = () => {
+		setCurrentConfigPhotoBook(prev => {
+			const listOfTexts = Object.values(prev?.[`${sheetDataSelected?.currentPage}`]?.texts ?? {});
+
+			const newKeyText = listOfTexts.length;
+			return {
+				...prev,
+				[`${sheetDataSelected?.currentPage}`] : {
+					...prev?.[`${sheetDataSelected?.currentPage}`],
+					texts : {
+						...prev?.[`${sheetDataSelected?.currentPage}`]?.texts,
+						[`${newKeyText}`] : {
+							text     : "<p style='text-align: center;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>",
+							position : {
+								x : 0,
+								y : 0,
+							},
+							sizes : {
+								width  : "300px",
+								height : "60px",
+							},
+						},
+					},
+				},
+			};
+		});
+	};
+
 	useEffect(() => {
 	  if (currentPageId === "frontpage") {
 			dispatch(workSpaceSlice.actions.setLayoutFilter({
@@ -103,26 +136,46 @@ const Footer = () => {
 				<Tabs tabList={handleTabsLayouts} loading={loading} />
 			</div>
 			<div className="body-layouts-container">
-				{
-					((currentPageId !== "frontpage") && (currentFileterLayout.type !== "texto")) && (
-						<div
-							style={{
-								marginTop : "15px",
-								width     : "103px",
+				<Stack>
+					{
+						((currentPageId !== "frontpage") && (currentFileterLayout.type !== "texto")) && (
+							<div
+								style={{
+									marginTop : "15px",
+									width     : "103px",
+								}}
+							>
+								<SelectorMenuItem
+									isLoading={loading}
+									type="filled"
+									placeholder="FOTOS"
+									onChange={(objValue) => handleChangeLayoutFilter(objValue)}
+									options={optionsPhotosQuantityFiltered()}
+									value={currentFileterLayout.photosQuantity}
+									dropTopMenu
+								/>
+							</div>
+						)
+					}
+					<Button
+						radius={12}
+						size="xs"
+						color="darkCasaMatte"
+						onClick={() => handlerAddNewText()}
+						disabled={false}
+						mt="10px"
+					>
+						<Text
+							weight={400}
+							color="whiteCasaMatte"
+							sx={{
+								fontFamily : "Helvetica",
 							}}
 						>
-							<SelectorMenuItem
-								isLoading={loading}
-								type="filled"
-								placeholder="FOTOS"
-								onChange={(objValue) => handleChangeLayoutFilter(objValue)}
-								options={optionsPhotosQuantityFiltered()}
-								value={currentFileterLayout.photosQuantity}
-								dropTopMenu
-							/>
-						</div>
-					)
-				}
+							Agregar Texto
+						</Text>
+					</Button>
+				</Stack>
 				<div className="LayoutsContainer">
 					<LayoutsList />
 				</div>

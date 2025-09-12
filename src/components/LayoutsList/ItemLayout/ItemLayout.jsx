@@ -8,7 +8,6 @@ import { arrayObjGenerator } from "helpers";
 //Slices
 import { workSpaceSlice } from "store/Slices";
 import "./ItemLayout.scss";
-import { PageIdProvider } from "contexts/pageIdContext";
 
 const ItemLayout = ({
 	layoutData,
@@ -27,10 +26,19 @@ const ItemLayout = ({
 
 	const myConfigPhotoBook = photoBooksConfing[productPhotoBook]?.[formatPhotoBook]?.sizes?.[sizePhotoBook];
 
-	const Layout = myConfigPhotoBook?.layoutMods[layoutData?.id]?.layout;
+	const Layout = () => {
+		const ModLayout = myConfigPhotoBook?.layoutMods[layoutData?.id]?.layoutThumbNail;
+
+		if (ModLayout) {
+			return (
+				<ModLayout />
+			);
+		}
+
+		return <></>;
+	};
 
 	const isInDoublePage = myConfigPhotoBook?.modsInDoublePage?.includes(layoutData?.id);
-
 
 	const currentLayoutSelected = () => {
 		if (currentPageId === "frontpage") {
@@ -58,6 +66,13 @@ const ItemLayout = ({
 			}));
 		}
 		if (pageDataSelected) {
+			const defaultTexts = layoutData?.defaultTexts;
+
+			const objDefaultTexts = defaultTexts && defaultTexts.reduce((acc, item, index) => {
+				acc[index] = item;
+				return acc;
+			}, {});
+
 			setCurrentConfigPhotoBook(prev => ({
 				...prev,
 				[pageDataSelected.currentPage] : {
@@ -67,11 +82,7 @@ const ItemLayout = ({
 						id  : "",
 						url : "",
 					}),
-					texts : arrayObjGenerator(layoutData?.numberText, {
-						text     : "",
-						position : undefined,
-						sizes    : undefined,
-					}),
+					texts : objDefaultTexts,
 				},
 			}));
 			// dispatch(workSpaceSlice.actions.addLayout({
@@ -85,19 +96,17 @@ const ItemLayout = ({
 	};
 
 	return (
-		<PageIdProvider pageId={undefined}>
-			<div
-				onClick={(e) => handleSelectedLayout(e)}
-				className={
+		<div
+			onClick={(e) => handleSelectedLayout(e)}
+			className={
 				`ItemLayout ${isSelectedLayout && "isActive"}`
-				}
-				style={{
-					aspectRatio : isInDoublePage ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
-				}}
-			>
-				<Layout isThumbNail={true} />
-			</div>
-		</PageIdProvider>
+			}
+			style={{
+				aspectRatio : isInDoublePage ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
+			}}
+		>
+			<Layout />
+		</div>
 	);
 };
 

@@ -16,27 +16,21 @@ import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 //Contexts
 import { currentConfigPhotoBookContext } from "contexts/configContext";
 
-import { useRef, useState, useContext, useEffect } from "react";
-import { workSpaceSlice }                          from "store/Slices";
-import { connect, useSelector, shallowEqual }      from "react-redux";
+import { useRef, useState, useContext }       from "react";
+import { workSpaceSlice }                     from "store/Slices";
+import { connect, useSelector, shallowEqual } from "react-redux";
 
 import { bindAll } from "helpers";
 import styles      from "./styles";
+import { Center }  from "@mantine/core";
 
 const EditText = ({
-	isFront,
-	isBound,
-	sizes,
 	sheetNo,
 	layoutNo,
-	dataTextPage,
 	gapSpacing,
 	lineHeight,
 	typeText,
 	letterSpacing,
-	sizesDefault,
-	positionDefault,
-	workSpaceSlice,
 }) => {
 	const {currentConfigPhotoBook, setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 	const [currentFontSize, setCurrentFontSize] = useState(undefined);
@@ -107,7 +101,7 @@ const EditText = ({
 		fontFamily : {
 			options : availableFontFamilies[typeText ?? "body"],
 		},
-		toolbar : ((product === "travelcoffeetable ") && isFront) ? undefined : {
+		toolbar : ((product === "travelcoffeetable ")) ? undefined : {
 			items : [
 				"fontSize",
 				"fontfamily",
@@ -119,7 +113,7 @@ const EditText = ({
 				"alignment:right",
 				"alignment:justify",
 			],
-			shouldNotGroupWhenFullScreen : true,
+			shouldNotGroupWhenFull : true,
 		},
 		language : "es",
 		tooltip  : {
@@ -207,9 +201,7 @@ const EditText = ({
 		},
 	};
 
-	const editorState = (currentConfigPhotoBook?.[`sheet${sheetNo}`]?.texts?.[layoutNo]?.text === "") ? dataTextPage : currentConfigPhotoBook?.[`sheet${sheetNo}`]?.texts?.[layoutNo]?.text;
-
-	// const [editorState, setEditorState] = useState(dataTextPage);
+	const editorState = currentConfigPhotoBook?.[`sheet${sheetNo}`]?.texts?.[layoutNo]?.text;
 
 
 	const handleEditorChange = (event, editor) =>{
@@ -289,29 +281,6 @@ const EditText = ({
 		}));
 	};
 
-	useEffect(() => {
-		if (currentConfigPhotoBook) {
-			const isNotAvailablePositionAndSizeText = !currentConfigPhotoBook?.[sheetNo]?.texts?.[layoutNo]?.position || !currentConfigPhotoBook?.[sheetNo]?.texts?.[layoutNo]?.sizes;
-
-			if (isNotAvailablePositionAndSizeText) {
-				setCurrentConfigPhotoBook(prev => ({
-					...prev,
-					[`sheet${sheetNo}`] : {
-						...prev?.[`sheet${sheetNo}`],
-						texts : {
-							...prev?.[`sheet${sheetNo}`]?.texts,
-							[layoutNo] : {
-								...prev?.[`sheet${sheetNo}`]?.texts?.[layoutNo],
-								position : positionDefault,
-								sizes    : sizesDefault,
-							},
-						},
-					},
-				}));
-			}
-		}
-	}, []);
-
 	return (
 		<Rnd
 			className={classes.editText}
@@ -322,7 +291,8 @@ const EditText = ({
 			size={currentSizeText}
 			position={currentPositionText}
 			bounds={`#draggable-zone-sheet${sheetNo}`}
-			scale={0.43}
+			dragHandleClassName={`handles-${layoutNo}`}
+			scale={0.45}
 			onDragStop={(e, d) => {
 				handlerSetPosition(d);
 			}}
@@ -340,6 +310,19 @@ const EditText = ({
 					handleEditorChange(event, editor);
 				}}
 			/>
+			<Center>
+				<div
+					className={`handles-${layoutNo}`}
+					style={{
+						cursor     : "move",
+						fontSize   : "35px",
+						fontWeight : "bold",
+						color      : "#3b82f6",
+					}}
+				>
+					+
+				</div>
+			</Center>
 		</Rnd>
 	);
 };

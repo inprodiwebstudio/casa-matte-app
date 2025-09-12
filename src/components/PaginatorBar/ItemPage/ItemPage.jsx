@@ -7,7 +7,7 @@ import { useContext }                             from "react";
 import { Draggable } from "react-beautiful-dnd";
 //Own Components
 import "./ItemPage.scss";
-import BookPages                         from "components/BookPages";
+import SpreadLayoutsThumbNail            from "components/SpreadLayoutsThumbNail";
 import { workSpaceSlice }                from "store/Slices";
 import { currentConfigPhotoBookContext } from "contexts/configContext";
 
@@ -37,6 +37,7 @@ const ItemPage = ({
 			currentPage : "sheet1",
 		}));
 		setCurrentConfigPhotoBook({
+			pageId : undefined,
 			sheet1 : {
 				modlayoutId : undefined,
 				texts       : undefined,
@@ -95,11 +96,7 @@ const ItemPage = ({
 				<div className={`sheets-container ${photoBookFormat}`}>
 					{
 						(isAvailableProduct !== "") && (
-							<BookPages
-								isThumbNail={false}
-								isInPaginator={true}
-								pageData={pageData}
-							/>
+							<SpreadLayoutsThumbNail pageData={pageData} />
 						)
 					}
 				</div>

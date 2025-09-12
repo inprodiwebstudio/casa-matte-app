@@ -10,8 +10,8 @@ import { convertToArray, isValidArray, convertToObject, bindAll } from "helpers"
 import { ScrollBar }                                              from "core/components";
 // import FrontPage                                                  from "./FrontPage";
 import "./PaginatorBar.scss";
-import CoverBookItem from "./CoverBookItem";
-import { Group }     from "@mantine/core";
+// import CoverBookItem from "./CoverBookItem";
+import { Group } from "@mantine/core";
 
 const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, loading, productType}) => {
 	const [ pageList, setPageList ] = useState({
@@ -112,7 +112,7 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 					</ScrollBar>
 				) : (
 					<ScrollBar>
-						<CoverBookItem />
+						{/* <CoverBookItem /> */}
 						<Group
 							position="center"
 							mb="10px"

@@ -4,13 +4,13 @@ import { useState, useEffect }                    from "react";
 import { isValidArray, convertToArray } from "helpers";
 
 //Own components
-import BookPages          from "components/BookPages";
-import ManagePagesView    from "../ManagePagesView";
-import { RedoArrow }      from "Resources/icons";
-import { workSpaceSlice } from "store/Slices";
+import BookPages              from "components/BookPages";
+import ManagePagesView        from "../ManagePagesView";
+import { RedoArrow }          from "Resources/icons";
+import { workSpaceSlice }     from "store/Slices";
+import SpreadLayoutsWorkspace from "components/SpreadLayoutsWorkspace";
+import CoverBook              from "components/CoverBook";
 import "./WorkSpace.scss";
-import CoverBook          from "components/CoverBook";
-import SpreadBook         from "components/global/SpreadBook";
 
 const WorkSpace = () => {
 	const dispatch = useDispatch();
@@ -117,12 +117,7 @@ const WorkSpace = () => {
 							isFrontLayout ? (
 								<CoverBook isInWorkSpace />
 							) : (
-								<SpreadBook
-									isAvailableRightSheet={false}
-									contents={{
-										ContentSheet1 : undefined,
-									}}
-								/>
+								<SpreadLayoutsWorkspace />
 							)
 						}
 					</div>

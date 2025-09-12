@@ -1,20 +1,16 @@
 import { Center, Stack } from "@mantine/core";
 
 //Own components
-import Text              from "components/LayoutHandler/Text";
-import { textInsertion } from "helpers";
-import { TextShell }     from "core/components";
+import Text                              from "components/LayoutHandler/Text";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
+import { useContext }                    from "react";
 
 const Mod35 = ({
-	data,
-	isInWorkSpace,
 	sheetNo,
-	isInPaginator,
-	isThumbNail,
-	pageNo,
-	modLayout,
 }) => {
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>";
+	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+
+	const listOfTexts = Object.values(currentConfigPhotoBook?.[`sheet${sheetNo}`]?.texts ?? {});
 
 	return (
 		<Center w="100%" h="100%">
@@ -23,26 +19,17 @@ const Mod35 = ({
 				p="0%"
 				pt="0%"
 				pb="0%"
-				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
-				<Text
-					sizes={{
-						"chico"   : "38px",
-						"regular" : "42px",
-						"grande"  : "46px",
-					}}
-					positionDefault={{
-						x : 260,
-						y : 250,
-					}}
-					sheetNo={sheetNo}
-					textShell={() => <TextShell.Title />}
-					letterSpacing="6.5px"
-					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-					textNo={0}
-				/>
+				{listOfTexts.map((item, index) => {
+					return (
+						<Text
+							key={index}
+							sheetNo={sheetNo}
+							letterSpacing="6.5px"
+							layoutNo={index}
+						/>
+					);
+				})}
 			</Stack>
 		</Center>
 	);

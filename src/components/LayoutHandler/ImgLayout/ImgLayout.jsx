@@ -104,13 +104,17 @@ const ImgLayout = ({
 				} )
 			}
 		>
-			<ActionImagesLayout
-				containerPhotoUuid={`${currentPageId}-${sheetNo}-${imageNo}`}
-				sheetNo={sheetNo}
-				layoutNo={imageNo}
-				pageId={currentPageId}
-				image={selectPhotoUrl(imageData)}
-			/>
+			{
+				imageData?.url && (
+					<ActionImagesLayout
+						containerPhotoUuid={`${currentPageId}-${sheetNo}-${imageNo}`}
+						sheetNo={sheetNo}
+						layoutNo={imageNo}
+						pageId={currentPageId}
+						image={selectPhotoUrl(imageData)}
+					/>
+				)
+			}
 		</div>
 	);
 };
