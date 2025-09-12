@@ -5,8 +5,6 @@ import PropTypes                           from "prop-types";
 import { useSelector, shallowEqual } from "react-redux";
 //Contexts
 import { currentConfigPhotoBookContext } from "contexts/configContext";
-import { pageIdContext }                 from "contexts/pageIdContext";
-//Slices
 //Helpers
 import { handlerResizerImage, selectPhotoUrl } from "./imgLayout.helpers";
 //OwnComponents
@@ -16,30 +14,19 @@ import "./ImgLayout.scss";
 import { cleanNotifications, showNotification } from "@mantine/notifications";
 
 const ImgLayout = ({
-	sheetNo,
 	imageNo,
-	urlImage,
+	sheetNo,
+	imageData,
 	isUnderImage,
 	isCoverImage,
-	isInWorkSpace,
 }) => {
-	const {setCurrentConfigPhotoBook, currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
-	const {myCurrentPageId,  isInPaginatorBar} = useContext(pageIdContext);
-
-	const currentPhotoData = currentConfigPhotoBook?.[`sheet${sheetNo}`]?.photos?.[imageNo] ?? undefined;
+	const {setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 
 	const dragerImage = useSelector((state) => state.workSpaceSlice.currentPhotoDragger, shallowEqual);
 
 	const [ isLowQuality, setIsLowQuality ] = useState(false);
-
-	const handlerPhotoData = () => {
-		if ((isInPaginatorBar && (myCurrentPageId === currentPageId)) || isInWorkSpace) {
-			return currentPhotoData;
-		}
-		return urlImage;
-	};
 
 	const handleDrop = (e) => {
 		e.preventDefault();
@@ -66,9 +53,9 @@ const ImgLayout = ({
 
 
 	const handlerQuality = () => {
-		const megapixels = handlerPhotoData()?.pixels / 1_000_000;
+		const megapixels = imageData?.pixels / 1_000_000;
 
-		if (handlerPhotoData() && (megapixels < 8)) {
+		if (imageData && (megapixels < 8)) {
 			cleanNotifications();
 			showNotification({
 				title     : "Alerta baja calidad",
@@ -95,10 +82,8 @@ const ImgLayout = ({
 	};
 
 	useEffect(() => {
-		if (handlerPhotoData() && isInWorkSpace) {
-			handlerQuality();
-		}
-	}, [currentPhotoData]);
+		handlerQuality();
+	}, []);
 
 	return (
 		<div
@@ -109,9 +94,9 @@ const ImgLayout = ({
 			}
 			id={`${currentPageId}-${sheetNo}-${imageNo}`}
 			{
-				...( ((handlerPhotoData()?.url && (handlerPhotoData()?.url !== ""))) &&  {
+				...((imageData?.url && (imageData?.url !== "")) &&  {
 					style : {
-						backgroundImage    : "url(\"" + handlerResizerImage(handlerPhotoData(), isInWorkSpace) + "\")",
+						backgroundImage    : "url(\"" + handlerResizerImage(imageData, true) + "\")",
 						backgroundSize     : "cover",
 						backgroundPosition : "center",
 						backgroundRepeat   : "no-repeat",
@@ -119,28 +104,21 @@ const ImgLayout = ({
 				} )
 			}
 		>
-			{
-				(handlerPhotoData()?.url && (handlerPhotoData()?.url !== "") && isInWorkSpace) && (
-					<>
-						<ActionImagesLayout
-							containerPhotoUuid={`${currentPageId}-${sheetNo}-${imageNo}`}
-							sheetNo={sheetNo}
-							layoutNo={imageNo}
-							pageId={currentPageId}
-							image={selectPhotoUrl(handlerPhotoData())}
-						/>
-					</>
-				)
-			}
+			<ActionImagesLayout
+				containerPhotoUuid={`${currentPageId}-${sheetNo}-${imageNo}`}
+				sheetNo={sheetNo}
+				layoutNo={imageNo}
+				pageId={currentPageId}
+				image={selectPhotoUrl(imageData)}
+			/>
 		</div>
 	);
 };
 
 ImgLayout.propTypes = {
-	imageNo       : PropTypes.number.isRequired,
-	sheetNo       : PropTypes.number,
-	isInWorkSpace : PropTypes.bool,
-	urlImage      : PropTypes.object,
+	imageNo   : PropTypes.number.isRequired,
+	sheetNo   : PropTypes.number,
+	imageData : PropTypes.object,
 };
 
 export default ImgLayout;
