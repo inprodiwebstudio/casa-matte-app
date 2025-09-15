@@ -2,10 +2,16 @@ import { isValidArray }                     from "helpers";
 import {createContext, useState, useEffect} from "react";
 import { useSelector, shallowEqual }        from "react-redux";
 
+//Hooks
+import { useHandlerConfigBook } from "helpers/Hooks/useHandlerConfigBook";
+
 export const currentConfigPhotoBookContext = createContext();
 
 export const CurrentConfigPhotoBookProvider = ({children}) => {
 	const photoCurrentPageData = useSelector((state) => state.workSpaceSlice.currentPageData, shallowEqual);
+
+
+	const {layoutMods} = useHandlerConfigBook() ?? {};
 
 	const defaultDataConfig = {
 		modlayoutId : undefined,
@@ -19,9 +25,9 @@ export const CurrentConfigPhotoBookProvider = ({children}) => {
 	});
 
 	useEffect(() => {
-		if (photoCurrentPageData) {
-			const parseTextsObject = (textObject) => {
-				if (!textObject) {
+		if (photoCurrentPageData && layoutMods) {
+			const parseTextsObject = (textObject, modLayout) => {
+				if (!textObject || !modLayout) {
 					return undefined;
 				}
 
@@ -37,11 +43,19 @@ export const CurrentConfigPhotoBookProvider = ({children}) => {
 					return textObject;
 				}
 
-				const newListOfTexts = listOfTexts.map((text) => ({
-					text,
-					position : undefined,
-					sizes    : undefined,
-				}));
+				const layoutModConfig = layoutMods[modLayout];
+
+				const defaultTexts = layoutModConfig?.defaultTexts;
+
+				const newListOfTexts = listOfTexts.map((text, index) => {
+					const textPresetConfig = defaultTexts?.[index];
+					const {position, sizes} = textPresetConfig;
+					return {
+						text,
+						position,
+						sizes,
+					};
+				});
 
 				const newTextObject = newListOfTexts.reduce((acc, item, index) => {
 					acc[index] = item;
@@ -57,19 +71,19 @@ export const CurrentConfigPhotoBookProvider = ({children}) => {
 				pageId : photoCurrentPageData?.id ?? undefined,
 				sheet1 : {
 					modlayoutId : photoCurrentPageData?.sheet1?.layoutType ?? undefined,
-					texts       : parseTextsObject(photoCurrentPageData?.sheet1?.text ?? undefined),
+					texts       : parseTextsObject(photoCurrentPageData?.sheet1?.text ?? undefined, photoCurrentPageData?.sheet1?.layoutType ?? undefined),
 					photos      : photoCurrentPageData?.sheet1?.photos ?? undefined,
 				},
 				...(photoCurrentPageData?.sheet2 && {
 					sheet2 : {
 						modlayoutId : photoCurrentPageData?.sheet2?.layoutType ?? undefined,
-						texts       : parseTextsObject(photoCurrentPageData?.sheet2?.text ?? undefined),
+						texts       : parseTextsObject(photoCurrentPageData?.sheet2?.text ?? undefined, photoCurrentPageData?.sheet2?.layoutType ?? undefined),
 						photos      : photoCurrentPageData?.sheet2?.photos ?? undefined,
 					},
 				}),
 			});
 		}
-	}, [photoCurrentPageData]);
+	}, [photoCurrentPageData, layoutMods]);
 
 	return (
 		<currentConfigPhotoBookContext.Provider

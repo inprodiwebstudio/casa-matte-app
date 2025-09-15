@@ -4,7 +4,6 @@ import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import photoBooksConfing                 from "core/constants/photoBooksConfing";
 import { currentConfigPhotoBookContext } from "contexts/configContext";
 //Helpers
-import { arrayObjGenerator } from "helpers";
 //Slices
 import { workSpaceSlice } from "store/Slices";
 import "./ItemLayout.scss";
@@ -13,7 +12,7 @@ const ItemLayout = ({
 	layoutData,
 }) => {
 	const dispatch = useDispatch();
-	const {currentConfigPhotoBook, setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 
 	const pageDataSelected = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
@@ -61,37 +60,26 @@ const ItemLayout = ({
 				layout       : layoutData?.id,
 				pageId       : "FrontLayout",
 				numberPhotos : layoutData?.numberPhotos,
-				numberText   : layoutData?.numberText,
+				defaultTexts : undefined,
 				sheetId      : 1,
 			}));
 		}
 		if (pageDataSelected) {
 			const defaultTexts = layoutData?.defaultTexts;
 
-			const objDefaultTexts = defaultTexts && defaultTexts.reduce((acc, item, index) => {
-				acc[index] = item;
-				return acc;
-			}, {});
+			const handlerAnotherSheetKey = (pageDataSelected.currentPage === "sheet1") ? "sheet2" : "sheet1";
 
-			setCurrentConfigPhotoBook(prev => ({
-				...prev,
-				[pageDataSelected.currentPage] : {
-					...prev[pageDataSelected.currentPage],
-					modlayoutId : layoutData?.id,
-					photos      : arrayObjGenerator(layoutData?.numberPhotos, {
-						id  : "",
-						url : "",
-					}),
-					texts : objDefaultTexts,
-				},
+			const dataAnotherSheet = currentConfigPhotoBook[handlerAnotherSheetKey] ?? undefined;
+
+			dispatch(workSpaceSlice.actions.addLayout({
+				layout           : layoutData?.id,
+				pageId           : pageDataSelected.pageId,
+				sheetId          : pageDataSelected.currentPage,
+				numberPhotos     : layoutData?.numberPhotos,
+				anotherSheetKey  : dataAnotherSheet && handlerAnotherSheetKey,
+				anotherSheetData : dataAnotherSheet,
+				defaultTexts,
 			}));
-			// dispatch(workSpaceSlice.actions.addLayout({
-			// 	layout       : layoutData?.id,
-			// 	pageId       : pageDataSelected.pageId,
-			// 	numberPhotos : layoutData?.numberPhotos,
-			// 	numberText   : layoutData?.numberText,
-			// 	sheetId      : pageDataSelected.currentPage,
-			// }));
 		}
 	};
 

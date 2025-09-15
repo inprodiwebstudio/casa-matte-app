@@ -28,8 +28,8 @@ const VerticalLarge = {
 				y : 0,
 			},
 			sizes : {
-				width  : "auto",
-				height : "auto",
+				width  : "300px",
+				height : "60px",
 			},
 		},
 		defaultTexts : [
