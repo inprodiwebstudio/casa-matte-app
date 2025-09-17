@@ -1018,12 +1018,14 @@ export const workSpaceSlice = createSlice({
 			if (!isAvailableDoublePage && isFullBook()) {
 				return;
 			}
-			cloneData.pages[pageId][anotherSheetKey] = {
-				...cloneData.pages[pageId][anotherSheetKey],
-				layoutType : anotherSheetData?.modlayoutId,
-				text       : anotherSheetData?.texts,
-				photos     : anotherSheetKey?.photos,
-			};
+			if (anotherSheetKey) {
+				cloneData.pages[pageId][anotherSheetKey] = {
+					...cloneData.pages[pageId][anotherSheetKey],
+					layoutType : anotherSheetData?.modlayoutId,
+					text       : anotherSheetData?.texts,
+					photos     : anotherSheetKey?.photos,
+				};
+			}
 			cloneData.pages[pageId][sheetId] = {
 				...cloneData.pages[pageId][sheetId],
 				layoutType : layout,

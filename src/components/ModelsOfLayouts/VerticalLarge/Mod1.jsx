@@ -11,7 +11,6 @@ const Mod1 = ({photos, sheetNo}) => {
 			<ImgLayout
 				sheetNo={sheetNo}
 				imageNo={0}
-				imageData={photos[0] ?? {}}
 			/>
 		</Stack>
 	);

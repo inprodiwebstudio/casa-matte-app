@@ -47,9 +47,9 @@ export const CurrentConfigPhotoBookProvider = ({children}) => {
 
 				const defaultTexts = layoutModConfig?.defaultTexts;
 
-				const newListOfTexts = listOfTexts.map((text, index) => {
+				const newListOfTexts = listOfTexts.map((item, index) => {
 					const textPresetConfig = defaultTexts?.[index];
-					const {position, sizes} = textPresetConfig;
+					const {position, sizes, text} = textPresetConfig;
 					return {
 						text,
 						position,

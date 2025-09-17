@@ -16,11 +16,13 @@ import { cleanNotifications, showNotification } from "@mantine/notifications";
 const ImgLayout = ({
 	imageNo,
 	sheetNo,
-	imageData,
 	isUnderImage,
 	isCoverImage,
 }) => {
-	const {setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+	const {setCurrentConfigPhotoBook, currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+
+	const sheetData = currentConfigPhotoBook[`sheet${sheetNo}`];
+	const imageData = sheetData?.photos?.[imageNo];
 
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 

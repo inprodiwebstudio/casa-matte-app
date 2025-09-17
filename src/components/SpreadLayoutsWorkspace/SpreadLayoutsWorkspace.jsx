@@ -1,16 +1,18 @@
+// import { useContext } from "react";
 //Contexts
-import { currentConfigPhotoBookContext } from "contexts/configContext";
+// import {currentConfigPhotoBookContext} from "contexts/configContext";
 
 import SpreadBook from "components/global/SpreadBook";
 
 import ModLayoutHandler from "components/global/ModLayoutHandler";
 
-import { useContext } from "react";
+import { shallowEqual, useSelector } from "react-redux";
 
 const SpreadLayoutsWorkspace = () => {
-	const { currentConfigPhotoBook } = useContext(currentConfigPhotoBookContext);
+	const currentPageData = useSelector((state) => state.workSpaceSlice.currentPageData, shallowEqual);
+	// const { setCurrentPageData } = useContext(currentConfigPhotoBookContext);
 
-	const { sheet1, sheet2 } = currentConfigPhotoBook;
+	const { sheet1, sheet2 } = currentPageData;
 
 	const isAvailableRightPage = sheet2 ? true : false;
 
@@ -21,15 +23,13 @@ const SpreadLayoutsWorkspace = () => {
 			contents={{
 				ContentSheet1 : () => <ModLayoutHandler
 					sheetNo={1}
-					photos={sheet1.photos}
-					modLayoutKey={sheet1?.modlayoutId}
+					modLayoutKey={sheet1?.layoutType}
 					type="layout"
 				/>,
 				...(isAvailableRightPage && {
 					ContentSheet2 : () => <ModLayoutHandler
 						sheetNo={2}
-						photos={sheet2.photos}
-						modLayoutKey={sheet2?.modlayoutId}
+						modLayoutKey={sheet2?.layoutType}
 						type="layout"
 					/>,
 				}),
