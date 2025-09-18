@@ -1,7 +1,9 @@
 
 import { useHandlerConfigBook } from "helpers/Hooks/useHandlerConfigBook";
+import { useState, useEffect }  from "react";
 
 const ModLayoutHandler = ({modLayoutKey, type, ...rest}) => {
+	const [ showModLayout, setShowModLayout ] = useState(false);
 
 	if (!modLayoutKey) {
 		return <></>;
@@ -18,8 +20,23 @@ const ModLayoutHandler = ({modLayoutKey, type, ...rest}) => {
 		);
 	}
 
+	useEffect(() => {
+		setTimeout(() => {
+			setShowModLayout(true);
+		}, 10);
+	}, []);
+
 	return (
-		<ModLayout {...rest} />
+		<div
+			style={{
+				width      : "100%",
+				height     : "100%",
+				transition : "all 0.2s ease-in-out",
+				opacity    : showModLayout ? 1 : 0,
+			}}
+		>
+			<ModLayout {...rest} />
+		</div>
 	);
 };
 

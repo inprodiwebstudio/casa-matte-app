@@ -37,7 +37,7 @@ export const CurrentConfigPhotoBookProvider = ({children}) => {
 					return undefined;
 				}
 
-				const isAvailableNewKeys = textObject?.position;
+				const isAvailableNewKeys = textObject[0]?.position;
 
 				if (isAvailableNewKeys) {
 					return textObject;
@@ -84,6 +84,8 @@ export const CurrentConfigPhotoBookProvider = ({children}) => {
 			});
 		}
 	}, [photoCurrentPageData, layoutMods]);
+
+	console.log(currentConfigPhotoBook);
 
 	return (
 		<currentConfigPhotoBookContext.Provider

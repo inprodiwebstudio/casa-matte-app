@@ -50,6 +50,7 @@ const SpreadBook = ({
 				style={{
 					aspectRatio : handlerAspectRatio,
 					position    : "relative",
+					transition  : "all 0.2s ease-in-out",
 				}}
 				id="draggable-zone-sheet1"
 				{
@@ -69,6 +70,7 @@ const SpreadBook = ({
 						style={{
 							aspectRatio : handlerAspectRatio,
 							position    : "relative",
+							transition  : "all 0.2s ease-in-out",
 						}}
 						id="draggable-zone-sheet2"
 						{
