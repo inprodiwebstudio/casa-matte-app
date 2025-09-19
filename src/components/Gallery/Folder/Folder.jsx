@@ -14,6 +14,7 @@ import {
 
 import "./Folder.scss";
 import { openContextModal, closeAllModals } from "@mantine/modals";
+import { changeResolutionImgUrl }           from "helpers/Functions/changeResolutionImgUrl";
 
 
 const Folder = ({
@@ -136,25 +137,25 @@ const Folder = ({
 								<div
 									className={`photo-indicator ${thumbNails[0] && "full-size"}`}
 									style={{
-										backgroundImage : "url(\"" + thumbNails[0] + "\")",
+										backgroundImage : "url(\"" + changeResolutionImgUrl(thumbNails[0], {width : 80}, 100) + "\")",
 									}}
 								/>
 								<div
 									className={`photo-indicator ${thumbNails[1] && "full-size"}`}
 									style={{
-										backgroundImage : "url(\"" + thumbNails[1] + "\")",
+										backgroundImage : "url(\"" + changeResolutionImgUrl(thumbNails[1], {width : 80}, 100) + "\")",
 									}}
 								/>
 								<div
 									className={`photo-indicator ${thumbNails[2] && "full-size"}`}
 									style={{
-										backgroundImage : "url(\"" + thumbNails[2] + "\")",
+										backgroundImage : "url(\"" + changeResolutionImgUrl(thumbNails[2], {width : 80}, 100) + "\")",
 									}}
 								/>
 								<div
 									className={`photo-indicator ${thumbNails[3] && "full-size"}`}
 									style={{
-										backgroundImage : "url(\"" + thumbNails[3] + "\")",
+										backgroundImage : "url(\"" + changeResolutionImgUrl(thumbNails[3], {width : 80}) + "\")",
 									}}
 								/>
 							</>
