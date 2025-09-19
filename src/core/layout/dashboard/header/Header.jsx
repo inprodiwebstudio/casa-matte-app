@@ -65,22 +65,26 @@ const Header = () => {
 	};
 
 	const submitData = async () => {
-		await dataMutation({
-			module : "wp-json/wp/v2/photobook-2-0",
-			data   : {
-				title : {
-					rendered : isModifiedData?.projectTittle ?? "TITULO",
-					raw      : isModifiedData?.projectTittle ?? "TITULO",
+		try {
+			await dataMutation({
+				module : "wp-json/wp/v2/photobook-2-1",
+				data   : {
+					title : {
+						rendered : isModifiedData?.projectTittle ?? "TITULO",
+						raw      : isModifiedData?.projectTittle ?? "TITULO",
+					},
+					status : "publish",
+					meta   : {
+						config : parseSendData({...isModifiedData, minPages : (isModifiedData?.pasta === "Dura") ? 25 : 10}),
+					},
 				},
-				status : "publish",
-				meta   : {
-					config : parseSendData({...isModifiedData, minPages : (isModifiedData?.pasta === "Dura") ? 25 : 10}),
-				},
-			},
-			id     : postId,
-			method : "POST",
-		});
-		setDate(new Date);
+				id     : postId,
+				method : "POST",
+			}).unwrap();
+			setDate(new Date);
+		} catch (error) {
+			PostingConfig["post"][500]();
+		}
 	};
 
 	useEffect(() => {

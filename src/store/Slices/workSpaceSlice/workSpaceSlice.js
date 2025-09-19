@@ -655,9 +655,8 @@ export const workSpaceSlice = createSlice({
 					const newListOfPhotos = listOfPhotos.map((photo) => {
 						if ((photo?.id === "") && photo?.url) {
 							return {
-								...photo,
-								url            : "",
-								urlPhotoEdited : "",
+								id  : "",
+								url : "",
 							};
 						}
 						return {...photo};

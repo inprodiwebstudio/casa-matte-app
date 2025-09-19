@@ -2,10 +2,10 @@ import { connect }             from "react-redux";
 import { useState, useEffect } from "react";
 
 //Own omponents
-import { apiImageKit }                from "store/api/imageKitApi";
-import { MutationSpinner, TextInput } from "core/components";
-import { gallerySlice }               from "store/Slices";
-import { Thrash, PlusIcon }           from "Resources/icons";
+import { apiImageKit }                  from "store/api/imageKitApi";
+import { MutationSpinner, TextInput }   from "core/components";
+import { gallerySlice, workSpaceSlice } from "store/Slices";
+import { Thrash, PlusIcon }             from "Resources/icons";
 import {
 	bindAll,
 	isValidArray,
@@ -23,6 +23,7 @@ const Folder = ({
 	thumbNails,
 	postTypeId,
 	gallerySlice,
+	workSpaceSlice,
 	onSelectedFolder,
 	gallerySelectedData,
 	loadingMutationGallery,
@@ -39,13 +40,16 @@ const Folder = ({
 	const hadleDeleteFolder = async () => {
 		gallerySlice.setLoadingMutationGallery(true);
 		try {
-			await galleryFolderMutation({
+			const resp = await galleryFolderMutation({
 				data : {
 					userName,
 					postTypeId,
 					folderName,
 				},
 			});
+			const { data } = resp;
+			const listOfIdsDeleted = data?.idsDeletedImages ?? [];
+			workSpaceSlice.removePhotosDeleted({imagesIds : listOfIdsDeleted});
 			gallerySlice.setLoadingMutationGallery(false);
 			gallerySlice.deleteDataGallery({
 				[folderId] : true,
@@ -205,6 +209,6 @@ const mapStateToProps = ({ gallerySlice, authSlice, workSpaceSlice }) => ({
 	postTypeId          : workSpaceSlice?.data?.postTypeId ?? undefined,
 });
 
-const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions});
+const mapDispatchToProps = bindAll({ gallerySlice : gallerySlice.actions, workSpaceSlice : workSpaceSlice.actions});
 
 export default connect(mapStateToProps, mapDispatchToProps) (Folder);

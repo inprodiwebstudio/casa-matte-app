@@ -1,11 +1,17 @@
-import { resizerImage } from "helpers";
+import { changeResolutionImgUrl } from "helpers/Functions/changeResolutionImgUrl";
 
 export const handlerResizerImage = (image, isInWorkSpcae) => {
-	const myImage = selectPhotoUrl(image);
+	const myImageUrl = selectPhotoUrl(image);
+	const sizesWorkSpace = {
+		width : 1920,
+	};
+	const sizesPaginatorThumbnail = {
+		width : 100,
+	};
 	if (isInWorkSpcae) {
-		return resizerImage(myImage, 50, 50);
+		return changeResolutionImgUrl(myImageUrl, sizesWorkSpace, 70);
 	}
-	return resizerImage(myImage, 10, 10);
+	return changeResolutionImgUrl(myImageUrl, sizesPaginatorThumbnail);
 };
 
 export const selectPhotoUrl = (photoData) => {
