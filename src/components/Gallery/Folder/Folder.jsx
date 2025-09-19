@@ -1,6 +1,9 @@
 import { connect }             from "react-redux";
 import { useState, useEffect } from "react";
 
+//Functions
+import { changeResolutionImgUrl } from "helpers/Functions/changeResolutionImgUrl";
+
 //Own omponents
 import { apiImageKit }                  from "store/api/imageKitApi";
 import { MutationSpinner, TextInput }   from "core/components";
@@ -136,25 +139,33 @@ const Folder = ({
 								<div
 									className={`photo-indicator ${thumbNails[0] && "full-size"}`}
 									style={{
-										backgroundImage : "url(\"" + thumbNails[0] + "\")",
+										backgroundImage : "url(\"" + changeResolutionImgUrl(thumbNails[0], {
+											width : 300,
+										}) + "\")",
 									}}
 								/>
 								<div
 									className={`photo-indicator ${thumbNails[1] && "full-size"}`}
 									style={{
-										backgroundImage : "url(\"" + thumbNails[1] + "\")",
+										backgroundImage : "url(\"" + changeResolutionImgUrl(thumbNails[1], {
+											width : 300,
+										}) + "\")",
 									}}
 								/>
 								<div
 									className={`photo-indicator ${thumbNails[2] && "full-size"}`}
 									style={{
-										backgroundImage : "url(\"" + thumbNails[2] + "\")",
+										backgroundImage : "url(\"" + changeResolutionImgUrl(thumbNails[2], {
+											width : 300,
+										}) + "\")",
 									}}
 								/>
 								<div
 									className={`photo-indicator ${thumbNails[3] && "full-size"}`}
 									style={{
-										backgroundImage : "url(\"" + thumbNails[3] + "\")",
+										backgroundImage : "url(\"" + changeResolutionImgUrl(thumbNails[3], {
+											width : 300,
+										}) + "\")",
 									}}
 								/>
 							</>
