@@ -9,6 +9,8 @@ import { workSpaceSlice } from "store/Slices";
 import { handlerResizerImage, selectPhotoUrl } from "./imgLayout.helpers";
 //OwnComponents
 import ActionImagesLayout from "./ActionImagesLayout";
+import { MoonLoader }     from "react-spinners";
+
 //Styles
 import "./ImgLayout.scss";
 import { cleanNotifications, showNotification } from "@mantine/notifications";
@@ -20,6 +22,10 @@ const ImgLayout = ({
 	isCoverImage,
 	isInWorkSpace,
 }) => {
+	const [ loadingPhoto, setLoadingphoto ] = useState(false);
+
+	const [ myImageUrl, setMyImageUrl ] = useState("");
+
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 
 	const dispatch = useDispatch();
@@ -42,6 +48,15 @@ const ImgLayout = ({
 		e.preventDefault();
 	};
 
+	const handleImageLoad = () => {
+		setLoadingphoto(false);
+	};
+	const loadImage = () => {
+		const img = new Image();
+		img.src = handlerResizerImage(urlImage, isInWorkSpace);
+		img.addEventListener("load", handleImageLoad);
+		setMyImageUrl(img.src);
+	};
 
 	const handlerQuality = () => {
 		const megapixels = urlImage.pixels / 1_000_000;
@@ -76,6 +91,10 @@ const ImgLayout = ({
 		if (urlImage && isInWorkSpace) {
 			handlerQuality();
 		}
+		if (urlImage?.url) {
+			setLoadingphoto(true);
+			loadImage();
+		}
 	}, [urlImage]);
 
 	return (
@@ -85,9 +104,9 @@ const ImgLayout = ({
 			className={`ImgLayout ${isLowQuality ? "low-quality" : ""} ${isCoverImage && "relevantColor"}`}
 			id={`${currentPageId}-${sheetNo}-${imageNo}`}
 			{
-				...( (urlImage?.url && (urlImage?.url !== "")) &&  {
+				...( ((myImageUrl && (myImageUrl !== "")) || !loadingPhoto) &&  {
 					style : {
-						backgroundImage    : "url(\"" + handlerResizerImage(urlImage, isInWorkSpace) + "\")",
+						backgroundImage    : "url(\"" + myImageUrl + "\")",
 						backgroundSize     : "cover",
 						backgroundPosition : "center",
 						backgroundRepeat   : "no-repeat",
@@ -96,7 +115,14 @@ const ImgLayout = ({
 			}
 		>
 			{
-				(urlImage?.url && (urlImage?.url !== "") && isInWorkSpace) && (
+				loadingPhoto && (
+					<div className="loading">
+						<MoonLoader size={isInWorkSpace ? 50 : 5} />
+					</div>
+				)
+			}
+			{
+				(myImageUrl && (myImageUrl !== "") && isInWorkSpace) && (
 					<>
 						<ActionImagesLayout
 							containerPhotoUuid={`${currentPageId}-${sheetNo}-${imageNo}`}

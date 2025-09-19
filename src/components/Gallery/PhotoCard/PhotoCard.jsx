@@ -59,7 +59,7 @@ const PhotoCard = ({
 
 	const handleImageLoad = () => {
 		setLoadingphoto(false);
-	  };
+	};
 
 	const loadImage = () => {
 		const img = new Image();
