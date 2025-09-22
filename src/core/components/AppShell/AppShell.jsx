@@ -70,7 +70,7 @@ const AppShell = ({
 			const isRechargeProject = workSpaceData?.version === (photoBookConfig?.version + 1);
 			const isSameVersion = workSpaceData?.version === photoBookConfig?.version;
 
-			if (isSameVersion || isRechargeProject) {
+			if (isSameVersion || isRechargeProject || !photoBookConfig?.version) {
 				await dataMutation({
 					module : "wp-json/wp/v2/photobook-2-0",
 					data   : {
