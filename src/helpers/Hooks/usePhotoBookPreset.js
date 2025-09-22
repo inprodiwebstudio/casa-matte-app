@@ -32,6 +32,7 @@ export const usePhotoBookPreset = () => {
 			bound         : meta?.encuadernado ?? "",
 			pasta         : meta?.pasta ?? "",
 			maxRangePages : numberOfPages,
+			version       : 1,
 			pages         : convertToObject(generatePages(numberOfPages, model.modelKey === "layflat")),
 		};
 

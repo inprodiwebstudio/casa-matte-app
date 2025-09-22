@@ -15,7 +15,7 @@ const ErrorPageLayout = ({
 
 	const defaultActionButton = {
 		body   : actionButton?.body ?? "RECARGAR PAGINA",
-		action : () => actionButton?.action ?? navigate(-1),
+		action : actionButton?.action ?? navigate(-1),
 	};
 
 	return (

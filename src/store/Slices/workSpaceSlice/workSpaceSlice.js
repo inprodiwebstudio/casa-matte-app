@@ -12,6 +12,7 @@ const initialState = {
 		projectTittle  : "",
 		modified       : undefined,
 		orderId        : undefined,
+		version        : undefined,
 		frontPage      : {
 			id     : "FrontLayout",
 			sheet1 : {

@@ -1,5 +1,6 @@
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { useEffect, useState }                    from "react";
+import axios                                      from "axios";
 
 //Own component;
 import { PostingConfig }             from "Notifications";
@@ -8,6 +9,7 @@ import { workSpaceSlice, authSlice } from "store/Slices";
 import "./AppShell.scss";
 import { useParams }                 from "react-router";
 import { isValidArray }              from "helpers";
+import ErrorPageLayout               from "core/layout/errorPage/ErrorPageLayout";
 
 const AppShell = ({
 	Body,
@@ -21,6 +23,7 @@ const AppShell = ({
 	const dispatch = useDispatch();
 
 	const [urlCollage, setUrlCollage] = useState("");
+	const [errorVersionMatch, setErrorVersionMatch] = useState(false);
 
 	// const isSelectedPage = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice?.data, shallowEqual);
@@ -36,29 +39,70 @@ const AppShell = ({
 		return stringData;
 	};
 
-	const submitData = async () => {
-		await dataMutation({
-			module : "wp-json/wp/v2/photobook-2-0",
-			data   : {
-				title : {
-					rendered : workSpaceData?.projectTittle ?? "TITULO",
-					raw      : workSpaceData?.projectTittle ?? "TITULO",
-				},
-				status : "publish",
-				meta   : {
-					collage : urlCollage,
-					config  : parseSendData({...workSpaceData, minPages : (workSpaceData?.pasta === "Dura") ? 25 : 10}),
-				},
-			},
-			id     : postId,
-			method : "POST",
-		});
+	const validateAndSubmitData = async () => {
+		try {
+			const respGetPost = await axios.get(`https://casamatte.com/wp-json/wp/v2/photobook-2-0/${postId}`);
+			const { data } = respGetPost;
+			const config = data?.meta?.config;
+
+			if (!config) {
+				await dataMutation({
+					module : "wp-json/wp/v2/photobook-2-0",
+					data   : {
+						title : {
+							rendered : workSpaceData?.projectTittle ?? "TITULO",
+							raw      : workSpaceData?.projectTittle ?? "TITULO",
+						},
+						status : "publish",
+						meta   : {
+							collage : urlCollage,
+							config  : parseSendData({...workSpaceData, minPages : (workSpaceData?.pasta === "Dura") ? 25 : 10}),
+						},
+					},
+					id     : postId,
+					method : "POST",
+				});
+				return;
+			}
+
+			const photoBookConfig = JSON.parse(config);
+
+			const isRechargeProject = workSpaceData?.version === (photoBookConfig?.version + 1);
+			const isSameVersion = workSpaceData?.version === photoBookConfig?.version;
+
+			if (isSameVersion || isRechargeProject) {
+				await dataMutation({
+					module : "wp-json/wp/v2/photobook-2-0",
+					data   : {
+						title : {
+							rendered : workSpaceData?.projectTittle ?? "TITULO",
+							raw      : workSpaceData?.projectTittle ?? "TITULO",
+						},
+						status : "publish",
+						meta   : {
+							collage : urlCollage,
+							config  : parseSendData({...workSpaceData, minPages : (workSpaceData?.pasta === "Dura") ? 25 : 10}),
+						},
+					},
+					id     : postId,
+					method : "POST",
+				});
+				return;
+			}
+
+			throw new Error("Versiones diferentes");
+		} catch (error) {
+			if (error.message === "Versiones diferentes") {
+				setErrorVersionMatch(true);
+			}
+			console.error(error);
+		}
 	};
 
 
 	useEffect(() => {
 		if (workSpaceData?.productName) {
-			submitData();
+			validateAndSubmitData();
 		}
 		if (!initialData) {
 			dispatch(workSpaceSlice.actions.addInitialData(workSpaceData));
@@ -145,6 +189,20 @@ const AppShell = ({
 			setUrlCollage(handlerConstructURLCollage);
 		}
 	}, [galleryData]);
+
+	if (errorVersionMatch) {
+		return (
+			<ErrorPageLayout
+				errorCode="426"
+				title="Book Desincronizado"
+				description="Parece que realizaste cambios de tu proyecto en otra pestaña, navegador o dispositivo de forma simultanea. Recarga la pagina para continuar editando tu photobook."
+				actionButton={{
+					body   : "RECARGAR",
+					action : () => window.location.reload(),
+				}}
+			/>
+		);
+	}
 
 	return (
 		<div

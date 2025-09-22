@@ -404,6 +404,7 @@ const CorrectAccessGuard = () => {
 
 		dispatch(workSpaceSlice.actions.insertData({
 			...parseJSON,
+			version    : parseJSON?.version ? (parseJSON?.version + 1) : 1,
 			postTypeId : postId,
 			modified   : photoBookConfigData?.modified ?? undefined,
 			orderId    : photoBookConfigData?.meta?.id_del_pedido ?? undefined,
@@ -459,17 +460,6 @@ const CorrectAccessGuard = () => {
 			return;
 		}
 		if (photobookData?.meta?.config) {
-			// const isAvailableProgressLocalBook = worspaceData?.postTypeId && (worspaceData?.postTypeId !== "");
-
-			// if (isAvailableProgressLocalBook) {
-			// 	const stringJsonCurrentProgress = JSON.stringify(worspaceData);
-			// 	const stringJsonNewProgress = JSON.stringify(photoBookConfigData?.meta?.config);
-
-			// 	if (stringJsonCurrentProgress === stringJsonNewProgress) {
-			// 		setStatusView("continue");
-			// 		return;
-			// 	}
-			// }
 			addCurrentPhotoBookConfig(photobookData);
 			setStatusView("continue");
 			return;
@@ -478,7 +468,6 @@ const CorrectAccessGuard = () => {
 		setStatusView("continue");
 		return;
 	}, [photobookData]);
-
 
 	return (
 		<>
