@@ -67,7 +67,7 @@ const Header = () => {
 	const submitData = async () => {
 		try {
 			await dataMutation({
-				module : "wp-json/wp/v2/photobook-2-1",
+				module : "wp-json/wp/v2/photobook-2-0",
 				data   : {
 					title : {
 						rendered : isModifiedData?.projectTittle ?? "TITULO",
