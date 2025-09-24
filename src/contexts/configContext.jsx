@@ -49,11 +49,14 @@ export const CurrentConfigPhotoBookProvider = ({children}) => {
 
 				const newListOfTexts = listOfTexts.map((item, index) => {
 					const textPresetConfig = defaultTexts?.[index];
-					const {position, sizes, text} = textPresetConfig;
+					const {position, sizes, text, letterSpacing, gapSpacing, lineHeight } = textPresetConfig;
 					return {
 						text,
 						position,
 						sizes,
+						letterSpacing,
+						gapSpacing,
+						lineHeight,
 					};
 				});
 

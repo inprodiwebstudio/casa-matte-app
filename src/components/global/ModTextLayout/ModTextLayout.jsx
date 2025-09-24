@@ -12,18 +12,29 @@ const ModTextLayout = ({
 
 	const listOfTexts = Object.values(currentConfigPhotoBook?.[`sheet${sheetNo}`]?.texts ?? {});
 
+	const listOfDecorationLines = Object.values(currentConfigPhotoBook?.[`sheet${sheetNo}`]?.linesDecoration ?? {});
+
 	return (
 		<Stack
 			w="100%"
 			h="100%"
 			p="0%"
 		>
+			{
+				listOfDecorationLines.map((item, index) => {
+					return (
+						<></>
+					);
+				})
+			}
 			{listOfTexts.map((item, index) => {
 				return (
 					<Text
 						key={index}
 						sheetNo={sheetNo}
-						letterSpacing="6px"
+						letterSpacing={item?.letterSpacing}
+						gapSpacing={item?.gapSpacing}
+						lineHeight={item?.lineHeight}
 						layoutNo={index}
 					/>
 				);

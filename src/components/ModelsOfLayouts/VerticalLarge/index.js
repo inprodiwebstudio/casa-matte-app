@@ -35,6 +35,9 @@ const VerticalLarge = {
 				width  : "300px",
 				height : "60px",
 			},
+			letterSpacing : "6px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
 		},
 		defaultTexts : [
 			{
@@ -47,6 +50,9 @@ const VerticalLarge = {
 					width  : "300px",
 					height : "60px",
 				},
+				letterSpacing : "6px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
 			},
 		],
 	},
@@ -67,6 +73,9 @@ const VerticalLarge = {
 				width  : "300px",
 				height : "60px",
 			},
+			letterSpacing : "6px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
 		},
 		defaultTexts : [
 			{
@@ -79,6 +88,9 @@ const VerticalLarge = {
 					width  : "300px",
 					height : "60px",
 				},
+				letterSpacing : "6px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
 			},
 		],
 	},
@@ -99,6 +111,9 @@ const VerticalLarge = {
 				width  : "300px",
 				height : "60px",
 			},
+			letterSpacing : "6px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
 		},
 		defaultTexts : [
 			{
@@ -111,6 +126,9 @@ const VerticalLarge = {
 					width  : "300px",
 					height : "60px",
 				},
+				letterSpacing : "6px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
 			},
 			{
 				text     : "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>",
@@ -121,6 +139,28 @@ const VerticalLarge = {
 				sizes : {
 					width  : "200px",
 					height : "30px",
+				},
+				letterSpacing : "6px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod38 : {
+		id              : "Mod38",
+		layout          : undefined,
+		numberPhotos    : 0,
+		numberText      : 2,
+		cat             : "texto",
+		layoutThumbNail : undefined,
+		linesDecoration : [
+			{
+				orientation : "h",
+				long        : "6.5%",
+				weight      : "2px",
+				position    : {
+					x : 0,
+					y : 0,
 				},
 			},
 		],

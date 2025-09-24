@@ -11,6 +11,7 @@ import "./ItemLayout.scss";
 const ItemLayout = ({
 	layoutData,
 }) => {
+	console.log(layoutData);
 	const dispatch = useDispatch();
 	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 
