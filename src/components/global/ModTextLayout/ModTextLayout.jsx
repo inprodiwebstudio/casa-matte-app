@@ -4,7 +4,7 @@ import Text                              from "components/LayoutHandler/Text";
 import { currentConfigPhotoBookContext } from "contexts/configContext";
 import { useContext }                    from "react";
 
-const Mod37 = ({
+const ModTextLayout = ({
 	sheetNo,
 }) => {
 
@@ -32,4 +32,4 @@ const Mod37 = ({
 	);
 };
 
-export default Mod37;
+export default ModTextLayout;

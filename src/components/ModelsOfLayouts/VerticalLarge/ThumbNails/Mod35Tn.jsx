@@ -4,9 +4,7 @@ import { Center, Stack } from "@mantine/core";
 import { TextShell } from "core/components";
 
 
-const Mod35Tn = ({
-	sheetNo,
-}) => {
+const Mod35Tn = () => {
 
 	return (
 		<Center w="100%" h="100%">

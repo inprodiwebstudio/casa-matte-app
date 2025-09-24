@@ -1,54 +1,34 @@
-import {Stack, Flex } from "@mantine/core";
+import {Stack } from "@mantine/core";
 //Own components
-import Text              from "components/LayoutHandler/Text";
-import { TextShell }     from "core/components";
-import { textInsertion } from "helpers";
+import Text                              from "components/LayoutHandler/Text";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
+import { useContext }                    from "react";
 
 const Mod36 = ({
-	data,
-	isInWorkSpace,
 	sheetNo,
-	isInPaginator,
-	isThumbNail,
-	pageNo,
-	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO 2</span></p>";
+	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+
+	const listOfTexts = Object.values(currentConfigPhotoBook?.[`sheet${sheetNo}`]?.texts ?? {});
 
 	return (
-		<Flex
+		<Stack
 			w="100%"
 			h="100%"
-			justify="flex-end"
-			align="flex-end"
-			p="7%"
+			p="0%"
 		>
-			<Stack
-				w={"100%"}
-				align={isThumbNail ? "flex-end" : undefined}
-				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
-			>
-				<Text
-					sizes={{
-						"chico"   : "38px",
-						"regular" : "42px",
-						"grande"  : "46px",
-					}}
-					positionDefault={{
-						x : 550,
-						y : 480,
-					}}
-					sheetNo={sheetNo}
-					letterSpacing="6px"
-					textShell={() => <TextShell.Title width="40%" align="flex-end" />}
-					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-					textNo={0}
-				/>
-			</Stack>
-		</Flex>
+			{listOfTexts.map((item, index) => {
+				return (
+					<Text
+						key={index}
+						sheetNo={sheetNo}
+						letterSpacing="6px"
+						layoutNo={index}
+					/>
+				);
+			})}
+		</Stack>
 	);
 };
 

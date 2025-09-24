@@ -285,8 +285,7 @@ const EditText = ({
 		<Rnd
 			className={classes.editText}
 			style={{
-				color  : ((product === "premium") && (currentPageId === "frontpage")) && "#1c1c1c6c",
-				border : "1px solid rgb(85, 121, 248)",
+				color : ((product === "premium") && (currentPageId === "frontpage")) && "#1c1c1c6c",
 			}}
 			size={currentSizeText}
 			position={currentPositionText}
@@ -310,7 +309,10 @@ const EditText = ({
 					handleEditorChange(event, editor);
 				}}
 			/>
-			<Center>
+			<Center
+				p="0%"
+				m="0%"
+			>
 				<div
 					className={`handles-${layoutNo}`}
 					style={{
@@ -318,6 +320,7 @@ const EditText = ({
 						fontSize   : "35px",
 						fontWeight : "bold",
 						color      : "#3b82f6",
+						marginTop  : "-22.5px",
 					}}
 				>
 					+
