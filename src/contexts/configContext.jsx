@@ -85,8 +85,6 @@ export const CurrentConfigPhotoBookProvider = ({children}) => {
 		}
 	}, [photoCurrentPageData, layoutMods]);
 
-	console.log(currentConfigPhotoBook);
-
 	return (
 		<currentConfigPhotoBookContext.Provider
 			value={{

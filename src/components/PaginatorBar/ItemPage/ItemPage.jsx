@@ -52,6 +52,27 @@ const ItemPage = ({
 		dispatch(workSpaceSlice.actions.handleChangePage(draggableId));
 	};
 
+	const handlerPageData = () => {
+		if (currentConfigPhotoBook?.pageId === pageData?.id) {
+			const constructorData = {
+				sheet1 : {
+					layoutType : currentConfigPhotoBook?.sheet1?.modlayoutId,
+					texts      : currentConfigPhotoBook?.sheet1?.texts,
+					photos     : currentConfigPhotoBook?.sheet1?.photos,
+				},
+				...(currentConfigPhotoBook?.sheet2 && {
+					sheet2 : {
+						layoutType : currentConfigPhotoBook?.sheet2?.modlayoutId,
+						texts      : currentConfigPhotoBook?.sheet2?.texts,
+						photos     : currentConfigPhotoBook?.sheet2?.photos,
+					},
+				}),
+			};
+			return constructorData;
+		}
+		return pageData;
+	};
+
 	const NumbPages = () => {
 		if (photoBookProduct === "layflat") {
 			return (
@@ -96,7 +117,7 @@ const ItemPage = ({
 				<div className={`sheets-container ${photoBookFormat}`}>
 					{
 						(isAvailableProduct !== "") && (
-							<SpreadLayoutsThumbNail pageData={pageData} />
+							<SpreadLayoutsThumbNail pageData={handlerPageData()} />
 						)
 					}
 				</div>
