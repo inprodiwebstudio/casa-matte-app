@@ -51,7 +51,14 @@ const EditText = ({
 
 	const isAvailableChangeColorText = currentColorEngravingText && (currentPageId === "frontpage");
 
-	const { classes } = styles({size : currentFontSize, gapSpacing, lineHeight, letterSpacing, gravingColor : isAvailableChangeColorText ? currentColorEngravingText : undefined});
+	const { classes } = styles({
+		size         : currentFontSize,
+		gapSpacing,
+		lineHeight,
+		letterSpacing,
+		layoutNo,
+		gravingColor : isAvailableChangeColorText ? currentColorEngravingText : undefined,
+	});
 
 	const editorRef = useRef();
 
@@ -315,13 +322,6 @@ const EditText = ({
 			>
 				<div
 					className={`handles-${layoutNo}`}
-					style={{
-						cursor     : "move",
-						fontSize   : "35px",
-						fontWeight : "bold",
-						color      : "#3b82f6",
-						marginTop  : "-22.5px",
-					}}
 				>
 					+
 				</div>

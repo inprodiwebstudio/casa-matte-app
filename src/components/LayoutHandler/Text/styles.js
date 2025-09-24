@@ -3,7 +3,14 @@ import { createStyles } from "@mantine/core";
 const useStyles = createStyles(
 	(
 		theme,
-		{ size, gapSpacing, lineHeight, letterSpacing, gravingColor }
+		{
+			size,
+			gapSpacing,
+			lineHeight,
+			letterSpacing,
+			gravingColor,
+			layoutNo,
+		}
 	) => ({
 		editText : {
 			fontFamily     : "Helvetica, sans-serif",
@@ -11,7 +18,11 @@ const useStyles = createStyles(
 			justifyContent : "space-between",
 			display        : !size ? "none" : "flex",
 			position       : "relative", // necesario para handles absolutos
-			border         : "2px dashed #3b82f6", // bounding box azul
+			border         : "2px dashed #ffffff", // bounding box azul
+
+			"&:hover" : {
+				border : "2px dashed #3b82f6",
+			},
 
 			"& .ck.ck-editor__editable_inline" : {
 				display       : gapSpacing ? "flex" : "block",
@@ -105,10 +116,15 @@ const useStyles = createStyles(
 				position     : "absolute",
 				width        : "10px",
 				height       : "10px",
-				background   : "#fff",
-				border       : "2px solid #3b82f6",
+				background   : "transparent",
+				border       : "2px solid transparent",
 				borderRadius : "50%",
 				zIndex       : 2,
+			},
+
+			"&:hover::before, &:hover::after" : {
+				background : "#fff",
+				border     : "2px solid #3b82f6",
 			},
 
 			/* esquina superior izquierda */
@@ -129,10 +145,15 @@ const useStyles = createStyles(
 				position     : "absolute",
 				width        : "10px",
 				height       : "10px",
-				background   : "#fff",
-				border       : "2px solid #3b82f6",
+				background   : "transparent",
+				border       : "2px solid transparent",
 				borderRadius : "50%",
 				zIndex       : 2,
+			},
+
+			"&:hover .handles::before, &:hover .handles::after" : {
+				background : "#fff",
+				border     : "2px solid #3b82f6",
 			},
 
 			/* esquina inferior izquierda */
@@ -145,6 +166,18 @@ const useStyles = createStyles(
 			"& .handles::after" : {
 				bottom : "-6px",
 				right  : "-6px",
+			},
+
+			[`& .handles-${layoutNo}`] : {
+				cursor     : "move",
+				fontSize   : "35px",
+				fontWeight : "bold",
+				color      : "transparent",
+				marginTop  : "-22.5px",
+			},
+
+			[`&:hover .handles-${layoutNo}`] : {
+				color : "#3b82f6",
 			},
 
 			/* handles de los lados (extra div para cubrir 4 más) */
