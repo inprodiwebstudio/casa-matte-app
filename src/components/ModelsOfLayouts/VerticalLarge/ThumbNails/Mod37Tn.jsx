@@ -11,9 +11,11 @@ const Mod37Tn = () => {
 			<Stack
 				spacing="0.05em"
 				w="100%"
+				align="center"
+				justify="center"
 			>
-				<TextShell.Title />
-				<TextShell.SubTitle />
+				<TextShell.Title width="50%" />
+				<TextShell.SubTitle width="40%" />
 			</Stack>
 		</Center>
 	);

@@ -11,7 +11,7 @@ const Mod36Tn = () => {
 			h="100%"
 			justify="flex-end"
 			align="flex-end"
-			p="3%"
+			p="10%"
 		>
 			<Stack
 				w="50%"

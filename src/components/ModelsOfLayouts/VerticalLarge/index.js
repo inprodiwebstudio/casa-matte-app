@@ -40,8 +40,8 @@ const VerticalLarge = {
 			{
 				text     : "<p style='text-align: center;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>",
 				position : {
-					x : 235,
-					y : 255,
+					x : 300,
+					y : 455,
 				},
 				sizes : {
 					width  : "300px",
@@ -116,7 +116,7 @@ const VerticalLarge = {
 				text     : "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>",
 				position : {
 					x : 355,
-					y : 520,
+					y : 505,
 				},
 				sizes : {
 					width  : "200px",
