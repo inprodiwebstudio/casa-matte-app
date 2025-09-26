@@ -443,7 +443,7 @@ export const workSpaceSlice = createSlice({
 				const newPageData = {
 					id     : pageId,
 					sheet1 : {
-						pageNo     : pageData.sheet1.pageNo + 1,
+						pageNo     : pageData.sheet1.pageNo + 2,
 						layoutType : "",
 						text       : {},
 						photos     : {},
@@ -467,13 +467,13 @@ export const workSpaceSlice = createSlice({
 			slicePagesToReorder.unshift({
 				id     : slicePagesToReorder[0].id,
 				sheet1 : {
-					pageNo     : slicePagesToReorder[0].id.split("page")[1],
+					pageNo     : (slicePagesToReorder[0].id.split("page")[1] * 2) - 1,
 					layoutType : "",
 					text       : {},
 					photos     : {},
 				},
 				sheet2 : {
-					pageNo     : slicePagesToReorder[0].id.split("page")[1],
+					pageNo     : slicePagesToReorder[0].id.split("page")[1] * 2,
 					layoutType : "",
 					text       : {},
 					photos     : {},
@@ -485,6 +485,14 @@ export const workSpaceSlice = createSlice({
 				}
 				return {
 					...pageData,
+					sheet1 : {
+						...pageData.sheet1,
+						pageNo : pageData.sheet1.pageNo + 2,
+					},
+					sheet2 : {
+						...pageData.sheet2,
+						pageNo : pageData.sheet2.pageNo + 2,
+					},
 					id : `page${Number(pageData.id.split("page")[1]) + 1}`,
 				};
 			});

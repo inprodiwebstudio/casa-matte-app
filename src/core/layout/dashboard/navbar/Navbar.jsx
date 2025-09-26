@@ -24,7 +24,7 @@ const Navbar = ({workSpaceSlice}) => {
 
 
 	const listOfPages = convertToArray(dataPages.pages);
-	const counterPages = () => counterSheets(listOfPages, photoBookProduct === "layflat");
+	const counterPages = () => counterSheets(listOfPages, false);
 
 	const insertNewPage = () => {
 		if (photoBookProduct === "layflat") {
@@ -52,7 +52,6 @@ const Navbar = ({workSpaceSlice}) => {
 			});
 			return;
 		}
-		workSpaceSlice.addPage();
 	};
 
 	const toggleManagePagesView = () => {

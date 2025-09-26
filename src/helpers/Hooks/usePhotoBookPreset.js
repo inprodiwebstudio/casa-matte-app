@@ -95,17 +95,17 @@ const generatePages = (numberOfPages, isLayflat) => {
 	const pageCount = isEvenPages ? totalPaginations : (numberOfPages / 2) + 1;
 
 	if (isLayflat) {
-		return Array(numberOfPages).fill(0).map((_, index) => {
+		return Array(numberOfPages / 2).fill(0).map((_, index) => {
 			return {
 				id     : `page${index + 1}`,
 				sheet1 : {
-					pageNo     : index + 1,
+					pageNo     : (index * 2) + 1,
 					layoutType : "",
 					text       : {},
 					photos     : { 0 : { id : "", url : "" } },
 				},
 				sheet2 : {
-					pageNo     : index + 1,
+					pageNo     : (index * 2) + 2,
 					layoutType : "",
 					text       : "",
 					photos     : { 0 : { id : "", url : "" } },
