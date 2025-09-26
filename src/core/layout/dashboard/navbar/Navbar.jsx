@@ -28,6 +28,8 @@ const Navbar = ({workSpaceSlice}) => {
 	const listOfPages = convertToArray(dataPages.pages);
 	const counterPages = () => counterSheets(listOfPages, false);
 
+	console.log(counterPages(), maxRangePages);
+
 	const insertNewPage = () => {
 		if (photoBookProduct === "layflat") {
 			workSpaceSlice.addSpread();
@@ -54,6 +56,7 @@ const Navbar = ({workSpaceSlice}) => {
 			});
 			return;
 		}
+		insertNewPage();
 	};
 
 	const toggleManagePagesView = () => {
