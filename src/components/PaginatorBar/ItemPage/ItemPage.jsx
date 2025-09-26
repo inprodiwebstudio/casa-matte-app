@@ -23,7 +23,7 @@ const ItemPage = ({
 	const photoBookFormat = useSelector((state) => state.workSpaceSlice?.data?.format, shallowEqual);
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const isAvailableProduct = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
-	// const photoBookProduct = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
+	const isFixedVersionLayflat = useSelector((state) => state.workSpaceSlice?.data?.isFixedPagesLayflat, shallowEqual);
 
 	const isCurrentPage = currentPageId === draggableId;
 
@@ -49,18 +49,18 @@ const ItemPage = ({
 	};
 
 	const NumbPages = () => {
-		// if (photoBookProduct === "layflat") {
-		// 	return (
-		// 		<div
-		// 			className="numbPages-container"
-		// 			style={{
-		// 				justifyContent : "center",
-		// 			}}
-		// 		>
-		// 			<p>{Number(pageData?.id?.split("page")[1])}</p>
-		// 		</div>
-		// 	);
-		// }
+		if (!isFixedVersionLayflat && (isAvailableProduct === "layflat")) {
+			return (
+				<div
+					className="numbPages-container"
+					style={{
+						justifyContent : "center",
+					}}
+				>
+					<p>{Number(pageData?.id?.split("page")[1])}</p>
+				</div>
+			);
+		}
 		return (
 			<div
 				className="numbPages-container"

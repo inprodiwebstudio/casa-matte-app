@@ -19,9 +19,11 @@ const Navbar = ({workSpaceSlice}) => {
 	const photoBookProduct = useSelector((state) => state.workSpaceSlice.data.product, shallowEqual);
 	const dataPages = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 	const statusViewPage = useSelector((state) => state.workSpaceSlice?.statusViewPage, shallowEqual);
+	const isFixedVersionLayflat = useSelector((state) => state.workSpaceSlice?.data?.isFixedPagesLayflat, shallowEqual);
 
 	const isManagePagesView = statusViewPage === "managePages";
 
+	const isDisabledAddPageButton = (photoBookProduct === "layflat") && !isFixedVersionLayflat;
 
 	const listOfPages = convertToArray(dataPages.pages);
 	const counterPages = () => counterSheets(listOfPages, false);
@@ -101,6 +103,7 @@ const Navbar = ({workSpaceSlice}) => {
 							sx={{marginTop : "15px"}}
 							loading={loading}
 							onClick={() => handlerAddPage()}
+							disabled={isDisabledAddPageButton}
 						>
 							<Text
 								weight={400}
