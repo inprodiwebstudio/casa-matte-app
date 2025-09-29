@@ -1,6 +1,7 @@
 import {Stack } from "@mantine/core";
 //Own components
 import Text                              from "components/LayoutHandler/Text";
+import LineDecorationDrag                from "../LineDecorationDrag";
 import { currentConfigPhotoBookContext } from "contexts/configContext";
 import { useContext }                    from "react";
 
@@ -23,7 +24,14 @@ const ModTextLayout = ({
 			{
 				listOfDecorationLines.map((item, index) => {
 					return (
-						<></>
+						<LineDecorationDrag
+							key={index}
+							orientation={item?.orientation}
+							long={item?.long}
+							weight={item?.weight}
+							layoutNo={index}
+							sheetNo={sheetNo}
+						/>
 					);
 				})
 			}

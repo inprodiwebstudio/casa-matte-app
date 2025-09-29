@@ -779,11 +779,12 @@ export const workSpaceSlice = createSlice({
 			state.history.current = history.currentAction;
 		},
 		addLayout : (state, {payload}) => {
-			const {layout, defaultTexts, numberPhotos, anotherSheetKey, anotherSheetData, pageId, sheetId} = payload;
+			const {layout, defaultTexts, linesDecoration, numberPhotos, anotherSheetKey, anotherSheetData, pageId, sheetId} = payload;
 			const cloneData = {...state.data};
 			const parseToListImages = Array.from(Array(numberPhotos).keys()).map(e => ({id : "", url : ""}));
 			const myPhotos = Object.assign({}, parseToListImages);
 			const texts = defaultTexts ? arrayToObj(defaultTexts) : undefined;
+			const myLinesDecoration = linesDecoration ? arrayToObj(linesDecoration) : undefined;
 			const isFullBook = () => {
 				switch (`${cloneData?.product}-${cloneData?.sizePhotoBook}-${cloneData?.format}`) {
 					case "grande-vertical":
@@ -987,9 +988,10 @@ export const workSpaceSlice = createSlice({
 			if (pageId === "FrontLayout") {
 				cloneData.frontPage.sheet1 = {
 					...cloneData.frontPage.sheet1,
-					layoutType : layout,
-					text       : texts,
-					photos     : {
+					layoutType      : layout,
+					text            : texts,
+					linesDecoration : myLinesDecoration,
+					photos          : {
 						0 : {
 							id  : cloneData?.frontPage?.sheet1?.photos?.[0]?.id,
 							url : cloneData?.frontPage?.sheet1?.photos?.[0]?.url,
@@ -1002,15 +1004,17 @@ export const workSpaceSlice = createSlice({
 			if (isFullBook() && isAvailableDoublePage) {
 				cloneData.pages[pageId]["sheet1"] = {
 					...cloneData.pages[pageId]["sheet1"],
-					layoutType : layout,
-					text       : texts,
-					photos     : myPhotos,
+					layoutType      : layout,
+					text            : texts,
+					linesDecoration : myLinesDecoration,
+					photos          : myPhotos,
 				};
 				cloneData.pages[pageId]["sheet2"] = {
 					...cloneData.pages[pageId]["sheet2"],
-					layoutType : "",
-					text       : undefined,
-					photos     : undefined,
+					layoutType      : "",
+					text            : undefined,
+					linesDecoration : undefined,
+					photos          : undefined,
 				};
 				state.data = cloneData;
 				return;
@@ -1021,16 +1025,18 @@ export const workSpaceSlice = createSlice({
 			if (anotherSheetKey) {
 				cloneData.pages[pageId][anotherSheetKey] = {
 					...cloneData.pages[pageId][anotherSheetKey],
-					layoutType : anotherSheetData?.modlayoutId,
-					text       : anotherSheetData?.texts,
-					photos     : anotherSheetKey?.photos,
+					layoutType      : anotherSheetData?.modlayoutId,
+					text            : anotherSheetData?.texts,
+					linesDecoration : anotherSheetData?.linesDecoration,
+					photos          : anotherSheetKey?.photos,
 				};
 			}
 			cloneData.pages[pageId][sheetId] = {
 				...cloneData.pages[pageId][sheetId],
-				layoutType : layout,
-				text       : texts,
-				photos     : myPhotos,
+				layoutType      : layout,
+				text            : texts,
+				linesDecoration : myLinesDecoration,
+				photos          : myPhotos,
 			};
 			state.data = cloneData;
 

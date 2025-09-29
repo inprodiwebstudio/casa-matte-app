@@ -11,7 +11,6 @@ import "./ItemLayout.scss";
 const ItemLayout = ({
 	layoutData,
 }) => {
-	console.log(layoutData);
 	const dispatch = useDispatch();
 	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 
@@ -67,6 +66,7 @@ const ItemLayout = ({
 		}
 		if (pageDataSelected) {
 			const defaultTexts = layoutData?.defaultTexts;
+			const linesDecoration = layoutData?.linesDecoration;
 
 			const handlerAnotherSheetKey = (pageDataSelected.currentPage === "sheet1") ? "sheet2" : "sheet1";
 
@@ -79,6 +79,7 @@ const ItemLayout = ({
 				numberPhotos     : layoutData?.numberPhotos,
 				anotherSheetKey  : dataAnotherSheet && handlerAnotherSheetKey,
 				anotherSheetData : dataAnotherSheet,
+				linesDecoration,
 				defaultTexts,
 			}));
 		}
