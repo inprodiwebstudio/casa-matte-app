@@ -15,6 +15,7 @@ const ModLayoutHandler = ({modLayoutKey, type, ...rest}) => {
 	const ModLayout = layoutMods[modLayoutKey]?.layout;
 
 	if (type === "thumbNail") {
+		if (!ModLayoutThumbNail) return <></>;
 		return (
 			<ModLayoutThumbNail {...rest} />
 		);

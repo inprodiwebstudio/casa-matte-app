@@ -8,7 +8,7 @@ const Mod1Tn = ({photos}) => {
 			w="100%"
 			h="100%"
 			style={{
-				background : "red",
+				background : "E3E3E3",
 			}}
 		>
 			<ImgLayoutPreview

@@ -288,6 +288,8 @@ const EditText = ({
 		}));
 	};
 
+	console.log(currentConfigPhotoBook ?? undefined);
+
 	return (
 		<Rnd
 			className={classes.editText}
