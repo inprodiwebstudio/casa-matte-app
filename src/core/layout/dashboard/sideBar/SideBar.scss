@@ -8,106 +8,12 @@
     left: 100;
     right: 0;
     bottom: 0;
-    width: 412px;
+    width: 354px;
     transition: all ease 200ms;
-    z-index: 2;
-    &.isFullSize {
-        // width : 1388px !important;
-        width: calc(73vw - 13px) !important;
-    }
-    &.isInpreview {
-        width: 0px !important;
-    }
-    &.isNoData {
-        width: 354px !important;
-    }
-    @include big-tablet {
-        width: 216px !important;
-        &.isInpreview {
-            width: 0px !important;
-        }
-        &.isFullSize {
-            // width: 900px !important;
-            width: calc(62vw - 11px) !important;
-        }
-    }
-    @include laptop {
-        width: 412px;
-        &.isInpreview {
-            width: 0px !important;
-        }
-        &.isNoData {
-            width: 354px !important;
-        }
-        &.isFullSize {
-            // width: 1054px !important;
-            width: calc(74vw - 11px) !important;
-        }
-    }
-    @include tablet {
-        width: 216px !important;
-        &.isInpreview {
-            width: 0px !important;
-        }
-        &.isNoData {
-            width: 228px !important;
-        }
-        &.isFullSize {
-            // width: 900px !important;
-            width: calc(55vw - 10px) !important;
-        }
-    }
-    .actions-sidebar-conatiner {
-        background: $secondary-color;
-        color : $flat-color;
-        flex-direction: column;
-        height: fit-content;
-        display: flex;
-        gap: 32px;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        // padding-bottom: 16.6px;
-        // padding-top: 35px;
-        padding: 15px !important;
-        // background: red !important;
-        
-        &.is-loading {
-            color : $primary-color !important;
-            .icon-sidebar-action {
-                &:hover {
-                    color : $primary-color;
-                    cursor: wait;
-                }
-            }
-        }
-
-        .icon-sidebar-action {
-            transition: all ease 200ms;
-            display: flex;
-            align-items: center;
-            padding-left: 6px;
-            padding-right: 6px;
-            &:hover {
-                color : $dark-color;
-                cursor: pointer;
-            }
-        }
-
-        .icon-arrow-action {
-            transform: rotate(270deg);
-            transition: all ease 200ms;
-        }
-
-        &.isFullSize {
-            .icon-arrow-action {
-                transform: rotate(-270deg);
-            }
-        }
-    }
+    z-index: 3;
 
     .body-sidebar {
-        background: $secondary-color;
         flex-grow: 1;
+        position: relative;
     }
 }
