@@ -2,7 +2,7 @@ import { Stack } from "@mantine/core";
 //Own components
 import ImgLayout from "components/LayoutHandler/ImgLayout";
 
-const Mod1 = ({photos, sheetNo}) => {
+const Mod1 = ({sheetNo}) => {
 	return (
 		<Stack
 			w="100%"
