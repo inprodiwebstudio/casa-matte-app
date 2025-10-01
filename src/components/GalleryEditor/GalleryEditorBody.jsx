@@ -23,7 +23,7 @@ const GalleryEditorBody = () => {
 			className={classes.galleryBodyCard}
 		>
 			<Stack
-				spacing={9}
+				spacing={10}
 				h="100%"
 			>
 				<TitleInpt />
@@ -36,6 +36,7 @@ const GalleryEditorBody = () => {
 						flex : 1,
 					}}
 					p={0}
+					mt="10px"
 				>
 					<PhotoGallery />
 				</Stack>

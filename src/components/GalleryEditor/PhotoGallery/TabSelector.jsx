@@ -72,7 +72,7 @@ const TabSelector = () => {
 							transition    : "all ease 200ms",
 						}}
 					>
-						Todas las carpetas
+						Carpetas
 					</Text>
 				</Center>
 			</Box>
