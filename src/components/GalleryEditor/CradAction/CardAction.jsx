@@ -43,6 +43,7 @@ const CardAction = ({
 						size="10px"
 						color="black"
 						weight={500}
+						align="center"
 						style={{
 							fontFamily    : "Helvetica",
 							letterSpacing : "0px",

@@ -1,15 +1,19 @@
-import { Group, Select, Stack, Text } from "@mantine/core";
-import { FaCaretDown }                from "react-icons/fa";
+import { Group, Select, Stack } from "@mantine/core";
+import { FaCaretDown }          from "react-icons/fa";
+import HidePhotosCheck          from "./HidePhotosCheck";
+import SelectorGrid             from "./SelectorGrid";
 
 const FilterBar = () => {
 	return (
 		<Group
-			spacing="50px"
+			spacing="31px"
+			mt="12px"
 		>
 			<Stack
-				w="25%"
+				w="30%"
 			>
 				<Select
+					placeholder="Ordenar por"
 					styles={{
 						input : {
 							background   : "#f6f6f6",
@@ -49,30 +53,15 @@ const FilterBar = () => {
 					}}
 					rightSection={<FaCaretDown size={10} />}
 					data={[
-						{ value : "react", label : "React" },
-						{ value : "test", label : "test" },
+						{ value : "filter 1", label : "filter 1" },
+						{ value : "filter 2", label : "filter 2" },
 					]}
 				/>
 			</Stack>
-			<Text
-				size="9px"
-				style={{
-					fontFamily    : "Helvetica",
-					letterSpacing : "0px",
-				}}
-			>
-				Ocultar fotos usadas
-			</Text>
-			<Text
-				size="9px"
-				style={{
-					fontFamily    : "Helvetica",
-					letterSpacing : "0px",
-					background    : "red",
-				}}
-			>
-				Totalssss
-			</Text>
+			<HidePhotosCheck />
+			<Stack>
+				<SelectorGrid />
+			</Stack>
 		</Group>
 	);
 };

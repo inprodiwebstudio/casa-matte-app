@@ -57,7 +57,6 @@ const TabSelector = () => {
 				}}
 				onClick={() => onChangeTab("folders")}
 			>
-
 				<Center
 					w="100%"
 					h="100%"

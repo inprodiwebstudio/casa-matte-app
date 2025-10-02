@@ -1,6 +1,7 @@
 import { Center, Stack } from "@mantine/core";
 import TabSelector       from "./TabSelector";
 import FilterBar         from "./FilterBar";
+import Body              from "./Body";
 
 const PhotoGallery = () => {
 	return (
@@ -16,6 +17,7 @@ const PhotoGallery = () => {
 			>
 				<FilterBar />
 			</Stack>
+			<Body />
 		</Stack>
 	);
 };
