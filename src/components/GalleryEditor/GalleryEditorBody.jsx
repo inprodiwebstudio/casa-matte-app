@@ -15,6 +15,7 @@ const GalleryEditorBody = () => {
 		<GalleryTypeView>
 			<Card
 				h="98%"
+				w="100%"
 				radius="15px"
 				withBorder
 				shadow="xl"

@@ -6,6 +6,8 @@ const useStyles = createStyles(() => ({
 		borderWidth   : 1.5,
 		display       : "flex",
 		flexDirection : "column",
+		position      : "absolute",
+		right         : "0px",
 	},
 })
 );
