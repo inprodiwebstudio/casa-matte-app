@@ -1,11 +1,14 @@
 import { Box, Center, Group, Text } from "@mantine/core";
-import { useState }                 from "react";
+import {  useContext }              from "react";
+
+//Contexts
+import {galleryTypeViewContext} from "contexts/galleryTypeView";
 
 const TabSelector = () => {
-	const [currentTabKey, setCurrentTabKey] = useState("photos");
+	const {gridType, setGridType} = useContext(galleryTypeViewContext);
 
 	const onChangeTab = (tabKey) => {
-		setCurrentTabKey(tabKey);
+		setGridType(tabKey);
 	};
 	return (
 		<Group
@@ -24,7 +27,7 @@ const TabSelector = () => {
 				h="100%"
 				style={{
 					borderRadius : "8px",
-					background   : currentTabKey === "photos" && "#58595b",
+					background   : gridType === "photos" && "#58595b",
 					transition   : "all ease 200ms",
 				}}
 				onClick={() => onChangeTab("photos")}
@@ -35,7 +38,7 @@ const TabSelector = () => {
 				>
 					<Text
 						size="12px"
-						color={(currentTabKey === "photos") ? "white" : "black"}
+						color={(gridType === "photos") ? "white" : "black"}
 						weight={500}
 						style={{
 							fontFamily    : "Helvetica",
@@ -51,7 +54,7 @@ const TabSelector = () => {
 				w="50%"
 				h="100%"
 				style={{
-					background   : currentTabKey === "folders" && "#58595b",
+					background   : gridType === "folders" && "#58595b",
 					borderRadius : "8px",
 					transition   : "all ease 200ms",
 				}}
@@ -63,7 +66,7 @@ const TabSelector = () => {
 				>
 					<Text
 						size="12px"
-						color={(currentTabKey === "folders") ? "white" : "black"}
+						color={(gridType === "folders") ? "white" : "black"}
 						weight={500}
 						style={{
 							fontFamily    : "Helvetica",

@@ -16,7 +16,7 @@ const FolderCard = ({
 				backgroundSize     : "cover",
 				backgroundPosition : "center",
 				backgroundRepeat   : "no-repeat",
-				background         : "#f6f6f6",
+				// background         : "#f6f6f6",
 				userSelect         : "none",
 				borderRadius       : "10px",
 				position           : "relative",
