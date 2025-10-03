@@ -1,11 +1,15 @@
-import { Center, Grid } from "@mantine/core";
-import CardAction       from "components/GalleryEditor/CradAction";
-import FolderCard       from "../FolderCard";
-import { GoPlus }       from "react-icons/go";
+import { Center, Grid }              from "@mantine/core";
+import CardAction                    from "components/GalleryEditor/CradAction";
+import FolderCard                    from "../FolderCard";
+import { GoPlus }                    from "react-icons/go";
+import { shallowEqual, useSelector } from "react-redux";
 
 const GridCard = ({
 	cols = 6,
 }) => {
+	const isMoreCols = useSelector((state) => state.gallerySlice.moreCols, shallowEqual);
+
+	const handlerSize = isMoreCols ? "80px" : "125px";
 	return (
 		<Grid
 			w="100%"
@@ -21,8 +25,9 @@ const GridCard = ({
 					<CardAction
 						withBorder
 						label="Agregar carpeta nueva"
-						h="120px"
-						w="135px"
+						h={handlerSize}
+						w={handlerSize}
+						zoomContent={isMoreCols && 0.8}
 						icon={
 							<GoPlus size={13} />
 						}
