@@ -18,7 +18,7 @@ const GalleryEditorBody = () => {
 
 	const isFullSizeSideBar = useSelector((state) => state.gallerySlice.isFullSizeSideBar, shallowEqual);
 
-	const handlerSizeSidebar = isFullSizeSideBar ? "60vw" : "100%";
+	const handlerSizeSidebar = isFullSizeSideBar ? "750px" : "100%";
 
 	const handlerClickInGallery = (e) => {
 		e.stopPropagation();

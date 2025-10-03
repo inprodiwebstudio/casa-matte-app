@@ -15,6 +15,7 @@ const initialState = {
 	typeDropedView    : null,
 	data              : null,
 	isFullSizeSideBar : false,
+	moreCols          : false,
 	isLoadingData     : false,
 	isLoadingMutation : false,
 	selectedData      : null,
@@ -94,8 +95,12 @@ export const gallerySlice = createSlice({
 		setFilter : (state, {payload}) => {
 			state.filter = payload;
 		},
+		toggleMoreCols : (state) => {
+			state.moreCols = !state.moreCols;
+		},
 		toggleFullSizeSideBar : (state) => {
 			state.isFullSizeSideBar = !state.isFullSizeSideBar;
+			state.moreCols = false;
 		},
 		moveToFolder : (state, {payload}) => {
 			const isMoveInFolder = !!payload?.folderId;

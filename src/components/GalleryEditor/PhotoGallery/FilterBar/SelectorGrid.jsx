@@ -1,12 +1,27 @@
-import { Group, Stack } from "@mantine/core";
+import { Group, Stack }                           from "@mantine/core";
+import { shallowEqual, useSelector, useDispatch } from "react-redux";
+import { gallerySlice }                           from "store/Slices";
 
 const SelectorGrid = () => {
-	//#58595b
+	const isFullSizeSideBar = useSelector((state) => state.gallerySlice.isFullSizeSideBar, shallowEqual);
+
+	const dispatch = useDispatch();
+
+	const colorHandler = isFullSizeSideBar ? "#c3c3c3ff" : "#58595b";
+	const cursorHandler = isFullSizeSideBar ? "not-allowed" : "pointer";
+
+	const handlerChangeGrid = () => {
+		if (!isFullSizeSideBar) {
+			dispatch(gallerySlice.actions.toggleMoreCols());
+		}
+	};
+
 	return (
 		<Group
 			spacing={"5px"}
+			onClick={handlerChangeGrid}
 			style={{
-				cursor     : "pointer",
+				cursor     : cursorHandler,
 				userSelect : "none",
 			}}
 		>
@@ -15,7 +30,7 @@ const SelectorGrid = () => {
 					w="6px"
 					h="6px"
 					style={{
-						background : "#58595b",
+						background : colorHandler,
 					}}
 				>
 					&nbsp;
@@ -24,7 +39,7 @@ const SelectorGrid = () => {
 					w="6px"
 					h="6px"
 					style={{
-						background : "#58595b",
+						background : colorHandler,
 					}}
 				>
 					&nbsp;
@@ -33,7 +48,7 @@ const SelectorGrid = () => {
 					w="6px"
 					h="6px"
 					style={{
-						background : "#58595b",
+						background : colorHandler,
 					}}
 				>
 					&nbsp;
@@ -46,7 +61,7 @@ const SelectorGrid = () => {
 					w="8px"
 					h="8px"
 					style={{
-						background : "#58595b",
+						background : colorHandler,
 					}}
 				>
 					&nbsp;
@@ -55,7 +70,7 @@ const SelectorGrid = () => {
 					w="8px"
 					h="8px"
 					style={{
-						background : "#58595b",
+						background : colorHandler,
 					}}
 				>
 					&nbsp;

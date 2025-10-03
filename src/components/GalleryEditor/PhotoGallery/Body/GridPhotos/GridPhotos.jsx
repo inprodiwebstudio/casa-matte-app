@@ -1,41 +1,61 @@
 import { Grid }  from "@mantine/core";
 import PhotoCard from "../PhotoCard";
 
-const GridPhotos = () => {
+const GridPhotos = ({
+	cols = 6,
+}) => {
 	return (
 		<Grid
 			w="100%"
 			gutter="3"
 		>
 			<Grid.Col
-				span={6}
+				span={cols}
+				style={{
+					aspectRatio : "1/1",
+				}}
 			>
-				<PhotoCard h="135px" />
+				<PhotoCard />
 			</Grid.Col>
 			<Grid.Col
-				span={6}
+				span={cols}
+				style={{
+					aspectRatio : "1/1",
+				}}
 			>
-				<PhotoCard h="135px" />
+				<PhotoCard />
 			</Grid.Col>
 			<Grid.Col
-				span={6}
+				span={cols}
+				style={{
+					aspectRatio : "1/1",
+				}}
 			>
-				<PhotoCard h="135px" />
+				<PhotoCard />
 			</Grid.Col>
 			<Grid.Col
-				span={6}
+				span={cols}
+				style={{
+					aspectRatio : "1/1",
+				}}
 			>
-				<PhotoCard h="135px" />
+				<PhotoCard />
 			</Grid.Col>
 			<Grid.Col
-				span={6}
+				span={cols}
+				style={{
+					aspectRatio : "1/1",
+				}}
 			>
-				<PhotoCard h="135px" />
+				<PhotoCard />
 			</Grid.Col>
 			<Grid.Col
-				span={6}
+				span={cols}
+				style={{
+					aspectRatio : "1/1",
+				}}
 			>
-				<PhotoCard h="135px" />
+				<PhotoCard />
 			</Grid.Col>
 		</Grid>
 	);

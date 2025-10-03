@@ -3,14 +3,16 @@ import CardAction       from "components/GalleryEditor/CradAction";
 import FolderCard       from "../FolderCard";
 import { GoPlus }       from "react-icons/go";
 
-const GridCard = () => {
+const GridCard = ({
+	cols = 6,
+}) => {
 	return (
 		<Grid
 			w="100%"
 			gutter="3"
 		>
 			<Grid.Col
-				span={6}
+				span={cols}
 			>
 				<Center
 					w="100%"
@@ -28,29 +30,44 @@ const GridCard = () => {
 				</Center>
 			</Grid.Col>
 			<Grid.Col
-				span={6}
+				span={cols}
+				style={{
+					aspectRatio : "1/1",
+				}}
 			>
-				<FolderCard urlImage="https://images.pexels.com/photos/25390327/pexels-photo-25390327.jpeg" h="135px" />
+				<FolderCard urlImage="https://images.pexels.com/photos/25390327/pexels-photo-25390327.jpeg" />
 			</Grid.Col>
 			<Grid.Col
-				span={6}
+				span={cols}
+				style={{
+					aspectRatio : "1/1",
+				}}
 			>
-				<FolderCard urlImage="https://images.pexels.com/photos/32005277/pexels-photo-32005277.jpeg" h="135px" />
+				<FolderCard urlImage="https://images.pexels.com/photos/32005277/pexels-photo-32005277.jpeg" />
 			</Grid.Col>
 			<Grid.Col
-				span={6}
+				span={cols}
+				style={{
+					aspectRatio : "1/1",
+				}}
 			>
-				<FolderCard urlImage="https://images.pexels.com/photos/32506092/pexels-photo-32506092.jpeg" h="135px" />
+				<FolderCard urlImage="https://images.pexels.com/photos/32506092/pexels-photo-32506092.jpeg" />
 			</Grid.Col>
 			<Grid.Col
-				span={6}
+				span={cols}
+				style={{
+					aspectRatio : "1/1",
+				}}
 			>
-				<FolderCard urlImage="https://images.pexels.com/photos/27054239/pexels-photo-27054239.jpeg" h="135px" />
+				<FolderCard urlImage="https://images.pexels.com/photos/27054239/pexels-photo-27054239.jpeg" />
 			</Grid.Col>
 			<Grid.Col
-				span={6}
+				span={cols}
+				style={{
+					aspectRatio : "1/1",
+				}}
 			>
-				<FolderCard h="135px" />
+				<FolderCard />
 			</Grid.Col>
 		</Grid>
 	);
