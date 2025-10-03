@@ -10,8 +10,8 @@ const PhotoCard = ({
 			w="100%"
 			h={h ?? "100%"}
 			style={{
-				backgroundImage    : `url(${urlImage})`,
-				// background         : "#f6f6f6",
+				// backgroundImage    : `url(${urlImage})`,
+				background         : "#f6f6f6",
 				backgroundSize     : "cover",
 				backgroundPosition : "center",
 				backgroundRepeat   : "no-repeat",

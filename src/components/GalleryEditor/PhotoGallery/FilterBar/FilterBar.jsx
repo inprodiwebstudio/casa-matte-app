@@ -6,7 +6,7 @@ import SelectorGrid             from "./SelectorGrid";
 const FilterBar = () => {
 	return (
 		<Group
-			spacing="31px"
+			spacing="28px"
 			mt="12px"
 		>
 			<Stack
