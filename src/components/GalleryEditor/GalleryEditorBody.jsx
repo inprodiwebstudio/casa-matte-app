@@ -20,6 +20,10 @@ const GalleryEditorBody = () => {
 
 	const handlerSizeSidebar = isFullSizeSideBar ? "60vw" : "100%";
 
+	const handlerClickInGallery = (e) => {
+		e.stopPropagation();
+	};
+
 	return (
 		<GalleryTypeView>
 			<Flex
@@ -30,6 +34,7 @@ const GalleryEditorBody = () => {
 					right      : "0",
 					transition : "all ease 200ms",
 				}}
+				onClick={handlerClickInGallery}
 			>
 				<ExpandButton />
 				<Card

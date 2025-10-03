@@ -2,12 +2,12 @@ import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { useEffect, useState }                    from "react";
 
 //Own component;
-import { PostingConfig }             from "Notifications";
-import { genericApi }                from "store/api/genericApi";
-import { workSpaceSlice, authSlice } from "store/Slices";
+import { PostingConfig }                           from "Notifications";
+import { genericApi }                              from "store/api/genericApi";
+import { workSpaceSlice, authSlice, gallerySlice } from "store/Slices";
 import "./AppShell.scss";
-import { useParams }                 from "react-router";
-import { isValidArray }              from "helpers";
+import { useParams }                               from "react-router";
+import { isValidArray }                            from "helpers";
 
 const AppShell = ({
 	Body,
@@ -25,6 +25,7 @@ const AppShell = ({
 	// const isSelectedPage = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice?.data, shallowEqual);
 	const galleryData = useSelector((state) => state.gallerySlice?.data, shallowEqual);
+	const galleryIsFullSizeSideBar = useSelector((state) => state.gallerySlice?.isFullSizeSideBar, shallowEqual);
 	const initialData = useSelector((state) => state.workSpaceSlice?.initialData, shallowEqual);
 
 
@@ -53,6 +54,12 @@ const AppShell = ({
 			id     : postId,
 			method : "POST",
 		});
+	};
+
+	const handlerCloseFullSizeGallery = () => {
+		if (galleryIsFullSizeSideBar) {
+			dispatch(gallerySlice.actions.toggleFullSizeSideBar());
+		}
 	};
 
 	useEffect(() => {
@@ -148,6 +155,7 @@ const AppShell = ({
 	return (
 		<div
 			id="AppShell"
+			onClick={handlerCloseFullSizeGallery}
 		>
 			<div className="bodyContainer">
 				<Body />
