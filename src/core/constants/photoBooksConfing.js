@@ -1,8 +1,8 @@
 
 //LayoutsMods
 import VerticalLarge            from "components/ModelsOfLayouts/VerticalLarge";
+import VerticalMedium           from "components/ModelsOfLayouts/VerticalMedium";
 import SquareLarge              from "components/MyModsLayouts/SquareLarge";
-import VerticalMedium           from "components/MyModsLayouts/VerticalMedium";
 import VerticalMediumSencillo   from "components/MyModsLayouts/Sencillo/VerticalMedium";
 import VerticalLargeSencillo    from "components/MyModsLayouts/Sencillo/VerticalLarge";
 import VerticalMediumPremium    from "components/MyModsLayouts/Premium/VerticalMedium";
