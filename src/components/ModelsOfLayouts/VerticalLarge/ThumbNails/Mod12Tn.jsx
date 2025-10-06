@@ -1,8 +1,8 @@
-import { Stack, Flex } from "@mantine/core";
+import { Flex, Stack }  from "@mantine/core";
+import ImgLayoutPreview from "components/LayoutHandler/ImgLayoutPreview";
 //Own components
-import ImgLayout from "components/LayoutHandler/ImgLayout";
 
-const Mod12 = ({sheetNo}) => {
+const Mod12Tn = ({photos}) => {
 	return (
 		<Stack
 			w="100%"
@@ -17,22 +17,19 @@ const Mod12 = ({sheetNo}) => {
 			>
 				<Flex w="100%" h="50%" gap="0.1em">
 					<Stack w="50%" h="100%">
-						<ImgLayout
-							sheetNo={sheetNo}
-							imageNo={0}
+						<ImgLayoutPreview
+							imageData={photos?.[0] ?? {}}
 						/>
 					</Stack>
 					<Stack w="50%" h="100%">
-						<ImgLayout
-							sheetNo={sheetNo}
-							imageNo={1}
+						<ImgLayoutPreview
+							imageData={photos?.[1] ?? {}}
 						/>
 					</Stack>
 				</Flex>
 				<Flex w="100%" h="50%">
-					<ImgLayout
-						sheetNo={sheetNo}
-						imageNo={2}
+					<ImgLayoutPreview
+						imageData={photos?.[2] ?? {}}
 					/>
 				</Flex>
 			</Stack>
@@ -40,4 +37,4 @@ const Mod12 = ({sheetNo}) => {
 	);
 };
 
-export default Mod12;
+export default Mod12Tn;
