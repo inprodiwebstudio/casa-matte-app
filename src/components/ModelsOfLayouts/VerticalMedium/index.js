@@ -8,6 +8,22 @@ import Mod7  from "./Mod7";
 import Mod8  from "./Mod8";
 import Mod9  from "./Mod9";
 import Mod10 from "./Mod10";
+import Mod11 from "./Mod11";
+import Mod12 from "./Mod12";
+import Mod13 from "./Mod13";
+import Mod14 from "./Mod14";
+import Mod15 from "./Mod15";
+import Mod16 from "./Mod16";
+import Mod17 from "./Mod17";
+import Mod18 from "./Mod18";
+import Mod19 from "./Mod19";
+import Mod20 from "./Mod20";
+import Mod21 from "./Mod21";
+import Mod22 from "./Mod22";
+import Mod23 from "./Mod23";
+import Mod24 from "./Mod24";
+import Mod25 from "./Mod25";
+import Mod26 from "./Mod26";
 
 //Own Components
 // import ModTextLayout from "components/global/ModTextLayout";
@@ -23,7 +39,22 @@ import Mod7Tn  from "./ThumbNails/Mod7Tn";
 import Mod8Tn  from "./ThumbNails/Mod8Tn";
 import Mod9Tn  from "./ThumbNails/Mod9Tn";
 import Mod10Tn from "./ThumbNails/Mod10Tn";
-
+import Mod11Tn from "./ThumbNails/Mod11Tn";
+import Mod12Tn from "./ThumbNails/Mod12Tn";
+import Mod13Tn from "./ThumbNails/Mod13Tn";
+import Mod14Tn from "./ThumbNails/Mod14Tn";
+import Mod15Tn from "./ThumbNails/Mod15Tn";
+import Mod16Tn from "./ThumbNails/Mod16Tn";
+import Mod17Tn from "./ThumbNails/Mod17Tn";
+import Mod18Tn from "./ThumbNails/Mod18Tn";
+import Mod19Tn from "./ThumbNails/Mod19Tn";
+import Mod20Tn from "./ThumbNails/Mod20Tn";
+import Mod21Tn from "./ThumbNails/Mod21Tn";
+import Mod22Tn from "./ThumbNails/Mod22Tn";
+import Mod23Tn from "./ThumbNails/Mod23Tn";
+import Mod24Tn from "./ThumbNails/Mod24Tn";
+import Mod25Tn from "./ThumbNails/Mod25Tn";
+import Mod26Tn from "./ThumbNails/Mod26Tn";
 
 const VerticalMedium = {
 	Mod1 : {
@@ -95,6 +126,118 @@ const VerticalMedium = {
 		numberPhotos    : 2,
 		cat             : "fotos",
 		layoutThumbNail : Mod10Tn,
+	},
+	Mod11 : {
+		id              : "Mod11",
+		layout          : Mod11,
+		numberPhotos    : 2,
+		cat             : "fotos",
+		layoutThumbNail : Mod11Tn,
+	},
+	Mod12 : {
+		id              : "Mod12",
+		layout          : Mod12,
+		numberPhotos    : 3,
+		cat             : "fotos",
+		layoutThumbNail : Mod12Tn,
+	},
+	Mod13 : {
+		id              : "Mod13",
+		layout          : Mod13,
+		numberPhotos    : 3,
+		cat             : "fotos",
+		layoutThumbNail : Mod13Tn,
+	},
+	Mod14 : {
+		id              : "Mod14",
+		layout          : Mod14,
+		numberPhotos    : 3,
+		cat             : "fotos",
+		layoutThumbNail : Mod14Tn,
+	},
+	Mod15 : {
+		id              : "Mod15",
+		layout          : Mod15,
+		numberPhotos    : 3,
+		cat             : "fotos",
+		layoutThumbNail : Mod15Tn,
+	},
+	Mod16 : {
+		id              : "Mod16",
+		layout          : Mod16,
+		numberPhotos    : 3,
+		cat             : "fotos",
+		layoutThumbNail : Mod16Tn,
+	},
+	Mod17 : {
+		id              : "Mod17",
+		layout          : Mod17,
+		numberPhotos    : 3,
+		cat             : "fotos",
+		layoutThumbNail : Mod17Tn,
+	},
+	Mod18 : {
+		id              : "Mod18",
+		layout          : Mod18,
+		numberPhotos    : 3,
+		cat             : "fotos",
+		layoutThumbNail : Mod18Tn,
+	},
+	Mod19 : {
+		id              : "Mod19",
+		layout          : Mod19,
+		numberPhotos    : 3,
+		cat             : "fotos",
+		layoutThumbNail : Mod19Tn,
+	},
+	Mod20 : {
+		id              : "Mod20",
+		layout          : Mod20,
+		numberPhotos    : 3,
+		cat             : "fotos",
+		layoutThumbNail : Mod20Tn,
+	},
+	Mod21 : {
+		id              : "Mod21",
+		layout          : Mod21,
+		numberPhotos    : 4,
+		cat             : "fotos",
+		layoutThumbNail : Mod21Tn,
+	},
+	Mod22 : {
+		id              : "Mod22",
+		layout          : Mod22,
+		numberPhotos    : 4,
+		cat             : "fotos",
+		layoutThumbNail : Mod22Tn,
+	},
+	Mod23 : {
+		id              : "Mod23",
+		layout          : Mod23,
+		numberPhotos    : 4,
+		cat             : "fotos",
+		layoutThumbNail : Mod23Tn,
+	},
+	Mod24 : {
+		id              : "Mod24",
+		layout          : Mod24,
+		numberPhotos    : 4,
+		cat             : "fotos",
+		layoutThumbNail : Mod24Tn,
+	},
+	Mod25 : {
+		id              : "Mod25",
+		layout          : Mod25,
+		numberPhotos    : 4,
+		cat             : "fotos",
+		layoutThumbNail : Mod25Tn,
+	},
+	Mod26 : {
+		id              : "Mod26",
+		layout          : Mod26,
+		numberPhotos    : 4,
+		cat             : "fotos",
+		layoutThumbNail : Mod26Tn,
 	},
 };
 
