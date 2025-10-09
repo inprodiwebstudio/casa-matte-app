@@ -2,9 +2,13 @@
 
 .body-confirmation-modal {
     padding: 50px;
+    padding-bottom: 25px !important;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 30px !important;
+    position: relative;
 
     .tittle-confirmation {
         font-size: 27px;

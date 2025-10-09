@@ -38,9 +38,8 @@ const modalsConfig = {
 	overlayOpacity      : 0.35,
 	closeOnClickOutside : true,
 	withCloseButton     : false,
-	radius              : "xs",
+	radius              : "xl",
 	size                : "50vw",
-	padding             : "0px",
 };
 
 export { modals, modalsConfig };

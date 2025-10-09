@@ -35,8 +35,8 @@ import "./DropDoc.scss";
 import { showNotification, cleanNotifications } from "@mantine/notifications";
 import { closeAllModals, openContextModal }     from "@mantine/modals";
 import { useParams }                            from "react-router";
-import { IconContext } from "react-icons";
-import { FaMobile, FaLaptop } from "react-icons/fa";
+import { IconContext }                          from "react-icons";
+import { FaMobile, FaLaptop }                   from "react-icons/fa";
 
 const DropDoc = ({
 	userName,
@@ -275,7 +275,7 @@ const DropDoc = ({
 
 	const handlerOnclickPhotosMovil = () => {
 		openContextModal({
-			modal      : "qrGeneratorPhotos",
+			modal : "qrGeneratorPhotos",
 		});
 		dispatch(gallerySlice.actions.setTypeDropedView(null));
 	};
@@ -294,7 +294,7 @@ const DropDoc = ({
 						<Card
 							isButton
 							image={
-								<IconContext.Provider value={{ size: "50px" }}>
+								<IconContext.Provider value={{ size : "50px" }}>
 									<div>
 										<FaLaptop />
 									</div>
@@ -306,7 +306,7 @@ const DropDoc = ({
 						<Card
 							isButton
 							image={
-								<IconContext.Provider value={{ size: "50px" }}>
+								<IconContext.Provider value={{ size : "50px" }}>
 									<div>
 										<FaMobile />
 									</div>

@@ -11,7 +11,8 @@ import { gallerySlice } from "store/Slices";
 
 
 //Own components
-import CardButton from "./CardButton";
+import CardButton           from "./CardButton";
+import { openContextModal } from "@mantine/modals";
 
 const DropPhotos = () => {
 	const [typeActiveCard, setTypeActiveCard] = useState(null);
@@ -20,6 +21,14 @@ const DropPhotos = () => {
 
 	const onClickClose = () => {
 		dispatch(gallerySlice.actions.setTypeDropedView(null));
+	};
+
+	const onSelectPhone = () => {
+		setTypeActiveCard("phone");
+		openContextModal({
+			modal      : "qrGeneratorPhotos",
+			innerProps : {},
+		});
 	};
 
 
@@ -69,7 +78,7 @@ const DropPhotos = () => {
 				spacing="30px"
 			>
 				<CardButton
-					action={() => setTypeActiveCard("phone")}
+					action={() => onSelectPhone()}
 					label="Celular"
 					icon={<HiOutlineDevicePhoneMobile size={30} />}
 					isActive={typeActiveCard === "phone"}
