@@ -13,13 +13,15 @@ import { gallerySlice } from "store/Slices";
 //Own components
 import CardButton           from "./CardButton";
 import { openContextModal } from "@mantine/modals";
+import { useDropzone }      from "react-dropzone/.";
 
 const DropPhotos = () => {
 	const [typeActiveCard, setTypeActiveCard] = useState(null);
 
 	const dispatch = useDispatch();
 
-	const onClickClose = () => {
+	const onClickClose = (e) => {
+		e.stopPropagation();
 		dispatch(gallerySlice.actions.setTypeDropedView(null));
 	};
 
@@ -30,6 +32,20 @@ const DropPhotos = () => {
 			innerProps : {},
 		});
 	};
+
+	const handlerDropPhotos = (files) => {
+		dispatch(gallerySlice.actions.setFilesDrop(files));
+		dispatch(gallerySlice.actions.setTypeDropedView(null));
+	};
+
+
+	const { getInputProps, getRootProps } = useDropzone({
+		multiple : true,
+		onDrop   : (files) => handlerDropPhotos(files),
+		accept   : {
+			"image/*" : [],
+		},
+	});
 
 
 	return (
@@ -45,6 +61,7 @@ const DropPhotos = () => {
 			p="50px"
 			align="center"
 			spacing="40px"
+			{...getRootProps({className : "indicator-drop-container"})}
 		>
 			 <CloseButton
 				radius={"50%"}
@@ -56,7 +73,7 @@ const DropPhotos = () => {
 					top      : "-8px",
 					right    : "-1px",
 				}}
-				onClick={onClickClose}
+				onClick={(e) => onClickClose(e)}
 			/>
 			<Text
 				size="10px"
@@ -82,6 +99,7 @@ const DropPhotos = () => {
 					label="Celular"
 					icon={<HiOutlineDevicePhoneMobile size={30} />}
 					isActive={typeActiveCard === "phone"}
+					stopPropagation
 				/>
 				<CardButton
 					action={() => setTypeActiveCard("computer")}
@@ -94,6 +112,7 @@ const DropPhotos = () => {
 					label="Mis Galerías"
 					icon={<MdOutlinePhotoLibrary size={30} />}
 					isActive={typeActiveCard === "gallery"}
+					stopPropagation
 				/>
 			</Stack>
 			<Button
@@ -118,6 +137,7 @@ const DropPhotos = () => {
 					Done
 				</Text>
 			</Button>
+			<input {...getInputProps()} />
 		</Stack>
 	);
 };

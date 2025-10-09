@@ -5,7 +5,12 @@ const CardButton = ({
 	icon,
 	label,
 	isActive = false,
+	stopPropagation = false,
 }) => {
+	const handlerAction = (e) => {
+		if (stopPropagation) e.stopPropagation();
+		action();
+	};
 	return (
 		<Card
 			shadow="sm"
@@ -19,7 +24,7 @@ const CardButton = ({
 				color      : isActive && "white",
 				transition : "all ease 200ms",
 			}}
-			onClick={action}
+			onClick={handlerAction}
 			p={0}
 		>
 			<Center

@@ -12,6 +12,8 @@ const initialState = {
 		label : "FECHA DE CAPTURA",
 		value : "CAPTURE_DATE",
 	},
+	filesDrop         : [],
+	photosUploaded    : [],
 	typeDropedView    : null,
 	data              : null,
 	isFullSizeSideBar : false,
@@ -49,6 +51,9 @@ export const gallerySlice = createSlice({
 			const myNewGalleryData = convertToObject(handlerGallerySorted());
 			// state.data = newDataList;
 			state.data = myNewGalleryData;
+		},
+		setFilesDrop : (state, {payload}) => {
+			state.filesDrop = payload;
 		},
 		getGalleryData : (state, {payload}) => {
 			const gallletyDataInsert = convertToObject(payload);
