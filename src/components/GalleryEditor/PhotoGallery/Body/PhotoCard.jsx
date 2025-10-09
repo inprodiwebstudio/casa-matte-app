@@ -1,24 +1,43 @@
-import { Stack } from "@mantine/core";
-import React     from "react";
+import { Stack }               from "@mantine/core";
+import { MoonLoader }          from "react-spinners";
+import { useEffect, useState } from "react";
+import { resizerImage }        from "helpers";
 
 const PhotoCard = ({
 	h,
 	urlImage,
 }) => {
+	const [loadingPhoto, setLoadingPhoto] = useState(true);
+	const [ myImageUrl, setMyImageUrl ] = useState(undefined);
+	const loadImage = () => {
+		const img = new Image();
+		img.src = resizerImage(urlImage);
+		img.addEventListener("load", setLoadingPhoto(false));
+		setMyImageUrl(img.src);
+	};
+
+	useEffect(() => {
+		if (urlImage) loadImage();
+	}, [urlImage]);
+
 	return (
 		<Stack
 			w="100%"
 			h={h ?? "100%"}
 			style={{
-				// backgroundImage    : `url(${urlImage})`,
-				background         : "#f6f6f6",
+				...((!loadingPhoto || myImageUrl) && {backgroundImage : `url(${myImageUrl})`}),
+				...(!myImageUrl && {background : "#f6f6f6"}),
 				backgroundSize     : "cover",
 				backgroundPosition : "center",
 				backgroundRepeat   : "no-repeat",
 				userSelect         : "none",
 			}}
+			align="center"
+			justify="center"
 		>
-            &nbsp;
+			{
+				loadingPhoto && <MoonLoader size={18} />
+			}
 		</Stack>
 	);
 };

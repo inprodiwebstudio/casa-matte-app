@@ -57,6 +57,14 @@ const GridPhotos = ({
 			>
 				<PhotoCard />
 			</Grid.Col>
+			<Grid.Col
+				span={cols}
+				style={{
+					aspectRatio : "1/1",
+				}}
+			>
+				<PhotoCard />
+			</Grid.Col>
 		</Grid>
 	);
 };

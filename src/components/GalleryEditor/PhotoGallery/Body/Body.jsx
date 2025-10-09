@@ -1,7 +1,7 @@
-import { Stack }      from "@mantine/core";
-import GridPhotos     from "./GridPhotos";
-import GridFolder     from "./GridFolder";
-import { useContext } from "react";
+import { Stack, ScrollArea } from "@mantine/core";
+import GridPhotos            from "./GridPhotos";
+import GridFolder            from "./GridFolder";
+import { useContext }        from "react";
 
 //Contexts
 import {galleryTypeViewContext}      from "contexts/galleryTypeView";
@@ -23,14 +23,18 @@ const Body = () => {
 	};
 
 	return (
-		<Stack
-			w="100%"
-			h="100%"
-			align="center"
+		<ScrollArea
+			h="410px"
 		>
-			{gridType === "photos" && <GridPhotos cols={colsQuantity()} />}
-			{gridType === "folders" && <GridFolder cols={colsQuantity()} />}
-		</Stack>
+			<Stack
+				w="100%"
+				h="100%"
+				align="center"
+			>
+				{gridType === "photos" && <GridPhotos cols={colsQuantity()} />}
+				{gridType === "folders" && <GridFolder cols={colsQuantity()} />}
+			</Stack>
+		</ScrollArea>
 	);
 };
 
