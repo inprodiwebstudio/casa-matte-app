@@ -5,8 +5,19 @@ import { GoPlus }          from "react-icons/go";
 import { FaRegFolderOpen } from "react-icons/fa";
 import { BsStars }         from "react-icons/bs";
 
+//Slices
+import { gallerySlice } from "store/Slices";
+
+//Redux
+import { useDispatch } from "react-redux";
 
 const ActionsGroup = ({...rest}) => {
+	const dispatch = useDispatch();
+
+	const onClickAddPhotos = () => {
+		dispatch(gallerySlice.actions.setTypeDropedView("photos"));
+	};
+
 	return (
 		<Group
 			{...rest}
@@ -20,6 +31,7 @@ const ActionsGroup = ({...rest}) => {
 				icon={
 					<GoPlus size={13} />
 				}
+				onClick={() => onClickAddPhotos()}
 			/>
 			<CardAction
 				withBorder

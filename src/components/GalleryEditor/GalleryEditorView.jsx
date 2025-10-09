@@ -3,8 +3,15 @@ import TitleInpt    from "./TitleInpt";
 import ActionsGroup from "./ActionsGrouop";
 import PhotoGallery from "./PhotoGallery";
 
+import DropPhotos from "./DropPhotos";
+
+//Redux
+import { shallowEqual, useSelector } from "react-redux";
+
 
 const GalleryEditorView = () => {
+	const typeDropedView = useSelector((state) => state.gallerySlice.typeDropedView, shallowEqual);
+
 	return (
 		<Stack
 			spacing={10}
@@ -15,15 +22,24 @@ const GalleryEditorView = () => {
 				w="290px"
 				spacing="10px"
 			/>
-			<Stack
-				style={{
-					flex : 1,
-				}}
-				p={0}
-				mt="10px"
-			>
-				<PhotoGallery />
-			</Stack>
+			{
+				(!typeDropedView) && (
+					<Stack
+						style={{
+							flex : 1,
+						}}
+						p={0}
+						mt="10px"
+					>
+						<PhotoGallery />
+					</Stack>
+				)
+			}
+			{
+				(typeDropedView === "photos") && (
+					<DropPhotos />
+				)
+			}
 		</Stack>
 	);
 };
