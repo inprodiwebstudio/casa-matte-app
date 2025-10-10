@@ -1,5 +1,5 @@
-import { Grid }  from "@mantine/core";
-import PhotoCard from "../PhotoCard";
+import { Grid, ScrollArea } from "@mantine/core";
+import PhotoCard            from "../PhotoCard";
 
 const GridPhotos = ({
 	cols = 6,
@@ -7,22 +7,30 @@ const GridPhotos = ({
 }) => {
 	const listOfPhotos = photos ?? [];
 	return (
-		<Grid
+		<ScrollArea
 			w="100%"
-			gutter="3"
+			h="100%"
 		>
-			{listOfPhotos.map((item, index) => (
-				<Grid.Col
-					key={index}
-					span={cols}
-					style={{
-						aspectRatio : "1/1",
-					}}
-				>
-					<PhotoCard urlImage={item?.urlThumbnail} />
-				</Grid.Col>
-			))}
-		</Grid>
+			<Grid
+				w="100%"
+				gutter="3"
+				style={{
+					maxHeight : "100px",
+				}}
+			>
+				{listOfPhotos.map((item, index) => (
+					<Grid.Col
+						key={index}
+						span={cols}
+						style={{
+							aspectRatio : "1/1",
+						}}
+					>
+						<PhotoCard urlImage={item?.urlThumbnail} />
+					</Grid.Col>
+				))}
+			</Grid>
+		</ScrollArea>
 	);
 };
 

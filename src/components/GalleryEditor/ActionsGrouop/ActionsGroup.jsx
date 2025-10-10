@@ -16,6 +16,12 @@ const ActionsGroup = ({...rest}) => {
 
 	const onClickAddPhotos = () => {
 		dispatch(gallerySlice.actions.setTypeDropedView("photos"));
+		dispatch(gallerySlice.actions.setTypeViewList("photos"));
+	};
+
+	const onClickAddFolder = () => {
+		dispatch(gallerySlice.actions.setTypeDropedView("folders"));
+		dispatch(gallerySlice.actions.setTypeViewList("folders"));
 	};
 
 	return (
@@ -41,6 +47,7 @@ const ActionsGroup = ({...rest}) => {
 				icon={
 					<FaRegFolderOpen size={12} />
 				}
+				onClick={() => onClickAddFolder()}
 			/>
 			<CardAction
 				withBorder

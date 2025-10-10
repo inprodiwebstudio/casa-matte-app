@@ -1,81 +1,82 @@
-import { Center, Grid }              from "@mantine/core";
-import CardAction                    from "components/GalleryEditor/CradAction";
-import FolderCard                    from "../FolderCard";
-import { GoPlus }                    from "react-icons/go";
-import { shallowEqual, useSelector } from "react-redux";
+import { Center, Grid, Stack, ScrollArea } from "@mantine/core";
+import CardAction                          from "components/GalleryEditor/CradAction";
+import { GoPlus }                          from "react-icons/go";
+import { shallowEqual, useSelector }       from "react-redux";
+import FolderCard                          from "../FolderCard";
+import { isValidArray }                    from "helpers";
 
-const GridCard = ({
+const GridFolder = ({
 	cols = 6,
+	folders,
 }) => {
+	const listOfFolders = folders ?? [];
 	const isMoreCols = useSelector((state) => state.gallerySlice.moreCols, shallowEqual);
 
+	const isAvailableFolders = isValidArray(listOfFolders);
+
 	const handlerSize = isMoreCols ? "80px" : "125px";
-	return (
-		<Grid
-			w="100%"
-			gutter="3"
-		>
-			<Grid.Col
-				span={cols}
+
+	if (!isAvailableFolders) {
+		return (
+			<Stack
+				w="100%"
+				h="100%"
 			>
-				<Center
+				<CardAction
+					withBorder
+					label="Agregar carpeta nueva"
 					w="100%"
 					h="100%"
+					icon={
+						<GoPlus size={13} />
+					}
+				/>
+			</Stack>
+		);
+	}
+
+	return (
+		<ScrollArea
+			w="100%"
+			h="100%"
+		>
+			<Grid
+				w="100%"
+				gutter="3"
+			>
+				<Grid.Col
+					span={cols}
 				>
-					<CardAction
-						withBorder
-						label="Agregar carpeta nueva"
-						h={handlerSize}
-						w={handlerSize}
-						zoomContent={isMoreCols && 0.8}
-						icon={
-							<GoPlus size={13} />
-						}
-					/>
-				</Center>
-			</Grid.Col>
-			<Grid.Col
-				span={cols}
-				style={{
-					aspectRatio : "1/1",
-				}}
-			>
-				<FolderCard urlImage="https://images.pexels.com/photos/25390327/pexels-photo-25390327.jpeg" />
-			</Grid.Col>
-			<Grid.Col
-				span={cols}
-				style={{
-					aspectRatio : "1/1",
-				}}
-			>
-				<FolderCard urlImage="https://images.pexels.com/photos/32005277/pexels-photo-32005277.jpeg" />
-			</Grid.Col>
-			<Grid.Col
-				span={cols}
-				style={{
-					aspectRatio : "1/1",
-				}}
-			>
-				<FolderCard urlImage="https://images.pexels.com/photos/32506092/pexels-photo-32506092.jpeg" />
-			</Grid.Col>
-			<Grid.Col
-				span={cols}
-				style={{
-					aspectRatio : "1/1",
-				}}
-			>
-				<FolderCard urlImage="https://images.pexels.com/photos/27054239/pexels-photo-27054239.jpeg" />
-			</Grid.Col>
-			<Grid.Col
-				span={cols}
-				style={{
-					aspectRatio : "1/1",
-				}}
-			>
-				<FolderCard />
-			</Grid.Col>
-		</Grid>
+					<Center
+						w="100%"
+						h="100%"
+					>
+						<CardAction
+							withBorder
+							label="Agregar carpeta nueva"
+							h={handlerSize}
+							w={handlerSize}
+							zoomContent={isMoreCols && 0.8}
+							icon={
+								<GoPlus size={13} />
+							}
+						/>
+					</Center>
+				</Grid.Col>
+				{listOfFolders.map((item, index) => (
+					<Grid.Col
+						key={index}
+						span={cols}
+						style={{
+							aspectRatio : "1/1",
+						}}
+					>
+						<FolderCard urlImage="https://images.pexels.com/photos/25390327/pexels-photo-25390327.jpeg" />
+					</Grid.Col>
+				))}
+			</Grid>
+		</ScrollArea>
 	);
 };
 
-export default GridCard;
+export default GridFolder;

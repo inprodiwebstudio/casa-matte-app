@@ -87,7 +87,7 @@ const GalleryEditorView = () => {
 				spacing="10px"
 			/>
 			{
-				(!typeDropedView) && (
+				(typeDropedView !== "photos") && (
 					<Stack
 						style={{
 							flex : 1,

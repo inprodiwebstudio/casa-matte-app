@@ -1,4 +1,4 @@
-import { Stack, ScrollArea }   from "@mantine/core";
+import { Stack }               from "@mantine/core";
 import GridPhotos              from "./GridPhotos";
 import GridFolder              from "./GridFolder";
 import { useState, useEffect } from "react";
@@ -50,18 +50,17 @@ const Body = () => {
 	}, [galleryData]);
 
 	return (
-		<ScrollArea
-			h="410px"
+		<Stack
+			w="100%"
+			align="center"
+			style={{
+				overflow : "hidden",
+				flexGrow : 1,
+			}}
 		>
-			<Stack
-				w="100%"
-				h="100%"
-				align="center"
-			>
-				{typeViewList === "photos" && <GridPhotos photos={listOfPhotos} cols={colsQuantity()} />}
-				{typeViewList === "folders" && <GridFolder folders={listOfFolders} cols={colsQuantity()} />}
-			</Stack>
-		</ScrollArea>
+			{typeViewList === "photos" && <GridPhotos photos={listOfPhotos} cols={colsQuantity()} />}
+			{typeViewList === "folders" && <GridFolder folders={listOfFolders} cols={colsQuantity()} />}
+		</Stack>
 	);
 };
 
