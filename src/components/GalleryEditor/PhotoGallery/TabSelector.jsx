@@ -1,15 +1,18 @@
-import { Box, Center, Group, Text } from "@mantine/core";
-import {  useContext }              from "react";
+import { Box, Center, Group, Text }               from "@mantine/core";
+import { shallowEqual, useSelector, useDispatch } from "react-redux";
 
-//Contexts
-import {galleryTypeViewContext} from "contexts/galleryTypeView";
+//Slices
+import { gallerySlice } from "store/Slices";
 
 const TabSelector = () => {
-	const {gridType, setGridType} = useContext(galleryTypeViewContext);
+	const dispatch = useDispatch();
+
+	const typeListGallery = useSelector((state) => state.gallerySlice.typeViewList, shallowEqual);
 
 	const onChangeTab = (tabKey) => {
-		setGridType(tabKey);
+		dispatch(gallerySlice.actions.setTypeViewList(tabKey));
 	};
+
 	return (
 		<Group
 			style={{
@@ -27,7 +30,7 @@ const TabSelector = () => {
 				h="100%"
 				style={{
 					borderRadius : "8px",
-					background   : gridType === "photos" && "#58595b",
+					background   : typeListGallery === "photos" && "#58595b",
 					transition   : "all ease 200ms",
 				}}
 				onClick={() => onChangeTab("photos")}
@@ -38,7 +41,7 @@ const TabSelector = () => {
 				>
 					<Text
 						size="12px"
-						color={(gridType === "photos") ? "white" : "black"}
+						color={(typeListGallery === "photos") ? "white" : "black"}
 						weight={500}
 						style={{
 							fontFamily    : "Helvetica",
@@ -54,7 +57,7 @@ const TabSelector = () => {
 				w="50%"
 				h="100%"
 				style={{
-					background   : gridType === "folders" && "#58595b",
+					background   : typeListGallery === "folders" && "#58595b",
 					borderRadius : "8px",
 					transition   : "all ease 200ms",
 				}}
@@ -66,7 +69,7 @@ const TabSelector = () => {
 				>
 					<Text
 						size="12px"
-						color={(gridType === "folders") ? "white" : "black"}
+						color={(typeListGallery === "folders") ? "white" : "black"}
 						weight={500}
 						style={{
 							fontFamily    : "Helvetica",

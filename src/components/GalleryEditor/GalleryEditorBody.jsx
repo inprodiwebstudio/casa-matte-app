@@ -1,9 +1,8 @@
 
 //Mantine Components
-import { Card, Flex }      from "@mantine/core";
-import { GalleryTypeView } from "contexts/galleryTypeView";
-import ExpandButton        from "./ExpandButton";
-import GetDataGallery      from "./GetDataGallery";
+import { Card, Flex } from "@mantine/core";
+import ExpandButton   from "./ExpandButton";
+import GetDataGallery from "./GetDataGallery";
 
 //Redux
 import { shallowEqual, useSelector } from "react-redux";
@@ -23,34 +22,32 @@ const GalleryEditorBody = () => {
 	};
 
 	return (
-		<GalleryTypeView>
-			<Flex
-				h="100%"
-				w={handlerSizeSidebar}
-				style={{
-					position   : "absolute",
-					right      : "0",
-					transition : "all ease 200ms",
-				}}
-				onClick={handlerClickInGallery}
+		<Flex
+			h="100%"
+			w={handlerSizeSidebar}
+			style={{
+				position   : "absolute",
+				right      : "0",
+				transition : "all ease 200ms",
+			}}
+			onClick={handlerClickInGallery}
+		>
+			<ExpandButton />
+			<Card
+				h="98%"
+				w="100%"
+				radius="15px"
+				withBorder
+				shadow="xl"
+				p={25}
+				pl={30}
+				pr={17}
+				pb={12}
+				className={classes.galleryBodyCard}
 			>
-				<ExpandButton />
-				<Card
-					h="98%"
-					w="100%"
-					radius="15px"
-					withBorder
-					shadow="xl"
-					p={25}
-					pl={30}
-					pr={17}
-					pb={12}
-					className={classes.galleryBodyCard}
-				>
-					<GetDataGallery />
-				</Card>
-			</Flex>
-		</GalleryTypeView>
+				<GetDataGallery />
+			</Card>
+		</Flex>
 	);
 };
 
