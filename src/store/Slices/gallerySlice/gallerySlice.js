@@ -95,11 +95,7 @@ export const gallerySlice = createSlice({
 			state.selectedData = newData;
 		},
 		setTypeDropedView : (state, {payload}) => {
-			if (payload === state.typeDropedView) {
-				state.typeDropedView = null;
-			} else {
-				state.typeDropedView = payload;
-			}
+			state.typeDropedView = payload;
 		},
 		setGalleryPath : (state, {payload}) => {
 			state.galleryPathName = payload;

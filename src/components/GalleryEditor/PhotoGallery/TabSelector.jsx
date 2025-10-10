@@ -11,6 +11,7 @@ const TabSelector = () => {
 
 	const onChangeTab = (tabKey) => {
 		dispatch(gallerySlice.actions.setTypeViewList(tabKey));
+		dispatch(gallerySlice.actions.setTypeDropedView(null));
 	};
 
 	return (
