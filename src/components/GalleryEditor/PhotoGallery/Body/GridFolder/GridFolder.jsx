@@ -1,14 +1,16 @@
-import { Center, Grid, Stack, ScrollArea } from "@mantine/core";
-import CardAction                          from "components/GalleryEditor/CradAction";
-import { GoPlus }                          from "react-icons/go";
-import { shallowEqual, useSelector }       from "react-redux";
-import FolderCard                          from "../FolderCard";
-import { isValidArray }                    from "helpers";
+import { Center, Grid, Stack, ScrollArea }        from "@mantine/core";
+import CardAction                                 from "components/GalleryEditor/CradAction";
+import { GoPlus }                                 from "react-icons/go";
+import { shallowEqual, useSelector, useDispatch } from "react-redux";
+import FolderCard                                 from "../FolderCard";
+import { isValidArray }                           from "helpers";
+import { gallerySlice }                           from "store/Slices";
 
 const GridFolder = ({
 	cols = 6,
 	folders,
 }) => {
+	const dispatch = useDispatch();
 	const listOfFolders = folders ?? [];
 	const isMoreCols = useSelector((state) => state.gallerySlice.moreCols, shallowEqual);
 
@@ -16,11 +18,16 @@ const GridFolder = ({
 
 	const handlerSize = isMoreCols ? "80px" : "125px";
 
+	const onClickAddNewFolder = () => {
+		dispatch(gallerySlice.actions.setTypeDropedView("folders"));
+	};
+
 	if (!isAvailableFolders) {
 		return (
 			<Stack
 				w="100%"
 				h="100%"
+				onClick={() => onClickAddNewFolder()}
 			>
 				<CardAction
 					withBorder

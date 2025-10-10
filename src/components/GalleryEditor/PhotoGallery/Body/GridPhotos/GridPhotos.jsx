@@ -1,11 +1,18 @@
 import { Grid, ScrollArea } from "@mantine/core";
 import PhotoCard            from "../PhotoCard";
+import NotAvailablePhotos   from "./NotAvailablePhotos";
+import { isValidArray }     from "helpers";
 
 const GridPhotos = ({
 	cols = 6,
 	photos,
 }) => {
 	const listOfPhotos = photos ?? [];
+	if (!isValidArray) {
+		return (
+			<NotAvailablePhotos />
+		);
+	}
 	return (
 		<ScrollArea
 			w="100%"
