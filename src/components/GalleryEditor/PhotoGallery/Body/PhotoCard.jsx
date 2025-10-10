@@ -25,12 +25,10 @@ const PhotoCard = ({
 			w="100%"
 			h={h ?? "100%"}
 			style={{
-				...((!loadingPhoto || myImageUrl) && {backgroundImage : `url(${myImageUrl})`}),
-				...(!myImageUrl && {background : "#f6f6f6"}),
-				backgroundSize     : "cover",
-				backgroundPosition : "center",
-				backgroundRepeat   : "no-repeat",
-				userSelect         : "none",
+				...((!loadingPhoto) && {background : "url(\"" + myImageUrl + "\") center center / cover no-repeat"}),
+				...(loadingPhoto && {background : "#f6f6f6"}),
+				userSelect : "none",
+				cursor     : "grab",
 			}}
 			align="center"
 			justify="center"
