@@ -7,9 +7,6 @@ const SelectorGrid = () => {
 
 	const dispatch = useDispatch();
 
-	const colorHandler = isFullSizeSideBar ? "#c3c3c3ff" : "#58595b";
-	const cursorHandler = isFullSizeSideBar ? "not-allowed" : "pointer";
-
 	const handlerChangeGrid = () => {
 		if (!isFullSizeSideBar) {
 			dispatch(gallerySlice.actions.toggleMoreCols());
@@ -21,7 +18,7 @@ const SelectorGrid = () => {
 			spacing={"5px"}
 			onClick={handlerChangeGrid}
 			style={{
-				cursor     : cursorHandler,
+				cursor     : "pointer",
 				userSelect : "none",
 			}}
 		>
@@ -30,7 +27,7 @@ const SelectorGrid = () => {
 					w="6px"
 					h="6px"
 					style={{
-						background : colorHandler,
+						background : "#58595b",
 					}}
 				>
 					&nbsp;
@@ -39,7 +36,7 @@ const SelectorGrid = () => {
 					w="6px"
 					h="6px"
 					style={{
-						background : colorHandler,
+						background : "#58595b",
 					}}
 				>
 					&nbsp;
@@ -48,7 +45,7 @@ const SelectorGrid = () => {
 					w="6px"
 					h="6px"
 					style={{
-						background : colorHandler,
+						background : "#58595b",
 					}}
 				>
 					&nbsp;
@@ -61,7 +58,7 @@ const SelectorGrid = () => {
 					w="8px"
 					h="8px"
 					style={{
-						background : colorHandler,
+						background : "#58595b",
 					}}
 				>
 					&nbsp;
@@ -70,7 +67,7 @@ const SelectorGrid = () => {
 					w="8px"
 					h="8px"
 					style={{
-						background : colorHandler,
+						background : "#58595b",
 					}}
 				>
 					&nbsp;
