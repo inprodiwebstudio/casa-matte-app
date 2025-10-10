@@ -1,8 +1,15 @@
 import { Button, Card, Center, Input, Stack, Text } from "@mantine/core";
 import { GoPlus }                                   from "react-icons/go";
 import FillCircle                                   from "../CradAction/FillCircle";
+import { useState }                                 from "react";
 
 const DropFolder = () => {
+	const [folderName, setFolderName] = useState(undefined);
+
+	const onChangeFolderName = (e) => {
+		setFolderName(e.target.value);
+	};
+
 	return (
 		<Stack
 			w="100%"
@@ -29,8 +36,10 @@ const DropFolder = () => {
 					h="100%"
 				>
 					<Input
-						value={"TÍTULO CARPETA"}
+						value={folderName}
+						onChange={onChangeFolderName}
 						variant="unstyled"
+						placeholder="CARPETA SIN TÍTULO"
 						styles={{
 							input : {
 								fontWeight : 600,

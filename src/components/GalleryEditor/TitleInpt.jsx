@@ -1,11 +1,19 @@
-import { Input }  from "@mantine/core";
-import { MdEdit } from "react-icons/md";
+import { Input }    from "@mantine/core";
+import { MdEdit }   from "react-icons/md";
+import { useState } from "react";
 
 const TitleInpt = () => {
+	const [title, setTitle] = useState(undefined);
+
+	const onChangeTitle = (e) => {
+		setTitle(e.target.value);
+	};
 	return (
 		<Input
-			value={"GALERÍA DE FOTOS SIN TÍTULO"}
+			value={title}
 			variant="unstyled"
+			placeholder="GALERÍA DE FOTOS SIN TÍTULO"
+			onChange={onChangeTitle}
 			styles={{
 				input : {
 					fontWeight : 500,
