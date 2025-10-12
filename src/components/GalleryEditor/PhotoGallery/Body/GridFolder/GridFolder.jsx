@@ -78,7 +78,10 @@ const GridFolder = ({
 							aspectRatio : "1/1",
 						}}
 					>
-						<FolderCard urlImage="https://images.pexels.com/photos/25390327/pexels-photo-25390327.jpeg" />
+						<FolderCard
+							urlImage={item?.thumbNails[0] ?? undefined}
+							folderName={item?.name}
+						/>
 					</Grid.Col>
 				))}
 			</Grid>

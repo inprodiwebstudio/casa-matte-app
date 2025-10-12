@@ -1,9 +1,12 @@
-import { Stack, Badge, Text } from "@mantine/core";
+import { Stack, Badge, Text }     from "@mantine/core";
+import { changeResolutionImgUrl } from "helpers/Functions/changeResolutionImgUrl";
+
 
 const FolderCard = ({
 	w,
 	h,
 	urlImage,
+	folderName,
 }) => {
 	return (
 		<Stack
@@ -12,7 +15,7 @@ const FolderCard = ({
 			p={0}
 			m={0}
 			style={{
-				backgroundImage    : `url(${urlImage})`,
+				backgroundImage    : "url(\"" + changeResolutionImgUrl(urlImage, { width : 200 }, 100) + "\")",
 				backgroundSize     : "cover",
 				backgroundPosition : "center",
 				backgroundRepeat   : "no-repeat",
@@ -39,7 +42,7 @@ const FolderCard = ({
 						color         : "black",
 					}}
 				>
-					1. Folder
+					{folderName ?? "Sin nombre"}
 				</Text>
 			</Badge>
 		</Stack>

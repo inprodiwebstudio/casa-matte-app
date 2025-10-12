@@ -1,7 +1,7 @@
-import { Stack }               from "@mantine/core";
-import { MoonLoader }          from "react-spinners";
-import { useEffect, useState } from "react";
-import { resizerImage }        from "helpers";
+import { Stack }                  from "@mantine/core";
+import { MoonLoader }             from "react-spinners";
+import { useEffect, useState }    from "react";
+import { changeResolutionImgUrl } from "helpers/Functions/changeResolutionImgUrl";
 
 const PhotoCard = ({
 	h,
@@ -11,7 +11,7 @@ const PhotoCard = ({
 	const [ myImageUrl, setMyImageUrl ] = useState(undefined);
 	const loadImage = () => {
 		const img = new Image();
-		img.src = resizerImage(urlImage);
+		img.src = changeResolutionImgUrl(urlImage, { width : 200 }, 100);
 		img.addEventListener("load", setLoadingPhoto(false));
 		setMyImageUrl(img.src);
 	};

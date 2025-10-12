@@ -33,7 +33,7 @@ const GridPhotos = ({
 							aspectRatio : "1/1",
 						}}
 					>
-						<PhotoCard urlImage={item?.urlThumbnail} />
+						<PhotoCard urlImage={item?.url} />
 					</Grid.Col>
 				))}
 			</Grid>
