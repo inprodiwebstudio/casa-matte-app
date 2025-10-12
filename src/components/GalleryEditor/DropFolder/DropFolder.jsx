@@ -6,17 +6,20 @@ import FillCircle                                   from "../CradAction/FillCirc
 
 import { useState } from "react";
 
+//Slices
+import { useDispatch }  from "react-redux";
+import { gallerySlice } from "store/Slices";
+
 const DropFolder = () => {
+	const dispatch = useDispatch();
+
 	const [folderName, setFolderName] = useState(undefined);
+	const [photosFiles, setPhotosFiles] = useState([]);
 	const [errorFolderName, setErrorFolderName] = useState(false);
 
 	const onChangeFolderName = (e) => {
 		if (errorFolderName) setErrorFolderName(false);
 		setFolderName(e.target.value);
-	};
-
-	const onDropPhotos = (files) => {
-		console.log(files);
 	};
 
 	const handlerSubmit = () => {
@@ -41,11 +44,14 @@ const DropFolder = () => {
 			});
 			return;
 		}
+		dispatch(gallerySlice.actions.setFolderName(folderName));
+		dispatch(gallerySlice.actions.setFilesDrop(photosFiles));
+		dispatch(gallerySlice.actions.setTypeDropedView(null));
 	};
 
 	const { getInputProps, getRootProps } = useDropzone({
 		multiple : true,
-		onDrop   : (files) => onDropPhotos(files),
+		onDrop   : (files) => setPhotosFiles(files),
 		accept   : {
 			"image/*" : [],
 		},

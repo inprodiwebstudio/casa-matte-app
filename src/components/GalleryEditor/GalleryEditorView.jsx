@@ -23,8 +23,9 @@ const GalleryEditorView = () => {
 	const typeDropedView = useSelector((state) => state.gallerySlice.typeDropedView, shallowEqual);
 	const filesDrop = useSelector((state) => state.gallerySlice.filesDrop, shallowEqual);
 	const userName = useSelector((state) => state.authSlice?.user?.username, shallowEqual);
+	const folderName = useSelector((state) => state.gallerySlice?.folderName, shallowEqual);
 
-	const { handlerUploadImage } = useSubmitImages({userName : `${userName}/${postId}`, folderName : undefined});
+	const { handlerUploadImage } = useSubmitImages({userName : `${userName}/${postId}`, folderName : folderName ?? undefined});
 
 	const uploadPhotos = () => {
 		dispatch(gallerySlice.actions.setLoadingMutationGallery(true));

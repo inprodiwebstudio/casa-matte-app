@@ -15,6 +15,7 @@ const initialState = {
 	filesDrop         : [],
 	photosUploaded    : [],
 	typeDropedView    : null,
+	folderName        : null,
 	typeViewList      : "photos",
 	data              : null,
 	isFullSizeSideBar : false,
@@ -52,6 +53,9 @@ export const gallerySlice = createSlice({
 			const myNewGalleryData = convertToObject(handlerGallerySorted());
 			// state.data = newDataList;
 			state.data = myNewGalleryData;
+		},
+		setFolderName : (state, {payload}) => {
+			state.folderName = payload;
 		},
 		setFilesDrop : (state, {payload}) => {
 			state.filesDrop = payload;

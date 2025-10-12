@@ -59,7 +59,6 @@ const DropDoc = ({
 	const [ completedPhotos, setCompletedPhotos ] = useState([]);
 	const [ photoPreview, setPhotosPreview ] = useState([]);
 
-	// const [galleryImagesMutation] = apiImageKit.useAddImageMutation();
 	const [galleryFolderMutation] = apiImageKit.useAddFolderMutation();
 
 	const { handlerUploadImage } = useSubmitImages({userName : `${userName}/${postId}`, folderName : folderName});
