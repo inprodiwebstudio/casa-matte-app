@@ -1,4 +1,5 @@
 import { Button, Group, Progress, Stack, Text } from "@mantine/core";
+import { isValidArray }                         from "helpers";
 import { IoIosCloseCircleOutline }              from "react-icons/io";
 
 
@@ -10,12 +11,19 @@ import { gallerySlice }                           from "store/Slices";
 const ProgressBarUploading = () => {
 	const dispatch = useDispatch();
 
+	const controller = new AbortController();
+
 	const handlerCancelUploading = () => {
+		controller.abort();
 		dispatch(gallerySlice.actions.setFilesDrop([]));
+		dispatch(gallerySlice.actions.setFolderName(null));
 	};
 
 	const filesDrop = useSelector((state) => state.gallerySlice.filesDrop, shallowEqual);
 	const photosUploaded = useSelector((state) => state.gallerySlice.photosUploaded, shallowEqual);
+	const folderName = useSelector((state) => state.gallerySlice.folderName, shallowEqual);
+
+	const uploadingFolder = folderName && !isValidArray(filesDrop);
 
 	const calcPercentage = () => {
 		if (filesDrop.length > 0) {
@@ -29,13 +37,17 @@ const ProgressBarUploading = () => {
 			w="100%"
 			spacing={"2px"}
 		>
-			<Progress
-				color="blue"
-				value={calcPercentage()}
-				size="sm"
-				radius="xl"
-				animate
-			/>
+			{
+				!uploadingFolder && (
+					<Progress
+						color="blue"
+						value={calcPercentage()}
+						size="sm"
+						radius="xl"
+						animate
+					/>
+				)
+			}
 			<Group
 				position="apart"
 			>
@@ -49,7 +61,7 @@ const ProgressBarUploading = () => {
 						color         : "black",
 					}}
 				>
-					Cargando fotos : {calcPercentage()}%
+					{!uploadingFolder ? "Subiendo fotos" : "Subiendo carpeta"} : {calcPercentage()}%
 				</Text>
 				<Button
 					size="xs"

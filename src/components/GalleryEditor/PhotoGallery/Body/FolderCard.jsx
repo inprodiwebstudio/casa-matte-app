@@ -1,5 +1,7 @@
-import { Stack, Badge, Text }     from "@mantine/core";
-import { changeResolutionImgUrl } from "helpers/Functions/changeResolutionImgUrl";
+import { Stack, Badge, Text, Center } from "@mantine/core";
+import FillCircle                     from "components/GalleryEditor/CradAction/FillCircle";
+import { changeResolutionImgUrl }     from "helpers/Functions/changeResolutionImgUrl";
+import { GoPlus }                     from "react-icons/go";
 
 
 const FolderCard = ({
@@ -15,14 +17,15 @@ const FolderCard = ({
 			p={0}
 			m={0}
 			style={{
-				backgroundImage    : "url(\"" + changeResolutionImgUrl(urlImage, { width : 200 }, 100) + "\")",
-				backgroundSize     : "cover",
-				backgroundPosition : "center",
-				backgroundRepeat   : "no-repeat",
-				// background         : "#f6f6f6",
-				userSelect         : "none",
-				borderRadius       : "10px",
-				position           : "relative",
+				...(urlImage && {
+					background : "url(\"" + changeResolutionImgUrl(urlImage, { width : 200 }, 100) + "\") center center / cover no-repeat",
+				}),
+				...(!urlImage && {
+					background : "#f6f6f6ff",
+				}),
+				userSelect   : "none",
+				borderRadius : "10px",
+				position     : "relative",
 			}}
 		>
 			<Badge
@@ -45,6 +48,39 @@ const FolderCard = ({
 					{folderName ?? "Sin nombre"}
 				</Text>
 			</Badge>
+			{
+				!urlImage && (
+					<Center
+						h="100%"
+						w="100%"
+						style={{
+							cursor : "pointer",
+						}}
+					>
+						<Stack
+							align="center"
+							spacing={5}
+						>
+							<FillCircle>
+								<GoPlus size={13} />
+							</FillCircle>
+							<Text
+								size="10px"
+								color="black"
+								weight={500}
+								align="center"
+								style={{
+									fontFamily    : "Helvetica",
+									letterSpacing : "0px",
+									color         : "black",
+								}}
+							>
+								Agregar Fotos
+							</Text>
+						</Stack>
+					</Center>
+				)
+			}
 		</Stack>
 	);
 };

@@ -1,8 +1,9 @@
-import { Stack }     from "@mantine/core";
-import TitleInpt     from "./TitleInpt";
-import ActionsGroup  from "./ActionsGrouop";
-import PhotoGallery  from "./PhotoGallery";
-import { useEffect } from "react";
+import { Stack }       from "@mantine/core";
+import TitleInpt       from "./TitleInpt";
+import ActionsGroup    from "./ActionsGrouop";
+import PhotoGallery    from "./PhotoGallery";
+import { apiImageKit } from "store/api/imageKitApi";
+import { useEffect }   from "react";
 
 import DropPhotos from "./DropPhotos";
 
@@ -26,6 +27,7 @@ const GalleryEditorView = () => {
 	const folderName = useSelector((state) => state.gallerySlice?.folderName, shallowEqual);
 
 	const { handlerUploadImage } = useSubmitImages({userName : `${userName}/${postId}`, folderName : folderName ?? undefined});
+	const [galleryFolderMutation] = apiImageKit.useAddFolderMutation();
 
 	const uploadPhotos = () => {
 		dispatch(gallerySlice.actions.setLoadingMutationGallery(true));
@@ -65,17 +67,43 @@ const GalleryEditorView = () => {
 		});
 
 		Promise.allSettled([...listOfPromises]).then((imageValues) => {
-			console.log(imageValues);
 			dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
+			if (folderName) {
+				dispatch(gallerySlice.actions.setFolderName(null));
+			}
 			dispatch(gallerySlice.actions.setFilesDrop([]));
 		});
 	};
 
+	const uploadFolder = async () => {
+		const respFolder = await galleryFolderMutation({
+			data : {
+				userName,
+				postId,
+				folderName,
+			},
+		});
+
+		const constructorData = {
+			...respFolder?.data,
+			type       : "folder",
+			id         : respFolder?.data?.path,
+			thumbNails : [],
+		};
+
+		return constructorData;
+	};
+
 	useEffect(() => {
+		if (folderName && !isValidArray(filesDrop)) {
+			uploadFolder();
+			return;
+		}
 		if (isValidArray(filesDrop)) {
 			uploadPhotos();
+			return;
 		}
-	}, [filesDrop]);
+	}, [filesDrop, folderName]);
 
 	return (
 		<Stack
