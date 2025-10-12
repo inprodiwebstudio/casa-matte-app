@@ -8,6 +8,7 @@ const TitleInpt = () => {
 	const onChangeTitle = (e) => {
 		setTitle(e.target.value);
 	};
+
 	return (
 		<Input
 			value={title}

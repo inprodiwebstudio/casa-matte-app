@@ -1,14 +1,55 @@
 import { Button, Card, Center, Input, Stack, Text } from "@mantine/core";
 import { GoPlus }                                   from "react-icons/go";
+import { useDropzone }                              from "react-dropzone/.";
+import { showNotification }                         from "@mantine/notifications";
 import FillCircle                                   from "../CradAction/FillCircle";
-import { useState }                                 from "react";
+
+import { useState } from "react";
 
 const DropFolder = () => {
 	const [folderName, setFolderName] = useState(undefined);
+	const [errorFolderName, setErrorFolderName] = useState(false);
 
 	const onChangeFolderName = (e) => {
+		if (errorFolderName) setErrorFolderName(false);
 		setFolderName(e.target.value);
 	};
+
+	const onDropPhotos = (files) => {
+		console.log(files);
+	};
+
+	const handlerSubmit = () => {
+		if (!folderName) {
+			setErrorFolderName(true);
+			showNotification({
+				title   : "No hay nombre de carpeta",
+				message : "El nombre de la carpeta es obligatorio.",
+				color   : "red",
+				styles  : () => ({
+					root : {
+											  "&::before" : {
+												  borderRadius : "0px",
+												  width        : "3px",
+											  },
+											  borderRadius : "0px",
+					},
+
+					title       : { fontFamily : "Helvetica", fontWeight : "500", textTransform : "uppercase" },
+					description : { fontFamily : "Helvetica" },
+				}),
+			});
+			return;
+		}
+	};
+
+	const { getInputProps, getRootProps } = useDropzone({
+		multiple : true,
+		onDrop   : (files) => onDropPhotos(files),
+		accept   : {
+			"image/*" : [],
+		},
+	});
 
 	return (
 		<Stack
@@ -42,9 +83,12 @@ const DropFolder = () => {
 						placeholder="CARPETA SIN TÍTULO"
 						styles={{
 							input : {
-								fontWeight : 600,
-								fontSize   : "15px",
-								color      : "#1e293b",
+								fontWeight      : 600,
+								fontSize        : "15px",
+								color           : "#1e293b",
+								"::placeholder" : {
+									color : errorFolderName ? "red" : "black",
+								},
 							},
 						}}
 					/>
@@ -52,6 +96,7 @@ const DropFolder = () => {
 						style={{
 							flex : 1,
 						}}
+						{...getRootProps()}
 					>
 						<Card
 							style={{
@@ -86,6 +131,7 @@ const DropFolder = () => {
 								</Text>
 							</Center>
 						</Card>
+						<input {...getInputProps()} />
 					</Center>
 				</Stack>
 			</Card>
@@ -107,6 +153,7 @@ const DropFolder = () => {
 						letterSpacing : "0px",
 						lineHeight    : "12px",
 					}}
+					onClick={() => handlerSubmit()}
 				>
 					Done
 				</Text>
