@@ -1,8 +1,15 @@
 import { Card, Center, Stack, Text } from "@mantine/core";
 import FillCircle                    from "components/GalleryEditor/CradAction/FillCircle";
 import { GoPlus }                    from "react-icons/go";
+import { useDispatch }               from "react-redux";
+import { gallerySlice }              from "store/Slices";
 
 const NotAvailablePhotos = () => {
+	const dispatch = useDispatch();
+	const onClickAddPhotos = () => {
+		dispatch(gallerySlice.actions.setTypeDropedView("photos"));
+		dispatch(gallerySlice.actions.setTypeViewList("photos"));
+	};
 	return (
 		<Card
 			withBorder
@@ -33,6 +40,7 @@ const NotAvailablePhotos = () => {
 						}}
 						radius={"10px"}
 						w="120px"
+						onClick={() => onClickAddPhotos()}
 					>
 						<Center
 							style={{
