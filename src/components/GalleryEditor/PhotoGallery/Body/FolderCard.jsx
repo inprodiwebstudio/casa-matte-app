@@ -9,7 +9,10 @@ import { shallowEqual, useSelector, useDispatch } from "react-redux";
 import { MoonLoader }                             from "react-spinners";
 import { gallerySlice }                           from "store/Slices";
 
-import styles from "./styles";
+import styles                               from "./styles";
+import { closeAllModals, openContextModal } from "@mantine/modals";
+import { useParams }                        from "react-router";
+import { apiImageKit }                      from "store/api/imageKitApi";
 
 
 const FolderCard = ({
@@ -22,14 +25,19 @@ const FolderCard = ({
 	const { classes } = styles();
 	const dispatch = useDispatch();
 
+	const { postId } = useParams();
+
 	const handlerSubmitPhotos = (photosFiles) => {
 		dispatch(gallerySlice.actions.setFolderName(folderName));
 		dispatch(gallerySlice.actions.setFolderId(folderId));
 		dispatch(gallerySlice.actions.setFilesDrop(photosFiles));
 	};
 
+	const [galleryFolderMutation] = apiImageKit.useDeleteFolderMutation();
+
 	const folderIdDropedPhotos = useSelector((state) => state.gallerySlice.folderId, shallowEqual);
 	const photosDrop = useSelector((state) => state.gallerySlice.filesDrop, shallowEqual);
+	const userName = useSelector((state) => state.authSlice?.user?.username, shallowEqual);
 
 	const isLoadingChargeNewPhotos = (folderIdDropedPhotos === folderId) && isValidArray(photosDrop);
 
@@ -40,6 +48,36 @@ const FolderCard = ({
 			"image/*" : [],
 		},
 	});
+
+	const onDeleteFolder = async () => {
+		dispatch(gallerySlice.actions.setLoadingMutationGallery(true));
+		try {
+			await galleryFolderMutation({
+				data : {
+					userName,
+					postTypeId : postId,
+					folderName,
+				},
+			});
+			dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
+			dispatch(gallerySlice.actions.deleteDataGallery({
+				[folderId] : true,
+			}));
+			closeAllModals();
+		} catch (error) {
+			console.error(error);
+			dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
+		}
+	};
+
+	const handlerDeleteFolder = () => {
+		openContextModal({
+			modal      : "confirmationDeleteFolder",
+			innerProps : {
+				actionDelete : () => onDeleteFolder(),
+			},
+		});
+	};
 
 	return (
 		<Stack
@@ -79,6 +117,7 @@ const FolderCard = ({
 				variant="light"
 				size="md"
 				className="trashAction"
+				onClick={() => handlerDeleteFolder()}
 			>
 				<FaRegTrashCan size={14} />
 			</ActionIcon>

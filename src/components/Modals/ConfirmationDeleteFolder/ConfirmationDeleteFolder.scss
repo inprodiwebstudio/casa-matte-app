@@ -1,22 +1,20 @@
 @import "/src/Resources/scss/variables/colorThemes";
 
-@font-face {
-    font-family: "HelveticaLight";
-    src: url("../../../Resources/Fonts/HelveticaLightRegular.otf");
-}
-
 .body-confirmation-modal {
     padding: 50px;
+    padding-bottom: 25px !important;
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    font-family: "HelveticaLight";
+    justify-content: center;
+    align-items: center;
+    gap: 30px !important;
+    position: relative;
 
     .tittle-confirmation {
         font-size: 27px;
         font-weight: 400;
         text-align: center;
-        font-family: "HelveticaLight";
+        font-family: "Aitana-Regular";
     }
 
     .text-description {

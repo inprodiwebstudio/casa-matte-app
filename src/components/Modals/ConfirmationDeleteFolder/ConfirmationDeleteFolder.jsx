@@ -1,55 +1,97 @@
-import React                         from "react";
-import { shallowEqual, useSelector } from "react-redux";
-import { Button, Text }              from "@mantine/core";
-import { closeAllModals }            from "@mantine/modals";
-import "./ConfirmationDeleteFolder.scss";
+import { Center, CloseButton, Stack, Text, Button } from "@mantine/core";
+import React                                        from "react";
+import "./ConfirmationDeleteFolder";
+import { closeAllModals }                           from "@mantine/modals";
+import { shallowEqual, useSelector }                from "react-redux";
 
-const ConfirmationDelete = ({innerProps}) => {
-	const { handdleSuccess } = innerProps;
+const ConfirmationDeleteFolder = ({innerProps}) => {
+	const {actionDelete} = innerProps;
 
 	const isLoadingDelete = useSelector((state) => state.gallerySlice?.isLoadingMutation, shallowEqual);
 
+	const onCloseButton = () => {
+		closeAllModals();
+	};
+
 	return (
 		<div className="body-confirmation-modal">
-			<div className="tittle-confirmation">¿Estás seguro?</div>
-			<div className="text-description">
-				Estás por eliminar permanentemente la carpeta, se borrarán de cualquier parte donde haya sido utilizado.
-			</div>
-			<div className="buttons-container">
-				<Button
-					radius={12}
-					size="md"
-					loading={isLoadingDelete}
+			<Stack
+				style={{
+					background   : "#edeeee",
+					borderRadius : "20px",
+					position     : "absolute",
+					top          : "-20px",
+					left         : "-20px",
+					width        : "50vw",
+					padding      : "15px",
+				}}
+			>
+				<CloseButton
+					radius={"50%"}
 					color="darkCasaMatte"
-					onClick={() => handdleSuccess()}
-				>
-					<Text
-						weight={400}
-						color="whiteCasaMatte"
-						sx={{
-							fontFamily : "Helvetica",
-						}}
-					>
-						ACEPTAR
-					</Text>
-				</Button>
-				<Button
-					radius={12}
-					size="md"
-					color="gray"
-					loading={isLoadingDelete}
-					onClick={() => closeAllModals()}
-
-					sx={{
-						fontFamily : "Helvetica",
-						fontWeight : "400",
+					variant="filled"
+					size="sm"
+					style={{
+						position : "absolute",
+						left     : "95%",
+						right    : "0px",
+					}}
+					onClick={onCloseButton}
+				/>
+				<Text
+					size="15px"
+					align="center"
+					style={{
+						fontFamily    : "Helvetica",
+						letterSpacing : "0px",
+						color         : "#58595b",
 					}}
 				>
-					CANCELAR
-				</Button>
+					¿Estás seguro?
+				</Text>
+			</Stack>
+			<Text
+				size="15px"
+				align="center"
+				weight="bolder"
+				style={{
+					fontFamily    : "Helvetica",
+					letterSpacing : "0px",
+				}}
+				w="90%"
+			>
+				Estás por eliminar permanentemente la carpeta, se borrará su contenido de cualquier parte donde haya sido utilizada.
+			</Text>
+			<div className="buttons-container">
+				<Center>
+					<Button
+						radius="md"
+						size="xs"
+						color="darkCasaMatte"
+						w="140px"
+						h="27px"
+						onClick={() => actionDelete()}
+						loading={isLoadingDelete}
+					>
+						<Text
+							size="13px"
+							weight={500}
+							w="150px"
+							color="lightCasaMatte"
+							align="center"
+							style={{
+								fontFamily    : "Helvetica",
+								letterSpacing : "0px",
+								lineHeight    : "12px",
+							}}
+						>
+							Aceptar
+						</Text>
+					</Button>
+				</Center>
 			</div>
 		</div>
 	);
 };
 
-export default ConfirmationDelete;
+export default ConfirmationDeleteFolder;
