@@ -72,8 +72,9 @@ const FolderCard = ({
 
 	const handlerDeleteFolder = () => {
 		openContextModal({
-			modal      : "confirmationDeleteFolder",
-			innerProps : {
+			modal               : "confirmationDeleteFolder",
+			closeOnClickOutside : false,
+			innerProps          : {
 				actionDelete : () => onDeleteFolder(),
 			},
 		});

@@ -36,6 +36,7 @@ const ConfirmationDeleteFolder = ({innerProps}) => {
 						left     : "95%",
 						right    : "0px",
 					}}
+					loading={isLoadingDelete}
 					onClick={onCloseButton}
 				/>
 				<Text

@@ -2,8 +2,11 @@ import { Center, CloseButton, Stack, Text, Button } from "@mantine/core";
 import React                                        from "react";
 import "./ConfirmationDeletePhoto";
 import { closeAllModals }                           from "@mantine/modals";
+import { shallowEqual, useSelector }                from "react-redux";
 
 const ConfirmationDeletePhoto = ({innerProps}) => {
+	const isLoadingDelete = useSelector((state) => state.gallerySlice?.isLoadingMutation, shallowEqual);
+
 	const {actionDelete} = innerProps;
 	const onCloseButton = () => {
 		closeAllModals();
@@ -27,6 +30,7 @@ const ConfirmationDeletePhoto = ({innerProps}) => {
 					color="darkCasaMatte"
 					variant="filled"
 					size="sm"
+					loading={isLoadingDelete}
 					style={{
 						position : "absolute",
 						left     : "95%",
@@ -67,6 +71,7 @@ const ConfirmationDeletePhoto = ({innerProps}) => {
 						w="140px"
 						h="27px"
 						onClick={() => actionDelete()}
+						loading={isLoadingDelete}
 					>
 						<Text
 							size="13px"

@@ -27,14 +27,6 @@ const PhotoCard = ({
 
 	const [galleryImagesMutastionDelete] = apiImageKit.useDeleteImagesMutation();
 
-	// const loadImage = () => {
-	// 	const img = new Image();
-	// 	img.src = changeResolutionImgUrl(urlImage, { width : 300 }, 100);
-	// 	img.addEventListener("load", () => {
-	// 		setMyImageUrl(img.src);
-	// 	});
-	// };
-
 	const handdleDrag = () => {
 		setIsDragger(true);
 		dispatch(workSpaceSlice.actions.setCurrentPhotoDrager(
@@ -63,8 +55,9 @@ const PhotoCard = ({
 
 	const onDeletePhoto = () => {
 		openContextModal({
-			modal      : "confirmationDeletePhoto",
-			innerProps : {
+			modal               : "confirmationDeletePhoto",
+			closeOnClickOutside : false,
+			innerProps          : {
 				actionDelete : () => handlerDeletePhotos(),
 			},
 		});
