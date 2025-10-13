@@ -43,12 +43,7 @@ export const gallerySlice = createSlice({
 
 
 			const handlerGallerySorted = () => {
-				switch (state.filter?.value) {
-					case "CAPTURE_DATE":
-						return constructGalleryList.sort((a, b) => new Date(b?.context?.dateCaptured) - new Date(a?.context?.dateCaptured));
-					default:
-						return constructGalleryList.sort((a, b) => new Date(b?.uploaded_at) - new Date(a?.uploaded_at));
-				}
+				return constructGalleryList.sort((a, b) => new Date(b?.uploaded_at) + new Date(a?.uploaded_at));
 			};
 
 			const myNewGalleryData = convertToObject(handlerGallerySorted());

@@ -44,6 +44,7 @@ const GalleryEditorView = () => {
 					type     : "file",
 				};
 				dispatch(gallerySlice.actions.setPhotosUploaded(constructorImageData));
+				dispatch(gallerySlice.actions.setGalleryData(constructorImageData));
 				return constructorImageData;
 			} catch (error) {
 				cleanNotifications();

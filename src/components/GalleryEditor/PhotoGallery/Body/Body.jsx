@@ -13,8 +13,6 @@ const Body = () => {
 	const isMoreCols = useSelector((state) => state.gallerySlice.moreCols, shallowEqual);
 	const galleryData = useSelector((state) => state.gallerySlice.data, shallowEqual);
 	const typeViewList = useSelector((state) => state.gallerySlice.typeViewList, shallowEqual);
-	const photosUploaded = useSelector((state) => state.gallerySlice.photosUploaded, shallowEqual);
-	const folderName = useSelector((state) => state.gallerySlice.folderName, shallowEqual);
 
 	const [listOfPhotos, setListOfPhotos] = useState([]);
 	const [listOfFolders, setListOfFolders] = useState([]);
@@ -48,12 +46,6 @@ const Body = () => {
 		}
 		handlerSetPhotosAndFolders();
 	}, [galleryData]);
-
-	useEffect(() => {
-		if (!folderName && isValidArray(photosUploaded)) {
-			setListOfPhotos(prev => [photosUploaded[0], ...prev]);
-		}
-	}, [photosUploaded]);
 
 	return (
 		<Stack

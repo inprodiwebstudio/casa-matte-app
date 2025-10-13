@@ -7,17 +7,19 @@ const PhotoCard = ({
 	h,
 	urlImage,
 }) => {
-	const [loadingPhoto, setLoadingPhoto] = useState(true);
 	const [ myImageUrl, setMyImageUrl ] = useState(undefined);
 	const loadImage = () => {
 		const img = new Image();
-		img.src = changeResolutionImgUrl(urlImage, { width : 200 }, 100);
-		img.addEventListener("load", setLoadingPhoto(false));
-		setMyImageUrl(img.src);
+		img.src = changeResolutionImgUrl(urlImage, { width : 300 }, 100);
+		img.addEventListener("load", () => {
+			setMyImageUrl(img.src);
+		});
 	};
 
 	useEffect(() => {
-		if (urlImage) loadImage();
+		if (urlImage) {
+			loadImage();
+		}
 	}, [urlImage]);
 
 	return (
@@ -25,8 +27,8 @@ const PhotoCard = ({
 			w="100%"
 			h={h ?? "100%"}
 			style={{
-				...((!loadingPhoto) && {background : "url(\"" + myImageUrl + "\") center center / cover no-repeat"}),
-				...(loadingPhoto && {background : "#f6f6f6"}),
+				...((myImageUrl) && {background : "url(\"" + myImageUrl + "\") center center / cover no-repeat"}),
+				...(!myImageUrl && {background : "#f6f6f6"}),
 				userSelect : "none",
 				cursor     : "grab",
 			}}
@@ -34,7 +36,7 @@ const PhotoCard = ({
 			justify="center"
 		>
 			{
-				loadingPhoto && <MoonLoader size={18} />
+				!myImageUrl && (<MoonLoader size={18} />)
 			}
 		</Stack>
 	);
