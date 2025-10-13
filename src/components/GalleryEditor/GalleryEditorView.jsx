@@ -69,11 +69,13 @@ const GalleryEditorView = () => {
 		});
 
 		Promise.allSettled([...listOfPromises]).then((imageValues) => {
+			const listOfUploadedImages = imageValues.map(image => image.value);
 			dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 			if (folderName) {
 				dispatch(gallerySlice.actions.setFolderName(null));
 			}
 			if (folderId) {
+				dispatch(gallerySlice.actions.setNewPhotosThumbNailsFolder(listOfUploadedImages));
 				dispatch(gallerySlice.actions.setFolderId(null));
 			}
 			dispatch(gallerySlice.actions.setFilesDrop([]));

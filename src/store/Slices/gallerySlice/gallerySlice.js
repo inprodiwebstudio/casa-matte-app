@@ -50,6 +50,12 @@ export const gallerySlice = createSlice({
 			// state.data = newDataList;
 			state.data = myNewGalleryData;
 		},
+		setNewPhotosThumbNailsFolder : (state, {payload}) => {
+			const listOfPhotos = payload;
+			const sliceThumbnails = listOfPhotos.slice(0, 5);
+			const newListOfThumbnails = sliceThumbnails.map(image => image?.url);
+			state.data[state?.folderId].thumbNails = newListOfThumbnails;
+		},
 		setFolderId : (state, {payload}) => {
 			state.folderId = payload;
 		},
