@@ -687,6 +687,7 @@ export const workSpaceSlice = createSlice({
 								...photo,
 								url            : "",
 								urlPhotoEdited : "",
+								pixels         : undefined,
 							};
 						}
 						return {...photo};
