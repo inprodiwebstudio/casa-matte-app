@@ -4,11 +4,11 @@ import { useEffect, useState }              from "react";
 import { changeResolutionImgUrl }           from "helpers/Functions/changeResolutionImgUrl";
 import { FaRegTrashCan, FaCheck }           from "react-icons/fa6";
 
-import styles                               from "./styles";
-import { useDispatch }                      from "react-redux";
-import { gallerySlice, workSpaceSlice }     from "store/Slices";
-import { closeAllModals, openContextModal } from "@mantine/modals";
-import { apiImageKit }                      from "store/api/imageKitApi";
+import styles                                     from "./styles";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { gallerySlice, workSpaceSlice }           from "store/Slices";
+import { closeAllModals, openContextModal }       from "@mantine/modals";
+import { apiImageKit }                            from "store/api/imageKitApi";
 
 
 const PhotoCard = ({
@@ -21,6 +21,8 @@ const PhotoCard = ({
 }) => {
 	const { classes } = styles();
 	const dispatch = useDispatch();
+
+	const isLoadingMutation = useSelector((state) => state.gallerySlice.isLoadingMutation, shallowEqual);
 
 	const [ myImageUrl, setMyImageUrl ] = useState(undefined);
 	const [ isDragger, setIsDragger ] = useState(false);
@@ -109,16 +111,18 @@ const PhotoCard = ({
 			{
 				(myImageUrl && !isDragger) && (
 					<>
-						<ActionIcon
-							color="red"
-							radius="xl"
-							variant="light"
-							size="md"
-							className="trashAction"
-							onClick={onDeletePhoto}
-						>
-							<FaRegTrashCan size={14} />
-						</ActionIcon>
+						{!isLoadingMutation && (
+							<ActionIcon
+								color="red"
+								radius="xl"
+								variant="light"
+								size="md"
+								className="trashAction"
+								onClick={onDeletePhoto}
+							>
+								<FaRegTrashCan size={14} />
+							</ActionIcon>
+						)}
 						{
 							isInUsePhoto && (
 								<Badge
