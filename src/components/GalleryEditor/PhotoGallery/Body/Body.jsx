@@ -4,8 +4,8 @@ import GridFolder              from "./GridFolder";
 import { useState, useEffect } from "react";
 
 //Contexts
-import { shallowEqual, useSelector }    from "react-redux";
-import { convertToArray, isValidArray } from "helpers";
+import { shallowEqual, useSelector } from "react-redux";
+import { convertToArray }            from "helpers";
 
 const Body = () => {
 
@@ -38,12 +38,6 @@ const Body = () => {
 	};
 
 	useEffect(() => {
-		const listOfData = convertToArray(galleryData);
-		const isAvAvailableDocs = isValidArray(listOfData);
-
-		if (!isAvAvailableDocs || !galleryData) {
-			return;
-		}
 		handlerSetPhotosAndFolders();
 	}, [galleryData]);
 
