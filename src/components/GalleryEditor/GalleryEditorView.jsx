@@ -44,7 +44,9 @@ const GalleryEditorView = () => {
 					type     : "file",
 				};
 				dispatch(gallerySlice.actions.setPhotosUploaded(constructorImageData));
-				dispatch(gallerySlice.actions.setGalleryData(constructorImageData));
+				if (!folderName && !folderId) {
+					dispatch(gallerySlice.actions.setGalleryData(constructorImageData));
+				}
 				return constructorImageData;
 			} catch (error) {
 				cleanNotifications();
@@ -54,13 +56,12 @@ const GalleryEditorView = () => {
 					color   : "red",
 					styles  : () => ({
 						root : {
-								  "&::before" : {
-									  borderRadius : "0px",
-									  width        : "3px",
-								  },
+							"&::before" : {
 								  borderRadius : "0px",
+								  width        : "3px",
+							},
+							borderRadius : "0px",
 						},
-
 						title       : { fontFamily : "Helvetica", fontWeight : "500", textTransform : "uppercase" },
 						description : { fontFamily : "Helvetica" },
 					}),
@@ -72,6 +73,18 @@ const GalleryEditorView = () => {
 			const listOfUploadedImages = imageValues.map(image => image.value);
 			dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 			if (folderName) {
+				if (!folderId) {
+					const urlImages = listOfUploadedImages.map(image => image?.url);
+					const thumbNails = urlImages.slice(0, 5);
+					const constructorData = {
+						id         : `${userName}/${folderName}`,
+						path       : `${userName}/${folderName}`,
+						name       : folderName,
+						thumbNails : [...thumbNails],
+						type       : "folder",
+					};
+					dispatch(gallerySlice.actions.setGalleryData(constructorData));
+				}
 				dispatch(gallerySlice.actions.setFolderName(null));
 			}
 			if (folderId) {
@@ -98,6 +111,8 @@ const GalleryEditorView = () => {
 			id         : respFolder?.data?.path,
 			thumbNails : [],
 		};
+
+		dispatch(gallerySlice.actions.setGalleryData(constructorData));
 
 		return constructorData;
 	};
