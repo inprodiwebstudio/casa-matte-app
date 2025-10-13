@@ -25,6 +25,7 @@ const GalleryEditorView = () => {
 	const filesDrop = useSelector((state) => state.gallerySlice.filesDrop, shallowEqual);
 	const userName = useSelector((state) => state.authSlice?.user?.username, shallowEqual);
 	const folderName = useSelector((state) => state.gallerySlice?.folderName, shallowEqual);
+	const folderId = useSelector((state) => state.gallerySlice?.folderId, shallowEqual);
 
 	const { handlerUploadImage } = useSubmitImages({userName : `${userName}/${postId}`, folderName : folderName ?? undefined});
 	const [galleryFolderMutation] = apiImageKit.useAddFolderMutation();
@@ -70,6 +71,9 @@ const GalleryEditorView = () => {
 			dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 			if (folderName) {
 				dispatch(gallerySlice.actions.setFolderName(null));
+			}
+			if (folderId) {
+				dispatch(gallerySlice.actions.setFolderId(null));
 			}
 			dispatch(gallerySlice.actions.setFilesDrop([]));
 		});

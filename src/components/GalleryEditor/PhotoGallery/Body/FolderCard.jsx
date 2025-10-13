@@ -1,7 +1,12 @@
-import { Stack, Badge, Text, Center } from "@mantine/core";
-import FillCircle                     from "components/GalleryEditor/CradAction/FillCircle";
-import { changeResolutionImgUrl }     from "helpers/Functions/changeResolutionImgUrl";
-import { GoPlus }                     from "react-icons/go";
+import { Stack, Badge, Text, Center }             from "@mantine/core";
+import FillCircle                                 from "components/GalleryEditor/CradAction/FillCircle";
+import { isValidArray }                           from "helpers";
+import { changeResolutionImgUrl }                 from "helpers/Functions/changeResolutionImgUrl";
+import { useDropzone }                            from "react-dropzone/.";
+import { GoPlus }                                 from "react-icons/go";
+import { shallowEqual, useSelector, useDispatch } from "react-redux";
+import { MoonLoader }                             from "react-spinners";
+import { gallerySlice }                           from "store/Slices";
 
 
 const FolderCard = ({
@@ -9,7 +14,29 @@ const FolderCard = ({
 	h,
 	urlImage,
 	folderName,
+	folderId,
 }) => {
+	const dispatch = useDispatch();
+
+	const handlerSubmitPhotos = (photosFiles) => {
+		dispatch(gallerySlice.actions.setFolderName(folderName));
+		dispatch(gallerySlice.actions.setFolderId(folderId));
+		dispatch(gallerySlice.actions.setFilesDrop(photosFiles));
+	};
+
+	const folderIdDropedPhotos = useSelector((state) => state.gallerySlice.folderId, shallowEqual);
+	const photosDrop = useSelector((state) => state.gallerySlice.filesDrop, shallowEqual);
+
+	const isLoadingChargeNewPhotos = (folderIdDropedPhotos === folderId) && isValidArray(photosDrop);
+
+	const { getInputProps, getRootProps } = useDropzone({
+		multiple : true,
+		onDrop   : (files) => handlerSubmitPhotos(files),
+		accept   : {
+			"image/*" : [],
+		},
+	});
+
 	return (
 		<Stack
 			w={w ?? "100%"}
@@ -56,28 +83,40 @@ const FolderCard = ({
 						style={{
 							cursor : "pointer",
 						}}
+						{...!isLoadingChargeNewPhotos && getRootProps()}
 					>
 						<Stack
 							align="center"
 							spacing={5}
 						>
-							<FillCircle>
-								<GoPlus size={13} />
-							</FillCircle>
-							<Text
-								size="10px"
-								color="black"
-								weight={500}
-								align="center"
-								style={{
-									fontFamily    : "Helvetica",
-									letterSpacing : "0px",
-									color         : "black",
-								}}
-							>
-								Agregar Fotos
-							</Text>
+							{
+								!isLoadingChargeNewPhotos ? (
+									<>
+										<FillCircle>
+											<GoPlus size={13} />
+										</FillCircle>
+										<Text
+											size="10px"
+											color="black"
+											weight={500}
+											align="center"
+											style={{
+												fontFamily    : "Helvetica",
+												letterSpacing : "0px",
+												color         : "black",
+											}}
+										>
+											Agregar Fotos
+										</Text>
+									</>
+								) : (
+									<MoonLoader size={18} />
+								)
+							}
 						</Stack>
+						{
+							!isLoadingChargeNewPhotos && (<input {...getInputProps()} />)
+						}
 					</Center>
 				)
 			}

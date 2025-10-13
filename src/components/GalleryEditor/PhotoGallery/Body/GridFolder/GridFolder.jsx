@@ -81,6 +81,7 @@ const GridFolder = ({
 						<FolderCard
 							urlImage={item?.thumbNails[0] ?? undefined}
 							folderName={item?.name}
+							folderId={item?.id ?? undefined}
 						/>
 					</Grid.Col>
 				))}
