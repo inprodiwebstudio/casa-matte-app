@@ -27,13 +27,13 @@ const PhotoCard = ({
 
 	const [galleryImagesMutastionDelete] = apiImageKit.useDeleteImagesMutation();
 
-	const loadImage = () => {
-		const img = new Image();
-		img.src = changeResolutionImgUrl(urlImage, { width : 300 }, 100);
-		img.addEventListener("load", () => {
-			setMyImageUrl(img.src);
-		});
-	};
+	// const loadImage = () => {
+	// 	const img = new Image();
+	// 	img.src = changeResolutionImgUrl(urlImage, { width : 300 }, 100);
+	// 	img.addEventListener("load", () => {
+	// 		setMyImageUrl(img.src);
+	// 	});
+	// };
 
 	const handdleDrag = () => {
 		setIsDragger(true);
@@ -76,9 +76,23 @@ const PhotoCard = ({
 	};
 
 	useEffect(() => {
-		if (urlImage) {
-			loadImage();
-		}
+		if (!urlImage) return;
+
+		let isMounted = true;
+		const img = new Image();
+		const newUrl = changeResolutionImgUrl(urlImage, { width : 300 }, 100);
+
+		setMyImageUrl(undefined);
+
+		img.src = newUrl;
+		img.addEventListener("load", () => {
+			if (isMounted) setMyImageUrl(newUrl);
+		});
+
+		return () => {
+			isMounted = false;
+			img.src = "";
+		};
 	}, [urlImage]);
 
 	return (
