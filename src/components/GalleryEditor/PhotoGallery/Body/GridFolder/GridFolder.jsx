@@ -50,6 +50,9 @@ const GridFolder = ({
 			<Grid
 				w="100%"
 				gutter="3"
+				style={{
+					maxHeight : "100px",
+				}}
 			>
 				<Grid.Col
 					span={cols}

@@ -71,6 +71,9 @@ export const gallerySlice = createSlice({
 			const photoDataUpload = payload;
 			state.photosUploaded = [{...photoDataUpload}, ...state.photosUploaded];
 		},
+		clearPhotosUploaded : (state) => {
+			state.photosUploaded = [];
+		},
 		getGalleryData : (state, {payload}) => {
 			const gallletyDataInsert = convertToObject(payload);
 			state.data = gallletyDataInsert;

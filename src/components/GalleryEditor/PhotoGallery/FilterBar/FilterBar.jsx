@@ -3,13 +3,28 @@ import { FaCaretDown }          from "react-icons/fa";
 import HidePhotosCheck          from "./HidePhotosCheck";
 import SelectorGrid             from "./SelectorGrid";
 
-import { shallowEqual, useSelector } from "react-redux";
+import { shallowEqual, useSelector, useDispatch } from "react-redux";
+import { gallerySlice }                           from "store/Slices";
 
 const FilterBar = () => {
+	const dispatch = useDispatch();
 	const typeViewList = useSelector((state) => state.gallerySlice.typeViewList, shallowEqual);
 	const isFullSizeSideBar = useSelector((state) => state.gallerySlice.isFullSizeSideBar, shallowEqual);
+	const filterValue = useSelector((state) => state.gallerySlice.filter, shallowEqual);
 
 	const isPhotosViewList = typeViewList === "photos";
+
+	const filterOptions = [
+		{ value : "UPLOAD_DATE", label : "Fecha de subida" },
+		{ value : "CAPTURE_DATE", label : "Fecha de captura" },
+	];
+
+	const handlerChangeFilter = (value) => {
+		const indexValue = filterOptions.findIndex((item) => item.value === value);
+		const newFilter = filterOptions[indexValue];
+		dispatch(gallerySlice.actions.setFilter(newFilter));
+	};
+
 	return (
 		<Group
 			spacing="28px"
@@ -21,7 +36,9 @@ const FilterBar = () => {
 						w="30%"
 					>
 						<Select
+							value={filterValue?.value}
 							placeholder="Ordenar por"
+							onChange={(value) => handlerChangeFilter(value)}
 							styles={{
 								input : {
 									background   : "#f6f6f6",
@@ -41,6 +58,7 @@ const FilterBar = () => {
 									borderStyle  : "solid",
 									borderRadius : 8,
 									boxShadow    : "0 4px 10px rgba(0,0,0,0.1)",
+									width        : "32% !important",
 								},
 								item : {
 									fontFamily        : "Helvetica !important",
@@ -61,8 +79,7 @@ const FilterBar = () => {
 							}}
 							rightSection={<FaCaretDown size={10} />}
 							data={[
-								{ value : "filter 1", label : "filter 1" },
-								{ value : "filter 2", label : "filter 2" },
+								...filterOptions,
 							]}
 						/>
 					</Stack>

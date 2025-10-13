@@ -76,6 +76,7 @@ const GalleryEditorView = () => {
 				dispatch(gallerySlice.actions.setFolderId(null));
 			}
 			dispatch(gallerySlice.actions.setFilesDrop([]));
+			dispatch(gallerySlice.actions.clearPhotosUploaded());
 		});
 	};
 
