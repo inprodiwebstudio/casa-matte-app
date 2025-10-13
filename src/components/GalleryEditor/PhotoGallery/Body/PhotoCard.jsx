@@ -4,9 +4,10 @@ import { useEffect, useState }              from "react";
 import { changeResolutionImgUrl }           from "helpers/Functions/changeResolutionImgUrl";
 import { FaRegTrashCan, FaCheck }           from "react-icons/fa6";
 
-import styles             from "./styles";
-import { useDispatch }    from "react-redux";
-import { workSpaceSlice } from "store/Slices";
+import styles               from "./styles";
+import { useDispatch }      from "react-redux";
+import { workSpaceSlice }   from "store/Slices";
+import { openContextModal } from "@mantine/modals";
 
 
 const PhotoCard = ({
@@ -38,6 +39,12 @@ const PhotoCard = ({
 				pixels,
 			}
 		));
+	};
+
+	const onDeletePhoto = () => {
+		openContextModal({
+			modal : "confirmationDeletePhoto",
+		});
 	};
 
 	const handleLeaveDragger = () => {
@@ -78,6 +85,7 @@ const PhotoCard = ({
 							variant="light"
 							size="md"
 							className="trashAction"
+							onClick={onDeletePhoto}
 						>
 							<FaRegTrashCan size={14} />
 						</ActionIcon>
