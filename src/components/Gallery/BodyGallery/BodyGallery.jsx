@@ -5,7 +5,6 @@ import Folder         from "../Folder";
 import DropDoc        from "../DropDoc";
 import PhotoCard      from "../PhotoCard";
 import GalleryLoading from "../GalleryLoading";
-import { FaMobile } from "react-icons/fa";
 
 import {
 	Button,
@@ -16,11 +15,8 @@ import {
 import { gallerySlice, workSpaceSlice }          from "store/Slices";
 import { convertToArray, isValidArray, bindAll } from "helpers";
 import { CircleArrow, ActionCross }              from "Resources/icons";
-import { openContextModal } from "@mantine/modals";
-import { Center, Button as ButtonMantine } from "@mantine/core";
 import "./BodyGallery.scss";
 import { gallerySeparation }                     from "./BodyGallery.helpers";
-import { IconContext } from "react-icons";
 
 const BodyGallery = ({
 	isLoggedIn,
