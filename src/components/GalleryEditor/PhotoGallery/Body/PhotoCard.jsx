@@ -4,10 +4,11 @@ import { useEffect, useState }              from "react";
 import { changeResolutionImgUrl }           from "helpers/Functions/changeResolutionImgUrl";
 import { FaRegTrashCan, FaCheck }           from "react-icons/fa6";
 
-import styles               from "./styles";
-import { useDispatch }      from "react-redux";
-import { workSpaceSlice }   from "store/Slices";
-import { openContextModal } from "@mantine/modals";
+import styles                               from "./styles";
+import { useDispatch }                      from "react-redux";
+import { gallerySlice, workSpaceSlice }     from "store/Slices";
+import { closeAllModals, openContextModal } from "@mantine/modals";
+import { apiImageKit }                      from "store/api/imageKitApi";
 
 
 const PhotoCard = ({
@@ -16,12 +17,16 @@ const PhotoCard = ({
 	pixels,
 	urlImage,
 	isInUsePhoto,
+	publicId,
 }) => {
 	const { classes } = styles();
 	const dispatch = useDispatch();
 
 	const [ myImageUrl, setMyImageUrl ] = useState(undefined);
 	const [ isDragger, setIsDragger ] = useState(false);
+
+	const [galleryImagesMutastionDelete] = apiImageKit.useDeleteImagesMutation();
+
 	const loadImage = () => {
 		const img = new Image();
 		img.src = changeResolutionImgUrl(urlImage, { width : 300 }, 100);
@@ -41,9 +46,27 @@ const PhotoCard = ({
 		));
 	};
 
+	const handlerDeletePhotos = async () => {
+		dispatch(gallerySlice.actions.setLoadingMutationGallery(true));
+		try {
+			await galleryImagesMutastionDelete([publicId]);
+			dispatch(workSpaceSlice.actions.removePhotosDeleted({imagesIds : [id]}));
+			dispatch(gallerySlice.actions.deleteDataGallery({[id] : [id]}));
+			dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
+			closeAllModals();
+		} catch (error) {
+			dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
+			closeAllModals();
+			console.error(error);
+		}
+	};
+
 	const onDeletePhoto = () => {
 		openContextModal({
-			modal : "confirmationDeletePhoto",
+			modal      : "confirmationDeletePhoto",
+			innerProps : {
+				actionDelete : () => handlerDeletePhotos(),
+			},
 		});
 	};
 

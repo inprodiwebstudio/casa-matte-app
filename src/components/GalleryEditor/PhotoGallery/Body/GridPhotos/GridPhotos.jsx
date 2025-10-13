@@ -84,6 +84,7 @@ const GridPhotos = ({
 							urlImage={item?.url}
 							isInUsePhoto={isInUsePhoto(item?.id)}
 							id={item?.id}
+							publicId={item?.public_id}
 							pixels={item?.pixels}
 						/>
 					</Grid.Col>

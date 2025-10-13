@@ -3,7 +3,8 @@ import React                                        from "react";
 import "./ConfirmationDeletePhoto";
 import { closeAllModals }                           from "@mantine/modals";
 
-const ConfirmationDeletePhoto = () => {
+const ConfirmationDeletePhoto = ({innerProps}) => {
+	const {actionDelete} = innerProps;
 	const onCloseButton = () => {
 		closeAllModals();
 	};
@@ -65,6 +66,7 @@ const ConfirmationDeletePhoto = () => {
 						color="darkCasaMatte"
 						w="140px"
 						h="27px"
+						onClick={() => actionDelete()}
 					>
 						<Text
 							size="13px"
