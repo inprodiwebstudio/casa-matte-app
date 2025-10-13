@@ -26,6 +26,31 @@ const useStyles = createStyles(() => ({
 			left     : "5px",
 		},
 	},
+	folderCardBody : {
+		userSelect   : "none",
+		borderRadius : "10px",
+		position     : "relative",
+
+		"&:hover" : {
+			"& .trashAction" : {
+				opacity : 1,
+			},
+		},
+
+		"& .badgeTitle" : {
+			position   : "absolute",
+			top        : "0px",
+			background : "#edeeee",
+		},
+
+		"& .trashAction" : {
+			position   : "absolute",
+			top        : "-5px",
+			left       : "0px",
+			transition : "all ease 200ms",
+			opacity    : 0,
+		},
+	},
 })
 );
 
