@@ -69,7 +69,7 @@ export const gallerySlice = createSlice({
 		},
 		setPhotosUploaded : (state, {payload}) => {
 			const photoDataUpload = payload;
-			state.photosUploaded = [photoDataUpload, ...state.photosUploaded];
+			state.photosUploaded = [{...photoDataUpload}, ...state.photosUploaded];
 		},
 		getGalleryData : (state, {payload}) => {
 			const gallletyDataInsert = convertToObject(payload);
