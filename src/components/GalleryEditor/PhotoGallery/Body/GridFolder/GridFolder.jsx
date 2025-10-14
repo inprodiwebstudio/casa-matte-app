@@ -67,6 +67,7 @@ const GridFolder = ({
 							h={handlerSize}
 							w={handlerSize}
 							zoomContent={isMoreCols && 0.8}
+							onClick={onClickAddNewFolder}
 							icon={
 								<GoPlus size={13} />
 							}

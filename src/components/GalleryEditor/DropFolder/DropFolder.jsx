@@ -1,8 +1,8 @@
-import { Button, Card, Center, Input, Stack, Text } from "@mantine/core";
-import { GoPlus }                                   from "react-icons/go";
-import { useDropzone }                              from "react-dropzone/.";
-import { showNotification }                         from "@mantine/notifications";
-import FillCircle                                   from "../CradAction/FillCircle";
+import { Button, Card, Center, CloseButton, Input, Stack, Text } from "@mantine/core";
+import { GoPlus }                                                from "react-icons/go";
+import { useDropzone }                                           from "react-dropzone/.";
+import { showNotification }                                      from "@mantine/notifications";
+import FillCircle                                                from "../CradAction/FillCircle";
 
 import { useState } from "react";
 
@@ -49,6 +49,10 @@ const DropFolder = () => {
 		dispatch(gallerySlice.actions.setTypeDropedView(null));
 	};
 
+	const onClickClose = () => {
+		dispatch(gallerySlice.actions.setTypeDropedView(null));
+	};
+
 	const { getInputProps, getRootProps } = useDropzone({
 		multiple : true,
 		onDrop   : (files) => setPhotosFiles(files),
@@ -76,6 +80,8 @@ const DropFolder = () => {
 				style={{
 					background : "#f6f6f6",
 					flex       : 1,
+					position   : "relative",
+					overflow   : "visible",
 				}}
 			>
 				<Stack
@@ -140,6 +146,18 @@ const DropFolder = () => {
 						<input {...getInputProps()} />
 					</Center>
 				</Stack>
+				<CloseButton
+					radius={"50%"}
+					color="darkCasaMatte"
+					variant="filled"
+					size="sm"
+					style={{
+						position : "absolute",
+						top      : "-7px",
+						right    : "-7px",
+					}}
+					onClick={() => onClickClose()}
+				/>
 			</Card>
 			<Button
 				radius="md"
