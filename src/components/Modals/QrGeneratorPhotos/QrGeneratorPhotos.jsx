@@ -10,7 +10,7 @@ const QrGeneratorPhotos = () => {
 	const authorId = useSelector((state) => state.authSlice?.user?.username, shallowEqual);
 	const postId = useSelector((state) => state.workSpaceSlice?.data?.postTypeId, shallowEqual);
 
-	const linkValueQr = `http://192.168.100.129:5173/uploadImages/${authorId}/${postId}` ;
+	const linkValueQr = `https://app.casamatte.com/uploadImages/${authorId}/${postId}` ;
 
 	const handlerRefresh = () => {
 		window.location.reload();
