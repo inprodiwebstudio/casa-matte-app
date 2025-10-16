@@ -109,9 +109,10 @@ const DropPhotos = () => {
 				/>
 				<CardButton
 					action={() => setTypeActiveCard("gallery")}
-					label="Mis Galerías"
+					label="Mis Galerías (Próximamente)"
 					icon={<MdOutlinePhotoLibrary size={30} />}
 					isActive={typeActiveCard === "gallery"}
+					disabled={true}
 					stopPropagation
 				/>
 			</Stack>

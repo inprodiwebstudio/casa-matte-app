@@ -6,6 +6,7 @@ const CardButton = ({
 	label,
 	isActive = false,
 	stopPropagation = false,
+	disabled = false,
 }) => {
 	const handlerAction = (e) => {
 		if (stopPropagation) e.stopPropagation();
@@ -23,6 +24,7 @@ const CardButton = ({
 				background : isActive && "#58595b",
 				color      : isActive && "white",
 				transition : "all ease 200ms",
+				opacity    : disabled ? 0.5 : 1,
 			}}
 			onClick={handlerAction}
 			p={0}
