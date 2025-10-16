@@ -7,7 +7,7 @@ import { FaRegTrashCan }                          from "react-icons/fa6";
 import { GoPlus }                                 from "react-icons/go";
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
 import { MoonLoader }                             from "react-spinners";
-import { gallerySlice }                           from "store/Slices";
+import { gallerySlice, workSpaceSlice }           from "store/Slices";
 
 import styles                               from "./styles";
 import { closeAllModals, openContextModal } from "@mantine/modals";
@@ -52,13 +52,16 @@ const FolderCard = ({
 	const onDeleteFolder = async () => {
 		dispatch(gallerySlice.actions.setLoadingMutationGallery(true));
 		try {
-			await galleryFolderMutation({
+			const resp = await galleryFolderMutation({
 				data : {
 					userName,
 					postTypeId : postId,
 					folderName,
 				},
 			});
+			const { data } = resp;
+			const listOfIdsDeleted = data?.idsDeletedImages ?? [];
+			dispatch(workSpaceSlice.actions.removePhotosDeleted({imagesIds : listOfIdsDeleted}));
 			dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 			dispatch(gallerySlice.actions.deleteDataGallery({
 				[folderId] : true,
