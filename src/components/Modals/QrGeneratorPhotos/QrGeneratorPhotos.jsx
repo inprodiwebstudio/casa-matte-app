@@ -1,13 +1,20 @@
+import { useSelector, shallowEqual }                from "react-redux";
 import { Center, CloseButton, Stack, Text, Button } from "@mantine/core";
 import React                                        from "react";
-import "./ConfirmationDeleteFolder";
+import "./QrGeneratorPhotos.scss";
+import QRCode                                       from "react-qr-code";
 import { closeAllModals }                           from "@mantine/modals";
-import { shallowEqual, useSelector }                from "react-redux";
 
-const ConfirmationDeleteFolder = ({innerProps}) => {
-	const {actionDelete} = innerProps;
+const QrGeneratorPhotos = () => {
 
-	const isLoadingDelete = useSelector((state) => state.gallerySlice?.isLoadingMutation, shallowEqual);
+	const authorId = useSelector((state) => state.authSlice?.user?.username, shallowEqual);
+	const postId = useSelector((state) => state.workSpaceSlice?.data?.postTypeId, shallowEqual);
+
+	const linkValueQr = `https://app.casamatte.com/uploadImages/${authorId}/${postId}` ;
+
+	const handlerRefresh = () => {
+		window.location.reload();
+	};
 
 	const onCloseButton = () => {
 		closeAllModals();
@@ -36,7 +43,6 @@ const ConfirmationDeleteFolder = ({innerProps}) => {
 						left     : "95%",
 						right    : "0px",
 					}}
-					loading={isLoadingDelete}
 					onClick={onCloseButton}
 				/>
 				<Text
@@ -48,7 +54,7 @@ const ConfirmationDeleteFolder = ({innerProps}) => {
 						color         : "#58595b",
 					}}
 				>
-					¿Estás seguro?
+					Agregar Fotos a Galería Sin Titulo.
 				</Text>
 			</Stack>
 			<Text
@@ -59,9 +65,27 @@ const ConfirmationDeleteFolder = ({innerProps}) => {
 					fontFamily    : "Helvetica",
 					letterSpacing : "0px",
 				}}
-				w="90%"
+				w="45%"
 			>
-				Estás por eliminar permanentemente la carpeta, se borrará su contenido de cualquier parte donde haya sido utilizada.
+				Escanea el código QR
+				para subir fotos desde tu celular.
+			</Text>
+			<Center>
+				<QRCode value={linkValueQr} size={200} />
+			</Center>
+			<Text
+				size="12px"
+				align="center"
+				style={{
+					fontFamily    : "Helvetica",
+					letterSpacing : "0px",
+					color         : "#58595b",
+				}}
+				w="80%"
+			>
+				Sigue las instrucciones desde tu celular.
+				Cuando terminen de subirse las fotos, haz
+				click en DONE para ver las fotos en tu galería.
 			</Text>
 			<div className="buttons-container">
 				<Center>
@@ -71,8 +95,7 @@ const ConfirmationDeleteFolder = ({innerProps}) => {
 						color="darkCasaMatte"
 						w="140px"
 						h="27px"
-						onClick={() => actionDelete()}
-						loading={isLoadingDelete}
+						onClick={handlerRefresh}
 					>
 						<Text
 							size="13px"
@@ -86,7 +109,7 @@ const ConfirmationDeleteFolder = ({innerProps}) => {
 								lineHeight    : "12px",
 							}}
 						>
-							Aceptar
+							Done
 						</Text>
 					</Button>
 				</Center>
@@ -95,4 +118,4 @@ const ConfirmationDeleteFolder = ({innerProps}) => {
 	);
 };
 
-export default ConfirmationDeleteFolder;
+export default QrGeneratorPhotos;

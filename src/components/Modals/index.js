@@ -1,33 +1,35 @@
 //Own components
-import EditPhoto                 from "./EditPhoto";
-import EditText                  from "./EditText";
-import TestPdf                   from "./TestPdf";
-import ConfirmationDelete        from "./ConfirmationDelete";
-import ConfirmationToPrint       from "./ConfirmationToPrint";
-import ConfirmationDeleteFolder  from "./ConfirmationDeleteFolder";
-import AddNewPageConfirmation    from "./AddNewPageConfirmation";
-import NoMorePages               from "./NoMorePages";
-import MinPagesLimit             from "./MinPagesLimit";
-import DisclaimerDropPhotos      from "./DisclaimerDropPhotos";
-import DeletePageConfirm         from "./DeletePageConfirm";
-import RefreshNotification       from "./RefreshNotification";
-import DisclaimerNoMatchProgress from "./DisclaimerNoMatchProgress";
+import EditPhoto                from "./EditPhoto";
+import EditText                 from "./EditText";
+import TestPdf                  from "./TestPdf";
+import ConfirmationDelete       from "./ConfirmationDelete";
+import ConfirmationDeletePhoto  from "./ConfirmationDeletePhoto";
+import ConfirmationToPrint      from "./ConfirmationToPrint";
+import ConfirmationDeleteFolder from "./ConfirmationDeleteFolder";
+import AddNewPageConfirmation   from "./AddNewPageConfirmation";
+import NoMorePages              from "./NoMorePages";
+import MinPagesLimit            from "./MinPagesLimit";
+import DisclaimerDropPhotos     from "./DisclaimerDropPhotos";
+import DeletePageConfirm        from "./DeletePageConfirm";
+import QrGeneratorPhotos        from "./QrGeneratorPhotos";
+import RefreshNotification      from "./RefreshNotification";
 
 
 const modals = {
-	editPhoto                 : EditPhoto,
-	editText                  : EditText,
-	testPdf                   : TestPdf,
-	confirmationDelete        : ConfirmationDelete,
-	confirmationToPrint       : ConfirmationToPrint,
-	confirmationDeleteFolder  : ConfirmationDeleteFolder,
-	addNewPageConfirmation    : AddNewPageConfirmation,
-	noMorePages               : NoMorePages,
-	disclaimerDropPhotos      : DisclaimerDropPhotos,
-	minPagesLimit             : MinPagesLimit,
-	deletePageConfirm         : DeletePageConfirm,
-	refreshNotification       : RefreshNotification,
-	disclaimerNoMatchProgress : DisclaimerNoMatchProgress,
+	editPhoto                : EditPhoto,
+	editText                 : EditText,
+	testPdf                  : TestPdf,
+	confirmationDelete       : ConfirmationDelete,
+	confirmationDeletePhoto  : ConfirmationDeletePhoto,
+	confirmationToPrint      : ConfirmationToPrint,
+	confirmationDeleteFolder : ConfirmationDeleteFolder,
+	addNewPageConfirmation   : AddNewPageConfirmation,
+	noMorePages              : NoMorePages,
+	disclaimerDropPhotos     : DisclaimerDropPhotos,
+	minPagesLimit            : MinPagesLimit,
+	deletePageConfirm        : DeletePageConfirm,
+	qrGeneratorPhotos        : QrGeneratorPhotos,
+	refreshNotification      : RefreshNotification,
 };
 
 const modalsConfig = {
@@ -38,9 +40,8 @@ const modalsConfig = {
 	overlayOpacity      : 0.35,
 	closeOnClickOutside : true,
 	withCloseButton     : false,
-	radius              : "xs",
+	radius              : "xl",
 	size                : "50vw",
-	padding             : "0px",
 };
 
 export { modals, modalsConfig };

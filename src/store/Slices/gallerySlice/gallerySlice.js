@@ -1,5 +1,5 @@
-import { createSlice }     from "@reduxjs/toolkit";
-import { convertToObject } from "helpers";
+import { createSlice }                     from "@reduxjs/toolkit";
+import { convertToArray, convertToObject } from "helpers";
 
 
 const initialState = {
@@ -8,10 +8,20 @@ const initialState = {
 		name         : "route",
 		folderThumbs : [],
 	},
-	filter            : undefined,
+	filter : {
+		label : "FECHA DE CAPTURA",
+		value : "CAPTURE_DATE",
+	},
+	filesDrop         : [],
+	photosUploaded    : [],
 	typeDropedView    : null,
+	folderName        : null,
+	folderId          : null,
+	typeViewList      : "photos",
 	data              : null,
 	isFullSizeSideBar : false,
+	isHidePhotosInUse : false,
+	moreCols          : false,
 	isLoadingData     : false,
 	isLoadingMutation : false,
 	selectedData      : null,
@@ -22,7 +32,52 @@ export const gallerySlice = createSlice({
 	initialState,
 	reducers : {
 		setGalleryData : (state, {payload}) => {
-			state.data = {[payload?.id] : payload, ...state.data};
+			const insertNewData = {[payload?.id] : payload, ...state.data};
+
+			const constructGalleryList = convertToArray(insertNewData).map(image => {
+				const handlerContextDateCaptured = image.context?.custom ?? image.context;
+				return {
+					...image,
+					context : handlerContextDateCaptured,
+				};
+			});
+
+
+			const handlerGallerySorted = () => {
+				return constructGalleryList.sort((a, b) => new Date(b?.uploaded_at) + new Date(a?.uploaded_at));
+			};
+
+			const myNewGalleryData = convertToObject(handlerGallerySorted());
+			// state.data = newDataList;
+			state.data = myNewGalleryData;
+		},
+		togglePhotosInUse : (state) => {
+			state.isHidePhotosInUse = !state.isHidePhotosInUse;
+		},
+		setNewPhotosThumbNailsFolder : (state, {payload}) => {
+			const listOfPhotos = payload;
+			const sliceThumbnails = listOfPhotos.slice(0, 5);
+			const newListOfThumbnails = sliceThumbnails.map(image => image?.url);
+			state.data[state?.folderId].thumbNails = newListOfThumbnails;
+		},
+		setFolderId : (state, {payload}) => {
+			state.folderId = payload;
+		},
+		setFolderName : (state, {payload}) => {
+			state.folderName = payload;
+		},
+		setFilesDrop : (state, {payload}) => {
+			state.filesDrop = payload;
+		},
+		setTypeViewList : (state, {payload}) => {
+			state.typeViewList = payload;
+		},
+		setPhotosUploaded : (state, {payload}) => {
+			const photoDataUpload = payload;
+			state.photosUploaded = [{...photoDataUpload}, ...state.photosUploaded];
+		},
+		clearPhotosUploaded : (state) => {
+			state.photosUploaded = [];
 		},
 		getGalleryData : (state, {payload}) => {
 			const gallletyDataInsert = convertToObject(payload);
@@ -56,11 +111,7 @@ export const gallerySlice = createSlice({
 			state.selectedData = newData;
 		},
 		setTypeDropedView : (state, {payload}) => {
-			if (payload === state.typeDropedView) {
-				state.typeDropedView = null;
-			} else {
-				state.typeDropedView = payload;
-			}
+			state.typeDropedView = payload;
 		},
 		setGalleryPath : (state, {payload}) => {
 			state.galleryPathName = payload;
@@ -69,8 +120,12 @@ export const gallerySlice = createSlice({
 		setFilter : (state, {payload}) => {
 			state.filter = payload;
 		},
+		toggleMoreCols : (state) => {
+			state.moreCols = !state.moreCols;
+		},
 		toggleFullSizeSideBar : (state) => {
 			state.isFullSizeSideBar = !state.isFullSizeSideBar;
+			state.moreCols = false;
 		},
 		moveToFolder : (state, {payload}) => {
 			const isMoveInFolder = !!payload?.folderId;

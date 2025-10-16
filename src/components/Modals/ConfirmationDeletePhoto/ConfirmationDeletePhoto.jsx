@@ -1,14 +1,13 @@
 import { Center, CloseButton, Stack, Text, Button } from "@mantine/core";
 import React                                        from "react";
-import "./ConfirmationDeleteFolder";
+import "./ConfirmationDeletePhoto";
 import { closeAllModals }                           from "@mantine/modals";
 import { shallowEqual, useSelector }                from "react-redux";
 
-const ConfirmationDeleteFolder = ({innerProps}) => {
-	const {actionDelete} = innerProps;
-
+const ConfirmationDeletePhoto = ({innerProps}) => {
 	const isLoadingDelete = useSelector((state) => state.gallerySlice?.isLoadingMutation, shallowEqual);
 
+	const {actionDelete} = innerProps;
 	const onCloseButton = () => {
 		closeAllModals();
 	};
@@ -31,12 +30,12 @@ const ConfirmationDeleteFolder = ({innerProps}) => {
 					color="darkCasaMatte"
 					variant="filled"
 					size="sm"
+					loading={isLoadingDelete}
 					style={{
 						position : "absolute",
 						left     : "95%",
 						right    : "0px",
 					}}
-					loading={isLoadingDelete}
 					onClick={onCloseButton}
 				/>
 				<Text
@@ -61,7 +60,7 @@ const ConfirmationDeleteFolder = ({innerProps}) => {
 				}}
 				w="90%"
 			>
-				Estás por eliminar permanentemente la carpeta, se borrará su contenido de cualquier parte donde haya sido utilizada.
+				Estás por eliminar permanentemente la fotografía de tu galería, se borrará de cualquier parte donde haya sido utilizada.
 			</Text>
 			<div className="buttons-container">
 				<Center>
@@ -95,4 +94,4 @@ const ConfirmationDeleteFolder = ({innerProps}) => {
 	);
 };
 
-export default ConfirmationDeleteFolder;
+export default ConfirmationDeletePhoto;
