@@ -6,13 +6,17 @@ import { FaRegFolderOpen } from "react-icons/fa";
 import { BsStars }         from "react-icons/bs";
 
 //Slices
-import { gallerySlice } from "store/Slices";
+import { gallerySlice, workSpaceSlice } from "store/Slices";
 
 //Redux
-import { useDispatch } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { convertToArray }                         from "helpers";
 
 const ActionsGroup = ({...rest}) => {
 	const dispatch = useDispatch();
+
+	const galleryData = useSelector((state) => state.gallerySlice.data, shallowEqual);
+	const typeViewList = useSelector((state) => state.gallerySlice.typeViewList, shallowEqual);
 
 	const onClickAddPhotos = () => {
 		dispatch(gallerySlice.actions.setTypeDropedView("photos"));
@@ -22,6 +26,10 @@ const ActionsGroup = ({...rest}) => {
 	const onClickAddFolder = () => {
 		dispatch(gallerySlice.actions.setTypeDropedView("folders"));
 		dispatch(gallerySlice.actions.setTypeViewList("folders"));
+	};
+
+	const onClickAutofill = () => {
+		dispatch(workSpaceSlice.actions.autoFillImages(convertToArray(galleryData)));
 	};
 
 	return (
@@ -49,17 +57,22 @@ const ActionsGroup = ({...rest}) => {
 				}
 				onClick={() => onClickAddFolder()}
 			/>
-			<CardAction
-				withBorder
-				w="calc(25% - 11px)"
-				h="50px"
-				fillIcon={false}
-				icon={
-					<BsStars size={15} />
-				}
-				zoomContent={1}
-				label="Autofill"
-			/>
+			{
+				(typeViewList === "photos") && (
+					<CardAction
+						withBorder
+						w="calc(25% - 11px)"
+						h="50px"
+						fillIcon={false}
+						icon={
+							<BsStars size={15} />
+						}
+						onClick={onClickAutofill}
+						zoomContent={1}
+						label="Autofill"
+					/>
+				)
+			}
 		</Group>
 	);
 };

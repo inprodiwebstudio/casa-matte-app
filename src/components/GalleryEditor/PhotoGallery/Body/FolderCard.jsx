@@ -80,6 +80,15 @@ const FolderCard = ({
 		});
 	};
 
+	const onClickFolder = () => {
+		dispatch(gallerySlice.actions.setGalleryPath({
+			id           : folderName,
+			name         : folderName,
+			folderThumbs : [],
+		}));
+		dispatch(gallerySlice.actions.setTypeViewList("photosInFolder"));
+	};
+
 	return (
 		<Stack
 			w={w ?? "100%"}
@@ -123,7 +132,7 @@ const FolderCard = ({
 				<FaRegTrashCan size={14} />
 			</ActionIcon>
 			{
-				!urlImage && (
+				!urlImage ? (
 					<Center
 						h="100%"
 						w="100%"
@@ -165,6 +174,17 @@ const FolderCard = ({
 							!isLoadingChargeNewPhotos && (<input {...getInputProps()} />)
 						}
 					</Center>
+				) : (
+					<Stack
+						h="100%"
+						w="100%"
+						style={{
+							cursor : "pointer",
+						}}
+						onClick={onClickFolder}
+					>
+						&nbsp;
+					</Stack>
 				)
 			}
 		</Stack>

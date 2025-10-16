@@ -12,6 +12,7 @@ const GridPhotos = ({
 	const [ selectedImagesIds, setSelectedImagesIds ] = useState([]);
 
 	const workSpaceData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
+	const isHidePhotosInUse = useSelector((state) => state.gallerySlice.isHidePhotosInUse, shallowEqual);
 
 	const listOfPhotos = photos ?? [];
 
@@ -82,6 +83,7 @@ const GridPhotos = ({
 						span={cols}
 						style={{
 							aspectRatio : "1/1",
+							display     : (isHidePhotosInUse && isInUsePhoto(item?.id)) ? "none" : "block",
 						}}
 					>
 						<PhotoCard

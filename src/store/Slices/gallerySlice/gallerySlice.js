@@ -20,6 +20,7 @@ const initialState = {
 	typeViewList      : "photos",
 	data              : null,
 	isFullSizeSideBar : false,
+	isHidePhotosInUse : false,
 	moreCols          : false,
 	isLoadingData     : false,
 	isLoadingMutation : false,
@@ -49,6 +50,9 @@ export const gallerySlice = createSlice({
 			const myNewGalleryData = convertToObject(handlerGallerySorted());
 			// state.data = newDataList;
 			state.data = myNewGalleryData;
+		},
+		togglePhotosInUse : (state) => {
+			state.isHidePhotosInUse = !state.isHidePhotosInUse;
 		},
 		setNewPhotosThumbNailsFolder : (state, {payload}) => {
 			const listOfPhotos = payload;

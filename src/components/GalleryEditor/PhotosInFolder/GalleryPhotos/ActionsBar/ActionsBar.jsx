@@ -6,14 +6,14 @@ import SelectorGrid             from "./SelectorGrid";
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
 import { gallerySlice }                           from "store/Slices";
 
-const FilterBar = () => {
+const ActionsBar = () => {
 	const dispatch = useDispatch();
 	const typeViewList = useSelector((state) => state.gallerySlice.typeViewList, shallowEqual);
 	const isFullSizeSideBar = useSelector((state) => state.gallerySlice.isFullSizeSideBar, shallowEqual);
 	const filterValue = useSelector((state) => state.gallerySlice.filter, shallowEqual);
 	const isLoadingMutation = useSelector((state) => state.gallerySlice.isLoadingMutation, shallowEqual);
 
-	const isPhotosViewList = typeViewList === "photos";
+	const isPhotosViewList = typeViewList === "photosInFolder";
 
 	const filterOptions = [
 		{ value : "UPLOAD_DATE", label : "Fecha de subida" },
@@ -28,8 +28,10 @@ const FilterBar = () => {
 
 	return (
 		<Group
-			spacing="28px"
+			spacing="22px"
 			mt="12px"
+			align="center"
+			justify="center"
 		>
 			{
 				isPhotosViewList && (
@@ -37,10 +39,10 @@ const FilterBar = () => {
 						w="30%"
 					>
 						<Select
-							withinPortal
 							disabled={isLoadingMutation}
 							value={filterValue?.value}
 							placeholder="Ordenar por"
+							withinPortal
 							onChange={(value) => handlerChangeFilter(value)}
 							styles={{
 								input : {
@@ -104,4 +106,4 @@ const FilterBar = () => {
 	);
 };
 
-export default FilterBar;
+export default ActionsBar;

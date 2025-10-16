@@ -12,6 +12,7 @@ import { gallerySlice } from "store/Slices";
 
 //Fetch Slices Api
 import { apiImageKit } from "store/api/imageKitApi";
+import PhotosInFolder  from "./PhotosInFolder";
 
 const { useLazyGetDirentsListQuery } = apiImageKit;
 
@@ -19,6 +20,7 @@ const GetDataGallery = () => {
 	const dispatch = useDispatch();
 	const [ fetchGallery, { error } ] = useLazyGetDirentsListQuery();
 
+	const typeViewList = useSelector((state) => state.gallerySlice?.typeViewList, shallowEqual);
 	const galleryPath = useSelector((state) => state.gallerySlice.galleryPathName, shallowEqual);
 	const filter = useSelector((state) => state.gallerySlice.filter, shallowEqual);
 	const isLoading = useSelector((state) => state.gallerySlice.isLoadingData, shallowEqual);
@@ -61,6 +63,12 @@ const GetDataGallery = () => {
 	if (error) {
 		return (
 			<ErrorView />
+		);
+	}
+
+	if (typeViewList === "photosInFolder") {
+		return (
+			<PhotosInFolder />
 		);
 	}
 
