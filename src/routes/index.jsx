@@ -11,6 +11,7 @@ import { Loadable } from "core/components";
 
 // // Dashboard
 const WorkSpace = Loadable(lazy(() => import("pages/dashboard/WorkSpace")));
+const UploadImages = Loadable(lazy(() => import("pages/UploadImages")));
 const LayoutsNotFound = Loadable(lazy(() => import("pages/NotFoundLayouts")));
 const AuthValidate = Loadable(lazy(() => import("pages/AuthValidate")));
 const PrivateRoute = Loadable(lazy(() => import("components/global/PrivateRoute")));
@@ -50,6 +51,28 @@ const Router = () => {
 		{
 			path    : "admin",
 			element : <PrivateAdminRoute component={SearchPhotoBook} />,
+		},
+		{
+			path     : "uploadImages",
+			children : [
+				{
+					element : <Navigate to="/uploadImages/:authorId" replace />,
+					index   : true,
+				},
+				{
+					path     : ":authorId",
+					children : [
+						{
+							element : <Navigate to="/uploadImages/:authorId/:postId" replace />,
+							index   : true,
+						},
+						{
+							path    : ":postId",
+							element : <UploadImages />,
+						},
+					],
+				},
+			],
 		},
 		{
 			path     : "order",

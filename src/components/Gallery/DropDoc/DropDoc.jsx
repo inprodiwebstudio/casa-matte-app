@@ -10,7 +10,6 @@ import useSubmitImages from "helpers/Hooks/useSubmitImages";
 
 import {
 	bindAll,
-	convertToArray,
 	isValidArray,
 } from "helpers";
 
@@ -33,7 +32,7 @@ import {
 } from "Resources/icons";
 import "./DropDoc.scss";
 import { showNotification, cleanNotifications } from "@mantine/notifications";
-import { closeAllModals, openContextModal }     from "@mantine/modals";
+import { closeAllModals }                       from "@mantine/modals";
 import { useParams }                            from "react-router";
 
 const DropDoc = ({
@@ -188,17 +187,6 @@ const DropDoc = ({
 	};
 
 	const handlerSubmitPhotos = () => {
-		const listOfPhotos = convertToArray(photosData);
-		const isAvailablePhotos = isValidArray(listOfPhotos);
-
-		if (!isAvailablePhotos) {
-			return openContextModal({
-				modal      : "disclaimerDropPhotos",
-				innerProps : {
-					handdleSuccess : () => handleAddPhotos(),
-				},
-			});
-		}
 		return handleAddPhotos();
 	};
 
@@ -316,7 +304,7 @@ const DropDoc = ({
 								<div  {...getRootProps({className : "indicator-drop-container"})}>
 									<DropFile size="40px" />
 									<p>
-										haz click aquí para subir tus fotos o arrastra y suelta
+										DA UN TAP PARA CARGAR FOTOS
 									</p>
 									<input {...getInputProps()} />
 								</div>
