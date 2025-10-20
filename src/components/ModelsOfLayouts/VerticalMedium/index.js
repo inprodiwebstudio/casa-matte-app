@@ -71,7 +71,12 @@ import Mod31Tn from "./ThumbNails/Mod31Tn";
 import Mod32Tn from "./ThumbNails/Mod32Tn";
 import Mod33Tn from "./ThumbNails/Mod33Tn";
 import Mod34Tn from "./ThumbNails/Mod34Tn";
+import Mod35Tn from "./ThumbNails/Mod35Tn";
+import Mod36Tn from "./ThumbNails/Mod36Tn";
+import Mod37Tn from "./ThumbNails/Mod37Tn";
+import Mod38Tn from "./ThumbNails/Mod38Tn";
 
+import ModTextLayout from "components/global/ModTextLayout";
 
 const VerticalMedium = {
 	Mod1 : {
@@ -311,6 +316,197 @@ const VerticalMedium = {
 		numberPhotos    : 5,
 		cat             : "fotos",
 		layoutThumbNail : Mod34Tn,
+	},
+	Mod35 : {
+		id              : "Mod35",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 1,
+		cat             : "texto",
+		layoutThumbNail : Mod35Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: center;'><span style='font-size: 28px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "45px",
+			},
+			letterSpacing : "6.5px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: center;'><span style='font-size: 28px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>",
+				position : {
+					x : 159.99995727539064,
+					y : 359.9999999999998,
+				},
+				sizes : {
+					width  : "300px",
+					height : "45px",
+				},
+				letterSpacing : "6.5px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod36 : {
+		id              : "Mod36",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 1,
+		cat             : "texto",
+		layoutThumbNail : Mod36Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: right;'><span style='font-size: 28px; font-family: Aitana-Regular;'>TÍTULO 2</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "42px",
+			},
+			letterSpacing : "3px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: right;'><span style='font-size: 28px; font-family: Aitana-Regular;'>TÍTULO 2</span></p>",
+				position : {
+					x : 266.6666210123699,
+					y : 701.666623942057,
+				},
+				sizes : {
+					width  : "300px",
+					height : "42px",
+				},
+				letterSpacing : "3px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod37 : {
+		id              : "Mod37",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 2,
+		cat             : "texto",
+		layoutThumbNail : Mod37Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: right;'><span style='font-size: 28px; font-family: Aitana-Regular;'>TÍTULO 2</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "42px",
+			},
+			letterSpacing : "3px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: center;'><span style='font-size: 28px; font-family: Aitana-Regular;'>TÍTULO</span></p>",
+				position : {
+					x : 158.33328580403662,
+					y : 351.6665584513345,
+				},
+				sizes : {
+					width  : "300px",
+					height : "43px",
+				},
+				letterSpacing : "6px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: center;'><span style='font-size: 10px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>",
+				position : {
+					x : 158.3332865540366,
+					y : 385.93333180745464,
+				},
+				sizes : {
+					width  : "300px",
+					height : "25px",
+				},
+				letterSpacing : "2px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod38 : {
+		id              : "Mod38",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 2,
+		cat             : "texto",
+		layoutThumbNail : Mod38Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: right;'><span style='font-size: 28px; font-family: JosefinSans-Light;'>TÍTULO</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "60px",
+			},
+			letterSpacing : "3px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: right;'><span style='font-size: 28px; font-family: JosefinSans-Light;'>TÍTULO</span></p>",
+				position : {
+					x : 0,
+					y : 0,
+				},
+				sizes : {
+					width  : "300px",
+					height : "60px",
+				},
+				letterSpacing : "3px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: right;'><span style='font-size: 10px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>",
+				position : {
+					x : 0,
+					y : 0,
+				},
+				sizes : {
+					width  : "200px",
+					height : "30px",
+				},
+				letterSpacing : "2px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+		linesDecoration : [
+			{
+				orientation : "h",
+				long        : "100px",
+				weight      : "2px",
+				position    : {
+					x : 693.0232558139539,
+					y : 795.3488372093026,
+				},
+			},
+		],
 	},
 };
 
