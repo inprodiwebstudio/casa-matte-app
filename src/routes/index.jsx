@@ -22,7 +22,6 @@ const ErrorPage = Loadable(lazy(() => import("pages/ErrorPage")));
 const Router = () => {
 	// const { hasUpdate } = useAppVersionChecker();
 
-	
 	// useEffect(() => {
 	// 	if (hasUpdate) {
 	// 		openContextModal({
