@@ -75,6 +75,12 @@ import Mod35Tn from "./ThumbNails/Mod35Tn";
 import Mod36Tn from "./ThumbNails/Mod36Tn";
 import Mod37Tn from "./ThumbNails/Mod37Tn";
 import Mod38Tn from "./ThumbNails/Mod38Tn";
+import Mod39Tn from "./ThumbNails/Mod39Tn";
+import Mod40Tn from "./ThumbNails/Mod40Tn";
+import Mod41Tn from "./ThumbNails/Mod41Tn";
+import Mod42Tn from "./ThumbNails/Mod42Tn";
+import Mod43Tn from "./ThumbNails/Mod43Tn";
+import Mod44Tn from "./ThumbNails/Mod44Tn";
 
 import ModTextLayout from "components/global/ModTextLayout";
 
@@ -470,12 +476,12 @@ const VerticalMedium = {
 			{
 				text     : "<p style='text-align: right;'><span style='font-size: 28px; font-family: JosefinSans-Light;'>TÍTULO</span></p>",
 				position : {
-					x : 0,
-					y : 0,
+					x : 268.33333333333326,
+					y : 679.9999923706052,
 				},
 				sizes : {
 					width  : "300px",
-					height : "60px",
+					height : "40px",
 				},
 				letterSpacing : "3px",
 				gapSpacing    : undefined,
@@ -484,8 +490,8 @@ const VerticalMedium = {
 			{
 				text     : "<p style='text-align: right;'><span style='font-size: 10px; font-family: Inter-Lifght;'>SUBTÍTULO 2</span></p>",
 				position : {
-					x : 0,
-					y : 0,
+					x : 361.6666666666672,
+					y : 718.3333333333339,
 				},
 				sizes : {
 					width  : "200px",
@@ -499,11 +505,339 @@ const VerticalMedium = {
 		linesDecoration : [
 			{
 				orientation : "h",
-				long        : "100px",
+				long        : "30px",
 				weight      : "2px",
 				position    : {
-					x : 693.0232558139539,
-					y : 795.3488372093026,
+					x : 530.0000000000007,
+					y : 654.9999999999998,
+				},
+			},
+		],
+	},
+	Mod39 : {
+		id              : "Mod39",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 1,
+		cat             : "texto",
+		layoutThumbNail : Mod39Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: center;'><span style='font-size: 10px; font-family: Inter-Lifght;'>PARA PAPÁ. UN HOMENAJE A TU VIDA. GRACIAS POR TANTOS AÑOS DE CARIÑO Y AMOR, TE QUEREMOS SIEMPRE.</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "60px",
+			},
+			letterSpacing : "0px",
+			gapSpacing    : undefined,
+			lineHeight    : "15px",
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: center;'><span style='font-size: 10px; font-family: Inter-Lifght;'>PARA PAPÁ. UN HOMENAJE A TU VIDA. GRACIAS POR TANTOS AÑOS DE CARIÑO Y AMOR, TE QUEREMOS SIEMPRE.</span></p>",
+				position : {
+					x : 156.6666239420573,
+					y : 366.6666190592444,
+				},
+				sizes : {
+					width  : "300px",
+					height : "43px",
+				},
+				letterSpacing : "0px",
+				gapSpacing    : undefined,
+				lineHeight    : "15px",
+			},
+		],
+	},
+	Mod40 : {
+		id              : "Mod40",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 1,
+		cat             : "texto",
+		layoutThumbNail : Mod40Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: right;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Para papá, un homenaje a tu vida. Gracias por tantos años de cariño y amor. Te queremos siempre.</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "60px",
+			},
+			letterSpacing : undefined,
+			gapSpacing    : undefined,
+			lineHeight    : "14px",
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: right;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Para papá, un homenaje a tu vida. Gracias por tantos años de cariño y amor. Te queremos siempre.</span></p>",
+				position : {
+					x : 274.9999543457032,
+					y : 703.333285725911,
+				},
+				sizes : {
+					width  : "300px",
+					height : "43px",
+				},
+				letterSpacing : "0px",
+				gapSpacing    : undefined,
+				lineHeight    : "14px",
+			},
+		],
+		linesDecoration : [
+			{
+				orientation : "h",
+				long        : "30px",
+				weight      : "2px",
+				position    : {
+					x : 538.3333333333337,
+					y : 671.6666666666665,
+				},
+			},
+		],
+	},
+	Mod41 : {
+		id              : "Mod41",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 2,
+		cat             : "texto",
+		layoutThumbNail : Mod41Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: left;'><span style='font-size: 15px; font-family: Aitana-Regular;'>TÍTULO</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "60px",
+			},
+			letterSpacing : "1.7px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 15px; font-family: Aitana-Regular;'>TÍTULO</span></p>",
+				position : {
+					x : 288.33328580403656,
+					y : 508.3332219930016,
+				},
+				sizes : {
+					width  : "143px",
+					height : "25px",
+				},
+				letterSpacing : "1.7px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: justify;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam.</span></p>",
+				position : {
+					x : 289.3333231751301,
+					y : 566.999911101074,
+				},
+				sizes : {
+					width  : "274px",
+					height : "175px",
+				},
+				letterSpacing : "0.5px",
+				gapSpacing    : undefined,
+				lineHeight    : "16px",
+			},
+		],
+		linesDecoration : [
+			{
+				orientation : "h",
+				long        : "30px",
+				weight      : "2px",
+				position    : {
+					x : 293.33333333333417,
+					y : 529.9999999999995,
+				},
+			},
+		],
+	},
+	Mod42 : {
+		id              : "Mod42",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 2,
+		cat             : "texto",
+		layoutThumbNail : Mod42Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: left;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>MAMÁ</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "60px",
+			},
+			letterSpacing : "1.7px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>MAMÁ</span></p>",
+				position : {
+					x : 151.66661913736993,
+					y : 253.33322199300142,
+				},
+				sizes : {
+					width  : "143px",
+					height : "25px",
+				},
+				letterSpacing : "1.7px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: justify;'><span style='font-size: 12px; font-family: JosefinSans-Light;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam.</span></p>",
+				position : {
+					x : 152.66666089990116,
+					y : 306.9999008232611,
+				},
+				sizes : {
+					width  : "321px",
+					height : "195px",
+				},
+				letterSpacing : "0.5px",
+				gapSpacing    : undefined,
+				lineHeight    : "16px",
+			},
+		],
+		linesDecoration : [
+			{
+				orientation : "h",
+				long        : "30px",
+				weight      : "2px",
+				position    : {
+					x : 156.66666666666737,
+					y : 268.3333333333329,
+				},
+			},
+		],
+	},
+	Mod43 : {
+		id              : "Mod43",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 2,
+		cat             : "texto",
+		layoutThumbNail : Mod43Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: left;'><span style='font-size: 15px; font-family: JosefinSans-Light;'>TÍTULO:</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "60px",
+			},
+			letterSpacing : "1.7px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 15px; font-family: JosefinSans-Light;'>TÍTULO:</span></p>",
+				position : {
+					x : 114.99995241471612,
+					y : 87.59998779919172,
+				},
+				sizes : {
+					width  : "143px",
+					height : "25px",
+				},
+				letterSpacing : "1.7px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align:justify;'><span style='font-family:JosefinSans-Light;font-size:12px;'>Obunte cone ingul utura dem fue crissendeli, quit, patam dienterendam med cont. Grat vit, vidensupere, note foridiortui serobse nerox ses, o unum untuam num sentrar idicaed Catus, nor ad mo egilincultus bonsum perunti, Catim quodiemum, num ac mum vestratu istiost ritabutem in notabus nequem invem omnius contimp otisquam factorei tario taremo inatam in stre manteliis, et is? P. Sati publin videt verraticae esimoris. La aurnicae que ponsula tqueruntere vereorum Patum quam ac ingulin prorte, quitus ili in temussedo, num pata verobse ntiam.</span></p><p style='text-align:justify;'>&nbsp;</p><p style='text-align:justify;'><span style='font-family:JosefinSans-Light;'>Erri, furo, P. Ullatas treviri strae ta, delaris plinatum morunum sulatum sum esum Patum consulocaes consil hilium intemqu itesusces liis, nonsupiorum adhuiuscero eliis aus comnequam facips, num vere aridien terum. Catem.</span></p><p style='text-align:justify;'><span style='font-family:JosefinSans-Light;'>Sim ore poporisse forum ner uri ponlocu picatam me etortes tilius actuam pra? Mei sename auconum prorei ina, credica ad sedicatat. Unum acrenihiciam inte adducon suspionsulis cupiese strionsum, probse cotiae crem immorimus virmilius cotem tus, cont. Catum, vivir locaecre de tum aut que num sesidet erficonihi, conte detil verdis.</span></p><p style='text-align:justify;'>&nbsp;</p><p style='text-align:justify;'><span style='font-family:JosefinSans-Light;'>Averfic iverica elium, C. Vere, quo iu vissen des Catidie inte consilia atia es convent erternum etre crena, intrum, clute et? Os, uro C. Ifessedeo, clus proxime mo virisqua tum que ne milicortius, supicaet niquium inicula videt omprit. Epermilnem pribus, ne audem, consuliaet, crebus hocresilist omnerestrum us hos et? Ximilia Sp. Ita retiam suliste quo tes bonsus, quam, con Etra pulicaet; nonve, C. Tum supio vitiam erus, nermaxime estodius, quisquo ero imaio alari sinte reis ina mo vis senatim precus su viturei id conticibunu mod dinarit, sedis. Neque nes dientereis detiam simurni quamed dicivil intellari fue patrum ma, sulocci peropota noti intem nox mo acciterum vico nestia? Em dea iam int aut vera ve, P. At omnerte, erideat raverio rtemove rorisqu amplicae ellaris.</span></p><p style='text-align:justify;'>&nbsp;</p><p style='text-align:justify;'><span style='font-family:JosefinSans-Light;'>Jero.</span></p>",
+				position : {
+					x : 116.66663001695234,
+					y : 126.66655406025313,
+				},
+				sizes : {
+					width  : "389px",
+					height : "557px",
+				},
+				letterSpacing : "0.5px",
+				gapSpacing    : undefined,
+				lineHeight    : "15px",
+			},
+		],
+	},
+	Mod44 : {
+		id              : "Mod44",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 2,
+		cat             : "texto",
+		layoutThumbNail : Mod44Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: center;'><span style='font-size: 28px; font-family: Aitana-Regular;'>TÍTULO</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "60px",
+			},
+			letterSpacing : "3px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: center;'><span style='font-size: 28px; font-family: Aitana-Regular;'>TÍTULO</span></p>",
+				position : {
+					x : 44.66660493940623,
+					y : 262.5999800879979,
+				},
+				sizes : {
+					width  : "527px",
+					height : "42px",
+				},
+				letterSpacing : "3px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Índice 1</span></p><p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Índice 2</span></p><p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Índice 3</span></p><p style='text-align: center;'><span style='font-size: 12px; font-family: Spectral-Light-Italic;'>Índice 4</span></p>",
+				position : {
+					x : 114.99995495898006,
+					y : 379.9999269721158,
+				},
+				sizes : {
+					width  : "389px",
+					height : "133px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : "12px",
+				lineHeight    : undefined,
+			},
+		],
+		linesDecoration : [
+			{
+				orientation : "v",
+				long        : "50px",
+				weight      : "1px",
+				position    : {
+					x : 283.33333333333417,
+					y : 316.6666666666667,
 				},
 			},
 		],
