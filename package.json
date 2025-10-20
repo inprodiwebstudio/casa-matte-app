@@ -76,6 +76,7 @@
     "react-image-file-resizer": "^0.4.8",
     "react-pdf-html": "1.1.18",
     "react-perfect-scrollbar": "^1.5.8",
+    "react-qr-code": "^2.0.18",
     "react-redux": "^8.0.2",
     "react-router": "^6.4.3",
     "react-router-dom": "^6.4.0",
