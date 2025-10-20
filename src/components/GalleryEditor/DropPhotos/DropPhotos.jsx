@@ -99,7 +99,6 @@ const DropPhotos = () => {
 					label="Celular"
 					icon={<HiOutlineDevicePhoneMobile size={30} />}
 					isActive={typeActiveCard === "phone"}
-					disabled
 					stopPropagation
 				/>
 				<CardButton
