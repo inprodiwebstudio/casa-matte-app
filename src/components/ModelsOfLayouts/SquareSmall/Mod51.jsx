@@ -1,0 +1,79 @@
+import {Stack, Flex } from "@mantine/core";
+//Own components
+import Text              from "components/LayoutHandler/Text";
+import DividerLayout     from "components/LayoutHandler/DividerLayout";
+import { textInsertion } from "helpers";
+import { TextShell }     from "core/components";
+
+
+const Mod51 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
+
+	const defaultTitle = "<p style='text-align: left;'><span style='font-size: 20px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+
+	const defaultIndices = "<p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 1</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 2</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 3</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 4</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 5</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 6</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 7</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 8</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 9</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Índice 10</span></p>";
+
+	return (
+		<Flex
+			p="10%"
+			w="100%"
+			h="100%"
+			justify="center"
+			align="center"
+		>
+			<Stack
+				spacing={isInWorkSpace ? "25px" : "0.1em"}
+				sx={{overflow : "hidden"}}
+				w={"30%"}
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
+			>
+				<Stack
+					spacing={isInWorkSpace ? "20px" : "0.1em"}
+				>
+					<Text
+						sizes={{
+							"chico"   : "22px",
+							"regular" : "24px",
+							"grande"  : "26px",
+						}}
+						typeText="subtitle"
+						align="left"
+						sheetNo={sheetNo}
+						letterSpacing="3px"
+						textShell={() => <TextShell.TitleSmall width="100%" align="left" />}
+						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+						textNo={0}
+					/>
+					<DividerLayout long="12%" position="h" />
+				</Stack>
+				<Text
+					sizes={{
+						"chico"   : "15px",
+						"regular" : "10px",
+						"grande"  : "20px",
+					}}
+					typeText="index"
+					align="left"
+					gapSpacing="12px"
+					sheetNo={sheetNo}
+					textShell={() => <TextShell.BodyIndices align="left" />}
+					data={textInsertion(data?.text[1], defaultIndices, isInWorkSpace)}
+					isInPaginator={isInPaginator}
+					isThumbNail={isThumbNail}
+					textNo={1}
+				/>
+			</Stack>
+		</Flex>
+	);
+};
+
+export default Mod51;

@@ -2,6 +2,7 @@
 //LayoutsMods
 import VerticalLarge            from "components/ModelsOfLayouts/VerticalLarge";
 import VerticalMedium           from "components/ModelsOfLayouts/VerticalMedium";
+import SquareSmall              from "components/ModelsOfLayouts/SquareSmall";
 import SquareLarge              from "components/MyModsLayouts/SquareLarge";
 import VerticalMediumSencillo   from "components/MyModsLayouts/Sencillo/VerticalMedium";
 import VerticalLargeSencillo    from "components/MyModsLayouts/Sencillo/VerticalLarge";
@@ -12,7 +13,6 @@ import VerticalLargePremium     from "components/MyModsLayouts/Premium/VerticalL
 import HorizontalLargePremium   from "components/MyModsLayouts/Premium/HorizontalLarge";
 import HorizontalMediumPremium  from "components/MyModsLayouts/Premium/HorizontalMedium";
 import HorizontalLarge          from "components/MyModsLayouts/HorizontalLarge";
-import SquareSmall              from "components/MyModsLayouts/SquareSmall";
 import SquareSmallSencillo      from "components/MyModsLayouts/Sencillo/SquareSmall";
 import SquareLrageSencillo      from "components/MyModsLayouts/Sencillo/SquareLarge";
 import HorizontalMediumSencillo from "components/MyModsLayouts/Sencillo/HorizontalMedium";
