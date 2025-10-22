@@ -81,6 +81,10 @@ import Mod41Tn from "./ThumbNails/Mod41Tn";
 import Mod42Tn from "./ThumbNails/Mod42Tn";
 import Mod43Tn from "./ThumbNails/Mod43Tn";
 import Mod44Tn from "./ThumbNails/Mod44Tn";
+import Mod45Tn from "./ThumbNails/Mod45Tn";
+import Mod46Tn from "./ThumbNails/Mod46Tn";
+import Mod47Tn from "./ThumbNails/Mod47Tn";
+
 
 import ModTextLayout from "components/global/ModTextLayout";
 
@@ -838,6 +842,343 @@ const VerticalMedium = {
 				position    : {
 					x : 283.33333333333417,
 					y : 316.6666666666667,
+				},
+			},
+		],
+	},
+	Mod45 : {
+		id              : "Mod45",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 2,
+		cat             : "texto",
+		layoutThumbNail : Mod45Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: center;'><span style='font-size: 32px; font-family: JosefinSans-Light;'>TÍTULO</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "60px",
+			},
+			letterSpacing : "5px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: center;'><span style='font-size: 32px; font-family: JosefinSans-Light;'>TÍTULO</span></p>",
+				position : {
+					x : 47.999938272739556,
+					y : 269.26664675466463,
+				},
+				sizes : {
+					width  : "527px",
+					height : "42px",
+				},
+				letterSpacing : "5px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: center;'><span style='font-size: 10px; font-family: JosefinSans-Light;'>Índice 1</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: JosefinSans-Light;'>Índice 2</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: JosefinSans-Light;'>Índice 3</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: JosefinSans-Light;'>Índice 4</span></p><p style='text-align: center;'><span style='font-size: 10px; font-family: JosefinSans-Light;'>Índice 5</span></p>",
+				position : {
+					x : 114.99995495898006,
+					y : 379.9999269721158,
+				},
+				sizes : {
+					width  : "389px",
+					height : "133px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : "23px",
+				lineHeight    : undefined,
+			},
+		],
+		linesDecoration : [
+			{
+				orientation : "h",
+				long        : "30px",
+				weight      : "1px",
+				position    : {
+					x : 291.66666666666765,
+					y : 321.66666666666674,
+				},
+			},
+		],
+	},
+	Mod46 : {
+		id              : "Mod46",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 6,
+		cat             : "texto",
+		layoutThumbNail : Mod46Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: center;'><span style='font-size: 32px; font-family: JosefinSans-Light;'>TÍTULO</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "60px",
+			},
+			letterSpacing : "5px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>TÍTULO</span></p>",
+				position : {
+					x : 252.99993485978766,
+					y : 302.59998304489204,
+				},
+				sizes : {
+					width  : "527px",
+					height : "42px",
+				},
+				letterSpacing : "1.5px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>TÍTULO</span></p>",
+				position : {
+					x : 254.6666015264544,
+					y : 452.6000135624706,
+				},
+				sizes : {
+					width  : "527px",
+					height : "42px",
+				},
+				letterSpacing : "1.5px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 16px; font-family: Aitana-Regular;'>TÍTULO</span></p>",
+				position : {
+					x : 252.99993485978766,
+					y : 142.59997816207948,
+				},
+				sizes : {
+					width  : "527px",
+					height : "42px",
+				},
+				letterSpacing : "1.5px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 1</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 2</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p>",
+				position : {
+					x : 256.3332695583015,
+					y : 349.2666529233326,
+				},
+				sizes : {
+					width  : "527px",
+					height : "80px",
+				},
+				letterSpacing : "1px",
+				gapSpacing    : "10px",
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 1</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 2</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p>",
+				position : {
+					x : 254.66660152645375,
+					y : 194.26669219202842,
+				},
+				sizes : {
+					width  : "527px",
+					height : "80px",
+				},
+				letterSpacing : "1px",
+				gapSpacing    : "10px",
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 1</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 2</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p>",
+				position : {
+					x : 259.6666028916346,
+					y : 502.5999862566679,
+				},
+				sizes : {
+					width  : "527px",
+					height : "80px",
+				},
+				letterSpacing : "1px",
+				gapSpacing    : "10px",
+				lineHeight    : undefined,
+			},
+		],
+		linesDecoration : [
+			{
+				orientation : "h",
+				long        : "30px",
+				weight      : "1px",
+				position    : {
+					x : 261.66666666666754,
+					y : 466.6666666666661,
+				},
+			},
+			{
+				orientation : "h",
+				long        : "30px",
+				weight      : "1px",
+				position    : {
+					x : 258.33333333333417,
+					y : 316.66666666666595,
+				},
+			},
+			{
+				orientation : "h",
+				long        : "30px",
+				weight      : "1px",
+				position    : {
+					x : 258.33333333333417,
+					y : 158.33333333333275,
+				},
+			},
+		],
+	},
+	Mod47 : {
+		id              : "Mod47",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 6,
+		cat             : "texto",
+		layoutThumbNail : Mod47Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: center;'><span style='font-size: 32px; font-family: JosefinSans-Light;'>TÍTULO</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "60px",
+			},
+			letterSpacing : "1px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 16px; font-family: JosefinSans-Light;'>TÍTULO</span></p>",
+				position : {
+					x : 252.99993485978766,
+					y : 302.59998304489204,
+				},
+				sizes : {
+					width  : "527px",
+					height : "42px",
+				},
+				letterSpacing : "1px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 16px; font-family: JosefinSans-Light;'>TÍTULO</span></p>",
+				position : {
+					x : 254.6666015264544,
+					y : 452.6000135624706,
+				},
+				sizes : {
+					width  : "527px",
+					height : "42px",
+				},
+				letterSpacing : "1px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 16px; font-family: JosefinSans-Light;'>TÍTULO</span></p>",
+				position : {
+					x : 252.99993485978766,
+					y : 142.59997816207948,
+				},
+				sizes : {
+					width  : "527px",
+					height : "42px",
+				},
+				letterSpacing : "1px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 1</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 2</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p>",
+				position : {
+					x : 256.3332695583015,
+					y : 349.2666529233326,
+				},
+				sizes : {
+					width  : "527px",
+					height : "80px",
+				},
+				letterSpacing : "1.3px",
+				gapSpacing    : "9px",
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 1</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 2</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p>",
+				position : {
+					x : 254.66660152645375,
+					y : 194.26669219202842,
+				},
+				sizes : {
+					width  : "527px",
+					height : "80px",
+				},
+				letterSpacing : "1.3px",
+				gapSpacing    : "9px",
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 1</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 2</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p><p style='text-align: left;'><span style='font-size: 8px; font-family: Inter-Lifght;'>ÍNDICE 3</span></p>",
+				position : {
+					x : 259.6666028916346,
+					y : 502.5999862566679,
+				},
+				sizes : {
+					width  : "527px",
+					height : "80px",
+				},
+				letterSpacing : "1.3px",
+				gapSpacing    : "9px",
+				lineHeight    : undefined,
+			},
+		],
+		linesDecoration : [
+			{
+				orientation : "h",
+				long        : "30px",
+				weight      : "1px",
+				position    : {
+					x : 261.66666666666754,
+					y : 466.6666666666661,
+				},
+			},
+			{
+				orientation : "h",
+				long        : "30px",
+				weight      : "1px",
+				position    : {
+					x : 258.33333333333417,
+					y : 316.66666666666595,
+				},
+			},
+			{
+				orientation : "h",
+				long        : "30px",
+				weight      : "1px",
+				position    : {
+					x : 258.33333333333417,
+					y : 158.33333333333275,
 				},
 			},
 		],
