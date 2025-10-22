@@ -13,6 +13,7 @@ import styles                               from "./styles";
 import { closeAllModals, openContextModal } from "@mantine/modals";
 import { useParams }                        from "react-router";
 import { apiImageKit }                      from "store/api/imageKitApi";
+import regularFormatImage                   from "helpers/Functions/regularFormatImage";
 
 
 const FolderCard = ({
@@ -101,7 +102,7 @@ const FolderCard = ({
 			className={classes.folderCardBody}
 			style={{
 				...(urlImage && {
-					background : "url(\"" + changeResolutionImgUrl(urlImage, { width : 200 }, 100) + "\") center center / cover no-repeat",
+					background : "url(\"" + changeResolutionImgUrl( regularFormatImage(urlImage), { width : 200 }, 100) + "\") center center / cover no-repeat",
 				}),
 				...(!urlImage && {
 					background : "#f6f6f6ff",
