@@ -1,24 +1,18 @@
 import {Stack, Flex } from "@mantine/core";
 import ImgLayout      from "components/LayoutHandler/ImgLayout";
 //Own components
-import Text              from "components/LayoutHandler/Text";
-import { TextShell }     from "core/components";
-import { textInsertion } from "helpers";
+import Text                              from "components/LayoutHandler/Text";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
+import { useContext }                    from "react";
 
 
 const Mod50 = ({
-	data,
-	isInWorkSpace,
 	sheetNo,
-	isInPaginator,
-	isThumbNail,
-	pageNo,
-	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 
-	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
+	const listOfTexts = Object.values(currentConfigPhotoBook?.[`sheet${sheetNo}`]?.texts ?? {});
 
 	return (
 		<Flex
@@ -31,58 +25,24 @@ const Mod50 = ({
 			gap="10%"
 			direction="column"
 		>
-			<Stack
-				spacing="0em"
-				w="70%"
-				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
-			>
-				<Text
-					sizes={{
-						"chico"   : "38px",
-						"regular" : "42px",
-						"grande"  : "46px",
-					}}
-					typeText="title"
-					align="center"
-					sheetNo={sheetNo}
-					textShell={() => <TextShell.Title />}
-					letterSpacing="4px"
-					data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-					textNo={0}
-				/>
-			</Stack>
-			<Stack w="55%" h="100%">
+			<Stack w="55%" h="75%">
 				<ImgLayout
-					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
 					imageNo={0}
-					urlImage={data?.photos[0] ?? {}}
 				/>
 			</Stack>
-			<Stack
-				spacing="0em"
-				w="60%"
-				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
-			>
-				<Text
-					sizes={{
-						"chico"   : "14px",
-						"regular" : "15px",
-						"grande"  : "16px",
-					}}
-					typeText="subtitle"
-					align="center"
-					sheetNo={sheetNo}
-					letterSpacing="2px"
-					textShell={() => <TextShell.SubTitle />}
-					data={textInsertion(data?.text[1], defaultSubtitle, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-					textNo={1}
-				/>
-			</Stack>
+			{listOfTexts.map((item, index) => {
+				return (
+					<Text
+						key={index}
+						sheetNo={sheetNo}
+						letterSpacing={item?.letterSpacing}
+						gapSpacing={item?.gapSpacing}
+						lineHeight={item?.lineHeight}
+						layoutNo={index}
+					/>
+				);
+			})}
 		</Flex>
 	);
 };

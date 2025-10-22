@@ -3,7 +3,7 @@ import DividerLayout   from "components/LayoutHandler/DividerLayout";
 import { TextShell }   from "core/components";
 //Own components
 
-const Mod48Tn = () => {
+const Mod49Tn = () => {
 	return (
 		<Flex
 			pr="8%"
@@ -33,4 +33,4 @@ const Mod48Tn = () => {
 	);
 };
 
-export default Mod48Tn;
+export default Mod49Tn;
