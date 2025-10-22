@@ -1,5 +1,6 @@
-import { createSlice }                     from "@reduxjs/toolkit";
-import { convertToArray, convertToObject } from "helpers";
+import { createSlice }                                   from "@reduxjs/toolkit";
+import { convertToArray, convertToObject, isValidArray } from "helpers";
+import regularFormatImage                                from "helpers/Functions/regularFormatImage";
 
 
 const initialState = {
@@ -80,7 +81,16 @@ export const gallerySlice = createSlice({
 			state.photosUploaded = [];
 		},
 		getGalleryData : (state, {payload}) => {
-			const gallletyDataInsert = convertToObject(payload);
+			if (!isValidArray(payload)) {
+				return;
+			}
+			const constructorImages = payload.map(imageData => {
+				return {
+					...imageData,
+					url : regularFormatImage(imageData?.url),
+				};
+			});
+			const gallletyDataInsert = convertToObject(constructorImages);
 			state.data = gallletyDataInsert;
 		},
 		setLoadingGalleryData : (state, {payload}) => {

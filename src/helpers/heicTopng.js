@@ -3,8 +3,8 @@ import heic2any from "heic2any";
 const heicToPng = async (blobImage) => {
 	const extension = blobImage.name.split(".").pop()?.toLowerCase();
 
-	const heicExtensions = ["heic", "heif", "hif"];
-	const mimeTypes = ["image/heic", "image/heif"];
+	const heicExtensions = ["heic", "heif", "hif", "dng"];
+	const mimeTypes = ["image/heic", "image/heif", "image/hif", "image/dng"];
 
 	const isHeic =
 		heicExtensions.includes(extension) ||
