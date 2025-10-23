@@ -1,8 +1,8 @@
-import { Stack, Group, Box } from "@mantine/core";
-import ImgLayout             from "components/LayoutHandler/ImgLayout";
+import { Box, Group, Stack } from "@mantine/core";
 //Own components
+import ImgLayoutPreview from "components/LayoutHandler/ImgLayoutPreview";
 
-const Mod37 = ({sheetNo}) => {
+const Mod37Tn = ({photos}) => {
 	return (
 		<Stack
 			w="100%"
@@ -19,27 +19,24 @@ const Mod37 = ({sheetNo}) => {
 					h={"100%"}
 					w={"calc(100% / 3 - 0.067em)"}
 				>
-					<ImgLayout
-						sheetNo={sheetNo}
-						imageNo={0}
+					<ImgLayoutPreview
+						imageData={photos?.[0] ?? {}}
 					/>
 				</Box>
 				<Box
 					h={"100%"}
 					w={"calc(100% / 3 - 0.067em)"}
 				>
-					<ImgLayout
-						sheetNo={sheetNo}
-						imageNo={1}
+					<ImgLayoutPreview
+						imageData={photos?.[1] ?? {}}
 					/>
 				</Box>
 				<Box
 					h={"100%"}
 					w={"calc(100% / 3 - 0.067em)"}
 				>
-					<ImgLayout
-						sheetNo={sheetNo}
-						imageNo={2}
+					<ImgLayoutPreview
+						imageData={photos?.[2] ?? {}}
 					/>
 				</Box>
 			</Group>
@@ -52,27 +49,24 @@ const Mod37 = ({sheetNo}) => {
 					h={"100%"}
 					w={"calc(100% / 3 - 0.067em)"}
 				>
-					<ImgLayout
-						sheetNo={sheetNo}
-						imageNo={3}
+					<ImgLayoutPreview
+						imageData={photos?.[3] ?? {}}
 					/>
 				</Box>
 				<Box
 					h={"100%"}
 					w={"calc(100% / 3 - 0.067em)"}
 				>
-					<ImgLayout
-						sheetNo={sheetNo}
-						imageNo={4}
+					<ImgLayoutPreview
+						imageData={photos?.[4] ?? {}}
 					/>
 				</Box>
 				<Box
 					h={"100%"}
 					w={"calc(100% / 3 - 0.067em)"}
 				>
-					<ImgLayout
-						sheetNo={sheetNo}
-						imageNo={5}
+					<ImgLayoutPreview
+						imageData={photos?.[5] ?? {}}
 					/>
 				</Box>
 			</Group>
@@ -85,27 +79,24 @@ const Mod37 = ({sheetNo}) => {
 					h={"100%"}
 					w={"calc(100% / 3 - 0.067em)"}
 				>
-					<ImgLayout
-						sheetNo={sheetNo}
-						imageNo={6}
+					<ImgLayoutPreview
+						imageData={photos?.[6] ?? {}}
 					/>
 				</Box>
 				<Box
 					h={"100%"}
 					w={"calc(100% / 3 - 0.067em)"}
 				>
-					<ImgLayout
-						sheetNo={sheetNo}
-						imageNo={7}
+					<ImgLayoutPreview
+						imageData={photos?.[7] ?? {}}
 					/>
 				</Box>
 				<Box
 					h={"100%"}
 					w={"calc(100% / 3 - 0.067em)"}
 				>
-					<ImgLayout
-						sheetNo={sheetNo}
-						imageNo={8}
+					<ImgLayoutPreview
+						imageData={photos?.[8] ?? {}}
 					/>
 				</Box>
 			</Group>
@@ -113,4 +104,4 @@ const Mod37 = ({sheetNo}) => {
 	);
 };
 
-export default Mod37;
+export default Mod37Tn;

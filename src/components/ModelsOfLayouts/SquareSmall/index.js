@@ -24,6 +24,18 @@ import Mod22Tn from "./ThumbNails/Mod22Tn";
 import Mod23Tn from "./ThumbNails/Mod23Tn";
 import Mod24Tn from "./ThumbNails/Mod24Tn";
 import Mod25Tn from "./ThumbNails/Mod25Tn";
+import Mod26Tn from "./ThumbNails/Mod26Tn";
+import Mod27Tn from "./ThumbNails/Mod27Tn";
+import Mod28Tn from "./ThumbNails/Mod28Tn";
+import Mod29Tn from "./ThumbNails/Mod29Tn";
+import Mod30Tn from "./ThumbNails/Mod30Tn";
+import Mod31Tn from "./ThumbNails/Mod31Tn";
+import Mod32Tn from "./ThumbNails/Mod32Tn";
+import Mod33Tn from "./ThumbNails/Mod33Tn";
+import Mod34Tn from "./ThumbNails/Mod34Tn";
+import Mod35Tn from "./ThumbNails/Mod35Tn";
+import Mod36Tn from "./ThumbNails/Mod36Tn";
+import Mod37Tn from "./ThumbNails/Mod37Tn";
 import Mod1    from "./Mod1";
 import Mod2    from "./Mod2";
 import Mod3    from "./Mod3";
@@ -49,6 +61,18 @@ import Mod22   from "./Mod22";
 import Mod23   from "./Mod23";
 import Mod24   from "./Mod24";
 import Mod25   from "./Mod25";
+import Mod26   from "./Mod26";
+import Mod27   from "./Mod27";
+import Mod28   from "./Mod28";
+import Mod29   from "./Mod29";
+import Mod30   from "./Mod30";
+import Mod31   from "./Mod31";
+import Mod32   from "./Mod32";
+import Mod33   from "./Mod33";
+import Mod34   from "./Mod34";
+import Mod35   from "./Mod35";
+import Mod36   from "./Mod36";
+import Mod37   from "./Mod37";
 
 const SquareSmall = {
 	Mod1 : {
@@ -225,6 +249,90 @@ const SquareSmall = {
 		numberPhotos    : 4,
 		cat             : "fotos",
 		layoutThumbNail : Mod25Tn,
+	},
+	Mod26 : {
+		id              : "Mod26",
+		layout          : Mod26,
+		numberPhotos    : 4,
+		cat             : "fotos",
+		layoutThumbNail : Mod26Tn,
+	},
+	Mod27 : {
+		id              : "Mod27",
+		layout          : Mod27,
+		numberPhotos    : 4,
+		cat             : "fotos",
+		layoutThumbNail : Mod27Tn,
+	},
+	Mod28 : {
+		id              : "Mod28",
+		layout          : Mod28,
+		numberPhotos    : 4,
+		cat             : "fotos",
+		layoutThumbNail : Mod28Tn,
+	},
+	Mod29 : {
+		id              : "Mod29",
+		layout          : Mod29,
+		numberPhotos    : 4,
+		cat             : "fotos",
+		layoutThumbNail : Mod29Tn,
+	},
+	Mod30 : {
+		id              : "Mod30",
+		layout          : Mod30,
+		numberPhotos    : 4,
+		cat             : "fotos",
+		layoutThumbNail : Mod30Tn,
+	},
+	Mod31 : {
+		id              : "Mod31",
+		layout          : Mod31,
+		numberPhotos    : 5,
+		cat             : "fotos",
+		layoutThumbNail : Mod31Tn,
+	},
+	Mod32 : {
+		id              : "Mod32",
+		layout          : Mod32,
+		numberPhotos    : 5,
+		cat             : "fotos",
+		layoutThumbNail : Mod32Tn,
+	},
+	Mod33 : {
+		id              : "Mod33",
+		layout          : Mod33,
+		numberPhotos    : 5,
+		cat             : "fotos",
+		layoutThumbNail : Mod33Tn,
+	},
+	Mod34 : {
+		id              : "Mod34",
+		layout          : Mod34,
+		numberPhotos    : 5,
+		cat             : "fotos",
+		layoutThumbNail : Mod34Tn,
+	},
+	Mod35 : {
+		id              : "Mod35",
+		layout          : Mod35,
+		numberPhotos    : 6,
+		cat             : "fotos",
+		layoutThumbNail : Mod35Tn,
+	},
+	Mod36 : {
+		id              : "Mod36",
+		layout          : Mod36,
+		numberPhotos    : 6,
+		cat             : "fotos",
+		layoutThumbNail : Mod36Tn,
+	},
+	Mod37 : {
+		id              : "Mod37",
+		layout          : Mod37,
+		numberPhotos    : 9,
+		cat             : "fotos",
+		layoutThumbNail : Mod37Tn,
 	},
 };
 
