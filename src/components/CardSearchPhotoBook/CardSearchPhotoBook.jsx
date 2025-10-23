@@ -19,7 +19,7 @@ const CardSearchPhotoBook = () => {
 	const [ fetchPhotoBook, { isLoading : isFetching, error } ] = useLazyGetDataQuery();
 
 	const { data : ordersPhotoBook, isLoading } = useGetDataQuery({
-		module : "wp-json/wp/v2/photobook-2-0?per_page=100",
+		module : "wp-json/miapi/v1/post-filtrado?per_page=300",
 	});
 
 	const loading = isLoading || isFetching;
@@ -35,17 +35,17 @@ const CardSearchPhotoBook = () => {
 			const photoBookData = await fetchPhotoBook({ module : `wp-json/wp/v2/photobook-2-0/meta/?meta_value=${myOreder}`}).unwrap();
 			const filteredBooks = photoBookData.filter((photoBook) => (photoBook?.metas?.status[0] === "48") || (photoBook?.metas?.status[0] === "26"));
 			const constructorPhotoBooksData = filteredBooks.map((photoBook) => ({
-				id   : photoBook?.id,
-				meta : {
-					config           : photoBook?.metas?.config?.[0] ?? "",
-					modelo           : photoBook?.metas?.modelo[0],
-					tamano           : photoBook?.metas?.tamano?.[0] ?? undefined,
-					id_del_pedido    : photoBook?.metas?.id_del_pedido[0],
-					correo_del_autor : photoBook?.metas?.correo_del_autor[0],
-					status           : photoBook?.metas?.status[0],
-				},
+				post_id     	  	 : photoBook?.id ?? "",
+				id               : photoBook?.id ?? "",
+				config     	  	  : photoBook?.metas?.config?.[0] ?? "",
+				id_del_pedido  	 : photoBook?.metas?.id_del_pedido[0] ?? "",
+				correo_del_autor : photoBook?.metas?.correo_del_autor[0] ?? "",
+				status           : photoBook?.metas?.status[0],
+				modelo           : photoBook?.metas?.modelo[0] ?? "",
+				tamano           : photoBook?.metas?.tamano[0] ?? "",
+				fecha_de_termino : photoBook?.metas?.fecha_de_termino?.[0] ?? "",
 			}));
-			const photoBooksFiltered = constructorPhotoBooksData.filter((photoBook) => (photoBook?.meta?.status === "48") || (photoBook?.meta?.status === "26"));
+			const photoBooksFiltered = constructorPhotoBooksData.filter((photoBook) => (photoBook?.status === "48") || (photoBook?.status === "26"));
 			setPhotoBooksOrders(photoBooksFiltered);
 		} catch (error) {
 			console.error(error);
@@ -80,9 +80,24 @@ const CardSearchPhotoBook = () => {
 
 	useEffect(() => {
 		if (ordersPhotoBook && isValidArray(ordersPhotoBook)) {
-			const filteredOrders = ordersPhotoBook.filter(order => (order?.meta?.status === "48") || (order?.meta?.status === "26"));
-			setPhotoBooksOrders(filteredOrders);
-			setInitialPhotoBooksOrders(filteredOrders);
+			const filteredOrders = ordersPhotoBook.filter(order => (order?.status === "48") || (order?.status === "26"));
+			const constructorPhotoBooksData = filteredOrders.map((photoBook) => {
+				const parseJsonConfig = (photoBook?.config || (photoBook?.config !== "")) ? JSON.parse(photoBook?.config) : null;
+
+				return {
+					post_id        	 : photoBook?.id ?? "",
+					id               : photoBook?.id ?? "",
+					config     	  	  : photoBook?.config ?? "",
+					id_del_pedido  	 : photoBook?.id_del_pedido ?? "",
+					correo_del_autor : photoBook?.correo_del_autor ?? "",
+					status           : photoBook?.status,
+					modelo           : parseJsonConfig?.productName ?? "",
+					tamano           : parseJsonConfig?.sizePhotoBook ?? "",
+					fecha_de_termino : photoBook?.fecha_de_termino ?? "",
+				};
+			});
+			setPhotoBooksOrders(constructorPhotoBooksData);
+			setInitialPhotoBooksOrders(constructorPhotoBooksData);
 		}
 	}, [ ordersPhotoBook ]);
 

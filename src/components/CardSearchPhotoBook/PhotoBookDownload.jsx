@@ -49,7 +49,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	// Efectos
 	useEffect(() => {
 		setIsLoading(true);
-		if (photoBookData?.meta?.config) {
+		if (photoBookData?.config) {
 			getConfigDataPhotoBook();
 		}
 	}, [photoBookData]);
@@ -70,7 +70,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 	// Handlers
 	const getConfigDataPhotoBook = () => {
-		const myData = photoBookData.meta.config.replace(/\.(heic|webp)/g, ".jpg");
+		const myData = photoBookData.config.replace(/\.(heic|webp)/g, ".jpg");
 		const parseJSON = JSON.parse(myData);
 		dispatch(workSpaceSlice.actions.insertData(parseJSON));
 		setPhotoBookConfigData(parseJSON);
@@ -313,13 +313,13 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 		await downloadImagesAsZip(
 			await convertPDFToImages(blob),
-      `${photoBookData.meta.id_del_pedido}-${photoBookData.meta.correo_del_autor}`
+      `${photoBookData.id_del_pedido}-${photoBookData.correo_del_autor}`
 		);
 	};
 
 	const zipDownload = async (pdfBlob, frontPdfBlob, boundPdfBlob) => {
 		const zip = new JSZip();
-		const baseName = `${photoBookData.meta.correo_del_autor}-noPedido-${photoBookData.meta.id_del_pedido}-photobookId_${photoBookData.id}`;
+		const baseName = `${photoBookData.correo_del_autor}-noPedido-${photoBookData.id_del_pedido}-photobookId_${photoBookData.id}`;
 
 		zip.file(`${baseName}/Paginas.pdf`, pdfBlob);
 		if (frontPdfBlob) zip.file(`${baseName}/Portada.pdf`, frontPdfBlob);
@@ -442,6 +442,8 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		</Card>
 	);
 
+	console.log(photoBookData);
+
 	return (
 		<Stack w="100%" h="100%" align="center" justify="center" style={{ position : "relative" }}>
 			<OrderInfoCard
@@ -473,9 +475,9 @@ const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload,
 			<OrderSection
 				title="DATOS DEL PEDIDO"
 				items={[
-					{ label : "NO DE PEDIDO", value : `#${photoBookData?.meta?.id_del_pedido ?? "--"}` },
+					{ label : "NO DE PEDIDO", value : `#${photoBookData?.id_del_pedido ?? "--"}` },
 					{ label : "ID PHOTOBOOK", value : photoBookData?.id ?? "--" },
-					{ label : "CORREO DEL AUTOR", value : photoBookData?.meta?.correo_del_autor ?? "--" },
+					{ label : "CORREO DEL AUTOR", value : photoBookData?.correo_del_autor ?? "--" },
 				]}
 			/>
 
@@ -484,8 +486,8 @@ const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload,
 			<OrderSection
 				title="INFORMACIÓN DEL PHOTOBOOK"
 				items={[
-					{ label : "MODELO", value : photoBookData?.meta?.modelo ?? "--" },
-					{ label : "TAMAÑO", value : photoBookData?.meta?.tamano ?? "--" },
+					{ label : "MODELO", value : photoBookData?.modelo ?? "--" },
+					{ label : "TAMAÑO", value : photoBookData?.tamano ?? "--" },
 				]}
 			/>
 

@@ -1,5 +1,5 @@
 import { Badge, Center, ScrollArea, Stack, Table, Text } from "@mantine/core";
-import { isValidArray }                                  from "helpers";
+import { isValidArray, dayjs }                           from "helpers";
 import React                                             from "react";
 import { ClipLoader }                                    from "react-spinners";
 
@@ -51,6 +51,9 @@ const TableOrders = ({
 										<Text>CORREO</Text>
 									</th>
 									<th>
+										<Text>Fecha de Finalización</Text>
+									</th>
+									<th>
 										<Text>STATUS</Text>
 									</th>
 								</tr>
@@ -64,17 +67,20 @@ const TableOrders = ({
 												onClick={() => onSelectOrder(photoBook)}
 											>
 												<td>
-													<Text>{!photoBook.meta.id_del_pedido ? "--" : `#${photoBook.meta.id_del_pedido}`}</Text>
+													<Text>{!photoBook.id_del_pedido ? "--" : `#${photoBook.id_del_pedido}`}</Text>
 												</td>
 												<td>
-													<Text>#{photoBook.id}</Text>
+													<Text>#{photoBook.post_id}</Text>
 												</td>
 												<td>
-													<Text>{photoBook.meta.correo_del_autor}</Text>
+													<Text>{photoBook.correo_del_autor}</Text>
 												</td>
 												<td>
-													<Badge variant="light" color={(photoBook.meta.status === "48") ? "green" : "orange"}>
-														{photoBook.meta.status === "48" ? "COMPLETADO" : "EDITANDO"}
+													<Text>{photoBook.fecha_de_termino ? dayjs(photoBook.fecha_de_termino).format("DD [de] MMMM, YYYY") : "--"}</Text>
+												</td>
+												<td>
+													<Badge variant="light" color={(photoBook.status === "48") ? "green" : "orange"}>
+														{photoBook.status === "48" ? "COMPLETADO" : "EDITANDO"}
 													</Badge>
 												</td>
 											</tr>
