@@ -2,7 +2,7 @@ import { Center, Stack } from "@mantine/core";
 //Own components
 import { TextShell } from "core/components";
 
-const Mod38Tn = () => {
+const Mod54Tn = () => {
 	return (
 		<Center w="100%" h="100%">
 			<Stack
@@ -17,4 +17,4 @@ const Mod38Tn = () => {
 	);
 };
 
-export default Mod38Tn;
+export default Mod54Tn;

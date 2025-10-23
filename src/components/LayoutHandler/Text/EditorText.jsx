@@ -300,7 +300,7 @@ const EditText = ({
 			position={currentPositionText}
 			bounds={`#draggable-zone-sheet${sheetNo}`}
 			dragHandleClassName={`handles-${layoutNo}`}
-			scale={0.62}
+			scale={0.75}
 			onDragStop={(e, d) => {
 				handlerSetPosition(d);
 			}}
