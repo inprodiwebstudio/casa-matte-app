@@ -1,8 +1,8 @@
-import { Stack, Group, Box } from "@mantine/core";
+import { Box, Group, Stack } from "@mantine/core";
 //Own components
-import ImgLayout from "components/LayoutHandler/ImgLayout";
+import ImgLayoutPreview from "components/LayoutHandler/ImgLayoutPreview";
 
-const Mod25 = ({sheetNo}) => {
+const Mod25Tn = ({photos}) => {
 	return (
 		<Stack
 			w="100%"
@@ -23,18 +23,16 @@ const Mod25 = ({sheetNo}) => {
 						w="calc(100% / 2 - 0.05em)"
 						h="100%"
 					>
-						<ImgLayout
-							sheetNo={sheetNo}
-							imageNo={0}
+						<ImgLayoutPreview
+							imageData={photos?.[0] ?? {}}
 						/>
 					</Box>
 					<Box
 						w="calc(100% / 2 - 0.05em)"
 						h="100%"
 					>
-						<ImgLayout
-							sheetNo={sheetNo}
-							imageNo={1}
+						<ImgLayoutPreview
+							imageData={photos?.[1] ?? {}}
 						/>
 					</Box>
 				</Group>
@@ -47,18 +45,16 @@ const Mod25 = ({sheetNo}) => {
 						w="calc(100% / 2 - 0.05em)"
 						h="100%"
 					>
-						<ImgLayout
-							sheetNo={sheetNo}
-							imageNo={2}
+						<ImgLayoutPreview
+							imageData={photos?.[2] ?? {}}
 						/>
 					</Box>
 					<Box
 						w="calc(100% / 2 - 0.05em)"
 						h="100%"
 					>
-						<ImgLayout
-							sheetNo={sheetNo}
-							imageNo={3}
+						<ImgLayoutPreview
+							imageData={photos?.[3] ?? {}}
 						/>
 					</Box>
 				</Group>
@@ -67,4 +63,4 @@ const Mod25 = ({sheetNo}) => {
 	);
 };
 
-export default Mod25;
+export default Mod25Tn;

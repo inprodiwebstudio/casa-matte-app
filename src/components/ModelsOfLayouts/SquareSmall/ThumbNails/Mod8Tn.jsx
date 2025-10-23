@@ -1,8 +1,8 @@
 import { Box, Stack } from "@mantine/core";
 //Own components
-import ImgLayout from "components/LayoutHandler/ImgLayout";
+import ImgLayoutPreview from "components/LayoutHandler/ImgLayoutPreview";
 
-const Mod8 = ({sheetNo}) => {
+const Mod8Tn = ({photos}) => {
 	return (
 		<Stack
 			w="100%"
@@ -20,18 +20,16 @@ const Mod8 = ({sheetNo}) => {
 					h="50%"
 					w="100%"
 				>
-					<ImgLayout
-						sheetNo={sheetNo}
-						imageNo={0}
+					<ImgLayoutPreview
+						imageData={photos?.[0] ?? {}}
 					/>
 				</Box>
 				<Box
 					h="50%"
 					w="100%"
 				>
-					<ImgLayout
-						sheetNo={sheetNo}
-						imageNo={1}
+					<ImgLayoutPreview
+						imageData={photos?.[1] ?? {}}
 					/>
 				</Box>
 			</Stack>
@@ -39,4 +37,4 @@ const Mod8 = ({sheetNo}) => {
 	);
 };
 
-export default Mod8;
+export default Mod8Tn;

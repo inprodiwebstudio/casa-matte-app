@@ -1,15 +1,15 @@
 import { Box, Group, Stack } from "@mantine/core";
 //Own components
-import ImgLayout from "components/LayoutHandler/ImgLayout";
+import ImgLayoutPreview from "components/LayoutHandler/ImgLayoutPreview";
 
-const Mod10 = ({sheetNo}) => {
+const Mod12Tn = ({photos}) => {
 	return (
 		<Stack
 			w="100%"
 			h="100%"
-			p="2%"
-			pt="15%"
-			pb="15%"
+			pl="12%"
+			pr="12%"
+			p="19%"
 		>
 			<Group
 				spacing="0.1em"
@@ -20,18 +20,16 @@ const Mod10 = ({sheetNo}) => {
 					w="calc(100% / 2 - 0.05em)"
 					h="100%"
 				>
-					<ImgLayout
-						sheetNo={sheetNo}
-						imageNo={0}
+					<ImgLayoutPreview
+						imageData={photos?.[0] ?? {}}
 					/>
 				</Box>
 				<Box
 					w="calc(100% / 2 - 0.05em)"
 					h="100%"
 				>
-					<ImgLayout
-						sheetNo={sheetNo}
-						imageNo={1}
+					<ImgLayoutPreview
+						imageData={photos?.[1] ?? {}}
 					/>
 				</Box>
 			</Group>
@@ -39,4 +37,4 @@ const Mod10 = ({sheetNo}) => {
 	);
 };
 
-export default Mod10;
+export default Mod12Tn;
