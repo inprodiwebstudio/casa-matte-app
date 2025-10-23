@@ -8,9 +8,10 @@ import LoadingPaginator                                           from "./Loadin
 import { workSpaceSlice }                                         from "store/Slices";
 import { convertToArray, isValidArray, convertToObject, bindAll } from "helpers";
 import { ScrollBar }                                              from "core/components";
-import FrontPage                                                  from "./FrontPage";
+import { Space }                                                  from "@mantine/core";
 import "./PaginatorBar.scss";
 import { openContextModal }                                       from "@mantine/modals";
+import CoverBookItem                                              from "./CoverBookItem";
 
 const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, loading, productType}) => {
 	const [ pageList, setPageList ] = useState({
@@ -153,11 +154,8 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 					</ScrollBar>
 				) : (
 					<ScrollBar>
-						{
-							(productType === "white") && (
-								<FrontPage />
-							)
-						}
+						<CoverBookItem />
+						<Space h="md" />
 						<ItemPage
 							isFixedPage
 							handleDelete={handleDelete}

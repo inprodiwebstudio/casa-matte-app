@@ -23,6 +23,8 @@ const initialState = {
 				},
 			},
 		},
+		cover         : undefined,
+		engraving     : undefined,
 		minPages      : 0,
 		maxPages      : 0,
 		numberOfPages : 50,
@@ -278,6 +280,12 @@ export const workSpaceSlice = createSlice({
 		},
 		setCurrentPhotoDrager : (state, {payload}) => {
 			state.currentPhotoDragger = payload;
+		},
+		changeColorCover : (state, {payload}) => {
+			state.data.cover = payload;
+		},
+		changeColorEngraving : (state, {payload}) => {
+			state.data.engraving.currentColor = payload;
 		},
 		setLayoutFilter : (state, {payload}) => {
 			state.layoutFilter = payload;
