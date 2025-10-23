@@ -16,17 +16,17 @@ const Mod77 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>";
+	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>";
 
 	return (
 		<Stack
 			p="14%"
-			pb="11%"
+			pb="12%"
 			pl="12%"
 			pr="12%"
 			w="100%"
 			h="100%"
-			spacing="0.1em"
+			spacing={isInWorkSpace ? "25px" : "0.1em"}
 		>
 			<Group
 				w="100%"

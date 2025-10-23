@@ -26,7 +26,7 @@ const Mod45Pdf = ({images}) => {
 					style={{
 						height     : "100%",
 						width      : "100%",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -49,7 +49,7 @@ const Mod45Pdf = ({images}) => {
 						position   : "absolute",
 						top        : "28%",
 						left       : "87%",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{

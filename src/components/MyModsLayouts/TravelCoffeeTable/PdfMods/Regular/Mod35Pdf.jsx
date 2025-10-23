@@ -7,18 +7,11 @@ import ReactDOMServer from "react-dom/server";
 
 import { imgUrlPdf } from "helpers";
 
-const Mod35Pdf = ({
-	text,
-	pageNo,
-	images,
-	textImgs,
-	modLayout,
-}) => {
+const Mod35Pdf = ({text, images}) => {
 
-	const myTextImgsMod = {
-		0 : textImgs[`${pageNo}-${modLayout}-text1`]?.textImg ?? null,
-		1 : textImgs[`${pageNo}-${modLayout}-text2`]?.textImg ?? null,
-	};
+	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 32px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
+
+	const text02 = text[1] ? text[1] : "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
 
 	const bodyHtml = (
 		<div
@@ -59,21 +52,28 @@ const Mod35Pdf = ({
 							justifyContent : "center",
 						}}
 					>
-						{
-							myTextImgsMod[0] &&
-								<img
-									src={myTextImgsMod[0]}
-									alt="Captura de texto"
-									style={{ objectFit : "contain", height : "auto", width : "100%", objectPosition : "center" }}
-								/>
-						}
+						<div
+							style={{
+								letterSpacing : "6.5px",
+								textTransform : "uppercase",
+							}}
+							dangerouslySetInnerHTML={{
+								__html : `<style>
+								p {
+								margin: 0;
+								padding: 0;
+								}
+							</style>
+							${text01}`,
+							}}
+						/>
 					</div>
 					<div
 						style={{
 							height     : "100%",
 							width      : "100%",
 							overflow   : "hidden",
-							background : "#E3E3E3",
+							background : "white",
 						}}
 					>
 						{
@@ -97,14 +97,21 @@ const Mod35Pdf = ({
 							justifyContent : "center",
 						}}
 					>
-						{
-							myTextImgsMod[1] &&
-								<img
-									src={myTextImgsMod[1]}
-									alt="Captura de texto"
-									style={{ objectFit : "contain", height : "auto", width : "100%", objectPosition : "center" }}
-								/>
-						}
+						<div
+							style={{
+								letterSpacing : "2px",
+								textTransform : "uppercase",
+							}}
+							dangerouslySetInnerHTML={{
+								__html : `<style>
+                                   p {
+                                     margin: 0;
+                                     padding: 0;
+                                   }
+                                 </style>
+                                 ${text02}`,
+							}}
+						/>
 					</div>
 				</div>
 			</div>

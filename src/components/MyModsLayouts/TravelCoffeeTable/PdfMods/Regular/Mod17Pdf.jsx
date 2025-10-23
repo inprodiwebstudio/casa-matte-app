@@ -6,36 +6,39 @@ import Html           from "react-pdf-html";
 import ReactDOMServer from "react-dom/server";
 
 
-const Mod17Pdf = ({
-	text,
-	pageNo,
-	textImgs,
-	modLayout,
-}) => {
+const Mod17Pdf = ({text}) => {
 
-	const myTextImgsMod = {
-		0 : textImgs[`${pageNo}-${modLayout}-text1`]?.textImg ?? null,
-	};
+	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
 				height       : "850px",
+				paddingLeft  : "15%",
+				paddingRight : "15%",
 				width        : "100%",
 				overflow     : "hidden",
 				display      : "flex",
-				justifyContent: "center",
 			}}
 		>
 
-			{
-				myTextImgsMod[0] &&
-					<img
-						src={myTextImgsMod[0]}
-						alt="Captura de texto"
-						style={{ objectFit : "contain", height : "auto", width : "100%", objectPosition : "center" }}
-					/>
-			}
+			<div
+				style={{
+					height         : "100%",
+					width          : "100%",
+					display        : "flex",
+					justifyContent : "center",
+					alignItems     : "center",
+				}}
+			>
+				<div
+					style={{
+						letterSpacing : "2.5px !important",
+						textAlign     : "end",
+					}}
+					dangerouslySetInnerHTML={{__html : text01}}
+				/>
+			</div>
 		</div>
 	);
 

@@ -1,0 +1,84 @@
+import { Flex, Stack, Center } from "@mantine/core";
+//Own components
+import Text              from "components/LayoutHandler/Text";
+import DividerLayout     from "components/LayoutHandler/DividerLayout";
+import { textInsertion } from "helpers";
+import { TextShell }     from "core/components";
+
+
+const Mod48 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
+
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 46px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Spectral-Light-Italic;'>Toledo</span></p><p style='text-align: center;'><span style='font-size: 20px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
+
+
+	return (
+		<Flex
+			p="8%"
+			w="100%"
+			h="100%"
+			justify="center"
+			align="center"
+		>
+			<Stack
+				w="50%"
+				mah="80%"
+				spacing="0.3em"
+				aria-hidden
+				sx={{
+					overflow : "hidden",
+				}}
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
+			>
+				<Stack
+					spacing={isInWorkSpace ? "0.1em" : "0.3em"}
+					w="100%"
+				>
+					<Text
+						sizes={{
+							"chico"   : "42px",
+							"regular" : "46px",
+							"grande"  : "48px",
+						}}
+						letterSpacing="5px"
+						sheetNo={sheetNo}
+						textShell={() => <TextShell.Title width="100%" align="center" />}
+						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+						isInPaginator={isInPaginator}
+						isThumbNail={isThumbNail}
+						textNo={0}
+					/>
+					<Center>
+						<DividerLayout long="0.4em" position="v" />
+					</Center>
+				</Stack>
+				<Text
+					sizes={{
+						"chico"   : "21px",
+						"regular" : "23px",
+						"grande"  : "25px",
+					}}
+					align="center"
+					sheetNo={sheetNo}
+					gapSpacing="5px"
+					textShell={() => <TextShell.BodyIndices align="center" />}
+					data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
+					isInPaginator={isInPaginator}
+					isThumbNail={isThumbNail}
+					textNo={1}
+				/>
+			</Stack>
+		</Flex>
+	);
+};
+
+export default Mod48;

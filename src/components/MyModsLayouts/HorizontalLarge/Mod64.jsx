@@ -15,7 +15,7 @@ const Mod64 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle01 = "<p style='text-align: center;'><span style='font-size: 25px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+	const defaultTitle01 = "<p style='text-align: center;'><span style='font-size: 24px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
 	const defaultIndice01 = "<p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
 
@@ -36,7 +36,7 @@ const Mod64 = ({
 				w={"100%"}
 			>
 				<Stack
-					spacing="0.1em"
+					spacing={isInWorkSpace ? "10px" : "0.1em"}
 					aria-hidden
 				>
 					<div
@@ -52,7 +52,7 @@ const Mod64 = ({
 								"grande"  : "27px",
 							}}
 							align="center"
-							letterSpacing="3px"
+							letterSpacing="2px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.TitleSmall width="30%" align="center" />}
 							data={textInsertion(data?.text[0], defaultTitle01, isInWorkSpace)}

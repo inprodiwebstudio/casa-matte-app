@@ -16,20 +16,20 @@ const Mod51 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 38px; font-family: JosefinSans-Light;'>SANTIAGO</span></p>";
+	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 38px; font-family: JosefinSans-Light;'>TÍTULO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const defaultSubtitle = "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex
-			p="8%"
+			p="11%"
 			pl="4%"
 			pr="4%"
 			w="100%"
 			h="100%"
 			justify="center"
 			align="center"
-			gap="0.5em"
+			gap={isInWorkSpace ? "11%" : "0.3em"}
 			direction="column"
 		>
 			<Stack

@@ -1,4 +1,4 @@
-import { Center, Stack } from "@mantine/core";
+import { Center } from "@mantine/core";
 //Own components
 import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
@@ -14,22 +14,25 @@ const Mod35 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 28px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>";
 
 	return (
-		<div
-			style={{
-				width        : "100%",
-				height       : "100%",
-			}}
-			{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
-		>
-			<Center w="100%" h="100%">
-				<Stack
-					w="70%"
-					p="0%"
-					pt="0%"
-					pb="0%"
+		<Center w="100%" h="100%">
+			<div
+				style={{
+					width          : "100%",
+					display        : "flex",
+					justifyContent : "center",
+					maxHeight      : "100px",
+					overflow       : "hidden",
+				}}
+			>
+				<div
+					style={{
+						width  : "70%",
+						height : "fit-content",
+					}}
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
 					<Text
 						sizes={{
@@ -38,16 +41,17 @@ const Mod35 = ({
 							"grande"  : "46px",
 						}}
 						sheetNo={sheetNo}
+						typeText="title"
 						textShell={() => <TextShell.Title />}
-						letterSpacing="6.5px"
+						letterSpacing="4.8px"
 						data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
 						isInPaginator={isInPaginator}
 						isThumbNail={isThumbNail}
 						textNo={0}
 					/>
-				</Stack>
-			</Center>
-		</div>
+				</div>
+			</div>
+		</Center>
 	);
 };
 

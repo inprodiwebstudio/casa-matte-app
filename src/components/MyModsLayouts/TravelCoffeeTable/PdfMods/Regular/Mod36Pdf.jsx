@@ -7,25 +7,18 @@ import ReactDOMServer from "react-dom/server";
 
 import { imgUrlPdf } from "helpers";
 
-const Mod36Pdf = ({
-	text,
-	pageNo,
-	images,
-	textImgs,
-	modLayout,
-}) => {
+const Mod36Pdf = ({text, images}) => {
 
-	const myTextImgsMod = {
-		0 : textImgs[`${pageNo}-${modLayout}-text1`]?.textImg ?? null,
-		1 : textImgs[`${pageNo}-${modLayout}-text2`]?.textImg ?? null,
-	};
+	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 32px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
+
+	const text02 = text[1] ? text[1] : "<p style='text-align: left;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
 				height        : "850px",
 				width         : "100%",
-				paddingTop    : "16%",
+				paddingTop    : "15%",
 				display       : "flex",
 				alignItems    : "flex-end",
 				flexDirection : "column",
@@ -54,29 +47,40 @@ const Mod36Pdf = ({
 							height        : "100%",
 							display       : "flex",
 							flexDirection : "column",
-							gap           : "30px",
+							gap           : "50px",
 						}}
 					>
 						<div
 							style={{
-								width : "100%",
+								width          : "100%",
+								display        : "flex",
+								alignItems     : "flex-end",
+								justifyContent : "flex-end",
+								paddingRight   : "10%",
 							}}
 						>
-							{
-								myTextImgsMod[0] &&
-									<img
-										src={myTextImgsMod[0]}
-										alt="Captura de texto"
-										style={{ objectFit : "contain", height : "auto", width : "100%" }}
-									/>
-							}
+							<div
+								style={{
+									letterSpacing : "6.5px",
+									textTransform : "uppercase",
+								}}
+								dangerouslySetInnerHTML={{
+									__html : `<style>
+								p {
+								margin: 0;
+								padding: 0;
+								}
+							</style>
+							${text01}`,
+								}}
+							/>
 						</div>
 						<div
 							style={{
 								height     : "100%",
 								width      : "100%",
 								overflow   : "hidden",
-								background : "#E3E3E3",
+								background : "white",
 							}}
 						>
 							{
@@ -95,17 +99,27 @@ const Mod36Pdf = ({
 					</div>
 					<div
 						style={{
-							width : "100%",
+							width          : "100%",
+							display        : "flex",
+							alignItems     : "flex-start",
+							justifyContent : "flex-start",
 						}}
 					>
-							{
-								myTextImgsMod[1] &&
-									<img
-										src={myTextImgsMod[1]}
-										alt="Captura de texto"
-										style={{ objectFit : "contain", height : "auto", width : "100%" }}
-									/>
-							}
+						<div
+							style={{
+								letterSpacing : "2px",
+								textTransform : "uppercase",
+							}}
+							dangerouslySetInnerHTML={{
+								__html : `<style>
+                                   p {
+                                     margin: 0;
+                                     padding: 0;
+                                   }
+                                 </style>
+                                 ${text02}`,
+							}}
+						/>
 					</div>
 				</div>
 			</div>

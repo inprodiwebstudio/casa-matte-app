@@ -30,8 +30,12 @@ const Mod35Pdf = ({
 		>
 			<div
 				style={{
-					width : "100%",
-					height: "100%",
+					width          : "70%",
+					maxHeight      : "100px",
+					overflow       : "hidden",
+					display        : "flex",
+					justifyContent : "center",
+					alignItems     : "center",
 				}}
 			>
 				{
@@ -39,7 +43,12 @@ const Mod35Pdf = ({
 					<img
 						src={myTextImgsMod[0]}
 						alt="Captura de texto"
-						style={{ objectFit : "contain", height : "auto", width : "100%" }}
+						style={{
+							objectFit      : "cover",
+							height         : "auto",
+							width          : "100%",
+							objectPosition : "center",
+						}}
 					/>
 				}
 			</div>

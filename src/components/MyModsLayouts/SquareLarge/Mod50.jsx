@@ -16,17 +16,17 @@ const Mod50 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 34px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
+	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
-	const defaultTitle02 = "<p style='text-align: left;'><span style='font-size: 34px; font-family: Aitana-Regular;'>FRANCIA</span></p>";
+	const defaultTitle02 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>FRANCIA</span></p>";
 
-	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 34px; font-family: Aitana-Regular;'>TURQUÍA</span></p>";
+	const defaultTitle03 = "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>TURQUÍA</span></p>";
 
-	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
+	const defaultIndice01 = "<p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
 
-	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>París</span></p><p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Versalles</span></p>";
+	const defaultIndice02 = "<p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>París</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Versalles</span></p>";
 
-	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 23px; font-family: Spectral-Light-Italic;'>Capadocia</span></p>";
+	const defaultIndice03 = "<p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Estambul</span></p><p style='text-align: left;'><span style='font-size: 10px; font-family: Spectral-Light-Italic;'>Capadocia</span></p>";
 
 	return (
 		<Flex
@@ -37,15 +37,15 @@ const Mod50 = ({
 			direction="column"
 			sx={{overflow : "hidden"}}
 			pr="5%"
-			pl="36%"
+			pl="42%"
 		>
 			<Stack
-				spacing={isInWorkSpace ? "0.3em" : "0.2em"}
+				spacing={isInWorkSpace ? "40px" : "0.2em"}
 				w="100%"
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<Stack
-					spacing={isInWorkSpace ? "0em" : "0.13em"}
+					spacing={isInWorkSpace ? "15px" : "0.13em"}
 					aria-hidden
 				>
 					<div>
@@ -74,7 +74,7 @@ const Mod50 = ({
 								"grande"  : "25px",
 							}}
 							align="left"
-							gapSpacing="10px"
+							gapSpacing="5px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.BodyIndices width="50%" align="left" />}
 							data={textInsertion(data?.text[1], defaultIndice01, isInWorkSpace)}
@@ -85,7 +85,7 @@ const Mod50 = ({
 					</div>
 				</Stack>
 				<Stack
-					spacing={isInWorkSpace ? "0em" : "0.13em"}
+					spacing={isInWorkSpace ? "15px" : "0.13em"}
 					aria-hidden
 				>
 					<div>
@@ -114,7 +114,7 @@ const Mod50 = ({
 								"grande"  : "25px",
 							}}
 							align="left"
-							gapSpacing="10px"
+							gapSpacing="5px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.BodyIndices width="50%" align="left" />}
 							data={textInsertion(data?.text[6], defaultIndice02, isInWorkSpace)}
@@ -125,7 +125,7 @@ const Mod50 = ({
 					</div>
 				</Stack>
 				<Stack
-					spacing={isInWorkSpace ? "0em" : "0.13em"}
+					spacing={isInWorkSpace ? "15px" : "0.13em"}
 				>
 					<div>
 						<Text
@@ -153,7 +153,7 @@ const Mod50 = ({
 								"grande"  : "25px",
 							}}
 							align="left"
-							gapSpacing="10px"
+							gapSpacing="5px"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.BodyIndices width="50%" align="left" />}
 							data={textInsertion(data?.text[6], defaultIndice03, isInWorkSpace)}

@@ -16,26 +16,43 @@ const Mod42Pdf = ({
 }) => {
 	const myTextImgsMod = {
 		0 : textImgs[`${pageNo}-${modLayout}-text1`]?.textImg ?? null,
+		1 : textImgs[`${pageNo}-${modLayout}-text2`]?.textImg ?? null,
 	};
-
-	console.log(myTextImgsMod[0]);
 
 	const bodyHtml = (
 		<div
 			style={{
 				height  : "792px",
 				width   : "100%",
+				padding : "20px",
 			}}
 		>
 
-			{
-				myTextImgsMod[0] && 
-				<img
-					src={myTextImgsMod[0]}
-					alt="Captura de texto"
-					style={{ objectFit : "contain", height : "auto", width : "100%" }}
-				/>
-			}
+			<div
+				style={{
+					height         : "100%",
+					width          : "100%",
+					display        : "flex",
+					justifyContent : "center",
+					alignItems     : "center",
+				}}
+			>
+				<div style={{
+					width         : "45%",
+					display       : "flex",
+					flexDirection : "column",
+					gap           : "17px",
+				}}>
+					<div
+						style={{
+							width : "100%",
+						}}
+					>
+						{myTextImgsMod[0] && <img src={myTextImgsMod[0]} alt="Captura de texto" />}
+					</div>
+					{myTextImgsMod[1] && <img src={myTextImgsMod[1]} alt="Captura de texto" />}
+				</div>
+			</div>
 		</div>
 	);
 

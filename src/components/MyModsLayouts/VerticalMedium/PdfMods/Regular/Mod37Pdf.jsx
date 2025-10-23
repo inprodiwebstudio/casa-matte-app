@@ -21,8 +21,9 @@ const Mod37Pdf = ({
 	const bodyHtml = (
 		<div
 			style={{
-				height : "792px",
-				width  : "100%",
+				height  : "792px",
+				width   : "100%",
+				padding : "20px",
 			}}
 		>
 
@@ -36,12 +37,12 @@ const Mod37Pdf = ({
 					gap            : "0px",
 				}}
 			>
-				{myTextImgsMod[0] &&
-					<img
-						src={myTextImgsMod[0]}
-						alt="Captura de texto"
-						style={{ objectFit : "contain", height : "auto", width : "100%" }}
-					/>}
+				<div style={{ width : "80%" }}>
+					{myTextImgsMod[0] && <img src={myTextImgsMod[0]} alt="Captura de texto" />}
+				</div>
+				<div style={{ width : "80%" }}>
+					{myTextImgsMod[1] && <img src={myTextImgsMod[1]} alt="Captura de texto" />}
+				</div>
 			</div>
 		</div>
 	);

@@ -4,15 +4,7 @@ import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
-const Mod20 = ({
-	data,
-	isInWorkSpace,
-	sheetNo,
-	isInPaginator,
-	isThumbNail,
-	pageNo,
-	modLayout,
-}) => {
+const Mod20 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
 	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 12px; font-family: JosefinSans-Light;'>Quisque at malesuada dolor. Nullam in eleifend est. In dolor dui, egestas id blandit eget...</span></p>";
 
@@ -24,7 +16,6 @@ const Mod20 = ({
 			sx={{
 				overflow : "hidden",
 			}}
-			{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 		>
 			<Stack
 				sx={{

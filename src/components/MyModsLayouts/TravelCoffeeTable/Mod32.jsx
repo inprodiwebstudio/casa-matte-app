@@ -5,15 +5,7 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod32 = ({
-	data,
-	isInWorkSpace,
-	sheetNo,
-	isInPaginator,
-	isThumbNail,
-	pageNo,
-	modLayout,
-}) => {
+const Mod32 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 	const defaultIndice01 = "<p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
 
 	return (
@@ -24,7 +16,6 @@ const Mod32 = ({
 			align="center"
 			direction="column"
 			sx={{overflow : "hidden"}}
-			{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 		>
 			<Stack
 				spacing="0.35em"

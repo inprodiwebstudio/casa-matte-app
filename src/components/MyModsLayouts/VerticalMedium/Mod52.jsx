@@ -16,25 +16,24 @@ const Mod52 = ({
 	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 38px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
+	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaultSubtitle = "<p style='text-align: left;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const defaultSubtitle = "<p style='text-align: left;'><span style='font-size: 12px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
 	return (
 		<Flex
-			pt="8%"
 			w="100%"
 			h="100%"
 			align="flex-end"
-			gap="0.5em"
+			justify="center"
 			direction="column"
 		>
 			<Stack
-				spacing="0.2em"
-				w="59%"
-				h="88%"
+				spacing="5%"
+				w="70%"
+				h="75%"
 			>
-				<Stack w="100%" h="100%" spacing="0.1em">
+				<Stack w="100%" h="100%" spacing="8%">
 					<Stack mr="10%" {...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}>
 						<Text
 							sizes={{
@@ -42,6 +41,7 @@ const Mod52 = ({
 								"regular" : "42px",
 								"grande"  : "46px",
 							}}
+							typeText="title"
 							align="right"
 							sheetNo={sheetNo}
 							textShell={() => <TextShell.Title />}
@@ -68,6 +68,7 @@ const Mod52 = ({
 							"regular" : "15px",
 							"grande"  : "16px",
 						}}
+						typeText="subtitle"
 						align="left"
 						sheetNo={sheetNo}
 						letterSpacing="2px"

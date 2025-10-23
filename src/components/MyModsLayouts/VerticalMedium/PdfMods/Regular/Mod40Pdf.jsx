@@ -54,17 +54,7 @@ const Mod40Pdf = ({
 				}}>
 					{
 						myTextImgsMod[0] &&
-						<div
-							style={{
-								width : "50%",
-							}}
-						>
-							<img
-								style={{ objectFit : "contain", height : "auto", width : "100%" }}
-								src={myTextImgsMod[0]}
-								alt="Captura de texto"
-							/>
-						</div>
+						<img style={{ width : "50%" }} src={myTextImgsMod[0]} alt="Captura de texto" />
 					}
 				</div>
 			</div>

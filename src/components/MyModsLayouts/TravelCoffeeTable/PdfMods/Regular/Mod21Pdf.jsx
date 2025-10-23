@@ -6,22 +6,16 @@ import Html           from "react-pdf-html";
 import ReactDOMServer from "react-dom/server";
 
 
-const Mod20Pdf = ({
-	text,
-	pageNo,
-	textImgs,
-	modLayout,
-}) => {
+const Mod39Pdf = ({text}) => {
 
-	const myTextImgsMod = {
-		0 : textImgs[`${pageNo}-${modLayout}-text1`]?.textImg ?? null,
-	};
+	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 12px; font-family: JosefinSans-Light;'>Quisque at malesuada dolor. Nullam in eleifend est. In dolor dui, egestas id blandit eget...</span></p>";
 
 	const bodyHtml = (
 		<div
 			style={{
 				height         : "850px",
 				width          : "100%",
+				padding        : "4%",
 				display        : "flex",
 				justifyContent : "center",
 				alignItems     : "center",
@@ -29,14 +23,25 @@ const Mod20Pdf = ({
 			}}
 		>
 
-			{
-				myTextImgsMod[0] &&
-					<img
-						src={myTextImgsMod[0]}
-						alt="Captura de texto"
-						style={{ objectFit : "contain", height : "auto", width : "100%"}}
-					/>
-			}
+			<div
+				style={{
+					height         : "100%",
+					width          : "53%",
+					display        : "flex",
+					justifyContent : "center",
+					alignItems     : "center",
+					overflow       : "hidden",
+				}}
+			>
+				<div
+					style={{
+						textAlign     : "start",
+						lineHeight    : "1.4px",
+						textTransform : "uppercase",
+					}}
+					dangerouslySetInnerHTML={{__html : text01}}
+				/>
+			</div>
 		</div>
 	);
 
@@ -47,4 +52,4 @@ const Mod20Pdf = ({
 	);
 };
 
-export default Mod20Pdf;
+export default Mod39Pdf;

@@ -51,7 +51,7 @@ const Mod51Pdf = ({
 							<img
 								src={myTextImgsMod[0]}
 								alt="Captura de texto"
-								style={{ objectFit : "contain", height : "auto", width : "100%" }}
+								style={{ objectFit : "cover" }}
 							/>
 					}
 				</div>
@@ -60,7 +60,7 @@ const Mod51Pdf = ({
 						height     : "100%",
 						width      : "100%",
 						overflow   : "hidden",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{

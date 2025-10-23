@@ -1,17 +1,29 @@
 
 //LayoutsMods
-import VerticalLarge           from "components/MyModsLayouts/VerticalLarge";
-import SquareLarge             from "components/MyModsLayouts/SquareLarge";
-import VerticalMedium          from "components/MyModsLayouts/VerticalMedium";
-import HorizontalLarge         from "components/MyModsLayouts/HorizontalLarge";
-import SquareSmall             from "components/MyModsLayouts/SquareSmall";
-import TravelCoffeeTable       from "components/MyModsLayouts/TravelCoffeeTable";
-import HorizontalMedium        from "components/MyModsLayouts/HorizontalMedium";
-import LayFlat                 from "components/MyModsLayouts/LayFlat";
-import LayFlatSquareMedium     from "components/MyModsLayouts/LayFlatSquareMedium";
-import LayFlatSquareLarge      from "components/MyModsLayouts/LayFlatSquareLarge";
-import LayFlatSquareSmall      from "components/MyModsLayouts/LayFlatSquareSmall";
-import LayFlatHorizontalMedium from "components/MyModsLayouts/LayFlatHorizontalMedium";
+import VerticalLarge            from "components/MyModsLayouts/VerticalLarge";
+import SquareLarge              from "components/MyModsLayouts/SquareLarge";
+import VerticalMedium           from "components/MyModsLayouts/VerticalMedium";
+import VerticalMediumSencillo   from "components/MyModsLayouts/Sencillo/VerticalMedium";
+import VerticalLargeSencillo    from "components/MyModsLayouts/Sencillo/VerticalLarge";
+import VerticalMediumPremium    from "components/MyModsLayouts/Premium/VerticalMedium";
+import SquareLargePremium       from "components/MyModsLayouts/Premium/SquareLarge";
+import SquareSmallPremium       from "components/MyModsLayouts/Premium/SquareSmall";
+import VerticalLargePremium     from "components/MyModsLayouts/Premium/VerticalLarge";
+import HorizontalLargePremium   from "components/MyModsLayouts/Premium/HorizontalLarge";
+import HorizontalMediumPremium  from "components/MyModsLayouts/Premium/HorizontalMedium";
+import HorizontalLarge          from "components/MyModsLayouts/HorizontalLarge";
+import SquareSmall              from "components/MyModsLayouts/SquareSmall";
+import SquareSmallSencillo      from "components/MyModsLayouts/Sencillo/SquareSmall";
+import SquareLrageSencillo      from "components/MyModsLayouts/Sencillo/SquareLarge";
+import HorizontalMediumSencillo from "components/MyModsLayouts/Sencillo/HorizontalMedium";
+import HorizontalLargeSencillo  from "components/MyModsLayouts/Sencillo/HorizontalLarge";
+import TravelCoffeeTable        from "components/MyModsLayouts/TravelCoffeeTable";
+import HorizontalMedium         from "components/MyModsLayouts/HorizontalMedium";
+import LayFlat                  from "components/MyModsLayouts/LayFlat";
+import LayFlatSquareMedium      from "components/MyModsLayouts/LayFlatSquareMedium";
+import LayFlatSquareLarge       from "components/MyModsLayouts/LayFlatSquareLarge";
+import LayFlatSquareSmall       from "components/MyModsLayouts/LayFlatSquareSmall";
+import LayFlatHorizontalMedium  from "components/MyModsLayouts/LayFlatHorizontalMedium";
 
 const photoBooksConfing = {
 	white : {
@@ -104,14 +116,14 @@ const photoBooksConfing = {
 				},
 				mediano : {
 					aspectRatio      : [158, 123],
-					layoutMods       : {...HorizontalMedium},
+					layoutMods       : {...HorizontalMediumSencillo},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [100, 100],
 				},
 				grande : {
 					aspectRatio      : [496, 425],
-					layoutMods       : {...HorizontalLarge},
+					layoutMods       : {...HorizontalLargeSencillo},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [35, 30],
@@ -124,14 +136,14 @@ const photoBooksConfing = {
 				chico   : false,
 				mediano : {
 					aspectRatio      : [17, 22],
-					layoutMods       : {...VerticalMedium},
+					layoutMods       : {...VerticalMediumSencillo},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 				grande : {
 					aspectRatio      : [8, 9],
-					layoutMods       : {...VerticalLarge},
+					layoutMods       : {...VerticalLargeSencillo},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
@@ -144,14 +156,14 @@ const photoBooksConfing = {
 				mediano : false,
 				chico   : {
 					aspectRatio      : [1, 1],
-					layoutMods       : {...SquareSmall},
+					layoutMods       : {...SquareSmallSencillo},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 				grande : {
 					aspectRatio      : [1, 1],
-					layoutMods       : {...SquareLarge},
+					layoutMods       : {...SquareLrageSencillo},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
@@ -171,14 +183,14 @@ const photoBooksConfing = {
 				},
 				mediano : {
 					aspectRatio      : [158, 123],
-					layoutMods       : {...HorizontalMedium},
+					layoutMods       : {...HorizontalMediumPremium},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [100, 100],
 				},
 				grande : {
 					aspectRatio      : [496, 425],
-					layoutMods       : {...HorizontalLarge},
+					layoutMods       : {...HorizontalLargePremium},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [35, 30],
@@ -191,14 +203,14 @@ const photoBooksConfing = {
 				chico   : false,
 				mediano : {
 					aspectRatio      : [17, 22],
-					layoutMods       : {...VerticalMedium},
+					layoutMods       : {...VerticalMediumPremium},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 				grande : {
 					aspectRatio      : [8, 9],
-					layoutMods       : {...VerticalLarge},
+					layoutMods       : {...VerticalLargePremium},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
@@ -211,14 +223,14 @@ const photoBooksConfing = {
 				mediano : false,
 				chico   : {
 					aspectRatio      : [1, 1],
-					layoutMods       : {...SquareSmall},
+					layoutMods       : {...SquareSmallPremium},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 				grande : {
 					aspectRatio      : [1, 1],
-					layoutMods       : {...SquareLarge},
+					layoutMods       : {...SquareLargePremium},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
@@ -238,14 +250,14 @@ const photoBooksConfing = {
 				},
 				mediano : {
 					aspectRatio      : [158, 123],
-					layoutMods       : {...HorizontalMedium},
+					layoutMods       : {...HorizontalMediumPremium},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [100, 100],
 				},
 				grande : {
 					aspectRatio      : [496, 425],
-					layoutMods       : {...HorizontalLarge},
+					layoutMods       : {...HorizontalLargePremium},
 					frontLayouts     : {},
 					modsInDoublePage : ["FrontLayout"],
 					pdfSize          : [35, 30],
@@ -258,14 +270,14 @@ const photoBooksConfing = {
 				chico   : false,
 				mediano : {
 					aspectRatio      : [17, 22],
-					layoutMods       : {...VerticalMedium},
+					layoutMods       : {...VerticalMediumPremium},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
 				grande : {
 					aspectRatio      : [8, 9],
-					layoutMods       : {...VerticalLarge},
+					layoutMods       : {...VerticalLargePremium},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
 				},
@@ -277,7 +289,7 @@ const photoBooksConfing = {
 				mediano : false,
 				grande  : {
 					aspectRatio      : [1, 1],
-					layoutMods       : {...SquareLarge},
+					layoutMods       : {...SquareLargePremium},
 					frontLayouts     : {},
 					modsInDoublePage : [],
 					pdfSize          : [100, 100],
@@ -523,7 +535,7 @@ const photoBooksConfing = {
 			},
 		},
 	},
-	"travelcoffeetable" : {
+	"travelcoffeetable " : {
 		vertical : {
 			sizes : {
 				grande : {

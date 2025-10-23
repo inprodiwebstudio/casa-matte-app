@@ -31,7 +31,7 @@ const Mod17Pdf = ({images}) => {
 						width      : "100%",
 						height     : "33.33%",
 						overflow   : "hidden",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -52,7 +52,7 @@ const Mod17Pdf = ({images}) => {
 						width      : "100%",
 						height     : "33.33%",
 						overflow   : "hidden",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{
@@ -73,7 +73,7 @@ const Mod17Pdf = ({images}) => {
 						width      : "100%",
 						height     : "33.33%",
 						overflow   : "hidden",
-						background : "#E3E3E3",
+						background : "white",
 					}}
 				>
 					{

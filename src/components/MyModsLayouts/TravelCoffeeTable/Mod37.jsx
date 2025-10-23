@@ -6,15 +6,7 @@ import { textInsertion } from "helpers";
 //Own components
 
 
-const Mod37 = ({
-	data,
-	isInWorkSpace,
-	sheetNo,
-	isInPaginator,
-	isThumbNail,
-	pageNo,
-	modLayout,
-}) => {
+const Mod37 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 
 	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 32px; font-family: JosefinSans-Light;'>VALPARAÍSO</span></p>";
 
@@ -43,13 +35,7 @@ const Mod37 = ({
 						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Stack>
-				<Stack
-					maw="70%"
-					miw="30%"
-					mr="5%"
-					spacing="0em"
-					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
-				>
+				<Stack maw="70%" miw="30%" mr="5%" spacing="0em">
 					<Text
 						sizes={{
 							"chico"   : "30px",

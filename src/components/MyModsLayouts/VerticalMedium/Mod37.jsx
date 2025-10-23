@@ -15,9 +15,9 @@ const Mod37 = ({
 	modLayout,
 }) => {
 
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 42px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 28px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
 
-	const defaulSubtTitle = "<p style='text-align: center;'><span style='font-size: 15px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>";
+	const defaulSubtTitle = "<p style='text-align: center;'><span style='font-size: 10px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>";
 
 	return (
 		<Flex
@@ -27,42 +27,38 @@ const Mod37 = ({
 			justify="flex-end"
 			align="flex-end"
 		>
-			<Center w="100%" h="100%" {...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}>
-				<Stack spacing="0px" w="100%">
+			<Center
+				w="100%"
+				h="100%"
+			>
+				<Stack
+					spacing={isInWorkSpace ? "2px" : "0.05em"}
+					w="100%"
+				>
 					<div
 						style={{
-							width          : "100%",
-							display        : "flex",
-							justifyContent : "center",
-							alignItems     : "center",
-							overflow       : "visible",
-							maxHeight      : "200px",
+							width        : "100%",
+							paddingLeft  : "10%",
+							paddingRight : "10%",
+							maxHeight    : "100px",
 						}}
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 					>
-						<div
-							style={{
-								width          : "100%",
-								height         : "auto",
-								display        : "flex",
-								justifyContent : "center",
-								alignItems     : "center",
+						<Text
+							sizes={{
+								"chico"   : "38px",
+								"regular" : "42px",
+								"grande"  : "46px",
 							}}
-						>
-							<Text
-								sizes={{
-									"chico"   : "38px",
-									"regular" : "42px",
-									"grande"  : "46px",
-								}}
-								sheetNo={sheetNo}
-								letterSpacing="6px"
-								textShell={() => <TextShell.Title />}
-								data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
-								isInPaginator={isInPaginator}
-								isThumbNail={isThumbNail}
-								textNo={0}
-							/>
-						</div>
+							typeText="title"
+							sheetNo={sheetNo}
+							letterSpacing="4px"
+							textShell={() => <TextShell.Title />}
+							data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+							isInPaginator={isInPaginator}
+							isThumbNail={isThumbNail}
+							textNo={0}
+						/>
 					</div>
 					<div
 						style={{
@@ -70,6 +66,7 @@ const Mod37 = ({
 							paddingLeft  : "20%",
 							paddingRight : "20%",
 						}}
+						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
 					>
 						<Text
 							sizes={{
@@ -77,6 +74,7 @@ const Mod37 = ({
 								"regular" : "15px",
 								"grande"  : "16px",
 							}}
+							typeText="subtitle"
 							sheetNo={sheetNo}
 							letterSpacing="2px"
 							textShell={() => <TextShell.SubTitle />}

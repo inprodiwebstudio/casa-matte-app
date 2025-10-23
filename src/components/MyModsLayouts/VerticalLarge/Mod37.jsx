@@ -27,7 +27,7 @@ const Mod37 = ({
 			align="flex-end"
 		>
 			<Center w="100%" h="100%">
-				<Stack spacing="0.05em" w="100%">
+				<Stack spacing={isInWorkSpace ? "6px" : "0.1em"} w="100%">
 					<div
 						style={{
 							width        : "100%",
