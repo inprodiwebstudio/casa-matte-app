@@ -2,7 +2,7 @@ import { Stack, Group, Box } from "@mantine/core";
 import ImgLayout             from "components/LayoutHandler/ImgLayout";
 //Own components
 
-const Mod37 = ({data, isInWorkSpace, sheetNo}) => {
+const Mod37 = ({sheetNo}) => {
 	return (
 		<Stack
 			w="100%"
@@ -20,10 +20,8 @@ const Mod37 = ({data, isInWorkSpace, sheetNo}) => {
 					w={"calc(100% / 3 - 0.067em)"}
 				>
 					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={0}
-						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Box>
 				<Box
@@ -31,10 +29,8 @@ const Mod37 = ({data, isInWorkSpace, sheetNo}) => {
 					w={"calc(100% / 3 - 0.067em)"}
 				>
 					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={1}
-						urlImage={data?.photos[1] ?? {}}
 					/>
 				</Box>
 				<Box
@@ -42,10 +38,8 @@ const Mod37 = ({data, isInWorkSpace, sheetNo}) => {
 					w={"calc(100% / 3 - 0.067em)"}
 				>
 					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={2}
-						urlImage={data?.photos[2] ?? {}}
 					/>
 				</Box>
 			</Group>
@@ -59,10 +53,8 @@ const Mod37 = ({data, isInWorkSpace, sheetNo}) => {
 					w={"calc(100% / 3 - 0.067em)"}
 				>
 					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={3}
-						urlImage={data?.photos[3] ?? {}}
 					/>
 				</Box>
 				<Box
@@ -70,10 +62,8 @@ const Mod37 = ({data, isInWorkSpace, sheetNo}) => {
 					w={"calc(100% / 3 - 0.067em)"}
 				>
 					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={4}
-						urlImage={data?.photos[4] ?? {}}
 					/>
 				</Box>
 				<Box
@@ -81,10 +71,8 @@ const Mod37 = ({data, isInWorkSpace, sheetNo}) => {
 					w={"calc(100% / 3 - 0.067em)"}
 				>
 					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={5}
-						urlImage={data?.photos[5] ?? {}}
 					/>
 				</Box>
 			</Group>
@@ -98,10 +86,8 @@ const Mod37 = ({data, isInWorkSpace, sheetNo}) => {
 					w={"calc(100% / 3 - 0.067em)"}
 				>
 					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={6}
-						urlImage={data?.photos[6] ?? {}}
 					/>
 				</Box>
 				<Box
@@ -109,10 +95,8 @@ const Mod37 = ({data, isInWorkSpace, sheetNo}) => {
 					w={"calc(100% / 3 - 0.067em)"}
 				>
 					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={7}
-						urlImage={data?.photos[7] ?? {}}
 					/>
 				</Box>
 				<Box
@@ -120,10 +104,8 @@ const Mod37 = ({data, isInWorkSpace, sheetNo}) => {
 					w={"calc(100% / 3 - 0.067em)"}
 				>
 					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={8}
-						urlImage={data?.photos[8] ?? {}}
 					/>
 				</Box>
 			</Group>
