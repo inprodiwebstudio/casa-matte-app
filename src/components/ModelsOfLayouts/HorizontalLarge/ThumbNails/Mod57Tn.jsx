@@ -2,7 +2,7 @@ import { Group, Stack } from "@mantine/core";
 import ImgLayoutPreview from "components/LayoutHandler/ImgLayoutPreview";
 //Own components
 
-const Mod56Tn = ({photos}) => {
+const Mod57Tn = ({photos}) => {
 	return (
 		<Stack
 			w="100%"
@@ -13,7 +13,7 @@ const Mod56Tn = ({photos}) => {
 			<Group
 				spacing="0.1em"
 				w="100%"
-				h="calc(50% - 0.05em)"
+				h="calc(33.33% - 0.067em)"
 			>
 				<Stack
 					h="100%"
@@ -43,7 +43,7 @@ const Mod56Tn = ({photos}) => {
 			<Group
 				spacing="0.1em"
 				w="100%"
-				h="calc(50% - 0.05em)"
+				h="calc(33.33% - 0.067em)"
 			>
 				<Stack
 					h="100%"
@@ -70,8 +70,38 @@ const Mod56Tn = ({photos}) => {
 					/>
 				</Stack>
 			</Group>
+			<Group
+				spacing="0.1em"
+				w="100%"
+				h="calc(33.33% - 0.067em)"
+			>
+				<Stack
+					h="100%"
+					w="calc(33.33% - 0.067em)"
+				>
+					<ImgLayoutPreview
+						imageData={photos?.[6] ?? {}}
+					/>
+				</Stack>
+				<Stack
+					h="100%"
+					w="calc(33.33% - 0.067em)"
+				>
+					<ImgLayoutPreview
+						imageData={photos?.[7] ?? {}}
+					/>
+				</Stack>
+				<Stack
+					h="100%"
+					w="calc(33.33% - 0.067em)"
+				>
+					<ImgLayoutPreview
+						imageData={photos?.[8] ?? {}}
+					/>
+				</Stack>
+			</Group>
 		</Stack>
 	);
 };
 
-export default Mod56Tn;
+export default Mod57Tn;

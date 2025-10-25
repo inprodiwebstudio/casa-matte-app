@@ -1,4 +1,4 @@
-import { Box, Group, Stack } from "@mantine/core";
+import { Group, Stack } from "@mantine/core";
 //Own components
 import ImgLayoutPreview from "components/LayoutHandler/ImgLayoutPreview";
 
@@ -7,52 +7,40 @@ const Mod31Tn = ({photos}) => {
 		<Stack
 			w="100%"
 			h="100%"
-			p="2%"
+			p="28%"
+			pl="18%"
+			pr="18%"
 		>
-			<Stack
+			<Group
 				spacing="0.1em"
-				h="100%"
 				w="100%"
+				h="100%"
 			>
-				<Group
-					w="100%"
-					h="calc(35% - 0.05em)"
-					spacing={"0.1em"}
-				>
-					<Box
-						w="calc(100% / 3 - 0.067em)"
-						h="100%"
-					>
-						<ImgLayoutPreview
-							imageData={photos?.[0] ?? {}}
-						/>
-					</Box>
-					<Box
-						w="calc(100% / 3 - 0.067em)"
-						h="100%"
-					>
-						<ImgLayoutPreview
-							imageData={photos?.[1] ?? {}}
-						/>
-					</Box>
-					<Box
-						w="calc(100% / 3 - 0.067em)"
-						h="100%"
-					>
-						<ImgLayoutPreview
-							imageData={photos?.[2] ?? {}}
-						/>
-					</Box>
-				</Group>
-				<Box
-					w="100%"
-					h="calc(67% - 0.05em)"
+				<Stack
+					w="calc(33.33% - 0.067em)"
+					h="100%"
 				>
 					<ImgLayoutPreview
-						imageData={photos?.[3] ?? {}}
+						imageData={photos?.[0] ?? {}}
 					/>
-				</Box>
-			</Stack>
+				</Stack>
+				<Stack
+					w="calc(33.33% - 0.067em)"
+					h="100%"
+				>
+					<ImgLayoutPreview
+						imageData={photos?.[1] ?? {}}
+					/>
+				</Stack>
+				<Stack
+					w="calc(33.33% - 0.067em)"
+					h="100%"
+				>
+					<ImgLayoutPreview
+						imageData={photos?.[2] ?? {}}
+					/>
+				</Stack>
+			</Group>
 		</Stack>
 	);
 };

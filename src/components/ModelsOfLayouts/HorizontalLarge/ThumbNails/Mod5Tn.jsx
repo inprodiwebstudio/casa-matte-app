@@ -2,14 +2,14 @@ import { Stack } from "@mantine/core";
 //Own components
 import ImgLayoutPreview from "components/LayoutHandler/ImgLayoutPreview";
 
-const Mod4Tn = ({photos}) => {
+const Mod5Tn = ({photos}) => {
 	return (
 		<Stack
 			w="100%"
 			h="100%"
-			pt="20%"
-			pb={"20%"}
+			pb="17%"
 		>
+
 			<ImgLayoutPreview
 				imageData={photos?.[0] ?? {}}
 			/>
@@ -17,4 +17,4 @@ const Mod4Tn = ({photos}) => {
 	);
 };
 
-export default Mod4Tn;
+export default Mod5Tn;

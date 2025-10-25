@@ -1,61 +1,53 @@
-import { Flex, Stack } from "@mantine/core";
-import DividerLayout   from "components/LayoutHandler/DividerLayout";
-import { TextShell }   from "core/components";
+import { Group, Stack } from "@mantine/core";
+import ImgLayoutPreview from "components/LayoutHandler/ImgLayoutPreview";
 //Own components
 
-const Mod50Tn = () => {
+const Mod50Tn = ({photos}) => {
 	return (
-		<Flex
+		<Stack
 			w="100%"
 			h="100%"
-			justify="center"
-			align="center"
-			direction="column"
-			sx={{overflow : "hidden"}}
-			pr="5%"
-			pl="32%"
+			p="10%"
+			pl="15%"
+			pr="15%"
 		>
-			<Stack
-				spacing={"0.2em"}
+			<Group
+				spacing="0.1em"
 				w="100%"
+				h="100%"
 			>
-				<Stack
-					spacing={"0.13em"}
-					aria-hidden
+				<Group
+					w="100%"
+					h="calc(50% - 0.05em)"
+					spacing="0.1em"
 				>
-					<div>
-						<TextShell.TitleSmall width="60%" align="left" />
-					</div>
-					<DividerLayout long="0.3em" position="h" />
-					<div>
-						<TextShell.BodyIndices width="50%" align="left" />
-					</div>
-				</Stack>
+					<Stack
+						h="100%"
+						w="calc(50% - 0.05em)"
+					>
+						<ImgLayoutPreview
+							imageData={photos?.[0] ?? {}}
+						/>
+					</Stack>
+					<Stack
+						h="100%"
+						w="calc(50% - 0.05em)"
+					>
+						<ImgLayoutPreview
+							imageData={photos?.[1] ?? {}}
+						/>
+					</Stack>
+				</Group>
 				<Stack
-					spacing={"0.13em"}
-					aria-hidden
+					w="100%"
+					h="calc(50% - 0.05em)"
 				>
-					<div>
-						<TextShell.TitleSmall width="60%" align="left" />
-					</div>
-					<DividerLayout long="0.3em" position="h" />
-					<div>
-						<TextShell.BodyIndices width="50%" align="left" />
-					</div>
+					<ImgLayoutPreview
+						imageData={photos?.[2] ?? {}}
+					/>
 				</Stack>
-				<Stack
-					spacing={"0.13em"}
-				>
-					<div>
-						<TextShell.TitleSmall width="60%" align="left" />
-					</div>
-					<DividerLayout long="0.3em" position="h" />
-					<div>
-						<TextShell.BodyIndices width="50%" align="left" />
-					</div>
-				</Stack>
-			</Stack>
-		</Flex>
+			</Group>
+		</Stack>
 	);
 };
 

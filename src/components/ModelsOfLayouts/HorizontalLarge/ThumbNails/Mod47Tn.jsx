@@ -1,27 +1,51 @@
-import { Flex, Stack } from "@mantine/core";
-import { TextShell }   from "core/components";
+import { Group, Stack } from "@mantine/core";
+import ImgLayoutPreview from "components/LayoutHandler/ImgLayoutPreview";
 //Own components
 
-const Mod47Tn = () => {
+const Mod47Tn = ({photos}) => {
 	return (
-		<Flex
-			p="8%"
+		<Stack
 			w="100%"
 			h="100%"
-			justify="center"
-			align="center"
+			p="4%"
 		>
-			<Stack
-				w="57%"
-				mah="95%"
-				spacing={"0.1em"}
-				aria-hidden
-				style={{overflow : "hidden"}}
+			<Group
+				spacing="0.1em"
+				w="100%"
+				h="100%"
 			>
-				<TextShell.SubTitle width="35%" align="flex-start" />
-				<TextShell.BodyParagraph width="100%" align="center" />
-			</Stack>
-		</Flex>
+				<Stack
+					w="100%"
+					h="calc(50% - 0.05em)"
+				>
+					<ImgLayoutPreview
+						imageData={photos?.[0] ?? {}}
+					/>
+				</Stack>
+				<Group
+					w="100%"
+					h="calc(50% - 0.05em)"
+					spacing="0.1em"
+				>
+					<Stack
+						h="100%"
+						w="calc(50% - 0.05em)"
+					>
+						<ImgLayoutPreview
+							imageData={photos?.[1] ?? {}}
+						/>
+					</Stack>
+					<Stack
+						h="100%"
+						w="calc(50% - 0.05em)"
+					>
+						<ImgLayoutPreview
+							imageData={photos?.[2] ?? {}}
+						/>
+					</Stack>
+				</Group>
+			</Group>
+		</Stack>
 	);
 };
 

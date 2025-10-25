@@ -2,7 +2,7 @@ import { Group, Stack } from "@mantine/core";
 //Own components
 import ImgLayout from "components/LayoutHandler/ImgLayout";
 
-const Mod58 = ({data, isInWorkSpace, sheetNo}) => {
+const Mod58 = ({sheetNo}) => {
 	return (
 		<Stack
 			w="100%"
@@ -20,10 +20,8 @@ const Mod58 = ({data, isInWorkSpace, sheetNo}) => {
 					w="calc(33.33% - 0.067em)"
 				>
 					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={0}
-						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Stack>
 				<Stack
@@ -31,10 +29,8 @@ const Mod58 = ({data, isInWorkSpace, sheetNo}) => {
 					w="calc(33.33% - 0.067em)"
 				>
 					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={1}
-						urlImage={data?.photos[1] ?? {}}
 					/>
 				</Stack>
 				<Stack
@@ -42,10 +38,8 @@ const Mod58 = ({data, isInWorkSpace, sheetNo}) => {
 					w="calc(33.33% - 0.067em)"
 				>
 					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={2}
-						urlImage={data?.photos[2] ?? {}}
 					/>
 				</Stack>
 			</Group>
@@ -59,10 +53,8 @@ const Mod58 = ({data, isInWorkSpace, sheetNo}) => {
 					w="calc(33.33% - 0.067em)"
 				>
 					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={3}
-						urlImage={data?.photos[3] ?? {}}
 					/>
 				</Stack>
 				<Stack
@@ -70,10 +62,8 @@ const Mod58 = ({data, isInWorkSpace, sheetNo}) => {
 					w="calc(33.33% - 0.067em)"
 				>
 					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={4}
-						urlImage={data?.photos[4] ?? {}}
 					/>
 				</Stack>
 				<Stack
@@ -81,10 +71,8 @@ const Mod58 = ({data, isInWorkSpace, sheetNo}) => {
 					w="calc(33.33% - 0.067em)"
 				>
 					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={5}
-						urlImage={data?.photos[5] ?? {}}
 					/>
 				</Stack>
 			</Group>

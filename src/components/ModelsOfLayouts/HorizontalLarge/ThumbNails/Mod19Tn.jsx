@@ -1,4 +1,4 @@
-import { Box, Group, Stack } from "@mantine/core";
+import { Stack } from "@mantine/core";
 //Own components
 import ImgLayoutPreview from "components/LayoutHandler/ImgLayoutPreview";
 
@@ -7,32 +7,32 @@ const Mod19Tn = ({photos}) => {
 		<Stack
 			w="100%"
 			h="100%"
-			pl="16%"
-			pr="16%"
-			p="33%"
+			p="30%"
+			pt="15%"
+			pb="15%"
 		>
-			<Group
+			<Stack
 				spacing="0.1em"
 				w="100%"
-				h={"100%"}
+				h="100%"
 			>
-				<Box
-					w="calc(100% / 2 - 0.05em)"
-					h="100%"
+				<Stack
+					h="calc(50% - 0.05em)"
+					w="100%"
 				>
 					<ImgLayoutPreview
 						imageData={photos?.[0] ?? {}}
 					/>
-				</Box>
-				<Box
-					w="calc(100% / 2 - 0.05em)"
-					h="100%"
+				</Stack>
+				<Stack
+					h="calc(50% - 0.05em)"
+					w="100%"
 				>
 					<ImgLayoutPreview
 						imageData={photos?.[1] ?? {}}
 					/>
-				</Box>
-			</Group>
+				</Stack>
+			</Stack>
 		</Stack>
 	);
 };

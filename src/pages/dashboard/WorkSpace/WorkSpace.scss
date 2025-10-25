@@ -250,7 +250,7 @@
 				transform: scale(0.6, 0.6);
 
 				@include laptop {
-					margin-right: 45px;
+					margin-right: 0px;
 					transform: scale(0.40, 0.40);
 					z-index: 1;
 				}

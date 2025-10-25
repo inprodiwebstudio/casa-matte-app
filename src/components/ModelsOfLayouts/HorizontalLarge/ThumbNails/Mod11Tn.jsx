@@ -7,7 +7,9 @@ const Mod11Tn = ({photos}) => {
 		<Stack
 			w="100%"
 			h="100%"
-			pr="22%"
+			p="13%"
+			pl="29%"
+			pr="29%"
 		>
 			<ImgLayoutPreview
 				imageData={photos?.[0] ?? {}}

@@ -1,38 +1,51 @@
-import { Center, Flex, Stack } from "@mantine/core";
-import DividerLayout           from "components/LayoutHandler/DividerLayout";
-import { TextShell }           from "core/components";
+import { Group, Stack } from "@mantine/core";
+import ImgLayoutPreview from "components/LayoutHandler/ImgLayoutPreview";
 //Own components
 
-const Mod48Tn = () => {
+const Mod48Tn = ({photos}) => {
 	return (
-		<Flex
-			p="8%"
+		<Stack
 			w="100%"
 			h="100%"
-			justify="center"
-			align="center"
+			p="4%"
 		>
-			<Stack
-				w="50%"
-				mah="80%"
-				spacing={"0.2em"}
-				aria-hidden
-				sx={{
-					overflow : "hidden",
-				}}
+			<Group
+				spacing="0.1em"
+				w="100%"
+				h="100%"
 			>
-				<Stack
-					spacing={"0.1em"}
+				<Group
 					w="100%"
+					h="calc(50% - 0.05em)"
+					spacing="0.1em"
 				>
-					<TextShell.Title width="100%" align="center" />
-					<Center>
-						<DividerLayout long="0.4em" position="v" />
-					</Center>
+					<Stack
+						h="100%"
+						w="calc(50% - 0.05em)"
+					>
+						<ImgLayoutPreview
+							imageData={photos?.[0] ?? {}}
+						/>
+					</Stack>
+					<Stack
+						h="100%"
+						w="calc(50% - 0.05em)"
+					>
+						<ImgLayoutPreview
+							imageData={photos?.[1] ?? {}}
+						/>
+					</Stack>
+				</Group>
+				<Stack
+					w="100%"
+					h="calc(50% - 0.05em)"
+				>
+					<ImgLayoutPreview
+						imageData={photos?.[2] ?? {}}
+					/>
 				</Stack>
-				<TextShell.BodyIndices align="center" />
-			</Stack>
-		</Flex>
+			</Group>
+		</Stack>
 	);
 };
 

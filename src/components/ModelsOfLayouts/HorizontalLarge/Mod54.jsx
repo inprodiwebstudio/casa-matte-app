@@ -2,7 +2,7 @@ import { Group, Stack } from "@mantine/core";
 //Own components
 import ImgLayout from "components/LayoutHandler/ImgLayout";
 
-const Mod54 = ({data, isInWorkSpace, sheetNo}) => {
+const Mod54 = ({sheetNo}) => {
 	return (
 		<Stack
 			w="100%"
@@ -20,10 +20,8 @@ const Mod54 = ({data, isInWorkSpace, sheetNo}) => {
 					w="calc(33.2% - 0.05em)"
 				>
 					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={0}
-						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Stack>
 				<Stack
@@ -31,10 +29,8 @@ const Mod54 = ({data, isInWorkSpace, sheetNo}) => {
 					w="calc(66.8% - 0.05em)"
 				>
 					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={1}
-						urlImage={data?.photos[1] ?? {}}
 					/>
 				</Stack>
 			</Group>
@@ -48,10 +44,8 @@ const Mod54 = ({data, isInWorkSpace, sheetNo}) => {
 					w="calc(66.8% - 0.05em)"
 				>
 					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={2}
-						urlImage={data?.photos[2] ?? {}}
 					/>
 				</Stack>
 				<Stack
@@ -59,10 +53,8 @@ const Mod54 = ({data, isInWorkSpace, sheetNo}) => {
 					w="calc(33.2% - 0.05em)"
 				>
 					<ImgLayout
-						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}
 						imageNo={3}
-						urlImage={data?.photos[3] ?? {}}
 					/>
 				</Stack>
 			</Group>

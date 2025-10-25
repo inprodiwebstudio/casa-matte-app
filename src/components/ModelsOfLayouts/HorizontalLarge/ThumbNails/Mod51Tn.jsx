@@ -1,61 +1,68 @@
-import { Flex, Stack } from "@mantine/core";
-import DividerLayout   from "components/LayoutHandler/DividerLayout";
-import { TextShell }   from "core/components";
+import { Group, Stack } from "@mantine/core";
+import ImgLayoutPreview from "components/LayoutHandler/ImgLayoutPreview";
 //Own components
 
-const Mod51Tn = () => {
+const Mod51Tn = ({photos}) => {
 	return (
-		<Flex
+		<Stack
 			w="100%"
 			h="100%"
-			justify="center"
-			align="center"
-			direction="column"
-			sx={{overflow : "hidden"}}
-			pr="5%"
-			pl="42%"
+			p="4%"
+			spacing={"0.1em"}
 		>
-			<Stack
-				spacing={"0.2em"}
+			<Group
+				spacing="0.1em"
 				w="100%"
+				h="calc(50% - 0.05em)"
 			>
 				<Stack
-					spacing={"0.13em"}
-					aria-hidden
+					h="100%"
+					w="calc(66.8% - 0.05em)"
 				>
-					<div>
-						<TextShell.TitleSmall width="60%" align="left" />
-					</div>
-					<DividerLayout long="0.3em" position="h" />
-					<div>
-						<TextShell.BodyIndices width="50%" align="left" />
-					</div>
+					<ImgLayoutPreview
+						imageData={photos?.[0] ?? {}}
+					/>
 				</Stack>
 				<Stack
-					spacing={"0.13em"}
-					aria-hidden
+					h="100%"
+					w="calc(33.2% - 0.05em)"
 				>
-					<div>
-						<TextShell.TitleSmall width="60%" align="left" />
-					</div>
-					<DividerLayout long="0.3em" position="h" />
-					<div>
-						<TextShell.BodyIndices width="50%" align="left" />
-					</div>
+					<ImgLayoutPreview
+						imageData={photos?.[1] ?? {}}
+					/>
+				</Stack>
+			</Group>
+			<Group
+				w="100%"
+				h="calc(50% - 0.05em)"
+				spacing={"0.1em"}
+			>
+				<Stack
+					h="100%"
+					w="calc(33.33% - 0.067em)"
+				>
+					<ImgLayoutPreview
+						imageData={photos?.[2] ?? {}}
+					/>
 				</Stack>
 				<Stack
-					spacing={"0.13em"}
+					h="100%"
+					w="calc(33.33% - 0.067em)"
 				>
-					<div>
-						<TextShell.TitleSmall width="60%" align="left" />
-					</div>
-					<DividerLayout long="0.3em" position="h" />
-					<div>
-						<TextShell.BodyIndices width="50%" align="left" />
-					</div>
+					<ImgLayoutPreview
+						imageData={photos?.[3] ?? {}}
+					/>
 				</Stack>
-			</Stack>
-		</Flex>
+				<Stack
+					h="100%"
+					w="calc(33.33% - 0.067em)"
+				>
+					<ImgLayoutPreview
+						imageData={photos?.[4] ?? {}}
+					/>
+				</Stack>
+			</Group>
+		</Stack>
 	);
 };
 

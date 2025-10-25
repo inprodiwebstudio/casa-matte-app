@@ -1,43 +1,54 @@
-import { Center, Flex, Stack } from "@mantine/core";
-import DividerLayout           from "components/LayoutHandler/DividerLayout";
-import { TextShell }           from "core/components";
+import { Group, Stack } from "@mantine/core";
+import ImgLayoutPreview from "components/LayoutHandler/ImgLayoutPreview";
 //Own components
 
-const Mod48Tn = () => {
+const Mod49Tn = ({photos}) => {
 	return (
-		<Flex
-			p="8%"
+		<Stack
 			w="100%"
 			h="100%"
-			justify="center"
-			align="center"
+			p="10%"
+			pl="15%"
+			pr="15%"
 		>
-			<Stack
-				w="50%"
-				mah="80%"
-				spacing={"0.3em"}
-				aria-hidden
-				sx={{
-					overflow : "hidden",
-				}}
+			<Group
+				spacing="0.1em"
+				w="100%"
+				h="100%"
 			>
 				<Stack
-					spacing={"0.25em"}
 					w="100%"
+					h="calc(50% - 0.05em)"
 				>
-					<TextShell.Title width="100%" align="left" />
-					<Center>
-						<DividerLayout
-							long={"0.3em"}
-							position="h"
-							weight={"0.015em"}
-						/>
-					</Center>
+					<ImgLayoutPreview
+						imageData={photos?.[0] ?? {}}
+					/>
 				</Stack>
-				<TextShell.BodyIndices align="center" />
-			</Stack>
-		</Flex>
+				<Group
+					w="100%"
+					h="calc(50% - 0.05em)"
+					spacing="0.1em"
+				>
+					<Stack
+						h="100%"
+						w="calc(50% - 0.05em)"
+					>
+						<ImgLayoutPreview
+							imageData={photos?.[1] ?? {}}
+						/>
+					</Stack>
+					<Stack
+						h="100%"
+						w="calc(50% - 0.05em)"
+					>
+						<ImgLayoutPreview
+							imageData={photos?.[2] ?? {}}
+						/>
+					</Stack>
+				</Group>
+			</Group>
+		</Stack>
 	);
 };
 
-export default Mod48Tn;
+export default Mod49Tn;
