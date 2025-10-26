@@ -39,6 +39,7 @@ import Mod37Tn from "./ThumbNails/Mod37Tn";
 import Mod38Tn from "./ThumbNails/Mod38Tn";
 import Mod39Tn from "./ThumbNails/Mod39Tn";
 import Mod40Tn from "./ThumbNails/Mod40Tn";
+import Mod63Tn from "./ThumbNails/Mod63Tn";
 
 import Mod1  from "./Mod1";
 import Mod2  from "./Mod2";
@@ -78,47 +79,52 @@ import Mod35 from "./Mod35";
 import Mod36 from "./Mod36";
 import Mod37 from "./Mod37";
 
-import Mod41Tn from "./ThumbNails/Mod41Tn";
-import Mod42Tn from "./ThumbNails/Mod42Tn";
-import Mod43Tn from "./ThumbNails/Mod43Tn";
-import Mod44Tn from "./ThumbNails/Mod44Tn";
-import Mod45Tn from "./ThumbNails/Mod45Tn";
-import Mod46Tn from "./ThumbNails/Mod46Tn";
-import Mod47Tn from "./ThumbNails/Mod47Tn";
-import Mod48Tn from "./ThumbNails/Mod48Tn";
-import Mod49Tn from "./ThumbNails/Mod49Tn";
-import Mod50Tn from "./ThumbNails/Mod50Tn";
-import Mod51Tn from "./ThumbNails/Mod51Tn";
-import Mod52Tn from "./ThumbNails/Mod52Tn";
-import Mod53Tn from "./ThumbNails/mod53Tn";
-import Mod54Tn from "./ThumbNails/Mod54Tn";
-import Mod54   from "./Mod54";
-import Mod55   from "./Mod55";
-import Mod55Tn from "./ThumbNails/Mod55Tn";
-import Mod56Tn from "./ThumbNails/Mod56Tn";
-import Mod56   from "./Mod56";
-import Mod38   from "./Mod38";
-import Mod39   from "./Mod39";
-import Mod40   from "./Mod40";
-import Mod41   from "./Mod41";
-import Mod42   from "./Mod42";
-import Mod43   from "./Mod43";
-import Mod44   from "./Mod44";
-import Mod45   from "./Mod45";
-import Mod46   from "./Mod46";
-import Mod47   from "./Mod47";
-import Mod48   from "./Mod48";
-import Mod49   from "./Mod49";
-import Mod50   from "./Mod50";
-import Mod51   from "./Mod51";
-import Mod52   from "./Mod52";
-import Mod53   from "./Mod53";
-import Mod57   from "./Mod57";
-import Mod57Tn from "./ThumbNails/Mod57Tn";
-import Mod58   from "./Mod58";
-import Mod58Tn from "./ThumbNails/Mod58Tn";
-import Mod59   from "./Mod59";
-import Mod59Tn from "./ThumbNails/Mod59Tn";
+import Mod41Tn       from "./ThumbNails/Mod41Tn";
+import Mod42Tn       from "./ThumbNails/Mod42Tn";
+import Mod43Tn       from "./ThumbNails/Mod43Tn";
+import Mod44Tn       from "./ThumbNails/Mod44Tn";
+import Mod45Tn       from "./ThumbNails/Mod45Tn";
+import Mod46Tn       from "./ThumbNails/Mod46Tn";
+import Mod47Tn       from "./ThumbNails/Mod47Tn";
+import Mod48Tn       from "./ThumbNails/Mod48Tn";
+import Mod49Tn       from "./ThumbNails/Mod49Tn";
+import Mod50Tn       from "./ThumbNails/Mod50Tn";
+import Mod51Tn       from "./ThumbNails/Mod51Tn";
+import Mod52Tn       from "./ThumbNails/Mod52Tn";
+import Mod53Tn       from "./ThumbNails/mod53Tn";
+import Mod54Tn       from "./ThumbNails/Mod54Tn";
+import Mod54         from "./Mod54";
+import Mod55         from "./Mod55";
+import Mod55Tn       from "./ThumbNails/Mod55Tn";
+import Mod56Tn       from "./ThumbNails/Mod56Tn";
+import Mod56         from "./Mod56";
+import Mod38         from "./Mod38";
+import Mod39         from "./Mod39";
+import Mod40         from "./Mod40";
+import Mod41         from "./Mod41";
+import Mod42         from "./Mod42";
+import Mod43         from "./Mod43";
+import Mod44         from "./Mod44";
+import Mod45         from "./Mod45";
+import Mod46         from "./Mod46";
+import Mod47         from "./Mod47";
+import Mod48         from "./Mod48";
+import Mod49         from "./Mod49";
+import Mod50         from "./Mod50";
+import Mod51         from "./Mod51";
+import Mod52         from "./Mod52";
+import Mod53         from "./Mod53";
+import Mod57         from "./Mod57";
+import Mod57Tn       from "./ThumbNails/Mod57Tn";
+import Mod58         from "./Mod58";
+import Mod58Tn       from "./ThumbNails/Mod58Tn";
+import Mod59         from "./Mod59";
+import Mod59Tn       from "./ThumbNails/Mod59Tn";
+import ModTextLayout from "components/global/ModTextLayout";
+import Mod60Tn       from "./ThumbNails/Mod60Tn";
+import Mod61Tn       from "./ThumbNails/Mod61Tn";
+import Mod62Tn       from "./ThumbNails/Mod62Tn";
+import Mod64Tn       from "./ThumbNails/Mod64Tn";
 
 const SquareSmall = {
 	Mod1 : {
@@ -533,6 +539,378 @@ const SquareSmall = {
 		numberPhotos    : 7,
 		cat             : "fotos",
 		layoutThumbNail : Mod59Tn,
+	},
+	Mod60 : {
+		id              : "Mod60",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 2,
+		cat             : "texto",
+		layoutThumbNail : Mod60Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: center;'><span style='font-size: 14px; font-family: Inter-Lifght;'>Agregar texto...</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : "2px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: center;'><span style='font-size: 40px; font-family: Aitana-Regular;'>TÍTULO</span></p>",
+				position : {
+					x : 38.37733976269095,
+					y : 362.03094660661895,
+				},
+				sizes : {
+					width  : "909px",
+					height : "52px",
+				},
+				letterSpacing : "6px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: center;'><span style='font-size: 14px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>",
+				position : {
+					x : 185.30187575061578,
+					y : 413.2075247393918,
+				},
+				sizes : {
+					width  : "622px",
+					height : "27px",
+				},
+				letterSpacing : "2px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod61 : {
+		id              : "Mod61",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 2,
+		cat             : "texto",
+		layoutThumbNail : Mod61Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: right;'><span style='font-size: 14px; font-family: Inter-Lifght;'>Agregar texto...</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : "3px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: right;'><span style='font-size: 36px; font-family: Aitana-Regular;'>TÍTULO</span></p>",
+				position : {
+					x : 110.5093974626024,
+					y : 694.1064146104177,
+				},
+				sizes : {
+					width  : "818px",
+					height : "52px",
+				},
+				letterSpacing : "6px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: right;'><span style='font-size: 14px; font-family: Inter-Lifght;'>SUBTÍTULO 1</span></p>",
+				position : {
+					x : 300.3962153732577,
+					y : 743.3962039846721,
+				},
+				sizes : {
+					width  : "622px",
+					height : "27px",
+				},
+				letterSpacing : "3px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod62 : {
+		id              : "Mod62",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 6,
+		cat             : "texto",
+		layoutThumbNail : Mod62Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Agregar texto...</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : undefined,
+			gapSpacing    : "8px",
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>ESPAÑA</span></p>",
+				position : {
+					x : 818.0565652341957,
+					y : 511.0875407532207,
+				},
+				sizes : {
+					width  : "150px",
+					height : "37px",
+				},
+				letterSpacing : "2px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>ESPAÑA</span></p>",
+				position : {
+					x : 819.9433576870263,
+					y : 667.6913295969132,
+				},
+				sizes : {
+					width  : "144px",
+					height : "37px",
+				},
+				letterSpacing : "2px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>ESPAÑA</span></p>",
+				position : {
+					x : 814.2829812872062,
+					y : 358.2573456761884,
+				},
+				sizes : {
+					width  : "145px",
+					height : "35px",
+				},
+				letterSpacing : "2px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>",
+				position : {
+					x : 823.7169425926882,
+					y : 705.427193912305,
+				},
+				sizes : {
+					width  : "95px",
+					height : "90px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : "8px",
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>",
+				position : {
+					x : 819.9433576870266,
+					y : 546.9366278745706,
+				},
+				sizes : {
+					width  : "89px",
+					height : "89px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : "8px",
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>",
+				position : {
+					x : 819.9433586456987,
+					y : 395.9932344365104,
+				},
+				sizes : {
+					width  : "84px",
+					height : "93px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : "8px",
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod63 : {
+		id              : "Mod63",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 6,
+		cat             : "texto",
+		layoutThumbNail : Mod63Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: left;'><span style='font-size: 14px; font-family: Aitana-Regular;'>Agregar texto...</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : undefined,
+			gapSpacing    : "8px",
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>ESPAÑA</span></p>",
+				position : {
+					x : 407.8363805967389,
+					y : 330.48376716831456,
+				},
+				sizes : {
+					width  : "150px",
+					height : "37px",
+				},
+				letterSpacing : "2px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>ESPAÑA</span></p>",
+				position : {
+					x : 407.66667096820584,
+					y : 184.26665751139325,
+				},
+				sizes : {
+					width  : "144px",
+					height : "37px",
+				},
+				letterSpacing : "2px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 24px; font-family: Aitana-Regular;'>ESPAÑA</span></p>",
+				position : {
+					x : 410.9496479538726,
+					y : 477.5999908447266,
+				},
+				sizes : {
+					width  : "145px",
+					height : "35px",
+				},
+				letterSpacing : "2px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>",
+				position : {
+					x : 410.99996345788804,
+					y : 220.4271939123055,
+				},
+				sizes : {
+					width  : "95px",
+					height : "90px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : "8px",
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>",
+				position : {
+					x : 411.9999993265981,
+					y : 365.2699612079032,
+				},
+				sizes : {
+					width  : "89px",
+					height : "89px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : "8px",
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: left;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>",
+				position : {
+					x : 415.33333164587725,
+					y : 514.2666575113938,
+				},
+				sizes : {
+					width  : "84px",
+					height : "93px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : "8px",
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod64 : {
+		id              : "Mod64",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 2,
+		cat             : "texto",
+		layoutThumbNail : Mod64Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Agregar Texto...</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : undefined,
+			gapSpacing    : "10px",
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: center;'><span style='font-size: 24px; font-family: Aitana-Regular;'>ESPAÑA</span></p>",
+				position : {
+					x : 132.83637497573392,
+					y : 335.93331208216046,
+				},
+				sizes : {
+					width  : "748px",
+					height : "37px",
+				},
+				letterSpacing : "2px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>",
+				position : {
+					x : 171.00000641509482,
+					y : 377.59995605468805,
+				},
+				sizes : {
+					width  : "656px",
+					height : "97px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : "10px",
+				lineHeight    : undefined,
+			},
+		],
 	},
 };
 
