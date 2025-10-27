@@ -217,11 +217,19 @@ const DropDoc = ({
 				setLoading(false);
 				dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 				dispatch(gallerySlice.actions.setTypeDropedView(null));
+				setFileImage([]);
+				setCompletedPhotos([]);
+				setIsSelectedFolder(false);
+				setFolderName("");
 			}, reason => {
 				setLoading(false);
 				dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 				dispatch(gallerySlice.actions.setTypeDropedView(null));
 				console.error(reason);
+				setFileImage([]);
+				setCompletedPhotos([]);
+				setIsSelectedFolder(false);
+				setFolderName("");
 			});
 			return;
 		}
