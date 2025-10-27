@@ -535,7 +535,7 @@ const photoBooksConfing = {
 			},
 		},
 	},
-	"travelcoffeetable " : {
+	"travelcoffeetable" : {
 		vertical : {
 			aspectRatio : [354, 425],
 			sizes       : {
