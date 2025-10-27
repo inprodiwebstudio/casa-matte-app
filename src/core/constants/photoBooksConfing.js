@@ -5,6 +5,7 @@ import VerticalMedium           from "components/ModelsOfLayouts/VerticalMedium"
 import SquareSmall              from "components/ModelsOfLayouts/SquareSmall";
 import SquareLarge              from "components/ModelsOfLayouts/SquareLarge";
 import HorizontalLarge          from "components/ModelsOfLayouts/HorizontalLarge";
+import HorizontalMedium         from "components/ModelsOfLayouts/HorizontalMedium";
 import VerticalMediumSencillo   from "components/MyModsLayouts/Sencillo/VerticalMedium";
 import VerticalLargeSencillo    from "components/MyModsLayouts/Sencillo/VerticalLarge";
 import VerticalMediumPremium    from "components/MyModsLayouts/Premium/VerticalMedium";
@@ -18,7 +19,6 @@ import SquareLrageSencillo      from "components/MyModsLayouts/Sencillo/SquareLa
 import HorizontalMediumSencillo from "components/MyModsLayouts/Sencillo/HorizontalMedium";
 import HorizontalLargeSencillo  from "components/MyModsLayouts/Sencillo/HorizontalLarge";
 import TravelCoffeeTable        from "components/MyModsLayouts/TravelCoffeeTable";
-import HorizontalMedium         from "components/MyModsLayouts/HorizontalMedium";
 import LayFlat                  from "components/MyModsLayouts/LayFlat";
 import LayFlatSquareMedium      from "components/MyModsLayouts/LayFlatSquareMedium";
 import LayFlatSquareLarge       from "components/MyModsLayouts/LayFlatSquareLarge";
