@@ -537,7 +537,8 @@ const photoBooksConfing = {
 	},
 	"travelcoffeetable " : {
 		vertical : {
-			sizes : {
+			aspectRatio : [354, 425],
+			sizes       : {
 				grande : {
 					aspectRatio      : [354, 425],
 					layoutMods       : {...TravelCoffeeTable},
