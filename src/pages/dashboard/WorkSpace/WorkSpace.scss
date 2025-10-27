@@ -267,13 +267,13 @@
 				transform: scale(0.75, 0.75);
 
 				@include laptop {
-					margin-right: 45px;
+					margin-right: 0px;
 					transform: scale(0.52, 0.52);
 					z-index: 1;
 				}
 	
 				@include big-laptop {
-					margin-right: 30px;
+					margin-right: 0px;
 					transform: scale(0.65, 0.65);
 					z-index: 1;
 				}
