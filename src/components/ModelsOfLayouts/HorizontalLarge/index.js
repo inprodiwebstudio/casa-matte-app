@@ -141,6 +141,22 @@ import Mod73Tn       from "./ThumbNails/Mod73Tn";
 import Mod74Tn       from "./ThumbNails/Mod74Tn";
 import Mod75         from "./Mod75";
 import Mod75Tn       from "./ThumbNails/Mod75Tn";
+import Mod76         from "./Mod76";
+import Mod76Tn       from "./ThumbNails/Mod76Tn";
+import Mod77Tn       from "./ThumbNails/Mod77Tn";
+import Mod77         from "./Mod77";
+import Mod78Tn       from "./ThumbNails/Mod78Tn";
+import Mod78         from "./Mod78";
+import Mod79Tn       from "./ThumbNails/Mod79Tn";
+import Mod79         from "./Mod79";
+import Mod80Tn       from "./ThumbNails/Mod80Tn";
+import Mod80         from "./Mod80";
+import Mod81Tn       from "./ThumbNails/Mod81Tn";
+import Mod81         from "./Mod81";
+import Mod82         from "./Mod82";
+import Mod82Tn       from "./ThumbNails/Mod82Tn";
+import Mod83Tn       from "./ThumbNails/Mod83Tn";
+import Mod83         from "./Mod83";
 
 const SquareSmall = {
 	Mod1 : {
@@ -1413,6 +1429,310 @@ const SquareSmall = {
 				position : {
 					x : 134.83637221043676,
 					y : 732.5999344407276,
+				},
+				sizes : {
+					width  : "563px",
+					height : "27px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod76 : {
+		id              : "Mod76",
+		layout          : Mod76,
+		numberPhotos    : 2,
+		numberText      : 1,
+		cat             : "fotosytexto",
+		layoutThumbNail : Mod76Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Agregar Texto...</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : undefined,
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: center;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>",
+				position : {
+					x : 216.50303887710302,
+					y : 754.2666011073937,
+				},
+				sizes : {
+					width  : "563px",
+					height : "27px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod77 : {
+		id              : "Mod77",
+		layout          : Mod77,
+		numberPhotos    : 2,
+		numberText      : 1,
+		cat             : "fotosytexto",
+		layoutThumbNail : Mod77Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : undefined,
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>",
+				position : {
+					x : 239.83637221043722,
+					y : 654.266601107395,
+				},
+				sizes : {
+					width  : "563px",
+					height : "27px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod78 : {
+		id              : "Mod78",
+		layout          : Mod78,
+		numberPhotos    : 2,
+		numberText      : 1,
+		cat             : "fotosytexto",
+		layoutThumbNail : Mod78Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : undefined,
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>",
+				position : {
+					x : 333.1697065187162,
+					y : 669.2666049333429,
+				},
+				sizes : {
+					width  : "563px",
+					height : "27px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod79 : {
+		id              : "Mod79",
+		layout          : Mod79,
+		numberPhotos    : 2,
+		numberText      : 1,
+		cat             : "fotosytexto",
+		layoutThumbNail : Mod79Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : undefined,
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>",
+				position : {
+					x : 333.1697055437706,
+					y : 640.9332677740629,
+				},
+				sizes : {
+					width  : "563px",
+					height : "27px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod80 : {
+		id              : "Mod80",
+		layout          : Mod80,
+		numberPhotos    : 2,
+		numberText      : 1,
+		cat             : "fotosytexto",
+		layoutThumbNail : Mod80Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Agregar texto ...</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : undefined,
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>",
+				position : {
+					x : 329.8363722104374,
+					y : 667.599934440729,
+				},
+				sizes : {
+					width  : "563px",
+					height : "27px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod81 : {
+		id              : "Mod81",
+		layout          : Mod81,
+		numberPhotos    : 3,
+		numberText      : 1,
+		cat             : "fotosytexto",
+		layoutThumbNail : Mod81Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: left;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : undefined,
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>",
+				position : {
+					x : 98.16970554377001,
+					y : 84.26660110739421,
+				},
+				sizes : {
+					width  : "563px",
+					height : "27px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod82 : {
+		id              : "Mod82",
+		layout          : Mod82,
+		numberPhotos    : 3,
+		numberText      : 1,
+		cat             : "fotosytexto",
+		layoutThumbNail : Mod82Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Agregar texto ...</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : undefined,
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>",
+				position : {
+					x : 313.16970651871634,
+					y : 667.5999291114031,
+				},
+				sizes : {
+					width  : "563px",
+					height : "27px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod83 : {
+		id              : "Mod83",
+		layout          : Mod83,
+		numberPhotos    : 4,
+		numberText      : 1,
+		cat             : "fotosytexto",
+		layoutThumbNail : Mod83Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Agregar texto ...</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : undefined,
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>",
+				position : {
+					x : 321.5030388771039,
+					y : 757.5999344407272,
 				},
 				sizes : {
 					width  : "563px",
