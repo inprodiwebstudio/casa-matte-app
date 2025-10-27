@@ -1,22 +1,18 @@
 import {Stack, Flex } from "@mantine/core";
 import ImgLayout      from "components/LayoutHandler/ImgLayout";
 //Own components
-import Text              from "components/LayoutHandler/Text";
-import { TextShell }     from "core/components";
-import { textInsertion } from "helpers";
+import Text                              from "components/LayoutHandler/Text";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
+import { useContext }                    from "react";
 
 
 const Mod66 = ({
-	data,
-	isInWorkSpace,
 	sheetNo,
-	isInPaginator,
-	isThumbNail,
-	pageNo,
-	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>";
+	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+
+	const listOfTexts = Object.values(currentConfigPhotoBook?.[`sheet${sheetNo}`]?.texts ?? {});
 
 	return (
 		<Flex
@@ -25,48 +21,26 @@ const Mod66 = ({
 			h="100%"
 		>
 			<Stack
-				p={isInWorkSpace ? "40px" : "5%"}
-				pr={isInWorkSpace ? "35px" : "5%"}
-				w="70%"
-				h="100%"
-				align="flex-end"
-				justify="flex-end"
-				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
-			>
-				<div
-					style={{
-						textTransform : "uppercase",
-						width         : "100%",
-					}}
-				>
-					<Text
-						sizes={{
-							"chico"   : "18px",
-							"regular" : "20px",
-							"grande"  : "22px",
-						}}
-						align="right"
-						sheetNo={sheetNo}
-						letterSpacing="2px"
-						textShell={() => <TextShell.SubTitle align="flex-end" />}
-						data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-						textNo={0}
-					/>
-				</div>
-			</Stack>
-			<Stack
 				w="30%"
 				h="100%"
 			>
 				<ImgLayout
-					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
 					imageNo={0}
-					urlImage={data?.photos[0] ?? {}}
 				/>
 			</Stack>
+			{listOfTexts.map((item, index) => {
+				return (
+					<Text
+						key={index}
+						sheetNo={sheetNo}
+						letterSpacing={item?.letterSpacing}
+						gapSpacing={item?.gapSpacing}
+						lineHeight={item?.lineHeight}
+						layoutNo={index}
+					/>
+				);
+			})}
 		</Flex>
 	);
 };

@@ -1,27 +1,22 @@
 import {Stack }  from "@mantine/core";
 import ImgLayout from "components/LayoutHandler/ImgLayout";
 //Own components
-import Text              from "components/LayoutHandler/Text";
-import { TextShell }     from "core/components";
-import { textInsertion } from "helpers";
+import Text                              from "components/LayoutHandler/Text";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
+import { useContext }                    from "react";
 
 
 const Mod73 = ({
-	data,
-	isInWorkSpace,
 	sheetNo,
-	isInPaginator,
-	isThumbNail,
-	pageNo,
-	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>";
+	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+
+	const listOfTexts = Object.values(currentConfigPhotoBook?.[`sheet${sheetNo}`]?.texts ?? {});
 
 	return (
 		<Stack
 			p="10%"
-			pb="7%"
 			w="100%"
 			h="100%"
 			spacing="0.1em"
@@ -31,33 +26,22 @@ const Mod73 = ({
 				h="100%"
 			>
 				<ImgLayout
-					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
 					imageNo={0}
-					urlImage={data?.photos[0] ?? {}}
 				/>
 			</Stack>
-			<Stack
-				w="100%"
-				align="flex-end"
-				mah="20%"
-				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
-			>
-				<Text
-					sizes={{
-						"chico"   : "16px",
-						"regular" : "18px",
-						"grande"  : "20px",
-					}}
-					align="right"
-					sheetNo={sheetNo}
-					textShell={() => <TextShell.SubTitle align="flex-end" />}
-					data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-					textNo={0}
-				/>
-			</Stack>
+			{listOfTexts.map((item, index) => {
+				return (
+					<Text
+						key={index}
+						sheetNo={sheetNo}
+						letterSpacing={item?.letterSpacing}
+						gapSpacing={item?.gapSpacing}
+						lineHeight={item?.lineHeight}
+						layoutNo={index}
+					/>
+				);
+			})}
 		</Stack>
 	);
 };

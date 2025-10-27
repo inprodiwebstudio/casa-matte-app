@@ -125,6 +125,22 @@ import Mod60Tn       from "./ThumbNails/Mod60Tn";
 import Mod61Tn       from "./ThumbNails/Mod61Tn";
 import Mod62Tn       from "./ThumbNails/Mod62Tn";
 import Mod64Tn       from "./ThumbNails/Mod64Tn";
+import Mod65Tn       from "./ThumbNails/Mod65Tn";
+import Mod66Tn       from "./ThumbNails/Mod66Tn";
+import Mod66         from "./Mod66";
+import Mod67Tn       from "./ThumbNails/Mod67Tn";
+import Mod67         from "./Mod67";
+import Mod68Tn       from "./ThumbNails/Mod68Tn";
+import Mod69Tn       from "./ThumbNails/Mod69Tn";
+import Mod70Tn       from "./ThumbNails/Mod70Tn";
+import Mod71Tn       from "./ThumbNails/Mod71Tn";
+import Mod72Tn       from "./ThumbNails/Mod72Tn";
+import Mod73         from "./Mod73";
+import Mod74         from "./Mod74";
+import Mod73Tn       from "./ThumbNails/Mod73Tn";
+import Mod74Tn       from "./ThumbNails/Mod74Tn";
+import Mod75         from "./Mod75";
+import Mod75Tn       from "./ThumbNails/Mod75Tn";
 
 const SquareSmall = {
 	Mod1 : {
@@ -908,6 +924,502 @@ const SquareSmall = {
 				},
 				letterSpacing : undefined,
 				gapSpacing    : "10px",
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod65 : {
+		id              : "Mod65",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 1,
+		cat             : "texto",
+		layoutThumbNail : Mod65Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: center;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>Título Grande</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : "4px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: center;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>Título Grande</span></p>",
+				position : {
+					x : 137.83637497573392,
+					y : 395.93331208216114,
+				},
+				sizes : {
+					width  : "748px",
+					height : "37px",
+				},
+				letterSpacing : "4px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod66 : {
+		id              : "Mod66",
+		layout          : Mod66,
+		numberPhotos    : 1,
+		numberText      : 1,
+		cat             : "fotosytexto",
+		layoutThumbNail : Mod66Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: right;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>Agregar Texto...</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : "2px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: right;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>",
+				position : {
+					x : 602.5030860636577,
+					y : 750.9332877173359,
+				},
+				sizes : {
+					width  : "330px",
+					height : "37px",
+				},
+				letterSpacing : "2px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod67 : {
+		id              : "Mod67",
+		layout          : Mod67,
+		numberPhotos    : 1,
+		numberText      : 1,
+		cat             : "fotosytexto",
+		layoutThumbNail : Mod67Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: right;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>Agregar Texto...</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : "2px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: center;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>Título 1</span></p>",
+				position : {
+					x : 344.1697527303246,
+					y : 715.9332877173365,
+				},
+				sizes : {
+					width  : "330px",
+					height : "37px",
+				},
+				letterSpacing : "2px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod68 : {
+		id              : "Mod68",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 1,
+		cat             : "texto",
+		layoutThumbNail : Mod68Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: center;'><span style='font-size: 14px; font-family: Inter-Lifght;'>Agregar texto...</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : undefined,
+			gapSpacing    : undefined,
+			lineHeight    : "20px",
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: center;'><span style='font-size: 14px; font-family: Inter-Lifght;'>Odi pullerit. Actus nes consid fur, senatus, essendi enatrum pra, us consum, que quam, ve, quo potimorta trurs con hosus ore dumus ommorunum dium oporat, elum hocul verobu</span></p>",
+				position : {
+					x : 214.16975630659007,
+					y : 375.9332808223447,
+				},
+				sizes : {
+					width  : "580px",
+					height : "77px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : undefined,
+				lineHeight    : "20px",
+			},
+		],
+	},
+	Mod69 : {
+		id              : "Mod69",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 1,
+		cat             : "texto",
+		layoutThumbNail : Mod69Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: center;'><span style='font-size: 14px; font-family: Inter-Lifght;'>Agregar texto...</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : undefined,
+			gapSpacing    : undefined,
+			lineHeight    : "20px",
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: right;'><span style='font-size: 14px; font-family: Inter-Lifght;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</span></p>",
+				position : {
+					x : 474.50304548478584,
+					y : 690.9332738473935,
+				},
+				sizes : {
+					width  : "448px",
+					height : "70px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : undefined,
+				lineHeight    : "20px",
+			},
+		],
+	},
+	Mod70 : {
+		id              : "Mod70",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 2,
+		cat             : "texto",
+		layoutThumbNail : Mod70Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: center;'><span style='font-size: 14px; font-family: Inter-Lifght;'>Agregar texto...</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : "0.5px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Subtítulo 3</span></p>",
+				position : {
+					x : 229.5030402479627,
+					y : 152.5998999938824,
+				},
+				sizes : {
+					width  : "549px",
+					height : "32px",
+				},
+				letterSpacing : "1.7px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: justify;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper, pharetra odio conubia dictumst malesuada lectus dis penatibus, primis orci dictum sociosqu nam platea parturient cursus.</span></p><p style='text-align: justify;'><span style='font-size: 14px; font-family: JosefinSans-Light;'></span></p><p style='text-align: justify;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Et maecenas ante viverra potenti libero purus habitasse aliquam, non massa vivamus dictumst eu erat sodales cursus, integer lacinia rutrum urna aliquet convallis scelerisque. Volutpat condimentum quis taciti fames tempor sagittis eleifend nostra donec, proin ad dis nec sollicitudin dictum viverra semper ridiculus, potenti feugiat odio tellus nisl curabitur nunc phasellus. Luctus iaculis suscipit inceptos mollis quisque nam cum turpis cras, class ante risus ultricies dapibus justo suspendisse enim, cubilia feugiat sed est dui lacinia diam vivamus.</span></p><p style='text-align: justify;'><span style='font-size: 14px; font-family: JosefinSans-Light;'></span></p><p style='text-align: justify;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Curabitur quis eleifend tellus. Mauris venenatis accumsan magna, nec mattis ex molestie sit amet. Cras dignissim faucibus volutpat. Suspendisse egestas odio in libero imperdiet bibendum. Suspendisse eleifend dictum sagittis. Nam urna mi, vestibulum eget erat finibus, cursus vehicula elit. Donec imperdiet luctus tincidunt. Sed id vulputate felis. Donec sagittis feugiat ornare. Ut lacinia vehicula lacus non pretium.</span></p></span></p><p style='text-align: justify;'><span style='font-size: 14px; font-family: JosefinSans-Light;'></span></p><p style='text-align: justify;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Ut tempor convallis elit, eu placerat erat venenatis ac. Cras vitae pretium augue, eget facilisis sapien. Nulla facilisi. Aliquam erat volutpat. Quisque ut viverra neque. Nulla hendrerit nisl non fermentum dictum. Quisque iaculis cursus cursus. Vestibulum id commodo neque, ac posuere purus.</span></p>",
+				position : {
+					x : 229.50304024796273,
+					y : 194.5999183044296,
+				},
+				sizes : {
+					width  : "551px",
+					height : "495px",
+				},
+				letterSpacing : "0.5px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod71 : {
+		id              : "Mod71",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 3,
+		cat             : "texto",
+		layoutThumbNail : Mod71Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: left;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Agregar Texto...</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : "3px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>EC</span></p>",
+				position : {
+					x : 151.1697028089601,
+					y : 279.2665678517143,
+				},
+				sizes : {
+					width  : "689px",
+					height : "28px",
+				},
+				letterSpacing : "3px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: justify;'><span style='font-size: 13px; font-family: JosefinSans-Light;'>Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper, pharetra odio conubia dictumst malesuada lectus dis penatibus, primis orci dictum sociosqu nam platea parturient cursus.</span></p>",
+				position : {
+					x : 512.8363667385137,
+					y : 334.2665035416579,
+				},
+				sizes : {
+					width  : "337px",
+					height : "244px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : undefined,
+				lineHeight    : "18px",
+			},
+			{
+				text     : "<p style='text-align: justify;'><span style='font-size: 13px; font-family: JosefinSans-Light;'>Et maecenas ante viverra potenti libero purus habitasse aliquam, non massa vivamus dictumst eu erat sodales cursus, integer lacinia rutrum urna aliquet convallis scelerisque. Volutpat condimentum quis taciti fames tempor sagittis eleifend nostra donec, proin ad dis nec sollicitudin dictum viverra semper ridiculus, potenti feugiat odio tellus nisl curabitur nunc phasellus. Luctus iaculis suscipit inceptos mollis quisque nam cum turpis cras, class ante risus ultricies dapibus justo suspendisse enim, cubilia feugiat sed est dui lacinia diam vivamus.</span></p>",
+				position : {
+					x : 147.83636947562678,
+					y : 335.9332772429907,
+				},
+				sizes : {
+					width  : "346px",
+					height : "231px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : undefined,
+				lineHeight    : "18px",
+			},
+		],
+		linesDecoration : [
+			{
+				orientation : "h",
+				long        : "45px",
+				weight      : "1px",
+				position    : {
+					x : 152.44444444444161,
+					y : 299.26665751139365,
+				},
+			},
+		],
+	},
+	Mod72 : {
+		id              : "Mod72",
+		layout          : ModTextLayout,
+		numberPhotos    : 0,
+		numberText      : 2,
+		cat             : "texto",
+		layoutThumbNail : Mod72Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: left;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Agregar Texto...</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : "3px",
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Subtítulo 3</span></p>",
+				position : {
+					x : 612.8363641108849,
+					y : 544.2665592356434,
+				},
+				sizes : {
+					width  : "264px",
+					height : "28px",
+				},
+				letterSpacing : "2px",
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+			{
+				text     : "<p style='text-align: justify;'><span style='font-size: 12px; font-family: JosefinSans-Light;'>Lorem ipsum dolor sit amet consectetur adipiscing elit, nascetur feugiat natoque vel nisi est, lacinia in sociis sodales luctus integer. Lectus conubia libero proin tempus molestie feugiat posuere ullamcorper placerat fringilla, litora consequat torquent habitasse commodo inceptos lobortis velit vulputate, magna natoque integer euismod suscipit gravida scelerisque cras aliquet. Tincidunt velit viverra dignissim ridiculus taciti rhoncus nibh senectus semper, pharetra odio conubia dictumst malesuada lectus dis penatibus, primis orci dictum sociosqu nam platea parturient cursus.</span></p>",
+				position : {
+					x : 614.5030290257996,
+					y : 595.9331664333272,
+				},
+				sizes : {
+					width  : "307px",
+					height : "179px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : undefined,
+				lineHeight    : "13px",
+			},
+		],
+		linesDecoration : [
+			{
+				orientation : "h",
+				long        : "45px",
+				weight      : "1px",
+				position    : {
+					x : 619.1111111111073,
+					y : 560.9333241780599,
+				},
+			},
+		],
+	},
+	Mod73 : {
+		id              : "Mod73",
+		layout          : Mod73,
+		numberPhotos    : 1,
+		numberText      : 1,
+		cat             : "fotosytexto",
+		layoutThumbNail : Mod73Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: left;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Agregar Texto...</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : undefined,
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: left;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Subtítulo 3</span></p>",
+				position : {
+					x : 786.1696940107834,
+					y : 765.933189870447,
+				},
+				sizes : {
+					width  : "109px",
+					height : "27px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod74 : {
+		id              : "Mod74",
+		layout          : Mod74,
+		numberPhotos    : 1,
+		numberText      : 1,
+		cat             : "fotosytexto",
+		layoutThumbNail : Mod74Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Agregar Texto...</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : undefined,
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 5</span></p>",
+				position : {
+					x : 94.83637068708366,
+					y : 765.9332522592736,
+				},
+				sizes : {
+					width  : "870px",
+					height : "27px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : undefined,
+				lineHeight    : undefined,
+			},
+		],
+	},
+	Mod75 : {
+		id              : "Mod75",
+		layout          : Mod75,
+		numberPhotos    : 1,
+		numberText      : 1,
+		cat             : "fotosytexto",
+		layoutThumbNail : Mod75Tn,
+		presetNewText   : {
+			text     : "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>",
+			position : {
+				x : 0,
+				y : 0,
+			},
+			sizes : {
+				width  : "300px",
+				height : "41px",
+			},
+			letterSpacing : undefined,
+			gapSpacing    : undefined,
+			lineHeight    : undefined,
+		},
+		defaultTexts : [
+			{
+				text     : "<p style='text-align: right;'><span style='font-size: 14px; font-family: JosefinSans-Light;'>Subtítulo 2</span></p>",
+				position : {
+					x : 134.83637221043676,
+					y : 732.5999344407276,
+				},
+				sizes : {
+					width  : "563px",
+					height : "27px",
+				},
+				letterSpacing : undefined,
+				gapSpacing    : undefined,
 				lineHeight    : undefined,
 			},
 		],

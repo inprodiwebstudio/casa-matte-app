@@ -1,69 +1,51 @@
 import {Stack}   from "@mantine/core";
 import ImgLayout from "components/LayoutHandler/ImgLayout";
 //Own components
-import Text              from "components/LayoutHandler/Text";
-import { TextShell }     from "core/components";
-import { textInsertion } from "helpers";
+import Text                              from "components/LayoutHandler/Text";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
+import { useContext }                    from "react";
 
 
 const Mod67 = ({
-	data,
-	isInWorkSpace,
 	sheetNo,
-	isInPaginator,
-	isThumbNail,
-	pageNo,
-	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>Título 1</span></p>";
+	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+
+	const listOfTexts = Object.values(currentConfigPhotoBook?.[`sheet${sheetNo}`]?.texts ?? {});
 
 	return (
 		<Stack
 			w="100%"
 			h="100%"
-			mt="3%"
+			mt="0%"
 			pl="16%"
 			pr="16%"
 			align="center"
 			justify="center"
-			spacing={isInWorkSpace ? "45px" : "0.2em"}
+			spacing={"45px"}
 		>
 			<Stack
 				w="100%"
 				h="65%"
 			>
 				<ImgLayout
-					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
 					imageNo={0}
-					urlImage={data?.photos[0] ?? {}}
 				/>
 			</Stack>
-			<Stack
-				w="100%"
-				h="10%"
-				style={{
-					textTransform : "uppercase",
-				}}
-				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
-			>
-				<Text
-					sizes={{
-						"chico"   : "40px",
-						"regular" : "42px",
-						"grande"  : "44px",
-					}}
-					align="center"
-					letterSpacing="2px"
-					sheetNo={sheetNo}
-					textShell={() => <TextShell.SubTitle align="center" />}
-					data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-					textNo={0}
-				/>
-			</Stack>
+			{listOfTexts.map((item, index) => {
+				return (
+					<Text
+						key={index}
+						sheetNo={sheetNo}
+						letterSpacing={item?.letterSpacing}
+						gapSpacing={item?.gapSpacing}
+						lineHeight={item?.lineHeight}
+						layoutNo={index}
+					/>
+				);
+			})}
 		</Stack>
 	);
 };
