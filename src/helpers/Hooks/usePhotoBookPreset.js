@@ -1,6 +1,8 @@
-import { useDispatch }    from "react-redux";
-import { workSpaceSlice } from "store/Slices";
-import convertToObject    from "helpers/convertToobject";
+import { useDispatch }               from "react-redux";
+import { workSpaceSlice }            from "store/Slices";
+import convertToObject               from "helpers/convertToobject";
+import handlerMaterialAndColorLining from "helpers/handlerMaterialAndColorLining";
+import handlerGravingColorData       from "helpers/handlerGravingColor";
 
 export const usePhotoBookPreset = () => {
 	const dispatch = useDispatch();
@@ -14,6 +16,24 @@ export const usePhotoBookPreset = () => {
 		const model = getModel(meta?.modelo);
 		const price = meta?.precio_total?.replace("$", "") ?? "0";
 		const numberOfPages = meta?.numero_de_paginas ? Number(meta?.numero_de_paginas) : 40;
+
+		const cover = !meta.color_de_tela ? undefined : {
+			material : handlerMaterialAndColorLining(meta.color_de_tela).materialName,
+			color    : handlerMaterialAndColorLining(meta.color_de_tela).colorName,
+		};
+
+		const handlerEngravingData = () => {
+			const isAvailableEngraving = meta?.color_de_grabado !== "";
+
+			if (!isAvailableEngraving) {
+				return undefined;
+			}
+
+			return {
+				currentColor : handlerGravingColorData(meta?.color_de_grabado).currentColor,
+				listOfColors : handlerGravingColorData(meta?.color_de_grabado).listOfColors,
+			};
+		};
 
 		const configPhotoBookData = {
 			postTypeId          : productData?.id ?? undefined,
@@ -32,6 +52,9 @@ export const usePhotoBookPreset = () => {
 			bound               : meta?.encuadernado ?? "",
 			pasta               : meta?.pasta ?? "",
 			maxRangePages       : numberOfPages,
+			availableSpine      : (meta?.grabado_en_lomo === "Sin grabado") ? false : true,
+			cover,
+			engraving           : handlerEngravingData(),
 			version             : 1,
 			isFixedPagesLayflat : model.modelKey === "layflat",
 			pages               : convertToObject(generatePages(numberOfPages, model.modelKey === "layflat")),
