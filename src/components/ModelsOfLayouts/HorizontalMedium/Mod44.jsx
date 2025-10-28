@@ -1,22 +1,17 @@
 import {Stack}   from "@mantine/core";
 import ImgLayout from "components/LayoutHandler/ImgLayout";
 //Own components
-import Text              from "components/LayoutHandler/Text";
-import { TextShell }     from "core/components";
-import { textInsertion } from "helpers";
-
+import Text                              from "components/LayoutHandler/Text";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
+import { useContext }                    from "react";
 
 const Mod44 = ({
-	data,
-	isInWorkSpace,
 	sheetNo,
-	isInPaginator,
-	isThumbNail,
-	pageNo,
-	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>Título 1</span></p>";
+	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+
+	const listOfTexts = Object.values(currentConfigPhotoBook?.[`sheet${sheetNo}`]?.texts ?? {});
 
 	return (
 		<Stack
@@ -33,35 +28,22 @@ const Mod44 = ({
 				h="60%"
 			>
 				<ImgLayout
-					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
 					imageNo={0}
-					urlImage={data?.photos[0] ?? {}}
 				/>
 			</Stack>
-			<Stack
-				w="100%"
-				style={{
-					textTransform : "uppercase",
-				}}
-				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
-			>
-				<Text
-					sizes={{
-						"chico"   : "28px",
-						"regular" : "30px",
-						"grande"  : "32px",
-					}}
-					align="center"
-					letterSpacing="2px"
-					sheetNo={sheetNo}
-					textShell={() => <TextShell.SubTitle align="center" />}
-					data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
-					isInPaginator={isInPaginator}
-					isThumbNail={isThumbNail}
-					textNo={0}
-				/>
-			</Stack>
+			{listOfTexts.map((item, index) => {
+				return (
+					<Text
+						key={index}
+						sheetNo={sheetNo}
+						letterSpacing={item?.letterSpacing}
+						gapSpacing={item?.gapSpacing}
+						lineHeight={item?.lineHeight}
+						layoutNo={index}
+					/>
+				);
+			})}
 		</Stack>
 	);
 };
