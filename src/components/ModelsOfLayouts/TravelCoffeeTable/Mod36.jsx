@@ -1,93 +1,46 @@
-import {Stack, Flex } from "@mantine/core";
-import ImgLayout      from "components/LayoutHandler/ImgLayout";
+import {Stack}   from "@mantine/core";
+import ImgLayout from "components/LayoutHandler/ImgLayout";
 //Own components
-import Text              from "components/LayoutHandler/Text";
-import { TextShell }     from "core/components";
-import { textInsertion } from "helpers";
+import Text                              from "components/LayoutHandler/Text";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
+import { useContext }                    from "react";
 
 
 const Mod36 = ({
-	data,
-	isInWorkSpace,
 	sheetNo,
-	isInPaginator,
-	isThumbNail,
-	pageNo,
-	modLayout,
 }) => {
 
-	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 32px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
+	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 
-	const defaultSubtitle = "<p style='text-align: left;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const listOfTexts = Object.values(currentConfigPhotoBook?.[`sheet${sheetNo}`]?.texts ?? {});
 
 	return (
-		<Flex
+		<Stack
 			pt="15%"
 			w="100%"
 			h="100%"
 			align="flex-end"
-			gap="0.5em"
-			direction="column"
+			spacing={"20px"}
 		>
-			<Stack
-				spacing="0.2em"
-				w="70%"
-				h="80%"
-			>
-				<Stack w="100%" h="100%" spacing="0.4em">
-					<Stack
-						mr="10%"
-						sx={{textTransform : "uppercase"}}
-						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
-					>
-						<Text
-							sizes={{
-								"chico"   : "30px",
-								"regular" : "32px",
-								"grande"  : "34px",
-							}}
-							align="right"
-							sheetNo={sheetNo}
-							textShell={() => <TextShell.Title align="flex-end" />}
-							letterSpacing="6.5px"
-							data={textInsertion(data?.text[0], defaultTitle, isInWorkSpace)}
-							isInPaginator={isInPaginator}
-							isThumbNail={isThumbNail}
-							textNo={0}
-						/>
-					</Stack>
-					<Stack w="100%" h="100%">
-						<ImgLayout
-							isInWorkSpace={isInWorkSpace}
-							sheetNo={sheetNo}
-							imageNo={0}
-							urlImage={data?.photos[0] ?? {}}
-						/>
-					</Stack>
-				</Stack>
-				<Stack
-					mr="40%"
-					sx={{textTransform : "uppercase"}}
-					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
-				>
-					<Text
-						sizes={{
-							"chico"   : "13px",
-							"regular" : "15px",
-							"grande"  : "17px",
-						}}
-						align="left"
-						sheetNo={sheetNo}
-						letterSpacing="2px"
-						textShell={() => <TextShell.SubTitle align="flex-start" />}
-						data={textInsertion(data?.text[1], defaultSubtitle, isInWorkSpace)}
-						isInPaginator={isInPaginator}
-						isThumbNail={isThumbNail}
-						textNo={1}
-					/>
-				</Stack>
+			<Stack w="100%" h="100%">
+				<ImgLayout
+					sheetNo={sheetNo}
+					imageNo={0}
+				/>
 			</Stack>
-		</Flex>
+			{listOfTexts.map((item, index) => {
+				return (
+					<Text
+						key={index}
+						sheetNo={sheetNo}
+						letterSpacing={item?.letterSpacing}
+						gapSpacing={item?.gapSpacing}
+						lineHeight={item?.lineHeight}
+						layoutNo={index}
+					/>
+				);
+			})}
+		</Stack>
 	);
 };
 

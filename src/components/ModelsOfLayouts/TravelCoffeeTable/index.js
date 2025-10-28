@@ -36,43 +36,27 @@ import Mod35Tn from "./ThumbNails/Mod35Tn";
 import Mod36Tn from "./ThumbNails/Mod36Tn";
 import Mod37Tn from "./ThumbNails/Mod37Tn";
 
-import Mod1  from "./Mod1";
-import Mod2  from "./Mod2";
-import Mod3  from "./Mod3";
-import Mod4  from "./Mod4";
-import Mod5  from "./Mod5";
-import Mod6  from "./Mod6";
-import Mod7  from "./Mod7";
-import Mod8  from "./Mod8";
-import Mod9  from "./Mod9";
-import Mod10 from "./Mod10";
-import Mod11 from "./Mod11";
-import Mod12 from "./Mod12";
-import Mod13 from "./Mod13";
-import Mod14 from "./Mod14";
-import Mod15 from "./Mod15";
-import Mod16 from "./Mod16";
-import Mod17 from "./Mod17";
-import Mod18 from "./Mod18";
-import Mod19 from "./Mod19";
-import Mod20 from "./Mod20";
-import Mod21 from "./Mod21";
-import Mod22 from "./Mod22";
-import Mod23 from "./Mod23";
-import Mod24 from "./Mod24";
-import Mod25 from "./Mod25";
-import Mod26 from "./Mod26";
-import Mod27 from "./Mod27";
-import Mod28 from "./Mod28";
-import Mod29 from "./Mod29";
-import Mod30 from "./Mod30";
-import Mod31 from "./Mod31";
-import Mod32 from "./Mod32";
-import Mod33 from "./Mod33";
-import Mod34 from "./Mod34";
-import Mod35 from "./Mod35";
-import Mod36 from "./Mod36";
-import Mod37 from "./Mod37";
+import Mod1          from "./Mod1";
+import Mod2          from "./Mod2";
+import Mod3          from "./Mod3";
+import Mod4          from "./Mod4";
+import Mod5          from "./Mod5";
+import Mod6          from "./Mod6";
+import Mod7          from "./Mod7";
+import Mod8          from "./Mod8";
+import Mod9          from "./Mod9";
+import Mod10         from "./Mod10";
+import Mod11         from "./Mod11";
+import Mod12         from "./Mod12";
+import Mod13         from "./Mod13";
+import Mod14         from "./Mod14";
+import Mod15         from "./Mod15";
+import Mod16         from "./Mod16";
+import Mod34         from "./Mod34";
+import Mod35         from "./Mod35";
+import Mod36         from "./Mod36";
+import Mod37         from "./Mod37";
+import ModTextLayout from "components/global/ModTextLayout";
 
 const TravelCoffeeTable = {
 	Mod1 : {
@@ -189,7 +173,7 @@ const TravelCoffeeTable = {
 	},
 	Mod17 : {
 		id              : "Mod17",
-		layout          : Mod17,
+		layout          : ModTextLayout,
 		numberPhotos    : 0,
 		numberText      : 1,
 		cat             : "texto",
@@ -227,7 +211,7 @@ const TravelCoffeeTable = {
 	},
 	Mod18 : {
 		id              : "Mod18",
-		layout          : Mod18,
+		layout          : ModTextLayout,
 		numberPhotos    : 0,
 		numberText      : 1,
 		cat             : "texto",
@@ -265,7 +249,7 @@ const TravelCoffeeTable = {
 	},
 	Mod19 : {
 		id              : "Mod19",
-		layout          : Mod19,
+		layout          : ModTextLayout,
 		numberPhotos    : 0,
 		numberText      : 2,
 		cat             : "texto",
@@ -317,7 +301,7 @@ const TravelCoffeeTable = {
 	},
 	Mod20 : {
 		id              : "Mod20",
-		layout          : Mod20,
+		layout          : ModTextLayout,
 		numberPhotos    : 0,
 		numberText      : 2,
 		cat             : "texto",
@@ -369,7 +353,7 @@ const TravelCoffeeTable = {
 	},
 	Mod21 : {
 		id              : "Mod21",
-		layout          : Mod21,
+		layout          : ModTextLayout,
 		numberPhotos    : 0,
 		numberText      : 1,
 		cat             : "texto",
@@ -407,7 +391,7 @@ const TravelCoffeeTable = {
 	},
 	Mod22 : {
 		id              : "Mod22",
-		layout          : Mod22,
+		layout          : ModTextLayout,
 		numberPhotos    : 0,
 		numberText      : 1,
 		cat             : "texto",
@@ -456,7 +440,7 @@ const TravelCoffeeTable = {
 	},
 	Mod23 : {
 		id              : "Mod23",
-		layout          : Mod23,
+		layout          : ModTextLayout,
 		numberPhotos    : 0,
 		numberText      : 2,
 		cat             : "texto",
@@ -519,7 +503,7 @@ const TravelCoffeeTable = {
 	},
 	Mod24 : {
 		id              : "Mod24",
-		layout          : Mod24,
+		layout          : ModTextLayout,
 		numberPhotos    : 0,
 		numberText      : 2,
 		cat             : "texto",
@@ -582,7 +566,7 @@ const TravelCoffeeTable = {
 	},
 	Mod25 : {
 		id              : "Mod25",
-		layout          : Mod25,
+		layout          : ModTextLayout,
 		numberPhotos    : 0,
 		numberText      : 2,
 		cat             : "texto",
@@ -634,7 +618,7 @@ const TravelCoffeeTable = {
 	},
 	Mod26 : {
 		id              : "Mod26",
-		layout          : Mod26,
+		layout          : ModTextLayout,
 		numberPhotos    : 0,
 		numberText      : 2,
 		cat             : "texto",
@@ -697,7 +681,7 @@ const TravelCoffeeTable = {
 	},
 	Mod27 : {
 		id              : "Mod27",
-		layout          : Mod27,
+		layout          : ModTextLayout,
 		numberPhotos    : 0,
 		numberText      : 2,
 		cat             : "texto",
@@ -760,7 +744,7 @@ const TravelCoffeeTable = {
 	},
 	Mod28 : {
 		id              : "Mod28",
-		layout          : Mod28,
+		layout          : ModTextLayout,
 		numberPhotos    : 0,
 		numberText      : 6,
 		cat             : "texto",
@@ -897,7 +881,7 @@ const TravelCoffeeTable = {
 	},
 	Mod29 : {
 		id              : "Mod29",
-		layout          : Mod29,
+		layout          : ModTextLayout,
 		numberPhotos    : 0,
 		numberText      : 6,
 		cat             : "texto",
@@ -1034,7 +1018,7 @@ const TravelCoffeeTable = {
 	},
 	Mod30 : {
 		id              : "Mod30",
-		layout          : Mod30,
+		layout          : ModTextLayout,
 		numberPhotos    : 0,
 		numberText      : 2,
 		cat             : "texto",
@@ -1097,7 +1081,7 @@ const TravelCoffeeTable = {
 	},
 	Mod31 : {
 		id              : "Mod31",
-		layout          : Mod31,
+		layout          : ModTextLayout,
 		numberPhotos    : 0,
 		numberText      : 2,
 		cat             : "texto",
@@ -1160,7 +1144,7 @@ const TravelCoffeeTable = {
 	},
 	Mod32 : {
 		id              : "Mod32",
-		layout          : Mod32,
+		layout          : ModTextLayout,
 		numberPhotos    : 0,
 		numberText      : 1,
 		cat             : "texto",
@@ -1198,7 +1182,7 @@ const TravelCoffeeTable = {
 	},
 	Mod33 : {
 		id              : "Mod33",
-		layout          : Mod33,
+		layout          : ModTextLayout,
 		numberPhotos    : 0,
 		numberText      : 1,
 		cat             : "texto",
