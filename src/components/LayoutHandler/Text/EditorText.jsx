@@ -8,31 +8,42 @@ import Bold          from "@ckeditor/ckeditor5-basic-styles/src/bold";
 import Paragraph     from "@ckeditor/ckeditor5-paragraph/src/paragraph";
 import FontFamily    from "@ckeditor/ckeditor5-font/src/fontfamily";
 import FontColor     from "@ckeditor/ckeditor5-font/src/fontcolor";
+import { Rnd }       from "react-rnd";
 import FontSize      from "@ckeditor/ckeditor5-font/src/fontsize";
 import Alignment     from "@ckeditor/ckeditor5-alignment/src/alignment";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
-import { useCallback, useRef, useState }      from "react";
+//Contexts
+import { currentConfigPhotoBookContext } from "contexts/configContext";
+
+import { useRef, useState, useContext }       from "react";
 import { workSpaceSlice }                     from "store/Slices";
 import { connect, useSelector, shallowEqual } from "react-redux";
 
 import { bindAll } from "helpers";
 import styles      from "./styles";
+import { Center }  from "@mantine/core";
 
 const EditText = ({
-	isFront,
-	isBound,
-	sizes,
 	sheetNo,
 	layoutNo,
-	dataTextPage,
 	gapSpacing,
 	lineHeight,
 	typeText,
 	letterSpacing,
-	workSpaceSlice,
 }) => {
+	const {currentConfigPhotoBook, setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 	const [currentFontSize, setCurrentFontSize] = useState(undefined);
+
+	const currentPositionText = currentConfigPhotoBook?.[`sheet${sheetNo}`]?.texts?.[layoutNo]?.position ?? {
+		x : 0,
+		y : 0,
+	};
+
+	const currentSizeText = currentConfigPhotoBook?.[`sheet${sheetNo}`]?.texts?.[layoutNo]?.sizes ?? {
+		width  : "auto",
+		height : "auto",
+	};
 
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const product = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
@@ -40,7 +51,14 @@ const EditText = ({
 
 	const isAvailableChangeColorText = currentColorEngravingText && (currentPageId === "frontpage");
 
-	const { classes } = styles({size : currentFontSize, gapSpacing, lineHeight, letterSpacing, gravingColor : isAvailableChangeColorText ? currentColorEngravingText : undefined});
+	const { classes } = styles({
+		size         : currentFontSize,
+		gapSpacing,
+		lineHeight,
+		letterSpacing,
+		layoutNo,
+		gravingColor : isAvailableChangeColorText ? currentColorEngravingText : undefined,
+	});
 
 	const editorRef = useRef();
 
@@ -90,7 +108,7 @@ const EditText = ({
 		fontFamily : {
 			options : availableFontFamilies[typeText ?? "body"],
 		},
-		toolbar : ((product === "travelcoffeetable ") && isFront) ? undefined : {
+		toolbar : ((product === "travelcoffeetable ")) ? undefined : {
 			items : [
 				"fontSize",
 				"fontfamily",
@@ -102,7 +120,7 @@ const EditText = ({
 				"alignment:right",
 				"alignment:justify",
 			],
-			shouldNotGroupWhenFullScreen : true,
+			shouldNotGroupWhenFull : true,
 		},
 		language : "es",
 		tooltip  : {
@@ -190,35 +208,25 @@ const EditText = ({
 		},
 	};
 
-	const [editorState, setEditorState] = useState(dataTextPage);
+	const editorState = currentConfigPhotoBook?.[`sheet${sheetNo}`]?.texts?.[layoutNo]?.text;
 
-	const debounce = (func, delay) => {
-		let timeout;
-		return (...args) => {
-			if (timeout) clearTimeout(timeout);
-			timeout = setTimeout(() => {
-				func(...args);
-			}, delay);
-		};
+
+	const handleEditorChange = (event, editor) =>{
+		const data = editor.getData();
+		setCurrentConfigPhotoBook(prev => ({
+			...prev,
+			[`sheet${sheetNo}`] : {
+				...prev?.[`sheet${sheetNo}`],
+				texts : {
+					...prev?.[`sheet${sheetNo}`]?.texts,
+					[layoutNo] : {
+						...prev?.[`sheet${sheetNo}`]?.texts?.[layoutNo],
+						text : data,
+					},
+				},
+			},
+		}));
 	};
-
-	const handleEditorChange = useCallback(
-		debounce((event, editor) => {
-		  const data = editor.getData();
-		  setEditorState(data);
-		  if (isBound) {
-				workSpaceSlice.addTextBound({text : data});
-				return;
-		  }
-		  if (!isFront) {
-				workSpaceSlice.addText({pageId : currentPageId, sheetNo, text : data, layoutNo});
-				return;
-		  }
-		  workSpaceSlice.addTextFront({sheetNo, text : data, layoutNo});
-		}, 3000),
-		[]
-	);
-
 
 	const getCurrentFontSize = (editor) => {
 		editorRef.current = editor;
@@ -239,13 +247,68 @@ const EditText = ({
 		});
 	};
 
+	const handlerSetPosition = (d) => {
+		setCurrentConfigPhotoBook(prev => ({
+			...prev,
+			[`sheet${sheetNo}`] : {
+				...prev?.[`sheet${sheetNo}`],
+				texts : {
+					...prev?.[`sheet${sheetNo}`]?.texts,
+					[layoutNo] : {
+						...prev?.[`sheet${sheetNo}`]?.texts?.[layoutNo],
+						position : {
+							x : d.x,
+							y : d.y,
+						},
+					},
+				},
+			},
+		}));
+	};
+
+	const handlerSetSizes = (ref, position) => {
+		setCurrentConfigPhotoBook(prev => ({
+			...prev,
+			[`sheet${sheetNo}`] : {
+				...prev?.[`sheet${sheetNo}`],
+				texts : {
+					...prev?.[`sheet${sheetNo}`]?.texts,
+					[layoutNo] : {
+						...prev?.[`sheet${sheetNo}`]?.texts?.[layoutNo],
+						sizes : {
+							width  : ref.style.width,
+							height : ref.style.height,
+						},
+						position : {
+							...position,
+						},
+					},
+				},
+			},
+		}));
+	};
+
+	console.log(currentConfigPhotoBook ?? undefined);
+
 	return (
-		<div
+		<Rnd
 			className={classes.editText}
 			style={{
 				color : ((product === "premium") && (currentPageId === "frontpage")) && "#1c1c1c6c",
 			}}
+			size={currentSizeText}
+			position={currentPositionText}
+			bounds={`#draggable-zone-sheet${sheetNo}`}
+			dragHandleClassName={`handles-${layoutNo}`}
+			scale={0.55}
+			onDragStop={(e, d) => {
+				handlerSetPosition(d);
+			}}
+			onResizeStop={(e, direction, ref, delta, position) => {
+				handlerSetSizes(ref, position);
+			}}
 		>
+			<div className="handles" />
 			<CKEditor
 				editor={ BalloonEditor }
 				config={ editorConfiguration }
@@ -255,7 +318,17 @@ const EditText = ({
 					handleEditorChange(event, editor);
 				}}
 			/>
-		</div>
+			<Center
+				p="0%"
+				m="0%"
+			>
+				<div
+					className={`handles-${layoutNo}`}
+				>
+					+
+				</div>
+			</Center>
+		</Rnd>
 	);
 };
 
