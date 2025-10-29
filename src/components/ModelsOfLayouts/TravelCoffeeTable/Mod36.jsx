@@ -1,7 +1,8 @@
-import {Stack}   from "@mantine/core";
-import ImgLayout from "components/LayoutHandler/ImgLayout";
+import {Flex, Stack} from "@mantine/core";
+import ImgLayout     from "components/LayoutHandler/ImgLayout";
 //Own components
-import Text                              from "components/LayoutHandler/Text";
+import Text from "components/LayoutHandler/Text";
+
 import { currentConfigPhotoBookContext } from "contexts/configContext";
 import { useContext }                    from "react";
 
@@ -15,18 +16,27 @@ const Mod36 = ({
 	const listOfTexts = Object.values(currentConfigPhotoBook?.[`sheet${sheetNo}`]?.texts ?? {});
 
 	return (
-		<Stack
-			pt="15%"
+		<Flex
+			pt="26%"
 			w="100%"
 			h="100%"
 			align="flex-end"
-			spacing={"20px"}
+			gap="0.5em"
+			direction="column"
 		>
-			<Stack w="100%" h="100%">
-				<ImgLayout
-					sheetNo={sheetNo}
-					imageNo={0}
-				/>
+			<Stack
+				spacing="0.2em"
+				w="70%"
+				h="70%"
+			>
+				<Stack w="100%" h="100%" spacing="0.4em">
+					<Stack w="100%" h="100%">
+						<ImgLayout
+							sheetNo={sheetNo}
+							imageNo={0}
+						/>
+					</Stack>
+				</Stack>
 			</Stack>
 			{listOfTexts.map((item, index) => {
 				return (
@@ -40,7 +50,7 @@ const Mod36 = ({
 					/>
 				);
 			})}
-		</Stack>
+		</Flex>
 	);
 };
 

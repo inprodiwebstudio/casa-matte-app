@@ -16,7 +16,7 @@ const Mod37 = ({
 
 	return (
 		<Stack
-			pb="15%"
+			pb="25%"
 			w="100%"
 			h="100%"
 			spacing={"20px"}

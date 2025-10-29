@@ -51,7 +51,7 @@ const LineDecorationDrag = ({
 				justifyContent : "center",
 				alignItems     : "center",
 			}}
-			scale={0.95}
+			scale={0.55}
 			onDragStop={(e, d) => {
 				handlerSetPosition(d);
 			}}

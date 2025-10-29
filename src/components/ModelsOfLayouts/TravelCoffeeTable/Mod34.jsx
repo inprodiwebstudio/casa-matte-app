@@ -17,8 +17,8 @@ const Mod34 = ({
 	return (
 		<Stack
 			p="20%"
-			pt="8%"
-			pb="8%"
+			pt="14%"
+			pb="14%"
 			w="100%"
 			h="100%"
 			justify="center"

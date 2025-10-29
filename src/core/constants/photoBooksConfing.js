@@ -6,6 +6,7 @@ import SquareSmall              from "components/ModelsOfLayouts/SquareSmall";
 import SquareLarge              from "components/ModelsOfLayouts/SquareLarge";
 import HorizontalLarge          from "components/ModelsOfLayouts/HorizontalLarge";
 import HorizontalMedium         from "components/ModelsOfLayouts/HorizontalMedium";
+import TravelCoffeeTable        from "components/ModelsOfLayouts/TravelCoffeeTable";
 import VerticalMediumSencillo   from "components/MyModsLayouts/Sencillo/VerticalMedium";
 import VerticalLargeSencillo    from "components/MyModsLayouts/Sencillo/VerticalLarge";
 import VerticalMediumPremium    from "components/MyModsLayouts/Premium/VerticalMedium";
@@ -18,7 +19,6 @@ import SquareSmallSencillo      from "components/MyModsLayouts/Sencillo/SquareSm
 import SquareLrageSencillo      from "components/MyModsLayouts/Sencillo/SquareLarge";
 import HorizontalMediumSencillo from "components/MyModsLayouts/Sencillo/HorizontalMedium";
 import HorizontalLargeSencillo  from "components/MyModsLayouts/Sencillo/HorizontalLarge";
-import TravelCoffeeTable        from "components/MyModsLayouts/TravelCoffeeTable";
 import LayFlat                  from "components/MyModsLayouts/LayFlat";
 import LayFlatSquareMedium      from "components/MyModsLayouts/LayFlatSquareMedium";
 import LayFlatSquareLarge       from "components/MyModsLayouts/LayFlatSquareLarge";
@@ -537,7 +537,8 @@ const photoBooksConfing = {
 	},
 	"travelcoffeetable" : {
 		vertical : {
-			sizes : {
+			aspectRatio : [354, 425],
+			sizes       : {
 				grande : {
 					aspectRatio      : [354, 425],
 					layoutMods       : {...TravelCoffeeTable},

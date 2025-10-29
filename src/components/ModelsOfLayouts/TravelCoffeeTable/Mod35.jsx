@@ -17,8 +17,8 @@ const Mod35 = ({
 	return (
 		<Stack
 			p="4%"
-			pt="12%"
-			pb="12%"
+			pt="23%"
+			pb="23%"
 			w="100%"
 			h="100%"
 			justify="center"
