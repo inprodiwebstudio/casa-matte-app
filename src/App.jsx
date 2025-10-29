@@ -8,6 +8,7 @@ import { MantineProvider }       from "@mantine/core";
 import { ModalsProvider }        from "@mantine/modals";
 import { NotificationsProvider } from "@mantine/notifications";
 
+import { CurrentConfigPhotoBookProvider } from "contexts/configContext";
 
 import store, { persistor }     from "store";
 import { theme }                from "./theme";
@@ -49,20 +50,22 @@ export default function App() {
 		return (
 			<div id="body-app">
 				<Provider store={store}>
-					<BrowserRouter>
-						<PersistGate persistor={persistor}>
-							<MantineProvider theme={theme}>
-								<ModalsProvider
-									modals={ modals }
-									modalProps={ modalsConfig }
-								>
-									<NotificationsProvider position="top-right" zIndex={99999}>
-										<Router />
-									</NotificationsProvider>
-								</ModalsProvider>
-							</MantineProvider>
-						</PersistGate>
-					</BrowserRouter>
+					<CurrentConfigPhotoBookProvider>
+						<BrowserRouter>
+							<PersistGate persistor={persistor}>
+								<MantineProvider theme={theme}>
+									<ModalsProvider
+										modals={ modals }
+										modalProps={ modalsConfig }
+									>
+										<NotificationsProvider position="top-right" zIndex={99999}>
+											<Router />
+										</NotificationsProvider>
+									</ModalsProvider>
+								</MantineProvider>
+							</PersistGate>
+						</BrowserRouter>
+					</CurrentConfigPhotoBookProvider>
 				</Provider>
 			</div>
 		);
