@@ -1,0 +1,42 @@
+import { Stack } from "@mantine/core";
+//Own components
+import ImgLayout from "components/LayoutHandler/ImgLayout";
+
+const Mod19 = ({sheetNo}) => {
+	return (
+		<Stack
+			w="100%"
+			h="100%"
+			p="30%"
+			pt="15%"
+			pb="15%"
+		>
+			<Stack
+				spacing="0.1em"
+				w="100%"
+				h="100%"
+			>
+				<Stack
+					h="calc(50% - 0.05em)"
+					w="100%"
+				>
+					<ImgLayout
+						sheetNo={sheetNo}
+						imageNo={0}
+					/>
+				</Stack>
+				<Stack
+					h="calc(50% - 0.05em)"
+					w="100%"
+				>
+					<ImgLayout
+						sheetNo={sheetNo}
+						imageNo={1}
+					/>
+				</Stack>
+			</Stack>
+		</Stack>
+	);
+};
+
+export default Mod19;

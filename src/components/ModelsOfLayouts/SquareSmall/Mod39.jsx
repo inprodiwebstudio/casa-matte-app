@@ -1,0 +1,53 @@
+import {Stack, Flex } from "@mantine/core";
+//Own components
+import Text              from "components/LayoutHandler/Text";
+import { TextShell }     from "core/components";
+import { textInsertion } from "helpers";
+
+const Mod39 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
+
+	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO 2</span></p>";
+
+	return (
+		<Flex
+			w="100%"
+			h="100%"
+			justify="flex-end"
+			align="flex-end"
+			pb="8%"
+			pr="10%"
+		>
+			<Stack
+				w={"50%"}
+				align={isThumbNail ? "flex-end" : undefined}
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
+			>
+				<Text
+					sizes={{
+						"chico"   : "22px",
+						"regular" : "26px",
+						"grande"  : "28px",
+					}}
+					typeText="title"
+					sheetNo={sheetNo}
+					letterSpacing="4px"
+					textShell={() => <TextShell.Title width="80%" align="flex-end" />}
+					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
+					isInPaginator={isInPaginator}
+					isThumbNail={isThumbNail}
+					textNo={0}
+				/>
+			</Stack>
+		</Flex>
+	);
+};
+
+export default Mod39;

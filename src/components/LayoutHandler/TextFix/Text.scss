@@ -1,0 +1,12 @@
+@import "/src/Resources/scss/variables/colorThemes";
+
+.Text {
+    overflow: visible;
+    
+    .placeHolderText {
+        font-size: 12;
+        color : $flat-color;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+}
