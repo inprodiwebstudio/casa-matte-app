@@ -1,15 +1,15 @@
 //Redux
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { useContext }                             from "react";
 //Router
 //External components
-import { workSpaceSlice } from "store/Slices";
-import { Draggable }      from "react-beautiful-dnd";
+// import { workSpaceSlice } from "store/Slices";
+import { Draggable } from "react-beautiful-dnd";
 //Own Components
-//Resources
-import { Thrash }                           from "Resources/icons";
-import { closeAllModals, openContextModal } from "@mantine/modals";
 import "./ItemPage.scss";
-import BookPages                            from "components/BookPages";
+import SpreadLayoutsThumbNail            from "components/SpreadLayoutsThumbNail";
+import { workSpaceSlice }                from "store/Slices";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
 
 const ItemPage = ({
 	index,
@@ -18,6 +18,8 @@ const ItemPage = ({
 	draggableId,
 	handleDelete,
 }) => {
+	const {currentConfigPhotoBook, setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+
 	const dispatch = useDispatch();
 
 	const photoBookFormat = useSelector((state) => state.workSpaceSlice?.data?.format, shallowEqual);
@@ -28,24 +30,48 @@ const ItemPage = ({
 	const isCurrentPage = currentPageId === draggableId;
 
 	const handlerSelectPage = () => {
+		dispatch(workSpaceSlice.actions.updatePageContent({
+			currentConfigPhotoBook,
+		}));
 		dispatch(workSpaceSlice.actions.setSelectePageData({
-			pageId      : draggableId,
+			pageId      : pageData.id,
 			currentPage : "sheet1",
 		}));
+		setCurrentConfigPhotoBook({
+			pageId : undefined,
+			sheet1 : {
+				modlayoutId : undefined,
+				texts       : undefined,
+				photos      : undefined,
+			},
+			sheet2 : {
+				modlayoutId : undefined,
+				texts       : undefined,
+				photos      : undefined,
+			},
+		});
 		dispatch(workSpaceSlice.actions.handleChangePage(draggableId));
 	};
 
-	const onDeletePage = () => {
-		const myhandlerSucessDelete = () => {
-			closeAllModals();
-			handleDelete(pageData?.id);
-		};
-		openContextModal({
-			modal      : "deletePageConfirm",
-			innerProps : {
-				handdleSuccess : () => myhandlerSucessDelete(),
-			},
-		});
+	const handlerPageData = () => {
+		if (currentConfigPhotoBook?.pageId === pageData?.id) {
+			const constructorData = {
+				sheet1 : {
+					layoutType : currentConfigPhotoBook?.sheet1?.modlayoutId,
+					texts      : currentConfigPhotoBook?.sheet1?.texts,
+					photos     : currentConfigPhotoBook?.sheet1?.photos,
+				},
+				...(currentConfigPhotoBook?.sheet2 && {
+					sheet2 : {
+						layoutType : currentConfigPhotoBook?.sheet2?.modlayoutId,
+						texts      : currentConfigPhotoBook?.sheet2?.texts,
+						photos     : currentConfigPhotoBook?.sheet2?.photos,
+					},
+				}),
+			};
+			return constructorData;
+		}
+		return pageData;
 	};
 
 	const NumbPages = () => {
@@ -92,26 +118,12 @@ const ItemPage = ({
 				<div className={`sheets-container ${photoBookFormat}`}>
 					{
 						(isAvailableProduct !== "") && (
-							<BookPages
-								isThumbNail={false}
-								isInPaginator={true}
-								pageData={pageData}
-							/>
+							<SpreadLayoutsThumbNail pageData={handlerPageData()} />
 						)
 					}
 				</div>
 				<NumbPages />
 			</div>
-			{
-				(pageData?.id !== "page1") && (
-					<div
-						className="delete-icon"
-						onClick={() => onDeletePage()}
-					>
-						<Thrash size="15px" />
-					</div>
-				)
-			}
 		</div>
 	);
 

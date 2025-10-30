@@ -287,6 +287,10 @@ export const workSpaceSlice = createSlice({
 		changeColorEngraving : (state, {payload}) => {
 			state.data.engraving.currentColor = payload;
 		},
+		insertPhotoBase64Url : (state, {payload}) => {
+			const { pageId, sheetNo, photoIndex, imageData } = payload;
+			state.data.pages[pageId][sheetNo].photos[photoIndex] = imageData;
+		},
 		setLayoutFilter : (state, {payload}) => {
 			state.layoutFilter = payload;
 		},
@@ -303,9 +307,30 @@ export const workSpaceSlice = createSlice({
 			const {sheetNo, layoutNo, text} = payload;
 			state.currentPageData[`sheet${sheetNo}`].text[layoutNo] = text;
 		},
-		changePageData : (state, {payload}) => {
-			const { pageKey, newDataPage } = payload;
-			state.data.pages[pageKey] = newDataPage;
+		updatePageContent : (state, {payload}) => {
+			const { currentConfigPhotoBook } = payload;
+			const parseContentPage = {
+				...state?.currentPageData,
+				"sheet1" : {
+					...state?.currentPageData?.sheet1,
+					layoutType : currentConfigPhotoBook?.sheet1?.modlayoutId,
+					photos     : currentConfigPhotoBook?.sheet1?.photos,
+					text       : currentConfigPhotoBook?.sheet1?.texts,
+				},
+				...(state?.currentPageData?.sheet2 && { "sheet2" : {
+					...state?.currentPageData?.sheet2,
+					layoutType : currentConfigPhotoBook?.sheet2?.modlayoutId,
+					photos     : currentConfigPhotoBook?.sheet2?.photos,
+					text       : currentConfigPhotoBook?.sheet2?.texts,
+				} }),
+			};
+
+			const newPagesContent = {
+				...state.data.pages,
+				[state.currentPageData.id] : parseContentPage,
+			};
+
+			state.data.pages = newPagesContent;
 		},
 		newListPages : (state, {payload}) => {
 			state.data.pages = {...payload};
@@ -510,12 +535,12 @@ export const workSpaceSlice = createSlice({
 
 			state.data.pages = newPagesObject;
 		},
-		deletePage : (state, {payload}) => {
+		deletePage : (state) => {
 			const minPages = state.data.minPages;
 			if (state.data.numberOfPages === minPages) {
 				return;
 			}
-			state.data.numberOfPages = state.data.numberOfPages - payload.quantityDelete;
+			state.data.numberOfPages = state.data.numberOfPages - 1;
 		},
 		addPhotoEdited : (state, {payload}) => {
 			const newData = {...state.data};
