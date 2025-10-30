@@ -57,8 +57,17 @@ import Mod35         from "./Mod35";
 import Mod36         from "./Mod36";
 import Mod37         from "./Mod37";
 import ModTextLayout from "components/global/ModTextLayout";
+import { FrontMod1 } from "./FrontPages";
 
 const TravelCoffeeTable = {
+	FrontMod1 : {
+		id           : "FrontMod1",
+		layout       : FrontMod1,
+		numberPhotos : 1,
+		numberText   : 3,
+		cat          : "portadas",
+		pdfLayout    : undefined,
+	},
 	Mod1 : {
 		id              : "Mod1",
 		layout          : Mod1,

@@ -43,7 +43,7 @@ const WorkSpace = () => {
 	}
 
 	const handlerTypeProductFormat = () => {
-		if (productPhotoBook === "travelcoffeetable ") {
+		if (productPhotoBook === "travelcoffeetable") {
 			return "travel-coffee-table";
 		}
 		if ((productPhotoBook === "layflat") && (workSpaceFormatPage === "horizontal") && (workSpaceSizePage === "mediano")) {

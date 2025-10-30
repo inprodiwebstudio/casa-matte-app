@@ -78,28 +78,85 @@ import Mod35 from "./Mod35";
 import Mod36 from "./Mod36";
 import Mod37 from "./Mod37";
 
-import ModTextLayout from "components/global/ModTextLayout";
-import Mod41Tn       from "./ThumbNails/Mod41Tn";
-import Mod42Tn       from "./ThumbNails/Mod42Tn";
-import Mod43Tn       from "./ThumbNails/Mod43Tn";
-import Mod44Tn       from "./ThumbNails/Mod44Tn";
-import Mod45Tn       from "./ThumbNails/Mod45Tn";
-import Mod46Tn       from "./ThumbNails/Mod46Tn";
-import Mod47Tn       from "./ThumbNails/Mod47Tn";
-import Mod48Tn       from "./ThumbNails/Mod48Tn";
-import Mod49Tn       from "./ThumbNails/Mod49Tn";
-import Mod50Tn       from "./ThumbNails/Mod50Tn";
-import Mod51Tn       from "./ThumbNails/Mod51Tn";
-import Mod52Tn       from "./ThumbNails/Mod52Tn";
-import Mod53Tn       from "./ThumbNails/mod53Tn";
-import Mod54Tn       from "./ThumbNails/Mod54Tn";
-import Mod54         from "./Mod54";
-import Mod55         from "./Mod55";
-import Mod55Tn       from "./ThumbNails/Mod55Tn";
-import Mod56Tn       from "./ThumbNails/Mod56Tn";
-import Mod56         from "./Mod56";
+import ModTextLayout                                                                   from "components/global/ModTextLayout";
+import Mod41Tn                                                                         from "./ThumbNails/Mod41Tn";
+import Mod42Tn                                                                         from "./ThumbNails/Mod42Tn";
+import Mod43Tn                                                                         from "./ThumbNails/Mod43Tn";
+import Mod44Tn                                                                         from "./ThumbNails/Mod44Tn";
+import Mod45Tn                                                                         from "./ThumbNails/Mod45Tn";
+import Mod46Tn                                                                         from "./ThumbNails/Mod46Tn";
+import Mod47Tn                                                                         from "./ThumbNails/Mod47Tn";
+import Mod48Tn                                                                         from "./ThumbNails/Mod48Tn";
+import Mod49Tn                                                                         from "./ThumbNails/Mod49Tn";
+import Mod50Tn                                                                         from "./ThumbNails/Mod50Tn";
+import Mod51Tn                                                                         from "./ThumbNails/Mod51Tn";
+import Mod52Tn                                                                         from "./ThumbNails/Mod52Tn";
+import Mod53Tn                                                                         from "./ThumbNails/mod53Tn";
+import Mod54Tn                                                                         from "./ThumbNails/Mod54Tn";
+import Mod54                                                                           from "./Mod54";
+import Mod55                                                                           from "./Mod55";
+import Mod55Tn                                                                         from "./ThumbNails/Mod55Tn";
+import Mod56Tn                                                                         from "./ThumbNails/Mod56Tn";
+import Mod56                                                                           from "./Mod56";
+import { FrontMod1, FrontMod2, FrontMod3, FrontMod4, FrontMod5, FrontMod6, FrontMod7 } from "./FrontPages";
 
 const SquareSmall = {
+	FrontMod1 : {
+		id           : "FrontMod1",
+		layout       : FrontMod1,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "portadas",
+		pdfLayout    : undefined,
+	},
+	FrontMod2 : {
+		id           : "FrontMod2",
+		layout       : FrontMod2,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "portadas",
+		pdfLayout    : undefined,
+	},
+	FrontMod3 : {
+		id           : "FrontMod3",
+		layout       : FrontMod3,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "portadas",
+		pdfLayout    : undefined,
+	},
+	FrontMod4 : {
+		id           : "FrontMod4",
+		layout       : FrontMod4,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "portadas",
+		pdfLayout    : undefined,
+	},
+	FrontMod5 : {
+		id           : "FrontMod5",
+		layout       : FrontMod5,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "portadas",
+		pdfLayout    : undefined,
+	},
+	FrontMod6 : {
+		id           : "FrontMod6",
+		layout       : FrontMod6,
+		numberPhotos : 1,
+		numberText   : 2,
+		cat          : "portadas",
+		pdfLayout    : undefined,
+	},
+	FrontMod7 : {
+		id           : "FrontMod7",
+		layout       : FrontMod7,
+		numberPhotos : 1,
+		numberText   : 1,
+		cat          : "portadas",
+		pdfLayout    : undefined,
+	},
 	Mod1 : {
 		id              : "Mod1",
 		layout          : Mod1,
