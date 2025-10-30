@@ -1,13 +1,17 @@
 import { Thrash, Pencil }   from "Resources/icons";
 import { openContextModal } from "@mantine/modals";
-import { workSpaceSlice }   from "store/Slices";
-import { useDispatch }      from "react-redux";
+// import { workSpaceSlice }   from "store/Slices";
+import { useContext } from "react";
+// import { useDispatch }      from "react-redux";
+
+//Contexts
+import { currentConfigPhotoBookContext } from "contexts/configContext";
 
 //Own components
 import "./ActionImagesLayout.scss";
 
 const ActionImageslayout = ({image, sheetNo, layoutNo, pageId, containerPhotoUuid}) => {
-	const dispatch = useDispatch();
+	const {setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 
 	const documentContainer =  document.getElementById(containerPhotoUuid);
 
@@ -32,12 +36,23 @@ const ActionImageslayout = ({image, sheetNo, layoutNo, pageId, containerPhotoUui
 
 	const handleRemove = (e) => {
 		e.stopPropagation();
-		dispatch(workSpaceSlice.actions.removePhoto({
-			sheetNo  : sheetNo,
-			layoutNo : layoutNo,
-			pageId   : pageId,
+		setCurrentConfigPhotoBook(prev => ({
+			...prev,
+			[`sheet${sheetNo}`] : {
+				...prev[`sheet${sheetNo}`],
+				photos : {
+					...prev[`sheet${sheetNo}`]?.photos,
+					[layoutNo] : {
+						id             : undefined,
+						url            : undefined,
+						pixels         : undefined,
+						urlPhotoEdited : undefined,
+					},
+				},
+			},
 		}));
 	};
+
 	return (
 		<div className="ActionImagesLayout">
 			<Thrash size={"10%"} style={{cursor : "pointer"}} onClick={(e) => handleRemove(e)} />
