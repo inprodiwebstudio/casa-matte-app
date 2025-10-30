@@ -107,9 +107,74 @@ import Mod57Tn from "./ThumbNails/Mod57Tn";
 import Mod58Tn from "./ThumbNails/Mod58Tn";
 import Mod59Tn from "./ThumbNails/Mod59Tn";
 
-import ModTextLayout from "components/global/ModTextLayout";
+import ModTextLayout                                                                              from "components/global/ModTextLayout";
+import { FrontMod1, FrontMod2, FrontMod3, FrontMod4, FrontMod5, FrontMod6, FrontMod7, FrontMod8 } from "./FrontPages";
 
 const VerticalMedium = {
+	FrontMod1 : {
+		id           : "FrontMod1",
+		layout       : FrontMod1,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "portadas",
+		pdfLayout    : undefined,
+	},
+	FrontMod2 : {
+		id           : "FrontMod2",
+		layout       : FrontMod2,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "portadas",
+		pdfLayout    : undefined,
+	},
+	FrontMod3 : {
+		id           : "FrontMod3",
+		layout       : FrontMod3,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "portadas",
+		pdfLayout    : undefined,
+	},
+	FrontMod4 : {
+		id           : "FrontMod4",
+		layout       : FrontMod4,
+		numberPhotos : 0,
+		numberText   : 1,
+		cat          : "portadas",
+		pdfLayout    : undefined,
+	},
+	FrontMod5 : {
+		id           : "FrontMod5",
+		layout       : FrontMod5,
+		numberPhotos : 0,
+		numberText   : 1,
+		cat          : "portadas",
+		pdfLayout    : undefined,
+	},
+	FrontMod6 : {
+		id           : "FrontMod6",
+		layout       : FrontMod6,
+		numberPhotos : 0,
+		numberText   : 1,
+		cat          : "portadas",
+		pdfLayout    : undefined,
+	},
+	FrontMod7 : {
+		id           : "FrontMod7",
+		layout       : FrontMod7,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "portadas",
+		pdfLayout    : undefined,
+	},
+	FrontMod8 : {
+		id           : "FrontMod8",
+		layout       : FrontMod8,
+		numberPhotos : 0,
+		numberText   : 2,
+		cat          : "portadas",
+		pdfLayout    : undefined,
+	},
 	Mod1 : {
 		id              : "Mod1",
 		layout          : Mod1,
