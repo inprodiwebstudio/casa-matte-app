@@ -1,5 +1,5 @@
 import { Stack }                     from "@mantine/core";
-import Text                          from "components/LayoutHandler/Text";
+import TextFix                       from "components/LayoutHandler/TextFix";
 import { TextShell }                 from "core/components";
 import { textInsertion }             from "helpers";
 import { shallowEqual, useSelector } from "react-redux";
@@ -43,7 +43,7 @@ const SpineCover = ({
 				style={{ color : color }}
 			/>;
 		}
-		return <Text
+		return <TextFix
 			isBound={true}
 			sizes={{
 				"chico"   : "28px",

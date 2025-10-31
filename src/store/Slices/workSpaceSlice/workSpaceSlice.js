@@ -792,11 +792,13 @@ export const workSpaceSlice = createSlice({
 			state.history.current = history.currentAction;
 		},
 		addLayout : (state, {payload}) => {
-			const {layout, defaultTexts, linesDecoration, numberPhotos, anotherSheetKey, anotherSheetData, pageId, sheetId} = payload;
+			const {layout, defaultTexts, numberText, linesDecoration, numberPhotos, anotherSheetKey, anotherSheetData, pageId, sheetId} = payload;
 			const cloneData = {...state.data};
 			const parseToListImages = Array.from(Array(numberPhotos).keys()).map(e => ({id : "", url : ""}));
 			const myPhotos = Object.assign({}, parseToListImages);
 			const texts = defaultTexts ? arrayToObj(defaultTexts) : undefined;
+			const parseToListText = Array.from(Array(numberText).keys()).map(e => (""));
+			const myText = Object.assign({}, parseToListText);
 			const myLinesDecoration = linesDecoration ? arrayToObj(linesDecoration) : undefined;
 			const isFullBook = () => {
 				switch (`${cloneData?.product}-${cloneData?.sizePhotoBook}-${cloneData?.format}`) {
@@ -1002,7 +1004,7 @@ export const workSpaceSlice = createSlice({
 				cloneData.frontPage.sheet1 = {
 					...cloneData.frontPage.sheet1,
 					layoutType      : layout,
-					text            : texts,
+					text            : myText,
 					linesDecoration : myLinesDecoration,
 					photos          : {
 						0 : {

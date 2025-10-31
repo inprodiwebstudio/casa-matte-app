@@ -71,6 +71,7 @@ const ItemLayout = ({
 				layout       : layoutData?.id,
 				pageId       : "FrontLayout",
 				numberPhotos : layoutData?.numberPhotos,
+				numberText   : layoutData?.numberText,
 				defaultTexts : undefined,
 				sheetId      : 1,
 			}));
