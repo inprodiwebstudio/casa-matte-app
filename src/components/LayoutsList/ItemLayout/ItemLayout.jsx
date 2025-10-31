@@ -27,11 +27,22 @@ const ItemLayout = ({
 
 	const Layout = () => {
 		const ModLayout = myConfigPhotoBook?.layoutMods[layoutData?.id]?.layoutThumbNail;
+		const isFront = layoutData?.cat === "portadas";
 
 		if (ModLayout) {
 			return (
 				<ModLayout />
 			);
+		}
+
+		if (isFront) {
+			const FrontLayout = myConfigPhotoBook?.layoutMods[layoutData?.id]?.layout;
+
+			if (FrontLayout) {
+				return (
+					<FrontLayout isThumbNail={true} />
+				);
+			}
 		}
 
 		return <></>;
