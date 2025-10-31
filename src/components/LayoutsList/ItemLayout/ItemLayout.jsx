@@ -1,6 +1,9 @@
+import { useContext }                             from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 //Constants
-import photoBooksConfing from "core/constants/photoBooksConfing";
+import photoBooksConfing                 from "core/constants/photoBooksConfing";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
+//Helpers
 //Slices
 import { workSpaceSlice } from "store/Slices";
 import "./ItemLayout.scss";
@@ -9,10 +12,10 @@ const ItemLayout = ({
 	layoutData,
 }) => {
 	const dispatch = useDispatch();
+	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 
 	const pageDataSelected = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
-	const pagesData = useSelector((state) => state.workSpaceSlice?.data?.pages, shallowEqual);
 	const frontPageData = useSelector((state) => state.workSpaceSlice?.data?.frontPage, shallowEqual);
 	const productPhotoBook = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
 	const formatPhotoBook = useSelector((state) => state.workSpaceSlice?.data?.format, shallowEqual);
@@ -22,10 +25,19 @@ const ItemLayout = ({
 
 	const myConfigPhotoBook = photoBooksConfing[productPhotoBook]?.[formatPhotoBook]?.sizes?.[sizePhotoBook];
 
-	const Layout = myConfigPhotoBook?.layoutMods[layoutData?.id]?.layout;
+	const Layout = () => {
+		const ModLayout = myConfigPhotoBook?.layoutMods[layoutData?.id]?.layoutThumbNail;
+
+		if (ModLayout) {
+			return (
+				<ModLayout />
+			);
+		}
+
+		return <></>;
+	};
 
 	const isInDoublePage = myConfigPhotoBook?.modsInDoublePage?.includes(layoutData?.id);
-
 
 	const currentLayoutSelected = () => {
 		if (currentPageId === "frontpage") {
@@ -34,8 +46,8 @@ const ItemLayout = ({
 			};
 		}
 		return {
-			sheet1 : pagesData[currentPageId]?.sheet1?.layoutType,
-			sheet2 : pagesData[currentPageId]?.sheet2?.layoutType,
+			sheet1 : currentConfigPhotoBook?.sheet1?.modlayoutId,
+			sheet2 : currentConfigPhotoBook?.sheet2?.modlayoutId,
 		};
 	};
 
@@ -48,19 +60,28 @@ const ItemLayout = ({
 				layout       : layoutData?.id,
 				pageId       : "FrontLayout",
 				numberPhotos : layoutData?.numberPhotos,
-				numberText   : layoutData?.numberText,
+				defaultTexts : undefined,
 				sheetId      : 1,
 			}));
 		}
 		if (pageDataSelected) {
+			const defaultTexts = layoutData?.defaultTexts;
+			const linesDecoration = layoutData?.linesDecoration;
+
+			const handlerAnotherSheetKey = (pageDataSelected.currentPage === "sheet1") ? "sheet2" : "sheet1";
+
+			const dataAnotherSheet = currentConfigPhotoBook[handlerAnotherSheetKey] ?? undefined;
+
 			dispatch(workSpaceSlice.actions.addLayout({
-				layout       : layoutData?.id,
-				pageId       : pageDataSelected.pageId,
-				numberPhotos : layoutData?.numberPhotos,
-				numberText   : layoutData?.numberText,
-				sheetId      : pageDataSelected.currentPage,
+				layout           : layoutData?.id,
+				pageId           : pageDataSelected.pageId,
+				sheetId          : pageDataSelected.currentPage,
+				numberPhotos     : layoutData?.numberPhotos,
+				anotherSheetKey  : dataAnotherSheet && handlerAnotherSheetKey,
+				anotherSheetData : dataAnotherSheet,
+				linesDecoration,
+				defaultTexts,
 			}));
-			// dispatch(workSpaceSlice.actions.clearSelectedPageData());
 		}
 	};
 
@@ -74,7 +95,7 @@ const ItemLayout = ({
 				aspectRatio : isInDoublePage ? `${aspectRatio[0]*2}/${aspectRatio[1]}` : `${aspectRatio[0]}/${aspectRatio[1]}`,
 			}}
 		>
-			<Layout isThumbNail={true} />
+			<Layout />
 		</div>
 	);
 };

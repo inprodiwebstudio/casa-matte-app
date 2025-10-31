@@ -1,5 +1,6 @@
 import { createSlice }                                            from "@reduxjs/toolkit";
 import { convertToArray, convertToObject, History, isValidArray } from "helpers";
+import arrayToObj                                                 from "helpers/arrayToObj";
 
 const initialState = {
 	data : {
@@ -791,15 +792,16 @@ export const workSpaceSlice = createSlice({
 			state.history.current = history.currentAction;
 		},
 		addLayout : (state, {payload}) => {
+			const {layout, defaultTexts, linesDecoration, numberPhotos, anotherSheetKey, anotherSheetData, pageId, sheetId} = payload;
 			const cloneData = {...state.data};
-			const parseToListImages = Array.from(Array(payload?.numberPhotos).keys()).map(e => ({id : "", url : ""}));
-			const parseToListText = Array.from(Array(payload?.numberText).keys()).map(e => (""));
+			const parseToListImages = Array.from(Array(numberPhotos).keys()).map(e => ({id : "", url : ""}));
 			const myPhotos = Object.assign({}, parseToListImages);
-			const myText = Object.assign({}, parseToListText);
+			const texts = defaultTexts ? arrayToObj(defaultTexts) : undefined;
+			const myLinesDecoration = linesDecoration ? arrayToObj(linesDecoration) : undefined;
 			const isFullBook = () => {
 				switch (`${cloneData?.product}-${cloneData?.sizePhotoBook}-${cloneData?.format}`) {
 					case "grande-vertical":
-						return ["FrontLayout"].includes(payload.layout);
+						return ["FrontLayout"].includes(layout);
 					case "layflat-mediano-vertical":
 						return [
 							"FrontLayout",
@@ -992,16 +994,17 @@ export const workSpaceSlice = createSlice({
 							"Mod64",
 						].includes(payload.layout);
 					case "grande-cuadrado" :
-						return ["FrontLayout"].includes(payload.layout);
+						return ["FrontLayout"].includes(layout);
 				}
 			};
-			const isAvailableDoublePage = cloneData.pages[payload.pageId]?.["sheet2"];
-			if (payload?.pageId === "FrontLayout") {
+			const isAvailableDoublePage = cloneData.pages[pageId]?.["sheet2"];
+			if (pageId === "FrontLayout") {
 				cloneData.frontPage.sheet1 = {
 					...cloneData.frontPage.sheet1,
-					layoutType : payload.layout,
-					text       : myText,
-					photos     : {
+					layoutType      : layout,
+					text            : texts,
+					linesDecoration : myLinesDecoration,
+					photos          : {
 						0 : {
 							id  : cloneData?.frontPage?.sheet1?.photos?.[0]?.id,
 							url : cloneData?.frontPage?.sheet1?.photos?.[0]?.url,
@@ -1012,17 +1015,19 @@ export const workSpaceSlice = createSlice({
 				return;
 			}
 			if (isFullBook() && isAvailableDoublePage) {
-				cloneData.pages[payload.pageId]["sheet1"] = {
-					...cloneData.pages[payload.pageId]["sheet1"],
-					layoutType : payload.layout,
-					text       : myText,
-					photos     : myPhotos,
+				cloneData.pages[pageId]["sheet1"] = {
+					...cloneData.pages[pageId]["sheet1"],
+					layoutType      : layout,
+					text            : texts,
+					linesDecoration : myLinesDecoration,
+					photos          : myPhotos,
 				};
-				cloneData.pages[payload.pageId]["sheet2"] = {
-					...cloneData.pages[payload.pageId]["sheet2"],
-					layoutType : "",
-					text       : {},
-					photos     : {},
+				cloneData.pages[pageId]["sheet2"] = {
+					...cloneData.pages[pageId]["sheet2"],
+					layoutType      : "",
+					text            : undefined,
+					linesDecoration : undefined,
+					photos          : undefined,
 				};
 				state.data = cloneData;
 				return;
@@ -1030,11 +1035,21 @@ export const workSpaceSlice = createSlice({
 			if (!isAvailableDoublePage && isFullBook()) {
 				return;
 			}
-			cloneData.pages[payload.pageId][payload.sheetId] = {
-				...cloneData.pages[payload.pageId][payload.sheetId],
-				layoutType : payload.layout,
-				text       : myText,
-				photos     : myPhotos,
+			if (anotherSheetKey) {
+				cloneData.pages[pageId][anotherSheetKey] = {
+					...cloneData.pages[pageId][anotherSheetKey],
+					layoutType      : anotherSheetData?.modlayoutId,
+					text            : anotherSheetData?.texts,
+					linesDecoration : anotherSheetData?.linesDecoration,
+					photos          : anotherSheetKey?.photos,
+				};
+			}
+			cloneData.pages[pageId][sheetId] = {
+				...cloneData.pages[pageId][sheetId],
+				layoutType      : layout,
+				text            : texts,
+				linesDecoration : myLinesDecoration,
+				photos          : myPhotos,
 			};
 			state.data = cloneData;
 
