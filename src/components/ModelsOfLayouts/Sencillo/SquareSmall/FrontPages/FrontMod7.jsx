@@ -2,7 +2,7 @@
 import {Stack, Flex }    from "@mantine/core";
 import ImgLayout         from "components/LayoutHandler/ImgLayout";
 import { textInsertion } from "helpers";
-import Text              from "components/LayoutHandler/Text";
+import TextFix           from "components/LayoutHandler/TextFix";
 
 
 //Own components
@@ -54,7 +54,7 @@ const FrontMod7 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 							transform   : "rotate(180deg)",
 						}}
 					>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "20px",
 								"regular" : "28px",

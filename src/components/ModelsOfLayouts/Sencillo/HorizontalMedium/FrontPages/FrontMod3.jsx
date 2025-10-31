@@ -2,7 +2,7 @@
 import {Stack, Flex }    from "@mantine/core";
 import ImgLayout         from "components/LayoutHandler/ImgLayout";
 import { textInsertion } from "helpers";
-import Text              from "components/LayoutHandler/Text";
+import TextFix           from "components/LayoutHandler/TextFix";
 import { TextShell }     from "core/components";
 
 
@@ -56,7 +56,7 @@ const FrontMod3 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 							w="100%"
 							mah={isInWorkSpace ? "56px" : "10px"}
 						>
-							<Text
+							<TextFix
 								sizes={{
 									"chico"   : "20px",
 									"regular" : "28px",
@@ -76,7 +76,7 @@ const FrontMod3 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 							w="100%"
 							mah={isInWorkSpace ? "40px" : "10px"}
 						>
-							<Text
+							<TextFix
 								sizes={{
 									"chico"   : "5px",
 									"regular" : "10px",

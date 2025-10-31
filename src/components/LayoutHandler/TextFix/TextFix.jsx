@@ -5,7 +5,7 @@ import EditorText from "./EditorText";
 
 import "./Text.scss";
 
-const Text = ({
+const TextFix = ({
 	isBound,
 	isFront,
 	data,
@@ -81,4 +81,4 @@ Text.propTypes = {
 	height        : PropTypes.string || PropTypes.number,
 };
 
-export default Text;
+export default TextFix;
