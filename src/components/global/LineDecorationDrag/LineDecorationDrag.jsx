@@ -3,6 +3,7 @@ import { Rnd }                           from "react-rnd";
 import DividerLayout                     from "components/LayoutHandler/DividerLayout";
 import { useContext }                    from "react";
 import { currentConfigPhotoBookContext } from "contexts/configContext";
+import useWorkspaceScale                 from "helpers/Hooks/useWorkspaceScale";
 
 
 const LineDecorationDrag = ({
@@ -13,6 +14,8 @@ const LineDecorationDrag = ({
 	sheetNo,
 }) => {
 	const {currentConfigPhotoBook, setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+
+	const scale = useWorkspaceScale();
 
 	const currentPositionLine = currentConfigPhotoBook?.[`sheet${sheetNo}`]?.linesDecoration?.[layoutNo]?.position ?? {
 		x : 0,
@@ -51,7 +54,7 @@ const LineDecorationDrag = ({
 				justifyContent : "center",
 				alignItems     : "center",
 			}}
-			scale={0.55}
+			scale={scale}
 			onDragStop={(e, d) => {
 				handlerSetPosition(d);
 			}}

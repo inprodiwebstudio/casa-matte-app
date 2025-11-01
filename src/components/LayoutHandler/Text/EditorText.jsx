@@ -20,9 +20,10 @@ import { useRef, useState, useContext }       from "react";
 import { workSpaceSlice }                     from "store/Slices";
 import { connect, useSelector, shallowEqual } from "react-redux";
 
-import { bindAll } from "helpers";
-import styles      from "./styles";
-import { Center }  from "@mantine/core";
+import { bindAll }       from "helpers";
+import styles            from "./styles";
+import { Center }        from "@mantine/core";
+import useWorkspaceScale from "helpers/Hooks/useWorkspaceScale";
 
 const EditText = ({
 	sheetNo,
@@ -48,6 +49,8 @@ const EditText = ({
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const product = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
 	const currentColorEngravingText = useSelector((state) => state.workSpaceSlice.data?.engraving?.currentColor?.colorHex, shallowEqual);
+
+	const scale = useWorkspaceScale();
 
 	const isAvailableChangeColorText = currentColorEngravingText && (currentPageId === "frontpage");
 
@@ -288,6 +291,8 @@ const EditText = ({
 		}));
 	};
 
+	console.log(scale);
+
 	return (
 		<Rnd
 			className={classes.editText}
@@ -298,7 +303,7 @@ const EditText = ({
 			position={currentPositionText}
 			bounds={`#draggable-zone-sheet${sheetNo}`}
 			dragHandleClassName={`handles-${layoutNo}`}
-			scale={0.55}
+			scale={scale}
 			onDragStop={(e, d) => {
 				handlerSetPosition(d);
 			}}
