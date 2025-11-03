@@ -292,6 +292,20 @@ const EditText = ({
 		}));
 	};
 
+	const handleDeleteText = () => {
+		setCurrentConfigPhotoBook(prev => {
+			const newTexts = { ...prev?.[`sheet${sheetNo}`]?.texts };
+			delete newTexts[layoutNo];
+			return {
+				...prev,
+				[`sheet${sheetNo}`] : {
+					...prev?.[`sheet${sheetNo}`],
+					texts : newTexts,
+				},
+			};
+		});
+	};
+
 	return (
 		<Rnd
 			className={classes.editText}
@@ -318,6 +332,7 @@ const EditText = ({
 					radius="xl"
 					variant="light"
 					size="lg"
+					onClick={handleDeleteText}
 				>
 					<TiDelete size={30} />
 				</ActionIcon>
@@ -330,9 +345,6 @@ const EditText = ({
 				onReady={getCurrentFontSize}
 				onChange={(event, editor) => {
 					handleEditorChange(event, editor);
-				}}
-				onBlur={(editor) => {
-					console.log("Focus.", editor);
 				}}
 			/>
 			<Center
