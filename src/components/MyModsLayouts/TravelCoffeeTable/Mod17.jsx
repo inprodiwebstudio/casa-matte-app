@@ -1,6 +1,6 @@
 import { Center, Stack } from "@mantine/core";
 //Own components
-import Text              from "components/LayoutHandler/Text";
+import TextFix           from "components/LayoutHandler/TextFix";
 import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
@@ -16,7 +16,7 @@ const Mod17 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				pt="0%"
 				pb="0%"
 			>
-				<Text
+				<TextFix
 					sizes={{
 						"chico"   : "28px",
 						"regular" : "30px",

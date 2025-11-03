@@ -1,6 +1,6 @@
 import {Stack, Flex, Center } from "@mantine/core";
 //Own components
-import Text              from "components/LayoutHandler/Text";
+import TextFix           from "components/LayoutHandler/TextFix";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
@@ -40,7 +40,7 @@ const Mod40 = ({
 							maxHeight    : "100px",
 					 }}
 					>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "42px",
 								"regular" : "46px",
@@ -61,7 +61,7 @@ const Mod40 = ({
 							paddingLeft  : "20%",
 							paddingRight : "20%",
 						}}>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "18px",
 								"regular" : "20px",

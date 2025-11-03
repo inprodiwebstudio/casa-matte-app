@@ -1,7 +1,7 @@
 import { Flex, Stack } from "@mantine/core";
 import DividerLayout   from "components/LayoutHandler/DividerLayout";
 //Own components
-import Text              from "components/LayoutHandler/Text";
+import TextFix           from "components/LayoutHandler/TextFix";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
@@ -34,7 +34,7 @@ const Mod31 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							textTransform : "uppercase",
 						}}
 					>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "18px",
 								"regular" : "20px",
@@ -56,7 +56,7 @@ const Mod31 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							textTransform : "uppercase",
 						}}
 					>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "12px",
 								"regular" : "14px",

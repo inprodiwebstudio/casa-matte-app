@@ -1,6 +1,6 @@
 import {Stack, Flex } from "@mantine/core";
 //Own components
-import Text              from "components/LayoutHandler/Text";
+import TextFix           from "components/LayoutHandler/TextFix";
 import DividerLayout     from "components/LayoutHandler/DividerLayout";
 import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
@@ -47,7 +47,7 @@ const Mod41 = ({
 					/>
 				</Flex>
 				<Stack spacing={isInWorkSpace ? "3px" : "0.1em"} w="100%">
-					<Text
+					<TextFix
 						sizes={{
 							"chico"   : "42px",
 							"regular" : "46px",
@@ -67,7 +67,7 @@ const Mod41 = ({
 							paddingRight : isInWorkSpace ? "5px" : "0px",
 						}}
 					>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "18px",
 								"regular" : "20px",

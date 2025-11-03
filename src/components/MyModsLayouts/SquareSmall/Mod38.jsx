@@ -1,6 +1,6 @@
 import { Center, Stack } from "@mantine/core";
 //Own components
-import Text              from "components/LayoutHandler/Text";
+import TextFix           from "components/LayoutHandler/TextFix";
 import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
@@ -25,7 +25,7 @@ const Mod38 = ({
 				pb="0%"
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
-				<Text
+				<TextFix
 					sizes={{
 						"chico"   : "22px",
 						"regular" : "26px",
