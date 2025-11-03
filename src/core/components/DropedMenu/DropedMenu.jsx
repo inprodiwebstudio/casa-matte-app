@@ -13,7 +13,7 @@ import { convertToArray, currencyFormat, counterSheets } from "helpers";
 import ColorPickerEngraving                              from "./ColorPickerEngraving";
 
 const DropedMenu = () => {
-	const [ activeMenu, setActiveMenu ] = useState(false);
+	const [ activeMenu, setActiveMenu ] = useState(true);
 
 	const [ extraPages, setExtraPages ] = useState(0);
 
