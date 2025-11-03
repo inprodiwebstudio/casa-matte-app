@@ -53,7 +53,7 @@ const GhostSpreadDom = ({pageData}) => {
 			}}>
 			<div
 				style={{
-					height   : "1000px",
+					height   : "0px",
 					width    : "100%",
 					overflow : "hidden",
 				}}
