@@ -1,5 +1,6 @@
 import {Stack, Flex, Group } from "@mantine/core";
 import ImgLayout             from "components/LayoutHandler/ImgLayout";
+import TextFix           from "components/LayoutHandler/TextFix";
 import Text                  from "components/LayoutHandler/Text";
 import { textInsertion }     from "helpers";
 //Own components
@@ -35,7 +36,7 @@ const Mod62 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				position="apart"
 			>
 				<Stack w="48.5%" h="100%">
-					<Text
+					<TextFix
 						align="justify"
 						type="regular"
 						textNo={0}
@@ -46,7 +47,7 @@ const Mod62 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 					/>
 				</Stack>
 				<Stack w="48.5%" h="100%">
-					<Text
+					<TextFix
 						align="justify"
 						type="regular"
 						textNo={1}

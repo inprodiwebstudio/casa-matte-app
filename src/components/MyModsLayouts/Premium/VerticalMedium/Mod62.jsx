@@ -1,7 +1,7 @@
 import {Stack, Flex, Group } from "@mantine/core";
 import DividerLayout         from "components/LayoutHandler/DividerLayout";
 import ImgLayout             from "components/LayoutHandler/ImgLayout";
-import Text                  from "components/LayoutHandler/Text";
+import TextFix               from "components/LayoutHandler/TextFix";
 import { textInsertion }     from "helpers";
 
 //Own components
@@ -48,7 +48,7 @@ const Mod63 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						spacing="0.09em"
 					>
 						<div>
-							<Text
+							<TextFix
 								align="left"
 								type="h4"
 								textNo={0}
@@ -68,7 +68,7 @@ const Mod63 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 								height : "100%",
 							}}
 						>
-							<Text
+							<TextFix
 								align="justify"
 								type="regular"
 								textNo={1}
