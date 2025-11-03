@@ -1,0 +1,316 @@
+@import "/src/Resources/scss/variables/colorThemes";
+@import "/src/Resources/scss/breakpoints.scss";
+
+.PreviewPages {
+	width: 100%;
+	height: 88%;
+	overflow-y: scroll;
+	position: relative;
+	top : 12%;
+	z-index: 1;
+
+	.photoBookContainer {
+		height: 100% !important;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		.pagesPreviewPhotoBook {
+			width: 100% !important;
+			height: 992px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 90px;
+			transform: scale(0.6, 0.6);
+			z-index: 1;
+
+			&.travel-coffee-table-preview {
+				height: 850px;
+				transform: scale(0.73, 0.73);
+
+				@include laptop {
+					transform: scale(0.53, 0.53);
+					z-index: 1;
+				}
+	
+				@include big-laptop {
+					transform: scale(0.67, 0.67);
+					z-index: 1;
+				}
+	
+				@include big-tablet {
+					transform: scale(0.3, 0.3);
+					z-index: 1;
+				}
+
+				&.onePage {
+					transform: scale(0.75, 0.75);
+					z-index: 1;
+
+					@include big-laptop {
+						transform: scale(0.7, 0.7);
+						z-index: 1;
+					}
+
+					@include laptop {
+						transform: scale(0.55, 0.55);
+						z-index: 1;
+					}
+
+					@include big-tablet {
+						transform: scale(0.35, 0.35);
+						z-index: 1;
+					}
+				}
+			}
+
+			&.horizontal-grande-preview {
+				height: 850px;
+				transform: scale(0.6, 0.6);
+
+				@include laptop {
+					margin-right: 45px;
+					transform: scale(0.40, 0.40);
+					z-index: 1;
+					margin-left: 3.6vw;
+				}
+	
+				@include big-laptop {
+					transform: scale(0.45, 0.45);
+					z-index: 1;
+				}
+	
+				@include big-tablet {
+					transform: scale(0.3, 0.3);
+					z-index: 1;
+				}
+
+				&.onePage {
+					transform: scale(0.75, 0.75);
+					z-index: 1;
+
+					@include big-laptop {
+						transform: scale(0.6, 0.6);
+						z-index: 1;
+					}
+
+					@include laptop {
+						transform: scale(0.53, 0.53);
+						z-index: 1;
+					}
+
+					@include big-tablet {
+						transform: scale(0.35, 0.35);
+						z-index: 1;
+					}
+				}
+			}
+
+			&.horizontal-mediano-preview {
+				height: 615px;
+				transform: scale(0.75, 0.75);
+
+				@include laptop {
+					margin-right: 0px;
+					transform: scale(0.52, 0.52);
+					z-index: 1;
+				}
+	
+				@include big-laptop {
+					margin-right: 0px;
+					transform: scale(0.65, 0.65);
+					z-index: 1;
+				}
+	
+				@include big-tablet {
+					margin-right: 45px;
+					transform: scale(0.45, 0.45);
+					z-index: 1;
+				}
+
+				&.onePage {
+					transform: scale(0.95, 0.95);
+					z-index: 1;
+
+					@include big-laptop {
+						transform: scale(0.95, 0.95);
+						z-index: 1;
+					}
+
+					@include laptop {
+						transform: scale(0.7, 0.7);
+						z-index: 1;
+					}
+
+					@include big-tablet {
+						transform: scale(0.65, 0.65);
+						z-index: 1;
+					}
+				}
+			}
+
+			&.horizontal-mediano-layflat-preview {
+				height: 576px;
+				transform: scale(0.75, 0.75);
+
+				@include laptop {
+					margin-left: 5px;
+					transform: scale(0.54, 0.54);
+					z-index: 1;
+				}
+	
+				@include big-laptop {
+					margin-right: 30px;
+					transform: scale(0.65, 0.65);
+					z-index: 1;
+				}
+	
+				@include big-tablet {
+					margin-right: 45px;
+					transform: scale(0.45, 0.45);
+					z-index: 1;
+				}
+
+				&.onePage {
+					transform: scale(0.95, 0.95);
+					z-index: 1;
+
+					@include big-laptop {
+						transform: scale(0.95, 0.95);
+						z-index: 1;
+					}
+
+					@include laptop {
+						transform: scale(0.7, 0.7);
+						z-index: 1;
+					}
+
+					@include big-tablet {
+						transform: scale(0.65, 0.65);
+						z-index: 1;
+					}
+				}
+			}
+
+			&.vertical-mediano-preview {
+				height: 792px;
+				transform: scale(0.8, 0.8);
+
+				@include laptop {
+					transform: scale(0.6, 0.6);
+					z-index: 1;
+				}
+	
+				@include big-laptop {
+					transform: scale(0.6, 0.6);
+					z-index: 1;
+				}
+	
+				@include big-tablet {
+					transform: scale(0.45, 0.45);
+					z-index: 1;
+				}
+			}
+
+			&.cuadrado-chico-preview {
+				transform: scale(1, 1);
+				height: 595px;
+
+				@include laptop {
+					transform: scale(0.65, 0.65);
+					margin-right: 40px;
+					z-index: 1;
+				}
+	
+				@include big-laptop {
+					transform: scale(0.85, 0.85);
+					z-index: 1;
+				}
+	
+				@include big-tablet {
+					transform: scale(0.75, 0.75);
+					z-index: 1;
+				}
+
+				&.onePage {
+					transform: scale(0.95, 0.95);
+					z-index: 1;
+
+					@include big-laptop {
+						transform: scale(0.85, 0.85);
+						z-index: 1;
+					}
+
+					@include laptop {
+						transform: scale(0.75, 0.75);
+						z-index: 1;
+					}
+
+					@include big-tablet {
+						transform: scale(0.7, 0.7);
+						z-index: 1;
+					}
+				}
+			}
+
+			&.cuadrado-mediano-preview {
+				transform: scale(0.55, 0.55);
+				height: 850px;
+
+				@include laptop {
+					transform: scale(0.40, 0.40);
+					z-index: 1;
+				}
+	
+				@include big-laptop {
+					transform: scale(0.52, 0.52);
+					z-index: 1;
+				}
+	
+				@include big-tablet {
+					transform: scale(0.42, 0.42);
+					z-index: 1;
+				}
+			}
+
+			&.cuadrado-grande-preview {
+				transform: scale(0.6, 0.6);
+				height: 850px;
+
+				@include laptop {
+					transform: scale(0.45, 0.45);
+					z-index: 1;
+				}
+	
+				@include big-laptop {
+					transform: scale(0.57, 0.57);
+					z-index: 1;
+				}
+	
+				@include big-tablet {
+					transform: scale(0.47, 0.47);
+					z-index: 1;
+				}
+			}
+
+			@include laptop {
+				transform: scale(0.43, 0.43);
+				margin-bottom: 10px;
+				z-index: 1;
+			}
+
+			@include big-laptop {
+				transform: scale(0.55, 0.55);
+				z-index: 1;
+				// margin-right: 50px;
+			}
+
+			@include big-tablet {
+				transform: scale(0.45, 0.45);
+				z-index: 1;
+			}
+		}
+	}
+}
