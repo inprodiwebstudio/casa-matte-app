@@ -1,11 +1,11 @@
 import { useContext }                             from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 //Constants
-import photoBooksConfing                 from "core/constants/photoBooksConfing";
 import { currentConfigPhotoBookContext } from "contexts/configContext";
 //Helpers
 //Slices
 import { workSpaceSlice } from "store/Slices";
+import photoBooksConfig   from "core/constants/photoBooksConfing";
 import "./ItemLayout.scss";
 
 const ItemLayout = ({
@@ -21,9 +21,9 @@ const ItemLayout = ({
 	const formatPhotoBook = useSelector((state) => state.workSpaceSlice?.data?.format, shallowEqual);
 	const sizePhotoBook = useSelector((state) => state.workSpaceSlice?.data?.sizePhotoBook, shallowEqual);
 
-	const aspectRatio = photoBooksConfing[productPhotoBook]?.[formatPhotoBook]?.sizes?.[sizePhotoBook]?.aspectRatio;
+	const aspectRatio = photoBooksConfig[productPhotoBook]?.[formatPhotoBook]?.sizes?.[sizePhotoBook]?.aspectRatio;
 
-	const myConfigPhotoBook = photoBooksConfing[productPhotoBook]?.[formatPhotoBook]?.sizes?.[sizePhotoBook];
+	const myConfigPhotoBook = photoBooksConfig[productPhotoBook]?.[formatPhotoBook]?.sizes?.[sizePhotoBook];
 
 	const Layout = () => {
 		const ModLayout = myConfigPhotoBook?.layoutMods[layoutData?.id]?.layoutThumbNail;
@@ -89,6 +89,7 @@ const ItemLayout = ({
 				pageId           : pageDataSelected.pageId,
 				sheetId          : pageDataSelected.currentPage,
 				numberPhotos     : layoutData?.numberPhotos,
+				numberText       : layoutData?.numberText,
 				anotherSheetKey  : dataAnotherSheet && handlerAnotherSheetKey,
 				anotherSheetData : dataAnotherSheet,
 				linesDecoration,

@@ -18,11 +18,11 @@ import {
 	sortableKeyboardCoordinates,
 	rectSortingStrategy,
 } from "@dnd-kit/sortable";
-import { SortableBookPage } from "./BookPage";
-import { convertToArray }   from "helpers";
-import photoBooksConfing    from "core/constants/photoBooksConfing";
+import { SortableBookPage }          from "./BookPage";
+import { useHandlerTypeConfigBooks } from "helpers/Hooks/useHandlerTypeConfigBooks";
+import { convertToArray }            from "helpers";
 import "./ManagePagesDataGrid.scss";
-import { workSpaceSlice }   from "store/Slices";
+import { workSpaceSlice }            from "store/Slices";
 
 const ManagePagesDataGrid = () => {
 	const { data: photoBookData } = useSelector((state) => state.workSpaceSlice, shallowEqual);
@@ -30,7 +30,9 @@ const ManagePagesDataGrid = () => {
 	const photoBookDataPages = photoBookData?.pages || {};
 	const [activePage, setActivePage] = useState(null);
 
-	const currentPhotoBookConfig = photoBooksConfing[photoBookData?.product]?.[photoBookData?.format]?.sizes?.[photoBookData?.sizePhotoBook];
+	const photoBooksConfig = useHandlerTypeConfigBooks();
+
+	const currentPhotoBookConfig = photoBooksConfig[photoBookData?.product]?.[photoBookData?.format]?.sizes?.[photoBookData?.sizePhotoBook];
 	const aspectRatio = currentPhotoBookConfig?.aspectRatio ?? [1, 1];
 
 	const spreads = useMemo(() => {

@@ -4,14 +4,14 @@ import LayoutsList                                from "components/LayoutsList";
 
 //Constants
 import { filterTabs, optionsPhotoQuantity } from "./footerConstants";
-import photoBooksConfing                    from "core/constants/photoBooksConfing";
 //Slices
 import { workSpaceSlice } from "store/Slices";
 //Owwn components
-import { Tabs, SelectorMenuItem } from "core/components";
-import { ArrowTop }               from "Resources/icons";
+import { Tabs, SelectorMenuItem }    from "core/components";
+import { ArrowTop }                  from "Resources/icons";
+import { useHandlerTypeConfigBooks } from "helpers/Hooks/useHandlerTypeConfigBooks";
 import "./Footer.scss";
-import { convertToArray }         from "helpers";
+import { convertToArray }            from "helpers";
 
 const Footer = () => {
 	const currentFileterLayout = useSelector((state) => state.workSpaceSlice.layoutFilter, shallowEqual);
@@ -22,7 +22,9 @@ const Footer = () => {
 	const formatPhotoBook = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
 	const sizePhotoBook = useSelector((state) => state.workSpaceSlice?.data?.sizePhotoBook, shallowEqual);
 
-	const objLayouts = photoBooksConfing[productPhotoBook]?.[formatPhotoBook]?.sizes?.[sizePhotoBook]?.layoutMods ?? {};
+	const photoBooksConfig = useHandlerTypeConfigBooks();
+
+	const objLayouts = photoBooksConfig[productPhotoBook]?.[formatPhotoBook]?.sizes?.[sizePhotoBook]?.layoutMods ?? {};
 
 	const [ dropedToggle, setDropedToggle ] = useState(false);
 

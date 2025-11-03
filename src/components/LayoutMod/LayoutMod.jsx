@@ -2,11 +2,11 @@ import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { workSpaceSlice }                         from "store/Slices";
 
 //Constants
-import photoBooksConfing                       from "core/constants/photoBooksConfing";
 import ActionImagesLayout                      from "./ActionImagesLayout";
 import { handlerResizerImage, selectPhotoUrl } from "./layoutMod.helpers";
 //Styles
 import "./LayoutMods.scss";
+import { useHandlerTypeConfigBooks } from "helpers/Hooks/useHandlerTypeConfigBooks";
 
 const LayoutMod = ({
 	images,
@@ -16,6 +16,8 @@ const LayoutMod = ({
 }) => {
 
 	const dispatch = useDispatch();
+
+	const photoBooksConfig = useHandlerTypeConfigBooks();
 
 	const dragerImage = useSelector((state) => state.workSpaceSlice.currentPhotoDragger, shallowEqual);
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
@@ -27,7 +29,7 @@ const LayoutMod = ({
 
 	const photobookSize = photoBookData?.sizePhotoBook ?? "grande";
 
-	const configFormatPhotoBook = photoBooksConfing[photobookProduct][photobookFormat];
+	const configFormatPhotoBook = photoBooksConfig[photobookProduct][photobookFormat];
 
 	const modConfig = configFormatPhotoBook?.sizes[photobookSize]?.layoutMods[modLayout];
 

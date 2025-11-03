@@ -1,9 +1,9 @@
 import { Group, Box }                from "@mantine/core";
 import SpineCover                    from "./SpineCover";
-import photoBooksConfing             from "core/constants/photoBooksConfing";
 import frontThemesTextures           from "core/constants/frontThemesColors";
 import { shallowEqual, useSelector } from "react-redux";
 import { useEffect, useState }       from "react";
+import { useHandlerTypeConfigBooks } from "helpers/Hooks/useHandlerTypeConfigBooks";
 
 const CoverBook = ({
 	isInPaginator,
@@ -11,6 +11,8 @@ const CoverBook = ({
 	isInWorkSpace,
 }) => {
 	const [ showModLayout, setShowModLayout ] = useState(false);
+
+	const photoBooksConfig = useHandlerTypeConfigBooks();
 
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 	const coverData = useSelector((state) => state.workSpaceSlice.data.cover);
@@ -21,7 +23,7 @@ const CoverBook = ({
 
 	const photobookSize = photoBookData?.sizePhotoBook ?? "grande";
 
-	const aspectRatio = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.aspectRatio;
+	const aspectRatio = photoBooksConfig[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.aspectRatio;
 
 	const isSencilloPhotoBook = currentPhotoBook === "sencillo";
 
@@ -44,7 +46,7 @@ const CoverBook = ({
 
 	const handleLayoutMod = () => {
 		if (photoBookData?.frontPage?.sheet1?.layoutType) {
-			const LayoutMod = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.layoutMods[photoBookData?.frontPage?.sheet1?.layoutType]?.layout;
+			const LayoutMod = photoBooksConfig[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.layoutMods[photoBookData?.frontPage?.sheet1?.layoutType]?.layout;
 			if (LayoutMod) {
 				return (
 					<div

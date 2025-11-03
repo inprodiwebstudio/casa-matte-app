@@ -1,9 +1,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useSortable }               from "@dnd-kit/sortable";
-import photoBooksConfing             from "core/constants/photoBooksConfing";
 import { shallowEqual, useSelector } from "react-redux";
 import { useMemo }                   from "react";
 import { Text }                      from "@mantine/core";
+import { useHandlerTypeConfigBooks } from "helpers/Hooks/useHandlerTypeConfigBooks";
 
 export const SortableBookPage = ({ pageData, aspectRatio }) => {
 	const {
@@ -19,6 +19,8 @@ export const SortableBookPage = ({ pageData, aspectRatio }) => {
 
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 
+	const photoBooksConfig = useHandlerTypeConfigBooks();
+
 	const photobookSize = photoBookData?.sizePhotoBook ?? "grande";
 	const currentPhotoBook = (photoBookData?.product === "" || !photoBookData?.product)
 		? "white"
@@ -26,7 +28,7 @@ export const SortableBookPage = ({ pageData, aspectRatio }) => {
 	const photoBookFormat = photoBookData?.format ?? "vertical";
 
 	const handlerLayoutMod = useMemo(() => {
-		const LayoutMod = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.layoutMods[pageData?.layoutType]?.layout;
+		const LayoutMod = photoBooksConfig[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.layoutMods[pageData?.layoutType]?.layout;
 
 		if (LayoutMod) {
 			return (

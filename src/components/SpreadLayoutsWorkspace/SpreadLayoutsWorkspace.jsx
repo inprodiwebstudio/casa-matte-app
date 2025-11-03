@@ -22,12 +22,24 @@ const SpreadLayoutsWorkspace = () => {
 			isAvailableRightSheet={isAvailableRightPage}
 			contents={{
 				ContentSheet1 : () => <ModLayoutHandler
+					pageNo={sheet1?.pageNo}
+					modLayout={sheet1?.layoutType}
+					isThumbNail={false}
+					isInPaginator={false}
+					data={sheet1}
+					isInWorkSpace={true}
 					sheetNo={1}
 					modLayoutKey={sheet1?.layoutType}
 					type="layout"
 				/>,
 				...(isAvailableRightPage && {
 					ContentSheet2 : () => <ModLayoutHandler
+						pageNo={sheet2?.pageNo}
+						modLayout={sheet2?.layoutType}
+						isThumbNail={false}
+						isInPaginator={false}
+						data={sheet2}
+						isInWorkSpace={true}
 						sheetNo={2}
 						modLayoutKey={sheet2?.layoutType}
 						type="layout"

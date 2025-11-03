@@ -4,17 +4,18 @@ import arrayToObj                                                 from "helpers/
 
 const initialState = {
 	data : {
-		product        : "",
-		productName    : "",
-		format         : "",
-		sizePhotoBook  : "",
-		sizeDimentions : "",
-		pasta          : "",
-		projectTittle  : "",
-		modified       : undefined,
-		orderId        : undefined,
-		version        : undefined,
-		frontPage      : {
+		product               : "",
+		productName           : "",
+		format                : "",
+		sizePhotoBook         : "",
+		sizeDimentions        : "",
+		pasta                 : "",
+		projectTittle         : "",
+		modified              : undefined,
+		orderId               : undefined,
+		productionTypeVersion : undefined,
+		version               : undefined,
+		frontPage             : {
 			id     : "FrontLayout",
 			sheet1 : {
 				layoutType : "",
@@ -794,6 +795,7 @@ export const workSpaceSlice = createSlice({
 		addLayout : (state, {payload}) => {
 			const {layout, defaultTexts, numberText, linesDecoration, numberPhotos, anotherSheetKey, anotherSheetData, pageId, sheetId} = payload;
 			const cloneData = {...state.data};
+			const isNewVersion = state?.data?.productionTypeVersion;
 			const parseToListImages = Array.from(Array(numberPhotos).keys()).map(e => ({id : "", url : ""}));
 			const myPhotos = Object.assign({}, parseToListImages);
 			const texts = defaultTexts ? arrayToObj(defaultTexts) : undefined;
@@ -1020,7 +1022,7 @@ export const workSpaceSlice = createSlice({
 				cloneData.pages[pageId]["sheet1"] = {
 					...cloneData.pages[pageId]["sheet1"],
 					layoutType      : layout,
-					text            : texts,
+					text            : isNewVersion ? texts : myText,
 					linesDecoration : myLinesDecoration,
 					photos          : myPhotos,
 				};
@@ -1041,15 +1043,15 @@ export const workSpaceSlice = createSlice({
 				cloneData.pages[pageId][anotherSheetKey] = {
 					...cloneData.pages[pageId][anotherSheetKey],
 					layoutType      : anotherSheetData?.modlayoutId,
-					text            : anotherSheetData?.texts,
+					text            : isNewVersion ? anotherSheetData?.texts : myText,
 					linesDecoration : anotherSheetData?.linesDecoration,
-					photos          : anotherSheetKey?.photos,
+					photos          : anotherSheetData?.photos,
 				};
 			}
 			cloneData.pages[pageId][sheetId] = {
 				...cloneData.pages[pageId][sheetId],
 				layoutType      : layout,
-				text            : texts,
+				text            : isNewVersion ? texts : myText,
 				linesDecoration : myLinesDecoration,
 				photos          : myPhotos,
 			};

@@ -1,15 +1,27 @@
 
-import { useHandlerConfigBook } from "helpers/Hooks/useHandlerConfigBook";
-import { useState, useEffect }  from "react";
+import { useHandlerConfigBook }      from "helpers/Hooks/useHandlerConfigBook";
+import { useState, useEffect }       from "react";
+import { shallowEqual, useSelector } from "react-redux";
 
 const ModLayoutHandler = ({modLayoutKey, type, ...rest}) => {
 	const [ showModLayout, setShowModLayout ] = useState(false);
+
+	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
+
+	const versionTypeApp = photoBookData?.productionTypeVersion ?? undefined;
 
 	if (!modLayoutKey) {
 		return <></>;
 	}
 
-	const {layoutMods} = useHandlerConfigBook();
+	const handlerTypeConfig = () => {
+		if ((versionTypeApp === "moveTexts") || (type === "thumbNail")) {
+			return "new";
+		}
+		return "old";
+	};
+
+	const {layoutMods} = useHandlerConfigBook(handlerTypeConfig());
 
 	const ModLayoutThumbNail = layoutMods[modLayoutKey]?.layoutThumbNail;
 	const ModLayout = layoutMods[modLayoutKey]?.layout;

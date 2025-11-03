@@ -4,9 +4,9 @@ import { Skeleton }                               from "@mantine/core";
 
 //Own components
 // import LayoutMod          from "components/LayoutMod/LayoutMod";
-import photoBooksConfing  from "core/constants/photoBooksConfing";
-import { workSpaceSlice } from "store/Slices";
-import FrontLayout        from "components/global/LayoutsPage/FrontLayout";
+import { useHandlerTypeConfigBooks } from "helpers/Hooks/useHandlerTypeConfigBooks";
+import { workSpaceSlice }            from "store/Slices";
+import FrontLayout                   from "components/global/LayoutsPage/FrontLayout";
 import "./BookPages.scss";
 
 const BookPages = ({
@@ -24,21 +24,23 @@ const BookPages = ({
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 
+	const photoBooksConfig = useHandlerTypeConfigBooks();
+
 	const photobookSize = photoBookData?.sizePhotoBook ?? "grande";
 
 	const currentPhotoBook = (photoBookData?.product === "" || !photoBookData?.product) ? "white" : photoBookData?.product;
 
 	const photoBookFormat = photoBookData?.format ?? "vertical";
 
-	const modsInDoublePage = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.modsInDoublePage;
+	const modsInDoublePage = photoBooksConfig[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.modsInDoublePage;
 
 	const isInDoublePage = modsInDoublePage?.includes(pageData?.sheet1?.layoutType || pageData?.id);
 
-	const aspectRatio = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.aspectRatio;
+	const aspectRatio = photoBooksConfig[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.aspectRatio;
 
 	const handleLayoutMod = (layoutData, sheetNo) => {
 		if (layoutData?.layoutType) {
-			const LayoutMod = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.layoutMods[layoutData?.layoutType]?.layout;
+			const LayoutMod = photoBooksConfig[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.layoutMods[layoutData?.layoutType]?.layout;
 
 			const modLayout = pageData?.[`sheet${sheetNo}`]?.layoutType;
 			const pageNo = pageData?.[`sheet${sheetNo}`]?.pageNo;

@@ -1,14 +1,13 @@
 // import { useSelector, shallowEqual } from "react-redux";
 
 //Own components
-import photoBooksConfing from "core/constants/photoBooksConfing";
-
 import { shallowEqual, useSelector } from "react-redux";
 import "./FrontLayout.scss";
 import { Stack }                     from "@mantine/core";
 import Text                          from "components/LayoutHandler/Text";
 import { TextShell }                 from "core/components";
 import { textInsertion }             from "helpers";
+import { useHandlerTypeConfigBooks } from "helpers/Hooks/useHandlerTypeConfigBooks";
 
 const FrontLayout = ({
 	pageData,
@@ -17,6 +16,8 @@ const FrontLayout = ({
 	isInWorkSpcae,
 }) => {
 	const defaultSpineBook = "<p style='text-align: center;'><span style='font-size: 30px; font-family: Aitana-Regular;'>TÍTULO</span></p>";
+
+	const photoBooksConfig = useHandlerTypeConfigBooks();
 
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 
@@ -30,7 +31,7 @@ const FrontLayout = ({
 
 	const handleLayoutMod = () => {
 		if (pageData) {
-			const LayoutMod = photoBooksConfing[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.layoutMods[pageData?.sheet1?.layoutType]?.layout;
+			const LayoutMod = photoBooksConfig[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.layoutMods[pageData?.sheet1?.layoutType]?.layout;
 			if (LayoutMod) {
 				return <LayoutMod isThumbNail={isThumbNail} isInPaginator={isInPaginator} data={pageData?.sheet1} isInWorkSpace={isInWorkSpcae} sheetNo={1} />;
 			}

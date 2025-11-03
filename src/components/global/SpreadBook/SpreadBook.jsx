@@ -1,13 +1,13 @@
 //redux
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
 
-import photoBooksConfing from "core/constants/photoBooksConfing";
 
 import { workSpaceSlice } from "store/Slices";
 
 import "./SpreadBook.scss";
 import { useContext, useState }          from "react";
 import { currentConfigPhotoBookContext } from "contexts/configContext";
+import { useHandlerTypeConfigBooks }     from "helpers/Hooks/useHandlerTypeConfigBooks";
 
 const SpreadBook = ({
 	isWorkSpace = false,
@@ -15,6 +15,8 @@ const SpreadBook = ({
 	contents,
 }) => {
 	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+
+	const photoBooksConfig = useHandlerTypeConfigBooks();
 
 	const dispatch = useDispatch();
 	const [ currentSelectedPage, setCurrentSelectedPage ] = useState(undefined);
@@ -25,7 +27,7 @@ const SpreadBook = ({
 
 	const {sizePhotoBook, format, product} = photoBookData;
 
-	const photoBookConfigProperties = photoBooksConfing[product]?.[format]?.sizes?.[sizePhotoBook];
+	const photoBookConfigProperties = photoBooksConfig[product]?.[format]?.sizes?.[sizePhotoBook];
 
 	const {aspectRatio} = photoBookConfigProperties;
 

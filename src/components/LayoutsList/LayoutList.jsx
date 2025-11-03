@@ -2,18 +2,20 @@ import { useState, useEffect }       from "react";
 import { useSelector, shallowEqual } from "react-redux";
 
 //Own components
-import photoBooksConfing from "core/constants/photoBooksConfing";
-import LoadingLayouts    from "./LoadingLayouts";
-import ItemLayout        from "./ItemLayout";
+import LoadingLayouts from "./LoadingLayouts";
+import ItemLayout     from "./ItemLayout";
 import "./LayoutList.scss";
 import {
 	ScrollBar,
 } from "core/components";
 //helpers
 import { convertToArray, isValidArray } from "helpers";
+import { useHandlerTypeConfigBooks }    from "helpers/Hooks/useHandlerTypeConfigBooks";
 
 const LayoutList = () => {
 	const [ layoutList, setLayoutList ] = useState([]);
+
+	const photoBooksConfig = useHandlerTypeConfigBooks();
 
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
 	const filterLayouts = useSelector((state) => state.workSpaceSlice.layoutFilter, shallowEqual);
@@ -21,7 +23,7 @@ const LayoutList = () => {
 	const formatPhotoBook = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
 	const sizePhotoBook = useSelector((state) => state.workSpaceSlice?.data?.sizePhotoBook, shallowEqual);
 
-	const objLayouts = photoBooksConfing[productPhotoBook]?.[formatPhotoBook]?.sizes?.[sizePhotoBook]?.layoutMods ?? {};
+	const objLayouts = photoBooksConfig[productPhotoBook]?.[formatPhotoBook]?.sizes?.[sizePhotoBook]?.layoutMods ?? {};
 
 	const layouts = convertToArray(objLayouts) ?? [];
 

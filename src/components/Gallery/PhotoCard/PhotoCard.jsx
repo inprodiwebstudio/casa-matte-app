@@ -6,9 +6,9 @@ import { MoonLoader } from "react-spinners";
 //Own components
 import { BigPlus, Check }                        from "Resources/icons";
 import { workSpaceSlice }                        from "store/Slices";
-import photoBooksConfing                         from "core/constants/photoBooksConfing";
 import { resizerImage, bindAll, convertToArray } from "helpers";
 import "./PhotoCard.scss";
+import { useHandlerTypeConfigBooks }             from "helpers/Hooks/useHandlerTypeConfigBooks";
 
 const PhotoCard = ({
 	image,
@@ -29,7 +29,9 @@ const PhotoCard = ({
 	const formatPhotoBook = workSpaceData?.format ?? "vertical";
 	const sizePhotoBook = workSpaceData?.sizePhotoBook ?? "grande";
 
-	const photoBookConfig = photoBooksConfing[photoBookType ?? "white"];
+	const photoBooksConfig = useHandlerTypeConfigBooks();
+
+	const photoBookConfig = photoBooksConfig[photoBookType ?? "white"];
 
 	const pageData = currentPageId === "frontpage" ? workSpaceData?.frontPage : workSpaceData?.pages?.[currentPageId];
 
