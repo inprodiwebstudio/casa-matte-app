@@ -47,6 +47,7 @@ const ModLayoutHandler = ({modLayoutKey, type, ...rest}) => {
 				transition : "all 0.2s ease-in-out",
 				opacity    : showModLayout ? 1 : 0,
 			}}
+			id={`${rest?.sheetNo}-snapshot`}
 		>
 			<ModLayout {...rest} />
 		</div>
