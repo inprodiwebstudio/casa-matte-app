@@ -1,6 +1,6 @@
 import { Flex, Stack } from "@mantine/core";
 //Own components
-import Text              from "components/LayoutHandler/Text";
+import TextFix           from "components/LayoutHandler/TextFix";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
@@ -40,7 +40,7 @@ const Mod70 = ({
 						textTransform : "uppercase",
 					}}
 				>
-					<Text
+					<TextFix
 						sizes={{
 							"chico"   : "16px",
 							"regular" : "18px",
@@ -56,7 +56,7 @@ const Mod70 = ({
 						textNo={0}
 					/>
 				</div>
-				<Text
+				<TextFix
 					sizes={{
 						"chico"   : "13px",
 						"regular" : "15px",

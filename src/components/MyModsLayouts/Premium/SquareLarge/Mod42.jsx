@@ -1,6 +1,6 @@
 import {Center, Stack} from "@mantine/core";
 //Own components
-import Text              from "components/LayoutHandler/Text";
+import TextFix           from "components/LayoutHandler/TextFix";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
@@ -28,7 +28,7 @@ const Mod42 = ({
 				aria-hidden={true}
 				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
-				<Text
+				<TextFix
 					sizes={{
 						"chico"   : "16px",
 						"regular" : "18px",
