@@ -20,8 +20,23 @@ const useStyles = createStyles(
 			position       : "relative", // necesario para handles absolutos
 			border         : "2px dashed #ffffff", // bounding box azul
 
+			"& .action-delete" : {
+				position       : "absolute",
+				top            : -37,
+				right          : 0,
+				zIndex         : 3,
+				width          : "100%",
+				display        : "flex",
+				justifyContent : "flex-end",
+				opacity        : 0,
+			},
+
 			"&:hover" : {
 				border : "2px dashed #3b82f6",
+
+				"& .action-delete" : {
+					opacity : 1,
+				},
 			},
 
 			"& .ck.ck-editor__editable_inline" : {

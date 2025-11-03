@@ -1,5 +1,5 @@
-import { useSelector, shallowEqual } from "react-redux";
-import { useMemo }                   from "react";
+import { useSelector, shallowEqual }    from "react-redux";
+import { useEffect, useMemo, useState } from "react";
 
 const useWorkspaceScale = () => {
 	const product = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
@@ -9,8 +9,16 @@ const useWorkspaceScale = () => {
 
 	const isOnePage = !currentPageData?.sheet2 && currentPageData?.id !== "FrontLayout";
 
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+	useEffect(() => {
+		const handleResize = () => setWindowWidth(window.innerWidth);
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
+
 	const scale = useMemo(() => {
-		const width = window.innerWidth;
+	  const width = windowWidth;
 
 		// Función helper para calcular scale basado en breakpoints
 		const getScale = (
@@ -47,7 +55,6 @@ const useWorkspaceScale = () => {
 			return `${format}-${size}`;
 		};
 		const key = keyConstructor();
-		console.log(key);
 		switch (key) {
 			case "travelcoffeetable-vertical-grande":
 				return getScale(0.73, 0.53, 0.67, 0.3, 0.75, 0.55, 0.7, 0.35);
@@ -56,7 +63,7 @@ const useWorkspaceScale = () => {
 			case "horizontal-mediano":
 				return getScale(0.75, 0.52, 0.65, 0.45, 0.95, 0.7, 0.95, 0.65);
 			case "horizontal-mediano-layflat":
-				return getScale(0.75, 0.52, 0.65, 0.45, 0.95, 0.7, 0.95, 0.65);
+				return getScale(0.75, 0.54, 0.65, 0.45, 0.95, 0.7, 0.95, 0.65);
 			case "vertical-mediano":
 				return getScale(0.8, 0.6, 0.6, 0.45, 0.8, 0.6, 0.6, 0.45);
 			case "cuadrado-chico":
@@ -68,7 +75,7 @@ const useWorkspaceScale = () => {
 			default:
 				return getScale(0.6, 0.43, 0.55, 0.45, 0.6, 0.43, 0.55, 0.45);
 		}
-	}, [product, format, size, isOnePage]);
+	}, [product, format, size, isOnePage, windowWidth]);
 
 	return scale;
 };

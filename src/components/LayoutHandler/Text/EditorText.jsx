@@ -20,10 +20,11 @@ import { useRef, useState, useContext }       from "react";
 import { workSpaceSlice }                     from "store/Slices";
 import { connect, useSelector, shallowEqual } from "react-redux";
 
-import { bindAll }       from "helpers";
-import styles            from "./styles";
-import { Center }        from "@mantine/core";
-import useWorkspaceScale from "helpers/Hooks/useWorkspaceScale";
+import { bindAll }            from "helpers";
+import styles                 from "./styles";
+import { ActionIcon, Center } from "@mantine/core";
+import useWorkspaceScale      from "helpers/Hooks/useWorkspaceScale";
+import { TiDelete }           from "react-icons/ti";
 
 const EditText = ({
 	sheetNo,
@@ -291,8 +292,6 @@ const EditText = ({
 		}));
 	};
 
-	console.log(scale);
-
 	return (
 		<Rnd
 			className={classes.editText}
@@ -311,6 +310,18 @@ const EditText = ({
 				handlerSetSizes(ref, position);
 			}}
 		>
+			<div
+				className="action-delete"
+			>
+				<ActionIcon
+					color="red"
+					radius="xl"
+					variant="light"
+					size="lg"
+				>
+					<TiDelete size={30} />
+				</ActionIcon>
+			</div>
 			<div className="handles" />
 			<CKEditor
 				editor={ BalloonEditor }
@@ -319,6 +330,9 @@ const EditText = ({
 				onReady={getCurrentFontSize}
 				onChange={(event, editor) => {
 					handleEditorChange(event, editor);
+				}}
+				onBlur={(editor) => {
+					console.log("Focus.", editor);
 				}}
 			/>
 			<Center
