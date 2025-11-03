@@ -51,6 +51,33 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const getConfigDataPhotoBook = () => {
 		const myData = photoBookData.config.replace(/\.(heic|webp)/g, ".jpg");
 		const parseJSON = JSON.parse(myData);
+
+		// Función para eliminar parámetros de compresión de URLs de Cloudinary
+		const removeCompressionParams = (url) => {
+			if (!url) return url;
+			return url.replace(/\/w_\d+\/q_\d+\//, "/");
+		};
+
+		// Modificar URLs en parseJSON para obtener calidad original
+		if (parseJSON.pages) {
+			Object.keys(parseJSON.pages).forEach(pageKey => {
+				const page = parseJSON.pages[pageKey];
+				["sheet1", "sheet2"].forEach(sheetKey => {
+					if (page[sheetKey] && page[sheetKey].photos) {
+						Object.keys(page[sheetKey].photos).forEach(photoKey => {
+							const photo = page[sheetKey].photos[photoKey];
+							if (photo.url) {
+								photo.url = removeCompressionParams(photo.url);
+							}
+							if (photo.urlPhotoEdited) {
+								photo.urlPhotoEdited = removeCompressionParams(photo.urlPhotoEdited);
+							}
+						});
+					}
+				});
+			});
+		}
+
 		dispatch(workSpaceSlice.actions.insertData(parseJSON));
 		setPhotoBookConfigData(parseJSON);
 	};
@@ -352,6 +379,8 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			)}
 		</Card>
 	);
+
+	console.log(photoBookConfigData);
 
 	return (
 		<Stack w="100%" h="100%" align="center" justify="center" style={{ position : "relative" }}>
