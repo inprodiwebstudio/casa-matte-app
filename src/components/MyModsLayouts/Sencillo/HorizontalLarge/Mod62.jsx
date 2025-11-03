@@ -1,6 +1,6 @@
 import { Flex, Stack } from "@mantine/core";
 //Own components
-import Text              from "components/LayoutHandler/Text";
+import TextFix           from "components/LayoutHandler/TextFix";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
@@ -51,7 +51,7 @@ const Mod62 = ({
 						}}
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 					>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "22px",
 								"regular" : "24px",
@@ -70,7 +70,7 @@ const Mod62 = ({
 					<div
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
 					>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "12px",
 								"regular" : "14px",
@@ -97,7 +97,7 @@ const Mod62 = ({
 						}}
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text3` })}
 					>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "22px",
 								"regular" : "24px",
@@ -116,7 +116,7 @@ const Mod62 = ({
 					<div
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text4` })}
 					>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "12px",
 								"regular" : "14px",
@@ -143,7 +143,7 @@ const Mod62 = ({
 						}}
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text5` })}
 					>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "22px",
 								"regular" : "24px",
@@ -162,7 +162,7 @@ const Mod62 = ({
 					<div
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text6` })}
 					>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "12px",
 								"regular" : "14px",

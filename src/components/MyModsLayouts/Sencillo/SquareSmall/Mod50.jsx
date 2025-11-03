@@ -1,7 +1,7 @@
 import { Flex, Stack } from "@mantine/core";
 import DividerLayout   from "components/LayoutHandler/DividerLayout";
 //Own components
-import Text              from "components/LayoutHandler/Text";
+import TextFix           from "components/LayoutHandler/TextFix";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
@@ -52,7 +52,7 @@ const Mod50 = ({
 					aria-hidden
 				>
 					<div>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "22px",
 								"regular" : "24px",
@@ -70,7 +70,7 @@ const Mod50 = ({
 					</div>
 					<DividerLayout long="0.3em" position="h" />
 					<div>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "15px",
 								"regular" : "18px",
@@ -92,7 +92,7 @@ const Mod50 = ({
 					aria-hidden
 				>
 					<div>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "22px",
 								"regular" : "24px",
@@ -110,7 +110,7 @@ const Mod50 = ({
 					</div>
 					<DividerLayout long="0.3em" position="h" />
 					<div>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "15px",
 								"regular" : "18px",
@@ -131,7 +131,7 @@ const Mod50 = ({
 					spacing={isInWorkSpace ? "0em" : "0.1em" }
 				>
 					<div>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "22px",
 								"regular" : "24px",
@@ -149,7 +149,7 @@ const Mod50 = ({
 					</div>
 					<DividerLayout long="0.3em" position="h" />
 					<div>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "15px",
 								"regular" : "18px",

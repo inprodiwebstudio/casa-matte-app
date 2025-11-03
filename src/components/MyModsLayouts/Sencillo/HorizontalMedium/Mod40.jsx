@@ -1,6 +1,6 @@
 import { Flex, Stack } from "@mantine/core";
 //Own components
-import Text              from "components/LayoutHandler/Text";
+import TextFix           from "components/LayoutHandler/TextFix";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
@@ -47,7 +47,7 @@ const Mod40 = ({
 					aria-hidden
 				>
 					<div>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "16px",
 								"regular" : "18px",
@@ -64,7 +64,7 @@ const Mod40 = ({
 						/>
 					</div>
 					<div>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "10px",
 								"regular" : "12px",
@@ -85,7 +85,7 @@ const Mod40 = ({
 					spacing={isInWorkSpace ? "0em" : "0.13em"}
 				>
 					<div>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "16px",
 								"regular" : "18px",
@@ -102,7 +102,7 @@ const Mod40 = ({
 						/>
 					</div>
 					<div>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "10px",
 								"regular" : "12px",
@@ -123,7 +123,7 @@ const Mod40 = ({
 					spacing={isInWorkSpace ? "0em" : "0.13em"}
 				>
 					<div>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "10px",
 								"regular" : "12px",
@@ -140,7 +140,7 @@ const Mod40 = ({
 						/>
 					</div>
 					<div>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "10px",
 								"regular" : "12px",
