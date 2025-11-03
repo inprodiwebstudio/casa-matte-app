@@ -1,9 +1,9 @@
 import {Stack, Flex }    from "@mantine/core";
 import ImgLayout         from "components/LayoutHandler/ImgLayout";
+import TextFix           from "components/LayoutHandler/TextFix";
 import { textInsertion } from "helpers";
 
 //Own components
-import Text from "components/LayoutHandler/Text";
 
 
 const Mod60 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
@@ -31,7 +31,7 @@ const Mod60 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				w="45%"
 				align="right"
 			>
-				<Text
+				<TextFix
 					align="right"
 					type="regular"
 					sheetNo={sheetNo}

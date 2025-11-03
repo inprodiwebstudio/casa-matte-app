@@ -1,9 +1,9 @@
 import {Stack, Flex }    from "@mantine/core";
 import ImgLayout         from "components/LayoutHandler/ImgLayout";
+import TextFix           from "components/LayoutHandler/TextFix";
 import { textInsertion } from "helpers";
 
 //Own components
-import Text from "components/LayoutHandler/Text";
 
 
 const Mod59 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
@@ -23,7 +23,7 @@ const Mod59 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 				spacing="0.07em"
 				w="50%"
 			>
-				<Text
+				<TextFix
 					align="center"
 					type="h4"
 					data={textInsertion(data?.text[0], defaultText01, isInWorkSpace)}
