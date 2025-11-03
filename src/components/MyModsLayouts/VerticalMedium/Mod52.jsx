@@ -1,7 +1,7 @@
 import {Stack, Flex } from "@mantine/core";
 import ImgLayout      from "components/LayoutHandler/ImgLayout";
 //Own components
-import Text              from "components/LayoutHandler/Text";
+import TextFix           from "components/LayoutHandler/TextFix";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
@@ -35,7 +35,7 @@ const Mod52 = ({
 			>
 				<Stack w="100%" h="100%" spacing="8%">
 					<Stack mr="10%" {...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}>
-						<Text
+						<TextFix
 							sizes={{
 								"chico"   : "38px",
 								"regular" : "42px",
@@ -62,7 +62,7 @@ const Mod52 = ({
 					</Stack>
 				</Stack>
 				<Stack mr="40%" {...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}>
-					<Text
+					<TextFix
 						sizes={{
 							"chico"   : "14px",
 							"regular" : "15px",

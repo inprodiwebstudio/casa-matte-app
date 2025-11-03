@@ -1,6 +1,6 @@
 import { Box, Flex, Stack } from "@mantine/core";
 //Own components
-import Text              from "components/LayoutHandler/Text";
+import TextFix           from "components/LayoutHandler/TextFix";
 import DividerLayout     from "components/LayoutHandler/DividerLayout";
 import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
@@ -44,7 +44,7 @@ const Mod72 = ({
 						textTransform : "uppercase",
 					}}
 				>
-					<Text
+					<TextFix
 						sizes={{
 							"chico"   : "16px",
 							"regular" : "18px",
@@ -62,7 +62,7 @@ const Mod72 = ({
 					<DividerLayout long="13%" position="h" />
 				</Flex>
 				<Box w="100%">
-					<Text
+					<TextFix
 						sizes={{
 							"chico"   : "13px",
 							"regular" : "15px",
