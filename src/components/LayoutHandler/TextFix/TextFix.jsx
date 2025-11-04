@@ -12,6 +12,7 @@ const TextFix = ({
 	sizes,
 	textNo,
 	sheetNo,
+	typeText,
 	textShell,
 	gapSpacing,
 	lineHeight,
@@ -62,6 +63,7 @@ const TextFix = ({
 						letterSpacing={letterSpacing}
 						sheetNo={sheetNo}
 						layoutNo={textNo}
+						typeText={typeText}
 						dataTextPage={data}
 						sizes={sizes}
 						gapSpacing={gapSpacing}
