@@ -3,7 +3,8 @@ import SpineCover                    from "./SpineCover";
 import frontThemesTextures           from "core/constants/frontThemesColors";
 import { shallowEqual, useSelector } from "react-redux";
 import { useEffect, useState }       from "react";
-import { useHandlerTypeConfigBooks } from "helpers/Hooks/useHandlerTypeConfigBooks";
+import photoBooksConfigOld           from "core/constants/photoBooksConfigOld";
+
 
 const CoverBook = ({
 	isInPaginator,
@@ -12,7 +13,7 @@ const CoverBook = ({
 }) => {
 	const [ showModLayout, setShowModLayout ] = useState(false);
 
-	const photoBooksConfig = useHandlerTypeConfigBooks();
+	const photoBooksConfig = photoBooksConfigOld;
 
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 	const coverData = useSelector((state) => state.workSpaceSlice.data.cover);
