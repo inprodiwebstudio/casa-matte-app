@@ -30,7 +30,7 @@ const Mod56 = ({sheetNo}) => {
 				>
 					<ImgLayout
 						sheetNo={sheetNo}
-						imageNo={0}
+						imageNo={1}
 					/>
 				</Stack>
 				<Stack
