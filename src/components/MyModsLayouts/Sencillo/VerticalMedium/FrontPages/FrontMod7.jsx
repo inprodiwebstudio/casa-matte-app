@@ -1,8 +1,8 @@
 
 import {Stack, Flex }    from "@mantine/core";
-import ImgLayout         from "components/LayoutHandler/ImgLayout";
 import { textInsertion } from "helpers";
 import TextFix           from "components/LayoutHandler/TextFix";
+import ImgLayoutOld      from "components/LayoutHandler/ImgLayoutOld";
 
 
 //Own components
@@ -19,7 +19,7 @@ const FrontMod7 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 			sx={{position : "relative"}}
 		>
 			<Stack w="100%" h="100%">
-				<ImgLayout
+				<ImgLayoutOld
 					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
 					imageNo={0}

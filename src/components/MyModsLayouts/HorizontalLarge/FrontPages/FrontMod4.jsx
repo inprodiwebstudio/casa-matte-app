@@ -1,6 +1,6 @@
 
 import {Stack, Flex } from "@mantine/core";
-import ImgLayout      from "components/LayoutHandler/ImgLayout";
+import ImgLayoutOld   from "components/LayoutHandler/ImgLayoutOld";
 //Own components
 import Text              from "components/LayoutHandler/Text";
 import { TextShell }     from "core/components";
@@ -60,7 +60,7 @@ const FrontMod4 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 				</Stack>
 			</Stack>
 			<Stack justify="left" w="75%" h="85%">
-				<ImgLayout
+				<ImgLayoutOld
 					isInWorkSpace={isInWorkSpace}
 					sheetNo={sheetNo}
 					imageNo={0}
