@@ -33,7 +33,7 @@ import Mod31Tn from "./ThumbNails/Mod31Tn";
 import Mod32Tn from "./ThumbNails/Mod32Tn";
 import Mod33Tn from "./ThumbNails/Mod33Tn";
 import Mod34Tn from "./ThumbNails/Mod34Tn";
-import Mod35Tn from "./ThumbNails/Mod35tn";
+import Mod35Tn from "./ThumbNails/Mod35Tn";
 import Mod36Tn from "./ThumbNails/Mod36Tn";
 import Mod37Tn from "./ThumbNails/Mod37Tn";
 import Mod38Tn from "./ThumbNails/Mod38Tn";
