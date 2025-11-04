@@ -17,7 +17,7 @@ import Mod15Tn from "./ThumbNails/Mod15Tn";
 import Mod16Tn from "./ThumbNails/Mod16Tn";
 import Mod17Tn from "./ThumbNails/Mod17Tn";
 import Mod18Tn from "./ThumbNails/Mod18Tn";
-import Mod19Tn from "./ThumbNails/Mod19tn";
+import Mod19Tn from "./ThumbNails/Mod19Tn";
 import Mod20Tn from "./ThumbNails/Mod20Tn";
 import Mod21Tn from "./ThumbNails/Mod21Tn";
 import Mod22Tn from "./ThumbNails/Mod22Tn";
