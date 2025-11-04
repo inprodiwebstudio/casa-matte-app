@@ -14,7 +14,7 @@
     "dev": "vite",
     "commit": "cz",
     "prebuild": "echo \"{\\\"version\\\": \\\"$(date +%s)\\\"}\" > public/version.json",
-    "build": "node --max-old-space-size=4096 node_modules/.bin/react-scripts build",
+    "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint --ext .ts,.tsx ./src",
     "lint:fix": "eslint --fix --ext .ts,.tsx ./src",
