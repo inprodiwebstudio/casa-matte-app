@@ -9,35 +9,42 @@ import {
 	Progress,
 } from "@mantine/core";
 import {
+	handlerIdsTextPages,
+	listTextPagesAvailable,
 	loadImageWithRetry,
 } from "./cardSearchPhotoBook.helpers";
 import {
 	convertToArray,
+	convertToObject,
+	isValidArray,
+	textToImage,
 } from "helpers";
-import GhostSpreadDom          from "./GhostSpreadDom";
 import {
 	PHOTO_BOOK_TYPES,
 	GENERATION_STATUS_MESSAGES,
 } from "./cardSearchPhotoBook.constants";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { PDFDocument }               from "pdf-lib";
-import SpinePhotoBook                from "components/MyModsLayouts/SpinePdf";
-import saveAs                        from "file-saver";
-import JSZip                         from "jszip";
-import { Document, Page, pdf, View } from "@react-pdf/renderer";
-import { useDispatch }               from "react-redux";
-import { workSpaceSlice }            from "store/Slices";
-import { convertPDFToImages }        from "helpers/Functions/convertPdfJpg";
-import { SaveIcom }                  from "Resources/icons";
+import { PDFDocument }                            from "pdf-lib";
+import SpinePhotoBook                             from "components/MyModsLayouts/SpinePdf";
+import saveAs                                     from "file-saver";
+import JSZip                                      from "jszip";
+import { Document, Page, pdf, View }              from "@react-pdf/renderer";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { workSpaceSlice }                         from "store/Slices";
+import { convertPDFToImages }                     from "helpers/Functions/convertPdfJpg";
+import GhostTextPagesDom                          from "./GhostTextPagesDom";
+import { SaveIcom }                               from "Resources/icons";
 
 const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	// Estados
 	const [photoBookConfigData, setPhotoBookConfigData] = useState();
 	const [isLoading, setIsLoading] = useState(false);
+	const [textPages, setTextPages] = useState();
 	const [progress, setProgress] = useState(0);
 	const [generationStatus, setGenerationStatus] = useState("idle");
 
 	const dispatch = useDispatch();
+	const textImgsObj = useSelector((state) => state.workSpaceSlice.textsImgs, shallowEqual);
 
 	// Efectos
 	useEffect(() => {
@@ -47,39 +54,49 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		}
 	}, [photoBookData]);
 
+	useEffect(() => {
+		if (photoBookConfigData?.pages) {
+			setTextPages(listTextPagesAvailable(photoBookConfigData.pages));
+		}
+	}, [photoBookConfigData]);
+
+	useEffect(() => {
+		if (textPages && isValidArray(textPages)) {
+			handleTextImagesGeneration();
+		} else {
+			setIsLoading(false);
+		}
+	}, [textPages, photoBookConfigData]);
+
 	// Handlers
 	const getConfigDataPhotoBook = () => {
 		const myData = photoBookData.config.replace(/\.(heic|webp)/g, ".jpg");
 		const parseJSON = JSON.parse(myData);
-
-		// Función para eliminar parámetros de compresión de URLs de Cloudinary
-		const removeCompressionParams = (url) => {
-			if (!url) return url;
-			return url.replace(/\/w_\d+\/q_\d+\//, "/");
-		};
-
-		// Modificar URLs en parseJSON para obtener calidad original
-		if (parseJSON.pages) {
-			Object.keys(parseJSON.pages).forEach(pageKey => {
-				const page = parseJSON.pages[pageKey];
-				["sheet1", "sheet2"].forEach(sheetKey => {
-					if (page[sheetKey] && page[sheetKey].photos) {
-						Object.keys(page[sheetKey].photos).forEach(photoKey => {
-							const photo = page[sheetKey].photos[photoKey];
-							if (photo.url) {
-								photo.url = removeCompressionParams(photo.url);
-							}
-							if (photo.urlPhotoEdited) {
-								photo.urlPhotoEdited = removeCompressionParams(photo.urlPhotoEdited);
-							}
-						});
-					}
-				});
-			});
-		}
-
 		dispatch(workSpaceSlice.actions.insertData(parseJSON));
 		setPhotoBookConfigData(parseJSON);
+	};
+
+	const handleTextImagesGeneration = async () => {
+		try {
+			const formatKey = getFormatKey();
+			const modsLayoutsConfigPhotoBook = PHOTO_BOOK_TYPES[formatKey]?.[photoBookConfigData.sizePhotoBook]?.modLayouts;
+			const listIdsTextImgs = handlerIdsTextPages(textPages, modsLayoutsConfigPhotoBook);
+
+			const textImgs = await Promise.all(
+				listIdsTextImgs.map(async (textId) => ({
+					id      : textId,
+					textImg : await textToImage(textId),
+				}))
+			);
+
+			dispatch(workSpaceSlice.actions.addTextImgs({
+				textImgs : convertToObject(textImgs),
+			}));
+		} catch (error) {
+			console.error("Error al obtener las imágenes de texto:", error);
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	// Funciones de utilidad
@@ -123,9 +140,11 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		const sizeKey = photoBookConfigData?.sizePhotoBook;
 		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
 
+		console.log(config);
+
 		if (!config) return null;
 
-		const { size, isInDoublePageLayouts } = config;
+		const { size, isInDoublePageLayouts, modLayouts } = config;
 
 		const handlerDataSheet = (sheetData) => {
 			return {
@@ -141,22 +160,45 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		const isAvailableSheet2 = !!pageData?.sheet2;
 
 		const pageDataSheet1 = handlerDataSheet(pageData.sheet1);
+		const pageDataSheet2 = handlerDataSheet(pageData?.sheet2);
 
+		const handlerSheetLayoutComponent = (pageDataSheet) => {
+			const { layoutType } = pageDataSheet;
+			return modLayouts[layoutType]?.pdfLayout ?? undefined;
+		};
+
+		const Sheet1Layout = handlerSheetLayoutComponent(pageDataSheet1);
+		const Sheet2Layout = handlerSheetLayoutComponent(pageDataSheet2);
 		const isDoublePage = isInDoublePageLayouts?.includes(pageDataSheet1?.layoutType);
+
 
 		if (isLayFlatPhotoBook) {
 			return (
 				<Page size={size} style={{ display : "flex", flexDirection : "row" }}>
 					<View style={{ width : isDoublePage ? "100%" : "50%", height : "100%" }}>
 						{
-							<></>
+							Sheet1Layout &&
+							<Sheet1Layout
+								images={pageData?.sheet1?.photos}
+								text={pageData?.sheet1?.text}
+								textImgs={textImgsObj}
+								modLayout={pageData?.sheet1?.layoutType}
+								pageNo={pageData?.sheet1?.pageNo}
+							/>
 						}
 					</View>
 					{
 						!isDoublePage &&
 						<View style={{ width : "50%", height : "100%" }}>
 							{
-								<></>
+								Sheet2Layout &&
+								<Sheet2Layout
+									images={pageData?.sheet2?.photos}
+									text={pageData?.sheet2?.text}
+									textImgs={textImgsObj}
+									modLayout={pageData?.sheet2?.layoutType}
+									pageNo={pageData?.sheet2?.pageNo}
+								/>
 							}
 						</View>
 					}
@@ -168,14 +210,26 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			<>
 				<Page size={size}>
 					{
-						<></>
+						Sheet1Layout &&
+						<Sheet1Layout
+							images={pageDataSheet1?.photos}
+							textImgs={textImgsObj}
+							pageNo={pageDataSheet1?.pageNo}
+							modLayout={pageDataSheet1?.layoutType}
+						/>
 					}
 
 				</Page>
 				{isAvailableSheet2 && (
 					<Page size={size}>
 						{
-							<></>
+							Sheet2Layout &&
+							<Sheet2Layout
+								images={pageDataSheet2?.photos}
+								textImgs={textImgsObj}
+								pageNo={pageDataSheet2?.pageNo}
+								modLayout={pageDataSheet2?.layoutType}
+							/>
 						}
 					</Page>
 				)}
@@ -352,6 +406,14 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		</Document>
 	);
 
+	// const SpecsConfigPage = () => (
+	// 	<Document>
+	// 		<Page size="A4">
+	// 			<SpecsConfig />
+	// 		</Page>
+	// 	</Document>
+	// );
+
 	const StatusCard = () => (
 		<Card
 			style={{
@@ -380,7 +442,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		</Card>
 	);
 
-	console.log(photoBookConfigData);
+	console.log(photoBookData);
 
 	return (
 		<Stack w="100%" h="100%" align="center" justify="center" style={{ position : "relative" }}>
@@ -393,7 +455,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			/>
 
 			{generationStatus !== "idle" && <StatusCard />}
-			{photoBookConfigData && <GhostSpreadDom pageData={photoBookConfigData?.pages?.["page1"]} />}
+			{textPages && isValidArray(textPages) && <GhostTextPagesDom textPages={textPages} />}
 		</Stack>
 	);
 };
