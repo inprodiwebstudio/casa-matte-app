@@ -1,8 +1,8 @@
 
 import {Stack, Flex }    from "@mantine/core";
 import { textInsertion } from "helpers";
-import TextFix           from "components/LayoutHandler/TextFix";
 import ImgLayoutOld      from "components/LayoutHandler/ImgLayoutOld";
+import TextFix           from "components/LayoutHandler/TextFix";
 
 
 //Own components
@@ -18,6 +18,42 @@ const FrontMod7 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 			h="100%"
 			sx={{position : "relative"}}
 		>
+			<div
+				style={{
+					width           : "0.02em",
+					height          : "100%",
+					position        : "absolute",
+					left            : "93%",
+					top             : "0",
+					backgroundColor : "white",
+				}}
+			>
+                &nbsp;
+			</div>
+			<div
+				style={{
+					width           : "100%",
+					height          : "0.02em",
+					position        : "absolute",
+					left            : "0%",
+					top             : "5%",
+					backgroundColor : "white",
+				}}
+			>
+                &nbsp;
+			</div>
+			<div
+				style={{
+					width           : "100%",
+					height          : "0.02em",
+					position        : "absolute",
+					left            : "0%",
+					top             : "95%",
+					backgroundColor : "white",
+				}}
+			>
+				&nbsp;
+			</div>
 			<Stack w="100%" h="100%">
 				<ImgLayoutOld
 					isInWorkSpace={isInWorkSpace}
