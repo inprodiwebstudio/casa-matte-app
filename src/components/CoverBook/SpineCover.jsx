@@ -24,7 +24,7 @@ const SpineCover = ({
 	const isSencilloPhotoBook = productType === "sencillo";
 
 	const HandlerTextSpine = () => {
-		if (productType === "travelcoffeetable ") {
+		if (productType === "travelcoffeetable") {
 
 			const currentText = photoBookData?.frontPage?.sheet1?.text?.["2"] === "" ? "<p style='text-align:center;'><span style='font-family:Inter-Lifght;font-size:20px;'>OAXACA — TEOTITLÁN — SAN JOSÉ — OCOTLÁ</span></p>" : photoBookData?.frontPage?.sheet1?.text?.["2"];
 
