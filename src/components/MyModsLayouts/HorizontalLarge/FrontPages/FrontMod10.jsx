@@ -2,7 +2,7 @@
 import {Stack, Flex} from "@mantine/core";
 import ImgLayoutOld  from "components/LayoutHandler/ImgLayoutOld";
 //Own components
-import Text              from "components/LayoutHandler/Text";
+import TextFix           from "components/LayoutHandler/TextFix";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
@@ -32,7 +32,7 @@ const FrontMod10 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) 
 				justify="space-between"
 			>
 				<Stack h="50%" sx={{writingMode : "vertical-rl", transform : "rotate(180deg)"}} spacing={0}>
-					<Text
+					<TextFix
 						sizes={{
 							"chico"   : "46px",
 							"regular" : "48px",
@@ -49,7 +49,7 @@ const FrontMod10 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) 
 					/>
 				</Stack>
 				<Stack h="50%" sx={{writingMode : "vertical-rl", transform : "rotate(180deg)"}} spacing={0}>
-					<Text
+					<TextFix
 						sizes={{
 							"chico"   : "16px",
 							"regular" : "18px",
