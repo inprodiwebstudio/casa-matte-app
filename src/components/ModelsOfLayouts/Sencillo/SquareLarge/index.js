@@ -91,7 +91,7 @@ import Mod49Tn                                                                  
 import Mod50Tn                                                                         from "./ThumbNails/Mod50Tn";
 import Mod51Tn                                                                         from "./ThumbNails/Mod51Tn";
 import Mod52Tn                                                                         from "./ThumbNails/Mod52Tn";
-import Mod53Tn                                                                         from "./ThumbNails/mod53Tn";
+import Mod53Tn                                                                         from "./ThumbNails/Mod53Tn";
 import Mod54Tn                                                                         from "./ThumbNails/Mod54Tn";
 import Mod54                                                                           from "./Mod54";
 import Mod55                                                                           from "./Mod55";
