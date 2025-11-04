@@ -79,6 +79,7 @@ const EditText = ({
 		(fontFamily !== "Made-Mirage-Thin")&&
 		(fontFamily !== "Restora-Extra-Light")
 		),
+		travelCoffee : ["TAN-MERINGUE", "Inter-Lifght"],
 	};
 
 	const editorConfiguration = {

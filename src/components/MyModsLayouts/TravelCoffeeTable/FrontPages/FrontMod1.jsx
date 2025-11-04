@@ -42,9 +42,9 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 								"regular" : "20px",
 								"grande"  : "22px",
 							}}
+							typeText="travelCoffee"
 							isFront={true}
 							align="center"
-							typeText="subtitle"
 							sheetNo={sheetNo}
 							textShell={() => <></>}
 							data={textInsertion(data?.text[2], defaultText03, isInWorkSpace)}
@@ -75,7 +75,7 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 								"regular" : "70px",
 								"grande"  : "72px",
 							}}
-							typeText="title"
+							typeText="travelCoffee"
 							isFront={true}
 							align="center"
 							sheetNo={sheetNo}
@@ -112,7 +112,7 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 							isFront={true}
 							align="center"
 							sheetNo={sheetNo}
-							typeText="subtitle"
+							typeText="travelCoffee"
 							textShell={() => <TextShell.Title />}
 							data={textInsertion(data?.text[1], defaultText02, isInWorkSpace)}
 							isInPaginator={isInPaginator}
