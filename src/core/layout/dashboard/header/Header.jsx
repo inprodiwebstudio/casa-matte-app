@@ -27,7 +27,6 @@ const Header = () => {
 
 	const [ projectName, setProjectName ] = useState(undefined);
 
-	const isPreviewActive = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
 	const productName = useSelector((state) => state.workSpaceSlice.data.productName, shallowEqual);
 	const projectTitle = useSelector((state) => state.workSpaceSlice.data.projectTittle, shallowEqual);
 	const lastModified = useSelector((state) => state.workSpaceSlice.data.modified, shallowEqual);
@@ -38,8 +37,9 @@ const Header = () => {
 	const isLoadingWorspaceData = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
 	const statusViewPage = useSelector((state) => state.workSpaceSlice?.statusViewPage, shallowEqual);
 
-	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
+	const isPreviewActive = statusViewPage === "preview";
 
+	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
 
 	const isAdminAccount = (userName === "casamatteadmin") && (userEmail === "info@casamatte.com");
 	const isDevAccount = (userName === "demo") && (userEmail === "demo44@demo.com");
@@ -161,17 +161,15 @@ const Header = () => {
 									size="xs"
 									onClick={handlerClickPreview()}
 									loading={isLoadingWorspaceData}
-									disabled={true}
 								>
-									{/* <Text
+									<Text
 										weight={400}
 										sx={{
 											fontFamily : "Helvetica",
 										}}
 									>
 										{isPreviewActive ? "SALIR DE VISTA PREVIA" : "VISTA PREVIA"}
-									</Text> */}
-									VISTA PREVIA (en mantenimiento)
+									</Text>
 								</Button>
 								<Button
 									radius={12}

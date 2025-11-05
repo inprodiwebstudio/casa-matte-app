@@ -15,5 +15,9 @@
     .body-sidebar {
         flex-grow: 1;
         position: relative;
+
+        &.isPreviewActive {
+            display: none;
+        }
     }
 }
