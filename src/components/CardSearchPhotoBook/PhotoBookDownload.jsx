@@ -442,8 +442,6 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		</Card>
 	);
 
-	console.log(photoBookData);
-
 	return (
 		<Stack w="100%" h="100%" align="center" justify="center" style={{ position : "relative" }}>
 			<OrderInfoCard
