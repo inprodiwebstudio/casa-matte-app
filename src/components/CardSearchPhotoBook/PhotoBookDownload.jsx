@@ -136,105 +136,108 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 	// Componentes PDF
 	const PageComponent = ({ pageData }) => {
-		const formatKey = getFormatKey();
-		const sizeKey = photoBookConfigData?.sizePhotoBook;
-		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
+		try {
+			const formatKey = getFormatKey();
+			const sizeKey = photoBookConfigData?.sizePhotoBook;
+			const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
 
-		console.log(config);
+			if (!config) return null;
 
-		if (!config) return null;
+			const { size, isInDoublePageLayouts, modLayouts } = config;
 
-		const { size, isInDoublePageLayouts, modLayouts } = config;
-
-		const handlerDataSheet = (sheetData) => {
-			return {
-				photos     : sheetData?.photos,
-				text       : sheetData?.text,
-				pageNo     : sheetData?.pageNo,
-				layoutType : sheetData?.layoutType,
+			const handlerDataSheet = (sheetData) => {
+				return {
+					photos     : sheetData?.photos,
+					text       : sheetData?.text,
+					pageNo     : sheetData?.pageNo,
+					layoutType : sheetData?.layoutType,
+				};
 			};
-		};
 
-		const isLayFlatPhotoBook = photoBookConfigData?.product === "layflat";
+			const isLayFlatPhotoBook = photoBookConfigData?.product === "layflat";
 
-		const isAvailableSheet2 = !!pageData?.sheet2;
+			const isAvailableSheet2 = !!pageData?.sheet2;
 
-		const pageDataSheet1 = handlerDataSheet(pageData.sheet1);
-		const pageDataSheet2 = handlerDataSheet(pageData?.sheet2);
+			const pageDataSheet1 = handlerDataSheet(pageData.sheet1);
+			const pageDataSheet2 = handlerDataSheet(pageData?.sheet2);
 
-		const handlerSheetLayoutComponent = (pageDataSheet) => {
-			const { layoutType } = pageDataSheet;
-			return modLayouts[layoutType]?.pdfLayout ?? undefined;
-		};
+			const handlerSheetLayoutComponent = (pageDataSheet) => {
+				const { layoutType } = pageDataSheet;
+				return modLayouts[layoutType]?.pdfLayout ?? undefined;
+			};
 
-		const Sheet1Layout = handlerSheetLayoutComponent(pageDataSheet1);
-		const Sheet2Layout = handlerSheetLayoutComponent(pageDataSheet2);
-		const isDoublePage = isInDoublePageLayouts?.includes(pageDataSheet1?.layoutType);
+			const Sheet1Layout = handlerSheetLayoutComponent(pageDataSheet1);
+			const Sheet2Layout = handlerSheetLayoutComponent(pageDataSheet2);
+			const isDoublePage = isInDoublePageLayouts?.includes(pageDataSheet1?.layoutType);
 
 
-		if (isLayFlatPhotoBook) {
-			return (
-				<Page size={size} style={{ display : "flex", flexDirection : "row" }}>
-					<View style={{ width : isDoublePage ? "100%" : "50%", height : "100%" }}>
-						{
-							Sheet1Layout &&
-							<Sheet1Layout
-								images={pageData?.sheet1?.photos}
-								text={pageData?.sheet1?.text}
-								textImgs={textImgsObj}
-								modLayout={pageData?.sheet1?.layoutType}
-								pageNo={pageData?.sheet1?.pageNo}
-							/>
-						}
-					</View>
-					{
-						!isDoublePage &&
-						<View style={{ width : "50%", height : "100%" }}>
+			if (isLayFlatPhotoBook) {
+				return (
+					<Page size={size} style={{ display : "flex", flexDirection : "row" }}>
+						<View style={{ width : isDoublePage ? "100%" : "50%", height : "100%" }}>
 							{
-								Sheet2Layout &&
-								<Sheet2Layout
-									images={pageData?.sheet2?.photos}
-									text={pageData?.sheet2?.text}
+								Sheet1Layout &&
+								<Sheet1Layout
+									images={pageData?.sheet1?.photos}
+									text={pageData?.sheet1?.text}
 									textImgs={textImgsObj}
-									modLayout={pageData?.sheet2?.layoutType}
-									pageNo={pageData?.sheet2?.pageNo}
+									modLayout={pageData?.sheet1?.layoutType}
+									pageNo={pageData?.sheet1?.pageNo}
 								/>
 							}
 						</View>
-					}
-				</Page>
-			);
-		}
-
-		return (
-			<>
-				<Page size={size}>
-					{
-						Sheet1Layout &&
-						<Sheet1Layout
-							images={pageDataSheet1?.photos}
-							textImgs={textImgsObj}
-							pageNo={pageDataSheet1?.pageNo}
-							modLayout={pageDataSheet1?.layoutType}
-						/>
-					}
-
-				</Page>
-				{isAvailableSheet2 && (
-					<Page size={size}>
 						{
-							Sheet2Layout &&
-							<Sheet2Layout
-								images={pageDataSheet2?.photos}
-								textImgs={textImgsObj}
-								pageNo={pageDataSheet2?.pageNo}
-								modLayout={pageDataSheet2?.layoutType}
-							/>
+							!isDoublePage &&
+							<View style={{ width : "50%", height : "100%" }}>
+								{
+									Sheet2Layout &&
+									<Sheet2Layout
+										images={pageData?.sheet2?.photos}
+										text={pageData?.sheet2?.text}
+										textImgs={textImgsObj}
+										modLayout={pageData?.sheet2?.layoutType}
+										pageNo={pageData?.sheet2?.pageNo}
+									/>
+								}
+							</View>
 						}
 					</Page>
-				)}
-			</>
-		);
+				);
+			}
+
+			return (
+				<>
+					<Page size={size}>
+						{
+							Sheet1Layout &&
+							<Sheet1Layout
+								images={pageDataSheet1?.photos}
+								textImgs={textImgsObj}
+								pageNo={pageDataSheet1?.pageNo}
+								modLayout={pageDataSheet1?.layoutType}
+							/>
+						}
+
+					</Page>
+					{isAvailableSheet2 && (
+						<Page size={size}>
+							{
+								Sheet2Layout &&
+								<Sheet2Layout
+									images={pageDataSheet2?.photos}
+									textImgs={textImgsObj}
+									pageNo={pageDataSheet2?.pageNo}
+									modLayout={pageDataSheet2?.layoutType}
+								/>
+							}
+						</Page>
+					)}
+				</>
+			);
+		} catch (error) {
+			console.error("Error rendering page:", error);
+			return null;
+		}
 	};
 
 	// Funciones de generación de PDF
