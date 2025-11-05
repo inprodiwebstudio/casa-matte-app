@@ -170,13 +170,6 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			const Sheet2Layout = handlerSheetLayoutComponent(pageDataSheet2);
 			const isDoublePage = isInDoublePageLayouts?.includes(pageDataSheet1?.layoutType);
 
-			if (!Sheet1Layout || !Sheet2Layout) {
-				if (!Sheet2Layout) {
-					console.log(pageData);
-					console.log(pageDataSheet2);
-				}
-			}
-
 
 			if (isLayFlatPhotoBook) {
 				return (
