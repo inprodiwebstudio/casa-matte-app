@@ -205,6 +205,8 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 				);
 			}
 
+			console.log("Succesfully rendered page");
+
 			return (
 				<>
 					<Page size={size}>
