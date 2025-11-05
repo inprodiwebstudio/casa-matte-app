@@ -7,9 +7,9 @@ import {
 	getEditorDefaults,
 } from "@pqina/pintura";
 
-import { useState }       from "react";
-import { connect }        from "react-redux";
-import { closeAllModals } from "@mantine/modals";
+import { useContext, useState } from "react";
+import { connect }              from "react-redux";
+import { closeAllModals }       from "@mantine/modals";
 
 
 //Own components
@@ -22,8 +22,11 @@ import { PostingConfig }  from "Notifications";
 //Styles
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "@pqina/pintura/pintura.css";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
 
-const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
+const EditPhoto = ({innerProps, userName}) => {
+	const {setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+
 	const { handlerUploadImage } = useSubmitImages({userName : userName});
 	const [ isUploading, setIsUploading ] = useState(undefined);
 
@@ -35,7 +38,19 @@ const EditPhoto = ({innerProps, userName, workSpaceSlice}) => {
 		try {
 			setIsUploading("Cargando imagen...");
 			const myImage = await handlerUploadImage(file, true);
-			workSpaceSlice.addPhotoEdited({pageId : innerProps?.pageId, sheetNo : innerProps?.sheetNo, layoutNo : innerProps?.layoutNo, imageUrl : myImage?.url});
+			setCurrentConfigPhotoBook(prev => ({
+				...prev,
+				[`sheet${innerProps?.sheetNo}`] : {
+					...prev[`sheet${innerProps?.sheetNo}`],
+					photos : {
+						...prev[`sheet${innerProps?.sheetNo}`]?.photos,
+						[innerProps?.layoutNo] : {
+							...prev[`sheet${innerProps?.sheetNo}`]?.photos?.[innerProps?.layoutNo],
+							urlPhotoEdited : myImage?.url,
+						},
+					},
+				},
+			}));
 			setIsUploading(undefined);
 
 			closeAllModals();
