@@ -172,9 +172,11 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 			if (!Sheet1Layout || !Sheet2Layout) {
 				if (!Sheet1Layout) {
+					console.log(pageData);
 					console.log(pageDataSheet1);
 				}
 				if (!Sheet2Layout) {
+					console.log(pageData);
 					console.log(pageDataSheet2);
 				}
 			}
