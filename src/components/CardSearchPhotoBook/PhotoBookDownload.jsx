@@ -162,14 +162,22 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			const pageDataSheet2 = handlerDataSheet(pageData?.sheet2);
 
 			const handlerSheetLayoutComponent = (pageDataSheet) => {
-				const { layoutType, pageNo } = pageDataSheet;
-				console.log(pageNo);
+				const { layoutType } = pageDataSheet;
 				return modLayouts[layoutType]?.pdfLayout ?? undefined;
 			};
 
 			const Sheet1Layout = handlerSheetLayoutComponent(pageDataSheet1);
 			const Sheet2Layout = handlerSheetLayoutComponent(pageDataSheet2);
 			const isDoublePage = isInDoublePageLayouts?.includes(pageDataSheet1?.layoutType);
+
+			if (!Sheet1Layout || !Sheet2Layout) {
+				if (!Sheet1Layout) {
+					console.log(pageDataSheet1);
+				}
+				if (!Sheet2Layout) {
+					console.log(pageDataSheet2);
+				}
+			}
 
 
 			if (isLayFlatPhotoBook) {
