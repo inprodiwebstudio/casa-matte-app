@@ -124,7 +124,7 @@ const Header = () => {
 	return (
 		<div className="Header">
 			<div className={`body-container ${isPreviewActive && "isActivePreview"}`}>
-				<a href="https://casamatte.com/">
+				<a href="https://casamatte.wip-inprodi.com/">
 					<img src={LogoCasaMatte} width={120} />
 				</a>
 				{
@@ -161,15 +161,17 @@ const Header = () => {
 									size="xs"
 									onClick={handlerClickPreview()}
 									loading={isLoadingWorspaceData}
+									disabled={true}
 								>
-									<Text
+									{/* <Text
 										weight={400}
 										sx={{
 											fontFamily : "Helvetica",
 										}}
 									>
 										{isPreviewActive ? "SALIR DE VISTA PREVIA" : "VISTA PREVIA"}
-									</Text>
+									</Text> */}
+									VISTA PREVIA (en mantenimiento)
 								</Button>
 								<Button
 									radius={12}
