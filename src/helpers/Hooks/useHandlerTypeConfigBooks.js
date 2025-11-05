@@ -7,8 +7,6 @@ export const useHandlerTypeConfigBooks = () => {
 
 	const versionTypeApp = photoBookData?.productionTypeVersion ?? undefined;
 
-	console.log("Type version App", versionTypeApp);
-
 	if ((versionTypeApp === "moveTexts")) {
 		return photoBooksConfigNew;
 	}

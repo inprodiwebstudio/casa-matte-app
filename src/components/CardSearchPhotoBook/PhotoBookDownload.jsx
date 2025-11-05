@@ -162,7 +162,8 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			const pageDataSheet2 = handlerDataSheet(pageData?.sheet2);
 
 			const handlerSheetLayoutComponent = (pageDataSheet) => {
-				const { layoutType } = pageDataSheet;
+				const { layoutType, pageNo } = pageDataSheet;
+				console.log(pageNo);
 				return modLayouts[layoutType]?.pdfLayout ?? undefined;
 			};
 
@@ -204,8 +205,6 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 					</Page>
 				);
 			}
-
-			console.log("Succesfully rendered page");
 
 			return (
 				<>
