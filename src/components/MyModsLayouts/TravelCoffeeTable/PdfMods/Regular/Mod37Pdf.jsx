@@ -8,17 +8,24 @@ import ReactDOMServer from "react-dom/server";
 import { imgUrlPdf } from "helpers";
 
 
-const Mod37Pdf = ({text, images}) => {
-	const text01 = text[0] ? text[0] :  "<p style='text-align: right;'><span style='font-size: 32px; font-family: JosefinSans-Light;'>VALPARAÍSO</span></p>";
+const Mod37Pdf = ({
+	text,
+	pageNo,
+	images,
+	textImgs,
+	modLayout,
+}) => {
 
-	const text02 = text[1] ? text[1] : "<p style='text-align: right;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
+	const myTextImgsMod = {
+		0 : textImgs[`${pageNo}-${modLayout}-text1`]?.textImg ?? null,
+	};
 
 	const bodyHtml = (
 		<div
 			style={{
 				height        : "850px",
 				width         : "100%",
-				paddingBottom : "8%",
+				paddingBottom : "13%",
 			}}
 		>
 			<div
@@ -27,15 +34,15 @@ const Mod37Pdf = ({text, images}) => {
 					width         : "100%",
 					display       : "flex",
 					flexDirection : "column",
-					gap           : "33px",
+					gap           : "20px",
 				}}
 			>
 				<div
 					style={{
-						height     : "83%",
+						height     : "88%",
 						width      : "100%",
 						overflow   : "hidden",
-						background : "white",
+						background : "#E3E3E3",
 					}}
 				>
 					{
@@ -53,42 +60,20 @@ const Mod37Pdf = ({text, images}) => {
 				</div>
 				<div
 					style={{
-						display       : "flex",
-						flexDirection : "column",
-						gap           : "10px",
-						marginRight   : "80px",
+						width        : "100%",
+						height       : "55px",
+						overflow     : "hidden",
+						paddingRight : "20px",
 					}}
 				>
-					<div
-						style={{
-							letterSpacing : "3px",
-							textTransform : "uppercase",
-						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                p {
-                                margin: 0;
-                                padding: 0;
-                                }
-                                </style>
-                                ${text01}`,
-						}}
-					/>
-					<div
-						style={{
-							letterSpacing : "2px",
-							textTransform : "uppercase",
-						}}
-						dangerouslySetInnerHTML={{
-							__html : `<style>
-                                p {
-                                margin: 0;
-                                padding: 0;
-                                }
-                                </style>
-                                ${text02}`,
-						}}
-					/>
+					{
+						myTextImgsMod[0] &&
+							<img
+								src={myTextImgsMod[0]}
+								alt="Captura de texto"
+								style={{ objectFit : "contain", height : "auto", width : "100%", objectPosition : "right" }}
+							/>
+					}
 				</div>
 			</div>
 		</div>

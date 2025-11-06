@@ -27,7 +27,6 @@ const Header = () => {
 
 	const [ projectName, setProjectName ] = useState(undefined);
 
-	const isPreviewActive = useSelector((state) => state.workSpaceSlice.isPreview, shallowEqual);
 	const productName = useSelector((state) => state.workSpaceSlice.data.productName, shallowEqual);
 	const projectTitle = useSelector((state) => state.workSpaceSlice.data.projectTittle, shallowEqual);
 	const lastModified = useSelector((state) => state.workSpaceSlice.data.modified, shallowEqual);
@@ -38,8 +37,9 @@ const Header = () => {
 	const isLoadingWorspaceData = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
 	const statusViewPage = useSelector((state) => state.workSpaceSlice?.statusViewPage, shallowEqual);
 
-	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
+	const isPreviewActive = statusViewPage === "preview";
 
+	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
 
 	const isAdminAccount = (userName === "casamatteadmin") && (userEmail === "info@casamatte.com");
 	const isDevAccount = (userName === "demo") && (userEmail === "demo44@demo.com");
@@ -124,7 +124,7 @@ const Header = () => {
 	return (
 		<div className="Header">
 			<div className={`body-container ${isPreviewActive && "isActivePreview"}`}>
-				<a href="https://casamatte.com/">
+				<a href="https://casamatte.wip-inprodi.com/">
 					<img src={LogoCasaMatte} width={120} />
 				</a>
 				{

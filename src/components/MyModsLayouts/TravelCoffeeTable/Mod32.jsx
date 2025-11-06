@@ -1,11 +1,19 @@
 import { Flex, Stack } from "@mantine/core";
 //Own components
-import TextFix           from "components/LayoutHandler/TextFix";
+import Text              from "components/LayoutHandler/Text";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod32 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod32 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 	const defaultIndice01 = "<p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Madrid</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Segovia</span></p><p style='text-align: center;'><span style='font-size: 14px; font-family: Spectral-Light-Italic;'>Salamanca</span></p>";
 
 	return (
@@ -16,6 +24,7 @@ const Mod32 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			align="center"
 			direction="column"
 			sx={{overflow : "hidden"}}
+			{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 		>
 			<Stack
 				spacing="0.35em"
@@ -26,7 +35,7 @@ const Mod32 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						textTransform : "uppercase",
 					}}
 				>
-					<TextFix
+					<Text
 						sizes={{
 							"chico"   : "12px",
 							"regular" : "14px",

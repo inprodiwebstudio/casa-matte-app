@@ -1,12 +1,20 @@
 import {Stack, Flex } from "@mantine/core";
 import ImgLayout      from "components/LayoutHandler/ImgLayout";
 //Own components
-import TextFix           from "components/LayoutHandler/TextFix";
+import Text              from "components/LayoutHandler/Text";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod35 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod35 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultTitle = "<p style='text-align: center;'><span style='font-size: 32px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
 
@@ -27,9 +35,10 @@ const Mod35 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			<Stack
 				spacing="0.07em"
 				w="70%"
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 			>
 				<div>
-					<TextFix
+					<Text
 						sizes={{
 							"chico"   : "30px",
 							"regular" : "32px",
@@ -57,9 +66,10 @@ const Mod35 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			<Stack
 				spacing="0.07em"
 				w="60%"
+				{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
 			>
 				<div>
-					<TextFix
+					<Text
 						sizes={{
 							"chico"   : "13px",
 							"regular" : "15px",
