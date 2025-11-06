@@ -8,6 +8,7 @@ import ReactDOMServer from "react-dom/server";
 import { imgUrlPdf } from "helpers";
 
 const Mod36Pdf = ({text, images}) => {
+	console.log(images);
 
 	const text01 = text[0] ? text[0] : "<p style='text-align: right;'><span style='font-size: 32px; font-family: Aitana-Regular;'>SANTIAGO</span></p>";
 
