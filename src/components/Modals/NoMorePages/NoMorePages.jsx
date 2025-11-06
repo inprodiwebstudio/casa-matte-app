@@ -5,11 +5,12 @@ import "./NoMorePages.scss";
 
 
 const NoMorePages = ({innerProps}) => {
+	const {quantity} = innerProps;
 	return (
 		<div className="body-confirmation-modal">
 			<div className="tittle-confirmation">No puedes agregar más páginas</div>
 			<div className="text-description">
-				Tienes como máximo 400 páginas en un photobook.
+				Tienes como máximo {quantity} páginas en el photobook.
 			</div>
 			<div className="buttons-container">
 				<Button
