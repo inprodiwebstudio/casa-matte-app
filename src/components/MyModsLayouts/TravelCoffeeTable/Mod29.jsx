@@ -1,12 +1,20 @@
 import { Flex, Stack } from "@mantine/core";
 import DividerLayout   from "components/LayoutHandler/DividerLayout";
 //Own components
-import TextFix           from "components/LayoutHandler/TextFix";
+import Text              from "components/LayoutHandler/Text";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 
-const Mod29 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod29 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultTitle01 = "<p style='text-align: left;'><span style='font-size: 20px; font-family: Aitana-Regular;'>ESPAÑA</span></p>";
 
@@ -28,6 +36,7 @@ const Mod29 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			align="center"
 			direction="column"
 			sx={{overflow : "hidden"}}
+			{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 		>
 			<Stack
 				spacing="0.35em"
@@ -42,7 +51,7 @@ const Mod29 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							textTransform : "uppercase",
 						}}
 					>
-						<TextFix
+						<Text
 							sizes={{
 								"chico"   : "18px",
 								"regular" : "20px",
@@ -64,7 +73,7 @@ const Mod29 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							textTransform : "uppercase",
 						}}
 					>
-						<TextFix
+						<Text
 							sizes={{
 								"chico"   : "12px",
 								"regular" : "14px",
@@ -90,7 +99,7 @@ const Mod29 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							textTransform : "uppercase",
 						}}
 					>
-						<TextFix
+						<Text
 							sizes={{
 								"chico"   : "22px",
 								"regular" : "24px",
@@ -112,7 +121,7 @@ const Mod29 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							textTransform : "uppercase",
 						}}
 					>
-						<TextFix
+						<Text
 							sizes={{
 								"chico"   : "12px",
 								"regular" : "14px",
@@ -138,7 +147,7 @@ const Mod29 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							textTransform : "uppercase",
 						}}
 					>
-						<TextFix
+						<Text
 							sizes={{
 								"chico"   : "22px",
 								"regular" : "24px",
@@ -160,7 +169,7 @@ const Mod29 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 							textTransform : "uppercase",
 						}}
 					>
-						<TextFix
+						<Text
 							sizes={{
 								"chico"   : "12px",
 								"regular" : "14px",

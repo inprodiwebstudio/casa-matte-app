@@ -1,12 +1,20 @@
 import {Stack, Flex }    from "@mantine/core";
 import ImgLayout         from "components/LayoutHandler/ImgLayout";
-import TextFix           from "components/LayoutHandler/TextFix";
+import Text              from "components/LayoutHandler/Text";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 //Own components
 
 
-const Mod37 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod37 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultTitle = "<p style='text-align: right;'><span style='font-size: 32px; font-family: JosefinSans-Light;'>VALPARAÍSO</span></p>";
 
@@ -35,8 +43,14 @@ const Mod37 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						urlImage={data?.photos[0] ?? {}}
 					/>
 				</Stack>
-				<Stack maw="70%" miw="30%" mr="5%" spacing="0em">
-					<TextFix
+				<Stack
+					maw="70%"
+					miw="30%"
+					mr="5%"
+					spacing="0em"
+					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
+				>
+					<Text
 						sizes={{
 							"chico"   : "30px",
 							"regular" : "32px",
@@ -52,7 +66,7 @@ const Mod37 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						textNo={0}
 					/>
 					<Stack>
-						<TextFix
+						<Text
 							sizes={{
 								"chico"   : "13px",
 								"regular" : "15px",

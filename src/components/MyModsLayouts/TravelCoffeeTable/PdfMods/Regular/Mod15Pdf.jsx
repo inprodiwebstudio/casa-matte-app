@@ -34,7 +34,7 @@ const Mod15Pdf = ({images}) => {
 						width      : "calc(50% - 5px)",
 						height     : "100%",
 						overflow   : "hidden",
-						background : "white",
+						background : "#E3E3E3",
 					}}
 				>
 					{
@@ -55,7 +55,7 @@ const Mod15Pdf = ({images}) => {
 						width      : "calc(50% - 5px)",
 						height     : "100%",
 						overflow   : "hidden",
-						background : "white",
+						background : "#E3E3E3",
 					}}
 				>
 					{
@@ -87,7 +87,7 @@ const Mod15Pdf = ({images}) => {
 						width      : "calc(50% - 5px)",
 						height     : "100%",
 						overflow   : "hidden",
-						background : "white",
+						background : "#E3E3E3",
 					}}
 				>
 					{
@@ -108,7 +108,7 @@ const Mod15Pdf = ({images}) => {
 						width      : "calc(50% - 5px)",
 						height     : "100%",
 						overflow   : "hidden",
-						background : "white",
+						background : "#E3E3E3",
 					}}
 				>
 					{

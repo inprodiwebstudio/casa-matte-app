@@ -1,10 +1,18 @@
 import { Center, Stack } from "@mantine/core";
 //Own components
-import TextFix           from "components/LayoutHandler/TextFix";
+import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
-const Mod18 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
+const Mod18 = ({
+	data,
+	isInWorkSpace,
+	sheetNo,
+	isInPaginator,
+	isThumbNail,
+	pageNo,
+	modLayout,
+}) => {
 
 	const defaultText01 = "<p style='text-align: right;'><span style='font-size: 30px; font-family: JosefinSans-Light;'>TÍTULO 1</span></p>";
 
@@ -14,6 +22,7 @@ const Mod18 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 			h="100%"
 			pb={"4%"}
 			pr={"8%"}
+			{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 		>
 			<Stack
 				align="flex-end"
@@ -28,7 +37,7 @@ const Mod18 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
 						overflow : "hidden",
 					}}
 				>
-					<TextFix
+					<Text
 						sizes={{
 							"chico"   : "28px",
 							"regular" : "30px",

@@ -19,7 +19,7 @@ const Mod1Pdf = ({images}) => {
 					height     : "100%",
 					width      : "100%",
 					overflow   : "hidden",
-					background : "white",
+					background : "#E3E3E3",
 				}}
 			>
 				{
