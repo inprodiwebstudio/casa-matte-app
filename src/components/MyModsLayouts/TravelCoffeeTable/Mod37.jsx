@@ -50,7 +50,7 @@ const Mod37 = ({
 					spacing="0em"
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 				>
-					<Text
+					<TextFix
 						sizes={{
 							"chico"   : "30px",
 							"regular" : "32px",
