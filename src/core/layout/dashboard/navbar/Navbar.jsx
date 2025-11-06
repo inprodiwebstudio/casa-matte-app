@@ -38,10 +38,21 @@ const Navbar = ({workSpaceSlice}) => {
 	};
 
 	const handlerAddPage = () => {
+		if ((photoBookProduct === "layflat") && (counterPages() >= 120)) {
+			openContextModal({
+				modal      : "noMorePages",
+				innerProps : {
+					quantity : 120,
+				},
+			});
+			return;
+		}
 		if (counterPages() >= 400) {
 			openContextModal({
 				modal      : "noMorePages",
-				innerProps : {},
+				innerProps : {
+					quantity : 400,
+				},
 			});
 			return;
 		}
