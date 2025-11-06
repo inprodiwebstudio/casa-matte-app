@@ -1,6 +1,6 @@
 import { Center, Stack } from "@mantine/core";
 //Own components
-import TextFix           from "components/LayoutHandler/TextFix";
+import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
@@ -31,7 +31,7 @@ const Mod33 = ({
 					textTransform : "uppercase",
 				}}
 			>
-				<TextFix
+				<Text
 					sizes={{
 						"chico"   : "38px",
 						"regular" : "40px",

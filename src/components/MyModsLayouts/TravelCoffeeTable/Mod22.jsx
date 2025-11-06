@@ -1,6 +1,6 @@
 import { Flex, Stack } from "@mantine/core";
 //Own components
-import TextFix           from "components/LayoutHandler/TextFix";
+import Text              from "components/LayoutHandler/Text";
 import DividerLayout     from "components/LayoutHandler/DividerLayout";
 import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
@@ -36,7 +36,7 @@ const Mod22 = ({
 					textTransform : "uppercase",
 				}}
 			>
-				<TextFix
+				<Text
 					sizes={{
 						"chico"   : "11px",
 						"regular" : "12px",

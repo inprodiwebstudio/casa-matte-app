@@ -1,7 +1,7 @@
 import { Flex, Stack } from "@mantine/core";
 import DividerLayout   from "components/LayoutHandler/DividerLayout";
 //Own components
-import TextFix           from "components/LayoutHandler/TextFix";
+import Text              from "components/LayoutHandler/Text";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
@@ -51,7 +51,7 @@ const Mod28 = ({
 							textTransform : "uppercase",
 						}}
 					>
-						<TextFix
+						<Text
 							sizes={{
 								"chico"   : "18px",
 								"regular" : "20px",
@@ -69,7 +69,7 @@ const Mod28 = ({
 					</div>
 					<DividerLayout long="0.3em" position="h" />
 					<div>
-						<TextFix
+						<Text
 							sizes={{
 								"chico"   : "12px",
 								"regular" : "14px",
@@ -91,7 +91,7 @@ const Mod28 = ({
 					aria-hidden
 				>
 					<div>
-						<TextFix
+						<Text
 							sizes={{
 								"chico"   : "22px",
 								"regular" : "24px",
@@ -109,7 +109,7 @@ const Mod28 = ({
 					</div>
 					<DividerLayout long="0.3em" position="h" />
 					<div>
-						<TextFix
+						<Text
 							sizes={{
 								"chico"   : "12px",
 								"regular" : "14px",
@@ -131,7 +131,7 @@ const Mod28 = ({
 					spacing="0.13em"
 				>
 					<div>
-						<TextFix
+						<Text
 							sizes={{
 								"chico"   : "22px",
 								"regular" : "24px",
@@ -149,7 +149,7 @@ const Mod28 = ({
 					</div>
 					<DividerLayout long="0.3em" position="h" />
 					<div>
-						<TextFix
+						<Text
 							sizes={{
 								"chico"   : "12px",
 								"regular" : "14px",

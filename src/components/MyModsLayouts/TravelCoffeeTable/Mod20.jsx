@@ -1,6 +1,6 @@
 import { Center, Stack } from "@mantine/core";
 //Own components
-import TextFix           from "components/LayoutHandler/TextFix";
+import Text              from "components/LayoutHandler/Text";
 import { textInsertion } from "helpers";
 import { TextShell }     from "core/components";
 
@@ -41,7 +41,7 @@ const Mod20 = ({
 					spacing="0"
 				>
 					<Stack>
-						<TextFix
+						<Text
 							sizes={{
 								"chico"   : "28px",
 								"regular" : "30px",
@@ -57,7 +57,7 @@ const Mod20 = ({
 						/>
 					</Stack>
 					<Stack>
-						<TextFix
+						<Text
 							sizes={{
 								"chico"   : "12px",
 								"regular" : "14px",

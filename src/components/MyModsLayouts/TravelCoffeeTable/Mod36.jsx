@@ -1,7 +1,7 @@
 import {Stack, Flex } from "@mantine/core";
 import ImgLayout      from "components/LayoutHandler/ImgLayout";
 //Own components
-import TextFix           from "components/LayoutHandler/TextFix";
+import Text              from "components/LayoutHandler/Text";
 import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
@@ -40,7 +40,7 @@ const Mod36 = ({
 						sx={{textTransform : "uppercase"}}
 						{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}
 					>
-						<TextFix
+						<Text
 							sizes={{
 								"chico"   : "30px",
 								"regular" : "32px",
@@ -70,7 +70,7 @@ const Mod36 = ({
 					sx={{textTransform : "uppercase"}}
 					{...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text2` })}
 				>
-					<TextFix
+					<Text
 						sizes={{
 							"chico"   : "13px",
 							"regular" : "15px",
