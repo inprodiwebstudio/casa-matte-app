@@ -427,11 +427,6 @@ const CorrectAccessGuard = () => {
 	const handlerAvailableExtra = async (idOrderExtra) => {
 		const isPaid = await isPaidExtra(idOrderExtra);
 		if (isPaid) {
-			if (postId === "40754") {
-				addCurrentPhotoBookConfig(photobookData);
-				setStatusView("continue");
-				return;
-			}
 			setStatusView("done");
 			return;
 		}
@@ -456,11 +451,6 @@ const CorrectAccessGuard = () => {
 		}
 		if (photobookData?.meta?.status === "48") {
 			if (!photobookData?.meta?.id_pedido_hojas_extra) {
-				if (postId === "40754") {
-					addCurrentPhotoBookConfig(photobookData);
-					setStatusView("continue");
-					return;
-				}
 				setStatusView("done");
 				return;
 			}
