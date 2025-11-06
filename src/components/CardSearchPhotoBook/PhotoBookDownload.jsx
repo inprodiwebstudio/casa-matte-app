@@ -140,8 +140,6 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		const sizeKey = photoBookConfigData?.sizePhotoBook;
 		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
 
-		console.log(config);
-
 		if (!config) return null;
 
 		const { size, isInDoublePageLayouts, modLayouts } = config;
@@ -178,29 +176,29 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 					<View style={{ width : isDoublePage ? "100%" : "50%", height : "100%" }}>
 						{
 							Sheet1Layout &&
-							<Sheet1Layout
-								images={pageData?.sheet1?.photos}
-								text={pageData?.sheet1?.text}
-								textImgs={textImgsObj}
-								modLayout={pageData?.sheet1?.layoutType}
-								pageNo={pageData?.sheet1?.pageNo}
-							/>
+								<Sheet1Layout
+									images={pageData?.sheet1?.photos}
+									text={pageData?.sheet1?.text}
+									textImgs={textImgsObj}
+									modLayout={pageData?.sheet1?.layoutType}
+									pageNo={pageData?.sheet1?.pageNo}
+								/>
 						}
 					</View>
 					{
 						!isDoublePage &&
-						<View style={{ width : "50%", height : "100%" }}>
-							{
-								Sheet2Layout &&
-								<Sheet2Layout
-									images={pageData?.sheet2?.photos}
-									text={pageData?.sheet2?.text}
-									textImgs={textImgsObj}
-									modLayout={pageData?.sheet2?.layoutType}
-									pageNo={pageData?.sheet2?.pageNo}
-								/>
-							}
-						</View>
+							<View style={{ width : "50%", height : "100%" }}>
+								{
+									Sheet2Layout &&
+									<Sheet2Layout
+										images={pageData?.sheet2?.photos}
+										text={pageData?.sheet2?.text}
+										textImgs={textImgsObj}
+										modLayout={pageData?.sheet2?.layoutType}
+										pageNo={pageData?.sheet2?.pageNo}
+									/>
+								}
+							</View>
 					}
 				</Page>
 			);
@@ -211,12 +209,12 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 				<Page size={size}>
 					{
 						Sheet1Layout &&
-						<Sheet1Layout
-							images={pageDataSheet1?.photos}
-							textImgs={textImgsObj}
-							pageNo={pageDataSheet1?.pageNo}
-							modLayout={pageDataSheet1?.layoutType}
-						/>
+							<Sheet1Layout
+								images={pageDataSheet1?.photos}
+								textImgs={textImgsObj}
+								pageNo={pageDataSheet1?.pageNo}
+								modLayout={pageDataSheet1?.layoutType}
+							/>
 					}
 
 				</Page>
@@ -224,12 +222,12 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 					<Page size={size}>
 						{
 							Sheet2Layout &&
-							<Sheet2Layout
-								images={pageDataSheet2?.photos}
-								textImgs={textImgsObj}
-								pageNo={pageDataSheet2?.pageNo}
-								modLayout={pageDataSheet2?.layoutType}
-							/>
+								<Sheet2Layout
+									images={pageDataSheet2?.photos}
+									textImgs={textImgsObj}
+									pageNo={pageDataSheet2?.pageNo}
+									modLayout={pageDataSheet2?.layoutType}
+								/>
 						}
 					</Page>
 				)}

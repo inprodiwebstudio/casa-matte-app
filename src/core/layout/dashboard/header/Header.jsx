@@ -161,15 +161,17 @@ const Header = () => {
 									size="xs"
 									onClick={handlerClickPreview()}
 									loading={isLoadingWorspaceData}
+									disabled={true}
 								>
-									<Text
+									{/* <Text
 										weight={400}
 										sx={{
 											fontFamily : "Helvetica",
 										}}
 									>
 										{isPreviewActive ? "SALIR DE VISTA PREVIA" : "VISTA PREVIA"}
-									</Text>
+									</Text> */}
+									VISTA PREVIA (en mantenimiento)
 								</Button>
 								<Button
 									radius={12}

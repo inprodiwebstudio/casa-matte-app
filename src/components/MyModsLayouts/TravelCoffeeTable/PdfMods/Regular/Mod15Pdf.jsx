@@ -7,7 +7,6 @@ import { imgUrlPdf }  from "helpers";
 // eslint-disable-next-line import/extensions
 
 const Mod15Pdf = ({images}) => {
-
 	const bodyHtml = (
 		<div
 			style={{
