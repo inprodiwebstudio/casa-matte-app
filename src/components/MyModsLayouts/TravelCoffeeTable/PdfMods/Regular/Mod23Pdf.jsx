@@ -8,6 +8,7 @@ import DividerLayoutPdf from "components/LayoutHandler/DividerLayoutPdf";
 
 
 const Mod23Pdf = ({text}) => {
+	console.log(text);
 
 	const text01 = text[0] ? text[0] : "<p style='text-align: left;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Title</span></p>";
 

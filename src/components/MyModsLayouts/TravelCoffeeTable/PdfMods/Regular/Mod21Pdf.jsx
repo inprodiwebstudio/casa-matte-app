@@ -7,6 +7,7 @@ import ReactDOMServer from "react-dom/server";
 
 
 const Mod39Pdf = ({text}) => {
+	console.log(text);
 
 	const text01 = text[0] ? text[0] : "<p style='text-align: center;'><span style='font-size: 12px; font-family: JosefinSans-Light;'>Quisque at malesuada dolor. Nullam in eleifend est. In dolor dui, egestas id blandit eget...</span></p>";
 

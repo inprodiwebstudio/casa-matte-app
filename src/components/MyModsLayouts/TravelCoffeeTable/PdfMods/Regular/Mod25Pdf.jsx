@@ -7,6 +7,7 @@ import ReactDOMServer from "react-dom/server";
 
 
 const Mod25Pdf = ({text}) => {
+	console.log(text);
 
 	const text01 = text[0] ? text[0] : "<p style='text-align: left;'><span style='font-size: 18px; font-family: JosefinSans-Light;'>Title</span></p>";
 
