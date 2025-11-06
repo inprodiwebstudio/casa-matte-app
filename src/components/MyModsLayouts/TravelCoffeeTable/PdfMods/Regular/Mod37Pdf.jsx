@@ -9,7 +9,6 @@ import { imgUrlPdf } from "helpers";
 
 
 const Mod37Pdf = ({text, images}) => {
-	console.log(text);
 	const text01 = text[0] ? text[0] :  "<p style='text-align: right;'><span style='font-size: 32px; font-family: JosefinSans-Light;'>VALPARAÍSO</span></p>";
 
 	const text02 = text[1] ? text[1] : "<p style='text-align: right;'><span style='font-size: 15px; font-family: Inter-Lifght;'>CHILE</span></p>";
