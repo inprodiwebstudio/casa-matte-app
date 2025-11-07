@@ -21,7 +21,7 @@ const SpreadBook = ({
 	const dispatch = useDispatch();
 	const [ currentSelectedPage, setCurrentSelectedPage ] = useState(undefined);
 
-	const {ContentSheet1, ContentSheet2} = contents;
+	const {ContentSheet1, ContentSheet2, layoutTypeSheet1} = contents;
 
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 
@@ -31,7 +31,17 @@ const SpreadBook = ({
 
 	const {aspectRatio} = photoBookConfigProperties;
 
-	const handlerAspectRatio = `${aspectRatio[0]}/${aspectRatio[1]}`;
+	const photobookSize = photoBookData?.sizePhotoBook ?? "grande";
+
+	const photoBookFormat = photoBookData?.format ?? "vertical";
+
+	const currentPhotoBook = (photoBookData?.product === "" || !photoBookData?.product) ? "white" : photoBookData?.product;
+
+	const modsInDoublePage = photoBooksConfig[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.modsInDoublePage;
+
+	const isInDoublePage = modsInDoublePage?.includes(layoutTypeSheet1);
+
+	const handlerAspectRatio = `${aspectRatio[0]*(isInDoublePage ? 2 : 1)}/${aspectRatio[1]}`;
 
 	const handlerSelectedData = (currentPage) => {
 		setCurrentSelectedPage(currentPage);
@@ -64,7 +74,7 @@ const SpreadBook = ({
 				{ContentSheet1 && <ContentSheet1 />}
 			</div>
 			{
-				isAvailableRightSheet && (
+				(isAvailableRightSheet && !isInDoublePage) && (
 					<div
 						className={
 							`page-body ${(currentSelectedPage === "sheet2") && "isActivePage"}`
