@@ -32,6 +32,7 @@ const SpreadLayoutsWorkspace = () => {
 					modLayoutKey={sheet1?.layoutType}
 					type="layout"
 				/>,
+				layoutTypeSheet1 : sheet1?.layoutType,
 				...(isAvailableRightPage && {
 					ContentSheet2 : () => <ModLayoutHandler
 						pageNo={sheet2?.pageNo}
