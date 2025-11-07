@@ -429,7 +429,7 @@ const CorrectAccessGuard = () => {
 		if (isPaid) {
 			if ((postId === "38115") || (postId === "38113")) {
 				addCurrentPhotoBookConfig(photobookData);
-				setStatusView("done");
+				setStatusView("continue");
 				return;
 			}
 			setStatusView("done");
@@ -458,7 +458,7 @@ const CorrectAccessGuard = () => {
 			if (!photobookData?.meta?.id_pedido_hojas_extra) {
 				if ((postId === "38115") || (postId === "38113")) {
 					addCurrentPhotoBookConfig(photobookData);
-					setStatusView("done");
+					setStatusView("continue");
 					return;
 				}
 				setStatusView("done");
