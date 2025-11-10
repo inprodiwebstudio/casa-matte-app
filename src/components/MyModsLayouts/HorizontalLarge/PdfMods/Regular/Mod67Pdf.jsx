@@ -25,7 +25,7 @@ const Mod67Pdf = ({
 				height       : "850px",
 				width        : "100%",
 				padding      : "0%",
-				marginTop    : "3%",
+				paddingTop   : "3%",
 				paddingLeft  : "16%",
 				paddingRight : "16%",
 			}}
