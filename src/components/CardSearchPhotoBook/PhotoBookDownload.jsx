@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
 	Card,
 	Stack,
@@ -9,18 +9,104 @@ import {
 	Progress,
 } from "@mantine/core";
 
+import GhostPagesDom from "./GhostPagesDom";
+
 
 import {
 	GENERATION_STATUS_MESSAGES,
 } from "./cardSearchPhotoBook.constants";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { SaveIcom } from "Resources/icons";
+import { SaveIcom }                      from "Resources/icons";
+import { useDispatch }                   from "react-redux";
+import { workSpaceSlice }                from "store/Slices";
+import { convertToArray, isValidArray }  from "helpers";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
 
 const PhotoBookDownload = ({ photoBookData, onReturn }) => {
+	const {setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+
+	const dispatch = useDispatch();
 	// Estados
+	const [currentIndexSpread, setCurrentIndexSpread] = useState(0);
+	const [currentSpreadDataPage, setCurrentSpreadDataPage] = useState(undefined);
+	const [bookSpreadPages, setBookSpreadPages] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [progress, setProgress] = useState(0);
 	const [generationStatus, setGenerationStatus] = useState("idle");
+
+	const handlerAndParseConfig = (config) => {
+		const myData = config.replace(/\.(heic|webp)/g, ".jpg");
+		const parseJSON = JSON.parse(myData);
+		const pagesList = convertToArray(parseJSON?.pages);
+		if (isValidArray(pagesList)) {
+			setBookSpreadPages(pagesList);
+		} else {
+			setIsLoading(false);
+			return;
+		}
+		dispatch(workSpaceSlice.actions.insertData(parseJSON));
+		setIsLoading(false);
+	};
+
+	useEffect(() => {
+		setIsLoading(true);
+		if (photoBookData) {
+			const { config } = photoBookData;
+			if (!config) {
+				setIsLoading(false);
+				return;
+			}
+			handlerAndParseConfig(config);
+		} else {
+			setIsLoading(false);
+		}
+	}, [photoBookData]);
+
+	useEffect(() => {
+		if (isValidArray(bookSpreadPages)) {
+			const currentDataSpread = bookSpreadPages[currentIndexSpread];
+			setCurrentConfigPhotoBook({
+				pageId : currentDataSpread?.id ?? undefined,
+				sheet1 : {
+					modlayoutId     : currentDataSpread?.sheet1?.layoutType ?? undefined,
+					texts           : currentDataSpread?.sheet1?.text ?? undefined,
+					photos          : currentDataSpread?.sheet1?.photos ?? undefined,
+					linesDecoration : currentDataSpread?.sheet1?.linesDecoration ?? undefined,
+				},
+				...(currentDataSpread?.sheet2 && {
+					sheet2 : {
+						modlayoutId     : currentDataSpread?.sheet2?.layoutType ?? undefined,
+						texts           : currentDataSpread?.sheet2?.text ?? undefined,
+						photos          : currentDataSpread?.sheet2?.photos ?? undefined,
+						linesDecoration : currentDataSpread?.sheet2?.linesDecoration ?? undefined,
+					},
+				}),
+			});
+			setCurrentSpreadDataPage(bookSpreadPages[currentIndexSpread]);
+		}
+	}, [bookSpreadPages]);
+
+	useEffect(() => {
+		const currentDataSpread = bookSpreadPages[currentIndexSpread];
+		setCurrentConfigPhotoBook({
+			pageId : currentDataSpread?.id ?? undefined,
+			sheet1 : {
+				modlayoutId     : currentDataSpread?.sheet1?.layoutType ?? undefined,
+				texts           : currentDataSpread?.sheet1?.text ?? undefined,
+				photos          : currentDataSpread?.sheet1?.photos ?? undefined,
+				linesDecoration : currentDataSpread?.sheet1?.linesDecoration ?? undefined,
+			},
+			...(currentDataSpread?.sheet2 && {
+				sheet2 : {
+					modlayoutId     : currentDataSpread?.sheet2?.layoutType ?? undefined,
+					texts           : currentDataSpread?.sheet2?.text ?? undefined,
+					photos          : currentDataSpread?.sheet2?.photos ?? undefined,
+					linesDecoration : currentDataSpread?.sheet2?.linesDecoration ?? undefined,
+				},
+			}),
+		});
+		setCurrentSpreadDataPage(bookSpreadPages[currentIndexSpread]);
+	}, [currentIndexSpread]);
 
 	const StatusCard = () => (
 		<Card
@@ -59,7 +145,11 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 				onDownload={() => console.log("Download")}
 				onReturn={onReturn}
 			/>
-
+			{currentSpreadDataPage && (
+				<GhostPagesDom
+					spreadPage={currentSpreadDataPage}
+				/>
+			)}
 			{generationStatus !== "idle" && <StatusCard />}
 		</Stack>
 	);
