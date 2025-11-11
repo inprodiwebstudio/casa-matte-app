@@ -133,6 +133,7 @@ const WorkSpace = () => {
 		}
 		if (isFrontLayout) {
 			setMyWorkSpaceData(workSpaceFrontPage);
+			dispatch(workSpaceSlice.actions.setCurrentPageData(workSpaceFrontPage));
 		}
 	}, [currentPageId, workSpaceData, workSpaceFrontPage]);
 
