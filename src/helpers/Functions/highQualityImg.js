@@ -2,7 +2,7 @@ const constructorImg = (urlimg) => {
 	if (!urlimg) return;
 	const splitImage = urlimg.split("upload");
 
-	if (urlimg.split("/v1/")[1]) {
+	if (!urlimg.split("/v1/")[1]) {
 		console.log(urlimg);
 	}
 
