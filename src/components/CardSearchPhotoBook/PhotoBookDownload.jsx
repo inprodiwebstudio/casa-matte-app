@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import {
 	Card,
 	Stack,
@@ -11,10 +11,7 @@ import {
 import ReactDOMServer from "react-dom/server";
 import Html           from "react-pdf-html";
 import saveAs         from "file-saver";
-
-import GhostPagesDom from "./GhostPagesDom";
-
-
+import GhostPagesDom  from "./GhostPagesDom";
 import {
 	GENERATION_STATUS_MESSAGES,
 	PHOTO_BOOK_TYPES,
@@ -29,12 +26,10 @@ import { Page, pdf, Document }                       from "@react-pdf/renderer";
 import JSZip                                         from "jszip";
 
 const PhotoBookDownload = ({ photoBookData, onReturn }) => {
-	const {setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
-
+	const { setCurrentConfigPhotoBook } = useContext(currentConfigPhotoBookContext);
 	const bookConfigData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
-
-
 	const dispatch = useDispatch();
+
 	// Estados
 	const [currentIndexSpread, setCurrentIndexSpread] = useState(0);
 	const [base64ImagePages, setBase64ImagePages] = useState([]);
@@ -43,6 +38,9 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [progress, setProgress] = useState(0);
 	const [generationStatus, setGenerationStatus] = useState("idle");
+	const [isGenerating, setIsGenerating] = useState(false);
+
+	const processingRef = useRef(false);
 
 	const handlerAndParseConfig = (config) => {
 		const myData = config.replace(/\.(heic|webp)/g, ".jpg");
@@ -97,28 +95,30 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	}, [bookSpreadPages]);
 
 	useEffect(() => {
-		const currentDataSpread = bookSpreadPages[currentIndexSpread];
-		setCurrentConfigPhotoBook({
-			pageId : currentDataSpread?.id ?? undefined,
-			sheet1 : {
-				modlayoutId     : currentDataSpread?.sheet1?.layoutType ?? undefined,
-				texts           : currentDataSpread?.sheet1?.text ?? undefined,
-				photos          : currentDataSpread?.sheet1?.photos ?? undefined,
-				linesDecoration : currentDataSpread?.sheet1?.linesDecoration ?? undefined,
-			},
-			...(currentDataSpread?.sheet2 && {
-				sheet2 : {
-					modlayoutId     : currentDataSpread?.sheet2?.layoutType ?? undefined,
-					texts           : currentDataSpread?.sheet2?.text ?? undefined,
-					photos          : currentDataSpread?.sheet2?.photos ?? undefined,
-					linesDecoration : currentDataSpread?.sheet2?.linesDecoration ?? undefined,
+		if (isValidArray(bookSpreadPages) && bookSpreadPages[currentIndexSpread]) {
+			const currentDataSpread = bookSpreadPages[currentIndexSpread];
+			setCurrentConfigPhotoBook({
+				pageId : currentDataSpread?.id ?? undefined,
+				sheet1 : {
+					modlayoutId     : currentDataSpread?.sheet1?.layoutType ?? undefined,
+					texts           : currentDataSpread?.sheet1?.text ?? undefined,
+					photos          : currentDataSpread?.sheet1?.photos ?? undefined,
+					linesDecoration : currentDataSpread?.sheet1?.linesDecoration ?? undefined,
 				},
-			}),
-		});
-		setCurrentSpreadDataPage(currentDataSpread);
+				...(currentDataSpread?.sheet2 && {
+					sheet2 : {
+						modlayoutId     : currentDataSpread?.sheet2?.layoutType ?? undefined,
+						texts           : currentDataSpread?.sheet2?.text ?? undefined,
+						photos          : currentDataSpread?.sheet2?.photos ?? undefined,
+						linesDecoration : currentDataSpread?.sheet2?.linesDecoration ?? undefined,
+					},
+				}),
+			});
+			setCurrentSpreadDataPage(currentDataSpread);
+		}
 	}, [currentIndexSpread]);
 
-	const LayoutContainerPage = ({imgSrc}) => {
+	const LayoutContainerPage = ({ imgSrc }) => {
 		const bodyHtml = (
 			<div
 				style={{
@@ -135,6 +135,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 							style={{
 								objectFit : "cover",
 								height    : "100%",
+								width     : "100%",
 							}}
 						/>
 					)
@@ -149,7 +150,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		);
 	};
 
-	const PageComponent = ({children}) => {
+	const PageComponent = ({ children }) => {
 		const formatKey = bookConfigData?.format;
 		const sizeKey = bookConfigData?.sizePhotoBook;
 		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
@@ -158,7 +159,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 		return (
 			<Page size={size}>
-				{ children }
+				{children}
 			</Page>
 		);
 	};
@@ -167,47 +168,93 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		const zip = new JSZip();
 		const baseName = `${photoBookData.correo_del_autor}-noPedido-${photoBookData.id_del_pedido}-photobookId_${photoBookData.id}`;
 
-		zip.file(`${baseName}/Paginas.pdf`, pdfBlob);
+		zip.file(`${baseName}.pdf`, pdfBlob);
 
 		saveAs(await zip.generateAsync({ type : "blob" }), `${baseName}.zip`);
 	};
 
-	const handlerTakeSnapshot = async () => {
-		const bloblImagePage1 = await textToImage(`${1}-snapshot`);
-		const bloblImagePage2 = await textToImage(`${2}-snapshot`);
-
-		const myBlobPages = [];
-
-		myBlobPages.push(bloblImagePage1);
-
-		if (bloblImagePage2) {
-			myBlobPages.push(bloblImagePage2);
+	const handlerTakeSnapshot = async (pageNumber) => {
+		try {
+			const blobImage = await textToImage(`${pageNumber}-snapshot`);
+			return blobImage;
+		} catch (error) {
+			console.error(`Error tomando snapshot de página ${pageNumber}:`, error);
+			return null;
 		}
-
-		setBase64ImagePages(prev => [...prev, ...myBlobPages]);
 	};
 
 	const handleDownload = async () => {
-		let counterPagesTakeSnapshot = 0;
+		if (processingRef.current || !isValidArray(bookSpreadPages)) return;
 
-		while (counterPagesTakeSnapshot <= bookSpreadPages.length) {
-			await handlerTakeSnapshot();
-			setCurrentIndexSpread(prev => prev + 1);
-			counterPagesTakeSnapshot++;
-		}
+		processingRef.current = true;
+		setIsGenerating(true);
+		setGenerationStatus("generating");
+		setProgress(0);
+		setBase64ImagePages([]); // Limpiar imágenes anteriores
 
-		if (counterPagesTakeSnapshot === (bookSpreadPages.length - 1)) {
-			const blobPdf = await pdf(
+		try {
+			const allBase64Images = [];
+			const totalSpreads = bookSpreadPages.length;
+
+			// Procesar cada spread secuencialmente
+			for (let i = 0; i < totalSpreads; i++) {
+				setCurrentIndexSpread(i);
+
+				// Esperar a que el DOM se actualice con el nuevo spread
+				await new Promise(resolve => setTimeout(resolve, 500));
+
+				// Tomar snapshot de ambas páginas del spread actual
+				const blobImagePage1 = await handlerTakeSnapshot(1);
+				const blobImagePage2 = await handlerTakeSnapshot(2);
+
+				if (blobImagePage1) {
+					allBase64Images.push(blobImagePage1);
+				}
+				if (blobImagePage2) {
+					allBase64Images.push(blobImagePage2);
+				}
+
+				// Actualizar progreso
+				const newProgress = ((i + 1) / totalSpreads) * 100;
+				setProgress(newProgress);
+
+				// Actualizar estado para mostrar progreso en UI
+				setBase64ImagePages([...allBase64Images]);
+			}
+
+			// Verificar que tenemos imágenes antes de generar el PDF
+			if (allBase64Images.length === 0) {
+				throw new Error("No se generaron imágenes para el PDF");
+			}
+
+			setGenerationStatus("creating_pdf");
+
+			// Generar el PDF con todas las imágenes
+			const pdfInstance = (
 				<Document>
-					{base64ImagePages.map((base64PageImg, index) => (
+					{allBase64Images.map((base64PageImg, index) => (
 						<PageComponent key={index}>
 							<LayoutContainerPage imgSrc={base64PageImg} />
 						</PageComponent>
 					))}
 				</Document>
-			).toBlob();
+			);
 
+			const blobPdf = await pdf(pdfInstance).toBlob();
+
+			// Descargar el ZIP
 			await zipDownload(blobPdf);
+
+			setGenerationStatus("completed");
+			setProgress(100);
+
+		} catch (error) {
+			console.error("Error generando PDF:", error);
+			setGenerationStatus("error");
+		} finally {
+			setIsGenerating(false);
+			processingRef.current = false;
+			setCurrentIndexSpread(0); // Resetear al inicio
 		}
 	};
 
@@ -229,7 +276,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			</Text>
 			<Progress value={progress} mb="xs" />
 			<Text size="sm" color="dimmed">
-				Progreso: {progress}%
+				Progreso: {Math.round(progress)}% - {base64ImagePages.length} páginas generadas
 			</Text>
 			{generationStatus === "error" && (
 				<Text size="sm" color="red" mt="sm">
@@ -243,22 +290,23 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		<Stack w="100%" h="100%" align="center" justify="center" style={{ position : "relative" }}>
 			<OrderInfoCard
 				photoBookData={photoBookData}
-				isLoading={isLoading}
+				isLoading={isLoading || isGenerating}
 				generationStatus={generationStatus}
-				onDownload={() => handleDownload()}
+				onDownload={handleDownload}
 				onReturn={onReturn}
+				disabled={isGenerating}
 			/>
 			{currentSpreadDataPage && (
 				<GhostPagesDom
 					spreadPage={currentSpreadDataPage}
 				/>
 			)}
-			{generationStatus !== "idle" && <StatusCard />}
+			{(generationStatus !== "idle" && generationStatus !== "completed") && <StatusCard />}
 		</Stack>
 	);
 };
 
-const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload, onReturn }) => (
+const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload, onReturn, disabled }) => (
 	<Card
 		radius="13px"
 		shadow="lg"
@@ -294,6 +342,7 @@ const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload,
 				generationStatus={generationStatus}
 				onDownload={onDownload}
 				onReturn={onReturn}
+				disabled={disabled}
 			/>
 		</Stack>
 	</Card>
@@ -313,7 +362,7 @@ const OrderSection = ({ title, items }) => (
 	</Stack>
 );
 
-const ActionButtons = ({ isLoading, generationStatus, onDownload, onReturn }) => (
+const ActionButtons = ({ isLoading, generationStatus, onDownload, onReturn, disabled }) => (
 	<Stack spacing="0px">
 		<Button
 			color="darkCasaMatte.7"
@@ -323,10 +372,11 @@ const ActionButtons = ({ isLoading, generationStatus, onDownload, onReturn }) =>
 			loading={isLoading}
 			onClick={onDownload}
 			rightIcon={<SaveIcom size="12px" />}
-			disabled={generationStatus === "generating"}
+			disabled={disabled || generationStatus === "generating" || generationStatus === "creating_pdf"}
 			fullWidth
 		>
-			DESCARGAR
+			{generationStatus === "generating" ? "GENERANDO..." :
+			 generationStatus === "creating_pdf" ? "CREANDO PDF..." : "DESCARGAR"}
 		</Button>
 		<Button
 			color="darkCasaMatte.6"
@@ -335,7 +385,7 @@ const ActionButtons = ({ isLoading, generationStatus, onDownload, onReturn }) =>
 			sx={{ fontWeight : "200" }}
 			onClick={onReturn}
 			loading={isLoading}
-			disabled={generationStatus === "generating"}
+			disabled={disabled}
 			fullWidth
 		>
 			REGRESAR
