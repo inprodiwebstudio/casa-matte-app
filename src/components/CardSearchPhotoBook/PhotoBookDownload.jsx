@@ -8,26 +8,36 @@ import {
 	Button,
 	Progress,
 } from "@mantine/core";
+import ReactDOMServer from "react-dom/server";
+import Html           from "react-pdf-html";
+import saveAs         from "file-saver";
 
 import GhostPagesDom from "./GhostPagesDom";
 
 
 import {
 	GENERATION_STATUS_MESSAGES,
+	PHOTO_BOOK_TYPES,
 } from "./cardSearchPhotoBook.constants";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { SaveIcom }                      from "Resources/icons";
-import { useDispatch }                   from "react-redux";
-import { workSpaceSlice }                from "store/Slices";
-import { convertToArray, isValidArray }  from "helpers";
-import { currentConfigPhotoBookContext } from "contexts/configContext";
+import { SaveIcom }                                  from "Resources/icons";
+import { shallowEqual, useDispatch, useSelector }    from "react-redux";
+import { workSpaceSlice }                            from "store/Slices";
+import { convertToArray, isValidArray, textToImage } from "helpers";
+import { currentConfigPhotoBookContext }             from "contexts/configContext";
+import { Page, pdf, Document }                       from "@react-pdf/renderer";
+import JSZip                                         from "jszip";
 
 const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const {setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 
+	const bookConfigData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
+
+
 	const dispatch = useDispatch();
 	// Estados
 	const [currentIndexSpread, setCurrentIndexSpread] = useState(0);
+	const [base64ImagePages, setBase64ImagePages] = useState([]);
 	const [currentSpreadDataPage, setCurrentSpreadDataPage] = useState(undefined);
 	const [bookSpreadPages, setBookSpreadPages] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
@@ -82,7 +92,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 					},
 				}),
 			});
-			setCurrentSpreadDataPage(bookSpreadPages[currentIndexSpread]);
+			setCurrentSpreadDataPage(currentDataSpread);
 		}
 	}, [bookSpreadPages]);
 
@@ -105,8 +115,101 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 				},
 			}),
 		});
-		setCurrentSpreadDataPage(bookSpreadPages[currentIndexSpread]);
+		setCurrentSpreadDataPage(currentDataSpread);
 	}, [currentIndexSpread]);
+
+	const LayoutContainerPage = ({imgSrc}) => {
+		const bodyHtml = (
+			<div
+				style={{
+					height   : "100%",
+					width    : "100%",
+					overflow : "hidden",
+				}}
+			>
+				{
+					imgSrc && (
+						<img
+							src={imgSrc}
+							alt={""}
+							style={{
+								objectFit : "cover",
+								height    : "100%",
+							}}
+						/>
+					)
+				}
+			</div>
+		);
+
+		const toPdfElement = ReactDOMServer.renderToStaticMarkup(bodyHtml);
+
+		return (
+			<Html>{toPdfElement}</Html>
+		);
+	};
+
+	const PageComponent = ({children}) => {
+		const formatKey = bookConfigData?.format;
+		const sizeKey = bookConfigData?.sizePhotoBook;
+		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
+
+		const { size } = config;
+
+		return (
+			<Page size={size}>
+				{ children }
+			</Page>
+		);
+	};
+
+	const zipDownload = async (pdfBlob) => {
+		const zip = new JSZip();
+		const baseName = `${photoBookData.correo_del_autor}-noPedido-${photoBookData.id_del_pedido}-photobookId_${photoBookData.id}`;
+
+		zip.file(`${baseName}/Paginas.pdf`, pdfBlob);
+
+		saveAs(await zip.generateAsync({ type : "blob" }), `${baseName}.zip`);
+	};
+
+	const handlerTakeSnapshot = async () => {
+		const bloblImagePage1 = await textToImage(`${1}-snapshot`);
+		const bloblImagePage2 = await textToImage(`${2}-snapshot`);
+
+		const myBlobPages = [];
+
+		myBlobPages.push(bloblImagePage1);
+
+		if (bloblImagePage2) {
+			myBlobPages.push(bloblImagePage2);
+		}
+
+		setBase64ImagePages(prev => [...prev, ...myBlobPages]);
+	};
+
+	const handleDownload = async () => {
+		let counterPagesTakeSnapshot = 0;
+
+		while (counterPagesTakeSnapshot <= bookSpreadPages.length) {
+			await handlerTakeSnapshot();
+			setCurrentIndexSpread(prev => prev + 1);
+			counterPagesTakeSnapshot++;
+		}
+
+		if (counterPagesTakeSnapshot === (bookSpreadPages.length - 1)) {
+			const blobPdf = await pdf(
+				<Document>
+					{base64ImagePages.map((base64PageImg, index) => (
+						<PageComponent key={index}>
+							<LayoutContainerPage imgSrc={base64PageImg} />
+						</PageComponent>
+					))}
+				</Document>
+			).toBlob();
+
+			await zipDownload(blobPdf);
+		}
+	};
 
 	const StatusCard = () => (
 		<Card
@@ -142,7 +245,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 				photoBookData={photoBookData}
 				isLoading={isLoading}
 				generationStatus={generationStatus}
-				onDownload={() => console.log("Download")}
+				onDownload={() => handleDownload()}
 				onReturn={onReturn}
 			/>
 			{currentSpreadDataPage && (
