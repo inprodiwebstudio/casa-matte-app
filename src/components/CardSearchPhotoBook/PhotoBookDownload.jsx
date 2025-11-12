@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import {
 	Card,
 	Stack,
@@ -8,100 +8,119 @@ import {
 	Button,
 	Progress,
 } from "@mantine/core";
+import ReactDOMServer from "react-dom/server";
+import Html           from "react-pdf-html";
+import saveAs         from "file-saver";
+import GhostPagesDom  from "./GhostPagesDom";
 import {
-	handlerIdsTextPages,
-	listTextPagesAvailable,
-	loadImageWithRetry,
-} from "./cardSearchPhotoBook.helpers";
-import {
-	convertToArray,
-	convertToObject,
-	isValidArray,
-	textToImage,
-} from "helpers";
-import {
-	PHOTO_BOOK_TYPES,
 	GENERATION_STATUS_MESSAGES,
+	PHOTO_BOOK_TYPES,
 } from "./cardSearchPhotoBook.constants";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { PDFDocument }                            from "pdf-lib";
-import SpinePhotoBook                             from "components/MyModsLayouts/SpinePdf";
-import saveAs                                     from "file-saver";
-import JSZip                                      from "jszip";
-import { Document, Page, pdf, View }              from "@react-pdf/renderer";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { workSpaceSlice }                         from "store/Slices";
-import { convertPDFToImages }                     from "helpers/Functions/convertPdfJpg";
-import GhostTextPagesDom                          from "./GhostTextPagesDom";
-import { SaveIcom }                               from "Resources/icons";
+import { SaveIcom }                                  from "Resources/icons";
+import { shallowEqual, useDispatch, useSelector }    from "react-redux";
+import { workSpaceSlice }                            from "store/Slices";
+import { convertToArray, isValidArray, textToImage } from "helpers";
+import { currentConfigPhotoBookContext }             from "contexts/configContext";
+import { Page, pdf, Document }                       from "@react-pdf/renderer";
+import JSZip                                         from "jszip";
 
 const PhotoBookDownload = ({ photoBookData, onReturn }) => {
+	const { setCurrentConfigPhotoBook } = useContext(currentConfigPhotoBookContext);
+	const bookConfigData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
+	const dispatch = useDispatch();
+
 	// Estados
-	const [photoBookConfigData, setPhotoBookConfigData] = useState();
+	const [currentIndexSpread, setCurrentIndexSpread] = useState(0);
+	const [base64ImagePages, setBase64ImagePages] = useState([]);
+	const [currentSpreadDataPage, setCurrentSpreadDataPage] = useState(undefined);
+	const [bookSpreadPages, setBookSpreadPages] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-	const [textPages, setTextPages] = useState();
 	const [progress, setProgress] = useState(0);
 	const [generationStatus, setGenerationStatus] = useState("idle");
+	const [isGenerating, setIsGenerating] = useState(false);
 
-	const dispatch = useDispatch();
-	const textImgsObj = useSelector((state) => state.workSpaceSlice.textsImgs, shallowEqual);
+	const processingRef = useRef(false);
 
-	// Efectos
+	const handlerAndParseConfig = (config) => {
+		const myData = config.replace(/\.(heic|webp)/g, ".jpg");
+		const parseJSON = JSON.parse(myData);
+		const pagesList = convertToArray(parseJSON?.pages);
+		if (isValidArray(pagesList)) {
+			const pagesFilterNotFront = pagesList.filter((page) => page.id !== "FrontLayout");
+			setBookSpreadPages(pagesFilterNotFront);
+		} else {
+			setIsLoading(false);
+			return;
+		}
+		dispatch(workSpaceSlice.actions.insertData(parseJSON));
+		setIsLoading(false);
+	};
+
 	useEffect(() => {
 		setIsLoading(true);
-		if (photoBookData?.config) {
-			getConfigDataPhotoBook();
+		if (photoBookData) {
+			const { config } = photoBookData;
+			if (!config) {
+				setIsLoading(false);
+				return;
+			}
+			handlerAndParseConfig(config);
+		} else {
+			setIsLoading(false);
 		}
 	}, [photoBookData]);
 
 	useEffect(() => {
-		if (photoBookConfigData?.pages) {
-			setTextPages(listTextPagesAvailable(photoBookConfigData.pages));
+		if (isValidArray(bookSpreadPages)) {
+			const currentDataSpread = bookSpreadPages[currentIndexSpread];
+			setCurrentConfigPhotoBook({
+				pageId : currentDataSpread?.id ?? undefined,
+				sheet1 : {
+					modlayoutId     : currentDataSpread?.sheet1?.layoutType ?? undefined,
+					texts           : currentDataSpread?.sheet1?.text ?? undefined,
+					photos          : currentDataSpread?.sheet1?.photos ?? undefined,
+					linesDecoration : currentDataSpread?.sheet1?.linesDecoration ?? undefined,
+				},
+				...(currentDataSpread?.sheet2 && {
+					sheet2 : {
+						modlayoutId     : currentDataSpread?.sheet2?.layoutType ?? undefined,
+						texts           : currentDataSpread?.sheet2?.text ?? undefined,
+						photos          : currentDataSpread?.sheet2?.photos ?? undefined,
+						linesDecoration : currentDataSpread?.sheet2?.linesDecoration ?? undefined,
+					},
+				}),
+			});
+			setCurrentSpreadDataPage(currentDataSpread);
 		}
-	}, [photoBookConfigData]);
+	}, [bookSpreadPages]);
 
 	useEffect(() => {
-		if (textPages && isValidArray(textPages)) {
-			handleTextImagesGeneration();
-		} else {
-			setIsLoading(false);
+		if (isValidArray(bookSpreadPages) && bookSpreadPages[currentIndexSpread]) {
+			const currentDataSpread = bookSpreadPages[currentIndexSpread];
+			setCurrentConfigPhotoBook({
+				pageId : currentDataSpread?.id ?? undefined,
+				sheet1 : {
+					modlayoutId     : currentDataSpread?.sheet1?.layoutType ?? undefined,
+					texts           : currentDataSpread?.sheet1?.text ?? undefined,
+					photos          : currentDataSpread?.sheet1?.photos ?? undefined,
+					linesDecoration : currentDataSpread?.sheet1?.linesDecoration ?? undefined,
+				},
+				...(currentDataSpread?.sheet2 && {
+					sheet2 : {
+						modlayoutId     : currentDataSpread?.sheet2?.layoutType ?? undefined,
+						texts           : currentDataSpread?.sheet2?.text ?? undefined,
+						photos          : currentDataSpread?.sheet2?.photos ?? undefined,
+						linesDecoration : currentDataSpread?.sheet2?.linesDecoration ?? undefined,
+					},
+				}),
+			});
+			setCurrentSpreadDataPage(currentDataSpread);
 		}
-	}, [textPages, photoBookConfigData]);
+	}, [currentIndexSpread]);
 
-	// Handlers
-	const getConfigDataPhotoBook = () => {
-		const myData = photoBookData.config.replace(/\.(heic|webp)/g, ".jpg");
-		const parseJSON = JSON.parse(myData);
-		dispatch(workSpaceSlice.actions.insertData(parseJSON));
-		setPhotoBookConfigData(parseJSON);
-	};
-
-	const handleTextImagesGeneration = async () => {
-		try {
-			const formatKey = getFormatKey();
-			const modsLayoutsConfigPhotoBook = PHOTO_BOOK_TYPES[formatKey]?.[photoBookConfigData.sizePhotoBook]?.modLayouts;
-			const listIdsTextImgs = handlerIdsTextPages(textPages, modsLayoutsConfigPhotoBook);
-
-			const textImgs = await Promise.all(
-				listIdsTextImgs.map(async (textId) => ({
-					id      : textId,
-					textImg : await textToImage(textId),
-				}))
-			);
-
-			dispatch(workSpaceSlice.actions.addTextImgs({
-				textImgs : convertToObject(textImgs),
-			}));
-		} catch (error) {
-			console.error("Error al obtener las imágenes de texto:", error);
-		} finally {
-			setIsLoading(false);
-		}
-	};
-
-	// Funciones de utilidad
-	const getFormatKey = () => {
-		const { product, format } = photoBookConfigData || {};
+	const getFormatKey = (configDataBook) => {
+		const { product, format } = configDataBook || {};
 
 		if ( product === "travelcoffeetable") {
 			return "travelcoffeetable";
@@ -112,305 +131,155 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		return format;
 	};
 
-	const listOfPhotos = (pages) => {
-		return convertToArray(pages).flatMap(page => {
-			const photos = [
-				...convertToArray(page?.sheet1?.photos),
-				...(page?.sheet2?.photos ? convertToArray(page.sheet2.photos) : []),
-			];
+	const LayoutContainerPage = ({ imgSrc }) => {
+		const bodyHtml = (
+			<div
+				style={{
+					height   : "100%",
+					width    : "100%",
+					overflow : "hidden",
+				}}
+			>
+				{
+					imgSrc && (
+						<img
+							src={imgSrc}
+							alt={""}
+							style={{
+								objectFit : "cover",
+								height    : "100%",
+								width     : "100%",
+							}}
+						/>
+					)
+				}
+			</div>
+		);
 
-			return photos
-				.filter(photo => (photo?.url && photo?.id))
-				.map(photo => photo?.urlPhotoEdited || photo?.url);
-		});
-	};
-
-	const validateAllImages = async (imageUrls) => {
-		try {
-			await Promise.all(imageUrls.map(loadImageWithRetry));
-			return true;
-		} catch {
-			return false;
-		}
-	};
-
-	// Componentes PDF
-	const PageComponent = ({ pageData }) => {
-		const formatKey = getFormatKey();
-		const sizeKey = photoBookConfigData?.sizePhotoBook;
-		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
-
-		if (!config) return null;
-
-		const { size, isInDoublePageLayouts, modLayouts } = config;
-
-		const handlerDataSheet = (sheetData) => {
-			return {
-				photos     : sheetData?.photos,
-				text       : sheetData?.text,
-				pageNo     : sheetData?.pageNo,
-				layoutType : sheetData?.layoutType,
-			};
-		};
-
-		const isLayFlatPhotoBook = photoBookConfigData?.product === "layflat";
-
-		const isAvailableSheet2 = !!pageData?.sheet2;
-
-		const pageDataSheet1 = handlerDataSheet(pageData.sheet1);
-		const pageDataSheet2 = handlerDataSheet(pageData?.sheet2);
-
-		const handlerSheetLayoutComponent = (pageDataSheet) => {
-			const { layoutType } = pageDataSheet;
-			return modLayouts[layoutType]?.pdfLayout ?? undefined;
-		};
-
-		const Sheet1Layout = handlerSheetLayoutComponent(pageDataSheet1);
-		const Sheet2Layout = handlerSheetLayoutComponent(pageDataSheet2);
-		const isDoublePage = isInDoublePageLayouts?.includes(pageDataSheet1?.layoutType);
-
-
-		if (isLayFlatPhotoBook) {
-			return (
-				<Page size={size} style={{ display : "flex", flexDirection : "row" }}>
-					<View style={{ width : isDoublePage ? "100%" : "50%", height : "100%" }}>
-						{
-							Sheet1Layout &&
-								<Sheet1Layout
-									images={pageData?.sheet1?.photos}
-									text={pageData?.sheet1?.text}
-									textImgs={textImgsObj}
-									modLayout={pageData?.sheet1?.layoutType}
-									pageNo={pageData?.sheet1?.pageNo}
-								/>
-						}
-					</View>
-					{
-						!isDoublePage &&
-							<View style={{ width : "50%", height : "100%" }}>
-								{
-									Sheet2Layout &&
-									<Sheet2Layout
-										images={pageData?.sheet2?.photos}
-										text={pageData?.sheet2?.text}
-										textImgs={textImgsObj}
-										modLayout={pageData?.sheet2?.layoutType}
-										pageNo={pageData?.sheet2?.pageNo}
-									/>
-								}
-							</View>
-					}
-				</Page>
-			);
-		}
+		const toPdfElement = ReactDOMServer.renderToStaticMarkup(bodyHtml);
 
 		return (
-			<>
-				<Page size={size}>
-					{
-						Sheet1Layout &&
-							<Sheet1Layout
-								images={pageDataSheet1?.photos}
-								textImgs={textImgsObj}
-								pageNo={pageDataSheet1?.pageNo}
-								modLayout={pageDataSheet1?.layoutType}
-							/>
-					}
-
-				</Page>
-				{isAvailableSheet2 && (
-					<Page size={size}>
-						{
-							Sheet2Layout &&
-								<Sheet2Layout
-									images={pageDataSheet2?.photos}
-									textImgs={textImgsObj}
-									pageNo={pageDataSheet2?.pageNo}
-									modLayout={pageDataSheet2?.layoutType}
-								/>
-						}
-					</Page>
-				)}
-			</>
+			<Html>{toPdfElement}</Html>
 		);
 	};
 
-	// Funciones de generación de PDF
-	const generatePdfInChunks = async (listPages) => {
-		setGenerationStatus("generating");
-		setProgress(0);
+	const PageComponent = ({ children }) => {
+		const formatKey = getFormatKey(bookConfigData);
+		const sizeKey = bookConfigData?.sizePhotoBook;
+		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
 
-		try {
-			const CHUNK_SIZE = 1;
-			const chunks = Array.from(
-				{ length : Math.ceil(listPages.length / CHUNK_SIZE) },
-				(_, i) => listPages.slice(i * CHUNK_SIZE, (i + 1) * CHUNK_SIZE)
-			);
+		const { size } = config;
 
-			const blobChunks = await Promise.all(
-				chunks.map(async (chunk, i) => {
-					setProgress(Math.round((i / chunks.length) * 90));
-					await new Promise(resolve => setTimeout(resolve, 200));
-
-					return pdf(
-						<Document>
-							{chunk.map((pageData, index) => (
-								<PageComponent key={index} pageData={pageData} />
-							))}
-						</Document>
-					).toBlob();
-				})
-			);
-
-			return blobChunks;
-		} catch (error) {
-			console.error("Error generating PDF chunks:", error);
-			setGenerationStatus("error");
-			throw error;
-		}
-	};
-
-	const combinePdfChunks = async (blobChunks) => {
-		setGenerationStatus("combining");
-		setProgress(95);
-
-		try {
-			const mergedPdf = await PDFDocument.create();
-
-			for (const blob of blobChunks) {
-				const pdfDoc = await PDFDocument.load(await blob.arrayBuffer());
-				const pages = await mergedPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
-				pages.forEach(page => mergedPdf.addPage(page));
-			}
-
-			return new Blob([await mergedPdf.save()], { type : "application/pdf" });
-		} catch (error) {
-			console.error("Error combining PDF chunks:", error);
-			throw error;
-		}
-	};
-
-	// Funciones de descarga
-	const downloadImagesAsZip = async (imagesDataUrls, zipName = "imagenes") => {
-		const zip = new JSZip();
-		imagesDataUrls.forEach((dataUrl, index) => {
-			zip.file(`pagina_${index + 1}.jpg`, dataUrl.split(",")[1], { base64 : true });
-		});
-		saveAs(await zip.generateAsync({ type : "blob" }), `${zipName}.zip`);
-	};
-
-	const createPDFPhotoBook = async (photBookConfig) => {
-		const listPages = convertToArray(photBookConfig.pages);
-		const blob = await pdf(
-			<Document>
-				{listPages.map((pageData, index) => (
-					<PageComponent key={index} pageData={pageData} />
-				))}
-			</Document>
-		).toBlob();
-
-		await downloadImagesAsZip(
-			await convertPDFToImages(blob),
-      `${photoBookData.id_del_pedido}-${photoBookData.correo_del_autor}`
+		return (
+			<Page size={size}>
+				{children}
+			</Page>
 		);
 	};
 
-	const zipDownload = async (pdfBlob, frontPdfBlob, boundPdfBlob) => {
+	const zipDownload = async (pdfBlob) => {
 		const zip = new JSZip();
 		const baseName = `${photoBookData.correo_del_autor}-noPedido-${photoBookData.id_del_pedido}-photobookId_${photoBookData.id}`;
 
-		zip.file(`${baseName}/Paginas.pdf`, pdfBlob);
-		if (frontPdfBlob) zip.file(`${baseName}/Portada.pdf`, frontPdfBlob);
-		if (boundPdfBlob) zip.file(`${baseName}/Lomo.pdf`, boundPdfBlob);
+		zip.file(`${baseName}.pdf`, pdfBlob);
 
 		saveAs(await zip.generateAsync({ type : "blob" }), `${baseName}.zip`);
 	};
 
-	const handlerDownload = async () => {
-		setIsLoading(true);
-		setGenerationStatus("preparing");
-		setProgress(0);
-
+	const handlerTakeSnapshot = async (pageNumber) => {
 		try {
-			const imagesOk = await validateAllImages(listOfPhotos(photoBookConfigData.pages));
-			if (!imagesOk) {
-				setGenerationStatus("error");
-				return;
-			}
-
-			if (photoBookConfigData.product === "layflat") {
-				await createPDFPhotoBook(photoBookConfigData);
-			} else {
-				const [blobChunks, [blobFront, blobSpine]] = await Promise.all([
-					generatePdfInChunks(convertToArray(photoBookConfigData.pages)),
-					photoBookConfigData.product === "white" ? Promise.all([
-						pdf(<FrontCover />).toBlob(),
-						pdf(<SpineCover />).toBlob(),
-					]) : [null, null],
-				]);
-
-				await zipDownload(
-					await combinePdfChunks(blobChunks),
-					blobFront,
-					blobSpine,
-				);
-			}
-
-			setGenerationStatus("completed");
-			setProgress(100);
+			const blobImage = await textToImage(`${pageNumber}-snapshot`);
+			return blobImage;
 		} catch (error) {
-			console.error("Download error:", error);
-			setGenerationStatus("error");
-		} finally {
-			setIsLoading(false);
-			setTimeout(() => generationStatus !== "error" && resetStatus(), 2000);
+			console.error(`Error tomando snapshot de página ${pageNumber}:`, error);
+			return null;
 		}
 	};
 
-	const resetStatus = () => {
-		setGenerationStatus("idle");
+	const handleDownload = async () => {
+		if (processingRef.current || !isValidArray(bookSpreadPages)) return;
+
+		processingRef.current = true;
+		setIsGenerating(true);
+		setGenerationStatus("generating");
 		setProgress(0);
+		setBase64ImagePages([]); // Limpiar imágenes anteriores
+
+		try {
+			const allBase64Images = [];
+			const totalSpreads = bookSpreadPages.length;
+
+			// Procesar cada spread secuencialmente
+			for (let i = 0; i < totalSpreads; i++) {
+				setCurrentIndexSpread(i);
+
+				// Esperar a que el DOM se actualice con el nuevo spread
+				await new Promise(resolve => setTimeout(resolve, 500));
+
+				// Tomar snapshot de ambas páginas del spread actual
+				const blobImagePage1 = await handlerTakeSnapshot(1);
+				const blobImagePage2 = await handlerTakeSnapshot(2);
+
+				if (blobImagePage1) {
+					allBase64Images.push(blobImagePage1);
+				} else {
+					allBase64Images.push(undefined);
+				}
+
+				const isNotFoundSheet2 = !bookSpreadPages[i]?.sheet2;
+				if (isNotFoundSheet2) {
+					continue;
+				}
+
+				if (blobImagePage2) {
+					allBase64Images.push(blobImagePage2);
+				} else {
+					allBase64Images.push(undefined);
+				}
+
+				// Actualizar progreso
+				const newProgress = ((i + 1) / totalSpreads) * 100;
+				setProgress(newProgress);
+
+				// Actualizar estado para mostrar progreso en UI
+				setBase64ImagePages([...allBase64Images]);
+			}
+
+			// Verificar que tenemos imágenes antes de generar el PDF
+			if (allBase64Images.length === 0) {
+				throw new Error("No se generaron imágenes para el PDF");
+			}
+
+			setGenerationStatus("creating_pdf");
+
+			// Generar el PDF con todas las imágenes
+			const pdfInstance = (
+				<Document>
+					{allBase64Images.map((base64PageImg, index) => (
+						<PageComponent key={index}>
+							<LayoutContainerPage imgSrc={base64PageImg} />
+						</PageComponent>
+					))}
+				</Document>
+			);
+
+			const blobPdf = await pdf(pdfInstance).toBlob();
+
+			// Descargar el ZIP
+			await zipDownload(blobPdf);
+
+			setGenerationStatus("completed");
+			setProgress(100);
+
+		} catch (error) {
+			console.error("Error generando PDF:", error);
+			setGenerationStatus("error");
+		} finally {
+			setIsGenerating(false);
+			processingRef.current = false;
+			setCurrentIndexSpread(0); // Resetear al inicio
+		}
 	};
-
-	// Componentes auxiliares
-	const FrontCover = () => {
-		const formatKey = getFormatKey();
-		const config = PHOTO_BOOK_TYPES[formatKey]?.[photoBookConfigData.sizePhotoBook];
-		const SheetLayout = config?.modLayouts[photoBookConfigData.frontPage?.sheet1?.layoutType]?.pdfLayout;
-
-		return (
-			<Document>
-				<Page size={config.frontSize}>
-					{
-						SheetLayout ? (
-							<SheetLayout
-								images={photoBookConfigData?.frontPage?.sheet1?.photos}
-								text={photoBookConfigData?.frontPage?.sheet1?.text}
-							/>
-						) : (
-							"No hay información de portada. Indicarle al cliente que seleccione una portada."
-						)
-					}
-				</Page>
-			</Document>
-		);
-	};
-
-	const SpineCover = () => (
-		<Document>
-			<Page size={PHOTO_BOOK_TYPES[getFormatKey()]?.[photoBookConfigData.sizePhotoBook]?.frontSize}>
-				<SpinePhotoBook text={photoBookConfigData.bound} />
-			</Page>
-		</Document>
-	);
-
-	// const SpecsConfigPage = () => (
-	// 	<Document>
-	// 		<Page size="A4">
-	// 			<SpecsConfig />
-	// 		</Page>
-	// 	</Document>
-	// );
 
 	const StatusCard = () => (
 		<Card
@@ -430,7 +299,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			</Text>
 			<Progress value={progress} mb="xs" />
 			<Text size="sm" color="dimmed">
-				Progreso: {progress}%
+				Progreso: {Math.round(progress)}% - {base64ImagePages.length} páginas generadas
 			</Text>
 			{generationStatus === "error" && (
 				<Text size="sm" color="red" mt="sm">
@@ -444,19 +313,23 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		<Stack w="100%" h="100%" align="center" justify="center" style={{ position : "relative" }}>
 			<OrderInfoCard
 				photoBookData={photoBookData}
-				isLoading={isLoading}
+				isLoading={isLoading || isGenerating}
 				generationStatus={generationStatus}
-				onDownload={handlerDownload}
+				onDownload={handleDownload}
 				onReturn={onReturn}
+				disabled={isGenerating}
 			/>
-
-			{generationStatus !== "idle" && <StatusCard />}
-			{textPages && isValidArray(textPages) && <GhostTextPagesDom textPages={textPages} />}
+			{currentSpreadDataPage && (
+				<GhostPagesDom
+					spreadPage={currentSpreadDataPage}
+				/>
+			)}
+			{(generationStatus !== "idle" && generationStatus !== "completed") && <StatusCard />}
 		</Stack>
 	);
 };
 
-const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload, onReturn }) => (
+const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload, onReturn, disabled }) => (
 	<Card
 		radius="13px"
 		shadow="lg"
@@ -492,6 +365,7 @@ const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload,
 				generationStatus={generationStatus}
 				onDownload={onDownload}
 				onReturn={onReturn}
+				disabled={disabled}
 			/>
 		</Stack>
 	</Card>
@@ -511,7 +385,7 @@ const OrderSection = ({ title, items }) => (
 	</Stack>
 );
 
-const ActionButtons = ({ isLoading, generationStatus, onDownload, onReturn }) => (
+const ActionButtons = ({ isLoading, generationStatus, onDownload, onReturn, disabled }) => (
 	<Stack spacing="0px">
 		<Button
 			color="darkCasaMatte.7"
@@ -521,10 +395,11 @@ const ActionButtons = ({ isLoading, generationStatus, onDownload, onReturn }) =>
 			loading={isLoading}
 			onClick={onDownload}
 			rightIcon={<SaveIcom size="12px" />}
-			disabled={generationStatus === "generating"}
+			disabled={disabled || generationStatus === "generating" || generationStatus === "creating_pdf"}
 			fullWidth
 		>
-			DESCARGAR
+			{generationStatus === "generating" ? "GENERANDO..." :
+			 generationStatus === "creating_pdf" ? "CREANDO PDF..." : "DESCARGAR"}
 		</Button>
 		<Button
 			color="darkCasaMatte.6"
@@ -533,7 +408,7 @@ const ActionButtons = ({ isLoading, generationStatus, onDownload, onReturn }) =>
 			sx={{ fontWeight : "200" }}
 			onClick={onReturn}
 			loading={isLoading}
-			disabled={generationStatus === "generating"}
+			disabled={disabled}
 			fullWidth
 		>
 			REGRESAR

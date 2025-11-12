@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { useState, useEffect, useContext } from "react";
-import PropTypes                           from "prop-types";
+import { useContext } from "react";
+import PropTypes      from "prop-types";
 //Redux
 import { useSelector, shallowEqual } from "react-redux";
 //Contexts
@@ -11,7 +11,7 @@ import { handlerResizerImage, selectPhotoUrl } from "./imgLayout.helpers";
 import ActionImagesLayout from "./ActionImagesLayout";
 //Styles
 import "./ImgLayout.scss";
-import { cleanNotifications, showNotification } from "@mantine/notifications";
+// import { cleanNotifications, showNotification } from "@mantine/notifications";
 
 const ImgLayout = ({
 	imageNo,
@@ -28,7 +28,7 @@ const ImgLayout = ({
 
 	const dragerImage = useSelector((state) => state.workSpaceSlice.currentPhotoDragger, shallowEqual);
 
-	const [ isLowQuality, setIsLowQuality ] = useState(false);
+	// const [ isLowQuality, setIsLowQuality ] = useState(false);
 
 	const handleDrop = (e) => {
 		e.preventDefault();
@@ -54,45 +54,45 @@ const ImgLayout = ({
 	};
 
 
-	const handlerQuality = () => {
-		const megapixels = imageData?.pixels / 1_000_000;
+	// const handlerQuality = () => {
+	// 	const megapixels = imageData?.pixels / 1_000_000;
 
-		if (imageData && (megapixels < 8)) {
-			cleanNotifications();
-			showNotification({
-				title     : "Alerta baja calidad",
-				message   : `La imagen en el recuadro señalado presenta una baja calidad. De ${megapixels} pixeles. Recomendamos que la resolución de la imagen sea de 8 Mega Pixeles o superior.`,
-				color     : "yellow",
-				autoClose : 10000,
-				styles    : () => ({
-					root : {
-									  "&::before" : {
-										  borderRadius : "0px",
-										  width        : "3px",
-									  },
-									  borderRadius : "0px",
-					},
+	// 	if (imageData && (megapixels < 8)) {
+	// 		cleanNotifications();
+	// 		showNotification({
+	// 			title     : "Alerta baja calidad",
+	// 			message   : `La imagen en el recuadro señalado presenta una baja calidad. De ${megapixels} pixeles. Recomendamos que la resolución de la imagen sea de 8 Mega Pixeles o superior.`,
+	// 			color     : "yellow",
+	// 			autoClose : 10000,
+	// 			styles    : () => ({
+	// 				root : {
+	// 								  "&::before" : {
+	// 									  borderRadius : "0px",
+	// 									  width        : "3px",
+	// 								  },
+	// 								  borderRadius : "0px",
+	// 				},
 
-					title       : { fontFamily : "Helvetica", fontWeight : "500", textTransform : "uppercase" },
-					description : { fontFamily : "Helvetica" },
-				}),
-			});
-			setIsLowQuality(true);
-			return;
-		}
-		setIsLowQuality(false);
-	};
+	// 				title       : { fontFamily : "Helvetica", fontWeight : "500", textTransform : "uppercase" },
+	// 				description : { fontFamily : "Helvetica" },
+	// 			}),
+	// 		});
+	// 		setIsLowQuality(true);
+	// 		return;
+	// 	}
+	// 	setIsLowQuality(false);
+	// };
 
-	useEffect(() => {
-		handlerQuality();
-	}, []);
+	// useEffect(() => {
+	// 	handlerQuality();
+	// }, []);
 
 	return (
 		<div
 			onDrop={(e) => handleDrop(e)}
 			onDragOver={(e) => handleDragOver(e)}
 			className={
-				`ImgLayout ${isUnderImage ? "isUnderImage" : ""} ${isLowQuality ? "low-quality" : ""} ${isCoverImage && "relevantColor"}`
+				`ImgLayout ${isUnderImage ? "isUnderImage" : ""} ${isCoverImage && "relevantColor"}`
 			}
 			id={`${currentPageId}-${sheetNo}-${imageNo}`}
 			{
