@@ -222,9 +222,19 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 				if (blobImagePage1) {
 					allBase64Images.push(blobImagePage1);
+				} else {
+					allBase64Images.push(undefined);
 				}
+
+				const isNotFoundSheet2 = !bookSpreadPages[i]?.sheet2;
+				if (isNotFoundSheet2) {
+					continue;
+				}
+
 				if (blobImagePage2) {
 					allBase64Images.push(blobImagePage2);
+				} else {
+					allBase64Images.push(undefined);
 				}
 
 				// Actualizar progreso
