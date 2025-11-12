@@ -47,7 +47,8 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		const parseJSON = JSON.parse(myData);
 		const pagesList = convertToArray(parseJSON?.pages);
 		if (isValidArray(pagesList)) {
-			setBookSpreadPages(pagesList);
+			const pagesFilterNotFront = pagesList.filter((page) => page.id !== "FrontLayout");
+			setBookSpreadPages(pagesFilterNotFront);
 		} else {
 			setIsLoading(false);
 			return;
@@ -118,6 +119,18 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		}
 	}, [currentIndexSpread]);
 
+	const getFormatKey = (configDataBook) => {
+		const { product, format } = configDataBook || {};
+
+		if ( product === "travelcoffeetable") {
+			return "travelcoffeetable";
+		}
+		if ( (product === "layflat") && format ) {
+			return `${product}${format.charAt(0).toUpperCase() + format.slice(1).toLowerCase()}`;
+		}
+		return format;
+	};
+
 	const LayoutContainerPage = ({ imgSrc }) => {
 		const bodyHtml = (
 			<div
@@ -151,7 +164,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	};
 
 	const PageComponent = ({ children }) => {
-		const formatKey = bookConfigData?.format;
+		const formatKey = getFormatKey(bookConfigData);
 		const sizeKey = bookConfigData?.sizePhotoBook;
 		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
 
