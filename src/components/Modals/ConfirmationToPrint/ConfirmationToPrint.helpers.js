@@ -10,6 +10,10 @@ export const inCompletePages = (pages) => {
 	clonePagesLeaveFrontPage.forEach((page) => {
 		const { sheet1, sheet2 } = page;
 
+		if (!sheet2.photos) {
+			console.log(page);
+		}
+
 		if (isIncompletedPhotos(sheet1.photos) && (sheet1.layoutType !== "")) {
 			incompletedPages.push(sheet1.pageNo);
 		}
