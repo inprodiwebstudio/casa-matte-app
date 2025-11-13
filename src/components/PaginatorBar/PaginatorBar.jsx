@@ -86,14 +86,15 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 
 	useEffect(() => {
 		const dataList = convertToArray(pagesData).slice(1, convertToArray(pagesData).length);
-		if (isValidArray(dataList)) {
+		const dataListLeaveFrontPage = dataList.filter(page => (page?.id !== "FrontLayout"));
+		if (isValidArray(dataListLeaveFrontPage)) {
 			const newPagesData = { ...pagesData };
 			delete newPagesData[convertToArray(pagesData)[0]?.id];
 			const newData = {
 				pages : {
 					...newPagesData,
 				},
-				pagesIds : dataList.map(page => page?.id),
+				pagesIds : dataListLeaveFrontPage.map(page => page?.id),
 			};
 			setPageList(newData);
 			return;

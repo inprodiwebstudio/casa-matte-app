@@ -1,5 +1,5 @@
 export const inCompletePages = (pages) => {
-	console.log(pages);
+	const clonePagesLeaveFrontPage = pages.filter((page) => (page?.id !== "FrontLayout"));
 	const incompletedPages = [];
 
 	const isIncompletedPhotos = (objectPhotos) => {
@@ -7,7 +7,7 @@ export const inCompletePages = (pages) => {
 
 		return photos.some((photo) => ((photo.id === "") || (photo.url === "")));
 	};
-	pages.forEach((page) => {
+	clonePagesLeaveFrontPage.forEach((page) => {
 		const { sheet1, sheet2 } = page;
 
 		if (isIncompletedPhotos(sheet1.photos) && (sheet1.layoutType !== "")) {
