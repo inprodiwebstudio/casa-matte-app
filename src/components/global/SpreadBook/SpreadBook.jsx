@@ -54,6 +54,7 @@ const SpreadBook = ({
 	return (
 		<div
 			className="SpreadBook"
+			id="spreadBook-snap-container"
 		>
 			<div
 				className={
