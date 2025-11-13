@@ -307,15 +307,11 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		const pdfDocument = (
 			<Document>
 				{allImages.map((base64PageImg, index) => {
-					// Solo crear página si hay imagen válida
-					if (base64PageImg) {
-						return (
-							<PageComponent key={index}>
-								<LayoutContainerPage imgSrc={base64PageImg} />
-							</PageComponent>
-						);
-					}
-					return null;
+					return (
+						<PageComponent key={index}>
+							<LayoutContainerPage imgSrc={base64PageImg} />
+						</PageComponent>
+					);
 				}).filter(Boolean)}
 			</Document>
 		);
