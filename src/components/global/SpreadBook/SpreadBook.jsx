@@ -13,6 +13,7 @@ const SpreadBook = ({
 	isWorkSpace = false,
 	isAvailableRightSheet = true,
 	contents,
+	shadowDisabled = false,
 }) => {
 	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 
@@ -58,7 +59,7 @@ const SpreadBook = ({
 		>
 			<div
 				className={
-					`page-body ${(currentSelectedPage === "sheet1") && "isActivePage"}`
+					`page-body ${(currentSelectedPage === "sheet1") && "isActivePage"} ${shadowDisabled && "shadowDisabled"}`
 				}
 				style={{
 					aspectRatio : handlerAspectRatio,
@@ -78,7 +79,7 @@ const SpreadBook = ({
 				(isAvailableRightSheet && !isInDoublePage) && (
 					<div
 						className={
-							`page-body ${(currentSelectedPage === "sheet2") && "isActivePage"}`
+							`page-body ${(currentSelectedPage === "sheet2") && "isActivePage"} ${shadowDisabled && "shadowDisabled"}`
 						}
 						style={{
 							aspectRatio : handlerAspectRatio,

@@ -42,6 +42,9 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 	const processingRef = useRef(false);
 
+	// Determinar si es producto layflat
+	const isLayflatProduct = bookConfigData?.product === "layflat";
+
 	const handlerAndParseConfig = (config) => {
 		const myData = config.replace(/\.(heic|webp)/g, ".jpg");
 		const parseJSON = JSON.parse(myData);
@@ -122,10 +125,10 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const getFormatKey = (configDataBook) => {
 		const { product, format } = configDataBook || {};
 
-		if ( product === "travelcoffeetable") {
+		if (product === "travelcoffeetable") {
 			return "travelcoffeetable";
 		}
-		if ( (product === "layflat") && format ) {
+		if ((product === "layflat") && format) {
 			return `${product}${format.charAt(0).toUpperCase() + format.slice(1).toLowerCase()}`;
 		}
 		return format;
@@ -177,15 +180,42 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		);
 	};
 
-	const zipDownload = async (pdfBlob) => {
+	// Función para descargar ZIP de imágenes PNG (para layflat)
+	const zipDownloadImages = async (images) => {
+		const zip = new JSZip();
+		const baseName = `${photoBookData.correo_del_autor}-noPedido-${photoBookData.id_del_pedido}-photobookId_${photoBookData.id}`;
+
+		// Agregar cada imagen al ZIP
+		images.forEach((imageBase64, index) => {
+			if (imageBase64) {
+				// Convertir base64 a blob
+				const byteString = atob(imageBase64.split(",")[1]);
+				const mimeString = imageBase64.split(",")[0].split(":")[1].split(";")[0];
+				const ab = new ArrayBuffer(byteString.length);
+				const ia = new Uint8Array(ab);
+
+				for (let i = 0; i < byteString.length; i++) {
+					ia[i] = byteString.charCodeAt(i);
+				}
+
+				const blob = new Blob([ab], { type : mimeString });
+				zip.file(`${baseName}_spread_${index + 1}.png`, blob);
+			}
+		});
+
+		saveAs(await zip.generateAsync({ type : "blob" }), `${baseName}_images.zip`);
+	};
+
+	// Función para descargar ZIP de PDF (para productos normales)
+	const zipDownloadPdf = async (pdfBlob) => {
 		const zip = new JSZip();
 		const baseName = `${photoBookData.correo_del_autor}-noPedido-${photoBookData.id_del_pedido}-photobookId_${photoBookData.id}`;
 
 		zip.file(`${baseName}.pdf`, pdfBlob);
-
 		saveAs(await zip.generateAsync({ type : "blob" }), `${baseName}.zip`);
 	};
 
+	// Función para tomar snapshot de página individual (productos normales)
 	const handlerTakeSnapshot = async (pageNumber) => {
 		try {
 			await new Promise(resolve => requestAnimationFrame(resolve));
@@ -193,6 +223,19 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			return blobImage;
 		} catch (error) {
 			console.error(`Error tomando snapshot de página ${pageNumber}:`, error);
+			return null;
+		}
+	};
+
+	// Función para tomar snapshot del spread completo (para layflat)
+	const handlerTakeSpreadSnapshot = async () => {
+		try {
+			await new Promise(resolve => requestAnimationFrame(resolve));
+			// Usar el nuevo ID para el spread completo
+			const blobImage = await textToImage("spreadBook-snap-container");
+			return blobImage;
+		} catch (error) {
+			console.error("Error tomando snapshot del spread completo:", error);
 			return null;
 		}
 	};
@@ -211,25 +254,40 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			// Verificar que el DOM esté listo
 			await new Promise(resolve => requestAnimationFrame(resolve));
 
-			// Tomar snapshots
-			const page1Snapshot = await handlerTakeSnapshot(1);
-			let page2Snapshot = null;
+			let result;
 
-			// Solo tomar snapshot de página 2 si el spread tiene sheet2
-			if (spread?.sheet2) {
-				page2Snapshot = await handlerTakeSnapshot(2);
+			if (isLayflatProduct) {
+				// Para layflat: tomar snapshot del spread completo
+				const spreadSnapshot = await handlerTakeSpreadSnapshot();
+				console.log(`Spread ${spreadIndex + 1} (layflat) procesado:`, {
+					spread : !!spreadSnapshot,
+				});
+				result = {
+					spread : spreadSnapshot || undefined,
+				};
+			} else {
+				// Para productos normales: tomar snapshots individuales
+				const page1Snapshot = await handlerTakeSnapshot(1);
+				let page2Snapshot = null;
+
+				// Solo tomar snapshot de página 2 si el spread tiene sheet2
+				if (spread?.sheet2) {
+					page2Snapshot = await handlerTakeSnapshot(2);
+				}
+
+				console.log(`Spread ${spreadIndex + 1} procesado:`, {
+					page1     : !!page1Snapshot,
+					page2     : !!page2Snapshot,
+					hasSheet2 : !!spread?.sheet2,
+				});
+
+				result = {
+					page1 : page1Snapshot || undefined,
+					page2 : spread?.sheet2 ? (page2Snapshot || undefined) : undefined,
+				};
 			}
 
-			console.log(`Spread ${spreadIndex + 1} procesado:`, {
-				page1     : !!page1Snapshot,
-				page2     : !!page2Snapshot,
-				hasSheet2 : !!spread?.sheet2,
-			});
-
-			return {
-				page1 : page1Snapshot || undefined,
-				page2 : spread?.sheet2 ? (page2Snapshot || undefined) : undefined,
-			};
+			return result;
 
 		} catch (error) {
 			console.error(`Error procesando spread ${spreadIndex + 1}:`, error);
@@ -243,10 +301,17 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 			// Si falla después de los reintentos, retornar undefined
 			console.warn(`Spread ${spreadIndex + 1} falló después de ${retryCount + 1} intentos`);
-			return {
-				page1 : undefined,
-				page2 : spread?.sheet2 ? undefined : undefined,
-			};
+
+			if (isLayflatProduct) {
+				return {
+					spread : undefined,
+				};
+			} else {
+				return {
+					page1 : undefined,
+					page2 : spread?.sheet2 ? undefined : undefined,
+				};
+			}
 		}
 	};
 
@@ -275,7 +340,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		return chunkResults;
 	};
 
-	// Función para generar PDF
+	// Función para generar PDF (para productos normales)
 	const generateCompletePdf = async (allImages) => {
 		console.log("=== INICIANDO GENERACIÓN DE PDF ===");
 		console.log("Total de imágenes en array:", allImages.length);
@@ -339,6 +404,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			const CHUNK_SIZE = 1; // Reducir a 1 para mejor control
 
 			console.log(`🎬 INICIANDO DESCARGA: ${totalSpreads} spreads`);
+			console.log(`📦 Tipo de producto: ${isLayflatProduct ? "LAYFLAT (imágenes)" : "NORMAL (PDF)"}`);
 
 			// Procesar cada spread secuencialmente con mejor control
 			for (let chunkStart = 0; chunkStart < totalSpreads; chunkStart += CHUNK_SIZE) {
@@ -352,17 +418,26 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 				// Agregar resultados en orden
 				for (const result of chunkResults) {
-					console.log(`📄 Spread ${result.spreadIndex + 1}:`, {
-						page1 : !!result.page1,
-						page2 : !!result.page2,
-					});
+					if (isLayflatProduct) {
+						// Para layflat: agregar solo el spread completo
+						console.log(`📄 Spread ${result.spreadIndex + 1} (layflat):`, {
+							spread : !!result.spread,
+						});
+						allBase64Images.push(result.spread);
+					} else {
+						// Para productos normales: agregar páginas individuales
+						console.log(`📄 Spread ${result.spreadIndex + 1}:`, {
+							page1 : !!result.page1,
+							page2 : !!result.page2,
+						});
 
-					// Agregar página 1
-					allBase64Images.push(result.page1);
+						// Agregar página 1
+						allBase64Images.push(result.page1);
 
-					// Agregar página 2 si existe
-					if (result.page2 !== undefined) {
-						allBase64Images.push(result.page2);
+						// Agregar página 2 si existe
+						if (result.page2 !== undefined) {
+							allBase64Images.push(result.page2);
+						}
 					}
 				}
 
@@ -379,21 +454,27 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			}
 
 			console.log("✅ TODOS LOS SPREADS PROCESADOS");
-			console.log(`📊 Total de páginas generadas: ${allBase64Images.length}`);
+			console.log(`📊 Total de ${isLayflatProduct ? "spreads" : "páginas"} generadas: ${allBase64Images.length}`);
 
 			setGenerationStatus("creating_pdf");
 
-			// Generar PDF
-			const blobPdf = await generateCompletePdf(allBase64Images);
-			await zipDownload(blobPdf);
+			if (isLayflatProduct) {
+				// Para layflat: descargar ZIP de imágenes PNG
+				console.log("📦 Generando ZIP de imágenes PNG para layflat");
+				await zipDownloadImages(allBase64Images);
+				console.log("🎉 ZIP DE IMÁGENES GENERADO Y DESCARGADO EXITOSAMENTE");
+			} else {
+				// Para productos normales: generar y descargar PDF
+				const blobPdf = await generateCompletePdf(allBase64Images);
+				await zipDownloadPdf(blobPdf);
+				console.log("🎉 PDF GENERADO Y DESCARGADO EXITOSAMENTE");
+			}
 
 			setGenerationStatus("completed");
 			setProgress(100);
 
-			console.log("🎉 PDF GENERADO Y DESCARGADO EXITOSAMENTE");
-
 		} catch (error) {
-			console.error("❌ ERROR GENERANDO PDF:", error);
+			console.error("❌ ERROR GENERANDO DESCARGABLE:", error);
 			setGenerationStatus("error");
 		} finally {
 			setIsGenerating(false);
@@ -420,8 +501,13 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			</Text>
 			<Progress value={progress} mb="xs" />
 			<Text size="sm" color="dimmed">
-				Progreso: {Math.round(progress)}% - {base64ImagePages.filter(img => img !== undefined).length} páginas generadas
+				Progreso: {Math.round(progress)}% - {base64ImagePages.filter(img => img !== undefined).length} {isLayflatProduct ? "spreads" : "páginas"} generadas
 			</Text>
+			{isLayflatProduct && (
+				<Text size="sm" color="blue" mt="xs">
+					📦 Producto Layflat - Descargando imágenes PNG
+				</Text>
+			)}
 			{generationStatus === "error" && (
 				<Text size="sm" color="red" mt="sm">
 					Ocurrió un error. Por favor intenta nuevamente.
@@ -439,6 +525,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 				onDownload={handleDownload}
 				onReturn={onReturn}
 				disabled={isGenerating}
+				isLayflatProduct={isLayflatProduct}
 			/>
 			{currentSpreadDataPage && (
 				<GhostPagesDom
@@ -450,7 +537,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	);
 };
 
-const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload, onReturn, disabled }) => (
+const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload, onReturn, disabled, isLayflatProduct }) => (
 	<Card
 		radius="13px"
 		shadow="lg"
@@ -478,6 +565,7 @@ const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload,
 				items={[
 					{ label : "MODELO", value : photoBookData?.modelo ?? "--" },
 					{ label : "TAMAÑO", value : photoBookData?.tamano ?? "--" },
+					...(isLayflatProduct ? [{ label : "TIPO", value : "LAYFLAT (Imágenes PNG)" }] : []),
 				]}
 			/>
 
@@ -487,6 +575,7 @@ const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload,
 				onDownload={onDownload}
 				onReturn={onReturn}
 				disabled={disabled}
+				isLayflatProduct={isLayflatProduct}
 			/>
 		</Stack>
 	</Card>
@@ -506,7 +595,7 @@ const OrderSection = ({ title, items }) => (
 	</Stack>
 );
 
-const ActionButtons = ({ isLoading, generationStatus, onDownload, onReturn, disabled }) => (
+const ActionButtons = ({ isLoading, generationStatus, onDownload, onReturn, disabled, isLayflatProduct }) => (
 	<Stack spacing="0px">
 		<Button
 			color="darkCasaMatte.7"
@@ -520,7 +609,8 @@ const ActionButtons = ({ isLoading, generationStatus, onDownload, onReturn, disa
 			fullWidth
 		>
 			{generationStatus === "generating" ? "GENERANDO..." :
-			 generationStatus === "creating_pdf" ? "CREANDO PDF..." : "DESCARGAR"}
+				generationStatus === "creating_pdf" ? "CREANDO PDF..." :
+					isLayflatProduct ? "DESCARGAR IMÁGENES PNG" : "DESCARGAR PDF"}
 		</Button>
 		<Button
 			color="darkCasaMatte.6"

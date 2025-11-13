@@ -40,6 +40,7 @@ const GhostPagesDom = ({spreadPage}) => {
 							<SpreadBook
 								isWorkSpace={true}
 								isAvailableRightSheet={isAvailableRightPage}
+								shadowDisabled
 								contents={{
 									ContentSheet1 : () => <ModLayoutHandler
 										pageNo={sheet1?.pageNo}
