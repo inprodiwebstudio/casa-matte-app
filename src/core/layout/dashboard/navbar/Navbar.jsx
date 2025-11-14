@@ -32,6 +32,9 @@ const Navbar = ({workSpaceSlice}) => {
 	const counterPages = () => counterSheets(listOfPages, false);
 
 	const insertNewPage = () => {
+		dispatch(workSpaceSlice.updatePageContent({
+			currentConfigPhotoBook,
+		}));
 		if (photoBookProduct === "layflat") {
 			workSpaceSlice.addSpread();
 		} else {
@@ -68,6 +71,9 @@ const Navbar = ({workSpaceSlice}) => {
 			});
 			return;
 		}
+		dispatch(workSpaceSlice.updatePageContent({
+			currentConfigPhotoBook,
+		}));
 		insertNewPage();
 	};
 

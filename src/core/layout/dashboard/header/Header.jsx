@@ -1,5 +1,5 @@
 import { Button, Text, TextInput }                from "@mantine/core";
-import { useEffect, useState }                    from "react";
+import { useContext, useEffect, useState }        from "react";
 import LogoCasaMatte                              from "Resources/images/casaMatteLogo.png";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
@@ -12,10 +12,11 @@ import "./Header.scss";
 // import { openContextModal } from "@mantine/modals";
 
 //Own components
-import { useParams }        from "react-router";
-import { PostingConfig }    from "Notifications";
-import { dayjs }            from "helpers";
-import { openContextModal } from "@mantine/modals";
+import { useParams }                     from "react-router";
+import { PostingConfig }                 from "Notifications";
+import { dayjs }                         from "helpers";
+import { openContextModal }              from "@mantine/modals";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
 
 
 const Header = () => {
@@ -26,6 +27,8 @@ const Header = () => {
 	const [ date, setDate ] = useState(undefined);
 
 	const [ projectName, setProjectName ] = useState(undefined);
+
+	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 
 	const productName = useSelector((state) => state.workSpaceSlice.data.productName, shallowEqual);
 	const projectTitle = useSelector((state) => state.workSpaceSlice.data.projectTittle, shallowEqual);
@@ -65,6 +68,9 @@ const Header = () => {
 	};
 
 	const submitData = async () => {
+		dispatch(workSpaceSlice.actions.updatePageContent({
+			currentConfigPhotoBook,
+		}));
 		try {
 			await dataMutation({
 				module : "wp-json/wp/v2/photobook-2-0",
@@ -124,7 +130,7 @@ const Header = () => {
 	return (
 		<div className="Header">
 			<div className={`body-container ${isPreviewActive && "isActivePreview"}`}>
-				<a href="https://casamatte.com/">
+				<a href="https://casamatte.wip-inprodi.com/">
 					<img src={LogoCasaMatte} width={120} />
 				</a>
 				{
