@@ -12,7 +12,8 @@ export const useExtraPriceHandler = () => {
 	const productType = useSelector((state) => state.workSpaceSlice.data.product, shallowEqual);
 
 	const listOfPages = convertToArray(dataPages.pages);
-	const counterPages = () => counterSheets(listOfPages);
+	const parseFilteredListPages = listOfPages.filter((page) => page?.id !== "FrontLayout");
+	const counterPages = () => counterSheets(parseFilteredListPages);
 
 	const handlerExtraCost = () => {
 		let extraCost = 0;
@@ -26,7 +27,7 @@ export const useExtraPriceHandler = () => {
 
 	useEffect(() => {
 		if (productType === "layflat") {
-			const myCounterPages = convertToArray(dataPages.pages).length;
+			const myCounterPages = parseFilteredListPages.length;
 			if (myCounterPages > maxRangePages) {
 				setExtraPages(myCounterPages - Number(maxRangePages));
 				return;
