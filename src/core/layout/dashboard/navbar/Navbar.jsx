@@ -10,9 +10,12 @@ import { workSpaceSlice }                                  from "store/Slices";
 import "./Navbar.scss";
 import { Text, Button, Center }                            from "@mantine/core";
 import { closeAllModals, openContextModal }                from "@mantine/modals";
+import { currentConfigPhotoBookContext }                   from "contexts/configContext";
+import { useContext }                                      from "react";
 
 const Navbar = ({workSpaceSlice}) => {
 	const dispatch = useDispatch();
+	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
 	const maxRangePages = useSelector((state) => state.workSpaceSlice.data?.maxRangePages, shallowEqual);
@@ -72,6 +75,9 @@ const Navbar = ({workSpaceSlice}) => {
 		if (statusViewPage === "managePages") {
 			return dispatch(workSpaceSlice.changeStatusViewPage("workspace"));
 		}
+		dispatch(workSpaceSlice.updatePageContent({
+			currentConfigPhotoBook,
+		}));
 		dispatch(workSpaceSlice.changeStatusViewPage("managePages"));
 	};
 
