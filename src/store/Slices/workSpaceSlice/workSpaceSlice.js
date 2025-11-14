@@ -361,14 +361,15 @@ export const workSpaceSlice = createSlice({
 		addPage : (state) => {
 			const newData = {...state.data.pages};
 			const pagesObjToArray = convertToArray(newData);
+			const pagesFilteredNotFront = pagesObjToArray.filter((page) => page?.id !== "FrontLayout");
 
-			const isAvailablePage = pagesObjToArray.find((page) => page.id === state.data.currentPage);
+			const isAvailablePage = pagesFilteredNotFront.find((page) => page.id === state.data.currentPage);
 
 			if (!isAvailablePage) {
 				return;
 			}
 
-			const listOfPages = pagesObjToArray.filter((page) => page.id !== "page1");
+			const listOfPages = pagesFilteredNotFront.filter((page) => page.id !== "page1");
 
 			const indexCurrentPage = listOfPages.findIndex((page) => page.id === state.data.currentPage);
 
@@ -469,10 +470,11 @@ export const workSpaceSlice = createSlice({
 		addSpread : (state) => {
 			const cloneDataPages = {...state.data.pages};
 			const currentListOfPages = convertToArray(cloneDataPages);
-			const currentIndexPage = currentListOfPages.findIndex((page) => page.id === state.currentPageData.id);
+			const pagesFilteredNotFront = currentListOfPages.filter((page) => page?.id !== "FrontLayout");
+			const currentIndexPage = pagesFilteredNotFront.findIndex((page) => page.id === state.currentPageData.id);
 
-			if (currentIndexPage === (currentListOfPages.length - 1)) {
-				const pageData = currentListOfPages[currentIndexPage];
+			if (currentIndexPage === (pagesFilteredNotFront.length - 1)) {
+				const pageData = pagesFilteredNotFront[currentIndexPage];
 
 				const pageId = `page${Number(pageData.id.split("page")[1]) + 1}`;
 				const newPageData = {
@@ -491,14 +493,14 @@ export const workSpaceSlice = createSlice({
 					},
 				};
 
-				const newListPages = [...currentListOfPages, newPageData];
+				const newListPages = [...pagesFilteredNotFront, newPageData];
 				const newObjPages = convertToObject(newListPages);
 
 				state.data.pages = newObjPages;
 				return;
 			}
 
-			const slicePagesToReorder = currentListOfPages.slice(currentIndexPage + 1, currentListOfPages.length);
+			const slicePagesToReorder = pagesFilteredNotFront.slice(currentIndexPage + 1, pagesFilteredNotFront.length);
 			slicePagesToReorder.unshift({
 				id     : slicePagesToReorder[0].id,
 				sheet1 : {
@@ -531,7 +533,7 @@ export const workSpaceSlice = createSlice({
 					id : `page${Number(pageData.id.split("page")[1]) + 1}`,
 				};
 			});
-			const pagesBeforeInsert = currentListOfPages.slice(0, currentIndexPage + 1);
+			const pagesBeforeInsert = pagesFilteredNotFront.slice(0, currentIndexPage + 1);
 			const finalPages = [...pagesBeforeInsert, ...pagesReordered];
 			const newPagesObject = convertToObject(finalPages);
 
