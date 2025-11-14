@@ -3,6 +3,7 @@ import { useSortable }               from "@dnd-kit/sortable";
 import { shallowEqual, useSelector } from "react-redux";
 import { useMemo }                   from "react";
 import { Text }                      from "@mantine/core";
+import ModLayoutHandler              from "components/global/ModLayoutHandler";
 import { useHandlerTypeConfigBooks } from "helpers/Hooks/useHandlerTypeConfigBooks";
 
 export const SortableBookPage = ({ pageData, aspectRatio }) => {
@@ -32,14 +33,10 @@ export const SortableBookPage = ({ pageData, aspectRatio }) => {
 
 		if (LayoutMod) {
 			return (
-				<LayoutMod
-					pageNo={pageData?.pageNo}
-					modLayout={pageData?.layoutType}
-					isThumbNail={false}
-					isInPaginator={true}
-					data={pageData}
-					isInWorkSpace={false}
-					sheetNo={Number(pageData?.sheetId.split("sheet")[1])}
+				<ModLayoutHandler
+					modLayoutKey={pageData?.layoutType}
+					type="thumbNail"
+					photos={pageData?.photos}
 				/>
 			);
 		}
