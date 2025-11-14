@@ -10,7 +10,7 @@ export const inCompletePages = (pages) => {
 	clonePagesLeaveFrontPage.forEach((page) => {
 		const { sheet1, sheet2 } = page;
 
-		if (!sheet2.photos || !sheet1.photos) {
+		if (!sheet2?.photos || !sheet1?.photos) {
 			console.log(page);
 		}
 
