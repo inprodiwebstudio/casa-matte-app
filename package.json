@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy": "https://casamatte.com/",
+  "proxy": "https://casamatte.wip-inprodi.com/",
   "engines": {
     "node": "18.12.0",
     "yarn": ">=3.0.0"
@@ -58,6 +58,7 @@
     "imagekit": "^4.1.2",
     "imagekit-javascript": "^1.5.4",
     "imagekitio-react": "^2.0.0",
+    "jspdf": "^3.0.3",
     "jszip": "^3.10.1",
     "localforage": "^1.10.0",
     "path": "^0.12.7",

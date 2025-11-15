@@ -8,10 +8,8 @@ import {
 	Button,
 	Progress,
 } from "@mantine/core";
-import ReactDOMServer from "react-dom/server";
-import Html           from "react-pdf-html";
-import saveAs         from "file-saver";
-import GhostPagesDom  from "./GhostPagesDom";
+import saveAs        from "file-saver";
+import GhostPagesDom from "./GhostPagesDom";
 import {
 	GENERATION_STATUS_MESSAGES,
 	PHOTO_BOOK_TYPES,
@@ -22,8 +20,17 @@ import { shallowEqual, useDispatch, useSelector }    from "react-redux";
 import { workSpaceSlice }                            from "store/Slices";
 import { convertToArray, isValidArray, textToImage } from "helpers";
 import { currentConfigPhotoBookContext }             from "contexts/configContext";
-import { Page, pdf, Document }                       from "@react-pdf/renderer";
 import JSZip                                         from "jszip";
+
+const generateBlankImage = (size) => {
+	const canvas = document.createElement("canvas");
+	canvas.width = size[0];
+	canvas.height = size[1];
+	const ctx = canvas.getContext("2d");
+	ctx.fillStyle = "white";
+	ctx.fillRect(0, 0, size[0], size[1]);
+	return canvas.toDataURL("image/png");
+};
 
 const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const { setCurrentConfigPhotoBook } = useContext(currentConfigPhotoBookContext);
@@ -134,73 +141,27 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		return format;
 	};
 
-	const LayoutContainerPage = ({ imgSrc }) => {
-		const bodyHtml = (
-			<div
-				style={{
-					height   : "100%",
-					width    : "100%",
-					overflow : "hidden",
-				}}
-			>
-				{
-					imgSrc && (
-						<img
-							src={imgSrc}
-							alt={""}
-							style={{
-								objectFit : "cover",
-								height    : "100%",
-								width     : "100%",
-							}}
-						/>
-					)
-				}
-			</div>
-		);
-
-		const toPdfElement = ReactDOMServer.renderToStaticMarkup(bodyHtml);
-
-		return (
-			<Html>{toPdfElement}</Html>
-		);
-	};
-
-	const PageComponent = ({ children }) => {
-		const formatKey = getFormatKey(bookConfigData);
-		const sizeKey = bookConfigData?.sizePhotoBook;
-		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
-
-		const { size } = config;
-
-		return (
-			<Page size={size}>
-				{children}
-			</Page>
-		);
-	};
 
 	// Función para descargar ZIP de imágenes PNG (para layflat)
-	const zipDownloadImages = async (images) => {
+	const zipDownloadImages = async (images, size) => {
 		const zip = new JSZip();
 		const baseName = `${photoBookData.correo_del_autor}-noPedido-${photoBookData.id_del_pedido}-photobookId_${photoBookData.id}`;
 
 		// Agregar cada imagen al ZIP
 		images.forEach((imageBase64, index) => {
-			if (imageBase64) {
-				// Convertir base64 a blob
-				const byteString = atob(imageBase64.split(",")[1]);
-				const mimeString = imageBase64.split(",")[0].split(":")[1].split(";")[0];
-				const ab = new ArrayBuffer(byteString.length);
-				const ia = new Uint8Array(ab);
+			const finalImage = imageBase64 || generateBlankImage(size);
+			// Convertir base64 a blob
+			const byteString = atob(finalImage.split(",")[1]);
+			const mimeString = finalImage.split(",")[0].split(":")[1].split(";")[0];
+			const ab = new ArrayBuffer(byteString.length);
+			const ia = new Uint8Array(ab);
 
-				for (let i = 0; i < byteString.length; i++) {
-					ia[i] = byteString.charCodeAt(i);
-				}
-
-				const blob = new Blob([ab], { type : mimeString });
-				zip.file(`${baseName}_spread_${index + 1}.png`, blob);
+			for (let i = 0; i < byteString.length; i++) {
+				ia[i] = byteString.charCodeAt(i);
 			}
+
+			const blob = new Blob([ab], { type : mimeString });
+			zip.file(`${baseName}_spread_${index + 1}.png`, blob);
 		});
 
 		saveAs(await zip.generateAsync({ type : "blob" }), `${baseName}_images.zip`);
@@ -249,7 +210,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			setCurrentIndexSpread(spreadIndex);
 
 			// Esperar más tiempo para asegurar que el DOM se actualice completamente
-			await new Promise(resolve => setTimeout(resolve, 500));
+			await new Promise(resolve => setTimeout(resolve, 1000));
 
 			// Verificar que el DOM esté listo
 			await new Promise(resolve => requestAnimationFrame(resolve));
@@ -340,9 +301,9 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		return chunkResults;
 	};
 
-	// Función para generar PDF (para productos normales)
+	// Función para generar PDF usando Web Worker (para productos normales)
 	const generateCompletePdf = async (allImages) => {
-		console.log("=== INICIANDO GENERACIÓN DE PDF ===");
+		console.log("=== INICIANDO GENERACIÓN DE PDF CON WORKER ===");
 		console.log("Total de imágenes en array:", allImages.length);
 
 		// Verificar qué tenemos realmente
@@ -360,32 +321,51 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		});
 
 		console.log("Estadísticas de imágenes:", imageStats);
-		console.log("Contenido del array:", allImages.map((img, idx) =>
-			`[${idx}] ${img ? "✓ IMAGEN" : "✗ UNDEFINED"}`
-		));
 
-		if (imageStats.valid === 0) {
-			throw new Error("No hay imágenes válidas para generar el PDF");
+		// Obtener tamaño de página
+		const formatKey = getFormatKey(bookConfigData);
+		const sizeKey = bookConfigData?.sizePhotoBook;
+		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
+		const pageSize = config?.size; // [width, height] en puntos
+
+		if (!pageSize) {
+			throw new Error("No se pudo determinar el tamaño de página");
 		}
 
-		// Crear documento con todas las imágenes (incluyendo undefined)
-		const pdfDocument = (
-			<Document>
-				{allImages.map((base64PageImg, index) => {
-					return (
-						<PageComponent key={index}>
-							<LayoutContainerPage imgSrc={base64PageImg} />
-						</PageComponent>
-					);
-				}).filter(Boolean)}
-			</Document>
-		);
+		// Procesar imágenes: reemplazar undefined/null con imagen en blanco
+		const processedImages = allImages.map(img => img || generateBlankImage(pageSize));
 
-		await new Promise(resolve => setTimeout(resolve, 100));
-		const blobPdf = await pdf(pdfDocument).toBlob();
+		console.log(`Generando PDF con ${processedImages.length} páginas`);
 
-		console.log(`✅ PDF generado con ${imageStats.valid} páginas válidas`);
-		return blobPdf;
+		// Crear worker
+		const worker = new Worker(new URL("./pdfWorker.js", import.meta.url));
+
+		return new Promise((resolve, reject) => {
+			worker.onmessage = function(e) {
+				const { success, blob, error } = e.data;
+				worker.terminate();
+
+				if (success) {
+					console.log("✅ PDF generado exitosamente en worker");
+					resolve(blob);
+				} else {
+					console.error("❌ Error en worker:", error);
+					reject(new Error(error));
+				}
+			};
+
+			worker.onerror = function(error) {
+				worker.terminate();
+				console.error("❌ Error en worker:", error);
+				reject(error);
+			};
+
+			// Enviar datos al worker
+			worker.postMessage({
+				images   : processedImages,
+				pageSize : pageSize,
+			});
+		});
 	};
 
 	// Función principal completamente reescrita
@@ -448,7 +428,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 				// Delay más largo entre chunks para mayor estabilidad
 				if (chunkEnd < totalSpreads) {
-					await new Promise(resolve => setTimeout(resolve, 200));
+					await new Promise(resolve => setTimeout(resolve, 500));
 					await new Promise(resolve => requestAnimationFrame(resolve));
 				}
 			}
@@ -461,7 +441,11 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			if (isLayflatProduct) {
 				// Para layflat: descargar ZIP de imágenes PNG
 				console.log("📦 Generando ZIP de imágenes PNG para layflat");
-				await zipDownloadImages(allBase64Images);
+				const formatKey = getFormatKey(bookConfigData);
+				const sizeKey = bookConfigData?.sizePhotoBook;
+				const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
+				const spreadSize = config?.size;
+				await zipDownloadImages(allBase64Images, spreadSize);
 				console.log("🎉 ZIP DE IMÁGENES GENERADO Y DESCARGADO EXITOSAMENTE");
 			} else {
 				// Para productos normales: generar y descargar PDF
@@ -501,7 +485,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			</Text>
 			<Progress value={progress} mb="xs" />
 			<Text size="sm" color="dimmed">
-				Progreso: {Math.round(progress)}% - {base64ImagePages.filter(img => img !== undefined).length} {isLayflatProduct ? "spreads" : "páginas"} generadas
+				Progreso: {Math.round(progress)}% - {base64ImagePages.length} {isLayflatProduct ? "spreads" : "páginas"} generadas
 			</Text>
 			{isLayflatProduct && (
 				<Text size="sm" color="blue" mt="xs">
