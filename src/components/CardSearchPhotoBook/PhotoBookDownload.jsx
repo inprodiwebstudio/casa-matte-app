@@ -8,10 +8,8 @@ import {
 	Button,
 	Progress,
 } from "@mantine/core";
-import ReactDOMServer from "react-dom/server";
-import Html           from "react-pdf-html";
-import saveAs         from "file-saver";
-import GhostPagesDom  from "./GhostPagesDom";
+import saveAs        from "file-saver";
+import GhostPagesDom from "./GhostPagesDom";
 import {
 	GENERATION_STATUS_MESSAGES,
 	PHOTO_BOOK_TYPES,
@@ -22,7 +20,6 @@ import { shallowEqual, useDispatch, useSelector }    from "react-redux";
 import { workSpaceSlice }                            from "store/Slices";
 import { convertToArray, isValidArray, textToImage } from "helpers";
 import { currentConfigPhotoBookContext }             from "contexts/configContext";
-import { Page, pdf, Document }                       from "@react-pdf/renderer";
 import JSZip                                         from "jszip";
 
 const PhotoBookDownload = ({ photoBookData, onReturn }) => {
@@ -134,51 +131,6 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		return format;
 	};
 
-	const LayoutContainerPage = ({ imgSrc }) => {
-		const bodyHtml = (
-			<div
-				style={{
-					height   : "100%",
-					width    : "100%",
-					overflow : "hidden",
-				}}
-			>
-				{
-					imgSrc && (
-						<img
-							src={imgSrc}
-							alt={""}
-							style={{
-								objectFit : "cover",
-								height    : "100%",
-								width     : "100%",
-							}}
-						/>
-					)
-				}
-			</div>
-		);
-
-		const toPdfElement = ReactDOMServer.renderToStaticMarkup(bodyHtml);
-
-		return (
-			<Html>{toPdfElement}</Html>
-		);
-	};
-
-	const PageComponent = ({ children }) => {
-		const formatKey = getFormatKey(bookConfigData);
-		const sizeKey = bookConfigData?.sizePhotoBook;
-		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
-
-		const { size } = config;
-
-		return (
-			<Page size={size}>
-				{children}
-			</Page>
-		);
-	};
 
 	// Función para descargar ZIP de imágenes PNG (para layflat)
 	const zipDownloadImages = async (images) => {
@@ -249,7 +201,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			setCurrentIndexSpread(spreadIndex);
 
 			// Esperar más tiempo para asegurar que el DOM se actualice completamente
-			await new Promise(resolve => setTimeout(resolve, 500));
+			await new Promise(resolve => setTimeout(resolve, 1000));
 
 			// Verificar que el DOM esté listo
 			await new Promise(resolve => requestAnimationFrame(resolve));
@@ -340,9 +292,9 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		return chunkResults;
 	};
 
-	// Función para generar PDF (para productos normales)
+	// Función para generar PDF usando Web Worker (para productos normales)
 	const generateCompletePdf = async (allImages) => {
-		console.log("=== INICIANDO GENERACIÓN DE PDF ===");
+		console.log("=== INICIANDO GENERACIÓN DE PDF CON WORKER ===");
 		console.log("Total de imágenes en array:", allImages.length);
 
 		// Verificar qué tenemos realmente
@@ -360,32 +312,55 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		});
 
 		console.log("Estadísticas de imágenes:", imageStats);
-		console.log("Contenido del array:", allImages.map((img, idx) =>
-			`[${idx}] ${img ? "✓ IMAGEN" : "✗ UNDEFINED"}`
-		));
 
 		if (imageStats.valid === 0) {
 			throw new Error("No hay imágenes válidas para generar el PDF");
 		}
 
-		// Crear documento con todas las imágenes (incluyendo undefined)
-		const pdfDocument = (
-			<Document>
-				{allImages.map((base64PageImg, index) => {
-					return (
-						<PageComponent key={index}>
-							<LayoutContainerPage imgSrc={base64PageImg} />
-						</PageComponent>
-					);
-				}).filter(Boolean)}
-			</Document>
-		);
+		// Obtener tamaño de página
+		const formatKey = getFormatKey(bookConfigData);
+		const sizeKey = bookConfigData?.sizePhotoBook;
+		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
+		const pageSize = config?.size; // [width, height] en puntos
 
-		await new Promise(resolve => setTimeout(resolve, 100));
-		const blobPdf = await pdf(pdfDocument).toBlob();
+		if (!pageSize) {
+			throw new Error("No se pudo determinar el tamaño de página");
+		}
 
-		console.log(`✅ PDF generado con ${imageStats.valid} páginas válidas`);
-		return blobPdf;
+		// Filtrar imágenes válidas (remover undefined/null)
+		const validImages = allImages.filter(img => img !== undefined && img !== null);
+
+		console.log(`Generando PDF con ${validImages.length} páginas válidas`);
+
+		// Crear worker
+		const worker = new Worker(new URL("./pdfWorker.js", import.meta.url));
+
+		return new Promise((resolve, reject) => {
+			worker.onmessage = function(e) {
+				const { success, blob, error } = e.data;
+				worker.terminate();
+
+				if (success) {
+					console.log("✅ PDF generado exitosamente en worker");
+					resolve(blob);
+				} else {
+					console.error("❌ Error en worker:", error);
+					reject(new Error(error));
+				}
+			};
+
+			worker.onerror = function(error) {
+				worker.terminate();
+				console.error("❌ Error en worker:", error);
+				reject(error);
+			};
+
+			// Enviar datos al worker
+			worker.postMessage({
+				images   : validImages,
+				pageSize : pageSize,
+			});
+		});
 	};
 
 	// Función principal completamente reescrita
@@ -448,7 +423,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 				// Delay más largo entre chunks para mayor estabilidad
 				if (chunkEnd < totalSpreads) {
-					await new Promise(resolve => setTimeout(resolve, 200));
+					await new Promise(resolve => setTimeout(resolve, 500));
 					await new Promise(resolve => requestAnimationFrame(resolve));
 				}
 			}
