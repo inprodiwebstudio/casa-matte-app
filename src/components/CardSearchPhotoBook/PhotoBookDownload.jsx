@@ -22,6 +22,16 @@ import { convertToArray, isValidArray, textToImage } from "helpers";
 import { currentConfigPhotoBookContext }             from "contexts/configContext";
 import JSZip                                         from "jszip";
 
+const generateBlankImage = (size) => {
+	const canvas = document.createElement("canvas");
+	canvas.width = size[0];
+	canvas.height = size[1];
+	const ctx = canvas.getContext("2d");
+	ctx.fillStyle = "white";
+	ctx.fillRect(0, 0, size[0], size[1]);
+	return canvas.toDataURL("image/png");
+};
+
 const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const { setCurrentConfigPhotoBook } = useContext(currentConfigPhotoBookContext);
 	const bookConfigData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
@@ -133,26 +143,25 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 
 	// Función para descargar ZIP de imágenes PNG (para layflat)
-	const zipDownloadImages = async (images) => {
+	const zipDownloadImages = async (images, size) => {
 		const zip = new JSZip();
 		const baseName = `${photoBookData.correo_del_autor}-noPedido-${photoBookData.id_del_pedido}-photobookId_${photoBookData.id}`;
 
 		// Agregar cada imagen al ZIP
 		images.forEach((imageBase64, index) => {
-			if (imageBase64) {
-				// Convertir base64 a blob
-				const byteString = atob(imageBase64.split(",")[1]);
-				const mimeString = imageBase64.split(",")[0].split(":")[1].split(";")[0];
-				const ab = new ArrayBuffer(byteString.length);
-				const ia = new Uint8Array(ab);
+			const finalImage = imageBase64 || generateBlankImage(size);
+			// Convertir base64 a blob
+			const byteString = atob(finalImage.split(",")[1]);
+			const mimeString = finalImage.split(",")[0].split(":")[1].split(";")[0];
+			const ab = new ArrayBuffer(byteString.length);
+			const ia = new Uint8Array(ab);
 
-				for (let i = 0; i < byteString.length; i++) {
-					ia[i] = byteString.charCodeAt(i);
-				}
-
-				const blob = new Blob([ab], { type : mimeString });
-				zip.file(`${baseName}_spread_${index + 1}.png`, blob);
+			for (let i = 0; i < byteString.length; i++) {
+				ia[i] = byteString.charCodeAt(i);
 			}
+
+			const blob = new Blob([ab], { type : mimeString });
+			zip.file(`${baseName}_spread_${index + 1}.png`, blob);
 		});
 
 		saveAs(await zip.generateAsync({ type : "blob" }), `${baseName}_images.zip`);
@@ -313,10 +322,6 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 		console.log("Estadísticas de imágenes:", imageStats);
 
-		if (imageStats.valid === 0) {
-			throw new Error("No hay imágenes válidas para generar el PDF");
-		}
-
 		// Obtener tamaño de página
 		const formatKey = getFormatKey(bookConfigData);
 		const sizeKey = bookConfigData?.sizePhotoBook;
@@ -327,10 +332,10 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			throw new Error("No se pudo determinar el tamaño de página");
 		}
 
-		// Filtrar imágenes válidas (remover undefined/null)
-		const validImages = allImages.filter(img => img !== undefined && img !== null);
+		// Procesar imágenes: reemplazar undefined/null con imagen en blanco
+		const processedImages = allImages.map(img => img || generateBlankImage(pageSize));
 
-		console.log(`Generando PDF con ${validImages.length} páginas válidas`);
+		console.log(`Generando PDF con ${processedImages.length} páginas`);
 
 		// Crear worker
 		const worker = new Worker(new URL("./pdfWorker.js", import.meta.url));
@@ -357,7 +362,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 			// Enviar datos al worker
 			worker.postMessage({
-				images   : validImages,
+				images   : processedImages,
 				pageSize : pageSize,
 			});
 		});
@@ -436,7 +441,11 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			if (isLayflatProduct) {
 				// Para layflat: descargar ZIP de imágenes PNG
 				console.log("📦 Generando ZIP de imágenes PNG para layflat");
-				await zipDownloadImages(allBase64Images);
+				const formatKey = getFormatKey(bookConfigData);
+				const sizeKey = bookConfigData?.sizePhotoBook;
+				const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
+				const spreadSize = config?.size;
+				await zipDownloadImages(allBase64Images, spreadSize);
 				console.log("🎉 ZIP DE IMÁGENES GENERADO Y DESCARGADO EXITOSAMENTE");
 			} else {
 				// Para productos normales: generar y descargar PDF
@@ -476,7 +485,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			</Text>
 			<Progress value={progress} mb="xs" />
 			<Text size="sm" color="dimmed">
-				Progreso: {Math.round(progress)}% - {base64ImagePages.filter(img => img !== undefined).length} {isLayflatProduct ? "spreads" : "páginas"} generadas
+				Progreso: {Math.round(progress)}% - {base64ImagePages.length} {isLayflatProduct ? "spreads" : "páginas"} generadas
 			</Text>
 			{isLayflatProduct && (
 				<Text size="sm" color="blue" mt="xs">

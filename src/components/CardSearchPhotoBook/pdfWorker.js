@@ -16,14 +16,12 @@ self.onmessage = function(e) {
 
 		// Agregar cada imagen como página
 		images.forEach((base64Img, index) => {
-			if (base64Img) {
-				if (index > 0) {
-					pdf.addPage([pageSize[0], pageSize[1]]);
-				}
-
-				// Agregar imagen a la página
-				pdf.addImage(base64Img, "PNG", 0, 0, pageSize[0], pageSize[1]);
+			if (index > 0) {
+				pdf.addPage([pageSize[0], pageSize[1]]);
 			}
+
+			// Agregar imagen a la página
+			pdf.addImage(base64Img, "PNG", 0, 0, pageSize[0], pageSize[1]);
 		});
 
 		// Generar blob del PDF
