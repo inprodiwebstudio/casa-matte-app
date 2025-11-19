@@ -135,6 +135,11 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	};
 
 	const LayoutContainerPage = ({ imgSrc }) => {
+		const formatKey = getFormatKey(bookConfigData);
+		const sizeKey = bookConfigData?.sizePhotoBook;
+		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
+
+		const { size } = config;
 		const bodyHtml = (
 			<div
 				style={{
@@ -147,11 +152,10 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 					imgSrc && (
 						<img
 							src={imgSrc}
-							alt={""}
+							alt={"image"}
 							style={{
-								objectFit : "cover",
-								height    : "100%",
-								width     : "100%",
+								height : size?.[1],
+								width  : size?.[0],
 							}}
 						/>
 					)
