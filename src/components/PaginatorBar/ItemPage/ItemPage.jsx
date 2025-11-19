@@ -18,7 +18,7 @@ const ItemPage = ({
 	draggableId,
 	handleDelete,
 }) => {
-	const {currentConfigPhotoBook, setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 
 	const dispatch = useDispatch();
 
@@ -37,21 +37,20 @@ const ItemPage = ({
 			pageId      : pageData.id,
 			currentPage : "sheet1",
 		}));
-		setCurrentConfigPhotoBook({
-			pageId : undefined,
-			sheet1 : {
-				modlayoutId : undefined,
-				texts       : undefined,
-				photos      : undefined,
-			},
-			sheet2 : {
-				modlayoutId : undefined,
-				texts       : undefined,
-				photos      : undefined,
-			},
-		});
+		// setCurrentConfigPhotoBook({
+		// 	pageId : undefined,
+		// 	sheet1 : {
+		// 		modlayoutId : undefined,
+		// 		texts       : undefined,
+		// 		photos      : undefined,
+		// 	},
+		// 	sheet2 : {
+		// 		modlayoutId : undefined,
+		// 		texts       : undefined,
+		// 		photos      : undefined,
+		// 	},
+		// });
 		dispatch(workSpaceSlice.actions.handleChangePage(draggableId));
-		console.log("Pass end fns");
 	};
 
 	const handlerPageData = () => {
