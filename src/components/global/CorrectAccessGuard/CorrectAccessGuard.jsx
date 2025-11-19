@@ -435,6 +435,11 @@ const CorrectAccessGuard = () => {
 			setStatusView("done");
 			return;
 		}
+		if (postId === "41959") {
+			addCurrentPhotoBookConfig(photobookData);
+			setStatusView("continue");
+			return;
+		}
 		setStatusView("notPaidExtras");
 		return;
 	};
