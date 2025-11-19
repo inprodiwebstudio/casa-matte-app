@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy": "https://casamatte.com/",
+  "proxy": "https://casamatte.wip-inprodi.com/",
   "engines": {
     "node": "18.12.0",
     "yarn": ">=3.0.0"
@@ -65,6 +65,7 @@
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^5.2.133",
     "pdfjs-lib": "^0.0.149",
+    "pdfkit": "^0.17.2",
     "prop-types": "^15.8.1",
     "qs": "^6.11.0",
     "react": "^18.2.0",
