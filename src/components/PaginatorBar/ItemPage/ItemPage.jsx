@@ -33,11 +33,11 @@ const ItemPage = ({
 		dispatch(workSpaceSlice.actions.updatePageContent({
 			currentConfigPhotoBook,
 		}));
-		console.log("Pass dispatch fn");
 		dispatch(workSpaceSlice.actions.setSelectePageData({
 			pageId      : pageData.id,
 			currentPage : "sheet1",
 		}));
+		console.log("Pass set selected page dispatch");
 		setCurrentConfigPhotoBook({
 			pageId : undefined,
 			sheet1 : {
