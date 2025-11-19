@@ -37,7 +37,6 @@ const ItemPage = ({
 			pageId      : pageData.id,
 			currentPage : "sheet1",
 		}));
-		console.log("Pass set selected page dispatch");
 		setCurrentConfigPhotoBook({
 			pageId : undefined,
 			sheet1 : {
@@ -51,6 +50,7 @@ const ItemPage = ({
 				photos      : undefined,
 			},
 		});
+		console.log("Pass set currentConfigPhotoBook");
 		dispatch(workSpaceSlice.actions.handleChangePage(draggableId));
 	};
 
