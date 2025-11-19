@@ -76,8 +76,17 @@ import {
 	Mod36Pdf,
 	Mod37Pdf,
 } from "./PdfMods/Regular";
+import { FrontMod1 } from "./FrontPages";
 
 const TravelCoffeeTable = {
+	FrontMod1 : {
+		id           : "FrontMod1",
+		layout       : FrontMod1,
+		numberPhotos : 1,
+		numberText   : 3,
+		cat          : "portadas",
+		pdfLayout    : undefined,
+	},
 	Mod1 : {
 		id           : "Mod1",
 		layout       : Mod1,
