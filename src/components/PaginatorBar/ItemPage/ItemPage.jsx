@@ -50,8 +50,8 @@ const ItemPage = ({
 				photos      : undefined,
 			},
 		});
-		console.log("Pass set currentConfigPhotoBook");
 		dispatch(workSpaceSlice.actions.handleChangePage(draggableId));
+		console.log("Pass end fns");
 	};
 
 	const handlerPageData = () => {
