@@ -23,19 +23,19 @@ const textToImage = async (id) => {
 		},
 	});
 
-	if (imgData) {
-		const downloadBase64Image = (base64String, filename = "imagen.png") => {
-			const link = document.createElement("a");
-			link.href = base64String;
-			link.download = filename;
+	// if (imgData) {
+	// 	const downloadBase64Image = (base64String, filename = "imagen.png") => {
+	// 		const link = document.createElement("a");
+	// 		link.href = base64String;
+	// 		link.download = filename;
 
-			document.body.appendChild(link);
-			link.click();
-			document.body.removeChild(link);
-		};
+	// 		document.body.appendChild(link);
+	// 		link.click();
+	// 		document.body.removeChild(link);
+	// 	};
 
-		downloadBase64Image(imgData, "imagen.png");
-	}
+	// 	downloadBase64Image(imgData, "imagen.png");
+	// }
 
 	return imgData;
 };
