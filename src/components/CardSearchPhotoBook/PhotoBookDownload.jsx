@@ -369,7 +369,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			console.log("Book pequeño, generando PDF único...");
 			const pdfDocument = (
 				<Document>
-					{validImages.map((base64PageImg, index) => (
+					{allImages.map((base64PageImg, index) => (
 						<PageComponent key={`page-${index}`}>
 							<LayoutContainerPage imgSrc={base64PageImg} />
 						</PageComponent>
@@ -510,10 +510,8 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 						allBase64Images.push(result.spread);
 					}
 				} else {
-					if (result.page1) {
-						allBase64Images.push(result.page1);
-					}
-					if (result.page2) {
+					allBase64Images.push(result.page1);
+					if (spread.sheet2) {
 						allBase64Images.push(result.page2);
 					}
 				}
