@@ -8,8 +8,10 @@ import {
 	Button,
 	Progress,
 } from "@mantine/core";
-import saveAs        from "file-saver";
-import GhostPagesDom from "./GhostPagesDom";
+import ReactDOMServer from "react-dom/server";
+import Html           from "react-pdf-html";
+import saveAs         from "file-saver";
+import GhostPagesDom  from "./GhostPagesDom";
 import {
 	GENERATION_STATUS_MESSAGES,
 	PHOTO_BOOK_TYPES,
@@ -20,17 +22,8 @@ import { shallowEqual, useDispatch, useSelector }    from "react-redux";
 import { workSpaceSlice }                            from "store/Slices";
 import { convertToArray, isValidArray, textToImage } from "helpers";
 import { currentConfigPhotoBookContext }             from "contexts/configContext";
+import { Page, pdf, Document }                       from "@react-pdf/renderer";
 import JSZip                                         from "jszip";
-
-const generateBlankImage = (size) => {
-	const canvas = document.createElement("canvas");
-	canvas.width = size[0];
-	canvas.height = size[1];
-	const ctx = canvas.getContext("2d");
-	ctx.fillStyle = "white";
-	ctx.fillRect(0, 0, size[0], size[1]);
-	return canvas.toDataURL("image/png");
-};
 
 const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const { setCurrentConfigPhotoBook } = useContext(currentConfigPhotoBookContext);
@@ -141,27 +134,77 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		return format;
 	};
 
+	const LayoutContainerPage = ({ imgSrc }) => {
+		const formatKey = getFormatKey(bookConfigData);
+		const sizeKey = bookConfigData?.sizePhotoBook;
+		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
+
+		const { size } = config;
+		const bodyHtml = (
+			<div
+				style={{
+					height   : "100%",
+					width    : "100%",
+					overflow : "hidden",
+				}}
+			>
+				{
+					imgSrc && (
+						<img
+							src={imgSrc}
+							alt={"image"}
+							style={{
+								height : size?.[1],
+								width  : size?.[0],
+							}}
+						/>
+					)
+				}
+			</div>
+		);
+
+		const toPdfElement = ReactDOMServer.renderToStaticMarkup(bodyHtml);
+
+		return (
+			<Html>{toPdfElement}</Html>
+		);
+	};
+
+	const PageComponent = ({ children }) => {
+		const formatKey = getFormatKey(bookConfigData);
+		const sizeKey = bookConfigData?.sizePhotoBook;
+		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
+
+		const { size } = config;
+
+		return (
+			<Page size={size}>
+				{children}
+			</Page>
+		);
+	};
 
 	// Función para descargar ZIP de imágenes PNG (para layflat)
-	const zipDownloadImages = async (images, size) => {
+	const zipDownloadImages = async (images) => {
 		const zip = new JSZip();
 		const baseName = `${photoBookData.correo_del_autor}-noPedido-${photoBookData.id_del_pedido}-photobookId_${photoBookData.id}`;
 
 		// Agregar cada imagen al ZIP
 		images.forEach((imageBase64, index) => {
-			const finalImage = imageBase64 || generateBlankImage(size);
-			// Convertir base64 a blob
-			const byteString = atob(finalImage.split(",")[1]);
-			const mimeString = finalImage.split(",")[0].split(":")[1].split(";")[0];
-			const ab = new ArrayBuffer(byteString.length);
-			const ia = new Uint8Array(ab);
+			if (imageBase64) {
+				// Convertir base64 a blob
+				const byteString = atob(imageBase64.split(",")[1]);
+				const mimeString = imageBase64.split(",")[0].split(":")[1].split(";")[0];
+				const ab = new ArrayBuffer(byteString.length);
+				const ia = new Uint8Array(ab);
 
-			for (let i = 0; i < byteString.length; i++) {
-				ia[i] = byteString.charCodeAt(i);
+				for (let i = 0; i < byteString.length; i++) {
+					ia[i] = byteString.charCodeAt(i);
+				}
+
+				const blob = new Blob([ab], { type : mimeString });
+				zip.file(`${baseName}_spread_${index + 1}.png`, blob);
 			}
-
-			const blob = new Blob([ab], { type : mimeString });
-			zip.file(`${baseName}_spread_${index + 1}.png`, blob);
 		});
 
 		saveAs(await zip.generateAsync({ type : "blob" }), `${baseName}_images.zip`);
@@ -201,7 +244,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		}
 	};
 
-	// Función para procesar un spread completo con mejor manejo de errores
+	// Función mejorada para procesar un spread con delays estratégicos
 	const processSpreadWithRetry = async (spread, spreadIndex, retryCount = 0) => {
 		try {
 			console.log(`Procesando spread ${spreadIndex + 1}, intento ${retryCount + 1}`);
@@ -209,11 +252,10 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			// Actualizar el estado para renderizar el spread actual
 			setCurrentIndexSpread(spreadIndex);
 
-			// Esperar más tiempo para asegurar que el DOM se actualice completamente
-			await new Promise(resolve => setTimeout(resolve, 1000));
-
-			// Verificar que el DOM esté listo
+			// Delay más largo para asegurar que el DOM se actualice completamente
+			await new Promise(resolve => setTimeout(resolve, 300));
 			await new Promise(resolve => requestAnimationFrame(resolve));
+			await new Promise(resolve => setTimeout(resolve, 200));
 
 			let result;
 
@@ -229,6 +271,10 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			} else {
 				// Para productos normales: tomar snapshots individuales
 				const page1Snapshot = await handlerTakeSnapshot(1);
+
+				// Delay entre páginas del mismo spread
+				await new Promise(resolve => setTimeout(resolve, 100));
+
 				let page2Snapshot = null;
 
 				// Solo tomar snapshot de página 2 si el spread tiene sheet2
@@ -256,7 +302,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			// Reintentar hasta 2 veces
 			if (retryCount < 2) {
 				console.log(`Reintentando spread ${spreadIndex + 1}, intento ${retryCount + 2}`);
-				await new Promise(resolve => setTimeout(resolve, 300));
+				await new Promise(resolve => setTimeout(resolve, 500));
 				return await processSpreadWithRetry(spread, spreadIndex, retryCount + 1);
 			}
 
@@ -276,34 +322,9 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		}
 	};
 
-	// Función para procesar chunks con mejor control
-	const processChunk = async (chunkSpreads, chunkStartIndex) => {
-		const chunkResults = [];
-
-		for (let i = 0; i < chunkSpreads.length; i++) {
-			const spreadIndex = chunkStartIndex + i;
-			const spread = chunkSpreads[i];
-
-			console.log(`Procesando spread ${spreadIndex + 1} del chunk`);
-
-			const result = await processSpreadWithRetry(spread, spreadIndex);
-			chunkResults.push({
-				spreadIndex,
-				...result,
-			});
-
-			// Pequeño delay entre spreads del mismo chunk
-			if (i < chunkSpreads.length - 1) {
-				await new Promise(resolve => setTimeout(resolve, 100));
-			}
-		}
-
-		return chunkResults;
-	};
-
-	// Función para generar PDF usando Web Worker (para productos normales)
+	// Función CORREGIDA para generar PDF completo
 	const generateCompletePdf = async (allImages) => {
-		console.log("=== INICIANDO GENERACIÓN DE PDF CON WORKER ===");
+		console.log("=== INICIANDO GENERACIÓN DE PDF COMPLETO ===");
 		console.log("Total de imágenes en array:", allImages.length);
 
 		// Verificar qué tenemos realmente
@@ -321,54 +342,44 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		});
 
 		console.log("Estadísticas de imágenes:", imageStats);
+		console.log("Contenido del array:", allImages.map((img, idx) =>
+			`[${idx}] ${img ? "✓ IMAGEN" : "✗ UNDEFINED"}`
+		));
 
-		// Obtener tamaño de página
-		const formatKey = getFormatKey(bookConfigData);
-		const sizeKey = bookConfigData?.sizePhotoBook;
-		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
-		const pageSize = config?.size; // [width, height] en puntos
-
-		if (!pageSize) {
-			throw new Error("No se pudo determinar el tamaño de página");
+		if (imageStats.valid === 0) {
+			throw new Error("No hay imágenes válidas para generar el PDF");
 		}
 
-		// Procesar imágenes: reemplazar undefined/null con imagen en blanco
-		const processedImages = allImages.map(img => img || generateBlankImage(pageSize));
+		// Crear documento con TODAS las imágenes
+		const pdfDocument = (
+			<Document>
+				{allImages.map((base64PageImg, index) => {
+					// Solo crear página si la imagen es válida
+					if (!base64PageImg) {
+						console.warn(`Imagen ${index} es undefined, omitiendo página`);
+						return null;
+					}
 
-		console.log(`Generando PDF con ${processedImages.length} páginas`);
+					return (
+						<PageComponent key={`page-${index}`}>
+							<LayoutContainerPage imgSrc={base64PageImg} />
+						</PageComponent>
+					);
+				}).filter(Boolean)}
+			</Document>
+		);
 
-		// Crear worker
-		const worker = new Worker(new URL("./pdfWorker.js", import.meta.url));
+		// Delay antes de generar el PDF completo
+		await new Promise(resolve => setTimeout(resolve, 500));
 
-		return new Promise((resolve, reject) => {
-			worker.onmessage = function(e) {
-				const { success, blob, error } = e.data;
-				worker.terminate();
+		console.log("Generando blob del PDF completo...");
+		const blobPdf = await pdf(pdfDocument).toBlob();
 
-				if (success) {
-					console.log("✅ PDF generado exitosamente en worker");
-					resolve(blob);
-				} else {
-					console.error("❌ Error en worker:", error);
-					reject(new Error(error));
-				}
-			};
-
-			worker.onerror = function(error) {
-				worker.terminate();
-				console.error("❌ Error en worker:", error);
-				reject(error);
-			};
-
-			// Enviar datos al worker
-			worker.postMessage({
-				images   : processedImages,
-				pageSize : pageSize,
-			});
-		});
+		console.log(`✅ PDF COMPLETO generado con ${imageStats.valid} páginas válidas de ${allImages.length} totales`);
+		return blobPdf;
 	};
 
-	// Función principal completamente reescrita
+	// Función principal mejorada - VERSIÓN SIMPLIFICADA Y CORREGIDA
 	const handleDownload = async () => {
 		if (processingRef.current || !isValidArray(bookSpreadPages)) return;
 
@@ -381,81 +392,92 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		try {
 			const allBase64Images = [];
 			const totalSpreads = bookSpreadPages.length;
-			const CHUNK_SIZE = 1; // Reducir a 1 para mejor control
 
 			console.log(`🎬 INICIANDO DESCARGA: ${totalSpreads} spreads`);
 			console.log(`📦 Tipo de producto: ${isLayflatProduct ? "LAYFLAT (imágenes)" : "NORMAL (PDF)"}`);
 
-			// Procesar cada spread secuencialmente con mejor control
-			for (let chunkStart = 0; chunkStart < totalSpreads; chunkStart += CHUNK_SIZE) {
-				const chunkEnd = Math.min(chunkStart + CHUNK_SIZE, totalSpreads);
-				const chunkSpreads = bookSpreadPages.slice(chunkStart, chunkEnd);
+			// Fase 1: Captura de imágenes (0% - 80% del progreso)
+			for (let spreadIndex = 0; spreadIndex < totalSpreads; spreadIndex++) {
+				const spread = bookSpreadPages[spreadIndex];
 
-				console.log(`📦 Procesando chunk ${chunkStart + 1}-${chunkEnd} de ${totalSpreads}`);
+				console.log(`📄 Procesando spread ${spreadIndex + 1} de ${totalSpreads}`);
 
-				// Procesar el chunk actual
-				const chunkResults = await processChunk(chunkSpreads, chunkStart);
+				// Procesar el spread actual
+				const result = await processSpreadWithRetry(spread, spreadIndex);
 
 				// Agregar resultados en orden
-				for (const result of chunkResults) {
-					if (isLayflatProduct) {
-						// Para layflat: agregar solo el spread completo
-						console.log(`📄 Spread ${result.spreadIndex + 1} (layflat):`, {
-							spread : !!result.spread,
-						});
-						allBase64Images.push(result.spread);
-					} else {
-						// Para productos normales: agregar páginas individuales
-						console.log(`📄 Spread ${result.spreadIndex + 1}:`, {
-							page1 : !!result.page1,
-							page2 : !!result.page2,
-						});
+				if (isLayflatProduct) {
+					// Para layflat: agregar solo el spread completo
+					console.log(`📄 Spread ${spreadIndex + 1} (layflat):`, {
+						spread : !!result.spread,
+					});
+					allBase64Images.push(result.spread);
+				} else {
+					// Para productos normales: agregar páginas individuales
+					console.log(`📄 Spread ${spreadIndex + 1}:`, {
+						page1 : !!result.page1,
+						page2 : !!result.page2,
+					});
 
-						// Agregar página 1
+					// Agregar página 1
+					if (result.page1) {
 						allBase64Images.push(result.page1);
+					}
 
-						// Agregar página 2 si existe
-						if (result.page2 !== undefined) {
-							allBase64Images.push(result.page2);
-						}
+					// Agregar página 2 si existe
+					if (result.page2) {
+						allBase64Images.push(result.page2);
 					}
 				}
 
-				// Actualizar progreso
-				const newProgress = (chunkEnd / totalSpreads) * 100;
-				setProgress(newProgress);
+				// Actualizar progreso (primera fase: 0% - 80%)
+				const captureProgress = ((spreadIndex + 1) / totalSpreads) * 80;
+				setProgress(captureProgress);
 				setBase64ImagePages([...allBase64Images]);
 
-				// Delay más largo entre chunks para mayor estabilidad
-				if (chunkEnd < totalSpreads) {
-					await new Promise(resolve => setTimeout(resolve, 500));
+				// Delay entre spreads para mayor estabilidad
+				if (spreadIndex < totalSpreads - 1) {
+					await new Promise(resolve => setTimeout(resolve, 300));
 					await new Promise(resolve => requestAnimationFrame(resolve));
 				}
 			}
 
-			console.log("✅ TODOS LOS SPREADS PROCESADOS");
+			console.log("✅ TODAS LAS IMÁGENES CAPTURADAS");
 			console.log(`📊 Total de ${isLayflatProduct ? "spreads" : "páginas"} generadas: ${allBase64Images.length}`);
+			console.log("Contenido final:", allBase64Images.map((img, idx) =>
+				`[${idx}] ${img ? `IMAGEN ${idx + 1}` : "UNDEFINED"}`
+			));
 
+			// Fase 2: Generación del documento (80% - 100% del progreso)
 			setGenerationStatus("creating_pdf");
+			setProgress(85);
 
 			if (isLayflatProduct) {
 				// Para layflat: descargar ZIP de imágenes PNG
 				console.log("📦 Generando ZIP de imágenes PNG para layflat");
-				const formatKey = getFormatKey(bookConfigData);
-				const sizeKey = bookConfigData?.sizePhotoBook;
-				const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
-				const spreadSize = config?.size;
-				await zipDownloadImages(allBase64Images, spreadSize);
+				await new Promise(resolve => setTimeout(resolve, 500));
+				await zipDownloadImages(allBase64Images);
 				console.log("🎉 ZIP DE IMÁGENES GENERADO Y DESCARGADO EXITOSAMENTE");
 			} else {
-				// Para productos normales: generar y descargar PDF
+				// Para productos normales: generar PDF COMPLETO
+				console.log("📄 Generando PDF COMPLETO...");
+				setProgress(90);
+
 				const blobPdf = await generateCompletePdf(allBase64Images);
+
+				// Delay final antes de la descarga
+				await new Promise(resolve => setTimeout(resolve, 200));
+				setProgress(95);
+
 				await zipDownloadPdf(blobPdf);
-				console.log("🎉 PDF GENERADO Y DESCARGADO EXITOSAMENTE");
+				console.log("🎉 PDF COMPLETO GENERADO Y DESCARGADO EXITOSAMENTE");
 			}
 
 			setGenerationStatus("completed");
 			setProgress(100);
+
+			// Delay final antes de resetear
+			await new Promise(resolve => setTimeout(resolve, 1000));
 
 		} catch (error) {
 			console.error("❌ ERROR GENERANDO DESCARGABLE:", error);
@@ -463,7 +485,11 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		} finally {
 			setIsGenerating(false);
 			processingRef.current = false;
-			setCurrentIndexSpread(0);
+
+			// Resetear al spread inicial después de un delay
+			setTimeout(() => {
+				setCurrentIndexSpread(0);
+			}, 500);
 		}
 	};
 
@@ -485,7 +511,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			</Text>
 			<Progress value={progress} mb="xs" />
 			<Text size="sm" color="dimmed">
-				Progreso: {Math.round(progress)}% - {base64ImagePages.length} {isLayflatProduct ? "spreads" : "páginas"} generadas
+				Progreso: {Math.round(progress)}% - {base64ImagePages.filter(img => img !== undefined && img !== null).length} {isLayflatProduct ? "spreads" : "páginas"} generadas
 			</Text>
 			{isLayflatProduct && (
 				<Text size="sm" color="blue" mt="xs">
