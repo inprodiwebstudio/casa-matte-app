@@ -26,6 +26,7 @@ import { Page, pdf, Document }                       from "@react-pdf/renderer";
 import JSZip                                         from "jszip";
 
 const PhotoBookDownload = ({ photoBookData, onReturn }) => {
+	console.log("Init component Test update");
 	const { setCurrentConfigPhotoBook } = useContext(currentConfigPhotoBookContext);
 	const bookConfigData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 	const dispatch = useDispatch();
