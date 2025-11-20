@@ -244,7 +244,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		}
 	};
 
-	// Función para procesar un spread completo con mejor manejo de errores
+	// Función mejorada para procesar un spread con delays estratégicos
 	const processSpreadWithRetry = async (spread, spreadIndex, retryCount = 0) => {
 		try {
 			console.log(`Procesando spread ${spreadIndex + 1}, intento ${retryCount + 1}`);
@@ -252,11 +252,10 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			// Actualizar el estado para renderizar el spread actual
 			setCurrentIndexSpread(spreadIndex);
 
-			// Esperar más tiempo para asegurar que el DOM se actualice completamente
-			await new Promise(resolve => setTimeout(resolve, 500));
-
-			// Verificar que el DOM esté listo
+			// Delay más largo para asegurar que el DOM se actualice completamente
+			await new Promise(resolve => setTimeout(resolve, 300));
 			await new Promise(resolve => requestAnimationFrame(resolve));
+			await new Promise(resolve => setTimeout(resolve, 200));
 
 			let result;
 
@@ -272,6 +271,10 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			} else {
 				// Para productos normales: tomar snapshots individuales
 				const page1Snapshot = await handlerTakeSnapshot(1);
+
+				// Delay entre páginas del mismo spread
+				await new Promise(resolve => setTimeout(resolve, 100));
+
 				let page2Snapshot = null;
 
 				// Solo tomar snapshot de página 2 si el spread tiene sheet2
@@ -299,7 +302,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			// Reintentar hasta 2 veces
 			if (retryCount < 2) {
 				console.log(`Reintentando spread ${spreadIndex + 1}, intento ${retryCount + 2}`);
-				await new Promise(resolve => setTimeout(resolve, 300));
+				await new Promise(resolve => setTimeout(resolve, 500));
 				return await processSpreadWithRetry(spread, spreadIndex, retryCount + 1);
 			}
 
@@ -319,34 +322,9 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		}
 	};
 
-	// Función para procesar chunks con mejor control
-	const processChunk = async (chunkSpreads, chunkStartIndex) => {
-		const chunkResults = [];
-
-		for (let i = 0; i < chunkSpreads.length; i++) {
-			const spreadIndex = chunkStartIndex + i;
-			const spread = chunkSpreads[i];
-
-			console.log(`Procesando spread ${spreadIndex + 1} del chunk`);
-
-			const result = await processSpreadWithRetry(spread, spreadIndex);
-			chunkResults.push({
-				spreadIndex,
-				...result,
-			});
-
-			// Pequeño delay entre spreads del mismo chunk
-			if (i < chunkSpreads.length - 1) {
-				await new Promise(resolve => setTimeout(resolve, 100));
-			}
-		}
-
-		return chunkResults;
-	};
-
-	// Función para generar PDF (para productos normales)
+	// Función CORREGIDA para generar PDF completo
 	const generateCompletePdf = async (allImages) => {
-		console.log("=== INICIANDO GENERACIÓN DE PDF ===");
+		console.log("=== INICIANDO GENERACIÓN DE PDF COMPLETO ===");
 		console.log("Total de imágenes en array:", allImages.length);
 
 		// Verificar qué tenemos realmente
@@ -372,12 +350,18 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			throw new Error("No hay imágenes válidas para generar el PDF");
 		}
 
-		// Crear documento con todas las imágenes (incluyendo undefined)
+		// Crear documento con TODAS las imágenes
 		const pdfDocument = (
 			<Document>
 				{allImages.map((base64PageImg, index) => {
+					// Solo crear página si la imagen es válida
+					if (!base64PageImg) {
+						console.warn(`Imagen ${index} es undefined, omitiendo página`);
+						return null;
+					}
+
 					return (
-						<PageComponent key={index}>
+						<PageComponent key={`page-${index}`}>
 							<LayoutContainerPage imgSrc={base64PageImg} />
 						</PageComponent>
 					);
@@ -385,14 +369,17 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			</Document>
 		);
 
-		await new Promise(resolve => setTimeout(resolve, 100));
+		// Delay antes de generar el PDF completo
+		await new Promise(resolve => setTimeout(resolve, 500));
+
+		console.log("Generando blob del PDF completo...");
 		const blobPdf = await pdf(pdfDocument).toBlob();
 
-		console.log(`✅ PDF generado con ${imageStats.valid} páginas válidas`);
+		console.log(`✅ PDF COMPLETO generado con ${imageStats.valid} páginas válidas de ${allImages.length} totales`);
 		return blobPdf;
 	};
 
-	// Función principal completamente reescrita
+	// Función principal mejorada - VERSIÓN SIMPLIFICADA Y CORREGIDA
 	const handleDownload = async () => {
 		if (processingRef.current || !isValidArray(bookSpreadPages)) return;
 
@@ -405,77 +392,92 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		try {
 			const allBase64Images = [];
 			const totalSpreads = bookSpreadPages.length;
-			const CHUNK_SIZE = 1; // Reducir a 1 para mejor control
 
 			console.log(`🎬 INICIANDO DESCARGA: ${totalSpreads} spreads`);
 			console.log(`📦 Tipo de producto: ${isLayflatProduct ? "LAYFLAT (imágenes)" : "NORMAL (PDF)"}`);
 
-			// Procesar cada spread secuencialmente con mejor control
-			for (let chunkStart = 0; chunkStart < totalSpreads; chunkStart += CHUNK_SIZE) {
-				const chunkEnd = Math.min(chunkStart + CHUNK_SIZE, totalSpreads);
-				const chunkSpreads = bookSpreadPages.slice(chunkStart, chunkEnd);
+			// Fase 1: Captura de imágenes (0% - 80% del progreso)
+			for (let spreadIndex = 0; spreadIndex < totalSpreads; spreadIndex++) {
+				const spread = bookSpreadPages[spreadIndex];
 
-				console.log(`📦 Procesando chunk ${chunkStart + 1}-${chunkEnd} de ${totalSpreads}`);
+				console.log(`📄 Procesando spread ${spreadIndex + 1} de ${totalSpreads}`);
 
-				// Procesar el chunk actual
-				const chunkResults = await processChunk(chunkSpreads, chunkStart);
+				// Procesar el spread actual
+				const result = await processSpreadWithRetry(spread, spreadIndex);
 
 				// Agregar resultados en orden
-				for (const result of chunkResults) {
-					if (isLayflatProduct) {
-						// Para layflat: agregar solo el spread completo
-						console.log(`📄 Spread ${result.spreadIndex + 1} (layflat):`, {
-							spread : !!result.spread,
-						});
-						allBase64Images.push(result.spread);
-					} else {
-						// Para productos normales: agregar páginas individuales
-						console.log(`📄 Spread ${result.spreadIndex + 1}:`, {
-							page1 : !!result.page1,
-							page2 : !!result.page2,
-						});
+				if (isLayflatProduct) {
+					// Para layflat: agregar solo el spread completo
+					console.log(`📄 Spread ${spreadIndex + 1} (layflat):`, {
+						spread : !!result.spread,
+					});
+					allBase64Images.push(result.spread);
+				} else {
+					// Para productos normales: agregar páginas individuales
+					console.log(`📄 Spread ${spreadIndex + 1}:`, {
+						page1 : !!result.page1,
+						page2 : !!result.page2,
+					});
 
-						// Agregar página 1
+					// Agregar página 1
+					if (result.page1) {
 						allBase64Images.push(result.page1);
+					}
 
-						// Agregar página 2 si existe
-						if (result.page2 !== undefined) {
-							allBase64Images.push(result.page2);
-						}
+					// Agregar página 2 si existe
+					if (result.page2) {
+						allBase64Images.push(result.page2);
 					}
 				}
 
-				// Actualizar progreso
-				const newProgress = (chunkEnd / totalSpreads) * 100;
-				setProgress(newProgress);
+				// Actualizar progreso (primera fase: 0% - 80%)
+				const captureProgress = ((spreadIndex + 1) / totalSpreads) * 80;
+				setProgress(captureProgress);
 				setBase64ImagePages([...allBase64Images]);
 
-				// Delay más largo entre chunks para mayor estabilidad
-				if (chunkEnd < totalSpreads) {
-					await new Promise(resolve => setTimeout(resolve, 200));
+				// Delay entre spreads para mayor estabilidad
+				if (spreadIndex < totalSpreads - 1) {
+					await new Promise(resolve => setTimeout(resolve, 300));
 					await new Promise(resolve => requestAnimationFrame(resolve));
 				}
 			}
 
-			console.log("✅ TODOS LOS SPREADS PROCESADOS");
+			console.log("✅ TODAS LAS IMÁGENES CAPTURADAS");
 			console.log(`📊 Total de ${isLayflatProduct ? "spreads" : "páginas"} generadas: ${allBase64Images.length}`);
+			console.log("Contenido final:", allBase64Images.map((img, idx) =>
+				`[${idx}] ${img ? `IMAGEN ${idx + 1}` : "UNDEFINED"}`
+			));
 
+			// Fase 2: Generación del documento (80% - 100% del progreso)
 			setGenerationStatus("creating_pdf");
+			setProgress(85);
 
 			if (isLayflatProduct) {
 				// Para layflat: descargar ZIP de imágenes PNG
 				console.log("📦 Generando ZIP de imágenes PNG para layflat");
+				await new Promise(resolve => setTimeout(resolve, 500));
 				await zipDownloadImages(allBase64Images);
 				console.log("🎉 ZIP DE IMÁGENES GENERADO Y DESCARGADO EXITOSAMENTE");
 			} else {
-				// Para productos normales: generar y descargar PDF
+				// Para productos normales: generar PDF COMPLETO
+				console.log("📄 Generando PDF COMPLETO...");
+				setProgress(90);
+
 				const blobPdf = await generateCompletePdf(allBase64Images);
+
+				// Delay final antes de la descarga
+				await new Promise(resolve => setTimeout(resolve, 200));
+				setProgress(95);
+
 				await zipDownloadPdf(blobPdf);
-				console.log("🎉 PDF GENERADO Y DESCARGADO EXITOSAMENTE");
+				console.log("🎉 PDF COMPLETO GENERADO Y DESCARGADO EXITOSAMENTE");
 			}
 
 			setGenerationStatus("completed");
 			setProgress(100);
+
+			// Delay final antes de resetear
+			await new Promise(resolve => setTimeout(resolve, 1000));
 
 		} catch (error) {
 			console.error("❌ ERROR GENERANDO DESCARGABLE:", error);
@@ -483,7 +485,11 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		} finally {
 			setIsGenerating(false);
 			processingRef.current = false;
-			setCurrentIndexSpread(0);
+
+			// Resetear al spread inicial después de un delay
+			setTimeout(() => {
+				setCurrentIndexSpread(0);
+			}, 500);
 		}
 	};
 
@@ -505,7 +511,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			</Text>
 			<Progress value={progress} mb="xs" />
 			<Text size="sm" color="dimmed">
-				Progreso: {Math.round(progress)}% - {base64ImagePages.filter(img => img !== undefined).length} {isLayflatProduct ? "spreads" : "páginas"} generadas
+				Progreso: {Math.round(progress)}% - {base64ImagePages.filter(img => img !== undefined && img !== null).length} {isLayflatProduct ? "spreads" : "páginas"} generadas
 			</Text>
 			{isLayflatProduct && (
 				<Text size="sm" color="blue" mt="xs">
