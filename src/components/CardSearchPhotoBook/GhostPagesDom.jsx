@@ -27,7 +27,7 @@ const GhostPagesDom = ({spreadPage}) => {
 			}}>
 			<div
 				style={{
-					height   : "500px",
+					height   : "800px",
 					width    : "100%",
 					overflow : "auto",
 				}}
