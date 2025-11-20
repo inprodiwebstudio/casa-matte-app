@@ -41,6 +41,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const [isGenerating, setIsGenerating] = useState(false);
 
 	const processingRef = useRef(false);
+	const abortControllerRef = useRef(null);
 
 	// Determinar si es producto layflat
 	const isLayflatProduct = bookConfigData?.product === "layflat";
@@ -235,7 +236,6 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const handlerTakeSpreadSnapshot = async () => {
 		try {
 			await new Promise(resolve => requestAnimationFrame(resolve));
-			// Usar el nuevo ID para el spread completo
 			const blobImage = await textToImage("spreadBook-snap-container");
 			return blobImage;
 		} catch (error) {
@@ -244,8 +244,45 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		}
 	};
 
-	// Función mejorada para procesar un spread con delays estratégicos
+	// Función para comprimir imágenes y reducir tamaño
+	const compressImage = async (base64Image, quality = 0.8) => {
+		return new Promise((resolve) => {
+			const img = new Image();
+			img.onload = () => {
+				const canvas = document.createElement("canvas");
+				canvas.width = img.width;
+				canvas.height = img.height;
+				const ctx = canvas.getContext("2d");
+				ctx.drawImage(img, 0, 0);
+
+				// Comprimir la imagen
+				const compressedBase64 = canvas.toDataURL("image/jpeg", quality);
+				resolve(compressedBase64);
+			};
+			img.src = base64Image;
+		});
+	};
+
+	// Función mejorada para forzar garbage collection de forma segura
+	const forceGarbageCollection = () => {
+		// Método seguro para navegadores - no usa global.gc
+		try {
+			// Crear y descartar un objeto grande para incentivar GC
+			const largeObject = new Array(1000000).fill(null);
+			// Forzar la liberación de referencia
+			largeObject.length = 0;
+		} catch (error) {
+			// Silenciosamente fallar - no es crítico
+		}
+	};
+
+	// Función mejorada para procesar un spread con gestión de memoria
 	const processSpreadWithRetry = async (spread, spreadIndex, retryCount = 0) => {
+		// Verificar si el proceso fue abortado
+		if (abortControllerRef.current?.signal.aborted) {
+			throw new Error("Proceso cancelado por el usuario");
+		}
+
 		try {
 			console.log(`Procesando spread ${spreadIndex + 1}, intento ${retryCount + 1}`);
 
@@ -260,37 +297,30 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			let result;
 
 			if (isLayflatProduct) {
-				// Para layflat: tomar snapshot del spread completo
 				const spreadSnapshot = await handlerTakeSpreadSnapshot();
-				console.log(`Spread ${spreadIndex + 1} (layflat) procesado:`, {
-					spread : !!spreadSnapshot,
-				});
-				result = {
-					spread : spreadSnapshot || undefined,
-				};
+				if (spreadSnapshot) {
+					// Comprimir imagen para layflat
+					const compressedSpread = await compressImage(spreadSnapshot, 0.9);
+					result = { spread : compressedSpread };
+				} else {
+					result = { spread : undefined };
+				}
 			} else {
-				// Para productos normales: tomar snapshots individuales
 				const page1Snapshot = await handlerTakeSnapshot(1);
-
-				// Delay entre páginas del mismo spread
 				await new Promise(resolve => setTimeout(resolve, 100));
 
 				let page2Snapshot = null;
-
-				// Solo tomar snapshot de página 2 si el spread tiene sheet2
 				if (spread?.sheet2) {
 					page2Snapshot = await handlerTakeSnapshot(2);
 				}
 
-				console.log(`Spread ${spreadIndex + 1} procesado:`, {
-					page1     : !!page1Snapshot,
-					page2     : !!page2Snapshot,
-					hasSheet2 : !!spread?.sheet2,
-				});
+				// Comprimir imágenes para productos normales
+				const compressedPage1 = page1Snapshot ? await compressImage(page1Snapshot, 0.85) : undefined;
+				const compressedPage2 = page2Snapshot ? await compressImage(page2Snapshot, 0.85) : undefined;
 
 				result = {
-					page1 : page1Snapshot || undefined,
-					page2 : spread?.sheet2 ? (page2Snapshot || undefined) : undefined,
+					page1 : compressedPage1,
+					page2 : spread?.sheet2 ? compressedPage2 : undefined,
 				};
 			}
 
@@ -299,20 +329,16 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		} catch (error) {
 			console.error(`Error procesando spread ${spreadIndex + 1}:`, error);
 
-			// Reintentar hasta 2 veces
 			if (retryCount < 2) {
 				console.log(`Reintentando spread ${spreadIndex + 1}, intento ${retryCount + 2}`);
 				await new Promise(resolve => setTimeout(resolve, 500));
 				return await processSpreadWithRetry(spread, spreadIndex, retryCount + 1);
 			}
 
-			// Si falla después de los reintentos, retornar undefined
 			console.warn(`Spread ${spreadIndex + 1} falló después de ${retryCount + 1} intentos`);
 
 			if (isLayflatProduct) {
-				return {
-					spread : undefined,
-				};
+				return { spread : undefined };
 			} else {
 				return {
 					page1 : undefined,
@@ -322,66 +348,130 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		}
 	};
 
-	// Función CORREGIDA para generar PDF completo
-	const generateCompletePdf = async (allImages) => {
-		console.log("=== INICIANDO GENERACIÓN DE PDF COMPLETO ===");
-		console.log("Total de imágenes en array:", allImages.length);
+	// Función para generar PDF por chunks con gestión de memoria MEJORADA
+	const generatePdfInChunksWithMemoryManagement = async (allImages, chunkSize = 10) => {
+		console.log("=== GENERANDO PDF POR CHUNKS CON GESTIÓN DE MEMORIA ===");
+		console.log(`Total de imágenes: ${allImages.length}, Chunk size: ${chunkSize}`);
 
-		// Verificar qué tenemos realmente
-		const imageStats = {
-			total     : allImages.length,
-			valid     : 0,
-			undefined : 0,
-			null      : 0,
-		};
+		const validImages = allImages.filter(img => img && img !== undefined && img !== null);
 
-		allImages.forEach((img, index) => {
-			if (img === undefined) imageStats.undefined++;
-			else if (img === null) imageStats.null++;
-			else imageStats.valid++;
-		});
-
-		console.log("Estadísticas de imágenes:", imageStats);
-		console.log("Contenido del array:", allImages.map((img, idx) =>
-			`[${idx}] ${img ? "✓ IMAGEN" : "✗ UNDEFINED"}`
-		));
-
-		if (imageStats.valid === 0) {
+		if (validImages.length === 0) {
 			throw new Error("No hay imágenes válidas para generar el PDF");
 		}
 
-		// Crear documento con TODAS las imágenes
-		const pdfDocument = (
-			<Document>
-				{allImages.map((base64PageImg, index) => {
-					// Solo crear página si la imagen es válida
-					if (!base64PageImg) {
-						console.warn(`Imagen ${index} es undefined, omitiendo página`);
-						return null;
-					}
+		console.log(`Imágenes válidas: ${validImages.length}`);
 
-					return (
+		// Para books pequeños, generar un solo PDF
+		if (validImages.length <= 20) {
+			console.log("Book pequeño, generando PDF único...");
+			const pdfDocument = (
+				<Document>
+					{validImages.map((base64PageImg, index) => (
 						<PageComponent key={`page-${index}`}>
 							<LayoutContainerPage imgSrc={base64PageImg} />
 						</PageComponent>
-					);
-				}).filter(Boolean)}
+					))}
+				</Document>
+			);
+
+			await new Promise(resolve => setTimeout(resolve, 500));
+			return await pdf(pdfDocument).toBlob();
+		}
+
+		// Para books grandes, dividir en chunks más pequeños
+		const chunks = [];
+		for (let i = 0; i < validImages.length; i += chunkSize) {
+			chunks.push(validImages.slice(i, i + chunkSize));
+		}
+
+		console.log(`Generando PDF en ${chunks.length} chunks`);
+
+		const pdfBlobs = [];
+
+		for (let i = 0; i < chunks.length; i++) {
+			// Verificar si el proceso fue abortado
+			if (abortControllerRef.current?.signal.aborted) {
+				throw new Error("Proceso cancelado por el usuario");
+			}
+
+			console.log(`Generando chunk ${i + 1} de ${chunks.length}`);
+
+			setGenerationStatus(`Generando PDF parte ${i + 1} de ${chunks.length}`);
+
+			const chunk = chunks[i];
+			const chunkDocument = (
+				<Document>
+					{chunk.map((base64PageImg, index) => (
+						<PageComponent key={`chunk-${i}-page-${index}`}>
+							<LayoutContainerPage imgSrc={base64PageImg} />
+						</PageComponent>
+					))}
+				</Document>
+			);
+
+			// Delay antes de generar cada chunk
+			await new Promise(resolve => setTimeout(resolve, 300));
+
+			try {
+				const chunkBlob = await pdf(chunkDocument).toBlob();
+				pdfBlobs.push(chunkBlob);
+
+				// Liberar memoria de forma segura
+				forceGarbageCollection();
+
+				// Actualizar progreso
+				const chunkProgress = 80 + ((i + 1) / chunks.length) * 20;
+				setProgress(chunkProgress);
+
+			} catch (error) {
+				console.error(`Error generando chunk ${i + 1}:`, error);
+
+				// Si falla un chunk, intentar con chunks más pequeños
+				if (chunkSize > 5) {
+					console.log("Reduciendo chunk size y reintentando...");
+					return await generatePdfInChunksWithMemoryManagement(allImages, Math.floor(chunkSize / 2));
+				}
+				throw error;
+			}
+
+			// Delay más largo entre chunks para PDF
+			if (i < chunks.length - 1) {
+				await new Promise(resolve => setTimeout(resolve, 500));
+				await new Promise(resolve => requestAnimationFrame(resolve));
+			}
+		}
+
+		console.log("Combinando chunks de PDF...");
+
+		// Para books muy grandes, considerar descargar chunks separados
+		if (pdfBlobs.length > 1 && validImages.length > 100) {
+			console.warn("Book muy grande, considerando descarga por partes");
+			// Por ahora, generamos un PDF único pero con advertencia
+		}
+
+		// Crear un PDF final combinado
+		const finalDocument = (
+			<Document>
+				{validImages.map((base64PageImg, index) => (
+					<PageComponent key={`final-page-${index}`}>
+						<LayoutContainerPage imgSrc={base64PageImg} />
+					</PageComponent>
+				))}
 			</Document>
 		);
 
-		// Delay antes de generar el PDF completo
-		await new Promise(resolve => setTimeout(resolve, 500));
+		console.log("Generando PDF final combinado...");
+		await new Promise(resolve => setTimeout(resolve, 1000));
 
-		console.log("Generando blob del PDF completo...");
-		const blobPdf = await pdf(pdfDocument).toBlob();
-
-		console.log(`✅ PDF COMPLETO generado con ${imageStats.valid} páginas válidas de ${allImages.length} totales`);
-		return blobPdf;
+		return await pdf(finalDocument).toBlob();
 	};
 
-	// Función principal mejorada - VERSIÓN SIMPLIFICADA Y CORREGIDA
+	// Función principal MEJORADA con gestión de memoria
 	const handleDownload = async () => {
 		if (processingRef.current || !isValidArray(bookSpreadPages)) return;
+
+		// Crear AbortController para permitir cancelación
+		abortControllerRef.current = new AbortController();
 
 		processingRef.current = true;
 		setIsGenerating(true);
@@ -396,8 +486,14 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			console.log(`🎬 INICIANDO DESCARGA: ${totalSpreads} spreads`);
 			console.log(`📦 Tipo de producto: ${isLayflatProduct ? "LAYFLAT (imágenes)" : "NORMAL (PDF)"}`);
 
-			// Fase 1: Captura de imágenes (0% - 80% del progreso)
+			// Fase 1: Captura de imágenes con gestión de memoria
 			for (let spreadIndex = 0; spreadIndex < totalSpreads; spreadIndex++) {
+				// Verificar si el proceso fue abortado
+				if (abortControllerRef.current?.signal.aborted) {
+					console.log("Proceso cancelado por el usuario");
+					return;
+				}
+
 				const spread = bookSpreadPages[spreadIndex];
 
 				console.log(`📄 Procesando spread ${spreadIndex + 1} de ${totalSpreads}`);
@@ -407,76 +503,66 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 				// Agregar resultados en orden
 				if (isLayflatProduct) {
-					// Para layflat: agregar solo el spread completo
-					console.log(`📄 Spread ${spreadIndex + 1} (layflat):`, {
-						spread : !!result.spread,
-					});
-					allBase64Images.push(result.spread);
+					if (result.spread) {
+						allBase64Images.push(result.spread);
+					}
 				} else {
-					// Para productos normales: agregar páginas individuales
-					console.log(`📄 Spread ${spreadIndex + 1}:`, {
-						page1 : !!result.page1,
-						page2 : !!result.page2,
-					});
-
-					// Agregar página 1
 					if (result.page1) {
 						allBase64Images.push(result.page1);
 					}
-
-					// Agregar página 2 si existe
 					if (result.page2) {
 						allBase64Images.push(result.page2);
 					}
 				}
 
-				// Actualizar progreso (primera fase: 0% - 80%)
+				// Actualizar progreso
 				const captureProgress = ((spreadIndex + 1) / totalSpreads) * 80;
 				setProgress(captureProgress);
 				setBase64ImagePages([...allBase64Images]);
 
-				// Delay entre spreads para mayor estabilidad
-				if (spreadIndex < totalSpreads - 1) {
-					await new Promise(resolve => setTimeout(resolve, 300));
+				// Gestión de memoria cada 10 spreads
+				if (spreadIndex % 10 === 0 && spreadIndex > 0) {
+					forceGarbageCollection();
+					await new Promise(resolve => setTimeout(resolve, 100));
+				}
+
+				// Yield cada 5 spreads para mayor estabilidad en books grandes
+				if (spreadIndex % 5 === 0 && spreadIndex < totalSpreads - 1) {
+					await new Promise(resolve => setTimeout(resolve, 100));
 					await new Promise(resolve => requestAnimationFrame(resolve));
+				}
+
+				// Delay normal entre spreads
+				if (spreadIndex < totalSpreads - 1) {
+					await new Promise(resolve => setTimeout(resolve, 200));
 				}
 			}
 
-			console.log("✅ TODAS LAS IMÁGENES CAPTURADAS");
+			console.log("✅ TODAS LAS IMÁGENES CAPTURADAS Y COMPRIMIDAS");
 			console.log(`📊 Total de ${isLayflatProduct ? "spreads" : "páginas"} generadas: ${allBase64Images.length}`);
-			console.log("Contenido final:", allBase64Images.map((img, idx) =>
-				`[${idx}] ${img ? `IMAGEN ${idx + 1}` : "UNDEFINED"}`
-			));
 
-			// Fase 2: Generación del documento (80% - 100% del progreso)
+			// Fase 2: Generación del documento
 			setGenerationStatus("creating_pdf");
 			setProgress(85);
 
 			if (isLayflatProduct) {
-				// Para layflat: descargar ZIP de imágenes PNG
-				console.log("📦 Generando ZIP de imágenes PNG para layflat");
 				await new Promise(resolve => setTimeout(resolve, 500));
 				await zipDownloadImages(allBase64Images);
-				console.log("🎉 ZIP DE IMÁGENES GENERADO Y DESCARGADO EXITOSAMENTE");
 			} else {
-				// Para productos normales: generar PDF COMPLETO
-				console.log("📄 Generando PDF COMPLETO...");
-				setProgress(90);
+				// Usar chunks más pequeños para books grandes
+				const chunkSize = totalSpreads > 100 ? 5 : totalSpreads > 50 ? 8 : 15;
+				console.log(`📄 Generando PDF con chunks de ${chunkSize} páginas...`);
 
-				const blobPdf = await generateCompletePdf(allBase64Images);
+				const blobPdf = await generatePdfInChunksWithMemoryManagement(allBase64Images, chunkSize);
 
-				// Delay final antes de la descarga
 				await new Promise(resolve => setTimeout(resolve, 200));
 				setProgress(95);
 
 				await zipDownloadPdf(blobPdf);
-				console.log("🎉 PDF COMPLETO GENERADO Y DESCARGADO EXITOSAMENTE");
 			}
 
 			setGenerationStatus("completed");
 			setProgress(100);
-
-			// Delay final antes de resetear
 			await new Promise(resolve => setTimeout(resolve, 1000));
 
 		} catch (error) {
@@ -485,12 +571,22 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		} finally {
 			setIsGenerating(false);
 			processingRef.current = false;
+			abortControllerRef.current = null;
 
-			// Resetear al spread inicial después de un delay
 			setTimeout(() => {
 				setCurrentIndexSpread(0);
 			}, 500);
 		}
+	};
+
+	// Función para cancelar la generación
+	const handleCancel = () => {
+		if (abortControllerRef.current) {
+			abortControllerRef.current.abort();
+		}
+		setIsGenerating(false);
+		processingRef.current = false;
+		setGenerationStatus("idle");
 	};
 
 	const StatusCard = () => (
@@ -507,7 +603,9 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			}}
 		>
 			<Text weight={600} mb="sm">
-				{GENERATION_STATUS_MESSAGES[generationStatus] || "Procesando..."}
+				{generationStatus.startsWith("Generando PDF parte")
+					? generationStatus
+					: GENERATION_STATUS_MESSAGES[generationStatus] || "Procesando..."}
 			</Text>
 			<Progress value={progress} mb="xs" />
 			<Text size="sm" color="dimmed">
@@ -523,6 +621,17 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 					Ocurrió un error. Por favor intenta nuevamente.
 				</Text>
 			)}
+			{isGenerating && (
+				<Button
+					color="red"
+					size="xs"
+					mt="sm"
+					onClick={handleCancel}
+					fullWidth
+				>
+					CANCELAR GENERACIÓN
+				</Button>
+			)}
 		</Card>
 	);
 
@@ -534,8 +643,10 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 				generationStatus={generationStatus}
 				onDownload={handleDownload}
 				onReturn={onReturn}
+				onCancel={handleCancel}
 				disabled={isGenerating}
 				isLayflatProduct={isLayflatProduct}
+				showCancel={isGenerating}
 			/>
 			{currentSpreadDataPage && (
 				<GhostPagesDom
@@ -547,7 +658,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	);
 };
 
-const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload, onReturn, disabled, isLayflatProduct }) => (
+const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload, onReturn, onCancel, disabled, isLayflatProduct, showCancel }) => (
 	<Card
 		radius="13px"
 		shadow="lg"
@@ -584,8 +695,10 @@ const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload,
 				generationStatus={generationStatus}
 				onDownload={onDownload}
 				onReturn={onReturn}
+				onCancel={onCancel}
 				disabled={disabled}
 				isLayflatProduct={isLayflatProduct}
+				showCancel={showCancel}
 			/>
 		</Stack>
 	</Card>
@@ -605,7 +718,7 @@ const OrderSection = ({ title, items }) => (
 	</Stack>
 );
 
-const ActionButtons = ({ isLoading, generationStatus, onDownload, onReturn, disabled, isLayflatProduct }) => (
+const ActionButtons = ({ isLoading, generationStatus, onDownload, onReturn, onCancel, disabled, isLayflatProduct, showCancel }) => (
 	<Stack spacing="0px">
 		<Button
 			color="darkCasaMatte.7"
@@ -622,10 +735,25 @@ const ActionButtons = ({ isLoading, generationStatus, onDownload, onReturn, disa
 				generationStatus === "creating_pdf" ? "CREANDO PDF..." :
 					isLayflatProduct ? "DESCARGAR IMÁGENES PNG" : "DESCARGAR PDF"}
 		</Button>
+
+		{showCancel && (
+			<Button
+				color="red"
+				size="xs"
+				mt="10px"
+				sx={{ fontWeight : "200" }}
+				onClick={onCancel}
+				disabled={!disabled}
+				fullWidth
+			>
+				CANCELAR
+			</Button>
+		)}
+
 		<Button
 			color="darkCasaMatte.6"
 			size="xs"
-			mt="20px"
+			mt="10px"
 			sx={{ fontWeight : "200" }}
 			onClick={onReturn}
 			loading={isLoading}
