@@ -140,6 +140,8 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		const sizeKey = bookConfigData?.sizePhotoBook;
 		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
 
+		const isVerticalLargeFormat = (formatKey === "vertical") && (sizeKey === "grande");
+
 		const { size } = config;
 		const bodyHtml = (
 			<div
@@ -155,9 +157,9 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 							src={imgSrc}
 							alt={"image"}
 							style={{
-								// objectFit : "cover",
-								height : size?.[0],
-								width  : size?.[1],
+								objectFit : !isVerticalLargeFormat ? "cover" : null,
+								height    : isVerticalLargeFormat ? size?.[0] : "100%",
+								width     : isVerticalLargeFormat ? size?.[1] : "100%",
 							}}
 						/>
 					)
