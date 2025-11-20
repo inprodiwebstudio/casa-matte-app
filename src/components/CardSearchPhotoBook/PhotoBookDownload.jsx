@@ -156,8 +156,8 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 							alt={"image"}
 							style={{
 								// objectFit : "cover",
-								height : size?.[1],
-								width  : size?.[0],
+								height : size?.[0],
+								width  : size?.[1],
 							}}
 						/>
 					)
