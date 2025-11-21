@@ -334,18 +334,6 @@ export const workSpaceSlice = createSlice({
 
 			state.data.pages = newPagesContent;
 		},
-		newListPages : (state, {payload}) => {
-			state.data.pages = {...payload};
-			const history = new History();
-			history.undoStack = state.history.undo;
-			const undoNewData = {
-				...state.data,
-				pages : {...payload},
-			};
-			history.addToUndoStack(undoNewData);
-			state.history.undo = history.undoStack;
-			state.history.current = history.currentAction;
-		},
 		insertData : (state, {payload}) => {
 			state.data = {...payload};
 		},
@@ -354,6 +342,12 @@ export const workSpaceSlice = createSlice({
 		},
 		handleChangePage : (state, {payload}) => {
 			state.data.currentPage = payload;
+		},
+		insertPages : (state, {payload}) => {
+			state.data.pages = {
+				...state.data.pages,
+				...payload,
+			};
 		},
 		handleChangepRrojectTitle : (state, {payload}) => {
 			state.data.projectTittle = payload;
