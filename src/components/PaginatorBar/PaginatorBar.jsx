@@ -1,87 +1,88 @@
-import { useState, useEffect }        from "react";
-import { connect }                    from "react-redux";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { useState, useEffect, useContext } from "react";
+import { connect }                         from "react-redux";
+import { DragDropContext, Droppable }      from "react-beautiful-dnd";
 
 //Own components
 import ItemPage                                                   from "./ItemPage";
 import LoadingPaginator                                           from "./LoadingPaginator";
 import { workSpaceSlice }                                         from "store/Slices";
-import { convertToArray, isValidArray, convertToObject, bindAll } from "helpers";
+import { convertToArray, isValidArray, bindAll, convertToObject } from "helpers";
 import { ScrollBar }                                              from "core/components";
 import { Group }                                                  from "@mantine/core";
 import CoverBookItem                                              from "./CoverBookItem";
 import "./PaginatorBar.scss";
+import { currentConfigPhotoBookContext }                          from "contexts/configContext";
 
 const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, loading, productType}) => {
+	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+
 	const [ pageList, setPageList ] = useState({
 		pages    : {},
 		pagesIds : [],
 	});
 
-	let counter = 1;
-
 	const firstPageData = pagesData[convertToArray(pagesData)[0]?.id];
 
 	const dragerChangePosition = result => {
-		const { destination, source, draggableId } = result;
+		const listOfPages = convertToArray(pageList?.pages);
 
-		if (!destination) {
+		const isAvailableChangePosition = listOfPages[result?.destination?.index]?.sheet2;
+		const notMovePage = !listOfPages[result?.source?.index]?.sheet2;
+
+		if (notMovePage || !isAvailableChangePosition) {
 			return;
 		}
 
-		if (
-			destination.droppableId === source.droppableId &&
-			destination.index === source.index
-		) {
-			return;
-		}
+		const {destination, source} = result;
+		const newPages = [...listOfPages];
 
-		const newpagesIds = Array.from(pageList.pagesIds);
-
-		newpagesIds.splice(source.index, 1);
-		newpagesIds.splice(destination.index, 0, draggableId);
-
-		const newPagesList = {
-			pages : {
-				...pageList.pages,
+		const destinationData = {
+			...newPages[destination?.index],
+			sheet1 : {
+				...newPages[destination?.index]?.sheet1,
+				layoutType      : newPages[source?.index]?.sheet1?.layoutType,
+				photos          : newPages[source?.index]?.sheet1?.photos,
+				text            : newPages[source?.index]?.sheet1?.text,
+				linesDecoration : newPages[source?.index]?.sheet1?.linesDecoration,
 			},
-			pagesIds : [...newpagesIds],
+			sheet2 : {
+				...newPages[destination?.index]?.sheet2,
+				layoutType      : newPages[source?.index]?.sheet2?.layoutType,
+				photos          : newPages[source?.index]?.sheet2?.photos,
+				text            : newPages[source?.index]?.sheet2?.text,
+				linesDecoration : newPages[source?.index]?.sheet2?.linesDecoration,
+			},
 		};
 
-		const reOrderPages = convertToArray(newPagesList.pages).map((pageData, index) => {
-			const newData = {
-				id     : pageData?.id,
-				sheet1 : {...newPagesList.pages[newPagesList.pagesIds[index]].sheet1},
-				...(newPagesList.pages[newPagesList.pagesIds[index]]?.sheet2 ? {
-					sheet2 : {...newPagesList.pages[newPagesList.pagesIds[index]].sheet2},
-				} : {}),
-			};
-			return newData;
-		});
+		const sourceData = {
+			...newPages[source?.index],
+			sheet1 : {
+				...newPages[source?.index]?.sheet1,
+				layoutType      : newPages[destination?.index]?.sheet1?.layoutType,
+				photos          : newPages[destination?.index]?.sheet1?.photos,
+				text            : newPages[destination?.index]?.sheet1?.text,
+				linesDecoration : newPages[destination?.index]?.sheet1?.linesDecoration,
+			},
+			sheet2 : {
+				...newPages[source?.index]?.sheet2,
+				layoutType      : newPages[destination?.index]?.sheet2?.layoutType,
+				photos          : newPages[destination?.index]?.sheet2?.photos,
+				text            : newPages[destination?.index]?.sheet2?.text,
+				linesDecoration : newPages[destination?.index]?.sheet2?.linesDecoration,
+			},
+		};
 
-		const newList = reOrderPages.map((page) => {
-			const newElement = {
-				...page,
-				sheet1 : {
-					...page.sheet1,
-					pageNo : counter + 1,
-				},
-				...(page.sheet2 ? {
-					sheet2 : { ...page.sheet2, pageNo : counter + 2},
-				} : {}),
-			};
-			counter += 1;
-			if (page.sheet2) {
-				counter += 1;
-			}
-			return newElement;
-		});
+		newPages[destination?.index] = destinationData;
+		newPages[source?.index] = sourceData;
 
-		const listToSend = [
-			{...pagesData[convertToArray(pagesData)[0]?.id]},
-			...newList,
-		];
-		workSpaceSlice.newListPages(convertToObject(listToSend));
+		const newObjPages = convertToObject(newPages);
+		workSpaceSlice.insertPages(newObjPages);
+	};
+
+	const handlerDragStart = () => {
+		workSpaceSlice.updatePageContent({
+			currentConfigPhotoBook,
+		});
 	};
 
 	useEffect(() => {
@@ -89,6 +90,9 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 		const dataListLeaveFrontPage = dataList.filter(page => (page?.id !== "FrontLayout"));
 		if (isValidArray(dataListLeaveFrontPage)) {
 			const newPagesData = { ...pagesData };
+			if (newPagesData?.FrontLayout) {
+				delete newPagesData.FrontLayout;
+			}
 			delete newPagesData[convertToArray(pagesData)[0]?.id];
 			const newData = {
 				pages : {
@@ -132,6 +136,7 @@ const PaginatorBar = ({ pagesData, workSpaceSlice, minPages, numberOfPages, load
 						/>
 						<DragDropContext
 							onDragEnd={dragerChangePosition}
+							onDragStart={handlerDragStart}
 						>
 							<Droppable droppableId="box-droppable-1">
 								{(provided) => (
