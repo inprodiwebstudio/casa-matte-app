@@ -1,7 +1,7 @@
 //redux
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
 
-import DeletePageActionButton from "./DeletePageAction";
+// import DeletePageActionButton from "./DeletePageAction";
 
 
 import { workSpaceSlice } from "store/Slices";
@@ -77,14 +77,14 @@ const SpreadBook = ({
 					})
 				}
 			>
-				{
+				{/* {
 					(isThumbNail && (pageData?.sheet1?.pageNo !== 1)) && (
 						<DeletePageActionButton
 							isLeftSide
 							pageData={pageData}
 						/>
 					)
-				}
+				} */}
 				{ContentSheet1 && <ContentSheet1 />}
 			</div>
 			{
@@ -105,13 +105,13 @@ const SpreadBook = ({
 							})
 						}
 					>
-						{
+						{/* {
 							isThumbNail && (
 								<DeletePageActionButton
 									pageData={pageData}
 								/>
 							)
-						}
+						} */}
 						{ContentSheet2 && <ContentSheet2 />}
 					</div>
 				)
