@@ -27,7 +27,7 @@ const GhostPagesDom = ({spreadPage}) => {
 			}}>
 			<div
 				style={{
-					height   : "0px",
+					height   : "800px",
 					width    : "100%",
 					overflow : "hidden",
 				}}
@@ -36,7 +36,13 @@ const GhostPagesDom = ({spreadPage}) => {
 					className="PreviewPages"
 				>
 					<div className="photoBookContainer">
-						<div className={`pagesPreviewPhotoBook ${handlerTypeProductFormat()}-preview`}>
+						<div className={
+							`pagesPreviewPhotoBook
+							${handlerTypeProductFormat()}-preview
+							${!isAvailableRightPage && "onePage"}
+							`
+						}
+						>
 							<SpreadBook
 								isWorkSpace={true}
 								isAvailableRightSheet={isAvailableRightPage}
