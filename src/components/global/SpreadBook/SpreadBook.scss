@@ -9,6 +9,38 @@
         overflow: hidden;
         background: white;
         box-shadow: 0px 0px 15px rgba(35, 35, 35, 0.332);
+        position: relative;
+
+        & .delete-container-button {
+            width: 22px;
+            height: 22px;
+            background: transparent;
+            color: transparent;
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 10;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all ease 200ms;
+
+            &.left-sheet {
+                left: 0;
+            }
+        }
+
+        &:hover {
+            & .delete-container-button {
+                background: rgba(44, 44, 44, 0.558);
+                border-radius: 5px;
+                cursor: pointer;
+                color: $dark-color;
+                font-weight: bolder;
+                color: rgb(255, 255, 255) !important;
+            }
+        }
 
         &.shadowDisabled {
             box-shadow: none;
