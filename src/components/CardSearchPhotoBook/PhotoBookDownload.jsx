@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState, useRef } from "react";
+import { genericApi }                              from "store/api/genericApi";
 import {
 	Card,
 	Stack,
@@ -25,6 +26,8 @@ import { currentConfigPhotoBookContext }             from "contexts/configContex
 import { Page, pdf, Document }                       from "@react-pdf/renderer";
 import JSZip                                         from "jszip";
 
+const { useLazyGetDataQuery } = genericApi;
+
 const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const { setCurrentConfigPhotoBook } = useContext(currentConfigPhotoBookContext);
 	const bookConfigData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
@@ -39,17 +42,37 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const [progress, setProgress] = useState(0);
 	const [generationStatus, setGenerationStatus] = useState("idle");
 	const [isGenerating, setIsGenerating] = useState(false);
+	const [postTypeId, setPostTypeId] = useState(undefined);
+	const [extraPaid, setExtraPaid] = useState(true);
+
+	const { data : myPhotoBookData } = genericApi.useGetDataQuery({
+		module : `wp-json/wp/v2/photobook-2-0/${postTypeId}`,
+	});
 
 	const processingRef = useRef(false);
 	const abortControllerRef = useRef(null);
 
+	const [ getOrdeInfo ] = useLazyGetDataQuery();
+
 	// Determinar si es producto layflat
 	const isLayflatProduct = bookConfigData?.product === "layflat";
+
+	const isPaidExtra = async (orderId) => {
+		try {
+			const orderData = await getOrdeInfo({ module : `wp-json/wc/v3/orders/${orderId}` }).unwrap();
+			if (!orderData.date_paid) {
+				setExtraPaid(false);
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	const handlerAndParseConfig = (config) => {
 		const myData = config.replace(/\.(heic|webp)/g, ".jpg");
 		const parseJSON = JSON.parse(myData);
 		const pagesList = convertToArray(parseJSON?.pages);
+		setPostTypeId(parseJSON?.postTypeId);
 		if (isValidArray(pagesList)) {
 			const pagesFilterNotFront = pagesList.filter((page) => page.id !== "FrontLayout");
 			setBookSpreadPages(pagesFilterNotFront);
@@ -60,6 +83,14 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		dispatch(workSpaceSlice.actions.insertData(parseJSON));
 		setIsLoading(false);
 	};
+
+	useEffect(() => {
+		if (myPhotoBookData) {
+			if (myPhotoBookData?.meta?.id_pedido_hojas_extra) {
+				isPaidExtra(myPhotoBookData?.meta?.id_pedido_hojas_extra);
+			}
+		}
+	}, [myPhotoBookData]);
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -639,6 +670,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	return (
 		<Stack w="100%" h="100%" align="center" justify="center" style={{ position : "relative" }}>
 			<OrderInfoCard
+				extraPaid={extraPaid}
 				photoBookData={photoBookData}
 				isLoading={isLoading || isGenerating}
 				generationStatus={generationStatus}
@@ -659,7 +691,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	);
 };
 
-const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload, onReturn, onCancel, disabled, isLayflatProduct, showCancel }) => (
+const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload, onReturn, onCancel, disabled, isLayflatProduct, showCancel, extraPaid=true }) => (
 	<Card
 		radius="13px"
 		shadow="lg"
@@ -692,6 +724,7 @@ const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload,
 			/>
 
 			<ActionButtons
+				isNotPaid={!extraPaid}
 				isLoading={isLoading}
 				generationStatus={generationStatus}
 				onDownload={onDownload}
@@ -719,8 +752,25 @@ const OrderSection = ({ title, items }) => (
 	</Stack>
 );
 
-const ActionButtons = ({ isLoading, generationStatus, onDownload, onReturn, onCancel, disabled, isLayflatProduct, showCancel }) => (
+const ActionButtons = ({
+	isLoading,
+	generationStatus,
+	onDownload,
+	onReturn,
+	onCancel,
+	disabled,
+	isLayflatProduct,
+	showCancel,
+	isNotPaid=false,
+}) => (
 	<Stack spacing="0px">
+		{
+			isNotPaid && (
+				<Text size="xs" align="center" color="red" mt="5px" sx={{ fontWeight : "300" }}>
+					No se ha completado el pago de hojas extras.
+				</Text>
+			)
+		}
 		<Button
 			color="darkCasaMatte.7"
 			size="xs"
@@ -729,7 +779,7 @@ const ActionButtons = ({ isLoading, generationStatus, onDownload, onReturn, onCa
 			loading={isLoading}
 			onClick={onDownload}
 			rightIcon={<SaveIcom size="12px" />}
-			disabled={disabled || generationStatus === "generating" || generationStatus === "creating_pdf"}
+			disabled={disabled || generationStatus === "generating" || generationStatus === "creating_pdf" || isNotPaid}
 			fullWidth
 		>
 			{generationStatus === "generating" ? "GENERANDO..." :
