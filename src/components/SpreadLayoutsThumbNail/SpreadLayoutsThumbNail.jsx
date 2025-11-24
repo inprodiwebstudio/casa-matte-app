@@ -11,13 +11,15 @@ const SpreadLayoutsThumbNail = ({pageData}) => {
 	return (
 		<SpreadBook
 			isAvailableRightSheet={isAvailableRightPage}
+			pageData={pageData}
 			contents={{
-				ContentSheet1    : () => <ModLayoutHandler modLayoutKey={sheet1?.layoutType} type="thumbNail" photos={sheet1?.photos} />,
-				layoutTypeSheet1 : sheet1?.layoutType,
+				ContentSheet1 : () => <ModLayoutHandler modLayoutKey={sheet1?.layoutType} type="thumbNail" photos={sheet1?.photos} />,
 				...(isAvailableRightPage && {
 					ContentSheet2 : () => <ModLayoutHandler modLayoutKey={sheet2?.layoutType} type="thumbNail" photos={sheet2?.photos} />,
 				}),
+				layoutTypeSheet1 : sheet1?.layoutType,
 			}}
+			isThumbNail
 		/>
 	);
 };
