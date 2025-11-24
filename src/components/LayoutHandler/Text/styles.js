@@ -18,7 +18,7 @@ const useStyles = createStyles(
 			justifyContent : "space-between",
 			display        : !size ? "none" : "flex",
 			position       : "relative", // necesario para handles absolutos
-			border         : "2px dashed #ffffff", // bounding box azul
+			border         : "2px dashed transparent", // bounding box azul
 
 			"& .action-delete" : {
 				position       : "absolute",
