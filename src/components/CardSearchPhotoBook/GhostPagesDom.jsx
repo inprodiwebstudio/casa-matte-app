@@ -14,7 +14,6 @@ const GhostPagesDom = ({spreadPage}) => {
 
 	const handlerTypeProductFormat = () => {
 		if (productPhotoBook === "travelcoffeetable") {
-			console.log("is travel");
 			return "travel-coffee-table";
 		}
 		return `${workSpaceFormatPage}-${workSpaceSizePage}`;
