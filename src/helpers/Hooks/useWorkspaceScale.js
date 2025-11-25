@@ -57,7 +57,7 @@ const useWorkspaceScale = () => {
 		const key = keyConstructor();
 		switch (key) {
 			case "travel-coffee-table":
-				return getScale(0.73, 0.53, 0.67, 0.3, 0.75, 0.55, 0.7, 0.35);
+				return getScale(0.6, 0.43, 0.45, 0.4, 0.6, 0.45, 0.45, 0.4);
 			case "horizontal-grande":
 				return getScale(0.6, 0.4, 0.45, 0.3, 0.75, 0.53, 0.6, 0.35);
 			case "horizontal-mediano":
