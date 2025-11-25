@@ -13,7 +13,7 @@ const GhostPagesDom = ({spreadPage}) => {
 	const isAvailableRightPage = sheet2 ? true : false;
 
 	const handlerTypeProductFormat = () => {
-		if (productPhotoBook === "travelcoffeetable ") {
+		if (productPhotoBook === "travelcoffeetable") {
 			return "travel-coffee-table";
 		}
 		return `${workSpaceFormatPage}-${workSpaceSizePage}`;
