@@ -90,14 +90,6 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		}
 	};
 
-	// useEffect(() => {
-	// 	if (myPhotoBookData) {
-	// 		if (myPhotoBookData?.meta?.id_pedido_hojas_extra) {
-	// 			isPaidExtra(myPhotoBookData?.meta?.id_pedido_hojas_extra);
-	// 		}
-	// 	}
-	// }, [myPhotoBookData]);
-
 	useEffect(() => {
 		setIsLoading(true);
 		if (photoBookData) {
