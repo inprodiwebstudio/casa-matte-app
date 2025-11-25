@@ -38,59 +38,65 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const [base64ImagePages, setBase64ImagePages] = useState([]);
 	const [currentSpreadDataPage, setCurrentSpreadDataPage] = useState(undefined);
 	const [bookSpreadPages, setBookSpreadPages] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 	const [progress, setProgress] = useState(0);
 	const [generationStatus, setGenerationStatus] = useState("idle");
 	const [isGenerating, setIsGenerating] = useState(false);
-	const [postTypeId, setPostTypeId] = useState(undefined);
 	const [extraPaid, setExtraPaid] = useState(true);
-
-	const { data : myPhotoBookData } = genericApi.useGetDataQuery({
-		module : `wp-json/wp/v2/photobook-2-0/${postTypeId}`,
-	});
 
 	const processingRef = useRef(false);
 	const abortControllerRef = useRef(null);
 
-	const [ getOrdeInfo ] = useLazyGetDataQuery();
+	const [ getData ] = useLazyGetDataQuery();
 
 	// Determinar si es producto layflat
 	const isLayflatProduct = bookConfigData?.product === "layflat";
 
-	const isPaidExtra = async (orderId) => {
-		try {
-			const orderData = await getOrdeInfo({ module : `wp-json/wc/v3/orders/${orderId}` }).unwrap();
-			if (!orderData.date_paid) {
-				setExtraPaid(false);
-			}
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
-	const handlerAndParseConfig = (config) => {
+	const handlerAndParseConfig = async (config) => {
 		const myData = config.replace(/\.(heic|webp)/g, ".jpg");
 		const parseJSON = JSON.parse(myData);
 		const pagesList = convertToArray(parseJSON?.pages);
-		setPostTypeId(parseJSON?.postTypeId);
-		if (isValidArray(pagesList)) {
-			const pagesFilterNotFront = pagesList.filter((page) => page.id !== "FrontLayout");
-			setBookSpreadPages(pagesFilterNotFront);
-		} else {
+		try {
+			const postTypeId = parseJSON?.postTypeId;
+			if (!postTypeId) {
+				new Error("No se encontro el postTypeId");
+			}
+			const postInfo = await getData({ module : `wp-json/wp/v2/photobook-2-0/${postTypeId}` }).unwrap();
+			const orderIdExtraPges = postInfo?.meta?.id_pedido_hojas_extra;
+			if (!orderIdExtraPges || orderIdExtraPges === "") {
+				setExtraPaid(true);
+			} else {
+				const orderInfoData = await getData({ module : `wp-json/wc/v3/orders/${orderIdExtraPges}` }).unwrap();
+				const datePaid = orderInfoData?.date_paid;
+				if (datePaid) {
+					setExtraPaid(true);
+				} else {
+					setExtraPaid(false);
+				}
+			}
+			if (isValidArray(pagesList)) {
+				const pagesFilterNotFront = pagesList.filter((page) => page.id !== "FrontLayout");
+				setBookSpreadPages(pagesFilterNotFront);
+			} else {
+				setIsLoading(false);
+				return;
+			}
+			dispatch(workSpaceSlice.actions.insertData(parseJSON));
 			setIsLoading(false);
+		} catch (error) {
+			setIsLoading(false);
+			console.error(error);
 			return;
 		}
-		dispatch(workSpaceSlice.actions.insertData(parseJSON));
-		setIsLoading(false);
 	};
 
-	useEffect(() => {
-		if (myPhotoBookData) {
-			if (myPhotoBookData?.meta?.id_pedido_hojas_extra) {
-				isPaidExtra(myPhotoBookData?.meta?.id_pedido_hojas_extra);
-			}
-		}
-	}, [myPhotoBookData]);
+	// useEffect(() => {
+	// 	if (myPhotoBookData) {
+	// 		if (myPhotoBookData?.meta?.id_pedido_hojas_extra) {
+	// 			isPaidExtra(myPhotoBookData?.meta?.id_pedido_hojas_extra);
+	// 		}
+	// 	}
+	// }, [myPhotoBookData]);
 
 	useEffect(() => {
 		setIsLoading(true);
