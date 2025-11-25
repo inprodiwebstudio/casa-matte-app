@@ -16,6 +16,7 @@ dist-ssr
 .vscode/*
 .yarn/install-state.gz
 !.vscode/extensions.json
+.yarn/install-state.gz
 .idea
 .DS_Store
 *.suo
