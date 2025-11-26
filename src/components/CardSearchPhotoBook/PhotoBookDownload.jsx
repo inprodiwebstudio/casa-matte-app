@@ -169,7 +169,9 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		const sizeKey = bookConfigData?.sizePhotoBook;
 		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
 
-		const isVerticalLargeFormat = ((formatKey === "vertical") && (sizeKey === "grande") || (formatKey === "travelcoffeetable"));
+		const isVerticalLargeFormat = (
+			((formatKey === "vertical") && (sizeKey === "grande")) || (formatKey === "travelcoffeetable")
+		);
 
 		const { size } = config;
 		const bodyHtml = (
