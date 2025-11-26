@@ -92,7 +92,7 @@ const EditText = ({
 		fontFamily : {
 			options : availableFontFamilies[typeText ?? "body"],
 		},
-		toolbar : ((product === "travelcoffeetable ") && isFront) ? undefined : {
+		toolbar : ((product === "travelcoffeetable") && isFront) ? undefined : {
 			items : [
 				"fontSize",
 				"fontfamily",
@@ -207,16 +207,26 @@ const EditText = ({
 	const handleEditorChange = useCallback(
 		debounce((event, editor) => {
 		  const data = editor.getData();
-		  setEditorState(data);
+		  const stylesPreset = "text-align: center;";
+		  const stylesContent = "font-family: TAN-MERINGUE; font-size: 50px;";
+		  // eslint-disable-next-line no-irregular-whitespace
+		  const defaultHtml = `<p style="${stylesPreset}"><span style="${stylesContent}">​</span></p>`;
+
+		  let myDataEditor = data;
+
+		  if (!data && isFront) {
+				myDataEditor = defaultHtml;
+		  }
+		  setEditorState(myDataEditor);
 		  if (isBound) {
-				workSpaceSlice.addTextBound({text : data});
+				workSpaceSlice.addTextBound({text : myDataEditor});
 				return;
 		  }
 		  if (!isFront) {
-				workSpaceSlice.addText({pageId : currentPageId, sheetNo, text : data, layoutNo});
+				workSpaceSlice.addText({pageId : currentPageId, sheetNo, text : myDataEditor, layoutNo});
 				return;
 		  }
-		  workSpaceSlice.addTextFront({sheetNo, text : data, layoutNo});
+		  workSpaceSlice.addTextFront({sheetNo, text : myDataEditor, layoutNo});
 		}, 3000),
 		[]
 	);

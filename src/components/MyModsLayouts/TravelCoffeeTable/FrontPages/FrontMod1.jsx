@@ -1,6 +1,6 @@
 
 import {Stack, Flex, Group} from "@mantine/core";
-import ImgLayout            from "components/LayoutHandler/ImgLayout";
+import ImgLayoutOld         from "components/LayoutHandler/ImgLayoutOld";
 
 //Own components
 import TextFix           from "components/LayoutHandler/TextFix";
@@ -8,9 +8,9 @@ import { TextShell }     from "core/components";
 import { textInsertion } from "helpers";
 
 const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
-	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 70px; font-family: TAN-MERINGUE;'>AMALFI</span></p>";
-	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 20px; font-family: Inter-Lifght;'>ENERO 2023</span></p>";
-	const defaultText03 = "<p style='text-align: center;'><span style='font-size: 20px; font-family: Inter-Lifght;'>OAXACA — TEOTITLÁN — SAN JOSÉ — OCOTLÁN</span></p>";
+	const defaultText01 = "<p style='text-align: center;'><span style='font-size: 50px; font-family: TAN-MERINGUE;'>AMALFI</span></p>";
+	const defaultText02 = "<p style='text-align: center;'><span style='font-size: 20px; font-family: TAN-MERINGUE;'>ENERO 2023</span></p>";
+	const defaultText03 = "<p style='text-align: center;'><span style='font-size: 20px; font-family: TAN-MERINGUE;'>OAXACA — TEOTITLÁN — SAN JOSÉ — OCOTLÁN</span></p>";
 
 	// const defaultText02 = "<p style='text-align: center;'><span style='font-size: 18px; font-family: Inter-Lifght;'>SUBTÍTULO</span></p>";
 
@@ -52,7 +52,7 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
 							textNo={2}
-							typeText={"travelCoffee"}
+							typeText={"titleTravelCoffee"}
 						/>
 					</Stack>
 				</Stack>
@@ -64,7 +64,10 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 					align="center"
 					spacing={isInWorkSpace ? "0%" : "20%"}
 				>
-					<Stack w="80%">
+					<Stack
+						w="80%"
+						mt={isInWorkSpace ? "90px" : "0%"}
+					>
 						<TextFix
 							sizes={{
 								"chico"   : "68px",
@@ -79,16 +82,16 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
 							textNo={0}
-							typeText={"travelCoffee"}
+							typeText={"titleTravelCoffee"}
 						/>
 					</Stack>
 					<Stack
 						w={isInWorkSpace ? "450px" : "70%"}
 						h={isInWorkSpace ? "440px" : "90%"}
-						mt={isInWorkSpace ? "75px" : "0%"}
-						mb={isInWorkSpace ? "140px" : "0%"}
+						mt={isInWorkSpace ? "80px" : "0%"}
+						mb={isInWorkSpace ? "80px" : "0%"}
 					>
-						<ImgLayout
+						<ImgLayoutOld
 							isInWorkSpace={isInWorkSpace}
 							sheetNo={sheetNo}
 							imageNo={0}
@@ -113,7 +116,7 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
 							textNo={1}
-							typeText={"travelCoffee"}
+							typeText={"titleTravelCoffee"}
 						/>
 					</Stack>
 				</Stack>

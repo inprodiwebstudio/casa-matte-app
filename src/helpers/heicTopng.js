@@ -3,8 +3,8 @@ import heic2any from "heic2any";
 const heicToPng = async (blobImage) => {
 	const extension = blobImage.name.split(".").pop()?.toLowerCase();
 
-	const heicExtensions = ["heic", "heif", "hif", "dng"];
-	const mimeTypes = ["image/heic", "image/heif", "image/hif", "image/dng"];
+	const heicExtensions = ["heic", "heif", "hif", "dng", "HEIF", "HEIC"];
+	const mimeTypes = ["image/heic", "image/heif", "image/hif", "image/dng", "image/HEIF", "image/HEIC"];
 
 	const isHeic =
 		heicExtensions.includes(extension) ||
@@ -25,6 +25,11 @@ const heicToPng = async (blobImage) => {
 		dataTransfer.items.add(fileWithPath);
 		return dataTransfer.files[0];
 	} catch (error) {
+		const { message, code } = error;
+		if (
+			(message === "ERR_LIBHEIF format not supported") ||
+			(code === 2)
+		) return blobImage;
 		return new Error(error);
 	}
 };
