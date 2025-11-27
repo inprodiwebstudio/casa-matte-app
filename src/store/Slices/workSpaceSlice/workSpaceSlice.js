@@ -208,8 +208,9 @@ const initialState = {
 			value : "all",
 		},
 	},
-	loading        : false,
-	statusViewPage : "",
+	loading           : false,
+	frontBookTypeView : null,
+	statusViewPage    : "",
 };
 
 export const workSpaceSlice = createSlice({
@@ -288,6 +289,9 @@ export const workSpaceSlice = createSlice({
 		},
 		changeColorEngraving : (state, {payload}) => {
 			state.data.engraving.currentColor = payload;
+		},
+		changeFrontBookTypeView : (state, {payload}) => {
+			state.frontBookTypeView = payload;
 		},
 		insertPhotoBase64Url : (state, {payload}) => {
 			const { pageId, sheetNo, photoIndex, imageData } = payload;

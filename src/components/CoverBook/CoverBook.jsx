@@ -15,6 +15,7 @@ const CoverBook = ({
 	const photoBooksConfig = photoBooksConfigOld;
 
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
+	const frontBookTypeView = useSelector((state) => state.workSpaceSlice.frontBookTypeView, shallowEqual);
 	const coverData = useSelector((state) => state.workSpaceSlice.data.cover);
 
 	const currentPhotoBook = photoBookData?.product ?? "white";
@@ -24,6 +25,8 @@ const CoverBook = ({
 	const photobookSize = photoBookData?.sizePhotoBook ?? "grande";
 
 	const aspectRatio = photoBooksConfig[currentPhotoBook]?.[photoBookFormat]?.sizes?.[photobookSize]?.aspectRatio;
+
+	const isBlackAndWhiteText = frontBookTypeView;
 
 
 	const handleLayoutMod = () => {
@@ -68,6 +71,7 @@ const CoverBook = ({
 				aspectRatio     : `${aspectRatio[0]*2}/${aspectRatio[1]}`,
 				boxShadow       : "0px 0px 15px rgba(35, 35, 35, 0.332)",
 				position        : "relative",
+				...(isBlackAndWhiteText && {color : "black"}),
 			}}
 		>
 			<Group
@@ -110,6 +114,7 @@ const CoverBook = ({
 						height : "100%",
 						flex   : 1,
 					}}
+					id="spanShotCover"
 				>
 					{
 						photoBookData?.frontPage?.sheet1?.layoutType && (

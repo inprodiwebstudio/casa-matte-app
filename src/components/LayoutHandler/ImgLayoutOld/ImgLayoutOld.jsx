@@ -27,6 +27,7 @@ const ImgLayoutOld = ({
 	const [ myImageUrl, setMyImageUrl ] = useState("");
 
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
+	const frontBookTypeView = useSelector((state) => state.workSpaceSlice?.frontBookTypeView, shallowEqual);
 
 	const dispatch = useDispatch();
 
@@ -106,7 +107,11 @@ const ImgLayoutOld = ({
 			{
 				...( ((myImageUrl && (myImageUrl !== "")) || !loadingPhoto) &&  {
 					style : {
-						backgroundImage    : "url(\"" + myImageUrl + "\")",
+						...((frontBookTypeView === "whitOutImage") ? {
+							background : "white",
+						} : {
+							backgroundImage : "url(\"" + myImageUrl + "\")",
+						}),
 						backgroundSize     : "cover",
 						backgroundPosition : "center",
 						backgroundRepeat   : "no-repeat",
