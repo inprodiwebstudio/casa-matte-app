@@ -71,7 +71,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 				if (datePaid) {
 					setExtraPaid(true);
 				} else {
-					setExtraPaid(true);
+					setExtraPaid(false);
 				}
 			}
 			if (isValidArray(pagesList)) {
