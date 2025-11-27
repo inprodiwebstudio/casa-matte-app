@@ -341,7 +341,7 @@ const EditText = ({
 			<CKEditor
 				editor={ BalloonEditor }
 				config={ editorConfiguration }
-				data={editorState}
+				data={editorState ?? ""}
 				onReady={getCurrentFontSize}
 				onChange={(event, editor) => {
 					handleEditorChange(event, editor);
