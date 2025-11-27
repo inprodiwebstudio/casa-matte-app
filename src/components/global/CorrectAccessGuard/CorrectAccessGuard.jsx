@@ -430,7 +430,8 @@ const CorrectAccessGuard = () => {
 			if (
 				(postId === "42516")||
 				(postId === "37505")||
-				(postId === "43701")
+				(postId === "43701")||
+				(postId === "43256")
 			) {
 				addCurrentPhotoBookConfig(photobookData);
 				setStatusView("continue");
@@ -442,7 +443,8 @@ const CorrectAccessGuard = () => {
 		if (
 			(postId === "42516")||
 			(postId === "37505")||
-			(postId === "43701")
+			(postId === "43701")||
+			(postId === "43256")
 		) {
 			addCurrentPhotoBookConfig(photobookData);
 			setStatusView("continue");
@@ -471,8 +473,9 @@ const CorrectAccessGuard = () => {
 			if (!photobookData?.meta?.id_pedido_hojas_extra) {
 				if (
 					(postId === "42516")||
-					(postId === "37505") ||
-					(postId === "43701")
+					(postId === "37505")||
+					(postId === "43701")||
+					(postId === "43256")
 				) {
 					addCurrentPhotoBookConfig(photobookData);
 					setStatusView("continue");
