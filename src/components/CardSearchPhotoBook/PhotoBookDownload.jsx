@@ -779,7 +779,7 @@ const ActionButtons = ({
 			loading={isLoading}
 			onClick={onDownload}
 			rightIcon={<SaveIcom size="12px" />}
-			disabled={disabled || generationStatus === "generating" || generationStatus === "creating_pdf" || isNotPaid}
+			disabled={disabled || generationStatus === "generating" || generationStatus === "creating_pdf"}
 			fullWidth
 		>
 			{generationStatus === "generating" ? "GENERANDO..." :
