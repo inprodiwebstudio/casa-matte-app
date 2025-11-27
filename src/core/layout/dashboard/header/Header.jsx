@@ -93,6 +93,18 @@ const Header = () => {
 		}
 	};
 
+	const handlerPrintClick = () => {
+		dispatch(workSpaceSlice.actions.updatePageContent({
+			currentConfigPhotoBook,
+		}));
+		openContextModal({
+			modal      : "confirmationToPrint",
+			innerProps : {
+				postId,
+			},
+		});
+	};
+
 	useEffect(() => {
 		if (lastModified) {
 			setDate(lastModified);
@@ -196,12 +208,7 @@ const Header = () => {
 									radius={12}
 									size="xs"
 									color="darkCasaMatte"
-									onClick={() => openContextModal({
-										modal      : "confirmationToPrint",
-										innerProps : {
-											postId,
-										},
-									})}
+									onClick={() => handlerPrintClick()}
 									disabled={false}
 									loading={isLoadingWorspaceData}
 								>
