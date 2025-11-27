@@ -1,12 +1,18 @@
-import CoverBook          from "components/CoverBook";
-import { useDispatch }    from "react-redux";
-import { workSpaceSlice } from "store/Slices";
+import CoverBook                         from "components/CoverBook";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
+import { useContext }                    from "react";
+import { useDispatch }                   from "react-redux";
+import { workSpaceSlice }                from "store/Slices";
 
 
 const CoverBookItem = () => {
+	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 	const dispatch = useDispatch();
 
 	const handlerSelectPage = () => {
+		dispatch(workSpaceSlice.actions.updatePageContent({
+			currentConfigPhotoBook,
+		}));
 		dispatch(workSpaceSlice.actions.setSelectePageData({
 			pageId      : "frontpage",
 			currentPage : "sheet1",
