@@ -93,6 +93,18 @@ const Header = () => {
 		}
 	};
 
+	const handlerPrintClick = () => {
+		dispatch(workSpaceSlice.actions.updatePageContent({
+			currentConfigPhotoBook,
+		}));
+		openContextModal({
+			modal      : "confirmationToPrint",
+			innerProps : {
+				postId,
+			},
+		});
+	};
+
 	useEffect(() => {
 		if (lastModified) {
 			setDate(lastModified);
@@ -130,7 +142,7 @@ const Header = () => {
 	return (
 		<div className="Header">
 			<div className={`body-container ${isPreviewActive && "isActivePreview"}`}>
-				<a href="https://casamatte.wip-inprodi.com/">
+				<a href="https://casamatte.com/">
 					<img src={LogoCasaMatte} width={120} />
 				</a>
 				{
@@ -196,12 +208,7 @@ const Header = () => {
 									radius={12}
 									size="xs"
 									color="darkCasaMatte"
-									onClick={() => openContextModal({
-										modal      : "confirmationToPrint",
-										innerProps : {
-											postId,
-										},
-									})}
+									onClick={() => handlerPrintClick()}
 									disabled={false}
 									loading={isLoadingWorspaceData}
 								>
