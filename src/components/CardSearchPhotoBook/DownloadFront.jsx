@@ -8,6 +8,7 @@ import { workSpaceSlice }                         from "store/Slices";
 import { Document, Page, pdf }                    from "@react-pdf/renderer";
 import Html                                       from "react-pdf-html";
 import ReactDOMServer                             from "react-dom/server";
+import SpecsConfigPdf                             from "components/MyModsLayouts/SpecsConfigPdf";
 import { PHOTO_BOOK_TYPES }                       from "./cardSearchPhotoBook.constants";
 
 const DownloadFront = () => {
@@ -147,6 +148,9 @@ const DownloadFront = () => {
 						<LayoutContainerPage imgSrc={base64PageImg} indexImage={index} />
 					</PageComponent>
 				))}
+				<PageComponent>
+					<SpecsConfigPdf />
+				</PageComponent>
 			</Document>
 		);
 		return await pdf(pdfDocument).toBlob();
