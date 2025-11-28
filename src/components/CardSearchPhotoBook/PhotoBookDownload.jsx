@@ -13,6 +13,7 @@ import ReactDOMServer from "react-dom/server";
 import Html           from "react-pdf-html";
 import saveAs         from "file-saver";
 import GhostPagesDom  from "./GhostPagesDom";
+import DownloadFront  from "./DownloadFront";
 import {
 	GENERATION_STATUS_MESSAGES,
 	PHOTO_BOOK_TYPES,
@@ -43,6 +44,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const [generationStatus, setGenerationStatus] = useState("idle");
 	const [isGenerating, setIsGenerating] = useState(false);
 	const [extraPaid, setExtraPaid] = useState(true);
+	const [isAvailableFront, setIsAvailableFront] = useState(false);
 
 	const processingRef = useRef(false);
 	const abortControllerRef = useRef(null);
@@ -151,6 +153,18 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			setCurrentSpreadDataPage(currentDataSpread);
 		}
 	}, [currentIndexSpread]);
+
+	useEffect(() => {
+		if (bookConfigData && bookConfigData?.frontPage?.sheet1?.layoutType) {
+			setIsAvailableFront(true);
+			return;
+		}
+		return;
+	}, [bookConfigData]);
+
+	useEffect(() => {
+		setIsAvailableFront(false);
+	}, []);
 
 	const getFormatKey = (configDataBook) => {
 		const { product, format } = configDataBook || {};
@@ -668,8 +682,15 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	);
 
 	return (
-		<Stack w="100%" h="100%" align="center" justify="center" style={{ position : "relative" }}>
+		<Stack
+			w="100%"
+			h="100%"
+			align="center"
+			justify="center"
+			style={{ position : "relative" }}
+		>
 			<OrderInfoCard
+				isAvailableFront={isAvailableFront}
 				extraPaid={extraPaid}
 				photoBookData={photoBookData}
 				isLoading={isLoading || isGenerating}
@@ -691,7 +712,19 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	);
 };
 
-const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload, onReturn, onCancel, disabled, isLayflatProduct, showCancel, extraPaid=true }) => (
+const OrderInfoCard = ({
+	photoBookData,
+	isLoading,
+	generationStatus,
+	onDownload,
+	onReturn,
+	onCancel,
+	disabled,
+	isLayflatProduct,
+	showCancel,
+	extraPaid=true,
+	isAvailableFront,
+}) => (
 	<Card
 		radius="13px"
 		shadow="lg"
@@ -724,6 +757,7 @@ const OrderInfoCard = ({ photoBookData, isLoading, generationStatus, onDownload,
 			/>
 
 			<ActionButtons
+				isAvailableFront={isAvailableFront}
 				isNotPaid={!extraPaid}
 				isLoading={isLoading}
 				generationStatus={generationStatus}
@@ -762,6 +796,7 @@ const ActionButtons = ({
 	isLayflatProduct,
 	showCancel,
 	isNotPaid=false,
+	isAvailableFront,
 }) => (
 	<Stack spacing="0px">
 		{
@@ -800,6 +835,12 @@ const ActionButtons = ({
 				CANCELAR
 			</Button>
 		)}
+
+		{
+			isAvailableFront && (
+				<DownloadFront />
+			)
+		}
 
 		<Button
 			color="darkCasaMatte.6"

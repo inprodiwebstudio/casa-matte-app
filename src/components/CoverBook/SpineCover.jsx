@@ -10,6 +10,7 @@ const SpineCover = ({
 }) => {
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 	const availableSpine = useSelector((state) => state.workSpaceSlice.data.availableSpine, shallowEqual);
+	const frontBookTypeView = useSelector((state) => state.workSpaceSlice.frontBookTypeView, shallowEqual);
 
 	const isLargePhotoBook = photoBookData?.sizePhotoBook === "grande";
 
@@ -64,12 +65,13 @@ const SpineCover = ({
 			style={{
 				width          : "5%",
 				height         : (isSencilloPhotoBook && !isInPaginator) ? "100%" : "100%",
-				borderRight    : `${isInPaginator ? "1px" : "3px"} solid rgb(217, 216, 216)`,
-				borderLeft     : `${isInPaginator ? "1px" : "3px"} solid rgb(217, 216, 216)`,
+				borderRight    : !frontBookTypeView && `${isInPaginator ? "1px" : "3px"} solid rgb(217, 216, 216)`,
+				borderLeft     : !frontBookTypeView && `${isInPaginator ? "1px" : "3px"} solid rgb(217, 216, 216)`,
 				display        : "flex",
 				justifyContent : "center",
 				alignItems     : "center",
 			}}
+			id="snapShotSpine"
 		>
 			<Stack
 				style={{

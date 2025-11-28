@@ -8,8 +8,15 @@ import ReactDOMServer from "react-dom/server";
 import casaMatteLabLogo from "../../../Resources/images/casaMatteLogo.png";
 
 
-const SpinePage = () => {
-
+const SpinePage = ({
+	material,
+	frontColor,
+	productName,
+	hexColorFront,
+	engravingColor,
+	hexColorEngraving,
+	isAvailableSpineText,
+}) => {
 	const bodyHtml = (
 		<div
 			style={{
@@ -51,7 +58,7 @@ const SpinePage = () => {
 							fontWeight : "bold",
 						}}
 					>
-						Clásico
+						{productName}
 					</div>
 				</div>
 				<div
@@ -66,28 +73,10 @@ const SpinePage = () => {
 					<div
 						style={{
 							fontWeight : "bold",
-							color      : "green",
+							color      : isAvailableSpineText ? "green" : "red",
 						}}
 					>
-						Si
-					</div>
-				</div>
-				<div
-					style={{
-						display       : "flex",
-						flexDirection : "row",
-						gap           : "5px",
-						fontSize      : "17px",
-					}}
-				>
-					<div>Grabado en Lomo :</div>
-					<div
-						style={{
-							fontWeight : "bold",
-							color      : "green",
-						}}
-					>
-						Si
+						{isAvailableSpineText ? "Si" : "No"}
 					</div>
 				</div>
 				<div
@@ -104,7 +93,7 @@ const SpinePage = () => {
 							fontWeight : "bold",
 						}}
 					>
-						Tela
+						{material}
 					</div>
 				</div>
 				<div
@@ -129,7 +118,7 @@ const SpinePage = () => {
 								fontWeight : "bold",
 							}}
 						>
-							Verde Amarillo BRIGHT
+							{frontColor}
 						</div>
 						<div
 							style={{
@@ -137,7 +126,7 @@ const SpinePage = () => {
 								height       : "20px",
 								borderRadius : "50%",
 								border       : "1px solid black",
-								background   : "#D6C872",
+								background   : hexColorFront,
 							}}
 						>
 							&nbsp;
@@ -166,7 +155,7 @@ const SpinePage = () => {
 								fontWeight : "bold",
 							}}
 						>
-							Magenta
+							{engravingColor}
 						</div>
 						<div
 							style={{
@@ -174,62 +163,10 @@ const SpinePage = () => {
 								height       : "20px",
 								borderRadius : "50%",
 								border       : "1px solid black",
-								background   : "#FF00FF",
+								background   : hexColorEngraving,
 							}}
 						>
 							&nbsp;
-						</div>
-					</div>
-				</div>
-				<div
-					style={{
-						display       : "flex",
-						flexDirection : "row",
-						gap           : "5px",
-						fontSize      : "17px",
-					}}
-				>
-					<div>Correo del cliente :</div>
-					<div
-						style={{
-							display       : "flex",
-							flexDirection : "row",
-							gap           : "2px",
-							fontSize      : "17px",
-						}}
-					>
-						<div
-							style={{
-								fontWeight : "bold",
-							}}
-						>
-							demo44@demo.com
-						</div>
-					</div>
-				</div>
-				<div
-					style={{
-						display       : "flex",
-						flexDirection : "row",
-						gap           : "5px",
-						fontSize      : "17px",
-					}}
-				>
-					<div>No de Paginas :</div>
-					<div
-						style={{
-							display       : "flex",
-							flexDirection : "row",
-							gap           : "2px",
-							fontSize      : "17px",
-						}}
-					>
-						<div
-							style={{
-								fontWeight : "bold",
-							}}
-						>
-							80
 						</div>
 					</div>
 				</div>

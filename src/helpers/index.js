@@ -20,6 +20,7 @@ export { default as filterTwoArrays }            from "./filterTwoArrays";
 export { default as PrivateRoute }               from "./PrivateRoute.jsx";
 export { default as coordinatesPhotoInWorkSpce } from "./coordinatesPhotoInWorkSpce";
 export { default as textToImage }                from "./textToImage";
+export { default as snapShotCover }              from "./snapShotCover";
 export {  default as imgUrlPdf }                 from "./imgUrlPdf";
 export {  default as getParamURL }               from "./getParamURL";
 export {  default as heicToPng }                 from "./heicTopng";
