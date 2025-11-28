@@ -29,9 +29,9 @@ import { TiDelete }           from "react-icons/ti";
 const EditText = ({
 	sheetNo,
 	layoutNo,
+	typeText,
 	gapSpacing,
 	lineHeight,
-	typeText,
 	letterSpacing,
 }) => {
 	const {currentConfigPhotoBook, setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
