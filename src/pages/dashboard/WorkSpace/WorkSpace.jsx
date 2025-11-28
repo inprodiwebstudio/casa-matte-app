@@ -1,10 +1,9 @@
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { useState, useEffect }                    from "react";
 //Helpers
-import { isValidArray, convertToArray } from "helpers";
+import { isValidArray } from "helpers";
 
 //Own components
-import BookPages              from "components/BookPages";
 import ManagePagesView        from "../ManagePagesView";
 import { RedoArrow }          from "Resources/icons";
 import { workSpaceSlice }     from "store/Slices";
@@ -28,6 +27,7 @@ const WorkSpace = () => {
 	const isAvailableProduct = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
 
 	const isFrontLayout = currentPageId === "frontpage";
+	const isInPreview = statusViewPage === "preview";
 
 	const isAvailableUndo = isValidArray(workSpaceHistory.undo);
 	const isAvailableRedo = isValidArray(workSpaceHistory.redo);
@@ -53,34 +53,13 @@ const WorkSpace = () => {
 	};
 
 	const SapceViewHandler = () => {
-		if ((statusViewPage === "preview") && (isAvailableProduct !== "") ) {
-			return (
-				<div
-					className="PreviewPages"
-				>
-					{
-						convertToArray({...workSpaceData}).map((page, index) => (
-							<div className="photoBookContainer" key={index}>
-								<div className={`pagesPreviewPhotoBook ${handlerTypeProductFormat()}-preview`}>
-									<BookPages
-										isInWorkSpcae={true}
-										loading={false}
-										pageData={page}
-									/>
-								</div>
-							</div>
-						))
-					}
-				</div>
-			);
-		}
 		if ((statusViewPage === "managePages") && (isAvailableProduct !== "")) {
 			return (
 				<ManagePagesView />
 			);
 		}
 		return (
-			<div className="WorkSpace">
+			<div className={`WorkSpace ${isInPreview && "previewActive"}`}>
 				<div className="canva-space">
 					<div className="undo-redo-container">
 						<div

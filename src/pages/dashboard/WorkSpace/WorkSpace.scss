@@ -136,6 +136,12 @@
 	align-items     : center;
 	position: relative;
 
+	&.previewActive {
+		padding-left: 0px;
+		padding-bottom: 0px;
+		padding-right: 0px;
+	}
+
 	@include big-tablet {
 		padding-right: 184px;
 	}

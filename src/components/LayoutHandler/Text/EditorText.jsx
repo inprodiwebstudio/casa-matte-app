@@ -49,19 +49,23 @@ const EditText = ({
 
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const product = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
+	const statusViewPage = useSelector((state) => state.workSpaceSlice.statusViewPage, shallowEqual);
 	const currentColorEngravingText = useSelector((state) => state.workSpaceSlice.data?.engraving?.currentColor?.colorHex, shallowEqual);
 
 	const scale = useWorkspaceScale();
 
+	const isInPreview = statusViewPage === "preview";
+
 	const isAvailableChangeColorText = currentColorEngravingText && (currentPageId === "frontpage");
 
 	const { classes } = styles({
-		size         : currentFontSize,
+		size                   : currentFontSize,
 		gapSpacing,
 		lineHeight,
 		letterSpacing,
 		layoutNo,
-		gravingColor : isAvailableChangeColorText ? currentColorEngravingText : undefined,
+		isDisabledContainerBox : isInPreview,
+		gravingColor           : isAvailableChangeColorText ? currentColorEngravingText : undefined,
 	});
 
 	const editorRef = useRef();
@@ -349,21 +353,26 @@ const EditText = ({
 			onResizeStop={(e, direction, ref, delta, position) => {
 				handlerSetSizes(ref, position);
 			}}
+			disableDragging={isInPreview}
 		>
-			<div
-				className="action-delete"
-			>
-				<ActionIcon
-					color="red"
-					radius="xl"
-					variant="light"
-					size="lg"
-					onClick={handleDeleteText}
-				>
-					<TiDelete size={30} />
-				</ActionIcon>
-			</div>
-			<div className="handles" />
+			{!isInPreview && (
+				<>
+					<div
+						className="action-delete"
+					>
+						<ActionIcon
+							color="red"
+							radius="xl"
+							variant="light"
+							size="lg"
+							onClick={handleDeleteText}
+						>
+							<TiDelete size={30} />
+						</ActionIcon>
+					</div>
+					<div className="handles" />
+				</>
+			)}
 			<CKEditor
 				editor={ BalloonEditor }
 				config={ editorConfiguration }
@@ -372,17 +381,22 @@ const EditText = ({
 				onChange={(event, editor) => {
 					handleEditorChange(event, editor);
 				}}
+				disabled={isInPreview}
 			/>
-			<Center
-				p="0%"
-				m="0%"
-			>
-				<div
-					className={`handles-${layoutNo}`}
-				>
-					+
-				</div>
-			</Center>
+			{
+				!isInPreview && (
+					<Center
+						p="0%"
+						m="0%"
+					>
+						<div
+							className={`handles-${layoutNo}`}
+						>
+							+
+						</div>
+					</Center>
+				)
+			}
 		</Rnd>
 	);
 };

@@ -10,6 +10,7 @@ const useStyles = createStyles(
 			letterSpacing,
 			gravingColor,
 			layoutNo,
+			isDisabledContainerBox,
 		}
 	) => ({
 		editText : {
@@ -32,7 +33,7 @@ const useStyles = createStyles(
 			},
 
 			"&:hover" : {
-				border : "2px dashed #3b82f6",
+				border : !isDisabledContainerBox && "2px dashed #3b82f6",
 
 				"& .action-delete" : {
 					opacity : 1,
@@ -124,102 +125,102 @@ const useStyles = createStyles(
 				flexDirection : "row-reverse",
 				paddingRight  : "20px",
 			},
+			...(!isDisabledContainerBox && {
+				"&::before, &::after" : {
+					content      : "''",
+					position     : "absolute",
+					width        : "10px",
+					height       : "10px",
+					background   : "transparent",
+					border       : "2px solid transparent",
+					borderRadius : "50%",
+					zIndex       : 2,
+				},
 
-			/* ==== HANDLES CON PSEUDO ELEMENTOS ==== */
-			"&::before, &::after" : {
-				content      : "''",
-				position     : "absolute",
-				width        : "10px",
-				height       : "10px",
-				background   : "transparent",
-				border       : "2px solid transparent",
-				borderRadius : "50%",
-				zIndex       : 2,
-			},
+				"&:hover::before, &:hover::after" : {
+					background : "#fff",
+					border     : "2px solid #3b82f6",
+				},
 
-			"&:hover::before, &:hover::after" : {
-				background : "#fff",
-				border     : "2px solid #3b82f6",
-			},
+				/* esquina superior izquierda */
+				"&::before" : {
+					top  : "-6px",
+					left : "-6px",
+				},
 
-			/* esquina superior izquierda */
-			"&::before" : {
-				top  : "-6px",
-				left : "-6px",
-			},
+				/* esquina superior derecha */
+				"&::after" : {
+					top   : "-6px",
+					right : "-6px",
+				},
 
-			/* esquina superior derecha */
-			"&::after" : {
-				top   : "-6px",
-				right : "-6px",
-			},
+				/* contenedor auxiliar para más handles */
+				"& .handles::before, & .handles::after" : {
+					content      : "''",
+					position     : "absolute",
+					width        : "10px",
+					height       : "10px",
+					background   : "transparent",
+					border       : "2px solid transparent",
+					borderRadius : "50%",
+					zIndex       : 2,
+				},
 
-			/* contenedor auxiliar para más handles */
-			"& .handles::before, & .handles::after" : {
-				content      : "''",
-				position     : "absolute",
-				width        : "10px",
-				height       : "10px",
-				background   : "transparent",
-				border       : "2px solid transparent",
-				borderRadius : "50%",
-				zIndex       : 2,
-			},
+				"&:hover .handles::before, &:hover .handles::after" : {
+					background : "#fff",
+					border     : "2px solid #3b82f6",
+				},
 
-			"&:hover .handles::before, &:hover .handles::after" : {
-				background : "#fff",
-				border     : "2px solid #3b82f6",
-			},
+				/* esquina inferior izquierda */
+				"& .handles::before" : {
+					bottom : "-6px",
+					left   : "-6px",
+				},
 
-			/* esquina inferior izquierda */
-			"& .handles::before" : {
-				bottom : "-6px",
-				left   : "-6px",
-			},
+				/* esquina inferior derecha */
+				"& .handles::after" : {
+					bottom : "-6px",
+					right  : "-6px",
+				},
 
-			/* esquina inferior derecha */
-			"& .handles::after" : {
-				bottom : "-6px",
-				right  : "-6px",
-			},
+				[`& .handles-${layoutNo}`] : {
+					cursor     : "move",
+					fontSize   : "35px",
+					fontWeight : "bold",
+					color      : "transparent",
+					marginTop  : "-22.5px",
+				},
 
-			[`& .handles-${layoutNo}`] : {
-				cursor     : "move",
-				fontSize   : "35px",
-				fontWeight : "bold",
-				color      : "transparent",
-				marginTop  : "-22.5px",
-			},
+				[`&:hover .handles-${layoutNo}`] : {
+					color : "#3b82f6",
+				},
 
-			[`&:hover .handles-${layoutNo}`] : {
-				color : "#3b82f6",
-			},
+				/* handles de los lados (extra div para cubrir 4 más) */
+				"& .handles span::before, & .handles span::after" : {
+					content      : "''",
+					position     : "absolute",
+					width        : "10px",
+					height       : "10px",
+					background   : "#fff",
+					border       : "2px solid #3b82f6",
+					borderRadius : "50%",
+					zIndex       : 2,
+				},
 
-			/* handles de los lados (extra div para cubrir 4 más) */
-			"& .handles span::before, & .handles span::after" : {
-				content      : "''",
-				position     : "absolute",
-				width        : "10px",
-				height       : "10px",
-				background   : "#fff",
-				border       : "2px solid #3b82f6",
-				borderRadius : "50%",
-				zIndex       : 2,
-			},
+				/* lado superior medio */
+				"& .handles span::before" : {
+					top       : "-6px",
+					left      : "50%",
+					transform : "translateX(-50%)",
+				},
 
-			/* lado superior medio */
-			"& .handles span::before" : {
-				top       : "-6px",
-				left      : "50%",
-				transform : "translateX(-50%)",
-			},
-
-			/* lado inferior medio */
-			"& .handles span::after" : {
-				bottom    : "-6px",
-				left      : "50%",
-				transform : "translateX(-50%)",
-			},
+				/* lado inferior medio */
+				"& .handles span::after" : {
+					bottom    : "-6px",
+					left      : "50%",
+					transform : "translateX(-50%)",
+				},
+			}),
 		},
 	})
 );
