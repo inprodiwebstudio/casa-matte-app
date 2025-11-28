@@ -25,8 +25,11 @@ const ImgLayout = ({
 	const imageData = sheetData?.photos?.[imageNo];
 
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
+	const statusViewPage = useSelector((state) => state.workSpaceSlice.statusViewPage, shallowEqual);
 
 	const dragerImage = useSelector((state) => state.workSpaceSlice.currentPhotoDragger, shallowEqual);
+
+	const isInPreView = statusViewPage === "preview";
 
 	// const [ isLowQuality, setIsLowQuality ] = useState(false);
 
@@ -107,7 +110,7 @@ const ImgLayout = ({
 			}
 		>
 			{
-				imageData?.url && (
+				(imageData?.url && !isInPreView) && (
 					<ActionImagesLayout
 						containerPhotoUuid={`${currentPageId}-${sheetNo}-${imageNo}`}
 						sheetNo={sheetNo}

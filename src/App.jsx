@@ -29,11 +29,11 @@ export default function App() {
 		window.location.href = "https://casamatte.wip-inprodi.com/dashboard/";
 	});
 
-	window.addEventListener("beforeunload", function(event) {
-		// Cualquier texto que pongas aquí NO se mostrará (los navegadores ya no lo permiten)
-		event.preventDefault();
-		event.returnValue = ""; // Obligatorio
-	});
+	// window.addEventListener("beforeunload", function(event) {
+	// 	// Cualquier texto que pongas aquí NO se mostrará (los navegadores ya no lo permiten)
+	// 	event.preventDefault();
+	// 	event.returnValue = ""; // Obligatorio
+	// });
 
 	if (isMobile) {
 		return (

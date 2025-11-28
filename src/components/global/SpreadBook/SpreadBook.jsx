@@ -29,6 +29,9 @@ const SpreadBook = ({
 	const {ContentSheet1, ContentSheet2, layoutTypeSheet1} = contents;
 
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
+	const statusViewPage = useSelector((state) => state.workSpaceSlice.statusViewPage, shallowEqual);
+
+	const isInPreviewPage = statusViewPage === "preview";
 
 	const {sizePhotoBook, format, product} = photoBookData;
 
@@ -72,7 +75,7 @@ const SpreadBook = ({
 				}}
 				id="draggable-zone-sheet1"
 				{
-					...(isWorkSpace && {
+					...((isWorkSpace && !isInPreviewPage) && {
 						onClick : () => handlerSelectedData("sheet1"),
 					})
 				}
@@ -100,7 +103,7 @@ const SpreadBook = ({
 						}}
 						id="draggable-zone-sheet2"
 						{
-							...(isWorkSpace && {
+							...((isWorkSpace && !isInPreviewPage) && {
 								onClick : () => handlerSelectedData("sheet2"),
 							})
 						}
