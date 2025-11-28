@@ -2,7 +2,7 @@ import { Stack, Button }                          from "@mantine/core";
 import { FaBook }                                 from "react-icons/fa";
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
 import GhostFrontDom                              from "./GhostFrontDom";
-import { snapShotCover }                          from "helpers";
+import { isValidArray, snapShotCover }            from "helpers";
 import { useEffect, useState }                    from "react";
 import { workSpaceSlice }                         from "store/Slices";
 import { Document, Page, pdf }                    from "@react-pdf/renderer";
@@ -17,6 +17,8 @@ const DownloadFront = () => {
 	const bookConfigData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 	const frontTypeBook = useSelector((state) => state.workSpaceSlice.frontBookTypeView, shallowEqual);
 	const availableSpine = useSelector((state) => state.workSpaceSlice.data.availableSpine, shallowEqual);
+
+	const [isLoading, setIsLoading] = useState(false);
 
 	const spineText = bookConfigData?.bound;
 
@@ -33,6 +35,7 @@ const DownloadFront = () => {
 	const [frontImages, setFrontImages] = useState([]);
 
 	const handlerDownloadFront = async () => {
+		setIsLoading(true);
 		const blobImageFullFront = await snapShotCover("spanShotCover");
 		setFrontImages(prev => [ ...prev, blobImageFullFront]);
 		dispatch(workSpaceSlice.actions.changeFrontBookTypeView("whitOutImage"));
@@ -216,6 +219,12 @@ const DownloadFront = () => {
 		return;
 	}, [frontImages]);
 
+	useEffect(() => {
+		if (frontTypeBook && isValidArray(frontImages)) {
+			setIsLoading(false);
+		}
+	}, [frontTypeBook]);
+
 	return (
 		<Stack
 			spacing={0}
@@ -226,7 +235,7 @@ const DownloadFront = () => {
 				size="xs"
 				mt={10}
 				sx={{ fontWeight : "200" }}
-				loading={false}
+				loading={isLoading}
 				rightIcon={<FaBook size="15px" />}
 				onClick={() => handlerDownloadFront()}
 				fullWidth
