@@ -5,23 +5,18 @@ import React from "react";
 import Html           from "react-pdf-html";
 import ReactDOMServer from "react-dom/server";
 
-import casaMatteLabLogo              from "../../../Resources/images/casaMatteLogo.png";
-import frontThemesTextures           from "core/constants/frontThemesColors";
-import { shallowEqual, useSelector } from "react-redux";
+import casaMatteLabLogo from "../../../Resources/images/casaMatteLogo.png";
 
 
-const SpinePage = () => {
-	const bookConfigData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
-
-	const productName = bookConfigData?.product;
-	const isAvailableSpineText = bookConfigData?.availableSpine && (bookConfigData !== "");
-	const material = bookConfigData?.cover?.material ?? "";
-	const frontColor = bookConfigData?.cover?.color ?? "";
-	const engravingColor = bookConfigData?.engraving?.currentColor?.name ?? "";
-
-	const hexColorFront = frontThemesTextures[material]?.[frontColor]?.color ?? "transparent";
-	const hexColorEngraving = bookConfigData?.engraving?.currentColor?.colorHex ?? "transparent";
-
+const SpinePage = ({
+	material,
+	frontColor,
+	productName,
+	hexColorFront,
+	engravingColor,
+	hexColorEngraving,
+	isAvailableSpineText,
+}) => {
 	const bodyHtml = (
 		<div
 			style={{

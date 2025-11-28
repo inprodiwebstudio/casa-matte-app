@@ -10,6 +10,7 @@ import Html                                       from "react-pdf-html";
 import ReactDOMServer                             from "react-dom/server";
 import SpecsConfigPdf                             from "components/MyModsLayouts/SpecsConfigPdf";
 import { PHOTO_BOOK_TYPES }                       from "./cardSearchPhotoBook.constants";
+import frontThemesTextures                        from "core/constants/frontThemesColors";
 
 const DownloadFront = () => {
 	const dispatch = useDispatch();
@@ -19,7 +20,15 @@ const DownloadFront = () => {
 
 	const spineText = bookConfigData?.bound;
 
+	const productName = bookConfigData?.product;
 	const isAvailableSpineText = availableSpine && (spineText !== "");
+	const material = bookConfigData?.cover?.material ?? "";
+	const frontColor = bookConfigData?.cover?.color ?? "";
+	const engravingColor = bookConfigData?.engraving?.currentColor?.name ?? "";
+
+	const hexColorFront = frontThemesTextures[material]?.[frontColor]?.color ?? "transparent";
+	const hexColorEngraving = bookConfigData?.engraving?.currentColor?.colorHex ?? "transparent";
+
 
 	const [frontImages, setFrontImages] = useState([]);
 
@@ -108,7 +117,7 @@ const DownloadFront = () => {
 							alt={"image"}
 							style={{
 								objectFit : null,
-								height    : "20%",
+								height    : "100%",
 								width     : "auto",
 							}}
 						/>
@@ -149,7 +158,15 @@ const DownloadFront = () => {
 					</PageComponent>
 				))}
 				<PageComponent>
-					<SpecsConfigPdf />
+					<SpecsConfigPdf
+						material={material}
+						frontColor={frontColor}
+						productName={productName}
+						hexColorFront={hexColorFront}
+						engravingColor={engravingColor}
+						hexColorEngraving={hexColorEngraving}
+						isAvailableSpineText={isAvailableSpineText}
+					/>
 				</PageComponent>
 			</Document>
 		);
