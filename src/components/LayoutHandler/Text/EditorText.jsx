@@ -215,9 +215,35 @@ const EditText = ({
 	const editorState = currentConfigPhotoBook?.[`sheet${sheetNo}`]?.texts?.[layoutNo]?.text;
 
 
-	const handleEditorChange = (event, editor) =>{
-		const data = editor.getData();
-		setCurrentConfigPhotoBook(prev => ({
+	const handleEditorChange = (event, editor) => {
+		let data = editor.getData().trim();
+
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(data, "text/html");
+
+		const p = doc.querySelector("p");
+		const span = doc.querySelector("span");
+
+		// Detectar "contenido vacío" real
+		const isEmpty =
+        data === "" ||
+        data === "<p>&nbsp;</p>" ||
+        data === "<p></p>" ||
+        data === "<p><br></p>";
+
+		// Si el usuario borró TODO → aplicar defaultTemplate dinámico
+		if (isEmpty) {
+			const defaultAlignment = p?.getAttribute("style") || "text-align: center;";
+			const defaultTextStyle =
+            span?.getAttribute("style") ||
+            "font-size: 20px; color: #000; font-family: HelveticaLight;";
+
+			data = `<p style="${defaultAlignment}">
+                  <span style="${defaultTextStyle}">&#8203;</span>
+                </p>`;
+		}
+
+		setCurrentConfigPhotoBook((prev) => ({
 			...prev,
 			[`sheet${sheetNo}`] : {
 				...prev?.[`sheet${sheetNo}`],
