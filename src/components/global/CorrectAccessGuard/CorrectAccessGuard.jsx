@@ -427,7 +427,12 @@ const CorrectAccessGuard = () => {
 	const handlerAvailableExtra = async (idOrderExtra) => {
 		const isPaid = await isPaidExtra(idOrderExtra);
 		if (isPaid) {
-			if ((postId === "42516") || (postId === "37505")) {
+			if (
+				(postId === "42516")||
+				(postId === "37505")||
+				(postId === "43701")||
+				(postId === "43256")
+			) {
 				addCurrentPhotoBookConfig(photobookData);
 				setStatusView("continue");
 				return;
@@ -435,7 +440,12 @@ const CorrectAccessGuard = () => {
 			setStatusView("done");
 			return;
 		}
-		if ((postId === "42516") || (postId === "37505")) {
+		if (
+			(postId === "42516")||
+			(postId === "37505")||
+			(postId === "43701")||
+			(postId === "43256")
+		) {
 			addCurrentPhotoBookConfig(photobookData);
 			setStatusView("continue");
 			return;
@@ -461,7 +471,12 @@ const CorrectAccessGuard = () => {
 		}
 		if (photobookData?.meta?.status === "48") {
 			if (!photobookData?.meta?.id_pedido_hojas_extra) {
-				if ((postId === "42516") || (postId === "37505")) {
+				if (
+					(postId === "42516")||
+					(postId === "37505")||
+					(postId === "43701")||
+					(postId === "43256")
+				) {
 					addCurrentPhotoBookConfig(photobookData);
 					setStatusView("continue");
 					return;
