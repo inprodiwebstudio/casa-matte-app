@@ -88,6 +88,29 @@ const ImgLayoutOld = ({
 		setIsLowQuality(false);
 	};
 
+	const handlerShowImage = () => {
+		const isWithoutImage =( frontBookTypeView === "whitOutImage");
+		if (isWithoutImage) {
+			return {
+				style : {
+					background : "white",
+				},
+			};
+		}
+		const isAvailableImage = ((myImageUrl && (myImageUrl !== "")) || !loadingPhoto);
+		if (isAvailableImage) {
+			return {
+				style : {
+					backgroundImage    : "url(\"" + myImageUrl + "\")",
+					backgroundSize     : "cover",
+					backgroundPosition : "center",
+					backgroundRepeat   : "no-repeat",
+				},
+			};
+		}
+		return {};
+	};
+
 	useEffect(() => {
 		if (urlImage && isInWorkSpace) {
 			handlerQuality();
@@ -105,18 +128,7 @@ const ImgLayoutOld = ({
 			className={`ImgLayout ${isLowQuality ? "low-quality" : ""} ${isCoverImage && "relevantColor"}`}
 			id={`${currentPageId}-${sheetNo}-${imageNo}`}
 			{
-				...( ((myImageUrl && (myImageUrl !== "")) || !loadingPhoto) &&  {
-					style : {
-						...((frontBookTypeView === "whitOutImage") ? {
-							background : "white",
-						} : {
-							backgroundImage : "url(\"" + myImageUrl + "\")",
-						}),
-						backgroundSize     : "cover",
-						backgroundPosition : "center",
-						backgroundRepeat   : "no-repeat",
-					},
-				} )
+				...( handlerShowImage() || {} )
 			}
 		>
 			{

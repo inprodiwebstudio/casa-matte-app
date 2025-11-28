@@ -77,6 +77,7 @@ const SpineCover = ({
 				}}
 				justify="center"
 				align="center"
+				id="snapShotSpine"
 			>
 				{
 					isAvailablEditeSpine && (

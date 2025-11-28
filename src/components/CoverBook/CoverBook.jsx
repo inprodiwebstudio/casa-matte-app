@@ -67,31 +67,35 @@ const CoverBook = ({
 			spacing={0}
 			h="105.1%"
 			style={{
-				backgroundColor : !coverData ? "white" : frontThemesTextures[coverData?.material][coverData?.color].color,
+				backgroundColor : (!coverData || isBlackAndWhiteText) ? "white" : frontThemesTextures[coverData?.material][coverData?.color].color,
 				aspectRatio     : `${aspectRatio[0]*2}/${aspectRatio[1]}`,
 				boxShadow       : "0px 0px 15px rgba(35, 35, 35, 0.332)",
 				position        : "relative",
-				...(isBlackAndWhiteText && {color : "black"}),
+				...(isBlackAndWhiteText && {color : (frontBookTypeView === "whitOutText") ? "transparent" : "black"}),
 			}}
 		>
-			<Group
-				w="100%"
-				h="100%"
-				spacing={0}
-				style={{
-					position         : "absolute",
-					top              : 0,
-					left             : 0,
-					right            : 0,
-					bottom           : 0,
-					backgroundImage  : coverData && `url(${frontThemesTextures[coverData?.material][coverData?.color].textureUrl})`,
-					backgroundSize   : (coverData?.material === "PIEL VEGANA") ? "50% 100%" : "cover",
-					backgroundRepeat : (coverData?.material === "PIEL VEGANA") ? "repeat" : "no-repeat",
-					opacity          : 0.6,
-				}}
-			>
-				&nbsp;
-			</Group>
+			{
+				!isBlackAndWhiteText && (
+					<Group
+						w="100%"
+						h="100%"
+						spacing={0}
+						style={{
+							position         : "absolute",
+							top              : 0,
+							left             : 0,
+							right            : 0,
+							bottom           : 0,
+							backgroundImage  : coverData && `url(${frontThemesTextures[coverData?.material][coverData?.color].textureUrl})`,
+							backgroundSize   : (coverData?.material === "PIEL VEGANA") ? "50% 100%" : "cover",
+							backgroundRepeat : (coverData?.material === "PIEL VEGANA") ? "repeat" : "no-repeat",
+							opacity          : 0.6,
+						}}
+					>
+						&nbsp;
+					</Group>
+				)
+			}
 			<Group
 				w="100%"
 				h="100%"
@@ -108,7 +112,10 @@ const CoverBook = ({
 				>
 				&nbsp;
 				</Box>
-				<SpineCover isThumbNail={isThumbNail} isInPaginator={isInPaginator} />
+				<SpineCover
+					isThumbNail={isThumbNail}
+					isInPaginator={isInPaginator}
+				/>
 				<Box
 					style={{
 						height : "100%",
