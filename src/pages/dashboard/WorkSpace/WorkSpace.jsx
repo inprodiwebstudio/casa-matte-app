@@ -1,20 +1,24 @@
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
-import { useState, useEffect }                    from "react";
+import { useState, useEffect, useContext }        from "react";
+import { FaChevronLeft, FaChevronRight }          from "react-icons/fa";
 //Helpers
 import { isValidArray } from "helpers";
 
 //Own components
-import ManagePagesView        from "../ManagePagesView";
-import { RedoArrow }          from "Resources/icons";
-import { workSpaceSlice }     from "store/Slices";
-import SpreadLayoutsWorkspace from "components/SpreadLayoutsWorkspace";
-import CoverBook              from "components/CoverBook";
+import ManagePagesView                   from "../ManagePagesView";
+import { RedoArrow }                     from "Resources/icons";
+import { workSpaceSlice }                from "store/Slices";
+import SpreadLayoutsWorkspace            from "components/SpreadLayoutsWorkspace";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
+import CoverBook                         from "components/CoverBook";
 import "./WorkSpace.scss";
 
 const WorkSpace = () => {
 	const dispatch = useDispatch();
 
 	const [ myWorkSpaceData, setMyWorkSpaceData ] = useState(undefined);
+
+	const {setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
@@ -50,6 +54,44 @@ const WorkSpace = () => {
 			return `${workSpaceFormatPage}-${workSpaceSizePage}-layflat`;
 		}
 		return `${workSpaceFormatPage}-${workSpaceSizePage}`;
+	};
+
+	const handlerChangePagePreview = (typeChangePage) => {
+		const listOfPages = Object.values(workSpaceData).filter((page) => page?.id !== "FrontLayout");
+		const currentIndexPosition = listOfPages.findIndex((page) => page.id === currentPageId);
+
+		let pageId = null;
+
+		if (typeChangePage === "prev") {
+			if (currentIndexPosition === 0) {
+				return;
+			}
+			pageId = listOfPages[currentIndexPosition - 1].id;
+		} else {
+			if (currentIndexPosition === (listOfPages.length - 1)) {
+				return;
+			}
+			pageId = listOfPages[currentIndexPosition + 1].id;
+		}
+		dispatch(workSpaceSlice.actions.setSelectePageData({
+			pageId      : pageId,
+			currentPage : "sheet1",
+		}));
+		setCurrentConfigPhotoBook({
+			pageId : undefined,
+			sheet1 : {
+				modlayoutId : undefined,
+				texts       : undefined,
+				photos      : undefined,
+			},
+			sheet2 : {
+				modlayoutId : undefined,
+				texts       : undefined,
+				photos      : undefined,
+			},
+		});
+		dispatch(workSpaceSlice.actions.handleChangePage(pageId));
+
 	};
 
 	const SapceViewHandler = () => {
@@ -102,6 +144,16 @@ const WorkSpace = () => {
 							`
 						}
 					>
+						{(isInPreview && !isFrontLayout) && (
+							<div
+								style={{
+									cursor : "pointer",
+								}}
+								onClick={() => handlerChangePagePreview("prev")}
+							>
+								<FaChevronLeft color="gray" size={50} />
+							</div>
+						)}
 						{
 							isFrontLayout ? (
 								<CoverBook isInWorkSpace />
@@ -109,6 +161,16 @@ const WorkSpace = () => {
 								<SpreadLayoutsWorkspace />
 							)
 						}
+						{(isInPreview && !isFrontLayout) && (
+							<div
+								style={{
+									cursor : "pointer",
+								}}
+								onClick={() => handlerChangePagePreview("next")}
+							>
+								<FaChevronRight color="gray" size={50} />
+							</div>
+						)}
 					</div>
 				</div>
 			</div>
