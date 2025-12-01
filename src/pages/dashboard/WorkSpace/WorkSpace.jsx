@@ -90,7 +90,13 @@ const WorkSpace = () => {
 						</div>
 					</div>
 					<div
-						className={`ghost-canva ${handlerTypeProductFormat()}-workSpace ${(!myWorkSpaceData?.sheet2 && (myWorkSpaceData?.id !== "FrontLayout")) && "onePage"}`}
+						className={
+							`ghost-canva
+							${isInPreview ? "onPreviewContainer" : ""}
+							${handlerTypeProductFormat()}-workSpace
+							${(!myWorkSpaceData?.sheet2 && (myWorkSpaceData?.id !== "FrontLayout")) && "onePage"}
+							`
+						}
 					>
 						{
 							isFrontLayout ? (
