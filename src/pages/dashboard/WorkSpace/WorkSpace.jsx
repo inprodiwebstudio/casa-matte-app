@@ -61,34 +61,38 @@ const WorkSpace = () => {
 		return (
 			<div className={`WorkSpace ${isInPreview && "previewActive"}`}>
 				<div className="canva-space">
-					<div className="undo-redo-container">
-						<div
-							className={`action-styled ${!isAvailableUndo && "disabled"}`}
-							{...(
-								isAvailableUndo && {
-									onClick : () => dispatch(workSpaceSlice.actions.undo()),
-								}
-							)}
-						>
-							<RedoArrow style={{transform : "scaleX(-1)"}} size="13px" />
-							<div className="labelUndoRedo">
-								<div>Deshacer</div>
+					{
+						!isInPreview && (
+							<div className="undo-redo-container">
+								<div
+									className={`action-styled ${!isAvailableUndo && "disabled"}`}
+									{...(
+										isAvailableUndo && {
+											onClick : () => dispatch(workSpaceSlice.actions.undo()),
+										}
+									)}
+								>
+									<RedoArrow style={{transform : "scaleX(-1)"}} size="13px" />
+									<div className="labelUndoRedo">
+										<div>Deshacer</div>
+									</div>
+								</div>
+								<div
+									className={`action-styled ${!isAvailableRedo && "disabled"}`}
+									{...(
+										isAvailableRedo && {
+											onClick : () => dispatch(workSpaceSlice.actions.redo()),
+										}
+									)}
+								>
+									<RedoArrow size="13px" />
+									<div className="labelUndoRedo">
+										<div>Rehacer</div>
+									</div>
+								</div>
 							</div>
-						</div>
-						<div
-							className={`action-styled ${!isAvailableRedo && "disabled"}`}
-							{...(
-								isAvailableRedo && {
-									onClick : () => dispatch(workSpaceSlice.actions.redo()),
-								}
-							)}
-						>
-							<RedoArrow size="13px" />
-							<div className="labelUndoRedo">
-								<div>Rehacer</div>
-							</div>
-						</div>
-					</div>
+						)
+					}
 					<div
 						className={
 							`ghost-canva

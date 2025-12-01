@@ -11,6 +11,7 @@ import { handlerResizerImage, selectPhotoUrl } from "./imgLayout.helpers";
 import ActionImagesLayout from "./ActionImagesLayout";
 //Styles
 import "./ImgLayout.scss";
+import { changeResolutionImgUrl } from "helpers/Functions/changeResolutionImgUrl";
 // import { cleanNotifications, showNotification } from "@mantine/notifications";
 
 const ImgLayout = ({
@@ -101,7 +102,7 @@ const ImgLayout = ({
 			{
 				...((imageData?.url && (imageData?.url !== "")) &&  {
 					style : {
-						backgroundImage    : "url(\"" + handlerResizerImage(imageData, true) + "\")",
+						backgroundImage    : !isInPreView ? "url(\"" + handlerResizerImage(imageData, true) + "\")" : "url(\"" + changeResolutionImgUrl(selectPhotoUrl(imageData), {width : 1920}) + "\")",
 						backgroundSize     : "cover",
 						backgroundPosition : "center",
 						backgroundRepeat   : "no-repeat",
