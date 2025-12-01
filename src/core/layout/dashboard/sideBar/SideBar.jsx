@@ -11,6 +11,9 @@ const SideBar = () => {
 	return (
 		<div
 			id="SideBar"
+			style={{
+				display : isPreviewActive ? "none" : "flex",
+			}}
 		>
 			<div className={`body-sidebar ${isPreviewActive && "isPreviewActive"}`}>
 				<GalleryEditor />

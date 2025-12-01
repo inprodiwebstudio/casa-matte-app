@@ -1,21 +1,24 @@
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
-import { useState, useEffect }                    from "react";
+import { useState, useEffect, useContext }        from "react";
+import { FaChevronLeft, FaChevronRight }          from "react-icons/fa";
 //Helpers
-import { isValidArray, convertToArray } from "helpers";
+import { isValidArray } from "helpers";
 
 //Own components
-import BookPages              from "components/BookPages";
-import ManagePagesView        from "../ManagePagesView";
-import { RedoArrow }          from "Resources/icons";
-import { workSpaceSlice }     from "store/Slices";
-import SpreadLayoutsWorkspace from "components/SpreadLayoutsWorkspace";
-import CoverBook              from "components/CoverBook";
+import ManagePagesView                   from "../ManagePagesView";
+import { RedoArrow }                     from "Resources/icons";
+import { workSpaceSlice }                from "store/Slices";
+import SpreadLayoutsWorkspace            from "components/SpreadLayoutsWorkspace";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
+import CoverBook                         from "components/CoverBook";
 import "./WorkSpace.scss";
 
 const WorkSpace = () => {
 	const dispatch = useDispatch();
 
 	const [ myWorkSpaceData, setMyWorkSpaceData ] = useState(undefined);
+
+	const {setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
@@ -28,6 +31,7 @@ const WorkSpace = () => {
 	const isAvailableProduct = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
 
 	const isFrontLayout = currentPageId === "frontpage";
+	const isInPreview = statusViewPage === "preview";
 
 	const isAvailableUndo = isValidArray(workSpaceHistory.undo);
 	const isAvailableRedo = isValidArray(workSpaceHistory.redo);
@@ -52,67 +56,104 @@ const WorkSpace = () => {
 		return `${workSpaceFormatPage}-${workSpaceSizePage}`;
 	};
 
-	const SapceViewHandler = () => {
-		if ((statusViewPage === "preview") && (isAvailableProduct !== "") ) {
-			return (
-				<div
-					className="PreviewPages"
-				>
-					{
-						convertToArray({...workSpaceData}).map((page, index) => (
-							<div className="photoBookContainer" key={index}>
-								<div className={`pagesPreviewPhotoBook ${handlerTypeProductFormat()}-preview`}>
-									<BookPages
-										isInWorkSpcae={true}
-										loading={false}
-										pageData={page}
-									/>
-								</div>
-							</div>
-						))
-					}
-				</div>
-			);
+	const handlerChangePagePreview = (typeChangePage) => {
+		const listOfPages = Object.values(workSpaceData).filter((page) => page?.id !== "FrontLayout");
+		const currentIndexPosition = listOfPages.findIndex((page) => page.id === currentPageId);
+
+		let pageId = null;
+
+		if (typeChangePage === "prev") {
+			if (currentIndexPosition === 0) {
+				return;
+			}
+			pageId = listOfPages[currentIndexPosition - 1].id;
+		} else {
+			if (currentIndexPosition === (listOfPages.length - 1)) {
+				return;
+			}
+			pageId = listOfPages[currentIndexPosition + 1].id;
 		}
+		dispatch(workSpaceSlice.actions.setSelectePageData({
+			pageId      : pageId,
+			currentPage : "sheet1",
+		}));
+		setCurrentConfigPhotoBook({
+			pageId : undefined,
+			sheet1 : {
+				modlayoutId : undefined,
+				texts       : undefined,
+				photos      : undefined,
+			},
+			sheet2 : {
+				modlayoutId : undefined,
+				texts       : undefined,
+				photos      : undefined,
+			},
+		});
+		dispatch(workSpaceSlice.actions.handleChangePage(pageId));
+
+	};
+
+	const SapceViewHandler = () => {
 		if ((statusViewPage === "managePages") && (isAvailableProduct !== "")) {
 			return (
 				<ManagePagesView />
 			);
 		}
 		return (
-			<div className="WorkSpace">
+			<div className={`WorkSpace ${isInPreview && "previewActive"}`}>
 				<div className="canva-space">
-					<div className="undo-redo-container">
-						<div
-							className={`action-styled ${!isAvailableUndo && "disabled"}`}
-							{...(
-								isAvailableUndo && {
-									onClick : () => dispatch(workSpaceSlice.actions.undo()),
-								}
-							)}
-						>
-							<RedoArrow style={{transform : "scaleX(-1)"}} size="13px" />
-							<div className="labelUndoRedo">
-								<div>Deshacer</div>
+					{
+						!isInPreview && (
+							<div className="undo-redo-container">
+								<div
+									className={`action-styled ${!isAvailableUndo && "disabled"}`}
+									{...(
+										isAvailableUndo && {
+											onClick : () => dispatch(workSpaceSlice.actions.undo()),
+										}
+									)}
+								>
+									<RedoArrow style={{transform : "scaleX(-1)"}} size="13px" />
+									<div className="labelUndoRedo">
+										<div>Deshacer</div>
+									</div>
+								</div>
+								<div
+									className={`action-styled ${!isAvailableRedo && "disabled"}`}
+									{...(
+										isAvailableRedo && {
+											onClick : () => dispatch(workSpaceSlice.actions.redo()),
+										}
+									)}
+								>
+									<RedoArrow size="13px" />
+									<div className="labelUndoRedo">
+										<div>Rehacer</div>
+									</div>
+								</div>
 							</div>
-						</div>
-						<div
-							className={`action-styled ${!isAvailableRedo && "disabled"}`}
-							{...(
-								isAvailableRedo && {
-									onClick : () => dispatch(workSpaceSlice.actions.redo()),
-								}
-							)}
-						>
-							<RedoArrow size="13px" />
-							<div className="labelUndoRedo">
-								<div>Rehacer</div>
-							</div>
-						</div>
-					</div>
+						)
+					}
 					<div
-						className={`ghost-canva ${handlerTypeProductFormat()}-workSpace ${(!myWorkSpaceData?.sheet2 && (myWorkSpaceData?.id !== "FrontLayout")) && "onePage"}`}
+						className={
+							`ghost-canva
+							${isInPreview ? "onPreviewContainer" : ""}
+							${handlerTypeProductFormat()}-workSpace
+							${(!myWorkSpaceData?.sheet2 && (myWorkSpaceData?.id !== "FrontLayout")) && "onePage"}
+							`
+						}
 					>
+						{(isInPreview && !isFrontLayout) && (
+							<div
+								style={{
+									cursor : "pointer",
+								}}
+								onClick={() => handlerChangePagePreview("prev")}
+							>
+								<FaChevronLeft color="gray" size={50} />
+							</div>
+						)}
 						{
 							isFrontLayout ? (
 								<CoverBook isInWorkSpace />
@@ -120,6 +161,16 @@ const WorkSpace = () => {
 								<SpreadLayoutsWorkspace />
 							)
 						}
+						{(isInPreview && !isFrontLayout) && (
+							<div
+								style={{
+									cursor : "pointer",
+								}}
+								onClick={() => handlerChangePagePreview("next")}
+							>
+								<FaChevronRight color="gray" size={50} />
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

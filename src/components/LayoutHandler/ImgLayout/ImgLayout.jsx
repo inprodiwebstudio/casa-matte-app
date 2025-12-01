@@ -11,6 +11,7 @@ import { handlerResizerImage, selectPhotoUrl } from "./imgLayout.helpers";
 import ActionImagesLayout from "./ActionImagesLayout";
 //Styles
 import "./ImgLayout.scss";
+import { changeResolutionImgUrl } from "helpers/Functions/changeResolutionImgUrl";
 // import { cleanNotifications, showNotification } from "@mantine/notifications";
 
 const ImgLayout = ({
@@ -25,8 +26,11 @@ const ImgLayout = ({
 	const imageData = sheetData?.photos?.[imageNo];
 
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
+	const statusViewPage = useSelector((state) => state.workSpaceSlice.statusViewPage, shallowEqual);
 
 	const dragerImage = useSelector((state) => state.workSpaceSlice.currentPhotoDragger, shallowEqual);
+
+	const isInPreView = statusViewPage === "preview";
 
 	// const [ isLowQuality, setIsLowQuality ] = useState(false);
 
@@ -98,7 +102,7 @@ const ImgLayout = ({
 			{
 				...((imageData?.url && (imageData?.url !== "")) &&  {
 					style : {
-						backgroundImage    : "url(\"" + handlerResizerImage(imageData, true) + "\")",
+						backgroundImage    : !isInPreView ? "url(\"" + handlerResizerImage(imageData, true) + "\")" : "url(\"" + changeResolutionImgUrl(selectPhotoUrl(imageData), {width : 1920}) + "\")",
 						backgroundSize     : "cover",
 						backgroundPosition : "center",
 						backgroundRepeat   : "no-repeat",
@@ -107,7 +111,7 @@ const ImgLayout = ({
 			}
 		>
 			{
-				imageData?.url && (
+				(imageData?.url && !isInPreView) && (
 					<ActionImagesLayout
 						containerPhotoUuid={`${currentPageId}-${sheetNo}-${imageNo}`}
 						sheetNo={sheetNo}
