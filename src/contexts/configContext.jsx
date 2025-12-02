@@ -8,6 +8,7 @@ export const currentConfigPhotoBookContext = createContext();
 
 export const CurrentConfigPhotoBookProvider = ({children}) => {
 	const photoCurrentPageData = useSelector((state) => state.workSpaceSlice.currentPageData, shallowEqual);
+	const currentPageId = useSelector((state) => state.workSpaceSlice.data.currentPage, shallowEqual);
 
 	const {layoutMods} = useHandlerConfigBook() ?? {};
 
@@ -22,6 +23,14 @@ export const CurrentConfigPhotoBookProvider = ({children}) => {
 		sheet1 : defaultDataConfig,
 		sheet2 : defaultDataConfig,
 	});
+
+	const [historyChanges, setHistoryChanges] = useState([]);
+
+	const handlerHistoryChanges = (data) => {
+		if (historyChanges.length <= 9) {
+			setHistoryChanges([...historyChanges, data]);
+		}
+	};
 
 	useEffect(() => {
 		if (photoCurrentPageData && layoutMods) {
@@ -44,6 +53,21 @@ export const CurrentConfigPhotoBookProvider = ({children}) => {
 			});
 		}
 	}, [photoCurrentPageData, layoutMods]);
+
+
+	useEffect(() => {
+		if ((currentConfigPhotoBook?.pageId !== undefined)) {
+			handlerHistoryChanges(currentConfigPhotoBook);
+		}
+	}, [currentConfigPhotoBook]);
+
+	useEffect(() => {
+		if (currentPageId !== photoCurrentPageData?.id) {
+			setHistoryChanges([]);
+		}
+	}, [currentPageId]);
+
+	console.log(historyChanges);
 
 	return (
 		<currentConfigPhotoBookContext.Provider
