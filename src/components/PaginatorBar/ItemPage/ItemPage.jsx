@@ -56,6 +56,7 @@ const ItemPage = ({
 	const handlerPageData = () => {
 		if (currentConfigPhotoBook?.pageId === pageData?.id) {
 			const constructorData = {
+				id     : currentConfigPhotoBook?.pageId,
 				sheet1 : {
 					layoutType : currentConfigPhotoBook?.sheet1?.modlayoutId,
 					texts      : currentConfigPhotoBook?.sheet1?.texts,

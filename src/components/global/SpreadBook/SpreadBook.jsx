@@ -10,7 +10,7 @@ import "./SpreadBook.scss";
 import { useContext, useState }          from "react";
 import { currentConfigPhotoBookContext } from "contexts/configContext";
 import { useHandlerTypeConfigBooks }     from "helpers/Hooks/useHandlerTypeConfigBooks";
-// import DeletePageActionButton            from "./DeletePageAction";
+import DeletePageActionButton            from "./DeletePageAction";
 
 const SpreadBook = ({
 	isWorkSpace = false,
@@ -60,6 +60,8 @@ const SpreadBook = ({
 		}));
 	};
 
+	console.log(pageData?.id);
+
 	return (
 		<div
 			className="SpreadBook"
@@ -81,14 +83,14 @@ const SpreadBook = ({
 					})
 				}
 			>
-				{/* {
-					(isThumbNail && (pageData?.sheet1?.pageNo !== 1)) && (
+				{
+					(isThumbNail && ((pageData?.id !== "page1") || (product === "layflat"))) && (
 						<DeletePageActionButton
 							isLeftSide
 							pageData={pageData}
 						/>
 					)
-				} */}
+				}
 				{ContentSheet1 && <ContentSheet1 />}
 			</div>
 			{
@@ -109,13 +111,13 @@ const SpreadBook = ({
 							})
 						}
 					>
-						{/* {
-							isThumbNail && (
+						{
+							(isThumbNail && (product !== "layflat")) && (
 								<DeletePageActionButton
 									pageData={pageData}
 								/>
 							)
-						} */}
+						}
 						{ContentSheet2 && <ContentSheet2 />}
 					</div>
 				)

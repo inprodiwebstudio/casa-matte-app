@@ -76,7 +76,6 @@ export const CurrentConfigPhotoBookProvider = ({children}) => {
 		}
 	}, [currentPageId]);
 
-
 	return (
 		<currentConfigPhotoBookContext.Provider
 			value={{

@@ -331,9 +331,13 @@ export const workSpaceSlice = createSlice({
 				} }),
 			};
 
+			if (!state?.currentPageData?.id) {
+				return;
+			}
+
 			const newPagesContent = {
 				...state.data.pages,
-				[state.currentPageData.id] : parseContentPage,
+				[state?.currentPageData?.id] : parseContentPage,
 			};
 
 			state.data.pages = newPagesContent;
@@ -1065,6 +1069,9 @@ export const workSpaceSlice = createSlice({
 			history.addToUndoStack(undoNewData);
 			state.history.undo = history.undoStack;
 			state.history.current = history.currentAction;
+		},
+		newListPages : (state, {payload}) => {
+			state.data.pages = {...payload};
 		},
 		addTextImgs : (state, {payload}) => {
 			const { textImgs } = payload;
