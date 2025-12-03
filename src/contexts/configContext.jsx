@@ -57,7 +57,16 @@ export const CurrentConfigPhotoBookProvider = ({children}) => {
 
 	useEffect(() => {
 		if ((currentConfigPhotoBook?.pageId !== undefined)) {
-			handlerHistoryChanges(currentConfigPhotoBook);
+			const stringJsonConfigCurrent = JSON.stringify(currentConfigPhotoBook);
+			const listOfHistoryString = historyChanges.map((item) => JSON.stringify(item));
+
+			const isAvailableItem = listOfHistoryString.some((item) => item === stringJsonConfigCurrent);
+
+			if (!isAvailableItem) {
+				handlerHistoryChanges(currentConfigPhotoBook);
+				return;
+			}
+			return;
 		}
 	}, [currentConfigPhotoBook]);
 
@@ -67,11 +76,11 @@ export const CurrentConfigPhotoBookProvider = ({children}) => {
 		}
 	}, [currentPageId]);
 
-	console.log(historyChanges);
 
 	return (
 		<currentConfigPhotoBookContext.Provider
 			value={{
+				historyChanges,
 				currentConfigPhotoBook,
 				setCurrentConfigPhotoBook,
 			}}
