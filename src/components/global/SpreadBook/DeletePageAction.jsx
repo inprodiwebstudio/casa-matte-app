@@ -28,6 +28,8 @@ const DeletePageActionButton = ({
 
 		const clonePages = { ...myPages };
 
+		console.log(clonePages);
+
 		delete clonePages[pageId];
 
 		const listOfPages = convertToArray(clonePages).filter((page) => page.id !== "FrontLayout");
@@ -37,11 +39,11 @@ const DeletePageActionButton = ({
 				id     : `page${index + 1}`,
 				sheet1 : {
 					...page?.sheet1,
-					pageNo : page?.sheet1?.pageNo - 2,
+					pageNo : index === 0 ? 1 : (index * 2) + 1,
 				},
 				sheet2 : {
 					...page?.sheet2,
-					pageNo : page?.sheet2?.pageNo - 2,
+					pageNo : (index + 1) * 2,
 				},
 			};
 			return newDataPage;
@@ -49,7 +51,9 @@ const DeletePageActionButton = ({
 
 		const newObjPages = convertToObject(newListPagesParsed);
 
+
 		dispatch(workSpaceSlice.actions.newListPages(newObjPages));
+		closeAllModals();
 	};
 
 	const handlerDeletePage = () => {
@@ -156,7 +160,7 @@ const DeletePageActionButton = ({
 			className={`delete-container-button ${isLeftSide && "left-sheet"}`}
 			onClick={onClickDelete}
 			style={{
-				marginRight : (product === "layflat") && "18px",
+				marginLeft : (product === "layflat") && "20px",
 			}}
 		>
 			<Thrash size="15px" />

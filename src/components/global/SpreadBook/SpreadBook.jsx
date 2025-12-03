@@ -60,6 +60,8 @@ const SpreadBook = ({
 		}));
 	};
 
+	console.log(pageData?.id);
+
 	return (
 		<div
 			className="SpreadBook"
@@ -82,7 +84,7 @@ const SpreadBook = ({
 				}
 			>
 				{
-					(isThumbNail && (pageData?.sheet1?.pageNo !== 1) && (product !== "layflat")) && (
+					(isThumbNail && ((pageData?.id !== "page1") || (product === "layflat"))) && (
 						<DeletePageActionButton
 							isLeftSide
 							pageData={pageData}
@@ -110,7 +112,7 @@ const SpreadBook = ({
 						}
 					>
 						{
-							isThumbNail && (
+							(isThumbNail && (product !== "layflat")) && (
 								<DeletePageActionButton
 									pageData={pageData}
 								/>
