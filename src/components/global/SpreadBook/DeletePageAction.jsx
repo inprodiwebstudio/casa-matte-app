@@ -28,8 +28,6 @@ const DeletePageActionButton = ({
 
 		const clonePages = { ...myPages };
 
-		console.log(clonePages);
-
 		delete clonePages[pageId];
 
 		const listOfPages = convertToArray(clonePages).filter((page) => page.id !== "FrontLayout");
