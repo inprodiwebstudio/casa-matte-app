@@ -1,8 +1,8 @@
 import { convertToArray, convertToObject }        from "helpers";
-import { workSpaceSlice }                         from "store/Slices";
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
 import { Thrash }                                 from "Resources/icons";
 import { closeAllModals, openContextModal }       from "@mantine/modals";
+import { workSpaceSlice }                         from "store/Slices";
 
 const DeletePageActionButton = ({
 	pageData,
@@ -25,7 +25,7 @@ const DeletePageActionButton = ({
 		if (!pageId || !sheetKey) return;
 
 		const clonePages = { ...myPages };
-		const listPages = convertToArray(clonePages);
+		const listPages = convertToArray(clonePages).filter((page) => page.id !== "FrontLayout");
 		const pageIndex = listPages.findIndex((page) => page.id === pageId);
 
 		const firstPagesSlice = listPages.slice(0, pageIndex);
