@@ -35,18 +35,6 @@ export default function App() {
 		event.returnValue = ""; // Obligatorio
 	});
 
-	window.addEventListener("beforeunload", function(event) {
-		// Cualquier texto que pongas aquí NO se mostrará (los navegadores ya no lo permiten)
-		event.preventDefault();
-		event.returnValue = ""; // Obligatorio
-	});
-
-	window.addEventListener("beforeunload", function(event) {
-		// Cualquier texto que pongas aquí NO se mostrará (los navegadores ya no lo permiten)
-		event.preventDefault();
-		event.returnValue = ""; // Obligatorio
-	});
-
 	if (isMobile) {
 		return (
 			<div id="body-app">
