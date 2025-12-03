@@ -26,13 +26,7 @@ export default function App() {
 
 	window.addEventListener("popstate", (event) => {
 		event.preventDefault();
-		window.location.href = "https://casamatte.com/dashboard/";
-	});
-
-	window.addEventListener("beforeunload", function(event) {
-		// Cualquier texto que pongas aquí NO se mostrará (los navegadores ya no lo permiten)
-		event.preventDefault();
-		event.returnValue = ""; // Obligatorio
+		window.location.href = "https://casamatte.wip-inprodi.com/dashboard/";
 	});
 
 	if (isMobile) {

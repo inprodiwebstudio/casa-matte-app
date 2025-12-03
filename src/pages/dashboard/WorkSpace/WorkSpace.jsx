@@ -2,7 +2,6 @@ import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { useState, useEffect, useContext }        from "react";
 import { FaChevronLeft, FaChevronRight }          from "react-icons/fa";
 //Helpers
-import { isValidArray } from "helpers";
 
 //Own components
 import ManagePagesView                   from "../ManagePagesView";
@@ -18,7 +17,7 @@ const WorkSpace = () => {
 
 	const [ myWorkSpaceData, setMyWorkSpaceData ] = useState(undefined);
 
-	const {setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+	const {setCurrentConfigPhotoBook, historyChanges} = useContext(currentConfigPhotoBookContext);
 
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
@@ -26,25 +25,29 @@ const WorkSpace = () => {
 	const workSpaceFrontPage = useSelector((state) => state.workSpaceSlice.data?.frontPage, shallowEqual);
 	const workSpaceFormatPage = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
 	const workSpaceSizePage = useSelector((state) => state.workSpaceSlice.data?.sizePhotoBook, shallowEqual);
-	const workSpaceHistory = useSelector((state) => state.workSpaceSlice.history, shallowEqual);
 	const statusViewPage = useSelector((state) => state.workSpaceSlice?.statusViewPage, shallowEqual);
 	const isAvailableProduct = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
+
+	const [ currentIndexHistory, setCurrentIndexHistory ] = useState(0);
 
 	const isFrontLayout = currentPageId === "frontpage";
 	const isInPreview = statusViewPage === "preview";
 
-	const isAvailableUndo = isValidArray(workSpaceHistory.undo);
-	const isAvailableRedo = isValidArray(workSpaceHistory.redo);
+	const isAvailableUndo = historyChanges[currentIndexHistory - 1];
+	const isAvailableRedo = historyChanges[currentIndexHistory + 1];
 
-	function undoAndRedoActions(e) {
-		const evtobj = window.event? event : e;
-		if ((evtobj.keyCode === 90) && (evtobj.ctrlKey) && isAvailableUndo) {
-			dispatch(workSpaceSlice.actions.undo({}));
+	const handleUndo = () => {
+		if (historyChanges[currentIndexHistory - 1]) {
+			dispatch(workSpaceSlice.actions.updatePageContent({currentConfigPhotoBook : historyChanges[currentIndexHistory - 1]}));
+			setCurrentIndexHistory(currentIndexHistory - 1);
 		}
-		if ((evtobj.keyCode === 89) && (evtobj.ctrlKey) && isAvailableRedo) {
-			dispatch(workSpaceSlice.actions.redo({}));
+	};
+	const handleRedo = () => {
+		if (historyChanges[currentIndexHistory + 1]) {
+			dispatch(workSpaceSlice.actions.updatePageContent({currentConfigPhotoBook : historyChanges[currentIndexHistory + 1]}));
+			setCurrentIndexHistory(currentIndexHistory + 1);
 		}
-	}
+	};
 
 	const handlerTypeProductFormat = () => {
 		if (productPhotoBook === "travelcoffeetable") {
@@ -110,7 +113,7 @@ const WorkSpace = () => {
 									className={`action-styled ${!isAvailableUndo && "disabled"}`}
 									{...(
 										isAvailableUndo && {
-											onClick : () => dispatch(workSpaceSlice.actions.undo()),
+											onClick : () => handleUndo(),
 										}
 									)}
 								>
@@ -123,7 +126,7 @@ const WorkSpace = () => {
 									className={`action-styled ${!isAvailableRedo && "disabled"}`}
 									{...(
 										isAvailableRedo && {
-											onClick : () => dispatch(workSpaceSlice.actions.redo()),
+											onClick : () => handleRedo(),
 										}
 									)}
 								>
@@ -188,8 +191,11 @@ const WorkSpace = () => {
 		}
 	}, [currentPageId, workSpaceData, workSpaceFrontPage]);
 
-	document.onkeydown = undoAndRedoActions;
-
+	useEffect(() => {
+		if (historyChanges.length > 0) {
+			setCurrentIndexHistory(historyChanges.length - 1);
+		}
+	}, [historyChanges]);
 
 	return (
 		<>
