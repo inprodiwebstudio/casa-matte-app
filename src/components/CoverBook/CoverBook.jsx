@@ -5,6 +5,8 @@ import { shallowEqual, useSelector } from "react-redux";
 import { useEffect, useState }       from "react";
 import photoBooksConfigOld           from "core/constants/photoBooksConfigOld";
 
+import "./coverBook.scss";
+
 const CoverBook = ({
 	isInPaginator,
 	isThumbNail,
@@ -122,6 +124,7 @@ const CoverBook = ({
 						flex   : 1,
 					}}
 					id="spanShotCover"
+					className="coverBook"
 				>
 					{
 						photoBookData?.frontPage?.sheet1?.layoutType && (
