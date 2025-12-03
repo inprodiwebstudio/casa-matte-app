@@ -82,7 +82,7 @@ const SpreadBook = ({
 				}
 			>
 				{
-					(isThumbNail && (pageData?.sheet1?.pageNo !== 1)) && (
+					(isThumbNail && (pageData?.sheet1?.pageNo !== 1) && (product !== "layflat")) && (
 						<DeletePageActionButton
 							isLeftSide
 							pageData={pageData}

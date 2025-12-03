@@ -17,9 +17,40 @@ const DeletePageActionButton = ({
 
 	const myPages = useSelector((state) => state.workSpaceSlice.data.pages, shallowEqual);
 
+	const product = useSelector((state) => state.workSpaceSlice.data.product, shallowEqual);
+
 	const currentPages = useSelector((state) => state.workSpaceSlice.data.numberOfPages, shallowEqual);
 
 	const minPages = useSelector((state) => state.workSpaceSlice.data.minPages, shallowEqual);
+
+	const handlerDeleteSpread = () => {
+		if (!pageId || !sheetKey) return;
+
+		const clonePages = { ...myPages };
+
+		delete clonePages[pageId];
+
+		const listOfPages = convertToArray(clonePages).filter((page) => page.id !== "FrontLayout");
+		const newListPagesParsed = listOfPages.map((page, index) => {
+			const newDataPage = {
+				...page,
+				id     : `page${index + 1}`,
+				sheet1 : {
+					...page?.sheet1,
+					pageNo : page?.sheet1?.pageNo - 2,
+				},
+				sheet2 : {
+					...page?.sheet2,
+					pageNo : page?.sheet2?.pageNo - 2,
+				},
+			};
+			return newDataPage;
+		});
+
+		const newObjPages = convertToObject(newListPagesParsed);
+
+		dispatch(workSpaceSlice.actions.newListPages(newObjPages));
+	};
 
 	const handlerDeletePage = () => {
 		if (!pageId || !sheetKey) return;
@@ -115,7 +146,7 @@ const DeletePageActionButton = ({
 		openContextModal({
 			modal      : "deletePageConfirm",
 			innerProps : {
-				handdleSuccess : handlerDeletePage,
+				handdleSuccess : (product === "layflat") ? handlerDeleteSpread : handlerDeletePage,
 			},
 		});
 	};
@@ -124,6 +155,9 @@ const DeletePageActionButton = ({
 		<div
 			className={`delete-container-button ${isLeftSide && "left-sheet"}`}
 			onClick={onClickDelete}
+			style={{
+				marginRight : (product === "layflat") && "18px",
+			}}
 		>
 			<Thrash size="15px" />
 		</div>
