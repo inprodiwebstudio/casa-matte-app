@@ -36,9 +36,10 @@ const EditText = ({
 
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const product = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
+	const frontTypeBook = useSelector((state) => state.workSpaceSlice.frontBookTypeView, shallowEqual);
 	const currentColorEngravingText = useSelector((state) => state.workSpaceSlice.data?.engraving?.currentColor?.colorHex, shallowEqual);
 
-	const isAvailableChangeColorText = currentColorEngravingText && (currentPageId === "frontpage");
+	const isAvailableChangeColorText = currentColorEngravingText && (currentPageId === "frontpage") && (!frontTypeBook);
 
 	const { classes } = styles({size : currentFontSize, gapSpacing, lineHeight, letterSpacing, gravingColor : isAvailableChangeColorText ? currentColorEngravingText : undefined});
 
