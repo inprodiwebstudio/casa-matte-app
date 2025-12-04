@@ -1,15 +1,15 @@
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
-import { useState, useEffect, useContext }        from "react";
+import { useState, useEffect }                    from "react";
 import { FaChevronLeft, FaChevronRight }          from "react-icons/fa";
 //Helpers
 
 //Own components
-import ManagePagesView                   from "../ManagePagesView";
-import { RedoArrow }                     from "Resources/icons";
-import { workSpaceSlice }                from "store/Slices";
-import SpreadLayoutsWorkspace            from "components/SpreadLayoutsWorkspace";
-import { currentConfigPhotoBookContext } from "contexts/configContext";
-import CoverBook                         from "components/CoverBook";
+import ManagePagesView        from "../ManagePagesView";
+import { RedoArrow }          from "Resources/icons";
+import { workSpaceSlice }     from "store/Slices";
+import SpreadLayoutsWorkspace from "components/SpreadLayoutsWorkspace";
+// import { currentConfigPhotoBookContext } from "contexts/configContext";
+import CoverBook from "components/CoverBook";
 import "./WorkSpace.scss";
 
 const WorkSpace = () => {
@@ -17,7 +17,7 @@ const WorkSpace = () => {
 
 	const [ myWorkSpaceData, setMyWorkSpaceData ] = useState(undefined);
 
-	const {setCurrentConfigPhotoBook, historyChanges} = useContext(currentConfigPhotoBookContext);
+	// const {setCurrentConfigPhotoBook, historyChanges} = useContext(currentConfigPhotoBookContext);
 
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
@@ -28,26 +28,26 @@ const WorkSpace = () => {
 	const statusViewPage = useSelector((state) => state.workSpaceSlice?.statusViewPage, shallowEqual);
 	const isAvailableProduct = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
 
-	const [ currentIndexHistory, setCurrentIndexHistory ] = useState(0);
+	// const [ currentIndexHistory, setCurrentIndexHistory ] = useState(0);
 
 	const isFrontLayout = currentPageId === "frontpage";
 	const isInPreview = statusViewPage === "preview";
 
-	const isAvailableUndo = historyChanges[currentIndexHistory - 1];
-	const isAvailableRedo = historyChanges[currentIndexHistory + 1];
+	const isAvailableUndo = false;
+	const isAvailableRedo = false;
 
-	const handleUndo = () => {
-		if (historyChanges[currentIndexHistory - 1]) {
-			dispatch(workSpaceSlice.actions.updatePageContent({currentConfigPhotoBook : historyChanges[currentIndexHistory - 1]}));
-			setCurrentIndexHistory(currentIndexHistory - 1);
-		}
-	};
-	const handleRedo = () => {
-		if (historyChanges[currentIndexHistory + 1]) {
-			dispatch(workSpaceSlice.actions.updatePageContent({currentConfigPhotoBook : historyChanges[currentIndexHistory + 1]}));
-			setCurrentIndexHistory(currentIndexHistory + 1);
-		}
-	};
+	// const handleUndo = () => {
+	// 	if (historyChanges[currentIndexHistory - 1]) {
+	// 		dispatch(workSpaceSlice.actions.updatePageContent({currentConfigPhotoBook : historyChanges[currentIndexHistory - 1]}));
+	// 		setCurrentIndexHistory(currentIndexHistory - 1);
+	// 	}
+	// };
+	// const handleRedo = () => {
+	// 	if (historyChanges[currentIndexHistory + 1]) {
+	// 		dispatch(workSpaceSlice.actions.updatePageContent({currentConfigPhotoBook : historyChanges[currentIndexHistory + 1]}));
+	// 		setCurrentIndexHistory(currentIndexHistory + 1);
+	// 	}
+	// };
 
 	const handlerTypeProductFormat = () => {
 		if (productPhotoBook === "travelcoffeetable") {
@@ -80,19 +80,19 @@ const WorkSpace = () => {
 			pageId      : pageId,
 			currentPage : "sheet1",
 		}));
-		setCurrentConfigPhotoBook({
-			pageId : undefined,
-			sheet1 : {
-				modlayoutId : undefined,
-				texts       : undefined,
-				photos      : undefined,
-			},
-			sheet2 : {
-				modlayoutId : undefined,
-				texts       : undefined,
-				photos      : undefined,
-			},
-		});
+		// setCurrentConfigPhotoBook({
+		// 	pageId : undefined,
+		// 	sheet1 : {
+		// 		modlayoutId : undefined,
+		// 		texts       : undefined,
+		// 		photos      : undefined,
+		// 	},
+		// 	sheet2 : {
+		// 		modlayoutId : undefined,
+		// 		texts       : undefined,
+		// 		photos      : undefined,
+		// 	},
+		// });
 		dispatch(workSpaceSlice.actions.handleChangePage(pageId));
 
 	};
@@ -113,7 +113,7 @@ const WorkSpace = () => {
 									className={`action-styled ${!isAvailableUndo && "disabled"}`}
 									{...(
 										isAvailableUndo && {
-											onClick : () => handleUndo(),
+											onClick : () => undefined,
 										}
 									)}
 								>
@@ -126,7 +126,7 @@ const WorkSpace = () => {
 									className={`action-styled ${!isAvailableRedo && "disabled"}`}
 									{...(
 										isAvailableRedo && {
-											onClick : () => handleRedo(),
+											onClick : () => undefined,
 										}
 									)}
 								>
@@ -191,11 +191,11 @@ const WorkSpace = () => {
 		}
 	}, [currentPageId, workSpaceData, workSpaceFrontPage]);
 
-	useEffect(() => {
-		if (historyChanges.length > 0) {
-			setCurrentIndexHistory(historyChanges.length - 1);
-		}
-	}, [historyChanges]);
+	// useEffect(() => {
+	// 	if (historyChanges.length > 0) {
+	// 		setCurrentIndexHistory(historyChanges.length - 1);
+	// 	}
+	// }, [historyChanges]);
 
 	return (
 		<>
