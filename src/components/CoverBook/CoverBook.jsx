@@ -124,7 +124,7 @@ const CoverBook = ({
 						flex   : 1,
 					}}
 					id="spanShotCover"
-					className="coverBook"
+					className={`coverBook ${isBlackAndWhiteText && "hideLinesCut"}`}
 				>
 					{
 						photoBookData?.frontPage?.sheet1?.layoutType && (

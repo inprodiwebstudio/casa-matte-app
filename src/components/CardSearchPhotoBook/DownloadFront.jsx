@@ -53,14 +53,14 @@ const DownloadFront = () => {
 		if (isAvailableSpineText) {
 			dispatch(workSpaceSlice.actions.changeFrontBookTypeView("spineText"));
 		} else {
-			dispatch(workSpaceSlice.actions.changeFrontBookTypeView(null));
+			dispatch(workSpaceSlice.actions.changeFrontBookTypeView("fullFrontBook"));
 		}
 	};
 
 	const handlerSnapShotSpineText = async () => {
 		const blobImageSpineText = await snapShotCover("snapShotSpine");
 		setFrontImages(prev => [ ...prev, blobImageSpineText]);
-		dispatch(workSpaceSlice.actions.changeFrontBookTypeView(null));
+		dispatch(workSpaceSlice.actions.changeFrontBookTypeView("fullFrontBook"));
 	};
 
 	const getFormatKey = (configDataBook) => {
@@ -80,9 +80,9 @@ const DownloadFront = () => {
 		const sizeKey = bookConfigData?.sizePhotoBook;
 		const config = PHOTO_BOOK_TYPES[formatKey]?.[sizeKey];
 
-		const isVerticalLargeFormat = (
-			((formatKey === "vertical") && (sizeKey === "grande")) || (formatKey === "travelcoffeetable")
-		);
+		// const isVerticalLargeFormat = (
+		// 	((formatKey === "vertical") && (sizeKey === "grande")) || (formatKey === "travelcoffeetable")
+		// );
 
 		const { size } = config;
 		const parseSizes = [size?.[0] + 30, size?.[1] + 30];
@@ -106,9 +106,9 @@ const DownloadFront = () => {
 							src={imgSrc}
 							alt={"image"}
 							style={{
-								objectFit : !isVerticalLargeFormat ? "cover" : null,
-								height    : isVerticalLargeFormat ? parseSizes?.[1] : "100%",
-								width     : isVerticalLargeFormat ? parseSizes?.[0] : "100%",
+								objectFit : null,
+								height    : parseSizes?.[1],
+								width     : parseSizes?.[0],
 							}}
 						/>
 					)
