@@ -5,7 +5,6 @@ import { TextShell }     from "core/components";
 import ImgLayoutOld      from "components/LayoutHandler/ImgLayoutOld";
 import TextFix           from "components/LayoutHandler/TextFix";
 
-
 //Own components
 
 const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) => {
@@ -23,37 +22,37 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 		>
 			<div
 				style={{
-					width           : "0.02em",
-					height          : "100%",
-					position        : "absolute",
-					left            : "93%",
-					top             : "0",
-					backgroundColor : "white",
+					width    : "0.02em",
+					height   : "100%",
+					position : "absolute",
+					left     : "93%",
+					top      : "0",
 				}}
+				className="colorLinesCut"
 			>
 				&nbsp;
 			</div>
 			<div
 				style={{
-					width           : "100%",
-					height          : "0.02em",
-					position        : "absolute",
-					left            : "0%",
-					top             : "5%",
-					backgroundColor : "white",
+					width    : "100%",
+					height   : "0.02em",
+					position : "absolute",
+					left     : "0%",
+					top      : "5%",
 				}}
+				className="colorLinesCut"
 			>
 				&nbsp;
 			</div>
 			<div
 				style={{
-					width           : "100%",
-					height          : "0.02em",
-					position        : "absolute",
-					left            : "0%",
-					top             : "95%",
-					backgroundColor : "white",
+					width    : "100%",
+					height   : "0.02em",
+					position : "absolute",
+					left     : "0%",
+					top      : "95%",
 				}}
+				className="colorLinesCut"
 			>
 				&nbsp;
 			</div>
