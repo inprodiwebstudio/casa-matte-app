@@ -52,7 +52,7 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
 							textNo={2}
-							typeText={"titleTravelCoffee"}
+							typeText={"subTitleTravelCoffee"}
 						/>
 					</Stack>
 				</Stack>
@@ -116,7 +116,7 @@ const FrontMod1 = ({data, isInWorkSpace, sheetNo, isInPaginator, isThumbNail}) =
 							isInPaginator={isInPaginator}
 							isThumbNail={isThumbNail}
 							textNo={1}
-							typeText={"titleTravelCoffee"}
+							typeText={"subTitleTravelCoffee"}
 						/>
 					</Stack>
 				</Stack>

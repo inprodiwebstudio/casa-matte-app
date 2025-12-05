@@ -1,7 +1,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-// import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
+import { CKEditor }  from "@ckeditor/ckeditor5-react";
 import BalloonEditor from "@ckeditor/ckeditor5-editor-balloon/src/ballooneditor";
 import Essentials    from "@ckeditor/ckeditor5-essentials/src/essentials";
 import Bold          from "@ckeditor/ckeditor5-basic-styles/src/bold";
@@ -12,9 +11,9 @@ import FontSize      from "@ckeditor/ckeditor5-font/src/fontsize";
 import Alignment     from "@ckeditor/ckeditor5-alignment/src/alignment";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
-import { useCallback, useRef, useState }      from "react";
-import { workSpaceSlice }                     from "store/Slices";
-import { connect, useSelector, shallowEqual } from "react-redux";
+import { useCallback, useRef, useState, useEffect } from "react";
+import { workSpaceSlice }                           from "store/Slices";
+import { connect, useSelector, shallowEqual }       from "react-redux";
 
 import { bindAll } from "helpers";
 import styles      from "./styles";
@@ -33,6 +32,12 @@ const EditText = ({
 	workSpaceSlice,
 }) => {
 	const [currentFontSize, setCurrentFontSize] = useState(undefined);
+	const [editorState, setEditorState] = useState(dataTextPage);
+
+	// Refs para manejar el debounce y datos temporales
+	const debounceTimeoutRef = useRef(null);
+	const lastEditorDataRef = useRef(dataTextPage);
+	const editorRef = useRef();
 
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const product = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
@@ -42,8 +47,6 @@ const EditText = ({
 	const isAvailableChangeColorText = currentColorEngravingText && (currentPageId === "frontpage") && (!frontTypeBook);
 
 	const { classes } = styles({size : currentFontSize, gapSpacing, lineHeight, letterSpacing, gravingColor : isAvailableChangeColorText ? currentColorEngravingText : undefined});
-
-	const editorRef = useRef();
 
 	const fontFamilies = [
 		"default",
@@ -80,8 +83,9 @@ const EditText = ({
 		(fontFamily !== "Made-Mirage-Thin")&&
 		(fontFamily !== "Restora-Extra-Light")
 		),
-		titleTravelCoffee : ["TAN-MERINGUE"],
-		travelCoffee      : ["Inter-Lifght"],
+		titleTravelCoffee    : ["TAN-MERINGUE"],
+		subTitleTravelCoffee : ["TAN-MERINGUE"],
+		travelCoffee         : ["Inter-Lifght"],
 	};
 
 	const editorConfiguration = {
@@ -138,13 +142,6 @@ const EditText = ({
 		},
 		fontSize : {
 			options : [
-				{title : "1pt", model : "1px"},
-				{title : "2pt", model : "2px"},
-				{title : "3pt", model : "3px"},
-				{title : "4pt", model : "4px"},
-				{title : "5pt", model : "5px"},
-				{title : "6pt", model : "6px"},
-				{title : "7pt", model : "7px"},
 				{title : "8pt", model : "8px"},
 				{title : "9pt", model : "9px"},
 				{title : "10pt", model : "10px"},
@@ -193,45 +190,93 @@ const EditText = ({
 		},
 	};
 
-	const [editorState, setEditorState] = useState(dataTextPage);
+	// Función para actualizar Redux
+	const updateRedux = useCallback((data) => {
+		if (isBound) {
+			workSpaceSlice.addTextBound({text : data});
+			return;
+		}
+		if (!isFront) {
+			workSpaceSlice.addText({pageId : currentPageId, sheetNo, text : data, layoutNo});
+			return;
+		}
+		workSpaceSlice.addTextFront({sheetNo, text : data, layoutNo});
+	}, [isBound, isFront, currentPageId, sheetNo, layoutNo, workSpaceSlice]);
 
-	const debounce = (func, delay) => {
-		let timeout;
-		return (...args) => {
-			if (timeout) clearTimeout(timeout);
-			timeout = setTimeout(() => {
-				func(...args);
-			}, delay);
+	// Handler principal de cambios
+	const handleEditorChange = useCallback((event, editor) => {
+		let data = editor.getData().trim();
+
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(data, "text/html");
+
+		const p = doc.querySelector("p");
+		const span = doc.querySelector("span");
+
+		// Detectar "contenido vacío" real
+		const isEmpty =
+		data === "" ||
+		data === "<p>&nbsp;</p>" ||
+		data === "<p></p>" ||
+		data === "<p><br></p>";
+
+		// Si el usuario borró TODO → aplicar defaultTemplate dinámico
+		if (isEmpty && isFront && (product === "travelcoffeetable")) {
+			const defaultAlignment = p?.getAttribute("style") || "text-align: center;";
+			const handlerFontSize = ( typeText === "titleTravelCoffee") ? "50px" : "20px";
+			const defaultTextStyle =
+				span?.getAttribute("style") ||
+				`font-size: ${handlerFontSize}; color: #000; font-family: TAN-MERINGUE;`;
+
+			data = `<p style="${defaultAlignment}">
+                  <span style="${defaultTextStyle}">&#8203;</span>
+                </p>`;
+		}
+
+		// Actualizar estado local inmediatamente
+		setEditorState(data);
+		lastEditorDataRef.current = data;
+
+		// Cancelar timeout anterior
+		if (debounceTimeoutRef.current) {
+			clearTimeout(debounceTimeoutRef.current);
+		}
+
+		// Programar actualización automática después de 3 segundos de inactividad
+		debounceTimeoutRef.current = setTimeout(() => {
+			updateRedux(data);
+		}, 3000);
+
+	}, [isFront, product, updateRedux]);
+
+	// Handler para cuando el usuario termina de editar (blur)
+	const handleEditorBlur = useCallback(() => {
+		// Cancelar el timeout programado
+		if (debounceTimeoutRef.current) {
+			clearTimeout(debounceTimeoutRef.current);
+			debounceTimeoutRef.current = null;
+		}
+
+		// Actualizar Redux inmediatamente con el último dato
+		if (lastEditorDataRef.current !== undefined) {
+			updateRedux(lastEditorDataRef.current);
+		}
+	}, [updateRedux]);
+
+	// Limpiar timeout cuando el componente se desmonte o cambien dependencias
+	useEffect(() => {
+		return () => {
+			if (debounceTimeoutRef.current) {
+				clearTimeout(debounceTimeoutRef.current);
+			}
 		};
-	};
+	}, []);
 
-	const handleEditorChange = useCallback(
-		debounce((event, editor) => {
-		  const data = editor.getData();
-		  const stylesPreset = "text-align: center;";
-		  const stylesContent = "font-family: TAN-MERINGUE; font-size: 50px;";
-		  // eslint-disable-next-line no-irregular-whitespace
-		  const defaultHtml = `<p style="${stylesPreset}"><span style="${stylesContent}">​</span></p>`;
-
-		  let myDataEditor = data;
-
-		  if (!data && isFront) {
-				myDataEditor = defaultHtml;
-		  }
-		  setEditorState(myDataEditor);
-		  if (isBound) {
-				workSpaceSlice.addTextBound({text : myDataEditor});
-				return;
-		  }
-		  if (!isFront) {
-				workSpaceSlice.addText({pageId : currentPageId, sheetNo, text : myDataEditor, layoutNo});
-				return;
-		  }
-		  workSpaceSlice.addTextFront({sheetNo, text : myDataEditor, layoutNo});
-		}, 3000),
-		[]
-	);
-
+	// Sincronizar editorState cuando cambie dataTextPage desde fuera
+	useEffect(() => {
+		setEditorState(dataTextPage);
+		lastEditorDataRef.current = dataTextPage;
+	}, [dataTextPage]);
 
 	const getCurrentFontSize = (editor) => {
 		editorRef.current = editor;
@@ -264,9 +309,8 @@ const EditText = ({
 				config={ editorConfiguration }
 				data={editorState}
 				onReady={getCurrentFontSize}
-				onChange={(event, editor) => {
-					handleEditorChange(event, editor);
-				}}
+				onChange={handleEditorChange}
+				onBlur={handleEditorBlur}
 			/>
 		</div>
 	);
