@@ -1,9 +1,7 @@
-import { Button }                    from "core/components";
 import { closeAllModals }            from "@mantine/modals";
 import { shallowEqual, useSelector } from "react-redux";
-import React                         from "react";
-import "./AddNewPageConfirmation.scss";
 import { currencyFormat }            from "helpers";
+import ModalBody                     from "components/global/ModalBody";
 
 
 const AddNewPageConfirmation = ({innerProps}) => {
@@ -21,33 +19,29 @@ const AddNewPageConfirmation = ({innerProps}) => {
 	};
 
 	return (
-		<div className="body-confirmation-modal">
-			<div className="tittle-confirmation">¿Quieres agregar una nueva página al photobook?</div>
-			<div className="text-description">
+		<ModalBody
+			onSubmit={confirmationFn}
+			onClose={() => closeAllModals()}
+			textHeader="Agregar nueva página"
+		>
+			<div
+				style={{
+					fontFamily    : "Helvetica",
+					letterSpacing : "0px",
+				}}
+			>
+				¿Quieres agregar una nueva página al photobook?
+			</div>
+			<div
+				style={{
+					fontFamily    : "Helvetica",
+					letterSpacing : "0px",
+					textAlign     : "center",
+				}}
+			>
 				Cada página adicional tiene un costo de {currencyFormat(handlerPriceExtraCost())} MXN. ¿Deseas agregarla?
 			</div>
-			<div className="buttons-container">
-				<Button
-					fontSize="18px"
-					type="subtleActive"
-					width={117}
-					height={39}
-					isLoading={false}
-					onClick={() => confirmationFn()}
-				>
-					Aceptar
-				</Button>
-				<Button
-					fontSize="18px"
-					width={117}
-					height={39}
-					isLoading={false}
-					onClick={() => closeAllModals()}
-				>
-					Cancelar
-				</Button>
-			</div>
-		</div>
+		</ModalBody>
 	);
 };
 

@@ -1,8 +1,6 @@
-import { Button }                    from "core/components";
 import { useSelector, shallowEqual } from "react-redux";
 import { closeAllModals }            from "@mantine/modals";
-import React                         from "react";
-import "./DisclaimerDropPhotos.scss";
+import ModalBody                     from "components/global/ModalBody";
 
 const DisclaimerDropPhotos = ({innerProps}) => {
 	const {  handdleSuccess } = innerProps;
@@ -10,33 +8,30 @@ const DisclaimerDropPhotos = ({innerProps}) => {
 	const isLoadingDelete = useSelector((state) => state.gallerySlice?.isLoadingMutation, shallowEqual);
 
 	return (
-		<div className="body-confirmation-modal">
-			<div className="tittle-confirmation">¿Estás de acuerdo?</div>
-			<div className="text-description">
+		<ModalBody
+			onSubmit={handdleSuccess}
+			onClose={() => closeAllModals()}
+			isLoading={isLoadingDelete}
+			textHeader="Agregar fotografías"
+		>
+			<div
+				style={{
+					fontFamily    : "Helvetica",
+					letterSpacing : "0px",
+				}}
+			>
+				¿Estás de acuerdo?
+			</div>
+			<div
+				style={{
+					fontFamily    : "Helvetica",
+					letterSpacing : "0px",
+					textAlign     : "center",
+				}}
+			>
 				Recuerda subir tus fotos en alta calidad para una mejor experiencia de visualización y la correcta impresión de tu photobook. Tus fotografías serán subidas en su calidad original.
 			</div>
-			<div className="buttons-container">
-				<Button
-					fontSize="18px"
-					type="subtleActive"
-					width={117}
-					height={39}
-					isLoading={isLoadingDelete}
-					onClick={() => handdleSuccess()}
-				>
-					Aceptar
-				</Button>
-				<Button
-					fontSize="18px"
-					width={117}
-					height={39}
-					isLoading={isLoadingDelete}
-					onClick={() => closeAllModals()}
-				>
-					Cancelar
-				</Button>
-			</div>
-		</div>
+		</ModalBody>
 	);
 };
 

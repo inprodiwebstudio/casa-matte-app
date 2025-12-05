@@ -1,0 +1,16 @@
+.modalBody {
+    padding: 50px;
+    padding-bottom: 25px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px !important;
+    position: relative;
+
+    .buttonsContainer {
+        display: flex;
+        gap : 56px;
+        justify-content: center;
+    }
+}
