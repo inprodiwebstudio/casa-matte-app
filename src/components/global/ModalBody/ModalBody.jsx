@@ -1,9 +1,9 @@
-import { Button, Center, CloseButton, Stack, Text } from "@mantine/core";
-import { closeAllModals }                           from "@mantine/modals";
+import { Button, Center, CloseButton, Group, Stack, Text } from "@mantine/core";
+import { closeAllModals }                                  from "@mantine/modals";
 
 import "./ModalBody.scss";
 
-const ModalBody = ({children, onClose, onSubmit}) => {
+const ModalBody = ({children, textHeader, onClose, onSubmit}) => {
 	return (
 		<div className="modalBody">
 			<Stack
@@ -38,35 +38,60 @@ const ModalBody = ({children, onClose, onSubmit}) => {
 						color         : "#58595b",
 					}}
 				>
-					Agregar Fotos a Galería Sin Titulo.
+					{textHeader ?? ""}
 				</Text>
 			</Stack>
 			{children}
 			<div className="buttonsContainer">
 				<Center>
-					<Button
-						radius="md"
-						size="xs"
-						color="darkCasaMatte"
-						w="140px"
-						h="27px"
-						onClick={() => closeAllModals()}
-					>
-						<Text
-							size="13px"
-							weight={500}
-							w="150px"
-							color="lightCasaMatte"
-							align="center"
-							style={{
-								fontFamily    : "Helvetica",
-								letterSpacing : "0px",
-								lineHeight    : "12px",
-							}}
+					<Group spacing={80}>
+						<Button
+							radius="md"
+							size="xs"
+							color="darkCasaMatte"
+							w="140px"
+							h="27px"
+							onClick={onSubmit}
 						>
-							Done
-						</Text>
-					</Button>
+							<Text
+								size="13px"
+								weight={500}
+								w="150px"
+								color="lightCasaMatte"
+								align="center"
+								style={{
+									fontFamily    : "Helvetica",
+									letterSpacing : "0px",
+									lineHeight    : "12px",
+								}}
+							>
+								Terminar
+							</Text>
+						</Button>
+						<Button
+							color="darkCasaMatte.2"
+							radius="md"
+							size="xs"
+							w="140px"
+							h="27px"
+							onClick={onClose}
+						>
+							<Text
+								size="13px"
+								weight={500}
+								color="lightCasaMatte"
+								w="150px"
+								align="center"
+								style={{
+									fontFamily    : "Helvetica",
+									letterSpacing : "0px",
+									lineHeight    : "12px",
+								}}
+							>
+								Cancelar
+							</Text>
+						</Button>
+					</Group>
 				</Center>
 			</div>
 		</div>

@@ -21,7 +21,11 @@ const QrGeneratorPhotos = () => {
 	};
 
 	return (
-		<ModalBody>
+		<ModalBody
+			onClose={onCloseButton}
+			onSubmit={handlerRefresh}
+			textHeader="Subir fotos desde tu dispositivo móvil"
+		>
 			<Text
 				size="15px"
 				align="center"
