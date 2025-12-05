@@ -60,8 +60,6 @@ const SpreadBook = ({
 		}));
 	};
 
-	console.log(pageData?.id);
-
 	return (
 		<div
 			className="SpreadBook"
