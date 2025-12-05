@@ -45,7 +45,7 @@ export const gallerySlice = createSlice({
 
 
 			const handlerGallerySorted = () => {
-				return constructGalleryList.sort((a, b) => new Date(b?.uploaded_at) + new Date(a?.uploaded_at));
+				return constructGalleryList.sort((a, b) => new Date(b?.context?.dateCaptured) - new Date(a?.context?.dateCaptured));
 			};
 
 			const myNewGalleryData = convertToObject(handlerGallerySorted());
