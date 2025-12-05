@@ -483,9 +483,10 @@ const photoBooksConfing = {
 			},
 		},
 	},
-	"civily pedida" : {
+	"civilypedida" : {
 		vertical : {
-			sizes : {
+			aspectRatio : [17, 22],
+			sizes       : {
 				mediano : {
 					aspectRatio      : [17, 22],
 					layoutMods       : {...VerticalMedium},
