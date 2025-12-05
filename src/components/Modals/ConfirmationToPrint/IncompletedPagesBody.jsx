@@ -1,11 +1,31 @@
 import { Group, Stack, Text } from "@mantine/core";
+import { closeAllModals }     from "@mantine/modals";
+import ModalBody              from "components/global/ModalBody";
 
 const IncompletedPagesBody = ({pages}) => {
 	return (
-		<div className="body-confirmation-modal">
-			<div className="tittle-confirmation">No has completado tu photobook</div>
+		<ModalBody
+			onSubmit={() => closeAllModals()}
+			onClose={() => closeAllModals()}
+			textHeader="No has completado tu photobook"
+		>
+			<div
+				style={{
+					fontFamily    : "Helvetica",
+					letterSpacing : "0px",
+					textAlign     : "center",
+				}}
+			>
+				No has completado tu photobook
+			</div>
 			<Stack>
-				<div className="text-description" style={{ textAlign : "center" }}>
+				<div
+					style={{
+						fontFamily    : "Helvetica",
+						letterSpacing : "0px",
+						textAlign     : "center",
+					}}
+				>
 					Los siguientes paginas están incompletas :
 				</div>
 				<Group position="center" w="100%">
@@ -15,18 +35,18 @@ const IncompletedPagesBody = ({pages}) => {
 								size="15px"
 								weight={500}
 								key={index}
-								style={{ textTransform : "uppercase" }}
+								style={{ textTransform : "uppercase", fontFamily : "Helvetica" }}
 							>
 								Pagina {page}
 							</Text>;
 						})
 					}
 				</Group>
-				<div className="text-description" style={{ textAlign : "center" }}>
+				<div className="text-description" style={{ textAlign : "center", fontFamily : "Helvetica" }}>
 					debes completarlas antes de enviarlo.
 				</div>
 			</Stack>
-		</div>
+		</ModalBody>
 	);
 };
 

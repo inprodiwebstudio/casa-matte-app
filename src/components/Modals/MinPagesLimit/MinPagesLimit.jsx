@@ -1,31 +1,35 @@
 import { shallowEqual, useSelector } from "react-redux";
-import { Button }                    from "core/components";
 import { closeAllModals }            from "@mantine/modals";
 import React                         from "react";
-import "./MinPagesLimit.scss";
-
+import ModalBody                     from "components/global/ModalBody";
 
 const MinPagesLimit = ({innerProps}) => {
 	const minPages = useSelector((state) => state.workSpaceSlice.data.minPages, shallowEqual);
 
 	return (
-		<div className="body-confirmation-modal">
-			<div className="tittle-confirmation">No puedes quitar más páginas</div>
-			<div className="text-description">
+		<ModalBody
+			onSubmit={() => closeAllModals()}
+			onClose={() => closeAllModals()}
+			textHeader="No puedes quitar más páginas"
+		>
+			<div
+				style={{
+					fontFamily    : "Helvetica",
+					letterSpacing : "0px",
+				}}
+			>
+				Haz alcanzado el límite de páginas.
+			</div>
+			<div
+				style={{
+					fontFamily    : "Helvetica",
+					letterSpacing : "0px",
+					textAlign     : "center",
+				}}
+			>
 				Tienes como mínimo {minPages} páginas en un photobook.
 			</div>
-			<div className="buttons-container">
-				<Button
-					fontSize="18px"
-					width={117}
-					height={39}
-					isLoading={false}
-					onClick={() => closeAllModals()}
-				>
-					Cerrar
-				</Button>
-			</div>
-		</div>
+		</ModalBody>
 	);
 };
 

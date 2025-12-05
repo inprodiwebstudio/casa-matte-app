@@ -3,7 +3,7 @@ import { closeAllModals }                                  from "@mantine/modals
 
 import "./ModalBody.scss";
 
-const ModalBody = ({children, textHeader, onClose, onSubmit}) => {
+const ModalBody = ({children, textHeader, onClose, onSubmit, isLoading = false}) => {
 	return (
 		<div className="modalBody">
 			<Stack
@@ -51,6 +51,7 @@ const ModalBody = ({children, textHeader, onClose, onSubmit}) => {
 							color="darkCasaMatte"
 							w="140px"
 							h="27px"
+							loading={isLoading}
 							onClick={onSubmit}
 						>
 							<Text
@@ -65,7 +66,7 @@ const ModalBody = ({children, textHeader, onClose, onSubmit}) => {
 									lineHeight    : "12px",
 								}}
 							>
-								Terminar
+								Continuar
 							</Text>
 						</Button>
 						<Button
@@ -74,6 +75,7 @@ const ModalBody = ({children, textHeader, onClose, onSubmit}) => {
 							size="xs"
 							w="140px"
 							h="27px"
+							loading={isLoading}
 							onClick={onClose}
 						>
 							<Text
@@ -88,7 +90,7 @@ const ModalBody = ({children, textHeader, onClose, onSubmit}) => {
 									lineHeight    : "12px",
 								}}
 							>
-								Cancelar
+								Cerrar
 							</Text>
 						</Button>
 					</Group>

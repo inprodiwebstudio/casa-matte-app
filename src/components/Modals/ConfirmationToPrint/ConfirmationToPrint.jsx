@@ -1,16 +1,14 @@
 import { useState }                  from "react";
 import BodyConfirm                   from "./BodyConfirm";
 import { shallowEqual, useSelector } from "react-redux";
-// import { inCompletePages }           from "./ConfirmationToPrint.helpers";
-import { genericApi }           from "store/api/genericApi";
-import { useExtraPriceHandler } from "helpers/Hooks/useExtraPriceHandler";
-import "./ConfirmationPrint.scss";
-import axios                    from "axios";
-import { PostingConfig }        from "Notifications";
-import { closeAllModals }       from "@mantine/modals";
-import { dayjs, isValidArray }  from "helpers";
-import { inCompletePages }      from "./ConfirmationToPrint.helpers";
-import IncompletedPagesBody     from "./IncompletedPagesBody";
+import { genericApi }                from "store/api/genericApi";
+import { useExtraPriceHandler }      from "helpers/Hooks/useExtraPriceHandler";
+import axios                         from "axios";
+import { PostingConfig }             from "Notifications";
+import { closeAllModals }            from "@mantine/modals";
+import { dayjs, isValidArray }       from "helpers";
+import { inCompletePages }           from "./ConfirmationToPrint.helpers";
+import IncompletedPagesBody          from "./IncompletedPagesBody";
 
 
 const ConfirmationToPrint = ({ innerProps }) => {
