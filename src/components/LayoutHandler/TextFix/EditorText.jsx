@@ -1,14 +1,16 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
-import { CKEditor }  from "@ckeditor/ckeditor5-react";
-import BalloonEditor from "@ckeditor/ckeditor5-editor-balloon/src/ballooneditor";
-import Essentials    from "@ckeditor/ckeditor5-essentials/src/essentials";
-import Bold          from "@ckeditor/ckeditor5-basic-styles/src/bold";
-import Paragraph     from "@ckeditor/ckeditor5-paragraph/src/paragraph";
-import FontFamily    from "@ckeditor/ckeditor5-font/src/fontfamily";
-import FontColor     from "@ckeditor/ckeditor5-font/src/fontcolor";
-import FontSize      from "@ckeditor/ckeditor5-font/src/fontsize";
-import Alignment     from "@ckeditor/ckeditor5-alignment/src/alignment";
+import { CKEditor }   from "@ckeditor/ckeditor5-react";
+import BalloonEditor  from "@ckeditor/ckeditor5-editor-balloon/src/ballooneditor";
+import Essentials     from "@ckeditor/ckeditor5-essentials/src/essentials";
+import Bold           from "@ckeditor/ckeditor5-basic-styles/src/bold";
+import Paragraph      from "@ckeditor/ckeditor5-paragraph/src/paragraph";
+import FontFamily     from "@ckeditor/ckeditor5-font/src/fontfamily";
+import FontColor      from "@ckeditor/ckeditor5-font/src/fontcolor";
+import FontSize       from "@ckeditor/ckeditor5-font/src/fontsize";
+import Alignment      from "@ckeditor/ckeditor5-alignment/src/alignment";
+import FontFamilyIcon from "Resources/svgIcons/fontFamily.svg?raw";
+import FontColorIcon  from "Resources/svgIcons/colorWheel.svg?raw";
 // import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
 import { useCallback, useRef, useState, useEffect } from "react";
