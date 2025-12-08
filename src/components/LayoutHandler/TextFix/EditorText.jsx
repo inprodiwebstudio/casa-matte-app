@@ -1,6 +1,7 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
 import { CKEditor }   from "@ckeditor/ckeditor5-react";
+import { Plugin }     from "@ckeditor/ckeditor5-core";
 import BalloonEditor  from "@ckeditor/ckeditor5-editor-balloon/src/ballooneditor";
 import Essentials     from "@ckeditor/ckeditor5-essentials/src/essentials";
 import Bold           from "@ckeditor/ckeditor5-basic-styles/src/bold";
