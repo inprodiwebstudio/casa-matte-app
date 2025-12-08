@@ -128,7 +128,7 @@ const AppShell = ({
 	}, [dataMutationResult]);
 
 	useEffect(() => {
-		const listOfphotos = galleryData && Object.values(galleryData).filter(photo => photo?.format === "jpg");
+		const listOfphotos = galleryData && Object.values(galleryData).filter(photo => (photo?.format === "jpg") || (photo?.format === "png") || (photo?.format === "heic") || (photo?.format === "heif") || (photo?.format === "HEIC") || (photo?.format === "HEIF"));
 
 		if (isValidArray(listOfphotos)) {
 			const handlerConstructURLCollage = () => {
@@ -153,14 +153,11 @@ const AppShell = ({
 				if (firstImages.length === 1) {
 					const listOfPathRoutes = firstImages[0]?.url.split("/");
 
-					const userName = listOfPathRoutes[0];
-					const photoBookNo = listOfPathRoutes[1];
-					const fileName = listOfPathRoutes[2];
-					const extensionFormat = firstImages[0]?.format;
+					const userName = listOfPathRoutes[9];
+					const photoBookNo = listOfPathRoutes[10];
+					const fileName = listOfPathRoutes[11];
 
-					const fileNameWithFormat = `${fileName}.${extensionFormat}`;
-
-					const myFinalUrl = `${prefixUrl}${sizesImgs}${userName}/${photoBookNo}/${fileNameWithFormat}`;
+					const myFinalUrl = `${prefixUrl}${sizesImgs}${userName}/${photoBookNo}/${fileName}`;
 
 					return myFinalUrl;
 				}
@@ -187,7 +184,9 @@ const AppShell = ({
 			};
 
 			setUrlCollage(handlerConstructURLCollage);
+			return;
 		}
+		setUrlCollage("");
 	}, [galleryData]);
 
 	if (errorVersionMatch) {
