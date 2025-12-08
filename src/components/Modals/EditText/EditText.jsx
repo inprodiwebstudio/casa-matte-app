@@ -10,7 +10,7 @@ import FontFamily    from "@ckeditor/ckeditor5-font/src/fontfamily";
 import FontColor     from "@ckeditor/ckeditor5-font/src/fontcolor";
 import FontSize      from "@ckeditor/ckeditor5-font/src/fontsize";
 import Alignment     from "@ckeditor/ckeditor5-alignment/src/alignment";
-import "@ckeditor/ckeditor5-build-classic/build/translations/es";
+// import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
 // import { EditorState, convertToRaw, ContentState } from "draft-js";
 import { useState, useEffect } from "react";
