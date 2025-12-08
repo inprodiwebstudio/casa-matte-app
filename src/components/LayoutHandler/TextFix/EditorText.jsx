@@ -18,6 +18,31 @@ import { connect, useSelector, shallowEqual }       from "react-redux";
 import { bindAll } from "helpers";
 import styles      from "./styles";
 
+class OverrideIcons extends Plugin {
+	init() {
+		const editor = this.editor;
+
+		const factory = editor.ui.componentFactory;
+		const originalFactory = factory.create.bind(factory);
+
+		factory.create = (name, locale) => {
+			const view = originalFactory(name, locale);
+
+			if (name === "fontfamily") {
+				view.buttonView.icon = FontFamilyIcon;
+				view.buttonView.withText = false;
+			}
+
+			if (name === "fontColor") {
+				view.buttonView.icon = FontColorIcon;
+				view.buttonView.withText = false;
+			}
+
+			return view;
+		};
+	}
+}
+
 const EditText = ({
 	isFront,
 	isBound,
@@ -89,7 +114,7 @@ const EditText = ({
 	};
 
 	const editorConfiguration = {
-		plugins      : [Essentials, Bold, Alignment, Paragraph, FontFamily, FontSize, FontColor],
+		plugins      : [Essentials, Bold, Alignment, Paragraph, FontFamily, FontSize, FontColor, OverrideIcons],
 		GroupHeading : false,
 		alignment    : {
 			options : [ "left", "right", "center", "justify" ],
