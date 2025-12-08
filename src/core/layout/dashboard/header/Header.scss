@@ -16,18 +16,16 @@
         gap: 10px;
 
         .title-container {
-            width: fit-content;
             font-weight: lighter;
             font-size: 14px;
             flex-direction: row;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
-            margin-left: 15vw;
+            gap: 5px;
 
-            .text-title {
-                font-weight: 400;
+            .product-name-title {
+                text-align: center;
             }
         }
         

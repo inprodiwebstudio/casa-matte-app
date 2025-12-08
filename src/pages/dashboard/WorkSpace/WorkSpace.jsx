@@ -5,19 +5,15 @@ import { FaChevronLeft, FaChevronRight }          from "react-icons/fa";
 
 //Own components
 import ManagePagesView        from "../ManagePagesView";
-import { RedoArrow }          from "Resources/icons";
 import { workSpaceSlice }     from "store/Slices";
 import SpreadLayoutsWorkspace from "components/SpreadLayoutsWorkspace";
-// import { currentConfigPhotoBookContext } from "contexts/configContext";
-import CoverBook from "components/CoverBook";
+import CoverBook              from "components/CoverBook";
 import "./WorkSpace.scss";
 
 const WorkSpace = () => {
 	const dispatch = useDispatch();
 
 	const [ myWorkSpaceData, setMyWorkSpaceData ] = useState(undefined);
-
-	// const {setCurrentConfigPhotoBook, historyChanges} = useContext(currentConfigPhotoBookContext);
 
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
@@ -28,26 +24,8 @@ const WorkSpace = () => {
 	const statusViewPage = useSelector((state) => state.workSpaceSlice?.statusViewPage, shallowEqual);
 	const isAvailableProduct = useSelector((state) => state.workSpaceSlice?.data?.product, shallowEqual);
 
-	// const [ currentIndexHistory, setCurrentIndexHistory ] = useState(0);
-
 	const isFrontLayout = currentPageId === "frontpage";
 	const isInPreview = statusViewPage === "preview";
-
-	const isAvailableUndo = false;
-	const isAvailableRedo = false;
-
-	// const handleUndo = () => {
-	// 	if (historyChanges[currentIndexHistory - 1]) {
-	// 		dispatch(workSpaceSlice.actions.updatePageContent({currentConfigPhotoBook : historyChanges[currentIndexHistory - 1]}));
-	// 		setCurrentIndexHistory(currentIndexHistory - 1);
-	// 	}
-	// };
-	// const handleRedo = () => {
-	// 	if (historyChanges[currentIndexHistory + 1]) {
-	// 		dispatch(workSpaceSlice.actions.updatePageContent({currentConfigPhotoBook : historyChanges[currentIndexHistory + 1]}));
-	// 		setCurrentIndexHistory(currentIndexHistory + 1);
-	// 	}
-	// };
 
 	const handlerTypeProductFormat = () => {
 		if (productPhotoBook === "travelcoffeetable") {
@@ -80,19 +58,6 @@ const WorkSpace = () => {
 			pageId      : pageId,
 			currentPage : "sheet1",
 		}));
-		// setCurrentConfigPhotoBook({
-		// 	pageId : undefined,
-		// 	sheet1 : {
-		// 		modlayoutId : undefined,
-		// 		texts       : undefined,
-		// 		photos      : undefined,
-		// 	},
-		// 	sheet2 : {
-		// 		modlayoutId : undefined,
-		// 		texts       : undefined,
-		// 		photos      : undefined,
-		// 	},
-		// });
 		dispatch(workSpaceSlice.actions.handleChangePage(pageId));
 
 	};
@@ -106,38 +71,6 @@ const WorkSpace = () => {
 		return (
 			<div className={`WorkSpace ${isInPreview && "previewActive"}`}>
 				<div className="canva-space">
-					{
-						!isInPreview && (
-							<div className="undo-redo-container">
-								<div
-									className={`action-styled ${!isAvailableUndo && "disabled"}`}
-									{...(
-										isAvailableUndo && {
-											onClick : () => undefined,
-										}
-									)}
-								>
-									<RedoArrow style={{transform : "scaleX(-1)"}} size="13px" />
-									<div className="labelUndoRedo">
-										<div>Deshacer</div>
-									</div>
-								</div>
-								<div
-									className={`action-styled ${!isAvailableRedo && "disabled"}`}
-									{...(
-										isAvailableRedo && {
-											onClick : () => undefined,
-										}
-									)}
-								>
-									<RedoArrow size="13px" />
-									<div className="labelUndoRedo">
-										<div>Rehacer</div>
-									</div>
-								</div>
-							</div>
-						)
-					}
 					<div
 						className={
 							`ghost-canva

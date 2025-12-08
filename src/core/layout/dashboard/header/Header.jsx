@@ -1,4 +1,4 @@
-import { Button, Text, TextInput }                from "@mantine/core";
+import { Button, Group, Stack, Text, TextInput }  from "@mantine/core";
 import { useContext, useEffect, useState }        from "react";
 import LogoCasaMatte                              from "Resources/images/casaMatteLogo.png";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
@@ -17,6 +17,7 @@ import { PostingConfig }                 from "Notifications";
 import { dayjs }                         from "helpers";
 import { openContextModal }              from "@mantine/modals";
 import { currentConfigPhotoBookContext } from "contexts/configContext";
+import { RedoArrow }                     from "Resources/icons";
 
 
 const Header = () => {
@@ -28,7 +29,10 @@ const Header = () => {
 
 	const [ projectName, setProjectName ] = useState(undefined);
 
-	const {currentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
+	const [ currentIndexHistory, setCurrentIndexHistory ] = useState(0);
+
+	const {currentConfigPhotoBook, historyChanges} = useContext(currentConfigPhotoBookContext);
+
 
 	const productName = useSelector((state) => state.workSpaceSlice.data.productName, shallowEqual);
 	const projectTitle = useSelector((state) => state.workSpaceSlice.data.projectTittle, shallowEqual);
@@ -48,7 +52,24 @@ const Header = () => {
 	const isAdminAccount = (userName === "casamatteadmin") && (userEmail === "info@casamatte.com");
 	const isDevAccount = (userName === "demo") && (userEmail === "demo44@demo.com");
 
+	const isAvailableUndo = historyChanges[currentIndexHistory - 1];
+	const isAvailableRedo = historyChanges[currentIndexHistory + 1];
+
 	const handlerShowTestPdf = isAdminAccount || isDevAccount;
+
+	const handleUndo = () => {
+		if (historyChanges[currentIndexHistory - 1]) {
+			dispatch(workSpaceSlice.actions.updatePageContent({currentConfigPhotoBook : historyChanges[currentIndexHistory - 1]}));
+			setCurrentIndexHistory(currentIndexHistory - 1);
+		}
+	};
+	const handleRedo = () => {
+		if (historyChanges[currentIndexHistory + 1]) {
+			dispatch(workSpaceSlice.actions.updatePageContent({currentConfigPhotoBook : historyChanges[currentIndexHistory + 1]}));
+			setCurrentIndexHistory(currentIndexHistory + 1);
+		}
+	};
+
 	const handlerClickPreview = () => () => {
 		if (statusViewPage === "preview") {
 			dispatch(workSpaceSlice.actions.changeStatusViewPage("workspace"));
@@ -142,23 +163,80 @@ const Header = () => {
 		}
 	}, [dataMutationResult]);
 
+	useEffect(() => {
+		if (historyChanges.length > 0) {
+			setCurrentIndexHistory(historyChanges.length - 1);
+		}
+	}, [historyChanges]);
+
 	return (
 		<div className="Header">
 			<div className={`body-container ${isPreviewActive && "isActivePreview"}`}>
 				<a href="https://casamatte.com/">
-					<img src={LogoCasaMatte} width={120} />
+					<img src={LogoCasaMatte} width={130} />
 				</a>
+				<Group
+					spacing={20}
+					style={{
+						flexWrap : "nowrap",
+					}}
+					align="center"
+				>
+					<Stack
+						align="center"
+						spacing={0}
+						style={{
+							cursor     : isAvailableUndo ? "pointer" : "not-allowed",
+							userSelect : "none",
+							color      : isAvailableUndo ? "black" : "gray",
+						}}
+						{
+							...(isAvailableUndo && {
+								onClick : handleUndo,
+							})
+						}
+					>
+						<RedoArrow style={{transform : "scaleX(-1)"}} size="14px" />
+						<Text
+							weight={300}
+							size={10}
+							color={isAvailableUndo ? "darkCasaMatte.7" : "darkCasaMatte.2"}
+						>
+							Deshacer
+						</Text>
+					</Stack>
+					<Stack
+						align="center"
+						spacing={0}
+						style={{
+							cursor     : isAvailableRedo ? "pointer" : "not-allowed",
+							userSelect : "none",
+							color      : isAvailableRedo ? "black" : "gray",
+						}}
+						{
+							...(isAvailableRedo && {
+								onClick : handleRedo,
+							})
+						}
+					>
+						<RedoArrow size="14px" />
+						<Text
+							weight={300}
+							size={10}
+							color={isAvailableRedo ? "darkCasaMatte.7" : "darkCasaMatte.2"}
+						>
+							Rehacer
+						</Text>
+					</Stack>
+				</Group>
 				{
 					isLoggedIn && (
 						<>
 							<div className="title-container">
 								<div className="product-name-title">{productName ?? ""}</div>
 								<div>/</div>
-								<div
-									style={{width : "65%"}}
-								>
+								<div>
 									<TextInput
-										// variant="unstyled"
 										value={projectName}
 										onChange={(e) => handlerChangeTitleProject(e.target.value)}
 										sx={{
@@ -173,6 +251,7 @@ const Header = () => {
 									style={{
 										textTransform : "uppercase",
 										fontSize      : "10px",
+										textAlign     : "center",
 									}}
 								>
 									{dayjs(date).format("DD [de] MMMM, YYYY, hh:mm A")}
