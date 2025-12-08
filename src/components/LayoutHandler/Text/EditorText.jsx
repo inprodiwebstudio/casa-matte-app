@@ -1,6 +1,7 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
 import { CKEditor } from "@ckeditor/ckeditor5-react";
+import { Plugin }   from "@ckeditor/ckeditor5-core";
 // import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
 import BalloonEditor from "@ckeditor/ckeditor5-editor-balloon/src/ballooneditor";
 import Essentials    from "@ckeditor/ckeditor5-essentials/src/essentials";
@@ -11,7 +12,7 @@ import FontColor     from "@ckeditor/ckeditor5-font/src/fontcolor";
 import { Rnd }       from "react-rnd";
 import FontSize      from "@ckeditor/ckeditor5-font/src/fontsize";
 import Alignment     from "@ckeditor/ckeditor5-alignment/src/alignment";
-import "@ckeditor/ckeditor5-build-classic/build/translations/es";
+// import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
 //Contexts
 import { currentConfigPhotoBookContext } from "contexts/configContext";
@@ -25,6 +26,34 @@ import styles                 from "./styles";
 import { ActionIcon, Center } from "@mantine/core";
 import useWorkspaceScale      from "helpers/Hooks/useWorkspaceScale";
 import { TiDelete }           from "react-icons/ti";
+import FontFamilyIcon         from "Resources/svgIcons/fontFamily.svg?raw";
+import FontColorIcon          from "Resources/svgIcons/colorWheel.svg?raw";
+
+
+class OverrideIcons extends Plugin {
+	init() {
+		const editor = this.editor;
+
+		const factory = editor.ui.componentFactory;
+		const originalFactory = factory.create.bind(factory);
+
+		factory.create = (name, locale) => {
+			const view = originalFactory(name, locale);
+
+			if (name === "fontfamily") {
+				view.buttonView.icon = FontFamilyIcon;
+				view.buttonView.withText = false;
+			}
+
+			if (name === "fontColor") {
+				view.buttonView.icon = FontColorIcon;
+				view.buttonView.withText = false;
+			}
+
+			return view;
+		};
+	}
+}
 
 const EditText = ({
 	sheetNo,
@@ -108,10 +137,10 @@ const EditText = ({
 	};
 
 	const editorConfiguration = {
-		plugins      : [Essentials, Bold, Alignment, Paragraph, FontFamily, FontSize, FontColor],
+		plugins      : [Essentials, Bold, Alignment, Paragraph, FontFamily, FontSize, FontColor, OverrideIcons],
 		GroupHeading : false,
 		alignment    : {
-			options : [ "left", "right", "center", "justify" ],
+			options : [ "left", "right", "center", "justify"],
 		},
 		fontFamily : {
 			options : availableFontFamilies[typeText ?? "body"],
