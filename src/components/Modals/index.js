@@ -13,6 +13,7 @@ import DisclaimerDropPhotos     from "./DisclaimerDropPhotos";
 import DeletePageConfirm        from "./DeletePageConfirm";
 import QrGeneratorPhotos        from "./QrGeneratorPhotos";
 import RefreshNotification      from "./RefreshNotification";
+import DisclaimerHiddenPhoto    from "./DisclaimerHiddenPhoto";
 
 
 const modals = {
@@ -30,6 +31,7 @@ const modals = {
 	deletePageConfirm        : DeletePageConfirm,
 	qrGeneratorPhotos        : QrGeneratorPhotos,
 	refreshNotification      : RefreshNotification,
+	disclaimerHiddenPhoto    : DisclaimerHiddenPhoto,
 };
 
 const modalsConfig = {
