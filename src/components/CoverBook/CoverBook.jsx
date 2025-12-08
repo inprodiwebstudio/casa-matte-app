@@ -1,22 +1,27 @@
-import { Group, Box }                from "@mantine/core";
-import SpineCover                    from "./SpineCover";
-import frontThemesTextures           from "core/constants/frontThemesColors";
-import { shallowEqual, useSelector } from "react-redux";
-import { useEffect, useState }       from "react";
-import photoBooksConfigOld           from "core/constants/photoBooksConfigOld";
+import { Group, Box }                             from "@mantine/core";
+import SpineCover                                 from "./SpineCover";
+import frontThemesTextures                        from "core/constants/frontThemesColors";
+import { shallowEqual, useSelector, useDispatch } from "react-redux";
+import { useEffect, useState }                    from "react";
+import photoBooksConfigOld                        from "core/constants/photoBooksConfigOld";
 
 import "./coverBook.scss";
+import { openContextModal } from "@mantine/modals";
+import { workSpaceSlice }   from "store/Slices";
 
 const CoverBook = ({
 	isInPaginator,
 	isThumbNail,
 	isInWorkSpace,
 }) => {
+	const dispatch = useDispatch();
 	const [ showModLayout, setShowModLayout ] = useState(false);
 
 	const photoBooksConfig = photoBooksConfigOld;
 
 	const photoBookData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
+	const product = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
+	const disclaimerFrontShown = useSelector((state) => state.workSpaceSlice?.disclaimerFrontShown, shallowEqual);
 	const frontBookTypeView = useSelector((state) => state.workSpaceSlice.frontBookTypeView, shallowEqual);
 	const coverData = useSelector((state) => state.workSpaceSlice.data.cover);
 
@@ -59,6 +64,12 @@ const CoverBook = ({
 	};
 
 	useEffect(() => {
+		if (photoBookData && (product === "sencillo") && isInWorkSpace && !disclaimerFrontShown) {
+			openContextModal({
+				modal : "disclaimerHiddenPhoto",
+			});
+			dispatch(workSpaceSlice.actions.toggleDisclaimerFrontShown());
+		}
 		setTimeout(() => {
 			setShowModLayout(true);
 		}, 10);

@@ -208,15 +208,19 @@ const initialState = {
 			value : "all",
 		},
 	},
-	loading           : false,
-	frontBookTypeView : null,
-	statusViewPage    : "",
+	disclaimerFrontShown : false,
+	loading              : false,
+	frontBookTypeView    : null,
+	statusViewPage       : "",
 };
 
 export const workSpaceSlice = createSlice({
 	name     : "workspace",
 	initialState,
 	reducers : {
+		toggleDisclaimerFrontShown : (state) => {
+			state.disclaimerFrontShown = !state.disclaimerFrontShown;
+		},
 		changeStatusViewPage : (state, {payload}) => {
 			state.statusViewPage = payload;
 		},
