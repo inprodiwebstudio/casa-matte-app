@@ -161,13 +161,6 @@ const EditText = ({
 		},
 		fontSize : {
 			options : [
-				{title : "1pt", model : "1px"},
-				{title : "2pt", model : "2px"},
-				{title : "3pt", model : "3px"},
-				{title : "4pt", model : "4px"},
-				{title : "5pt", model : "5px"},
-				{title : "6pt", model : "6px"},
-				{title : "7pt", model : "7px"},
 				{title : "8pt", model : "8px"},
 				{title : "9pt", model : "9px"},
 				{title : "10pt", model : "10px"},
