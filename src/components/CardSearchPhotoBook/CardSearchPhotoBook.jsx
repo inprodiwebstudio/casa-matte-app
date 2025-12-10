@@ -81,6 +81,7 @@ const CardSearchPhotoBook = () => {
 	useEffect(() => {
 		if (ordersPhotoBook && isValidArray(ordersPhotoBook)) {
 			const filteredOrders = ordersPhotoBook.filter(order => (order?.status === "48") || (order?.status === "26"));
+			console.log(filteredOrders.filter(order => order?.modelo === "PHOTOBOOK BODA"));
 			const constructorPhotoBooksData = filteredOrders.map((photoBook) => {
 				const parseJsonConfig = (photoBook?.config || (photoBook?.config !== "")) ? JSON.parse(photoBook?.config) : null;
 
