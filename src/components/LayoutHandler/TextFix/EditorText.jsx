@@ -265,16 +265,6 @@ const EditText = ({
 		setEditorState(data);
 		lastEditorDataRef.current = data;
 
-		// Cancelar timeout anterior
-		if (debounceTimeoutRef.current) {
-			clearTimeout(debounceTimeoutRef.current);
-		}
-
-		// Programar actualización automática después de 3 segundos de inactividad
-		debounceTimeoutRef.current = setTimeout(() => {
-			updateRedux(data);
-		}, 3000);
-
 	}, [isFront, product, updateRedux]);
 
 	// Handler para cuando el usuario termina de editar (blur)
