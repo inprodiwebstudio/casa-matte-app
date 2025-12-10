@@ -61,11 +61,14 @@ const EditText = ({
 }) => {
 	const [currentFontSize, setCurrentFontSize] = useState(undefined);
 	const [editorState, setEditorState] = useState(dataTextPage);
+	const [editorId] = useState(() => `editor-${Math.random().toString(36).substr(2, 9)}`);
 
 	// Refs para manejar el debounce y datos temporales
 	const debounceTimeoutRef = useRef(null);
 	const lastEditorDataRef = useRef(dataTextPage);
 	const editorRef = useRef();
+	const isToolbarInteractionRef = useRef(false);
+	const editorContainerRef = useRef(null);
 
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const product = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
@@ -254,7 +257,16 @@ const EditText = ({
 			const handlerFontSize = ( typeText === "titleTravelCoffee") ? "50px" : "20px";
 			const defaultTextStyle =
 				span?.getAttribute("style") ||
-				`font-size: ${handlerFontSize}; color: #000; font-family: TAN-MERINGUE;`;
+				`font-size: ${handlerFontSize}; font-family: TAN-MERINGUE;`;
+
+			data = `<p style="${defaultAlignment}">
+                  <span style="${defaultTextStyle}">&#8203;</span>
+                </p>`;
+		} else if (isEmpty) {
+			const defaultFontSize = "28px";
+			const defaultAlignment = "text-align: center;";
+
+			const defaultTextStyle = `font-size: ${defaultFontSize}; font-family: Inter-Lifght;`;
 
 			data = `<p style="${defaultAlignment}">
                   <span style="${defaultTextStyle}">&#8203;</span>
@@ -265,30 +277,132 @@ const EditText = ({
 		setEditorState(data);
 		lastEditorDataRef.current = data;
 
-	}, [isFront, product, updateRedux]);
+	}, [isFront, product, typeText]);
 
-	// Handler para cuando el usuario termina de editar (blur)
+	// Handler para cuando el usuario termina de editar (blur) - SOLUCIÓN MEJORADA
 	const handleEditorBlur = useCallback(() => {
-		// Cancelar el timeout programado
+		// Cancelar el timeout programado anterior
 		if (debounceTimeoutRef.current) {
 			clearTimeout(debounceTimeoutRef.current);
 			debounceTimeoutRef.current = null;
 		}
 
-		// Actualizar Redux inmediatamente con el último dato
-		if (lastEditorDataRef.current !== undefined) {
-			updateRedux(lastEditorDataRef.current);
-		}
+		// Solo actualizar Redux si no fue una interacción con la toolbar
+		// y después de un pequeño delay para asegurarnos
+		debounceTimeoutRef.current = setTimeout(() => {
+			if (!isToolbarInteractionRef.current && lastEditorDataRef.current !== undefined) {
+				updateRedux(lastEditorDataRef.current);
+			}
+			// Resetear la bandera después del procesamiento
+			isToolbarInteractionRef.current = false;
+			debounceTimeoutRef.current = null;
+		}, 150); // 150ms es suficiente para la mayoría de interacciones con la toolbar
 	}, [updateRedux]);
 
-	// Limpiar timeout cuando el componente se desmonte o cambien dependencias
+	// Función para detectar si un elemento pertenece a la toolbar de ESTE editor específico
+	const isToolbarForThisEditor = useCallback((toolbarElement) => {
+		if (!editorContainerRef.current || !toolbarElement) return false;
+
+		// Verificar si la toolbar está posicionada cerca de nuestro editor
+		const editorRect = editorContainerRef.current.getBoundingClientRect();
+		const toolbarRect = toolbarElement.getBoundingClientRect();
+
+		// La toolbar balloon de CKEditor generalmente aparece cerca del editor
+		// Podemos verificar si están relativamente cerca en la pantalla
+		const verticalDistance = Math.abs(toolbarRect.top - editorRect.bottom);
+		const horizontalOverlap =
+			toolbarRect.left < editorRect.right &&
+			toolbarRect.right > editorRect.left;
+
+		// Si la toolbar está cerca verticalmente y se superpone horizontalmente,
+		// probablemente pertenezca a este editor
+		return verticalDistance < 200 && horizontalOverlap;
+	}, []);
+
+	// Efecto para detectar interacciones con la toolbar balloon de ESTE editor específico
 	useEffect(() => {
+		const handleToolbarMouseDown = (event) => {
+			// Verificar si esta toolbar pertenece a nuestro editor
+			const toolbarElement = event.target.closest(".ck-balloon-panel");
+			if (!toolbarElement || !isToolbarForThisEditor(toolbarElement)) {
+				return;
+			}
+
+			// Marcar que hubo interacción con la toolbar
+			isToolbarInteractionRef.current = true;
+
+			// Cancelar cualquier timeout de blur pendiente
+			if (debounceTimeoutRef.current) {
+				clearTimeout(debounceTimeoutRef.current);
+				debounceTimeoutRef.current = null;
+			}
+		};
+
+		const handleToolbarMouseUp = (event) => {
+			const toolbarElement = event.target.closest(".ck-balloon-panel");
+			if (!toolbarElement || !isToolbarForThisEditor(toolbarElement)) {
+				return;
+			}
+
+			// Esperar un poco antes de resetear para permitir
+			// que el foco vuelva al editor
+			setTimeout(() => {
+				isToolbarInteractionRef.current = false;
+			}, 100);
+		};
+
+		// Función para buscar y añadir listeners a la toolbar
+		const setupToolbarListeners = () => {
+			// Buscar TODAS las toolbars balloon de CKEditor
+			const toolbars = document.querySelectorAll(".ck-balloon-panel");
+			let foundOurToolbar = false;
+
+			toolbars.forEach(toolbar => {
+				// Solo añadir listeners si esta toolbar pertenece a nuestro editor
+				if (isToolbarForThisEditor(toolbar)) {
+					toolbar.addEventListener("mousedown", handleToolbarMouseDown);
+					toolbar.addEventListener("mouseup", handleToolbarMouseUp);
+					toolbar.addEventListener("click", handleToolbarMouseDown);
+					foundOurToolbar = true;
+				}
+			});
+
+			return foundOurToolbar;
+		};
+
+		// Intentar configurar listeners inmediatamente
+		const setupSuccess = setupToolbarListeners();
+
+		// Si no se encuentra la toolbar inmediatamente,
+		// intentar periódicamente hasta que se cree
+		let intervalId;
+		if (!setupSuccess) {
+			intervalId = setInterval(() => {
+				if (setupToolbarListeners()) {
+					clearInterval(intervalId);
+				}
+			}, 300);
+		}
+
+		// Cleanup
 		return () => {
+			if (intervalId) {
+				clearInterval(intervalId);
+			}
+
+			// Remover listeners de TODAS las toolbars
+			const toolbars = document.querySelectorAll(".ck-balloon-panel");
+			toolbars.forEach(toolbar => {
+				toolbar.removeEventListener("mousedown", handleToolbarMouseDown);
+				toolbar.removeEventListener("mouseup", handleToolbarMouseUp);
+				toolbar.removeEventListener("click", handleToolbarMouseDown);
+			});
+
 			if (debounceTimeoutRef.current) {
 				clearTimeout(debounceTimeoutRef.current);
 			}
 		};
-	}, []);
+	}, [isToolbarForThisEditor]);
 
 	// Sincronizar editorState cuando cambie dataTextPage desde fuera
 	useEffect(() => {
@@ -296,7 +410,8 @@ const EditText = ({
 		lastEditorDataRef.current = dataTextPage;
 	}, [dataTextPage]);
 
-	const getCurrentFontSize = (editor) => {
+	// Handler para cuando el editor está listo
+	const handleEditorReady = useCallback((editor) => {
 		editorRef.current = editor;
 
 		const handlerSetcurrentFontSize = () => {
@@ -313,10 +428,69 @@ const EditText = ({
 		editor.model.document.on("change:data", () => {
 			handlerSetcurrentFontSize();
 		});
-	};
+
+		// Escuchar eventos de foco directamente en el editor
+		editor.editing.view.document.on("focus", () => {
+			// Cuando el editor recibe foco, resetear la bandera
+			isToolbarInteractionRef.current = false;
+
+			// Marcar que este editor está activo
+			// Podemos añadir una clase CSS para identificarlo
+			if (editorContainerRef.current) {
+				editorContainerRef.current.classList.add("ckeditor-active");
+			}
+		});
+
+		// Escuchar eventos de blur directamente en el editor
+		editor.editing.view.document.on("blur", (evt, data) => {
+			// Verificar si el blur fue causado por un clic en una toolbar
+			// que NO pertenece a este editor
+			setTimeout(() => {
+				const activeElement = document.activeElement;
+				const clickedToolbar = activeElement.closest(".ck-balloon-panel");
+
+				if (clickedToolbar && !isToolbarForThisEditor(clickedToolbar)) {
+					// El usuario hizo clic en la toolbar de OTRO editor
+					// No debemos marcar esto como interacción con nuestra toolbar
+					isToolbarInteractionRef.current = false;
+					// Pero sí debemos guardar los datos actuales
+					if (lastEditorDataRef.current !== undefined) {
+						updateRedux(lastEditorDataRef.current);
+					}
+				}
+			}, 50);
+		});
+
+	}, [isToolbarForThisEditor, updateRedux]);
+
+	// Handler para guardar datos cuando el usuario cambia a otro editor
+	useEffect(() => {
+		const handleGlobalClick = (event) => {
+			// Si hacemos clic fuera de nuestro editor y su toolbar
+			if (!editorContainerRef.current?.contains(event.target)) {
+				const clickedToolbar = event.target.closest(".ck-balloon-panel");
+
+				// Si hacemos clic en una toolbar que NO es de nuestro editor
+				if (clickedToolbar && !isToolbarForThisEditor(clickedToolbar)) {
+					// Guardar los datos de nuestro editor antes de cambiar
+					if (lastEditorDataRef.current !== undefined && !isToolbarInteractionRef.current) {
+						updateRedux(lastEditorDataRef.current);
+					}
+				}
+			}
+		};
+
+		document.addEventListener("mousedown", handleGlobalClick);
+
+		return () => {
+			document.removeEventListener("mousedown", handleGlobalClick);
+		};
+	}, [isToolbarForThisEditor, updateRedux]);
 
 	return (
 		<div
+			ref={editorContainerRef}
+			id={editorId}
 			className={classes.editText}
 			style={{
 				color : ((product === "premium") && (currentPageId === "frontpage")) && "#1c1c1c6c",
@@ -326,7 +500,7 @@ const EditText = ({
 				editor={ BalloonEditor }
 				config={ editorConfiguration }
 				data={editorState}
-				onReady={getCurrentFontSize}
+				onReady={handleEditorReady}
 				onChange={handleEditorChange}
 				onBlur={handleEditorBlur}
 			/>
