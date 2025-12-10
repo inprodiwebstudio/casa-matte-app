@@ -263,8 +263,12 @@ const EditText = ({
                   <span style="${defaultTextStyle}">&#8203;</span>
                 </p>`;
 		} else if (isEmpty) {
-			const defaultFontSize = "28px";
+			let defaultFontSize = "10px";
 			const defaultAlignment = "text-align: center;";
+
+			if (isFront) {
+				defaultFontSize = "20px";
+			}
 
 			const defaultTextStyle = `font-size: ${defaultFontSize}; font-family: Inter-Lifght;`;
 
