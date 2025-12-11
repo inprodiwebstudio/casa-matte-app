@@ -3,13 +3,13 @@ import { useEffect, useState }                    from "react";
 import axios                                      from "axios";
 
 //Own component;
-import { PostingConfig }             from "Notifications";
-import { genericApi }                from "store/api/genericApi";
-import { workSpaceSlice, authSlice } from "store/Slices";
+import { PostingConfig }                           from "Notifications";
+import { genericApi }                              from "store/api/genericApi";
+import { workSpaceSlice, authSlice, gallerySlice } from "store/Slices";
 import "./AppShell.scss";
-import { useParams }                 from "react-router";
-import { isValidArray }              from "helpers";
-import ErrorPageLayout               from "core/layout/errorPage/ErrorPageLayout";
+import { useParams }                               from "react-router";
+import { isValidArray }                            from "helpers";
+import ErrorPageLayout                             from "core/layout/errorPage/ErrorPageLayout";
 
 const AppShell = ({
 	Body,
@@ -29,9 +29,16 @@ const AppShell = ({
 	const workSpaceData = useSelector((state) => state.workSpaceSlice?.data, shallowEqual);
 	const initialData = useSelector((state) => state.workSpaceSlice?.initialData, shallowEqual);
 	const galleryData = useSelector((state) => state.gallerySlice?.data, shallowEqual);
+	const galleryIsFullSizeSideBar = useSelector((state) => state.gallerySlice?.isFullSizeSideBar, shallowEqual);
 
 
 	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
+
+	const handlerCloseFullSizeGallery = () => {
+		if (galleryIsFullSizeSideBar) {
+			dispatch(gallerySlice.actions.toggleFullSizeSideBar());
+		}
+	};
 
 	const parseSendData = (data) => {
 		const myData = data;
@@ -41,7 +48,7 @@ const AppShell = ({
 
 	const validateAndSubmitData = async () => {
 		try {
-			const respGetPost = await axios.get(`https://casamatte.com/wp-json/wp/v2/photobook-2-0/${postId}`);
+			const respGetPost = await axios.get(`https://casamatte.wip-inprodi.com/wp-json/wp/v2/photobook-2-0/${postId}`);
 			const { data } = respGetPost;
 			const config = data?.meta?.config;
 
@@ -206,6 +213,7 @@ const AppShell = ({
 	return (
 		<div
 			id="AppShell"
+			onClick={handlerCloseFullSizeGallery}
 		>
 			<div className="bodyContainer">
 				<Body />

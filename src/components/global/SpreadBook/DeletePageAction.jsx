@@ -49,8 +49,11 @@ const DeletePageActionButton = ({
 
 		const newObjPages = convertToObject(newListPagesParsed);
 
-
 		dispatch(workSpaceSlice.actions.newListPages(newObjPages));
+		if (!newObjPages[pageId]) {
+			const listOfPages = newListPagesParsed;
+			dispatch(workSpaceSlice.actions.handleChangePage(listOfPages[listOfPages.length - 1].id));
+		}
 		closeAllModals();
 	};
 
@@ -135,6 +138,10 @@ const DeletePageActionButton = ({
 
 		dispatch(workSpaceSlice.actions.newListPages(constructorNewPages));
 		dispatch(workSpaceSlice.actions.deletePage());
+		if (!constructorNewPages[pageId]) {
+			const listOfPages = convertToArray(constructorNewPages);
+			dispatch(workSpaceSlice.actions.handleChangePage(listOfPages[listOfPages.length - 1].id));
+		}
 		closeAllModals();
 	};
 
