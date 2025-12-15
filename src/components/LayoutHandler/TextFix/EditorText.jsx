@@ -140,7 +140,7 @@ const EditText = ({
 				"alignment:right",
 				"alignment:justify",
 			],
-			shouldNotGroupWhenFullScreen : true,
+			shouldNotGroupWhenFull : true,
 		},
 		language : "es",
 		tooltip  : {
