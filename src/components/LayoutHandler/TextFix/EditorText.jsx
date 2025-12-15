@@ -132,7 +132,7 @@ const EditText = ({
 			items : [
 				"fontSize",
 				"fontfamily",
-				"fontColor",
+				...(!isFront ? ["fontColor"] : []),
 				"paragraph",
 				"italic",
 				"alignment:left",
