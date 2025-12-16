@@ -211,6 +211,7 @@ const initialState = {
 	disclaimerFrontShown : false,
 	loading              : false,
 	frontBookTypeView    : null,
+	status               : undefined,
 	statusViewPage       : "",
 };
 

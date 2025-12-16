@@ -404,6 +404,7 @@ const CorrectAccessGuard = () => {
 
 		dispatch(workSpaceSlice.actions.insertData({
 			...parseJSON,
+			status     : photoBookConfigData?.meta?.status ?? undefined,
 			version    : parseJSON?.version ? (parseJSON?.version + 1) : 1,
 			postTypeId : postId,
 			modified   : photoBookConfigData?.modified ?? undefined,
@@ -435,7 +436,8 @@ const CorrectAccessGuard = () => {
 				(postId === "43214")||
 				(postId === "41895")||
 				(postId === "44121")||
-				(postId === "41814")
+				(postId === "41814")||
+				(postId === "42239")
 			) {
 				addCurrentPhotoBookConfig(photobookData);
 				setStatusView("continue");
@@ -452,7 +454,8 @@ const CorrectAccessGuard = () => {
 			(postId === "43214")||
 			(postId === "41895")||
 			(postId === "44121")||
-			(postId === "41814")
+			(postId === "41814")||
+			(postId === "42239")
 		) {
 			addCurrentPhotoBookConfig(photobookData);
 			setStatusView("continue");
@@ -487,7 +490,8 @@ const CorrectAccessGuard = () => {
 					(postId === "43214")||
 					(postId === "41895")||
 					(postId === "44121")||
-					(postId === "41814")
+					(postId === "41814")||
+					(postId === "42239")
 				) {
 					addCurrentPhotoBookConfig(photobookData);
 					setStatusView("continue");
