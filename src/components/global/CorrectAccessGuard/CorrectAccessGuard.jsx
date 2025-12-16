@@ -404,6 +404,7 @@ const CorrectAccessGuard = () => {
 
 		dispatch(workSpaceSlice.actions.insertData({
 			...parseJSON,
+			status     : photoBookConfigData?.meta?.status ?? undefined,
 			version    : parseJSON?.version ? (parseJSON?.version + 1) : 1,
 			postTypeId : postId,
 			modified   : photoBookConfigData?.modified ?? undefined,

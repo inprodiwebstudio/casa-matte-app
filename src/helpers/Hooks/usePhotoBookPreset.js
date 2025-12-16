@@ -58,6 +58,7 @@ export const usePhotoBookPreset = () => {
 			version               : 1,
 			isFixedPagesLayflat   : model.modelKey === "layflat",
 			productionTypeVersion : "moveTexts",
+			status                : meta?.status ?? undefined,
 			pages                 : convertToObject(generatePages(numberOfPages, model.modelKey === "layflat")),
 		};
 
