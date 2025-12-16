@@ -38,7 +38,7 @@ const ConfirmationToPrint = ({ innerProps }) => {
 			setIsLoadingOrder(true);
 			try {
 				const responseCreateOrder = await axios.post(
-					"https://casamatte.wip-inprodi.com/wp-json/wc/v3/orders",
+					"https://casamatte.com/wp-json/wc/v3/orders",
 					{
 						payment_method       : "bacs",
 						payment_method_title : "Direct Bank Transfer",
