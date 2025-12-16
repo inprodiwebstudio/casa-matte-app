@@ -479,7 +479,7 @@ const CorrectAccessGuard = () => {
 		if (!userEmail || (userEmail === "")) {
 			dispatch(authSlice.actions.updateEmail(photobookData?.meta?.correo_del_autor));
 		}
-		if (photobookData?.meta?.status === "48") {
+		if ((photobookData?.meta?.status === "48") && (photobookData?.meta?.config)) {
 			if (!photobookData?.meta?.id_pedido_hojas_extra) {
 				if (
 					(postId === "42516")||
