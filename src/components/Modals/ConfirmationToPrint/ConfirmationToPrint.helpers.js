@@ -1,9 +1,15 @@
+import { isValidArray } from "helpers";
+
 export const inCompletePages = (pages) => {
 	const clonePagesLeaveFrontPage = pages.filter((page) => (page?.id !== "FrontLayout"));
 	const incompletedPages = [];
 
 	const isIncompletedPhotos = (objectPhotos) => {
 		const photos = Object.values(objectPhotos);
+
+		if (isValidArray(photos)) {
+			return true;
+		}
 
 		return photos.some((photo) => ((photo.id === "") || (photo.url === "")));
 	};
