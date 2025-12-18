@@ -79,13 +79,10 @@ const EditText = ({
 	const currentPageId = useSelector((state) => state.workSpaceSlice.data?.currentPage, shallowEqual);
 	const product = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
 	const statusViewPage = useSelector((state) => state.workSpaceSlice.statusViewPage, shallowEqual);
-	const currentColorEngravingText = useSelector((state) => state.workSpaceSlice.data?.engraving?.currentColor?.colorHex, shallowEqual);
 
 	const scale = useWorkspaceScale();
 
 	const isInPreview = statusViewPage === "preview";
-
-	const isAvailableChangeColorText = currentColorEngravingText && (currentPageId === "frontpage");
 
 	const { classes } = styles({
 		size                   : currentFontSize,
@@ -94,7 +91,7 @@ const EditText = ({
 		letterSpacing,
 		layoutNo,
 		isDisabledContainerBox : isInPreview,
-		gravingColor           : isAvailableChangeColorText ? currentColorEngravingText : undefined,
+		gravingColor           : undefined,
 	});
 
 	const editorRef = useRef();
