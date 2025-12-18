@@ -10,7 +10,7 @@ const useWorkspaceScale = () => {
 
 	const isInPreview = statusViewPage === "preview";
 
-	const isOnePage = !currentPageData?.sheet2 && currentPageData?.id !== "FrontLayout";
+	const isOnePage = !currentPageData?.sheet2 && (currentPageData?.id !== "FrontLayout");
 
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
