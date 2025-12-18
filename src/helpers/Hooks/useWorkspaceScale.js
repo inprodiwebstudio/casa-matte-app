@@ -126,6 +126,8 @@ const useWorkspaceScale = () => {
 		}
 	}, [product, format, size, isOnePage, windowWidth]);
 
+	console.log("scale", scale);
+
 	return scale;
 };
 
