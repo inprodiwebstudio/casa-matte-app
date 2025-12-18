@@ -35,13 +35,13 @@ const useWorkspaceScale = () => {
 			onePageBigTablet
 		) => {
 			if (isOnePage) {
-				if (width <= 1199) return onePageBigTablet ?? onePageBase;
-				if (width <= 1501) return onePageLaptop ?? onePageBase;
+				if (width <= 1200) return onePageBigTablet ?? onePageBase;
+				if (width <= 1500) return onePageLaptop ?? onePageBase;
 				if (width <= 1800) return onePageBigLaptop ?? onePageBase;
 				return onePageBase;
 			} else {
-				if (width <= 1199) return bigTablet ?? base;
-				if (width <= 1501) return laptop ?? base;
+				if (width <= 1200) return bigTablet ?? base;
+				if (width <= 1500) return laptop ?? base;
 				if (width <= 1800) return bigLaptop ?? base;
 				return base;
 			}
