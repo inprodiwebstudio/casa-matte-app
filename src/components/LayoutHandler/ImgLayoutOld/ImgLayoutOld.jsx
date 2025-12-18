@@ -9,7 +9,7 @@ import { workSpaceSlice } from "store/Slices";
 import { handlerResizerImage, selectPhotoUrl } from "./imgLayout.helpers";
 //OwnComponents
 import ActionImagesLayout from "./ActionImagesLayout";
-import { MoonLoader }     from "react-spinners";
+// import { MoonLoader }     from "react-spinners";
 
 //Styles
 import "./ImgLayout.scss";
@@ -131,13 +131,13 @@ const ImgLayoutOld = ({
 				...( handlerShowImage() || {} )
 			}
 		>
-			{
+			{/* {
 				loadingPhoto && (
 					<div className="loading">
 						<MoonLoader size={isInWorkSpace ? 50 : 5} />
 					</div>
 				)
-			}
+			} */}
 			{
 				(myImageUrl && (myImageUrl !== "") && isInWorkSpace) && (
 					<>
