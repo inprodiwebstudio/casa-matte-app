@@ -35,7 +35,6 @@ const useWorkspaceScale = () => {
 			onePageBigTablet
 		) => {
 			if (isOnePage) {
-				console.log("isInOnePage");
 				if (width <= 1200) return onePageBigTablet ?? onePageBase;
 				if (width <= 1500) return onePageLaptop ?? onePageBase;
 				if (width <= 1800) return onePageBigLaptop ?? onePageBase;
@@ -74,7 +73,7 @@ const useWorkspaceScale = () => {
 				"previewScales"   : getScale(0.9, 0.75, 0.8, 0.65, 0.9, 0.75, 0.8, 0.65),
 			},
 			"cuadrado-chico" : {
-				"workSpaceScales" : getScale(1, 0.65, 0.85, 0.75, 0.95, 0.75, 0.85, 0.7),
+				"workSpaceScales" : getScale(1, 0.65, 0.85, 0.75, 0.95, 0.65, 0.85, 0.7),
 				"previewScales"   : getScale(1, 0.9, 0.95, 0.85, 1, 0.9, 0.95, 0.85),
 			},
 			"cuadrado-mediano" : {
