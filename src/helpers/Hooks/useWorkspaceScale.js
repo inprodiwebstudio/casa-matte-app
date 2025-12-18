@@ -22,6 +22,7 @@ const useWorkspaceScale = () => {
 
 	const scale = useMemo(() => {
 	  const width = windowWidth;
+	  console.log("width", width);
 
 		// Función helper para calcular scale basado en breakpoints
 		const getScale = (
