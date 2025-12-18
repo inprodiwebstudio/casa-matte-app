@@ -7,7 +7,7 @@ export const inCompletePages = (pages) => {
 	const isIncompletedPhotos = (objectPhotos) => {
 		const photos = Object.values(objectPhotos);
 
-		if (isValidArray(photos)) {
+		if (!isValidArray(photos)) {
 			return true;
 		}
 
