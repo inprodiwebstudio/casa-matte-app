@@ -22,7 +22,6 @@ const useWorkspaceScale = () => {
 
 	const scale = useMemo(() => {
 	  const width = windowWidth;
-	  console.log("width", width);
 
 		// Función helper para calcular scale basado en breakpoints
 		const getScale = (
@@ -41,8 +40,14 @@ const useWorkspaceScale = () => {
 				if (width <= 1800) return onePageBigLaptop ?? onePageBase;
 				return onePageBase;
 			} else {
-				if (width <= 1200) return bigTablet ?? base;
-				if (width <= 1500) return laptop ?? base;
+				if (width <= 1200) {
+					console.log("Es bigTablet");
+					return bigTablet ?? base;
+				}
+				if (width <= 1500) {
+					console.log("Es laptop");
+					return laptop ?? base;
+				}
 				if (width <= 1800) return bigLaptop ?? base;
 				return base;
 			}
