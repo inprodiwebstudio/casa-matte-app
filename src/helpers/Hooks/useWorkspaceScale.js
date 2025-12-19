@@ -90,7 +90,6 @@ const useWorkspaceScale = () => {
 			if (isInPreview) {
 				return scalesProducts[keyScale]["previewScales"];
 			}
-			console.log(keyScale);
 			return scalesProducts[keyScale]["workSpaceScales"];
 		};
 
@@ -126,6 +125,8 @@ const useWorkspaceScale = () => {
 				return handlerGetCales("vertical-grande-workSpace");
 		}
 	}, [product, format, size, isOnePage, windowWidth]);
+
+	console.log("scale", scale);
 
 	return scale;
 };
