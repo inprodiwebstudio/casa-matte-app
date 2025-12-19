@@ -9,13 +9,18 @@ import { closeAllModals }            from "@mantine/modals";
 import { dayjs, isValidArray }       from "helpers";
 import { inCompletePages }           from "./ConfirmationToPrint.helpers";
 import IncompletedPagesBody          from "./IncompletedPagesBody";
+import { useHandlerTypeConfigBooks } from "helpers/Hooks/useHandlerTypeConfigBooks";
 
 
 const ConfirmationToPrint = ({ innerProps }) => {
 	const { postId } = innerProps;
 	const { handlerExtraCost } = useExtraPriceHandler();
+	const photoBooksConfig = useHandlerTypeConfigBooks();
 
 	const pages = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
+	const product = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
+	const size = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
+	const format = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
 	const userId = useSelector((state) => state.authSlice?.user?.userId, shallowEqual);
 	const userEmail = useSelector((state) => state.authSlice?.user?.email, shallowEqual);
 
@@ -25,13 +30,15 @@ const ConfirmationToPrint = ({ innerProps }) => {
 
 	const [isLoadingOrder, setIsLoadingOrder] = useState(false);
 
+	const layoutMods = photoBooksConfig[product][format]?.sizes?.[size]?.layoutMods;
+
 	const handlerSubmit = async () => {
 		if (
 			isValidArray(
-				inCompletePages(Object.values(pages))
+				inCompletePages(Object.values(pages), layoutMods)
 			)
 		) {
-			setNotCompletedPages(inCompletePages(Object.values(pages)));
+			setNotCompletedPages(inCompletePages(Object.values(pages), layoutMods));
 			return;
 		}
 		if (handlerExtraCost() > 0) {
