@@ -48,7 +48,7 @@ const AppShell = ({
 
 	const validateAndSubmitData = async () => {
 		try {
-			const respGetPost = await axios.get(`https://casamatte.wip-inprodi.com/wp-json/wp/v2/photobook-2-0/${postId}`);
+			const respGetPost = await axios.get(`https://casamatte.com/wp-json/wp/v2/photobook-2-0/${postId}`);
 			const { data } = respGetPost;
 			const config = data?.meta?.config;
 
