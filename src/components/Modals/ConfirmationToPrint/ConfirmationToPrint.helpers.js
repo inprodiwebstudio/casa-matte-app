@@ -11,25 +11,32 @@ export const inCompletePages = (pages, layoutMods) => {
 			return true;
 		}
 
-		return photos.some((photo) => ((photo.id === "") || (photo.url === "")));
+		return photos.some((photo) => (((photo.id === "") || (photo.id === undefined)) || ((photo.url === "") || (photo.url === undefined)) || (Object.values(photo).length === 0)));
 	};
 
 	clonePagesLeaveFrontPage.forEach((page) => {
 		const { sheet1, sheet2 } = page;
 
-		const isTextLayout = (sheetNo) => {
+		const isPhotoLayout = (sheetNo) => {
 			const layoutType = sheetNo?.layoutType;
 			const layout = layoutMods[layoutType];
-			console.log("layout", layout);
-			return (layout?.cat === "text") || (layout?.cat === "fotosytexto");
+			return (layout?.cat === "fotos") || (layout?.cat === "fotosytexto");
 		};
 
-		if (isIncompletedPhotos(sheet1?.photos) && ((sheet1?.layoutType !== "") && !isTextLayout(sheet1))) {
-			incompletedPages.push(sheet1.pageNo);
+		if (isIncompletedPhotos(sheet1?.photos)) {
+			if (sheet1?.layoutType !== "") {
+				if (isPhotoLayout(sheet1)) {
+					incompletedPages.push(sheet1.pageNo);
+				}
+			}
 		}
 		if (sheet2?.photos) {
-			if (isIncompletedPhotos(sheet2.photos) && ((sheet2.layoutType !== "") && !isTextLayout(sheet2))) {
-				incompletedPages.push(sheet2.pageNo);
+			if (isIncompletedPhotos(sheet2?.photos)) {
+				if (sheet2?.layoutType !== "") {
+					if (isPhotoLayout(sheet2)) {
+						incompletedPages.push(sheet2.pageNo);
+					}
+				}
 			}
 		}
 	});

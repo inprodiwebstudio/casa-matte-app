@@ -19,7 +19,7 @@ const ConfirmationToPrint = ({ innerProps }) => {
 
 	const pages = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
 	const product = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
-	const size = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
+	const size = useSelector((state) => state.workSpaceSlice.data?.sizePhotoBook, shallowEqual);
 	const format = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
 	const userId = useSelector((state) => state.authSlice?.user?.userId, shallowEqual);
 	const userEmail = useSelector((state) => state.authSlice?.user?.email, shallowEqual);
@@ -45,7 +45,7 @@ const ConfirmationToPrint = ({ innerProps }) => {
 			setIsLoadingOrder(true);
 			try {
 				const responseCreateOrder = await axios.post(
-					"https://casamatte.com/wp-json/wc/v3/orders",
+					"https://casamatte.wip-inprodi.com/wp-json/wc/v3/orders",
 					{
 						payment_method       : "bacs",
 						payment_method_title : "Direct Bank Transfer",
