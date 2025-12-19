@@ -22,30 +22,24 @@ const Mod52 = ({
 			justify="center"
 			direction="column"
 		>
-			<Stack
-				spacing="5%"
-				w="70%"
-				h="55%"
-			>
-				<Stack w="100%" h="100%">
-					<ImgLayout
-						sheetNo={sheetNo}
-						imageNo={0}
-					/>
-				</Stack>
-				{listOfTexts.map((item, index) => {
-					return (
-						<Text
-							key={index}
-							sheetNo={sheetNo}
-							letterSpacing={item?.letterSpacing}
-							gapSpacing={item?.gapSpacing}
-							lineHeight={item?.lineHeight}
-							layoutNo={index}
-						/>
-					);
-				})}
+			<Stack w="70%" h="55%">
+				<ImgLayout
+					sheetNo={sheetNo}
+					imageNo={0}
+				/>
 			</Stack>
+			{listOfTexts.map((item, index) => {
+				return (
+					<Text
+						key={index}
+						sheetNo={sheetNo}
+						letterSpacing={item?.letterSpacing}
+						gapSpacing={item?.gapSpacing}
+						lineHeight={item?.lineHeight}
+						layoutNo={index}
+					/>
+				);
+			})}
 		</Flex>
 	);
 };
