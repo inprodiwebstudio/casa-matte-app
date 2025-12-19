@@ -69,7 +69,7 @@ const useWorkspaceScale = () => {
 				"previewScales"   : getScale(1, 0.8, 0.85, 0.7, 0.95, 0.7, 0.95, 0.65),
 			},
 			"vertical-mediano" : {
-				"workSpaceScales" : getScale(0.8, 0.6, 0.6, 0.45, 0.8, 0.6, 0.6, 0.45),
+				"workSpaceScales" : getScale(0.8, 0.6, 0.6, 0.45, 0.8, 0.8, 0.6, 0.45),
 				"previewScales"   : getScale(0.9, 0.75, 0.8, 0.65, 0.9, 0.75, 0.8, 0.65),
 			},
 			"cuadrado-chico" : {
