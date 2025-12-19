@@ -20,6 +20,7 @@ export const inCompletePages = (pages, layoutMods) => {
 		const isTextLayout = (sheetNo) => {
 			const layoutType = sheetNo?.layoutType;
 			const layout = layoutMods[layoutType];
+			console.log("layout", layout);
 			return (layout?.cat === "text") || (layout?.cat === "fotosytexto");
 		};
 
