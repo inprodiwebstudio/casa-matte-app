@@ -90,6 +90,7 @@ const useWorkspaceScale = () => {
 			if (isInPreview) {
 				return scalesProducts[keyScale]["previewScales"];
 			}
+			console.log(keyScale);
 			return scalesProducts[keyScale]["workSpaceScales"];
 		};
 
