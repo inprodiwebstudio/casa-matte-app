@@ -13,7 +13,7 @@ import ActionImagesLayout from "./ActionImagesLayout";
 
 //Styles
 import "./ImgLayout.scss";
-import { cleanNotifications, showNotification } from "@mantine/notifications";
+// import { cleanNotifications, showNotification } from "@mantine/notifications";
 
 const ImgLayoutOld = ({
 	sheetNo,
@@ -33,7 +33,7 @@ const ImgLayoutOld = ({
 
 	const dragerImage = useSelector((state) => state.workSpaceSlice.currentPhotoDragger, shallowEqual);
 
-	const [ isLowQuality, setIsLowQuality ] = useState(false);
+	// const [ isLowQuality, setIsLowQuality ] = useState(false);
 
 	const handleDrop = (e) => {
 		e.preventDefault();
@@ -59,34 +59,34 @@ const ImgLayoutOld = ({
 		setMyImageUrl(img.src);
 	};
 
-	const handlerQuality = () => {
-		const megapixels = urlImage.pixels / 1_000_000;
+	// const handlerQuality = () => {
+	// 	const megapixels = urlImage.pixels / 1_000_000;
 
-		if (urlImage && (megapixels < 8)) {
-			cleanNotifications();
-			showNotification({
-				title     : "Alerta baja calidad",
-				message   : `La imagen en el recuadro señalado presenta una baja calidad. De ${megapixels} pixeles. Recomendamos que la resolución de la imagen sea de 8 Mega Pixeles o superior.`,
-				color     : "yellow",
-				autoClose : 10000,
-				styles    : () => ({
-					root : {
-									  "&::before" : {
-										  borderRadius : "0px",
-										  width        : "3px",
-									  },
-									  borderRadius : "0px",
-					},
+	// 	if (urlImage && (megapixels < 8)) {
+	// 		cleanNotifications();
+	// 		showNotification({
+	// 			title     : "Alerta baja calidad",
+	// 			message   : `La imagen en el recuadro señalado presenta una baja calidad. De ${megapixels} pixeles. Recomendamos que la resolución de la imagen sea de 8 Mega Pixeles o superior.`,
+	// 			color     : "yellow",
+	// 			autoClose : 10000,
+	// 			styles    : () => ({
+	// 				root : {
+	// 								  "&::before" : {
+	// 									  borderRadius : "0px",
+	// 									  width        : "3px",
+	// 								  },
+	// 								  borderRadius : "0px",
+	// 				},
 
-					title       : { fontFamily : "Helvetica", fontWeight : "500", textTransform : "uppercase" },
-					description : { fontFamily : "Helvetica" },
-				}),
-			});
-			setIsLowQuality(true);
-			return;
-		}
-		setIsLowQuality(false);
-	};
+	// 				title       : { fontFamily : "Helvetica", fontWeight : "500", textTransform : "uppercase" },
+	// 				description : { fontFamily : "Helvetica" },
+	// 			}),
+	// 		});
+	// 		setIsLowQuality(true);
+	// 		return;
+	// 	}
+	// 	setIsLowQuality(false);
+	// };
 
 	const handlerShowImage = () => {
 		const isWithoutImage =( frontBookTypeView === "whitOutImage");
@@ -112,9 +112,9 @@ const ImgLayoutOld = ({
 	};
 
 	useEffect(() => {
-		if (urlImage && isInWorkSpace) {
-			handlerQuality();
-		}
+		// if (urlImage && isInWorkSpace) {
+		// 	handlerQuality();
+		// }
 		if (urlImage?.url) {
 			setLoadingphoto(true);
 			loadImage();
@@ -125,7 +125,7 @@ const ImgLayoutOld = ({
 		<div
 			onDrop={(e) => handleDrop(e)}
 			onDragOver={(e) => handleDragOver(e)}
-			className={`ImgLayout ${isLowQuality ? "low-quality" : ""} ${isCoverImage && "relevantColor"}`}
+			className={`ImgLayout ${isCoverImage && "relevantColor"}`}
 			id={`${currentPageId}-${sheetNo}-${imageNo}`}
 			{
 				...( handlerShowImage() || {} )
