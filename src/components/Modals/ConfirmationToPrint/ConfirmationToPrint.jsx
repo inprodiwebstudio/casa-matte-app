@@ -36,13 +36,11 @@ const ConfirmationToPrint = ({ innerProps }) => {
 		if (
 			isValidArray(
 				inCompletePages(Object.values(pages), layoutMods)
-			)
+			) && (postId !== "29077")
 		) {
 			setNotCompletedPages(inCompletePages(Object.values(pages), layoutMods));
 			return;
 		}
-		console.log("Donde test");
-		return;
 		if (handlerExtraCost() > 0) {
 			setIsLoadingOrder(true);
 			try {
