@@ -41,8 +41,6 @@ const ConfirmationToPrint = ({ innerProps }) => {
 			setNotCompletedPages(inCompletePages(Object.values(pages), layoutMods));
 			return;
 		}
-		console.log("Completed");
-		return;
 		if (handlerExtraCost() > 0) {
 			setIsLoadingOrder(true);
 			try {
