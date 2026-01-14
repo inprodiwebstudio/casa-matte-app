@@ -9,6 +9,8 @@ export const inCompletePages = (pages, layoutMods) => {
 
 		const validPhotos = photos.filter(photo => !((photo?.[0] === "h") && (photo?.[1] === "t") && (photo?.[2] === "t") && (photo?.[3] === "p") && (photo?.[4] === "s") && (photo?.[5] === ":")) || !(Object.keys(photo).length === 0));
 
+		console.log(validPhotos);
+
 		if (!isValidArray(validPhotos)) {
 			return true;
 		}
