@@ -7,11 +7,13 @@ export const inCompletePages = (pages, layoutMods) => {
 	const isIncompletedPhotos = (objectPhotos) => {
 		const photos = Object.values(objectPhotos);
 
-		if (!isValidArray(photos)) {
+		const validPhotos = photos.filter(photo => !((photo?.[0] === "h") && (photo?.[1] === "t") && (photo?.[2] === "t") && (photo?.[3] === "p") && (photo?.[4] === "s") && (photo?.[5] === ":")));
+
+		if (!isValidArray(validPhotos)) {
 			return true;
 		}
 
-		return photos.some((photo) => (((photo.id === "") || (photo.id === undefined)) || ((photo.url === "") || (photo.url === undefined)) || (Object.values(photo).length === 0)));
+		return validPhotos.some((photo) => (((photo.id === "") || (photo.id === undefined)) || ((photo.url === "") || (photo.url === undefined)) || (Object.values(photo).length === 0)));
 	};
 
 	clonePagesLeaveFrontPage.forEach((page) => {
