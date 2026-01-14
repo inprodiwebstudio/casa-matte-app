@@ -116,12 +116,13 @@ const defaultFrontPage = () => ({
 });
 
 const generatePages = (numberOfPages, isLayflat) => {
-	const totalPaginations = (numberOfPages - 1) / 2;
+	const myNumberOfPages = (isLayflat && (numberOfPages === 25)) ? 20 : numberOfPages;
+	const totalPaginations = (myNumberOfPages - 1) / 2;
 	const isEvenPages = totalPaginations % 2 === 0;
-	const pageCount = isEvenPages ? totalPaginations : (numberOfPages / 2) + 1;
+	const pageCount = isEvenPages ? totalPaginations : (myNumberOfPages / 2) + 1;
 
 	if (isLayflat) {
-		return Array(numberOfPages / 2).fill(0).map((_, index) => {
+		return Array(myNumberOfPages / 2).fill(0).map((_, index) => {
 			return {
 				id     : `page${index + 1}`,
 				sheet1 : {
@@ -157,7 +158,7 @@ const generatePages = (numberOfPages, isLayflat) => {
 			return {
 				id     : `page${index + 1}`,
 				sheet1 : {
-					pageNo     : numberOfPages,
+					pageNo     : myNumberOfPages,
 					layoutType : "",
 					text       : {},
 					photos     : { 0 : { id : "", url : "" } },
