@@ -116,6 +116,7 @@ const defaultFrontPage = () => ({
 });
 
 const generatePages = (numberOfPages, isLayflat) => {
+	console.log(numberOfPages, isLayflat);
 	const totalPaginations = (numberOfPages - 1) / 2;
 	const isEvenPages = totalPaginations % 2 === 0;
 	const pageCount = isEvenPages ? totalPaginations : (numberOfPages / 2) + 1;
