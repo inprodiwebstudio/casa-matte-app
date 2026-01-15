@@ -28,7 +28,6 @@ const Mod57 = ({
 				w="100%"
 				h="calc(100% / 2 - 0.05em)"
 				spacing="0.1em"
-				grow
 			>
 				<Stack h="100%" w="calc(100% / 2 - 0.05em)">
 					<ImgLayout
