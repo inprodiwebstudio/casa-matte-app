@@ -176,13 +176,18 @@ const Header = () => {
 
 	const getPostIdsEnd = async () => {
 		try {
-			const listOfPostIds = await getPostIds({ module : "wp-json/wp/v2/photobook-2-0?before=2025-12-29T00:00:00&per_page=100&page=1"}).unwrap();
+			const listOfPostIds = await getPostIds({ module : "wp-json/wp/v2/photobook-2-0?per_page=100&page=1"}).unwrap();
 
 			const endPostIds = listOfPostIds.filter((postIdData) => postIdData?.meta?.status === "48");
 
-			const listOfPostIdsEnd = endPostIds.map((post) => post?.id);
+			const listOfPrintedPostIds = endPostIds.filter(postIdData => {
+				if (!postIdData?.meta?.fecha_de_termino || postIdData?.meta?.fecha_de_termino === "") return true;
+				const endDate = new Date(postIdData?.meta?.fecha_de_termino);
+				const maxDate = new Date("2025-12-29");
+				return endDate < maxDate;
+			});
 
-			console.log(listOfPostIdsEnd);
+			console.log(listOfPrintedPostIds);
 		} catch (error) {
 			console.error(error);
 		}
