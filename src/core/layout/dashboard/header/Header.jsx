@@ -175,7 +175,7 @@ const Header = () => {
 	}, [historyChanges]);
 
 	const getPostIdsEnd = async () => {
-		const quantityMapPages = 4;
+		const quantityMapPages = 5;
 		const newArrayPages = new Array(quantityMapPages).fill(0);
 		try {
 			const listPagesPostIds = await Promise.all(newArrayPages.map((_, index) => getPostIds({ module : `wp-json/wp/v2/photobook-2-0?per_page=100&page=${index + 1}`}).unwrap()));
