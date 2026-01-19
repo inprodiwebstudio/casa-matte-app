@@ -189,10 +189,34 @@ const Header = () => {
 			});
 
 			const listOfPostIds = listOfPrintedPostIds.map(postIdData => postIdData?.id);
-			console.log(listOfPostIds);
+
+			if (listOfPostIds.length > 0) {
+				downloadTxtFile(listOfPostIds);
+			} else {
+				console.log("No hay datos para descargar");
+			}
 		} catch (error) {
 			console.error(error);
 		}
+	};
+
+	const downloadTxtFile = (data) => {
+		const textContent = data.join("\n");
+
+		const blob = new Blob([textContent], { type : "text/plain" });
+
+		const url = URL.createObjectURL(blob);
+
+		const link = document.createElement("a");
+		link.href = url;
+		link.download = "post_ids.txt";
+		link.style.display = "none";
+
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+
+		URL.revokeObjectURL(url);
 	};
 
 	return (
