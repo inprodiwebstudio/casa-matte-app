@@ -178,9 +178,11 @@ const Header = () => {
 		try {
 			const listOfPostIds = await getPostIds({ module : "wp-json/wp/v2/photobook-2-0?before=2025-12-29T00:00:00&per_page=100&page=1"}).unwrap();
 
-			const endPostIds = listOfPostIds.filter((postId) => postId?.status === "48");
+			const endPostIds = listOfPostIds.filter((postIdData) => postIdData?.meta?.status === "48");
 
-			console.log(endPostIds);
+			const listOfPostIdsEnd = endPostIds.map((post) => post?.id);
+
+			console.log(listOfPostIdsEnd);
 		} catch (error) {
 			console.error(error);
 		}
