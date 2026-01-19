@@ -7,6 +7,8 @@ import { workSpaceSlice, authSlice } from "store/Slices";
 
 import { genericApi } from "store/api/genericApi";
 
+const { useLazyGetDataQuery } = genericApi;
+
 import "./Header.scss";
 //Mantine
 // import { openContextModal } from "@mantine/modals";
@@ -33,6 +35,7 @@ const Header = () => {
 
 	const {currentConfigPhotoBook, historyChanges} = useContext(currentConfigPhotoBookContext);
 
+	const [ getPostIds ] = useLazyGetDataQuery();
 
 	const productName = useSelector((state) => state.workSpaceSlice.data.productName, shallowEqual);
 	const projectTitle = useSelector((state) => state.workSpaceSlice.data.projectTittle, shallowEqual);
@@ -48,6 +51,8 @@ const Header = () => {
 	const isPreviewActive = statusViewPage === "preview";
 
 	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
+
+	const availableDevButton = (userName && userEmail) && ((userName === "joab27") && (userEmail === "dev@casamatte.com"));
 
 	const isAdminAccount = (userName === "casamatteadmin") && (userEmail === "info@casamatte.com");
 	const isDevAccount = (userName === "demo") && (userEmail === "demo44@demo.com");
@@ -168,6 +173,18 @@ const Header = () => {
 			setCurrentIndexHistory(historyChanges.length - 1);
 		}
 	}, [historyChanges]);
+
+	const getPostIdsEnd = async () => {
+		try {
+			const listOfPostIds = await getPostIds({ module : "wp-json/wp/v2/photobook-2-0?before=2025-12-29T00:00:00&per_page=100&page=1"}).unwrap();
+
+			const endPostIds = listOfPostIds.filter((postId) => postId?.status === "48");
+
+			console.log(endPostIds);
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	return (
 		<div className="Header">
@@ -324,6 +341,19 @@ const Header = () => {
 											>
 												TestPdf
 											</Text>
+										</Button>
+									)
+								}
+								{
+									availableDevButton && (
+										<Button
+											radius={12}
+											size="xs"
+											color="darkCasaMatte"
+											onClick={() => getPostIdsEnd()}
+											disabled={false}
+										>
+											PostIdsEnd
 										</Button>
 									)
 								}
