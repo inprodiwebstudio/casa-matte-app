@@ -187,7 +187,9 @@ const Header = () => {
 				const maxDate = new Date("2025-12-29");
 				return endDate < maxDate;
 			});
-			console.log(listOfPrintedPostIds);
+
+			const listOfPostIds = listOfPrintedPostIds.map(postIdData => postIdData?.id);
+			console.log(listOfPostIds);
 		} catch (error) {
 			console.error(error);
 		}
