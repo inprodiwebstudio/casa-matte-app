@@ -175,19 +175,23 @@ const Header = () => {
 	}, [historyChanges]);
 
 	const getPostIdsEnd = async () => {
+		const quantityMapPages = 4;
+		const newArrayPages = new Array(quantityMapPages).fill(0);
 		try {
-			const listOfPostIds = await getPostIds({ module : "wp-json/wp/v2/photobook-2-0?per_page=300&page=1"}).unwrap();
+			const listPagesPostIds = await Promise.all(newArrayPages.map((_, index) => getPostIds({ module : `wp-json/wp/v2/photobook-2-0?per_page=100&page=${index + 1}`}).unwrap()));
+			console.log(listPagesPostIds);
+			// const listOfPostIds = await getPostIds({ module : "wp-json/wp/v2/photobook-2-0?per_page=100&page=1"}).unwrap();
 
-			const endPostIds = listOfPostIds.filter((postIdData) => postIdData?.meta?.status === "48");
+			// const endPostIds = listOfPostIds.filter((postIdData) => postIdData?.meta?.status === "48");
 
-			const listOfPrintedPostIds = endPostIds.filter(postIdData => {
-				if (!postIdData?.meta?.fecha_de_termino || postIdData?.meta?.fecha_de_termino === "") return true;
-				const endDate = new Date(postIdData?.meta?.fecha_de_termino);
-				const maxDate = new Date("2025-12-29");
-				return endDate < maxDate;
-			});
+			// const listOfPrintedPostIds = endPostIds.filter(postIdData => {
+			// 	if (!postIdData?.meta?.fecha_de_termino || postIdData?.meta?.fecha_de_termino === "") return true;
+			// 	const endDate = new Date(postIdData?.meta?.fecha_de_termino);
+			// 	const maxDate = new Date("2025-12-29");
+			// 	return endDate < maxDate;
+			// });
 
-			console.log(listOfPrintedPostIds);
+			// console.log(listOfPrintedPostIds);
 		} catch (error) {
 			console.error(error);
 		}
