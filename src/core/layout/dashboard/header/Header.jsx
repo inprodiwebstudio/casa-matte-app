@@ -176,7 +176,7 @@ const Header = () => {
 
 	const getPostIdsEnd = async () => {
 		try {
-			const listOfPostIds = await getPostIds({ module : "wp-json/wp/v2/photobook-2-0?per_page=100&page=1"}).unwrap();
+			const listOfPostIds = await getPostIds({ module : "wp-json/wp/v2/photobook-2-0?per_page=300&page=1"}).unwrap();
 
 			const endPostIds = listOfPostIds.filter((postIdData) => postIdData?.meta?.status === "48");
 
