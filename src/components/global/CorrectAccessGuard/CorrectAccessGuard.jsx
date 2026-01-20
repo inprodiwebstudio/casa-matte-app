@@ -443,7 +443,8 @@ const CorrectAccessGuard = () => {
 				(postId === "42155")||
 				(postId === "44557")||
 				(postId === "42503")||
-				(postId === "43933")
+				(postId === "43933")||
+				(postId === "34277")
 			) {
 				addCurrentPhotoBookConfig(photobookData);
 				setStatusView("continue");
@@ -467,7 +468,8 @@ const CorrectAccessGuard = () => {
 			(postId === "42155")||
 			(postId === "44557")||
 			(postId === "42503")||
-			(postId === "43933")
+			(postId === "43933")||
+			(postId === "34277")
 		) {
 			addCurrentPhotoBookConfig(photobookData);
 			setStatusView("continue");
@@ -509,7 +511,8 @@ const CorrectAccessGuard = () => {
 					(postId === "42155")||
 					(postId === "44557")||
 					(postId === "42503")||
-					(postId === "43933")
+					(postId === "43933")||
+					(postId === "34277")
 				) {
 					addCurrentPhotoBookConfig(photobookData);
 					setStatusView("continue");
