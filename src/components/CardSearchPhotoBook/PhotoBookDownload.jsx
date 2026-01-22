@@ -35,7 +35,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 	const dispatch = useDispatch();
 
 	// Estados
-	const [currentIndexSpread, setCurrentIndexSpread] = useState(27);
+	const [currentIndexSpread, setCurrentIndexSpread] = useState(0);
 	const [base64ImagePages, setBase64ImagePages] = useState([]);
 	const [currentSpreadDataPage, setCurrentSpreadDataPage] = useState(undefined);
 	const [bookSpreadPages, setBookSpreadPages] = useState([]);
