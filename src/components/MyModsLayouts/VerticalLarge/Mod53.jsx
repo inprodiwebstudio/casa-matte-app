@@ -29,12 +29,15 @@ const Mod53 = ({
 			direction="column"
 		>
 			<Stack
-				spacing={isInWorkSpace ? "5%" : "0.3em"}
+				spacing={isInWorkSpace ? "0.5em" : "0.3em"}
 				w="100%"
 				h="100%"
 				align="flex-end"
 			>
-				<Stack w="100%" h="100%">
+				<Stack
+					w="100%"
+					h="90%"
+				>
 					<ImgLayout
 						isInWorkSpace={isInWorkSpace}
 						sheetNo={sheetNo}

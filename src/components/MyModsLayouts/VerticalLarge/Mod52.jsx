@@ -30,14 +30,14 @@ const Mod52 = ({
 			direction="column"
 		>
 			<Stack
-				spacing="3%"
+				spacing="0.3em"
 				w="60%"
 				h="70%"
 			>
 				<Stack
 					w="100%"
 					h="100%"
-					spacing="5%"
+					spacing="0.5em"
 				>
 					<Stack mr="10%" {...(isInWorkSpace && { id : `${pageNo}-${modLayout}-text1` })}>
 						<TextFix
