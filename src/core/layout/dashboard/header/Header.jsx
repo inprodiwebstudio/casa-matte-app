@@ -37,6 +37,9 @@ const Header = () => {
 
 	const [ getPostIds ] = useLazyGetDataQuery();
 
+	const [ getDataUser ] = useLazyGetDataQuery();
+
+
 	const productName = useSelector((state) => state.workSpaceSlice.data.productName, shallowEqual);
 	const projectTitle = useSelector((state) => state.workSpaceSlice.data.projectTittle, shallowEqual);
 	const lastModified = useSelector((state) => state.workSpaceSlice.data.modified, shallowEqual);
@@ -188,7 +191,19 @@ const Header = () => {
 				return endDate < maxDate;
 			});
 
-			const listOfPostIds = listOfPrintedPostIds.map(postIdData => postIdData?.id);
+			const listOfPostIdsWithUserName = listOfPrintedPostIds.map(async postIdData => {
+				const userId = postIdData?.author;
+
+				const respUserData = await getDataUser({ module : `wp-json/wp/v2/users/${userId}` }).unwrap();
+				return {
+					...postIdData,
+					userName : respUserData?.name,
+				};
+			});
+
+			const listOfPostIdsWithUserNameData = await Promise.all(listOfPostIdsWithUserName);
+
+			const listOfPostIds = listOfPostIdsWithUserNameData.map(postIdData => `${postIdData?.userName}/${postIdData?.id}`);
 
 			if (listOfPostIds.length > 0) {
 				downloadTxtFile(listOfPostIds);
