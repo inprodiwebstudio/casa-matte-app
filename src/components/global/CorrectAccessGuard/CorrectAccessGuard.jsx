@@ -379,28 +379,14 @@ const CorrectAccessGuard = () => {
 
 	const addCurrentPhotoBookConfig = (photoBookConfigData) => {
 		const myData = photoBookConfigData?.meta?.config;
-		const parseJSON = JSON.parse(myData);
 
-		// if ((parseJSON?.product === "layflat") && (!parseJSON?.pages?.page1.sheet2)) {
-		// 	const pagesList = convertToArray(parseJSON?.pages);
-		// 	const lastPageId = pagesList?.[pagesList?.length - 1]?.id;
+		const pattern = /<span[^>]*font-family:HelveticaLight[^>]*>[\s\u200b]*<\/span>/gi;
 
-		// 	parseJSON.pages.page1.sheet2 = {
-		// 		pageNo     : 2,
-		// 		layoutType : "",
-		// 		text       : "",
-		// 		photos     : { 0 : { id : "", url : "" } },
-		// 	};
+		const cleanedData = myData.replaceAll(pattern, (match) => {
+			return match.replace(/font-size:20px/g, "font-size:8px");
+		});
 
-		// 	if (!parseJSON?.pages[lastPageId].sheet2) {
-		// 		parseJSON.pages[lastPageId].sheet2 = {
-		// 			pageNo     : parseJSON.pages[lastPageId].sheet1.pageNo + 1,
-		// 			layoutType : "",
-		// 			text       : "",
-		// 			photos     : { 0 : { id : "", url : "" } },
-		// 		};
-		// 	}
-		// }
+		const parseJSON = JSON.parse(cleanedData);
 
 		dispatch(workSpaceSlice.actions.insertData({
 			...parseJSON,
