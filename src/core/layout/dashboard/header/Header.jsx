@@ -222,7 +222,7 @@ const Header = () => {
 
 		const link = document.createElement("a");
 		link.href = url;
-		link.download = "post_ids.txt";
+		link.download = `postIds${pagNo}.txt`;
 		link.style.display = "none";
 
 		document.body.appendChild(link);
@@ -396,7 +396,7 @@ const Header = () => {
 											radius={12}
 											size="xs"
 											color="darkCasaMatte"
-											onClick={() => getPostIdsEnd(2)}
+											onClick={() => getPostIdsEnd(3)}
 											disabled={false}
 										>
 											PostIdsEnd
