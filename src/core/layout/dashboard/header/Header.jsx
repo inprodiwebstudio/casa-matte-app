@@ -177,15 +177,15 @@ const Header = () => {
 		}
 	}, [historyChanges]);
 
-	const getPostIdsEnd = async () => {
+	const getPostIdsEnd = async (pageNo) => {
 		try {
-			const listPagesPostIds = await getPostIds({ module : `wp-json/wp/v2/photobook-2-0?per_page=100&page=${1}`}).unwrap();
+			const listPagesPostIds = await getPostIds({ module : `wp-json/wp/v2/photobook-2-0?per_page=100&page=${pageNo}`}).unwrap();
 
 			const endPostIds = listPagesPostIds.filter((postIdData) => postIdData?.meta?.status === "48");
 			const listOfPrintedPostIds = endPostIds.filter(postIdData => {
 				if (!postIdData?.meta?.fecha_de_termino || postIdData?.meta?.fecha_de_termino === "") return true;
 				const endDate = new Date(postIdData?.meta?.fecha_de_termino);
-				const maxDate = new Date("2025-12-29");
+				const maxDate = new Date("2025-12-15");
 				return endDate < maxDate;
 			});
 
@@ -204,7 +204,7 @@ const Header = () => {
 			const listOfPostIds = listOfPostIdsWithUserNameData.map(postIdData => `${postIdData?.userName}/${postIdData?.id}`);
 
 			if (listOfPostIds.length > 0) {
-				downloadTxtFile(listOfPostIds);
+				downloadTxtFile(listOfPostIds, pageNo);
 			} else {
 				console.log("No hay datos para descargar");
 			}
@@ -213,7 +213,7 @@ const Header = () => {
 		}
 	};
 
-	const downloadTxtFile = (data) => {
+	const downloadTxtFile = (data, pagNo) => {
 		const textContent = data.join("\n");
 
 		const blob = new Blob([textContent], { type : "text/plain" });
@@ -396,7 +396,7 @@ const Header = () => {
 											radius={12}
 											size="xs"
 											color="darkCasaMatte"
-											onClick={() => getPostIdsEnd()}
+											onClick={() => getPostIdsEnd(1)}
 											disabled={false}
 										>
 											PostIdsEnd
