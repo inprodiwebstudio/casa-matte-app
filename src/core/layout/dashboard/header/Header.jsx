@@ -178,12 +178,10 @@ const Header = () => {
 	}, [historyChanges]);
 
 	const getPostIdsEnd = async () => {
-		const quantityMapPages = 5;
-		const newArrayPages = new Array(quantityMapPages).fill(0);
 		try {
-			const listPagesPostIds = await Promise.all(newArrayPages.map((_, index) => getPostIds({ module : `wp-json/wp/v2/photobook-2-0?per_page=100&page=${index + 1}`}).unwrap()));
+			const listPagesPostIds = await getPostIds({ module : `wp-json/wp/v2/photobook-2-0?per_page=100&page=${1}`}).unwrap();
 
-			const endPostIds = listPagesPostIds.flat().filter((postIdData) => postIdData?.meta?.status === "48");
+			const endPostIds = listPagesPostIds.filter((postIdData) => postIdData?.meta?.status === "48");
 			const listOfPrintedPostIds = endPostIds.filter(postIdData => {
 				if (!postIdData?.meta?.fecha_de_termino || postIdData?.meta?.fecha_de_termino === "") return true;
 				const endDate = new Date(postIdData?.meta?.fecha_de_termino);
