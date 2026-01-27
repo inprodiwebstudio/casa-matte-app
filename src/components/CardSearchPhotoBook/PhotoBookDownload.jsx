@@ -56,7 +56,11 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 	const handlerAndParseConfig = async (config) => {
 		const myData = config.replace(/\.(heic|webp)/g, ".jpg");
-		const parseJSON = JSON.parse(myData);
+		const pattern = /<span[^>]*font-family:HelveticaLight[^>]*>[\s\u200b]*<\/span>/gi;
+		const cleanedData = myData.replaceAll(pattern, (match) => {
+			return match.replace(/font-size:20px/g, "font-size:8px");
+		});
+		const parseJSON = JSON.parse(cleanedData);
 		const pagesList = convertToArray(parseJSON?.pages);
 		try {
 			const postTypeId = parseJSON?.postTypeId;
