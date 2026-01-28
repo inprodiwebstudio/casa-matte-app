@@ -483,6 +483,22 @@ const photoBooksConfing = {
 			},
 		},
 	},
+	couplescoffeetable : {
+		cuadrado : {
+			aspectRatio : [1, 1],
+			sizes       : {
+				mediano : false,
+				chico   : {
+					aspectRatio      : [1, 1],
+					layoutMods       : {...SquareSmallPremium},
+					frontLayouts     : {},
+					modsInDoublePage : [],
+					pdfSize          : [100, 100],
+				},
+				grande : false,
+			},
+		},
+	},
 	"civilypedida" : {
 		vertical : {
 			aspectRatio : [17, 22],
