@@ -27,7 +27,7 @@ const DropedMenu = () => {
 	const basePrice = useSelector((state) => state.workSpaceSlice.data?.basePrice, shallowEqual);
 	// const extraCost = useSelector((state) => state.workSpaceSlice.data?.extraCost, shallowEqual);
 
-	const listOfPages = convertToArray(dataPages.pages);
+	const listOfPages = convertToArray(dataPages.pages).filter((page) => page.id !== "FrontLayout");
 	const counterPages = () => counterSheets(listOfPages);
 
 	const handlerCost = () => {
