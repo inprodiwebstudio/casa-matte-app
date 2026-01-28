@@ -44,6 +44,15 @@ const Navbar = ({workSpaceSlice}) => {
 	};
 
 	const handlerAddPage = () => {
+		if ((photoBookProduct === "couplescoffeetablebook") && (counterPages() >= Number(maxRangePages))) {
+			openContextModal({
+				modal      : "noMorePages",
+				innerProps : {
+					quantity : 100,
+				},
+			});
+			return;
+		}
 		if ((photoBookProduct === "layflat") && (counterPages() >= 120)) {
 			openContextModal({
 				modal      : "noMorePages",
