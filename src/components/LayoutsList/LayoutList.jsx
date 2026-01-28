@@ -35,8 +35,17 @@ const LayoutList = () => {
 				setLayoutList(frontsLayouts);
 				return;
 			}
-			const listLayoutsOnePhoto = layouts.filter(layout => ((layout.numberPhotos === 1) && (layout.cat === filterLayouts.type)));
-			setLayoutList(listLayoutsOnePhoto);
+			let listOfLayouts = [];
+			if (filterLayouts?.type === "all") {
+				listOfLayouts = layouts.filter(layout => ((layout.numberPhotos === 1) && (layout.cat !== "portadas")));
+			}
+			if (filterLayouts?.type === "texto") {
+				listOfLayouts = layouts.filter(layout => layout.cat === "texto");
+			}
+			if ((filterLayouts?.type === "fotos") || (filterLayouts?.type === "fotosytexto")) {
+				listOfLayouts = layouts.filter(layout => (layout.numberPhotos === 1) && (layout.cat === filterLayouts?.type));
+			}
+			setLayoutList(listOfLayouts);
 			return;
 		}
 		if ((filterLayouts?.type === "all") && (filterLayouts?.photosQuantity?.value === "all")) {
