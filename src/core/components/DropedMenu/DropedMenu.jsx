@@ -79,10 +79,14 @@ const DropedMenu = () => {
 				<ScrollArea
 					h="100%"
 				>
-					<div className="menu-item">
-						<label>PASTA</label>
-						<MenuItem body={pasta ?? ""} />
-					</div>
+					{
+						(product !== "couplescoffeetablebook") && (
+							<div className="menu-item">
+								<label>PASTA</label>
+								<MenuItem body={pasta ?? ""} />
+							</div>
+						)
+					}
 					{
 						(coverData && (product !== "couplescoffeetablebook")) && (
 							<div className="menu-item">
