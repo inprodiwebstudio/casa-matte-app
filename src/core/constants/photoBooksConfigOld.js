@@ -483,7 +483,7 @@ const photoBooksConfing = {
 			},
 		},
 	},
-	couplescoffeetable : {
+	couplescoffeetablebook : {
 		cuadrado : {
 			aspectRatio : [1, 1],
 			sizes       : {
