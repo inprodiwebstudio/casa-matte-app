@@ -11,12 +11,14 @@ export const usePhotoBookPreset = () => {
 		const meta = productData?.meta;
 		const modified = productData?.modified;
 
-		//TODO : Validar para nuevo producto paginas y tamaño fijos.
-		const formatAndSize = getFormatAndSize(meta?.tamano);
-		const dimensions = getDimensions(meta?.tamano);
+		const isCoupleCoffeProduct = meta?.modelo === "COUPLES COFFEE TABLE BOOK";
+		const handlerSize = isCoupleCoffeProduct ? "Chico (21x21cm)" : meta?.tamano;
+
+		const formatAndSize = getFormatAndSize(handlerSize);
+		const dimensions = getDimensions(handlerSize);
 		const model = getModel(meta?.modelo);
 		const price = meta?.precio_total?.replace("$", "") ?? "0";
-		const numberOfPages = meta?.numero_de_paginas ? Number(meta?.numero_de_paginas) : 40;
+		const numberOfPages = meta?.numero_de_paginas ? Number(meta?.numero_de_paginas) : 100;
 
 		const cover = !meta.color_de_tela ? undefined : {
 			material : handlerMaterialAndColorLining(meta.color_de_tela).materialName,
