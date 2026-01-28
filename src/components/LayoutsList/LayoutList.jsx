@@ -35,7 +35,7 @@ const LayoutList = () => {
 				setLayoutList(frontsLayouts);
 				return;
 			}
-			const listLayoutsOnePhoto = layouts.filter(layout => layout.numberPhotos === 1);
+			const listLayoutsOnePhoto = layouts.filter(layout => ((layout.numberPhotos === 1) && (layout.cat === filterLayouts.type)));
 			setLayoutList(listLayoutsOnePhoto);
 			return;
 		}
