@@ -11,6 +11,7 @@ export const usePhotoBookPreset = () => {
 		const meta = productData?.meta;
 		const modified = productData?.modified;
 
+		//TODO : Validar para nuevo producto paginas y tamaño fijos.
 		const formatAndSize = getFormatAndSize(meta?.tamano);
 		const dimensions = getDimensions(meta?.tamano);
 		const model = getModel(meta?.modelo);
