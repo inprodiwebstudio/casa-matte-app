@@ -37,7 +37,7 @@ const LayoutList = () => {
 			}
 			let listOfLayouts = [];
 			if (filterLayouts?.type === "all") {
-				listOfLayouts = layouts.filter(layout => ((layout.numberPhotos === 1) && (layout.cat !== "portadas")));
+				listOfLayouts = layouts.filter(layout => (((layout.numberPhotos === 1) && (layout.cat !== "portadas") || (layout.cat === "texto"))));
 			}
 			if (filterLayouts?.type === "texto") {
 				listOfLayouts = layouts.filter(layout => layout.cat === "texto");
