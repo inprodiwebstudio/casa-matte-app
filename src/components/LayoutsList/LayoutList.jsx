@@ -28,16 +28,16 @@ const LayoutList = () => {
 	const layouts = convertToArray(objLayouts) ?? [];
 
 	useEffect(() => {
-		if (productPhotoBook === "couplescoffeetablebook") {
-			const isFrontsLayouts = layouts.filter(layout => layout.cat === "portadas");
-			if (isFrontsLayouts.length > 0) {
-				setLayoutList(isFrontsLayouts);
-				return;
-			}
-			const listLayoutsOnePhoto = layouts.filter(layout => layout.numberPhotos === 1);
-			setLayoutList(listLayoutsOnePhoto);
-			return;
-		}
+		// if (productPhotoBook === "couplescoffeetablebook") {
+		// 	const isFrontsLayouts = layouts.filter(layout => layout.cat === "portadas");
+		// 	if (isFrontsLayouts.length > 0) {
+		// 		setLayoutList(isFrontsLayouts);
+		// 		return;
+		// 	}
+		// 	const listLayoutsOnePhoto = layouts.filter(layout => layout.numberPhotos === 1);
+		// 	setLayoutList(listLayoutsOnePhoto);
+		// 	return;
+		// }
 		if ((filterLayouts?.type === "all") && (filterLayouts?.photosQuantity?.value === "all")) {
 			const noCoverList = layouts.filter(layout => layout.cat !== "portadas");
 			setLayoutList(noCoverList);

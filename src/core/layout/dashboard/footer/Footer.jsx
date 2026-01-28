@@ -141,7 +141,7 @@ const Footer = () => {
 			<div className="body-layouts-container">
 				<Stack>
 					{
-						((currentPageId !== "frontpage") && (currentFileterLayout.type !== "texto") && (productPhotoBook !== "couplescoffeetablebook")) && (
+						((currentPageId !== "frontpage") && (currentFileterLayout.type !== "texto")) && (
 							<div
 								style={{
 									marginTop : "15px",
