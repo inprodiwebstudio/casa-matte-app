@@ -18,6 +18,7 @@ const DropedMenu = () => {
 	const [ extraPages, setExtraPages ] = useState(0);
 
 	const loading = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
+	const product = useSelector((state) => state.workSpaceSlice.product, shallowEqual);
 	const coverData = useSelector((state) => state.workSpaceSlice.data.cover, shallowEqual);
 	const engravingData = useSelector((state) => state.workSpaceSlice.data.engraving, shallowEqual);
 	const pasta = useSelector((state) => state.workSpaceSlice.data.pasta, shallowEqual);
@@ -83,7 +84,7 @@ const DropedMenu = () => {
 						<MenuItem body={pasta ?? ""} />
 					</div>
 					{
-						coverData && (
+						(coverData && (product !== "couplescoffeetablebook")) && (
 							<div className="menu-item">
 								<label>COLOR DE PORTADA</label>
 								<ColorPickerCover />
@@ -91,7 +92,7 @@ const DropedMenu = () => {
 						)
 					}
 					{
-						engravingData && (
+						(engravingData && (product !== "couplescoffeetablebook")) && (
 							<div
 								className="menu-item"
 								style={{
