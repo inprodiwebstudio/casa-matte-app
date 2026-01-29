@@ -21,7 +21,7 @@ export const usePhotoBookPreset = () => {
 		const numberOfPages = meta?.numero_de_paginas ? Number(meta?.numero_de_paginas) : 100;
 
 		const cover = !meta.color_de_tela ? undefined : {
-			material : handlerMaterialAndColorLining(meta.color_de_tela).materialName,
+			material : isCoupleCoffeProduct ? "COUPLE" : handlerMaterialAndColorLining(meta.color_de_tela).materialName,
 			color    : handlerMaterialAndColorLining(meta.color_de_tela).colorName,
 		};
 

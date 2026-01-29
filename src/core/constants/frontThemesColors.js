@@ -261,6 +261,14 @@ const frontThemesTextures = {
 			color      : "#29447D",
 			textureUrl : telaTexture,
 		},
+		Crema : {
+			color      : "#D3CEC4",
+			textureUrl : telaTexture,
+		},
+		Vino : {
+			color      : "#5C292B",
+			textureUrl : telaTexture,
+		},
 	},
 	"PIEL VEGANA" : {
 		Marfil : {
