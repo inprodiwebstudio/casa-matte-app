@@ -248,6 +248,20 @@ const frontThemesTextures = {
 			textureUrl : curlPielTexture,
 		},
 	},
+	COUPLE : {
+		"Naranja Rojizo" : {
+			color      : "#C43A1E",
+			textureUrl : telaTexture,
+		},
+		"Rosa Claro" : {
+			color      : "#C98A96",
+			textureUrl : telaTexture,
+		},
+		"Azul Rey" : {
+			color      : "#29447D",
+			textureUrl : telaTexture,
+		},
+	},
 	"PIEL VEGANA" : {
 		Marfil : {
 			color      : "#A79E8C",
