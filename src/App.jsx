@@ -27,8 +27,9 @@ export default function App() {
 			if (typeof window === "undefined") return;
 
 			const width = window.innerWidth;
+			console.log("width", width);
 
-			setIsCompatible(width >= 1300);
+			setIsCompatible(width >= 1030);
 		};
 
 		checkCompatibility();
