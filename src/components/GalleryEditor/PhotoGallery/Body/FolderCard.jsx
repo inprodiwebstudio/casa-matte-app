@@ -61,7 +61,7 @@ const FolderCard = ({
 				},
 			});
 			const { data } = resp;
-			const listOfIdsDeleted = data?.idsDeletedImages ?? [];
+			const listOfIdsDeleted = data?.imagesDeleted ?? [];
 			dispatch(workSpaceSlice.actions.removePhotosDeleted({imagesIds : listOfIdsDeleted}));
 			dispatch(gallerySlice.actions.setLoadingMutationGallery(false));
 			dispatch(gallerySlice.actions.deleteDataGallery({
