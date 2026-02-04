@@ -1,21 +1,25 @@
-import { useState }                  from "react";
-import BodyConfirm                   from "./BodyConfirm";
-import { shallowEqual, useSelector } from "react-redux";
-import { genericApi }                from "store/api/genericApi";
-import { useExtraPriceHandler }      from "helpers/Hooks/useExtraPriceHandler";
-import axios                         from "axios";
-import { PostingConfig }             from "Notifications";
-import { closeAllModals }            from "@mantine/modals";
-import { dayjs, isValidArray }       from "helpers";
-import { inCompletePages }           from "./ConfirmationToPrint.helpers";
-import IncompletedPagesBody          from "./IncompletedPagesBody";
-import { useHandlerTypeConfigBooks } from "helpers/Hooks/useHandlerTypeConfigBooks";
+import { useEffect, useState }                    from "react";
+import BodyConfirm                                from "./BodyConfirm";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { genericApi }                             from "store/api/genericApi";
+import { useExtraPriceHandler }                   from "helpers/Hooks/useExtraPriceHandler";
+import axios                                      from "axios";
+import { PostingConfig }                          from "Notifications";
+import { closeAllModals }                         from "@mantine/modals";
+import { dayjs, isValidArray, urlImagesInPages }  from "helpers";
+import { inCompletePages }                        from "./ConfirmationToPrint.helpers";
+import IncompletedPagesBody                       from "./IncompletedPagesBody";
+import { useHandlerTypeConfigBooks }              from "helpers/Hooks/useHandlerTypeConfigBooks";
+import handlerErrorImages                         from "helpers/Functions/handlerErrorImages";
+import handlerRemoveErrorImgs                     from "helpers/Functions/handlerRemoveErrorImgs";
+import { workSpaceSlice }                         from "store/Slices";
 
 
 const ConfirmationToPrint = ({ innerProps }) => {
 	const { postId } = innerProps;
 	const { handlerExtraCost } = useExtraPriceHandler();
 	const photoBooksConfig = useHandlerTypeConfigBooks();
+	const dispatch = useDispatch();
 
 	const pages = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
 	const product = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
@@ -23,6 +27,10 @@ const ConfirmationToPrint = ({ innerProps }) => {
 	const format = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
 	const userId = useSelector((state) => state.authSlice?.user?.userId, shallowEqual);
 	const userEmail = useSelector((state) => state.authSlice?.user?.email, shallowEqual);
+
+	const [ loadingValidateImgs, setLoadingValidateImgs ] = useState(false);
+
+	const [ validatedImages, setValidatedImages] = useState(false);
 
 	const [ dataMutation, { isLoading } ] = genericApi.useSubmitDataMutation();
 
@@ -32,12 +40,26 @@ const ConfirmationToPrint = ({ innerProps }) => {
 
 	const layoutMods = photoBooksConfig[product][format]?.sizes?.[size]?.layoutMods;
 
+	const handlerValidateImages = async () => {
+		setLoadingValidateImgs(true);
+		try {
+			const listUrlImages = urlImagesInPages(pages);
+			const errorImages = await handlerErrorImages(listUrlImages);
+			const newPagesRemovedImgs = handlerRemoveErrorImgs(errorImages, pages);
+			dispatch(workSpaceSlice.actions.insertPages(newPagesRemovedImgs));
+			setLoadingValidateImgs(false);
+			setValidatedImages(true);
+		} catch (error) {
+			setLoadingValidateImgs(false);
+			console.log(error);
+		}
+	};
+
 	const handlerSubmit = async () => {
-		// const listUrlImages = urlImagesInPages(pages);
-		// const errorImages = await handlerErrorImages(listUrlImages);
-		// const newPagesRemovedImgs = handlerRemoveErrorImgs(errorImages, pages);
-		// console.log(newPagesRemovedImgs);
-		// return;
+		const listUrlImages = urlImagesInPages(pages);
+		const errorImages = await handlerErrorImages(listUrlImages);
+		const newPagesRemovedImgs = handlerRemoveErrorImgs(errorImages, pages);
+		dispatch(workSpaceSlice.actions.insertPages(newPagesRemovedImgs));
 		if (
 			isValidArray(
 				inCompletePages(Object.values(pages), layoutMods)
@@ -50,7 +72,7 @@ const ConfirmationToPrint = ({ innerProps }) => {
 			setIsLoadingOrder(true);
 			try {
 				const responseCreateOrder = await axios.post(
-					"https://casamatte.com/wp-json/wc/v3/orders",
+					"https://casamatte.wip-inprodi.com/wp-json/wc/v3/orders",
 					{
 						payment_method       : "bacs",
 						payment_method_title : "Direct Bank Transfer",
@@ -126,12 +148,20 @@ const ConfirmationToPrint = ({ innerProps }) => {
 		window.location.reload();
 	};
 
+	useEffect(() => {
+		if (validatedImages) {
+			handlerSubmit();
+		}
+	}, [validatedImages]);
+
 	return (
 		<>
 			{
 				!isValidArray(notCompletedPages) ?
 					<BodyConfirm
-						onSubmit={handlerSubmit}
+						validatedImages={validatedImages}
+						loadingValidateImgs={loadingValidateImgs}
+						onSubmit={handlerValidateImages}
 						isLoading={isLoading || isLoadingOrder}
 					/> : <IncompletedPagesBody pages={notCompletedPages} />
 			}

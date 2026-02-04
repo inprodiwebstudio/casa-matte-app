@@ -5,9 +5,18 @@ const handlerRemoveErrorImgs = (errorImages, pages) => {
 	const clonePages = convertToObject(listOfPages);
 
 	errorImages.forEach((errImage) => {
-		clonePages[errImage.pageId][errImage.sheetNo].photos[errImage.photoNo] = {
-			url : "",
-			id  : "",
+		clonePages[errImage.pageId] = {
+			...clonePages[errImage.pageId],
+			[errImage.sheetNo] : {
+				...clonePages[errImage.pageId]?.[errImage.sheetNo],
+				photos : {
+					...clonePages[errImage.pageId]?.[errImage.sheetNo]?.photos,
+					[errImage.photoNo] : {
+						id  : "",
+						url : "",
+					},
+				},
+			},
 		};
 	});
 
