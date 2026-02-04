@@ -1,7 +1,6 @@
 import {Stack, Flex, Group } from "@mantine/core";
 import ImgLayout             from "components/LayoutHandler/ImgLayout";
-import TextFix           from "components/LayoutHandler/TextFix";
-import Text                  from "components/LayoutHandler/Text";
+import TextFix               from "components/LayoutHandler/TextFix";
 import { TextShell }         from "core/components";
 import { textInsertion }     from "helpers";
 //Own components
@@ -64,7 +63,6 @@ const Mod56 = ({
 				w="100%"
 				h="calc(100% / 2 - 0.05em)"
 				spacing="0.1em"
-				grow
 			>
 				<Stack h="100%" w="calc(100% / 2 - 0.05em)">
 					<ImgLayout
