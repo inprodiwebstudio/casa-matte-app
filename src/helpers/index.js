@@ -16,7 +16,7 @@ export { default as getMainLettersFromName }     from "./getMainLettersFromName"
 export { default as uploadImageKitIo }           from "./uploadImageKitIo";
 export { default as resizerImage }               from "./resizerImage";
 export { default as resizerQualityImage }        from "./resizerQualityImage";
-export { default as filterTwoArrays }            from "./filterTwoArrays";
+export { default as filterTwoArrays }             from "./filterTwoArrays";
 export { default as PrivateRoute }               from "./PrivateRoute.jsx";
 export { default as coordinatesPhotoInWorkSpce } from "./coordinatesPhotoInWorkSpce";
 export { default as textToImage }                from "./textToImage";
@@ -24,4 +24,5 @@ export { default as snapShotCover }              from "./snapShotCover";
 export {  default as imgUrlPdf }                 from "./imgUrlPdf";
 export {  default as getParamURL }               from "./getParamURL";
 export {  default as heicToPng }                 from "./heicTopng";
+export {  default as urlImagesInPages }          from "./urlImagesInPages";
 

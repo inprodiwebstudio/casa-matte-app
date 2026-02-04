@@ -33,6 +33,11 @@ const ConfirmationToPrint = ({ innerProps }) => {
 	const layoutMods = photoBooksConfig[product][format]?.sizes?.[size]?.layoutMods;
 
 	const handlerSubmit = async () => {
+		// const listUrlImages = urlImagesInPages(pages);
+		// const errorImages = await handlerErrorImages(listUrlImages);
+		// const newPagesRemovedImgs = handlerRemoveErrorImgs(errorImages, pages);
+		// console.log(newPagesRemovedImgs);
+		// return;
 		if (
 			isValidArray(
 				inCompletePages(Object.values(pages), layoutMods)
