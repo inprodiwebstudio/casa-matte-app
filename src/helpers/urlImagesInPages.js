@@ -12,7 +12,9 @@ const urlImagesInPages = (pages) => {
 		...(page.sheet2 && {
 			sheet2 : {
 				...page.sheet2,
-				photos : Object.values(page.sheet2.photos),
+				...(page.sheet2.photos ? {
+					photos : Object.values(page.sheet2.photos),
+				} : {}),
 			},
 		}),
 	}));
@@ -20,7 +22,7 @@ const urlImagesInPages = (pages) => {
 	const imagesInPages = [];
 
 	const susbstractImagesInSheet = (sheetData) => {
-		const listOfPhotos = sheetData.photos;
+		const listOfPhotos = sheetData?.photos ?? [];
 		if (listOfPages.length <= 0) {
 			return [];
 		}
