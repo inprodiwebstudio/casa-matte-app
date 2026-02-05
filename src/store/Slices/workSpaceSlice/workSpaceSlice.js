@@ -225,6 +225,129 @@ export const workSpaceSlice = createSlice({
 		changeStatusViewPage : (state, {payload}) => {
 			state.statusViewPage = payload;
 		},
+		reorderPagesCyclically : (state, { payload }) => {
+			const { oldIndex, newIndex, moveForward } = payload;
+
+			// Crear copia profunda del estado actual
+			const currentPages = JSON.parse(JSON.stringify(state.data.pages));
+
+			// Paso 1: Obtener todos los contenidos en orden ACTUAL según pageNo
+			// Primero, necesitamos mapear todos los contenidos existentes por su pageNo
+			const contentsByPageNo = {};
+
+			// Recorrer todas las páginas para construir un mapa de contenidos por pageNo
+			Object.values(currentPages).forEach(pageData => {
+				Object.entries(pageData).forEach(([key, sheetData]) => {
+					if (key.startsWith("sheet") && sheetData.pageNo) {
+						contentsByPageNo[sheetData.pageNo] = {
+							layoutType : sheetData.layoutType || "",
+							photos     : sheetData.photos || {},
+							text       : sheetData.text || {},
+							// Guardamos también la referencia a dónde pertenece
+							pageId     : pageData.id,
+							sheetId    : key,
+						};
+					}
+				});
+			});
+
+			// Paso 2: Crear array de contenidos en orden de pageNo (1, 2, 3, ...)
+			const totalPages = Object.keys(contentsByPageNo).length;
+			const currentContents = [];
+			for (let i = 1; i <= totalPages; i++) {
+				if (contentsByPageNo[i]) {
+					currentContents.push({
+						...contentsByPageNo[i],
+						// pageNo real (posición fija)
+						pageNo : i,
+					});
+				}
+			}
+
+			// Paso 3: Aplicar desplazamiento cíclico solo a los contenidos
+			let reorderedContents;
+
+			if (moveForward) {
+				// Movimiento hacia adelante
+				reorderedContents = [...currentContents];
+				const movedContent = reorderedContents[oldIndex];
+
+				// Desplazar contenidos intermedios hacia atrás
+				for (let i = oldIndex; i < newIndex; i++) {
+					reorderedContents[i] = reorderedContents[i + 1];
+				}
+
+				// Colocar el contenido movido en la nueva posición
+				reorderedContents[newIndex] = movedContent;
+			} else {
+				// Movimiento hacia atrás
+				reorderedContents = [...currentContents];
+				const movedContent = reorderedContents[oldIndex];
+
+				// Desplazar contenidos intermedios hacia adelante
+				for (let i = oldIndex; i > newIndex; i--) {
+					reorderedContents[i] = reorderedContents[i - 1];
+				}
+
+				// Colocar el contenido movido en la nueva posición
+				reorderedContents[newIndex] = movedContent;
+			}
+
+			// Paso 4: IMPORTANTE - pageNo debe mantenerse fijo
+			// Cada posición en el array tiene un pageNo fijo que NO cambia
+			// Solo los contenidos se mueven entre estas posiciones fijas
+
+			// Paso 5: Reconstruir el estado manteniendo pageNo fijo
+			const newPages = JSON.parse(JSON.stringify(currentPages));
+
+			// Primero, limpiar todos los contenidos (manteniendo estructura y pageNo)
+			Object.values(newPages).forEach(pageData => {
+				Object.keys(pageData).forEach(key => {
+					if (key.startsWith("sheet") && pageData[key]) {
+						// Mantener el pageNo original, limpiar contenido
+						pageData[key].layoutType = "";
+						pageData[key].photos = {};
+						pageData[key].text = {};
+						// pageNo se mantiene igual
+					}
+				});
+			});
+
+			// Paso 6: Asignar los contenidos desplazados a sus nuevas posiciones (pageNo fijo)
+			reorderedContents.forEach((content, arrayIndex) => {
+				// El arrayIndex corresponde al pageNo fijo (arrayIndex + 1)
+				const targetPageNo = arrayIndex + 1;
+
+				// Encontrar qué página/sheet tiene este pageNo en la estructura original
+				let targetPageId = null;
+				let targetSheetId = null;
+
+				// Buscar en la estructura original qué página/sheet tiene este pageNo
+				Object.values(currentPages).forEach(pageData => {
+					Object.entries(pageData).forEach(([key, sheetData]) => {
+						if (key.startsWith("sheet") && sheetData.pageNo === targetPageNo) {
+							targetPageId = pageData.id;
+							targetSheetId = key;
+						}
+					});
+				});
+
+				// Asignar el contenido desplazado a esta posición fija
+				if (targetPageId && targetSheetId && newPages[targetPageId]) {
+					newPages[targetPageId][targetSheetId] = {
+						...newPages[targetPageId][targetSheetId],
+						layoutType : content.layoutType,
+						photos     : content.photos,
+						text       : content.text,
+						// pageNo se mantiene fijo según la posición física
+						pageNo     : targetPageNo,
+					};
+				}
+			});
+
+			// Paso 7: Actualizar el estado
+			state.data.pages = newPages;
+		},
 		changePageContainer : (state, {payload}) => {
 			const { originPageKey, destinationPageKey } = payload;
 

@@ -92,27 +92,71 @@ const ManagePagesDataGrid = () => {
 
 		if (active?.id && over?.id && active.id !== over.id) {
 			setSpreadsState((prevSpreads) => {
+			// Obtener páginas planas del estado actual
 				const flatPages = prevSpreads.flatMap(spread => spread.pages);
+
+				// Encontrar índices de origen y destino
 				const oldIndex = flatPages.findIndex((page) => page.id === active.id);
 				const newIndex = flatPages.findIndex((page) => page.id === over.id);
 
+				if (oldIndex === -1 || newIndex === -1) return prevSpreads;
+
+				// Determinar dirección
+				const moveForward = oldIndex < newIndex;
+
+				// Crear array con toda la información de páginas
+				const allPageInfo = flatPages.map(page => ({
+					pageId  : page.spreadPageId,
+					sheetId : page.sheetId,
+					id      : page.id,
+					pageNo  : page.pageNo,
+				}));
+
+				// Enviar a Redux para el desplazamiento cíclico
+				dispatch(workSpaceSlice.actions.reorderPagesCyclically({
+					oldIndex,
+					newIndex,
+					pageOrder : allPageInfo,
+					moveForward,
+				}));
+
+				// Actualizar el estado local para reflejar los cambios inmediatamente
 				const newFlatPages = [...flatPages];
-				[newFlatPages[oldIndex], newFlatPages[newIndex]] = [newFlatPages[newIndex], newFlatPages[oldIndex]];
 
-				const oldDataPage = newFlatPages[newIndex];
-				const newDataPage = newFlatPages[oldIndex];
+				if (moveForward) {
+				// Movimiento hacia adelante
+					const movedPage = { ...newFlatPages[oldIndex] };
 
-				const originPageKey = `${oldDataPage.spreadPageId}-${oldDataPage.sheetId}`;
-				const destinationPageKey = `${newDataPage.spreadPageId}-${newDataPage.sheetId}`;
+					// Desplazar páginas intermedias hacia atrás
+					for (let i = oldIndex; i < newIndex; i++) {
+						newFlatPages[i] = { ...newFlatPages[i + 1] };
+						newFlatPages[i].pageNo = i + 1;
+					}
 
+					// Colocar la página movida en la nueva posición
+					newFlatPages[newIndex] = movedPage;
+					newFlatPages[newIndex].pageNo = newIndex + 1;
+				} else {
+				// Movimiento hacia atrás
+					const movedPage = { ...newFlatPages[oldIndex] };
 
-				dispatch(workSpaceSlice.actions.changePageContainer({originPageKey, destinationPageKey}));
-				// const newDataPage = newFlatPages[newIndex];
+					// Desplazar páginas intermedias hacia adelante
+					for (let i = oldIndex; i > newIndex; i--) {
+						newFlatPages[i] = { ...newFlatPages[i - 1] };
+						newFlatPages[i].pageNo = i + 1;
+					}
 
-				newFlatPages.forEach((page, idx) => {
-					page.pageNo = idx + 1;
+					// Colocar la página movida en la nueva posición
+					newFlatPages[newIndex] = movedPage;
+					newFlatPages[newIndex].pageNo = newIndex + 1;
+				}
+
+				// Actualizar los IDs para mantener la consistencia
+				newFlatPages.forEach((page, index) => {
+					page.id = `${page.spreadPageId}-${page.sheetId}`;
 				});
 
+				// Regresar a la estructura de spreads
 				return groupPagesIntoSpreads(newFlatPages);
 			});
 		}
