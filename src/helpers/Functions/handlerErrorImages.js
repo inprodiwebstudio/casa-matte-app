@@ -1,6 +1,10 @@
 const handlerErrorImages = async (imagesInPages) => {
 	const errorImages = [];
 
+	const sanitizeUrl = (url = "") => {
+		return url.replace("/w_1920/q_30/v1", "/w_20/v1");
+	};
+
 	const checkImage = (url) => {
 		return new Promise((resolve) => {
 			const img = new Image();
@@ -23,11 +27,19 @@ const handlerErrorImages = async (imagesInPages) => {
 
 	for (let i = 0; i < imagesInPages.length; i++) {
 		const image = imagesInPages[i];
-		const {status} = await checkImage(image.url);
+
+		const sanityUrl = sanitizeUrl(image.url);
+		console.log(sanityUrl);
+		const { status } = await checkImage(sanityUrl);
+
 		if (status === "error") {
-			errorImages.push(image);
+			errorImages.push({
+				...image,
+				url : sanityUrl,
+			});
 		}
 	}
+
 	return errorImages;
 };
 

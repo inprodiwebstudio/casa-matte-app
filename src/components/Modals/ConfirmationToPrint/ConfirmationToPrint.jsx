@@ -10,9 +10,9 @@ import { dayjs, isValidArray, urlImagesInPages }  from "helpers";
 import { inCompletePages }                        from "./ConfirmationToPrint.helpers";
 import IncompletedPagesBody                       from "./IncompletedPagesBody";
 import { useHandlerTypeConfigBooks }              from "helpers/Hooks/useHandlerTypeConfigBooks";
-import handlerErrorImages                         from "helpers/Functions/handlerErrorImages";
 import handlerRemoveErrorImgs                     from "helpers/Functions/handlerRemoveErrorImgs";
 import { workSpaceSlice }                         from "store/Slices";
+import { apiImageKit }                            from "store/api/imageKitApi";
 
 
 const ConfirmationToPrint = ({ innerProps }) => {
@@ -20,6 +20,8 @@ const ConfirmationToPrint = ({ innerProps }) => {
 	const { handlerExtraCost } = useExtraPriceHandler();
 	const photoBooksConfig = useHandlerTypeConfigBooks();
 	const dispatch = useDispatch();
+
+	const [errImgs] = apiImageKit.useCheckImagesMutation();
 
 	const pages = useSelector((state) => state.workSpaceSlice.data?.pages, shallowEqual);
 	const product = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
@@ -44,22 +46,18 @@ const ConfirmationToPrint = ({ innerProps }) => {
 		setLoadingValidateImgs(true);
 		try {
 			const listUrlImages = urlImagesInPages(pages);
-			const errorImages = await handlerErrorImages(listUrlImages);
-			const newPagesRemovedImgs = handlerRemoveErrorImgs(errorImages, pages);
+			const errorImages = await errImgs({data : listUrlImages});
+			const dataErrImgs = errorImages?.data;
+			const newPagesRemovedImgs = handlerRemoveErrorImgs(dataErrImgs, pages);
 			dispatch(workSpaceSlice.actions.insertPages(newPagesRemovedImgs));
 			setLoadingValidateImgs(false);
 			setValidatedImages(true);
 		} catch (error) {
 			setLoadingValidateImgs(false);
-			console.log(error);
 		}
 	};
 
 	const handlerSubmit = async () => {
-		const listUrlImages = urlImagesInPages(pages);
-		const errorImages = await handlerErrorImages(listUrlImages);
-		const newPagesRemovedImgs = handlerRemoveErrorImgs(errorImages, pages);
-		dispatch(workSpaceSlice.actions.insertPages(newPagesRemovedImgs));
 		if (
 			isValidArray(
 				inCompletePages(Object.values(pages), layoutMods)

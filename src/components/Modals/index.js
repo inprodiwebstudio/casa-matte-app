@@ -14,6 +14,7 @@ import DeletePageConfirm        from "./DeletePageConfirm";
 import QrGeneratorPhotos        from "./QrGeneratorPhotos";
 import RefreshNotification      from "./RefreshNotification";
 import DisclaimerHiddenPhoto    from "./DisclaimerHiddenPhoto";
+import ValidateImages           from "./ValidateImages";
 
 
 const modals = {
@@ -32,6 +33,7 @@ const modals = {
 	qrGeneratorPhotos        : QrGeneratorPhotos,
 	refreshNotification      : RefreshNotification,
 	disclaimerHiddenPhoto    : DisclaimerHiddenPhoto,
+	validateImages           : ValidateImages,
 };
 
 const modalsConfig = {

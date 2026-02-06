@@ -9,18 +9,16 @@ import { genericApi } from "store/api/genericApi";
 
 const { useLazyGetDataQuery } = genericApi;
 
-import "./Header.scss";
-//Mantine
-// import { openContextModal } from "@mantine/modals";
-
 //Own components
-import { useParams }                     from "react-router";
-import { PostingConfig }                 from "Notifications";
-import { dayjs }                         from "helpers";
-import { openContextModal }              from "@mantine/modals";
-import { currentConfigPhotoBookContext } from "contexts/configContext";
-import { RedoArrow }                     from "Resources/icons";
+import { useParams }                      from "react-router";
+import { PostingConfig }                  from "Notifications";
+import { IoSaveOutline, IoImagesOutline } from "react-icons/io5";
+import { dayjs }                          from "helpers";
+import { openContextModal }               from "@mantine/modals";
+import { currentConfigPhotoBookContext }  from "contexts/configContext";
+import { RedoArrow }                      from "Resources/icons";
 
+import "./Header.scss";
 
 const Header = () => {
 	const dispatch = useDispatch();
@@ -57,13 +55,9 @@ const Header = () => {
 
 	const availableDevButton = (userName && userEmail) && ((userName === "joab27") && (userEmail === "dev@casamatte.com"));
 
-	const isAdminAccount = (userName === "casamatteadmin") && (userEmail === "info@casamatte.com");
-	const isDevAccount = (userName === "demo") && (userEmail === "demo44@demo.com");
-
 	const isAvailableUndo = historyChanges[currentIndexHistory - 1];
 	const isAvailableRedo = historyChanges[currentIndexHistory + 1];
 
-	const handlerShowTestPdf = isAdminAccount || isDevAccount;
 
 	const handleUndo = () => {
 		if (historyChanges[currentIndexHistory - 1]) {
@@ -121,6 +115,13 @@ const Header = () => {
 		} catch (error) {
 			PostingConfig["post"][500]();
 		}
+	};
+
+	const handlerOpenValidateImages = () => {
+		openContextModal({
+			modal      : "validateImages",
+			innerProps : {},
+		});
 	};
 
 	const handlerPrintClick = () => {
@@ -337,19 +338,6 @@ const Header = () => {
 								<Button
 									radius={12}
 									size="xs"
-									loading={dataMutationResult.isLoading}
-									color="gray"
-									onClick={() => submitData()}
-									sx={{
-										fontFamily : "Helvetica",
-										fontWeight : "400",
-									}}
-								>
-									{dataMutationResult.isLoading ? "GUARDANDO..." : "GUARDAR"}
-								</Button>
-								<Button
-									radius={12}
-									size="xs"
 									color="darkCasaMatte"
 									onClick={() => handlerPrintClick()}
 									disabled={isEndBook ? true : false}
@@ -365,31 +353,37 @@ const Header = () => {
 										Imprimir
 									</Text>
 								</Button>
-								{
-									(handlerShowTestPdf) && (
-										<Button
-											radius={12}
-											size="xs"
-											color="darkCasaMatte"
-											onClick={() => openContextModal({
-												modal      : "testPdf",
-												innerProps : {},
-											})}
-											disabled={false}
-											loading={isLoadingWorspaceData}
-										>
-											<Text
-												weight={400}
-												color="whiteCasaMatte"
-												sx={{
-													fontFamily : "Helvetica",
-												}}
-											>
-												TestPdf
-											</Text>
-										</Button>
-									)
-								}
+								<Button
+									radius={12}
+									size="xs"
+									onClick={() => handlerOpenValidateImages()}
+									disabled={isEndBook ? true : false}
+									loading={isLoadingWorspaceData}
+									rightIcon={<IoImagesOutline size={18} color="gray" />}
+								>
+									<Text
+										weight={400}
+										sx={{
+											fontFamily : "Helvetica",
+										}}
+									>
+										Validar Fotos
+									</Text>
+								</Button>
+								<Button
+									radius={12}
+									size="xs"
+									loading={dataMutationResult.isLoading}
+									color="gray"
+									onClick={() => submitData()}
+									rightIcon={<IoSaveOutline size={18} />}
+									sx={{
+										fontFamily : "Helvetica",
+										fontWeight : "400",
+									}}
+								>
+									{dataMutationResult.isLoading ? "GUARDANDO..." : "GUARDAR"}
+								</Button>
 								{
 									availableDevButton && (
 										<Button

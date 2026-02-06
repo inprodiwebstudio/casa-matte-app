@@ -40,6 +40,17 @@ export const apiImageKit = createApi({
 			query        : ({params}) => `files/?${qs.stringify(params)}`,
 			providesTags : ["gallery"],
 		}),
+		checkImages : builder.mutation({
+			query({data}) {
+				const body = data;
+				return {
+					url    : "check-assets",
+					method : "POST",
+					body,
+				};
+			},
+			invalidatesTags : [],
+		}),
 		deleteImages : builder.mutation({
 			query(imagesPulicIds) {
 				const body = imagesPulicIds;

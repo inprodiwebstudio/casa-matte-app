@@ -28,8 +28,8 @@ export const useExtraPriceHandler = () => {
 	useEffect(() => {
 		if (productType === "layflat") {
 			const myCounterPages = parseFilteredListPages.length;
-			if (myCounterPages > maxRangePages) {
-				setExtraPages(myCounterPages - Number(maxRangePages));
+			if (myCounterPages > (maxRangePages / 2)) {
+				setExtraPages(myCounterPages - Number(maxRangePages / 2));
 				return;
 			}
 			setExtraPages(0);
