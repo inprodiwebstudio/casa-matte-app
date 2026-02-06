@@ -357,7 +357,6 @@ const Header = () => {
 									radius={12}
 									size="xs"
 									onClick={() => handlerOpenValidateImages()}
-									disabled={isEndBook ? true : false}
 									loading={isLoadingWorspaceData}
 									rightIcon={<IoImagesOutline size={18} color="gray" />}
 								>
