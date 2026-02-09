@@ -47,7 +47,7 @@ const Header = () => {
 	const userEmail = useSelector((state) => state.authSlice?.user?.email, shallowEqual);
 	const isLoadingWorspaceData = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
 	const statusViewPage = useSelector((state) => state.workSpaceSlice?.statusViewPage, shallowEqual);
-	// const statusProject = useSelector((state) => state.workSpaceSlice?.data?.status, shallowEqual);
+	const statusProject = useSelector((state) => state.workSpaceSlice?.data?.status, shallowEqual);
 
 	const isPreviewActive = statusViewPage === "preview";
 
@@ -136,7 +136,7 @@ const Header = () => {
 		});
 	};
 
-	// const isEndBook = (statusProject === "48");
+	const isEndBook = (statusProject === "48") || (userName !== "joab27");
 
 	useEffect(() => {
 		if (lastModified) {
@@ -340,7 +340,7 @@ const Header = () => {
 									size="xs"
 									color="darkCasaMatte"
 									onClick={() => handlerPrintClick()}
-									disabled={true}
+									disabled={isEndBook}
 									loading={isLoadingWorspaceData}
 								>
 									<Text
