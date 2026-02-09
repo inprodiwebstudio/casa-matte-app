@@ -136,7 +136,7 @@ const Header = () => {
 		});
 	};
 
-	const isEndBook = (statusProject === "48") || (userName !== "joab27");
+	const isEndBook = (statusProject === "48");
 
 	useEffect(() => {
 		if (lastModified) {
