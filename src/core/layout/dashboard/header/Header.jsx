@@ -47,7 +47,7 @@ const Header = () => {
 	const userEmail = useSelector((state) => state.authSlice?.user?.email, shallowEqual);
 	const isLoadingWorspaceData = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
 	const statusViewPage = useSelector((state) => state.workSpaceSlice?.statusViewPage, shallowEqual);
-	const statusProject = useSelector((state) => state.workSpaceSlice?.data?.status, shallowEqual);
+	// const statusProject = useSelector((state) => state.workSpaceSlice?.data?.status, shallowEqual);
 
 	const isPreviewActive = statusViewPage === "preview";
 
@@ -136,7 +136,7 @@ const Header = () => {
 		});
 	};
 
-	const isEndBook = (statusProject === "48");
+	// const isEndBook = (statusProject === "48");
 
 	useEffect(() => {
 		if (lastModified) {
