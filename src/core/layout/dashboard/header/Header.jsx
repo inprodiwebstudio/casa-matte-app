@@ -340,7 +340,7 @@ const Header = () => {
 									size="xs"
 									color="darkCasaMatte"
 									onClick={() => handlerPrintClick()}
-									disabled={isEndBook ? true : false}
+									disabled={true}
 									loading={isLoadingWorspaceData}
 								>
 									<Text
