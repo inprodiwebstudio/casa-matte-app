@@ -10,13 +10,13 @@ import { genericApi } from "store/api/genericApi";
 const { useLazyGetDataQuery } = genericApi;
 
 //Own components
-import { useParams }                      from "react-router";
-import { PostingConfig }                  from "Notifications";
-import { IoSaveOutline, IoImagesOutline } from "react-icons/io5";
-import { dayjs }                          from "helpers";
-import { openContextModal }               from "@mantine/modals";
-import { currentConfigPhotoBookContext }  from "contexts/configContext";
-import { RedoArrow }                      from "Resources/icons";
+import { useParams }                     from "react-router";
+import { PostingConfig }                 from "Notifications";
+import { IoSaveOutline }                 from "react-icons/io5";
+import { dayjs }                         from "helpers";
+import { openContextModal }              from "@mantine/modals";
+import { currentConfigPhotoBookContext } from "contexts/configContext";
+import { RedoArrow }                     from "Resources/icons";
 
 import "./Header.scss";
 
@@ -117,12 +117,12 @@ const Header = () => {
 		}
 	};
 
-	const handlerOpenValidateImages = () => {
-		openContextModal({
-			modal      : "validateImages",
-			innerProps : {},
-		});
-	};
+	// const handlerOpenValidateImages = () => {
+	// 	openContextModal({
+	// 		modal      : "validateImages",
+	// 		innerProps : {},
+	// 	});
+	// };
 
 	const handlerPrintClick = () => {
 		dispatch(workSpaceSlice.actions.updatePageContent({
@@ -353,7 +353,7 @@ const Header = () => {
 										Imprimir
 									</Text>
 								</Button>
-								<Button
+								{/* <Button
 									radius={12}
 									size="xs"
 									onClick={() => handlerOpenValidateImages()}
@@ -368,7 +368,7 @@ const Header = () => {
 									>
 										Validar Fotos
 									</Text>
-								</Button>
+								</Button> */}
 								<Button
 									radius={12}
 									size="xs"
