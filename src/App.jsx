@@ -37,7 +37,7 @@ export default function App() {
 
 		const handlePopState = (event) => {
 			event.preventDefault();
-			window.location.href = "https://casamatte.com/dashboard/";
+			window.location.href = "https://casamatte.wip-inprodi.com/dashboard/";
 		};
 
 		window.addEventListener("popstate", handlePopState);
