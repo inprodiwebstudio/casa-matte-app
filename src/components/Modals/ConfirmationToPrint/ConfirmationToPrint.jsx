@@ -157,9 +157,7 @@ const ConfirmationToPrint = ({ innerProps }) => {
 			{
 				!isValidArray(notCompletedPages) ?
 					<BodyConfirm
-						validatedImages={false}
-						loadingValidateImgs={false}
-						onSubmit={handlerSubmit()}
+						onSubmit={() => handlerSubmit()}
 						isLoading={isLoading || isLoadingOrder}
 					/> : <IncompletedPagesBody pages={notCompletedPages} />
 			}
