@@ -8,7 +8,6 @@ const textToImage = async (id) => {
 
 	// --- NUEVO: Guardar URLs originales y reemplazar temporalmente ---
 	const images = element.getElementsByTagName("img");
-	console.log(element, images);
 	const originalUrls = [];
 
 	// Mapa de reemplazo para caracteres problemáticos
@@ -60,6 +59,8 @@ const textToImage = async (id) => {
 		});
 		// --- FIN NUEVO ---
 	}
+
+	console.log(element);
 
 	return imgData;
 };
