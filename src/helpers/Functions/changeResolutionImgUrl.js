@@ -1,3 +1,5 @@
+import sanitizerUrlImg from "helpers/sanitizerUrlImg";
+
 export const changeResolutionImgUrl = (
 	url,
 	sizes = {
@@ -11,5 +13,6 @@ export const changeResolutionImgUrl = (
   `w_${sizes.width}/${sizes?.height ? `h_${sizes.height}/` : ""}q_${quality}/`
 	);
 
-	return newUrlImage;
+	const imgSanitizer = sanitizerUrlImg(newUrlImage);
+	return imgSanitizer;
 };

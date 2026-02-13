@@ -25,4 +25,5 @@ export {  default as imgUrlPdf }                 from "./imgUrlPdf";
 export {  default as getParamURL }               from "./getParamURL";
 export {  default as heicToPng }                 from "./heicTopng";
 export {  default as urlImagesInPages }          from "./urlImagesInPages";
+export {  default as sanitizerUrlImg }           from "./sanitizerUrlImg";
 
