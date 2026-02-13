@@ -8,6 +8,7 @@ const textToImage = async (id) => {
 
 	// --- NUEVO: Guardar URLs originales y reemplazar temporalmente ---
 	const images = element.getElementsByTagName("img");
+	console.log(element, images);
 	const originalUrls = [];
 
 	// Mapa de reemplazo para caracteres problemáticos
@@ -26,7 +27,6 @@ const textToImage = async (id) => {
 		console.log(`🔄 Reemplazando URL temporalmente: ${originalSrc.substring(0, 50)}... -> ${tempSrc.substring(0, 50)}...`);
 		img.src = tempSrc;
 	});
-	console.log("Test my elements Data img dom complete replace");
 	// --- FIN NUEVO ---
 
 	await document.fonts.ready;
