@@ -4,6 +4,8 @@ import domtoimage from "dom-to-image";
 const textToImage = async (id) => {
 	const element = document.getElementById(id);
 
+	console.log("Test my elements Data img dom");
+
 	if (!element) return undefined;
 
 	// --- NUEVO: Guardar URLs originales y reemplazar temporalmente ---
