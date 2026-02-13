@@ -37,6 +37,8 @@ const textToImage = async (id) => {
 	// 	downloadBase64Image(imgData, "imagen.png");
 	// }
 
+	console.log(imgData);
+
 	return imgData;
 };
 
