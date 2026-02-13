@@ -61,7 +61,6 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			return match.replace(/font-size:20px/g, "font-size:8px");
 		});
 		const parseJSON = JSON.parse(cleanedData);
-		console.log(parseJSON);
 		const pagesList = convertToArray(parseJSON?.pages);
 		try {
 			const postTypeId = parseJSON?.postTypeId;
