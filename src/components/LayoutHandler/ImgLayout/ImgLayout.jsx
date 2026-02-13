@@ -91,8 +91,6 @@ const ImgLayout = ({
 	// 	handlerQuality();
 	// }, []);
 
-	console.log(imageData);
-
 	return (
 		<div
 			onDrop={(e) => handleDrop(e)}
