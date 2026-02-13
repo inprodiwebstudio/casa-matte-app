@@ -7,10 +7,10 @@ export const changeResolutionImgUrl = (
 	quality = 100,
 ) => {
 	if (!url) return;
-	console.log(url);
 	const newUrlImage = url.replace(/w_\d+\/q_\d+\//,
   `w_${sizes.width}/${sizes?.height ? `h_${sizes.height}/` : ""}q_${quality}/`
 	);
+	console.log(newUrlImage);
 
 	return newUrlImage;
 };
