@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+// textToImage.js
 import domtoimage from "dom-to-image";
 
 const textToImage = async (id) => {
@@ -6,38 +6,59 @@ const textToImage = async (id) => {
 
 	if (!element) return undefined;
 
+	// --- NUEVO: Guardar URLs originales y reemplazar temporalmente ---
+	const images = element.getElementsByTagName("img");
+	const originalUrls = [];
+
+	// Mapa de reemplazo para caracteres problemáticos
+	Array.from(images).forEach((img, index) => {
+		const originalSrc = img.src;
+		originalUrls[index] = originalSrc;
+
+		// Reemplazar paréntesis y otros caracteres problemáticos temporalmente
+		// Usamos un placeholder único que no cause problemas
+		const tempSrc = originalSrc
+			.replace(/\(/g, "__LEFT_PAREN__")
+			.replace(/\)/g, "__RIGHT_PAREN__")
+			.replace(/%28/g, "__LEFT_PAREN__")
+			.replace(/%29/g, "__RIGHT_PAREN__");
+
+		console.log(`🔄 Reemplazando URL temporalmente: ${originalSrc.substring(0, 50)}... -> ${tempSrc.substring(0, 50)}...`);
+		img.src = tempSrc;
+	});
+	// --- FIN NUEVO ---
+
 	await document.fonts.ready;
 
-	const width = element.clientWidth * 2; // Aumenta el ancho
-	const height = element.clientHeight * 2; // Aumenta la altura
+	const width = element.clientWidth * 2;
+	const height = element.clientHeight * 2;
 
-	const imgData = await domtoimage.toPng(element, {
-		width  : width,
-		height : height,
-		style  : {
-			transform       : `scale(${2})`,
-			transformOrigin : "top left",
-			background      : "white",
-			width           : `${element.clientWidth}px`, // Mantiene el tamaño real en el DOM
-			height          : `${element.clientHeight}px`,
-		},
-	});
-
-	// if (imgData) {
-	// 	const downloadBase64Image = (base64String, filename = "imagen.png") => {
-	// 		const link = document.createElement("a");
-	// 		link.href = base64String;
-	// 		link.download = filename;
-
-	// 		document.body.appendChild(link);
-	// 		link.click();
-	// 		document.body.removeChild(link);
-	// 	};
-
-	// 	downloadBase64Image(imgData, "imagen.png");
-	// }
-
-	console.log(imgData);
+	let imgData;
+	try {
+		imgData = await domtoimage.toPng(element, {
+			width  : width,
+			height : height,
+			style  : {
+				transform       : `scale(${2})`,
+				transformOrigin : "top left",
+				background      : "white",
+				width           : `${element.clientWidth}px`,
+				height          : `${element.clientHeight}px`,
+			},
+		});
+	} catch (error) {
+		console.error("Error en domtoimage:", error);
+		throw error;
+	} finally {
+		// --- NUEVO: Restaurar URLs originales SIEMPRE ---
+		Array.from(images).forEach((img, index) => {
+			if (originalUrls[index]) {
+				console.log(`🔄 Restaurando URL original: ${img.src.substring(0, 50)}... -> ${originalUrls[index].substring(0, 50)}...`);
+				img.src = originalUrls[index];
+			}
+		});
+		// --- FIN NUEVO ---
+	}
 
 	return imgData;
 };
