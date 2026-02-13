@@ -4,8 +4,6 @@ import domtoimage from "dom-to-image";
 const textToImage = async (id) => {
 	const element = document.getElementById(id);
 
-	console.log("Test my elements Data img dom");
-
 	if (!element) return undefined;
 
 	// --- NUEVO: Guardar URLs originales y reemplazar temporalmente ---
@@ -28,6 +26,7 @@ const textToImage = async (id) => {
 		console.log(`🔄 Reemplazando URL temporalmente: ${originalSrc.substring(0, 50)}... -> ${tempSrc.substring(0, 50)}...`);
 		img.src = tempSrc;
 	});
+	console.log("Test my elements Data img dom complete replace");
 	// --- FIN NUEVO ---
 
 	await document.fonts.ready;
