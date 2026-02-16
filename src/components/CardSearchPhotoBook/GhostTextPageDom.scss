@@ -295,22 +295,22 @@
 				}
 			}
 
-			@include laptop {
-				transform: scale(0.43, 0.43);
-				margin-bottom: 10px;
-				z-index: 1;
-			}
+			// @include laptop {
+			// 	transform: scale(0.43, 0.43);
+			// 	margin-bottom: 10px;
+			// 	z-index: 1;
+			// }
 
-			@include big-laptop {
-				transform: scale(0.55, 0.55);
-				z-index: 1;
-				// margin-right: 50px;
-			}
+			// @include big-laptop {
+			// 	transform: scale(0.55, 0.55);
+			// 	z-index: 1;
+			// 	// margin-right: 50px;
+			// }
 
-			@include big-tablet {
-				transform: scale(0.45, 0.45);
-				z-index: 1;
-			}
+			// @include big-tablet {
+			// 	transform: scale(0.45, 0.45);
+			// 	z-index: 1;
+			// }
 		}
 	}
 }

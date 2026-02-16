@@ -2,10 +2,8 @@ import { shallowEqual, useSelector } from "react-redux";
 import "./GhostTextPageDom.scss";
 import SpreadBook                    from "components/global/SpreadBook";
 import ModLayoutHandler              from "components/global/ModLayoutHandler";
-import { useLocation }               from "react-router";
 
 const GhostPagesDom = ({spreadPage}) => {
-	const location = useLocation();
 	const productPhotoBook = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
 	const workSpaceFormatPage = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
 	const workSpaceSizePage = useSelector((state) => state.workSpaceSlice.data?.sizePhotoBook, shallowEqual);
@@ -20,8 +18,6 @@ const GhostPagesDom = ({spreadPage}) => {
 		}
 		return `${workSpaceFormatPage}-${workSpaceSizePage}`;
 	};
-
-	console.log(location.pathname);
 
 	return (
 		<div
