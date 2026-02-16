@@ -1,9 +1,7 @@
 import { useSelector, shallowEqual }    from "react-redux";
-import { useLocation }                  from "react-router";
 import { useEffect, useMemo, useState } from "react";
 
 const useWorkspaceScale = () => {
-	const location = useLocation();
 
 	const product = useSelector((state) => state.workSpaceSlice.data?.product, shallowEqual);
 	const format = useSelector((state) => state.workSpaceSlice.data?.format, shallowEqual);
@@ -37,10 +35,6 @@ const useWorkspaceScale = () => {
 			onePageBigLaptop,
 			onePageBigTablet
 		) => {
-			if (location.pathname === "/admin") {
-				console.log("base scale text");
-				return base;
-			}
 			if (isOnePage) {
 				if (width <= 1200) return onePageBigTablet ?? onePageBase;
 				if (width <= 1500) return onePageLaptop ?? onePageBase;
