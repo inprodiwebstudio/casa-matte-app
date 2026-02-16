@@ -23,6 +23,7 @@ const PhotoCard = ({
 	const dispatch = useDispatch();
 
 	const isLoadingMutation = useSelector((state) => state.gallerySlice.isLoadingMutation, shallowEqual);
+	const selectedPhotos = useSelector((state) => state.gallerySlice.selectedData, shallowEqual);
 
 	const [ myImageUrl, setMyImageUrl ] = useState(undefined);
 	const [ isDragger, setIsDragger ] = useState(false);
@@ -70,6 +71,19 @@ const PhotoCard = ({
 		setIsDragger(false);
 	};
 
+	const handlerSelectPhoto = () => {
+		dispatch(gallerySlice.actions.setSelectedData({
+			id,
+			publicId,
+		}));
+	};
+
+	const isSelectedPhoto = () => {
+		if (!selectedPhotos) return false;
+		if (selectedPhotos[id]) return true;
+		return false;
+	};
+
 	useEffect(() => {
 		if (!urlImage) return;
 
@@ -111,6 +125,22 @@ const PhotoCard = ({
 			{
 				(myImageUrl && !isDragger) && (
 					<>
+						<Radio
+							checked={isSelectedPhoto()}
+							labelPosition="left"
+							color="green"
+							size="md"
+							className="radioCheck"
+							onClick={() => handlerSelectPhoto()}
+							styles={{
+								radio : {
+									cursor    : "pointer",
+									"&:hover" : {
+										cursor : "pointer",
+									},
+								},
+							}}
+						/>
 						{!isLoadingMutation && (
 							<ActionIcon
 								color="red"
@@ -123,21 +153,6 @@ const PhotoCard = ({
 								<FaRegTrashCan size={14} />
 							</ActionIcon>
 						)}
-						<Radio
-							checked={true}
-							labelPosition="left"
-							color="green"
-							size="md"
-							className="radioCheck"
-							styles={{
-								radio : {
-									cursor    : "pointer",
-									"&:hover" : {
-										cursor : "pointer",
-									},
-								},
-							}}
-						/>
 						{
 							isInUsePhoto && (
 								<Badge
