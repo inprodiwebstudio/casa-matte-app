@@ -37,7 +37,10 @@ const useWorkspaceScale = () => {
 			onePageBigLaptop,
 			onePageBigTablet
 		) => {
-			if (location.pathname === "/admin") return base;
+			if (location.pathname === "/admin") {
+				console.log("base scale text");
+				return base;
+			}
 			if (isOnePage) {
 				if (width <= 1200) return onePageBigTablet ?? onePageBase;
 				if (width <= 1500) return onePageLaptop ?? onePageBase;
