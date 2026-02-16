@@ -6,16 +6,19 @@ import ProgressBarUploading from "./PrgressBarUploading";
 import Body                 from "./Body";
 import DropFolder           from "../DropFolder";
 
-import { shallowEqual, useSelector } from "react-redux";
-import { isValidArray }              from "helpers";
-import { FaRegTrashCan }             from "react-icons/fa6";
+import { shallowEqual, useSelector }    from "react-redux";
+import { convertToArray, isValidArray } from "helpers";
+import { FaRegTrashCan }                from "react-icons/fa6";
 
 const PhotoGallery = () => {
 	const dropFilesPhotos = useSelector((state) => state.gallerySlice.filesDrop, shallowEqual);
 	const typeDropedView = useSelector((state) => state.gallerySlice.typeDropedView, shallowEqual);
 	const typeViewList = useSelector((state) => state.gallerySlice.typeViewList, shallowEqual);
+	const selectedPhotos = useSelector((state) => state.gallerySlice.selectedData, shallowEqual);
 
 	const isAvailableDropPhotos = isValidArray(dropFilesPhotos);
+
+	const availableDeletePhotos = convertToArray(selectedPhotos).length > 0;
 
 	return (
 		<Stack
@@ -25,24 +28,28 @@ const PhotoGallery = () => {
 			<Center>
 				<TabSelector />
 			</Center>
-			<Center
-				mt="-14px"
-				mb="-14px"
-			>
-				<Button
-					radius="lg"
-					color="red"
-					size="xs"
-					mt="sm"
-					variant="light"
-					rightIcon={<FaRegTrashCan size={12} />}
-					style={{
-						fontSize : "10px",
-					}}
-				>
-					Eliminar Fotos
-				</Button>
-			</Center>
+			{
+				availableDeletePhotos && (
+					<Center
+						mt="-14px"
+						mb="-14px"
+					>
+						<Button
+							radius="lg"
+							color="red"
+							size="xs"
+							mt="sm"
+							variant="light"
+							rightIcon={<FaRegTrashCan size={12} />}
+							style={{
+								fontSize : "10px",
+							}}
+						>
+							Eliminar Fotos
+						</Button>
+					</Center>
+				)
+			}
 			<Stack
 				w="100%"
 			>
