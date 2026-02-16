@@ -10,6 +10,10 @@ const useStyles = createStyles(() => ({
 			"& .trashAction" : {
 				opacity : 1,
 			},
+
+			"& .radioCheck" : {
+				opacity : 1,
+			},
 		},
 
 		"& .trashAction" : {
@@ -24,6 +28,13 @@ const useStyles = createStyles(() => ({
 			position : "absolute",
 			bottom   : "5px",
 			left     : "5px",
+		},
+
+		"& .radioCheck" : {
+			position : "absolute",
+			top      : "5px",
+			left     : "5px",
+			opacity  : 0,
 		},
 	},
 	folderCardBody : {

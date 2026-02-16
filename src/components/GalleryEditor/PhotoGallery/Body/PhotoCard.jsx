@@ -1,8 +1,8 @@
-import { Stack, ActionIcon, Badge, Center } from "@mantine/core";
-import { MoonLoader }                       from "react-spinners";
-import { useEffect, useState }              from "react";
-import { changeResolutionImgUrl }           from "helpers/Functions/changeResolutionImgUrl";
-import { FaRegTrashCan, FaCheck }           from "react-icons/fa6";
+import { Stack, ActionIcon, Badge, Center, Radio } from "@mantine/core";
+import { MoonLoader }                              from "react-spinners";
+import { useEffect, useState }                     from "react";
+import { changeResolutionImgUrl }                  from "helpers/Functions/changeResolutionImgUrl";
+import { FaRegTrashCan, FaCheck }                  from "react-icons/fa6";
 
 import styles                                     from "./styles";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
@@ -123,6 +123,21 @@ const PhotoCard = ({
 								<FaRegTrashCan size={14} />
 							</ActionIcon>
 						)}
+						<Radio
+							checked={true}
+							labelPosition="left"
+							color="green"
+							size="md"
+							className="radioCheck"
+							styles={{
+								radio : {
+									cursor    : "pointer",
+									"&:hover" : {
+										cursor : "pointer",
+									},
+								},
+							}}
+						/>
 						{
 							isInUsePhoto && (
 								<Badge

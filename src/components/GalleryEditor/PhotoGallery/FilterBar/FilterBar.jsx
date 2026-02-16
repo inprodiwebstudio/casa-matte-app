@@ -1,7 +1,7 @@
-import { Group, Select, Stack } from "@mantine/core";
-import { FaCaretDown }          from "react-icons/fa";
-import HidePhotosCheck          from "./HidePhotosCheck";
-import SelectorGrid             from "./SelectorGrid";
+import { Checkbox, Group, Select, Stack } from "@mantine/core";
+import { FaCaretDown, FaCheck }           from "react-icons/fa";
+import HidePhotosCheck                    from "./HidePhotosCheck";
+import SelectorGrid                       from "./SelectorGrid";
 
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
 import { gallerySlice }                           from "store/Slices";
@@ -28,9 +28,19 @@ const FilterBar = () => {
 
 	return (
 		<Group
-			spacing="28px"
+			spacing="12px"
 			mt="12px"
+			position="center"
 		>
+			<Checkbox
+				indeterminate
+				color="darkCasaMatte"
+				p={0}
+				m={0}
+				size="xs"
+				icon={FaCheck}
+				placeholder="test"
+			/>
 			{
 				isPhotosViewList && (
 					<Stack
