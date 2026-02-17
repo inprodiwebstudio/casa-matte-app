@@ -10,6 +10,7 @@ import "./AppShell.scss";
 import { useParams }                               from "react-router";
 import { isValidArray }                            from "helpers";
 import ErrorPageLayout                             from "core/layout/errorPage/ErrorPageLayout";
+import ErrorPage                                   from "pages/ErrorPage";
 
 const AppShell = ({
 	Body,
@@ -24,6 +25,7 @@ const AppShell = ({
 
 	const [urlCollage, setUrlCollage] = useState("");
 	const [errorVersionMatch, setErrorVersionMatch] = useState(false);
+	const [errorCoenection, setErrorCoenection] = useState(false);
 
 	// const isSelectedPage = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice?.data, shallowEqual);
@@ -48,7 +50,7 @@ const AppShell = ({
 
 	const validateAndSubmitData = async () => {
 		try {
-			const respGetPost = await axios.get(`https://casamatte.wip-inprodi.com/wp-json/wp/v2/photobook-2-0/${postId}`);
+			const respGetPost = await axios.get(`https://casamatte.com/wp-json/wp/v2/photobook-2-0/${postId}`);
 			const { data } = respGetPost;
 			const config = data?.meta?.config;
 
@@ -101,8 +103,9 @@ const AppShell = ({
 		} catch (error) {
 			if (error.message === "Versiones diferentes") {
 				setErrorVersionMatch(true);
+				return;
 			}
-			console.error(error);
+			setErrorCoenection(true);
 		}
 	};
 
@@ -128,7 +131,7 @@ const AppShell = ({
 					dispatch(authSlice.actions.clearUserData());
 					break;
 				default:
-					PostingConfig["post"][500]();
+					setErrorCoenection(true);
 					break;
 			}
 		}
@@ -195,6 +198,12 @@ const AppShell = ({
 		}
 		setUrlCollage("");
 	}, [galleryData]);
+
+	if (errorCoenection) {
+		return (
+			<ErrorPage codeError="500" />
+		);
+	}
 
 	if (errorVersionMatch) {
 		return (

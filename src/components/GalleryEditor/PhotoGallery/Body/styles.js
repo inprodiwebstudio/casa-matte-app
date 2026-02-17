@@ -1,68 +1,70 @@
 import { createStyles } from "@mantine/core";
 
-const useStyles = createStyles(() => ({
-	photoCardBody : {
-		userSelect : "none",
-		cursor     : "grab",
-		position   : "relative",
+const useStyles = createStyles((theme, props) => {
+	return {
+		photoCardBody : {
+			userSelect : "none",
+			cursor     : "grab",
+			position   : "relative",
 
-		"&:hover" : {
+			"&:hover" : {
+				"& .trashAction" : {
+					opacity : 1,
+				},
+
+				"& .radioCheck" : {
+					opacity : 1,
+				},
+			},
+
 			"& .trashAction" : {
-				opacity : 1,
+				position   : "absolute",
+				top        : "5px",
+				right      : "5px",
+				transition : "all ease 200ms",
+				opacity    : 0,
+			},
+
+			"& .checkBadge" : {
+				position : "absolute",
+				bottom   : "5px",
+				left     : "5px",
 			},
 
 			"& .radioCheck" : {
-				opacity : 1,
+				position : "absolute",
+				top      : "5px",
+				left     : "5px",
+				opacity  : props.isSelectedPhoto ? 1 : 0,
 			},
 		},
+		folderCardBody : {
+			userSelect   : "none",
+			borderRadius : "10px",
+			position     : "relative",
 
-		"& .trashAction" : {
-			position   : "absolute",
-			top        : "5px",
-			right      : "5px",
-			transition : "all ease 200ms",
-			opacity    : 0,
-		},
+			"&:hover" : {
+				"& .trashAction" : {
+					opacity : 1,
+				},
+			},
 
-		"& .checkBadge" : {
-			position : "absolute",
-			bottom   : "5px",
-			left     : "5px",
-		},
+			"& .badgeTitle" : {
+				position   : "absolute",
+				top        : "0px",
+				background : "#edeeee",
+			},
 
-		"& .radioCheck" : {
-			position : "absolute",
-			top      : "5px",
-			left     : "5px",
-			opacity  : 0,
-		},
-	},
-	folderCardBody : {
-		userSelect   : "none",
-		borderRadius : "10px",
-		position     : "relative",
-
-		"&:hover" : {
 			"& .trashAction" : {
-				opacity : 1,
+				position   : "absolute",
+				top        : "-5px",
+				left       : "0px",
+				transition : "all ease 200ms",
+				opacity    : 0,
 			},
 		},
-
-		"& .badgeTitle" : {
-			position   : "absolute",
-			top        : "0px",
-			background : "#edeeee",
-		},
-
-		"& .trashAction" : {
-			position   : "absolute",
-			top        : "-5px",
-			left       : "0px",
-			transition : "all ease 200ms",
-			opacity    : 0,
-		},
-	},
-})
+	};
+}
 );
 
 export default useStyles;

@@ -23,7 +23,7 @@ const FolderCard = ({
 	folderName,
 	folderId,
 }) => {
-	const { classes } = styles();
+	const { classes } = styles({isSelectedPhoto : false});
 	const dispatch = useDispatch();
 
 	const { postId } = useParams();

@@ -5,6 +5,7 @@ import SelectorGrid                       from "./SelectorGrid";
 
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
 import { gallerySlice }                           from "store/Slices";
+import { convertToArray }                         from "helpers";
 
 const FilterBar = () => {
 	const dispatch = useDispatch();
@@ -12,6 +13,12 @@ const FilterBar = () => {
 	const isFullSizeSideBar = useSelector((state) => state.gallerySlice.isFullSizeSideBar, shallowEqual);
 	const filterValue = useSelector((state) => state.gallerySlice.filter, shallowEqual);
 	const isLoadingMutation = useSelector((state) => state.gallerySlice.isLoadingMutation, shallowEqual);
+	const selectedPhotos = useSelector((state) => state.gallerySlice.selectedData, shallowEqual);
+	const galleryPhotos = useSelector((state) => state.gallerySlice.data, shallowEqual);
+
+	const isAvailablePhotos = convertToArray(galleryPhotos).filter((item) => (item.type !== "folder")).length > 0;
+
+	const isAvailableSelectedPhotos = convertToArray(selectedPhotos).length > 0;
 
 	const isPhotosViewList = typeViewList === "photos";
 
@@ -26,21 +33,41 @@ const FilterBar = () => {
 		dispatch(gallerySlice.actions.setFilter(newFilter));
 	};
 
+	const toggleSelectPhotos = () => {
+		if (isAvailableSelectedPhotos) {
+			dispatch(gallerySlice.actions.clearSelectedData());
+			return;
+		}
+		const listOfGallery = convertToArray(galleryPhotos);
+		listOfGallery.forEach((photo) => {
+			dispatch(gallerySlice.actions.setSelectedData({
+				id       : photo.id,
+				publicId : photo.publicId,
+			}));
+		});
+	};
+
 	return (
 		<Group
 			spacing="12px"
 			mt="12px"
 			position="center"
 		>
-			<Checkbox
-				indeterminate
-				color="darkCasaMatte"
-				p={0}
-				m={0}
-				size="xs"
-				icon={FaCheck}
-				placeholder="test"
-			/>
+			{
+				(isAvailablePhotos && isPhotosViewList) && (
+					<Checkbox
+						onClick={() => toggleSelectPhotos()}
+						checked={isAvailableSelectedPhotos}
+						indeterminate
+						color="darkCasaMatte"
+						p={0}
+						m={0}
+						size="xs"
+						icon={FaCheck}
+						placeholder="test"
+					/>
+				)
+			}
 			{
 				isPhotosViewList && (
 					<Stack

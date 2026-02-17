@@ -17,7 +17,7 @@ const ConfirmationDeletePhoto = ({innerProps}) => {
 			onSubmit={actionDelete}
 			onClose={onCloseButton}
 			isLoading={isLoadingDelete}
-			textHeader="Eliminar fotografía"
+			textHeader="Eliminar fotografías"
 		>
 			<Text
 				size="15px"
@@ -29,7 +29,7 @@ const ConfirmationDeletePhoto = ({innerProps}) => {
 				}}
 				w="90%"
 			>
-				Estás por eliminar permanentemente la fotografía de tu galería, se borrará de cualquier parte donde haya sido utilizada.
+				Estás por eliminar permanentemente las fotografías seleccionadas de tu galería, se borrará de cualquier parte donde haya sido utilizada.
 			</Text>
 		</ModalBody>
 	);

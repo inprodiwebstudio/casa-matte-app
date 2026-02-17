@@ -19,11 +19,12 @@ const PhotoCard = ({
 	isInUsePhoto,
 	publicId,
 }) => {
-	const { classes } = styles();
 	const dispatch = useDispatch();
 
 	const isLoadingMutation = useSelector((state) => state.gallerySlice.isLoadingMutation, shallowEqual);
 	const selectedPhotos = useSelector((state) => state.gallerySlice.selectedData, shallowEqual);
+
+	const { classes } = styles({isSelectedPhoto : (selectedPhotos && selectedPhotos[id]) ? true : false});
 
 	const [ myImageUrl, setMyImageUrl ] = useState(undefined);
 	const [ isDragger, setIsDragger ] = useState(false);
