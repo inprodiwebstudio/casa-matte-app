@@ -87,14 +87,14 @@ const AppShell = ({
 			if (isSameVersion || isRechargeProject || !photoBookConfig?.version) {
 				const currentTitle = projectTitle ?? "TITULO";
 
-				const isEndWhiteSpace = currentTitle?.endsWith(" ");
+				const isEndWhitPoint = currentTitle?.endsWith(".");
 
 				let newTitle = currentTitle;
 
-				if (isEndWhiteSpace) {
+				if (isEndWhitPoint) {
 					newTitle = currentTitle?.slice(0, currentTitle?.length - 1);
 				} else {
-					newTitle = `${currentTitle} `;
+					newTitle = `${currentTitle}.`;
 				}
 
 				dispatch(workSpaceSlice.actions.handleChangepRrojectTitle(newTitle));
