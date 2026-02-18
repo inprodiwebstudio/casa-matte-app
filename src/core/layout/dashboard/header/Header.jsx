@@ -27,8 +27,6 @@ const Header = () => {
 
 	const [ date, setDate ] = useState(undefined);
 
-	const [ projectName, setProjectName ] = useState(undefined);
-
 	const [ currentIndexHistory, setCurrentIndexHistory ] = useState(0);
 
 	const {currentConfigPhotoBook, historyChanges} = useContext(currentConfigPhotoBookContext);
@@ -39,7 +37,7 @@ const Header = () => {
 
 
 	const productName = useSelector((state) => state.workSpaceSlice.data.productName, shallowEqual);
-	const projectTitle = useSelector((state) => state.workSpaceSlice.data.projectTittle, shallowEqual);
+	const projectTitle = useSelector((state) => state.workSpaceSlice.projectTittle, shallowEqual);
 	const lastModified = useSelector((state) => state.workSpaceSlice.data.modified, shallowEqual);
 	const isModifiedData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 	const isLoggedIn = useSelector((state) => state.authSlice.loggedIn, shallowEqual);
@@ -80,8 +78,7 @@ const Header = () => {
 		dispatch(workSpaceSlice.actions.changeStatusViewPage("preview"));
 	};
 
-	const handlerChangeTitleProject = async (valueName) => {
-		setProjectName(valueName);
+	const handlerChangeTitleProject = (valueName) => {
 		dispatch(workSpaceSlice.actions.handleChangepRrojectTitle(valueName));
 	};
 
@@ -95,14 +92,11 @@ const Header = () => {
 		dispatch(workSpaceSlice.actions.updatePageContent({
 			currentConfigPhotoBook,
 		}));
+
 		try {
 			await dataMutation({
 				module : "wp-json/wp/v2/photobook-2-0",
 				data   : {
-					title : {
-						rendered : isModifiedData?.projectTittle ?? "TITULO",
-						raw      : isModifiedData?.projectTittle ?? "TITULO",
-					},
 					status : "publish",
 					meta   : {
 						config : parseSendData({...isModifiedData, minPages : (isModifiedData?.pasta === "Dura") ? 25 : 10}),
@@ -147,12 +141,6 @@ const Header = () => {
 	useEffect(() => {
 		setDate(new Date);
 	}, [isModifiedData]);
-
-	useEffect(() => {
-		if (projectTitle && (projectTitle !== "")) {
-			setProjectName(projectTitle);
-		}
-	}, [projectTitle]);
 
 	useEffect(() => {
 		if (dataMutationResult.isUninitialized) return;
@@ -301,7 +289,7 @@ const Header = () => {
 								<div>/</div>
 								<div>
 									<TextInput
-										value={projectName}
+										value={projectTitle ?? ""}
 										onChange={(e) => handlerChangeTitleProject(e.target.value)}
 										sx={{
 											fontSize   : "14px",

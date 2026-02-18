@@ -10,7 +10,6 @@ const initialState = {
 		sizePhotoBook         : "",
 		sizeDimentions        : "",
 		pasta                 : "",
-		projectTittle         : "",
 		modified              : undefined,
 		orderId               : undefined,
 		productionTypeVersion : undefined,
@@ -191,6 +190,7 @@ const initialState = {
 			},
 		},
 	},
+	projectTittle   : "",
 	textsImgs       : undefined,
 	currentPageData : undefined,
 	initialData     : undefined,
@@ -486,7 +486,7 @@ export const workSpaceSlice = createSlice({
 			};
 		},
 		handleChangepRrojectTitle : (state, {payload}) => {
-			state.data.projectTittle = payload;
+			state.projectTittle = payload;
 		},
 		addPage : (state) => {
 			const newData = {...state.data.pages};

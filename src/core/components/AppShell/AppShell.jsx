@@ -33,6 +33,7 @@ const AppShell = ({
 
 	// const isSelectedPage = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice?.data, shallowEqual);
+	const projectTitle = useSelector((state) => state.workSpaceSlice.projectTittle, shallowEqual);
 	const initialData = useSelector((state) => state.workSpaceSlice?.initialData, shallowEqual);
 	const galleryData = useSelector((state) => state.gallerySlice?.data, shallowEqual);
 	const galleryIsFullSizeSideBar = useSelector((state) => state.gallerySlice?.isFullSizeSideBar, shallowEqual);
@@ -63,8 +64,8 @@ const AppShell = ({
 					module : "wp-json/wp/v2/photobook-2-0",
 					data   : {
 						title : {
-							rendered : workSpaceData?.projectTittle ?? "TITULO",
-							raw      : workSpaceData?.projectTittle ?? "TITULO",
+							rendered : projectTitle ?? "TITULO",
+							raw      : projectTitle ?? "TITULO",
 						},
 						status : "publish",
 						meta   : {
@@ -84,12 +85,26 @@ const AppShell = ({
 			const isSameVersion = workSpaceData?.version === photoBookConfig?.version;
 
 			if (isSameVersion || isRechargeProject || !photoBookConfig?.version) {
+				const currentTitle = projectTitle ?? "TITULO";
+
+				const isEndWhiteSpace = currentTitle?.endsWith(" ");
+
+				let newTitle = currentTitle;
+
+				if (isEndWhiteSpace) {
+					newTitle = currentTitle?.slice(0, currentTitle?.length - 1);
+				} else {
+					newTitle = `${currentTitle} `;
+				}
+
+				dispatch(workSpaceSlice.actions.handleChangepRrojectTitle(newTitle));
+
 				await dataMutation({
 					module : "wp-json/wp/v2/photobook-2-0",
 					data   : {
 						title : {
-							rendered : workSpaceData?.projectTittle ?? "TITULO",
-							raw      : workSpaceData?.projectTittle ?? "TITULO",
+							rendered : newTitle,
+							raw      : newTitle,
 						},
 						status : "publish",
 						meta   : {

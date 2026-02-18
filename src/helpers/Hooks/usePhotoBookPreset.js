@@ -50,7 +50,6 @@ export const usePhotoBookPreset = () => {
 			minPages              : meta?.pasta === "Dura" ? 25 : 10,
 			maxPages              : numberOfPages,
 			currentPage           : "page1",
-			projectTittle         : "TITULO",
 			basePrice             : price.replace(" ", ""),
 			bound                 : meta?.encuadernado ?? "",
 			pasta                 : meta?.pasta ?? "",
@@ -67,6 +66,7 @@ export const usePhotoBookPreset = () => {
 
 		try {
 			dispatch(workSpaceSlice.actions.insertData({ ...configPhotoBookData, modified }));
+			dispatch(workSpaceSlice.actions.handleChangepRrojectTitle("TITULO"));
 		} catch (error) {
 			console.error(error);
 		}
