@@ -12,6 +12,8 @@ import { isValidArray }                            from "helpers";
 import ErrorPageLayout                             from "core/layout/errorPage/ErrorPageLayout";
 import ErrorPage                                   from "pages/ErrorPage";
 
+import LogoCasaMatte from "Resources/images/casaMatteLogo.png";
+
 const AppShell = ({
 	Body,
 	header,
@@ -26,6 +28,8 @@ const AppShell = ({
 	const [urlCollage, setUrlCollage] = useState("");
 	const [errorVersionMatch, setErrorVersionMatch] = useState(false);
 	const [errorCoenection, setErrorCoenection] = useState(false);
+
+	const [isCompatibleDivice, setIsCompatibleDivice] = useState(true);
 
 	// const isSelectedPage = useSelector((state) => state.workSpaceSlice?.pageDataSelected, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice?.data, shallowEqual);
@@ -199,6 +203,24 @@ const AppShell = ({
 		setUrlCollage("");
 	}, [galleryData]);
 
+	useEffect(() => {
+		const checkCompatibility = () => {
+			if (typeof window === "undefined") return;
+
+			const width = window.innerWidth;
+
+			setIsCompatibleDivice(width >= 1030);
+		};
+
+		checkCompatibility();
+
+		window.addEventListener("resize", checkCompatibility);
+
+		return () => {
+			window.removeEventListener("resize", checkCompatibility);
+		};
+	}, []);
+
 	if (errorCoenection) {
 		return (
 			<ErrorPage codeError="500" />
@@ -216,6 +238,25 @@ const AppShell = ({
 					action : () => window.location.reload(),
 				}}
 			/>
+		);
+	}
+
+	if (!isCompatibleDivice) {
+		return (
+			<div id="body-app">
+				<div className="container-mobile-info">
+					<div className="text-group-mobile">
+						<div className="mobile-notification">
+							La aplicación para editar no es compatible con dispositivos móviles.
+							Te recomendamos que uses una computadora.
+						</div>
+						<div className="mobile-logo-header">
+							<div className="att-text-container">ATTE.</div>
+							<img src={LogoCasaMatte} width={170} alt="CasaMatte Logo" />
+						</div>
+					</div>
+				</div>
+			</div>
 		);
 	}
 
