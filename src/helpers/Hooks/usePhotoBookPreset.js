@@ -65,8 +65,6 @@ export const usePhotoBookPreset = () => {
 			pages                 : convertToObject(generatePages(numberOfPages, model.modelKey === "layflat")),
 		};
 
-		console.log(configPhotoBookData);
-
 		try {
 			dispatch(workSpaceSlice.actions.insertData({ ...configPhotoBookData, modified }));
 		} catch (error) {
