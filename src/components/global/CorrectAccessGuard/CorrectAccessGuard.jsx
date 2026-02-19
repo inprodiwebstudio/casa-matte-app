@@ -388,6 +388,7 @@ const CorrectAccessGuard = () => {
 
 		const parseJSON = JSON.parse(cleanedData);
 
+		dispatch(workSpaceSlice.actions.handleChangepRrojectTitle(photoBookConfigData?.title?.rendered ?? "TITULO"));
 		dispatch(workSpaceSlice.actions.insertData({
 			...parseJSON,
 			status     : photoBookConfigData?.meta?.status ?? undefined,
