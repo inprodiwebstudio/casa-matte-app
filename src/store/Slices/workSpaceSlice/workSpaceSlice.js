@@ -604,19 +604,19 @@ export const workSpaceSlice = createSlice({
 			const currentIndexPage = pagesFilteredNotFront.findIndex((page) => page.id === state.currentPageData.id);
 
 			if (currentIndexPage === (pagesFilteredNotFront.length - 1)) {
-				const pageData = pagesFilteredNotFront[currentIndexPage];
+				const pageNo = pagesFilteredNotFront.slice(0, currentIndexPage + 1).length + 1;
 
-				const pageId = `page${Number(pageData.id.split("page")[1]) + 1}`;
+				const pageId = `page${pageNo}`;
 				const newPageData = {
 					id     : pageId,
 					sheet1 : {
-						pageNo     : pageData.sheet1.pageNo + 2,
+						pageNo     : (pageNo * 2) - 1,
 						layoutType : "",
 						text       : {},
 						photos     : {},
 					},
 					sheet2 : {
-						pageNo     : pageData.sheet1.pageNo + 2,
+						pageNo     : pageNo * 2,
 						layoutType : "",
 						text       : {},
 						photos     : {},
