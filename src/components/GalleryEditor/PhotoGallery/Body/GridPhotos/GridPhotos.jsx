@@ -69,9 +69,6 @@ const GridPhotos = ({
 		<ScrollArea
 			w="100%"
 			h="100%"
-			style={{
-				background : "red",
-			}}
 		>
 			<Grid
 				w="100%"
