@@ -32,13 +32,16 @@ const useGetGallery = () => {
 				},
 			});
 
+			if (resp.error) {
+				throw resp.error;
+			}
+
 			dispatch(gallerySlice.actions.getGalleryData(resp.data?.resources ?? []));
 			if (resp.data?.nextCursor) {
 				dispatch(gallerySlice.actions.setNextCursor(resp.data?.nextCursor));
 			}
 			dispatch(gallerySlice.actions.setLoadingGalleryData(false));
 		} catch (error) {
-			console.error(error);
 			dispatch(gallerySlice.actions.setLoadingGalleryData(false));
 			throw error;
 		}
