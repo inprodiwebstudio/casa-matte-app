@@ -1,3 +1,5 @@
+import convertToArray                             from "helpers/convertToArray";
+import isValidArray                               from "helpers/isValidArray";
 import { useCallback }                            from "react";
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
 import { useParams }                              from "react-router";
@@ -14,10 +16,12 @@ const useGetGallery = () => {
 	const { postId } = useParams();
 
 	const userName = useSelector((state) => state.authSlice?.user?.username, shallowEqual);
+	const assetsData = useSelector((state) => state.gallerySlice.data, shallowEqual);
 	const galleryPath = useSelector((state) => state.gallerySlice.galleryPathName, shallowEqual);
 	const nextCursor = useSelector((state) => state.gallerySlice?.nextCursor, shallowEqual);
 	const filter = useSelector((state) => state.gallerySlice.filter, shallowEqual);
 
+	const currentImages = convertToArray(assetsData);
 
 	const handlerGetGallery = useCallback(async () => {
 		dispatch(gallerySlice.actions.setLoadingGalleryData(true));
@@ -36,10 +40,21 @@ const useGetGallery = () => {
 				throw resp.error;
 			}
 
-			dispatch(gallerySlice.actions.getGalleryData(resp.data?.resources ?? []));
-			if (resp.data?.nextCursor) {
-				dispatch(gallerySlice.actions.setNextCursor(resp.data?.nextCursor));
+			const listOfAssets = [...currentImages];
+
+			const newListOfAssets = resp.data?.resources ?? [];
+
+			if (isValidArray(newListOfAssets)) {
+				newListOfAssets.forEach(asset => {
+					const isAvailableAsset = listOfAssets.find(({asset_id}) => asset_id === asset.asset_id);
+					if (!isAvailableAsset) {
+						listOfAssets.push(asset);
+					}
+				});
 			}
+
+			dispatch(gallerySlice.actions.getGalleryData(listOfAssets ?? []));
+			dispatch(gallerySlice.actions.setNextCursor(resp.data?.nextCursor ?? ""));
 			dispatch(gallerySlice.actions.setLoadingGalleryData(false));
 		} catch (error) {
 			dispatch(gallerySlice.actions.setLoadingGalleryData(false));
