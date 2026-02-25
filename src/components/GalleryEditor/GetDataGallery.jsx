@@ -22,6 +22,7 @@ const GetDataGallery = () => {
 
 	const typeViewList = useSelector((state) => state.gallerySlice?.typeViewList, shallowEqual);
 	const galleryPath = useSelector((state) => state.gallerySlice.galleryPathName, shallowEqual);
+	const nextCursor = useSelector((state) => state.gallerySlice?.nextCursor, shallowEqual);
 	const filter = useSelector((state) => state.gallerySlice.filter, shallowEqual);
 	const isLoading = useSelector((state) => state.gallerySlice.isLoadingData, shallowEqual);
 	const userName = useSelector((state) => state.authSlice?.user?.username, shallowEqual);
@@ -36,10 +37,15 @@ const GetDataGallery = () => {
 					limit      : 500,
 					userName   : `${userName}/${postId}`,
 					folderName : (galleryPath?.name === "route") ? null : galleryPath?.name,
+					nextCursor : nextCursor,
 					...((filter && (filter?.value !== "DESC_CAPTURE")) ? {sort : filter?.value} : {}),
 				},
 			});
-			dispatch(gallerySlice.actions.getGalleryData(resp.data));
+
+			dispatch(gallerySlice.actions.getGalleryData(resp.data?.resources ?? []));
+			if (resp.data?.nextCursor) {
+				dispatch(gallerySlice.actions.setNextCursor(resp.data?.nextCursor));
+			}
 			dispatch(gallerySlice.actions.setLoadingGalleryData(false));
 		} catch (error) {
 			console.error(error);
