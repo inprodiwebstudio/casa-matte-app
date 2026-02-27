@@ -1,12 +1,14 @@
-import { Center, Grid, ScrollArea }               from "@mantine/core";
+import { Center, Grid }                           from "@mantine/core";
 import CardAction                                 from "components/GalleryEditor/CradAction";
 import PhotoCard                                  from "components/GalleryEditor/PhotoGallery/Body/PhotoCard";
 import { convertToArray, isValidArray }           from "helpers";
+import useGetGallery                              from "helpers/Hooks/useGetGallery";
 import { useEffect, useState }                    from "react";
 import { gallerySlice }                           from "store/Slices";
 import { useDropzone }                            from "react-dropzone/.";
 import { GoPlus }                                 from "react-icons/go";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import InfiniteScroll                             from "react-infinite-scroll-component";
 
 const DataGridPhotos = () => {
 	const dispatch = useDispatch();
@@ -17,6 +19,11 @@ const DataGridPhotos = () => {
 	const galleryData = useSelector((state) => state.gallerySlice.data, shallowEqual);
 	const photosDrop = useSelector((state) => state.gallerySlice.filesDrop, shallowEqual);
 	const workSpaceData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
+	const nextCursor = useSelector((state) => state.gallerySlice.nextCursor, shallowEqual);
+
+	const hasMore = !!nextCursor;
+
+	const { handlerGetGallery } = useGetGallery(true);
 
 
 	const colsQuantity = () => {
@@ -52,6 +59,14 @@ const DataGridPhotos = () => {
 	});
 
 	const isLoadingChargeNewPhotos = isValidArray(photosDrop);
+
+	const getMyGallery = async () => {
+		try {
+			await handlerGetGallery();
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	useEffect(() => {
 		if (!workSpaceData) return;
@@ -89,59 +104,68 @@ const DataGridPhotos = () => {
 	}, [workSpaceData]);
 
 	return (
-		<ScrollArea
-			w="100%"
-			h="100%"
+		<div
+			id="scrollableDiv"
+			style={{
+				height    : "520px",
+				width     : "100%",
+				overflowY : "scroll",
+			}}
 		>
-			<Grid
-				w="100%"
-				gutter="3"
-				style={{
-					maxHeight : "100px",
-				}}
+			<InfiniteScroll
+				dataLength={convertToArray(galleryData).length ?? 0}
+				next={() => getMyGallery()}
+				hasMore={hasMore}
+				height={520}
+				scrollableTarget="scrollableDiv"
 			>
-				<Grid.Col
-					span={colsQuantity()}
+				<Grid
+					w="100%"
+					gutter="3"
 				>
-					<Center
-						w="100%"
-						h="100%"
-					>
-						<CardAction
-							withBorder
-							label="Agregar fotos"
-							h={handlerSize}
-							w={handlerSize}
-							zoomContent={isMoreCols && 0.8}
-							icon={
-								<GoPlus size={13} />
-							}
-							{...!isLoadingChargeNewPhotos && getRootProps()}
-						/>
-						{
-							!isLoadingChargeNewPhotos && (<input {...getInputProps()} />)
-						}
-					</Center>
-				</Grid.Col>
-				{convertToArray(galleryData).map((item, index) => (
 					<Grid.Col
-						key={index}
 						span={colsQuantity()}
-						style={{
-							aspectRatio : "1/1",
-						}}
 					>
-						<PhotoCard
-							urlImage={item?.url}
-							isInUsePhoto={isInUsePhoto(item?.id)}
-							id={item?.id}
-							publicId={item?.public_id}
-							pixels={item?.pixels}
-						/>
+						<Center
+							w="100%"
+							h="100%"
+						>
+							<CardAction
+								withBorder
+								label="Agregar fotos"
+								h={handlerSize}
+								w={handlerSize}
+								zoomContent={isMoreCols && 0.8}
+								icon={
+									<GoPlus size={13} />
+								}
+								{...!isLoadingChargeNewPhotos && getRootProps()}
+							/>
+							{
+								!isLoadingChargeNewPhotos && (<input {...getInputProps()} />)
+							}
+						</Center>
 					</Grid.Col>
-				))}
-			</Grid>
-		</ScrollArea>
+					{convertToArray(galleryData).map((item, index) => (
+						<Grid.Col
+							key={index}
+							span={colsQuantity()}
+							style={{
+								aspectRatio : "1/1",
+							}}
+						>
+							<PhotoCard
+								urlImage={item?.url}
+								isInUsePhoto={isInUsePhoto(item?.id)}
+								id={item?.id}
+								publicId={item?.public_id}
+								pixels={item?.pixels}
+							/>
+						</Grid.Col>
+					))}
+				</Grid>
+			</InfiniteScroll>
+		</div>
 	);
 };
 

@@ -10,6 +10,7 @@ const PhotosInFolder = () => {
 	const isLoadingMutation = useSelector((state) => state.gallerySlice.isLoadingMutation, shallowEqual);
 
 	const onCloseView = () => {
+		dispatch(gallerySlice.actions.setNextCursor(""));
 		dispatch(gallerySlice.actions.setGalleryPath({
 			id           : "route",
 			name         : "route",

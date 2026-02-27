@@ -1,5 +1,4 @@
 import convertToArray                             from "helpers/convertToArray";
-import isValidArray                               from "helpers/isValidArray";
 import { useCallback }                            from "react";
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
 import { useParams }                              from "react-router";
@@ -8,7 +7,7 @@ import { apiImageKit }                            from "store/api/imageKitApi";
 
 const { useLazyGetDirentsListQuery } = apiImageKit;
 
-const useGetGallery = () => {
+const useGetGallery = (hasGetNextCursor = false) => {
 	const [fetchGallery] = useLazyGetDirentsListQuery();
 
 	const dispatch = useDispatch();
@@ -31,8 +30,7 @@ const useGetGallery = () => {
 					limit      : 500,
 					userName   : `${userName}/${postId}`,
 					folderName : (galleryPath?.name === "route") ? null : galleryPath?.name,
-					nextCursor : nextCursor,
-					...((filter && (filter?.value !== "DESC_CAPTURE")) ? {sort : filter?.value} : {}),
+					nextCursor : (hasGetNextCursor && nextCursor) ? nextCursor : null,
 				},
 			});
 
@@ -40,19 +38,15 @@ const useGetGallery = () => {
 				throw resp.error;
 			}
 
-			const listOfAssets = [...currentImages];
+			let listOfAssets = [...resp.data.resources ?? []];
 
-			const newListOfAssets = resp.data?.resources ?? [];
-
-			if (isValidArray(newListOfAssets)) {
-				newListOfAssets.forEach(asset => {
-					const isAvailableAsset = listOfAssets.find(({asset_id}) => asset_id === asset.asset_id);
-					if (!isAvailableAsset) {
-						listOfAssets.push(asset);
-					}
-				});
+			if (hasGetNextCursor && nextCursor) {
+				listOfAssets = [...currentImages, ...resp.data.resources];
 			}
 
+			if (filter.value === "CAPTURE_DATE") {
+				listOfAssets = listOfAssets.sort((a, b) => new Date(b?.context?.dateCaptured) - new Date(a?.context?.dateCaptured));
+			}
 			dispatch(gallerySlice.actions.getGalleryData(listOfAssets ?? []));
 			dispatch(gallerySlice.actions.setNextCursor(resp.data?.nextCursor ?? ""));
 			dispatch(gallerySlice.actions.setLoadingGalleryData(false));

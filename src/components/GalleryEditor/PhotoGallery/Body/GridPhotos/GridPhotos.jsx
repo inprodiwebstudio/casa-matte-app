@@ -23,7 +23,7 @@ const GridPhotos = ({
 
 	const listOfPhotos = photos ?? [];
 
-	const { handlerGetGallery } = useGetGallery();
+	const { handlerGetGallery } = useGetGallery(true);
 
 	const isInUsePhoto = (imageId) => {
 		const findImage = selectedImagesIds.find(id => id === imageId);
@@ -92,7 +92,7 @@ const GridPhotos = ({
 			}}
 		>
 			<InfiniteScroll
-				dataLength={listOfPhotos.length}
+				dataLength={listOfPhotos.length ?? 0}
 				next={() => getMyGallery()}
 				hasMore={hasMore}
 				height={410}
