@@ -1,4 +1,5 @@
 import { Grid }                         from "@mantine/core";
+import { useMediaQuery }                from "@mantine/hooks";
 import PhotoCard                        from "../PhotoCard";
 import NotAvailablePhotos               from "./NotAvailablePhotos";
 import { convertToArray, isValidArray } from "helpers";
@@ -13,6 +14,7 @@ const GridPhotos = ({
 	cols = 6,
 	photos,
 }) => {
+	const isLargeScreen = useMediaQuery("(min-width: 1500px)");
 	const [ selectedImagesIds, setSelectedImagesIds ] = useState([]);
 
 	const workSpaceData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
@@ -86,7 +88,7 @@ const GridPhotos = ({
 		<div
 			id="scrollableDiv"
 			style={{
-				height    : "410px",
+				height    : isLargeScreen ? "580px" : "410px",
 				width     : "100%",
 				overflowY : "scroll",
 			}}
@@ -95,7 +97,7 @@ const GridPhotos = ({
 				dataLength={listOfPhotos.length ?? 0}
 				next={() => getMyGallery()}
 				hasMore={hasMore}
-				height={410}
+				height={isLargeScreen ? 580 : 410}
 				scrollableTarget="scrollableDiv"
 			>
 				<Grid

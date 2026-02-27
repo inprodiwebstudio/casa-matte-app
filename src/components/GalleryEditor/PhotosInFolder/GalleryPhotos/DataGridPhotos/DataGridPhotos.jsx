@@ -9,10 +9,13 @@ import { useDropzone }                            from "react-dropzone/.";
 import { GoPlus }                                 from "react-icons/go";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import InfiniteScroll                             from "react-infinite-scroll-component";
+import { useMediaQuery }                          from "@mantine/hooks";
 
 const DataGridPhotos = () => {
 	const dispatch = useDispatch();
 	const [ selectedImagesIds, setSelectedImagesIds ] = useState([]);
+
+	const isLargeScreen = useMediaQuery("(min-width: 1500px)");
 
 	const isFullSizeSideBar = useSelector((state) => state.gallerySlice.isFullSizeSideBar, shallowEqual);
 	const isMoreCols = useSelector((state) => state.gallerySlice.moreCols, shallowEqual);
@@ -107,7 +110,7 @@ const DataGridPhotos = () => {
 		<div
 			id="scrollableDiv"
 			style={{
-				height    : "520px",
+				height    : isLargeScreen ? "600px" : "520px",
 				width     : "100%",
 				overflowY : "scroll",
 			}}
@@ -116,7 +119,7 @@ const DataGridPhotos = () => {
 				dataLength={convertToArray(galleryData).length ?? 0}
 				next={() => getMyGallery()}
 				hasMore={hasMore}
-				height={520}
+				height={isLargeScreen ? 600 : 520}
 				scrollableTarget="scrollableDiv"
 			>
 				<Grid
