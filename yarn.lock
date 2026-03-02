@@ -2792,6 +2792,7 @@ __metadata:
     react-hook-form: "npm:^7.43.7"
     react-icons: "npm:^5.5.0"
     react-image-file-resizer: "npm:^0.4.8"
+    react-infinite-scroll-component: "npm:^6.1.1"
     react-pdf-html: "npm:1.1.18"
     react-perfect-scrollbar: "npm:^1.5.8"
     react-qr-code: "npm:^2.0.18"
@@ -7078,6 +7079,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-infinite-scroll-component@npm:^6.1.1":
+  version: 6.1.1
+  resolution: "react-infinite-scroll-component@npm:6.1.1"
+  dependencies:
+    throttle-debounce: "npm:^2.1.0"
+  peerDependencies:
+    react: ">=16.0.0"
+  checksum: 10c0/d05c52012238ed29a3fbd687a323614a688c6d26cacb92557ebf056ee6bb91ce9b31aa0775f74e1f79db66f177edafc377017d2cd87f6374ffbc092a4f28a130
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.13.1, react-is@npm:^16.7.0, react-is@npm:^16.8.1":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -8234,6 +8246,13 @@ __metadata:
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
   checksum: 10c0/02805740c12851ea5982686810702e2f14369a5f4c5c40a836821e3eefc65ffeec3131ba324692a37608294b0fd8c1e55a2dd571ffed4909822787668ddbee5c
+  languageName: node
+  linkType: hard
+
+"throttle-debounce@npm:^2.1.0":
+  version: 2.3.0
+  resolution: "throttle-debounce@npm:2.3.0"
+  checksum: 10c0/41648e4cf46f935818af32ecac34f9876c618f24e300551cbe3a0ca2c5828cb8d2f9b73e6e1e2f8c64237f70fbc8c541f9b5c9114da70b33b1ed10ba4cc6b15f
   languageName: node
   linkType: hard
 

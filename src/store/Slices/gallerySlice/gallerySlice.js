@@ -13,6 +13,7 @@ const initialState = {
 		label : "FECHA DE CAPTURA",
 		value : "CAPTURE_DATE",
 	},
+	nextCursor        : undefined,
 	filesDrop         : [],
 	photosUploaded    : [],
 	typeDropedView    : null,
@@ -51,6 +52,9 @@ export const gallerySlice = createSlice({
 			const myNewGalleryData = convertToObject(handlerGallerySorted());
 			// state.data = newDataList;
 			state.data = myNewGalleryData;
+		},
+		setNextCursor : (state, {payload}) => {
+			state.nextCursor = payload;
 		},
 		togglePhotosInUse : (state) => {
 			state.isHidePhotosInUse = !state.isHidePhotosInUse;

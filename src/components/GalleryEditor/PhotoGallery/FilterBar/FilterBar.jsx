@@ -42,7 +42,7 @@ const FilterBar = () => {
 		listOfGallery.forEach((photo) => {
 			dispatch(gallerySlice.actions.setSelectedData({
 				id       : photo.id,
-				publicId : photo.publicId,
+				publicId : photo.public_id,
 			}));
 		});
 	};

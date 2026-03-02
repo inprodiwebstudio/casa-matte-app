@@ -1,10 +1,11 @@
-import { Group, Select, Stack } from "@mantine/core";
-import { FaCaretDown }          from "react-icons/fa";
-import HidePhotosCheck          from "./HidePhotosCheck";
-import SelectorGrid             from "./SelectorGrid";
+import { Checkbox, Group, Select, Stack } from "@mantine/core";
+import { FaCaretDown, FaCheck }           from "react-icons/fa";
+import HidePhotosCheck                    from "./HidePhotosCheck";
+import SelectorGrid                       from "./SelectorGrid";
 
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
 import { gallerySlice }                           from "store/Slices";
+import { convertToArray }                         from "helpers";
 
 const ActionsBar = () => {
 	const dispatch = useDispatch();
@@ -12,6 +13,8 @@ const ActionsBar = () => {
 	const isFullSizeSideBar = useSelector((state) => state.gallerySlice.isFullSizeSideBar, shallowEqual);
 	const filterValue = useSelector((state) => state.gallerySlice.filter, shallowEqual);
 	const isLoadingMutation = useSelector((state) => state.gallerySlice.isLoadingMutation, shallowEqual);
+	const galleryPhotos = useSelector((state) => state.gallerySlice.data, shallowEqual);
+	const selectedPhotos = useSelector((state) => state.gallerySlice.selectedData, shallowEqual);
 
 	const isPhotosViewList = typeViewList === "photosInFolder";
 
@@ -20,19 +23,52 @@ const ActionsBar = () => {
 		{ value : "CAPTURE_DATE", label : "Fecha de captura" },
 	];
 
+	const isAvailablePhotos = convertToArray(galleryPhotos).filter((item) => (item.type !== "folder")).length > 0;
+
+	const isAvailableSelectedPhotos = convertToArray(selectedPhotos).length > 0;
+
 	const handlerChangeFilter = (value) => {
 		const indexValue = filterOptions.findIndex((item) => item.value === value);
 		const newFilter = filterOptions[indexValue];
 		dispatch(gallerySlice.actions.setFilter(newFilter));
 	};
 
+	const toggleSelectPhotos = () => {
+		if (isAvailableSelectedPhotos) {
+			dispatch(gallerySlice.actions.clearSelectedData());
+			return;
+		}
+		const listOfGallery = convertToArray(galleryPhotos);
+		console.log(listOfGallery);
+		listOfGallery.forEach((photo) => {
+			dispatch(gallerySlice.actions.setSelectedData({
+				id       : photo.id,
+				publicId : photo.public_id,
+			}));
+		});
+	};
+
 	return (
 		<Group
-			spacing="22px"
+			spacing="12px"
 			mt="12px"
-			align="center"
-			justify="center"
+			position="center"
 		>
+			{
+				(isAvailablePhotos && isPhotosViewList) && (
+					<Checkbox
+						onClick={() => toggleSelectPhotos()}
+						checked={isAvailableSelectedPhotos}
+						indeterminate
+						color="darkCasaMatte"
+						p={0}
+						m={0}
+						size="xs"
+						icon={FaCheck}
+						placeholder="test"
+					/>
+				)
+			}
 			{
 				isPhotosViewList && (
 					<Stack

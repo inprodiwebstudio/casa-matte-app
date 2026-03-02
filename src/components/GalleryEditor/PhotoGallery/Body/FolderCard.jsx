@@ -85,6 +85,7 @@ const FolderCard = ({
 	};
 
 	const onClickFolder = () => {
+		dispatch(gallerySlice.actions.setNextCursor(""));
 		dispatch(gallerySlice.actions.setGalleryPath({
 			id           : folderName,
 			name         : folderName,
