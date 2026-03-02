@@ -564,9 +564,11 @@ const CorrectAccessGuard = () => {
 			setStatusView("continue");
 			return;
 		}
-		createPresetPhotoBook(photobookData);
-		setStatusView("continue");
-		return;
+		if (photobookData?.meta?.config === "") {
+			createPresetPhotoBook(photobookData);
+			setStatusView("continue");
+			return;
+		}
 	}, [photobookData]);
 
 	return (
