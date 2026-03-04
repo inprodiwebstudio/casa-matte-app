@@ -11,7 +11,7 @@ const textToImage = async (id) => {
 	const width = element.clientWidth * 2; // Aumenta el ancho
 	const height = element.clientHeight * 2; // Aumenta la altura
 
-	const imgData = await domtoimage.toPng(element, {
+	const imgData = await domtoimage.toJpeg(element, {
 		width  : width,
 		height : height,
 		style  : {
@@ -24,7 +24,7 @@ const textToImage = async (id) => {
 	});
 
 	// if (imgData) {
-	// 	const downloadBase64Image = (base64String, filename = "imagen.png") => {
+	// 	const downloadBase64Image = (base64String, filename = "imagen.jpg") => {
 	// 		const link = document.createElement("a");
 	// 		link.href = base64String;
 	// 		link.download = filename;
