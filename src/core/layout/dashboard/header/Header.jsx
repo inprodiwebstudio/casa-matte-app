@@ -170,11 +170,11 @@ const Header = () => {
 		try {
 			const listPagesPostIds = await getPostIds({ module : `wp-json/wp/v2/photobook-2-0?per_page=100&page=${pageNo}`}).unwrap();
 
-			const endPostIds = listPagesPostIds.filter((postIdData) => postIdData?.meta?.status === "48");
+			const endPostIds = listPagesPostIds.filter((postIdData) => postIdData?.meta?.status === "26");
 			const listOfPrintedPostIds = endPostIds.filter(postIdData => {
-				if (!postIdData?.meta?.fecha_de_termino || postIdData?.meta?.fecha_de_termino === "") return true;
-				const endDate = new Date(postIdData?.meta?.fecha_de_termino);
-				const maxDate = new Date("2025-12-15");
+				// if (!postIdData?.meta?.fecha_de_termino || postIdData?.meta?.fecha_de_termino === "") return true;
+				const endDate = new Date(postIdData?.date);
+				const maxDate = new Date("2025-02-09");
 				return endDate < maxDate;
 			});
 
@@ -190,7 +190,7 @@ const Header = () => {
 
 			const listOfPostIdsWithUserNameData = await Promise.all(listOfPostIdsWithUserName);
 
-			const listOfPostIds = listOfPostIdsWithUserNameData.map(postIdData => `${postIdData?.userName}/${postIdData?.id}`);
+			const listOfPostIds = listOfPostIdsWithUserNameData.map(postIdData => `${postIdData?.userName}/${postIdData?.id} orderId:${postIdData?.meta?.id_del_pedido}`);
 
 			if (listOfPostIds.length > 0) {
 				downloadTxtFile(listOfPostIds, pageNo);
@@ -224,7 +224,7 @@ const Header = () => {
 	return (
 		<div className="Header">
 			<div className={`body-container ${isPreviewActive && "isActivePreview"}`}>
-				<a href="https://casamatte.com/">
+				<a href="https://casamatte.wip-inprodi.com/">
 					<img src={LogoCasaMatte} width={130} />
 				</a>
 				<Group
@@ -377,7 +377,7 @@ const Header = () => {
 											radius={12}
 											size="xs"
 											color="darkCasaMatte"
-											onClick={() => getPostIdsEnd(2)}
+											onClick={() => getPostIdsEnd(1)}
 											disabled={false}
 										>
 											PostIdsEnd
