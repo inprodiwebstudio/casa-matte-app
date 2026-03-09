@@ -130,6 +130,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 					},
 				}),
 			});
+			dispatch(workSpaceSlice.actions.setCurrentPageData(currentDataSpread));
 			setCurrentSpreadDataPage(currentDataSpread);
 		}
 	}, [bookSpreadPages]);
@@ -154,6 +155,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 					},
 				}),
 			});
+			dispatch(workSpaceSlice.actions.setCurrentPageData(currentDataSpread));
 			setCurrentSpreadDataPage(currentDataSpread);
 		}
 	}, [currentIndexSpread]);
