@@ -377,7 +377,7 @@ const Header = () => {
 											radius={12}
 											size="xs"
 											color="darkCasaMatte"
-											onClick={() => getPostIdsEnd(12)}
+											onClick={() => getPostIdsEnd(13)}
 											disabled={false}
 										>
 											PostIdsEnd
