@@ -34,7 +34,7 @@ const textToImage = async (id) => {
 	// 		document.body.removeChild(link);
 	// 	};
 
-	// 	downloadBase64Image(imgData, "imagen.png");
+	// 	downloadBase64Image(imgData, "imagen.jpg");
 	// }
 
 	return imgData;

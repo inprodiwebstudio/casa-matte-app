@@ -239,7 +239,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		);
 	};
 
-	// Función para descargar ZIP de imágenes PNG (para layflat)
+	// Función para descargar ZIP de imágenes JPG (para layflat)
 	const zipDownloadImages = async (images) => {
 		const zip = new JSZip();
 		const baseName = `${photoBookData.correo_del_autor}-noPedido-${photoBookData.id_del_pedido}-photobookId_${photoBookData.id}`;
@@ -258,7 +258,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 				}
 
 				const blob = new Blob([ab], { type : mimeString });
-				zip.file(`${baseName}_spread_${index + 1}.png`, blob);
+				zip.file(`${baseName}_spread_${index + 1}.jpg`, blob);
 			}
 		});
 
@@ -665,7 +665,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 			</Text>
 			{isLayflatProduct && (
 				<Text size="sm" color="blue" mt="xs">
-					📦 Producto Layflat - Descargando imágenes PNG
+					📦 Producto Layflat - Descargando imágenes JPG
 				</Text>
 			)}
 			{generationStatus === "error" && (
@@ -758,7 +758,7 @@ const OrderInfoCard = ({
 				items={[
 					{ label : "MODELO", value : photoBookData?.modelo ?? "--" },
 					{ label : "TAMAÑO", value : photoBookData?.tamano ?? "--" },
-					...(isLayflatProduct ? [{ label : "TIPO", value : "LAYFLAT (Imágenes PNG)" }] : []),
+					...(isLayflatProduct ? [{ label : "TIPO", value : "LAYFLAT (Imágenes JPG)" }] : []),
 				]}
 			/>
 
@@ -825,7 +825,7 @@ const ActionButtons = ({
 		>
 			{generationStatus === "generating" ? "GENERANDO..." :
 				generationStatus === "creating_pdf" ? "CREANDO PDF..." :
-					isLayflatProduct ? "DESCARGAR IMÁGENES PNG" : "DESCARGAR PDF"}
+					isLayflatProduct ? "DESCARGAR IMÁGENES JPG" : "DESCARGAR PDF"}
 		</Button>
 
 		{showCancel && (
