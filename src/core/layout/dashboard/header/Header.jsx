@@ -174,7 +174,7 @@ const Header = () => {
 			const listOfPrintedPostIds = endPostIds.filter(postIdData => {
 				// if (!postIdData?.meta?.fecha_de_termino || postIdData?.meta?.fecha_de_termino === "") return true;
 				const endDate = new Date(postIdData?.date);
-				const maxDate = new Date("2025-02-09");
+				const maxDate = new Date("2026-02-09");
 				return endDate < maxDate;
 			});
 
@@ -377,7 +377,7 @@ const Header = () => {
 											radius={12}
 											size="xs"
 											color="darkCasaMatte"
-											onClick={() => getPostIdsEnd(7)}
+											onClick={() => getPostIdsEnd(2)}
 											disabled={false}
 										>
 											PostIdsEnd
