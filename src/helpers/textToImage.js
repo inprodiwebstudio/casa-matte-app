@@ -8,14 +8,14 @@ const textToImage = async (id) => {
 
 	await document.fonts.ready;
 
-	const width = element.clientWidth * 4; // Aumenta el ancho
-	const height = element.clientHeight * 4; // Aumenta la altura
+	const width = element.clientWidth * 5; // Aumenta el ancho
+	const height = element.clientHeight * 5; // Aumenta la altura
 
 	const imgData = await domtoimage.toJpeg(element, {
 		width  : width,
 		height : height,
 		style  : {
-			transform       : `scale(${4})`,
+			transform       : `scale(${5})`,
 			transformOrigin : "top left",
 			background      : "white",
 			width           : `${element.clientWidth}px`, // Mantiene el tamaño real en el DOM
