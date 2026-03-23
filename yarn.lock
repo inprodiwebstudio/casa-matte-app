@@ -2781,6 +2781,7 @@ __metadata:
     pdf-lib: "npm:^1.17.1"
     pdfjs-dist: "npm:^5.2.133"
     pdfjs-lib: "npm:^0.0.149"
+    piexifjs: "npm:^1.0.6"
     prop-types: "npm:^15.8.1"
     qs: "npm:^6.11.0"
     react: "npm:^18.2.0"
@@ -6710,6 +6711,13 @@ __metadata:
   version: 4.0.2
   resolution: "picomatch@npm:4.0.2"
   checksum: 10c0/7c51f3ad2bb42c776f49ebf964c644958158be30d0a510efd5a395e8d49cb5acfed5b82c0c5b365523ce18e6ab85013c9ebe574f60305892ec3fa8eee8304ccc
+  languageName: node
+  linkType: hard
+
+"piexifjs@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "piexifjs@npm:1.0.6"
+  checksum: 10c0/69a10fe09c08f1e67e653844ac79e720324a7fa34689b020359d60d98b3a601c070e1759df8f2d97d022298bd2f5b79eed4c92de86c5f215300c8a63adf947b1
   languageName: node
   linkType: hard
 

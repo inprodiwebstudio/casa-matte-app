@@ -354,8 +354,8 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 				const spreadSnapshot = await handlerTakeSpreadSnapshot();
 				if (spreadSnapshot) {
 					// Comprimir imagen para layflat
-					const compressedSpread = await compressImage(spreadSnapshot, 0.9);
-					result = { spread : compressedSpread };
+					// const compressedSpread = await compressImage(spreadSnapshot, 0.9);
+					result = { spread : spreadSnapshot };
 				} else {
 					result = { spread : undefined };
 				}
