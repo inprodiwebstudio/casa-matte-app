@@ -7,9 +7,9 @@ import {
 	getEditorDefaults,
 } from "@pqina/pintura";
 
-import { useContext, useState } from "react";
-import { connect }              from "react-redux";
-import { closeAllModals }       from "@mantine/modals";
+import { useContext, useEffect, useState } from "react";
+import { connect }                         from "react-redux";
+import { closeAllModals }                  from "@mantine/modals";
 
 
 //Own components
@@ -27,10 +27,10 @@ import { currentConfigPhotoBookContext } from "contexts/configContext";
 const EditPhoto = ({innerProps, userName}) => {
 	const {setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 
+	const [validUrlImg, setValidUrlImg] = useState("");
+
 	const { handlerUploadImage } = useSubmitImages({userName : userName});
 	const [ isUploading, setIsUploading ] = useState(undefined);
-
-	// const [inlineResult, setInlineResult] = useState();
 
 	const urlImage = fullQualityImg(innerProps?.image);
 
@@ -61,6 +61,39 @@ const EditPhoto = ({innerProps, userName}) => {
 		}
 	};
 
+	const getValidImageUrl = (url) => {
+		const tryLoad = (src) => {
+			return new Promise((resolve, reject) => {
+				const img = new Image();
+				img.onload = () => resolve(src);      // Si carga bien, devolvemos el src
+				img.onerror = () => reject(new Error(`error img charge: ${src}`));
+				img.src = src;
+			});
+		};
+
+		return tryLoad(url).catch(() => {
+			const fallbackUrl = url.replace(".png", ".jpg");
+			if (fallbackUrl === url) throw new Error("Not valid fallbackUrl");
+			return tryLoad(fallbackUrl);
+		});
+	};
+
+	const handlerGetImage = async () => {
+		try {
+			const urlValida = await getValidImageUrl(urlImage);
+			return urlValida;
+		} catch (err) {
+			console.error("Error:", err);
+		}
+	};
+
+	useEffect(() => {
+		handlerGetImage().then((res) => {
+			console.log(res);
+			setValidUrlImg(res);
+		});
+	}, []);
+
 	return (
 		<div style={{ height : "90vh" }}>
 			<PinturaEditor
@@ -87,7 +120,7 @@ const EditPhoto = ({innerProps, userName}) => {
 					"filter",
 					"finetune",
 				]}
-				src={urlImage}
+				src={validUrlImg}
 				status={isUploading}
 				onProcess={(res) => addEditedImage(res?.dest)}
 			/>
