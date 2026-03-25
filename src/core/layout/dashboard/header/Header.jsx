@@ -71,11 +71,13 @@ const Header = () => {
 	};
 
 	const handlerClickPreview = () => () => {
-		if (statusViewPage === "preview") {
-			dispatch(workSpaceSlice.actions.changeStatusViewPage("workspace"));
-			return;
-		}
-		dispatch(workSpaceSlice.actions.changeStatusViewPage("preview"));
+		setTimeout(() => {
+			if (statusViewPage === "preview") {
+				dispatch(workSpaceSlice.actions.changeStatusViewPage("workspace"));
+				return;
+			}
+			dispatch(workSpaceSlice.actions.changeStatusViewPage("preview"));
+		}, 500);
 	};
 
 	const handlerChangeTitleProject = (valueName) => {
@@ -89,9 +91,11 @@ const Header = () => {
 	};
 
 	const submitData = async () => {
-		dispatch(workSpaceSlice.actions.updatePageContent({
-			currentConfigPhotoBook,
-		}));
+		setTimeout(async () => {
+			dispatch(workSpaceSlice.actions.updatePageContent({
+				currentConfigPhotoBook,
+			}));
+		}, 1000);
 
 		try {
 			await dataMutation({
@@ -119,9 +123,11 @@ const Header = () => {
 	// };
 
 	const handlerPrintClick = () => {
-		dispatch(workSpaceSlice.actions.updatePageContent({
-			currentConfigPhotoBook,
-		}));
+		setTimeout(async () => {
+			dispatch(workSpaceSlice.actions.updatePageContent({
+				currentConfigPhotoBook,
+			}));
+		}, 1000);
 		openContextModal({
 			modal      : "confirmationToPrint",
 			innerProps : {
@@ -339,6 +345,22 @@ const Header = () => {
 										}}
 									>
 										Imprimir
+									</Text>
+								</Button>
+								<Button
+									radius={12}
+									size="xs"
+									color="darkCasaMatte"
+									onClick={() => console.log("Test")}
+								>
+									<Text
+										weight={400}
+										color="whiteCasaMatte"
+										sx={{
+											fontFamily : "Helvetica",
+										}}
+									>
+										Button Exp
 									</Text>
 								</Button>
 								{/* <Button
