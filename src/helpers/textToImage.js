@@ -104,19 +104,19 @@ const textToImage = async (id, targetDPI = 150) => {
 
 	const newBase64 = btoa(binaryString);
 
-	// if (newBase64) {
-	// 	const downloadBase64Image = (base64String, filename = "imagen.jpg") => {
-	// 		const link = document.createElement("a");
-	// 		link.href = base64String;
-	// 		link.download = filename;
+	if (newBase64) {
+		const downloadBase64Image = (base64String, filename = "imagen.jpg") => {
+			const link = document.createElement("a");
+			link.href = base64String;
+			link.download = filename;
 
-	// 		document.body.appendChild(link);
-	// 		link.click();
-	// 		document.body.removeChild(link);
-	// 	};
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+		};
 
-	// 	downloadBase64Image(`data:image/jpeg;base64,${newBase64}`, "imagen.jpg");
-	// }
+		downloadBase64Image(`data:image/jpeg;base64,${newBase64}`, "imagen.jpg");
+	}
 
 	return `data:image/jpeg;base64,${newBase64}`;
 };
