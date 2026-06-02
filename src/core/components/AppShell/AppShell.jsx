@@ -224,7 +224,7 @@ const AppShell = ({
 
 			const width = window.innerWidth;
 
-			setIsCompatibleDivice(width >= 1030);
+			setIsCompatibleDivice(width >= 900);
 		};
 
 		checkCompatibility();
