@@ -44,7 +44,7 @@ const Navbar = ({workSpaceSlice}) => {
 	};
 
 	const handlerAddPage = () => {
-		if ((photoBookProduct === "couplescoffeetablebook") && (dataPages?.postTypeId !== "163325") && (counterPages() >= Number(maxRangePages))) {
+		if ((photoBookProduct === "couplescoffeetablebook") && (dataPages?.postTypeId !== "163325") && (dataPages?.postTypeId !== "163324") && (counterPages() >= Number(maxRangePages))) {
 			openContextModal({
 				modal      : "noMorePages",
 				innerProps : {
