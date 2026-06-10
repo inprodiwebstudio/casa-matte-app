@@ -34,6 +34,15 @@ const EditPhoto = ({innerProps, userName}) => {
 
 	const urlImage = fullQualityImg(innerProps?.image);
 
+	// Relación de aspecto del slot del layout donde está montada la imagen.
+	// Fuerza que el recorte conserve exactamente la misma proporción que el
+	// contenedor en el que fue seleccionada/montada la imagen.
+	const layoutAspectRatio = innerProps?.aspectRatio;
+	const cropAspectRatio =
+		Number.isFinite(layoutAspectRatio) && layoutAspectRatio > 0
+			? layoutAspectRatio
+			: undefined;
+
 	const addEditedImage = async (file) => {
 		try {
 			setIsUploading("Cargando imagen...");
@@ -98,6 +107,7 @@ const EditPhoto = ({innerProps, userName}) => {
 		<div style={{ height : "90vh" }}>
 			<PinturaEditor
 				{...getEditorDefaults()}
+				imageCropAspectRatio={cropAspectRatio}
 				locale={{
 					...getEditorDefaults().locale,
 					labelButtonExport          : "Guardar",

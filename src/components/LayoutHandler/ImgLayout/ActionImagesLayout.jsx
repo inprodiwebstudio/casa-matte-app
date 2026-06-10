@@ -13,15 +13,16 @@ import "./ActionImagesLayout.scss";
 const ActionImageslayout = ({image, sheetNo, layoutNo, pageId, containerPhotoUuid}) => {
 	const {setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
 
-	const documentContainer =  document.getElementById(containerPhotoUuid);
-
-	const clientWidth = documentContainer ? documentContainer.offsetWidth : 0;
-	const clientHeight = documentContainer ? documentContainer.offsetHeight : 0;
-
-	const aspectRatio = clientWidth / clientHeight;
-
 	const activeModal = (e) => {
 		e.stopPropagation();
+
+		// Se mide el contenedor del slot al abrir el editor para obtener la
+		// relación de aspecto real del layout donde está montada la imagen.
+		const documentContainer = document.getElementById(containerPhotoUuid);
+		const clientWidth = documentContainer ? documentContainer.offsetWidth : 0;
+		const clientHeight = documentContainer ? documentContainer.offsetHeight : 0;
+		const aspectRatio = clientHeight > 0 ? clientWidth / clientHeight : undefined;
+
 		openContextModal({
 			modal      : "editPhoto",
 			innerProps : {
