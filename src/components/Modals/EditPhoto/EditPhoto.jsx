@@ -5,6 +5,7 @@ import { PinturaEditor } from "@pqina/react-pintura";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {
 	getEditorDefaults,
+	createDefaultImageWriter,
 } from "@pqina/pintura";
 
 import { useContext, useEffect, useState } from "react";
@@ -23,6 +24,20 @@ import { PostingConfig }  from "Notifications";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "@pqina/pintura/pintura.css";
 import { currentConfigPhotoBookContext } from "contexts/configContext";
+
+// Acota la imagen exportada para que nunca exceda los límites de Cloudinary
+// (tamaño de archivo / megapíxeles). JPEG de alta calidad: óptimo para impresión
+// y evita los PNG a resolución completa que provocaban el error 400.
+const editedImageWriter = createDefaultImageWriter({
+	mimeType   : "image/jpeg",
+	quality    : 0.85,
+	targetSize : {
+		width   : 5000,
+		height  : 5000,
+		fit     : "contain",
+		upscale : false,
+	},
+});
 
 const EditPhoto = ({innerProps, userName}) => {
 	const {setCurrentConfigPhotoBook} = useContext(currentConfigPhotoBookContext);
@@ -107,6 +122,7 @@ const EditPhoto = ({innerProps, userName}) => {
 		<div style={{ height : "90vh" }}>
 			<PinturaEditor
 				{...getEditorDefaults()}
+				imageWriter={editedImageWriter}
 				imageCropAspectRatio={cropAspectRatio}
 				locale={{
 					...getEditorDefaults().locale,
