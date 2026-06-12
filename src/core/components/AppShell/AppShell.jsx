@@ -87,24 +87,24 @@ const AppShell = ({
 			if (isSameVersion || isRechargeProject || !photoBookConfig?.version) {
 				const currentTitle = projectTitle ?? "TITULO";
 
-				const isEndWhitPoint = currentTitle?.endsWith(".");
+				// const isEndWhitPoint = currentTitle?.endsWith(".");
 
-				let newTitle = currentTitle;
+				// let newTitle = currentTitle;
 
-				if (isEndWhitPoint) {
-					newTitle = currentTitle?.slice(0, currentTitle?.length - 1);
-				} else {
-					newTitle = `${currentTitle}.`;
-				}
+				// if (isEndWhitPoint) {
+				// 	newTitle = currentTitle?.slice(0, currentTitle?.length - 1);
+				// } else {
+				// 	newTitle = `${currentTitle}.`;
+				// }
 
-				dispatch(workSpaceSlice.actions.handleChangepRrojectTitle(newTitle));
+				dispatch(workSpaceSlice.actions.handleChangepRrojectTitle(currentTitle));
 
 				await dataMutation({
 					module : "wp-json/wp/v2/photobook-2-0",
 					data   : {
 						title : {
-							rendered : newTitle,
-							raw      : newTitle,
+							rendered : currentTitle,
+							raw      : currentTitle,
 						},
 						status : "publish",
 						meta   : {
