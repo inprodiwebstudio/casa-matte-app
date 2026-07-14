@@ -404,20 +404,17 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 	// Función para generar PDF por chunks con gestión de memoria MEJORADA
 	const generatePdfInChunksWithMemoryManagement = async (allImages, chunkSize = 10) => {
-		console.log(allImages);
 		console.log("=== GENERANDO PDF POR CHUNKS CON GESTIÓN DE MEMORIA ===");
 		console.log(`Total de imágenes: ${allImages.length}, Chunk size: ${chunkSize}`);
 
-		const validImages = allImages.filter(img => img && img !== undefined && img !== null);
-
-		if (validImages.length === 0) {
+		if (allImages.length === 0) {
 			throw new Error("No hay imágenes válidas para generar el PDF");
 		}
 
-		console.log(`Imágenes válidas: ${validImages.length}`);
+		console.log(`Imágenes válidas: ${allImages.length}`);
 
 		// Para books pequeños, generar un solo PDF
-		if (validImages.length <= 20) {
+		if (allImages.length <= 20) {
 			console.log("Book pequeño, generando PDF único...");
 			const pdfDocument = (
 				<Document>
@@ -435,8 +432,8 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 		// Para books grandes, dividir en chunks más pequeños
 		const chunks = [];
-		for (let i = 0; i < validImages.length; i += chunkSize) {
-			chunks.push(validImages.slice(i, i + chunkSize));
+		for (let i = 0; i < allImages.length; i += chunkSize) {
+			chunks.push(allImages.slice(i, i + chunkSize));
 		}
 
 		console.log(`Generando PDF en ${chunks.length} chunks`);
@@ -499,7 +496,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		console.log("Combinando chunks de PDF...");
 
 		// Para books muy grandes, considerar descargar chunks separados
-		if (pdfBlobs.length > 1 && validImages.length > 100) {
+		if (pdfBlobs.length > 1 && allImages.length > 100) {
 			console.warn("Book muy grande, considerando descarga por partes");
 			// Por ahora, generamos un PDF único pero con advertencia
 		}
@@ -507,7 +504,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		// Crear un PDF final combinado
 		const finalDocument = (
 			<Document>
-				{validImages.map((base64PageImg, index) => (
+				{allImages.map((base64PageImg, index) => (
 					<PageComponent key={`final-page-${index}`}>
 						<LayoutContainerPage imgSrc={base64PageImg} />
 					</PageComponent>
