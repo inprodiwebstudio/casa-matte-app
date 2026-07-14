@@ -687,6 +687,8 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 		</Card>
 	);
 
+	console.log(bookSpreadPages);
+
 	return (
 		<Stack
 			w="100%"
