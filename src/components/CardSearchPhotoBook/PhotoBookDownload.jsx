@@ -404,6 +404,7 @@ const PhotoBookDownload = ({ photoBookData, onReturn }) => {
 
 	// Función para generar PDF por chunks con gestión de memoria MEJORADA
 	const generatePdfInChunksWithMemoryManagement = async (allImages, chunkSize = 10) => {
+		console.log(allImages);
 		console.log("=== GENERANDO PDF POR CHUNKS CON GESTIÓN DE MEMORIA ===");
 		console.log(`Total de imágenes: ${allImages.length}, Chunk size: ${chunkSize}`);
 
