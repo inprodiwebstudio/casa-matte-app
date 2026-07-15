@@ -416,53 +416,8 @@ const CorrectAccessGuard = () => {
 		const isPaid = await isPaidExtra(idOrderExtra);
 		if (isPaid) {
 			if (
-				(postId === "42516")||
-				(postId === "37505")||
-				(postId === "43701")||
-				(postId === "43256")||
-				(postId === "43214")||
-				(postId === "41895")||
-				(postId === "44121")||
-				(postId === "41814")||
-				(postId === "42239")||
-				(postId === "43930")||
-				(postId === "41557")||
-				(postId === "42155")||
-				(postId === "44557")||
-				(postId === "42503")||
-				(postId === "43933")||
-				(postId === "34277")||
-				(postId === "45385")||
-				(postId === "42292")||
-				(postId === "36096")||
-				(postId === "46056")||
-				(postId === "45740")||
-				(postId === "45292")||
-				(postId === "42507")||
-				(postId === "45334")||
-				(postId === "45136")||
-				(postId === "45832")||
-				(postId === "36096")||
-				(postId === "46130")||
-				(postId === "46572")||
-				(postId === "42998")||
-				(postId === "46568")||
-				(postId === "41730")||
-				(postId === "51535")||
-				(postId === "95701")||
-				(postId === "95596")||
-				(postId === "126475")||
-				(postId === "70206")||
-				(postId === "118460")||
-				(postId === "141664")||
-				(postId === "91785")||
-				(postId === "154158")||
-				(postId === "152901")||
-				(postId === "174132")||
-				(postId === "163891")||
-				(postId === "180039")||
-				(postId === "179924")||
-				(postId === "180213")
+				(postId === "180213")||
+				(postId === "180882")
 			) {
 				addCurrentPhotoBookConfig(photobookData);
 				setStatusView("continue");
@@ -472,53 +427,8 @@ const CorrectAccessGuard = () => {
 			return;
 		}
 		if (
-			(postId === "42516")||
-			(postId === "37505")||
-			(postId === "43701")||
-			(postId === "43256")||
-			(postId === "43214")||
-			(postId === "41895")||
-			(postId === "44121")||
-			(postId === "41814")||
-			(postId === "42239")||
-			(postId === "43930")||
-			(postId === "41557")||
-			(postId === "42155")||
-			(postId === "44557")||
-			(postId === "42503")||
-			(postId === "43933")||
-			(postId === "34277")||
-			(postId === "45385")||
-			(postId === "42292")||
-			(postId === "36096")||
-			(postId === "46056")||
-			(postId === "45740")||
-			(postId === "45292")||
-			(postId === "42507")||
-			(postId === "45334")||
-			(postId === "45136")||
-			(postId === "45832")||
-			(postId === "36096")||
-			(postId === "46130")||
-			(postId === "46572")||
-			(postId === "42998")||
-			(postId === "46568")||
-			(postId === "41730")||
-			(postId === "51535")||
-			(postId === "95701")||
-			(postId === "95596")||
-			(postId === "126475")||
-			(postId === "70206")||
-			(postId === "118460")||
-			(postId === "141664")||
-			(postId === "91785")||
-			(postId === "154158")||
-			(postId === "152901")||
-			(postId === "174132")||
-			(postId === "163891")||
-			(postId === "180039")||
-			(postId === "179924")||
-			(postId === "180213")
+			(postId === "180213")||
+			(postId === "180882")
 		) {
 			addCurrentPhotoBookConfig(photobookData);
 			setStatusView("continue");
@@ -546,53 +456,8 @@ const CorrectAccessGuard = () => {
 		if ((photobookData?.meta?.status === "48") && (photobookData?.meta?.config)) {
 			if (!photobookData?.meta?.id_pedido_hojas_extra) {
 				if (
-					(postId === "42516")||
-					(postId === "37505")||
-					(postId === "43701")||
-					(postId === "43256")||
-					(postId === "43214")||
-					(postId === "41895")||
-					(postId === "44121")||
-					(postId === "41814")||
-					(postId === "42239")||
-					(postId === "43930")||
-					(postId === "41557")||
-					(postId === "42155")||
-					(postId === "44557")||
-					(postId === "42503")||
-					(postId === "43933")||
-					(postId === "34277")||
-					(postId === "45385")||
-					(postId === "42292")||
-					(postId === "36096")||
-					(postId === "46056")||
-					(postId === "45740")||
-					(postId === "45292")||
-					(postId === "42507")||
-					(postId === "45334")||
-					(postId === "45136")||
-					(postId === "45832")||
-					(postId === "36096")||
-					(postId === "46130")||
-					(postId === "46572")||
-					(postId === "42998")||
-					(postId === "46568")||
-					(postId === "41730")||
-					(postId === "51535")||
-					(postId === "95701")||
-					(postId === "95596")||
-					(postId === "126475")||
-					(postId === "70206")||
-					(postId === "118460")||
-					(postId === "141664")||
-					(postId === "91785")||
-					(postId === "154158")||
-					(postId === "152901")||
-					(postId === "174132")||
-					(postId === "163891")||
-					(postId === "180039")||
-					(postId === "179924")||
-					(postId === "180213")
+					(postId === "180213")||
+					(postId === "180882")
 				) {
 					addCurrentPhotoBookConfig(photobookData);
 					setStatusView("continue");
