@@ -7,7 +7,7 @@ import { workSpaceSlice, authSlice } from "store/Slices";
 
 import { genericApi } from "store/api/genericApi";
 
-const { useLazyGetDataQuery } = genericApi;
+// const { useLazyGetDataQuery } = genericApi;
 
 //Own components
 import { useParams }                     from "react-router";
@@ -31,9 +31,9 @@ const Header = () => {
 
 	const {currentConfigPhotoBook, historyChanges} = useContext(currentConfigPhotoBookContext);
 
-	const [ getPostIds ] = useLazyGetDataQuery();
+	// const [ getPostIds ] = useLazyGetDataQuery();
 
-	const [ getDataUser ] = useLazyGetDataQuery();
+	// const [ getDataUser ] = useLazyGetDataQuery();
 
 
 	const productName = useSelector((state) => state.workSpaceSlice.data.productName, shallowEqual);
@@ -41,8 +41,8 @@ const Header = () => {
 	const lastModified = useSelector((state) => state.workSpaceSlice.data.modified, shallowEqual);
 	const isModifiedData = useSelector((state) => state.workSpaceSlice.data, shallowEqual);
 	const isLoggedIn = useSelector((state) => state.authSlice.loggedIn, shallowEqual);
-	const userName = useSelector((state) => state.authSlice?.user?.username, shallowEqual);
-	const userEmail = useSelector((state) => state.authSlice?.user?.email, shallowEqual);
+	// const userName = useSelector((state) => state.authSlice?.user?.username, shallowEqual);
+	// const userEmail = useSelector((state) => state.authSlice?.user?.email, shallowEqual);
 	const isLoadingWorspaceData = useSelector((state) => state.workSpaceSlice.loading, shallowEqual);
 	const statusViewPage = useSelector((state) => state.workSpaceSlice?.statusViewPage, shallowEqual);
 	const statusProject = useSelector((state) => state.workSpaceSlice?.data?.status, shallowEqual);
@@ -51,7 +51,7 @@ const Header = () => {
 
 	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
 
-	const availableDevButton = (userName && userEmail) && ((userName === "joab27") && (userEmail === "dev@casamatte.com"));
+	// const availableDevButton = (userName && userEmail) && ((userName === "joab27") && (userEmail === "dev@casamatte.com"));
 
 	const isAvailableUndo = historyChanges[currentIndexHistory - 1];
 	const isAvailableRedo = historyChanges[currentIndexHistory + 1];
@@ -172,60 +172,60 @@ const Header = () => {
 		}
 	}, [historyChanges]);
 
-	const getPostIdsEnd = async (pageNo) => {
-		try {
-			const listPagesPostIds = await getPostIds({ module : `wp-json/wp/v2/photobook-2-0?per_page=100&page=${pageNo}`}).unwrap();
+	// const getPostIdsEnd = async (pageNo) => {
+	// 	try {
+	// 		const listPagesPostIds = await getPostIds({ module : `wp-json/wp/v2/photobook-2-0?per_page=100&page=${pageNo}`}).unwrap();
 
-			const endPostIds = listPagesPostIds.filter((postIdData) => postIdData?.meta?.status === "26");
-			const listOfPrintedPostIds = endPostIds.filter(postIdData => {
-				// if (!postIdData?.meta?.fecha_de_termino || postIdData?.meta?.fecha_de_termino === "") return true;
-				const endDate = new Date(postIdData?.date);
-				const maxDate = new Date("2026-02-09");
-				return endDate < maxDate;
-			});
+	// 		const endPostIds = listPagesPostIds.filter((postIdData) => postIdData?.meta?.status === "26");
+	// 		const listOfPrintedPostIds = endPostIds.filter(postIdData => {
+	// 			// if (!postIdData?.meta?.fecha_de_termino || postIdData?.meta?.fecha_de_termino === "") return true;
+	// 			const endDate = new Date(postIdData?.date);
+	// 			const maxDate = new Date("2026-02-09");
+	// 			return endDate < maxDate;
+	// 		});
 
-			const listOfPostIdsWithUserName = listOfPrintedPostIds.map(async postIdData => {
-				const userId = postIdData?.author;
+	// 		const listOfPostIdsWithUserName = listOfPrintedPostIds.map(async postIdData => {
+	// 			const userId = postIdData?.author;
 
-				const respUserData = await getDataUser({ module : `wp-json/wp/v2/users/${userId}` }).unwrap();
-				return {
-					...postIdData,
-					userName : respUserData?.name,
-				};
-			});
+	// 			const respUserData = await getDataUser({ module : `wp-json/wp/v2/users/${userId}` }).unwrap();
+	// 			return {
+	// 				...postIdData,
+	// 				userName : respUserData?.name,
+	// 			};
+	// 		});
 
-			const listOfPostIdsWithUserNameData = await Promise.all(listOfPostIdsWithUserName);
+	// 		const listOfPostIdsWithUserNameData = await Promise.all(listOfPostIdsWithUserName);
 
-			const listOfPostIds = listOfPostIdsWithUserNameData.map(postIdData => `${postIdData?.userName}/${postIdData?.id} orderId:${postIdData?.meta?.id_del_pedido}`);
+	// 		const listOfPostIds = listOfPostIdsWithUserNameData.map(postIdData => `${postIdData?.userName}/${postIdData?.id} orderId:${postIdData?.meta?.id_del_pedido}`);
 
-			if (listOfPostIds.length > 0) {
-				downloadTxtFile(listOfPostIds, pageNo);
-			} else {
-				console.log("No hay datos para descargar");
-			}
-		} catch (error) {
-			console.error(error);
-		}
-	};
+	// 		if (listOfPostIds.length > 0) {
+	// 			downloadTxtFile(listOfPostIds, pageNo);
+	// 		} else {
+	// 			console.log("No hay datos para descargar");
+	// 		}
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 	}
+	// };
 
-	const downloadTxtFile = (data, pagNo) => {
-		const textContent = data.join("\n");
+	// const downloadTxtFile = (data, pagNo) => {
+	// 	const textContent = data.join("\n");
 
-		const blob = new Blob([textContent], { type : "text/plain" });
+	// 	const blob = new Blob([textContent], { type : "text/plain" });
 
-		const url = URL.createObjectURL(blob);
+	// 	const url = URL.createObjectURL(blob);
 
-		const link = document.createElement("a");
-		link.href = url;
-		link.download = `postIds${pagNo}.txt`;
-		link.style.display = "none";
+	// 	const link = document.createElement("a");
+	// 	link.href = url;
+	// 	link.download = `postIds${pagNo}.txt`;
+	// 	link.style.display = "none";
 
-		document.body.appendChild(link);
-		link.click();
-		document.body.removeChild(link);
+	// 	document.body.appendChild(link);
+	// 	link.click();
+	// 	document.body.removeChild(link);
 
-		URL.revokeObjectURL(url);
-	};
+	// 	URL.revokeObjectURL(url);
+	// };
 
 	return (
 		<div className="Header">
@@ -347,7 +347,7 @@ const Header = () => {
 										Imprimir
 									</Text>
 								</Button>
-								<Button
+								{/* <Button
 									radius={12}
 									size="xs"
 									color="darkCasaMatte"
@@ -362,7 +362,7 @@ const Header = () => {
 									>
 										Button Exp
 									</Text>
-								</Button>
+								</Button> */}
 								{/* <Button
 									radius={12}
 									size="xs"
@@ -393,7 +393,7 @@ const Header = () => {
 								>
 									{dataMutationResult.isLoading ? "GUARDANDO..." : "GUARDAR"}
 								</Button>
-								{
+								{/* {
 									availableDevButton && (
 										<Button
 											radius={12}
@@ -405,7 +405,7 @@ const Header = () => {
 											PostIdsEnd
 										</Button>
 									)
-								}
+								} */}
 							</div>
 						</>
 					)
