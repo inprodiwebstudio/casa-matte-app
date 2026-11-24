@@ -51,7 +51,7 @@ const Header = () => {
 
 	const [dataMutation, dataMutationResult] = genericApi.useSubmitDataMutation();
 
-	// const availableDevButton = (userName && userEmail) && ((userName === "joab27") && (userEmail === "dev@casamatte.com"));
+	// const availableDevButton = (userName && userEmail) && ((userName === "joab27") && (userEmail === "dev@store.casamatte.com"));
 
 	const isAvailableUndo = historyChanges[currentIndexHistory - 1];
 	const isAvailableRedo = historyChanges[currentIndexHistory + 1];
@@ -230,7 +230,7 @@ const Header = () => {
 	return (
 		<div className="Header">
 			<div className={`body-container ${isPreviewActive && "isActivePreview"}`}>
-				<a href="https://casamatte.com/">
+				<a href="https://store.casamatte.com/">
 					<img src={LogoCasaMatte} width={130} />
 				</a>
 				<Group

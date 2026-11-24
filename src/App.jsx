@@ -22,7 +22,7 @@ export default function App() {
 	useEffect(() => {
 		const handlePopState = (event) => {
 			event.preventDefault();
-			window.location.href = "https://casamatte.com/dashboard/";
+			window.location.href = "https://store.casamatte.com/dashboard/";
 		};
 
 		window.addEventListener("popstate", handlePopState);

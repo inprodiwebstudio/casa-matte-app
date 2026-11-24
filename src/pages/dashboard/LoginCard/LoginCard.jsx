@@ -44,7 +44,7 @@ const LoginCard = () => {
 	const handleSubmitForm = (...args) => {
 		setLoading(true);
 		handleSubmit( async (data) => {
-			const adminEmail = "info@casamatte.com";
+			const adminEmail = "info@store.casamatte.com";
 			const devEmail = "demo44@demo.com";
 
 			const passwordAdmin = "admin_casamatte025";

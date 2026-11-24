@@ -17,7 +17,7 @@ const PayConfirm = () => {
 					</div>
 					<div>Gracias por tu confianza</div>
 				</Stack>
-				<a href="https://casamatte.com/">
+				<a href="https://store.casamatte.com/">
 					<img src={LogoCasaMatte} width={180} />
 				</a>
 			</Stack>

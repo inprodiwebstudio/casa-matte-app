@@ -8,7 +8,7 @@ const ErrorPage = ({codeError}) => {
 			...errorPages["404"],
 			actionButton : {
 				body   : "REGRESAR A LA PAGINA",
-				action : () => window.location.replace("https://casamatte.com"),
+				action : () => window.location.replace("https://store.casamatte.com"),
 			},
 		},
 		"500" : {
@@ -18,14 +18,14 @@ const ErrorPage = ({codeError}) => {
 			...errorPages["403"],
 			actionButton : {
 				body   : "REGRESAR A LA PAGINA",
-				action : () => window.location.replace("https://casamatte.com"),
+				action : () => window.location.replace("https://store.casamatte.com"),
 			},
 		},
 		"401" : {
 			...errorPages["401"],
 			actionButton : {
 				body   : "REGRESAR A LA PAGINA",
-				action : () => window.location.replace("https://casamatte.com"),
+				action : () => window.location.replace("https://store.casamatte.com"),
 			},
 		},
 	};

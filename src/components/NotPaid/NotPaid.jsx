@@ -50,7 +50,7 @@ const NotPaid = ({
 						COMPLETAR PAGO
 					</Button>
 				</Stack>
-				<a href="https://casamatte.com/">
+				<a href="https://store.casamatte.com/">
 					<img src={LogoCasaMatte} width={170} />
 				</a>
 			</Stack>
